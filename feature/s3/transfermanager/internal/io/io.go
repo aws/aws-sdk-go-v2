@@ -16,6 +16,22 @@ type BufferPools struct {
 	pools map[int]*sync.Pool
 }
 
+// https://en.wikipedia.org/wiki/Data_structure_alignment#Computing_padding
+//
+// IMPORTANT: this only works when alignedBy is a power of 2
+func align[T uintptr | int64](addr T) T {
+	return (addr + (alignedBy - 1)) &^ (alignedBy - 1)
+}
+
+func makealigned(size int) []byte {
+	p := make([]byte, size+alignedBy)
+	u := unsafe.Pointer(&p[0])
+	addr := uintptr(u)
+
+	off := align(addr) - addr
+	return p[off : int(off)+size : int(off)+size]
+}
+
 // Pool returns the pool for buffers of the requested size.
 //
 // DO NOT repeatedly call Pool() in a transfer operation. Grab the pool of the
@@ -33,15 +49,7 @@ func (bps *BufferPools) Pool(size int) *sync.Pool {
 
 	p := &sync.Pool{
 		New: func() any {
-			// we do aligned allocs no matter what b/c it's not that much extra
-			p := make([]byte, size+alignedBy)
-			u := unsafe.Pointer(&p[0])
-			addr := uintptr(u)
-
-			// https://en.wikipedia.org/wiki/Data_structure_alignment#Computing_padding
-			aligned := (addr + (alignedBy - 1)) &^ (alignedBy - 1)
-			off := aligned - addr
-			return p[off : int(off)+size : int(off)+size]
+			return makealigned(size)
 		},
 	}
 	bps.pools[size] = p
@@ -74,6 +82,11 @@ func NewAsyncWriterAt(w io.WriterAt, startWorkers, maxWorkers, queueDepth int) *
 //
 // WriteAt retains p, callers MUST NOT retain or modify p.
 func (w *AsyncWriterAt) WriteAt(p []byte, off int64) {
+	select {
+	case <-w.done:
+		return
+	}
+
 	w.queue <- writeAtJob{p, off}
 }
 
@@ -110,6 +123,7 @@ type writeAtJob struct {
 	off int64
 }
 
+// File is a lazily initialized download destination.
 type File interface {
 	io.WriterAt
 	Init(int64, int64) error
