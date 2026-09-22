@@ -1,3 +1,25 @@
+# Release (2026-09-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.49.0](service/apigateway/CHANGELOG.md#v1490-2026-09-22)
+  * **Feature**: API Gateway now supports two new security policies for REST APIs and custom domain names, SecurityPolicy-TLS13-1-2-Ext2-PQ-2025-09 (TLS 1.3 1.2 with post-quantum cryptography) and SecurityPolicy-TLS13-1-2-Ext2-FIPS-PQ-2025-09 (adds FIPS). Both retain legacy algorithms for backward compatibility.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchomni`: [v1.0.0](service/cloudwatchomni/CHANGELOG.md#v100-2026-09-22)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon CloudWatch Omni is now generally available, an AI-powered unified observability for AI agents, applications, and infrastructure. As part of it, organization centralization rules now support cross-account context graph centralization.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.336.0](service/ec2/CHANGELOG.md#v13360-2026-09-22)
+  * **Feature**: Amazon EC2 now supports quote-based start date changes for future-dated Capacity Reservations
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.162.0](service/glue/CHANGELOG.md#v11620-2026-09-22)
+  * **Feature**: Adding two new fields for Glue Materialized Views feature - (1) SubObjectsStatistics and (2) SparkPipelineInfo.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.29.0](service/observabilityadmin/CHANGELOG.md#v1290-2026-09-22)
+  * **Feature**: Amazon CloudWatch Omni is now generally available, an AI-powered unified observability for AI agents, applications, and infrastructure. Centralization now supports context graph for multi-account resource discovery, and dataset integrations makes logs available in CloudWatch datasets.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.132.0](service/quicksight/CHANGELOG.md#v11320-2026-09-22)
+  * **Feature**: Adds support for granular custom permissions on 28 action connectors, including Gmail, Google Drive, Google Sheets, Airtable, and Dropbox. Administrators can now allow or deny individual connector operations instead of all action connectors at once.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.49.0](service/ssoadmin/CHANGELOG.md#v1490-2026-09-22)
+  * **Feature**: AWS IAM Identity Center now returns PrimaryRegion and Regions in the DescribeInstance response, providing information about replicated instances, and returns IdentityStoreArn in both the ListInstances and DescribeInstance responses.
+
 # Release (2026-09-21)
 
 ## General Highlights

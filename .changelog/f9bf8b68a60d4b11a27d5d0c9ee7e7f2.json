@@ -1,8 +1,0 @@
-{
-    "id": "f9bf8b68-a60d-4b11-a27d-5d0c9ee7e7f2",
-    "type": "feature",
-    "description": "Amazon CloudWatch Omni is now generally available, an AI-powered unified observability for AI agents, applications, and infrastructure. As part of it, organization centralization rules now support cross-account context graph centralization.",
-    "modules": [
-        "service/cloudwatchomni"
-    ]
-}

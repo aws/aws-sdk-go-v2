@@ -1,8 +1,0 @@
-{
-    "id": "a86953d0-a10f-46aa-9fae-be71f7662be0",
-    "type": "feature",
-    "description": "Adding two new fields for Glue Materialized Views feature - (1) SubObjectsStatistics and (2) SparkPipelineInfo.",
-    "modules": [
-        "service/glue"
-    ]
-}
