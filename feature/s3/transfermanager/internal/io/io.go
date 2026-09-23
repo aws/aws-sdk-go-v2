@@ -68,22 +68,27 @@ type AsyncWriterAt struct {
 	startWorkers int
 	maxWorkers   int
 
-	wg       sync.WaitGroup
-	queue    chan writeAtJob
-	doneOnce sync.Once
-	done     chan struct{}
-	errOnce  sync.Once
-	err      error
+	jobs    sync.WaitGroup
+	workers sync.WaitGroup
+	queue   chan writeAtJob
+
+	stopOnce sync.Once
+	stop     chan struct{}
+
+	failed  chan struct{}
+	errOnce sync.Once
+	err     error
 }
 
 func NewAsyncWriterAt(w io.WriterAt, bufs *sync.Pool, startWorkers, maxWorkers, queueDepth int) *AsyncWriterAt {
 	return &AsyncWriterAt{
 		w:            w,
 		bufs:         bufs,
-		done:         make(chan struct{}),
 		startWorkers: startWorkers,
 		maxWorkers:   maxWorkers,
 		queue:        make(chan writeAtJob, queueDepth),
+		stop:         make(chan struct{}),
+		failed:       make(chan struct{}),
 	}
 }
 
@@ -101,23 +106,27 @@ func (w *AsyncWriterAt) Buffer() []byte {
 //     NOT a subslice) so it can return the full slice to the pool.
 //   - This method retains p, callers MUST NOT retain or modify p.
 func (w *AsyncWriterAt) WriteAt(p []byte, n int, off int64) {
-	w.wg.Add(1)
+	w.jobs.Add(1)
 
 	select {
-	case <-w.done:
-		w.wg.Done()
+	case <-w.failed:
+		w.jobs.Done()
 		w.bufs.Put(p)
 		return
-	case w.queue <- writeAtJob{p, n, off}:
+	case <-w.stop:
+		w.jobs.Done()
+		w.bufs.Put(p)
+		return
+	case w.queue <- writeAtJob{p: p, n: n, off: off}:
 	}
 }
 
-// Done returns a channel that's closed when the writer is done.
-func (w *AsyncWriterAt) Done() chan struct{} {
-	return w.done
+// Done returns a channel that's closed when a write fails.
+func (w *AsyncWriterAt) Done() <-chan struct{} {
+	return w.failed
 }
 
-// Error returns the write error (if any) encountered during async write.
+// Error returns the first write error, if any.
 func (w *AsyncWriterAt) Error() error {
 	return w.err
 }
@@ -125,20 +134,25 @@ func (w *AsyncWriterAt) Error() error {
 // Start spins up write workers.
 func (w *AsyncWriterAt) Start() {
 	// TODO maxWorkers
+	w.workers.Add(w.startWorkers)
 	for range w.startWorkers {
-		go w.doWrites()
+		go func() {
+			defer w.workers.Done()
+			w.doWrites()
+		}()
 	}
 }
 
-// Stop immediately terminates all write workers.
+// Stop terminates workers and releases any jobs they did not process.
 func (w *AsyncWriterAt) Stop() {
-	w.doneOnce.Do(func() {
-		close(w.done)
+	w.stopOnce.Do(func() {
+		close(w.stop)
+		w.workers.Wait()
 		for {
 			select {
 			case job := <-w.queue:
 				w.bufs.Put(job.p)
-				w.wg.Done()
+				w.jobs.Done()
 			default:
 				return
 			}
@@ -146,36 +160,42 @@ func (w *AsyncWriterAt) Stop() {
 	})
 }
 
-// Wait blocks until internal WaitGroup counter of the dispatcher is zero,
-// which means that there are no more write jobs queued.
-//
-// By contrast, Wait DOES NOT signal that no future write jobs will be
-// submitted. The caller MUST first Wait() on the internal downloader's
-// WaitGroup to confirm that.
+// Wait blocks until all submitted jobs have completed or been discarded.
+// The caller MUST first wait for all producers to stop submitting jobs.
 func (w *AsyncWriterAt) Wait() {
-	select {
-	case <-w.done:
-	default:
-		w.wg.Wait()
-	}
+	w.jobs.Wait()
+}
+
+func (w *AsyncWriterAt) fail(err error) {
+	w.errOnce.Do(func() {
+		w.err = err
+		close(w.failed)
+	})
 }
 
 func (w *AsyncWriterAt) doWrites() {
 	for {
 		select {
-		case <-w.done:
+		case <-w.stop:
 			return
 		case job := <-w.queue:
+			select {
+			case <-w.failed:
+				w.bufs.Put(job.p)
+				w.jobs.Done()
+				continue
+			default:
+			}
+
 			n, err := w.w.WriteAt(job.p[:job.n], job.off)
 			if err == nil && n != job.n {
 				err = io.ErrShortWrite
 			}
 			if err != nil {
-				w.errOnce.Do(func() { w.err = err })
-				w.Stop()
+				w.fail(err)
 			}
 
-			w.wg.Done()
+			w.jobs.Done()
 			w.bufs.Put(job.p)
 		}
 	}
