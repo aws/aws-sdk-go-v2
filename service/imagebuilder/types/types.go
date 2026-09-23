@@ -67,7 +67,9 @@ func (v *AccountAggregation) Deserialize(d smithy.ShapeDeserializer) error {
 // Manager agent, you can choose whether to keep it for the AMI that you create.
 type AdditionalInstanceConfiguration struct {
 
-	// Contains settings for the Systems Manager agent on your build instance.
+	// The Systems Manager agent settings for your build instance. This setting
+	// applies to Linux and macOS build instances only. Requests that set it for a
+	// recipe with a Windows base image are rejected.
 	SystemsManagerAgent *SystemsManagerAgent
 
 	// Use this property to provide commands or a command script to run when you
@@ -79,7 +81,7 @@ type AdditionalInstanceConfiguration struct {
 	// install Systems Manager, if it is not pre-installed on your base image.
 	//
 	// The user data is always base 64 encoded. For example, the following commands
-	// are encoded as IyEvYmluL2Jhc2gKbWtkaXIgLXAgL3Zhci9iYi8KdG91Y2ggL3Zhci$ :
+	// are encoded as IyEvYmluL2Jhc2gKbWtkaXIgLXAgL3Zhci9iYi8KdG91Y2ggL3Zhcg== :
 	//
 	// #!/bin/bash
 	//
@@ -140,7 +142,8 @@ type Ami struct {
 	// The Amazon Web Services Region of the Amazon EC2 AMI.
 	Region *string
 
-	// Image status and the reason for that status.
+	// The state of the AMI, which includes the status and, if applicable, the reason
+	// for that status.
 	State *ImageState
 
 	noSmithyDocumentSerde
@@ -206,8 +209,11 @@ type AmiDistributionConfiguration struct {
 	// The tags to apply to AMIs distributed to this Region.
 	AmiTags map[string]string
 
-	// The description of the AMI distribution configuration. Minimum and maximum
-	// length are in characters.
+	// The description to apply to the distributed AMI. Image Builder sets this as the
+	// output AMI's description in each target Region and account. If you don't specify
+	// a description, the AMI in the build Region uses the image recipe's description,
+	// if the recipe has one. Copies distributed to other Regions and accounts don't
+	// receive a default description.
 	Description *string
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
@@ -221,10 +227,15 @@ type AmiDistributionConfiguration struct {
 	// can use the AMI to launch instances.
 	LaunchPermission *LaunchPermissionConfiguration
 
-	// The name of the output AMI.
+	// The name of the output AMI. The name must include the {{ imagebuilder:buildDate
+	// }} dynamic tag so that each build produces a uniquely named AMI. If you don't
+	// specify a name, Image Builder names the output AMI with the image name followed
+	// by the build timestamp, for example my-image 2022-10-26T22-30-05.912619Z .
 	Name *string
 
-	// The ID of an account to which you want to distribute an image.
+	// The Amazon Web Services account IDs to distribute the AMI to in this Region.
+	// Each listed account receives its own copy of the output AMI. If you don't
+	// specify accounts, Image Builder distributes the AMI only to your own account.
 	TargetAccountIds []string
 
 	noSmithyDocumentSerde
@@ -279,7 +290,8 @@ func (v *AmiDistributionConfiguration) Deserialize(d smithy.ShapeDeserializer) e
 }
 
 // Defines the rules by which an image pipeline is automatically disabled when it
-// fails.
+// fails. By default, if the schedule doesn't include an auto-disable policy, Image
+// Builder disables the pipeline after 5 consecutive failed scheduled builds.
 type AutoDisablePolicy struct {
 
 	// The number of consecutive scheduled image pipeline executions that must fail
@@ -332,7 +344,9 @@ type Component struct {
 	// The description of the component.
 	Description *string
 
-	// The encryption status of the component.
+	// Indicates whether the component data is encrypted at rest. Image Builder
+	// encrypts all component data at rest, so this value is always true . This field
+	// is retained for backward compatibility.
 	Encrypted *bool
 
 	// The KMS key identifier used to encrypt the component. This can be either the
@@ -349,7 +363,9 @@ type Component struct {
 	// component detail results for API, CLI, or SDK operations.
 	Obfuscate bool
 
-	// The owner of the component.
+	// The owner of the component. The value is your account ID for components that
+	// you own, the sharing account's ID for shared components, or Amazon , ThirdParty
+	// , or AWSMarketplace .
 	Owner *string
 
 	// Contains parameter details for each of the parameters that the component
@@ -515,16 +531,22 @@ func (v *Component) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Configuration details of the component.
+// Configuration details of the component. You can specify each component only
+// once in a recipe, regardless of version. Components with a status of DEPRECATED
+// or DISABLED can't be added to new recipes.
 type ComponentConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of the component.
+	// The Amazon Resource Name (ARN) of the component. You can specify a build
+	// version ARN, or a component version ARN whose version segments can use x
+	// wildcards, for example 1.x.x .
 	//
 	// This member is required.
 	ComponentArn *string
 
 	// A group of parameter settings that Image Builder uses to configure the
-	// component for a specific recipe.
+	// component for a specific recipe. You must supply a value for every component
+	// parameter that has no default value, and you can only supply parameters that the
+	// component defines.
 	Parameters []ComponentParameter
 
 	noSmithyDocumentSerde
@@ -734,7 +756,8 @@ type ComponentState struct {
 	// Describes how or why the component changed state.
 	Reason *string
 
-	// The current state of the component.
+	// The current state of the component. Components with a status of DEPRECATED or
+	// DISABLED can't be added to new recipes.
 	Status ComponentStatus
 
 	noSmithyDocumentSerde
@@ -778,10 +801,10 @@ type ComponentSummary struct {
 	// The Amazon Resource Name (ARN) of the component.
 	Arn *string
 
-	// The change description for the current version of the component.
+	// The change description for this version of the component.
 	ChangeDescription *string
 
-	// The original creation date of the component.
+	// The date that Image Builder created this version of the component.
 	DateCreated *string
 
 	// The description of the component.
@@ -794,7 +817,9 @@ type ComponentSummary struct {
 	// component detail results for API, CLI, or SDK operations.
 	Obfuscate bool
 
-	// The owner of the component.
+	// The owner of the component. The value is your account ID for components that
+	// you own, the sharing account's ID for shared components, or Amazon , ThirdParty
+	// , or AWSMarketplace .
 	Owner *string
 
 	// The operating system platform of the component.
@@ -928,8 +953,7 @@ func (v *ComponentSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The defining characteristics of a specific version of an Amazon Web Services
-// TOE component.
+// The defining characteristics of a specific version of a component.
 type ComponentVersion struct {
 
 	// The Amazon Resource Name (ARN) of the component.
@@ -956,7 +980,9 @@ type ComponentVersion struct {
 	// The name of the component.
 	Name *string
 
-	// The owner of the component.
+	// The owner of the component. The value is your account ID for components that
+	// you own, the sharing account's ID for shared components, or Amazon , ThirdParty
+	// , or AWSMarketplace .
 	Owner *string
 
 	// The platform of the component.
@@ -1088,7 +1114,9 @@ func (v *ComponentVersion) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// A container encapsulates the runtime environment for an application.
+// Details of the container images that are output resources of an image build in
+// a given Amazon Web Services Region: the Region, and the URIs of the container
+// images.
 type Container struct {
 
 	// A list of URIs for containers created in the context Region.
@@ -1126,8 +1154,9 @@ func (v *Container) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Container distribution settings for encryption, licensing, and sharing in a
-// specific Region.
+// Defines how the output container image is distributed in a specific Amazon Web
+// Services Region: the target repository, the image tags to apply to the
+// distributed image, and an optional description.
 type ContainerDistributionConfiguration struct {
 
 	// The destination repository for the container distribution configuration.
@@ -1135,7 +1164,8 @@ type ContainerDistributionConfiguration struct {
 	// This member is required.
 	TargetRepository *TargetContainerRepository
 
-	// Tags that are attached to the container distribution configuration.
+	// Tags that Image Builder applies to the distributed container image in the
+	// target repository. These are repository image tags, not resource tags.
 	ContainerTags []string
 
 	// The description of the container distribution configuration.
@@ -1177,7 +1207,9 @@ func (v *ContainerDistributionConfiguration) Deserialize(d smithy.ShapeDeseriali
 	})
 }
 
-// A container recipe.
+// Defines how Image Builder builds and tests a container image: the base image,
+// components to apply, the Dockerfile template, the build and test instance
+// configuration, and the target repository for the output image.
 type ContainerRecipe struct {
 
 	// The Amazon Resource Name (ARN) of the container recipe.
@@ -1195,9 +1227,12 @@ type ContainerRecipe struct {
 	//   specific version of an object.
 	Arn *string
 
-	// Build and test components that are included in the container recipe. Recipes
-	// require a minimum of one build component, and can have a maximum of 20 build and
-	// test components in any combination.
+	// Build and test components that are included in the container recipe. A recipe
+	// can contain a maximum of 20 build and test components in any combination, by
+	// default. This maximum is an adjustable quota. For more information, see [EC2 Image Builder endpoints and quotas]in the
+	// Amazon Web Services General Reference.
+	//
+	// [EC2 Image Builder endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/imagebuilder.html
 	Components []ComponentConfiguration
 
 	// Specifies the type of container, such as Docker.
@@ -1209,23 +1244,29 @@ type ContainerRecipe struct {
 	// The description of the container recipe.
 	Description *string
 
-	// Dockerfiles are text documents that are used to build Docker containers, and
-	// ensure that they contain all of the elements required by the application running
-	// inside. The template data consists of contextual variables where Image Builder
-	// places build information or scripts, based on your container image recipe.
+	// The Dockerfile template that Image Builder uses to build the container image.
+	// The template can include contextual variables that Image Builder replaces with
+	// build information at build time. For the contextual variables that the template
+	// can include, see [Create a new version of a container recipe]in the EC2 Image Builder User Guide.
+	//
+	// [Create a new version of a container recipe]: https://docs.aws.amazon.com/imagebuilder/latest/userguide/create-container-recipes.html
 	DockerfileTemplateData *string
 
-	// A flag that indicates if the target container is encrypted.
+	// Specifies whether the recipe's Dockerfile template data is encrypted at rest.
+	// Image Builder encrypts all Dockerfile template data at rest, so this value is
+	// always true . This field is retained for backward compatibility, and doesn't
+	// describe encryption of the output container image.
 	Encrypted *bool
 
 	// A group of options that can be used to configure an instance for building and
 	// testing container images.
 	InstanceConfiguration *InstanceConfiguration
 
-	// The Amazon Resource Name (ARN) that uniquely identifies which KMS key is used
-	// to encrypt the container image for distribution to the target Region. This can
-	// be either the Key ARN or the Alias ARN. For more information, see [Key identifiers (KeyId)]in the Key
-	// Management Service Developer Guide.
+	// The KMS key that Image Builder uses to encrypt the recipe's Dockerfile template
+	// data at rest. This can be either the Key ARN or the Alias ARN. For more
+	// information, see [Key identifiers (KeyId)]in the Key Management Service Developer Guide. If you don't
+	// specify a key, Image Builder encrypts the template data with a KMS key that
+	// Image Builder owns. This key isn't used to encrypt the output container image.
 	//
 	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KmsKeyId *string
@@ -1241,7 +1282,8 @@ type ContainerRecipe struct {
 	// example amazonlinux:latest .
 	ParentImage *string
 
-	// The system platform for the container, such as Windows or Linux.
+	// The system platform for the container. Container recipes support only the Linux
+	// and Windows platforms.
 	Platform Platform
 
 	// Tags that are attached to the container recipe.
@@ -1399,7 +1441,7 @@ func (v *ContainerRecipe) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// A summary of a container recipe
+// A summary of a container recipe.
 type ContainerRecipeSummary struct {
 
 	// The Amazon Resource Name (ARN) of the container recipe.
@@ -1428,7 +1470,8 @@ type ContainerRecipeSummary struct {
 	// The base image for the container recipe.
 	ParentImage *string
 
-	// The system platform for the container, such as Windows or Linux.
+	// The system platform for the container. Container recipes support only the Linux
+	// and Windows platforms.
 	Platform Platform
 
 	// Tags that are attached to the container recipe.
@@ -1512,14 +1555,10 @@ func (v *ContainerRecipeSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Amazon Inspector generates a risk score for each finding. This score helps you
-// to prioritize findings, to focus on the most critical findings and the most
-// vulnerable resources. The score uses the Common Vulnerability Scoring System
-// (CVSS) format. This format is a modification of the base CVSS score that the
-// National Vulnerability Database (NVD) provides. For more information about
-// severity levels, see [Severity levels for Amazon Inspector findings]in the Amazon Inspector User Guide.
-//
-// [Severity levels for Amazon Inspector findings]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html
+// A CVSS score for the vulnerability, as published by the vulnerability source.
+// Sources include the National Vulnerability Database (NVD) and the operating
+// system vendor's security feed. A finding can include CVSS scores from multiple
+// sources and CVSS versions.
 type CvssScore struct {
 
 	// The CVSS base score.
@@ -1622,11 +1661,13 @@ func (v *CvssScoreAdjustment) Deserialize(d smithy.ShapeDeserializer) error {
 // adjustments to create the final score.
 type CvssScoreDetails struct {
 
-	// An object that contains details about an adjustment that Amazon Inspector made
-	// to the CVSS score for the finding.
+	// The adjustments that Amazon Inspector applied to the base CVSS score to produce
+	// its own score for the finding. The list is empty when Amazon Inspector made no
+	// adjustments.
 	Adjustments []CvssScoreAdjustment
 
-	// The source of the finding.
+	// The source of the CVSS data that the Amazon Inspector score for the finding is
+	// based on, for example NVD or a vendor security feed.
 	CvssSource *string
 
 	// The CVSS score.
@@ -1788,10 +1829,19 @@ func (v *Distribution) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// A distribution configuration.
+// Defines how Image Builder distributes the output of an image build. You can
+// configure:
+//
+//   - The Regions to distribute the image to.
+//
+//   - The Region-specific settings to apply, such as output AMI names, launch
+//     permissions for other Amazon Web Services accounts, and target container
+//     repositories.
 type DistributionConfiguration struct {
 
-	// The maximum duration in minutes for this distribution configuration.
+	// A property that Image Builder doesn't use. You can't set this property when you
+	// create or update a distribution configuration, and it has no effect on
+	// distribution behavior.
 	//
 	// This member is required.
 	TimeoutMinutes *int32
@@ -1897,7 +1947,7 @@ type DistributionConfigurationSummary struct {
 	// The name of the distribution configuration.
 	Name *string
 
-	// A list of Regions where the container image is distributed to.
+	// A list of the Regions that the distribution configuration distributes images to.
 	Regions []string
 
 	// The tags associated with the distribution configuration.
@@ -2107,12 +2157,12 @@ type EcrConfiguration struct {
 	// Inspector scans. Tags can help you identify and manage your scanned images.
 	ContainerTags []string
 
-	// The name of the container repository that Amazon Inspector scans to identify
-	// findings for your container images. The name includes the path for the
-	// repository location. If you don’t provide this information, Image Builder
-	// creates a repository in your account named
-	// image-builder-image-scanning-repository for vulnerability scans of your output
-	// container images.
+	// The name of the container repository where Image Builder pushes the container
+	// image for the vulnerability scan. Provide the repository name only (a namespace
+	// path is allowed, but not the registry hostname); the repository must already
+	// exist in your account. If you don't specify a repository name, Image Builder
+	// creates the default repository image-builder-image-scanning-repository in your
+	// account.
 	RepositoryName *string
 
 	noSmithyDocumentSerde
@@ -2143,12 +2193,12 @@ func (v *EcrConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Define and configure faster launching for output Windows AMIs.
+// Defines and configures EC2 Fast Launch for output Windows AMIs.
 type FastLaunchConfiguration struct {
 
-	// A Boolean that represents the current state of faster launching for the Windows
-	// AMI. Set to true to start using Windows faster launching, or false to stop
-	// using it.
+	// Specifies whether to enable Windows fast launch on the output AMI during
+	// distribution. A value of false means Image Builder takes no fast-launch action
+	// for this configuration.
 	//
 	// This member is required.
 	Enabled bool
@@ -2165,7 +2215,7 @@ type FastLaunchConfiguration struct {
 	MaxParallelLaunches *int32
 
 	// Configuration settings for managing the number of snapshots that are created
-	// from pre-provisioned instances for the Windows AMI when faster launching is
+	// from pre-provisioned instances for the Windows AMI when Windows fast launch is
 	// enabled.
 	SnapshotConfiguration *FastLaunchSnapshotConfiguration
 
@@ -2220,19 +2270,20 @@ func (v *FastLaunchConfiguration) Deserialize(d smithy.ShapeDeserializer) error 
 }
 
 // Identifies the launch template that the associated Windows AMI uses for
-// launching an instance when faster launching is enabled.
+// launching an instance when Windows fast launch is enabled.
 //
 // You can specify either the launchTemplateName or the launchTemplateId , but not
 // both.
 type FastLaunchLaunchTemplateSpecification struct {
 
-	// The ID of the launch template to use for faster launching for a Windows AMI.
+	// The ID of the launch template to use for Windows fast launch for a Windows AMI.
 	LaunchTemplateId *string
 
-	// The name of the launch template to use for faster launching for a Windows AMI.
+	// The name of the launch template to use for Windows fast launch for a Windows
+	// AMI.
 	LaunchTemplateName *string
 
-	// The version of the launch template to use for faster launching for a Windows
+	// The version of the launch template to use for Windows fast launch for a Windows
 	// AMI.
 	LaunchTemplateVersion *string
 
@@ -2346,10 +2397,10 @@ func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // An Image Builder image resource that keeps track of all of the settings used to
-// create, configure, and distribute output for that image. You must specify
-// exactly one recipe for the image – either a container recipe ( containerRecipe
-// ), which creates a container image, or an image recipe ( imageRecipe ), which
-// creates an AMI.
+// create, configure, and distribute output for that image. An image that Image
+// Builder built from a recipe contains exactly one recipe – either a container
+// recipe ( containerRecipe ), which creates a container image, or an image recipe (
+// imageRecipe ), which creates an AMI. Imported images don't contain a recipe.
 type Image struct {
 
 	// The Amazon Resource Name (ARN) of the image.
@@ -2407,13 +2458,16 @@ type Image struct {
 	// used to create the image. For container images, this is empty.
 	ImageRecipe *ImageRecipe
 
-	// Contains settings for vulnerability scans.
+	// Settings for the vulnerability scans that Amazon Inspector runs for this image.
+	// For AMI output, Amazon Inspector scans the test instance during image creation.
+	// For container output, Amazon Inspector scans the container image in its Amazon
+	// ECR repository.
 	ImageScanningConfiguration *ImageScanningConfiguration
 
 	// The origin of the base image that Image Builder used to build this image.
 	ImageSource ImageSource
 
-	// The image tests that ran when that Image Builder created this image.
+	// The image test settings that Image Builder used when it created this image.
 	ImageTestsConfiguration *ImageTestsConfiguration
 
 	// The infrastructure that Image Builder used to create this image.
@@ -2444,9 +2498,11 @@ type Image struct {
 	ScanState *ImageScanState
 
 	// The Amazon Resource Name (ARN) of the image pipeline that created this image.
+	// This field is only present for images that a pipeline execution created.
 	SourcePipelineArn *string
 
-	// The name of the image pipeline that created this image.
+	// The name of the image pipeline that created this image. Image Builder doesn't
+	// return this field for new images. Use sourcePipelineArn instead.
 	SourcePipelineName *string
 
 	// The state of the image.
@@ -2477,7 +2533,8 @@ type Image struct {
 	// be wildcards.
 	Version *string
 
-	// Contains the build and test workflows that are associated with the image.
+	// The build, test, and distribution workflow configurations that are associated
+	// with the image.
 	Workflows []WorkflowConfiguration
 
 	noSmithyDocumentSerde
@@ -2869,8 +2926,9 @@ func (v *ImageLoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
-// A software package that's installed on top of the base image to create a
-// customized image.
+// A software package that's installed on an image, as detected by Amazon Web
+// Services Systems Manager Inventory at build time. The list includes packages
+// that shipped with the base image.
 type ImagePackage struct {
 
 	// The name of the package that's reported to the operating system package manager.
@@ -2911,7 +2969,10 @@ func (v *ImagePackage) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Details of an image pipeline.
+// Defines the automation configuration for building, testing, and distributing
+// images. A pipeline references the resources that its builds use, such as the
+// recipe and infrastructure configuration. It also holds the settings that control
+// its builds, such as the schedule and custom workflows.
 type ImagePipeline struct {
 
 	// The Amazon Resource Name (ARN) of the image pipeline.
@@ -2925,8 +2986,8 @@ type ImagePipeline struct {
 	//   resets to zero.
 	//
 	//   - If the pipeline execution fails, Image Builder increments the number of
-	//   consecutive failures. If the failure count exceeds the limit defined in the
-	//   AutoDisablePolicy , Image Builder disables the pipeline.
+	//   consecutive failures. If the failure count reaches the limit defined in the AutoDisablePolicy,
+	//   Image Builder disables the pipeline.
 	//
 	// The consecutive failure count is also reset to zero under the following
 	// conditions:
@@ -2946,7 +3007,7 @@ type ImagePipeline struct {
 	// The date on which this image pipeline was created.
 	DateCreated *string
 
-	// This is no longer supported, and does not return a value.
+	// The date on which this image pipeline was last run.
 	DateLastRun *string
 
 	// The next date when the pipeline is scheduled to run.
@@ -2975,10 +3036,16 @@ type ImagePipeline struct {
 	// pipeline.
 	ImageRecipeArn *string
 
-	// Contains settings for vulnerability scans.
+	// Contains settings for vulnerability scans that Amazon Inspector runs against
+	// the test instance during image creation.
 	ImageScanningConfiguration *ImageScanningConfiguration
 
-	// The tags to be applied to the images produced by this pipeline.
+	// The tags that Image Builder applies to the Image Builder image resource that
+	// this pipeline's scheduled executions create. These tags don't apply to the
+	// output AMI. Builds that you start manually use the tags from the [StartImagePipelineExecution]request
+	// instead.
+	//
+	// [StartImagePipelineExecution]: https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_StartImagePipelineExecution.html
 	ImageTags map[string]string
 
 	// The image tests configuration of the image pipeline.
@@ -2992,19 +3059,23 @@ type ImagePipeline struct {
 	// TESTING , FAILED , or AVAILABLE .
 	LastRunStatus ImageStatus
 
-	// Defines logging configuration for the output image.
+	// The CloudWatch Logs configuration for the pipeline: the log group for image
+	// build logs and the log group for pipeline execution logs.
 	LoggingConfiguration *PipelineLoggingConfiguration
 
 	// The name of the image pipeline.
 	Name *string
 
-	// The platform of the image pipeline.
+	// The platform of the image pipeline, inherited from the recipe that the pipeline
+	// uses.
 	Platform Platform
 
 	// The schedule of the image pipeline.
 	Schedule *Schedule
 
-	// The status of the image pipeline.
+	// The status of the image pipeline. A disabled pipeline doesn't run on its
+	// schedule, but you can still start builds manually. Image Builder can also
+	// disable a pipeline automatically when consecutive scheduled builds fail.
 	Status PipelineStatus
 
 	// The tags of this image pipeline.
@@ -3237,7 +3308,7 @@ type ImageRecipe struct {
 	// Before you create a new AMI, Image Builder launches temporary Amazon EC2
 	// instances to build and test your image configuration. Instance configuration
 	// adds a layer of control over those instances. You can define settings and add
-	// scripts to run when an instance is launched from your AMI.
+	// scripts to run when Image Builder launches your build instance.
 	AdditionalInstanceConfiguration *AdditionalInstanceConfiguration
 
 	// Tags that are applied to the AMI that Image Builder creates during the Build
@@ -3255,9 +3326,12 @@ type ImageRecipe struct {
 	// The block device mappings to apply when creating images from this recipe.
 	BlockDeviceMappings []InstanceBlockDeviceMapping
 
-	// The components that are included in the image recipe. Recipes require a minimum
-	// of one build component, and can have a maximum of 20 build and test components
-	// in any combination.
+	// The components that are included in the image recipe. A recipe can contain a
+	// maximum of 20 build and test components in any combination, by default. This
+	// maximum is an adjustable quota. For more information, see [EC2 Image Builder endpoints and quotas]in the Amazon Web
+	// Services General Reference.
+	//
+	// [EC2 Image Builder endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/imagebuilder.html
 	Components []ComponentConfiguration
 
 	// The date on which this image recipe was created.
@@ -3291,14 +3365,17 @@ type ImageRecipe struct {
 	// The tags of the image recipe.
 	Tags map[string]string
 
-	// Specifies which type of image is created by the recipe - an AMI or a container
-	// image.
+	// The output image type. For an image recipe, this is always AMI. Container
+	// images are built from container recipes, a separate resource. This field isn't
+	// currently returned in responses.
 	Type ImageType
 
 	// The version of the image recipe.
 	Version *string
 
-	// The working directory to be used during build and test workflows.
+	// The working directory used during build and test workflows. If you don't
+	// specify a working directory, Image Builder uses /tmp for Linux and macOS build
+	// instances, and C:/ for Windows build instances.
 	WorkingDirectory *string
 
 	noSmithyDocumentSerde
@@ -3497,7 +3574,8 @@ func (v *ImageRecipeSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Contains details about a vulnerability scan finding.
+// Contains details about a vulnerability scan finding that Amazon Inspector
+// generated for an image.
 type ImageScanFinding struct {
 
 	// The Amazon Web Services account ID that's associated with the finding.
@@ -3510,7 +3588,14 @@ type ImageScanFinding struct {
 	FirstObservedAt *time.Time
 
 	// Details about whether a fix is available for any of the packages that are
-	// identified in the finding through a version update.
+	// identified in the finding through a version update. Valid values include:
+	//
+	//   - YES – A fix is available for all of the packages identified in the finding.
+	//
+	//   - NO – No fix is available.
+	//
+	//   - PARTIAL – A fix is available for some, but not all, of the packages
+	//   identified in the finding.
 	FixAvailable *string
 
 	// The Amazon Resource Name (ARN) of the image build version that's associated
@@ -3533,7 +3618,10 @@ type ImageScanFinding struct {
 	// An object that contains the details about how to remediate the finding.
 	Remediation *Remediation
 
-	// The severity of the finding.
+	// The severity of the finding. For more information, see [Severity levels for Amazon Inspector findings] in the Amazon Inspector
+	// User Guide.
+	//
+	// [Severity levels for Amazon Inspector findings]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html
 	Severity *string
 
 	// The title of the finding.
@@ -3728,6 +3816,17 @@ func (v *ImageScanFindingAggregation) Deserialize(d smithy.ShapeDeserializer) er
 type ImageScanFindingsFilter struct {
 
 	// The name of the image scan finding filter. Filter names are case-sensitive.
+	// Valid filter names are:
+	//
+	//   - imageBuildVersionArn – Filters findings by the image build version that was
+	//   scanned.
+	//
+	//   - imagePipelineArn – Filters findings by the pipeline that created the scanned
+	//   image.
+	//
+	//   - vulnerabilityId – Filters findings by vulnerability ID, for example a CVE ID.
+	//
+	//   - severity – Filters findings by severity level.
 	Name *string
 
 	// The filter values. Filter values are case-sensitive.
@@ -3767,9 +3866,12 @@ type ImageScanningConfiguration struct {
 	// Contains Amazon ECR settings for vulnerability scans.
 	EcrConfiguration *EcrConfiguration
 
-	// A setting that indicates whether Image Builder keeps a snapshot of the
-	// vulnerability scans that Amazon Inspector runs against the build instance when
-	// you create a new image.
+	// Specifies whether Amazon Inspector scans for vulnerabilities when you create a
+	// new image, and whether Image Builder saves the findings. Amazon Inspector must
+	// be enabled in the account. Image tests must also be enabled. For AMI output,
+	// Amazon Inspector scans the test instance. For container output, Amazon Inspector
+	// scans the container image that Image Builder pushes to the Amazon ECR repository
+	// from your ecrConfiguration settings.
 	ImageScanningEnabled *bool
 
 	noSmithyDocumentSerde
@@ -3812,7 +3914,10 @@ type ImageScanState struct {
 	// The reason for the scan status for the image.
 	Reason *string
 
-	// The current state of vulnerability scans for the image.
+	// The current state of vulnerability scans for the image. The scan starts as
+	// PENDING and moves through SCANNING and COLLECTING to COMPLETED . Image Builder
+	// sets the status to ABANDONED if the image reaches a terminal state before the
+	// scan finding collection completes. A scan can also end as FAILED or TIMED_OUT .
 	Status ImageScanStatus
 
 	noSmithyDocumentSerde
@@ -3860,7 +3965,10 @@ type ImageState struct {
 	// The reason for the status of the image.
 	Reason *string
 
-	// The status of the image.
+	// The status of the image. A new image moves through build, test, and
+	// distribution statuses during creation, and ends in the AVAILABLE , FAILED , or
+	// CANCELLED state. The DEPRECATED , DISABLED , and DELETED statuses come from
+	// later resource management actions.
 	Status ImageStatus
 
 	noSmithyDocumentSerde
@@ -4114,7 +4222,8 @@ type ImageTestsConfiguration struct {
 	// after the image build and before image distribution. Defaults to true .
 	ImageTestsEnabled *bool
 
-	// The maximum time in minutes that tests are permitted to run.
+	// The maximum time in minutes that tests are permitted to run. If you don't
+	// specify a value, Image Builder stores and returns 720.
 	//
 	// The timeout property is not currently active. This value is ignored.
 	TimeoutMinutes *int32
@@ -4191,8 +4300,8 @@ type ImageVersion struct {
 	// The name of this specific version of an Image Builder image.
 	Name *string
 
-	// The operating system version of the Amazon EC2 build instance. For example,
-	// Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
+	// The operating system version of the image. For example, Amazon Linux 2023 or
+	// Microsoft Windows Server 2022.
 	OsVersion *string
 
 	// The owner of the image version.
@@ -4205,8 +4314,8 @@ type ImageVersion struct {
 	// Specifies whether this image produces an AMI or a container image.
 	Type ImageType
 
-	// Details for a specific version of an Image Builder image. This version follows
-	// the semantic version syntax.
+	// The semantic version of the image. This version follows the semantic version
+	// syntax.
 	//
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
@@ -4347,28 +4456,33 @@ type InfrastructureConfiguration struct {
 	// The Amazon EC2 key pair of the infrastructure configuration.
 	KeyPair *string
 
-	// The logging configuration of the infrastructure configuration.
+	// The logging configuration of the infrastructure configuration. When you
+	// configure S3 logs, Image Builder writes logs from the build and test process to
+	// the specified bucket under the key prefix.
 	Logging *Logging
 
 	// The name of the infrastructure configuration.
 	Name *string
 
-	// The instance placement settings that define where the instances that are
-	// launched from your image run.
+	// The instance placement settings that define where the build and test instances
+	// that Image Builder launches during image creation run. These settings don't
+	// affect instances that you launch from the output image.
 	Placement *Placement
 
-	// The tags attached to the resource created by Image Builder.
+	// The metadata tags assigned to the Amazon EC2 build and test instances that
+	// Image Builder launches during image creation.
 	ResourceTags map[string]string
 
 	// The security group IDs of the infrastructure configuration.
 	SecurityGroupIds []string
 
 	// The Amazon Resource Name (ARN) of the SNS topic to which Image Builder sends
-	// image build event notifications.
+	// image build event notifications. Specify a standard topic. Image Builder doesn't
+	// support FIFO topics.
 	//
-	// EC2 Image Builder is unable to send notifications to SNS topics that are
-	// encrypted using keys from other accounts. The key that is used to encrypt the
-	// SNS topic must reside in the account that the Image Builder service runs under.
+	// EC2 Image Builder can't send notifications to SNS topics that are encrypted
+	// using keys from other accounts. If your SNS topic is encrypted, the key must be
+	// owned by the same account that owns your Image Builder resources.
 	SnsTopicArn *string
 
 	// The subnet ID of the infrastructure configuration.
@@ -4377,8 +4491,9 @@ type InfrastructureConfiguration struct {
 	// The tags of the infrastructure configuration.
 	Tags map[string]string
 
-	// The terminate instance on failure configuration of the infrastructure
-	// configuration.
+	// Indicates whether Image Builder terminates the build and test instances when
+	// the image build fails. When false , Image Builder retains the instance so that
+	// you can debug it.
 	TerminateInstanceOnFailure *bool
 
 	noSmithyDocumentSerde
@@ -4496,7 +4611,8 @@ func (v *InfrastructureConfiguration) Deserialize(d smithy.ShapeDeserializer) er
 	})
 }
 
-// The infrastructure used when building Amazon EC2 AMIs.
+// Contains a high-level summary of an infrastructure configuration, including the
+// environment settings that Image Builder uses to build and test images.
 type InfrastructureConfigurationSummary struct {
 
 	// The Amazon Resource Name (ARN) of the infrastructure configuration.
@@ -4520,11 +4636,13 @@ type InfrastructureConfigurationSummary struct {
 	// The name of the infrastructure configuration.
 	Name *string
 
-	// The instance placement settings that define where the instances that are
-	// launched from your image run.
+	// The instance placement settings that define where the build and test instances
+	// that Image Builder launches during image creation run. These settings don't
+	// affect instances that you launch from the output image.
 	Placement *Placement
 
-	// The tags attached to the image created by Image Builder.
+	// The metadata tags assigned to the Amazon EC2 build and test instances that
+	// Image Builder launches during image creation.
 	ResourceTags map[string]string
 
 	// The tags of the infrastructure configuration.
@@ -4606,8 +4724,9 @@ func (v *InfrastructureConfigurationSummary) Deserialize(d smithy.ShapeDeseriali
 // assigned for a finding.
 type InspectorScoreDetails struct {
 
-	// An object that contains details about an adjustment that Amazon Inspector made
-	// to the CVSS score for the finding.
+	// The CVSS score that Amazon Inspector assigned to the finding after applying its
+	// adjustments. It includes the score source, CVSS version, scoring vector, and the
+	// adjustments applied.
 	AdjustedCvss *CvssScoreDetails
 
 	noSmithyDocumentSerde
@@ -4701,8 +4820,8 @@ func (v *InstanceBlockDeviceMapping) Deserialize(d smithy.ShapeDeserializer) err
 // instance used for building and testing container images.
 type InstanceConfiguration struct {
 
-	// Defines the block devices to attach for building an instance from this Image
-	// Builder AMI.
+	// Defines the block device mappings for the EC2 instance that Image Builder
+	// launches to build and test your container image.
 	BlockDeviceMappings []InstanceBlockDeviceMapping
 
 	// The base image for a container build and test instance. This can contain an AMI
@@ -4741,17 +4860,15 @@ func (v *InstanceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The instance metadata options that apply to the HTTP requests that pipeline
-// builds use to launch EC2 build and test instances. For more information about
-// instance metadata options, see [Configure the instance metadata options]in the Amazon EC2 User Guide for Linux
-// instances, or [Configure the instance metadata options]in the Amazon EC2 Windows Guide for Windows instances.
-//
-// [Configure the instance metadata options]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html
+// The instance metadata service (IMDS) settings that Image Builder applies to the
+// EC2 build and test instances it launches. These settings control how software on
+// those instances retrieves instance metadata and IAM role credentials.
 type InstanceMetadataOptions struct {
 
 	// Limit the number of hops that an instance metadata request can traverse to
-	// reach its destination. The default is one hop. However, if HTTP tokens are
-	// required, container image builds need a minimum of two hops.
+	// reach its destination. If you don't set a value, the EC2 launch default for the
+	// instance applies. If HTTP tokens are required, container image builds need a
+	// minimum of two hops.
 	HttpPutResponseHopLimit *int32
 
 	// Indicates whether a signed token header is required for instance metadata
@@ -4765,7 +4882,11 @@ type InstanceMetadataOptions struct {
 	//   2.0 credentials are returned for the IAM role. Otherwise, version 1.0
 	//   credentials are returned.
 	//
-	// The default setting is optional.
+	// If you don't set a value, the EC2 launch default applies to the build and test
+	// instances. That default depends on the base AMI and any account-level instance
+	// metadata defaults. For more information, see [Configure the instance metadata options]in the Amazon EC2 User Guide .
+	//
+	// [Configure the instance metadata options]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html
 	HttpTokens *string
 
 	noSmithyDocumentSerde
@@ -4799,7 +4920,9 @@ func (v *InstanceMetadataOptions) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
-// The resource ARNs with different wildcard variations of semantic versioning.
+// A set of wildcard version ARNs that always reference the latest version of the
+// resource. ARNs are included for the latest version overall, and for the latest
+// versions within the same major, minor, and patch levels.
 type LatestVersionReferences struct {
 
 	// The latest version Amazon Resource Name (ARN) with the same major version of
@@ -4862,9 +4985,8 @@ func (v *LatestVersionReferences) Deserialize(d smithy.ShapeDeserializer) error 
 
 // Describes the configuration for a launch permission. The launch permission
 // modification request is sent to the [Amazon EC2 ModifyImageAttribute]API on behalf of the user for each Region
-// they have selected to distribute the AMI. To make an AMI public, set the launch
-// permission authorized accounts to all . See the examples for making an AMI
-// public at [Amazon EC2 ModifyImageAttribute].
+// they have selected to distribute the AMI. To make an AMI public, set userGroups
+// to the value all . See the examples for making an AMI public at [Amazon EC2 ModifyImageAttribute].
 //
 // [Amazon EC2 ModifyImageAttribute]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html
 type LaunchPermissionConfiguration struct {
@@ -4881,10 +5003,12 @@ type LaunchPermissionConfiguration struct {
 	// [Organizations terminology and concepts]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html
 	OrganizationalUnitArns []string
 
-	// The name of the group.
+	// The name of the group that you want to grant launch permission to. The only
+	// supported value is all , which makes the distributed AMI public.
 	UserGroups []string
 
-	// The Amazon Web Services account ID.
+	// The Amazon Web Services account IDs to grant launch permission to. Each listed
+	// account can use the distributed AMI to launch instances.
 	UserIds []string
 
 	noSmithyDocumentSerde
@@ -4929,8 +5053,9 @@ type LaunchTemplateConfiguration struct {
 	// The account ID that this configuration applies to.
 	AccountId *string
 
-	// Set the specified Amazon EC2 launch template as the default launch template for
-	// the specified account.
+	// Specifies whether to make the new launch template version that Image Builder
+	// creates the default version of the launch template. If you don't set a value,
+	// Image Builder treats it as true .
 	SetDefaultVersion *bool
 
 	noSmithyDocumentSerde
@@ -4982,15 +5107,15 @@ type LifecycleExecution struct {
 	// The Amazon Resource Name (ARN) of the lifecycle policy that ran.
 	LifecyclePolicyArn *string
 
-	// Contains information about associated resources that are identified for action
-	// by the runtime instance of the lifecycle policy.
+	// A summary flag that indicates whether the lifecycle execution identified any
+	// resources to take lifecycle actions on.
 	ResourcesImpactedSummary *LifecycleExecutionResourcesImpactedSummary
 
 	// The timestamp when the lifecycle runtime instance started.
 	StartTime *time.Time
 
-	// Runtime state that reports if the policy action ran successfully, failed, or
-	// was skipped.
+	// Runtime state that reports whether the lifecycle execution is in progress,
+	// succeeded, or failed.
 	State *LifecycleExecutionState
 
 	noSmithyDocumentSerde
@@ -5090,7 +5215,7 @@ type LifecycleExecutionResource struct {
 	// resource.
 	StartTime *time.Time
 
-	// The runtime state for the lifecycle execution.
+	// The runtime state of the lifecycle action for this resource.
 	State *LifecycleExecutionResourceState
 
 	noSmithyDocumentSerde
@@ -5167,7 +5292,7 @@ func (v *LifecycleExecutionResource) Deserialize(d smithy.ShapeDeserializer) err
 // The lifecycle policy action that was identified for the impacted resource.
 type LifecycleExecutionResourceAction struct {
 
-	// The name of the resource that was identified for a lifecycle policy action.
+	// The name of the lifecycle action that was identified for the resource.
 	Name LifecycleExecutionResourceActionName
 
 	// The reason why the lifecycle policy action is taken.
@@ -5208,12 +5333,12 @@ func (v *LifecycleExecutionResourceAction) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 
-// Contains details for an image resource that was identified for a lifecycle
-// action.
+// Contains an indicator that shows whether the lifecycle execution identified any
+// resources to take lifecycle actions on.
 type LifecycleExecutionResourcesImpactedSummary struct {
 
-	// Indicates whether an image resource that was identified for a lifecycle action
-	// has associated resources that are also impacted.
+	// Indicates whether the lifecycle execution identified any resources to take
+	// lifecycle actions on.
 	HasImpactedResources bool
 
 	noSmithyDocumentSerde
@@ -5372,7 +5497,8 @@ func (v *LifecycleExecutionState) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
-// The configuration details for a lifecycle policy resource.
+// Defines a lifecycle policy resource: its identity, status, execution role,
+// resource type, rules, resource selection, timestamps, and tags.
 type LifecyclePolicy struct {
 
 	// The Amazon Resource Name (ARN) of the lifecycle policy resource.
@@ -5397,7 +5523,9 @@ type LifecyclePolicy struct {
 	// The name of the lifecycle policy.
 	Name *string
 
-	// The configuration details for a lifecycle policy resource.
+	// The list of rules for the lifecycle policy. Each rule pairs an action with a
+	// filter and optional exclusion rules. A policy can contain at most one rule per
+	// action type.
 	PolicyDetails []LifecyclePolicyDetail
 
 	// Resource selection criteria used to run the lifecycle policy.
@@ -5406,7 +5534,9 @@ type LifecyclePolicy struct {
 	// The type of resources the lifecycle policy targets.
 	ResourceType LifecyclePolicyResourceType
 
-	// Indicates whether the lifecycle policy resource is enabled.
+	// Indicates whether the lifecycle policy resource is enabled. Only enabled
+	// policies run on their schedule. Disabling or deleting a policy removes its
+	// schedule and cancels any in-flight lifecycle execution.
 	Status LifecyclePolicyStatus
 
 	// To help manage your lifecycle policy resources, you can assign your own
@@ -5509,7 +5639,8 @@ func (v *LifecyclePolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The configuration details for a lifecycle policy resource.
+// Defines one lifecycle policy rule: the action to take, the filter that
+// determines which resources the rule applies to, and optional exclusion rules.
 type LifecyclePolicyDetail struct {
 
 	// Configuration details for the policy action.
@@ -5568,15 +5699,23 @@ func (v *LifecyclePolicyDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Contains selection criteria for the lifecycle policy.
+// Contains the action configuration for a lifecycle policy rule: the action to
+// take, and which underlying resources the action extends to.
 type LifecyclePolicyDetailAction struct {
 
-	// Specifies the lifecycle action to take.
+	// Specifies the lifecycle action to take. DELETE deletes the image resource and,
+	// with includeResources , also removes distributed AMIs, snapshots, or container
+	// images. DEPRECATE and DISABLE set the corresponding status on the image
+	// resource and, if includeResources.amis is set, on its distributed AMIs.
 	//
 	// This member is required.
 	Type LifecyclePolicyDetailActionType
 
-	// Specifies the resources that the lifecycle policy applies to.
+	// Specifies which underlying resources the action extends to beyond the Image
+	// Builder image resource itself: distributed AMIs, their snapshots, or distributed
+	// container images. DELETE rules can include all three, DEPRECATE and DISABLE
+	// rules can include AMIs only, and you can only include snapshots together with
+	// AMIs.
 	IncludeResources *LifecyclePolicyDetailActionIncludeResources
 
 	noSmithyDocumentSerde
@@ -5710,20 +5849,21 @@ type LifecyclePolicyDetailExclusionRulesAmis struct {
 	// Configures whether public AMIs are excluded from the lifecycle action.
 	IsPublic bool
 
-	// Specifies configuration details for Image Builder to exclude the most recent
-	// resources from lifecycle actions.
+	// Configures Image Builder to exclude AMIs that were launched within the
+	// specified time period from lifecycle actions. AMIs with no recorded
+	// last-launched time aren't excluded by this rule.
 	LastLaunched *LifecyclePolicyDetailExclusionRulesAmisLastLaunched
 
 	// Configures Amazon Web Services Regions that are excluded from the lifecycle
 	// action.
 	Regions []string
 
-	// Specifies Amazon Web Services accounts whose resources are excluded from the
-	// lifecycle action.
+	// The lifecycle action doesn't apply to AMIs that are shared with any of the
+	// specified Amazon Web Services accounts.
 	SharedAccounts []string
 
-	// Lists tags that should be excluded from lifecycle actions for the AMIs that
-	// have them.
+	// Lifecycle actions don't apply to AMIs that have any of these tags. Both the key
+	// and the value must match.
 	TagMap map[string]string
 
 	noSmithyDocumentSerde
@@ -5772,8 +5912,7 @@ func (v *LifecyclePolicyDetailExclusionRulesAmis) Deserialize(d smithy.ShapeDese
 type LifecyclePolicyDetailExclusionRulesAmisLastLaunched struct {
 
 	// Defines the unit of time that the lifecycle policy uses to calculate elapsed
-	// time since the last instance launched from the AMI. For example: days, weeks,
-	// months, or years.
+	// time since the last launch.
 	//
 	// This member is required.
 	Unit LifecyclePolicyTimeUnit
@@ -5821,7 +5960,8 @@ func (v *LifecyclePolicyDetailExclusionRulesAmisLastLaunched) Deserialize(d smit
 // Defines filters that the lifecycle policy uses to determine impacted resource.
 type LifecyclePolicyDetailFilter struct {
 
-	// Filter resources based on either age or count .
+	// Filter resources based on either AGE or COUNT . You can only use the count
+	// filter with the DELETE action type.
 	//
 	// This member is required.
 	Type LifecyclePolicyDetailFilterType
@@ -5897,7 +6037,8 @@ func (v *LifecyclePolicyDetailFilter) Deserialize(d smithy.ShapeDeserializer) er
 	})
 }
 
-// Resource selection criteria for the lifecycle policy.
+// Resource selection criteria for the lifecycle policy. You must provide exactly
+// one selection criteria: either recipes or a tag map, not both.
 type LifecyclePolicyResourceSelection struct {
 
 	// A list of recipes that are used as selection criteria for the output images
@@ -5982,7 +6123,7 @@ func (v *LifecyclePolicyResourceSelectionRecipe) Deserialize(d smithy.ShapeDeser
 // Contains a summary of lifecycle policy resources.
 type LifecyclePolicySummary struct {
 
-	// The Amazon Resource Name (ARN) of the lifecycle policy summary resource.
+	// The Amazon Resource Name (ARN) of the lifecycle policy.
 	Arn *string
 
 	// The timestamp when Image Builder created the lifecycle policy resource.
@@ -6135,11 +6276,13 @@ func (v *Logging) Deserialize(d smithy.ShapeDeserializer) error {
 // The resources produced by this image.
 type OutputResources struct {
 
-	// The Amazon EC2 AMIs created by this image.
+	// The Amazon EC2 AMIs created by this image. The list contains one entry per AMI,
+	// including copies that distribution created in each target Amazon Web Services
+	// Region and account.
 	Amis []Ami
 
-	// Container images that the pipeline has generated and stored in the output
-	// repository.
+	// The container images that Image Builder created when it built this image,
+	// stored in the output Amazon ECR repository.
 	Containers []Container
 
 	noSmithyDocumentSerde
@@ -6175,8 +6318,9 @@ type PackageVulnerabilityDetails struct {
 	// This member is required.
 	VulnerabilityId *string
 
-	// CVSS scores for one or more vulnerabilities that Amazon Inspector identified
-	// for a package.
+	// The CVSS scores for the vulnerability in this finding, as published by the
+	// vulnerability sources. Sources include NVD and the operating system vendor, and
+	// scores can span CVSS versions.
 	Cvss []CvssScore
 
 	// Links to web pages that contain details about the vulnerabilities that Amazon
@@ -6334,14 +6478,11 @@ type Placement struct {
 	AvailabilityZone *string
 
 	// The ID of the Dedicated Host on which build and test instances run. This only
-	// applies if tenancy is host . If you specify the host ID, you must not specify
-	// the resource group ARN. If you specify both, Image Builder returns an error.
+	// applies if tenancy is host .
 	HostId *string
 
 	// The Amazon Resource Name (ARN) of the host resource group in which to launch
-	// build and test instances. This only applies if tenancy is host . If you specify
-	// the resource group ARN, you must not specify the host ID. If you specify both,
-	// Image Builder returns an error.
+	// build and test instances. This only applies if tenancy is host .
 	HostResourceGroupArn *string
 
 	// The tenancy of the instance. An instance with a tenancy of dedicated runs on
@@ -6661,11 +6802,11 @@ func (v *RemediationRecommendation) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
-// The current state of an impacted resource.
+// The state to apply to the image resource in a resource state update request.
 type ResourceState struct {
 
-	// Shows the current lifecycle policy action that was applied to an impacted
-	// resource.
+	// The status to which you want to move the image resource. Set the status to
+	// AVAILABLE to restore an image that's currently deprecated or disabled.
 	Status ResourceStatus
 
 	noSmithyDocumentSerde
@@ -6701,7 +6842,8 @@ func (v *ResourceState) Deserialize(d smithy.ShapeDeserializer) error {
 // lifecycle actions.
 type ResourceStateUpdateExclusionRules struct {
 
-	// Defines criteria for AMIs that are excluded from lifecycle actions.
+	// Defines criteria for AMIs that Image Builder should exclude from the resource
+	// state update.
 	Amis *LifecyclePolicyDetailExclusionRulesAmis
 
 	noSmithyDocumentSerde
@@ -6731,10 +6873,12 @@ func (v *ResourceStateUpdateExclusionRules) Deserialize(d smithy.ShapeDeserializ
 	})
 }
 
-// Specifies if the lifecycle policy should apply actions to selected resources.
+// Specifies which underlying resources the resource state update applies to, in
+// addition to the Image Builder image resource itself: distributed AMIs and their
+// snapshots for AMI images, or distributed container images for container images.
 type ResourceStateUpdateIncludeResources struct {
 
-	// Specifies whether the lifecycle action should apply to distributed AMIs
+	// Specifies whether the lifecycle action should apply to distributed AMIs.
 	Amis bool
 
 	// Specifies whether the lifecycle action should apply to distributed containers.
@@ -6778,8 +6922,8 @@ func (v *ResourceStateUpdateIncludeResources) Deserialize(d smithy.ShapeDeserial
 	})
 }
 
-// Properties that configure export from your build instance to a compatible file
-// format for your VM.
+// Properties that configure exporting the output image to a disk image file in an
+// Amazon S3 bucket, in a format that's compatible with your VMs.
 type S3ExportConfiguration struct {
 
 	// Export the updated image to one of the following supported disk image formats:
@@ -6860,10 +7004,14 @@ func (v *S3ExportConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 // Amazon S3 logging configuration.
 type S3Logs struct {
 
-	// The S3 bucket in which to store the logs.
+	// The name of an existing Amazon S3 bucket where Image Builder saves build logs.
+	// The bucket isn't validated when you create or update the configuration, and
+	// Image Builder doesn't create it. The instance profile associated with this
+	// infrastructure configuration must have permission to write to the bucket.
 	S3BucketName *string
 
-	// The Amazon S3 path to the bucket where the logs are stored.
+	// The Amazon S3 key prefix under which Image Builder writes build and test logs
+	// in the bucket.
 	S3KeyPrefix *string
 
 	noSmithyDocumentSerde
@@ -6919,19 +7067,25 @@ type Schedule struct {
 	//   - EXPRESSION_MATCH_ONLY – This condition builds a new image every time the
 	//   CRON expression matches the current time.
 	//
+	// If the recipe references its base image through an Amazon Web Services Systems
+	// Manager Parameter Store parameter, a change in the parameter's value also counts
+	// as an available dependency update.
+	//
 	// [CreateComponent]: https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html
 	PipelineExecutionStartCondition PipelineExecutionStartCondition
 
-	// The cron expression determines how often EC2 Image Builder evaluates your
-	// pipelineExecutionStartCondition .
+	// The expression determines how often EC2 Image Builder evaluates your
+	// pipelineExecutionStartCondition . You can specify a cron expression, or a rate
+	// expression such as rate(1 day) .
 	//
 	// For information on how to format a cron expression in Image Builder, see [Use cron expressions in EC2 Image Builder].
 	//
 	// [Use cron expressions in EC2 Image Builder]: https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html
 	ScheduleExpression *string
 
-	// The timezone that applies to the scheduling expression. For example, "Etc/UTC",
-	// "America/Los_Angeles" in the [IANA timezone format]. If not specified this defaults to UTC.
+	// The timezone that applies to the scheduling expression. Specify a value in [IANA timezone format],
+	// for example Etc/UTC or America/Los_Angeles . If not specified, this defaults to
+	// UTC.
 	//
 	// [IANA timezone format]: https://www.joda.org/joda-time/timezones.html
 	Timezone *string
@@ -7106,16 +7260,17 @@ func (v *SsmParameterConfiguration) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
-// Contains settings for the Systems Manager agent on your build instance.
+// Contains settings for the Systems Manager agent on your build instance. This
+// setting applies to Linux and macOS build instances only. Requests that set it
+// for a recipe with a Windows base image are rejected.
 type SystemsManagerAgent struct {
 
-	// Controls whether the Systems Manager agent is removed from your final build
-	// image, prior to creating the new AMI. If this is set to true, then the agent is
-	// removed from the final image. If it's set to false, then the agent is left in,
-	// so that it is included in the new AMI. default value is false.
-	//
-	// The default behavior of uninstallAfterBuild is to remove the SSM Agent if it
-	// was installed by EC2 Image Builder
+	// Specifies whether the Systems Manager agent is removed from your final build
+	// image before Image Builder creates the new AMI. If true , the agent is removed.
+	// If false , the agent is kept, so that it's included in the AMI. If you don't set
+	// this property, Image Builder removes the agent only if Image Builder installed
+	// the agent during the build. An agent that was pre-installed on the base image is
+	// kept.
 	UninstallAfterBuild *bool
 
 	noSmithyDocumentSerde
@@ -7147,8 +7302,8 @@ func (v *SystemsManagerAgent) Deserialize(d smithy.ShapeDeserializer) error {
 type TargetContainerRepository struct {
 
 	// The name of the container repository where the output container image is
-	// stored. This name is prefixed by the repository location. For example,
-	// /repository_name .
+	// stored. Provide the repository name only (a namespace path such as
+	// team-a/my-repo is allowed, but not the registry hostname).
 	//
 	// This member is required.
 	RepositoryName *string
@@ -7385,8 +7540,8 @@ func (v *WindowsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Defines a process that Image Builder uses to build and test images during the
-// image creation process.
+// Defines a process that Image Builder runs during the build, test, or
+// distribution stage of the image creation process.
 type Workflow struct {
 
 	// The Amazon Resource Name (ARN) of the workflow resource.
@@ -7418,18 +7573,17 @@ type Workflow struct {
 	// The owner of the workflow resource.
 	Owner *string
 
-	// An array of input parameters that that the image workflow uses to control
-	// actions or configure settings.
+	// An array of input parameters that the image workflow uses to control actions or
+	// configure settings.
 	Parameters []WorkflowParameterDetail
 
 	// Describes the current status of the workflow and the reason for that status.
 	State *WorkflowState
 
-	// The tags that apply to the workflow resource
+	// The tags that apply to the workflow resource.
 	Tags map[string]string
 
-	// Specifies the image creation stage that the workflow applies to. Image Builder
-	// currently supports build and test workflows.
+	// The image creation stage that the workflow applies to.
 	Type WorkflowType
 
 	// The workflow resource version. Workflow resources are immutable. To make a
@@ -7541,7 +7695,10 @@ type WorkflowConfiguration struct {
 	// This member is required.
 	WorkflowArn *string
 
-	// The action to take if the workflow fails.
+	// The action to take if the workflow fails. With CONTINUE , a failed workflow is
+	// logged and image creation proceeds to the next workflow. If you don't set a
+	// value, the image build fails when the workflow fails. You can only set this
+	// property for test workflows.
 	OnFailure OnWorkflowFailure
 
 	// Test workflows are defined within named runtime groups called parallel groups.
@@ -7613,7 +7770,9 @@ type WorkflowExecutionMetadata struct {
 	// The name of the test group that included the test workflow resource at runtime.
 	ParallelGroup *string
 
-	// Indicates retry status for this runtime instance of the workflow.
+	// Indicates whether a retry of the image build superseded this runtime instance
+	// of the workflow. When you retry a failed image build, Image Builder sets this
+	// flag to true on the original workflow executions that the retry re-ran.
 	Retried *bool
 
 	// The timestamp when the runtime instance of this workflow started.
@@ -7622,8 +7781,10 @@ type WorkflowExecutionMetadata struct {
 	// The current runtime status for this workflow.
 	Status WorkflowExecutionStatus
 
-	// The total number of steps in the workflow. This should equal the sum of the
-	// step counts for steps that succeeded, were skipped, and failed.
+	// The total number of steps that the workflow document defines for this runtime
+	// instance of the workflow. Image Builder sets this count before any steps run.
+	// The sum of succeeded, skipped, and failed steps only reaches this total if every
+	// step finishes in one of those states.
 	TotalStepCount int32
 
 	// A runtime count for the number of steps in the workflow that failed.
@@ -7797,8 +7958,8 @@ type WorkflowParameterDetail struct {
 	// This member is required.
 	Name *string
 
-	// The type of input this parameter provides. The currently supported value is
-	// "string".
+	// The type of input this parameter provides. Supported values are string , integer
+	// , boolean , and stringList .
 	//
 	// This member is required.
 	Type *string
@@ -7849,7 +8010,7 @@ func (v *WorkflowParameterDetail) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
-// A group of fields that describe the current status of workflow.
+// A group of fields that describe the current status of the workflow.
 type WorkflowState struct {
 
 	// Describes how or why the workflow changed state.
@@ -7893,8 +8054,8 @@ func (v *WorkflowState) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Contains runtime details for an instance of a workflow that ran for the
-// associated image build version.
+// Contains runtime details for a workflow step that has paused at a WaitForAction
+// step, and is waiting for you to send an action.
 type WorkflowStepExecution struct {
 
 	// The name of the step action.
@@ -7997,7 +8158,8 @@ type WorkflowStepMetadata struct {
 	// The timestamp when the workflow step finished.
 	EndTime *string
 
-	// Input parameters that Image Builder provides for the workflow step.
+	// Input parameters that Image Builder provides for the workflow step, as a
+	// JSON-encoded string.
 	Inputs *string
 
 	// The maximum number of attempts allowed for the workflow step, based on the
@@ -8011,8 +8173,10 @@ type WorkflowStepMetadata struct {
 	// The name of the workflow step.
 	Name *string
 
-	// The file names that the workflow step created as output for this runtime
-	// instance of the workflow.
+	// The output values that the workflow step produced for this runtime instance of
+	// the workflow, as a JSON-encoded string. For example, a step that launches an
+	// instance outputs the instance ID. If the step failed, this field contains the
+	// error message.
 	Outputs *string
 
 	// Reports on the rollback status of the step, if applicable.
@@ -8159,8 +8323,7 @@ type WorkflowSummary struct {
 	// Contains a list of tags that are defined for the workflow.
 	Tags map[string]string
 
-	// The image creation stage that this workflow applies to. Image Builder currently
-	// supports build and test stage workflows.
+	// The image creation stage that this workflow applies to.
 	Type WorkflowType
 
 	// The version of the workflow.
@@ -8266,8 +8429,7 @@ type WorkflowVersion struct {
 	// The owner of the workflow resource.
 	Owner *string
 
-	// The image creation stage that this workflow applies to. Image Builder currently
-	// supports build and test stage workflows.
+	// The image creation stage that this workflow applies to.
 	Type WorkflowType
 
 	// The semantic version of the workflow resource. The format includes three nodes:

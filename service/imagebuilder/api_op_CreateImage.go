@@ -13,7 +13,13 @@ import (
 
 // Creates a new image along with all configured output resources defined in the
 // distribution configuration. You must specify exactly one recipe for your image,
-// using either a ContainerRecipeArn or an ImageRecipeArn.
+// using either a containerRecipeArn or an imageRecipeArn .
+//
+// The response returns as soon as Image Builder creates the new image resource.
+// The image build process runs asynchronously. To check its progress, call [GetImage]and
+// check the image status.
+//
+// [GetImage]: https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_GetImage.html
 func (c *Client) CreateImage(ctx context.Context, params *CreateImageInput, optFns ...func(*Options)) (*CreateImageOutput, error) {
 	if params == nil {
 		params = &CreateImageInput{}
@@ -32,9 +38,9 @@ func (c *Client) CreateImage(ctx context.Context, params *CreateImageInput, optF
 type CreateImageInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -48,11 +54,14 @@ type CreateImageInput struct {
 	InfrastructureConfigurationArn *string
 
 	// The Amazon Resource Name (ARN) of the container recipe that defines how images
-	// are configured and tested.
+	// are configured and tested. You must specify either this property or
+	// imageRecipeArn , but not both.
 	ContainerRecipeArn *string
 
 	// The Amazon Resource Name (ARN) of the distribution configuration that defines
-	// and configures the outputs of your pipeline.
+	// and configures the outputs of the image build. If you don't specify a
+	// distribution configuration, Image Builder creates the output image only in the
+	// account and Amazon Web Services Region where the build runs.
 	DistributionConfigurationArn *string
 
 	// Specifies whether to collect additional information about the image being
@@ -61,26 +70,39 @@ type CreateImageInput struct {
 	EnhancedImageMetadataEnabled *bool
 
 	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
-	// Image Builder access to perform workflow actions.
+	// Image Builder access to perform workflow actions. This property is required if
+	// you specify workflows . If you don't provide a role, Image Builder uses the
+	// Image Builder service-linked role in your account, and creates it if it doesn't
+	// exist.
 	ExecutionRole *string
 
 	// The Amazon Resource Name (ARN) of the image recipe that defines how images are
-	// configured, tested, and assessed.
+	// configured, tested, and assessed. You must specify either this property or
+	// containerRecipeArn , but not both.
 	ImageRecipeArn *string
 
-	// Contains settings for vulnerability scans.
+	// Settings for vulnerability scans that Amazon Inspector runs during image
+	// creation. For AMI output, Amazon Inspector scans the test instance. For
+	// container output, Amazon Inspector scans the container image that Image Builder
+	// pushes to the Amazon ECR repository specified in ecrConfiguration .
 	ImageScanningConfiguration *types.ImageScanningConfiguration
 
-	// The image tests configuration of the image.
+	// Settings that determine whether Image Builder runs tests on the image after
+	// building it. Image tests are enabled by default.
 	ImageTestsConfiguration *types.ImageTestsConfiguration
 
-	// The logging configuration for the image build process.
+	// The CloudWatch Logs log group where Image Builder sends the image build logs.
+	// If you specify a log group name outside of the /aws/imagebuilder/ namespace,
+	// you must also provide an executionRole that has permission to write to that log
+	// group.
 	LoggingConfiguration *types.ImageLoggingConfiguration
 
 	// The tags of the image.
 	Tags map[string]string
 
-	// Contains an array of workflow configuration objects.
+	// The array of workflow configuration objects for the build. If you specify
+	// workflows, they replace the default workflows that Image Builder otherwise runs
+	// for the build, and you must also provide an executionRole .
 	Workflows []types.WorkflowConfiguration
 
 	noSmithyDocumentSerde
@@ -141,7 +163,9 @@ type CreateImageOutput struct {
 	// The Amazon Resource Name (ARN) of the image that the request created.
 	ImageBuildVersionArn *string
 
-	// The resource ARNs with different wildcard variations of semantic versioning.
+	// A set of wildcard version ARNs that always reference the latest version of the
+	// resource. ARNs are included for the latest version overall, and for the latest
+	// versions within the same major, minor, and patch levels.
 	LatestVersionReferences *types.LatestVersionReferences
 
 	// The request ID that uniquely identifies this request.

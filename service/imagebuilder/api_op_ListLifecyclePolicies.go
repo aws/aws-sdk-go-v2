@@ -29,7 +29,8 @@ func (c *Client) ListLifecyclePolicies(ctx context.Context, params *ListLifecycl
 
 type ListLifecyclePoliciesInput struct {
 
-	// Streamline results based on one of the following values: Name , Status .
+	// Use the following filters to streamline results: name , resourceType , and
+	// status . Filter names are matched exactly as shown.
 	Filters []types.Filter
 
 	// The maximum number of items to return in a single request.

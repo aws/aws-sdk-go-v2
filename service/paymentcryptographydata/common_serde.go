@@ -343,6 +343,12 @@ func serializePinVerificationAttributes(s smithy.ShapeSerializer, schema *smithy
 
 func serializeReEncryptionAttributes(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ReEncryptionAttributes) {
 	switch vv := v.(type) {
+	case *types.ReEncryptionAttributesMemberAsymmetric:
+		s.WriteUnion(schema, schemas.ReEncryptionAttributes_Asymmetric)
+		s.WriteStruct(schemas.ReEncryptionAttributes_Asymmetric)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.ReEncryptionAttributesMemberDukpt:
 		s.WriteUnion(schema, schemas.ReEncryptionAttributes_Dukpt)
 		s.WriteStruct(schemas.ReEncryptionAttributes_Dukpt)
@@ -753,6 +759,10 @@ func deserializePinVerificationAttributes(d smithy.ShapeDeserializer, s *smithy.
 func deserializeReEncryptionAttributes(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ReEncryptionAttributes) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.ReEncryptionAttributes_Asymmetric:
+			vv := &types.ReEncryptionAttributesMemberAsymmetric{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.ReEncryptionAttributes_Dukpt:
 			vv := &types.ReEncryptionAttributesMemberDukpt{}
 			*v = vv

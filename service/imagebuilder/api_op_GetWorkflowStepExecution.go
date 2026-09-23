@@ -29,8 +29,9 @@ func (c *Client) GetWorkflowStepExecution(ctx context.Context, params *GetWorkfl
 
 type GetWorkflowStepExecutionInput struct {
 
-	// Use the unique identifier for a specific runtime instance of the workflow step
-	// to get runtime details for that step.
+	// The unique identifier for the runtime instance of the workflow step that you
+	// want to get runtime details for. To get the identifiers for the steps that ran
+	// in a workflow, call ListWorkflowStepExecutions.
 	//
 	// This member is required.
 	StepExecutionId *string
@@ -65,12 +66,12 @@ type GetWorkflowStepExecutionOutput struct {
 	// The timestamp when the specified runtime instance of the workflow step finished.
 	EndTime *string
 
-	// The Amazon Resource Name (ARN) of the image resource build version that the
-	// specified runtime instance of the workflow step creates.
+	// The Amazon Resource Name (ARN) of the image build version that owns the
+	// specified runtime instance of the workflow step.
 	ImageBuildVersionArn *string
 
 	// Input parameters that Image Builder provided for the specified runtime instance
-	// of the workflow step.
+	// of the workflow step, as a JSON-encoded string.
 	Inputs *string
 
 	// The maximum number of attempts allowed for the specified runtime instance of
@@ -85,31 +86,39 @@ type GetWorkflowStepExecutionOutput struct {
 	// The name of the specified runtime instance of the workflow step.
 	Name *string
 
-	// The action to perform if the workflow step fails.
+	// The action that the workflow takes if this step fails, as configured in the
+	// workflow document. Abort fails the workflow and rolls back completed steps.
+	// Continue proceeds to the next step. If the step doesn't set a value, it defaults
+	// to Abort .
 	OnFailure *string
 
-	// The file names that the specified runtime version of the workflow step created
-	// as output.
+	// The output values that the specified runtime instance of the workflow step
+	// produced, as a JSON-encoded string. For example, a step that launches an
+	// instance outputs the instance ID. If the step failed, this field contains the
+	// error message.
 	Outputs *string
 
 	// The request ID that uniquely identifies this request.
 	RequestId *string
 
-	// Reports on the rollback status of the specified runtime version of the workflow
-	// step, if applicable.
+	// Reports on the rollback status of the specified runtime instance of the
+	// workflow step, if applicable. Rollback runs when the workflow execution fails,
+	// and undoes the work that completed steps performed.
 	RollbackStatus types.WorkflowStepExecutionRollbackStatus
 
-	// The timestamp when the specified runtime version of the workflow step started.
+	// The timestamp when the specified runtime instance of the workflow step started.
 	StartTime *string
 
-	// The current status for the specified runtime version of the workflow step.
+	// The current status for the specified runtime instance of the workflow step.
 	Status types.WorkflowStepExecutionStatus
 
-	// The unique identifier for the runtime version of the workflow step that you
+	// The unique identifier for the runtime instance of the workflow step that you
 	// specified in the request.
 	StepExecutionId *string
 
-	// The maximum duration in seconds for this step to complete its action.
+	// The maximum duration in seconds for this step to complete its action. If the
+	// workflow document doesn't set a timeout for the step, Image Builder applies the
+	// default timeout for the step's action. This field returns that value.
 	TimeoutSeconds *int32
 
 	// The Amazon Resource Name (ARN) of the build version for the Image Builder

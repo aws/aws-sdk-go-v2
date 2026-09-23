@@ -6682,6 +6682,46 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentContentKeyPeriodConfiguration(v **types.ContentKeyPeriodConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContentKeyPeriodConfiguration
+	if *v == nil {
+		sv = &types.ContentKeyPeriodConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ContentKeyPeriodTiming":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContentKeyPeriodTiming to be of type string, got %T instead", value)
+				}
+				sv.ContentKeyPeriodTiming = types.ContentKeyPeriodTiming(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCustomAdTypeList(v *[]types.CustomAdType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10256,6 +10296,11 @@ func awsRestjson1_deserializeDocumentSpekeKeyProvider(v **types.SpekeKeyProvider
 				sv.CertificateArn = ptr.String(jtv)
 			}
 
+		case "ContentKeyPeriodConfiguration":
+			if err := awsRestjson1_deserializeDocumentContentKeyPeriodConfiguration(&sv.ContentKeyPeriodConfiguration, value); err != nil {
+				return err
+			}
+
 		case "DrmSystems":
 			if err := awsRestjson1_deserializeDocumentDrmSystems(&sv.DrmSystems, value); err != nil {
 				return err
@@ -10282,6 +10327,15 @@ func awsRestjson1_deserializeDocumentSpekeKeyProvider(v **types.SpekeKeyProvider
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "SpekeVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SpekeVersion to be of type string, got %T instead", value)
+				}
+				sv.SpekeVersion = types.SpekeVersion(jtv)
 			}
 
 		case "Url":

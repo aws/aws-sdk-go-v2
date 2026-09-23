@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"hasPublishedVersion":true,"isSnapshot":true,"scopeArn":"__ScopeArn__","scopeConfiguration":{"accountFilter":{"includeAll":{}},"resourceScopes":{"key0":{"exclude":{"explicitArns":["__Member__","__Member__"],"expression":{"criteria":{"tags":{"key0":"__Value__"}}}},"include":{"explicitArns":["__Member__","__Member__"],"expression":{"criteria":{"tags":{"key0":"__Value__"}}}},"includeAll":true}}},"scopeDescription":"__ScopeDescription__","scopeId":"__ScopeId__","scopeName":"__ScopeName__","status":"DRAFT","updateToken":"__UpdateToken__","updatedAt":"2000-01-01T00:00:00Z","version":"__Version__"}

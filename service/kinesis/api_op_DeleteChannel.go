@@ -14,9 +14,8 @@ import (
 // source stream to the destination. Data already delivered to the destination is
 // not deleted.
 //
-// A stream cannot be deleted while it has active channels. To delete the stream,
-// first delete all channels attached to it. To find them, use ListChannelswith a stream
-// filter.
+// A stream cannot be deleted while it has active channels. Use ListChannels with a stream
+// filter to find the channels attached to a stream before deleting it.
 //
 // This operation has a call limit of 5 transactions per second (TPS) for each
 // Amazon Web Services account. Exceeding 5 TPS results in a LimitExceededException

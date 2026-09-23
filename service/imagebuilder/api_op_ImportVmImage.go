@@ -11,14 +11,15 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// When you export your virtual machine (VM) from its virtualization environment,
-// that process creates a set of one or more disk container files that act as
-// snapshots of your VM’s environment, settings, and data. The Amazon EC2 API [ImportImage]
-// action uses those files to import your VM and create an AMI. To import using the
-// CLI command, see [import-image]
+// Creates an Image Builder image resource from an Amazon EC2 VM import task. The
+// response returns as soon as Image Builder creates the image resource in the
+// PENDING state. Image Builder then monitors the import task asynchronously. When
+// the task completes, Image Builder records the AMI that it produced as the new
+// image's output resource and marks the image AVAILABLE . You can then use the
+// imported image as the base image for your recipes.
 //
-// You can reference the task ID from the VM import to pull in the AMI that the
-// import created as the base image for your Image Builder recipe.
+// To create the VM import task, use the Amazon EC2 API [ImportImage] operation, or the [import-image] CLI
+// command.
 //
 // [ImportImage]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportImage.html
 // [import-image]: https://docs.aws.amazon.com/cli/latest/reference/ec2/import-image.html
@@ -40,16 +41,20 @@ func (c *Client) ImportVmImage(ctx context.Context, params *ImportVmImageInput, 
 type ImportVmImageInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The name of the base image that is created by the import process.
+	// The name of the base image that is created by the import process. Image Builder
+	// generates the image ARN from a normalized form of the name, so names that differ
+	// only in case, spaces, or underscores count as the same name. If an image with
+	// the same name and semantic version already exists in your account in the same
+	// Amazon Web Services Region, the import creates a new build version for it.
 	//
 	// This member is required.
 	Name *string
@@ -77,8 +82,9 @@ type ImportVmImageInput struct {
 	SemanticVersion *string
 
 	// The importTaskId (API) or ImportTaskId (CLI) from the Amazon EC2 VM import
-	// process. Image Builder retrieves information from the import process to pull in
-	// the AMI that is created from the VM source as the base image for your recipe.
+	// process. The import task doesn't need to be complete when you call ImportVmImage
+	// - Image Builder monitors the task and finishes creating the image when the task
+	// completes.
 	//
 	// This member is required.
 	VmImportTaskId *string
@@ -86,7 +92,9 @@ type ImportVmImageInput struct {
 	// The description for the base image that is created by the import process.
 	Description *string
 
-	// The logging configuration for the image build process.
+	// The CloudWatch Logs log group where Image Builder sends the import logs. For
+	// ImportVmImage, the log group name must be within the /aws/imagebuilder/
+	// namespace.
 	LoggingConfiguration *types.ImageLoggingConfiguration
 
 	// The operating system version for the imported VM.
@@ -139,8 +147,9 @@ type ImportVmImageOutput struct {
 	// The client token that uniquely identifies the request.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the AMI that was created during the VM import
-	// process. This AMI is used as the base image for the recipe that imported the VM.
+	// The Amazon Resource Name (ARN) of the Image Builder image resource that this
+	// request created. Image Builder records the AMI from the VM import task in the
+	// image's output resources after the task completes.
 	ImageArn *string
 
 	// The request ID that uniquely identifies this request.

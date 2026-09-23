@@ -30,9 +30,9 @@ func (c *Client) CreateLifecyclePolicy(ctx context.Context, params *CreateLifecy
 type CreateLifecyclePolicyInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -40,27 +40,40 @@ type CreateLifecyclePolicyInput struct {
 	ClientToken *string
 
 	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
-	// Image Builder access to run lifecycle actions.
+	// Image Builder access to run lifecycle actions. You must have permission to pass
+	// the role, and the role's trust policy must allow the Image Builder service
+	// principal to assume it.
 	//
 	// This member is required.
 	ExecutionRole *string
 
-	// The name of the lifecycle policy to create.
+	// The name of the lifecycle policy to create. Policy names must be unique to your
+	// account in each Amazon Web Services Region. Image Builder generates the policy
+	// ARN from a normalized form of the name, so names that differ only in case,
+	// spaces, or underscores count as the same name. You can't change the name after
+	// creation.
 	//
 	// This member is required.
 	Name *string
 
-	// Configuration details for the lifecycle policy rules.
+	// Configuration details for the lifecycle policy rules. A policy can contain at
+	// most one rule per action type: one DELETE , one DEPRECATE , and one DISABLE .
 	//
 	// This member is required.
 	PolicyDetails []types.LifecyclePolicyDetail
 
-	// Selection criteria for the resources that the lifecycle policy applies to.
+	// Selection criteria for the resources that the lifecycle policy applies to. You
+	// must specify exactly one selection criteria: either recipes or a tag map, not
+	// both.
 	//
 	// This member is required.
 	ResourceSelection *types.LifecyclePolicyResourceSelection
 
-	// The type of Image Builder resource that the lifecycle policy applies to.
+	// The type of Image Builder resource that the lifecycle policy applies to. The
+	// resource type determines the allowed rule actions: policies for AMI-based Image
+	// Builder images support DELETE , DEPRECATE , and DISABLE , and policies for
+	// container-based Image Builder images support only DELETE . You can't change the
+	// resource type after creation.
 	//
 	// This member is required.
 	ResourceType types.LifecyclePolicyResourceType
@@ -68,12 +81,14 @@ type CreateLifecyclePolicyInput struct {
 	// Optional description for the lifecycle policy.
 	Description *string
 
-	// Validates the required permissions and request parameters without making the
-	// request. If validation succeeds, the operation returns a
+	// Validates the required permissions and request parameters without performing
+	// the operation. If validation succeeds, the operation returns a
 	// DryRunOperationException error response.
 	DryRun bool
 
-	// Indicates whether the lifecycle policy resource is enabled.
+	// Indicates whether the lifecycle policy resource is enabled. If you don't
+	// specify a status, it defaults to ENABLED . Only enabled policies run on their
+	// schedule.
 	Status types.LifecyclePolicyStatus
 
 	// Tags to apply to the lifecycle policy resource.

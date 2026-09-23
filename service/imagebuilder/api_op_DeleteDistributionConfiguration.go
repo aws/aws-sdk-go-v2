@@ -9,7 +9,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes a distribution configuration.
+// Deletes a distribution configuration. You can't delete a configuration that an
+// image pipeline still references. The request fails with
+// ResourceDependencyException . Update or delete the referencing pipelines first.
 func (c *Client) DeleteDistributionConfiguration(ctx context.Context, params *DeleteDistributionConfigurationInput, optFns ...func(*Options)) (*DeleteDistributionConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteDistributionConfigurationInput{}

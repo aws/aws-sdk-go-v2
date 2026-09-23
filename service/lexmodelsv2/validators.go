@@ -3569,6 +3569,11 @@ func validateBotLocaleImportSpecification(v *types.BotLocaleImportSpecification)
 			invalidParams.AddNested("UnifiedSpeechSettings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SpeakerDiarizationSettings != nil {
+		if err := validateSpeakerDiarizationSettings(v.SpeakerDiarizationSettings); err != nil {
+			invalidParams.AddNested("SpeakerDiarizationSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6141,6 +6146,18 @@ func validateSlotValueSelectionSetting(v *types.SlotValueSelectionSetting) error
 	}
 }
 
+func validateSpeakerDiarizationSettings(v *types.SpeakerDiarizationSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpeakerDiarizationSettings"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSpecifications(v *types.Specifications) error {
 	if v == nil {
 		return nil
@@ -7016,6 +7033,11 @@ func validateOpCreateBotLocaleInput(v *CreateBotLocaleInput) error {
 	if v.GenerativeAISettings != nil {
 		if err := validateGenerativeAISettings(v.GenerativeAISettings); err != nil {
 			invalidParams.AddNested("GenerativeAISettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SpeakerDiarizationSettings != nil {
+		if err := validateSpeakerDiarizationSettings(v.SpeakerDiarizationSettings); err != nil {
+			invalidParams.AddNested("SpeakerDiarizationSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -9204,6 +9226,11 @@ func validateOpUpdateBotLocaleInput(v *UpdateBotLocaleInput) error {
 	if v.GenerativeAISettings != nil {
 		if err := validateGenerativeAISettings(v.GenerativeAISettings); err != nil {
 			invalidParams.AddNested("GenerativeAISettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SpeakerDiarizationSettings != nil {
+		if err := validateSpeakerDiarizationSettings(v.SpeakerDiarizationSettings); err != nil {
+			invalidParams.AddNested("SpeakerDiarizationSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

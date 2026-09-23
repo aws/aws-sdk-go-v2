@@ -49,7 +49,8 @@ func (v *GetImagePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 
 type GetImagePolicyOutput struct {
 
-	// The image policy object.
+	// The resource policy for the image, as a JSON policy document. If the image has
+	// no policy applied, the response contains an empty JSON object ( {} ).
 	Policy *string
 
 	// The request ID that uniquely identifies this request.

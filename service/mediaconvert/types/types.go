@@ -1563,14 +1563,18 @@ func (v *AudioPitchCorrectionSettings) Deserialize(d smithy.ShapeDeserializer) e
 // Details about the media file's audio track.
 type AudioProperties struct {
 
-	// The bit depth of the audio track.
+	// The bit depth of the audio track. This value is exact for PCM and FLAC audio.
+	// For lossy codecs, such as AAC, AC-3, and E-AC-3, it is a nominal value and
+	// should be treated as approximate.
 	BitDepth *int32
 
 	// The bit rate of the audio track, in bits per second.
 	BitRate *int64
 
 	// The audio channel layout of the track, such as "mono", "stereo", "5.1", or
-	// "7.1". Object-based or immersive audio is reported as "5.1.4" or "7.1.4".
+	// "7.1". Object-based or immersive audio is reported as "5.1.4" or "7.1.4". The
+	// layout is exact for AC-3 and E-AC-3 audio. For other codecs, it is inferred from
+	// the channel count and should be treated as approximate.
 	ChannelLayout *string
 
 	// The number of audio channels in the audio track.
@@ -1763,6 +1767,14 @@ type AudioSelector struct {
 	// numberings will not shift.
 	SelectorType AudioSelectorType
 
+	// Specify whether to pass SMPTE 337M-wrapped audio (such as Dolby E) through
+	// without unwrapping. Choose Enabled to pass the SMPTE 337M container through
+	// unchanged, treating the track as raw PCM. Choose Disabled (default) to
+	// automatically detect and unwrap SMPTE 337M data, extracting the underlying Dolby
+	// E programs as separate audio tracks for encoding. When this field is absent, the
+	// service defaults to Disabled (auto-unwrap).
+	Smpte337Passthrough AudioSmpte337Passthrough
+
 	// Identify a track from the input audio to include in this selector by entering
 	// the stream index number. These numberings count all tracks in the input file,
 	// but only a track containing audio data may be used here. To include several
@@ -1824,6 +1836,9 @@ func (v *AudioSelector) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SelectorType != "" {
 		s.WriteString(schemas.AudioSelector_SelectorType, string(v.SelectorType))
 	}
+	if v.Smpte337Passthrough != "" {
+		s.WriteString(schemas.AudioSelector_Smpte337Passthrough, string(v.Smpte337Passthrough))
+	}
 	serialize__listOf__integerMin1Max2147483647(s, schemas.AudioSelector_Streams, v.Streams)
 	serialize__listOf__integerMin1Max2147483647(s, schemas.AudioSelector_Tracks, v.Tracks)
 }
@@ -1877,6 +1892,13 @@ func (v *AudioSelector) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.SelectorType = AudioSelectorType(ev)
+			return nil
+		case schemas.AudioSelector_Smpte337Passthrough:
+			var ev string
+			if err := d.ReadString(schemas.AudioSelector_Smpte337Passthrough, &ev); err != nil {
+				return err
+			}
+			v.Smpte337Passthrough = AudioSmpte337Passthrough(ev)
 			return nil
 		case schemas.AudioSelector_Streams:
 			return deserialize__listOf__integerMin1Max2147483647(d, schemas.AudioSelector_Streams, &v.Streams)
@@ -5111,7 +5133,11 @@ func (v *CmfcSettings) Deserialize(d smithy.ShapeDeserializer) error {
 // information provides detailed technical specifications about how the video was
 // encoded, including profile settings, resolution details, and color space
 // information that can help you understand the source video characteristics and
-// make informed encoding decisions.
+// make informed encoding decisions. These fields are returned for H.264 (AVC),
+// H.265 (HEVC), and MPEG-2 video, and might not be returned for other codecs. For
+// MPEG-TS and MPEG-PS inputs, color information (color primaries, transfer
+// characteristics, and matrix coefficients) appears in these fields rather than in
+// the top-level videoProperties.
 type CodecMetadata struct {
 
 	// The number of bits used per color component in the video essence such as 8, 10,
@@ -5665,8 +5691,9 @@ type Container struct {
 
 	// The format of your media file. For example: MP4, QuickTime (MOV), Matroska
 	// (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, MP3, FLAC, ASF (Windows Media /
-	// WMA), or OGG. Note that this will be blank if your media file has a format that
-	// the MediaConvert Probe operation does not recognize.
+	// WMA), OGG, 3GP, 3G2, AAC (raw ADTS), AC-3, or Enhanced AC-3 (E-AC-3). Note that
+	// this will be blank if your media file has a format that the MediaConvert Probe
+	// operation does not recognize.
 	Format Format
 
 	// The start timecode of the media file, in HH:MM:SS:FF format (or HH:MM:SS;FF for
@@ -14571,6 +14598,11 @@ type JobSettings struct {
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.
 	MotionImageInserter *MotionImageInserter
 
+	// Array of motion image inserters for overlaying multiple independent motion
+	// graphics. Compositing order follows array index. Mutually exclusive with
+	// motionImageInserter.
+	MotionImageInserters []MotionImageInserter
+
 	// Settings for your Nielsen configuration. If you don't do Nielsen measurement
 	// and analytics, ignore these settings. When you enable Nielsen configuration,
 	// MediaConvert enables PCM to ID3 tagging for all outputs in the job.
@@ -14647,6 +14679,7 @@ func (v *JobSettings) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MotionImageInserter.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serialize__listOfMotionImageInserter(s, schemas.JobSettings_MotionImageInserters, v.MotionImageInserters)
 	if v.NielsenConfiguration != nil {
 		s.WriteStruct(schemas.JobSettings_NielsenConfiguration)
 		v.NielsenConfiguration.SerializeMembers(s)
@@ -14697,6 +14730,8 @@ func (v *JobSettings) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.JobSettings_MotionImageInserter:
 			v.MotionImageInserter = &MotionImageInserter{}
 			return v.MotionImageInserter.Deserialize(d)
+		case schemas.JobSettings_MotionImageInserters:
+			return deserialize__listOfMotionImageInserter(d, schemas.JobSettings_MotionImageInserters, &v.MotionImageInserters)
 		case schemas.JobSettings_NielsenConfiguration:
 			v.NielsenConfiguration = &NielsenConfiguration{}
 			return v.NielsenConfiguration.Deserialize(d)
@@ -14992,6 +15027,11 @@ type JobTemplateSettings struct {
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.
 	MotionImageInserter *MotionImageInserter
 
+	// Array of motion image inserters for overlaying multiple independent motion
+	// graphics. Compositing order follows array index. Mutually exclusive with
+	// motionImageInserter.
+	MotionImageInserters []MotionImageInserter
+
 	// Settings for your Nielsen configuration. If you don't do Nielsen measurement
 	// and analytics, ignore these settings. When you enable Nielsen configuration,
 	// MediaConvert enables PCM to ID3 tagging for all outputs in the job.
@@ -15068,6 +15108,7 @@ func (v *JobTemplateSettings) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MotionImageInserter.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serialize__listOfMotionImageInserter(s, schemas.JobTemplateSettings_MotionImageInserters, v.MotionImageInserters)
 	if v.NielsenConfiguration != nil {
 		s.WriteStruct(schemas.JobTemplateSettings_NielsenConfiguration)
 		v.NielsenConfiguration.SerializeMembers(s)
@@ -15118,6 +15159,8 @@ func (v *JobTemplateSettings) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.JobTemplateSettings_MotionImageInserter:
 			v.MotionImageInserter = &MotionImageInserter{}
 			return v.MotionImageInserter.Deserialize(d)
+		case schemas.JobTemplateSettings_MotionImageInserters:
+			return deserialize__listOfMotionImageInserter(d, schemas.JobTemplateSettings_MotionImageInserters, &v.MotionImageInserters)
 		case schemas.JobTemplateSettings_NielsenConfiguration:
 			v.NielsenConfiguration = &NielsenConfiguration{}
 			return v.NielsenConfiguration.Deserialize(d)
@@ -19464,6 +19507,35 @@ type PassthroughSettings struct {
 	// setting your output may not be compatible with most players.
 	FrameControl FrameControl
 
+	// Specify how many input GOPs MediaConvert places in each output segment when you
+	// set Passthrough segmentation mode to GOP count. For example, if your input has a
+	// closed GOP every 1.92 seconds and you specify 2, each output segment is 3.84
+	// seconds. In this mode, output segment duration is determined by your input GOP
+	// structure rather than by your configured Segment length or Fragment length, so
+	// segment durations are consistent only when your input GOP cadence is constant.
+	// Segments at input discontinuities or ad avails may contain fewer GOPs.
+	GopsPerSegment *int32
+
+	// Choose how MediaConvert determines segment boundaries when you passthrough
+	// video to a segmented ABR output (HLS, DASH, or CMAF). This setting applies only
+	// to ABR outputs. Keep the default value, Auto, to let MediaConvert choose based
+	// on your input: when your input is a segmented HLS or DASH source, MediaConvert
+	// reproduces your input's own segment boundaries, with one output segment per
+	// input segment; for all other inputs, MediaConvert places boundaries by duration,
+	// cutting at the first eligible IDR-frame at or after each configured Segment
+	// length or Fragment length target. Choose Duration based to always place
+	// boundaries by duration, at the first eligible IDR-frame at or after each
+	// configured Segment length or Fragment length target, regardless of your input.
+	// When your input GOP duration does not evenly divide your target segment length,
+	// output segment durations will vary. Choose GOP count to place a fixed number of
+	// input GOPs in every segment, and specify GOPs per segment. Every segment
+	// contains the same number of input GOPs, which produces consistent segment
+	// durations when your input GOP cadence is constant. In this mode MediaConvert
+	// ignores your configured Segment length and Fragment length for video boundary
+	// placement. Ad avails and input discontinuities are still honored as segment
+	// boundaries.
+	SegmentationMode PassthroughSegmentationMode
+
 	// AUTO will select the highest bitrate input in the video selector source.
 	// REMUX_ALL will passthrough all the selected streams in the video selector
 	// source. When selecting streams from multiple renditions (i.e. using Stream video
@@ -19484,6 +19556,12 @@ func (v *PassthroughSettings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FrameControl != "" {
 		s.WriteString(schemas.PassthroughSettings_FrameControl, string(v.FrameControl))
 	}
+	if v.GopsPerSegment != nil {
+		s.WriteInt32(schemas.PassthroughSettings_GopsPerSegment, *v.GopsPerSegment)
+	}
+	if v.SegmentationMode != "" {
+		s.WriteString(schemas.PassthroughSettings_SegmentationMode, string(v.SegmentationMode))
+	}
 	if v.VideoSelectorMode != "" {
 		s.WriteString(schemas.PassthroughSettings_VideoSelectorMode, string(v.VideoSelectorMode))
 	}
@@ -19497,6 +19575,16 @@ func (v *PassthroughSettings) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.FrameControl = FrameControl(ev)
+			return nil
+		case schemas.PassthroughSettings_GopsPerSegment:
+			v.GopsPerSegment = new(int32)
+			return d.ReadInt32(schemas.PassthroughSettings_GopsPerSegment, v.GopsPerSegment)
+		case schemas.PassthroughSettings_SegmentationMode:
+			var ev string
+			if err := d.ReadString(schemas.PassthroughSettings_SegmentationMode, &ev); err != nil {
+				return err
+			}
+			v.SegmentationMode = PassthroughSegmentationMode(ev)
 			return nil
 		case schemas.PassthroughSettings_VideoSelectorMode:
 			var ev string
@@ -23487,7 +23575,11 @@ type VideoProperties struct {
 	// information provides detailed technical specifications about how the video was
 	// encoded, including profile settings, resolution details, and color space
 	// information that can help you understand the source video characteristics and
-	// make informed encoding decisions.
+	// make informed encoding decisions. These fields are returned for H.264 (AVC),
+	// H.265 (HEVC), and MPEG-2 video, and might not be returned for other codecs. For
+	// MPEG-TS and MPEG-PS inputs, color information (color primaries, transfer
+	// characteristics, and matrix coefficients) appears in these fields rather than in
+	// the top-level videoProperties.
 	CodecMetadata *CodecMetadata
 
 	// The color space primaries of the video track, defining the red, green, and blue
@@ -24865,16 +24957,12 @@ func (v *Xavc4kProfileSettings) Deserialize(d smithy.ShapeDeserializer) error {
 // Required when you set Profile to the value XAVC_HD_INTRA_CBG.
 type XavcHdIntraCbgProfileSettings struct {
 
-	// Choose the scan line type for the output. Keep the default value, Progressive
-	// to create a progressive output, regardless of the scan type of your input. Use
-	// Top field first or Bottom field first to create an output that's interlaced with
-	// the same field polarity throughout. Use Follow, default top or Follow, default
-	// bottom to produce outputs with the same field polarity as the source. For jobs
-	// that have multiple inputs, the output field polarity might change over the
-	// course of the output. Follow behavior depends on the input scan type. If the
-	// source is interlaced, the output will be interlaced with the same polarity as
-	// the source. If the source is progressive, the output will be interlaced with top
-	// field bottom field first, depending on which of the Follow options you choose.
+	// Choose the scan line type for the output. Keep the default value, Progressive,
+	// to create a progressive output, regardless of the scan type of your input. To
+	// create an interlaced output, choose Top field first or Follow, default top.
+	// Outputs that you create with this profile are always top field first when they
+	// are interlaced. When you create an interlaced output, set your output frame rate
+	// to 25 or 29.97.
 	InterlaceMode XavcInterlaceMode
 
 	// Specify the XAVC Intra HD (CBG) Class to set the bitrate of your output.
@@ -25168,9 +25256,9 @@ type XavcSettings struct {
 	PerFrameMetrics []FrameMetricType
 
 	// Specify the XAVC profile for this output. For more information, see the Sony
-	// documentation at https://www.xavc-info.org/. Note that MediaConvert doesn't
-	// support the interlaced video XAVC operating points for XAVC_HD_INTRA_CBG. To
-	// create an interlaced XAVC output, choose the profile XAVC_HD.
+	// documentation at https://www.xavc-info.org/. Note that when you choose
+	// XAVC_HD_INTRA_CBG, MediaConvert supports interlaced outputs only when they are
+	// top field first and your output frame rate is 25 or 29.97 fps.
 	Profile XavcProfile
 
 	// Ignore this setting unless your input frame rate is 23.976 or 24 frames per

@@ -13,6 +13,10 @@ import (
 
 // Updates an infrastructure configuration. An infrastructure configuration
 // defines the environment in which Image Builder builds and tests your image.
+//
+// This operation doesn't support selective updates. The request replaces the
+// configuration, so include every setting that you want to keep. Omitted optional
+// properties are cleared.
 func (c *Client) UpdateInfrastructureConfiguration(ctx context.Context, params *UpdateInfrastructureConfigurationInput, optFns ...func(*Options)) (*UpdateInfrastructureConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateInfrastructureConfigurationInput{}
@@ -31,9 +35,9 @@ func (c *Client) UpdateInfrastructureConfiguration(ctx context.Context, params *
 type UpdateInfrastructureConfigurationInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -47,7 +51,7 @@ type UpdateInfrastructureConfigurationInput struct {
 	InfrastructureConfigurationArn *string
 
 	// The instance profile to associate with the instance used to customize your
-	// Amazon EC2 AMI.
+	// Amazon EC2 AMI. The instance profile must exist in your account.
 	//
 	// This member is required.
 	InstanceProfileName *string
@@ -55,9 +59,10 @@ type UpdateInfrastructureConfigurationInput struct {
 	// The description of the infrastructure configuration.
 	Description *string
 
-	// The instance metadata options that you can set for the HTTP requests that
-	// pipeline builds use to launch EC2 build and test instances. For more information
-	// about instance metadata options, see one of the following links:
+	// The instance metadata service (IMDS) settings that Image Builder applies to the
+	// EC2 build and test instances it launches during image creation. If you don't set
+	// these options, the EC2 launch defaults for the instance apply. For more
+	// information about instance metadata options, see one of the following links:
 	//
 	// [Configure the instance metadata options]
 	//   - in the Amazon EC2 User Guide for Linux instances.
@@ -70,21 +75,29 @@ type UpdateInfrastructureConfigurationInput struct {
 
 	// The instance types of the infrastructure configuration. You can specify one or
 	// more instance types to use for this build. Image Builder picks one of these
-	// instance types based on availability.
+	// instance types based on availability. If you don't specify instance types, Image
+	// Builder selects compatible instance types automatically. If you specify a
+	// Dedicated Host, Image Builder uses only instance types that the host supports.
 	InstanceTypes []string
 
 	// The key pair of the infrastructure configuration. You can use this to log on to
 	// and debug the instance used to create your image.
 	KeyPair *string
 
-	// The logging configuration of the infrastructure configuration.
+	// The logging configuration of the infrastructure configuration. When you
+	// configure S3 logs, Image Builder writes logs from the build and test process to
+	// the specified bucket under the key prefix.
 	Logging *types.Logging
 
-	// The instance placement settings that define where the instances that are
-	// launched from your image run.
+	// The instance placement settings that define where the build and test instances
+	// that Image Builder launches during image creation run. These settings don't
+	// affect instances that you launch from the output image.
 	Placement *types.Placement
 
-	// The tags attached to the resource created by Image Builder.
+	// The metadata tags to assign to the Amazon EC2 instance that Image Builder
+	// launches during the build process. Tags are formatted as key value pairs. Tag
+	// keys can't begin with aws: or match one of the following reserved keys:
+	// CreatedBy , Ec2ImageBuilderArn , Name , or Tags .
 	ResourceTags map[string]string
 
 	// The security group IDs to associate with the instance used to customize your
@@ -92,14 +105,18 @@ type UpdateInfrastructureConfigurationInput struct {
 	SecurityGroupIds []string
 
 	// The Amazon Resource Name (ARN) of the SNS topic to which Image Builder sends
-	// image build event notifications.
+	// image build event notifications. Specify a standard topic. Image Builder doesn't
+	// support FIFO topics. Image Builder validates the topic when you create or update
+	// the configuration. You must have permission to publish to the topic.
 	//
-	// EC2 Image Builder is unable to send notifications to SNS topics that are
-	// encrypted using keys from other accounts. The key that is used to encrypt the
-	// SNS topic must reside in the account that the Image Builder service runs under.
+	// EC2 Image Builder can't send notifications to SNS topics that are encrypted
+	// using keys from other accounts. If your SNS topic is encrypted, the key must be
+	// owned by the same account that owns your Image Builder resources.
 	SnsTopicArn *string
 
-	// The subnet ID to place the instance used to customize your Amazon EC2 AMI in.
+	// The subnet ID in which to place the instance used to customize your Amazon EC2
+	// AMI. If you specify subnetId , you must also specify one or more security group
+	// IDs in securityGroupIds . Otherwise, the request fails.
 	SubnetId *string
 
 	// Specifies whether to terminate the instance on failure. Set to false if you

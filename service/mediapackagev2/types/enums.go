@@ -103,6 +103,27 @@ func (ContainerType) Values() []ContainerType {
 	}
 }
 
+type ContentKeyPeriodTiming string
+
+// Enum values for ContentKeyPeriodTiming
+const (
+	ContentKeyPeriodTimingIndexOnly         ContentKeyPeriodTiming = "INDEX_ONLY"
+	ContentKeyPeriodTimingStartEndOnly      ContentKeyPeriodTiming = "START_END_ONLY"
+	ContentKeyPeriodTimingIndexWithStartEnd ContentKeyPeriodTiming = "INDEX_WITH_START_END"
+)
+
+// Values returns all known values for ContentKeyPeriodTiming. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentKeyPeriodTiming) Values() []ContentKeyPeriodTiming {
+	return []ContentKeyPeriodTiming{
+		"INDEX_ONLY",
+		"START_END_ONLY",
+		"INDEX_WITH_START_END",
+	}
+}
+
 type CustomAdType string
 
 // Enum values for CustomAdType
@@ -657,6 +678,25 @@ func (ScteInSegments) Values() []ScteInSegments {
 	}
 }
 
+type SpekeVersion string
+
+// Enum values for SpekeVersion
+const (
+	SpekeVersionV20 SpekeVersion = "V2_0"
+	SpekeVersionV21 SpekeVersion = "V2_1"
+)
+
+// Values returns all known values for SpekeVersion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpekeVersion) Values() []SpekeVersion {
+	return []SpekeVersion{
+		"V2_0",
+		"V2_1",
+	}
+}
+
 type StreamNameOutputMode string
 
 // Enum values for StreamNameOutputMode
@@ -867,6 +907,8 @@ const (
 	ValidationExceptionTypeMultiviewInputTypeWithSegmentDuration                  ValidationExceptionType = "MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION"
 	ValidationExceptionTypeMultiviewSourceNonEpochLocked                          ValidationExceptionType = "MULTIVIEW_SOURCE_NON_EPOCH_LOCKED"
 	ValidationExceptionTypeMultiviewScteRequiresAvailsPeriodTrigger               ValidationExceptionType = "MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER"
+	ValidationExceptionTypeContentKeyPeriodTimingWithoutKeyRotation               ValidationExceptionType = "CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION"
+	ValidationExceptionTypeContentKeyPeriodTimingRequiresSpekeV21                 ValidationExceptionType = "CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1"
 )
 
 // Values returns all known values for ValidationExceptionType. Note that this can
@@ -1005,5 +1047,7 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION",
 		"MULTIVIEW_SOURCE_NON_EPOCH_LOCKED",
 		"MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER",
+		"CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION",
+		"CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1",
 	}
 }

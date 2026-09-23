@@ -54,16 +54,16 @@ type GetWorkflowExecutionOutput struct {
 	// The timestamp when the specified runtime instance of the workflow finished.
 	EndTime *string
 
-	// The Amazon Resource Name (ARN) of the image resource build version that the
-	// specified runtime instance of the workflow created.
+	// The Amazon Resource Name (ARN) of the image build version that owns the
+	// specified runtime instance of the workflow.
 	ImageBuildVersionArn *string
 
 	// The output message from the specified runtime instance of the workflow, if
 	// applicable.
 	Message *string
 
-	// Test workflows are defined within named runtime groups. The parallel group is a
-	// named group that contains one or more test workflows.
+	// The name of the parallel group that this runtime instance of the workflow ran
+	// in, if configured. Parallel groups apply only to test workflows.
 	ParallelGroup *string
 
 	// The request ID that uniquely identifies this request.
@@ -73,11 +73,14 @@ type GetWorkflowExecutionOutput struct {
 	StartTime *string
 
 	// The current runtime status for the specified runtime instance of the workflow.
+	// COMPLETED , FAILED , ROLLBACK_COMPLETED , CANCELLED , and SKIPPED are terminal
+	// states.
 	Status types.WorkflowExecutionStatus
 
-	// The total number of steps in the specified runtime instance of the workflow
-	// that ran. This number should equal the sum of the step counts for steps that
-	// succeeded, were skipped, and failed.
+	// The total number of steps that the workflow document defines for this runtime
+	// instance of the workflow. Image Builder sets this count before any steps run.
+	// The sum of succeeded, skipped, and failed steps only reaches this total if every
+	// step finishes in one of those states.
 	TotalStepCount int32
 
 	// A runtime count for the number of steps that failed in the specified runtime

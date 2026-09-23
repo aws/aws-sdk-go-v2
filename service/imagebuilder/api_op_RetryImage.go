@@ -10,7 +10,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Retries an image distribution or test without rebuilding the image.
+// Retries a failed or canceled image build without rebuilding the phases that
+// already completed. The image re-runs asynchronously in place: the same build
+// version returns to the test or distribution phase where it failed and continues
+// from there. No new image build version is created. Retry is only supported for
+// AMI-based images.
 func (c *Client) RetryImage(ctx context.Context, params *RetryImageInput, optFns ...func(*Options)) (*RetryImageOutput, error) {
 	if params == nil {
 		params = &RetryImageInput{}
@@ -29,16 +33,17 @@ func (c *Client) RetryImage(ctx context.Context, params *RetryImageInput, optFns
 type RetryImageInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The source image Amazon Resource Name (ARN) to retry.
+	// The Amazon Resource Name (ARN) of the image build version that you want to
+	// retry. The image must be in the FAILED or CANCELLED state.
 	//
 	// This member is required.
 	ImageBuildVersionArn *string

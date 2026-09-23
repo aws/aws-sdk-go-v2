@@ -9,7 +9,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes the specified lifecycle policy resource.
+// Deletes the specified lifecycle policy resource. Deleting the policy removes
+// its schedule, so no further lifecycle runs occur for that policy. If a lifecycle
+// execution is in progress for the policy, Image Builder cancels it. Deletion
+// doesn't revert actions that the policy already applied to your resources.
 func (c *Client) DeleteLifecyclePolicy(ctx context.Context, params *DeleteLifecyclePolicyInput, optFns ...func(*Options)) (*DeleteLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteLifecyclePolicyInput{}

@@ -11,7 +11,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns a list of image scan findings for your account.
+// Returns a list of image scan findings for your account. Amazon Inspector
+// generates the findings when it scans images that have scanning enabled.
 func (c *Client) ListImageScanFindings(ctx context.Context, params *ListImageScanFindingsInput, optFns ...func(*Options)) (*ListImageScanFindingsOutput, error) {
 	if params == nil {
 		params = &ListImageScanFindingsInput{}
@@ -32,13 +33,15 @@ type ListImageScanFindingsInput struct {
 	// An array of name value pairs that you can use to filter your results. You can
 	// use the following filters to streamline results:
 	//
-	//   - imageBuildVersionArn
+	//   - imageBuildVersionArn – Filters findings by the image build version that was
+	//   scanned.
 	//
-	//   - imagePipelineArn
+	//   - imagePipelineArn – Filters findings by the pipeline that created the scanned
+	//   image.
 	//
-	//   - vulnerabilityId
+	//   - vulnerabilityId – Filters findings by vulnerability ID, for example a CVE ID.
 	//
-	//   - severity
+	//   - severity – Filters findings by severity level.
 	//
 	// If you don't request a filter, then all findings in your account are listed.
 	Filters []types.ImageScanFindingsFilter

@@ -1,0 +1,5 @@
+POST /templates/__TemplateIdentifier__/snapshots
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","tags":{"key0":"__Value__"}}

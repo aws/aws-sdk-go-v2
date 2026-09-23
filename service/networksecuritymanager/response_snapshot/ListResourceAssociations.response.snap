@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","resourceAssociations":[{"arn":"__Arn__","resourceType":"Rule"},{"arn":"__Arn__","resourceType":"Rule"}]}

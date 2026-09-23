@@ -104,6 +104,19 @@ func serializeBillingViewList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	s.CloseList()
 }
 
+func serializeBillingViewSegmentsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []BillingViewSegmentsListElement) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeBillingViewSourceViewsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
@@ -462,6 +475,20 @@ func deserializeBillingViewList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	var vv BillingViewListElement
 	return smithy.ReadList(d, s, func() error {
 		vv = BillingViewListElement{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBillingViewSegmentsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BillingViewSegmentsListElement) error {
+	*v = make([]BillingViewSegmentsListElement, 0)
+	var vv BillingViewSegmentsListElement
+	return smithy.ReadList(d, s, func() error {
+		vv = BillingViewSegmentsListElement{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

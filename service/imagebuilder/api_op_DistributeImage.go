@@ -32,9 +32,9 @@ func (c *Client) DistributeImage(ctx context.Context, params *DistributeImageInp
 type DistributeImageInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -54,10 +54,19 @@ type DistributeImageInput struct {
 	// This member is required.
 	ExecutionRole *string
 
-	// The source image to distribute. Specify an AMI identifier, SSM parameter path,
-	// or Image Builder image Amazon Resource Name (ARN). When you specify an Image
-	// Builder image Amazon Resource Name (ARN), the image must be in the AVAILABLE
-	// state.
+	// The source image to distribute. You can specify the source in any of the
+	// following formats:
+	//
+	//   - An AMI ID.
+	//
+	//   - An Amazon Web Services Systems Manager Parameter Store reference, prefixed
+	//   by ssm: , followed by the parameter name or ARN.
+	//
+	//   - An Image Builder image Amazon Resource Name (ARN). An image version ARN
+	//   resolves to the latest available build version.
+	//
+	// Whichever format you use, the source must resolve to an AMI in the current
+	// Amazon Web Services Region.
 	//
 	// This member is required.
 	SourceImage *string
@@ -65,7 +74,8 @@ type DistributeImageInput struct {
 	// The logging configuration for the distribution.
 	LoggingConfiguration *types.ImageLoggingConfiguration
 
-	// The tags to apply to the distributed image.
+	// The tags to apply to the new Image Builder image resource that this operation
+	// creates. To tag the output AMIs, use amiTags in the distribution configuration.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -103,7 +113,9 @@ type DistributeImageOutput struct {
 	// The client token that uniquely identifies the request.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the image to be distributed.
+	// The Amazon Resource Name (ARN) of the new Image Builder image resource that
+	// this operation creates to track the distribution. Use this ARN with GetImageto monitor
+	// distribution progress.
 	ImageBuildVersionArn *string
 
 	// Metadata pertaining to the operation's result.

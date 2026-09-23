@@ -10,7 +10,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Cancels a specific image lifecycle policy runtime instance.
+// Cancels a lifecycle execution – a single run of lifecycle actions that a
+// lifecycle policy or a StartResourceStateUpdaterequest started. You can only cancel an execution that
+// hasn't reached a terminal state. Cancellation is asynchronous and doesn't undo
+// completed lifecycle actions.
 func (c *Client) CancelLifecycleExecution(ctx context.Context, params *CancelLifecycleExecutionInput, optFns ...func(*Options)) (*CancelLifecycleExecutionOutput, error) {
 	if params == nil {
 		params = &CancelLifecycleExecutionInput{}
@@ -29,9 +32,9 @@ func (c *Client) CancelLifecycleExecution(ctx context.Context, params *CancelLif
 type CancelLifecycleExecutionInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -63,8 +66,8 @@ func (v *CancelLifecycleExecutionInput) SerializeMembers(s smithy.ShapeSerialize
 
 type CancelLifecycleExecutionOutput struct {
 
-	// The unique identifier for the image lifecycle runtime instance that was
-	// canceled.
+	// The unique identifier of the lifecycle execution that the cancellation request
+	// applies to. The cancellation completes asynchronously.
 	LifecycleExecutionId *string
 
 	// Metadata pertaining to the operation's result.

@@ -19,8 +19,6 @@ import (
 //
 // To streamline results, you can use the following filters in your request:
 //
-//   - accountId
-//
 //   - imageBuildVersionArn
 //
 //   - imagePipelineArn
@@ -43,9 +41,17 @@ func (c *Client) ListImageScanFindingAggregations(ctx context.Context, params *L
 
 type ListImageScanFindingAggregationsInput struct {
 
-	// A filter name and value pair that is used to return a more specific list of
-	// results from a list operation. Filters can be used to match a set of resources
-	// by specific criteria, such as tags, attributes, or IDs.
+	// A filter name and value pair that determines the type of aggregation that Image
+	// Builder returns. Use one of the following filter names:
+	//
+	//   - imageBuildVersionArn
+	//
+	//   - imagePipelineArn
+	//
+	//   - vulnerabilityId
+	//
+	// If you don't specify a filter, Image Builder returns an aggregation for your
+	// account.
 	Filter *types.Filter
 
 	// A token to specify where to start paginating. Use the nextToken value from a

@@ -42,8 +42,10 @@ type ListImageBuildVersionsInput struct {
 	//   - version
 	Filters []types.Filter
 
-	// The Amazon Resource Name (ARN) of the image whose build versions you want to
-	// retrieve.
+	// The Amazon Resource Name (ARN) of the image version whose build versions you
+	// want to retrieve. The ARN must specify an exact version ( .. ) - wildcards
+	// aren't allowed. This parameter is optional. If you don't specify it, Image
+	// Builder returns build versions for all of the images in your account.
 	ImageVersionArn *string
 
 	// The maximum number of items to return in a single request.

@@ -28,8 +28,10 @@ func (c *Client) GetComponent(ctx context.Context, params *GetComponentInput, op
 
 type GetComponentInput struct {
 
-	// The Amazon Resource Name (ARN) of the component that you want to get. Regex
-	// requires the suffix /\d+$ .
+	// The Amazon Resource Name (ARN) of the component that you want to get. You can
+	// specify a build version ARN, or a component version ARN. The version can use the
+	// x wildcard in trailing positions, for example 1.0.x or 1.x.x . Version ARNs
+	// resolve to the latest available matching component build version.
 	//
 	// This member is required.
 	ComponentBuildVersionArn *string
@@ -54,7 +56,9 @@ type GetComponentOutput struct {
 	// The component object specified in the request.
 	Component *types.Component
 
-	// The resource ARNs with different wildcard variations of semantic versioning.
+	// A set of wildcard version ARNs that always reference the latest version of the
+	// resource. ARNs are included for the latest version overall, and for the latest
+	// versions within the same major, minor, and patch levels.
 	LatestVersionReferences *types.LatestVersionReferences
 
 	// The request ID that uniquely identifies this request.

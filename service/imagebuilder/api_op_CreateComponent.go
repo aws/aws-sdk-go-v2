@@ -19,6 +19,10 @@ import (
 //
 //   - A URL that points to a YAML document file stored in Amazon S3, using the uri
 //     property in the request body.
+//
+// Image Builder determines the component type from the document. If the document
+// contains a single phase named test , the component type is TEST . Otherwise, the
+// component type is BUILD .
 func (c *Client) CreateComponent(ctx context.Context, params *CreateComponentInput, optFns ...func(*Options)) (*CreateComponentOutput, error) {
 	if params == nil {
 		params = &CreateComponentInput{}
@@ -37,16 +41,22 @@ func (c *Client) CreateComponent(ctx context.Context, params *CreateComponentInp
 type CreateComponentInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The name of the component.
+	// The name of the component. Image Builder generates the component ARN from a
+	// normalized form of the name, so names that differ only in case, spaces, or
+	// underscores count as the same name. If a component with the same name and
+	// semantic version already exists in your account in the same Amazon Web Services
+	// Region, the request creates a new build version for it. If the content is also
+	// identical to the latest build version, the request fails because the component
+	// already exists.
 	//
 	// This member is required.
 	Name *string
@@ -86,14 +96,16 @@ type CreateComponentInput struct {
 	// Describes the contents of the component.
 	Description *string
 
-	// Validates the required permissions and request parameters without making the
-	// request. If validation succeeds, the operation returns a
+	// Validates the required permissions and request parameters without performing
+	// the operation. If validation succeeds, the operation returns a
 	// DryRunOperationException error response.
 	DryRun bool
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
 	// encrypt this component. This can be either the Key ARN or the Alias ARN. For
-	// more information, see [Key identifiers (KeyId)]in the Key Management Service Developer Guide.
+	// more information, see [Key identifiers (KeyId)]in the Key Management Service Developer Guide. If you
+	// don't specify a key, Image Builder encrypts the component data with a KMS key
+	// that Image Builder owns.
 	//
 	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KmsKeyId *string
@@ -109,7 +121,7 @@ type CreateComponentInput struct {
 	// The uri of a YAML component document file. This must be an S3 URL (
 	// s3://bucket/key ), and you must have permission to access the S3 bucket it
 	// points to. If you use Amazon S3, you can specify component content up to your
-	// service quota.
+	// service quota for component size, which is 64 KB by default.
 	//
 	// Alternatively, you can specify the YAML document inline, using the component
 	// data property. You cannot specify both properties.
@@ -167,7 +179,9 @@ type CreateComponentOutput struct {
 	// The Amazon Resource Name (ARN) of the component that the request created.
 	ComponentBuildVersionArn *string
 
-	// The resource ARNs with different wildcard variations of semantic versioning.
+	// A set of wildcard version ARNs that always reference the latest version of the
+	// resource. ARNs are included for the latest version overall, and for the latest
+	// versions within the same major, minor, and patch levels.
 	LatestVersionReferences *types.LatestVersionReferences
 
 	// The request ID that uniquely identifies this request.

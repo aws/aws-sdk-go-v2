@@ -70,7 +70,9 @@ type ListWorkflowExecutionsOutput struct {
 	// you requested a list of workflow runtime details.
 	ImageBuildVersionArn *string
 
-	// The output message from the list action, if applicable.
+	// The failure reason for the image build version, if it's in a failed state. This
+	// comes from the image itself, not from an individual workflow, so it's available
+	// even when no workflow executions remain for the image.
 	Message *string
 
 	// The next token used for paginated responses. When this field isn't empty, there
@@ -81,8 +83,9 @@ type ListWorkflowExecutionsOutput struct {
 	// The request ID that uniquely identifies this request.
 	RequestId *string
 
-	// Contains an array of runtime details that represents each time a workflow ran
-	// for the requested image build version.
+	// An array of runtime details that represents each time a workflow ran for the
+	// requested image build version. Image Builder retains workflow execution records
+	// for a limited time, so this array can be empty for older image build versions.
 	WorkflowExecutions []types.WorkflowExecutionMetadata
 
 	// Metadata pertaining to the operation's result.

@@ -1,0 +1,8 @@
+{
+    "id": "cfc70b40-52f8-489b-ac54-a145cac49c11",
+    "type": "feature",
+    "description": "Multi language support with code switching, custom template sectionHeader now allows underscores.",
+    "modules": [
+        "service/connecthealth"
+    ]
+}

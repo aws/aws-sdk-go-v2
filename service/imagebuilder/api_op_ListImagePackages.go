@@ -30,7 +30,8 @@ func (c *Client) ListImagePackages(ctx context.Context, params *ListImagePackage
 
 type ListImagePackagesInput struct {
 
-	// Filter results for the ListImagePackages request by the Image Build Version ARN
+	// The Amazon Resource Name (ARN) of the image build version whose packages you
+	// want to list. The value must be a full build version ARN.
 	//
 	// This member is required.
 	ImageBuildVersionArn *string

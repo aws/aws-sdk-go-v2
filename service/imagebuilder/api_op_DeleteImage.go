@@ -14,6 +14,11 @@ import (
 // clean those up separately, using the appropriate Amazon EC2 or Amazon ECR
 // console actions, or API or CLI commands.
 //
+// The request fails with ResourceDependencyException if the image is shared with
+// other accounts, or if other resources depend on it. It also fails while the
+// image build is still running. Cancel an in-progress build with CancelImageCreationbefore you
+// delete the image.
+//
 //   - To deregister an EC2 Linux AMI, see [Deregister your Linux AMI]in the Amazon EC2 User Guide .
 //
 //   - To deregister an EC2 Windows AMI, see [Deregister your Windows AMI]in the Amazon EC2 Windows Guide .

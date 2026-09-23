@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","scopes":[{"hasPublishedVersion":true,"scopeArn":"__ScopeArn__","scopeId":"__ScopeId__","scopeName":"__ScopeName__","status":"DRAFT","updatedAt":"2000-01-01T00:00:00Z","version":"__Version__"},{"hasPublishedVersion":true,"scopeArn":"__ScopeArn__","scopeId":"__ScopeId__","scopeName":"__ScopeName__","status":"DRAFT","updatedAt":"2000-01-01T00:00:00Z","version":"__Version__"}]}

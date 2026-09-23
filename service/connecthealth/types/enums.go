@@ -142,7 +142,8 @@ type MedicalScribeLanguageCode string
 
 // Enum values for MedicalScribeLanguageCode
 const (
-	MedicalScribeLanguageCodeEnUs MedicalScribeLanguageCode = "en-US"
+	MedicalScribeLanguageCodeEnUs  MedicalScribeLanguageCode = "en-US"
+	MedicalScribeLanguageCodeMulti MedicalScribeLanguageCode = "multi"
 )
 
 // Values returns all known values for MedicalScribeLanguageCode. Note that this
@@ -152,6 +153,7 @@ const (
 func (MedicalScribeLanguageCode) Values() []MedicalScribeLanguageCode {
 	return []MedicalScribeLanguageCode{
 		"en-US",
+		"multi",
 	}
 }
 

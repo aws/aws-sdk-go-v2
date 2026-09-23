@@ -9,7 +9,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes a container recipe.
+// Deletes a container recipe. The request fails with ResourceDependencyException
+// if the recipe is shared with other accounts, or if an image pipeline references
+// it.
 func (c *Client) DeleteContainerRecipe(ctx context.Context, params *DeleteContainerRecipeInput, optFns ...func(*Options)) (*DeleteContainerRecipeOutput, error) {
 	if params == nil {
 		params = &DeleteContainerRecipeInput{}

@@ -1,0 +1,5 @@
+POST /policies
+
+Content-Type: application/json
+
+{"associatedTemplateAndRuleList":[{"templateIdentifier":"__TemplateOrRuleReferenceMemberTemplateIdentifier__"},{"templateIdentifier":"__TemplateOrRuleReferenceMemberTemplateIdentifier__"}],"clientToken":"__ClientToken__","firewallType":"WAF","isPublished":true,"policyConfiguration":{"remediationEnabled":true,"resourcesCleanUp":true,"wafConfig":{"conflictResolution":"MERGE_WHERE_APPLICABLE","existingCustomerWebACLResolution":"RETROFIT"}},"policyDescription":"__PolicyDescription__","policyName":"__PolicyName__","priority":1,"tags":{"key0":"__Value__"}}

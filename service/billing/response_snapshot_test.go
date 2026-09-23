@@ -789,6 +789,57 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListBillingViewSegments(t *testing.T) {
+	want := &ListBillingViewSegmentsOutput{
+		Items: []types.BillingViewSegmentsListElement{
+			{
+				Domain: types.BillingDomain("BILLABLE"),
+				TimeRange: &types.BillingViewSegmentTimeRange{
+					BeginDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDateExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				BillingTransferAccountId:     ptr.String("__BillingTransferAccountId__"),
+				ManagementAccountId:          ptr.String("__ManagementAccountId__"),
+				BillingGroupPrimaryAccountId: ptr.String("__BillingGroupPrimaryAccountId__"),
+			},
+			{
+				Domain: types.BillingDomain("BILLABLE"),
+				TimeRange: &types.BillingViewSegmentTimeRange{
+					BeginDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDateExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				BillingTransferAccountId:     ptr.String("__BillingTransferAccountId__"),
+				ManagementAccountId:          ptr.String("__ManagementAccountId__"),
+				BillingGroupPrimaryAccountId: ptr.String("__BillingGroupPrimaryAccountId__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListBillingViewSegments.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListBillingViewSegments(context.Background(), &ListBillingViewSegmentsInput{
+		TimeRange: &types.BillingViewSegmentTimeRange{
+			BeginDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndDateExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Arn:        ptr.String("__Arn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListBillingViewSegments.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListBillingViews(t *testing.T) {
 	want := &ListBillingViewsOutput{
 		BillingViews: []types.BillingViewListElement{

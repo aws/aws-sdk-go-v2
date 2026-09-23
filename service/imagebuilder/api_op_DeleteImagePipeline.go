@@ -9,7 +9,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes an image pipeline.
+// Deletes an image pipeline. Images that the pipeline created aren't deleted -
+// remove those separately with DeleteImage. You can delete a pipeline while a build that it
+// started is still running. The build continues independently.
 func (c *Client) DeleteImagePipeline(ctx context.Context, params *DeleteImagePipelineInput, optFns ...func(*Options)) (*DeleteImagePipelineOutput, error) {
 	if params == nil {
 		params = &DeleteImagePipelineInput{}

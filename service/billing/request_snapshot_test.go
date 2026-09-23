@@ -636,6 +636,39 @@ func TestCheckRequestSnapshot_ListBillingViews(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListBillingViewSegments(t *testing.T) {
+	input := &ListBillingViewSegmentsInput{
+		TimeRange: &types.BillingViewSegmentTimeRange{
+			BeginDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndDateExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Arn:        ptr.String("__Arn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListBillingViewSegments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBillingViewSegments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListEnterpriseSupportLinkedAccountCharges(t *testing.T) {
 	input := &ListEnterpriseSupportLinkedAccountChargesInput{
 		BillingMonth: ptr.String("__BillingMonth__"),
@@ -1335,6 +1368,39 @@ func TestUpdateRequestSnapshot_ListBillingViews(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBillingViews"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListBillingViewSegments(t *testing.T) {
+	input := &ListBillingViewSegmentsInput{
+		TimeRange: &types.BillingViewSegmentTimeRange{
+			BeginDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndDateExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Arn:        ptr.String("__Arn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListBillingViewSegments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBillingViewSegments"); err != nil {
 		t.Fatal(err)
 	}
 }

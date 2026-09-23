@@ -9,7 +9,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes a specific workflow resource.
+// Deletes a specific workflow resource. You can't delete a workflow build version
+// while an image pipeline references it. The request fails with
+// ResourceDependencyException .
 func (c *Client) DeleteWorkflow(ctx context.Context, params *DeleteWorkflowInput, optFns ...func(*Options)) (*DeleteWorkflowOutput, error) {
 	if params == nil {
 		params = &DeleteWorkflowInput{}

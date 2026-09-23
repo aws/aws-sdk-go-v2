@@ -1,0 +1,8 @@
+{
+    "id": "8fc68062-a62f-4994-a1de-9e99b97d3d1e",
+    "type": "feature",
+    "description": "This release adds support for signalling start and end in the ContentKeyPeriod element in key request from MediaPackageV2",
+    "modules": [
+        "service/mediapackagev2"
+    ]
+}

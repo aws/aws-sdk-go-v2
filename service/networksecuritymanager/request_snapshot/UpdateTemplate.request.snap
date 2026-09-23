@@ -1,0 +1,5 @@
+PATCH /templates/__TemplateIdentifier__
+
+Content-Type: application/json
+
+{"associatedRuleList":[{"ruleIdentifier":"__RuleIdentifier__"},{"ruleIdentifier":"__RuleIdentifier__"}],"clientToken":"__ClientToken__","isPublished":true,"templateDescription":"__TemplateDescription__","updateToken":"__UpdateToken__"}

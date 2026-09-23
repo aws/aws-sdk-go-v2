@@ -29,6 +29,8 @@ func (c *Client) GetImageRecipe(ctx context.Context, params *GetImageRecipeInput
 type GetImageRecipeInput struct {
 
 	// The Amazon Resource Name (ARN) of the image recipe that you want to retrieve.
+	// You can use the x wildcard in trailing version positions to retrieve the latest
+	// matching version, for example x.x.x or 1.x.x .
 	//
 	// This member is required.
 	ImageRecipeArn *string
@@ -53,7 +55,9 @@ type GetImageRecipeOutput struct {
 	// The image recipe object.
 	ImageRecipe *types.ImageRecipe
 
-	// The resource ARNs with different wildcard variations of semantic versioning.
+	// A set of wildcard version ARNs that always reference the latest version of the
+	// resource. ARNs are included for the latest version overall, and for the latest
+	// versions within the same major, minor, and patch levels.
 	LatestVersionReferences *types.LatestVersionReferences
 
 	// The request ID that uniquely identifies this request.

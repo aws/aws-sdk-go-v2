@@ -12,7 +12,8 @@ import (
 )
 
 // Creates a new image pipeline. Use image pipelines to automate the creation and
-// distribution of images.
+// distribution of images. You must specify exactly one recipe for the pipeline,
+// using either a containerRecipeArn or an imageRecipeArn .
 func (c *Client) CreateImagePipeline(ctx context.Context, params *CreateImagePipelineInput, optFns ...func(*Options)) (*CreateImagePipelineOutput, error) {
 	if params == nil {
 		params = &CreateImagePipelineInput{}
@@ -31,9 +32,9 @@ func (c *Client) CreateImagePipeline(ctx context.Context, params *CreateImagePip
 type CreateImagePipelineInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -46,13 +47,17 @@ type CreateImagePipelineInput struct {
 	// This member is required.
 	InfrastructureConfigurationArn *string
 
-	// The name of the image pipeline.
+	// The name of the image pipeline. Pipeline names must be unique to your account
+	// in each Amazon Web Services Region. Image Builder generates the pipeline ARN
+	// from a normalized form of the name, so names that differ only in case, spaces,
+	// or underscores count as the same name.
 	//
 	// This member is required.
 	Name *string
 
 	// The Amazon Resource Name (ARN) of the container recipe that is used to
-	// configure images created by this container pipeline.
+	// configure images created by this container pipeline. You must specify either
+	// this property or imageRecipeArn , but not both.
 	ContainerRecipeArn *string
 
 	// The description of the image pipeline.
@@ -62,8 +67,8 @@ type CreateImagePipelineInput struct {
 	// configures and distributes images created by this image pipeline.
 	DistributionConfigurationArn *string
 
-	// Validates the required permissions and request parameters without making the
-	// request. If validation succeeds, the operation returns a
+	// Validates the required permissions and request parameters without performing
+	// the operation. If validation succeeds, the operation returns a
 	// DryRunOperationException error response.
 	DryRun bool
 
@@ -77,16 +82,23 @@ type CreateImagePipelineInput struct {
 	ExecutionRole *string
 
 	// The Amazon Resource Name (ARN) of the image recipe that configures images
-	// created by this image pipeline.
+	// created by this image pipeline. You must specify either this property or
+	// containerRecipeArn , but not both.
 	ImageRecipeArn *string
 
-	// Contains settings for vulnerability scans.
+	// Contains settings for vulnerability scans that Amazon Inspector runs against
+	// the test instance during image creation.
 	ImageScanningConfiguration *types.ImageScanningConfiguration
 
-	// The tags to be applied to the images produced by this pipeline.
+	// The tags that Image Builder applies to the Image Builder image resource that
+	// this pipeline's scheduled executions create. These tags don't apply to the
+	// output AMI. To tag output AMIs, use amiTags in the pipeline's distribution
+	// configuration.
 	ImageTags map[string]string
 
-	// The image test configuration of the image pipeline.
+	// Specifies the test settings that Image Builder applies to images that this
+	// pipeline creates. If you don't provide test settings, Image Builder stores a
+	// default configuration with image tests enabled.
 	ImageTestsConfiguration *types.ImageTestsConfiguration
 
 	// Specifies the logging configuration for the image pipeline. Use this to define
@@ -96,16 +108,20 @@ type CreateImagePipelineInput struct {
 	// outside of this prefix, you must also provide an executionRole .
 	LoggingConfiguration *types.PipelineLoggingConfiguration
 
-	// The schedule of the image pipeline.
+	// The schedule of the image pipeline. If you don't provide a schedule, the
+	// pipeline runs only when you call StartImagePipelineExecution.
 	Schedule *types.Schedule
 
-	// The status of the image pipeline.
+	// The status of the image pipeline. If you don't specify a status, it defaults to
+	// ENABLED . A disabled pipeline doesn't run on its schedule, but you can still
+	// start builds manually.
 	Status types.PipelineStatus
 
 	// The tags of the image pipeline.
 	Tags map[string]string
 
-	// Contains an array of workflow configuration objects.
+	// The array of workflow configuration objects for builds that this pipeline
+	// starts. You must also specify executionRole when you provide workflows.
 	Workflows []types.WorkflowConfiguration
 
 	noSmithyDocumentSerde

@@ -70,6 +70,11 @@ var ListBillingViews = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/",
 	Code: 200})
 
+var ListBillingViewSegments = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ListBillingViewSegments",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListEnterpriseSupportLinkedAccountCharges = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ListEnterpriseSupportLinkedAccountCharges",
@@ -174,6 +179,14 @@ var ApplicationType = smithy.NewSchema(smithy.ShapeID{
 var ApplicationType_BEFORE_CROSS_SERVICE_DISCOUNTS *smithy.Schema
 
 var ApplicationType_AFTER_DISCOUNTS *smithy.Schema
+
+var BillingDomain = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingDomain",
+}, smithy.ShapeTypeEnum, 2)
+var BillingDomain_BILLABLE *smithy.Schema
+
+var BillingDomain_PRO_FORMA *smithy.Schema
 
 var BillingFeature = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -367,6 +380,34 @@ var _BillingViewName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "BillingViewName",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _BillingViewSegmentsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingViewSegmentsList",
+}, smithy.ShapeTypeList, 1)
+var _BillingViewSegmentsList_member *smithy.Schema
+
+var BillingViewSegmentsListElement = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingViewSegmentsListElement",
+}, smithy.ShapeTypeStructure, 5)
+var BillingViewSegmentsListElement_domain *smithy.Schema
+
+var BillingViewSegmentsListElement_timeRange *smithy.Schema
+
+var BillingViewSegmentsListElement_billingTransferAccountId *smithy.Schema
+
+var BillingViewSegmentsListElement_managementAccountId *smithy.Schema
+
+var BillingViewSegmentsListElement_billingGroupPrimaryAccountId *smithy.Schema
+
+var BillingViewSegmentTimeRange = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingViewSegmentTimeRange",
+}, smithy.ShapeTypeStructure, 2)
+var BillingViewSegmentTimeRange_beginDateInclusive *smithy.Schema
+
+var BillingViewSegmentTimeRange_endDateExclusive *smithy.Schema
 
 var _BillingViewsMaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -1261,6 +1302,26 @@ var GetResourcePolicyResponse_resourceArn *smithy.Schema
 
 var GetResourcePolicyResponse_policy *smithy.Schema
 
+var ListBillingViewSegmentsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ListBillingViewSegmentsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListBillingViewSegmentsRequest_timeRange *smithy.Schema
+
+var ListBillingViewSegmentsRequest_arn *smithy.Schema
+
+var ListBillingViewSegmentsRequest_maxResults *smithy.Schema
+
+var ListBillingViewSegmentsRequest_nextToken *smithy.Schema
+
+var ListBillingViewSegmentsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ListBillingViewSegmentsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListBillingViewSegmentsResponse_items *smithy.Schema
+
+var ListBillingViewSegmentsResponse_nextToken *smithy.Schema
+
 var ListBillingViewsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ListBillingViewsRequest",
@@ -1434,6 +1495,10 @@ func init() {
 
 	ApplicationType_AFTER_DISCOUNTS = ApplicationType.AddMember("AFTER_DISCOUNTS", smithyprelude.Unit)
 
+	BillingDomain_BILLABLE = BillingDomain.AddMember("BILLABLE", smithyprelude.Unit)
+
+	BillingDomain_PRO_FORMA = BillingDomain.AddMember("PRO_FORMA", smithyprelude.Unit)
+
 	BillingFeature_RI_SHARING = BillingFeature.AddMember("RI_SHARING", smithyprelude.Unit)
 
 	BillingFeature_RI_SHARING_HISTORY = BillingFeature.AddMember("RI_SHARING_HISTORY", smithyprelude.Unit)
@@ -1601,6 +1666,22 @@ func init() {
 	BillingViewListElement_healthStatus = BillingViewListElement.AddMember("healthStatus", BillingViewHealthStatus)
 
 	_BillingViewList_member = _BillingViewList.AddMember("member", BillingViewListElement)
+
+	BillingViewSegmentTimeRange_beginDateInclusive = BillingViewSegmentTimeRange.AddMember("beginDateInclusive", smithyprelude.Timestamp)
+
+	BillingViewSegmentTimeRange_endDateExclusive = BillingViewSegmentTimeRange.AddMember("endDateExclusive", smithyprelude.Timestamp)
+
+	BillingViewSegmentsListElement_domain = BillingViewSegmentsListElement.AddMember("domain", BillingDomain)
+
+	BillingViewSegmentsListElement_timeRange = BillingViewSegmentsListElement.AddMember("timeRange", BillingViewSegmentTimeRange)
+
+	BillingViewSegmentsListElement_billingTransferAccountId = BillingViewSegmentsListElement.AddMember("billingTransferAccountId", _AccountId)
+
+	BillingViewSegmentsListElement_managementAccountId = BillingViewSegmentsListElement.AddMember("managementAccountId", _AccountId)
+
+	BillingViewSegmentsListElement_billingGroupPrimaryAccountId = BillingViewSegmentsListElement.AddMember("billingGroupPrimaryAccountId", _AccountId)
+
+	_BillingViewSegmentsList_member = _BillingViewSegmentsList.AddMember("member", BillingViewSegmentsListElement)
 
 	_BillingViewSourceViewsList_member = _BillingViewSourceViewsList.AddMember("member", _BillingViewArn)
 
@@ -1979,6 +2060,18 @@ func init() {
 	GetResourcePolicyResponse_resourceArn = GetResourcePolicyResponse.AddMember("resourceArn", _ResourceArn)
 
 	GetResourcePolicyResponse_policy = GetResourcePolicyResponse.AddMember("policy", _PolicyDocument)
+
+	ListBillingViewSegmentsRequest_timeRange = ListBillingViewSegmentsRequest.AddMember("timeRange", BillingViewSegmentTimeRange)
+
+	ListBillingViewSegmentsRequest_arn = ListBillingViewSegmentsRequest.AddMember("arn", _BillingViewArn)
+
+	ListBillingViewSegmentsRequest_maxResults = ListBillingViewSegmentsRequest.AddMember("maxResults", _BillingViewsMaxResults)
+
+	ListBillingViewSegmentsRequest_nextToken = ListBillingViewSegmentsRequest.AddMember("nextToken", _PageToken)
+
+	ListBillingViewSegmentsResponse_items = ListBillingViewSegmentsResponse.AddMember("items", _BillingViewSegmentsList)
+
+	ListBillingViewSegmentsResponse_nextToken = ListBillingViewSegmentsResponse.AddMember("nextToken", _PageToken)
 
 	ListBillingViewsRequest_activeTimeRange = ListBillingViewsRequest.AddMember("activeTimeRange", ActiveTimeRange)
 

@@ -223,6 +223,11 @@ var UpdateStreamMode = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateStreamMode",
 }, smithy.ShapeTypeOperation, 0)
 
+var UpdateStreamRecordDistributionStrategy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateStreamRecordDistributionStrategy",
+}, smithy.ShapeTypeOperation, 0)
+
 var UpdateStreamWarmThroughput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "UpdateStreamWarmThroughput",
@@ -910,6 +915,14 @@ var RecordConfiguration_RecordFormatType *smithy.Schema
 
 var RecordConfiguration_GSRSchemaARN *smithy.Schema
 
+var RecordDistributionStrategy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "RecordDistributionStrategy",
+}, smithy.ShapeTypeEnum, 2)
+var RecordDistributionStrategy_AUTO *smithy.Schema
+
+var RecordDistributionStrategy_USER_PARTITION_KEY *smithy.Schema
+
 var RecordFormatType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "RecordFormatType",
@@ -1235,7 +1248,7 @@ var StreamDescription_KeyId *smithy.Schema
 var StreamDescriptionSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "StreamDescriptionSummary",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var StreamDescriptionSummary_StreamName *smithy.Schema
 
 var StreamDescriptionSummary_StreamARN *smithy.Schema
@@ -1265,6 +1278,8 @@ var StreamDescriptionSummary_WarmThroughput *smithy.Schema
 var StreamDescriptionSummary_MaxRecordSizeInKiB *smithy.Schema
 
 var StreamDescriptionSummary_ChannelCount *smithy.Schema
+
+var StreamDescriptionSummary_RecordDistributionStrategy *smithy.Schema
 
 var StreamFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
@@ -1481,7 +1496,7 @@ var CreateChannelOutput_ChannelDescription *smithy.Schema
 var CreateStreamInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "CreateStreamInput",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var CreateStreamInput_StreamName *smithy.Schema
 
 var CreateStreamInput_ShardCount *smithy.Schema
@@ -1493,6 +1508,8 @@ var CreateStreamInput_Tags *smithy.Schema
 var CreateStreamInput_WarmThroughputMiBps *smithy.Schema
 
 var CreateStreamInput_MaxRecordSizeInKiB *smithy.Schema
+
+var CreateStreamInput_RecordDistributionStrategy *smithy.Schema
 
 var DecreaseStreamRetentionPeriodInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
@@ -2150,6 +2167,16 @@ var UpdateStreamModeInput_StreamModeDetails *smithy.Schema
 
 var UpdateStreamModeInput_WarmThroughputMiBps *smithy.Schema
 
+var UpdateStreamRecordDistributionStrategyInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateStreamRecordDistributionStrategyInput",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateStreamRecordDistributionStrategyInput_StreamARN *smithy.Schema
+
+var UpdateStreamRecordDistributionStrategyInput_StreamId *smithy.Schema
+
+var UpdateStreamRecordDistributionStrategyInput_RecordDistributionStrategy *smithy.Schema
+
 var UpdateStreamWarmThroughputInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "UpdateStreamWarmThroughputInput",
@@ -2495,6 +2522,10 @@ func init() {
 
 	Record_EncryptionType = Record.AddMember("EncryptionType", EncryptionType)
 
+	RecordDistributionStrategy_AUTO = RecordDistributionStrategy.AddMember("AUTO", smithyprelude.Unit)
+
+	RecordDistributionStrategy_USER_PARTITION_KEY = RecordDistributionStrategy.AddMember("USER_PARTITION_KEY", smithyprelude.Unit)
+
 	_RecordList_member = _RecordList.AddMember("member", Record)
 
 	ResourceInUseException_message = ResourceInUseException.AddMember("message", _ErrorMessage)
@@ -2639,6 +2670,8 @@ func init() {
 
 	StreamDescriptionSummary_ChannelCount = StreamDescriptionSummary.AddMember("ChannelCount", _ChannelCountObject)
 
+	StreamDescriptionSummary_RecordDistributionStrategy = StreamDescriptionSummary.AddMember("RecordDistributionStrategy", RecordDistributionStrategy)
+
 	StreamFilter_StreamARN = StreamFilter.AddMember("StreamARN", _StreamARN)
 
 	StreamFilter_StreamCreationTimestamp = StreamFilter.AddMember("StreamCreationTimestamp", _Timestamp)
@@ -2738,6 +2771,8 @@ func init() {
 	CreateStreamInput_WarmThroughputMiBps = CreateStreamInput.AddMember("WarmThroughputMiBps", _NaturalIntegerObject)
 
 	CreateStreamInput_MaxRecordSizeInKiB = CreateStreamInput.AddMember("MaxRecordSizeInKiB", _MaxRecordSizeInKiB)
+
+	CreateStreamInput_RecordDistributionStrategy = CreateStreamInput.AddMember("RecordDistributionStrategy", RecordDistributionStrategy)
 
 	DecreaseStreamRetentionPeriodInput_StreamName = DecreaseStreamRetentionPeriodInput.AddMember("StreamName", _StreamName)
 
@@ -3140,6 +3175,12 @@ func init() {
 	UpdateStreamModeInput_StreamModeDetails = UpdateStreamModeInput.AddMember("StreamModeDetails", StreamModeDetails)
 
 	UpdateStreamModeInput_WarmThroughputMiBps = UpdateStreamModeInput.AddMember("WarmThroughputMiBps", _NaturalIntegerObject)
+
+	UpdateStreamRecordDistributionStrategyInput_StreamARN = UpdateStreamRecordDistributionStrategyInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
+
+	UpdateStreamRecordDistributionStrategyInput_StreamId = UpdateStreamRecordDistributionStrategyInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
+
+	UpdateStreamRecordDistributionStrategyInput_RecordDistributionStrategy = UpdateStreamRecordDistributionStrategyInput.AddMember("RecordDistributionStrategy", RecordDistributionStrategy)
 
 	UpdateStreamWarmThroughputInput_StreamARN = UpdateStreamWarmThroughputInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
 

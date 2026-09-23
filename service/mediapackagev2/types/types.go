@@ -131,6 +131,30 @@ type ChannelListConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration that controls the content key period timing information that
+// MediaPackage signals to your DRM key provider.
+type ContentKeyPeriodConfiguration struct {
+
+	// Specifies what timing information MediaPackage signals in the ContentKeyPeriod
+	// to your DRM key provider. If you don't specify a value, the default is
+	// INDEX_ONLY . Signaling start and end times ( START_END_ONLY or
+	// INDEX_WITH_START_END ) also requires key rotation to be enabled.
+	//
+	// The allowed values are:
+	//
+	//   - INDEX_ONLY - Signals only the content key index. This is the default and
+	//   matches the current behavior. It's supported for both SPEKE Version 2.0 and 2.1.
+	//
+	//   - START_END_ONLY - Signals only the start and end times the key is used for.
+	//   Requires SpekeVersion V2_1 .
+	//
+	//   - INDEX_WITH_START_END - Signals both the content key index and the start and
+	//   end times the key is used for. Requires SpekeVersion V2_1 .
+	ContentKeyPeriodTiming ContentKeyPeriodTiming
+
+	noSmithyDocumentSerde
+}
+
 // Create a DASH manifest configuration.
 type CreateDashManifestConfiguration struct {
 
@@ -1625,6 +1649,30 @@ type SpekeKeyProvider struct {
 	// Certificate Manager to add content key encryption to this endpoint. For this
 	// feature to work, your DRM key provider must support content key encryption.
 	CertificateArn *string
+
+	// The configuration that controls whether MediaPackage signals the start and end
+	// times a content key is used for, in the ContentKeyPeriod sent to your DRM key
+	// provider. Signaling this timing is supported only when key rotation is enabled (
+	// KeyRotationIntervalSeconds is set to a non-zero value) and SpekeVersion is V2_1
+	// . You can update these settings on an existing origin endpoint.
+	ContentKeyPeriodConfiguration *ContentKeyPeriodConfiguration
+
+	// Specifies the SPEKE version used with your DRM key provider. If you don't
+	// specify a value, the default is V2_0 .
+	//
+	// The allowed values are:
+	//
+	//   - V2_0 - Follows the SPEKE Version 2.0 contract and signals only the content
+	//   key index in key requests. This is the default.
+	//
+	//   - V2_1 - Follows the SPEKE Version 2.1 contract and additionally supports
+	//   signaling the start and end times a content key is used for, using
+	//   ContentKeyPeriodConfiguration .
+	//
+	// For more information, see [SPEKE Version 2.0 payload].
+	//
+	// [SPEKE Version 2.0 payload]: https://docs.aws.amazon.com/speke/latest/documentation/standard-payload-components-v2.html
+	SpekeVersion SpekeVersion
 
 	noSmithyDocumentSerde
 }

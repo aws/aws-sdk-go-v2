@@ -10,8 +10,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Retrieves the runtime information for a specific runtime instance of the
-// lifecycle policy.
+// Retrieves runtime information for a lifecycle execution – a single run of
+// lifecycle actions that a lifecycle policy or a StartResourceStateUpdaterequest started.
 func (c *Client) GetLifecycleExecution(ctx context.Context, params *GetLifecycleExecutionInput, optFns ...func(*Options)) (*GetLifecycleExecutionOutput, error) {
 	if params == nil {
 		params = &GetLifecycleExecutionInput{}

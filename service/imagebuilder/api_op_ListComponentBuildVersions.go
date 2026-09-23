@@ -11,8 +11,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns the list of component build versions for the specified component
-// version Amazon Resource Name (ARN).
+// Returns a list of component build versions for the specified component version
+// ARN. You can only list build versions for components that your account owns.
+// Deprecated build versions aren't included in the results.
 func (c *Client) ListComponentBuildVersions(ctx context.Context, params *ListComponentBuildVersionsInput, optFns ...func(*Options)) (*ListComponentBuildVersionsOutput, error) {
 	if params == nil {
 		params = &ListComponentBuildVersionsInput{}
@@ -30,8 +31,10 @@ func (c *Client) ListComponentBuildVersions(ctx context.Context, params *ListCom
 
 type ListComponentBuildVersionsInput struct {
 
-	// The component version Amazon Resource Name (ARN) whose versions you want to
-	// list.
+	// The component version ARN whose build versions you want to list. The ARN must
+	// specify an exact version, without a build number suffix. If you don't specify an
+	// ARN, Image Builder returns build versions for the components that your account
+	// owns.
 	ComponentVersionArn *string
 
 	// The maximum number of items to return in a single request.
@@ -64,7 +67,9 @@ func (v *ListComponentBuildVersionsInput) SerializeMembers(s smithy.ShapeSeriali
 
 type ListComponentBuildVersionsOutput struct {
 
-	// The list of component summaries for the specified semantic version.
+	// The list of component summaries. Each summary represents one build version of
+	// the specified component version, or of the components that your account owns if
+	// you didn't specify an ARN. Deprecated build versions aren't included.
 	ComponentSummaryList []types.ComponentSummary
 
 	// The next token used for paginated responses. When this field isn't empty, there

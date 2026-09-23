@@ -12,7 +12,8 @@ import (
 )
 
 // Creates a new distribution configuration. Distribution configurations define
-// and configure the outputs of your pipeline.
+// and configure the outputs for your images, including the target Regions,
+// accounts, and settings for each Region.
 func (c *Client) CreateDistributionConfiguration(ctx context.Context, params *CreateDistributionConfigurationInput, optFns ...func(*Options)) (*CreateDistributionConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateDistributionConfigurationInput{}
@@ -31,21 +32,27 @@ func (c *Client) CreateDistributionConfiguration(ctx context.Context, params *Cr
 type CreateDistributionConfigurationInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The distributions of the distribution configuration.
+	// The distribution settings for the configuration. Each entry defines how output
+	// images are distributed in one target Amazon Web Services Region. A Region can
+	// appear at most once in the list.
 	//
 	// This member is required.
 	Distributions []types.Distribution
 
-	// The name of the distribution configuration.
+	// The name of the distribution configuration. Distribution configuration names
+	// must be unique to your account in each Amazon Web Services Region. Image Builder
+	// generates the distribution configuration ARN from a normalized form of the name,
+	// so names that differ only in case, spaces, or underscores count as the same
+	// name.
 	//
 	// This member is required.
 	Name *string
@@ -53,8 +60,8 @@ type CreateDistributionConfigurationInput struct {
 	// The description of the distribution configuration.
 	Description *string
 
-	// Validates the required permissions and request parameters without making the
-	// request. If validation succeeds, the operation returns a
+	// Validates the required permissions and request parameters without performing
+	// the operation. If validation succeeds, the operation returns a
 	// DryRunOperationException error response.
 	DryRun bool
 

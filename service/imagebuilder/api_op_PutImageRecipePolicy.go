@@ -9,9 +9,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Applies a policy to an image recipe. To share resources, call the RAM API [CreateResourceShare]. If
-// you call this API, you must also call the RAM API [PromoteResourceShareCreatedFromPolicy]so that the resource is
-// visible to all principals with whom the resource is shared.
+// Applies a policy to an image recipe. The preferred way to share resources is
+// with the RAM API [CreateResourceShare]. If you use the PutImageRecipePolicy operation instead, you
+// must also call the RAM API [PromoteResourceShareCreatedFromPolicy]. Otherwise, the resource isn't visible to the
+// principals that it's shared with.
 //
 // [PromoteResourceShareCreatedFromPolicy]: https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html
 // [CreateResourceShare]: https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html

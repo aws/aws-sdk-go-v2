@@ -1,0 +1,8 @@
+{
+    "id": "f9b97941-0381-4f2c-b0bc-773266454c8f",
+    "type": "feature",
+    "description": "Adds asymmetric key support to ReEncryptData for re-encrypting data between RSA and symmetric data encryption keys.",
+    "modules": [
+        "service/paymentcryptographydata"
+    ]
+}

@@ -11,7 +11,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Lists workflow build versions based on filtering parameters.
+// Lists workflow versions based on filtering parameters. To list the build
+// versions of a specific workflow version, call ListWorkflowBuildVersions.
 func (c *Client) ListWorkflows(ctx context.Context, params *ListWorkflowsInput, optFns ...func(*Options)) (*ListWorkflowsOutput, error) {
 	if params == nil {
 		params = &ListWorkflowsInput{}
@@ -29,10 +30,13 @@ func (c *Client) ListWorkflows(ctx context.Context, params *ListWorkflowsInput, 
 
 type ListWorkflowsInput struct {
 
-	// Specify all or part of the workflow name to streamline results.
+	// Specifies whether to return one entry per workflow name, with all versions of
+	// each workflow aggregated. Defaults to false , which returns one entry per
+	// workflow version. You can't combine this option with the version filter.
 	ByName bool
 
-	// Used to streamline search results.
+	// Filters to narrow the list of workflows. You can filter on name , version ,
+	// description , and type .
 	Filters []types.Filter
 
 	// The maximum number of items to return in a single request.
@@ -42,8 +46,10 @@ type ListWorkflowsInput struct {
 	// previously truncated response.
 	NextToken *string
 
-	// Used to get a list of workflow build version filtered by the identity of the
-	// creator.
+	// Filters results based on the workflow owner. By default, this request returns
+	// the workflows that your account owns ( Self ). Specify Amazon to list the
+	// workflows that Image Builder manages. Image Builder rejects the Shared and
+	// ThirdParty owner values for workflows, and AWSMarketplace returns no results.
 	Owner types.Ownership
 
 	noSmithyDocumentSerde
@@ -78,7 +84,7 @@ type ListWorkflowsOutput struct {
 	// this token with the next request to retrieve additional objects.
 	NextToken *string
 
-	// A list of workflow build versions that match the request criteria.
+	// A list of workflow versions that match the request criteria.
 	WorkflowVersionList []types.WorkflowVersion
 
 	// Metadata pertaining to the operation's result.

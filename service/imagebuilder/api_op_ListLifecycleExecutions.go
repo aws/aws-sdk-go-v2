@@ -29,8 +29,10 @@ func (c *Client) ListLifecycleExecutions(ctx context.Context, params *ListLifecy
 
 type ListLifecycleExecutionsInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource for which to get a list of
-	// lifecycle runtime instances.
+	// The Amazon Resource Name (ARN) of the resource for which to list lifecycle
+	// executions. Specify a lifecycle policy ARN to list its executions, or an image
+	// build version ARN to list the executions that StartResourceStateUpdatestarted for that image. Other ARN
+	// types aren't valid for this request.
 	//
 	// This member is required.
 	ResourceArn *string

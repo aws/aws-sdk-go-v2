@@ -1,0 +1,8 @@
+{
+    "id": "54d58540-2d51-4049-b8fe-8c9fdab5b1ae",
+    "type": "feature",
+    "description": "Added the ListBillingViewSegments API, which returns billing view segment information for a specified billing view ARN and time range. This API enables customers and integrated tools to programmatically determine the billing context of their accounts.",
+    "modules": [
+        "service/billing"
+    ]
+}

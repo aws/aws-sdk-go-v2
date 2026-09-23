@@ -15,6 +15,11 @@ import (
 // file. The following disk images are supported:
 //
 //   - Windows 11 Enterprise
+//
+// The response returns as soon as Image Builder creates the new image resource in
+// the PENDING state. The conversion from ISO file to AMI then runs asynchronously
+// on an EC2 instance that Image Builder launches with the specified infrastructure
+// configuration.
 func (c *Client) ImportDiskImage(ctx context.Context, params *ImportDiskImageInput, optFns ...func(*Options)) (*ImportDiskImageOutput, error) {
 	if params == nil {
 		params = &ImportDiskImageInput{}
@@ -33,9 +38,9 @@ func (c *Client) ImportDiskImage(ctx context.Context, params *ImportDiskImageInp
 type ImportDiskImageInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -48,13 +53,17 @@ type ImportDiskImageInput struct {
 	// This member is required.
 	InfrastructureConfigurationArn *string
 
-	// The name of the image resource that's created from the import.
+	// The name of the image resource that's created from the import. Image Builder
+	// generates the image ARN from a normalized form of the name, so names that differ
+	// only in case, spaces, or underscores count as the same name. If an image with
+	// the same name and semantic version already exists in your account in the same
+	// Amazon Web Services Region, the import creates a new build version for it.
 	//
 	// This member is required.
 	Name *string
 
-	// The operating system version for the imported image. Allowed values include the
-	// following: Microsoft Windows 11 .
+	// The operating system version for the imported image. The only supported value
+	// is Microsoft Windows 11 .
 	//
 	// This member is required.
 	OsVersion *string
@@ -71,7 +80,9 @@ type ImportDiskImageInput struct {
 	// This member is required.
 	SemanticVersion *string
 
-	// The uri of the ISO disk file that's stored in Amazon S3.
+	// The uri of the ISO disk file that's stored in Amazon S3, in s3://bucket/key
+	// format. The key must end with the .iso , .ISO , or .Iso extension, and the
+	// bucket must be owned by the account that makes the request.
 	//
 	// This member is required.
 	Uri *string
@@ -81,10 +92,13 @@ type ImportDiskImageInput struct {
 
 	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
 	// Image Builder access to perform workflow actions to import an image from a
-	// Microsoft ISO file.
+	// Microsoft ISO file. If you don't provide a role, Image Builder uses the Image
+	// Builder service-linked role in your account, and creates it if it doesn't exist.
 	ExecutionRole *string
 
-	// The logging configuration for the image build process.
+	// The CloudWatch Logs log group where Image Builder sends the import logs. If you
+	// specify a log group name outside of the /aws/imagebuilder/ namespace, you must
+	// also provide an executionRole that has permission to write to that log group.
 	LoggingConfiguration *types.ImageLoggingConfiguration
 
 	// Configures Secure Boot and UEFI settings for the imported image.
@@ -156,8 +170,10 @@ type ImportDiskImageOutput struct {
 	// The client token that uniquely identifies the request.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the output AMI that was created from the ISO
-	// disk file.
+	// The Amazon Resource Name (ARN) of the Image Builder image resource that this
+	// request created. The AMI doesn't exist yet when the response returns. The import
+	// runs asynchronously, and the output AMI appears in the image's output resources
+	// when the import completes.
 	ImageBuildVersionArn *string
 
 	// Metadata pertaining to the operation's result.

@@ -578,6 +578,18 @@ func TestCheckSnapshot_UpdateStreamMode(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateStreamRecordDistributionStrategy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateStreamRecordDistributionStrategy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateStreamRecordDistributionStrategy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateStreamWarmThroughput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateStreamWarmThroughput(context.Background(), nil, func(o *Options) {
@@ -1098,6 +1110,18 @@ func TestUpdateSnapshot_UpdateStreamMode(t *testing.T) {
 	_, err := svc.UpdateStreamMode(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateStreamMode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateStreamRecordDistributionStrategy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateStreamRecordDistributionStrategy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateStreamRecordDistributionStrategy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

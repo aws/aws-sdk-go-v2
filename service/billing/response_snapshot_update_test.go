@@ -753,6 +753,52 @@ func TestUpdateResponseSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListBillingViewSegments(t *testing.T) {
+	want := &ListBillingViewSegmentsOutput{
+		Items: []types.BillingViewSegmentsListElement{
+			{
+				Domain: types.BillingDomain("BILLABLE"),
+				TimeRange: &types.BillingViewSegmentTimeRange{
+					BeginDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDateExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				BillingTransferAccountId:     ptr.String("__BillingTransferAccountId__"),
+				ManagementAccountId:          ptr.String("__ManagementAccountId__"),
+				BillingGroupPrimaryAccountId: ptr.String("__BillingGroupPrimaryAccountId__"),
+			},
+			{
+				Domain: types.BillingDomain("BILLABLE"),
+				TimeRange: &types.BillingViewSegmentTimeRange{
+					BeginDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDateExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				BillingTransferAccountId:     ptr.String("__BillingTransferAccountId__"),
+				ManagementAccountId:          ptr.String("__ManagementAccountId__"),
+				BillingGroupPrimaryAccountId: ptr.String("__BillingGroupPrimaryAccountId__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.AWSBilling)
+	opSchema := smithy.NewOperationSchema(schemas.ListBillingViewSegments, schemas.ListBillingViewSegmentsResponse, schemas.ListBillingViewSegmentsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListBillingViewSegments.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListBillingViews(t *testing.T) {
 	want := &ListBillingViewsOutput{
 		BillingViews: []types.BillingViewListElement{

@@ -53,7 +53,9 @@ type GetContainerRecipeOutput struct {
 	// The container recipe object that is returned.
 	ContainerRecipe *types.ContainerRecipe
 
-	// The resource ARNs with different wildcard variations of semantic versioning.
+	// A set of wildcard version ARNs that always reference the latest version of the
+	// resource. ARNs are included for the latest version overall, and for the latest
+	// versions within the same major, minor, and patch levels.
 	LatestVersionReferences *types.LatestVersionReferences
 
 	// The request ID that uniquely identifies this request.

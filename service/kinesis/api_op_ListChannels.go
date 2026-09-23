@@ -44,8 +44,7 @@ type ListChannelsInput struct {
 	MaxResults *int32
 
 	// The pagination token returned by a previous call. Specify this token to
-	// retrieve the next page of results. This value is null when there are no more
-	// results to return.
+	// retrieve the next page of results.
 	NextToken *string
 
 	// Filters the results to channels associated with the specified streams.

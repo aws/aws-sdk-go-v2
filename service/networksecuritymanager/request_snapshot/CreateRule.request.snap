@@ -1,0 +1,5 @@
+POST /rules
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","configuration":"__Document__","firewallType":"WAF","isPublished":true,"ruleDescription":"__RuleDescription__","ruleName":"__RuleName__","ruleType":"CONFIGURATION","tags":{"key0":"__Value__"}}

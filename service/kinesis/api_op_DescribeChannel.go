@@ -68,7 +68,8 @@ func (in *DescribeChannelInput) bindEndpointParams(p *EndpointParameters) {
 
 type DescribeChannelOutput struct {
 
-	// The configuration and current status of the channel.
+	// The configuration and current status of the channel, including its ARN, source
+	// stream, destination configuration, and lifecycle state.
 	//
 	// This member is required.
 	ChannelDescription *types.ChannelDescription

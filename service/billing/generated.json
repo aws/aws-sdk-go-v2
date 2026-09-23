@@ -19,6 +19,7 @@
         "api_op_GetEnterpriseSupportChargeSummary.go",
         "api_op_GetEnterpriseSupportContractDetails.go",
         "api_op_GetResourcePolicy.go",
+        "api_op_ListBillingViewSegments.go",
         "api_op_ListBillingViews.go",
         "api_op_ListEnterpriseSupportLinkedAccountCharges.go",
         "api_op_ListSourceViewsForBillingView.go",

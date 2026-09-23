@@ -3964,6 +3964,10 @@ type BotLocaleImportSpecification struct {
 	//   - IntentC
 	NluIntentConfidenceThreshold *float64
 
+	// The speaker diarization settings to apply when importing the bot locale
+	// configuration.
+	SpeakerDiarizationSettings *SpeakerDiarizationSettings
+
 	// The sensitivity level for voice activity detection (VAD) in the bot locale.
 	// This setting helps optimize speech recognition accuracy by adjusting how the
 	// system responds to background noise during voice interactions.
@@ -4015,6 +4019,11 @@ func (v *BotLocaleImportSpecification) SerializeMembers(s smithy.ShapeSerializer
 	if v.NluIntentConfidenceThreshold != nil {
 		s.WriteFloat64(schemas.BotLocaleImportSpecification_nluIntentConfidenceThreshold, *v.NluIntentConfidenceThreshold)
 	}
+	if v.SpeakerDiarizationSettings != nil {
+		s.WriteStruct(schemas.BotLocaleImportSpecification_speakerDiarizationSettings)
+		v.SpeakerDiarizationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SpeechDetectionSensitivity != "" {
 		s.WriteString(schemas.BotLocaleImportSpecification_speechDetectionSensitivity, string(v.SpeechDetectionSensitivity))
 	}
@@ -4052,6 +4061,9 @@ func (v *BotLocaleImportSpecification) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.BotLocaleImportSpecification_nluIntentConfidenceThreshold:
 			v.NluIntentConfidenceThreshold = new(float64)
 			return d.ReadFloat64(schemas.BotLocaleImportSpecification_nluIntentConfidenceThreshold, v.NluIntentConfidenceThreshold)
+		case schemas.BotLocaleImportSpecification_speakerDiarizationSettings:
+			v.SpeakerDiarizationSettings = &SpeakerDiarizationSettings{}
+			return v.SpeakerDiarizationSettings.Deserialize(d)
 		case schemas.BotLocaleImportSpecification_speechDetectionSensitivity:
 			var ev string
 			if err := d.ReadString(schemas.BotLocaleImportSpecification_speechDetectionSensitivity, &ev); err != nil {
@@ -12690,6 +12702,42 @@ func (v *SlotValueSelectionSetting) Deserialize(d smithy.ShapeDeserializer) erro
 			}
 			v.ResolutionStrategy = SlotValueResolutionStrategy(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Specifies configuration that restricts speech detection to the primary
+// (loudest) speaker during streaming audio conversations, so that speech from
+// background speakers does not start a turn, interrupt the bot, or reach speech
+// recognition.
+type SpeakerDiarizationSettings struct {
+
+	// Specifies whether speaker diarization is enabled for the bot locale. Set to true
+	// to have Amazon Lex treat speech from speakers other than the primary speaker as
+	// non-speech. Set to false to disable speaker diarization and rely on voice
+	// activity detection alone.
+	//
+	// This member is required.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *SpeakerDiarizationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SpeakerDiarizationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SpeakerDiarizationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.SpeakerDiarizationSettings_enabled, v.Enabled)
+}
+func (v *SpeakerDiarizationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SpeakerDiarizationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SpeakerDiarizationSettings_enabled:
+			return d.ReadBool(schemas.SpeakerDiarizationSettings_enabled, &v.Enabled)
 		}
 		return nil
 	})

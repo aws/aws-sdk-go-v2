@@ -437,6 +437,10 @@ func TestCheckRequestSnapshot_CreateOriginEndpoint(t *testing.T) {
 					RoleArn:        ptr.String("__RoleArn__"),
 					Url:            ptr.String("__Url__"),
 					CertificateArn: ptr.String("__CertificateArn__"),
+					SpekeVersion:   types.SpekeVersion("V2_0"),
+					ContentKeyPeriodConfiguration: &types.ContentKeyPeriodConfiguration{
+						ContentKeyPeriodTiming: types.ContentKeyPeriodTiming("INDEX_ONLY"),
+					},
 				},
 			},
 			OutputTimestampMode: types.OutputTimestampMode("PASSTHROUGH"),
@@ -1536,6 +1540,10 @@ func TestCheckRequestSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					RoleArn:        ptr.String("__RoleArn__"),
 					Url:            ptr.String("__Url__"),
 					CertificateArn: ptr.String("__CertificateArn__"),
+					SpekeVersion:   types.SpekeVersion("V2_0"),
+					ContentKeyPeriodConfiguration: &types.ContentKeyPeriodConfiguration{
+						ContentKeyPeriodTiming: types.ContentKeyPeriodTiming("INDEX_ONLY"),
+					},
 				},
 			},
 			OutputTimestampMode: types.OutputTimestampMode("PASSTHROUGH"),
@@ -2099,6 +2107,10 @@ func TestUpdateRequestSnapshot_CreateOriginEndpoint(t *testing.T) {
 					RoleArn:        ptr.String("__RoleArn__"),
 					Url:            ptr.String("__Url__"),
 					CertificateArn: ptr.String("__CertificateArn__"),
+					SpekeVersion:   types.SpekeVersion("V2_0"),
+					ContentKeyPeriodConfiguration: &types.ContentKeyPeriodConfiguration{
+						ContentKeyPeriodTiming: types.ContentKeyPeriodTiming("INDEX_ONLY"),
+					},
 				},
 			},
 			OutputTimestampMode: types.OutputTimestampMode("PASSTHROUGH"),
@@ -3198,6 +3210,10 @@ func TestUpdateRequestSnapshot_UpdateOriginEndpoint(t *testing.T) {
 					RoleArn:        ptr.String("__RoleArn__"),
 					Url:            ptr.String("__Url__"),
 					CertificateArn: ptr.String("__CertificateArn__"),
+					SpekeVersion:   types.SpekeVersion("V2_0"),
+					ContentKeyPeriodConfiguration: &types.ContentKeyPeriodConfiguration{
+						ContentKeyPeriodTiming: types.ContentKeyPeriodTiming("INDEX_ONLY"),
+					},
 				},
 			},
 			OutputTimestampMode: types.OutputTimestampMode("PASSTHROUGH"),

@@ -666,6 +666,133 @@ func (v *BillingViewListElement) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+//	A billing view segment. A segment represents a time range during which the
+//
+// billing domain and account relationships for a billing view remained unchanged.
+type BillingViewSegmentsListElement struct {
+
+	//  The billing group primary account ID. The response includes this field for
+	// billing group members. Compare this value to your own account ID to determine
+	// whether you are the primary account.
+	BillingGroupPrimaryAccountId *string
+
+	//  The billing transfer account ID. The response includes this field only when
+	// the caller is a billing transfer source account. The response omits this field
+	// for billing group billing views.
+	BillingTransferAccountId *string
+
+	// The billing domain for this segment. The following values are valid:
+	//
+	//   - PRO_FORMA - Data shaped by Billing Conductor that doesn't reflect the final
+	//   charges owed to Amazon Web Services.
+	//
+	//   - BILLABLE - Data that represents the final charges owed to Amazon Web
+	//   Services.
+	Domain BillingDomain
+
+	//  The management account ID of the organization. The response includes this
+	// field for organization member accounts.
+	ManagementAccountId *string
+
+	//  The time range during which this segment is effective.
+	TimeRange *BillingViewSegmentTimeRange
+
+	noSmithyDocumentSerde
+}
+
+func (v *BillingViewSegmentsListElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingViewSegmentsListElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingViewSegmentsListElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingGroupPrimaryAccountId != nil {
+		s.WriteString(schemas.BillingViewSegmentsListElement_billingGroupPrimaryAccountId, *v.BillingGroupPrimaryAccountId)
+	}
+	if v.BillingTransferAccountId != nil {
+		s.WriteString(schemas.BillingViewSegmentsListElement_billingTransferAccountId, *v.BillingTransferAccountId)
+	}
+	if v.Domain != "" {
+		s.WriteString(schemas.BillingViewSegmentsListElement_domain, string(v.Domain))
+	}
+	if v.ManagementAccountId != nil {
+		s.WriteString(schemas.BillingViewSegmentsListElement_managementAccountId, *v.ManagementAccountId)
+	}
+	if v.TimeRange != nil {
+		s.WriteStruct(schemas.BillingViewSegmentsListElement_timeRange)
+		v.TimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BillingViewSegmentsListElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingViewSegmentsListElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingViewSegmentsListElement_billingGroupPrimaryAccountId:
+			v.BillingGroupPrimaryAccountId = new(string)
+			return d.ReadString(schemas.BillingViewSegmentsListElement_billingGroupPrimaryAccountId, v.BillingGroupPrimaryAccountId)
+		case schemas.BillingViewSegmentsListElement_billingTransferAccountId:
+			v.BillingTransferAccountId = new(string)
+			return d.ReadString(schemas.BillingViewSegmentsListElement_billingTransferAccountId, v.BillingTransferAccountId)
+		case schemas.BillingViewSegmentsListElement_domain:
+			var ev string
+			if err := d.ReadString(schemas.BillingViewSegmentsListElement_domain, &ev); err != nil {
+				return err
+			}
+			v.Domain = BillingDomain(ev)
+			return nil
+		case schemas.BillingViewSegmentsListElement_managementAccountId:
+			v.ManagementAccountId = new(string)
+			return d.ReadString(schemas.BillingViewSegmentsListElement_managementAccountId, v.ManagementAccountId)
+		case schemas.BillingViewSegmentsListElement_timeRange:
+			v.TimeRange = &BillingViewSegmentTimeRange{}
+			return v.TimeRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Specifies a time range with an inclusive begin date and an exclusive end date.
+type BillingViewSegmentTimeRange struct {
+
+	//  The inclusive start of the time range. This value can't be in the future.
+	BeginDateInclusive *time.Time
+
+	//  The exclusive end of the time range. This value must be after
+	// beginDateInclusive .
+	EndDateExclusive *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *BillingViewSegmentTimeRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingViewSegmentTimeRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingViewSegmentTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginDateInclusive != nil {
+		s.WriteTime(schemas.BillingViewSegmentTimeRange_beginDateInclusive, *v.BeginDateInclusive)
+	}
+	if v.EndDateExclusive != nil {
+		s.WriteTime(schemas.BillingViewSegmentTimeRange_endDateExclusive, *v.EndDateExclusive)
+	}
+}
+func (v *BillingViewSegmentTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingViewSegmentTimeRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingViewSegmentTimeRange_beginDateInclusive:
+			v.BeginDateInclusive = new(time.Time)
+			return d.ReadTime(schemas.BillingViewSegmentTimeRange_beginDateInclusive, v.BeginDateInclusive)
+		case schemas.BillingViewSegmentTimeRange_endDateExclusive:
+			v.EndDateExclusive = new(time.Time)
+			return d.ReadTime(schemas.BillingViewSegmentTimeRange_endDateExclusive, v.EndDateExclusive)
+		}
+		return nil
+	})
+}
+
 // An account that is charged all or a portion of the total Support charge and the
 // percentage of the charge allocated to it.
 type ChargeAccount struct {

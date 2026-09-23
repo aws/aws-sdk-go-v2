@@ -739,8 +739,9 @@ func TestUpdateResponseSnapshot_DescribeStreamSummary(t *testing.T) {
 				TargetMiBps:  ptr.Int32(1),
 				CurrentMiBps: ptr.Int32(1),
 			},
-			MaxRecordSizeInKiB: ptr.Int32(1),
-			ChannelCount:       ptr.Int32(1),
+			MaxRecordSizeInKiB:         ptr.Int32(1),
+			ChannelCount:               ptr.Int32(1),
+			RecordDistributionStrategy: types.RecordDistributionStrategy("AUTO"),
 		},
 	}
 	proto := awsjson.New11(schemas.Kinesis_20131202)
@@ -1722,6 +1723,28 @@ func TestUpdateResponseSnapshot_UpdateStreamMode(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateStreamMode.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateStreamRecordDistributionStrategy(t *testing.T) {
+	want := &UpdateStreamRecordDistributionStrategyOutput{}
+	proto := awsjson.New11(schemas.Kinesis_20131202)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateStreamRecordDistributionStrategy, nil, nil)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateStreamRecordDistributionStrategy.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
