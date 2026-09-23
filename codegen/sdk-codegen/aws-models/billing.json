@@ -42,6 +42,9 @@
                     "target": "com.amazonaws.billing#ListBillingViews"
                 },
                 {
+                    "target": "com.amazonaws.billing#ListBillingViewSegments"
+                },
+                {
                     "target": "com.amazonaws.billing#ListEnterpriseSupportLinkedAccountCharges"
                 },
                 {
@@ -1549,6 +1552,26 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.billing#BillingDomain": {
+            "type": "enum",
+            "members": {
+                "BILLABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BILLABLE"
+                    }
+                },
+                "PRO_FORMA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRO_FORMA"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The billing domain for a billing view segment. The following values are valid:</p> <ul> <li> <p> <code>PRO_FORMA</code> - Data shaped by Billing Conductor that doesn't reflect the final charges owed to Amazon Web Services.</p> </li> <li> <p> <code>BILLABLE</code> - Data that represents the final charges owed to Amazon Web Services.</p> </li> </ul>"
+            }
+        },
         "com.amazonaws.billing#BillingFeature": {
             "type": "enum",
             "members": {
@@ -2000,6 +2023,73 @@
                 },
                 "smithy.api#pattern": "^[ a-zA-Z0-9_\\+=\\.\\-@]+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.billing#BillingViewSegmentTimeRange": {
+            "type": "structure",
+            "members": {
+                "beginDateInclusive": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The inclusive start of the time range. This value can't be in the future. </p>"
+                    }
+                },
+                "endDateExclusive": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The exclusive end of the time range. This value must be after <code>beginDateInclusive</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Specifies a time range with an inclusive begin date and an exclusive end date. </p>"
+            }
+        },
+        "com.amazonaws.billing#BillingViewSegmentsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#BillingViewSegmentsListElement"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A list of billing view segments. </p>"
+            }
+        },
+        "com.amazonaws.billing#BillingViewSegmentsListElement": {
+            "type": "structure",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.billing#BillingDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing domain for this segment. The following values are valid:</p> <ul> <li> <p> <code>PRO_FORMA</code> - Data shaped by Billing Conductor that doesn't reflect the final charges owed to Amazon Web Services.</p> </li> <li> <p> <code>BILLABLE</code> - Data that represents the final charges owed to Amazon Web Services.</p> </li> </ul>"
+                    }
+                },
+                "timeRange": {
+                    "target": "com.amazonaws.billing#BillingViewSegmentTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The time range during which this segment is effective. </p>"
+                    }
+                },
+                "billingTransferAccountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The billing transfer account ID. The response includes this field only when the caller is a billing transfer source account. The response omits this field for billing group billing views. </p>"
+                    }
+                },
+                "managementAccountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The management account ID of the organization. The response includes this field for organization member accounts. </p>"
+                    }
+                },
+                "billingGroupPrimaryAccountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The billing group primary account ID. The response includes this field for billing group members. Compare this value to your own account ID to determine whether you are the primary account. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A billing view segment. A segment represents a time range during which the billing domain and account relationships for a billing view remained unchanged. </p>"
             }
         },
         "com.amazonaws.billing#BillingViewSourceViewsList": {
@@ -3837,6 +3927,140 @@
                 "smithy.api#length": {
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.billing#ListBillingViewSegments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#ListBillingViewSegmentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#ListBillingViewSegmentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#BillingViewHealthStatusException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the segments of a billing view over a given time period. Each segment identifies the billing domain (<code>PRO_FORMA</code> or <code>BILLABLE</code>) and the account relationships that apply during its time range.</p> <p>If you don't provide an <code>arn</code>, the response includes segments for the caller's <code>PRIMARY</code> billing view.</p> <p>If a mid-period change occurs, the response includes multiple segments, each with its own time range. The response omits hidden segments, so the segments it returns might not cover the entire requested time period.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke ListBillingViewSegments",
+                        "input": {
+                            "timeRange": {
+                                "beginDateInclusive": 1719792000,
+                                "endDateExclusive": 1722470400
+                            }
+                        },
+                        "output": {
+                            "items": [
+                                {
+                                    "domain": "BILLABLE",
+                                    "timeRange": {
+                                        "beginDateInclusive": 1719792000,
+                                        "endDateExclusive": 1722470400
+                                    },
+                                    "billingTransferAccountId": "111111111111",
+                                    "managementAccountId": "222222222222",
+                                    "billingGroupPrimaryAccountId": "333333333333"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "Error example for ListBillingViewSegments",
+                        "input": {
+                            "timeRange": {
+                                "beginDateInclusive": 1722470400,
+                                "endDateExclusive": 1719792000
+                            }
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.billing#ValidationException",
+                            "content": {
+                                "message": "Failed to list billing view segments for an invalid time range.",
+                                "reason": "other"
+                            }
+                        },
+                        "allowConstraintErrors": true
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.billing#ListBillingViewSegmentsRequest": {
+            "type": "structure",
+            "members": {
+                "timeRange": {
+                    "target": "com.amazonaws.billing#BillingViewSegmentTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The billing period to query. If you don't provide a time range, the current billing period, which is the calendar month in UTC, is used. </p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.billing#BillingViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) that uniquely identifies the billing view to query. If you don't provide an ARN, the caller's <code>PRIMARY</code> billing view is used. The ARN must reference a primary billing view. Custom billing views aren't supported. </p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.billing#BillingViewsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The number of entries a paginated response contains. Valid values range from 1 to 100. The default is 100. </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.billing#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The pagination token that is used on subsequent calls to list billing view segments. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#ListBillingViewSegmentsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.billing#BillingViewSegmentsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of billing view segments. Each segment covers a portion of the requested time period. The response omits hidden segments, so the segments it returns might not cover the entire requested time period. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.billing#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The pagination token that is used on subsequent calls to list billing view segments. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.billing#ListBillingViews": {

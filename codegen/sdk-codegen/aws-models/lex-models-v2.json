@@ -3670,6 +3670,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Audio filler settings to apply when importing the bot locale\n         configuration. Audio filler requires <code>unifiedSpeechSettings</code>\n         (speech-to-speech) to be enabled when <code>enabled</code> is\n         <code>true</code>.</p>"
                     }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speaker diarization settings to apply when importing the bot\n         locale configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5651,6 +5657,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The sensitivity level for voice activity detection (VAD) in the bot locale. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise during voice interactions.</p>"
                     }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speaker diarization settings to configure for the new bot\n         locale. When enabled, Amazon Lex restricts speech detection to the primary\n         (loudest) speaker during streaming audio conversations.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5739,6 +5751,12 @@
                     "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
                     "traits": {
                         "smithy.api#documentation": "<p>The sensitivity level for voice activity detection (VAD) that was specified for the bot locale.</p>"
+                    }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speaker diarization settings configured for the created bot\n         locale.</p>"
                     }
                 }
             },
@@ -9632,6 +9650,12 @@
                     "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
                     "traits": {
                         "smithy.api#documentation": "<p>The sensitivity level for voice activity detection (VAD) configured for the bot locale.</p>"
+                    }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speaker diarization settings configured for the bot\n         locale.</p>"
                     }
                 }
             },
@@ -14407,7 +14431,7 @@
                     "name": "lex"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Lex Model Building Service provides APIs for creating, managing, and deploying conversational bots and their components.</p>",
+                "smithy.api#documentation": "<p>This document provides detailed information about the Amazon Lex V2 API actions and their parameters.</p>\n         <p>For information about the IAM access control permissions you need to use this API, see\n        <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/security_iam_service-with-iam.html\">Identity-based policies for Amazon Lex V2</a>.</p>\n         <p>Amazon Lex V2 Model Building V2 operations let you build and manage bots.</p>\n         <p>If you use a custom HTTP client to call Amazon Lex Model Building\n        V2 operations, you must set the \"Content-Type\" HTTP header to\n        \"application/x-amz-json-1.1\". Otherwise, you receive an HTTP 404 -\n        UnknownOperationException in the response.</p>\n         <p>Amazon Lex Model Building V2 operations return the responses with\n        the \"application/x-amz-json-1.1\" content type.</p>\n         <p>You can use <a href=\"http://aws.amazon.com/tools/#sdk\">Amazon Web Services SDKs</a> to access Amazon Lex V2 APIs using your favorite programming language.\n        The SDKs automatically perform useful tasks for you, such as:</p>\n         <ul>\n            <li>\n               <p>Cryptographically sign your service requests</p>\n            </li>\n            <li>\n               <p>Retry requests</p>\n            </li>\n            <li>\n               <p>Handle error responses</p>\n            </li>\n         </ul>\n         <p>The following resources provide additional information about the Amazon Lex V2 Model Building API.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Amazon Web Services General Reference</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/general/latest/gr/lex.html\">Amazon Lex V2 Endpoints for each region</a>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Command Line Interface</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/cli/latest/reference/lexv2-models/index.html\">\n                    Amazon Lex Model Building V2 CLI commands</a>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Lex Model Building V2",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -21590,6 +21614,22 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.lexmodelsv2#Enabled",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether speaker diarization is enabled for the bot locale.\n         Set to <code>true</code> to have Amazon Lex treat speech from speakers other\n         than the primary speaker as non-speech. Set to <code>false</code> to\n         disable speaker diarization and rely on voice activity detection\n         alone.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies configuration that restricts speech detection to the\n         primary (loudest) speaker during streaming audio conversations, so that\n         speech from background speakers does not start a turn, interrupt the\n         bot, or reach speech recognition.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#Specifications": {
             "type": "structure",
             "members": {
@@ -21692,6 +21732,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Deepgram"
+                    }
+                },
+                "Advanced": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Advanced"
                     }
                 }
             }
@@ -24490,6 +24536,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The new sensitivity level for voice activity detection (VAD) in the bot locale. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise during voice interactions.</p>"
                     }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated speaker diarization settings to apply to the bot locale.\n         If you omit this field, Amazon Lex keeps the setting currently stored on the\n         bot locale. To turn speaker diarization off, set <code>enabled</code>\n         to <code>false</code> explicitly.</p>"
+                    }
                 }
             },
             "traits": {
@@ -24599,6 +24651,12 @@
                     "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated sensitivity level for voice activity detection (VAD) in the bot locale.</p>"
+                    }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated speaker diarization settings for the bot locale.</p>"
                     }
                 }
             },
