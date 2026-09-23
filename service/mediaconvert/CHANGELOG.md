@@ -1,3 +1,7 @@
+# v1.106.0 (2026-09-23)
+
+* **Feature**: This release adds support for SMPTE 337M audio passthrough, compositing up to five motion graphic overlays in a single output, and controlling how passthrough video is segmented in ABR outputs. It also adds 3GP, 3G2, AAC, AC-3, and E-AC-3 as supported input containers for the Probe operation.
+
 # v1.105.0 (2026-09-15)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

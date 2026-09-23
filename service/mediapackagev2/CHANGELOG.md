@@ -1,3 +1,7 @@
+# v1.50.0 (2026-09-23)
+
+* **Feature**: This release adds support for signalling start and end in the ContentKeyPeriod element in key request from MediaPackageV2
+
 # v1.49.0 (2026-09-09)
 
 * **Feature**: Dynamic Multiview enables viewers to watch multiple live video streams in a single combined output. Viewers can select from 6 preset tiled layouts. Create MediaPackage channels with Input Type MULTIVIEW and configure Available Layouts and Available Sources. See the API Documentation for details.

@@ -1,3 +1,7 @@
+# v1.12.0 (2026-09-23)
+
+* **Feature**: Multi language support with code switching, custom template sectionHeader now allows underscores.
+
 # v1.11.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

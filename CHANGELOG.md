@@ -1,3 +1,31 @@
+# Release (2026-09-23)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.21.0](service/billing/CHANGELOG.md#v1210-2026-09-23)
+  * **Feature**: Added the ListBillingViewSegments API, which returns billing view segment information for a specified billing view ARN and time range. This API enables customers and integrated tools to programmatically determine the billing context of their accounts.
+* `github.com/aws/aws-sdk-go-v2/service/connecthealth`: [v1.12.0](service/connecthealth/CHANGELOG.md#v1120-2026-09-23)
+  * **Feature**: Multi language support with code switching, custom template sectionHeader now allows underscores.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.66.0](service/imagebuilder/CHANGELOG.md#v1660-2026-09-23)
+  * **Feature**: Documentation update for EC2 Image Builder - adds API request and response examples for all operations, improves descriptions throughout, and corrects response field patterns for image versions and workflow ARNs.
+* `github.com/aws/aws-sdk-go-v2/service/internal/checksum`: [v1.11.4](service/internal/checksum/CHANGELOG.md#v1114-2026-09-23)
+  * **Bug Fix**: Checksum non-200 http responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.56.0](service/kinesis/CHANGELOG.md#v1560-2026-09-23)
+  * **Feature**: Amazon Kinesis Data Streams now supports service managed record distribution for on demand streams. Set the record distribution strategy to AUTO to evenly distribute records across shards. Configure it at stream creation with CreateStream or update anytime with UpdateStreamRecordDistributionStrategy
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.71.0](service/lexmodelsv2/CHANGELOG.md#v1710-2026-09-23)
+  * **Feature**: Adds support for speaker diarization on Amazon Lex V2 bot locales. Speaker diarization keeps your bot on the primary (loudest) speaker during a streaming voice conversation, so background voices do not start a turn or interrupt a prompt.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.106.0](service/mediaconvert/CHANGELOG.md#v11060-2026-09-23)
+  * **Feature**: This release adds support for SMPTE 337M audio passthrough, compositing up to five motion graphic overlays in a single output, and controlling how passthrough video is segmented in ABR outputs. It also adds 3GP, 3G2, AAC, AC-3, and E-AC-3 as supported input containers for the Probe operation.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.50.0](service/mediapackagev2/CHANGELOG.md#v1500-2026-09-23)
+  * **Feature**: This release adds support for signalling start and end in the ContentKeyPeriod element in key request from MediaPackageV2
+* `github.com/aws/aws-sdk-go-v2/service/networksecuritymanager`: [v1.0.0](service/networksecuritymanager/CHANGELOG.md#v100-2026-09-23)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Network Security Manager is a new service that helps you centrally configure, deploy, and continuously enforce security policies on network security services across the accounts and resources in your AWS Organization.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.37.0](service/paymentcryptographydata/CHANGELOG.md#v1370-2026-09-23)
+  * **Feature**: Adds asymmetric key support to ReEncryptData for re-encrypting data between RSA and symmetric data encryption keys.
+
 # Release (2026-09-22)
 
 ## Module Highlights

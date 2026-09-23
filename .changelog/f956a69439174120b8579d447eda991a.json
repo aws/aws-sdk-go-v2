@@ -1,8 +1,0 @@
-{
-    "id": "f956a694-3917-4120-b857-9d447eda991a",
-    "type": "bugfix",
-    "description": "Checksum non-200 http responses",
-    "modules": [
-        "service/internal/checksum"
-    ]
-}
