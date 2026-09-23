@@ -985,7 +985,7 @@ func (c *dlChunk) ReadFrom(r io.Reader) (int64, error) {
 	var total int64
 	for {
 		buf := c.sink.Buffer()
-		n, err := r.Read(buf)
+		n, err := io.ReadFull(r, buf)
 		off := c.start + total
 		if n > 0 {
 			c.sink.WriteAt(buf, n, off)
