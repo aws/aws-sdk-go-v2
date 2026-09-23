@@ -78,12 +78,12 @@ func (m *validateOutputPayloadChecksum) HandleDeserialize(
 		}
 	}
 
-	// this runs BEFORE the deserializer, so we have to preemptively check for
-	// non-200, in which case there is no checksum to validate
-	if response.StatusCode != 200 {
-		return out, metadata, err
-	}
-
+	// Validation is gated on the presence of a supported, non-composite checksum
+	// header (the "no checksum" branch below). Responses without one — error
+	// responses (4xx/5xx) and arbitrary Range GETs — are not validated.
+	// Successful partial-content responses (206) from partNumber or whole-object
+	// Range GETs do carry a validatable checksum covering exactly the returned
+	// bytes, and are validated.
 	var expectedChecksum string
 	var algorithmToUse Algorithm
 	for _, algorithm := range m.Algorithms {
