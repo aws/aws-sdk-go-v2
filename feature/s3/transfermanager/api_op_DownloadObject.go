@@ -563,8 +563,7 @@ type downloader struct {
 
 	emitter *singleObjectProgressEmitter
 
-	bufpool *sync.Pool
-	writer  *internalio.AsyncWriterAt
+	writer *internalio.AsyncWriterAt
 }
 
 func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error) {
@@ -706,8 +705,7 @@ func (d *downloader) init() error {
 	d.emitter = &singleObjectProgressEmitter{
 		Listeners: d.options.ObjectProgressListeners,
 	}
-	d.bufpool = internalio.Pools.Pool(bufsize)
-	d.writer = internalio.NewAsyncWriterAt(d.in.WriterAt, d.bufpool, startWorkers, startWorkers, queueDepth)
+	d.writer = internalio.NewAsyncWriterAt(d.in.WriterAt, internalio.Pools.Pool(bufsize))
 
 	return nil
 }
@@ -800,8 +798,6 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 
 // TODO vary this
 const bufsize = 8 * 1024 * 1024
-const startWorkers = 32
-const queueDepth = 64
 
 func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectInput, chunk *dlChunk, clientOptions ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
 	out, err := d.options.S3.GetObject(ctx, params, clientOptions...)
