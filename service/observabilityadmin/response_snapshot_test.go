@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -135,6 +136,7 @@ func TestCheckResponseSnapshot_CreateCentralizationRuleForOrganization(t *testin
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
 				Region:  ptr.String("__Region__"),
@@ -174,6 +176,35 @@ func TestCheckResponseSnapshot_CreateCentralizationRuleForOrganization(t *testin
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateCentralizationRuleForOrganization.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateDatasetIntegration(t *testing.T) {
+	want := &CreateDatasetIntegrationOutput{
+		Arn:       ptr.String("__Arn__"),
+		RoleArn:   ptr.String("__RoleArn__"),
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateDatasetIntegration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateDatasetIntegration(context.Background(), &CreateDatasetIntegrationInput{
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateDatasetIntegration.response", err)
 	}
 }
 
@@ -773,6 +804,27 @@ func TestCheckResponseSnapshot_DeleteCentralizationRuleForOrganization(t *testin
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteDatasetIntegration(t *testing.T) {
+	want := &DeleteDatasetIntegrationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteDatasetIntegration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteDatasetIntegration(context.Background(), &DeleteDatasetIntegrationInput{
+		Arn: ptr.String("__Arn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteDatasetIntegration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteS3TableIntegration(t *testing.T) {
 	want := &DeleteS3TableIntegrationOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteS3TableIntegration.response")
@@ -869,6 +921,7 @@ func TestCheckResponseSnapshot_GetCentralizationRuleForOrganization(t *testing.T
 		FailureReason:               types.CentralizationFailureReason("TRUSTED_ACCESS_NOT_ENABLED"),
 		TagPropagationStatus:        types.TagPropagationStatus("Healthy"),
 		TagPropagationFailureReason: types.TagPropagationFailureReason("RoleNotAssumable"),
+		ContextGraphStatus:          types.ContextGraphStatus("Healthy"),
 		CentralizationRule: &types.CentralizationRule{
 			Source: &types.CentralizationRuleSource{
 				Regions: []string{
@@ -884,6 +937,7 @@ func TestCheckResponseSnapshot_GetCentralizationRuleForOrganization(t *testing.T
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
 				Region:  ptr.String("__Region__"),
@@ -931,6 +985,32 @@ func TestCheckResponseSnapshot_GetCentralizationRuleForOrganization(t *testing.T
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetCentralizationRuleForOrganization.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetDatasetIntegration(t *testing.T) {
+	want := &GetDatasetIntegrationOutput{
+		Arn:       ptr.String("__Arn__"),
+		RoleArn:   ptr.String("__RoleArn__"),
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetDatasetIntegration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetDatasetIntegration(context.Background(), &GetDatasetIntegrationInput{
+		Arn: ptr.String("__Arn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetDatasetIntegration.response", err)
 	}
 }
 
@@ -1661,6 +1741,7 @@ func TestCheckResponseSnapshot_ListCentralizationRulesForOrganization(t *testing
 				FailureReason:               types.CentralizationFailureReason("TRUSTED_ACCESS_NOT_ENABLED"),
 				TagPropagationStatus:        types.TagPropagationStatus("Healthy"),
 				TagPropagationFailureReason: types.TagPropagationFailureReason("RoleNotAssumable"),
+				ContextGraphStatus:          types.ContextGraphStatus("Healthy"),
 				DestinationAccountId:        ptr.String("__DestinationAccountId__"),
 				DestinationRegion:           ptr.String("__DestinationRegion__"),
 			},
@@ -1675,6 +1756,7 @@ func TestCheckResponseSnapshot_ListCentralizationRulesForOrganization(t *testing
 				FailureReason:               types.CentralizationFailureReason("TRUSTED_ACCESS_NOT_ENABLED"),
 				TagPropagationStatus:        types.TagPropagationStatus("Healthy"),
 				TagPropagationFailureReason: types.TagPropagationFailureReason("RoleNotAssumable"),
+				ContextGraphStatus:          types.ContextGraphStatus("Healthy"),
 				DestinationAccountId:        ptr.String("__DestinationAccountId__"),
 				DestinationRegion:           ptr.String("__DestinationRegion__"),
 			},
@@ -1700,6 +1782,44 @@ func TestCheckResponseSnapshot_ListCentralizationRulesForOrganization(t *testing
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListCentralizationRulesForOrganization.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListDatasetIntegrations(t *testing.T) {
+	want := &ListDatasetIntegrationsOutput{
+		DatasetIntegrationSummaries: []types.DatasetIntegrationSummary{
+			{
+				Arn:       ptr.String("__Arn__"),
+				RoleArn:   ptr.String("__RoleArn__"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Arn:       ptr.String("__Arn__"),
+				RoleArn:   ptr.String("__RoleArn__"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListDatasetIntegrations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListDatasetIntegrations(context.Background(), &ListDatasetIntegrationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListDatasetIntegrations.response", err)
 	}
 }
 
@@ -2370,6 +2490,7 @@ func TestCheckResponseSnapshot_UpdateCentralizationRuleForOrganization(t *testin
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
 				Region:  ptr.String("__Region__"),
@@ -2406,6 +2527,33 @@ func TestCheckResponseSnapshot_UpdateCentralizationRuleForOrganization(t *testin
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateCentralizationRuleForOrganization.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateDatasetIntegration(t *testing.T) {
+	want := &UpdateDatasetIntegrationOutput{
+		Arn:       ptr.String("__Arn__"),
+		RoleArn:   ptr.String("__RoleArn__"),
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateDatasetIntegration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateDatasetIntegration(context.Background(), &UpdateDatasetIntegrationInput{
+		Arn:     ptr.String("__Arn__"),
+		RoleArn: ptr.String("__RoleArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateDatasetIntegration.response", err)
 	}
 }
 
@@ -3013,6 +3161,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
 				Region:  ptr.String("__Region__"),
@@ -3090,6 +3239,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
 				Region:  ptr.String("__Region__"),
@@ -3167,6 +3317,7 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
 				Region:  ptr.String("__Region__"),
@@ -3303,6 +3454,7 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
 				Region:  ptr.String("__Region__"),
@@ -3378,6 +3530,7 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
 				Region:  ptr.String("__Region__"),
@@ -3469,6 +3622,7 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
 				Region:  ptr.String("__Region__"),

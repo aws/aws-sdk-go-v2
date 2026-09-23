@@ -4,7 +4,9 @@ package lookoutequipment
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type StopRetrainingSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRetrainingSchedulerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRetrainingSchedulerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRetrainingSchedulerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelName != nil {
+		s.WriteString(schemas.StopRetrainingSchedulerRequest_ModelName, *v.ModelName)
+	}
+}
+
 type StopRetrainingSchedulerOutput struct {
 
 	// The ARN of the model whose retraining scheduler is being stopped.
@@ -51,13 +65,48 @@ type StopRetrainingSchedulerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRetrainingSchedulerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRetrainingSchedulerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRetrainingSchedulerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelArn != nil {
+		s.WriteString(schemas.StopRetrainingSchedulerResponse_ModelArn, *v.ModelArn)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.StopRetrainingSchedulerResponse_ModelName, *v.ModelName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StopRetrainingSchedulerResponse_Status, string(v.Status))
+	}
+}
+func (v *StopRetrainingSchedulerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopRetrainingSchedulerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopRetrainingSchedulerResponse_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.StopRetrainingSchedulerResponse_ModelArn, v.ModelArn)
+		case schemas.StopRetrainingSchedulerResponse_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.StopRetrainingSchedulerResponse_ModelName, v.ModelName)
+		case schemas.StopRetrainingSchedulerResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StopRetrainingSchedulerResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RetrainingSchedulerStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopRetrainingSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStopRetrainingScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRetrainingScheduler, schemas.StopRetrainingSchedulerRequest, schemas.StopRetrainingSchedulerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStopRetrainingScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRetrainingScheduler, schemas.StopRetrainingSchedulerRequest, schemas.StopRetrainingSchedulerResponse), output: &StopRetrainingSchedulerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

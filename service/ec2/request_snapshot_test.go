@@ -3130,6 +3130,64 @@ func TestCheckRequestSnapshot_CreateCapacityReservationCancellationQuote(t *test
 	}
 }
 
+func TestCheckRequestSnapshot_CreateCapacityReservationDateChangeQuote(t *testing.T) {
+	input := &CreateCapacityReservationDateChangeQuoteInput{
+		CapacityReservationId: ptr.String("__CapacityReservationId__"),
+		NewStartDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:           ptr.String("__ClientToken__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateCapacityReservationDateChangeQuote(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCapacityReservationDateChangeQuote"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateCapacityReservationFleet(t *testing.T) {
 	input := &CreateCapacityReservationFleetInput{
 		AllocationStrategy: ptr.String("__AllocationStrategy__"),
@@ -15612,6 +15670,55 @@ func TestCheckRequestSnapshot_DescribeCapacityReservationCancellationQuotes(t *t
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeCapacityReservationCancellationQuotes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeCapacityReservationDateChangeQuotes(t *testing.T) {
+	input := &DescribeCapacityReservationDateChangeQuotesInput{
+		CapacityReservationModificationQuoteIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeCapacityReservationDateChangeQuotes(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeCapacityReservationDateChangeQuotes"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -29701,14 +29808,17 @@ func TestCheckRequestSnapshot_ModifyAvailabilityZoneGroup(t *testing.T) {
 
 func TestCheckRequestSnapshot_ModifyCapacityReservation(t *testing.T) {
 	input := &ModifyCapacityReservationInput{
-		CapacityReservationId: ptr.String("__CapacityReservationId__"),
-		InstanceCount:         ptr.Int32(1),
-		EndDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		EndDateType:           types.EndDateType("unlimited"),
-		Accept:                ptr.Bool(true),
-		DryRun:                ptr.Bool(true),
-		AdditionalInfo:        ptr.String("__AdditionalInfo__"),
-		InstanceMatchCriteria: types.InstanceMatchCriteria("open"),
+		CapacityReservationId:   ptr.String("__CapacityReservationId__"),
+		InstanceCount:           ptr.Int32(1),
+		EndDate:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDateType:             types.EndDateType("unlimited"),
+		Accept:                  ptr.Bool(true),
+		DryRun:                  ptr.Bool(true),
+		AdditionalInfo:          ptr.String("__AdditionalInfo__"),
+		InstanceMatchCriteria:   types.InstanceMatchCriteria("open"),
+		AcceptModificationTerms: ptr.Bool(true),
+		StartDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		QuoteId:                 ptr.String("__QuoteId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -42361,6 +42471,64 @@ func TestUpdateRequestSnapshot_CreateCapacityReservationCancellationQuote(t *tes
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateCapacityReservationDateChangeQuote(t *testing.T) {
+	input := &CreateCapacityReservationDateChangeQuoteInput{
+		CapacityReservationId: ptr.String("__CapacityReservationId__"),
+		NewStartDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:           ptr.String("__ClientToken__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateCapacityReservationDateChangeQuote(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCapacityReservationDateChangeQuote"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateCapacityReservationFleet(t *testing.T) {
 	input := &CreateCapacityReservationFleetInput{
 		AllocationStrategy: ptr.String("__AllocationStrategy__"),
@@ -54843,6 +55011,55 @@ func TestUpdateRequestSnapshot_DescribeCapacityReservationCancellationQuotes(t *
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeCapacityReservationCancellationQuotes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeCapacityReservationDateChangeQuotes(t *testing.T) {
+	input := &DescribeCapacityReservationDateChangeQuotesInput{
+		CapacityReservationModificationQuoteIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeCapacityReservationDateChangeQuotes(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeCapacityReservationDateChangeQuotes"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -68932,14 +69149,17 @@ func TestUpdateRequestSnapshot_ModifyAvailabilityZoneGroup(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ModifyCapacityReservation(t *testing.T) {
 	input := &ModifyCapacityReservationInput{
-		CapacityReservationId: ptr.String("__CapacityReservationId__"),
-		InstanceCount:         ptr.Int32(1),
-		EndDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		EndDateType:           types.EndDateType("unlimited"),
-		Accept:                ptr.Bool(true),
-		DryRun:                ptr.Bool(true),
-		AdditionalInfo:        ptr.String("__AdditionalInfo__"),
-		InstanceMatchCriteria: types.InstanceMatchCriteria("open"),
+		CapacityReservationId:   ptr.String("__CapacityReservationId__"),
+		InstanceCount:           ptr.Int32(1),
+		EndDate:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDateType:             types.EndDateType("unlimited"),
+		Accept:                  ptr.Bool(true),
+		DryRun:                  ptr.Bool(true),
+		AdditionalInfo:          ptr.String("__AdditionalInfo__"),
+		InstanceMatchCriteria:   types.InstanceMatchCriteria("open"),
+		AcceptModificationTerms: ptr.Bool(true),
+		StartDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		QuoteId:                 ptr.String("__QuoteId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

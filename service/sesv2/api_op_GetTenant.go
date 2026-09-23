@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetTenantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTenantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTenantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTenantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TenantName != nil {
+		s.WriteString(schemas.GetTenantRequest_TenantName, *v.TenantName)
+	}
+}
+
 // Information about a specific tenant.
 type GetTenantOutput struct {
 
@@ -48,13 +62,34 @@ type GetTenantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTenantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTenantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTenantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Tenant != nil {
+		s.WriteStruct(schemas.GetTenantResponse_Tenant)
+		v.Tenant.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTenantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTenantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTenantResponse_Tenant:
+			v.Tenant = &types.Tenant{}
+			return v.Tenant.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTenantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTenant{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTenant, schemas.GetTenantRequest, schemas.GetTenantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTenant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTenant, schemas.GetTenantRequest, schemas.GetTenantResponse), output: &GetTenantOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

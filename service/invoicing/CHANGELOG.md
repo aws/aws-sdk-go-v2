@@ -1,3 +1,7 @@
+# v1.20.0 (2026-09-21)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.19.0 (2026-09-11)
 
 * **Feature**: Add ListProcurementPortals and ListProcurementPortalSuppliers APIs to retrieve AWS-supported 3rd party procurement portals and their suppliers for e-invoice delivery and purchase order retrieval.

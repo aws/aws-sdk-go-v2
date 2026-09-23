@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListDbServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDbServersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDbServersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDbServersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudExadataInfrastructureId != nil {
+		s.WriteString(schemas.ListDbServersInput_cloudExadataInfrastructureId, *v.CloudExadataInfrastructureId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDbServersInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDbServersInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListDbServersOutput struct {
 
 	// The list of database servers along with their properties.
@@ -63,13 +83,35 @@ type ListDbServersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDbServersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDbServersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDbServersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDbServerList(s, schemas.ListDbServersOutput_dbServers, v.DbServers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDbServersOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDbServersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDbServersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDbServersOutput_dbServers:
+			return deserializeDbServerList(d, schemas.ListDbServersOutput_dbServers, &v.DbServers)
+		case schemas.ListDbServersOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDbServersOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDbServersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDbServers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbServers, schemas.ListDbServersInput, schemas.ListDbServersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDbServers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbServers, schemas.ListDbServersInput, schemas.ListDbServersOutput), output: &ListDbServersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

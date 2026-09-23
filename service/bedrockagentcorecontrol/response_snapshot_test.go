@@ -2452,6 +2452,32 @@ func TestCheckResponseSnapshot_CreateHarness(t *testing.T) {
 					},
 				},
 			},
+			Hooks: []types.HarnessHook{
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
+						},
+					},
+				},
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
+						},
+					},
+				},
+			},
 			MaxIterations:  ptr.Int32(1),
 			MaxTokens:      ptr.Int32(1),
 			TimeoutSeconds: ptr.Int32(1),
@@ -2666,6 +2692,32 @@ func TestCheckResponseSnapshot_CreateHarness(t *testing.T) {
 			Config: &types.HarnessTruncationStrategyConfigurationMemberSlidingWindow{
 				Value: types.HarnessSlidingWindowConfiguration{
 					MessagesCount: ptr.Int32(1),
+				},
+			},
+		},
+		Hooks: []types.HarnessHook{
+			&types.HarnessHookMemberBeforeInvocation{
+				Value: types.HarnessBeforeInvocationHook{
+					Name: ptr.String("__Name__"),
+					Target: &types.HarnessHookTargetMemberLambda{
+						Value: types.HarnessHookLambdaTarget{
+							Arn:            ptr.String("__Arn__"),
+							TimeoutSeconds: ptr.Int32(1),
+							FailureMode:    types.HarnessHookFailureMode("allow"),
+						},
+					},
+				},
+			},
+			&types.HarnessHookMemberBeforeInvocation{
+				Value: types.HarnessBeforeInvocationHook{
+					Name: ptr.String("__Name__"),
+					Target: &types.HarnessHookTargetMemberLambda{
+						Value: types.HarnessHookLambdaTarget{
+							Arn:            ptr.String("__Arn__"),
+							TimeoutSeconds: ptr.Int32(1),
+							FailureMode:    types.HarnessHookFailureMode("allow"),
+						},
+					},
 				},
 			},
 		},
@@ -4788,6 +4840,32 @@ func TestCheckResponseSnapshot_DeleteHarness(t *testing.T) {
 					},
 				},
 			},
+			Hooks: []types.HarnessHook{
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
+						},
+					},
+				},
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
+						},
+					},
+				},
+			},
 			MaxIterations:  ptr.Int32(1),
 			MaxTokens:      ptr.Int32(1),
 			TimeoutSeconds: ptr.Int32(1),
@@ -6738,6 +6816,32 @@ func TestCheckResponseSnapshot_GetHarness(t *testing.T) {
 							TopK:           ptr.Int32(1),
 							RelevanceScore: ptr.Float32(1.0),
 							StrategyId:     ptr.String("__StrategyId__"),
+						},
+					},
+				},
+			},
+			Hooks: []types.HarnessHook{
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
+						},
+					},
+				},
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
 						},
 					},
 				},
@@ -12221,6 +12325,32 @@ func TestCheckResponseSnapshot_UpdateHarness(t *testing.T) {
 					},
 				},
 			},
+			Hooks: []types.HarnessHook{
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
+						},
+					},
+				},
+				&types.HarnessHookMemberBeforeInvocation{
+					Value: types.HarnessBeforeInvocationHook{
+						Name: ptr.String("__Name__"),
+						Target: &types.HarnessHookTargetMemberLambda{
+							Value: types.HarnessHookLambdaTarget{
+								Arn:            ptr.String("__Arn__"),
+								TimeoutSeconds: ptr.Int32(1),
+								FailureMode:    types.HarnessHookFailureMode("allow"),
+							},
+						},
+					},
+				},
+			},
 			MaxIterations:  ptr.Int32(1),
 			MaxTokens:      ptr.Int32(1),
 			TimeoutSeconds: ptr.Int32(1),
@@ -12441,6 +12571,32 @@ func TestCheckResponseSnapshot_UpdateHarness(t *testing.T) {
 			Config: &types.HarnessTruncationStrategyConfigurationMemberSlidingWindow{
 				Value: types.HarnessSlidingWindowConfiguration{
 					MessagesCount: ptr.Int32(1),
+				},
+			},
+		},
+		Hooks: []types.HarnessHook{
+			&types.HarnessHookMemberBeforeInvocation{
+				Value: types.HarnessBeforeInvocationHook{
+					Name: ptr.String("__Name__"),
+					Target: &types.HarnessHookTargetMemberLambda{
+						Value: types.HarnessHookLambdaTarget{
+							Arn:            ptr.String("__Arn__"),
+							TimeoutSeconds: ptr.Int32(1),
+							FailureMode:    types.HarnessHookFailureMode("allow"),
+						},
+					},
+				},
+			},
+			&types.HarnessHookMemberBeforeInvocation{
+				Value: types.HarnessBeforeInvocationHook{
+					Name: ptr.String("__Name__"),
+					Target: &types.HarnessHookTargetMemberLambda{
+						Value: types.HarnessHookLambdaTarget{
+							Arn:            ptr.String("__Arn__"),
+							TimeoutSeconds: ptr.Int32(1),
+							FailureMode:    types.HarnessHookFailureMode("allow"),
+						},
+					},
 				},
 			},
 		},

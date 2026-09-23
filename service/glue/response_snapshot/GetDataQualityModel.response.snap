@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetDataQualityModel
+
+{"CompletedOn":946684800,"FailureReason":"__FailureReason__","StartedOn":946684800,"Status":"RUNNING"}

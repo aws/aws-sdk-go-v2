@@ -5,7 +5,9 @@ package amplifyuibuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,54 @@ type UpdateComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateComponentRequest_appId, *v.AppId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateComponentRequest_clientToken, *v.ClientToken)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.UpdateComponentRequest_environmentName, *v.EnvironmentName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateComponentRequest_id, *v.Id)
+	}
+	if v.UpdatedComponent != nil {
+		s.WriteStruct(schemas.UpdateComponentRequest_updatedComponent)
+		v.UpdatedComponent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateComponentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateComponentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateComponentRequest_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.UpdateComponentRequest_appId, v.AppId)
+		case schemas.UpdateComponentRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateComponentRequest_clientToken, v.ClientToken)
+		case schemas.UpdateComponentRequest_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.UpdateComponentRequest_environmentName, v.EnvironmentName)
+		case schemas.UpdateComponentRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateComponentRequest_id, v.Id)
+		case schemas.UpdateComponentRequest_updatedComponent:
+			v.UpdatedComponent = &types.UpdateComponentData{}
+			return v.UpdatedComponent.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type UpdateComponentOutput struct {
 
 	// Describes the configuration of the updated component.
@@ -64,13 +114,34 @@ type UpdateComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entity != nil {
+		s.WriteStruct(schemas.UpdateComponentResponse_entity)
+		v.Entity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateComponentResponse_entity:
+			v.Entity = &types.Component{}
+			return v.Entity.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateComponent, schemas.UpdateComponentRequest, schemas.UpdateComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateComponent, schemas.UpdateComponentRequest, schemas.UpdateComponentResponse), output: &UpdateComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

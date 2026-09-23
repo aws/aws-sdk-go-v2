@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,29 @@ type UpdateFirewallEncryptionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFirewallEncryptionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFirewallEncryptionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFirewallEncryptionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFirewallEncryptionConfigurationRequest_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.UpdateFirewallEncryptionConfigurationRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.UpdateFirewallEncryptionConfigurationRequest_FirewallName, *v.FirewallName)
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateFirewallEncryptionConfigurationRequest_UpdateToken, *v.UpdateToken)
+	}
+}
+
 type UpdateFirewallEncryptionConfigurationOutput struct {
 
 	// A complex type that contains optional Amazon Web Services Key Management
@@ -105,13 +130,52 @@ type UpdateFirewallEncryptionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFirewallEncryptionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFirewallEncryptionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFirewallEncryptionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFirewallEncryptionConfigurationResponse_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.UpdateFirewallEncryptionConfigurationResponse_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.UpdateFirewallEncryptionConfigurationResponse_FirewallName, *v.FirewallName)
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateFirewallEncryptionConfigurationResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *UpdateFirewallEncryptionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFirewallEncryptionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFirewallEncryptionConfigurationResponse_EncryptionConfiguration:
+			v.EncryptionConfiguration = &types.EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.UpdateFirewallEncryptionConfigurationResponse_FirewallArn:
+			v.FirewallArn = new(string)
+			return d.ReadString(schemas.UpdateFirewallEncryptionConfigurationResponse_FirewallArn, v.FirewallArn)
+		case schemas.UpdateFirewallEncryptionConfigurationResponse_FirewallName:
+			v.FirewallName = new(string)
+			return d.ReadString(schemas.UpdateFirewallEncryptionConfigurationResponse_FirewallName, v.FirewallName)
+		case schemas.UpdateFirewallEncryptionConfigurationResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.UpdateFirewallEncryptionConfigurationResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFirewallEncryptionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateFirewallEncryptionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFirewallEncryptionConfiguration, schemas.UpdateFirewallEncryptionConfigurationRequest, schemas.UpdateFirewallEncryptionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateFirewallEncryptionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFirewallEncryptionConfiguration, schemas.UpdateFirewallEncryptionConfigurationRequest, schemas.UpdateFirewallEncryptionConfigurationResponse), output: &UpdateFirewallEncryptionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

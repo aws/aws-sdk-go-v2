@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -121,6 +123,63 @@ type CreateSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Command != nil {
+		s.WriteStruct(schemas.CreateSessionRequest_Command)
+		v.Command.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Connections != nil {
+		s.WriteStruct(schemas.CreateSessionRequest_Connections)
+		v.Connections.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeOrchestrationArgumentsMap(s, schemas.CreateSessionRequest_DefaultArguments, v.DefaultArguments)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSessionRequest_Description, *v.Description)
+	}
+	if v.GlueVersion != nil {
+		s.WriteString(schemas.CreateSessionRequest_GlueVersion, *v.GlueVersion)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateSessionRequest_Id, *v.Id)
+	}
+	if v.IdleTimeout != nil {
+		s.WriteInt32(schemas.CreateSessionRequest_IdleTimeout, *v.IdleTimeout)
+	}
+	if v.MaxCapacity != nil {
+		s.WriteFloat64(schemas.CreateSessionRequest_MaxCapacity, *v.MaxCapacity)
+	}
+	if v.NumberOfWorkers != nil {
+		s.WriteInt32(schemas.CreateSessionRequest_NumberOfWorkers, *v.NumberOfWorkers)
+	}
+	if v.RequestOrigin != nil {
+		s.WriteString(schemas.CreateSessionRequest_RequestOrigin, *v.RequestOrigin)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.CreateSessionRequest_Role, *v.Role)
+	}
+	if v.SecurityConfiguration != nil {
+		s.WriteString(schemas.CreateSessionRequest_SecurityConfiguration, *v.SecurityConfiguration)
+	}
+	if v.SessionType != "" {
+		s.WriteString(schemas.CreateSessionRequest_SessionType, string(v.SessionType))
+	}
+	serializeTagsMap(s, schemas.CreateSessionRequest_Tags, v.Tags)
+	if v.Timeout != nil {
+		s.WriteInt32(schemas.CreateSessionRequest_Timeout, *v.Timeout)
+	}
+	if v.WorkerType != "" {
+		s.WriteString(schemas.CreateSessionRequest_WorkerType, string(v.WorkerType))
+	}
+}
+
 type CreateSessionOutput struct {
 
 	// Returns the session object in the response.
@@ -132,13 +191,34 @@ type CreateSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Session != nil {
+		s.WriteStruct(schemas.CreateSessionResponse_Session)
+		v.Session.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSessionResponse_Session:
+			v.Session = &types.Session{}
+			return v.Session.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSession, schemas.CreateSessionRequest, schemas.CreateSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSession, schemas.CreateSessionRequest, schemas.CreateSessionResponse), output: &CreateSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+404
+Content-Type: application/json
+
+{"__type":"QuickSightUserNotFoundException","Message":"__Message__","RequestId":"__RequestId__"}

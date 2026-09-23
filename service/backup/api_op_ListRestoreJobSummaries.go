@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,6 +88,33 @@ type ListRestoreJobSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRestoreJobSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRestoreJobSummariesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRestoreJobSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListRestoreJobSummariesInput_AccountId, *v.AccountId)
+	}
+	if v.AggregationPeriod != "" {
+		s.WriteString(schemas.ListRestoreJobSummariesInput_AggregationPeriod, string(v.AggregationPeriod))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRestoreJobSummariesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRestoreJobSummariesInput_NextToken, *v.NextToken)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ListRestoreJobSummariesInput_ResourceType, *v.ResourceType)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListRestoreJobSummariesInput_State, string(v.State))
+	}
+}
+
 type ListRestoreJobSummariesOutput struct {
 
 	// The period for the returned results.
@@ -113,13 +142,41 @@ type ListRestoreJobSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRestoreJobSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRestoreJobSummariesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRestoreJobSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationPeriod != nil {
+		s.WriteString(schemas.ListRestoreJobSummariesOutput_AggregationPeriod, *v.AggregationPeriod)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRestoreJobSummariesOutput_NextToken, *v.NextToken)
+	}
+	serializeRestoreJobSummaryList(s, schemas.ListRestoreJobSummariesOutput_RestoreJobSummaries, v.RestoreJobSummaries)
+}
+func (v *ListRestoreJobSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRestoreJobSummariesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRestoreJobSummariesOutput_AggregationPeriod:
+			v.AggregationPeriod = new(string)
+			return d.ReadString(schemas.ListRestoreJobSummariesOutput_AggregationPeriod, v.AggregationPeriod)
+		case schemas.ListRestoreJobSummariesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRestoreJobSummariesOutput_NextToken, v.NextToken)
+		case schemas.ListRestoreJobSummariesOutput_RestoreJobSummaries:
+			return deserializeRestoreJobSummaryList(d, schemas.ListRestoreJobSummariesOutput_RestoreJobSummaries, &v.RestoreJobSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRestoreJobSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRestoreJobSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRestoreJobSummaries, schemas.ListRestoreJobSummariesInput, schemas.ListRestoreJobSummariesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRestoreJobSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRestoreJobSummaries, schemas.ListRestoreJobSummariesInput, schemas.ListRestoreJobSummariesOutput), output: &ListRestoreJobSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

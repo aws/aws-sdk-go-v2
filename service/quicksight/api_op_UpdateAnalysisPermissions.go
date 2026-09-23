@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,23 @@ type UpdateAnalysisPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnalysisPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnalysisPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnalysisPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.UpdateAnalysisPermissionsRequest_AnalysisId, *v.AnalysisId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateAnalysisPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeUpdateResourcePermissionList(s, schemas.UpdateAnalysisPermissionsRequest_GrantPermissions, v.GrantPermissions)
+	serializeUpdateResourcePermissionList(s, schemas.UpdateAnalysisPermissionsRequest_RevokePermissions, v.RevokePermissions)
+}
+
 type UpdateAnalysisPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the analysis that you updated.
@@ -74,13 +93,52 @@ type UpdateAnalysisPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnalysisPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnalysisPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnalysisPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisArn != nil {
+		s.WriteString(schemas.UpdateAnalysisPermissionsResponse_AnalysisArn, *v.AnalysisArn)
+	}
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.UpdateAnalysisPermissionsResponse_AnalysisId, *v.AnalysisId)
+	}
+	serializeUpdateResourcePermissionList(s, schemas.UpdateAnalysisPermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateAnalysisPermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateAnalysisPermissionsResponse_Status, v.Status)
+	}
+}
+func (v *UpdateAnalysisPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAnalysisPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAnalysisPermissionsResponse_AnalysisArn:
+			v.AnalysisArn = new(string)
+			return d.ReadString(schemas.UpdateAnalysisPermissionsResponse_AnalysisArn, v.AnalysisArn)
+		case schemas.UpdateAnalysisPermissionsResponse_AnalysisId:
+			v.AnalysisId = new(string)
+			return d.ReadString(schemas.UpdateAnalysisPermissionsResponse_AnalysisId, v.AnalysisId)
+		case schemas.UpdateAnalysisPermissionsResponse_Permissions:
+			return deserializeUpdateResourcePermissionList(d, schemas.UpdateAnalysisPermissionsResponse_Permissions, &v.Permissions)
+		case schemas.UpdateAnalysisPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateAnalysisPermissionsResponse_RequestId, v.RequestId)
+		case schemas.UpdateAnalysisPermissionsResponse_Status:
+			return d.ReadInt32(schemas.UpdateAnalysisPermissionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAnalysisPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAnalysisPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnalysisPermissions, schemas.UpdateAnalysisPermissionsRequest, schemas.UpdateAnalysisPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAnalysisPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnalysisPermissions, schemas.UpdateAnalysisPermissionsRequest, schemas.UpdateAnalysisPermissionsResponse), output: &UpdateAnalysisPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

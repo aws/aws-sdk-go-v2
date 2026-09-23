@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSIdentityStore.DescribeGroup
+
+{"CreatedAt":946684800,"CreatedBy":"__CreatedBy__","Description":"__Description__","DisplayName":"__DisplayName__","ExternalIds":[{"Id":"__Id__","Issuer":"__Issuer__"},{"Id":"__Id__","Issuer":"__Issuer__"}],"GroupId":"__GroupId__","IdentityStoreId":"__IdentityStoreId__","UpdatedAt":946684800,"UpdatedBy":"__UpdatedBy__"}

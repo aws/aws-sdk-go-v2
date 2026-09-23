@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DescribeAppPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.DescribeAppPermissionsRequest_AppId, *v.AppId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeAppPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+}
+
 type DescribeAppPermissionsOutput struct {
 
 	// The ID of the app.
@@ -59,13 +76,47 @@ type DescribeAppPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.DescribeAppPermissionsResponse_AppId, *v.AppId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeAppPermissionsResponse_Arn, *v.Arn)
+	}
+	serializeResourcePermissionList(s, schemas.DescribeAppPermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeAppPermissionsResponse_RequestId, *v.RequestId)
+	}
+}
+func (v *DescribeAppPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppPermissionsResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.DescribeAppPermissionsResponse_AppId, v.AppId)
+		case schemas.DescribeAppPermissionsResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeAppPermissionsResponse_Arn, v.Arn)
+		case schemas.DescribeAppPermissionsResponse_Permissions:
+			return deserializeResourcePermissionList(d, schemas.DescribeAppPermissionsResponse_Permissions, &v.Permissions)
+		case schemas.DescribeAppPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeAppPermissionsResponse_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAppPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAppPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppPermissions, schemas.DescribeAppPermissionsRequest, schemas.DescribeAppPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAppPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppPermissions, schemas.DescribeAppPermissionsRequest, schemas.DescribeAppPermissionsResponse), output: &DescribeAppPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

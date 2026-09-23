@@ -4,7 +4,9 @@ package sagemakermetrics
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakermetrics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakermetrics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,19 @@ type BatchPutMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRawMetricDataList(s, schemas.BatchPutMetricsRequest_MetricData, v.MetricData)
+	if v.TrialComponentName != nil {
+		s.WriteString(schemas.BatchPutMetricsRequest_TrialComponentName, *v.TrialComponentName)
+	}
+}
+
 type BatchPutMetricsOutput struct {
 
 	// Lists any errors that occur when inserting metric data.
@@ -52,13 +67,29 @@ type BatchPutMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchPutMetricsErrorList(s, schemas.BatchPutMetricsResponse_Errors, v.Errors)
+}
+func (v *BatchPutMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutMetricsResponse_Errors:
+			return deserializeBatchPutMetricsErrorList(d, schemas.BatchPutMetricsResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutMetrics, schemas.BatchPutMetricsRequest, schemas.BatchPutMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutMetrics, schemas.BatchPutMetricsRequest, schemas.BatchPutMetricsResponse), output: &BatchPutMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

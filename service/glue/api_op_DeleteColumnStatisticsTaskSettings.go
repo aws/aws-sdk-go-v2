@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteColumnStatisticsTaskSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteColumnStatisticsTaskSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteColumnStatisticsTaskSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteColumnStatisticsTaskSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.DeleteColumnStatisticsTaskSettingsRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.DeleteColumnStatisticsTaskSettingsRequest_TableName, *v.TableName)
+	}
+}
+
 type DeleteColumnStatisticsTaskSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteColumnStatisticsTaskSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteColumnStatisticsTaskSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteColumnStatisticsTaskSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteColumnStatisticsTaskSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteColumnStatisticsTaskSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteColumnStatisticsTaskSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteColumnStatisticsTaskSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteColumnStatisticsTaskSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteColumnStatisticsTaskSettings, schemas.DeleteColumnStatisticsTaskSettingsRequest, schemas.DeleteColumnStatisticsTaskSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteColumnStatisticsTaskSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteColumnStatisticsTaskSettings, schemas.DeleteColumnStatisticsTaskSettingsRequest, schemas.DeleteColumnStatisticsTaskSettingsResponse), output: &DeleteColumnStatisticsTaskSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

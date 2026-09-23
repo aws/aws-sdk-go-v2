@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,41 @@ type CreateRemoteAccessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRemoteAccessSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRemoteAccessSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRemoteAccessSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.CreateRemoteAccessSessionRequest_appArn, *v.AppArn)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.CreateRemoteAccessSessionRequest_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceArn != nil {
+		s.WriteString(schemas.CreateRemoteAccessSessionRequest_deviceArn, *v.DeviceArn)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.CreateRemoteAccessSessionRequest_instanceArn, *v.InstanceArn)
+	}
+	if v.InteractionMode != "" {
+		s.WriteString(schemas.CreateRemoteAccessSessionRequest_interactionMode, string(v.InteractionMode))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRemoteAccessSessionRequest_name, *v.Name)
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.CreateRemoteAccessSessionRequest_projectArn, *v.ProjectArn)
+	}
+	if v.SkipAppResign != nil {
+		s.WriteBool(schemas.CreateRemoteAccessSessionRequest_skipAppResign, *v.SkipAppResign)
+	}
+}
+
 // Represents the server response from a request to create a remote access session.
 type CreateRemoteAccessSessionOutput struct {
 
@@ -82,13 +119,34 @@ type CreateRemoteAccessSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRemoteAccessSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRemoteAccessSessionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRemoteAccessSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RemoteAccessSession != nil {
+		s.WriteStruct(schemas.CreateRemoteAccessSessionResult_remoteAccessSession)
+		v.RemoteAccessSession.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRemoteAccessSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRemoteAccessSessionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRemoteAccessSessionResult_remoteAccessSession:
+			v.RemoteAccessSession = &types.RemoteAccessSession{}
+			return v.RemoteAccessSession.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRemoteAccessSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRemoteAccessSession, schemas.CreateRemoteAccessSessionRequest, schemas.CreateRemoteAccessSessionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRemoteAccessSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRemoteAccessSession, schemas.CreateRemoteAccessSessionRequest, schemas.CreateRemoteAccessSessionResult), output: &CreateRemoteAccessSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

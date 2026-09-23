@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListAutonomousDatabaseClonesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutonomousDatabaseClonesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutonomousDatabaseClonesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutonomousDatabaseClonesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.ListAutonomousDatabaseClonesInput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutonomousDatabaseClonesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutonomousDatabaseClonesInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListAutonomousDatabaseClonesOutput struct {
 
 	// The list of Autonomous Database clones along with their properties.
@@ -61,13 +81,35 @@ type ListAutonomousDatabaseClonesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutonomousDatabaseClonesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutonomousDatabaseClonesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutonomousDatabaseClonesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutonomousDatabaseList(s, schemas.ListAutonomousDatabaseClonesOutput_autonomousDatabaseClones, v.AutonomousDatabaseClones)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutonomousDatabaseClonesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAutonomousDatabaseClonesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutonomousDatabaseClonesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutonomousDatabaseClonesOutput_autonomousDatabaseClones:
+			return deserializeAutonomousDatabaseList(d, schemas.ListAutonomousDatabaseClonesOutput_autonomousDatabaseClones, &v.AutonomousDatabaseClones)
+		case schemas.ListAutonomousDatabaseClonesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutonomousDatabaseClonesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutonomousDatabaseClonesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAutonomousDatabaseClones{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutonomousDatabaseClones, schemas.ListAutonomousDatabaseClonesInput, schemas.ListAutonomousDatabaseClonesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAutonomousDatabaseClones{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutonomousDatabaseClones, schemas.ListAutonomousDatabaseClonesInput, schemas.ListAutonomousDatabaseClonesOutput), output: &ListAutonomousDatabaseClonesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

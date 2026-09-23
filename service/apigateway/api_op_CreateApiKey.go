@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,35 @@ type CreateApiKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApiKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApiKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApiKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerId != nil {
+		s.WriteString(schemas.CreateApiKeyRequest_customerId, *v.CustomerId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateApiKeyRequest_description, *v.Description)
+	}
+	if v.Enabled != false {
+		s.WriteBool(schemas.CreateApiKeyRequest_enabled, v.Enabled)
+	}
+	if v.GenerateDistinctId != false {
+		s.WriteBool(schemas.CreateApiKeyRequest_generateDistinctId, v.GenerateDistinctId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateApiKeyRequest_name, *v.Name)
+	}
+	serializeListOfStageKeys(s, schemas.CreateApiKeyRequest_stageKeys, v.StageKeys)
+	serializeMapOfStringToString(s, schemas.CreateApiKeyRequest_tags, v.Tags)
+	if v.Value != nil {
+		s.WriteString(schemas.CreateApiKeyRequest_value, *v.Value)
+	}
+}
+
 // A resource that can be distributed to callers for executing Method resources
 // that require an API key. API keys can be mapped to any Stage on any RestApi,
 // which indicates that the callers with the API key can make requests to that
@@ -102,13 +133,79 @@ type CreateApiKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApiKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApiKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApiKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.ApiKey_createdDate, *v.CreatedDate)
+	}
+	if v.CustomerId != nil {
+		s.WriteString(schemas.ApiKey_customerId, *v.CustomerId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ApiKey_description, *v.Description)
+	}
+	if v.Enabled != false {
+		s.WriteBool(schemas.ApiKey_enabled, v.Enabled)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ApiKey_id, *v.Id)
+	}
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.ApiKey_lastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ApiKey_name, *v.Name)
+	}
+	serializeListOfString(s, schemas.ApiKey_stageKeys, v.StageKeys)
+	serializeMapOfStringToString(s, schemas.ApiKey_tags, v.Tags)
+	if v.Value != nil {
+		s.WriteString(schemas.ApiKey_value, *v.Value)
+	}
+}
+func (v *CreateApiKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApiKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApiKey_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.ApiKey_createdDate, v.CreatedDate)
+		case schemas.ApiKey_customerId:
+			v.CustomerId = new(string)
+			return d.ReadString(schemas.ApiKey_customerId, v.CustomerId)
+		case schemas.ApiKey_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ApiKey_description, v.Description)
+		case schemas.ApiKey_enabled:
+			return d.ReadBool(schemas.ApiKey_enabled, &v.Enabled)
+		case schemas.ApiKey_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ApiKey_id, v.Id)
+		case schemas.ApiKey_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.ApiKey_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.ApiKey_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ApiKey_name, v.Name)
+		case schemas.ApiKey_stageKeys:
+			return deserializeListOfString(d, schemas.ApiKey_stageKeys, &v.StageKeys)
+		case schemas.ApiKey_tags:
+			return deserializeMapOfStringToString(d, schemas.ApiKey_tags, &v.Tags)
+		case schemas.ApiKey_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ApiKey_value, v.Value)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApiKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApiKey, schemas.CreateApiKeyRequest, schemas.ApiKey)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApiKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApiKey, schemas.CreateApiKeyRequest, schemas.ApiKey), output: &CreateApiKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

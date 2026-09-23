@@ -2923,6 +2923,12 @@
                         "smithy.api#documentation": "<p>The identifier of the identity store that is connected to the instance of IAM Identity Center.</p>"
                     }
                 },
+                "IdentityStoreArn": {
+                    "target": "com.amazonaws.ssoadmin#InstanceIdentityStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the identity store that is connected to the instance of IAM Identity Center.</p>"
+                    }
+                },
                 "OwnerAccountId": {
                     "target": "com.amazonaws.ssoadmin#AccountId",
                     "traits": {
@@ -2951,6 +2957,18 @@
                     "target": "com.amazonaws.ssoadmin#Reason",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides additional context about the current status of the IAM Identity Center instance. This field is particularly useful when an instance is in a non-ACTIVE state, such as CREATE_FAILED. When an instance fails to create or update, this field contains information about the cause, which may include issues with KMS key configuration, permission problems with the specified KMS key, or service-related errors. </p>"
+                    }
+                },
+                "PrimaryRegion": {
+                    "target": "com.amazonaws.ssoadmin#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary Region where the IAM Identity Center instance was originally enabled. The primary Region cannot be removed.</p>"
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.ssoadmin#RegionMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Regions enabled in the IAM Identity Center instance, including Regions with ACTIVE, ADDING, or REMOVING status.</p>"
                     }
                 },
                 "EncryptionConfigurationDetails": {
@@ -4145,6 +4163,16 @@
                 "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
             }
         },
+        "com.amazonaws.ssoadmin#InstanceIdentityStoreArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 62,
+                    "max": 93
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:identitystore::\\d{12}:identitystore/(d-[0-9a-f]{10}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$"
+            }
+        },
         "com.amazonaws.ssoadmin#InstanceList": {
             "type": "list",
             "member": {
@@ -4170,6 +4198,12 @@
                     "target": "com.amazonaws.ssoadmin#Id",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the identity store that is connected to the Identity Center instance.</p>"
+                    }
+                },
+                "IdentityStoreArn": {
+                    "target": "com.amazonaws.ssoadmin#InstanceIdentityStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the identity store that is connected to the Identity Center instance.</p>"
                     }
                 },
                 "OwnerAccountId": {

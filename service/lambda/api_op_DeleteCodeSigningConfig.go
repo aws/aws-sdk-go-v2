@@ -4,6 +4,8 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteCodeSigningConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCodeSigningConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCodeSigningConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCodeSigningConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeSigningConfigArn != nil {
+		s.WriteString(schemas.DeleteCodeSigningConfigRequest_CodeSigningConfigArn, *v.CodeSigningConfigArn)
+	}
+}
+
 type DeleteCodeSigningConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteCodeSigningConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCodeSigningConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCodeSigningConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCodeSigningConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCodeSigningConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCodeSigningConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCodeSigningConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCodeSigningConfig, schemas.DeleteCodeSigningConfigRequest, schemas.DeleteCodeSigningConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCodeSigningConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCodeSigningConfig, schemas.DeleteCodeSigningConfigRequest, schemas.DeleteCodeSigningConfigResponse), output: &DeleteCodeSigningConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

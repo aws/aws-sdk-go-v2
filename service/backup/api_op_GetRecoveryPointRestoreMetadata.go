@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type GetRecoveryPointRestoreMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecoveryPointRestoreMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecoveryPointRestoreMetadataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecoveryPointRestoreMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultAccountId != nil {
+		s.WriteString(schemas.GetRecoveryPointRestoreMetadataInput_BackupVaultAccountId, *v.BackupVaultAccountId)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.GetRecoveryPointRestoreMetadataInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.GetRecoveryPointRestoreMetadataInput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+}
+
 type GetRecoveryPointRestoreMetadataOutput struct {
 
 	// An ARN that uniquely identifies a backup vault; for example,
@@ -71,13 +91,47 @@ type GetRecoveryPointRestoreMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecoveryPointRestoreMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecoveryPointRestoreMetadataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecoveryPointRestoreMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.GetRecoveryPointRestoreMetadataOutput_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.GetRecoveryPointRestoreMetadataOutput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.GetRecoveryPointRestoreMetadataOutput_ResourceType, *v.ResourceType)
+	}
+	serializeMetadata(s, schemas.GetRecoveryPointRestoreMetadataOutput_RestoreMetadata, v.RestoreMetadata)
+}
+func (v *GetRecoveryPointRestoreMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecoveryPointRestoreMetadataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecoveryPointRestoreMetadataOutput_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.GetRecoveryPointRestoreMetadataOutput_BackupVaultArn, v.BackupVaultArn)
+		case schemas.GetRecoveryPointRestoreMetadataOutput_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.GetRecoveryPointRestoreMetadataOutput_RecoveryPointArn, v.RecoveryPointArn)
+		case schemas.GetRecoveryPointRestoreMetadataOutput_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.GetRecoveryPointRestoreMetadataOutput_ResourceType, v.ResourceType)
+		case schemas.GetRecoveryPointRestoreMetadataOutput_RestoreMetadata:
+			return deserializeMetadata(d, schemas.GetRecoveryPointRestoreMetadataOutput_RestoreMetadata, &v.RestoreMetadata)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecoveryPointRestoreMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRecoveryPointRestoreMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecoveryPointRestoreMetadata, schemas.GetRecoveryPointRestoreMetadataInput, schemas.GetRecoveryPointRestoreMetadataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRecoveryPointRestoreMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecoveryPointRestoreMetadata, schemas.GetRecoveryPointRestoreMetadataInput, schemas.GetRecoveryPointRestoreMetadataOutput), output: &GetRecoveryPointRestoreMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

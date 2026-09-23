@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,38 @@ type ModifyDataMigrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDataMigrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDataMigrationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDataMigrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataMigrationIdentifier != nil {
+		s.WriteString(schemas.ModifyDataMigrationMessage_DataMigrationIdentifier, *v.DataMigrationIdentifier)
+	}
+	if v.DataMigrationName != nil {
+		s.WriteString(schemas.ModifyDataMigrationMessage_DataMigrationName, *v.DataMigrationName)
+	}
+	if v.DataMigrationType != "" {
+		s.WriteString(schemas.ModifyDataMigrationMessage_DataMigrationType, string(v.DataMigrationType))
+	}
+	if v.EnableCloudwatchLogs != nil {
+		s.WriteBool(schemas.ModifyDataMigrationMessage_EnableCloudwatchLogs, *v.EnableCloudwatchLogs)
+	}
+	if v.NumberOfJobs != nil {
+		s.WriteInt32(schemas.ModifyDataMigrationMessage_NumberOfJobs, *v.NumberOfJobs)
+	}
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.ModifyDataMigrationMessage_SelectionRules, *v.SelectionRules)
+	}
+	if v.ServiceAccessRoleArn != nil {
+		s.WriteString(schemas.ModifyDataMigrationMessage_ServiceAccessRoleArn, *v.ServiceAccessRoleArn)
+	}
+	serializeSourceDataSettings(s, schemas.ModifyDataMigrationMessage_SourceDataSettings, v.SourceDataSettings)
+	serializeTargetDataSettings(s, schemas.ModifyDataMigrationMessage_TargetDataSettings, v.TargetDataSettings)
+}
+
 type ModifyDataMigrationOutput struct {
 
 	// Information about the modified data migration.
@@ -71,13 +105,34 @@ type ModifyDataMigrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDataMigrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDataMigrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDataMigrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataMigration != nil {
+		s.WriteStruct(schemas.ModifyDataMigrationResponse_DataMigration)
+		v.DataMigration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyDataMigrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyDataMigrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyDataMigrationResponse_DataMigration:
+			v.DataMigration = &types.DataMigration{}
+			return v.DataMigration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyDataMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyDataMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDataMigration, schemas.ModifyDataMigrationMessage, schemas.ModifyDataMigrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyDataMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDataMigration, schemas.ModifyDataMigrationMessage, schemas.ModifyDataMigrationResponse), output: &ModifyDataMigrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

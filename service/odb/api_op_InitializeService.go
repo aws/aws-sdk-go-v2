@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type InitializeServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitializeServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitializeServiceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitializeServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseOciAwsSecretsManagerIntegration != "" {
+		s.WriteString(schemas.InitializeServiceInput_autonomousDatabaseOciAwsSecretsManagerIntegration, string(v.AutonomousDatabaseOciAwsSecretsManagerIntegration))
+	}
+	if v.OciIdentityDomain != nil {
+		s.WriteBool(schemas.InitializeServiceInput_ociIdentityDomain, *v.OciIdentityDomain)
+	}
+}
+
 type InitializeServiceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +61,26 @@ type InitializeServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitializeServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitializeServiceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitializeServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *InitializeServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InitializeServiceOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInitializeServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpInitializeService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitializeService, schemas.InitializeServiceInput, schemas.InitializeServiceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpInitializeService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitializeService, schemas.InitializeServiceInput, schemas.InitializeServiceOutput), output: &InitializeServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

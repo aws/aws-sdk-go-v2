@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,23 @@ type UpdateTemplatePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplatePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTemplatePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplatePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateTemplatePermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeUpdateResourcePermissionList(s, schemas.UpdateTemplatePermissionsRequest_GrantPermissions, v.GrantPermissions)
+	serializeUpdateResourcePermissionList(s, schemas.UpdateTemplatePermissionsRequest_RevokePermissions, v.RevokePermissions)
+	if v.TemplateId != nil {
+		s.WriteString(schemas.UpdateTemplatePermissionsRequest_TemplateId, *v.TemplateId)
+	}
+}
+
 type UpdateTemplatePermissionsOutput struct {
 
 	// A list of resource permissions to be set on the template.
@@ -68,13 +87,52 @@ type UpdateTemplatePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplatePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTemplatePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplatePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUpdateResourcePermissionList(s, schemas.UpdateTemplatePermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateTemplatePermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateTemplatePermissionsResponse_Status, v.Status)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.UpdateTemplatePermissionsResponse_TemplateArn, *v.TemplateArn)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.UpdateTemplatePermissionsResponse_TemplateId, *v.TemplateId)
+	}
+}
+func (v *UpdateTemplatePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTemplatePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTemplatePermissionsResponse_Permissions:
+			return deserializeUpdateResourcePermissionList(d, schemas.UpdateTemplatePermissionsResponse_Permissions, &v.Permissions)
+		case schemas.UpdateTemplatePermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateTemplatePermissionsResponse_RequestId, v.RequestId)
+		case schemas.UpdateTemplatePermissionsResponse_Status:
+			return d.ReadInt32(schemas.UpdateTemplatePermissionsResponse_Status, &v.Status)
+		case schemas.UpdateTemplatePermissionsResponse_TemplateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.UpdateTemplatePermissionsResponse_TemplateArn, v.TemplateArn)
+		case schemas.UpdateTemplatePermissionsResponse_TemplateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.UpdateTemplatePermissionsResponse_TemplateId, v.TemplateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTemplatePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTemplatePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplatePermissions, schemas.UpdateTemplatePermissionsRequest, schemas.UpdateTemplatePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTemplatePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplatePermissions, schemas.UpdateTemplatePermissionsRequest, schemas.UpdateTemplatePermissionsResponse), output: &UpdateTemplatePermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

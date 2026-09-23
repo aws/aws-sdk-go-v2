@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteApprovalPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApprovalPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApprovalPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApprovalPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyId != nil {
+		s.WriteString(schemas.DeleteApprovalPolicyRequest_PolicyId, *v.PolicyId)
+	}
+}
+
 type DeleteApprovalPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteApprovalPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApprovalPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApprovalPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApprovalPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteApprovalPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteApprovalPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteApprovalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteApprovalPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApprovalPolicy, schemas.DeleteApprovalPolicyRequest, schemas.DeleteApprovalPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteApprovalPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApprovalPolicy, schemas.DeleteApprovalPolicyRequest, schemas.DeleteApprovalPolicyResponse), output: &DeleteApprovalPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

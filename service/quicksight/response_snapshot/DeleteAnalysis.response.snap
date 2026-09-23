@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AnalysisId":"__AnalysisId__","Arn":"__Arn__","DeletionTime":946684800,"RequestId":"__RequestId__","Status":200}

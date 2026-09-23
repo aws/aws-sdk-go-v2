@@ -4,6 +4,8 @@ package amplifybackend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type CreateTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.CreateTokenRequest_AppId, *v.AppId)
+	}
+}
+
 type CreateTokenOutput struct {
 
 	// The app ID.
@@ -54,13 +68,50 @@ type CreateTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.CreateTokenResponse_AppId, *v.AppId)
+	}
+	if v.ChallengeCode != nil {
+		s.WriteString(schemas.CreateTokenResponse_ChallengeCode, *v.ChallengeCode)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.CreateTokenResponse_SessionId, *v.SessionId)
+	}
+	if v.Ttl != nil {
+		s.WriteString(schemas.CreateTokenResponse_Ttl, *v.Ttl)
+	}
+}
+func (v *CreateTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTokenResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.CreateTokenResponse_AppId, v.AppId)
+		case schemas.CreateTokenResponse_ChallengeCode:
+			v.ChallengeCode = new(string)
+			return d.ReadString(schemas.CreateTokenResponse_ChallengeCode, v.ChallengeCode)
+		case schemas.CreateTokenResponse_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.CreateTokenResponse_SessionId, v.SessionId)
+		case schemas.CreateTokenResponse_Ttl:
+			v.Ttl = new(string)
+			return d.ReadString(schemas.CreateTokenResponse_Ttl, v.Ttl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateToken, schemas.CreateTokenRequest, schemas.CreateTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateToken, schemas.CreateTokenRequest, schemas.CreateTokenResponse), output: &CreateTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

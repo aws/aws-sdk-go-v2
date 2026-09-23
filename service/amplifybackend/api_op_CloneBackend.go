@@ -4,6 +4,8 @@ package amplifybackend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type CloneBackendInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloneBackendInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloneBackendRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloneBackendInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.CloneBackendRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.CloneBackendRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.TargetEnvironmentName != nil {
+		s.WriteString(schemas.CloneBackendRequest_TargetEnvironmentName, *v.TargetEnvironmentName)
+	}
+}
+
 type CloneBackendOutput struct {
 
 	// The app ID.
@@ -70,13 +90,62 @@ type CloneBackendOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloneBackendOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloneBackendResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloneBackendOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.CloneBackendResponse_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.CloneBackendResponse_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.CloneBackendResponse_Error, *v.Error)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.CloneBackendResponse_JobId, *v.JobId)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.CloneBackendResponse_Operation, *v.Operation)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.CloneBackendResponse_Status, *v.Status)
+	}
+}
+func (v *CloneBackendOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloneBackendResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloneBackendResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.CloneBackendResponse_AppId, v.AppId)
+		case schemas.CloneBackendResponse_BackendEnvironmentName:
+			v.BackendEnvironmentName = new(string)
+			return d.ReadString(schemas.CloneBackendResponse_BackendEnvironmentName, v.BackendEnvironmentName)
+		case schemas.CloneBackendResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.CloneBackendResponse_Error, v.Error)
+		case schemas.CloneBackendResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CloneBackendResponse_JobId, v.JobId)
+		case schemas.CloneBackendResponse_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.CloneBackendResponse_Operation, v.Operation)
+		case schemas.CloneBackendResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.CloneBackendResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCloneBackendMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCloneBackend{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CloneBackend, schemas.CloneBackendRequest, schemas.CloneBackendResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCloneBackend{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CloneBackend, schemas.CloneBackendRequest, schemas.CloneBackendResponse), output: &CloneBackendOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

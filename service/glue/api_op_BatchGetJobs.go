@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,16 @@ type BatchGetJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobNameList(s, schemas.BatchGetJobsRequest_JobNames, v.JobNames)
+}
+
 type BatchGetJobsOutput struct {
 
 	// A list of job definitions.
@@ -52,13 +64,32 @@ type BatchGetJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobList(s, schemas.BatchGetJobsResponse_Jobs, v.Jobs)
+	serializeJobNameList(s, schemas.BatchGetJobsResponse_JobsNotFound, v.JobsNotFound)
+}
+func (v *BatchGetJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetJobsResponse_Jobs:
+			return deserializeJobList(d, schemas.BatchGetJobsResponse_Jobs, &v.Jobs)
+		case schemas.BatchGetJobsResponse_JobsNotFound:
+			return deserializeJobNameList(d, schemas.BatchGetJobsResponse_JobsNotFound, &v.JobsNotFound)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetJobs, schemas.BatchGetJobsRequest, schemas.BatchGetJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetJobs, schemas.BatchGetJobsRequest, schemas.BatchGetJobsResponse), output: &BatchGetJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

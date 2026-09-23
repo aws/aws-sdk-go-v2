@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,19 @@ type BatchDeleteConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.BatchDeleteConnectionRequest_CatalogId, *v.CatalogId)
+	}
+	serializeDeleteConnectionNameList(s, schemas.BatchDeleteConnectionRequest_ConnectionNameList, v.ConnectionNameList)
+}
+
 type BatchDeleteConnectionOutput struct {
 
 	// A map of the names of connections that were not successfully deleted to error
@@ -53,13 +68,32 @@ type BatchDeleteConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeErrorByName(s, schemas.BatchDeleteConnectionResponse_Errors, v.Errors)
+	serializeNameStringList(s, schemas.BatchDeleteConnectionResponse_Succeeded, v.Succeeded)
+}
+func (v *BatchDeleteConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteConnectionResponse_Errors:
+			return deserializeErrorByName(d, schemas.BatchDeleteConnectionResponse_Errors, &v.Errors)
+		case schemas.BatchDeleteConnectionResponse_Succeeded:
+			return deserializeNameStringList(d, schemas.BatchDeleteConnectionResponse_Succeeded, &v.Succeeded)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteConnection, schemas.BatchDeleteConnectionRequest, schemas.BatchDeleteConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDeleteConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteConnection, schemas.BatchDeleteConnectionRequest, schemas.BatchDeleteConnectionResponse), output: &BatchDeleteConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

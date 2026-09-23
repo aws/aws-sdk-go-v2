@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeBackupJobInput struct {
 	BackupJobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeBackupJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBackupJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBackupJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupJobId != nil {
+		s.WriteString(schemas.DescribeBackupJobInput_BackupJobId, *v.BackupJobId)
+	}
 }
 
 type DescribeBackupJobOutput struct {
@@ -232,13 +246,218 @@ type DescribeBackupJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBackupJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBackupJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBackupJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_AccountId, *v.AccountId)
+	}
+	if v.BackupJobId != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_BackupJobId, *v.BackupJobId)
+	}
+	serializeBackupOptions(s, schemas.DescribeBackupJobOutput_BackupOptions, v.BackupOptions)
+	if v.BackupSizeInBytes != nil {
+		s.WriteInt64(schemas.DescribeBackupJobOutput_BackupSizeInBytes, *v.BackupSizeInBytes)
+	}
+	if v.BackupType != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_BackupType, *v.BackupType)
+	}
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.BytesTransferred != nil {
+		s.WriteInt64(schemas.DescribeBackupJobOutput_BytesTransferred, *v.BytesTransferred)
+	}
+	serializeBackupJobChildJobsInState(s, schemas.DescribeBackupJobOutput_ChildJobsInState, v.ChildJobsInState)
+	if v.CompletionDate != nil {
+		s.WriteTime(schemas.DescribeBackupJobOutput_CompletionDate, *v.CompletionDate)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeBackupJobOutput_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.DescribeBackupJobOutput_CreationDate, *v.CreationDate)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.ExpectedCompletionDate != nil {
+		s.WriteTime(schemas.DescribeBackupJobOutput_ExpectedCompletionDate, *v.ExpectedCompletionDate)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.InitiationDate != nil {
+		s.WriteTime(schemas.DescribeBackupJobOutput_InitiationDate, *v.InitiationDate)
+	}
+	if v.IsEncrypted != false {
+		s.WriteBool(schemas.DescribeBackupJobOutput_IsEncrypted, v.IsEncrypted)
+	}
+	if v.IsParent != false {
+		s.WriteBool(schemas.DescribeBackupJobOutput_IsParent, v.IsParent)
+	}
+	if v.MessageCategory != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_MessageCategory, *v.MessageCategory)
+	}
+	if v.NumberOfChildJobs != nil {
+		s.WriteInt64(schemas.DescribeBackupJobOutput_NumberOfChildJobs, *v.NumberOfChildJobs)
+	}
+	if v.ParentJobId != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_ParentJobId, *v.ParentJobId)
+	}
+	if v.PercentDone != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_PercentDone, *v.PercentDone)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.RecoveryPointLifecycle != nil {
+		s.WriteStruct(schemas.DescribeBackupJobOutput_RecoveryPointLifecycle)
+		v.RecoveryPointLifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_ResourceName, *v.ResourceName)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_ResourceType, *v.ResourceType)
+	}
+	if v.StartBy != nil {
+		s.WriteTime(schemas.DescribeBackupJobOutput_StartBy, *v.StartBy)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeBackupJobOutput_State, string(v.State))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_StatusMessage, *v.StatusMessage)
+	}
+	if v.VaultLockState != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_VaultLockState, *v.VaultLockState)
+	}
+	if v.VaultType != nil {
+		s.WriteString(schemas.DescribeBackupJobOutput_VaultType, *v.VaultType)
+	}
+}
+func (v *DescribeBackupJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBackupJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBackupJobOutput_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_AccountId, v.AccountId)
+		case schemas.DescribeBackupJobOutput_BackupJobId:
+			v.BackupJobId = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_BackupJobId, v.BackupJobId)
+		case schemas.DescribeBackupJobOutput_BackupOptions:
+			return deserializeBackupOptions(d, schemas.DescribeBackupJobOutput_BackupOptions, &v.BackupOptions)
+		case schemas.DescribeBackupJobOutput_BackupSizeInBytes:
+			v.BackupSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.DescribeBackupJobOutput_BackupSizeInBytes, v.BackupSizeInBytes)
+		case schemas.DescribeBackupJobOutput_BackupType:
+			v.BackupType = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_BackupType, v.BackupType)
+		case schemas.DescribeBackupJobOutput_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_BackupVaultArn, v.BackupVaultArn)
+		case schemas.DescribeBackupJobOutput_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_BackupVaultName, v.BackupVaultName)
+		case schemas.DescribeBackupJobOutput_BytesTransferred:
+			v.BytesTransferred = new(int64)
+			return d.ReadInt64(schemas.DescribeBackupJobOutput_BytesTransferred, v.BytesTransferred)
+		case schemas.DescribeBackupJobOutput_ChildJobsInState:
+			return deserializeBackupJobChildJobsInState(d, schemas.DescribeBackupJobOutput_ChildJobsInState, &v.ChildJobsInState)
+		case schemas.DescribeBackupJobOutput_CompletionDate:
+			v.CompletionDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeBackupJobOutput_CompletionDate, v.CompletionDate)
+		case schemas.DescribeBackupJobOutput_CreatedBy:
+			v.CreatedBy = &types.RecoveryPointCreator{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeBackupJobOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeBackupJobOutput_CreationDate, v.CreationDate)
+		case schemas.DescribeBackupJobOutput_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.DescribeBackupJobOutput_ExpectedCompletionDate:
+			v.ExpectedCompletionDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeBackupJobOutput_ExpectedCompletionDate, v.ExpectedCompletionDate)
+		case schemas.DescribeBackupJobOutput_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_IamRoleArn, v.IamRoleArn)
+		case schemas.DescribeBackupJobOutput_InitiationDate:
+			v.InitiationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeBackupJobOutput_InitiationDate, v.InitiationDate)
+		case schemas.DescribeBackupJobOutput_IsEncrypted:
+			return d.ReadBool(schemas.DescribeBackupJobOutput_IsEncrypted, &v.IsEncrypted)
+		case schemas.DescribeBackupJobOutput_IsParent:
+			return d.ReadBool(schemas.DescribeBackupJobOutput_IsParent, &v.IsParent)
+		case schemas.DescribeBackupJobOutput_MessageCategory:
+			v.MessageCategory = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_MessageCategory, v.MessageCategory)
+		case schemas.DescribeBackupJobOutput_NumberOfChildJobs:
+			v.NumberOfChildJobs = new(int64)
+			return d.ReadInt64(schemas.DescribeBackupJobOutput_NumberOfChildJobs, v.NumberOfChildJobs)
+		case schemas.DescribeBackupJobOutput_ParentJobId:
+			v.ParentJobId = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_ParentJobId, v.ParentJobId)
+		case schemas.DescribeBackupJobOutput_PercentDone:
+			v.PercentDone = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_PercentDone, v.PercentDone)
+		case schemas.DescribeBackupJobOutput_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_RecoveryPointArn, v.RecoveryPointArn)
+		case schemas.DescribeBackupJobOutput_RecoveryPointLifecycle:
+			v.RecoveryPointLifecycle = &types.Lifecycle{}
+			return v.RecoveryPointLifecycle.Deserialize(d)
+		case schemas.DescribeBackupJobOutput_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_ResourceArn, v.ResourceArn)
+		case schemas.DescribeBackupJobOutput_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_ResourceName, v.ResourceName)
+		case schemas.DescribeBackupJobOutput_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_ResourceType, v.ResourceType)
+		case schemas.DescribeBackupJobOutput_StartBy:
+			v.StartBy = new(time.Time)
+			return d.ReadTime(schemas.DescribeBackupJobOutput_StartBy, v.StartBy)
+		case schemas.DescribeBackupJobOutput_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBackupJobOutput_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.BackupJobState(ev)
+			return nil
+		case schemas.DescribeBackupJobOutput_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_StatusMessage, v.StatusMessage)
+		case schemas.DescribeBackupJobOutput_VaultLockState:
+			v.VaultLockState = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_VaultLockState, v.VaultLockState)
+		case schemas.DescribeBackupJobOutput_VaultType:
+			v.VaultType = new(string)
+			return d.ReadString(schemas.DescribeBackupJobOutput_VaultType, v.VaultType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBackupJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBackupJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBackupJob, schemas.DescribeBackupJobInput, schemas.DescribeBackupJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeBackupJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBackupJob, schemas.DescribeBackupJobInput, schemas.DescribeBackupJobOutput), output: &DescribeBackupJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

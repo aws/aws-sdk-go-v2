@@ -497,6 +497,9 @@ type InstanceMetadata struct {
 	// The date and time that the Identity Center instance was created.
 	CreatedDate *time.Time
 
+	// The ARN of the identity store that is connected to the Identity Center instance.
+	IdentityStoreArn *string
+
 	// The identifier of the identity store that is connected to the Identity Center
 	// instance.
 	IdentityStoreId *string

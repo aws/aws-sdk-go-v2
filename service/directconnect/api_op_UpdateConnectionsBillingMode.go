@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,19 @@ type UpdateConnectionsBillingModeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectionsBillingModeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectionsBillingModeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectionsBillingModeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingMode != "" {
+		s.WriteString(schemas.UpdateConnectionsBillingModeRequest_billingMode, string(v.BillingMode))
+	}
+	serializeConnectionIdList(s, schemas.UpdateConnectionsBillingModeRequest_connectionIds, v.ConnectionIds)
+}
+
 type UpdateConnectionsBillingModeOutput struct {
 
 	// The billing mode applied to the connections.
@@ -56,13 +71,39 @@ type UpdateConnectionsBillingModeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectionsBillingModeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectionsBillingModeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectionsBillingModeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingMode != "" {
+		s.WriteString(schemas.UpdateConnectionsBillingModeResponse_billingMode, string(v.BillingMode))
+	}
+	serializeConnectionList(s, schemas.UpdateConnectionsBillingModeResponse_connections, v.Connections)
+}
+func (v *UpdateConnectionsBillingModeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectionsBillingModeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectionsBillingModeResponse_billingMode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateConnectionsBillingModeResponse_billingMode, &ev); err != nil {
+				return err
+			}
+			v.BillingMode = types.BillingMode(ev)
+			return nil
+		case schemas.UpdateConnectionsBillingModeResponse_connections:
+			return deserializeConnectionList(d, schemas.UpdateConnectionsBillingModeResponse_connections, &v.Connections)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectionsBillingModeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateConnectionsBillingMode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectionsBillingMode, schemas.UpdateConnectionsBillingModeRequest, schemas.UpdateConnectionsBillingModeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateConnectionsBillingMode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectionsBillingMode, schemas.UpdateConnectionsBillingModeRequest, schemas.UpdateConnectionsBillingModeResponse), output: &UpdateConnectionsBillingModeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

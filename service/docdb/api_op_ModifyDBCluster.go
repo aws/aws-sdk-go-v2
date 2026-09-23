@@ -91,6 +91,10 @@ type ModifyDBClusterInput struct {
 	// CloudWatch Logs.
 	CloudwatchLogsExportConfiguration *types.CloudwatchLogsExportConfiguration
 
+	// Specifies whether to copy all tags from the DB cluster to snapshots of the DB
+	// cluster. The default is not to copy them.
+	CopyTagsToSnapshot *bool
+
 	// The name of the cluster parameter group to use for the cluster.
 	DBClusterParameterGroupName *string
 
@@ -166,7 +170,7 @@ type ModifyDBClusterInput struct {
 	//
 	// Valid Values: IPV4 | DUAL
 	//
-	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
 	NetworkType *string
 
 	// The new cluster identifier for the cluster when renaming a cluster. This value

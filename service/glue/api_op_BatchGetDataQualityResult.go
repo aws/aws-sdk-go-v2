@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type BatchGetDataQualityResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDataQualityResultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDataQualityResultRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDataQualityResultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataQualityResultIds(s, schemas.BatchGetDataQualityResultRequest_ResultIds, v.ResultIds)
+}
+
 type BatchGetDataQualityResultOutput struct {
 
 	// A list of DataQualityResult objects representing the data quality results.
@@ -50,13 +62,32 @@ type BatchGetDataQualityResultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDataQualityResultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDataQualityResultResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDataQualityResultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataQualityResultsList(s, schemas.BatchGetDataQualityResultResponse_Results, v.Results)
+	serializeDataQualityResultIds(s, schemas.BatchGetDataQualityResultResponse_ResultsNotFound, v.ResultsNotFound)
+}
+func (v *BatchGetDataQualityResultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetDataQualityResultResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetDataQualityResultResponse_Results:
+			return deserializeDataQualityResultsList(d, schemas.BatchGetDataQualityResultResponse_Results, &v.Results)
+		case schemas.BatchGetDataQualityResultResponse_ResultsNotFound:
+			return deserializeDataQualityResultIds(d, schemas.BatchGetDataQualityResultResponse_ResultsNotFound, &v.ResultsNotFound)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetDataQualityResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetDataQualityResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDataQualityResult, schemas.BatchGetDataQualityResultRequest, schemas.BatchGetDataQualityResultResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetDataQualityResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDataQualityResult, schemas.BatchGetDataQualityResultRequest, schemas.BatchGetDataQualityResultResponse), output: &BatchGetDataQualityResultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

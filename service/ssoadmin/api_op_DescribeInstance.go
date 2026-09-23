@@ -56,6 +56,10 @@ type DescribeInstanceOutput struct {
 	// including the encryption status, KMS key type, and KMS key ARN.
 	EncryptionConfigurationDetails *types.EncryptionConfigurationDetails
 
+	// The ARN of the identity store that is connected to the instance of IAM Identity
+	// Center.
+	IdentityStoreArn *string
+
 	// The identifier of the identity store that is connected to the instance of IAM
 	// Identity Center.
 	IdentityStoreId *string
@@ -74,6 +78,14 @@ type DescribeInstanceOutput struct {
 
 	// Indicates whether permission sets are enabled for this Identity Center instance.
 	PermissionSetsEnabled *bool
+
+	// The primary Region where the IAM Identity Center instance was originally
+	// enabled. The primary Region cannot be removed.
+	PrimaryRegion *string
+
+	// The list of Regions enabled in the IAM Identity Center instance, including
+	// Regions with ACTIVE, ADDING, or REMOVING status.
+	Regions []types.RegionMetadata
 
 	// The status of the instance.
 	Status types.InstanceStatus

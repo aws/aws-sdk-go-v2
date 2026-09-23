@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type DescribeDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDashboardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.DescribeDashboardRequest_AliasName, *v.AliasName)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeDashboardRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.DescribeDashboardRequest_DashboardId, *v.DashboardId)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.DescribeDashboardRequest_VersionNumber, *v.VersionNumber)
+	}
+}
+
 type DescribeDashboardOutput struct {
 
 	// Information about the dashboard.
@@ -64,13 +87,45 @@ type DescribeDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDashboardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dashboard != nil {
+		s.WriteStruct(schemas.DescribeDashboardResponse_Dashboard)
+		v.Dashboard.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeDashboardResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeDashboardResponse_Status, v.Status)
+	}
+}
+func (v *DescribeDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDashboardResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDashboardResponse_Dashboard:
+			v.Dashboard = &types.Dashboard{}
+			return v.Dashboard.Deserialize(d)
+		case schemas.DescribeDashboardResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeDashboardResponse_RequestId, v.RequestId)
+		case schemas.DescribeDashboardResponse_Status:
+			return d.ReadInt32(schemas.DescribeDashboardResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboard, schemas.DescribeDashboardRequest, schemas.DescribeDashboardResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboard, schemas.DescribeDashboardRequest, schemas.DescribeDashboardResponse), output: &DescribeDashboardOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

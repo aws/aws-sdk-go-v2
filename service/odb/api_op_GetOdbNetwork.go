@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetOdbNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOdbNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOdbNetworkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOdbNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OdbNetworkId != nil {
+		s.WriteString(schemas.GetOdbNetworkInput_odbNetworkId, *v.OdbNetworkId)
+	}
+}
+
 type GetOdbNetworkOutput struct {
 
 	// The ODB network.
@@ -45,13 +59,34 @@ type GetOdbNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOdbNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOdbNetworkOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOdbNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OdbNetwork != nil {
+		s.WriteStruct(schemas.GetOdbNetworkOutput_odbNetwork)
+		v.OdbNetwork.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetOdbNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOdbNetworkOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOdbNetworkOutput_odbNetwork:
+			v.OdbNetwork = &types.OdbNetwork{}
+			return v.OdbNetwork.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOdbNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetOdbNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOdbNetwork, schemas.GetOdbNetworkInput, schemas.GetOdbNetworkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetOdbNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOdbNetwork, schemas.GetOdbNetworkInput, schemas.GetOdbNetworkOutput), output: &GetOdbNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetApplicationInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetApplicationRequest_id, *v.Id)
+	}
 }
 
 type GetApplicationOutput struct {
@@ -81,13 +95,92 @@ type GetApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppConfigs(s, schemas.GetApplicationResponse_appConfigs, v.AppConfigs)
+	if v.Arn != nil {
+		s.WriteString(schemas.GetApplicationResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetApplicationResponse_createdAt, *v.CreatedAt)
+	}
+	serializeDataSources(s, schemas.GetApplicationResponse_dataSources, v.DataSources)
+	if v.Endpoint != nil {
+		s.WriteString(schemas.GetApplicationResponse_endpoint, *v.Endpoint)
+	}
+	if v.IamIdentityCenterOptions != nil {
+		s.WriteStruct(schemas.GetApplicationResponse_iamIdentityCenterOptions)
+		v.IamIdentityCenterOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetApplicationResponse_id, *v.Id)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.GetApplicationResponse_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetApplicationResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetApplicationResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetApplicationResponse_status, string(v.Status))
+	}
+}
+func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationResponse_appConfigs:
+			return deserializeAppConfigs(d, schemas.GetApplicationResponse_appConfigs, &v.AppConfigs)
+		case schemas.GetApplicationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_arn, v.Arn)
+		case schemas.GetApplicationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetApplicationResponse_createdAt, v.CreatedAt)
+		case schemas.GetApplicationResponse_dataSources:
+			return deserializeDataSources(d, schemas.GetApplicationResponse_dataSources, &v.DataSources)
+		case schemas.GetApplicationResponse_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_endpoint, v.Endpoint)
+		case schemas.GetApplicationResponse_iamIdentityCenterOptions:
+			v.IamIdentityCenterOptions = &types.IamIdentityCenterOptions{}
+			return v.IamIdentityCenterOptions.Deserialize(d)
+		case schemas.GetApplicationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_id, v.Id)
+		case schemas.GetApplicationResponse_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_kmsKeyArn, v.KmsKeyArn)
+		case schemas.GetApplicationResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetApplicationResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetApplicationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_name, v.Name)
+		case schemas.GetApplicationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetApplicationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ApplicationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse), output: &GetApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

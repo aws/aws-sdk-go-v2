@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type DeleteMigrationProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMigrationProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMigrationProjectMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMigrationProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.DeleteMigrationProjectMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+}
+
 type DeleteMigrationProjectOutput struct {
 
 	// The migration project that was deleted.
@@ -51,13 +65,34 @@ type DeleteMigrationProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMigrationProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMigrationProjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMigrationProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProject != nil {
+		s.WriteStruct(schemas.DeleteMigrationProjectResponse_MigrationProject)
+		v.MigrationProject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteMigrationProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMigrationProjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMigrationProjectResponse_MigrationProject:
+			v.MigrationProject = &types.MigrationProject{}
+			return v.MigrationProject.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMigrationProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMigrationProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMigrationProject, schemas.DeleteMigrationProjectMessage, schemas.DeleteMigrationProjectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMigrationProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMigrationProject, schemas.DeleteMigrationProjectMessage, schemas.DeleteMigrationProjectResponse), output: &DeleteMigrationProjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

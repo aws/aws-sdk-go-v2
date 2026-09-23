@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetSdkTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSdkTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSdkTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSdkTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetSdkTypeRequest_id, *v.Id)
+	}
+}
+
 // A type of SDK that API Gateway can generate.
 type GetSdkTypeOutput struct {
 
@@ -56,13 +70,47 @@ type GetSdkTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSdkTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SdkType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSdkTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfSdkConfigurationProperty(s, schemas.SdkType_configurationProperties, v.ConfigurationProperties)
+	if v.Description != nil {
+		s.WriteString(schemas.SdkType_description, *v.Description)
+	}
+	if v.FriendlyName != nil {
+		s.WriteString(schemas.SdkType_friendlyName, *v.FriendlyName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.SdkType_id, *v.Id)
+	}
+}
+func (v *GetSdkTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SdkType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SdkType_configurationProperties:
+			return deserializeListOfSdkConfigurationProperty(d, schemas.SdkType_configurationProperties, &v.ConfigurationProperties)
+		case schemas.SdkType_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SdkType_description, v.Description)
+		case schemas.SdkType_friendlyName:
+			v.FriendlyName = new(string)
+			return d.ReadString(schemas.SdkType_friendlyName, v.FriendlyName)
+		case schemas.SdkType_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SdkType_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSdkTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSdkType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSdkType, schemas.GetSdkTypeRequest, schemas.SdkType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSdkType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSdkType, schemas.GetSdkTypeRequest, schemas.SdkType), output: &GetSdkTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

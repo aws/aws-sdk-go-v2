@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DescribeDashboardsQAConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDashboardsQAConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardsQAConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardsQAConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeDashboardsQAConfigurationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+}
+
 type DescribeDashboardsQAConfigurationOutput struct {
 
 	// The status of dashboards QA configuration that you want described.
@@ -52,13 +66,47 @@ type DescribeDashboardsQAConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDashboardsQAConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardsQAConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardsQAConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardsQAStatus != "" {
+		s.WriteString(schemas.DescribeDashboardsQAConfigurationResponse_DashboardsQAStatus, string(v.DashboardsQAStatus))
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeDashboardsQAConfigurationResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeDashboardsQAConfigurationResponse_Status, v.Status)
+	}
+}
+func (v *DescribeDashboardsQAConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDashboardsQAConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDashboardsQAConfigurationResponse_DashboardsQAStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDashboardsQAConfigurationResponse_DashboardsQAStatus, &ev); err != nil {
+				return err
+			}
+			v.DashboardsQAStatus = types.DashboardsQAStatus(ev)
+			return nil
+		case schemas.DescribeDashboardsQAConfigurationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeDashboardsQAConfigurationResponse_RequestId, v.RequestId)
+		case schemas.DescribeDashboardsQAConfigurationResponse_Status:
+			return d.ReadInt32(schemas.DescribeDashboardsQAConfigurationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDashboardsQAConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDashboardsQAConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboardsQAConfiguration, schemas.DescribeDashboardsQAConfigurationRequest, schemas.DescribeDashboardsQAConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDashboardsQAConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboardsQAConfiguration, schemas.DescribeDashboardsQAConfigurationRequest, schemas.DescribeDashboardsQAConfigurationResponse), output: &DescribeDashboardsQAConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

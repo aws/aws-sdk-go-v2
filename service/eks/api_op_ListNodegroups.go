@@ -5,6 +5,8 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type ListNodegroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNodegroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNodegroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNodegroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListNodegroupsRequest_clusterName, *v.ClusterName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNodegroupsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNodegroupsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListNodegroupsOutput struct {
 
 	// The nextToken value returned from a previous paginated request, where maxResults
@@ -73,13 +93,35 @@ type ListNodegroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNodegroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNodegroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNodegroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNodegroupsResponse_nextToken, *v.NextToken)
+	}
+	serializeStringList(s, schemas.ListNodegroupsResponse_nodegroups, v.Nodegroups)
+}
+func (v *ListNodegroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNodegroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNodegroupsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNodegroupsResponse_nextToken, v.NextToken)
+		case schemas.ListNodegroupsResponse_nodegroups:
+			return deserializeStringList(d, schemas.ListNodegroupsResponse_nodegroups, &v.Nodegroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNodegroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNodegroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNodegroups, schemas.ListNodegroupsRequest, schemas.ListNodegroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNodegroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNodegroups, schemas.ListNodegroupsRequest, schemas.ListNodegroupsResponse), output: &ListNodegroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

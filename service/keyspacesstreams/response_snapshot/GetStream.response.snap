@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: KeyspacesStreams.GetStream
+
+{"creationRequestDateTime":946684800,"keyspaceName":"__KeyspaceName__","nextToken":"__NextToken__","shards":[{"parentShardIds":["__Member__","__Member__"],"sequenceNumberRange":{"endingSequenceNumber":"__EndingSequenceNumber__","startingSequenceNumber":"__StartingSequenceNumber__"},"shardId":"__ShardId__"},{"parentShardIds":["__Member__","__Member__"],"sequenceNumberRange":{"endingSequenceNumber":"__EndingSequenceNumber__","startingSequenceNumber":"__StartingSequenceNumber__"},"shardId":"__ShardId__"}],"streamArn":"__StreamArn__","streamLabel":"__StreamLabel__","streamStatus":"ENABLING","streamViewType":"NEW_IMAGE","tableName":"__TableName__"}

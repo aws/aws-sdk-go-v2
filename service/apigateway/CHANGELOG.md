@@ -1,3 +1,12 @@
+# v1.49.0 (2026-09-22)
+
+* **Feature**: API Gateway now supports two new security policies for REST APIs and custom domain names, SecurityPolicy-TLS13-1-2-Ext2-PQ-2025-09 (TLS 1.3 1.2 with post-quantum cryptography) and SecurityPolicy-TLS13-1-2-Ext2-FIPS-PQ-2025-09 (adds FIPS). Both retain legacy algorithms for backward compatibility.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.48.0 (2026-09-21)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.47.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeRefreshSchemasStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRefreshSchemasStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRefreshSchemasStatusMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRefreshSchemasStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.DescribeRefreshSchemasStatusMessage_EndpointArn, *v.EndpointArn)
+	}
+}
+
 type DescribeRefreshSchemasStatusOutput struct {
 
 	// The status of the schema.
@@ -45,13 +59,34 @@ type DescribeRefreshSchemasStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRefreshSchemasStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRefreshSchemasStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRefreshSchemasStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RefreshSchemasStatus != nil {
+		s.WriteStruct(schemas.DescribeRefreshSchemasStatusResponse_RefreshSchemasStatus)
+		v.RefreshSchemasStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeRefreshSchemasStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRefreshSchemasStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRefreshSchemasStatusResponse_RefreshSchemasStatus:
+			v.RefreshSchemasStatus = &types.RefreshSchemasStatus{}
+			return v.RefreshSchemasStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRefreshSchemasStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRefreshSchemasStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRefreshSchemasStatus, schemas.DescribeRefreshSchemasStatusMessage, schemas.DescribeRefreshSchemasStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRefreshSchemasStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRefreshSchemasStatus, schemas.DescribeRefreshSchemasStatusMessage, schemas.DescribeRefreshSchemasStatusResponse), output: &DescribeRefreshSchemasStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

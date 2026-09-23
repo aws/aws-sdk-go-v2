@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetCloudExadataInfrastructureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCloudExadataInfrastructureInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCloudExadataInfrastructureInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCloudExadataInfrastructureInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudExadataInfrastructureId != nil {
+		s.WriteString(schemas.GetCloudExadataInfrastructureInput_cloudExadataInfrastructureId, *v.CloudExadataInfrastructureId)
+	}
+}
+
 type GetCloudExadataInfrastructureOutput struct {
 
 	// The Exadata infrastructure.
@@ -45,13 +59,34 @@ type GetCloudExadataInfrastructureOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCloudExadataInfrastructureOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCloudExadataInfrastructureOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCloudExadataInfrastructureOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudExadataInfrastructure != nil {
+		s.WriteStruct(schemas.GetCloudExadataInfrastructureOutput_cloudExadataInfrastructure)
+		v.CloudExadataInfrastructure.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCloudExadataInfrastructureOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCloudExadataInfrastructureOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCloudExadataInfrastructureOutput_cloudExadataInfrastructure:
+			v.CloudExadataInfrastructure = &types.CloudExadataInfrastructure{}
+			return v.CloudExadataInfrastructure.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCloudExadataInfrastructureMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetCloudExadataInfrastructure{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudExadataInfrastructure, schemas.GetCloudExadataInfrastructureInput, schemas.GetCloudExadataInfrastructureOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetCloudExadataInfrastructure{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudExadataInfrastructure, schemas.GetCloudExadataInfrastructureInput, schemas.GetCloudExadataInfrastructureOutput), output: &GetCloudExadataInfrastructureOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

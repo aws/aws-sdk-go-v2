@@ -5,7 +5,9 @@ package evs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,28 @@ type DeleteEntitlementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEntitlementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEntitlementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEntitlementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteEntitlementRequest_clientToken, *v.ClientToken)
+	}
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.DeleteEntitlementRequest_connectorId, *v.ConnectorId)
+	}
+	if v.EntitlementType != "" {
+		s.WriteString(schemas.DeleteEntitlementRequest_entitlementType, string(v.EntitlementType))
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DeleteEntitlementRequest_environmentId, *v.EnvironmentId)
+	}
+	serializeVmIdList(s, schemas.DeleteEntitlementRequest_vmIds, v.VmIds)
+}
+
 type DeleteEntitlementOutput struct {
 
 	// A list of the deleted entitlements.
@@ -72,13 +96,29 @@ type DeleteEntitlementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEntitlementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEntitlementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEntitlementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVmEntitlementList(s, schemas.DeleteEntitlementResponse_entitlements, v.Entitlements)
+}
+func (v *DeleteEntitlementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEntitlementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEntitlementResponse_entitlements:
+			return deserializeVmEntitlementList(d, schemas.DeleteEntitlementResponse_entitlements, &v.Entitlements)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEntitlementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteEntitlement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEntitlement, schemas.DeleteEntitlementRequest, schemas.DeleteEntitlementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteEntitlement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEntitlement, schemas.DeleteEntitlementRequest, schemas.DeleteEntitlementResponse), output: &DeleteEntitlementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,25 @@ type SearchDataSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchDataSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchDataSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchDataSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.SearchDataSourcesRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeDataSourceSearchFilterList(s, schemas.SearchDataSourcesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchDataSourcesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchDataSourcesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type SearchDataSourcesOutput struct {
 
 	// A DataSourceSummaries object that returns a summary of a data source.
@@ -67,13 +88,46 @@ type SearchDataSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchDataSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchDataSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchDataSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSourceSummaryList(s, schemas.SearchDataSourcesResponse_DataSourceSummaries, v.DataSourceSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchDataSourcesResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.SearchDataSourcesResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.SearchDataSourcesResponse_Status, v.Status)
+	}
+}
+func (v *SearchDataSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchDataSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchDataSourcesResponse_DataSourceSummaries:
+			return deserializeDataSourceSummaryList(d, schemas.SearchDataSourcesResponse_DataSourceSummaries, &v.DataSourceSummaries)
+		case schemas.SearchDataSourcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchDataSourcesResponse_NextToken, v.NextToken)
+		case schemas.SearchDataSourcesResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.SearchDataSourcesResponse_RequestId, v.RequestId)
+		case schemas.SearchDataSourcesResponse_Status:
+			return d.ReadInt32(schemas.SearchDataSourcesResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchDataSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchDataSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchDataSources, schemas.SearchDataSourcesRequest, schemas.SearchDataSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchDataSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchDataSources, schemas.SearchDataSourcesRequest, schemas.SearchDataSourcesResponse), output: &SearchDataSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

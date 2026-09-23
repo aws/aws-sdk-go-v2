@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // Condition that matches based on the specific WAF action taken on the request.
@@ -113,6 +114,11 @@ type CentralizationRuleSource struct {
 	// specified using organization id, accounts or organizational unit ids.
 	Scope *string
 
+	// Configuration that enables centralization of the context graph for the selected
+	// sources. Including this configuration in a rule's source opts the rule into
+	// centralizing the context graph for the selected sources.
+	SourceContextGraphConfiguration *SourceContextGraphConfiguration
+
 	// Log specific configuration for centralization source log groups.
 	SourceLogsConfiguration *SourceLogsConfiguration
 
@@ -124,6 +130,12 @@ type CentralizationRuleSource struct {
 
 // A summary of a centralization rule's key properties and status.
 type CentralizationRuleSummary struct {
+
+	// The status of context graph centralization for this rule. Returns Provisioning
+	// while the context graph is being set up, Healthy once it is active, or Unhealthy
+	// if provisioning failed. This status is independent of the overall RuleHealth
+	// for log delivery.
+	ContextGraphStatus ContextGraphStatus
 
 	// The Amazon Web Services region where the organization centralization rule was
 	// created.
@@ -213,6 +225,29 @@ type ConfigurationSummary struct {
 
 	// The list of data sources configured in the pipeline.
 	Sources []Source
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a dataset integration, including its ARN,
+// associated IAM role, and creation and update timestamps, as returned by
+// ListDatasetIntegrations .
+type DatasetIntegrationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the dataset integration.
+	//
+	// This member is required.
+	Arn *string
+
+	// The timestamp when the dataset integration was created.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role associated with the dataset
+	// integration.
+	RoleArn *string
+
+	// The timestamp when the dataset integration was last updated.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -593,6 +628,13 @@ type Source struct {
 	// The plugin name of the source, such as cloudwatch_logs or s3 .
 	Type *string
 
+	noSmithyDocumentSerde
+}
+
+// Configuration that enables centralization of the context graph for the selected
+// sources. Including this configuration in a rule's source opts the rule into
+// centralizing the context graph for the selected sources.
+type SourceContextGraphConfiguration struct {
 	noSmithyDocumentSerde
 }
 

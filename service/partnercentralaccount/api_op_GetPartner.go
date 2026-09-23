@@ -4,7 +4,9 @@ package partnercentralaccount
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetPartnerInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPartnerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPartnerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPartnerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetPartnerRequest_Catalog, *v.Catalog)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetPartnerRequest_Identifier, *v.Identifier)
+	}
 }
 
 type GetPartnerOutput struct {
@@ -83,13 +100,67 @@ type GetPartnerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPartnerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPartnerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPartnerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetPartnerResponse_Arn, *v.Arn)
+	}
+	serializePartnerDomainList(s, schemas.GetPartnerResponse_AwsTrainingCertificationEmailDomains, v.AwsTrainingCertificationEmailDomains)
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetPartnerResponse_Catalog, *v.Catalog)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetPartnerResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetPartnerResponse_Id, *v.Id)
+	}
+	if v.LegalName != nil {
+		s.WriteString(schemas.GetPartnerResponse_LegalName, *v.LegalName)
+	}
+	if v.Profile != nil {
+		s.WriteStruct(schemas.GetPartnerResponse_Profile)
+		v.Profile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPartnerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPartnerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPartnerResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetPartnerResponse_Arn, v.Arn)
+		case schemas.GetPartnerResponse_AwsTrainingCertificationEmailDomains:
+			return deserializePartnerDomainList(d, schemas.GetPartnerResponse_AwsTrainingCertificationEmailDomains, &v.AwsTrainingCertificationEmailDomains)
+		case schemas.GetPartnerResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetPartnerResponse_Catalog, v.Catalog)
+		case schemas.GetPartnerResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPartnerResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetPartnerResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetPartnerResponse_Id, v.Id)
+		case schemas.GetPartnerResponse_LegalName:
+			v.LegalName = new(string)
+			return d.ReadString(schemas.GetPartnerResponse_LegalName, v.LegalName)
+		case schemas.GetPartnerResponse_Profile:
+			v.Profile = &types.PartnerProfile{}
+			return v.Profile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPartnerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetPartner{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPartner, schemas.GetPartnerRequest, schemas.GetPartnerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetPartner{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPartner, schemas.GetPartnerRequest, schemas.GetPartnerResponse), output: &GetPartnerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type DeleteThemeAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThemeAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThemeAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThemeAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.DeleteThemeAliasRequest_AliasName, *v.AliasName)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteThemeAliasRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ThemeId != nil {
+		s.WriteString(schemas.DeleteThemeAliasRequest_ThemeId, *v.ThemeId)
+	}
+}
+
 type DeleteThemeAliasOutput struct {
 
 	// The name for the theme alias.
@@ -69,13 +89,55 @@ type DeleteThemeAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThemeAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThemeAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThemeAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.DeleteThemeAliasResponse_AliasName, *v.AliasName)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteThemeAliasResponse_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteThemeAliasResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteThemeAliasResponse_Status, v.Status)
+	}
+	if v.ThemeId != nil {
+		s.WriteString(schemas.DeleteThemeAliasResponse_ThemeId, *v.ThemeId)
+	}
+}
+func (v *DeleteThemeAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteThemeAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteThemeAliasResponse_AliasName:
+			v.AliasName = new(string)
+			return d.ReadString(schemas.DeleteThemeAliasResponse_AliasName, v.AliasName)
+		case schemas.DeleteThemeAliasResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteThemeAliasResponse_Arn, v.Arn)
+		case schemas.DeleteThemeAliasResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteThemeAliasResponse_RequestId, v.RequestId)
+		case schemas.DeleteThemeAliasResponse_Status:
+			return d.ReadInt32(schemas.DeleteThemeAliasResponse_Status, &v.Status)
+		case schemas.DeleteThemeAliasResponse_ThemeId:
+			v.ThemeId = new(string)
+			return d.ReadString(schemas.DeleteThemeAliasResponse_ThemeId, v.ThemeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteThemeAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteThemeAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThemeAlias, schemas.DeleteThemeAliasRequest, schemas.DeleteThemeAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteThemeAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThemeAlias, schemas.DeleteThemeAliasRequest, schemas.DeleteThemeAliasResponse), output: &DeleteThemeAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

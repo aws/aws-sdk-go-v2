@@ -8645,6 +8645,11 @@ func awsRestjson1_serializeDocumentHarnessOpenAiModelConfig(v *types.HarnessOpen
 		}
 	}
 
+	if v.ApiBase != nil {
+		ok := object.Key("apiBase")
+		ok.String(*v.ApiBase)
+	}
+
 	if len(v.ApiFormat) > 0 {
 		ok := object.Key("apiFormat")
 		ok.String(string(v.ApiFormat))

@@ -5,7 +5,9 @@ package health
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/health/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,29 @@ type DescribeAffectedEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAffectedEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAffectedEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAffectedEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.DescribeAffectedEntitiesRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Locale != nil {
+		s.WriteString(schemas.DescribeAffectedEntitiesRequest_locale, *v.Locale)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeAffectedEntitiesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAffectedEntitiesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeAffectedEntitiesOutput struct {
 
 	// The entities that match the filter criteria.
@@ -84,13 +109,35 @@ type DescribeAffectedEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAffectedEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAffectedEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAffectedEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityList(s, schemas.DescribeAffectedEntitiesResponse_entities, v.Entities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAffectedEntitiesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAffectedEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAffectedEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAffectedEntitiesResponse_entities:
+			return deserializeEntityList(d, schemas.DescribeAffectedEntitiesResponse_entities, &v.Entities)
+		case schemas.DescribeAffectedEntitiesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAffectedEntitiesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAffectedEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAffectedEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAffectedEntities, schemas.DescribeAffectedEntitiesRequest, schemas.DescribeAffectedEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAffectedEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAffectedEntities, schemas.DescribeAffectedEntitiesRequest, schemas.DescribeAffectedEntitiesResponse), output: &DescribeAffectedEntitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

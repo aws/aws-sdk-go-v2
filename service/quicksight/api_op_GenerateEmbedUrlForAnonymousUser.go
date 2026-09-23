@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -129,6 +131,32 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateEmbedUrlForAnonymousUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateEmbedUrlForAnonymousUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateEmbedUrlForAnonymousUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.GenerateEmbedUrlForAnonymousUserRequest_AllowedDomains, v.AllowedDomains)
+	serializeArnList(s, schemas.GenerateEmbedUrlForAnonymousUserRequest_AuthorizedResourceArns, v.AuthorizedResourceArns)
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.GenerateEmbedUrlForAnonymousUserRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ExperienceConfiguration != nil {
+		s.WriteStruct(schemas.GenerateEmbedUrlForAnonymousUserRequest_ExperienceConfiguration)
+		v.ExperienceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.GenerateEmbedUrlForAnonymousUserRequest_Namespace, *v.Namespace)
+	}
+	if v.SessionLifetimeInMinutes != nil {
+		s.WriteInt64(schemas.GenerateEmbedUrlForAnonymousUserRequest_SessionLifetimeInMinutes, *v.SessionLifetimeInMinutes)
+	}
+	serializeSessionTagList(s, schemas.GenerateEmbedUrlForAnonymousUserRequest_SessionTags, v.SessionTags)
+}
+
 type GenerateEmbedUrlForAnonymousUserOutput struct {
 
 	// The Amazon Resource Name (ARN) to use for the anonymous Amazon Quick user.
@@ -157,13 +185,47 @@ type GenerateEmbedUrlForAnonymousUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateEmbedUrlForAnonymousUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateEmbedUrlForAnonymousUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateEmbedUrlForAnonymousUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnonymousUserArn != nil {
+		s.WriteString(schemas.GenerateEmbedUrlForAnonymousUserResponse_AnonymousUserArn, *v.AnonymousUserArn)
+	}
+	if v.EmbedUrl != nil {
+		s.WriteString(schemas.GenerateEmbedUrlForAnonymousUserResponse_EmbedUrl, *v.EmbedUrl)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GenerateEmbedUrlForAnonymousUserResponse_RequestId, *v.RequestId)
+	}
+	s.WriteInt32(schemas.GenerateEmbedUrlForAnonymousUserResponse_Status, v.Status)
+}
+func (v *GenerateEmbedUrlForAnonymousUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateEmbedUrlForAnonymousUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerateEmbedUrlForAnonymousUserResponse_AnonymousUserArn:
+			v.AnonymousUserArn = new(string)
+			return d.ReadString(schemas.GenerateEmbedUrlForAnonymousUserResponse_AnonymousUserArn, v.AnonymousUserArn)
+		case schemas.GenerateEmbedUrlForAnonymousUserResponse_EmbedUrl:
+			v.EmbedUrl = new(string)
+			return d.ReadString(schemas.GenerateEmbedUrlForAnonymousUserResponse_EmbedUrl, v.EmbedUrl)
+		case schemas.GenerateEmbedUrlForAnonymousUserResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GenerateEmbedUrlForAnonymousUserResponse_RequestId, v.RequestId)
+		case schemas.GenerateEmbedUrlForAnonymousUserResponse_Status:
+			return d.ReadInt32(schemas.GenerateEmbedUrlForAnonymousUserResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateEmbedUrlForAnonymousUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateEmbedUrlForAnonymousUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateEmbedUrlForAnonymousUser, schemas.GenerateEmbedUrlForAnonymousUserRequest, schemas.GenerateEmbedUrlForAnonymousUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateEmbedUrlForAnonymousUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateEmbedUrlForAnonymousUser, schemas.GenerateEmbedUrlForAnonymousUserRequest, schemas.GenerateEmbedUrlForAnonymousUserResponse), output: &GenerateEmbedUrlForAnonymousUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

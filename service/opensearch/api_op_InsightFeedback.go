@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,29 @@ type InsightFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InsightFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsightFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsightFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entity != nil {
+		s.WriteStruct(schemas.InsightFeedbackRequest_Entity)
+		v.Entity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FeedbackText != nil {
+		s.WriteString(schemas.InsightFeedbackRequest_FeedbackText, *v.FeedbackText)
+	}
+	if v.InsightId != nil {
+		s.WriteString(schemas.InsightFeedbackRequest_InsightId, *v.InsightId)
+	}
+	if v.Thumbs != "" {
+		s.WriteString(schemas.InsightFeedbackRequest_Thumbs, string(v.Thumbs))
+	}
+}
+
 // The result of an InsightFeedback request. Contains the status of the feedback
 // submission.
 type InsightFeedbackOutput struct {
@@ -66,13 +91,36 @@ type InsightFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InsightFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsightFeedbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsightFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.InsightFeedbackResponse_Status, string(v.Status))
+	}
+}
+func (v *InsightFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsightFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsightFeedbackResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.InsightFeedbackResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InsightResponseStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInsightFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInsightFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InsightFeedback, schemas.InsightFeedbackRequest, schemas.InsightFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInsightFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InsightFeedback, schemas.InsightFeedbackRequest, schemas.InsightFeedbackResponse), output: &InsightFeedbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

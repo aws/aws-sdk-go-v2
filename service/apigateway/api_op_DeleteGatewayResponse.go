@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteGatewayResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGatewayResponseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGatewayResponseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGatewayResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResponseType != "" {
+		s.WriteString(schemas.DeleteGatewayResponseRequest_responseType, string(v.ResponseType))
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.DeleteGatewayResponseRequest_restApiId, *v.RestApiId)
+	}
+}
+
 type DeleteGatewayResponseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type DeleteGatewayResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGatewayResponseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGatewayResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteGatewayResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGatewayResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGatewayResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGatewayResponse, schemas.DeleteGatewayResponseRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGatewayResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGatewayResponse, schemas.DeleteGatewayResponseRequest, nil), output: &DeleteGatewayResponseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

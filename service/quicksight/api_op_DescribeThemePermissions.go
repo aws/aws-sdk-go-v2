@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeThemePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThemePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThemePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThemePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeThemePermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ThemeId != nil {
+		s.WriteString(schemas.DescribeThemePermissionsRequest_ThemeId, *v.ThemeId)
+	}
+}
+
 type DescribeThemePermissionsOutput struct {
 
 	// A list of resource permissions set on the theme.
@@ -63,13 +80,52 @@ type DescribeThemePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThemePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThemePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThemePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUpdateResourcePermissionList(s, schemas.DescribeThemePermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeThemePermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeThemePermissionsResponse_Status, v.Status)
+	}
+	if v.ThemeArn != nil {
+		s.WriteString(schemas.DescribeThemePermissionsResponse_ThemeArn, *v.ThemeArn)
+	}
+	if v.ThemeId != nil {
+		s.WriteString(schemas.DescribeThemePermissionsResponse_ThemeId, *v.ThemeId)
+	}
+}
+func (v *DescribeThemePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeThemePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeThemePermissionsResponse_Permissions:
+			return deserializeUpdateResourcePermissionList(d, schemas.DescribeThemePermissionsResponse_Permissions, &v.Permissions)
+		case schemas.DescribeThemePermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeThemePermissionsResponse_RequestId, v.RequestId)
+		case schemas.DescribeThemePermissionsResponse_Status:
+			return d.ReadInt32(schemas.DescribeThemePermissionsResponse_Status, &v.Status)
+		case schemas.DescribeThemePermissionsResponse_ThemeArn:
+			v.ThemeArn = new(string)
+			return d.ReadString(schemas.DescribeThemePermissionsResponse_ThemeArn, v.ThemeArn)
+		case schemas.DescribeThemePermissionsResponse_ThemeId:
+			v.ThemeId = new(string)
+			return d.ReadString(schemas.DescribeThemePermissionsResponse_ThemeId, v.ThemeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeThemePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeThemePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThemePermissions, schemas.DescribeThemePermissionsRequest, schemas.DescribeThemePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeThemePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThemePermissions, schemas.DescribeThemePermissionsRequest, schemas.DescribeThemePermissionsResponse), output: &DescribeThemePermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

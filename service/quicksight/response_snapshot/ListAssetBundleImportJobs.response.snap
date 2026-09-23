@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AssetBundleImportJobSummaryList":[{"Arn":"__Arn__","AssetBundleImportJobId":"__AssetBundleImportJobId__","CreatedTime":946684800,"FailureAction":"DO_NOTHING","JobStatus":"QUEUED_FOR_IMMEDIATE_EXECUTION"},{"Arn":"__Arn__","AssetBundleImportJobId":"__AssetBundleImportJobId__","CreatedTime":946684800,"FailureAction":"DO_NOTHING","JobStatus":"QUEUED_FOR_IMMEDIATE_EXECUTION"}],"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200}

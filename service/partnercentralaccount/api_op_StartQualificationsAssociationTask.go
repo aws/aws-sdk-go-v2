@@ -5,7 +5,9 @@ package partnercentralaccount
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,29 @@ type StartQualificationsAssociationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQualificationsAssociationTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQualificationsAssociationTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQualificationsAssociationTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.StartQualificationsAssociationTaskRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartQualificationsAssociationTaskRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.StartQualificationsAssociationTaskRequest_Identifier, *v.Identifier)
+	}
+	if v.PrimaryPartner != nil {
+		s.WriteStruct(schemas.StartQualificationsAssociationTaskRequest_PrimaryPartner)
+		v.PrimaryPartner.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartQualificationsAssociationTaskOutput struct {
 
 	// The Amazon Resource Name (ARN) that uniquely identifies your partner resource.
@@ -104,13 +129,74 @@ type StartQualificationsAssociationTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQualificationsAssociationTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQualificationsAssociationTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQualificationsAssociationTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartQualificationsAssociationTaskResponse_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.StartQualificationsAssociationTaskResponse_Catalog, *v.Catalog)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartQualificationsAssociationTaskResponse_Id, *v.Id)
+	}
+	if v.PrimaryPartner != nil {
+		s.WriteStruct(schemas.StartQualificationsAssociationTaskResponse_PrimaryPartner)
+		v.PrimaryPartner.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.StartQualificationsAssociationTaskResponse_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartQualificationsAssociationTaskResponse_Status, string(v.Status))
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.StartQualificationsAssociationTaskResponse_TaskId, *v.TaskId)
+	}
+}
+func (v *StartQualificationsAssociationTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartQualificationsAssociationTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartQualificationsAssociationTaskResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartQualificationsAssociationTaskResponse_Arn, v.Arn)
+		case schemas.StartQualificationsAssociationTaskResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.StartQualificationsAssociationTaskResponse_Catalog, v.Catalog)
+		case schemas.StartQualificationsAssociationTaskResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartQualificationsAssociationTaskResponse_Id, v.Id)
+		case schemas.StartQualificationsAssociationTaskResponse_PrimaryPartner:
+			v.PrimaryPartner = &types.QualificationsAssociationPartner{}
+			return v.PrimaryPartner.Deserialize(d)
+		case schemas.StartQualificationsAssociationTaskResponse_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.StartQualificationsAssociationTaskResponse_StartedAt, v.StartedAt)
+		case schemas.StartQualificationsAssociationTaskResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartQualificationsAssociationTaskResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.QualificationsAssociationTaskStatus(ev)
+			return nil
+		case schemas.StartQualificationsAssociationTaskResponse_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.StartQualificationsAssociationTaskResponse_TaskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartQualificationsAssociationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartQualificationsAssociationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQualificationsAssociationTask, schemas.StartQualificationsAssociationTaskRequest, schemas.StartQualificationsAssociationTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartQualificationsAssociationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQualificationsAssociationTask, schemas.StartQualificationsAssociationTaskRequest, schemas.StartQualificationsAssociationTaskResponse), output: &StartQualificationsAssociationTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

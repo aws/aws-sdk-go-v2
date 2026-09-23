@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type ResumeWorkflowRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResumeWorkflowRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResumeWorkflowRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResumeWorkflowRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ResumeWorkflowRunRequest_Name, *v.Name)
+	}
+	serializeNodeIdList(s, schemas.ResumeWorkflowRunRequest_NodeIds, v.NodeIds)
+	if v.RunId != nil {
+		s.WriteString(schemas.ResumeWorkflowRunRequest_RunId, *v.RunId)
+	}
+}
+
 type ResumeWorkflowRunOutput struct {
 
 	// A list of the node IDs for the nodes that were actually restarted.
@@ -61,13 +79,35 @@ type ResumeWorkflowRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResumeWorkflowRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResumeWorkflowRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResumeWorkflowRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNodeIdList(s, schemas.ResumeWorkflowRunResponse_NodeIds, v.NodeIds)
+	if v.RunId != nil {
+		s.WriteString(schemas.ResumeWorkflowRunResponse_RunId, *v.RunId)
+	}
+}
+func (v *ResumeWorkflowRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResumeWorkflowRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResumeWorkflowRunResponse_NodeIds:
+			return deserializeNodeIdList(d, schemas.ResumeWorkflowRunResponse_NodeIds, &v.NodeIds)
+		case schemas.ResumeWorkflowRunResponse_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.ResumeWorkflowRunResponse_RunId, v.RunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResumeWorkflowRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResumeWorkflowRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResumeWorkflowRun, schemas.ResumeWorkflowRunRequest, schemas.ResumeWorkflowRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpResumeWorkflowRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResumeWorkflowRun, schemas.ResumeWorkflowRunRequest, schemas.ResumeWorkflowRunResponse), output: &ResumeWorkflowRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

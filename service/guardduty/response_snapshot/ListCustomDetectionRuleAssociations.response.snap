@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","ruleAssociations":[{"arn":"__Arn__","associationId":"__AssociationId__","createdAt":946684800,"expiresAt":946684800,"mode":"LIVE","ruleId":"__RuleId__","updatedAt":946684800},{"arn":"__Arn__","associationId":"__AssociationId__","createdAt":946684800,"expiresAt":946684800,"mode":"LIVE","ruleId":"__RuleId__","updatedAt":946684800}]}

@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DescribeOAuthClientApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOAuthClientApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOAuthClientApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOAuthClientApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeOAuthClientApplicationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.OAuthClientApplicationId != nil {
+		s.WriteString(schemas.DescribeOAuthClientApplicationRequest_OAuthClientApplicationId, *v.OAuthClientApplicationId)
+	}
+}
+
 type DescribeOAuthClientApplicationOutput struct {
 
 	// The information about the OAuthClientApplication.
@@ -56,13 +73,45 @@ type DescribeOAuthClientApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOAuthClientApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOAuthClientApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOAuthClientApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OAuthClientApplication != nil {
+		s.WriteStruct(schemas.DescribeOAuthClientApplicationResponse_OAuthClientApplication)
+		v.OAuthClientApplication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeOAuthClientApplicationResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeOAuthClientApplicationResponse_Status, v.Status)
+	}
+}
+func (v *DescribeOAuthClientApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOAuthClientApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOAuthClientApplicationResponse_OAuthClientApplication:
+			v.OAuthClientApplication = &types.OAuthClientApplication{}
+			return v.OAuthClientApplication.Deserialize(d)
+		case schemas.DescribeOAuthClientApplicationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeOAuthClientApplicationResponse_RequestId, v.RequestId)
+		case schemas.DescribeOAuthClientApplicationResponse_Status:
+			return d.ReadInt32(schemas.DescribeOAuthClientApplicationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOAuthClientApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeOAuthClientApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOAuthClientApplication, schemas.DescribeOAuthClientApplicationRequest, schemas.DescribeOAuthClientApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeOAuthClientApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOAuthClientApplication, schemas.DescribeOAuthClientApplicationRequest, schemas.DescribeOAuthClientApplicationResponse), output: &DescribeOAuthClientApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package keyspaces
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,34 @@ type ListKeyspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeyspacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeyspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeyspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListKeyspacesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKeyspacesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListKeyspacesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListKeyspacesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListKeyspacesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListKeyspacesRequest_maxResults, v.MaxResults)
+		case schemas.ListKeyspacesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListKeyspacesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListKeyspacesOutput struct {
 
 	// A list of keyspaces.
@@ -57,13 +87,35 @@ type ListKeyspacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeyspacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeyspacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeyspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKeyspaceSummaryList(s, schemas.ListKeyspacesResponse_keyspaces, v.Keyspaces)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKeyspacesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListKeyspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListKeyspacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListKeyspacesResponse_keyspaces:
+			return deserializeKeyspaceSummaryList(d, schemas.ListKeyspacesResponse_keyspaces, &v.Keyspaces)
+		case schemas.ListKeyspacesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListKeyspacesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListKeyspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListKeyspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeyspaces, schemas.ListKeyspacesRequest, schemas.ListKeyspacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListKeyspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeyspaces, schemas.ListKeyspacesRequest, schemas.ListKeyspacesResponse), output: &ListKeyspacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

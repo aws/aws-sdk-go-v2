@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type AssociatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatePackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatePackageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatePackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationConfiguration != nil {
+		s.WriteStruct(schemas.AssociatePackageRequest_AssociationConfiguration)
+		v.AssociationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.AssociatePackageRequest_DomainName, *v.DomainName)
+	}
+	if v.PackageID != nil {
+		s.WriteString(schemas.AssociatePackageRequest_PackageID, *v.PackageID)
+	}
+	serializePackageIDList(s, schemas.AssociatePackageRequest_PrerequisitePackageIDList, v.PrerequisitePackageIDList)
+}
+
 // Container for the response returned by the AssociatePackage operation.
 type AssociatePackageOutput struct {
 
@@ -64,13 +87,34 @@ type AssociatePackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatePackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatePackageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatePackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainPackageDetails != nil {
+		s.WriteStruct(schemas.AssociatePackageResponse_DomainPackageDetails)
+		v.DomainPackageDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociatePackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatePackageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatePackageResponse_DomainPackageDetails:
+			v.DomainPackageDetails = &types.DomainPackageDetails{}
+			return v.DomainPackageDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociatePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePackage, schemas.AssociatePackageRequest, schemas.AssociatePackageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociatePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePackage, schemas.AssociatePackageRequest, schemas.AssociatePackageResponse), output: &AssociatePackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

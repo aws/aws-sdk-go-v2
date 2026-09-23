@@ -765,6 +765,33 @@ func TestCheckRequestSnapshot_GetBillingGroupCostReport(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetBillingTransferPreference(t *testing.T) {
+	input := &GetBillingTransferPreferenceInput{
+		ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetBillingTransferPreference(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetBillingTransferPreference"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListAccountAssociations(t *testing.T) {
 	input := &ListAccountAssociationsInput{
 		BillingPeriod: ptr.String("__BillingPeriod__"),
@@ -1265,6 +1292,38 @@ func TestCheckRequestSnapshot_UpdateBillingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateBillingGroup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateBillingTransferPreference(t *testing.T) {
+	input := &UpdateBillingTransferPreferenceInput{
+		ClientToken:               ptr.String("__ClientToken__"),
+		ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+		AutoBillingTransferBillingGroupCreation: &types.AutoTransferBillingGroupCreationPreference{
+			Enabled:        ptr.Bool(true),
+			PricingPlanArn: ptr.String("__PricingPlanArn__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateBillingTransferPreference(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateBillingTransferPreference"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1972,6 +2031,33 @@ func TestUpdateRequestSnapshot_GetBillingGroupCostReport(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetBillingTransferPreference(t *testing.T) {
+	input := &GetBillingTransferPreferenceInput{
+		ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetBillingTransferPreference(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetBillingTransferPreference"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListAccountAssociations(t *testing.T) {
 	input := &ListAccountAssociationsInput{
 		BillingPeriod: ptr.String("__BillingPeriod__"),
@@ -2472,6 +2558,38 @@ func TestUpdateRequestSnapshot_UpdateBillingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateBillingGroup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateBillingTransferPreference(t *testing.T) {
+	input := &UpdateBillingTransferPreferenceInput{
+		ClientToken:               ptr.String("__ClientToken__"),
+		ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+		AutoBillingTransferBillingGroupCreation: &types.AutoTransferBillingGroupCreationPreference{
+			Enabled:        ptr.Bool(true),
+			PricingPlanArn: ptr.String("__PricingPlanArn__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateBillingTransferPreference(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateBillingTransferPreference"); err != nil {
 		t.Fatal(err)
 	}
 }

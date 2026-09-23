@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSMPCommerceService_v20200301.RejectAgreementPaymentRequest
+
+{"agreementId":"__AgreementId__","chargeAmount":"__ChargeAmount__","createdAt":946684800,"currencyCode":"__CurrencyCode__","description":"__Description__","name":"__Name__","paymentRequestId":"__PaymentRequestId__","status":"VALIDATING","statusMessage":"__StatusMessage__","updatedAt":946684800}

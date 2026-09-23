@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/CreateOneTimeDeepLinkCode
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿hdomainIdl__DomainId__kredirectUrlo__RedirectUrl__jttlSecondsÿ

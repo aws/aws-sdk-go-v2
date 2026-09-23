@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,22 @@ type DisassociateConnectionsFromResiliencyGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateConnectionsFromResiliencyGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateConnectionsFromResiliencyGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateConnectionsFromResiliencyGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DisassociateConnectionsFromResiliencyGroupRequest_clientToken, *v.ClientToken)
+	}
+	serializeConnectionIdentifierList(s, schemas.DisassociateConnectionsFromResiliencyGroupRequest_connectionIdentifiers, v.ConnectionIdentifiers)
+	if v.ResiliencyGroupId != nil {
+		s.WriteString(schemas.DisassociateConnectionsFromResiliencyGroupRequest_resiliencyGroupId, *v.ResiliencyGroupId)
+	}
+}
+
 type DisassociateConnectionsFromResiliencyGroupOutput struct {
 
 	// The connection associations for the resiliency group.
@@ -56,13 +74,29 @@ type DisassociateConnectionsFromResiliencyGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateConnectionsFromResiliencyGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateConnectionsFromResiliencyGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateConnectionsFromResiliencyGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResiliencyGroupAssociationList(s, schemas.DisassociateConnectionsFromResiliencyGroupResult_resiliencyGroupAssociations, v.ResiliencyGroupAssociations)
+}
+func (v *DisassociateConnectionsFromResiliencyGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateConnectionsFromResiliencyGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateConnectionsFromResiliencyGroupResult_resiliencyGroupAssociations:
+			return deserializeResiliencyGroupAssociationList(d, schemas.DisassociateConnectionsFromResiliencyGroupResult_resiliencyGroupAssociations, &v.ResiliencyGroupAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateConnectionsFromResiliencyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateConnectionsFromResiliencyGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateConnectionsFromResiliencyGroup, schemas.DisassociateConnectionsFromResiliencyGroupRequest, schemas.DisassociateConnectionsFromResiliencyGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateConnectionsFromResiliencyGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateConnectionsFromResiliencyGroup, schemas.DisassociateConnectionsFromResiliencyGroupRequest, schemas.DisassociateConnectionsFromResiliencyGroupResult), output: &DisassociateConnectionsFromResiliencyGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

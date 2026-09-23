@@ -4,7 +4,9 @@ package applicationsignals
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,16 @@ type BatchDeleteInstrumentationConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteInstrumentationConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteInstrumentationConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteInstrumentationConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDeleteDeletionTarget(s, schemas.BatchDeleteInstrumentationConfigurationsRequest_DeletionTarget, v.DeletionTarget)
+}
+
 type BatchDeleteInstrumentationConfigurationsOutput struct {
 
 	// Number of configurations successfully deleted. When deleting by scope, this is
@@ -67,13 +79,38 @@ type BatchDeleteInstrumentationConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteInstrumentationConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteInstrumentationConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteInstrumentationConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletedCount != nil {
+		s.WriteInt32(schemas.BatchDeleteInstrumentationConfigurationsResponse_DeletedCount, *v.DeletedCount)
+	}
+	serializeBatchDeleteErrorList(s, schemas.BatchDeleteInstrumentationConfigurationsResponse_Errors, v.Errors)
+	serializeBatchDeleteSuccessfulDeletionList(s, schemas.BatchDeleteInstrumentationConfigurationsResponse_SuccessfulDeletions, v.SuccessfulDeletions)
+}
+func (v *BatchDeleteInstrumentationConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteInstrumentationConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteInstrumentationConfigurationsResponse_DeletedCount:
+			v.DeletedCount = new(int32)
+			return d.ReadInt32(schemas.BatchDeleteInstrumentationConfigurationsResponse_DeletedCount, v.DeletedCount)
+		case schemas.BatchDeleteInstrumentationConfigurationsResponse_Errors:
+			return deserializeBatchDeleteErrorList(d, schemas.BatchDeleteInstrumentationConfigurationsResponse_Errors, &v.Errors)
+		case schemas.BatchDeleteInstrumentationConfigurationsResponse_SuccessfulDeletions:
+			return deserializeBatchDeleteSuccessfulDeletionList(d, schemas.BatchDeleteInstrumentationConfigurationsResponse_SuccessfulDeletions, &v.SuccessfulDeletions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteInstrumentationConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteInstrumentationConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteInstrumentationConfigurations, schemas.BatchDeleteInstrumentationConfigurationsRequest, schemas.BatchDeleteInstrumentationConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteInstrumentationConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteInstrumentationConfigurations, schemas.BatchDeleteInstrumentationConfigurationsRequest, schemas.BatchDeleteInstrumentationConfigurationsResponse), output: &BatchDeleteInstrumentationConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

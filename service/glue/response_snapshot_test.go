@@ -14540,6 +14540,25 @@ func TestCheckResponseSnapshot_CreateTable(t *testing.T) {
 					1,
 					1,
 				},
+				SubObjectsStatistics: []types.SubObjectStatistics{
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+				},
+				SparkPipelineInfo: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 		},
 		PartitionIndexes: []types.PartitionIndex{
@@ -30651,6 +30670,22 @@ func TestCheckResponseSnapshot_GetTable(t *testing.T) {
 					1,
 					1,
 				},
+				SubObjectsStatistics: []types.SubObjectStatistics{
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+				},
 				Representations: []types.ViewRepresentation{
 					{
 						Dialect:              types.ViewDialect("REDSHIFT"),
@@ -30668,6 +30703,9 @@ func TestCheckResponseSnapshot_GetTable(t *testing.T) {
 						ValidationConnection: ptr.String("__ValidationConnection__"),
 						IsStale:              ptr.Bool(true),
 					},
+				},
+				SparkPipelineInfo: map[string]string{
+					"key0": "__Value__",
 				},
 			},
 			IsMultiDialectView: ptr.Bool(true),
@@ -31137,6 +31175,22 @@ func TestCheckResponseSnapshot_GetTableVersion(t *testing.T) {
 						1,
 						1,
 					},
+					SubObjectsStatistics: []types.SubObjectStatistics{
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
+					},
 					Representations: []types.ViewRepresentation{
 						{
 							Dialect:              types.ViewDialect("REDSHIFT"),
@@ -31154,6 +31208,9 @@ func TestCheckResponseSnapshot_GetTableVersion(t *testing.T) {
 							ValidationConnection: ptr.String("__ValidationConnection__"),
 							IsStale:              ptr.Bool(true),
 						},
+					},
+					SparkPipelineInfo: map[string]string{
+						"key0": "__Value__",
 					},
 				},
 				IsMultiDialectView: ptr.Bool(true),
@@ -31519,6 +31576,22 @@ func TestCheckResponseSnapshot_GetTableVersions(t *testing.T) {
 							1,
 							1,
 						},
+						SubObjectsStatistics: []types.SubObjectStatistics{
+							{
+								SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+								GlueVersionId:  ptr.String("__GlueVersionId__"),
+								PartitionCount: ptr.Int64(1),
+								FileCount:      ptr.Int64(1),
+								TotalFileBytes: ptr.Int64(1),
+							},
+							{
+								SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+								GlueVersionId:  ptr.String("__GlueVersionId__"),
+								PartitionCount: ptr.Int64(1),
+								FileCount:      ptr.Int64(1),
+								TotalFileBytes: ptr.Int64(1),
+							},
+						},
 						Representations: []types.ViewRepresentation{
 							{
 								Dialect:              types.ViewDialect("REDSHIFT"),
@@ -31536,6 +31609,9 @@ func TestCheckResponseSnapshot_GetTableVersions(t *testing.T) {
 								ValidationConnection: ptr.String("__ValidationConnection__"),
 								IsStale:              ptr.Bool(true),
 							},
+						},
+						SparkPipelineInfo: map[string]string{
+							"key0": "__Value__",
 						},
 					},
 					IsMultiDialectView: ptr.Bool(true),
@@ -31867,6 +31943,22 @@ func TestCheckResponseSnapshot_GetTableVersions(t *testing.T) {
 							1,
 							1,
 						},
+						SubObjectsStatistics: []types.SubObjectStatistics{
+							{
+								SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+								GlueVersionId:  ptr.String("__GlueVersionId__"),
+								PartitionCount: ptr.Int64(1),
+								FileCount:      ptr.Int64(1),
+								TotalFileBytes: ptr.Int64(1),
+							},
+							{
+								SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+								GlueVersionId:  ptr.String("__GlueVersionId__"),
+								PartitionCount: ptr.Int64(1),
+								FileCount:      ptr.Int64(1),
+								TotalFileBytes: ptr.Int64(1),
+							},
+						},
 						Representations: []types.ViewRepresentation{
 							{
 								Dialect:              types.ViewDialect("REDSHIFT"),
@@ -31884,6 +31976,9 @@ func TestCheckResponseSnapshot_GetTableVersions(t *testing.T) {
 								ValidationConnection: ptr.String("__ValidationConnection__"),
 								IsStale:              ptr.Bool(true),
 							},
+						},
+						SparkPipelineInfo: map[string]string{
+							"key0": "__Value__",
 						},
 					},
 					IsMultiDialectView: ptr.Bool(true),
@@ -32251,6 +32346,22 @@ func TestCheckResponseSnapshot_GetTables(t *testing.T) {
 						1,
 						1,
 					},
+					SubObjectsStatistics: []types.SubObjectStatistics{
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
+					},
 					Representations: []types.ViewRepresentation{
 						{
 							Dialect:              types.ViewDialect("REDSHIFT"),
@@ -32268,6 +32379,9 @@ func TestCheckResponseSnapshot_GetTables(t *testing.T) {
 							ValidationConnection: ptr.String("__ValidationConnection__"),
 							IsStale:              ptr.Bool(true),
 						},
+					},
+					SparkPipelineInfo: map[string]string{
+						"key0": "__Value__",
 					},
 				},
 				IsMultiDialectView: ptr.Bool(true),
@@ -32596,6 +32710,22 @@ func TestCheckResponseSnapshot_GetTables(t *testing.T) {
 						1,
 						1,
 					},
+					SubObjectsStatistics: []types.SubObjectStatistics{
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
+					},
 					Representations: []types.ViewRepresentation{
 						{
 							Dialect:              types.ViewDialect("REDSHIFT"),
@@ -32613,6 +32743,9 @@ func TestCheckResponseSnapshot_GetTables(t *testing.T) {
 							ValidationConnection: ptr.String("__ValidationConnection__"),
 							IsStale:              ptr.Bool(true),
 						},
+					},
+					SparkPipelineInfo: map[string]string{
+						"key0": "__Value__",
 					},
 				},
 				IsMultiDialectView: ptr.Bool(true),
@@ -33630,6 +33763,22 @@ func TestCheckResponseSnapshot_GetUnfilteredTableMetadata(t *testing.T) {
 					1,
 					1,
 				},
+				SubObjectsStatistics: []types.SubObjectStatistics{
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+				},
 				Representations: []types.ViewRepresentation{
 					{
 						Dialect:              types.ViewDialect("REDSHIFT"),
@@ -33647,6 +33796,9 @@ func TestCheckResponseSnapshot_GetUnfilteredTableMetadata(t *testing.T) {
 						ValidationConnection: ptr.String("__ValidationConnection__"),
 						IsStale:              ptr.Bool(true),
 					},
+				},
+				SparkPipelineInfo: map[string]string{
+					"key0": "__Value__",
 				},
 			},
 			IsMultiDialectView: ptr.Bool(true),
@@ -39690,6 +39842,22 @@ func TestCheckResponseSnapshot_SearchTables(t *testing.T) {
 						1,
 						1,
 					},
+					SubObjectsStatistics: []types.SubObjectStatistics{
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
+					},
 					Representations: []types.ViewRepresentation{
 						{
 							Dialect:              types.ViewDialect("REDSHIFT"),
@@ -39707,6 +39875,9 @@ func TestCheckResponseSnapshot_SearchTables(t *testing.T) {
 							ValidationConnection: ptr.String("__ValidationConnection__"),
 							IsStale:              ptr.Bool(true),
 						},
+					},
+					SparkPipelineInfo: map[string]string{
+						"key0": "__Value__",
 					},
 				},
 				IsMultiDialectView: ptr.Bool(true),
@@ -40035,6 +40206,22 @@ func TestCheckResponseSnapshot_SearchTables(t *testing.T) {
 						1,
 						1,
 					},
+					SubObjectsStatistics: []types.SubObjectStatistics{
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
+						{
+							SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+							GlueVersionId:  ptr.String("__GlueVersionId__"),
+							PartitionCount: ptr.Int64(1),
+							FileCount:      ptr.Int64(1),
+							TotalFileBytes: ptr.Int64(1),
+						},
+					},
 					Representations: []types.ViewRepresentation{
 						{
 							Dialect:              types.ViewDialect("REDSHIFT"),
@@ -40052,6 +40239,9 @@ func TestCheckResponseSnapshot_SearchTables(t *testing.T) {
 							ValidationConnection: ptr.String("__ValidationConnection__"),
 							IsStale:              ptr.Bool(true),
 						},
+					},
+					SparkPipelineInfo: map[string]string{
+						"key0": "__Value__",
 					},
 				},
 				IsMultiDialectView: ptr.Bool(true),
@@ -45681,6 +45871,25 @@ func TestCheckResponseSnapshot_UpdateTable(t *testing.T) {
 				SubObjectVersionIds: []int64{
 					1,
 					1,
+				},
+				SubObjectsStatistics: []types.SubObjectStatistics{
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+				},
+				SparkPipelineInfo: map[string]string{
+					"key0": "__Value__",
 				},
 			},
 		},

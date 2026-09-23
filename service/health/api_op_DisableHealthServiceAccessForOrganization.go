@@ -4,6 +4,8 @@ package health
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/health/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,22 @@ type DisableHealthServiceAccessForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableHealthServiceAccessForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableHealthServiceAccessForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableHealthServiceAccessForOrganizationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DisableHealthServiceAccessForOrganizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +69,26 @@ type DisableHealthServiceAccessForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableHealthServiceAccessForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableHealthServiceAccessForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableHealthServiceAccessForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableHealthServiceAccessForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableHealthServiceAccessForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableHealthServiceAccessForOrganization, nil, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisableHealthServiceAccessForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableHealthServiceAccessForOrganization, nil, nil), output: &DisableHealthServiceAccessForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

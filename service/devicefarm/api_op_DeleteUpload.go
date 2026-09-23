@@ -4,6 +4,8 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUploadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUploadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteUploadRequest_arn, *v.Arn)
+	}
+}
+
 // Represents the result of a delete upload request.
 type DeleteUploadOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -42,13 +56,26 @@ type DeleteUploadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUploadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUploadResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUploadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteUploadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteUploadResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUpload, schemas.DeleteUploadRequest, schemas.DeleteUploadResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUpload, schemas.DeleteUploadRequest, schemas.DeleteUploadResult), output: &DeleteUploadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

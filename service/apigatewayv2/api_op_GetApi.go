@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetApiInput struct {
 	ApiId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetApiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetApiRequest_ApiId, *v.ApiId)
+	}
 }
 
 type GetApiOutput struct {
@@ -111,13 +125,129 @@ type GetApiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiEndpoint != nil {
+		s.WriteString(schemas.GetApiResponse_ApiEndpoint, *v.ApiEndpoint)
+	}
+	if v.ApiGatewayManaged != nil {
+		s.WriteBool(schemas.GetApiResponse_ApiGatewayManaged, *v.ApiGatewayManaged)
+	}
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetApiResponse_ApiId, *v.ApiId)
+	}
+	if v.ApiKeySelectionExpression != nil {
+		s.WriteString(schemas.GetApiResponse_ApiKeySelectionExpression, *v.ApiKeySelectionExpression)
+	}
+	if v.CorsConfiguration != nil {
+		s.WriteStruct(schemas.GetApiResponse_CorsConfiguration)
+		v.CorsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.GetApiResponse_CreatedDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetApiResponse_Description, *v.Description)
+	}
+	if v.DisableExecuteApiEndpoint != nil {
+		s.WriteBool(schemas.GetApiResponse_DisableExecuteApiEndpoint, *v.DisableExecuteApiEndpoint)
+	}
+	if v.DisableSchemaValidation != nil {
+		s.WriteBool(schemas.GetApiResponse_DisableSchemaValidation, *v.DisableSchemaValidation)
+	}
+	serialize__listOf__string(s, schemas.GetApiResponse_ImportInfo, v.ImportInfo)
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.GetApiResponse_IpAddressType, string(v.IpAddressType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetApiResponse_Name, *v.Name)
+	}
+	if v.ProtocolType != "" {
+		s.WriteString(schemas.GetApiResponse_ProtocolType, string(v.ProtocolType))
+	}
+	if v.RouteSelectionExpression != nil {
+		s.WriteString(schemas.GetApiResponse_RouteSelectionExpression, *v.RouteSelectionExpression)
+	}
+	serializeTags(s, schemas.GetApiResponse_Tags, v.Tags)
+	if v.Version != nil {
+		s.WriteString(schemas.GetApiResponse_Version, *v.Version)
+	}
+	serialize__listOf__string(s, schemas.GetApiResponse_Warnings, v.Warnings)
+}
+func (v *GetApiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApiResponse_ApiEndpoint:
+			v.ApiEndpoint = new(string)
+			return d.ReadString(schemas.GetApiResponse_ApiEndpoint, v.ApiEndpoint)
+		case schemas.GetApiResponse_ApiGatewayManaged:
+			v.ApiGatewayManaged = new(bool)
+			return d.ReadBool(schemas.GetApiResponse_ApiGatewayManaged, v.ApiGatewayManaged)
+		case schemas.GetApiResponse_ApiId:
+			v.ApiId = new(string)
+			return d.ReadString(schemas.GetApiResponse_ApiId, v.ApiId)
+		case schemas.GetApiResponse_ApiKeySelectionExpression:
+			v.ApiKeySelectionExpression = new(string)
+			return d.ReadString(schemas.GetApiResponse_ApiKeySelectionExpression, v.ApiKeySelectionExpression)
+		case schemas.GetApiResponse_CorsConfiguration:
+			v.CorsConfiguration = &types.Cors{}
+			return v.CorsConfiguration.Deserialize(d)
+		case schemas.GetApiResponse_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetApiResponse_CreatedDate, v.CreatedDate)
+		case schemas.GetApiResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetApiResponse_Description, v.Description)
+		case schemas.GetApiResponse_DisableExecuteApiEndpoint:
+			v.DisableExecuteApiEndpoint = new(bool)
+			return d.ReadBool(schemas.GetApiResponse_DisableExecuteApiEndpoint, v.DisableExecuteApiEndpoint)
+		case schemas.GetApiResponse_DisableSchemaValidation:
+			v.DisableSchemaValidation = new(bool)
+			return d.ReadBool(schemas.GetApiResponse_DisableSchemaValidation, v.DisableSchemaValidation)
+		case schemas.GetApiResponse_ImportInfo:
+			return deserialize__listOf__string(d, schemas.GetApiResponse_ImportInfo, &v.ImportInfo)
+		case schemas.GetApiResponse_IpAddressType:
+			var ev string
+			if err := d.ReadString(schemas.GetApiResponse_IpAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = types.IpAddressType(ev)
+			return nil
+		case schemas.GetApiResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetApiResponse_Name, v.Name)
+		case schemas.GetApiResponse_ProtocolType:
+			var ev string
+			if err := d.ReadString(schemas.GetApiResponse_ProtocolType, &ev); err != nil {
+				return err
+			}
+			v.ProtocolType = types.ProtocolType(ev)
+			return nil
+		case schemas.GetApiResponse_RouteSelectionExpression:
+			v.RouteSelectionExpression = new(string)
+			return d.ReadString(schemas.GetApiResponse_RouteSelectionExpression, v.RouteSelectionExpression)
+		case schemas.GetApiResponse_Tags:
+			return deserializeTags(d, schemas.GetApiResponse_Tags, &v.Tags)
+		case schemas.GetApiResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetApiResponse_Version, v.Version)
+		case schemas.GetApiResponse_Warnings:
+			return deserialize__listOf__string(d, schemas.GetApiResponse_Warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApi, schemas.GetApiRequest, schemas.GetApiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApi, schemas.GetApiRequest, schemas.GetApiResponse), output: &GetApiOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

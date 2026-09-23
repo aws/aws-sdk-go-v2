@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -119,6 +121,50 @@ type StartAssetBundleExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAssetBundleExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAssetBundleExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAssetBundleExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetBundleExportJobId != nil {
+		s.WriteString(schemas.StartAssetBundleExportJobRequest_AssetBundleExportJobId, *v.AssetBundleExportJobId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.StartAssetBundleExportJobRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.CloudFormationOverridePropertyConfiguration != nil {
+		s.WriteStruct(schemas.StartAssetBundleExportJobRequest_CloudFormationOverridePropertyConfiguration)
+		v.CloudFormationOverridePropertyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportFormat != "" {
+		s.WriteString(schemas.StartAssetBundleExportJobRequest_ExportFormat, string(v.ExportFormat))
+	}
+	if v.IncludeAllDependencies != false {
+		s.WriteBool(schemas.StartAssetBundleExportJobRequest_IncludeAllDependencies, v.IncludeAllDependencies)
+	}
+	if v.IncludeFolderMembers != "" {
+		s.WriteString(schemas.StartAssetBundleExportJobRequest_IncludeFolderMembers, string(v.IncludeFolderMembers))
+	}
+	if v.IncludeFolderMemberships != false {
+		s.WriteBool(schemas.StartAssetBundleExportJobRequest_IncludeFolderMemberships, v.IncludeFolderMemberships)
+	}
+	if v.IncludePermissions != false {
+		s.WriteBool(schemas.StartAssetBundleExportJobRequest_IncludePermissions, v.IncludePermissions)
+	}
+	if v.IncludeTags != false {
+		s.WriteBool(schemas.StartAssetBundleExportJobRequest_IncludeTags, v.IncludeTags)
+	}
+	serializeAssetBundleResourceArns(s, schemas.StartAssetBundleExportJobRequest_ResourceArns, v.ResourceArns)
+	if v.ValidationStrategy != nil {
+		s.WriteStruct(schemas.StartAssetBundleExportJobRequest_ValidationStrategy)
+		v.ValidationStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartAssetBundleExportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) for the export job.
@@ -140,13 +186,49 @@ type StartAssetBundleExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAssetBundleExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAssetBundleExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAssetBundleExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartAssetBundleExportJobResponse_Arn, *v.Arn)
+	}
+	if v.AssetBundleExportJobId != nil {
+		s.WriteString(schemas.StartAssetBundleExportJobResponse_AssetBundleExportJobId, *v.AssetBundleExportJobId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.StartAssetBundleExportJobResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.StartAssetBundleExportJobResponse_Status, v.Status)
+	}
+}
+func (v *StartAssetBundleExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAssetBundleExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAssetBundleExportJobResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartAssetBundleExportJobResponse_Arn, v.Arn)
+		case schemas.StartAssetBundleExportJobResponse_AssetBundleExportJobId:
+			v.AssetBundleExportJobId = new(string)
+			return d.ReadString(schemas.StartAssetBundleExportJobResponse_AssetBundleExportJobId, v.AssetBundleExportJobId)
+		case schemas.StartAssetBundleExportJobResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.StartAssetBundleExportJobResponse_RequestId, v.RequestId)
+		case schemas.StartAssetBundleExportJobResponse_Status:
+			return d.ReadInt32(schemas.StartAssetBundleExportJobResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAssetBundleExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAssetBundleExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAssetBundleExportJob, schemas.StartAssetBundleExportJobRequest, schemas.StartAssetBundleExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartAssetBundleExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAssetBundleExportJob, schemas.StartAssetBundleExportJobRequest, schemas.StartAssetBundleExportJobResponse), output: &StartAssetBundleExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

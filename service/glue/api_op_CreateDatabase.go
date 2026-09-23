@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type CreateDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatabaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.CreateDatabaseRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseInput != nil {
+		s.WriteStruct(schemas.CreateDatabaseRequest_DatabaseInput)
+		v.DatabaseInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.CreateDatabaseRequest_Tags, v.Tags)
+}
+
 type CreateDatabaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +68,26 @@ type CreateDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatabaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDatabaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatabase, schemas.CreateDatabaseRequest, schemas.CreateDatabaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatabase, schemas.CreateDatabaseRequest, schemas.CreateDatabaseResponse), output: &CreateDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

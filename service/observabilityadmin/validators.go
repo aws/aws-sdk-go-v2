@@ -30,6 +30,26 @@ func (m *validateOpCreateCentralizationRuleForOrganization) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDatasetIntegration struct {
+}
+
+func (*validateOpCreateDatasetIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDatasetIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDatasetIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDatasetIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateS3TableIntegration struct {
 }
 
@@ -130,6 +150,26 @@ func (m *validateOpDeleteCentralizationRuleForOrganization) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDatasetIntegration struct {
+}
+
+func (*validateOpDeleteDatasetIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDatasetIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDatasetIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDatasetIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteS3TableIntegration struct {
 }
 
@@ -225,6 +265,26 @@ func (m *validateOpGetCentralizationRuleForOrganization) HandleInitialize(ctx co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetCentralizationRuleForOrganizationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDatasetIntegration struct {
+}
+
+func (*validateOpGetDatasetIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDatasetIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDatasetIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDatasetIntegrationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +470,26 @@ func (m *validateOpUpdateCentralizationRuleForOrganization) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDatasetIntegration struct {
+}
+
+func (*validateOpUpdateDatasetIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDatasetIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDatasetIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDatasetIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTelemetryPipeline struct {
 }
 
@@ -494,6 +574,10 @@ func addOpCreateCentralizationRuleForOrganizationValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpCreateCentralizationRuleForOrganization{}, middleware.After)
 }
 
+func addOpCreateDatasetIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDatasetIntegration{}, middleware.After)
+}
+
 func addOpCreateS3TableIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateS3TableIntegration{}, middleware.After)
 }
@@ -514,6 +598,10 @@ func addOpDeleteCentralizationRuleForOrganizationValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpDeleteCentralizationRuleForOrganization{}, middleware.After)
 }
 
+func addOpDeleteDatasetIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDatasetIntegration{}, middleware.After)
+}
+
 func addOpDeleteS3TableIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteS3TableIntegration{}, middleware.After)
 }
@@ -532,6 +620,10 @@ func addOpDeleteTelemetryRuleValidationMiddleware(stack *middleware.Stack) error
 
 func addOpGetCentralizationRuleForOrganizationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCentralizationRuleForOrganization{}, middleware.After)
+}
+
+func addOpGetDatasetIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDatasetIntegration{}, middleware.After)
 }
 
 func addOpGetS3TableIntegrationValidationMiddleware(stack *middleware.Stack) error {
@@ -568,6 +660,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateCentralizationRuleForOrganizationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCentralizationRuleForOrganization{}, middleware.After)
+}
+
+func addOpUpdateDatasetIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDatasetIntegration{}, middleware.After)
 }
 
 func addOpUpdateTelemetryPipelineValidationMiddleware(stack *middleware.Stack) error {
@@ -972,6 +1068,21 @@ func validateOpCreateCentralizationRuleForOrganizationInput(v *CreateCentralizat
 	}
 }
 
+func validateOpCreateDatasetIntegrationInput(v *CreateDatasetIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDatasetIntegrationInput"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateS3TableIntegrationInput(v *CreateS3TableIntegrationInput) error {
 	if v == nil {
 		return nil
@@ -1075,6 +1186,21 @@ func validateOpDeleteCentralizationRuleForOrganizationInput(v *DeleteCentralizat
 	}
 }
 
+func validateOpDeleteDatasetIntegrationInput(v *DeleteDatasetIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDatasetIntegrationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteS3TableIntegrationInput(v *DeleteS3TableIntegrationInput) error {
 	if v == nil {
 		return nil
@@ -1142,6 +1268,21 @@ func validateOpGetCentralizationRuleForOrganizationInput(v *GetCentralizationRul
 	invalidParams := smithy.InvalidParamsError{Context: "GetCentralizationRuleForOrganizationInput"}
 	if v.RuleIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDatasetIntegrationInput(v *GetDatasetIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDatasetIntegrationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1297,6 +1438,24 @@ func validateOpUpdateCentralizationRuleForOrganizationInput(v *UpdateCentralizat
 		if err := validateCentralizationRule(v.Rule); err != nil {
 			invalidParams.AddNested("Rule", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDatasetIntegrationInput(v *UpdateDatasetIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDatasetIntegrationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

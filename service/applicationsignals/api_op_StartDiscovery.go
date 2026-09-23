@@ -4,6 +4,8 @@ package applicationsignals
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,15 @@ type StartDiscoveryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDiscoveryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDiscoveryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDiscoveryInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type StartDiscoveryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +71,26 @@ type StartDiscoveryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDiscoveryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDiscoveryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDiscoveryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartDiscoveryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDiscoveryOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDiscoveryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDiscovery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDiscovery, schemas.StartDiscoveryInput, schemas.StartDiscoveryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDiscovery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDiscovery, schemas.StartDiscoveryInput, schemas.StartDiscoveryOutput), output: &StartDiscoveryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

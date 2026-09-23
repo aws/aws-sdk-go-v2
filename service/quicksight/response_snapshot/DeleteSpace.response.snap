@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"RequestId":"__RequestId__","spaceArn":"__SpaceArn__","spaceId":"__SpaceId__"}

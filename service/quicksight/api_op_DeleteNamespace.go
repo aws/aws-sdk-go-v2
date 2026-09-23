@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteNamespaceRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DeleteNamespaceRequest_Namespace, *v.Namespace)
+	}
+}
+
 type DeleteNamespaceOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -56,13 +73,37 @@ type DeleteNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteNamespaceResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteNamespaceResponse_Status, v.Status)
+	}
+}
+func (v *DeleteNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteNamespaceResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteNamespaceResponse_RequestId, v.RequestId)
+		case schemas.DeleteNamespaceResponse_Status:
+			return d.ReadInt32(schemas.DeleteNamespaceResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNamespace, schemas.DeleteNamespaceRequest, schemas.DeleteNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNamespace, schemas.DeleteNamespaceRequest, schemas.DeleteNamespaceResponse), output: &DeleteNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

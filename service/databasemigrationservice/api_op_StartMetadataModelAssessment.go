@@ -4,6 +4,8 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,21 @@ type StartMetadataModelAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelAssessmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelAssessmentMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelAssessmentMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.StartMetadataModelAssessmentMessage_SelectionRules, *v.SelectionRules)
+	}
+}
+
 type StartMetadataModelAssessmentOutput struct {
 
 	// The identifier for the assessment request.
@@ -82,13 +99,32 @@ type StartMetadataModelAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelAssessmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelAssessmentResponse_RequestIdentifier, *v.RequestIdentifier)
+	}
+}
+func (v *StartMetadataModelAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMetadataModelAssessmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMetadataModelAssessmentResponse_RequestIdentifier:
+			v.RequestIdentifier = new(string)
+			return d.ReadString(schemas.StartMetadataModelAssessmentResponse_RequestIdentifier, v.RequestIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMetadataModelAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMetadataModelAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelAssessment, schemas.StartMetadataModelAssessmentMessage, schemas.StartMetadataModelAssessmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMetadataModelAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelAssessment, schemas.StartMetadataModelAssessmentMessage, schemas.StartMetadataModelAssessmentResponse), output: &StartMetadataModelAssessmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

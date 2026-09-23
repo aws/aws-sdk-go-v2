@@ -5,7 +5,9 @@ package healthlake
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,44 @@ type StartFHIRImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFHIRImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFHIRImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFHIRImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartFHIRImportJobRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartFHIRImportJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.StartFHIRImportJobRequest_DatastoreId, *v.DatastoreId)
+	}
+	if v.DriftDetectionEnabled != false {
+		s.WriteBool(schemas.StartFHIRImportJobRequest_DriftDetectionEnabled, v.DriftDetectionEnabled)
+	}
+	serializeInputDataConfig(s, schemas.StartFHIRImportJobRequest_InputDataConfig, v.InputDataConfig)
+	if v.InputFormat != nil {
+		s.WriteString(schemas.StartFHIRImportJobRequest_InputFormat, *v.InputFormat)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartFHIRImportJobRequest_JobName, *v.JobName)
+	}
+	serializeOutputDataConfig(s, schemas.StartFHIRImportJobRequest_JobOutputDataConfig, v.JobOutputDataConfig)
+	if v.ProfileId != nil {
+		s.WriteString(schemas.StartFHIRImportJobRequest_ProfileId, *v.ProfileId)
+	}
+	if v.ProvenanceEnabled != nil {
+		s.WriteBool(schemas.StartFHIRImportJobRequest_ProvenanceEnabled, *v.ProvenanceEnabled)
+	}
+	if v.ValidationLevel != "" {
+		s.WriteString(schemas.StartFHIRImportJobRequest_ValidationLevel, string(v.ValidationLevel))
+	}
+}
+
 type StartFHIRImportJobOutput struct {
 
 	// The import job identifier.
@@ -94,13 +134,48 @@ type StartFHIRImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFHIRImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFHIRImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFHIRImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.StartFHIRImportJobResponse_DatastoreId, *v.DatastoreId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StartFHIRImportJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StartFHIRImportJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StartFHIRImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFHIRImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFHIRImportJobResponse_DatastoreId:
+			v.DatastoreId = new(string)
+			return d.ReadString(schemas.StartFHIRImportJobResponse_DatastoreId, v.DatastoreId)
+		case schemas.StartFHIRImportJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartFHIRImportJobResponse_JobId, v.JobId)
+		case schemas.StartFHIRImportJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartFHIRImportJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFHIRImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartFHIRImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFHIRImportJob, schemas.StartFHIRImportJobRequest, schemas.StartFHIRImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartFHIRImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFHIRImportJob, schemas.StartFHIRImportJobRequest, schemas.StartFHIRImportJobResponse), output: &StartFHIRImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

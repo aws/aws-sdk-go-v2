@@ -4,7 +4,9 @@ package amplifybackend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,23 @@ type UpdateBackendConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBackendConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBackendConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBackendConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateBackendConfigRequest_AppId, *v.AppId)
+	}
+	if v.LoginAuthConfig != nil {
+		s.WriteStruct(schemas.UpdateBackendConfigRequest_LoginAuthConfig)
+		v.LoginAuthConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateBackendConfigOutput struct {
 
 	// The app ID.
@@ -59,13 +78,52 @@ type UpdateBackendConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBackendConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBackendConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBackendConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateBackendConfigResponse_AppId, *v.AppId)
+	}
+	if v.BackendManagerAppId != nil {
+		s.WriteString(schemas.UpdateBackendConfigResponse_BackendManagerAppId, *v.BackendManagerAppId)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.UpdateBackendConfigResponse_Error, *v.Error)
+	}
+	if v.LoginAuthConfig != nil {
+		s.WriteStruct(schemas.UpdateBackendConfigResponse_LoginAuthConfig)
+		v.LoginAuthConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateBackendConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBackendConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBackendConfigResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.UpdateBackendConfigResponse_AppId, v.AppId)
+		case schemas.UpdateBackendConfigResponse_BackendManagerAppId:
+			v.BackendManagerAppId = new(string)
+			return d.ReadString(schemas.UpdateBackendConfigResponse_BackendManagerAppId, v.BackendManagerAppId)
+		case schemas.UpdateBackendConfigResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.UpdateBackendConfigResponse_Error, v.Error)
+		case schemas.UpdateBackendConfigResponse_LoginAuthConfig:
+			v.LoginAuthConfig = &types.LoginAuthConfigReqObj{}
+			return v.LoginAuthConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBackendConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBackendConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBackendConfig, schemas.UpdateBackendConfigRequest, schemas.UpdateBackendConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBackendConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBackendConfig, schemas.UpdateBackendConfigRequest, schemas.UpdateBackendConfigResponse), output: &UpdateBackendConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

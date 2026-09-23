@@ -3,7 +3,10 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
+	smithyprelude "github.com/aws/smithy-go/prelude"
 	"time"
 )
 
@@ -17,6 +20,34 @@ type CloudWatchLogging struct {
 	LogStream *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CloudWatchLogging) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLogging)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLogging) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogGroup != nil {
+		s.WriteString(schemas.CloudWatchLogging_logGroup, *v.LogGroup)
+	}
+	if v.LogStream != nil {
+		s.WriteString(schemas.CloudWatchLogging_logStream, *v.LogStream)
+	}
+}
+func (v *CloudWatchLogging) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLogging, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLogging_logGroup:
+			v.LogGroup = new(string)
+			return d.ReadString(schemas.CloudWatchLogging_logGroup, v.LogGroup)
+		case schemas.CloudWatchLogging_logStream:
+			v.LogStream = new(string)
+			return d.ReadString(schemas.CloudWatchLogging_logStream, v.LogStream)
+		}
+		return nil
+	})
 }
 
 // Contains the location of the code artifact for a MicroVM image.
@@ -36,6 +67,12 @@ type CodeArtifactMemberUri struct {
 }
 
 func (*CodeArtifactMemberUri) isCodeArtifact() {}
+func (v *CodeArtifactMemberUri) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.CodeArtifact_uri, v.Value)
+}
+func (v *CodeArtifactMemberUri) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.CodeArtifact_uri, &v.Value)
+}
 
 // Configuration for the CPU architecture of a MicroVM.
 type CpuConfiguration struct {
@@ -46,6 +83,32 @@ type CpuConfiguration struct {
 	Architecture Architecture
 
 	noSmithyDocumentSerde
+}
+
+func (v *CpuConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CpuConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CpuConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Architecture != "" {
+		s.WriteString(schemas.CpuConfiguration_architecture, string(v.Architecture))
+	}
+}
+func (v *CpuConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CpuConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CpuConfiguration_architecture:
+			var ev string
+			if err := d.ReadString(schemas.CpuConfiguration_architecture, &ev); err != nil {
+				return err
+			}
+			v.Architecture = Architecture(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Lifecycle hook configuration for MicroVMs and MicroVM images.
@@ -61,6 +124,44 @@ type Hooks struct {
 	Port *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Hooks) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Hooks)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Hooks) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MicrovmHooks != nil {
+		s.WriteStruct(schemas.Hooks_microvmHooks)
+		v.MicrovmHooks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MicrovmImageHooks != nil {
+		s.WriteStruct(schemas.Hooks_microvmImageHooks)
+		v.MicrovmImageHooks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.Hooks_port, *v.Port)
+	}
+}
+func (v *Hooks) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Hooks, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Hooks_microvmHooks:
+			v.MicrovmHooks = &MicrovmHooks{}
+			return v.MicrovmHooks.Deserialize(d)
+		case schemas.Hooks_microvmImageHooks:
+			v.MicrovmImageHooks = &MicrovmImageHooks{}
+			return v.MicrovmImageHooks.Deserialize(d)
+		case schemas.Hooks_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.Hooks_port, v.Port)
+		}
+		return nil
+	})
 }
 
 // Configuration that controls MicroVM auto-suspend and auto-resume behavior. Idle
@@ -89,6 +190,40 @@ type IdlePolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IdlePolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdlePolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdlePolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoResumeEnabled != nil {
+		s.WriteBool(schemas.IdlePolicy_autoResumeEnabled, *v.AutoResumeEnabled)
+	}
+	if v.MaxIdleDurationSeconds != nil {
+		s.WriteInt32(schemas.IdlePolicy_maxIdleDurationSeconds, *v.MaxIdleDurationSeconds)
+	}
+	if v.SuspendedDurationSeconds != nil {
+		s.WriteInt32(schemas.IdlePolicy_suspendedDurationSeconds, *v.SuspendedDurationSeconds)
+	}
+}
+func (v *IdlePolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdlePolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdlePolicy_autoResumeEnabled:
+			v.AutoResumeEnabled = new(bool)
+			return d.ReadBool(schemas.IdlePolicy_autoResumeEnabled, v.AutoResumeEnabled)
+		case schemas.IdlePolicy_maxIdleDurationSeconds:
+			v.MaxIdleDurationSeconds = new(int32)
+			return d.ReadInt32(schemas.IdlePolicy_maxIdleDurationSeconds, v.MaxIdleDurationSeconds)
+		case schemas.IdlePolicy_suspendedDurationSeconds:
+			v.SuspendedDurationSeconds = new(int32)
+			return d.ReadInt32(schemas.IdlePolicy_suspendedDurationSeconds, v.SuspendedDurationSeconds)
+		}
+		return nil
+	})
+}
+
 // Configuration for MicroVM logging output. Specify exactly one: cloudWatch to
 // enable CloudWatch logging, or disabled to turn off logging.
 //
@@ -108,6 +243,14 @@ type LoggingMemberCloudWatch struct {
 }
 
 func (*LoggingMemberCloudWatch) isLogging() {}
+func (v *LoggingMemberCloudWatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Logging_cloudWatch)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *LoggingMemberCloudWatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Specifies that logging is disabled.
 type LoggingMemberDisabled struct {
@@ -117,10 +260,34 @@ type LoggingMemberDisabled struct {
 }
 
 func (*LoggingMemberDisabled) isLogging() {}
+func (v *LoggingMemberDisabled) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Logging_disabled)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *LoggingMemberDisabled) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Specifies that logging is disabled for the MicroVM.
 type LoggingDisabled struct {
 	noSmithyDocumentSerde
+}
+
+func (v *LoggingDisabled) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingDisabled)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingDisabled) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *LoggingDisabled) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingDisabled, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Contains summary information about a managed MicroVM image.
@@ -140,6 +307,40 @@ type ManagedMicrovmImageSummary struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ManagedMicrovmImageSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedMicrovmImageSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedMicrovmImageSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ManagedMicrovmImageSummary_createdAt, *v.CreatedAt)
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.ManagedMicrovmImageSummary_imageArn, *v.ImageArn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ManagedMicrovmImageSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ManagedMicrovmImageSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedMicrovmImageSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedMicrovmImageSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ManagedMicrovmImageSummary_createdAt, v.CreatedAt)
+		case schemas.ManagedMicrovmImageSummary_imageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.ManagedMicrovmImageSummary_imageArn, v.ImageArn)
+		case schemas.ManagedMicrovmImageSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ManagedMicrovmImageSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
 }
 
 // Contains version information for a managed MicroVM image.
@@ -171,6 +372,56 @@ type ManagedMicrovmImageVersion struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedMicrovmImageVersion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedMicrovmImageVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedMicrovmImageVersion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ManagedMicrovmImageVersion_createdAt, *v.CreatedAt)
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.ManagedMicrovmImageVersion_imageArn, *v.ImageArn)
+	}
+	if v.ImageVersion != nil {
+		s.WriteString(schemas.ManagedMicrovmImageVersion_imageVersion, *v.ImageVersion)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ManagedMicrovmImageVersion_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ManagedMicrovmImageVersion_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ManagedMicrovmImageVersion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedMicrovmImageVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedMicrovmImageVersion_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ManagedMicrovmImageVersion_createdAt, v.CreatedAt)
+		case schemas.ManagedMicrovmImageVersion_imageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.ManagedMicrovmImageVersion_imageArn, v.ImageArn)
+		case schemas.ManagedMicrovmImageVersion_imageVersion:
+			v.ImageVersion = new(string)
+			return d.ReadString(schemas.ManagedMicrovmImageVersion_imageVersion, v.ImageVersion)
+		case schemas.ManagedMicrovmImageVersion_status:
+			var ev string
+			if err := d.ReadString(schemas.ManagedMicrovmImageVersion_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ManagedMicrovmImageVersionStatus(ev)
+			return nil
+		case schemas.ManagedMicrovmImageVersion_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ManagedMicrovmImageVersion_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Configuration for lifecycle hooks invoked during MicroVM events such as run,
 // resume, suspend, and terminate.
 type MicrovmHooks struct {
@@ -200,6 +451,86 @@ type MicrovmHooks struct {
 	TerminateTimeoutInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *MicrovmHooks) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MicrovmHooks)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MicrovmHooks) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Resume != "" {
+		s.WriteString(schemas.MicrovmHooks_resume, string(v.Resume))
+	}
+	if v.ResumeTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.MicrovmHooks_resumeTimeoutInSeconds, *v.ResumeTimeoutInSeconds)
+	}
+	if v.Run != "" {
+		s.WriteString(schemas.MicrovmHooks_run, string(v.Run))
+	}
+	if v.RunTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.MicrovmHooks_runTimeoutInSeconds, *v.RunTimeoutInSeconds)
+	}
+	if v.Suspend != "" {
+		s.WriteString(schemas.MicrovmHooks_suspend, string(v.Suspend))
+	}
+	if v.SuspendTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.MicrovmHooks_suspendTimeoutInSeconds, *v.SuspendTimeoutInSeconds)
+	}
+	if v.Terminate != "" {
+		s.WriteString(schemas.MicrovmHooks_terminate, string(v.Terminate))
+	}
+	if v.TerminateTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.MicrovmHooks_terminateTimeoutInSeconds, *v.TerminateTimeoutInSeconds)
+	}
+}
+func (v *MicrovmHooks) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MicrovmHooks, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MicrovmHooks_resume:
+			var ev string
+			if err := d.ReadString(schemas.MicrovmHooks_resume, &ev); err != nil {
+				return err
+			}
+			v.Resume = HookState(ev)
+			return nil
+		case schemas.MicrovmHooks_resumeTimeoutInSeconds:
+			v.ResumeTimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.MicrovmHooks_resumeTimeoutInSeconds, v.ResumeTimeoutInSeconds)
+		case schemas.MicrovmHooks_run:
+			var ev string
+			if err := d.ReadString(schemas.MicrovmHooks_run, &ev); err != nil {
+				return err
+			}
+			v.Run = HookState(ev)
+			return nil
+		case schemas.MicrovmHooks_runTimeoutInSeconds:
+			v.RunTimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.MicrovmHooks_runTimeoutInSeconds, v.RunTimeoutInSeconds)
+		case schemas.MicrovmHooks_suspend:
+			var ev string
+			if err := d.ReadString(schemas.MicrovmHooks_suspend, &ev); err != nil {
+				return err
+			}
+			v.Suspend = HookState(ev)
+			return nil
+		case schemas.MicrovmHooks_suspendTimeoutInSeconds:
+			v.SuspendTimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.MicrovmHooks_suspendTimeoutInSeconds, v.SuspendTimeoutInSeconds)
+		case schemas.MicrovmHooks_terminate:
+			var ev string
+			if err := d.ReadString(schemas.MicrovmHooks_terminate, &ev); err != nil {
+				return err
+			}
+			v.Terminate = HookState(ev)
+			return nil
+		case schemas.MicrovmHooks_terminateTimeoutInSeconds:
+			v.TerminateTimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.MicrovmHooks_terminateTimeoutInSeconds, v.TerminateTimeoutInSeconds)
+		}
+		return nil
+	})
 }
 
 // Contains summary information about a MicroVM image build.
@@ -251,6 +582,88 @@ type MicrovmImageBuildSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MicrovmImageBuildSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MicrovmImageBuildSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MicrovmImageBuildSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Architecture != "" {
+		s.WriteString(schemas.MicrovmImageBuildSummary_architecture, string(v.Architecture))
+	}
+	if v.BuildId != nil {
+		s.WriteString(schemas.MicrovmImageBuildSummary_buildId, *v.BuildId)
+	}
+	if v.BuildState != "" {
+		s.WriteString(schemas.MicrovmImageBuildSummary_buildState, string(v.BuildState))
+	}
+	if v.Chipset != "" {
+		s.WriteString(schemas.MicrovmImageBuildSummary_chipset, string(v.Chipset))
+	}
+	if v.ChipsetGeneration != nil {
+		s.WriteString(schemas.MicrovmImageBuildSummary_chipsetGeneration, *v.ChipsetGeneration)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.MicrovmImageBuildSummary_createdAt, *v.CreatedAt)
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.MicrovmImageBuildSummary_imageArn, *v.ImageArn)
+	}
+	if v.ImageVersion != nil {
+		s.WriteString(schemas.MicrovmImageBuildSummary_imageVersion, *v.ImageVersion)
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.MicrovmImageBuildSummary_stateReason, *v.StateReason)
+	}
+}
+func (v *MicrovmImageBuildSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MicrovmImageBuildSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MicrovmImageBuildSummary_architecture:
+			var ev string
+			if err := d.ReadString(schemas.MicrovmImageBuildSummary_architecture, &ev); err != nil {
+				return err
+			}
+			v.Architecture = Architecture(ev)
+			return nil
+		case schemas.MicrovmImageBuildSummary_buildId:
+			v.BuildId = new(string)
+			return d.ReadString(schemas.MicrovmImageBuildSummary_buildId, v.BuildId)
+		case schemas.MicrovmImageBuildSummary_buildState:
+			var ev string
+			if err := d.ReadString(schemas.MicrovmImageBuildSummary_buildState, &ev); err != nil {
+				return err
+			}
+			v.BuildState = BuildState(ev)
+			return nil
+		case schemas.MicrovmImageBuildSummary_chipset:
+			var ev string
+			if err := d.ReadString(schemas.MicrovmImageBuildSummary_chipset, &ev); err != nil {
+				return err
+			}
+			v.Chipset = Chipset(ev)
+			return nil
+		case schemas.MicrovmImageBuildSummary_chipsetGeneration:
+			v.ChipsetGeneration = new(string)
+			return d.ReadString(schemas.MicrovmImageBuildSummary_chipsetGeneration, v.ChipsetGeneration)
+		case schemas.MicrovmImageBuildSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.MicrovmImageBuildSummary_createdAt, v.CreatedAt)
+		case schemas.MicrovmImageBuildSummary_imageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.MicrovmImageBuildSummary_imageArn, v.ImageArn)
+		case schemas.MicrovmImageBuildSummary_imageVersion:
+			v.ImageVersion = new(string)
+			return d.ReadString(schemas.MicrovmImageBuildSummary_imageVersion, v.ImageVersion)
+		case schemas.MicrovmImageBuildSummary_stateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.MicrovmImageBuildSummary_stateReason, v.StateReason)
+		}
+		return nil
+	})
+}
+
 // Configuration for hooks invoked during MicroVM image build events such as ready
 // and validate.
 type MicrovmImageHooks struct {
@@ -268,6 +681,54 @@ type MicrovmImageHooks struct {
 	ValidateTimeoutInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *MicrovmImageHooks) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MicrovmImageHooks)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MicrovmImageHooks) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ready != "" {
+		s.WriteString(schemas.MicrovmImageHooks_ready, string(v.Ready))
+	}
+	if v.ReadyTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.MicrovmImageHooks_readyTimeoutInSeconds, *v.ReadyTimeoutInSeconds)
+	}
+	if v.Validate != "" {
+		s.WriteString(schemas.MicrovmImageHooks_validate, string(v.Validate))
+	}
+	if v.ValidateTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.MicrovmImageHooks_validateTimeoutInSeconds, *v.ValidateTimeoutInSeconds)
+	}
+}
+func (v *MicrovmImageHooks) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MicrovmImageHooks, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MicrovmImageHooks_ready:
+			var ev string
+			if err := d.ReadString(schemas.MicrovmImageHooks_ready, &ev); err != nil {
+				return err
+			}
+			v.Ready = HookState(ev)
+			return nil
+		case schemas.MicrovmImageHooks_readyTimeoutInSeconds:
+			v.ReadyTimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.MicrovmImageHooks_readyTimeoutInSeconds, v.ReadyTimeoutInSeconds)
+		case schemas.MicrovmImageHooks_validate:
+			var ev string
+			if err := d.ReadString(schemas.MicrovmImageHooks_validate, &ev); err != nil {
+				return err
+			}
+			v.Validate = HookState(ev)
+			return nil
+		case schemas.MicrovmImageHooks_validateTimeoutInSeconds:
+			v.ValidateTimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.MicrovmImageHooks_validateTimeoutInSeconds, v.ValidateTimeoutInSeconds)
+		}
+		return nil
+	})
 }
 
 // Contains summary information about a MicroVM image.
@@ -300,6 +761,62 @@ type MicrovmImageSummary struct {
 	LatestFailedImageVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MicrovmImageSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MicrovmImageSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MicrovmImageSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.MicrovmImageSummary_createdAt, *v.CreatedAt)
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.MicrovmImageSummary_imageArn, *v.ImageArn)
+	}
+	if v.LatestActiveImageVersion != nil {
+		s.WriteString(schemas.MicrovmImageSummary_latestActiveImageVersion, *v.LatestActiveImageVersion)
+	}
+	if v.LatestFailedImageVersion != nil {
+		s.WriteString(schemas.MicrovmImageSummary_latestFailedImageVersion, *v.LatestFailedImageVersion)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MicrovmImageSummary_name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.MicrovmImageSummary_state, string(v.State))
+	}
+}
+func (v *MicrovmImageSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MicrovmImageSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MicrovmImageSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.MicrovmImageSummary_createdAt, v.CreatedAt)
+		case schemas.MicrovmImageSummary_imageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.MicrovmImageSummary_imageArn, v.ImageArn)
+		case schemas.MicrovmImageSummary_latestActiveImageVersion:
+			v.LatestActiveImageVersion = new(string)
+			return d.ReadString(schemas.MicrovmImageSummary_latestActiveImageVersion, v.LatestActiveImageVersion)
+		case schemas.MicrovmImageSummary_latestFailedImageVersion:
+			v.LatestFailedImageVersion = new(string)
+			return d.ReadString(schemas.MicrovmImageSummary_latestFailedImageVersion, v.LatestFailedImageVersion)
+		case schemas.MicrovmImageSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MicrovmImageSummary_name, v.Name)
+		case schemas.MicrovmImageSummary_state:
+			var ev string
+			if err := d.ReadString(schemas.MicrovmImageSummary_state, &ev); err != nil {
+				return err
+			}
+			v.State = MicrovmImageState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains summary information about a version of a MicroVM image.
@@ -385,6 +902,128 @@ type MicrovmImageVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MicrovmImageVersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MicrovmImageVersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MicrovmImageVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapabilityList(s, schemas.MicrovmImageVersionSummary_additionalOsCapabilities, v.AdditionalOsCapabilities)
+	if v.BaseImageArn != nil {
+		s.WriteString(schemas.MicrovmImageVersionSummary_baseImageArn, *v.BaseImageArn)
+	}
+	if v.BaseImageVersion != nil {
+		s.WriteString(schemas.MicrovmImageVersionSummary_baseImageVersion, *v.BaseImageVersion)
+	}
+	if v.BuildRoleArn != nil {
+		s.WriteString(schemas.MicrovmImageVersionSummary_buildRoleArn, *v.BuildRoleArn)
+	}
+	serializeCodeArtifact(s, schemas.MicrovmImageVersionSummary_codeArtifact, v.CodeArtifact)
+	serializeCpuConfigurationList(s, schemas.MicrovmImageVersionSummary_cpuConfigurations, v.CpuConfigurations)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.MicrovmImageVersionSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.MicrovmImageVersionSummary_description, *v.Description)
+	}
+	serializeNetworkConnectorList(s, schemas.MicrovmImageVersionSummary_egressNetworkConnectors, v.EgressNetworkConnectors)
+	serializeEnvironmentVariableMap(s, schemas.MicrovmImageVersionSummary_environmentVariables, v.EnvironmentVariables)
+	if v.Hooks != nil {
+		s.WriteStruct(schemas.MicrovmImageVersionSummary_hooks)
+		v.Hooks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.MicrovmImageVersionSummary_imageArn, *v.ImageArn)
+	}
+	if v.ImageVersion != nil {
+		s.WriteString(schemas.MicrovmImageVersionSummary_imageVersion, *v.ImageVersion)
+	}
+	serializeLogging(s, schemas.MicrovmImageVersionSummary_logging, v.Logging)
+	serializeResourcesList(s, schemas.MicrovmImageVersionSummary_resources, v.Resources)
+	if v.State != "" {
+		s.WriteString(schemas.MicrovmImageVersionSummary_state, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.MicrovmImageVersionSummary_stateReason, *v.StateReason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MicrovmImageVersionSummary_status, string(v.Status))
+	}
+	serializeTags(s, schemas.MicrovmImageVersionSummary_tags, v.Tags)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.MicrovmImageVersionSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *MicrovmImageVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MicrovmImageVersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MicrovmImageVersionSummary_additionalOsCapabilities:
+			return deserializeCapabilityList(d, schemas.MicrovmImageVersionSummary_additionalOsCapabilities, &v.AdditionalOsCapabilities)
+		case schemas.MicrovmImageVersionSummary_baseImageArn:
+			v.BaseImageArn = new(string)
+			return d.ReadString(schemas.MicrovmImageVersionSummary_baseImageArn, v.BaseImageArn)
+		case schemas.MicrovmImageVersionSummary_baseImageVersion:
+			v.BaseImageVersion = new(string)
+			return d.ReadString(schemas.MicrovmImageVersionSummary_baseImageVersion, v.BaseImageVersion)
+		case schemas.MicrovmImageVersionSummary_buildRoleArn:
+			v.BuildRoleArn = new(string)
+			return d.ReadString(schemas.MicrovmImageVersionSummary_buildRoleArn, v.BuildRoleArn)
+		case schemas.MicrovmImageVersionSummary_codeArtifact:
+			return deserializeCodeArtifact(d, schemas.MicrovmImageVersionSummary_codeArtifact, &v.CodeArtifact)
+		case schemas.MicrovmImageVersionSummary_cpuConfigurations:
+			return deserializeCpuConfigurationList(d, schemas.MicrovmImageVersionSummary_cpuConfigurations, &v.CpuConfigurations)
+		case schemas.MicrovmImageVersionSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.MicrovmImageVersionSummary_createdAt, v.CreatedAt)
+		case schemas.MicrovmImageVersionSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.MicrovmImageVersionSummary_description, v.Description)
+		case schemas.MicrovmImageVersionSummary_egressNetworkConnectors:
+			return deserializeNetworkConnectorList(d, schemas.MicrovmImageVersionSummary_egressNetworkConnectors, &v.EgressNetworkConnectors)
+		case schemas.MicrovmImageVersionSummary_environmentVariables:
+			return deserializeEnvironmentVariableMap(d, schemas.MicrovmImageVersionSummary_environmentVariables, &v.EnvironmentVariables)
+		case schemas.MicrovmImageVersionSummary_hooks:
+			v.Hooks = &Hooks{}
+			return v.Hooks.Deserialize(d)
+		case schemas.MicrovmImageVersionSummary_imageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.MicrovmImageVersionSummary_imageArn, v.ImageArn)
+		case schemas.MicrovmImageVersionSummary_imageVersion:
+			v.ImageVersion = new(string)
+			return d.ReadString(schemas.MicrovmImageVersionSummary_imageVersion, v.ImageVersion)
+		case schemas.MicrovmImageVersionSummary_logging:
+			return deserializeLogging(d, schemas.MicrovmImageVersionSummary_logging, &v.Logging)
+		case schemas.MicrovmImageVersionSummary_resources:
+			return deserializeResourcesList(d, schemas.MicrovmImageVersionSummary_resources, &v.Resources)
+		case schemas.MicrovmImageVersionSummary_state:
+			var ev string
+			if err := d.ReadString(schemas.MicrovmImageVersionSummary_state, &ev); err != nil {
+				return err
+			}
+			v.State = MicrovmImageVersionState(ev)
+			return nil
+		case schemas.MicrovmImageVersionSummary_stateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.MicrovmImageVersionSummary_stateReason, v.StateReason)
+		case schemas.MicrovmImageVersionSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.MicrovmImageVersionSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = MicrovmImageVersionStatus(ev)
+			return nil
+		case schemas.MicrovmImageVersionSummary_tags:
+			return deserializeTags(d, schemas.MicrovmImageVersionSummary_tags, &v.Tags)
+		case schemas.MicrovmImageVersionSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.MicrovmImageVersionSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Contains summary information about a MicroVM instance.
 type MicrovmItem struct {
 
@@ -416,6 +1055,56 @@ type MicrovmItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MicrovmItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MicrovmItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MicrovmItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageArn != nil {
+		s.WriteString(schemas.MicrovmItem_imageArn, *v.ImageArn)
+	}
+	if v.ImageVersion != nil {
+		s.WriteString(schemas.MicrovmItem_imageVersion, *v.ImageVersion)
+	}
+	if v.MicrovmId != nil {
+		s.WriteString(schemas.MicrovmItem_microvmId, *v.MicrovmId)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.MicrovmItem_startedAt, *v.StartedAt)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.MicrovmItem_state, string(v.State))
+	}
+}
+func (v *MicrovmItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MicrovmItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MicrovmItem_imageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.MicrovmItem_imageArn, v.ImageArn)
+		case schemas.MicrovmItem_imageVersion:
+			v.ImageVersion = new(string)
+			return d.ReadString(schemas.MicrovmItem_imageVersion, v.ImageVersion)
+		case schemas.MicrovmItem_microvmId:
+			v.MicrovmId = new(string)
+			return d.ReadString(schemas.MicrovmItem_microvmId, v.MicrovmId)
+		case schemas.MicrovmItem_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.MicrovmItem_startedAt, v.StartedAt)
+		case schemas.MicrovmItem_state:
+			var ev string
+			if err := d.ReadString(schemas.MicrovmItem_state, &ev); err != nil {
+				return err
+			}
+			v.State = MicrovmState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies a range of ports.
 type PortRange struct {
 
@@ -430,6 +1119,34 @@ type PortRange struct {
 	StartPort *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *PortRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PortRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PortRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndPort != nil {
+		s.WriteInt32(schemas.PortRange_endPort, *v.EndPort)
+	}
+	if v.StartPort != nil {
+		s.WriteInt32(schemas.PortRange_startPort, *v.StartPort)
+	}
+}
+func (v *PortRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PortRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PortRange_endPort:
+			v.EndPort = new(int32)
+			return d.ReadInt32(schemas.PortRange_endPort, v.EndPort)
+		case schemas.PortRange_startPort:
+			v.StartPort = new(int32)
+			return d.ReadInt32(schemas.PortRange_startPort, v.StartPort)
+		}
+		return nil
+	})
 }
 
 // Specifies which ports are accessible on a MicroVM. Only one of the port
@@ -452,6 +1169,14 @@ type PortSpecificationMemberAllPorts struct {
 }
 
 func (*PortSpecificationMemberAllPorts) isPortSpecification() {}
+func (v *PortSpecificationMemberAllPorts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PortSpecification_allPorts)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PortSpecificationMemberAllPorts) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A single port number.
 type PortSpecificationMemberPort struct {
@@ -461,6 +1186,12 @@ type PortSpecificationMemberPort struct {
 }
 
 func (*PortSpecificationMemberPort) isPortSpecification() {}
+func (v *PortSpecificationMemberPort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.PortSpecification_port, v.Value)
+}
+func (v *PortSpecificationMemberPort) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt32(schemas.PortSpecification_port, &v.Value)
+}
 
 // A range of ports.
 type PortSpecificationMemberRange struct {
@@ -470,6 +1201,14 @@ type PortSpecificationMemberRange struct {
 }
 
 func (*PortSpecificationMemberRange) isPortSpecification() {}
+func (v *PortSpecificationMemberRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PortSpecification_range)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PortSpecificationMemberRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Resource requirements for a MicroVM.
 type Resources struct {
@@ -480,6 +1219,28 @@ type Resources struct {
 	MinimumMemoryInMiB *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Resources) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resources)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resources) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MinimumMemoryInMiB != nil {
+		s.WriteInt32(schemas.Resources_minimumMemoryInMiB, *v.MinimumMemoryInMiB)
+	}
+}
+func (v *Resources) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resources, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resources_minimumMemoryInMiB:
+			v.MinimumMemoryInMiB = new(int32)
+			return d.ReadInt32(schemas.Resources_minimumMemoryInMiB, v.MinimumMemoryInMiB)
+		}
+		return nil
+	})
 }
 
 // Contains size information about a MicroVM image snapshot build.
@@ -497,8 +1258,58 @@ type SnapshotBuild struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SnapshotBuild) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotBuild)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotBuild) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeInstallSizeInBytes != nil {
+		s.WriteInt64(schemas.SnapshotBuild_codeInstallSizeInBytes, *v.CodeInstallSizeInBytes)
+	}
+	if v.DiskSnapshotSizeInBytes != nil {
+		s.WriteInt64(schemas.SnapshotBuild_diskSnapshotSizeInBytes, *v.DiskSnapshotSizeInBytes)
+	}
+	if v.MemorySnapshotSizeInBytes != nil {
+		s.WriteInt64(schemas.SnapshotBuild_memorySnapshotSizeInBytes, *v.MemorySnapshotSizeInBytes)
+	}
+}
+func (v *SnapshotBuild) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotBuild, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotBuild_codeInstallSizeInBytes:
+			v.CodeInstallSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.SnapshotBuild_codeInstallSizeInBytes, v.CodeInstallSizeInBytes)
+		case schemas.SnapshotBuild_diskSnapshotSizeInBytes:
+			v.DiskSnapshotSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.SnapshotBuild_diskSnapshotSizeInBytes, v.DiskSnapshotSizeInBytes)
+		case schemas.SnapshotBuild_memorySnapshotSizeInBytes:
+			v.MemorySnapshotSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.SnapshotBuild_memorySnapshotSizeInBytes, v.MemorySnapshotSizeInBytes)
+		}
+		return nil
+	})
+}
+
 type Unit struct {
 	noSmithyDocumentSerde
+}
+
+func (v *Unit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(smithyprelude.Unit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Unit) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *Unit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, smithyprelude.Unit, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

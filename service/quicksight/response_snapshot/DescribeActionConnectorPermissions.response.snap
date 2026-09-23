@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ActionConnectorId":"__ActionConnectorId__","Arn":"__Arn__","Permissions":[{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"},{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"}],"RequestId":"__RequestId__","Status":200}

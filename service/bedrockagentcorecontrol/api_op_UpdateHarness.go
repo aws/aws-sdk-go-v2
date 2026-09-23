@@ -62,6 +62,11 @@ type UpdateHarnessInput struct {
 	// specified, the existing value is retained.
 	ExecutionRoleArn *string
 
+	// The lifecycle hooks to run at defined points in the agent loop. If specified,
+	// this replaces all existing hooks. If not specified, the existing hooks are
+	// retained.
+	Hooks []types.HarnessHook
+
 	// The maximum number of iterations the agent loop can execute per invocation. If
 	// not specified, the existing value is retained.
 	MaxIterations *int32

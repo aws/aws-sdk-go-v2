@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type DescribeSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSpaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSpaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeSpaceRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxContributors != nil {
+		s.WriteInt32(schemas.DescribeSpaceRequest_MaxContributors, *v.MaxContributors)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.DescribeSpaceRequest_SpaceId, *v.SpaceId)
+	}
+}
+
 type DescribeSpaceOutput struct {
 
 	// The details of the space.
@@ -69,13 +89,55 @@ type DescribeSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSpaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSpaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSpaceContributorList(s, schemas.DescribeSpaceResponse_Contributors, v.Contributors)
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeSpaceResponse_RequestId, *v.RequestId)
+	}
+	if v.Space != nil {
+		s.WriteStruct(schemas.DescribeSpaceResponse_Space)
+		v.Space.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SpaceArn != nil {
+		s.WriteString(schemas.DescribeSpaceResponse_spaceArn, *v.SpaceArn)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.DescribeSpaceResponse_spaceId, *v.SpaceId)
+	}
+}
+func (v *DescribeSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSpaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSpaceResponse_Contributors:
+			return deserializeSpaceContributorList(d, schemas.DescribeSpaceResponse_Contributors, &v.Contributors)
+		case schemas.DescribeSpaceResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeSpaceResponse_RequestId, v.RequestId)
+		case schemas.DescribeSpaceResponse_Space:
+			v.Space = &types.SpaceDetails{}
+			return v.Space.Deserialize(d)
+		case schemas.DescribeSpaceResponse_spaceArn:
+			v.SpaceArn = new(string)
+			return d.ReadString(schemas.DescribeSpaceResponse_spaceArn, v.SpaceArn)
+		case schemas.DescribeSpaceResponse_spaceId:
+			v.SpaceId = new(string)
+			return d.ReadString(schemas.DescribeSpaceResponse_spaceId, v.SpaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSpace, schemas.DescribeSpaceRequest, schemas.DescribeSpaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSpace, schemas.DescribeSpaceRequest, schemas.DescribeSpaceResponse), output: &DescribeSpaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

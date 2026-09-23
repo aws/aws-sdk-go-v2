@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -108,6 +110,48 @@ type ListRestoreJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRestoreJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRestoreJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRestoreJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByAccountId != nil {
+		s.WriteString(schemas.ListRestoreJobsInput_ByAccountId, *v.ByAccountId)
+	}
+	if v.ByCompleteAfter != nil {
+		s.WriteTime(schemas.ListRestoreJobsInput_ByCompleteAfter, *v.ByCompleteAfter)
+	}
+	if v.ByCompleteBefore != nil {
+		s.WriteTime(schemas.ListRestoreJobsInput_ByCompleteBefore, *v.ByCompleteBefore)
+	}
+	if v.ByCreatedAfter != nil {
+		s.WriteTime(schemas.ListRestoreJobsInput_ByCreatedAfter, *v.ByCreatedAfter)
+	}
+	if v.ByCreatedBefore != nil {
+		s.WriteTime(schemas.ListRestoreJobsInput_ByCreatedBefore, *v.ByCreatedBefore)
+	}
+	if v.ByParentJobId != nil {
+		s.WriteString(schemas.ListRestoreJobsInput_ByParentJobId, *v.ByParentJobId)
+	}
+	if v.ByResourceType != nil {
+		s.WriteString(schemas.ListRestoreJobsInput_ByResourceType, *v.ByResourceType)
+	}
+	if v.ByRestoreTestingPlanArn != nil {
+		s.WriteString(schemas.ListRestoreJobsInput_ByRestoreTestingPlanArn, *v.ByRestoreTestingPlanArn)
+	}
+	if v.ByStatus != "" {
+		s.WriteString(schemas.ListRestoreJobsInput_ByStatus, string(v.ByStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRestoreJobsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRestoreJobsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListRestoreJobsOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a
@@ -126,13 +170,35 @@ type ListRestoreJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRestoreJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRestoreJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRestoreJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRestoreJobsOutput_NextToken, *v.NextToken)
+	}
+	serializeRestoreJobsList(s, schemas.ListRestoreJobsOutput_RestoreJobs, v.RestoreJobs)
+}
+func (v *ListRestoreJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRestoreJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRestoreJobsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRestoreJobsOutput_NextToken, v.NextToken)
+		case schemas.ListRestoreJobsOutput_RestoreJobs:
+			return deserializeRestoreJobsList(d, schemas.ListRestoreJobsOutput_RestoreJobs, &v.RestoreJobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRestoreJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRestoreJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRestoreJobs, schemas.ListRestoreJobsInput, schemas.ListRestoreJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRestoreJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRestoreJobs, schemas.ListRestoreJobsInput, schemas.ListRestoreJobsOutput), output: &ListRestoreJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

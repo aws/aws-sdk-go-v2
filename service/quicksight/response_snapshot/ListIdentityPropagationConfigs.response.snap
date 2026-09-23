@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","RequestId":"__RequestId__","Services":[{"AuthorizedTargets":["__Member__","__Member__"],"Service":"REDSHIFT"},{"AuthorizedTargets":["__Member__","__Member__"],"Service":"REDSHIFT"}],"Status":200}

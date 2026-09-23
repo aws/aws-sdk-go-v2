@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -92,6 +94,32 @@ type CreateTLSInspectionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTLSInspectionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTLSInspectionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTLSInspectionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateTLSInspectionConfigurationRequest_Description, *v.Description)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateTLSInspectionConfigurationRequest_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TLSInspectionConfiguration != nil {
+		s.WriteStruct(schemas.CreateTLSInspectionConfigurationRequest_TLSInspectionConfiguration)
+		v.TLSInspectionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TLSInspectionConfigurationName != nil {
+		s.WriteString(schemas.CreateTLSInspectionConfigurationRequest_TLSInspectionConfigurationName, *v.TLSInspectionConfigurationName)
+	}
+	serializeTagList(s, schemas.CreateTLSInspectionConfigurationRequest_Tags, v.Tags)
+}
+
 type CreateTLSInspectionConfigurationOutput struct {
 
 	// The high-level properties of a TLS inspection configuration. This, along with
@@ -122,13 +150,40 @@ type CreateTLSInspectionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTLSInspectionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTLSInspectionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTLSInspectionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TLSInspectionConfigurationResponse != nil {
+		s.WriteStruct(schemas.CreateTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse)
+		v.TLSInspectionConfigurationResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.CreateTLSInspectionConfigurationResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *CreateTLSInspectionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTLSInspectionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse:
+			v.TLSInspectionConfigurationResponse = &types.TLSInspectionConfigurationResponse{}
+			return v.TLSInspectionConfigurationResponse.Deserialize(d)
+		case schemas.CreateTLSInspectionConfigurationResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.CreateTLSInspectionConfigurationResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTLSInspectionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateTLSInspectionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTLSInspectionConfiguration, schemas.CreateTLSInspectionConfigurationRequest, schemas.CreateTLSInspectionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateTLSInspectionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTLSInspectionConfiguration, schemas.CreateTLSInspectionConfigurationRequest, schemas.CreateTLSInspectionConfigurationResponse), output: &CreateTLSInspectionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

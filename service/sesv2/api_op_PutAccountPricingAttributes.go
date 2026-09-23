@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,18 @@ type PutAccountPricingAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountPricingAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountPricingAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountPricingAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Plan != "" {
+		s.WriteString(schemas.PutAccountPricingAttributesRequest_Plan, string(v.Plan))
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error response if the
 // request fails.
 type PutAccountPricingAttributesOutput struct {
@@ -55,13 +69,26 @@ type PutAccountPricingAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountPricingAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountPricingAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountPricingAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutAccountPricingAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAccountPricingAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAccountPricingAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountPricingAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountPricingAttributes, schemas.PutAccountPricingAttributesRequest, schemas.PutAccountPricingAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAccountPricingAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountPricingAttributes, schemas.PutAccountPricingAttributesRequest, schemas.PutAccountPricingAttributesResponse), output: &PutAccountPricingAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

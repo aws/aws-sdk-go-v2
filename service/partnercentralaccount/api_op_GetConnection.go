@@ -4,7 +4,9 @@ package partnercentralaccount
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetConnectionInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetConnectionRequest_Catalog, *v.Catalog)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetConnectionRequest_Identifier, *v.Identifier)
+	}
 }
 
 type GetConnectionOutput struct {
@@ -78,13 +95,59 @@ type GetConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetConnectionResponse_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetConnectionResponse_Catalog, *v.Catalog)
+	}
+	serializeConnectionTypeDetailMap(s, schemas.GetConnectionResponse_ConnectionTypes, v.ConnectionTypes)
+	if v.Id != nil {
+		s.WriteString(schemas.GetConnectionResponse_Id, *v.Id)
+	}
+	if v.OtherParticipantAccountId != nil {
+		s.WriteString(schemas.GetConnectionResponse_OtherParticipantAccountId, *v.OtherParticipantAccountId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetConnectionResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConnectionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetConnectionResponse_Arn, v.Arn)
+		case schemas.GetConnectionResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetConnectionResponse_Catalog, v.Catalog)
+		case schemas.GetConnectionResponse_ConnectionTypes:
+			return deserializeConnectionTypeDetailMap(d, schemas.GetConnectionResponse_ConnectionTypes, &v.ConnectionTypes)
+		case schemas.GetConnectionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetConnectionResponse_Id, v.Id)
+		case schemas.GetConnectionResponse_OtherParticipantAccountId:
+			v.OtherParticipantAccountId = new(string)
+			return d.ReadString(schemas.GetConnectionResponse_OtherParticipantAccountId, v.OtherParticipantAccountId)
+		case schemas.GetConnectionResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetConnectionResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnection, schemas.GetConnectionRequest, schemas.GetConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnection, schemas.GetConnectionRequest, schemas.GetConnectionResponse), output: &GetConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

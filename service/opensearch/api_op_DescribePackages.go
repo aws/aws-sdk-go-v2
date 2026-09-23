@@ -5,7 +5,9 @@ package opensearch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type DescribePackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePackagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePackagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDescribePackagesFilterList(s, schemas.DescribePackagesRequest_Filters, v.Filters)
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.DescribePackagesRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribePackagesRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Container for the response returned by the DescribePackages operation.
 type DescribePackagesOutput struct {
 
@@ -63,13 +81,35 @@ type DescribePackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePackagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePackagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribePackagesResponse_NextToken, *v.NextToken)
+	}
+	serializePackageDetailsList(s, schemas.DescribePackagesResponse_PackageDetailsList, v.PackageDetailsList)
+}
+func (v *DescribePackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePackagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePackagesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribePackagesResponse_NextToken, v.NextToken)
+		case schemas.DescribePackagesResponse_PackageDetailsList:
+			return deserializePackageDetailsList(d, schemas.DescribePackagesResponse_PackageDetailsList, &v.PackageDetailsList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePackages, schemas.DescribePackagesRequest, schemas.DescribePackagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribePackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePackages, schemas.DescribePackagesRequest, schemas.DescribePackagesResponse), output: &DescribePackagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

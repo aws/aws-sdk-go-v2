@@ -12178,6 +12178,15 @@ func awsAwsjson11_deserializeDocumentInstanceMetadata(v **types.InstanceMetadata
 				}
 			}
 
+		case "IdentityStoreArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceIdentityStoreArn to be of type string, got %T instead", value)
+				}
+				sv.IdentityStoreArn = ptr.String(jtv)
+			}
+
 		case "IdentityStoreId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14812,6 +14821,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeInstanceOutput(v **DescribeInstan
 				return err
 			}
 
+		case "IdentityStoreArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceIdentityStoreArn to be of type string, got %T instead", value)
+				}
+				sv.IdentityStoreArn = ptr.String(jtv)
+			}
+
 		case "IdentityStoreId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14855,6 +14873,20 @@ func awsAwsjson11_deserializeOpDocumentDescribeInstanceOutput(v **DescribeInstan
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.PermissionSetsEnabled = ptr.Bool(jtv)
+			}
+
+		case "PrimaryRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegionName to be of type string, got %T instead", value)
+				}
+				sv.PrimaryRegion = ptr.String(jtv)
+			}
+
+		case "Regions":
+			if err := awsAwsjson11_deserializeDocumentRegionMetadataList(&sv.Regions, value); err != nil {
+				return err
 			}
 
 		case "Status":

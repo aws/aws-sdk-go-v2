@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,26 @@ type UpdateBrandInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrandInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrandRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrandInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateBrandRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.BrandDefinition != nil {
+		s.WriteStruct(schemas.UpdateBrandRequest_BrandDefinition)
+		v.BrandDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BrandId != nil {
+		s.WriteString(schemas.UpdateBrandRequest_BrandId, *v.BrandId)
+	}
+}
+
 type UpdateBrandOutput struct {
 
 	// The definition of the brand.
@@ -59,13 +81,48 @@ type UpdateBrandOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrandOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrandResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrandOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrandDefinition != nil {
+		s.WriteStruct(schemas.UpdateBrandResponse_BrandDefinition)
+		v.BrandDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BrandDetail != nil {
+		s.WriteStruct(schemas.UpdateBrandResponse_BrandDetail)
+		v.BrandDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateBrandResponse_RequestId, *v.RequestId)
+	}
+}
+func (v *UpdateBrandOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBrandResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBrandResponse_BrandDefinition:
+			v.BrandDefinition = &types.BrandDefinition{}
+			return v.BrandDefinition.Deserialize(d)
+		case schemas.UpdateBrandResponse_BrandDetail:
+			v.BrandDetail = &types.BrandDetail{}
+			return v.BrandDetail.Deserialize(d)
+		case schemas.UpdateBrandResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateBrandResponse_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBrandMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBrand{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBrand, schemas.UpdateBrandRequest, schemas.UpdateBrandResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBrand{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBrand, schemas.UpdateBrandRequest, schemas.UpdateBrandResponse), output: &UpdateBrandOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DescribeActionConnectorPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActionConnectorPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActionConnectorPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActionConnectorPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConnectorId != nil {
+		s.WriteString(schemas.DescribeActionConnectorPermissionsRequest_ActionConnectorId, *v.ActionConnectorId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeActionConnectorPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+}
+
 type DescribeActionConnectorPermissionsOutput struct {
 
 	// The unique identifier of the action connector.
@@ -65,13 +82,52 @@ type DescribeActionConnectorPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActionConnectorPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActionConnectorPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActionConnectorPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConnectorId != nil {
+		s.WriteString(schemas.DescribeActionConnectorPermissionsResponse_ActionConnectorId, *v.ActionConnectorId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeActionConnectorPermissionsResponse_Arn, *v.Arn)
+	}
+	serializeResourcePermissionList(s, schemas.DescribeActionConnectorPermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeActionConnectorPermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeActionConnectorPermissionsResponse_Status, v.Status)
+	}
+}
+func (v *DescribeActionConnectorPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeActionConnectorPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeActionConnectorPermissionsResponse_ActionConnectorId:
+			v.ActionConnectorId = new(string)
+			return d.ReadString(schemas.DescribeActionConnectorPermissionsResponse_ActionConnectorId, v.ActionConnectorId)
+		case schemas.DescribeActionConnectorPermissionsResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeActionConnectorPermissionsResponse_Arn, v.Arn)
+		case schemas.DescribeActionConnectorPermissionsResponse_Permissions:
+			return deserializeResourcePermissionList(d, schemas.DescribeActionConnectorPermissionsResponse_Permissions, &v.Permissions)
+		case schemas.DescribeActionConnectorPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeActionConnectorPermissionsResponse_RequestId, v.RequestId)
+		case schemas.DescribeActionConnectorPermissionsResponse_Status:
+			return d.ReadInt32(schemas.DescribeActionConnectorPermissionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeActionConnectorPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeActionConnectorPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActionConnectorPermissions, schemas.DescribeActionConnectorPermissionsRequest, schemas.DescribeActionConnectorPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeActionConnectorPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActionConnectorPermissions, schemas.DescribeActionConnectorPermissionsRequest, schemas.DescribeActionConnectorPermissionsResponse), output: &DescribeActionConnectorPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

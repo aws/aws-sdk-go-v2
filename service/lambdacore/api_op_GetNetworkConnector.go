@@ -4,7 +4,9 @@ package lambdacore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambdacore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambdacore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,18 @@ type GetNetworkConnectorInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetNetworkConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetNetworkConnectorRequest_Identifier, *v.Identifier)
+	}
 }
 
 type GetNetworkConnectorOutput struct {
@@ -103,13 +117,117 @@ type GetNetworkConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetNetworkConnectorResponse_Arn, *v.Arn)
+	}
+	serializeNetworkConnectorConfiguration(s, schemas.GetNetworkConnectorResponse_Configuration, v.Configuration)
+	if v.Id != nil {
+		s.WriteString(schemas.GetNetworkConnectorResponse_Id, *v.Id)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.GetNetworkConnectorResponse_LastModified, *v.LastModified)
+	}
+	if v.LastUpdateStatus != "" {
+		s.WriteString(schemas.GetNetworkConnectorResponse_LastUpdateStatus, string(v.LastUpdateStatus))
+	}
+	if v.LastUpdateStatusReason != nil {
+		s.WriteString(schemas.GetNetworkConnectorResponse_LastUpdateStatusReason, *v.LastUpdateStatusReason)
+	}
+	if v.LastUpdateStatusReasonCode != "" {
+		s.WriteString(schemas.GetNetworkConnectorResponse_LastUpdateStatusReasonCode, string(v.LastUpdateStatusReasonCode))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetNetworkConnectorResponse_Name, *v.Name)
+	}
+	if v.OperatorRole != nil {
+		s.WriteString(schemas.GetNetworkConnectorResponse_OperatorRole, *v.OperatorRole)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.GetNetworkConnectorResponse_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.GetNetworkConnectorResponse_StateReason, *v.StateReason)
+	}
+	if v.StateReasonCode != "" {
+		s.WriteString(schemas.GetNetworkConnectorResponse_StateReasonCode, string(v.StateReasonCode))
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.GetNetworkConnectorResponse_Version, *v.Version)
+	}
+}
+func (v *GetNetworkConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNetworkConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNetworkConnectorResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetNetworkConnectorResponse_Arn, v.Arn)
+		case schemas.GetNetworkConnectorResponse_Configuration:
+			return deserializeNetworkConnectorConfiguration(d, schemas.GetNetworkConnectorResponse_Configuration, &v.Configuration)
+		case schemas.GetNetworkConnectorResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetNetworkConnectorResponse_Id, v.Id)
+		case schemas.GetNetworkConnectorResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.GetNetworkConnectorResponse_LastModified, v.LastModified)
+		case schemas.GetNetworkConnectorResponse_LastUpdateStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetNetworkConnectorResponse_LastUpdateStatus, &ev); err != nil {
+				return err
+			}
+			v.LastUpdateStatus = types.NetworkConnectorLastUpdateStatus(ev)
+			return nil
+		case schemas.GetNetworkConnectorResponse_LastUpdateStatusReason:
+			v.LastUpdateStatusReason = new(string)
+			return d.ReadString(schemas.GetNetworkConnectorResponse_LastUpdateStatusReason, v.LastUpdateStatusReason)
+		case schemas.GetNetworkConnectorResponse_LastUpdateStatusReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.GetNetworkConnectorResponse_LastUpdateStatusReasonCode, &ev); err != nil {
+				return err
+			}
+			v.LastUpdateStatusReasonCode = types.NetworkConnectorLastUpdateStatusReasonCode(ev)
+			return nil
+		case schemas.GetNetworkConnectorResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetNetworkConnectorResponse_Name, v.Name)
+		case schemas.GetNetworkConnectorResponse_OperatorRole:
+			v.OperatorRole = new(string)
+			return d.ReadString(schemas.GetNetworkConnectorResponse_OperatorRole, v.OperatorRole)
+		case schemas.GetNetworkConnectorResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.GetNetworkConnectorResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.NetworkConnectorState(ev)
+			return nil
+		case schemas.GetNetworkConnectorResponse_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.GetNetworkConnectorResponse_StateReason, v.StateReason)
+		case schemas.GetNetworkConnectorResponse_StateReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.GetNetworkConnectorResponse_StateReasonCode, &ev); err != nil {
+				return err
+			}
+			v.StateReasonCode = types.NetworkConnectorStateReasonCode(ev)
+			return nil
+		case schemas.GetNetworkConnectorResponse_Version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.GetNetworkConnectorResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNetworkConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNetworkConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkConnector, schemas.GetNetworkConnectorRequest, schemas.GetNetworkConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNetworkConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkConnector, schemas.GetNetworkConnectorRequest, schemas.GetNetworkConnectorResponse), output: &GetNetworkConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

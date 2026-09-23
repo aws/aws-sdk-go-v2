@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -135,6 +137,52 @@ type CreateReplicationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReplicationTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReplicationTaskMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReplicationTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CdcStartPosition != nil {
+		s.WriteString(schemas.CreateReplicationTaskMessage_CdcStartPosition, *v.CdcStartPosition)
+	}
+	if v.CdcStartTime != nil {
+		s.WriteTime(schemas.CreateReplicationTaskMessage_CdcStartTime, *v.CdcStartTime)
+	}
+	if v.CdcStopPosition != nil {
+		s.WriteString(schemas.CreateReplicationTaskMessage_CdcStopPosition, *v.CdcStopPosition)
+	}
+	if v.MigrationType != "" {
+		s.WriteString(schemas.CreateReplicationTaskMessage_MigrationType, string(v.MigrationType))
+	}
+	if v.ReplicationInstanceArn != nil {
+		s.WriteString(schemas.CreateReplicationTaskMessage_ReplicationInstanceArn, *v.ReplicationInstanceArn)
+	}
+	if v.ReplicationTaskIdentifier != nil {
+		s.WriteString(schemas.CreateReplicationTaskMessage_ReplicationTaskIdentifier, *v.ReplicationTaskIdentifier)
+	}
+	if v.ReplicationTaskSettings != nil {
+		s.WriteString(schemas.CreateReplicationTaskMessage_ReplicationTaskSettings, *v.ReplicationTaskSettings)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.CreateReplicationTaskMessage_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.SourceEndpointArn != nil {
+		s.WriteString(schemas.CreateReplicationTaskMessage_SourceEndpointArn, *v.SourceEndpointArn)
+	}
+	if v.TableMappings != nil {
+		s.WriteString(schemas.CreateReplicationTaskMessage_TableMappings, *v.TableMappings)
+	}
+	serializeTagList(s, schemas.CreateReplicationTaskMessage_Tags, v.Tags)
+	if v.TargetEndpointArn != nil {
+		s.WriteString(schemas.CreateReplicationTaskMessage_TargetEndpointArn, *v.TargetEndpointArn)
+	}
+	if v.TaskData != nil {
+		s.WriteString(schemas.CreateReplicationTaskMessage_TaskData, *v.TaskData)
+	}
+}
+
 type CreateReplicationTaskOutput struct {
 
 	// The replication task that was created.
@@ -146,13 +194,34 @@ type CreateReplicationTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReplicationTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReplicationTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReplicationTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationTask != nil {
+		s.WriteStruct(schemas.CreateReplicationTaskResponse_ReplicationTask)
+		v.ReplicationTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateReplicationTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateReplicationTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateReplicationTaskResponse_ReplicationTask:
+			v.ReplicationTask = &types.ReplicationTask{}
+			return v.ReplicationTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateReplicationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateReplicationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReplicationTask, schemas.CreateReplicationTaskMessage, schemas.CreateReplicationTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateReplicationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReplicationTask, schemas.CreateReplicationTaskMessage, schemas.CreateReplicationTaskResponse), output: &CreateReplicationTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

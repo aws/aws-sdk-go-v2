@@ -17644,7 +17644,7 @@ var _ProcessingInstancePreferenceList_member *smithy.Schema
 var ProcessingInstanceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ProcessingInstanceType",
-}, smithy.ShapeTypeEnum, 133)
+}, smithy.ShapeTypeEnum, 174)
 var ProcessingInstanceType_ML_T3_MEDIUM *smithy.Schema
 
 var ProcessingInstanceType_ML_T3_LARGE *smithy.Schema
@@ -17910,6 +17910,88 @@ var ProcessingInstanceType_ML_G7_12XLARGE *smithy.Schema
 var ProcessingInstanceType_ML_G7_24XLARGE *smithy.Schema
 
 var ProcessingInstanceType_ML_G7_48XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_LARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_2XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_4XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_8XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_12XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_16XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_24XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R6I_32XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_LARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_2XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_4XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_8XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_12XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_16XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_24XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_32XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_48XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_M8I_96XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_2XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_4XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_8XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_12XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_16XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_24XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_32XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_48XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_C8I_96XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_LARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_2XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_4XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_8XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_12XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_16XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_24XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_32XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_48XLARGE *smithy.Schema
+
+var ProcessingInstanceType_ML_R8I_96XLARGE *smithy.Schema
 
 var ProcessingJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -22325,7 +22407,7 @@ var _TrainingInstanceCount = smithy.NewSchema(smithy.ShapeID{
 var TrainingInstanceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "TrainingInstanceType",
-}, smithy.ShapeTypeEnum, 151)
+}, smithy.ShapeTypeEnum, 192)
 var TrainingInstanceType_ML_M4_XLARGE *smithy.Schema
 
 var TrainingInstanceType_ML_M4_2XLARGE *smithy.Schema
@@ -22627,6 +22709,88 @@ var TrainingInstanceType_ML_G7_12XLARGE *smithy.Schema
 var TrainingInstanceType_ML_G7_24XLARGE *smithy.Schema
 
 var TrainingInstanceType_ML_G7_48XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_LARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_2XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_4XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_8XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_12XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_16XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_24XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R6I_32XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_LARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_2XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_4XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_8XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_12XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_16XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_24XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_32XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_48XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_M8I_96XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_2XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_4XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_8XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_12XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_16XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_24XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_32XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_48XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_C8I_96XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_LARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_2XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_4XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_8XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_12XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_16XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_24XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_32XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_48XLARGE *smithy.Schema
+
+var TrainingInstanceType_ML_R8I_96XLARGE *smithy.Schema
 
 var _TrainingInstanceTypes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -36472,6 +36636,88 @@ func init() {
 
 	TrainingInstanceType_ML_G7_48XLARGE = TrainingInstanceType.AddMember("ML_G7_48XLARGE", smithyprelude.Unit)
 
+	TrainingInstanceType_ML_R6I_LARGE = TrainingInstanceType.AddMember("ML_R6I_LARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_XLARGE = TrainingInstanceType.AddMember("ML_R6I_XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_2XLARGE = TrainingInstanceType.AddMember("ML_R6I_2XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_4XLARGE = TrainingInstanceType.AddMember("ML_R6I_4XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_8XLARGE = TrainingInstanceType.AddMember("ML_R6I_8XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_12XLARGE = TrainingInstanceType.AddMember("ML_R6I_12XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_16XLARGE = TrainingInstanceType.AddMember("ML_R6I_16XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_24XLARGE = TrainingInstanceType.AddMember("ML_R6I_24XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R6I_32XLARGE = TrainingInstanceType.AddMember("ML_R6I_32XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_LARGE = TrainingInstanceType.AddMember("ML_M8I_LARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_XLARGE = TrainingInstanceType.AddMember("ML_M8I_XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_2XLARGE = TrainingInstanceType.AddMember("ML_M8I_2XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_4XLARGE = TrainingInstanceType.AddMember("ML_M8I_4XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_8XLARGE = TrainingInstanceType.AddMember("ML_M8I_8XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_12XLARGE = TrainingInstanceType.AddMember("ML_M8I_12XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_16XLARGE = TrainingInstanceType.AddMember("ML_M8I_16XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_24XLARGE = TrainingInstanceType.AddMember("ML_M8I_24XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_32XLARGE = TrainingInstanceType.AddMember("ML_M8I_32XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_48XLARGE = TrainingInstanceType.AddMember("ML_M8I_48XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_M8I_96XLARGE = TrainingInstanceType.AddMember("ML_M8I_96XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_XLARGE = TrainingInstanceType.AddMember("ML_C8I_XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_2XLARGE = TrainingInstanceType.AddMember("ML_C8I_2XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_4XLARGE = TrainingInstanceType.AddMember("ML_C8I_4XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_8XLARGE = TrainingInstanceType.AddMember("ML_C8I_8XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_12XLARGE = TrainingInstanceType.AddMember("ML_C8I_12XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_16XLARGE = TrainingInstanceType.AddMember("ML_C8I_16XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_24XLARGE = TrainingInstanceType.AddMember("ML_C8I_24XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_32XLARGE = TrainingInstanceType.AddMember("ML_C8I_32XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_48XLARGE = TrainingInstanceType.AddMember("ML_C8I_48XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_C8I_96XLARGE = TrainingInstanceType.AddMember("ML_C8I_96XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_LARGE = TrainingInstanceType.AddMember("ML_R8I_LARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_XLARGE = TrainingInstanceType.AddMember("ML_R8I_XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_2XLARGE = TrainingInstanceType.AddMember("ML_R8I_2XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_4XLARGE = TrainingInstanceType.AddMember("ML_R8I_4XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_8XLARGE = TrainingInstanceType.AddMember("ML_R8I_8XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_12XLARGE = TrainingInstanceType.AddMember("ML_R8I_12XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_16XLARGE = TrainingInstanceType.AddMember("ML_R8I_16XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_24XLARGE = TrainingInstanceType.AddMember("ML_R8I_24XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_32XLARGE = TrainingInstanceType.AddMember("ML_R8I_32XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_48XLARGE = TrainingInstanceType.AddMember("ML_R8I_48XLARGE", smithyprelude.Unit)
+
+	TrainingInstanceType_ML_R8I_96XLARGE = TrainingInstanceType.AddMember("ML_R8I_96XLARGE", smithyprelude.Unit)
+
 	InstanceGroup_InstanceType = InstanceGroup.AddMember("InstanceType", TrainingInstanceType)
 
 	InstanceGroup_InstanceCount = InstanceGroup.AddMember("InstanceCount", _TrainingInstanceCount)
@@ -40137,6 +40383,88 @@ func init() {
 	ProcessingInstanceType_ML_G7_24XLARGE = ProcessingInstanceType.AddMember("ML_G7_24XLARGE", smithyprelude.Unit)
 
 	ProcessingInstanceType_ML_G7_48XLARGE = ProcessingInstanceType.AddMember("ML_G7_48XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_LARGE = ProcessingInstanceType.AddMember("ML_R6I_LARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_XLARGE = ProcessingInstanceType.AddMember("ML_R6I_XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_2XLARGE = ProcessingInstanceType.AddMember("ML_R6I_2XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_4XLARGE = ProcessingInstanceType.AddMember("ML_R6I_4XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_8XLARGE = ProcessingInstanceType.AddMember("ML_R6I_8XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_12XLARGE = ProcessingInstanceType.AddMember("ML_R6I_12XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_16XLARGE = ProcessingInstanceType.AddMember("ML_R6I_16XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_24XLARGE = ProcessingInstanceType.AddMember("ML_R6I_24XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R6I_32XLARGE = ProcessingInstanceType.AddMember("ML_R6I_32XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_LARGE = ProcessingInstanceType.AddMember("ML_M8I_LARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_XLARGE = ProcessingInstanceType.AddMember("ML_M8I_XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_2XLARGE = ProcessingInstanceType.AddMember("ML_M8I_2XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_4XLARGE = ProcessingInstanceType.AddMember("ML_M8I_4XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_8XLARGE = ProcessingInstanceType.AddMember("ML_M8I_8XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_12XLARGE = ProcessingInstanceType.AddMember("ML_M8I_12XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_16XLARGE = ProcessingInstanceType.AddMember("ML_M8I_16XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_24XLARGE = ProcessingInstanceType.AddMember("ML_M8I_24XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_32XLARGE = ProcessingInstanceType.AddMember("ML_M8I_32XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_48XLARGE = ProcessingInstanceType.AddMember("ML_M8I_48XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_M8I_96XLARGE = ProcessingInstanceType.AddMember("ML_M8I_96XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_XLARGE = ProcessingInstanceType.AddMember("ML_C8I_XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_2XLARGE = ProcessingInstanceType.AddMember("ML_C8I_2XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_4XLARGE = ProcessingInstanceType.AddMember("ML_C8I_4XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_8XLARGE = ProcessingInstanceType.AddMember("ML_C8I_8XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_12XLARGE = ProcessingInstanceType.AddMember("ML_C8I_12XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_16XLARGE = ProcessingInstanceType.AddMember("ML_C8I_16XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_24XLARGE = ProcessingInstanceType.AddMember("ML_C8I_24XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_32XLARGE = ProcessingInstanceType.AddMember("ML_C8I_32XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_48XLARGE = ProcessingInstanceType.AddMember("ML_C8I_48XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_C8I_96XLARGE = ProcessingInstanceType.AddMember("ML_C8I_96XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_LARGE = ProcessingInstanceType.AddMember("ML_R8I_LARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_XLARGE = ProcessingInstanceType.AddMember("ML_R8I_XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_2XLARGE = ProcessingInstanceType.AddMember("ML_R8I_2XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_4XLARGE = ProcessingInstanceType.AddMember("ML_R8I_4XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_8XLARGE = ProcessingInstanceType.AddMember("ML_R8I_8XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_12XLARGE = ProcessingInstanceType.AddMember("ML_R8I_12XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_16XLARGE = ProcessingInstanceType.AddMember("ML_R8I_16XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_24XLARGE = ProcessingInstanceType.AddMember("ML_R8I_24XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_32XLARGE = ProcessingInstanceType.AddMember("ML_R8I_32XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_48XLARGE = ProcessingInstanceType.AddMember("ML_R8I_48XLARGE", smithyprelude.Unit)
+
+	ProcessingInstanceType_ML_R8I_96XLARGE = ProcessingInstanceType.AddMember("ML_R8I_96XLARGE", smithyprelude.Unit)
 
 	_RuleParameters_key = _RuleParameters.AddMember("key", _ConfigKey)
 

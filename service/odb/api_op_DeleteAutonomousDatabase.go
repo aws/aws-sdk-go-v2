@@ -4,6 +4,8 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteAutonomousDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAutonomousDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAutonomousDatabaseInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAutonomousDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.DeleteAutonomousDatabaseInput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+}
+
 type DeleteAutonomousDatabaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteAutonomousDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAutonomousDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAutonomousDatabaseOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAutonomousDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAutonomousDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAutonomousDatabaseOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAutonomousDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAutonomousDatabase, schemas.DeleteAutonomousDatabaseInput, schemas.DeleteAutonomousDatabaseOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAutonomousDatabase, schemas.DeleteAutonomousDatabaseInput, schemas.DeleteAutonomousDatabaseOutput), output: &DeleteAutonomousDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

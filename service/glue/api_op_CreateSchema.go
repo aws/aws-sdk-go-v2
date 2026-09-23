@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -112,6 +114,36 @@ type CreateSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSchemaInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Compatibility != "" {
+		s.WriteString(schemas.CreateSchemaInput_Compatibility, string(v.Compatibility))
+	}
+	if v.DataFormat != "" {
+		s.WriteString(schemas.CreateSchemaInput_DataFormat, string(v.DataFormat))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSchemaInput_Description, *v.Description)
+	}
+	if v.RegistryId != nil {
+		s.WriteStruct(schemas.CreateSchemaInput_RegistryId)
+		v.RegistryId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaDefinition != nil {
+		s.WriteString(schemas.CreateSchemaInput_SchemaDefinition, *v.SchemaDefinition)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.CreateSchemaInput_SchemaName, *v.SchemaName)
+	}
+	serializeTagsMap(s, schemas.CreateSchemaInput_Tags, v.Tags)
+}
+
 type CreateSchemaOutput struct {
 
 	// The schema compatibility mode.
@@ -164,13 +196,123 @@ type CreateSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Compatibility != "" {
+		s.WriteString(schemas.CreateSchemaResponse_Compatibility, string(v.Compatibility))
+	}
+	if v.DataFormat != "" {
+		s.WriteString(schemas.CreateSchemaResponse_DataFormat, string(v.DataFormat))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSchemaResponse_Description, *v.Description)
+	}
+	if v.LatestSchemaVersion != nil {
+		s.WriteInt64(schemas.CreateSchemaResponse_LatestSchemaVersion, *v.LatestSchemaVersion)
+	}
+	if v.NextSchemaVersion != nil {
+		s.WriteInt64(schemas.CreateSchemaResponse_NextSchemaVersion, *v.NextSchemaVersion)
+	}
+	if v.RegistryArn != nil {
+		s.WriteString(schemas.CreateSchemaResponse_RegistryArn, *v.RegistryArn)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.CreateSchemaResponse_RegistryName, *v.RegistryName)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.CreateSchemaResponse_SchemaArn, *v.SchemaArn)
+	}
+	if v.SchemaCheckpoint != nil {
+		s.WriteInt64(schemas.CreateSchemaResponse_SchemaCheckpoint, *v.SchemaCheckpoint)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.CreateSchemaResponse_SchemaName, *v.SchemaName)
+	}
+	if v.SchemaStatus != "" {
+		s.WriteString(schemas.CreateSchemaResponse_SchemaStatus, string(v.SchemaStatus))
+	}
+	if v.SchemaVersionId != nil {
+		s.WriteString(schemas.CreateSchemaResponse_SchemaVersionId, *v.SchemaVersionId)
+	}
+	if v.SchemaVersionStatus != "" {
+		s.WriteString(schemas.CreateSchemaResponse_SchemaVersionStatus, string(v.SchemaVersionStatus))
+	}
+	serializeTagsMap(s, schemas.CreateSchemaResponse_Tags, v.Tags)
+}
+func (v *CreateSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSchemaResponse_Compatibility:
+			var ev string
+			if err := d.ReadString(schemas.CreateSchemaResponse_Compatibility, &ev); err != nil {
+				return err
+			}
+			v.Compatibility = types.Compatibility(ev)
+			return nil
+		case schemas.CreateSchemaResponse_DataFormat:
+			var ev string
+			if err := d.ReadString(schemas.CreateSchemaResponse_DataFormat, &ev); err != nil {
+				return err
+			}
+			v.DataFormat = types.DataFormat(ev)
+			return nil
+		case schemas.CreateSchemaResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateSchemaResponse_Description, v.Description)
+		case schemas.CreateSchemaResponse_LatestSchemaVersion:
+			v.LatestSchemaVersion = new(int64)
+			return d.ReadInt64(schemas.CreateSchemaResponse_LatestSchemaVersion, v.LatestSchemaVersion)
+		case schemas.CreateSchemaResponse_NextSchemaVersion:
+			v.NextSchemaVersion = new(int64)
+			return d.ReadInt64(schemas.CreateSchemaResponse_NextSchemaVersion, v.NextSchemaVersion)
+		case schemas.CreateSchemaResponse_RegistryArn:
+			v.RegistryArn = new(string)
+			return d.ReadString(schemas.CreateSchemaResponse_RegistryArn, v.RegistryArn)
+		case schemas.CreateSchemaResponse_RegistryName:
+			v.RegistryName = new(string)
+			return d.ReadString(schemas.CreateSchemaResponse_RegistryName, v.RegistryName)
+		case schemas.CreateSchemaResponse_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.CreateSchemaResponse_SchemaArn, v.SchemaArn)
+		case schemas.CreateSchemaResponse_SchemaCheckpoint:
+			v.SchemaCheckpoint = new(int64)
+			return d.ReadInt64(schemas.CreateSchemaResponse_SchemaCheckpoint, v.SchemaCheckpoint)
+		case schemas.CreateSchemaResponse_SchemaName:
+			v.SchemaName = new(string)
+			return d.ReadString(schemas.CreateSchemaResponse_SchemaName, v.SchemaName)
+		case schemas.CreateSchemaResponse_SchemaStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateSchemaResponse_SchemaStatus, &ev); err != nil {
+				return err
+			}
+			v.SchemaStatus = types.SchemaStatus(ev)
+			return nil
+		case schemas.CreateSchemaResponse_SchemaVersionId:
+			v.SchemaVersionId = new(string)
+			return d.ReadString(schemas.CreateSchemaResponse_SchemaVersionId, v.SchemaVersionId)
+		case schemas.CreateSchemaResponse_SchemaVersionStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateSchemaResponse_SchemaVersionStatus, &ev); err != nil {
+				return err
+			}
+			v.SchemaVersionStatus = types.SchemaVersionStatus(ev)
+			return nil
+		case schemas.CreateSchemaResponse_Tags:
+			return deserializeTagsMap(d, schemas.CreateSchemaResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSchema, schemas.CreateSchemaInput, schemas.CreateSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSchema, schemas.CreateSchemaInput, schemas.CreateSchemaResponse), output: &CreateSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

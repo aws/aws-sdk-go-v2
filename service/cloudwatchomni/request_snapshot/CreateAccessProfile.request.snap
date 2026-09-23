@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/CreateAccessProfile
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kclientTokeno__ClientToken__kdescriptiono__Description__dnameh__Name__gspaceIdk__SpaceId__dtags¿dkey0i__Value__ÿÿ

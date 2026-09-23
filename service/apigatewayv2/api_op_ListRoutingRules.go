@@ -5,7 +5,9 @@ package apigatewayv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type ListRoutingRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoutingRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoutingRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoutingRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListRoutingRulesRequest_DomainName, *v.DomainName)
+	}
+	if v.DomainNameId != nil {
+		s.WriteString(schemas.ListRoutingRulesRequest_DomainNameId, *v.DomainNameId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRoutingRulesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoutingRulesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRoutingRulesOutput struct {
 
 	// The next page of elements from this collection. Not valid for the last element
@@ -60,13 +83,35 @@ type ListRoutingRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoutingRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoutingRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoutingRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoutingRulesResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfRoutingRule(s, schemas.ListRoutingRulesResponse_RoutingRules, v.RoutingRules)
+}
+func (v *ListRoutingRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRoutingRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRoutingRulesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRoutingRulesResponse_NextToken, v.NextToken)
+		case schemas.ListRoutingRulesResponse_RoutingRules:
+			return deserialize__listOfRoutingRule(d, schemas.ListRoutingRulesResponse_RoutingRules, &v.RoutingRules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRoutingRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRoutingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoutingRules, schemas.ListRoutingRulesRequest, schemas.ListRoutingRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRoutingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoutingRules, schemas.ListRoutingRulesRequest, schemas.ListRoutingRulesResponse), output: &ListRoutingRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

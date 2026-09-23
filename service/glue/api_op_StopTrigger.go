@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type StopTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTriggerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopTriggerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTriggerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StopTriggerRequest_Name, *v.Name)
+	}
+}
+
 type StopTriggerOutput struct {
 
 	// The name of the trigger that was stopped.
@@ -44,13 +58,32 @@ type StopTriggerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTriggerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopTriggerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTriggerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StopTriggerResponse_Name, *v.Name)
+	}
+}
+func (v *StopTriggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopTriggerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopTriggerResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StopTriggerResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTrigger, schemas.StopTriggerRequest, schemas.StopTriggerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTrigger, schemas.StopTriggerRequest, schemas.StopTriggerResponse), output: &StopTriggerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

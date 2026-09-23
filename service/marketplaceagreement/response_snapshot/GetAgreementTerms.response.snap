@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSMPCommerceService_v20200301.GetAgreementTerms
+
+{"acceptedTerms":[{"legalTerm":{"documents":[{"type":"__Type__","url":"__Url__","version":"__Version__"},{"type":"__Type__","url":"__Url__","version":"__Version__"}],"id":"__Id__","type":"__Type__"}},{"legalTerm":{"documents":[{"type":"__Type__","url":"__Url__","version":"__Version__"},{"type":"__Type__","url":"__Url__","version":"__Version__"}],"id":"__Id__","type":"__Type__"}}],"nextToken":"__NextToken__"}

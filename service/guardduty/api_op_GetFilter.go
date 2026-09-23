@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,21 @@ type GetFilterInput struct {
 	FilterName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetFilterRequest_DetectorId, *v.DetectorId)
+	}
+	if v.FilterName != nil {
+		s.WriteString(schemas.GetFilterRequest_FilterName, *v.FilterName)
+	}
 }
 
 type GetFilterOutput struct {
@@ -94,13 +111,83 @@ type GetFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.GetFilterResponse_Action, string(v.Action))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetFilterResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetFilterResponse_Description, *v.Description)
+	}
+	if v.FindingCriteria != nil {
+		s.WriteStruct(schemas.GetFilterResponse_FindingCriteria)
+		v.FindingCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetFilterResponse_Name, *v.Name)
+	}
+	if v.Rank != nil {
+		s.WriteInt32(schemas.GetFilterResponse_Rank, *v.Rank)
+	}
+	serializeTagMap(s, schemas.GetFilterResponse_Tags, v.Tags)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetFilterResponse_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.GetFilterResponse_Version, *v.Version)
+	}
+}
+func (v *GetFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFilterResponse_Action:
+			var ev string
+			if err := d.ReadString(schemas.GetFilterResponse_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = types.FilterAction(ev)
+			return nil
+		case schemas.GetFilterResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFilterResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetFilterResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetFilterResponse_Description, v.Description)
+		case schemas.GetFilterResponse_FindingCriteria:
+			v.FindingCriteria = &types.FindingCriteria{}
+			return v.FindingCriteria.Deserialize(d)
+		case schemas.GetFilterResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetFilterResponse_Name, v.Name)
+		case schemas.GetFilterResponse_Rank:
+			v.Rank = new(int32)
+			return d.ReadInt32(schemas.GetFilterResponse_Rank, v.Rank)
+		case schemas.GetFilterResponse_Tags:
+			return deserializeTagMap(d, schemas.GetFilterResponse_Tags, &v.Tags)
+		case schemas.GetFilterResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFilterResponse_UpdatedAt, v.UpdatedAt)
+		case schemas.GetFilterResponse_Version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.GetFilterResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFilter, schemas.GetFilterRequest, schemas.GetFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFilter, schemas.GetFilterRequest, schemas.GetFilterResponse), output: &GetFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

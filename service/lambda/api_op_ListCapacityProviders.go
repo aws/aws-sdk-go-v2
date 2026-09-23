@@ -5,7 +5,9 @@ package lambda
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type ListCapacityProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCapacityProvidersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCapacityProvidersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCapacityProvidersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListCapacityProvidersRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListCapacityProvidersRequest_MaxItems, *v.MaxItems)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListCapacityProvidersRequest_State, string(v.State))
+	}
+}
+
 type ListCapacityProvidersOutput struct {
 
 	// A list of capacity providers in your account.
@@ -56,13 +76,35 @@ type ListCapacityProvidersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCapacityProvidersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCapacityProvidersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCapacityProvidersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapacityProvidersList(s, schemas.ListCapacityProvidersResponse_CapacityProviders, v.CapacityProviders)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListCapacityProvidersResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListCapacityProvidersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCapacityProvidersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCapacityProvidersResponse_CapacityProviders:
+			return deserializeCapacityProvidersList(d, schemas.ListCapacityProvidersResponse_CapacityProviders, &v.CapacityProviders)
+		case schemas.ListCapacityProvidersResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListCapacityProvidersResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCapacityProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCapacityProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCapacityProviders, schemas.ListCapacityProvidersRequest, schemas.ListCapacityProvidersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCapacityProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCapacityProviders, schemas.ListCapacityProvidersRequest, schemas.ListCapacityProvidersResponse), output: &ListCapacityProvidersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

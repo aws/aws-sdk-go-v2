@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type DeleteUserDefinedFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserDefinedFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserDefinedFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserDefinedFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.DeleteUserDefinedFunctionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.DeleteUserDefinedFunctionRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.FunctionName != nil {
+		s.WriteString(schemas.DeleteUserDefinedFunctionRequest_FunctionName, *v.FunctionName)
+	}
+}
+
 type DeleteUserDefinedFunctionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +69,26 @@ type DeleteUserDefinedFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserDefinedFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserDefinedFunctionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserDefinedFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteUserDefinedFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteUserDefinedFunctionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteUserDefinedFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteUserDefinedFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserDefinedFunction, schemas.DeleteUserDefinedFunctionRequest, schemas.DeleteUserDefinedFunctionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteUserDefinedFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserDefinedFunction, schemas.DeleteUserDefinedFunctionRequest, schemas.DeleteUserDefinedFunctionResponse), output: &DeleteUserDefinedFunctionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

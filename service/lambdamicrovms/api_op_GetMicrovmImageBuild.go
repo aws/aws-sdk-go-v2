@@ -4,7 +4,9 @@ package lambdamicrovms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -44,6 +46,24 @@ type GetMicrovmImageBuildInput struct {
 	ImageVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMicrovmImageBuildInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMicrovmImageBuildInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMicrovmImageBuildInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildId != nil {
+		s.WriteString(schemas.GetMicrovmImageBuildInput_buildId, *v.BuildId)
+	}
+	if v.ImageIdentifier != nil {
+		s.WriteString(schemas.GetMicrovmImageBuildInput_imageIdentifier, *v.ImageIdentifier)
+	}
+	if v.ImageVersion != nil {
+		s.WriteString(schemas.GetMicrovmImageBuildInput_imageVersion, *v.ImageVersion)
+	}
 }
 
 type GetMicrovmImageBuildOutput struct {
@@ -100,13 +120,100 @@ type GetMicrovmImageBuildOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMicrovmImageBuildOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMicrovmImageBuildOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMicrovmImageBuildOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Architecture != "" {
+		s.WriteString(schemas.GetMicrovmImageBuildOutput_architecture, string(v.Architecture))
+	}
+	if v.BuildId != nil {
+		s.WriteString(schemas.GetMicrovmImageBuildOutput_buildId, *v.BuildId)
+	}
+	if v.BuildState != "" {
+		s.WriteString(schemas.GetMicrovmImageBuildOutput_buildState, string(v.BuildState))
+	}
+	if v.Chipset != "" {
+		s.WriteString(schemas.GetMicrovmImageBuildOutput_chipset, string(v.Chipset))
+	}
+	if v.ChipsetGeneration != nil {
+		s.WriteString(schemas.GetMicrovmImageBuildOutput_chipsetGeneration, *v.ChipsetGeneration)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetMicrovmImageBuildOutput_createdAt, *v.CreatedAt)
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.GetMicrovmImageBuildOutput_imageArn, *v.ImageArn)
+	}
+	if v.ImageVersion != nil {
+		s.WriteString(schemas.GetMicrovmImageBuildOutput_imageVersion, *v.ImageVersion)
+	}
+	if v.SnapshotBuild != nil {
+		s.WriteStruct(schemas.GetMicrovmImageBuildOutput_snapshotBuild)
+		v.SnapshotBuild.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.GetMicrovmImageBuildOutput_stateReason, *v.StateReason)
+	}
+}
+func (v *GetMicrovmImageBuildOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMicrovmImageBuildOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMicrovmImageBuildOutput_architecture:
+			var ev string
+			if err := d.ReadString(schemas.GetMicrovmImageBuildOutput_architecture, &ev); err != nil {
+				return err
+			}
+			v.Architecture = types.Architecture(ev)
+			return nil
+		case schemas.GetMicrovmImageBuildOutput_buildId:
+			v.BuildId = new(string)
+			return d.ReadString(schemas.GetMicrovmImageBuildOutput_buildId, v.BuildId)
+		case schemas.GetMicrovmImageBuildOutput_buildState:
+			var ev string
+			if err := d.ReadString(schemas.GetMicrovmImageBuildOutput_buildState, &ev); err != nil {
+				return err
+			}
+			v.BuildState = types.BuildState(ev)
+			return nil
+		case schemas.GetMicrovmImageBuildOutput_chipset:
+			var ev string
+			if err := d.ReadString(schemas.GetMicrovmImageBuildOutput_chipset, &ev); err != nil {
+				return err
+			}
+			v.Chipset = types.Chipset(ev)
+			return nil
+		case schemas.GetMicrovmImageBuildOutput_chipsetGeneration:
+			v.ChipsetGeneration = new(string)
+			return d.ReadString(schemas.GetMicrovmImageBuildOutput_chipsetGeneration, v.ChipsetGeneration)
+		case schemas.GetMicrovmImageBuildOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMicrovmImageBuildOutput_createdAt, v.CreatedAt)
+		case schemas.GetMicrovmImageBuildOutput_imageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.GetMicrovmImageBuildOutput_imageArn, v.ImageArn)
+		case schemas.GetMicrovmImageBuildOutput_imageVersion:
+			v.ImageVersion = new(string)
+			return d.ReadString(schemas.GetMicrovmImageBuildOutput_imageVersion, v.ImageVersion)
+		case schemas.GetMicrovmImageBuildOutput_snapshotBuild:
+			v.SnapshotBuild = &types.SnapshotBuild{}
+			return v.SnapshotBuild.Deserialize(d)
+		case schemas.GetMicrovmImageBuildOutput_stateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.GetMicrovmImageBuildOutput_stateReason, v.StateReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMicrovmImageBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMicrovmImageBuild{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMicrovmImageBuild, schemas.GetMicrovmImageBuildInput, schemas.GetMicrovmImageBuildOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMicrovmImageBuild{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMicrovmImageBuild, schemas.GetMicrovmImageBuildInput, schemas.GetMicrovmImageBuildOutput), output: &GetMicrovmImageBuildOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

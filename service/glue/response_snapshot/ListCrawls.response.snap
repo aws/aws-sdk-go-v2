@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.ListCrawls
+
+{"Crawls":[{"CrawlId":"__CrawlId__","DPUHour":1,"EndTime":946684800,"ErrorMessage":"__ErrorMessage__","LogGroup":"__LogGroup__","LogStream":"__LogStream__","MessagePrefix":"__MessagePrefix__","StartTime":946684800,"State":"RUNNING","Summary":"__Summary__"},{"CrawlId":"__CrawlId__","DPUHour":1,"EndTime":946684800,"ErrorMessage":"__ErrorMessage__","LogGroup":"__LogGroup__","LogStream":"__LogStream__","MessagePrefix":"__MessagePrefix__","StartTime":946684800,"State":"RUNNING","Summary":"__Summary__"}],"NextToken":"__NextToken__"}

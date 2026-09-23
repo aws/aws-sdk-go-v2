@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type ListCloudExadataInfrastructuresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCloudExadataInfrastructuresInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCloudExadataInfrastructuresInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCloudExadataInfrastructuresInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCloudExadataInfrastructuresInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCloudExadataInfrastructuresInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListCloudExadataInfrastructuresOutput struct {
 
 	// The list of Exadata infrastructures along with their properties.
@@ -58,13 +75,35 @@ type ListCloudExadataInfrastructuresOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCloudExadataInfrastructuresOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCloudExadataInfrastructuresOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCloudExadataInfrastructuresOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCloudExadataInfrastructureList(s, schemas.ListCloudExadataInfrastructuresOutput_cloudExadataInfrastructures, v.CloudExadataInfrastructures)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCloudExadataInfrastructuresOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCloudExadataInfrastructuresOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCloudExadataInfrastructuresOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCloudExadataInfrastructuresOutput_cloudExadataInfrastructures:
+			return deserializeCloudExadataInfrastructureList(d, schemas.ListCloudExadataInfrastructuresOutput_cloudExadataInfrastructures, &v.CloudExadataInfrastructures)
+		case schemas.ListCloudExadataInfrastructuresOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCloudExadataInfrastructuresOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCloudExadataInfrastructuresMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListCloudExadataInfrastructures{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCloudExadataInfrastructures, schemas.ListCloudExadataInfrastructuresInput, schemas.ListCloudExadataInfrastructuresOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListCloudExadataInfrastructures{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCloudExadataInfrastructures, schemas.ListCloudExadataInfrastructuresInput, schemas.ListCloudExadataInfrastructuresOutput), output: &ListCloudExadataInfrastructuresOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

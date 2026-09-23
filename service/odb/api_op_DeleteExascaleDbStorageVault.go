@@ -4,6 +4,8 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteExascaleDbStorageVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExascaleDbStorageVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExascaleDbStorageVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExascaleDbStorageVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExascaleDbStorageVaultId != nil {
+		s.WriteString(schemas.DeleteExascaleDbStorageVaultInput_exascaleDbStorageVaultId, *v.ExascaleDbStorageVaultId)
+	}
+}
+
 type DeleteExascaleDbStorageVaultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteExascaleDbStorageVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExascaleDbStorageVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExascaleDbStorageVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExascaleDbStorageVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteExascaleDbStorageVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteExascaleDbStorageVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteExascaleDbStorageVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteExascaleDbStorageVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExascaleDbStorageVault, schemas.DeleteExascaleDbStorageVaultInput, schemas.DeleteExascaleDbStorageVaultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteExascaleDbStorageVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExascaleDbStorageVault, schemas.DeleteExascaleDbStorageVaultInput, schemas.DeleteExascaleDbStorageVaultOutput), output: &DeleteExascaleDbStorageVaultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteCustomDetectionRuleAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomDetectionRuleAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomDetectionRuleAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomDetectionRuleAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DeleteCustomDetectionRuleAssociationRequest_AssociationId, *v.AssociationId)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.DeleteCustomDetectionRuleAssociationRequest_RuleId, *v.RuleId)
+	}
+}
+
 type DeleteCustomDetectionRuleAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeleteCustomDetectionRuleAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomDetectionRuleAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomDetectionRuleAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomDetectionRuleAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCustomDetectionRuleAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCustomDetectionRuleAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCustomDetectionRuleAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCustomDetectionRuleAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomDetectionRuleAssociation, schemas.DeleteCustomDetectionRuleAssociationRequest, schemas.DeleteCustomDetectionRuleAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCustomDetectionRuleAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomDetectionRuleAssociation, schemas.DeleteCustomDetectionRuleAssociationRequest, schemas.DeleteCustomDetectionRuleAssociationResponse), output: &DeleteCustomDetectionRuleAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

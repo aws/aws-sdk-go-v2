@@ -4,6 +4,8 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteCloudVmClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCloudVmClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCloudVmClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCloudVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudVmClusterId != nil {
+		s.WriteString(schemas.DeleteCloudVmClusterInput_cloudVmClusterId, *v.CloudVmClusterId)
+	}
+}
+
 type DeleteCloudVmClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteCloudVmClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCloudVmClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCloudVmClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCloudVmClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCloudVmClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCloudVmClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCloudVmClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteCloudVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCloudVmCluster, schemas.DeleteCloudVmClusterInput, schemas.DeleteCloudVmClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteCloudVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCloudVmCluster, schemas.DeleteCloudVmClusterInput, schemas.DeleteCloudVmClusterOutput), output: &DeleteCloudVmClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package lambda
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,24 @@ type ListFunctionEventInvokeConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFunctionEventInvokeConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFunctionEventInvokeConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFunctionEventInvokeConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionName != nil {
+		s.WriteString(schemas.ListFunctionEventInvokeConfigsRequest_FunctionName, *v.FunctionName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListFunctionEventInvokeConfigsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListFunctionEventInvokeConfigsRequest_MaxItems, *v.MaxItems)
+	}
+}
+
 type ListFunctionEventInvokeConfigsOutput struct {
 
 	// A list of configurations.
@@ -69,13 +89,35 @@ type ListFunctionEventInvokeConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFunctionEventInvokeConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFunctionEventInvokeConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFunctionEventInvokeConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFunctionEventInvokeConfigList(s, schemas.ListFunctionEventInvokeConfigsResponse_FunctionEventInvokeConfigs, v.FunctionEventInvokeConfigs)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListFunctionEventInvokeConfigsResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListFunctionEventInvokeConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFunctionEventInvokeConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFunctionEventInvokeConfigsResponse_FunctionEventInvokeConfigs:
+			return deserializeFunctionEventInvokeConfigList(d, schemas.ListFunctionEventInvokeConfigsResponse_FunctionEventInvokeConfigs, &v.FunctionEventInvokeConfigs)
+		case schemas.ListFunctionEventInvokeConfigsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListFunctionEventInvokeConfigsResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFunctionEventInvokeConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFunctionEventInvokeConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFunctionEventInvokeConfigs, schemas.ListFunctionEventInvokeConfigsRequest, schemas.ListFunctionEventInvokeConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFunctionEventInvokeConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFunctionEventInvokeConfigs, schemas.ListFunctionEventInvokeConfigsRequest, schemas.ListFunctionEventInvokeConfigsResponse), output: &ListFunctionEventInvokeConfigsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

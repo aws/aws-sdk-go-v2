@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,32 @@ type ListDataQualityStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataQualityStatisticsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityStatisticsRequest_NextToken, *v.NextToken)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.ListDataQualityStatisticsRequest_ProfileId, *v.ProfileId)
+	}
+	if v.StatisticId != nil {
+		s.WriteString(schemas.ListDataQualityStatisticsRequest_StatisticId, *v.StatisticId)
+	}
+	if v.TimestampFilter != nil {
+		s.WriteStruct(schemas.ListDataQualityStatisticsRequest_TimestampFilter)
+		v.TimestampFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListDataQualityStatisticsOutput struct {
 
 	// A pagination token to request the next page of results.
@@ -58,13 +86,35 @@ type ListDataQualityStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityStatisticsResponse_NextToken, *v.NextToken)
+	}
+	serializeStatisticSummaryList(s, schemas.ListDataQualityStatisticsResponse_Statistics, v.Statistics)
+}
+func (v *ListDataQualityStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataQualityStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataQualityStatisticsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataQualityStatisticsResponse_NextToken, v.NextToken)
+		case schemas.ListDataQualityStatisticsResponse_Statistics:
+			return deserializeStatisticSummaryList(d, schemas.ListDataQualityStatisticsResponse_Statistics, &v.Statistics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataQualityStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDataQualityStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityStatistics, schemas.ListDataQualityStatisticsRequest, schemas.ListDataQualityStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDataQualityStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityStatistics, schemas.ListDataQualityStatisticsRequest, schemas.ListDataQualityStatisticsResponse), output: &ListDataQualityStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

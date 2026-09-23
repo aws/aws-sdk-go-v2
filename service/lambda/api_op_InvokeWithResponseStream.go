@@ -4,7 +4,9 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -85,6 +87,36 @@ type InvokeWithResponseStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeWithResponseStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeWithResponseStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeWithResponseStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientContext != nil {
+		s.WriteString(schemas.InvokeWithResponseStreamRequest_ClientContext, *v.ClientContext)
+	}
+	if v.FunctionName != nil {
+		s.WriteString(schemas.InvokeWithResponseStreamRequest_FunctionName, *v.FunctionName)
+	}
+	if v.InvocationType != "" {
+		s.WriteString(schemas.InvokeWithResponseStreamRequest_InvocationType, string(v.InvocationType))
+	}
+	if v.LogType != "" {
+		s.WriteString(schemas.InvokeWithResponseStreamRequest_LogType, string(v.LogType))
+	}
+	if v.Payload != nil {
+		s.WriteBlob(schemas.InvokeWithResponseStreamRequest_Payload, v.Payload)
+	}
+	if v.Qualifier != nil {
+		s.WriteString(schemas.InvokeWithResponseStreamRequest_Qualifier, *v.Qualifier)
+	}
+	if v.TenantId != nil {
+		s.WriteString(schemas.InvokeWithResponseStreamRequest_TenantId, *v.TenantId)
+	}
+}
+
 type InvokeWithResponseStreamOutput struct {
 
 	// The version of the function that executed. When you invoke a function with an
@@ -107,24 +139,55 @@ type InvokeWithResponseStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeWithResponseStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeWithResponseStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeWithResponseStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutedVersion != nil {
+		s.WriteString(schemas.InvokeWithResponseStreamResponse_ExecutedVersion, *v.ExecutedVersion)
+	}
+	if v.ResponseStreamContentType != nil {
+		s.WriteString(schemas.InvokeWithResponseStreamResponse_ResponseStreamContentType, *v.ResponseStreamContentType)
+	}
+	if v.StatusCode != 0 {
+		s.WriteInt32(schemas.InvokeWithResponseStreamResponse_StatusCode, v.StatusCode)
+	}
+}
+func (v *InvokeWithResponseStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeWithResponseStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeWithResponseStreamResponse_ExecutedVersion:
+			v.ExecutedVersion = new(string)
+			return d.ReadString(schemas.InvokeWithResponseStreamResponse_ExecutedVersion, v.ExecutedVersion)
+		case schemas.InvokeWithResponseStreamResponse_ResponseStreamContentType:
+			v.ResponseStreamContentType = new(string)
+			return d.ReadString(schemas.InvokeWithResponseStreamResponse_ResponseStreamContentType, v.ResponseStreamContentType)
+		case schemas.InvokeWithResponseStreamResponse_StatusCode:
+			return d.ReadInt32(schemas.InvokeWithResponseStreamResponse_StatusCode, &v.StatusCode)
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *InvokeWithResponseStreamOutput) GetStream() *InvokeWithResponseStreamEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationInvokeWithResponseStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeWithResponseStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeWithResponseStream, schemas.InvokeWithResponseStreamRequest, schemas.InvokeWithResponseStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeWithResponseStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeWithResponseStream, schemas.InvokeWithResponseStreamRequest, schemas.InvokeWithResponseStreamResponse), output: &InvokeWithResponseStreamOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeWithResponseStream{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamInvokeWithResponseStreamMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

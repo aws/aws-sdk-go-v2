@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type CheckSchemaVersionValidityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckSchemaVersionValidityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckSchemaVersionValidityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckSchemaVersionValidityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataFormat != "" {
+		s.WriteString(schemas.CheckSchemaVersionValidityInput_DataFormat, string(v.DataFormat))
+	}
+	if v.SchemaDefinition != nil {
+		s.WriteString(schemas.CheckSchemaVersionValidityInput_SchemaDefinition, *v.SchemaDefinition)
+	}
+}
+
 type CheckSchemaVersionValidityOutput struct {
 
 	// A validation failure error message.
@@ -56,13 +73,37 @@ type CheckSchemaVersionValidityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckSchemaVersionValidityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckSchemaVersionValidityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckSchemaVersionValidityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error != nil {
+		s.WriteString(schemas.CheckSchemaVersionValidityResponse_Error, *v.Error)
+	}
+	if v.Valid != false {
+		s.WriteBool(schemas.CheckSchemaVersionValidityResponse_Valid, v.Valid)
+	}
+}
+func (v *CheckSchemaVersionValidityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckSchemaVersionValidityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckSchemaVersionValidityResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.CheckSchemaVersionValidityResponse_Error, v.Error)
+		case schemas.CheckSchemaVersionValidityResponse_Valid:
+			return d.ReadBool(schemas.CheckSchemaVersionValidityResponse_Valid, &v.Valid)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCheckSchemaVersionValidityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCheckSchemaVersionValidity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckSchemaVersionValidity, schemas.CheckSchemaVersionValidityInput, schemas.CheckSchemaVersionValidityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCheckSchemaVersionValidity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckSchemaVersionValidity, schemas.CheckSchemaVersionValidityInput, schemas.CheckSchemaVersionValidityResponse), output: &CheckSchemaVersionValidityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

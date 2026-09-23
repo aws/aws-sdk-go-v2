@@ -32651,6 +32651,9 @@ func awsRestjson1_deserializeOpErrorUpdateHarness(response *smithyhttp.Response,
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
@@ -45363,6 +45366,11 @@ func awsRestjson1_deserializeDocumentHarness(v **types.Harness, value interface{
 				sv.HarnessVersion = ptr.String(jtv)
 			}
 
+		case "hooks":
+			if err := awsRestjson1_deserializeDocumentHarnessHooks(&sv.Hooks, value); err != nil {
+				return err
+			}
+
 		case "maxIterations":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -45452,6 +45460,96 @@ func awsRestjson1_deserializeDocumentHarness(v **types.Harness, value interface{
 					return err
 				}
 				sv.UpdatedAt = ptr.Time(t)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHarnessAfterInvocationHook(v **types.HarnessAfterInvocationHook, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HarnessAfterInvocationHook
+	if *v == nil {
+		sv = &types.HarnessAfterInvocationHook{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HarnessHookName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "target":
+			if err := awsRestjson1_deserializeDocumentHarnessHookTarget(&sv.Target, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHarnessAfterToolCallHook(v **types.HarnessAfterToolCallHook, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HarnessAfterToolCallHook
+	if *v == nil {
+		sv = &types.HarnessAfterToolCallHook{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HarnessHookName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "target":
+			if err := awsRestjson1_deserializeDocumentHarnessHookTarget(&sv.Target, value); err != nil {
+				return err
 			}
 
 		default:
@@ -46057,6 +46155,96 @@ func awsRestjson1_deserializeDocumentHarnessBedrockModelConfig(v **types.Harness
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentHarnessBeforeInvocationHook(v **types.HarnessBeforeInvocationHook, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HarnessBeforeInvocationHook
+	if *v == nil {
+		sv = &types.HarnessBeforeInvocationHook{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HarnessHookName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "target":
+			if err := awsRestjson1_deserializeDocumentHarnessHookTarget(&sv.Target, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHarnessBeforeToolCallHook(v **types.HarnessBeforeToolCallHook, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HarnessBeforeToolCallHook
+	if *v == nil {
+		sv = &types.HarnessBeforeToolCallHook{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HarnessHookName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "target":
+			if err := awsRestjson1_deserializeDocumentHarnessHookTarget(&sv.Target, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentHarnessDisabledMemoryConfiguration(v **types.HarnessDisabledMemoryConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -46548,6 +46736,310 @@ func awsRestjson1_deserializeDocumentHarnessGeminiModelConfig(v **types.HarnessG
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentHarnessHook(v *types.HarnessHook, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.HarnessHook
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "afterInvocation":
+			var mv types.HarnessAfterInvocationHook
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentHarnessAfterInvocationHook(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.HarnessHookMemberAfterInvocation{Value: mv}
+			break loop
+
+		case "afterToolCall":
+			var mv types.HarnessAfterToolCallHook
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentHarnessAfterToolCallHook(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.HarnessHookMemberAfterToolCall{Value: mv}
+			break loop
+
+		case "beforeInvocation":
+			var mv types.HarnessBeforeInvocationHook
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentHarnessBeforeInvocationHook(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.HarnessHookMemberBeforeInvocation{Value: mv}
+			break loop
+
+		case "beforeToolCall":
+			var mv types.HarnessBeforeToolCallHook
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentHarnessBeforeToolCallHook(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.HarnessHookMemberBeforeToolCall{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHarnessHookEventBridgeTarget(v **types.HarnessHookEventBridgeTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HarnessHookEventBridgeTarget
+	if *v == nil {
+		sv = &types.HarnessHookEventBridgeTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HarnessEventBridgeBusArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHarnessHookLambdaTarget(v **types.HarnessHookLambdaTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HarnessHookLambdaTarget
+	if *v == nil {
+		sv = &types.HarnessHookLambdaTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HarnessLambdaFunctionArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "failureMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HarnessHookFailureMode to be of type string, got %T instead", value)
+				}
+				sv.FailureMode = types.HarnessHookFailureMode(jtv)
+			}
+
+		case "timeoutSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeoutSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHarnessHooks(v *[]types.HarnessHook, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.HarnessHook
+	if *v == nil {
+		cv = []types.HarnessHook{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.HarnessHook
+		if err := awsRestjson1_deserializeDocumentHarnessHook(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHarnessHookSnsTarget(v **types.HarnessHookSnsTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HarnessHookSnsTarget
+	if *v == nil {
+		sv = &types.HarnessHookSnsTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HarnessSnsTopicArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHarnessHookTarget(v *types.HarnessHookTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.HarnessHookTarget
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "eventBridge":
+			var mv types.HarnessHookEventBridgeTarget
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentHarnessHookEventBridgeTarget(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.HarnessHookTargetMemberEventBridge{Value: mv}
+			break loop
+
+		case "lambda":
+			var mv types.HarnessHookLambdaTarget
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentHarnessHookLambdaTarget(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.HarnessHookTargetMemberLambda{Value: mv}
+			break loop
+
+		case "sns":
+			var mv types.HarnessHookSnsTarget
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentHarnessHookSnsTarget(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.HarnessHookTargetMemberSns{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentHarnessInlineFunctionConfig(v **types.HarnessInlineFunctionConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -46995,6 +47487,15 @@ func awsRestjson1_deserializeDocumentHarnessOpenAiModelConfig(v **types.HarnessO
 		case "additionalParams":
 			if err := awsRestjson1_deserializeDocumentDocument(&sv.AdditionalParams, value); err != nil {
 				return err
+			}
+
+		case "apiBase":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HarnessOpenAiApiBase to be of type string, got %T instead", value)
+				}
+				sv.ApiBase = ptr.String(jtv)
 			}
 
 		case "apiFormat":

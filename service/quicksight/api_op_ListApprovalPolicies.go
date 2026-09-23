@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListApprovalPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApprovalPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApprovalPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApprovalPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListApprovalPoliciesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApprovalPoliciesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListApprovalPoliciesOutput struct {
 
 	// The list of approval policies.
@@ -56,13 +73,35 @@ type ListApprovalPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApprovalPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApprovalPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApprovalPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApprovalPoliciesResponse_NextToken, *v.NextToken)
+	}
+	serializeApprovalPolicyList(s, schemas.ListApprovalPoliciesResponse_Policies, v.Policies)
+}
+func (v *ListApprovalPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApprovalPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApprovalPoliciesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApprovalPoliciesResponse_NextToken, v.NextToken)
+		case schemas.ListApprovalPoliciesResponse_Policies:
+			return deserializeApprovalPolicyList(d, schemas.ListApprovalPoliciesResponse_Policies, &v.Policies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApprovalPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApprovalPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApprovalPolicies, schemas.ListApprovalPoliciesRequest, schemas.ListApprovalPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApprovalPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApprovalPolicies, schemas.ListApprovalPoliciesRequest, schemas.ListApprovalPoliciesResponse), output: &ListApprovalPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

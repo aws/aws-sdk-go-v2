@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,23 @@ type UpdateBackupPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBackupPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBackupPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBackupPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlan != nil {
+		s.WriteStruct(schemas.UpdateBackupPlanInput_BackupPlan)
+		v.BackupPlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.UpdateBackupPlanInput_BackupPlanId, *v.BackupPlanId)
+	}
+}
+
 type UpdateBackupPlanOutput struct {
 
 	// Contains a list of BackupOptions for each resource type.
@@ -75,13 +94,56 @@ type UpdateBackupPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBackupPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBackupPlanOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBackupPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedBackupSettings(s, schemas.UpdateBackupPlanOutput_AdvancedBackupSettings, v.AdvancedBackupSettings)
+	if v.BackupPlanArn != nil {
+		s.WriteString(schemas.UpdateBackupPlanOutput_BackupPlanArn, *v.BackupPlanArn)
+	}
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.UpdateBackupPlanOutput_BackupPlanId, *v.BackupPlanId)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.UpdateBackupPlanOutput_CreationDate, *v.CreationDate)
+	}
+	serializeScanSettings(s, schemas.UpdateBackupPlanOutput_ScanSettings, v.ScanSettings)
+	if v.VersionId != nil {
+		s.WriteString(schemas.UpdateBackupPlanOutput_VersionId, *v.VersionId)
+	}
+}
+func (v *UpdateBackupPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBackupPlanOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBackupPlanOutput_AdvancedBackupSettings:
+			return deserializeAdvancedBackupSettings(d, schemas.UpdateBackupPlanOutput_AdvancedBackupSettings, &v.AdvancedBackupSettings)
+		case schemas.UpdateBackupPlanOutput_BackupPlanArn:
+			v.BackupPlanArn = new(string)
+			return d.ReadString(schemas.UpdateBackupPlanOutput_BackupPlanArn, v.BackupPlanArn)
+		case schemas.UpdateBackupPlanOutput_BackupPlanId:
+			v.BackupPlanId = new(string)
+			return d.ReadString(schemas.UpdateBackupPlanOutput_BackupPlanId, v.BackupPlanId)
+		case schemas.UpdateBackupPlanOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateBackupPlanOutput_CreationDate, v.CreationDate)
+		case schemas.UpdateBackupPlanOutput_ScanSettings:
+			return deserializeScanSettings(d, schemas.UpdateBackupPlanOutput_ScanSettings, &v.ScanSettings)
+		case schemas.UpdateBackupPlanOutput_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.UpdateBackupPlanOutput_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBackupPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBackupPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBackupPlan, schemas.UpdateBackupPlanInput, schemas.UpdateBackupPlanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBackupPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBackupPlan, schemas.UpdateBackupPlanInput, schemas.UpdateBackupPlanOutput), output: &UpdateBackupPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

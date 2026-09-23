@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type UpdateFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFolderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFolderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFolderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateFolderRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.FolderId != nil {
+		s.WriteString(schemas.UpdateFolderRequest_FolderId, *v.FolderId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFolderRequest_Name, *v.Name)
+	}
+}
+
 type UpdateFolderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the folder.
@@ -63,13 +83,49 @@ type UpdateFolderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFolderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFolderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFolderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateFolderResponse_Arn, *v.Arn)
+	}
+	if v.FolderId != nil {
+		s.WriteString(schemas.UpdateFolderResponse_FolderId, *v.FolderId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateFolderResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateFolderResponse_Status, v.Status)
+	}
+}
+func (v *UpdateFolderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFolderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFolderResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateFolderResponse_Arn, v.Arn)
+		case schemas.UpdateFolderResponse_FolderId:
+			v.FolderId = new(string)
+			return d.ReadString(schemas.UpdateFolderResponse_FolderId, v.FolderId)
+		case schemas.UpdateFolderResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateFolderResponse_RequestId, v.RequestId)
+		case schemas.UpdateFolderResponse_Status:
+			return d.ReadInt32(schemas.UpdateFolderResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFolder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFolder, schemas.UpdateFolderRequest, schemas.UpdateFolderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFolder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFolder, schemas.UpdateFolderRequest, schemas.UpdateFolderResponse), output: &UpdateFolderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

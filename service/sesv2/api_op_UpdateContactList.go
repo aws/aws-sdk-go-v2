@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,22 @@ type UpdateContactListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactListName != nil {
+		s.WriteString(schemas.UpdateContactListRequest_ContactListName, *v.ContactListName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateContactListRequest_Description, *v.Description)
+	}
+	serializeTopics(s, schemas.UpdateContactListRequest_Topics, v.Topics)
+}
+
 type UpdateContactListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +66,26 @@ type UpdateContactListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactListResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateContactListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContactListResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContactListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateContactList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContactList, schemas.UpdateContactListRequest, schemas.UpdateContactListResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateContactList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContactList, schemas.UpdateContactListRequest, schemas.UpdateContactListResponse), output: &UpdateContactListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

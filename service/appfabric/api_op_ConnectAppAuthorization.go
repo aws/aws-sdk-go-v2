@@ -4,7 +4,9 @@ package appfabric
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,26 @@ type ConnectAppAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectAppAuthorizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectAppAuthorizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectAppAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppAuthorizationIdentifier != nil {
+		s.WriteString(schemas.ConnectAppAuthorizationRequest_appAuthorizationIdentifier, *v.AppAuthorizationIdentifier)
+	}
+	if v.AppBundleIdentifier != nil {
+		s.WriteString(schemas.ConnectAppAuthorizationRequest_appBundleIdentifier, *v.AppBundleIdentifier)
+	}
+	if v.AuthRequest != nil {
+		s.WriteStruct(schemas.ConnectAppAuthorizationRequest_authRequest)
+		v.AuthRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ConnectAppAuthorizationOutput struct {
 
 	// Contains a summary of the app authorization.
@@ -61,13 +83,34 @@ type ConnectAppAuthorizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectAppAuthorizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectAppAuthorizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectAppAuthorizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppAuthorizationSummary != nil {
+		s.WriteStruct(schemas.ConnectAppAuthorizationResponse_appAuthorizationSummary)
+		v.AppAuthorizationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConnectAppAuthorizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectAppAuthorizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectAppAuthorizationResponse_appAuthorizationSummary:
+			v.AppAuthorizationSummary = &types.AppAuthorizationSummary{}
+			return v.AppAuthorizationSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConnectAppAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpConnectAppAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConnectAppAuthorization, schemas.ConnectAppAuthorizationRequest, schemas.ConnectAppAuthorizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpConnectAppAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConnectAppAuthorization, schemas.ConnectAppAuthorizationRequest, schemas.ConnectAppAuthorizationResponse), output: &ConnectAppAuthorizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

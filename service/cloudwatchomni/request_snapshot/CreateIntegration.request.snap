@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/CreateIntegration
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kclientTokeno__ClientToken__jcredential¡soauthCodeCredential¿hauthCodel__AuthCode__ÿuintegrationAttributes¿dkey0i__Value__ÿointegrationTypepAWS_CONFIG_SLRECdnameh__Name__groleArnk__RoleArn__dtags¿dkey0i__Value__ÿÿ

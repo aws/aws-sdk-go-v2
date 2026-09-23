@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,22 @@ type DescribeFleetAdvisorSchemaObjectSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetAdvisorSchemaObjectSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetAdvisorSchemaObjectSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetAdvisorSchemaObjectSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeFleetAdvisorSchemaObjectSummaryRequest_Filters, v.Filters)
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeFleetAdvisorSchemaObjectSummaryRequest_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetAdvisorSchemaObjectSummaryRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeFleetAdvisorSchemaObjectSummaryOutput struct {
 
 	// A collection of FleetAdvisorSchemaObjectResponse objects.
@@ -82,13 +100,35 @@ type DescribeFleetAdvisorSchemaObjectSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetAdvisorSchemaObjectSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetAdvisorSchemaObjectSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetAdvisorSchemaObjectSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFleetAdvisorSchemaObjectList(s, schemas.DescribeFleetAdvisorSchemaObjectSummaryResponse_FleetAdvisorSchemaObjects, v.FleetAdvisorSchemaObjects)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetAdvisorSchemaObjectSummaryResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeFleetAdvisorSchemaObjectSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFleetAdvisorSchemaObjectSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFleetAdvisorSchemaObjectSummaryResponse_FleetAdvisorSchemaObjects:
+			return deserializeFleetAdvisorSchemaObjectList(d, schemas.DescribeFleetAdvisorSchemaObjectSummaryResponse_FleetAdvisorSchemaObjects, &v.FleetAdvisorSchemaObjects)
+		case schemas.DescribeFleetAdvisorSchemaObjectSummaryResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFleetAdvisorSchemaObjectSummaryResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFleetAdvisorSchemaObjectSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFleetAdvisorSchemaObjectSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetAdvisorSchemaObjectSummary, schemas.DescribeFleetAdvisorSchemaObjectSummaryRequest, schemas.DescribeFleetAdvisorSchemaObjectSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFleetAdvisorSchemaObjectSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetAdvisorSchemaObjectSummary, schemas.DescribeFleetAdvisorSchemaObjectSummaryRequest, schemas.DescribeFleetAdvisorSchemaObjectSummaryResponse), output: &DescribeFleetAdvisorSchemaObjectSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

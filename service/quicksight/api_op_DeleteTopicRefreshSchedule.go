@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DeleteTopicRefreshScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTopicRefreshScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTopicRefreshScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTopicRefreshScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteTopicRefreshScheduleRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.DeleteTopicRefreshScheduleRequest_DatasetId, *v.DatasetId)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.DeleteTopicRefreshScheduleRequest_TopicId, *v.TopicId)
+	}
+}
+
 type DeleteTopicRefreshScheduleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset.
@@ -68,13 +88,55 @@ type DeleteTopicRefreshScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTopicRefreshScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTopicRefreshScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTopicRefreshScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.DeleteTopicRefreshScheduleResponse_DatasetArn, *v.DatasetArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteTopicRefreshScheduleResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteTopicRefreshScheduleResponse_Status, v.Status)
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.DeleteTopicRefreshScheduleResponse_TopicArn, *v.TopicArn)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.DeleteTopicRefreshScheduleResponse_TopicId, *v.TopicId)
+	}
+}
+func (v *DeleteTopicRefreshScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTopicRefreshScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTopicRefreshScheduleResponse_DatasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.DeleteTopicRefreshScheduleResponse_DatasetArn, v.DatasetArn)
+		case schemas.DeleteTopicRefreshScheduleResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteTopicRefreshScheduleResponse_RequestId, v.RequestId)
+		case schemas.DeleteTopicRefreshScheduleResponse_Status:
+			return d.ReadInt32(schemas.DeleteTopicRefreshScheduleResponse_Status, &v.Status)
+		case schemas.DeleteTopicRefreshScheduleResponse_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.DeleteTopicRefreshScheduleResponse_TopicArn, v.TopicArn)
+		case schemas.DeleteTopicRefreshScheduleResponse_TopicId:
+			v.TopicId = new(string)
+			return d.ReadString(schemas.DeleteTopicRefreshScheduleResponse_TopicId, v.TopicId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTopicRefreshScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTopicRefreshSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTopicRefreshSchedule, schemas.DeleteTopicRefreshScheduleRequest, schemas.DeleteTopicRefreshScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTopicRefreshSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTopicRefreshSchedule, schemas.DeleteTopicRefreshScheduleRequest, schemas.DeleteTopicRefreshScheduleResponse), output: &DeleteTopicRefreshScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

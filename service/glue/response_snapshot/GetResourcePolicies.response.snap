@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetResourcePolicies
+
+{"GetResourcePoliciesResponseList":[{"CreateTime":946684800,"PolicyHash":"__PolicyHash__","PolicyInJson":"__PolicyInJson__","UpdateTime":946684800},{"CreateTime":946684800,"PolicyHash":"__PolicyHash__","PolicyInJson":"__PolicyInJson__","UpdateTime":946684800}],"NextToken":"__NextToken__"}

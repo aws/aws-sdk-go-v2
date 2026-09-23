@@ -600,6 +600,35 @@ func TestUpdateResponseSnapshot_GetBillingGroupCostReport(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetBillingTransferPreference(t *testing.T) {
+	want := &GetBillingTransferPreferenceOutput{
+		ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+		AutoBillingTransferBillingGroupCreation: &types.AutoTransferBillingGroupCreationPreference{
+			Enabled:        ptr.Bool(true),
+			PricingPlanArn: ptr.String("__PricingPlanArn__"),
+		},
+		LastModifiedTime: ptr.Int64(1),
+	}
+	proto := restjson1.New(schemas.AWSBillingConductor)
+	opSchema := smithy.NewOperationSchema(schemas.GetBillingTransferPreference, schemas.GetBillingTransferPreferenceOutput, schemas.GetBillingTransferPreferenceOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetBillingTransferPreference.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListAccountAssociations(t *testing.T) {
 	want := &ListAccountAssociationsOutput{
 		LinkedAccounts: []types.AccountAssociationsListElement{
@@ -1339,6 +1368,35 @@ func TestUpdateResponseSnapshot_UpdateBillingGroup(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateBillingGroup.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateBillingTransferPreference(t *testing.T) {
+	want := &UpdateBillingTransferPreferenceOutput{
+		ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+		AutoBillingTransferBillingGroupCreation: &types.AutoTransferBillingGroupCreationPreference{
+			Enabled:        ptr.Bool(true),
+			PricingPlanArn: ptr.String("__PricingPlanArn__"),
+		},
+		LastModifiedTime: 1,
+	}
+	proto := restjson1.New(schemas.AWSBillingConductor)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateBillingTransferPreference, schemas.UpdateBillingTransferPreferenceOutput, schemas.UpdateBillingTransferPreferenceOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateBillingTransferPreference.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

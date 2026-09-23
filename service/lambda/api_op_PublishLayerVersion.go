@@ -4,7 +4,9 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,31 @@ type PublishLayerVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishLayerVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishLayerVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishLayerVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCompatibleArchitectures(s, schemas.PublishLayerVersionRequest_CompatibleArchitectures, v.CompatibleArchitectures)
+	serializeCompatibleRuntimes(s, schemas.PublishLayerVersionRequest_CompatibleRuntimes, v.CompatibleRuntimes)
+	if v.Content != nil {
+		s.WriteStruct(schemas.PublishLayerVersionRequest_Content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PublishLayerVersionRequest_Description, *v.Description)
+	}
+	if v.LayerName != nil {
+		s.WriteString(schemas.PublishLayerVersionRequest_LayerName, *v.LayerName)
+	}
+	if v.LicenseInfo != nil {
+		s.WriteString(schemas.PublishLayerVersionRequest_LicenseInfo, *v.LicenseInfo)
+	}
+}
+
 type PublishLayerVersionOutput struct {
 
 	// A list of compatible [instruction set architectures].
@@ -118,13 +145,75 @@ type PublishLayerVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishLayerVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishLayerVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishLayerVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCompatibleArchitectures(s, schemas.PublishLayerVersionResponse_CompatibleArchitectures, v.CompatibleArchitectures)
+	serializeCompatibleRuntimes(s, schemas.PublishLayerVersionResponse_CompatibleRuntimes, v.CompatibleRuntimes)
+	if v.Content != nil {
+		s.WriteStruct(schemas.PublishLayerVersionResponse_Content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedDate != nil {
+		s.WriteString(schemas.PublishLayerVersionResponse_CreatedDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PublishLayerVersionResponse_Description, *v.Description)
+	}
+	if v.LayerArn != nil {
+		s.WriteString(schemas.PublishLayerVersionResponse_LayerArn, *v.LayerArn)
+	}
+	if v.LayerVersionArn != nil {
+		s.WriteString(schemas.PublishLayerVersionResponse_LayerVersionArn, *v.LayerVersionArn)
+	}
+	if v.LicenseInfo != nil {
+		s.WriteString(schemas.PublishLayerVersionResponse_LicenseInfo, *v.LicenseInfo)
+	}
+	if v.Version != 0 {
+		s.WriteInt64(schemas.PublishLayerVersionResponse_Version, v.Version)
+	}
+}
+func (v *PublishLayerVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublishLayerVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublishLayerVersionResponse_CompatibleArchitectures:
+			return deserializeCompatibleArchitectures(d, schemas.PublishLayerVersionResponse_CompatibleArchitectures, &v.CompatibleArchitectures)
+		case schemas.PublishLayerVersionResponse_CompatibleRuntimes:
+			return deserializeCompatibleRuntimes(d, schemas.PublishLayerVersionResponse_CompatibleRuntimes, &v.CompatibleRuntimes)
+		case schemas.PublishLayerVersionResponse_Content:
+			v.Content = &types.LayerVersionContentOutput{}
+			return v.Content.Deserialize(d)
+		case schemas.PublishLayerVersionResponse_CreatedDate:
+			v.CreatedDate = new(string)
+			return d.ReadString(schemas.PublishLayerVersionResponse_CreatedDate, v.CreatedDate)
+		case schemas.PublishLayerVersionResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PublishLayerVersionResponse_Description, v.Description)
+		case schemas.PublishLayerVersionResponse_LayerArn:
+			v.LayerArn = new(string)
+			return d.ReadString(schemas.PublishLayerVersionResponse_LayerArn, v.LayerArn)
+		case schemas.PublishLayerVersionResponse_LayerVersionArn:
+			v.LayerVersionArn = new(string)
+			return d.ReadString(schemas.PublishLayerVersionResponse_LayerVersionArn, v.LayerVersionArn)
+		case schemas.PublishLayerVersionResponse_LicenseInfo:
+			v.LicenseInfo = new(string)
+			return d.ReadString(schemas.PublishLayerVersionResponse_LicenseInfo, v.LicenseInfo)
+		case schemas.PublishLayerVersionResponse_Version:
+			return d.ReadInt64(schemas.PublishLayerVersionResponse_Version, &v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPublishLayerVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPublishLayerVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishLayerVersion, schemas.PublishLayerVersionRequest, schemas.PublishLayerVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPublishLayerVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishLayerVersion, schemas.PublishLayerVersionRequest, schemas.PublishLayerVersionResponse), output: &PublishLayerVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

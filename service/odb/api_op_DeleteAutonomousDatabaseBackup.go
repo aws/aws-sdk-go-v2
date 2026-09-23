@@ -4,6 +4,8 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteAutonomousDatabaseBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAutonomousDatabaseBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAutonomousDatabaseBackupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAutonomousDatabaseBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseBackupId != nil {
+		s.WriteString(schemas.DeleteAutonomousDatabaseBackupInput_autonomousDatabaseBackupId, *v.AutonomousDatabaseBackupId)
+	}
+}
+
 type DeleteAutonomousDatabaseBackupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteAutonomousDatabaseBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAutonomousDatabaseBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAutonomousDatabaseBackupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAutonomousDatabaseBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAutonomousDatabaseBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAutonomousDatabaseBackupOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAutonomousDatabaseBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteAutonomousDatabaseBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAutonomousDatabaseBackup, schemas.DeleteAutonomousDatabaseBackupInput, schemas.DeleteAutonomousDatabaseBackupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteAutonomousDatabaseBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAutonomousDatabaseBackup, schemas.DeleteAutonomousDatabaseBackupInput, schemas.DeleteAutonomousDatabaseBackupOutput), output: &DeleteAutonomousDatabaseBackupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

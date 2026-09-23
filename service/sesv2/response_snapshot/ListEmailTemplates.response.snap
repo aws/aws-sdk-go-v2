@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","TemplatesMetadata":[{"CreatedTimestamp":946684800,"TemplateName":"__TemplateName__"},{"CreatedTimestamp":946684800,"TemplateName":"__TemplateName__"}]}

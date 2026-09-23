@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,27 @@ type ListAssociatedAccessPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedAccessPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedAccessPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedAccessPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListAssociatedAccessPoliciesRequest_clusterName, *v.ClusterName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssociatedAccessPoliciesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedAccessPoliciesRequest_nextToken, *v.NextToken)
+	}
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.ListAssociatedAccessPoliciesRequest_principalArn, *v.PrincipalArn)
+	}
+}
+
 type ListAssociatedAccessPoliciesOutput struct {
 
 	// The list of access policies associated with the access entry.
@@ -83,13 +106,47 @@ type ListAssociatedAccessPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedAccessPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedAccessPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedAccessPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociatedAccessPoliciesList(s, schemas.ListAssociatedAccessPoliciesResponse_associatedAccessPolicies, v.AssociatedAccessPolicies)
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListAssociatedAccessPoliciesResponse_clusterName, *v.ClusterName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedAccessPoliciesResponse_nextToken, *v.NextToken)
+	}
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.ListAssociatedAccessPoliciesResponse_principalArn, *v.PrincipalArn)
+	}
+}
+func (v *ListAssociatedAccessPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssociatedAccessPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssociatedAccessPoliciesResponse_associatedAccessPolicies:
+			return deserializeAssociatedAccessPoliciesList(d, schemas.ListAssociatedAccessPoliciesResponse_associatedAccessPolicies, &v.AssociatedAccessPolicies)
+		case schemas.ListAssociatedAccessPoliciesResponse_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.ListAssociatedAccessPoliciesResponse_clusterName, v.ClusterName)
+		case schemas.ListAssociatedAccessPoliciesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssociatedAccessPoliciesResponse_nextToken, v.NextToken)
+		case schemas.ListAssociatedAccessPoliciesResponse_principalArn:
+			v.PrincipalArn = new(string)
+			return d.ReadString(schemas.ListAssociatedAccessPoliciesResponse_principalArn, v.PrincipalArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssociatedAccessPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssociatedAccessPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedAccessPolicies, schemas.ListAssociatedAccessPoliciesRequest, schemas.ListAssociatedAccessPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssociatedAccessPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedAccessPolicies, schemas.ListAssociatedAccessPoliciesRequest, schemas.ListAssociatedAccessPoliciesResponse), output: &ListAssociatedAccessPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,25 @@ type UpdateDashboardPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDashboardPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDashboardPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDashboardPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateDashboardPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.UpdateDashboardPermissionsRequest_DashboardId, *v.DashboardId)
+	}
+	serializeUpdateLinkPermissionList(s, schemas.UpdateDashboardPermissionsRequest_GrantLinkPermissions, v.GrantLinkPermissions)
+	serializeUpdateResourcePermissionList(s, schemas.UpdateDashboardPermissionsRequest_GrantPermissions, v.GrantPermissions)
+	serializeUpdateLinkPermissionList(s, schemas.UpdateDashboardPermissionsRequest_RevokeLinkPermissions, v.RevokeLinkPermissions)
+	serializeUpdateResourcePermissionList(s, schemas.UpdateDashboardPermissionsRequest_RevokePermissions, v.RevokePermissions)
+}
+
 type UpdateDashboardPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dashboard.
@@ -78,13 +99,60 @@ type UpdateDashboardPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDashboardPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDashboardPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDashboardPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardArn != nil {
+		s.WriteString(schemas.UpdateDashboardPermissionsResponse_DashboardArn, *v.DashboardArn)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.UpdateDashboardPermissionsResponse_DashboardId, *v.DashboardId)
+	}
+	if v.LinkSharingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDashboardPermissionsResponse_LinkSharingConfiguration)
+		v.LinkSharingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUpdateResourcePermissionList(s, schemas.UpdateDashboardPermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateDashboardPermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateDashboardPermissionsResponse_Status, v.Status)
+	}
+}
+func (v *UpdateDashboardPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDashboardPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDashboardPermissionsResponse_DashboardArn:
+			v.DashboardArn = new(string)
+			return d.ReadString(schemas.UpdateDashboardPermissionsResponse_DashboardArn, v.DashboardArn)
+		case schemas.UpdateDashboardPermissionsResponse_DashboardId:
+			v.DashboardId = new(string)
+			return d.ReadString(schemas.UpdateDashboardPermissionsResponse_DashboardId, v.DashboardId)
+		case schemas.UpdateDashboardPermissionsResponse_LinkSharingConfiguration:
+			v.LinkSharingConfiguration = &types.LinkSharingConfiguration{}
+			return v.LinkSharingConfiguration.Deserialize(d)
+		case schemas.UpdateDashboardPermissionsResponse_Permissions:
+			return deserializeUpdateResourcePermissionList(d, schemas.UpdateDashboardPermissionsResponse_Permissions, &v.Permissions)
+		case schemas.UpdateDashboardPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateDashboardPermissionsResponse_RequestId, v.RequestId)
+		case schemas.UpdateDashboardPermissionsResponse_Status:
+			return d.ReadInt32(schemas.UpdateDashboardPermissionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDashboardPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDashboardPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDashboardPermissions, schemas.UpdateDashboardPermissionsRequest, schemas.UpdateDashboardPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDashboardPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDashboardPermissions, schemas.UpdateDashboardPermissionsRequest, schemas.UpdateDashboardPermissionsResponse), output: &UpdateDashboardPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

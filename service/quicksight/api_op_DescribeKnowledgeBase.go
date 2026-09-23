@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DescribeKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeKnowledgeBaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeKnowledgeBaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeKnowledgeBaseRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DescribeKnowledgeBaseRequest_KnowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type DescribeKnowledgeBaseOutput struct {
 
 	// The knowledge base.
@@ -58,13 +75,46 @@ type DescribeKnowledgeBaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeKnowledgeBaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeKnowledgeBaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeKnowledgeBaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBase != nil {
+		s.WriteStruct(schemas.DescribeKnowledgeBaseResponse_KnowledgeBase)
+		v.KnowledgeBase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeKnowledgeBaseResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != nil {
+		s.WriteInt32(schemas.DescribeKnowledgeBaseResponse_Status, *v.Status)
+	}
+}
+func (v *DescribeKnowledgeBaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeKnowledgeBaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeKnowledgeBaseResponse_KnowledgeBase:
+			v.KnowledgeBase = &types.KnowledgeBase{}
+			return v.KnowledgeBase.Deserialize(d)
+		case schemas.DescribeKnowledgeBaseResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeKnowledgeBaseResponse_RequestId, v.RequestId)
+		case schemas.DescribeKnowledgeBaseResponse_Status:
+			v.Status = new(int32)
+			return d.ReadInt32(schemas.DescribeKnowledgeBaseResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeKnowledgeBaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeKnowledgeBase, schemas.DescribeKnowledgeBaseRequest, schemas.DescribeKnowledgeBaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeKnowledgeBase, schemas.DescribeKnowledgeBaseRequest, schemas.DescribeKnowledgeBaseResponse), output: &DescribeKnowledgeBaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

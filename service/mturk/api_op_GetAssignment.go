@@ -4,7 +4,9 @@ package mturk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssignmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssignmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssignmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentId != nil {
+		s.WriteString(schemas.GetAssignmentRequest_AssignmentId, *v.AssignmentId)
+	}
+}
+
 type GetAssignmentOutput struct {
 
 	//  The assignment. The response includes one Assignment element.
@@ -48,13 +62,42 @@ type GetAssignmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssignmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssignmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssignmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Assignment != nil {
+		s.WriteStruct(schemas.GetAssignmentResponse_Assignment)
+		v.Assignment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HIT != nil {
+		s.WriteStruct(schemas.GetAssignmentResponse_HIT)
+		v.HIT.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAssignmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssignmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssignmentResponse_Assignment:
+			v.Assignment = &types.Assignment{}
+			return v.Assignment.Deserialize(d)
+		case schemas.GetAssignmentResponse_HIT:
+			v.HIT = &types.HIT{}
+			return v.HIT.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssignment, schemas.GetAssignmentRequest, schemas.GetAssignmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssignment, schemas.GetAssignmentRequest, schemas.GetAssignmentResponse), output: &GetAssignmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

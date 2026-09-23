@@ -5,7 +5,9 @@ package apigateway
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type GetUsagePlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsagePlansInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsagePlansRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsagePlansInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyId != nil {
+		s.WriteString(schemas.GetUsagePlansRequest_keyId, *v.KeyId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetUsagePlansRequest_limit, *v.Limit)
+	}
+	if v.Position != nil {
+		s.WriteString(schemas.GetUsagePlansRequest_position, *v.Position)
+	}
+}
+
 // Represents a collection of usage plans for an AWS account.
 type GetUsagePlansOutput struct {
 
@@ -56,13 +76,35 @@ type GetUsagePlansOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsagePlansOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UsagePlans)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsagePlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfUsagePlan(s, schemas.UsagePlans_items, v.Items)
+	if v.Position != nil {
+		s.WriteString(schemas.UsagePlans_position, *v.Position)
+	}
+}
+func (v *GetUsagePlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UsagePlans, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UsagePlans_items:
+			return deserializeListOfUsagePlan(d, schemas.UsagePlans_items, &v.Items)
+		case schemas.UsagePlans_position:
+			v.Position = new(string)
+			return d.ReadString(schemas.UsagePlans_position, v.Position)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUsagePlansMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUsagePlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsagePlans, schemas.GetUsagePlansRequest, schemas.UsagePlans)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUsagePlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsagePlans, schemas.GetUsagePlansRequest, schemas.UsagePlans), output: &GetUsagePlansOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

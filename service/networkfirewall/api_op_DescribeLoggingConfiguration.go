@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLoggingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLoggingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.DescribeLoggingConfigurationRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.DescribeLoggingConfigurationRequest_FirewallName, *v.FirewallName)
+	}
+}
+
 type DescribeLoggingConfigurationOutput struct {
 
 	// A boolean that reflects whether or not the firewall monitoring dashboard is
@@ -62,13 +79,46 @@ type DescribeLoggingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLoggingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLoggingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLoggingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableMonitoringDashboard != nil {
+		s.WriteBool(schemas.DescribeLoggingConfigurationResponse_EnableMonitoringDashboard, *v.EnableMonitoringDashboard)
+	}
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.DescribeLoggingConfigurationResponse_FirewallArn, *v.FirewallArn)
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.DescribeLoggingConfigurationResponse_LoggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeLoggingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLoggingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLoggingConfigurationResponse_EnableMonitoringDashboard:
+			v.EnableMonitoringDashboard = new(bool)
+			return d.ReadBool(schemas.DescribeLoggingConfigurationResponse_EnableMonitoringDashboard, v.EnableMonitoringDashboard)
+		case schemas.DescribeLoggingConfigurationResponse_FirewallArn:
+			v.FirewallArn = new(string)
+			return d.ReadString(schemas.DescribeLoggingConfigurationResponse_FirewallArn, v.FirewallArn)
+		case schemas.DescribeLoggingConfigurationResponse_LoggingConfiguration:
+			v.LoggingConfiguration = &types.LoggingConfiguration{}
+			return v.LoggingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLoggingConfiguration, schemas.DescribeLoggingConfigurationRequest, schemas.DescribeLoggingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLoggingConfiguration, schemas.DescribeLoggingConfigurationRequest, schemas.DescribeLoggingConfigurationResponse), output: &DescribeLoggingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

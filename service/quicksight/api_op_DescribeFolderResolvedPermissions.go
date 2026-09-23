@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,30 @@ type DescribeFolderResolvedPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFolderResolvedPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFolderResolvedPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFolderResolvedPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeFolderResolvedPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.FolderId != nil {
+		s.WriteString(schemas.DescribeFolderResolvedPermissionsRequest_FolderId, *v.FolderId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeFolderResolvedPermissionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DescribeFolderResolvedPermissionsRequest_Namespace, *v.Namespace)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFolderResolvedPermissionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeFolderResolvedPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the folder.
@@ -77,13 +103,58 @@ type DescribeFolderResolvedPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFolderResolvedPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFolderResolvedPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFolderResolvedPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeFolderResolvedPermissionsResponse_Arn, *v.Arn)
+	}
+	if v.FolderId != nil {
+		s.WriteString(schemas.DescribeFolderResolvedPermissionsResponse_FolderId, *v.FolderId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFolderResolvedPermissionsResponse_NextToken, *v.NextToken)
+	}
+	serializeResourcePermissionList(s, schemas.DescribeFolderResolvedPermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeFolderResolvedPermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeFolderResolvedPermissionsResponse_Status, v.Status)
+	}
+}
+func (v *DescribeFolderResolvedPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFolderResolvedPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFolderResolvedPermissionsResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeFolderResolvedPermissionsResponse_Arn, v.Arn)
+		case schemas.DescribeFolderResolvedPermissionsResponse_FolderId:
+			v.FolderId = new(string)
+			return d.ReadString(schemas.DescribeFolderResolvedPermissionsResponse_FolderId, v.FolderId)
+		case schemas.DescribeFolderResolvedPermissionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFolderResolvedPermissionsResponse_NextToken, v.NextToken)
+		case schemas.DescribeFolderResolvedPermissionsResponse_Permissions:
+			return deserializeResourcePermissionList(d, schemas.DescribeFolderResolvedPermissionsResponse_Permissions, &v.Permissions)
+		case schemas.DescribeFolderResolvedPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeFolderResolvedPermissionsResponse_RequestId, v.RequestId)
+		case schemas.DescribeFolderResolvedPermissionsResponse_Status:
+			return d.ReadInt32(schemas.DescribeFolderResolvedPermissionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFolderResolvedPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFolderResolvedPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFolderResolvedPermissions, schemas.DescribeFolderResolvedPermissionsRequest, schemas.DescribeFolderResolvedPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeFolderResolvedPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFolderResolvedPermissions, schemas.DescribeFolderResolvedPermissionsRequest, schemas.DescribeFolderResolvedPermissionsResponse), output: &DescribeFolderResolvedPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

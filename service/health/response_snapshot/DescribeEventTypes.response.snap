@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHealth_20160804.DescribeEventTypes
+
+{"eventTypes":[{"actionability":"ACTION_REQUIRED","category":"issue","code":"__Code__","personas":["OPERATIONS","OPERATIONS"],"service":"__Service__"},{"actionability":"ACTION_REQUIRED","category":"issue","code":"__Code__","personas":["OPERATIONS","OPERATIONS"],"service":"__Service__"}],"nextToken":"__NextToken__"}

@@ -4,6 +4,8 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DisablePortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisablePortalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisablePortalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisablePortalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortalId != nil {
+		s.WriteString(schemas.DisablePortalRequest_PortalId, *v.PortalId)
+	}
+}
+
 type DisablePortalOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DisablePortalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisablePortalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisablePortalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisablePortalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisablePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisablePortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisablePortal, schemas.DisablePortalRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisablePortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisablePortal, schemas.DisablePortalRequest, nil), output: &DisablePortalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package invoicing
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,16 @@ type BatchGetInvoiceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetInvoiceProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetInvoiceProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetInvoiceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.BatchGetInvoiceProfileRequest_AccountIds, v.AccountIds)
+}
+
 type BatchGetInvoiceProfileOutput struct {
 
 	//  A list of invoice profiles corresponding to the requested accounts.
@@ -46,13 +58,29 @@ type BatchGetInvoiceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetInvoiceProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetInvoiceProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetInvoiceProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProfileList(s, schemas.BatchGetInvoiceProfileResponse_Profiles, v.Profiles)
+}
+func (v *BatchGetInvoiceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetInvoiceProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetInvoiceProfileResponse_Profiles:
+			return deserializeProfileList(d, schemas.BatchGetInvoiceProfileResponse_Profiles, &v.Profiles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetInvoiceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchGetInvoiceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetInvoiceProfile, schemas.BatchGetInvoiceProfileRequest, schemas.BatchGetInvoiceProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchGetInvoiceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetInvoiceProfile, schemas.BatchGetInvoiceProfileRequest, schemas.BatchGetInvoiceProfileResponse), output: &BatchGetInvoiceProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

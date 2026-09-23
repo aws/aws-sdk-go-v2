@@ -9644,6 +9644,678 @@
                         "smithy.api#documentation": "<p>The ability to use New Relic actions.</p>"
                     }
                 },
+                "PagerDutyAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using PagerDuty Agent connectors.</p>"
+                    }
+                },
+                "CreateAndUpdatePagerDutyAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update PagerDuty Agent actions.</p>"
+                    }
+                },
+                "SharePagerDutyAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share PagerDuty Agent actions.</p>"
+                    }
+                },
+                "UsePagerDutyAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use PagerDuty Agent actions.</p>"
+                    }
+                },
+                "VisierAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Visier Agent connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateVisierAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Visier Agent actions.</p>"
+                    }
+                },
+                "ShareVisierAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Visier Agent actions.</p>"
+                    }
+                },
+                "UseVisierAgentAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Visier Agent actions.</p>"
+                    }
+                },
+                "ZoomAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Zoom connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateZoomAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Zoom actions.</p>"
+                    }
+                },
+                "ShareZoomAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Zoom actions.</p>"
+                    }
+                },
+                "UseZoomAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Zoom actions.</p>"
+                    }
+                },
+                "SnowFlakeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Snowflake Cortex Agent connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateSnowFlakeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Snowflake Cortex Agent actions.</p>"
+                    }
+                },
+                "ShareSnowFlakeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Snowflake Cortex Agent actions.</p>"
+                    }
+                },
+                "UseSnowFlakeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Snowflake Cortex Agent actions.</p>"
+                    }
+                },
+                "ZapierAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Zapier Agent connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateZapierAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Zapier Agent actions.</p>"
+                    }
+                },
+                "ShareZapierAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Zapier Agent actions.</p>"
+                    }
+                },
+                "UseZapierAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Zapier Agent actions.</p>"
+                    }
+                },
+                "AirtableAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Airtable connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateAirtableAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Airtable actions.</p>"
+                    }
+                },
+                "ShareAirtableAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Airtable actions.</p>"
+                    }
+                },
+                "UseAirtableAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Airtable actions.</p>"
+                    }
+                },
+                "DropboxAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Dropbox connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateDropboxAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Dropbox actions.</p>"
+                    }
+                },
+                "ShareDropboxAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Dropbox actions.</p>"
+                    }
+                },
+                "UseDropboxAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Dropbox actions.</p>"
+                    }
+                },
+                "GmailAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Gmail connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateGmailAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Gmail actions.</p>"
+                    }
+                },
+                "ShareGmailAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Gmail actions.</p>"
+                    }
+                },
+                "UseGmailAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Gmail actions.</p>"
+                    }
+                },
+                "GoogleAnalyticsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Google Analytics connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateGoogleAnalyticsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Google Analytics actions.</p>"
+                    }
+                },
+                "ShareGoogleAnalyticsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Google Analytics actions.</p>"
+                    }
+                },
+                "UseGoogleAnalyticsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Google Analytics actions.</p>"
+                    }
+                },
+                "GoogleDocsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Google Docs connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateGoogleDocsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Google Docs actions.</p>"
+                    }
+                },
+                "ShareGoogleDocsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Google Docs actions.</p>"
+                    }
+                },
+                "UseGoogleDocsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Google Docs actions.</p>"
+                    }
+                },
+                "GoogleDriveAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Google Drive connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateGoogleDriveAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Google Drive actions.</p>"
+                    }
+                },
+                "ShareGoogleDriveAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Google Drive actions.</p>"
+                    }
+                },
+                "UseGoogleDriveAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Google Drive actions.</p>"
+                    }
+                },
+                "GoogleMeetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Google Meet connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateGoogleMeetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Google Meet actions.</p>"
+                    }
+                },
+                "ShareGoogleMeetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Google Meet actions.</p>"
+                    }
+                },
+                "UseGoogleMeetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Google Meet actions.</p>"
+                    }
+                },
+                "GoogleSheetsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Google Sheets connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateGoogleSheetsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Google Sheets actions.</p>"
+                    }
+                },
+                "ShareGoogleSheetsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Google Sheets actions.</p>"
+                    }
+                },
+                "UseGoogleSheetsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Google Sheets actions.</p>"
+                    }
+                },
+                "GoogleSlidesAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Google Slides connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateGoogleSlidesAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Google Slides actions.</p>"
+                    }
+                },
+                "ShareGoogleSlidesAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Google Slides actions.</p>"
+                    }
+                },
+                "UseGoogleSlidesAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Google Slides actions.</p>"
+                    }
+                },
+                "QuickBooksAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using QuickBooks connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateQuickBooksAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update QuickBooks actions.</p>"
+                    }
+                },
+                "ShareQuickBooksAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share QuickBooks actions.</p>"
+                    }
+                },
+                "UseQuickBooksAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use QuickBooks actions.</p>"
+                    }
+                },
+                "FigmaAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Figma connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateFigmaAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Figma actions.</p>"
+                    }
+                },
+                "ShareFigmaAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Figma actions.</p>"
+                    }
+                },
+                "UseFigmaAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Figma actions.</p>"
+                    }
+                },
+                "WhatsAppAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using WhatsApp connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateWhatsAppAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update WhatsApp actions.</p>"
+                    }
+                },
+                "ShareWhatsAppAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share WhatsApp actions.</p>"
+                    }
+                },
+                "UseWhatsAppAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use WhatsApp actions.</p>"
+                    }
+                },
+                "GoogleChatAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Google Chat connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateGoogleChatAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Google Chat actions.</p>"
+                    }
+                },
+                "ShareGoogleChatAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Google Chat actions.</p>"
+                    }
+                },
+                "UseGoogleChatAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Google Chat actions.</p>"
+                    }
+                },
+                "OneNoteAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Microsoft OneNote connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateOneNoteAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Microsoft OneNote actions.</p>"
+                    }
+                },
+                "ShareOneNoteAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Microsoft OneNote actions.</p>"
+                    }
+                },
+                "UseOneNoteAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Microsoft OneNote actions.</p>"
+                    }
+                },
+                "ShopifyAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Shopify connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateShopifyAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Shopify actions.</p>"
+                    }
+                },
+                "ShareShopifyAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Shopify actions.</p>"
+                    }
+                },
+                "UseShopifyAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Shopify actions.</p>"
+                    }
+                },
+                "AdobeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Adobe Marketing Agent connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateAdobeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Adobe Marketing Agent actions.</p>"
+                    }
+                },
+                "ShareAdobeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Adobe Marketing Agent actions.</p>"
+                    }
+                },
+                "UseAdobeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Adobe Marketing Agent actions.</p>"
+                    }
+                },
+                "CiscoWebexVidcastAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Cisco Webex Video Messaging Agent connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateCiscoWebexVidcastAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Cisco Webex Video Messaging Agent actions.</p>"
+                    }
+                },
+                "ShareCiscoWebexVidcastAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Cisco Webex Video Messaging Agent actions.</p>"
+                    }
+                },
+                "UseCiscoWebexVidcastAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Cisco Webex Video Messaging Agent actions.</p>"
+                    }
+                },
+                "CiscoWebexMeetingsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Cisco Webex Meetings connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateCiscoWebexMeetingsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Cisco Webex Meetings actions.</p>"
+                    }
+                },
+                "ShareCiscoWebexMeetingsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Cisco Webex Meetings actions.</p>"
+                    }
+                },
+                "UseCiscoWebexMeetingsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Cisco Webex Meetings actions.</p>"
+                    }
+                },
+                "DunAndBradstreetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Dun and Bradstreet connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateDunAndBradstreetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Dun and Bradstreet actions.</p>"
+                    }
+                },
+                "ShareDunAndBradstreetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Dun and Bradstreet actions.</p>"
+                    }
+                },
+                "UseDunAndBradstreetAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Dun and Bradstreet actions.</p>"
+                    }
+                },
+                "HGInsightsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using HG Insights Agent connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateHGInsightsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update HG Insights Agent actions.</p>"
+                    }
+                },
+                "ShareHGInsightsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share HG Insights Agent actions.</p>"
+                    }
+                },
+                "UseHGInsightsAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use HG Insights Agent actions.</p>"
+                    }
+                },
+                "ZoomInfoAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using ZoomInfo Agent connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateZoomInfoAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update ZoomInfo Agent actions.</p>"
+                    }
+                },
+                "ShareZoomInfoAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share ZoomInfo Agent actions.</p>"
+                    }
+                },
+                "UseZoomInfoAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use ZoomInfo Agent actions.</p>"
+                    }
+                },
+                "MoodysAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Moody's GenAI Ready Data connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateMoodysAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Moody's GenAI Ready Data actions.</p>"
+                    }
+                },
+                "ShareMoodysAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Moody's GenAI Ready Data actions.</p>"
+                    }
+                },
+                "UseMoodysAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Moody's GenAI Ready Data actions.</p>"
+                    }
+                },
+                "BeeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Bee connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateBeeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Bee actions.</p>"
+                    }
+                },
+                "ShareBeeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Bee actions.</p>"
+                    }
+                },
+                "UseBeeAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Bee actions.</p>"
+                    }
+                },
                 "Topic": {
                     "target": "com.amazonaws.quicksight#CapabilityState",
                     "traits": {

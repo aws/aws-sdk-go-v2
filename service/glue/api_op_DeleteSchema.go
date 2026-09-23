@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,20 @@ type DeleteSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSchemaInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaId != nil {
+		s.WriteStruct(schemas.DeleteSchemaInput_SchemaId)
+		v.SchemaId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DeleteSchemaOutput struct {
 
 	// The Amazon Resource Name (ARN) of the schema being deleted.
@@ -56,13 +72,48 @@ type DeleteSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.DeleteSchemaResponse_SchemaArn, *v.SchemaArn)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.DeleteSchemaResponse_SchemaName, *v.SchemaName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteSchemaResponse_Status, string(v.Status))
+	}
+}
+func (v *DeleteSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSchemaResponse_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.DeleteSchemaResponse_SchemaArn, v.SchemaArn)
+		case schemas.DeleteSchemaResponse_SchemaName:
+			v.SchemaName = new(string)
+			return d.ReadString(schemas.DeleteSchemaResponse_SchemaName, v.SchemaName)
+		case schemas.DeleteSchemaResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteSchemaResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SchemaStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSchema, schemas.DeleteSchemaInput, schemas.DeleteSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSchema, schemas.DeleteSchemaInput, schemas.DeleteSchemaResponse), output: &DeleteSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

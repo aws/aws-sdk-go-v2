@@ -4,6 +4,8 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type GetTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetTagsRequest_limit, *v.Limit)
+	}
+	if v.Position != nil {
+		s.WriteString(schemas.GetTagsRequest_position, *v.Position)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetTagsRequest_resourceArn, *v.ResourceArn)
+	}
+}
+
 // The collection of tags. Each tag element is associated with a given resource.
 type GetTagsOutput struct {
 
@@ -54,13 +74,29 @@ type GetTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tags)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfStringToString(s, schemas.Tags_tags, v.Tags)
+}
+func (v *GetTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tags, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tags_tags:
+			return deserializeMapOfStringToString(d, schemas.Tags_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTags, schemas.GetTagsRequest, schemas.Tags)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTags, schemas.GetTagsRequest, schemas.Tags), output: &GetTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

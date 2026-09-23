@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteBackupSelectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBackupSelectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBackupSelectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBackupSelectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.DeleteBackupSelectionInput_BackupPlanId, *v.BackupPlanId)
+	}
+	if v.SelectionId != nil {
+		s.WriteString(schemas.DeleteBackupSelectionInput_SelectionId, *v.SelectionId)
+	}
+}
+
 type DeleteBackupSelectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DeleteBackupSelectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBackupSelectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBackupSelectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteBackupSelectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBackupSelectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBackupSelection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBackupSelection, schemas.DeleteBackupSelectionInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBackupSelection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBackupSelection, schemas.DeleteBackupSelectionInput, nil), output: &DeleteBackupSelectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

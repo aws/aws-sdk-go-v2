@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"certificateAuthority":{"activatedAt":946684800,"activatedBy":"EKS","createdAt":946684800,"createdBy":"EKS","data":"__Data__","distributionStatus":"IN_PROGRESS","id":"__Id__","rollbackAvailable":true,"scheduledEvents":{"finalAutoActivation":946684800,"firstAutoActivation":946684800},"signingStatus":"NOT_USED","validity":{"notAfter":946684800,"notBefore":946684800}}}

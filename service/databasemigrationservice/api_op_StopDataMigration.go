@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type StopDataMigrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDataMigrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDataMigrationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDataMigrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataMigrationIdentifier != nil {
+		s.WriteString(schemas.StopDataMigrationMessage_DataMigrationIdentifier, *v.DataMigrationIdentifier)
+	}
+}
+
 type StopDataMigrationOutput struct {
 
 	// The data migration that DMS stopped.
@@ -45,13 +59,34 @@ type StopDataMigrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDataMigrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDataMigrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDataMigrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataMigration != nil {
+		s.WriteStruct(schemas.StopDataMigrationResponse_DataMigration)
+		v.DataMigration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopDataMigrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopDataMigrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopDataMigrationResponse_DataMigration:
+			v.DataMigration = &types.DataMigration{}
+			return v.DataMigration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopDataMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopDataMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDataMigration, schemas.StopDataMigrationMessage, schemas.StopDataMigrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopDataMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDataMigration, schemas.StopDataMigrationMessage, schemas.StopDataMigrationResponse), output: &StopDataMigrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

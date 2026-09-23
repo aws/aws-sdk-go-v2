@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListBrandsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBrandsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBrandsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBrandsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListBrandsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBrandsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBrandsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListBrandsOutput struct {
 
 	// A list of all brands in your Amazon Web Services account. This structure
@@ -57,13 +77,35 @@ type ListBrandsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBrandsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBrandsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBrandsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBrandSummaryList(s, schemas.ListBrandsResponse_Brands, v.Brands)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBrandsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBrandsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBrandsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBrandsResponse_Brands:
+			return deserializeBrandSummaryList(d, schemas.ListBrandsResponse_Brands, &v.Brands)
+		case schemas.ListBrandsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBrandsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBrandsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBrands{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBrands, schemas.ListBrandsRequest, schemas.ListBrandsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBrands{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBrands, schemas.ListBrandsRequest, schemas.ListBrandsResponse), output: &ListBrandsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

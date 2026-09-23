@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteDevEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDevEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDevEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDevEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointName != nil {
+		s.WriteString(schemas.DeleteDevEndpointRequest_EndpointName, *v.EndpointName)
+	}
+}
+
 type DeleteDevEndpointOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteDevEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDevEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDevEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDevEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDevEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDevEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDevEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDevEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDevEndpoint, schemas.DeleteDevEndpointRequest, schemas.DeleteDevEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDevEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDevEndpoint, schemas.DeleteDevEndpointRequest, schemas.DeleteDevEndpointResponse), output: &DeleteDevEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

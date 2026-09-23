@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"FunctionArn":"__FunctionArn__","RuntimeVersionArn":"__RuntimeVersionArn__","UpdateRuntimeOn":"Auto"}

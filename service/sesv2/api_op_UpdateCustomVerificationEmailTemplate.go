@@ -4,6 +4,8 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,33 @@ type UpdateCustomVerificationEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCustomVerificationEmailTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCustomVerificationEmailTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCustomVerificationEmailTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureRedirectionURL != nil {
+		s.WriteString(schemas.UpdateCustomVerificationEmailTemplateRequest_FailureRedirectionURL, *v.FailureRedirectionURL)
+	}
+	if v.FromEmailAddress != nil {
+		s.WriteString(schemas.UpdateCustomVerificationEmailTemplateRequest_FromEmailAddress, *v.FromEmailAddress)
+	}
+	if v.SuccessRedirectionURL != nil {
+		s.WriteString(schemas.UpdateCustomVerificationEmailTemplateRequest_SuccessRedirectionURL, *v.SuccessRedirectionURL)
+	}
+	if v.TemplateContent != nil {
+		s.WriteString(schemas.UpdateCustomVerificationEmailTemplateRequest_TemplateContent, *v.TemplateContent)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.UpdateCustomVerificationEmailTemplateRequest_TemplateName, *v.TemplateName)
+	}
+	if v.TemplateSubject != nil {
+		s.WriteString(schemas.UpdateCustomVerificationEmailTemplateRequest_TemplateSubject, *v.TemplateSubject)
+	}
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type UpdateCustomVerificationEmailTemplateOutput struct {
@@ -81,13 +110,26 @@ type UpdateCustomVerificationEmailTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCustomVerificationEmailTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCustomVerificationEmailTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCustomVerificationEmailTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateCustomVerificationEmailTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCustomVerificationEmailTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCustomVerificationEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCustomVerificationEmailTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCustomVerificationEmailTemplate, schemas.UpdateCustomVerificationEmailTemplateRequest, schemas.UpdateCustomVerificationEmailTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCustomVerificationEmailTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCustomVerificationEmailTemplate, schemas.UpdateCustomVerificationEmailTemplateRequest, schemas.UpdateCustomVerificationEmailTemplateResponse), output: &UpdateCustomVerificationEmailTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

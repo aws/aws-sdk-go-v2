@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.GetSuite
+
+{"suite":{"arn":"__Arn__","counters":{"errored":1,"failed":1,"passed":1,"skipped":1,"stopped":1,"total":1,"warned":1},"created":946684800,"deviceMinutes":{"metered":1,"total":1,"unmetered":1},"message":"__Message__","name":"__Name__","result":"PENDING","started":946684800,"status":"PENDING","stopped":946684800,"type":"BUILTIN_FUZZ"}}

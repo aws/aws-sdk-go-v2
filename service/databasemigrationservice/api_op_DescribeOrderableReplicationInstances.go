@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type DescribeOrderableReplicationInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrderableReplicationInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrderableReplicationInstancesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrderableReplicationInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeOrderableReplicationInstancesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeOrderableReplicationInstancesMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeOrderableReplicationInstancesOutput struct {
 
 	//  An optional pagination token provided by a previous request. If this parameter
@@ -61,13 +78,35 @@ type DescribeOrderableReplicationInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrderableReplicationInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrderableReplicationInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrderableReplicationInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeOrderableReplicationInstancesResponse_Marker, *v.Marker)
+	}
+	serializeOrderableReplicationInstanceList(s, schemas.DescribeOrderableReplicationInstancesResponse_OrderableReplicationInstances, v.OrderableReplicationInstances)
+}
+func (v *DescribeOrderableReplicationInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOrderableReplicationInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOrderableReplicationInstancesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeOrderableReplicationInstancesResponse_Marker, v.Marker)
+		case schemas.DescribeOrderableReplicationInstancesResponse_OrderableReplicationInstances:
+			return deserializeOrderableReplicationInstanceList(d, schemas.DescribeOrderableReplicationInstancesResponse_OrderableReplicationInstances, &v.OrderableReplicationInstances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOrderableReplicationInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeOrderableReplicationInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrderableReplicationInstances, schemas.DescribeOrderableReplicationInstancesMessage, schemas.DescribeOrderableReplicationInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeOrderableReplicationInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrderableReplicationInstances, schemas.DescribeOrderableReplicationInstancesMessage, schemas.DescribeOrderableReplicationInstancesResponse), output: &DescribeOrderableReplicationInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

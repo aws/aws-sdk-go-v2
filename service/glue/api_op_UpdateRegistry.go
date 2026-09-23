@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,23 @@ type UpdateRegistryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRegistryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRegistryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRegistryInput_Description, *v.Description)
+	}
+	if v.RegistryId != nil {
+		s.WriteStruct(schemas.UpdateRegistryInput_RegistryId)
+		v.RegistryId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateRegistryOutput struct {
 
 	// The Amazon Resource name (ARN) of the updated registry.
@@ -57,13 +76,38 @@ type UpdateRegistryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRegistryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRegistryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryArn != nil {
+		s.WriteString(schemas.UpdateRegistryResponse_RegistryArn, *v.RegistryArn)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.UpdateRegistryResponse_RegistryName, *v.RegistryName)
+	}
+}
+func (v *UpdateRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRegistryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRegistryResponse_RegistryArn:
+			v.RegistryArn = new(string)
+			return d.ReadString(schemas.UpdateRegistryResponse_RegistryArn, v.RegistryArn)
+		case schemas.UpdateRegistryResponse_RegistryName:
+			v.RegistryName = new(string)
+			return d.ReadString(schemas.UpdateRegistryResponse_RegistryName, v.RegistryName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRegistry, schemas.UpdateRegistryInput, schemas.UpdateRegistryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRegistry, schemas.UpdateRegistryInput, schemas.UpdateRegistryResponse), output: &UpdateRegistryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type RevokeRestoreAccessBackupVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeRestoreAccessBackupVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeRestoreAccessBackupVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeRestoreAccessBackupVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.RevokeRestoreAccessBackupVaultInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.RequesterComment != nil {
+		s.WriteString(schemas.RevokeRestoreAccessBackupVaultInput_RequesterComment, *v.RequesterComment)
+	}
+	if v.RestoreAccessBackupVaultArn != nil {
+		s.WriteString(schemas.RevokeRestoreAccessBackupVaultInput_RestoreAccessBackupVaultArn, *v.RestoreAccessBackupVaultArn)
+	}
+}
+
 type RevokeRestoreAccessBackupVaultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +71,26 @@ type RevokeRestoreAccessBackupVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeRestoreAccessBackupVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeRestoreAccessBackupVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RevokeRestoreAccessBackupVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeRestoreAccessBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokeRestoreAccessBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeRestoreAccessBackupVault, schemas.RevokeRestoreAccessBackupVaultInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRevokeRestoreAccessBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeRestoreAccessBackupVault, schemas.RevokeRestoreAccessBackupVaultInput, nil), output: &RevokeRestoreAccessBackupVaultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -111,6 +113,48 @@ type SendBulkEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendBulkEmailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendBulkEmailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendBulkEmailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBulkEmailEntryList(s, schemas.SendBulkEmailRequest_BulkEmailEntries, v.BulkEmailEntries)
+	if v.ConfigurationOverrides != nil {
+		s.WriteStruct(schemas.SendBulkEmailRequest_ConfigurationOverrides)
+		v.ConfigurationOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SendBulkEmailRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.DefaultContent != nil {
+		s.WriteStruct(schemas.SendBulkEmailRequest_DefaultContent)
+		v.DefaultContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMessageTagList(s, schemas.SendBulkEmailRequest_DefaultEmailTags, v.DefaultEmailTags)
+	if v.EndpointId != nil {
+		s.WriteString(schemas.SendBulkEmailRequest_EndpointId, *v.EndpointId)
+	}
+	if v.FeedbackForwardingEmailAddress != nil {
+		s.WriteString(schemas.SendBulkEmailRequest_FeedbackForwardingEmailAddress, *v.FeedbackForwardingEmailAddress)
+	}
+	if v.FeedbackForwardingEmailAddressIdentityArn != nil {
+		s.WriteString(schemas.SendBulkEmailRequest_FeedbackForwardingEmailAddressIdentityArn, *v.FeedbackForwardingEmailAddressIdentityArn)
+	}
+	if v.FromEmailAddress != nil {
+		s.WriteString(schemas.SendBulkEmailRequest_FromEmailAddress, *v.FromEmailAddress)
+	}
+	if v.FromEmailAddressIdentityArn != nil {
+		s.WriteString(schemas.SendBulkEmailRequest_FromEmailAddressIdentityArn, *v.FromEmailAddressIdentityArn)
+	}
+	serializeEmailAddressList(s, schemas.SendBulkEmailRequest_ReplyToAddresses, v.ReplyToAddresses)
+	if v.TenantName != nil {
+		s.WriteString(schemas.SendBulkEmailRequest_TenantName, *v.TenantName)
+	}
+}
 func (in *SendBulkEmailInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.EndpointId = in.EndpointId
@@ -132,13 +176,29 @@ type SendBulkEmailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendBulkEmailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendBulkEmailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendBulkEmailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBulkEmailEntryResultList(s, schemas.SendBulkEmailResponse_BulkEmailEntryResults, v.BulkEmailEntryResults)
+}
+func (v *SendBulkEmailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendBulkEmailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendBulkEmailResponse_BulkEmailEntryResults:
+			return deserializeBulkEmailEntryResultList(d, schemas.SendBulkEmailResponse_BulkEmailEntryResults, &v.BulkEmailEntryResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendBulkEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendBulkEmail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendBulkEmail, schemas.SendBulkEmailRequest, schemas.SendBulkEmailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendBulkEmail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendBulkEmail, schemas.SendBulkEmailRequest, schemas.SendBulkEmailResponse), output: &SendBulkEmailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

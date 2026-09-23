@@ -5,7 +5,9 @@ package lambdamicrovms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,36 @@ type ListMicrovmImageBuildsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMicrovmImageBuildsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMicrovmImageBuildsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMicrovmImageBuildsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Architecture != "" {
+		s.WriteString(schemas.ListMicrovmImageBuildsInput_architecture, string(v.Architecture))
+	}
+	if v.Chipset != "" {
+		s.WriteString(schemas.ListMicrovmImageBuildsInput_chipset, string(v.Chipset))
+	}
+	if v.ChipsetGeneration != nil {
+		s.WriteString(schemas.ListMicrovmImageBuildsInput_chipsetGeneration, *v.ChipsetGeneration)
+	}
+	if v.ImageIdentifier != nil {
+		s.WriteString(schemas.ListMicrovmImageBuildsInput_imageIdentifier, *v.ImageIdentifier)
+	}
+	if v.ImageVersion != nil {
+		s.WriteString(schemas.ListMicrovmImageBuildsInput_imageVersion, *v.ImageVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMicrovmImageBuildsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMicrovmImageBuildsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListMicrovmImageBuildsOutput struct {
 
 	// The list of MicroVM image builds.
@@ -75,13 +107,35 @@ type ListMicrovmImageBuildsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMicrovmImageBuildsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMicrovmImageBuildsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMicrovmImageBuildsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMicrovmImageBuildSummaries(s, schemas.ListMicrovmImageBuildsOutput_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMicrovmImageBuildsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMicrovmImageBuildsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMicrovmImageBuildsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMicrovmImageBuildsOutput_items:
+			return deserializeMicrovmImageBuildSummaries(d, schemas.ListMicrovmImageBuildsOutput_items, &v.Items)
+		case schemas.ListMicrovmImageBuildsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMicrovmImageBuildsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMicrovmImageBuildsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMicrovmImageBuilds{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMicrovmImageBuilds, schemas.ListMicrovmImageBuildsInput, schemas.ListMicrovmImageBuildsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMicrovmImageBuilds{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMicrovmImageBuilds, schemas.ListMicrovmImageBuildsInput, schemas.ListMicrovmImageBuildsOutput), output: &ListMicrovmImageBuildsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

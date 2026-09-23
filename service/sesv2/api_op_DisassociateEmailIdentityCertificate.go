@@ -4,6 +4,8 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type DisassociateEmailIdentityCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateEmailIdentityCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateEmailIdentityCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateEmailIdentityCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailIdentity != nil {
+		s.WriteString(schemas.DisassociateEmailIdentityCertificateRequest_EmailIdentity, *v.EmailIdentity)
+	}
+	if v.FromAddress != nil {
+		s.WriteString(schemas.DisassociateEmailIdentityCertificateRequest_FromAddress, *v.FromAddress)
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type DisassociateEmailIdentityCertificateOutput struct {
@@ -59,13 +76,26 @@ type DisassociateEmailIdentityCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateEmailIdentityCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateEmailIdentityCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateEmailIdentityCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateEmailIdentityCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateEmailIdentityCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateEmailIdentityCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateEmailIdentityCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateEmailIdentityCertificate, schemas.DisassociateEmailIdentityCertificateRequest, schemas.DisassociateEmailIdentityCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateEmailIdentityCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateEmailIdentityCertificate, schemas.DisassociateEmailIdentityCertificateRequest, schemas.DisassociateEmailIdentityCertificateResponse), output: &DisassociateEmailIdentityCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

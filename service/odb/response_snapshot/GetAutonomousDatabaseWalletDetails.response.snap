@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.GetAutonomousDatabaseWalletDetails
+
+{"autonomousDatabaseWalletDetails":{"passwordSourceSummary":{"passwordSource":"CUSTOMER_MANAGED_AWS_SECRET","passwordSourceConfiguration":{"customerManagedAwsSecret":{"externalIdType":"database_ocid","iamRoleArn":"__IamRoleArn__","secretId":"__SecretId__"}}},"status":"ACTIVE","timeRotated":"2000-01-01T00:00:00Z"}}

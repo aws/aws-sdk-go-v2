@@ -5,15 +5,11 @@ package lambda
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
-	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/eventstream"
 	"github.com/aws/smithy-go/middleware"
-	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"io"
 	"sync"
 )
 
@@ -26,259 +22,122 @@ type InvokeWithResponseStreamResponseEventReader interface {
 	Close() error
 	Err() error
 }
-
 type invokeWithResponseStreamResponseEventReader struct {
-	stream      chan types.InvokeWithResponseStreamResponseEvent
-	decoder     *eventstream.Decoder
-	eventStream io.ReadCloser
-	err         *smithysync.OnceErr
-	payloadBuf  []byte
-	done        chan struct{}
-	closeOnce   sync.Once
+	reader *smithyhttp.EventStreamReader
+	ch     chan types.InvokeWithResponseStreamResponseEvent
+	done   chan struct{}
+	closed chan struct{}
+
+	closeOnce sync.Once
 }
 
-func newInvokeWithResponseStreamResponseEventReader(readCloser io.ReadCloser, decoder *eventstream.Decoder) *invokeWithResponseStreamResponseEventReader {
-	w := &invokeWithResponseStreamResponseEventReader{
-		stream:      make(chan types.InvokeWithResponseStreamResponseEvent),
-		decoder:     decoder,
-		eventStream: readCloser,
-		err:         smithysync.NewOnceErr(),
-		done:        make(chan struct{}),
-		payloadBuf:  make([]byte, 10*1024),
+var _ InvokeWithResponseStreamResponseEventReader = (*invokeWithResponseStreamResponseEventReader)(nil)
+
+func newInvokeWithResponseStreamResponseEventReader(reader *smithyhttp.EventStreamReader) *invokeWithResponseStreamResponseEventReader {
+	r := &invokeWithResponseStreamResponseEventReader{
+		reader: reader,
+		ch:     make(chan types.InvokeWithResponseStreamResponseEvent),
+		done:   make(chan struct{}),
+		closed: make(chan struct{}),
 	}
-
-	go w.readEventStream()
-
-	return w
+	go r.pipe()
+	return r
 }
 
-func (r *invokeWithResponseStreamResponseEventReader) Events() <-chan types.InvokeWithResponseStreamResponseEvent {
-	return r.stream
-}
-
-func (r *invokeWithResponseStreamResponseEventReader) readEventStream() {
-	defer r.Close()
-	defer close(r.stream)
-
-	for {
-		r.payloadBuf = r.payloadBuf[0:0]
-		decodedMessage, err := r.decoder.Decode(r.eventStream, r.payloadBuf)
-		if err != nil {
-			if err == io.EOF {
-				return
-			}
-			select {
-			case <-r.done:
-				return
-			default:
-				r.err.SetError(err)
-				return
-			}
+func (r *invokeWithResponseStreamResponseEventReader) pipe() {
+	defer close(r.closed)
+	defer close(r.ch)
+	for event := range r.reader.Events() {
+		var ev types.InvokeWithResponseStreamResponseEvent
+		switch v := event.(type) {
+		case *types.InvokeWithResponseStreamCompleteEvent:
+			ev = &types.InvokeWithResponseStreamResponseEventMemberInvokeComplete{Value: *v}
+		case *types.InvokeResponseStreamUpdate:
+			ev = &types.InvokeWithResponseStreamResponseEventMemberPayloadChunk{Value: *v}
+		case *eventstream.UnknownUnionMember:
+			ev = &types.UnknownUnionMember{Tag: v.Tag, Value: v.Value}
+		default:
+			continue
 		}
-
-		event, err := r.deserializeEventMessage(&decodedMessage)
-		if err != nil {
-			r.err.SetError(err)
-			return
-		}
-
 		select {
-		case r.stream <- event:
+		case r.ch <- ev:
 		case <-r.done:
 			return
 		}
-
 	}
 }
 
-func (r *invokeWithResponseStreamResponseEventReader) deserializeEventMessage(msg *eventstream.Message) (types.InvokeWithResponseStreamResponseEvent, error) {
-	messageType := msg.Headers.Get(eventstreamapi.MessageTypeHeader)
-	if messageType == nil {
-		return nil, fmt.Errorf("%s event header not present", eventstreamapi.MessageTypeHeader)
-	}
-
-	switch messageType.String() {
-	case eventstreamapi.EventMessageType:
-		var v types.InvokeWithResponseStreamResponseEvent
-		if err := awsRestjson1_deserializeEventStreamInvokeWithResponseStreamResponseEvent(&v, msg); err != nil {
-			return nil, err
-		}
-		return v, nil
-
-	case eventstreamapi.ExceptionMessageType:
-		return nil, awsRestjson1_deserializeEventStreamExceptionInvokeWithResponseStreamResponseEvent(msg)
-
-	case eventstreamapi.ErrorMessageType:
-		errorCode := "UnknownError"
-		errorMessage := errorCode
-		if header := msg.Headers.Get(eventstreamapi.ErrorCodeHeader); header != nil {
-			errorCode = header.String()
-		}
-		if header := msg.Headers.Get(eventstreamapi.ErrorMessageHeader); header != nil {
-			errorMessage = header.String()
-		}
-		return nil, &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-
-	default:
-		mc := msg.Clone()
-		return nil, &UnknownEventMessageError{
-			Type:    messageType.String(),
-			Message: &mc,
-		}
-
-	}
-}
-
-func (r *invokeWithResponseStreamResponseEventReader) ErrorSet() <-chan struct{} {
-	return r.err.ErrorSet()
+func (r *invokeWithResponseStreamResponseEventReader) Events() <-chan types.InvokeWithResponseStreamResponseEvent {
+	return r.ch
 }
 
 func (r *invokeWithResponseStreamResponseEventReader) Close() error {
-	r.closeOnce.Do(r.safeClose)
-	return r.Err()
-}
-
-func (r *invokeWithResponseStreamResponseEventReader) safeClose() {
-	close(r.done)
-	r.eventStream.Close()
-
+	r.closeOnce.Do(func() {
+		close(r.done)
+	})
+	return r.reader.Close()
 }
 
 func (r *invokeWithResponseStreamResponseEventReader) Err() error {
-	return r.err.Err()
+	return r.reader.Err()
 }
 
 func (r *invokeWithResponseStreamResponseEventReader) Closed() <-chan struct{} {
-	return r.done
+	return r.closed
 }
 
-type awsRestjson1_deserializeOpEventStreamInvokeWithResponseStream struct {
-	LogEventStreamWrites bool
-	LogEventStreamReads  bool
+type deserializeOpEventStreamInvokeWithResponseStream struct {
+	options *Options
 }
 
-func (*awsRestjson1_deserializeOpEventStreamInvokeWithResponseStream) ID() string {
+func (*deserializeOpEventStreamInvokeWithResponseStream) ID() string {
 	return "OperationEventStreamDeserializer"
 }
 
-func (m *awsRestjson1_deserializeOpEventStreamInvokeWithResponseStream) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+func (m *deserializeOpEventStreamInvokeWithResponseStream) HandleDeserialize(
+	ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler,
+) (
+	middleware.DeserializeOutput, middleware.Metadata, error,
 ) {
-	defer func() {
-		if err == nil {
-			return
-		}
-		m.closeResponseBody(out)
-	}()
-
-	logger := middleware.GetLogger(ctx)
-
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type: %T", in.Request)
-	}
-	_ = request
-
-	out, metadata, err = next.HandleDeserialize(ctx, in)
+	out, md, err := next.HandleDeserialize(ctx, in)
 	if err != nil {
-		return out, metadata, err
+		return out, md, err
 	}
 
-	deserializeOutput, ok := out.RawResponse.(*smithyhttp.Response)
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type: %T", out.RawResponse)
+		return out, md, fmt.Errorf("unknown transport type: %T", out.RawResponse)
 	}
-	_ = deserializeOutput
 
 	output, ok := out.Result.(*InvokeWithResponseStreamOutput)
 	if out.Result != nil && !ok {
-		return out, metadata, fmt.Errorf("unexpected output result type: %T", out.Result)
+		return out, md, fmt.Errorf("unexpected output result type %T, expected *InvokeWithResponseStreamOutput", out.Result)
 	} else if out.Result == nil {
 		output = &InvokeWithResponseStreamOutput{}
 		out.Result = output
 	}
 
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.InvokeWithResponseStreamResponse, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newInvokeWithResponseStreamResponseEventReader(
-		deserializeOutput.Body,
-		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
-			options.Logger = logger
-			options.LogMessages = m.LogEventStreamReads
-
-		}),
+		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.InvokeWithResponseStreamResponseEvent, TypeRegistry, resp.Body),
 	)
 	defer func() {
-		if err == nil {
-			return
+		if err != nil {
+			_ = eventReader.Close()
 		}
-		_ = eventReader.Close()
 	}()
 
 	output.eventStream = NewInvokeWithResponseStreamEventStream(func(stream *InvokeWithResponseStreamEventStream) {
+
 		stream.Reader = eventReader
 	})
 
 	go output.eventStream.waitStreamClose()
 
-	return out, metadata, nil
-}
-
-func (*awsRestjson1_deserializeOpEventStreamInvokeWithResponseStream) closeResponseBody(out middleware.DeserializeOutput) {
-	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(io.Discard, resp.Body)
-		_ = resp.Body.Close()
-	}
-}
-
-func addEventStreamInvokeWithResponseStreamMiddleware(stack *middleware.Stack, options Options) error {
-	if err := stack.Deserialize.Insert(&awsRestjson1_deserializeOpEventStreamInvokeWithResponseStream{
-		LogEventStreamWrites: options.ClientLogMode.IsRequestEventMessage(),
-		LogEventStreamReads:  options.ClientLogMode.IsResponseEventMessage(),
-	}, "OperationDeserializer", middleware.Before); err != nil {
-		return err
-	}
-	return nil
-
-}
-
-// UnknownEventMessageError provides an error when a message is received from the stream,
-// but the reader is unable to determine what kind of message it is.
-type UnknownEventMessageError struct {
-	Type    string
-	Message *eventstream.Message
-}
-
-// Error retruns the error message string.
-func (e *UnknownEventMessageError) Error() string {
-	return "unknown event stream message type, " + e.Type
-}
-
-func setSafeEventStreamClientLogMode(o *Options, operation string) {
-	switch operation {
-	case "InvokeWithResponseStream":
-		toggleEventStreamClientLogMode(o, false, true)
-		return
-
-	default:
-		return
-
-	}
-}
-func toggleEventStreamClientLogMode(o *Options, request, response bool) {
-	mode := o.ClientLogMode
-
-	if request && mode.IsRequestWithBody() {
-		mode.ClearRequestWithBody()
-		mode |= aws.LogRequest
-	}
-
-	if response && mode.IsResponseWithBody() {
-		mode.ClearResponseWithBody()
-		mode |= aws.LogResponse
-	}
-
-	o.ClientLogMode = mode
-
+	return out, md, nil
 }

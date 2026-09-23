@@ -5,7 +5,9 @@ package invoicing
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -110,6 +112,62 @@ type CreateProcurementPortalPreferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProcurementPortalPreferenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProcurementPortalPreferenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProcurementPortalPreferenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuyerDomain != "" {
+		s.WriteString(schemas.CreateProcurementPortalPreferenceRequest_BuyerDomain, string(v.BuyerDomain))
+	}
+	if v.BuyerIdentifier != nil {
+		s.WriteString(schemas.CreateProcurementPortalPreferenceRequest_BuyerIdentifier, *v.BuyerIdentifier)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateProcurementPortalPreferenceRequest_ClientToken, *v.ClientToken)
+	}
+	serializeContacts(s, schemas.CreateProcurementPortalPreferenceRequest_Contacts, v.Contacts)
+	if v.EinvoiceDeliveryEnabled != nil {
+		s.WriteBool(schemas.CreateProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled, *v.EinvoiceDeliveryEnabled)
+	}
+	if v.EinvoiceDeliveryPreference != nil {
+		s.WriteStruct(schemas.CreateProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference)
+		v.EinvoiceDeliveryPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProcurementPortalInstanceEndpoint != nil {
+		s.WriteString(schemas.CreateProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint, *v.ProcurementPortalInstanceEndpoint)
+	}
+	if v.ProcurementPortalName != "" {
+		s.WriteString(schemas.CreateProcurementPortalPreferenceRequest_ProcurementPortalName, string(v.ProcurementPortalName))
+	}
+	if v.ProcurementPortalSharedSecret != nil {
+		s.WriteString(schemas.CreateProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret, *v.ProcurementPortalSharedSecret)
+	}
+	if v.PurchaseOrderRetrievalEnabled != nil {
+		s.WriteBool(schemas.CreateProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled, *v.PurchaseOrderRetrievalEnabled)
+	}
+	serializeResourceTagList(s, schemas.CreateProcurementPortalPreferenceRequest_ResourceTags, v.ResourceTags)
+	if v.Selector != nil {
+		s.WriteStruct(schemas.CreateProcurementPortalPreferenceRequest_Selector)
+		v.Selector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SupplierDomain != "" {
+		s.WriteString(schemas.CreateProcurementPortalPreferenceRequest_SupplierDomain, string(v.SupplierDomain))
+	}
+	if v.SupplierIdentifier != nil {
+		s.WriteString(schemas.CreateProcurementPortalPreferenceRequest_SupplierIdentifier, *v.SupplierIdentifier)
+	}
+	if v.TestEnvPreference != nil {
+		s.WriteStruct(schemas.CreateProcurementPortalPreferenceRequest_TestEnvPreference)
+		v.TestEnvPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateProcurementPortalPreferenceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created procurement portal preference.
@@ -123,13 +181,32 @@ type CreateProcurementPortalPreferenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProcurementPortalPreferenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProcurementPortalPreferenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProcurementPortalPreferenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProcurementPortalPreferenceArn != nil {
+		s.WriteString(schemas.CreateProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn, *v.ProcurementPortalPreferenceArn)
+	}
+}
+func (v *CreateProcurementPortalPreferenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProcurementPortalPreferenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn:
+			v.ProcurementPortalPreferenceArn = new(string)
+			return d.ReadString(schemas.CreateProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn, v.ProcurementPortalPreferenceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProcurementPortalPreferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateProcurementPortalPreference{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProcurementPortalPreference, schemas.CreateProcurementPortalPreferenceRequest, schemas.CreateProcurementPortalPreferenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateProcurementPortalPreference{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProcurementPortalPreference, schemas.CreateProcurementPortalPreferenceRequest, schemas.CreateProcurementPortalPreferenceResponse), output: &CreateProcurementPortalPreferenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

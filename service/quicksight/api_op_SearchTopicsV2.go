@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,25 @@ type SearchTopicsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchTopicsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTopicsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTopicsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.SearchTopicsV2Request_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeTopicSearchFilterList(s, schemas.SearchTopicsV2Request_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchTopicsV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchTopicsV2Request_NextToken, *v.NextToken)
+	}
+}
+
 type SearchTopicsV2Output struct {
 
 	// The token for the next set of results, or null if there are no more results.
@@ -67,13 +88,46 @@ type SearchTopicsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchTopicsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTopicsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTopicsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchTopicsV2Response_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.SearchTopicsV2Response_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.SearchTopicsV2Response_Status, v.Status)
+	}
+	serializeTopicV2Summaries(s, schemas.SearchTopicsV2Response_TopicSummaryList, v.TopicSummaryList)
+}
+func (v *SearchTopicsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchTopicsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchTopicsV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchTopicsV2Response_NextToken, v.NextToken)
+		case schemas.SearchTopicsV2Response_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.SearchTopicsV2Response_RequestId, v.RequestId)
+		case schemas.SearchTopicsV2Response_Status:
+			return d.ReadInt32(schemas.SearchTopicsV2Response_Status, &v.Status)
+		case schemas.SearchTopicsV2Response_TopicSummaryList:
+			return deserializeTopicV2Summaries(d, schemas.SearchTopicsV2Response_TopicSummaryList, &v.TopicSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchTopicsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchTopicsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTopicsV2, schemas.SearchTopicsV2Request, schemas.SearchTopicsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchTopicsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTopicsV2, schemas.SearchTopicsV2Request, schemas.SearchTopicsV2Response), output: &SearchTopicsV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

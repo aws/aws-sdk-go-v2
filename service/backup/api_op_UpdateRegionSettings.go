@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,17 @@ type UpdateRegionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRegionSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRegionSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRegionSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceTypeManagementPreference(s, schemas.UpdateRegionSettingsInput_ResourceTypeManagementPreference, v.ResourceTypeManagementPreference)
+	serializeResourceTypeOptInPreference(s, schemas.UpdateRegionSettingsInput_ResourceTypeOptInPreference, v.ResourceTypeOptInPreference)
+}
+
 type UpdateRegionSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +70,26 @@ type UpdateRegionSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRegionSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRegionSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRegionSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRegionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRegionSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRegionSettings, schemas.UpdateRegionSettingsInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRegionSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRegionSettings, schemas.UpdateRegionSettingsInput, nil), output: &UpdateRegionSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

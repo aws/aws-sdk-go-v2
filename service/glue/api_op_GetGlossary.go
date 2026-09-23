@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetGlossaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGlossaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGlossaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGlossaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetGlossaryRequest_Identifier, *v.Identifier)
+	}
+}
+
 type GetGlossaryOutput struct {
 
 	// The description of the glossary.
@@ -50,13 +64,44 @@ type GetGlossaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGlossaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGlossaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGlossaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GetGlossaryResponse_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetGlossaryResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetGlossaryResponse_Name, *v.Name)
+	}
+}
+func (v *GetGlossaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGlossaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGlossaryResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetGlossaryResponse_Description, v.Description)
+		case schemas.GetGlossaryResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetGlossaryResponse_Id, v.Id)
+		case schemas.GetGlossaryResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetGlossaryResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGlossaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetGlossary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlossary, schemas.GetGlossaryRequest, schemas.GetGlossaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetGlossary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlossary, schemas.GetGlossaryRequest, schemas.GetGlossaryResponse), output: &GetGlossaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

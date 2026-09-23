@@ -4,7 +4,9 @@ package iotthingsgraph
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type GetUploadStatusInput struct {
 	UploadId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetUploadStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUploadStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUploadStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UploadId != nil {
+		s.WriteString(schemas.GetUploadStatusRequest_uploadId, *v.UploadId)
+	}
 }
 
 type GetUploadStatusOutput struct {
@@ -75,13 +89,69 @@ type GetUploadStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUploadStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUploadStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUploadStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.GetUploadStatusResponse_createdDate, *v.CreatedDate)
+	}
+	serializeStringList(s, schemas.GetUploadStatusResponse_failureReason, v.FailureReason)
+	if v.NamespaceArn != nil {
+		s.WriteString(schemas.GetUploadStatusResponse_namespaceArn, *v.NamespaceArn)
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.GetUploadStatusResponse_namespaceName, *v.NamespaceName)
+	}
+	if v.NamespaceVersion != nil {
+		s.WriteInt64(schemas.GetUploadStatusResponse_namespaceVersion, *v.NamespaceVersion)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.GetUploadStatusResponse_uploadId, *v.UploadId)
+	}
+	if v.UploadStatus != "" {
+		s.WriteString(schemas.GetUploadStatusResponse_uploadStatus, string(v.UploadStatus))
+	}
+}
+func (v *GetUploadStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUploadStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUploadStatusResponse_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetUploadStatusResponse_createdDate, v.CreatedDate)
+		case schemas.GetUploadStatusResponse_failureReason:
+			return deserializeStringList(d, schemas.GetUploadStatusResponse_failureReason, &v.FailureReason)
+		case schemas.GetUploadStatusResponse_namespaceArn:
+			v.NamespaceArn = new(string)
+			return d.ReadString(schemas.GetUploadStatusResponse_namespaceArn, v.NamespaceArn)
+		case schemas.GetUploadStatusResponse_namespaceName:
+			v.NamespaceName = new(string)
+			return d.ReadString(schemas.GetUploadStatusResponse_namespaceName, v.NamespaceName)
+		case schemas.GetUploadStatusResponse_namespaceVersion:
+			v.NamespaceVersion = new(int64)
+			return d.ReadInt64(schemas.GetUploadStatusResponse_namespaceVersion, v.NamespaceVersion)
+		case schemas.GetUploadStatusResponse_uploadId:
+			v.UploadId = new(string)
+			return d.ReadString(schemas.GetUploadStatusResponse_uploadId, v.UploadId)
+		case schemas.GetUploadStatusResponse_uploadStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetUploadStatusResponse_uploadStatus, &ev); err != nil {
+				return err
+			}
+			v.UploadStatus = types.UploadStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUploadStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUploadStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUploadStatus, schemas.GetUploadStatusRequest, schemas.GetUploadStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUploadStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUploadStatus, schemas.GetUploadStatusRequest, schemas.GetUploadStatusResponse), output: &GetUploadStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

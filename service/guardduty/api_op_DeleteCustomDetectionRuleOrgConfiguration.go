@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeleteCustomDetectionRuleOrgConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomDetectionRuleOrgConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomDetectionRuleOrgConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomDetectionRuleOrgConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.DeleteCustomDetectionRuleOrgConfigurationRequest_Mode, string(v.Mode))
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.DeleteCustomDetectionRuleOrgConfigurationRequest_RuleId, *v.RuleId)
+	}
+}
+
 type DeleteCustomDetectionRuleOrgConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +65,26 @@ type DeleteCustomDetectionRuleOrgConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomDetectionRuleOrgConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomDetectionRuleOrgConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomDetectionRuleOrgConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCustomDetectionRuleOrgConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCustomDetectionRuleOrgConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCustomDetectionRuleOrgConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCustomDetectionRuleOrgConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomDetectionRuleOrgConfiguration, schemas.DeleteCustomDetectionRuleOrgConfigurationRequest, schemas.DeleteCustomDetectionRuleOrgConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCustomDetectionRuleOrgConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomDetectionRuleOrgConfiguration, schemas.DeleteCustomDetectionRuleOrgConfigurationRequest, schemas.DeleteCustomDetectionRuleOrgConfigurationResponse), output: &DeleteCustomDetectionRuleOrgConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

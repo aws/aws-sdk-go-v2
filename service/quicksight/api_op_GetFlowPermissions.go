@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetFlowPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFlowPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFlowPermissionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFlowPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.GetFlowPermissionsInput_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.FlowId != nil {
+		s.WriteString(schemas.GetFlowPermissionsInput_FlowId, *v.FlowId)
+	}
+}
+
 type GetFlowPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the flow you are getting permissions against.
@@ -69,13 +86,52 @@ type GetFlowPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFlowPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFlowPermissionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFlowPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetFlowPermissionsOutput_Arn, *v.Arn)
+	}
+	if v.FlowId != nil {
+		s.WriteString(schemas.GetFlowPermissionsOutput_FlowId, *v.FlowId)
+	}
+	serializePermissionsList(s, schemas.GetFlowPermissionsOutput_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetFlowPermissionsOutput_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.GetFlowPermissionsOutput_Status, v.Status)
+	}
+}
+func (v *GetFlowPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFlowPermissionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFlowPermissionsOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetFlowPermissionsOutput_Arn, v.Arn)
+		case schemas.GetFlowPermissionsOutput_FlowId:
+			v.FlowId = new(string)
+			return d.ReadString(schemas.GetFlowPermissionsOutput_FlowId, v.FlowId)
+		case schemas.GetFlowPermissionsOutput_Permissions:
+			return deserializePermissionsList(d, schemas.GetFlowPermissionsOutput_Permissions, &v.Permissions)
+		case schemas.GetFlowPermissionsOutput_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetFlowPermissionsOutput_RequestId, v.RequestId)
+		case schemas.GetFlowPermissionsOutput_Status:
+			return d.ReadInt32(schemas.GetFlowPermissionsOutput_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFlowPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFlowPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlowPermissions, schemas.GetFlowPermissionsInput, schemas.GetFlowPermissionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFlowPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlowPermissions, schemas.GetFlowPermissionsInput, schemas.GetFlowPermissionsOutput), output: &GetFlowPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,6 +49,24 @@ type DescribeRecoveryPointInput struct {
 	BackupVaultAccountId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeRecoveryPointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecoveryPointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecoveryPointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultAccountId != nil {
+		s.WriteString(schemas.DescribeRecoveryPointInput_BackupVaultAccountId, *v.BackupVaultAccountId)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.DescribeRecoveryPointInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.DescribeRecoveryPointInput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
 }
 
 type DescribeRecoveryPointOutput struct {
@@ -242,13 +262,221 @@ type DescribeRecoveryPointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecoveryPointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecoveryPointOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecoveryPointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupSizeInBytes != nil {
+		s.WriteInt64(schemas.DescribeRecoveryPointOutput_BackupSizeInBytes, *v.BackupSizeInBytes)
+	}
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.CalculatedLifecycle != nil {
+		s.WriteStruct(schemas.DescribeRecoveryPointOutput_CalculatedLifecycle)
+		v.CalculatedLifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompletionDate != nil {
+		s.WriteTime(schemas.DescribeRecoveryPointOutput_CompletionDate, *v.CompletionDate)
+	}
+	if v.CompositeMemberIdentifier != nil {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_CompositeMemberIdentifier, *v.CompositeMemberIdentifier)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeRecoveryPointOutput_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.DescribeRecoveryPointOutput_CreationDate, *v.CreationDate)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.EncryptionKeyType != "" {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_EncryptionKeyType, string(v.EncryptionKeyType))
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.IndexStatus != "" {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_IndexStatus, string(v.IndexStatus))
+	}
+	if v.IndexStatusMessage != nil {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_IndexStatusMessage, *v.IndexStatusMessage)
+	}
+	if v.InitiationDate != nil {
+		s.WriteTime(schemas.DescribeRecoveryPointOutput_InitiationDate, *v.InitiationDate)
+	}
+	if v.IsEncrypted != false {
+		s.WriteBool(schemas.DescribeRecoveryPointOutput_IsEncrypted, v.IsEncrypted)
+	}
+	if v.IsParent != false {
+		s.WriteBool(schemas.DescribeRecoveryPointOutput_IsParent, v.IsParent)
+	}
+	if v.LastRestoreTime != nil {
+		s.WriteTime(schemas.DescribeRecoveryPointOutput_LastRestoreTime, *v.LastRestoreTime)
+	}
+	if v.Lifecycle != nil {
+		s.WriteStruct(schemas.DescribeRecoveryPointOutput_Lifecycle)
+		v.Lifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParentRecoveryPointArn != nil {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_ParentRecoveryPointArn, *v.ParentRecoveryPointArn)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_ResourceName, *v.ResourceName)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_ResourceType, *v.ResourceType)
+	}
+	serializeScanResults(s, schemas.DescribeRecoveryPointOutput_ScanResults, v.ScanResults)
+	if v.SourceBackupVaultArn != nil {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_SourceBackupVaultArn, *v.SourceBackupVaultArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_StatusMessage, *v.StatusMessage)
+	}
+	if v.StorageClass != "" {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_StorageClass, string(v.StorageClass))
+	}
+	if v.VaultType != "" {
+		s.WriteString(schemas.DescribeRecoveryPointOutput_VaultType, string(v.VaultType))
+	}
+}
+func (v *DescribeRecoveryPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRecoveryPointOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRecoveryPointOutput_BackupSizeInBytes:
+			v.BackupSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.DescribeRecoveryPointOutput_BackupSizeInBytes, v.BackupSizeInBytes)
+		case schemas.DescribeRecoveryPointOutput_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.DescribeRecoveryPointOutput_BackupVaultArn, v.BackupVaultArn)
+		case schemas.DescribeRecoveryPointOutput_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.DescribeRecoveryPointOutput_BackupVaultName, v.BackupVaultName)
+		case schemas.DescribeRecoveryPointOutput_CalculatedLifecycle:
+			v.CalculatedLifecycle = &types.CalculatedLifecycle{}
+			return v.CalculatedLifecycle.Deserialize(d)
+		case schemas.DescribeRecoveryPointOutput_CompletionDate:
+			v.CompletionDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeRecoveryPointOutput_CompletionDate, v.CompletionDate)
+		case schemas.DescribeRecoveryPointOutput_CompositeMemberIdentifier:
+			v.CompositeMemberIdentifier = new(string)
+			return d.ReadString(schemas.DescribeRecoveryPointOutput_CompositeMemberIdentifier, v.CompositeMemberIdentifier)
+		case schemas.DescribeRecoveryPointOutput_CreatedBy:
+			v.CreatedBy = &types.RecoveryPointCreator{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeRecoveryPointOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeRecoveryPointOutput_CreationDate, v.CreationDate)
+		case schemas.DescribeRecoveryPointOutput_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.DescribeRecoveryPointOutput_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.DescribeRecoveryPointOutput_EncryptionKeyType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeRecoveryPointOutput_EncryptionKeyType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionKeyType = types.EncryptionKeyType(ev)
+			return nil
+		case schemas.DescribeRecoveryPointOutput_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.DescribeRecoveryPointOutput_IamRoleArn, v.IamRoleArn)
+		case schemas.DescribeRecoveryPointOutput_IndexStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeRecoveryPointOutput_IndexStatus, &ev); err != nil {
+				return err
+			}
+			v.IndexStatus = types.IndexStatus(ev)
+			return nil
+		case schemas.DescribeRecoveryPointOutput_IndexStatusMessage:
+			v.IndexStatusMessage = new(string)
+			return d.ReadString(schemas.DescribeRecoveryPointOutput_IndexStatusMessage, v.IndexStatusMessage)
+		case schemas.DescribeRecoveryPointOutput_InitiationDate:
+			v.InitiationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeRecoveryPointOutput_InitiationDate, v.InitiationDate)
+		case schemas.DescribeRecoveryPointOutput_IsEncrypted:
+			return d.ReadBool(schemas.DescribeRecoveryPointOutput_IsEncrypted, &v.IsEncrypted)
+		case schemas.DescribeRecoveryPointOutput_IsParent:
+			return d.ReadBool(schemas.DescribeRecoveryPointOutput_IsParent, &v.IsParent)
+		case schemas.DescribeRecoveryPointOutput_LastRestoreTime:
+			v.LastRestoreTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeRecoveryPointOutput_LastRestoreTime, v.LastRestoreTime)
+		case schemas.DescribeRecoveryPointOutput_Lifecycle:
+			v.Lifecycle = &types.Lifecycle{}
+			return v.Lifecycle.Deserialize(d)
+		case schemas.DescribeRecoveryPointOutput_ParentRecoveryPointArn:
+			v.ParentRecoveryPointArn = new(string)
+			return d.ReadString(schemas.DescribeRecoveryPointOutput_ParentRecoveryPointArn, v.ParentRecoveryPointArn)
+		case schemas.DescribeRecoveryPointOutput_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.DescribeRecoveryPointOutput_RecoveryPointArn, v.RecoveryPointArn)
+		case schemas.DescribeRecoveryPointOutput_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DescribeRecoveryPointOutput_ResourceArn, v.ResourceArn)
+		case schemas.DescribeRecoveryPointOutput_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.DescribeRecoveryPointOutput_ResourceName, v.ResourceName)
+		case schemas.DescribeRecoveryPointOutput_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.DescribeRecoveryPointOutput_ResourceType, v.ResourceType)
+		case schemas.DescribeRecoveryPointOutput_ScanResults:
+			return deserializeScanResults(d, schemas.DescribeRecoveryPointOutput_ScanResults, &v.ScanResults)
+		case schemas.DescribeRecoveryPointOutput_SourceBackupVaultArn:
+			v.SourceBackupVaultArn = new(string)
+			return d.ReadString(schemas.DescribeRecoveryPointOutput_SourceBackupVaultArn, v.SourceBackupVaultArn)
+		case schemas.DescribeRecoveryPointOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeRecoveryPointOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RecoveryPointStatus(ev)
+			return nil
+		case schemas.DescribeRecoveryPointOutput_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.DescribeRecoveryPointOutput_StatusMessage, v.StatusMessage)
+		case schemas.DescribeRecoveryPointOutput_StorageClass:
+			var ev string
+			if err := d.ReadString(schemas.DescribeRecoveryPointOutput_StorageClass, &ev); err != nil {
+				return err
+			}
+			v.StorageClass = types.StorageClass(ev)
+			return nil
+		case schemas.DescribeRecoveryPointOutput_VaultType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeRecoveryPointOutput_VaultType, &ev); err != nil {
+				return err
+			}
+			v.VaultType = types.VaultType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRecoveryPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecoveryPoint, schemas.DescribeRecoveryPointInput, schemas.DescribeRecoveryPointOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRecoveryPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecoveryPoint, schemas.DescribeRecoveryPointInput, schemas.DescribeRecoveryPointOutput), output: &DescribeRecoveryPointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

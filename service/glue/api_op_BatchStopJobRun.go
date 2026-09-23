@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type BatchStopJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchStopJobRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchStopJobRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchStopJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.BatchStopJobRunRequest_JobName, *v.JobName)
+	}
+	serializeBatchStopJobRunJobRunIdList(s, schemas.BatchStopJobRunRequest_JobRunIds, v.JobRunIds)
+}
+
 type BatchStopJobRunOutput struct {
 
 	// A list of the errors that were encountered in trying to stop JobRuns , including
@@ -54,13 +69,32 @@ type BatchStopJobRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchStopJobRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchStopJobRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchStopJobRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchStopJobRunErrorList(s, schemas.BatchStopJobRunResponse_Errors, v.Errors)
+	serializeBatchStopJobRunSuccessfulSubmissionList(s, schemas.BatchStopJobRunResponse_SuccessfulSubmissions, v.SuccessfulSubmissions)
+}
+func (v *BatchStopJobRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchStopJobRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchStopJobRunResponse_Errors:
+			return deserializeBatchStopJobRunErrorList(d, schemas.BatchStopJobRunResponse_Errors, &v.Errors)
+		case schemas.BatchStopJobRunResponse_SuccessfulSubmissions:
+			return deserializeBatchStopJobRunSuccessfulSubmissionList(d, schemas.BatchStopJobRunResponse_SuccessfulSubmissions, &v.SuccessfulSubmissions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchStopJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchStopJobRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchStopJobRun, schemas.BatchStopJobRunRequest, schemas.BatchStopJobRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchStopJobRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchStopJobRun, schemas.BatchStopJobRunRequest, schemas.BatchStopJobRunResponse), output: &BatchStopJobRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

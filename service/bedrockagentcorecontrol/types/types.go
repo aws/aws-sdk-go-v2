@@ -3536,6 +3536,9 @@ type Harness struct {
 	// The version of the harness. Incremented on every successful UpdateHarness.
 	HarnessVersion *string
 
+	// The lifecycle hooks configured for the harness.
+	Hooks []HarnessHook
+
 	// The maximum number of iterations in the agent loop allowed before exiting per
 	// invocation.
 	MaxIterations *int32
@@ -3549,6 +3552,38 @@ type Harness struct {
 
 	// The maximum duration per invocation.
 	TimeoutSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a hook that runs after an invocation completes.
+type HarnessAfterInvocationHook struct {
+
+	// The name of the hook.
+	//
+	// This member is required.
+	Name *string
+
+	// The target that receives the hook event.
+	//
+	// This member is required.
+	Target HarnessHookTarget
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a hook that runs after a tool call completes.
+type HarnessAfterToolCallHook struct {
+
+	// The name of the hook.
+	//
+	// This member is required.
+	Name *string
+
+	// The target that receives the hook event.
+	//
+	// This member is required.
+	Target HarnessHookTarget
 
 	noSmithyDocumentSerde
 }
@@ -3699,6 +3734,38 @@ type HarnessBedrockModelConfig struct {
 
 	// The topP set when calling the model.
 	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a hook that runs before an invocation begins.
+type HarnessBeforeInvocationHook struct {
+
+	// The name of the hook.
+	//
+	// This member is required.
+	Name *string
+
+	// The target that receives the hook event.
+	//
+	// This member is required.
+	Target HarnessHookTarget
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a hook that runs before the agent calls a tool.
+type HarnessBeforeToolCallHook struct {
+
+	// The name of the hook.
+	//
+	// This member is required.
+	Name *string
+
+	// The target that receives the hook event.
+	//
+	// This member is required.
+	Target HarnessHookTarget
 
 	noSmithyDocumentSerde
 }
@@ -3892,6 +3959,136 @@ type HarnessGeminiModelConfig struct {
 	noSmithyDocumentSerde
 }
 
+// A lifecycle hook configuration. Specify one hook type.
+//
+// The following types satisfy this interface:
+//
+//	HarnessHookMemberAfterInvocation
+//	HarnessHookMemberAfterToolCall
+//	HarnessHookMemberBeforeInvocation
+//	HarnessHookMemberBeforeToolCall
+type HarnessHook interface {
+	isHarnessHook()
+}
+
+// A hook that runs after an invocation completes.
+type HarnessHookMemberAfterInvocation struct {
+	Value HarnessAfterInvocationHook
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessHookMemberAfterInvocation) isHarnessHook() {}
+
+// A hook that runs after a tool call completes.
+type HarnessHookMemberAfterToolCall struct {
+	Value HarnessAfterToolCallHook
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessHookMemberAfterToolCall) isHarnessHook() {}
+
+// A hook that runs before an invocation begins.
+type HarnessHookMemberBeforeInvocation struct {
+	Value HarnessBeforeInvocationHook
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessHookMemberBeforeInvocation) isHarnessHook() {}
+
+// A hook that runs before the agent calls a tool.
+type HarnessHookMemberBeforeToolCall struct {
+	Value HarnessBeforeToolCallHook
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessHookMemberBeforeToolCall) isHarnessHook() {}
+
+// The configuration for an Amazon EventBridge hook target.
+type HarnessHookEventBridgeTarget struct {
+
+	// The ARN of the Amazon EventBridge event bus to send hook events to.
+	//
+	// This member is required.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an AWS Lambda hook target.
+type HarnessHookLambdaTarget struct {
+
+	// The ARN of the Lambda function to invoke.
+	//
+	// This member is required.
+	Arn *string
+
+	// The behavior when the Lambda function times out, returns an error, or returns
+	// an invalid response. The default is DENY .
+	FailureMode HarnessHookFailureMode
+
+	// The maximum number of seconds to wait for the Lambda function response. The
+	// default is 60 seconds.
+	TimeoutSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an Amazon SNS hook target.
+type HarnessHookSnsTarget struct {
+
+	// The ARN of the Amazon SNS topic to publish hook events to.
+	//
+	// This member is required.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// The target that receives lifecycle hook events. Specify one target type.
+//
+// The following types satisfy this interface:
+//
+//	HarnessHookTargetMemberEventBridge
+//	HarnessHookTargetMemberLambda
+//	HarnessHookTargetMemberSns
+type HarnessHookTarget interface {
+	isHarnessHookTarget()
+}
+
+// An Amazon EventBridge hook target that sends the hook event without waiting for
+// a response.
+type HarnessHookTargetMemberEventBridge struct {
+	Value HarnessHookEventBridgeTarget
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessHookTargetMemberEventBridge) isHarnessHookTarget() {}
+
+// A Lambda hook target that invokes an AWS Lambda function synchronously and
+// waits for its response.
+type HarnessHookTargetMemberLambda struct {
+	Value HarnessHookLambdaTarget
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessHookTargetMemberLambda) isHarnessHookTarget() {}
+
+// An Amazon SNS hook target that publishes the hook event without waiting for a
+// response.
+type HarnessHookTargetMemberSns struct {
+	Value HarnessHookSnsTarget
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessHookTargetMemberSns) isHarnessHookTarget() {}
+
 // Configuration for an inline function tool. When the agent calls this tool, the
 // tool call is returned to the caller for external execution.
 type HarnessInlineFunctionConfig struct {
@@ -4062,6 +4259,9 @@ type HarnessOpenAiModelConfig struct {
 
 	// Provider-specific parameters passed through to the model provider unchanged.
 	AdditionalParams document.Interface
+
+	// Optional custom endpoint URL for an OpenAI-compatible endpoint.
+	ApiBase *string
 
 	// The API format to use when calling the OpenAI provider.
 	ApiFormat HarnessOpenAiApiFormat
@@ -9728,6 +9928,8 @@ func (*UnknownUnionMember) isHarnessEnvironmentArtifact()             {}
 func (*UnknownUnionMember) isHarnessEnvironmentProvider()             {}
 func (*UnknownUnionMember) isHarnessEnvironmentProviderRequest()      {}
 func (*UnknownUnionMember) isHarnessGatewayOutboundAuth()             {}
+func (*UnknownUnionMember) isHarnessHook()                            {}
+func (*UnknownUnionMember) isHarnessHookTarget()                      {}
 func (*UnknownUnionMember) isHarnessMemoryConfiguration()             {}
 func (*UnknownUnionMember) isHarnessModelConfiguration()              {}
 func (*UnknownUnionMember) isHarnessSkill()                           {}

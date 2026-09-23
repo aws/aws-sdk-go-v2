@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"responseModels":{"key0":"__Value__"},"responseParameters":{"key0":true},"statusCode":"__StatusCode__"}

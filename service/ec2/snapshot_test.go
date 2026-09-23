@@ -902,6 +902,18 @@ func TestCheckSnapshot_CreateCapacityReservationCancellationQuote(t *testing.T) 
 	}
 }
 
+func TestCheckSnapshot_CreateCapacityReservationDateChangeQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityReservationDateChangeQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCapacityReservationDateChangeQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCapacityReservationFleet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCapacityReservationFleet(context.Background(), nil, func(o *Options) {
@@ -3655,6 +3667,18 @@ func TestCheckSnapshot_DescribeCapacityReservationCancellationQuotes(t *testing.
 	_, err := svc.DescribeCapacityReservationCancellationQuotes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeCapacityReservationCancellationQuotes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeCapacityReservationDateChangeQuotes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationDateChangeQuotes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCapacityReservationDateChangeQuotes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -10525,6 +10549,18 @@ func TestUpdateSnapshot_CreateCapacityReservationCancellationQuote(t *testing.T)
 	}
 }
 
+func TestUpdateSnapshot_CreateCapacityReservationDateChangeQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityReservationDateChangeQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCapacityReservationDateChangeQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateCapacityReservationFleet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCapacityReservationFleet(context.Background(), nil, func(o *Options) {
@@ -13278,6 +13314,18 @@ func TestUpdateSnapshot_DescribeCapacityReservationCancellationQuotes(t *testing
 	_, err := svc.DescribeCapacityReservationCancellationQuotes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeCapacityReservationCancellationQuotes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCapacityReservationDateChangeQuotes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationDateChangeQuotes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCapacityReservationDateChangeQuotes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type PutDedicatedIpPoolScalingAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDedicatedIpPoolScalingAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDedicatedIpPoolScalingAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDedicatedIpPoolScalingAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PoolName != nil {
+		s.WriteString(schemas.PutDedicatedIpPoolScalingAttributesRequest_PoolName, *v.PoolName)
+	}
+	if v.ScalingMode != "" {
+		s.WriteString(schemas.PutDedicatedIpPoolScalingAttributesRequest_ScalingMode, string(v.ScalingMode))
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutDedicatedIpPoolScalingAttributesOutput struct {
@@ -53,13 +70,26 @@ type PutDedicatedIpPoolScalingAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDedicatedIpPoolScalingAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDedicatedIpPoolScalingAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDedicatedIpPoolScalingAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutDedicatedIpPoolScalingAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutDedicatedIpPoolScalingAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutDedicatedIpPoolScalingAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDedicatedIpPoolScalingAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDedicatedIpPoolScalingAttributes, schemas.PutDedicatedIpPoolScalingAttributesRequest, schemas.PutDedicatedIpPoolScalingAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutDedicatedIpPoolScalingAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDedicatedIpPoolScalingAttributes, schemas.PutDedicatedIpPoolScalingAttributesRequest, schemas.PutDedicatedIpPoolScalingAttributesResponse), output: &PutDedicatedIpPoolScalingAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

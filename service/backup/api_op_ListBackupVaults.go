@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type ListBackupVaultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupVaultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupVaultsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupVaultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByShared != false {
+		s.WriteBool(schemas.ListBackupVaultsInput_ByShared, v.ByShared)
+	}
+	if v.ByVaultType != "" {
+		s.WriteString(schemas.ListBackupVaultsInput_ByVaultType, string(v.ByVaultType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBackupVaultsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupVaultsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListBackupVaultsOutput struct {
 
 	// An array of backup vault list members containing vault metadata, including
@@ -66,13 +89,35 @@ type ListBackupVaultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupVaultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupVaultsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupVaultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBackupVaultList(s, schemas.ListBackupVaultsOutput_BackupVaultList, v.BackupVaultList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupVaultsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBackupVaultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBackupVaultsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBackupVaultsOutput_BackupVaultList:
+			return deserializeBackupVaultList(d, schemas.ListBackupVaultsOutput_BackupVaultList, &v.BackupVaultList)
+		case schemas.ListBackupVaultsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBackupVaultsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBackupVaultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBackupVaults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupVaults, schemas.ListBackupVaultsInput, schemas.ListBackupVaultsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBackupVaults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupVaults, schemas.ListBackupVaultsInput, schemas.ListBackupVaultsOutput), output: &ListBackupVaultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

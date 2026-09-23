@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteCrawlerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCrawlerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCrawlerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCrawlerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteCrawlerRequest_Name, *v.Name)
+	}
+}
+
 type DeleteCrawlerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteCrawlerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCrawlerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCrawlerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCrawlerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCrawlerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCrawlerResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCrawlerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCrawler{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCrawler, schemas.DeleteCrawlerRequest, schemas.DeleteCrawlerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteCrawler{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCrawler, schemas.DeleteCrawlerRequest, schemas.DeleteCrawlerResponse), output: &DeleteCrawlerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

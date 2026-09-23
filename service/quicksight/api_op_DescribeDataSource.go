@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeDataSourceRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DescribeDataSourceRequest_DataSourceId, *v.DataSourceId)
+	}
+}
+
 type DescribeDataSourceOutput struct {
 
 	// The information on the data source.
@@ -57,13 +74,45 @@ type DescribeDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.DescribeDataSourceResponse_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeDataSourceResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeDataSourceResponse_Status, v.Status)
+	}
+}
+func (v *DescribeDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataSourceResponse_DataSource:
+			v.DataSource = &types.DataSource{}
+			return v.DataSource.Deserialize(d)
+		case schemas.DescribeDataSourceResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeDataSourceResponse_RequestId, v.RequestId)
+		case schemas.DescribeDataSourceResponse_Status:
+			return d.ReadInt32(schemas.DescribeDataSourceResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSource, schemas.DescribeDataSourceRequest, schemas.DescribeDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSource, schemas.DescribeDataSourceRequest, schemas.DescribeDataSourceResponse), output: &DescribeDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

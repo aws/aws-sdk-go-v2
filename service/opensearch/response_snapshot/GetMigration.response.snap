@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"applicationId":"__ApplicationId__","createdAt":946684800,"error":{"code":"__Code__","message":"__Message__"},"exportedCount":1,"importedCount":1,"migrationId":"__MigrationId__","source":{"datasourceArn":"__DatasourceArn__"},"status":"__Status__","updatedAt":946684800}

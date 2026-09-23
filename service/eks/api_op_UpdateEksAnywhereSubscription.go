@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,22 @@ type UpdateEksAnywhereSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEksAnywhereSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEksAnywhereSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEksAnywhereSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.UpdateEksAnywhereSubscriptionRequest_autoRenew, v.AutoRenew)
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateEksAnywhereSubscriptionRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateEksAnywhereSubscriptionRequest_id, *v.Id)
+	}
+}
+
 type UpdateEksAnywhereSubscriptionOutput struct {
 
 	// The full description of the updated subscription.
@@ -55,13 +73,34 @@ type UpdateEksAnywhereSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEksAnywhereSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEksAnywhereSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEksAnywhereSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Subscription != nil {
+		s.WriteStruct(schemas.UpdateEksAnywhereSubscriptionResponse_subscription)
+		v.Subscription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateEksAnywhereSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEksAnywhereSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEksAnywhereSubscriptionResponse_subscription:
+			v.Subscription = &types.EksAnywhereSubscription{}
+			return v.Subscription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEksAnywhereSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEksAnywhereSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEksAnywhereSubscription, schemas.UpdateEksAnywhereSubscriptionRequest, schemas.UpdateEksAnywhereSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEksAnywhereSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEksAnywhereSubscription, schemas.UpdateEksAnywhereSubscriptionRequest, schemas.UpdateEksAnywhereSubscriptionResponse), output: &UpdateEksAnywhereSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

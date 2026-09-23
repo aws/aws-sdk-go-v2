@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,33 @@ type ListGiMinorVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGiMinorVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGiMinorVersionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGiMinorVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.ListGiMinorVersionsInput_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.ListGiMinorVersionsInput_availabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.GiVersion != nil {
+		s.WriteString(schemas.ListGiMinorVersionsInput_giVersion, *v.GiVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGiMinorVersionsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGiMinorVersionsInput_nextToken, *v.NextToken)
+	}
+	if v.ShapeFamily != nil {
+		s.WriteString(schemas.ListGiMinorVersionsInput_shapeFamily, *v.ShapeFamily)
+	}
+}
+
 type ListGiMinorVersionsOutput struct {
 
 	// The list of GI minor versions.
@@ -70,13 +99,35 @@ type ListGiMinorVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGiMinorVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGiMinorVersionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGiMinorVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGiMinorVersionList(s, schemas.ListGiMinorVersionsOutput_giMinorVersions, v.GiMinorVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGiMinorVersionsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListGiMinorVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGiMinorVersionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGiMinorVersionsOutput_giMinorVersions:
+			return deserializeGiMinorVersionList(d, schemas.ListGiMinorVersionsOutput_giMinorVersions, &v.GiMinorVersions)
+		case schemas.ListGiMinorVersionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGiMinorVersionsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGiMinorVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListGiMinorVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGiMinorVersions, schemas.ListGiMinorVersionsInput, schemas.ListGiMinorVersionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListGiMinorVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGiMinorVersions, schemas.ListGiMinorVersionsInput, schemas.ListGiMinorVersionsOutput), output: &ListGiMinorVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

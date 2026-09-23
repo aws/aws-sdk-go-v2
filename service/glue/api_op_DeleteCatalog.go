@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,18 @@ type DeleteCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCatalogInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCatalogRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.DeleteCatalogRequest_CatalogId, *v.CatalogId)
+	}
+}
+
 type DeleteCatalogOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +66,26 @@ type DeleteCatalogOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCatalogOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCatalogResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCatalogOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCatalogOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCatalogResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCatalog, schemas.DeleteCatalogRequest, schemas.DeleteCatalogResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCatalog, schemas.DeleteCatalogRequest, schemas.DeleteCatalogResponse), output: &DeleteCatalogOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

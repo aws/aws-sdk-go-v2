@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetTestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetTestRequest_arn, *v.Arn)
+	}
+}
+
 // Represents the result of a get test request.
 type GetTestOutput struct {
 
@@ -47,13 +61,34 @@ type GetTestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTestResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Test != nil {
+		s.WriteStruct(schemas.GetTestResult_test)
+		v.Test.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTestResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTestResult_test:
+			v.Test = &types.Test{}
+			return v.Test.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTest, schemas.GetTestRequest, schemas.GetTestResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTest, schemas.GetTestRequest, schemas.GetTestResult), output: &GetTestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

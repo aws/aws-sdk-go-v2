@@ -4,6 +4,8 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,19 @@ type UnarchiveFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnarchiveFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnarchiveFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnarchiveFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.UnarchiveFindingsRequest_DetectorId, *v.DetectorId)
+	}
+	serializeFindingIds(s, schemas.UnarchiveFindingsRequest_FindingIds, v.FindingIds)
+}
+
 type UnarchiveFindingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +65,26 @@ type UnarchiveFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnarchiveFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnarchiveFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnarchiveFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UnarchiveFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnarchiveFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUnarchiveFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUnarchiveFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnarchiveFindings, schemas.UnarchiveFindingsRequest, schemas.UnarchiveFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUnarchiveFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnarchiveFindings, schemas.UnarchiveFindingsRequest, schemas.UnarchiveFindingsResponse), output: &UnarchiveFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

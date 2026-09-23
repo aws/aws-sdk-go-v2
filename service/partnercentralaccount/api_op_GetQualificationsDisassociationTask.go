@@ -4,7 +4,9 @@ package partnercentralaccount
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,21 @@ type GetQualificationsDisassociationTaskInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetQualificationsDisassociationTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQualificationsDisassociationTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQualificationsDisassociationTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetQualificationsDisassociationTaskRequest_Catalog, *v.Catalog)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetQualificationsDisassociationTaskRequest_Identifier, *v.Identifier)
+	}
 }
 
 type GetQualificationsDisassociationTaskOutput struct {
@@ -96,13 +113,80 @@ type GetQualificationsDisassociationTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQualificationsDisassociationTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQualificationsDisassociationTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQualificationsDisassociationTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetQualificationsDisassociationTaskResponse_Arn, *v.Arn)
+	}
+	if v.AssociatedPartner != nil {
+		s.WriteStruct(schemas.GetQualificationsDisassociationTaskResponse_AssociatedPartner)
+		v.AssociatedPartner.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetQualificationsDisassociationTaskResponse_Catalog, *v.Catalog)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetQualificationsDisassociationTaskResponse_EndedAt, *v.EndedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetQualificationsDisassociationTaskResponse_Id, *v.Id)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetQualificationsDisassociationTaskResponse_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetQualificationsDisassociationTaskResponse_Status, string(v.Status))
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetQualificationsDisassociationTaskResponse_TaskId, *v.TaskId)
+	}
+}
+func (v *GetQualificationsDisassociationTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQualificationsDisassociationTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQualificationsDisassociationTaskResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetQualificationsDisassociationTaskResponse_Arn, v.Arn)
+		case schemas.GetQualificationsDisassociationTaskResponse_AssociatedPartner:
+			v.AssociatedPartner = &types.QualificationsAssociationPartner{}
+			return v.AssociatedPartner.Deserialize(d)
+		case schemas.GetQualificationsDisassociationTaskResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetQualificationsDisassociationTaskResponse_Catalog, v.Catalog)
+		case schemas.GetQualificationsDisassociationTaskResponse_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetQualificationsDisassociationTaskResponse_EndedAt, v.EndedAt)
+		case schemas.GetQualificationsDisassociationTaskResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetQualificationsDisassociationTaskResponse_Id, v.Id)
+		case schemas.GetQualificationsDisassociationTaskResponse_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetQualificationsDisassociationTaskResponse_StartedAt, v.StartedAt)
+		case schemas.GetQualificationsDisassociationTaskResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetQualificationsDisassociationTaskResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.QualificationsDisassociationTaskStatus(ev)
+			return nil
+		case schemas.GetQualificationsDisassociationTaskResponse_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.GetQualificationsDisassociationTaskResponse_TaskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQualificationsDisassociationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetQualificationsDisassociationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQualificationsDisassociationTask, schemas.GetQualificationsDisassociationTaskRequest, schemas.GetQualificationsDisassociationTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetQualificationsDisassociationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQualificationsDisassociationTask, schemas.GetQualificationsDisassociationTaskRequest, schemas.GetQualificationsDisassociationTaskResponse), output: &GetQualificationsDisassociationTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

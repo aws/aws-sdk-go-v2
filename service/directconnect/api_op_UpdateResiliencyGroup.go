@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type UpdateResiliencyGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResiliencyGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResiliencyGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResiliencyGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateResiliencyGroupRequest_clientToken, *v.ClientToken)
+	}
+	if v.ResiliencyGroupId != nil {
+		s.WriteString(schemas.UpdateResiliencyGroupRequest_resiliencyGroupId, *v.ResiliencyGroupId)
+	}
+	if v.ResiliencyGroupName != nil {
+		s.WriteString(schemas.UpdateResiliencyGroupRequest_resiliencyGroupName, *v.ResiliencyGroupName)
+	}
+}
+
 type UpdateResiliencyGroupOutput struct {
 
 	// Information about the resiliency group.
@@ -54,13 +74,34 @@ type UpdateResiliencyGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResiliencyGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResiliencyGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResiliencyGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResiliencyGroup != nil {
+		s.WriteStruct(schemas.UpdateResiliencyGroupResult_resiliencyGroup)
+		v.ResiliencyGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateResiliencyGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResiliencyGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResiliencyGroupResult_resiliencyGroup:
+			v.ResiliencyGroup = &types.ResiliencyGroup{}
+			return v.ResiliencyGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResiliencyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateResiliencyGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResiliencyGroup, schemas.UpdateResiliencyGroupRequest, schemas.UpdateResiliencyGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateResiliencyGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResiliencyGroup, schemas.UpdateResiliencyGroupRequest, schemas.UpdateResiliencyGroupResult), output: &UpdateResiliencyGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

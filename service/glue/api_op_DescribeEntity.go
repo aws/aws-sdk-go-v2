@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,30 @@ type DescribeEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.DescribeEntityRequest_CatalogId, *v.CatalogId)
+	}
+	if v.ConnectionName != nil {
+		s.WriteString(schemas.DescribeEntityRequest_ConnectionName, *v.ConnectionName)
+	}
+	if v.DataStoreApiVersion != nil {
+		s.WriteString(schemas.DescribeEntityRequest_DataStoreApiVersion, *v.DataStoreApiVersion)
+	}
+	if v.EntityName != nil {
+		s.WriteString(schemas.DescribeEntityRequest_EntityName, *v.EntityName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEntityRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeEntityOutput struct {
 
 	// Describes the fields for that connector entity. This is the list of Field
@@ -69,13 +95,35 @@ type DescribeEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFieldsList(s, schemas.DescribeEntityResponse_Fields, v.Fields)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEntityResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEntityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEntityResponse_Fields:
+			return deserializeFieldsList(d, schemas.DescribeEntityResponse_Fields, &v.Fields)
+		case schemas.DescribeEntityResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeEntityResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntity, schemas.DescribeEntityRequest, schemas.DescribeEntityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntity, schemas.DescribeEntityRequest, schemas.DescribeEntityResponse), output: &DescribeEntityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

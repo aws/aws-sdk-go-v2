@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BackupPlanArn":"__BackupPlanArn__","BackupPlanId":"__BackupPlanId__","DeletionDate":946684800,"VersionId":"__VersionId__"}

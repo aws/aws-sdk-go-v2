@@ -4,7 +4,9 @@ package keyspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type GetKeyspaceInput struct {
 	KeyspaceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetKeyspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetKeyspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetKeyspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.GetKeyspaceRequest_keyspaceName, *v.KeyspaceName)
+	}
+}
+func (v *GetKeyspaceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetKeyspaceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetKeyspaceRequest_keyspaceName:
+			v.KeyspaceName = new(string)
+			return d.ReadString(schemas.GetKeyspaceRequest_keyspaceName, v.KeyspaceName)
+		}
+		return nil
+	})
 }
 
 type GetKeyspaceOutput struct {
@@ -69,13 +93,54 @@ type GetKeyspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetKeyspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetKeyspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetKeyspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.GetKeyspaceResponse_keyspaceName, *v.KeyspaceName)
+	}
+	serializeReplicationGroupStatusList(s, schemas.GetKeyspaceResponse_replicationGroupStatuses, v.ReplicationGroupStatuses)
+	serializeRegionList(s, schemas.GetKeyspaceResponse_replicationRegions, v.ReplicationRegions)
+	if v.ReplicationStrategy != "" {
+		s.WriteString(schemas.GetKeyspaceResponse_replicationStrategy, string(v.ReplicationStrategy))
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetKeyspaceResponse_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *GetKeyspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetKeyspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetKeyspaceResponse_keyspaceName:
+			v.KeyspaceName = new(string)
+			return d.ReadString(schemas.GetKeyspaceResponse_keyspaceName, v.KeyspaceName)
+		case schemas.GetKeyspaceResponse_replicationGroupStatuses:
+			return deserializeReplicationGroupStatusList(d, schemas.GetKeyspaceResponse_replicationGroupStatuses, &v.ReplicationGroupStatuses)
+		case schemas.GetKeyspaceResponse_replicationRegions:
+			return deserializeRegionList(d, schemas.GetKeyspaceResponse_replicationRegions, &v.ReplicationRegions)
+		case schemas.GetKeyspaceResponse_replicationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.GetKeyspaceResponse_replicationStrategy, &ev); err != nil {
+				return err
+			}
+			v.ReplicationStrategy = types.Rs(ev)
+			return nil
+		case schemas.GetKeyspaceResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetKeyspaceResponse_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetKeyspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetKeyspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKeyspace, schemas.GetKeyspaceRequest, schemas.GetKeyspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetKeyspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKeyspace, schemas.GetKeyspaceRequest, schemas.GetKeyspaceResponse), output: &GetKeyspaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

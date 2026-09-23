@@ -298,6 +298,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Metric specific configuration for centralization source metrics.</p>"
                     }
+                },
+                "SourceContextGraphConfiguration": {
+                    "target": "com.amazonaws.observabilityadmin#SourceContextGraphConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration that enables centralization of the context graph for the selected sources. Including this configuration in a rule's source opts the rule into centralizing the context graph for the selected sources.</p>"
+                    }
                 }
             },
             "traits": {
@@ -371,6 +377,12 @@
                     "target": "com.amazonaws.observabilityadmin#TagPropagationFailureReason",
                     "traits": {
                         "smithy.api#documentation": "<p>The reason tag propagation is unhealthy for this rule. Only present when <code>TagPropagationStatus</code> is <code>Unhealthy</code>.</p>"
+                    }
+                },
+                "ContextGraphStatus": {
+                    "target": "com.amazonaws.observabilityadmin#ContextGraphStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of context graph centralization for this rule. Returns <code>Provisioning</code> while the context graph is being set up, <code>Healthy</code> once it is active, or <code>Unhealthy</code> if provisioning failed. This status is independent of the overall <code>RuleHealth</code> for log delivery.</p>"
                     }
                 },
                 "DestinationAccountId": {
@@ -500,6 +512,32 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.observabilityadmin#ContextGraphStatus": {
+            "type": "enum",
+            "members": {
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Healthy"
+                    }
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unhealthy"
+                    }
+                },
+                "PROVISIONING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Provisioning"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of context graph centralization for a centralization rule. This status is independent of the overall <code>RuleHealth</code> for log delivery. Returns <code>Provisioning</code> while the context graph is being set up, <code>Healthy</code> once it is active, or <code>Unhealthy</code> if provisioning failed.</p>"
+            }
+        },
         "com.amazonaws.observabilityadmin#CreateCentralizationRuleForOrganization": {
             "type": "operation",
             "input": {
@@ -571,6 +609,97 @@
                     "target": "com.amazonaws.observabilityadmin#ResourceArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created organization centralization rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#CreateDatasetIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#CreateDatasetIntegrationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#CreateDatasetIntegrationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a dataset integration for the caller's account in the current region and returns its ARN.</p> <p>To use this operation, you must have permission to access the dataset integration resources through the IAM role specified in the <code>RoleArn</code> parameter.</p> <p>If a dataset integration already exists for the account, this operation fails with a <code>ConflictException</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateDatasetIntegration",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#CreateDatasetIntegrationInput": {
+            "type": "structure",
+            "members": {
+                "RoleArn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that grants Amazon CloudWatch permission to access the resources needed for the dataset integration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.observabilityadmin#TagMapInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value pairs to associate with the dataset integration resource for categorization and management purposes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#CreateDatasetIntegrationOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created dataset integration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role associated with the dataset integration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the dataset integration was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the dataset integration was last updated.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -935,6 +1064,45 @@
                 "target": "com.amazonaws.observabilityadmin#DataSource"
             }
         },
+        "com.amazonaws.observabilityadmin#DatasetIntegrationSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#DatasetIntegrationSummary"
+            }
+        },
+        "com.amazonaws.observabilityadmin#DatasetIntegrationSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset integration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role associated with the dataset integration.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the dataset integration was created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the dataset integration was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a dataset integration, including its ARN, associated IAM role, and creation and update timestamps, as returned by <code>ListDatasetIntegrations</code>.</p>"
+            }
+        },
         "com.amazonaws.observabilityadmin#DeleteCentralizationRuleForOrganization": {
             "type": "operation",
             "input": {
@@ -975,6 +1143,56 @@
                     "target": "com.amazonaws.observabilityadmin#RuleIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier (name or ARN) of the organization centralization rule to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#DeleteDatasetIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#DeleteDatasetIntegrationInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a dataset integration for the caller's account in the current region. This operation is idempotent; if you submit the same delete more than once, each call succeeds.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteDatasetIntegration",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#DeleteDatasetIntegrationInput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset integration to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1608,10 +1826,97 @@
                         "smithy.api#documentation": "<p>The reason tag propagation is unhealthy for this rule. Only present when <code>TagPropagationStatus</code> is <code>Unhealthy</code>.</p>"
                     }
                 },
+                "ContextGraphStatus": {
+                    "target": "com.amazonaws.observabilityadmin#ContextGraphStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of context graph centralization for this rule. Returns <code>Provisioning</code> while the context graph is being set up, <code>Healthy</code> once it is active, or <code>Unhealthy</code> if provisioning failed. This status is independent of the overall <code>RuleHealth</code> for log delivery.</p>"
+                    }
+                },
                 "CentralizationRule": {
                     "target": "com.amazonaws.observabilityadmin#CentralizationRule",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration details for the organization centralization rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetDatasetIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#GetDatasetIntegrationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#GetDatasetIntegrationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the dataset integration for the caller's account in the current region.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetDatasetIntegration"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetDatasetIntegrationInput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset integration to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetDatasetIntegrationOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset integration.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role associated with the dataset integration.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the dataset integration was created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the dataset integration was last updated.</p>"
                     }
                 }
             },
@@ -2420,6 +2725,94 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.observabilityadmin#ListDatasetIntegrations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#ListDatasetIntegrationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#ListDatasetIntegrationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the dataset integrations in your account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListDatasetIntegrations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "DatasetIntegrationSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListDatasetIntegrationsInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.observabilityadmin#ListDatasetIntegrationsMaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.observabilityadmin#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. A previous call generates this token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListDatasetIntegrationsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListDatasetIntegrationsOutput": {
+            "type": "structure",
+            "members": {
+                "DatasetIntegrationSummaries": {
+                    "target": "com.amazonaws.observabilityadmin#DatasetIntegrationSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset integrations in your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.observabilityadmin#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to resume pagination of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.observabilityadmin#ListResourceTelemetry": {
             "type": "operation",
             "input": {
@@ -2512,7 +2905,7 @@
                 "ResourceTypes": {
                     "target": "com.amazonaws.observabilityadmin#ResourceTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of resource types used to filter resources in the organization. If this parameter is provided, the resources will be returned in the same order used in the request. </p>"
+                        "smithy.api#documentation": "<p> A list of resource types used to filter resources in the organization. If this parameter is provided, the service returns the resources in the same order as specified in the request. Currently supported resource types for discovery are:</p> <ul> <li> <p> <code>AWS::EC2::Instance</code> </p> </li> <li> <p> <code>AWS::EC2::VPC</code> </p> </li> <li> <p> <code>AWS::Lambda::Function</code> </p> </li> <li> <p> <code>AWS::EKS::Cluster</code> </p> </li> <li> <p> <code>AWS::WAFv2::WebACL</code> </p> </li> <li> <p> <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> (Network Load Balancers only)</p> </li> </ul>"
                     }
                 },
                 "TelemetryConfigurationState": {
@@ -2586,7 +2979,7 @@
                 "ResourceTypes": {
                     "target": "com.amazonaws.observabilityadmin#ResourceTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of resource types used to filter resources supported by telemetry config. If this parameter is provided, the resources will be returned in the same order used in the request. </p>"
+                        "smithy.api#documentation": "<p> A list of resource types used to filter resources supported by telemetry config. If this parameter is provided, the service returns the resources in the same order as specified in the request. Currently supported resource types for discovery are:</p> <ul> <li> <p> <code>AWS::EC2::Instance</code> </p> </li> <li> <p> <code>AWS::EC2::VPC</code> </p> </li> <li> <p> <code>AWS::Lambda::Function</code> </p> </li> <li> <p> <code>AWS::EKS::Cluster</code> </p> </li> <li> <p> <code>AWS::WAFv2::WebACL</code> </p> </li> <li> <p> <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> (Network Load Balancers only)</p> </li> </ul>"
                     }
                 },
                 "TelemetryConfigurationState": {
@@ -3361,6 +3754,9 @@
                     "target": "com.amazonaws.observabilityadmin#CreateCentralizationRuleForOrganization"
                 },
                 {
+                    "target": "com.amazonaws.observabilityadmin#CreateDatasetIntegration"
+                },
+                {
                     "target": "com.amazonaws.observabilityadmin#CreateS3TableIntegration"
                 },
                 {
@@ -3373,6 +3769,9 @@
                     "target": "com.amazonaws.observabilityadmin#DeleteCentralizationRuleForOrganization"
                 },
                 {
+                    "target": "com.amazonaws.observabilityadmin#DeleteDatasetIntegration"
+                },
+                {
                     "target": "com.amazonaws.observabilityadmin#DeleteS3TableIntegration"
                 },
                 {
@@ -3383,6 +3782,9 @@
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#GetCentralizationRuleForOrganization"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#GetDatasetIntegration"
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#GetS3TableIntegration"
@@ -3404,6 +3806,9 @@
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#ListCentralizationRulesForOrganization"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ListDatasetIntegrations"
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#ListResourceTelemetry"
@@ -3452,6 +3857,9 @@
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#UpdateCentralizationRuleForOrganization"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#UpdateDatasetIntegration"
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#UpdateTelemetryRule"
@@ -4846,6 +5254,13 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A list of source plugin types used in the pipeline configuration (such as <code>cloudwatch_logs</code> or <code>s3</code>). Currently supports a single source per pipeline, but is structured as a list to accommodate multiple pipelines in the configuration.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#SourceContextGraphConfiguration": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that enables centralization of the context graph for the selected sources. Including this configuration in a rule's source opts the rule into centralizing the context graph for the selected sources.</p>"
             }
         },
         "com.amazonaws.observabilityadmin#SourceFilterString": {
@@ -6257,6 +6672,98 @@
                     "target": "com.amazonaws.observabilityadmin#ResourceArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated organization centralization rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#UpdateDatasetIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#UpdateDatasetIntegrationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#UpdateDatasetIntegrationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a dataset integration for the caller's account in the current region. This operation is idempotent; if you submit the same update more than once, each call succeeds.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateDatasetIntegration"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#UpdateDatasetIntegrationInput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset integration to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with the dataset integration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#UpdateDatasetIntegrationOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated dataset integration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role associated with the updated dataset integration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the dataset integration was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the dataset integration was last updated.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },

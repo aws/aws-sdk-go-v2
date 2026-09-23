@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,30 @@ type ListAutonomousDatabaseBackupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutonomousDatabaseBackupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutonomousDatabaseBackupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutonomousDatabaseBackupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.ListAutonomousDatabaseBackupsInput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutonomousDatabaseBackupsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutonomousDatabaseBackupsInput_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListAutonomousDatabaseBackupsInput_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListAutonomousDatabaseBackupsInput_type, string(v.Type))
+	}
+}
+
 type ListAutonomousDatabaseBackupsOutput struct {
 
 	// The list of Autonomous Database backups along with their properties.
@@ -66,13 +92,35 @@ type ListAutonomousDatabaseBackupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutonomousDatabaseBackupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutonomousDatabaseBackupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutonomousDatabaseBackupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutonomousDatabaseBackupList(s, schemas.ListAutonomousDatabaseBackupsOutput_autonomousDatabaseBackups, v.AutonomousDatabaseBackups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutonomousDatabaseBackupsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAutonomousDatabaseBackupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutonomousDatabaseBackupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutonomousDatabaseBackupsOutput_autonomousDatabaseBackups:
+			return deserializeAutonomousDatabaseBackupList(d, schemas.ListAutonomousDatabaseBackupsOutput_autonomousDatabaseBackups, &v.AutonomousDatabaseBackups)
+		case schemas.ListAutonomousDatabaseBackupsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutonomousDatabaseBackupsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutonomousDatabaseBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAutonomousDatabaseBackups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutonomousDatabaseBackups, schemas.ListAutonomousDatabaseBackupsInput, schemas.ListAutonomousDatabaseBackupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAutonomousDatabaseBackups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutonomousDatabaseBackups, schemas.ListAutonomousDatabaseBackupsInput, schemas.ListAutonomousDatabaseBackupsOutput), output: &ListAutonomousDatabaseBackupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ruleAssociation":{"accountId":"__AccountId__","arn":"__Arn__","associationId":"__AssociationId__","createdAt":946684800,"expiresAt":946684800,"mode":"LIVE","ruleId":"__RuleId__","updatedAt":946684800}}

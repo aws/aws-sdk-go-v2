@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonMWAAServerless.ListTaskInstances
+
+{"NextToken":"__NextToken__","TaskInstances":[{"DurationInSeconds":1,"OperatorName":"__OperatorName__","RunId":"__RunId__","Status":"QUEUED","TaskInstanceId":"__TaskInstanceId__","WorkflowArn":"__WorkflowArn__","WorkflowVersion":"__WorkflowVersion__"},{"DurationInSeconds":1,"OperatorName":"__OperatorName__","RunId":"__RunId__","Status":"QUEUED","TaskInstanceId":"__TaskInstanceId__","WorkflowArn":"__WorkflowArn__","WorkflowVersion":"__WorkflowVersion__"}]}

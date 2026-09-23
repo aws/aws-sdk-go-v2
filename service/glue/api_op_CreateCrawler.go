@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -97,6 +99,66 @@ type CreateCrawlerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCrawlerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCrawlerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCrawlerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClassifierNameList(s, schemas.CreateCrawlerRequest_Classifiers, v.Classifiers)
+	if v.Configuration != nil {
+		s.WriteString(schemas.CreateCrawlerRequest_Configuration, *v.Configuration)
+	}
+	if v.CrawlerSecurityConfiguration != nil {
+		s.WriteString(schemas.CreateCrawlerRequest_CrawlerSecurityConfiguration, *v.CrawlerSecurityConfiguration)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.CreateCrawlerRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCrawlerRequest_Description, *v.Description)
+	}
+	if v.LakeFormationConfiguration != nil {
+		s.WriteStruct(schemas.CreateCrawlerRequest_LakeFormationConfiguration)
+		v.LakeFormationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LineageConfiguration != nil {
+		s.WriteStruct(schemas.CreateCrawlerRequest_LineageConfiguration)
+		v.LineageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCrawlerRequest_Name, *v.Name)
+	}
+	if v.RecrawlPolicy != nil {
+		s.WriteStruct(schemas.CreateCrawlerRequest_RecrawlPolicy)
+		v.RecrawlPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.CreateCrawlerRequest_Role, *v.Role)
+	}
+	if v.Schedule != nil {
+		s.WriteString(schemas.CreateCrawlerRequest_Schedule, *v.Schedule)
+	}
+	if v.SchemaChangePolicy != nil {
+		s.WriteStruct(schemas.CreateCrawlerRequest_SchemaChangePolicy)
+		v.SchemaChangePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TablePrefix != nil {
+		s.WriteString(schemas.CreateCrawlerRequest_TablePrefix, *v.TablePrefix)
+	}
+	serializeTagsMap(s, schemas.CreateCrawlerRequest_Tags, v.Tags)
+	if v.Targets != nil {
+		s.WriteStruct(schemas.CreateCrawlerRequest_Targets)
+		v.Targets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateCrawlerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -104,13 +166,26 @@ type CreateCrawlerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCrawlerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCrawlerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCrawlerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateCrawlerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCrawlerResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCrawlerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCrawler{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCrawler, schemas.CreateCrawlerRequest, schemas.CreateCrawlerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCrawler{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCrawler, schemas.CreateCrawlerRequest, schemas.CreateCrawlerResponse), output: &CreateCrawlerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

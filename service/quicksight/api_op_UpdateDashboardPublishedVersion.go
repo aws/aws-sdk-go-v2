@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type UpdateDashboardPublishedVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDashboardPublishedVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDashboardPublishedVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDashboardPublishedVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateDashboardPublishedVersionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.UpdateDashboardPublishedVersionRequest_DashboardId, *v.DashboardId)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.UpdateDashboardPublishedVersionRequest_VersionNumber, *v.VersionNumber)
+	}
+}
+
 type UpdateDashboardPublishedVersionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dashboard.
@@ -64,13 +84,49 @@ type UpdateDashboardPublishedVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDashboardPublishedVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDashboardPublishedVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDashboardPublishedVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardArn != nil {
+		s.WriteString(schemas.UpdateDashboardPublishedVersionResponse_DashboardArn, *v.DashboardArn)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.UpdateDashboardPublishedVersionResponse_DashboardId, *v.DashboardId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateDashboardPublishedVersionResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateDashboardPublishedVersionResponse_Status, v.Status)
+	}
+}
+func (v *UpdateDashboardPublishedVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDashboardPublishedVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDashboardPublishedVersionResponse_DashboardArn:
+			v.DashboardArn = new(string)
+			return d.ReadString(schemas.UpdateDashboardPublishedVersionResponse_DashboardArn, v.DashboardArn)
+		case schemas.UpdateDashboardPublishedVersionResponse_DashboardId:
+			v.DashboardId = new(string)
+			return d.ReadString(schemas.UpdateDashboardPublishedVersionResponse_DashboardId, v.DashboardId)
+		case schemas.UpdateDashboardPublishedVersionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateDashboardPublishedVersionResponse_RequestId, v.RequestId)
+		case schemas.UpdateDashboardPublishedVersionResponse_Status:
+			return d.ReadInt32(schemas.UpdateDashboardPublishedVersionResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDashboardPublishedVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDashboardPublishedVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDashboardPublishedVersion, schemas.UpdateDashboardPublishedVersionRequest, schemas.UpdateDashboardPublishedVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDashboardPublishedVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDashboardPublishedVersion, schemas.UpdateDashboardPublishedVersionRequest, schemas.UpdateDashboardPublishedVersionResponse), output: &UpdateDashboardPublishedVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type AcceptMarketplaceRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptMarketplaceRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptMarketplaceRegistrationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptMarketplaceRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MarketplaceRegistrationToken != nil {
+		s.WriteString(schemas.AcceptMarketplaceRegistrationInput_marketplaceRegistrationToken, *v.MarketplaceRegistrationToken)
+	}
+}
+
 type AcceptMarketplaceRegistrationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type AcceptMarketplaceRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptMarketplaceRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptMarketplaceRegistrationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptMarketplaceRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AcceptMarketplaceRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptMarketplaceRegistrationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptMarketplaceRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAcceptMarketplaceRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptMarketplaceRegistration, schemas.AcceptMarketplaceRegistrationInput, schemas.AcceptMarketplaceRegistrationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAcceptMarketplaceRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptMarketplaceRegistration, schemas.AcceptMarketplaceRegistrationInput, schemas.AcceptMarketplaceRegistrationOutput), output: &AcceptMarketplaceRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

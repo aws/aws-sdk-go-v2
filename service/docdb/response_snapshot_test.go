@@ -411,7 +411,8 @@ func TestCheckResponseSnapshot_CreateDBCluster(t *testing.T) {
 				SecretStatus: ptr.String("__SecretStatus__"),
 				KmsKeyId:     ptr.String("__KmsKeyId__"),
 			},
-			NetworkType: ptr.String("__NetworkType__"),
+			NetworkType:        ptr.String("__NetworkType__"),
+			CopyTagsToSnapshot: ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateDBCluster.response")
@@ -469,6 +470,7 @@ func TestCheckResponseSnapshot_CreateDBCluster(t *testing.T) {
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	})
@@ -1019,7 +1021,8 @@ func TestCheckResponseSnapshot_DeleteDBCluster(t *testing.T) {
 				SecretStatus: ptr.String("__SecretStatus__"),
 				KmsKeyId:     ptr.String("__KmsKeyId__"),
 			},
-			NetworkType: ptr.String("__NetworkType__"),
+			NetworkType:        ptr.String("__NetworkType__"),
+			CopyTagsToSnapshot: ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteDBCluster.response")
@@ -1779,7 +1782,8 @@ func TestCheckResponseSnapshot_DescribeDBClusters(t *testing.T) {
 					SecretStatus: ptr.String("__SecretStatus__"),
 					KmsKeyId:     ptr.String("__KmsKeyId__"),
 				},
-				NetworkType: ptr.String("__NetworkType__"),
+				NetworkType:        ptr.String("__NetworkType__"),
+				CopyTagsToSnapshot: ptr.Bool(true),
 			},
 			{
 				AvailabilityZones: []string{
@@ -1865,7 +1869,8 @@ func TestCheckResponseSnapshot_DescribeDBClusters(t *testing.T) {
 					SecretStatus: ptr.String("__SecretStatus__"),
 					KmsKeyId:     ptr.String("__KmsKeyId__"),
 				},
-				NetworkType: ptr.String("__NetworkType__"),
+				NetworkType:        ptr.String("__NetworkType__"),
+				CopyTagsToSnapshot: ptr.Bool(true),
 			},
 		},
 	}
@@ -3059,7 +3064,8 @@ func TestCheckResponseSnapshot_FailoverDBCluster(t *testing.T) {
 				SecretStatus: ptr.String("__SecretStatus__"),
 				KmsKeyId:     ptr.String("__KmsKeyId__"),
 			},
-			NetworkType: ptr.String("__NetworkType__"),
+			NetworkType:        ptr.String("__NetworkType__"),
+			CopyTagsToSnapshot: ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("FailoverDBCluster.response")
@@ -3288,7 +3294,8 @@ func TestCheckResponseSnapshot_ModifyDBCluster(t *testing.T) {
 				SecretStatus: ptr.String("__SecretStatus__"),
 				KmsKeyId:     ptr.String("__KmsKeyId__"),
 			},
-			NetworkType: ptr.String("__NetworkType__"),
+			NetworkType:        ptr.String("__NetworkType__"),
+			CopyTagsToSnapshot: ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifyDBCluster.response")
@@ -3335,6 +3342,7 @@ func TestCheckResponseSnapshot_ModifyDBCluster(t *testing.T) {
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		RotateMasterUserPassword: ptr.Bool(true),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -4171,7 +4179,8 @@ func TestCheckResponseSnapshot_RestoreDBClusterFromSnapshot(t *testing.T) {
 				SecretStatus: ptr.String("__SecretStatus__"),
 				KmsKeyId:     ptr.String("__KmsKeyId__"),
 			},
-			NetworkType: ptr.String("__NetworkType__"),
+			NetworkType:        ptr.String("__NetworkType__"),
+			CopyTagsToSnapshot: ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestoreDBClusterFromSnapshot.response")
@@ -4218,8 +4227,9 @@ func TestCheckResponseSnapshot_RestoreDBClusterFromSnapshot(t *testing.T) {
 			MinCapacity: ptr.Float64(1.0),
 			MaxCapacity: ptr.Float64(1.0),
 		},
-		StorageType: ptr.String("__StorageType__"),
-		NetworkType: ptr.String("__NetworkType__"),
+		StorageType:        ptr.String("__StorageType__"),
+		NetworkType:        ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -4315,7 +4325,8 @@ func TestCheckResponseSnapshot_RestoreDBClusterToPointInTime(t *testing.T) {
 				SecretStatus: ptr.String("__SecretStatus__"),
 				KmsKeyId:     ptr.String("__KmsKeyId__"),
 			},
-			NetworkType: ptr.String("__NetworkType__"),
+			NetworkType:        ptr.String("__NetworkType__"),
+			CopyTagsToSnapshot: ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestoreDBClusterToPointInTime.response")
@@ -4358,8 +4369,9 @@ func TestCheckResponseSnapshot_RestoreDBClusterToPointInTime(t *testing.T) {
 			MinCapacity: ptr.Float64(1.0),
 			MaxCapacity: ptr.Float64(1.0),
 		},
-		StorageType: ptr.String("__StorageType__"),
-		NetworkType: ptr.String("__NetworkType__"),
+		StorageType:        ptr.String("__StorageType__"),
+		NetworkType:        ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -4455,7 +4467,8 @@ func TestCheckResponseSnapshot_StartDBCluster(t *testing.T) {
 				SecretStatus: ptr.String("__SecretStatus__"),
 				KmsKeyId:     ptr.String("__KmsKeyId__"),
 			},
-			NetworkType: ptr.String("__NetworkType__"),
+			NetworkType:        ptr.String("__NetworkType__"),
+			CopyTagsToSnapshot: ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StartDBCluster.response")
@@ -4563,7 +4576,8 @@ func TestCheckResponseSnapshot_StopDBCluster(t *testing.T) {
 				SecretStatus: ptr.String("__SecretStatus__"),
 				KmsKeyId:     ptr.String("__KmsKeyId__"),
 			},
-			NetworkType: ptr.String("__NetworkType__"),
+			NetworkType:        ptr.String("__NetworkType__"),
+			CopyTagsToSnapshot: ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StopDBCluster.response")
@@ -4807,6 +4821,7 @@ func TestCheckResponseSnapshot_Error_DBClusterAlreadyExistsFault(t *testing.T) {
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	})
@@ -4918,6 +4933,7 @@ func TestCheckResponseSnapshot_Error_DBClusterParameterGroupNotFoundFault(t *tes
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	})
@@ -4992,6 +5008,7 @@ func TestCheckResponseSnapshot_Error_DBClusterQuotaExceededFault(t *testing.T) {
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	})
@@ -5508,6 +5525,7 @@ func TestCheckResponseSnapshot_Error_DBSubnetGroupDoesNotCoverEnoughAZs(t *testi
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	})
@@ -5582,6 +5600,7 @@ func TestCheckResponseSnapshot_Error_DBSubnetGroupNotFoundFault(t *testing.T) {
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	})
@@ -5859,6 +5878,7 @@ func TestCheckResponseSnapshot_Error_GlobalClusterNotFoundFault(t *testing.T) {
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	})
@@ -6003,8 +6023,9 @@ func TestCheckResponseSnapshot_Error_InsufficientDBClusterCapacityFault(t *testi
 			MinCapacity: ptr.Float64(1.0),
 			MaxCapacity: ptr.Float64(1.0),
 		},
-		StorageType: ptr.String("__StorageType__"),
-		NetworkType: ptr.String("__NetworkType__"),
+		StorageType:        ptr.String("__StorageType__"),
+		NetworkType:        ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6125,6 +6146,7 @@ func TestCheckResponseSnapshot_Error_InsufficientStorageClusterCapacityFault(t *
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	})
@@ -6316,6 +6338,7 @@ func TestCheckResponseSnapshot_Error_InvalidDBSecurityGroupStateFault(t *testing
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		RotateMasterUserPassword: ptr.Bool(true),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6377,8 +6400,9 @@ func TestCheckResponseSnapshot_Error_InvalidDBSnapshotStateFault(t *testing.T) {
 			MinCapacity: ptr.Float64(1.0),
 			MaxCapacity: ptr.Float64(1.0),
 		},
-		StorageType: ptr.String("__StorageType__"),
-		NetworkType: ptr.String("__NetworkType__"),
+		StorageType:        ptr.String("__StorageType__"),
+		NetworkType:        ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6451,6 +6475,7 @@ func TestCheckResponseSnapshot_Error_InvalidDBSubnetGroupStateFault(t *testing.T
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	})
@@ -6579,6 +6604,7 @@ func TestCheckResponseSnapshot_Error_InvalidGlobalClusterStateFault(t *testing.T
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	})
@@ -6642,8 +6668,9 @@ func TestCheckResponseSnapshot_Error_InvalidRestoreFault(t *testing.T) {
 			MinCapacity: ptr.Float64(1.0),
 			MaxCapacity: ptr.Float64(1.0),
 		},
-		StorageType: ptr.String("__StorageType__"),
-		NetworkType: ptr.String("__NetworkType__"),
+		StorageType:        ptr.String("__StorageType__"),
+		NetworkType:        ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6716,6 +6743,7 @@ func TestCheckResponseSnapshot_Error_InvalidSubnet(t *testing.T) {
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	})
@@ -6790,6 +6818,7 @@ func TestCheckResponseSnapshot_Error_InvalidVPCNetworkStateFault(t *testing.T) {
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	})
@@ -6907,6 +6936,7 @@ func TestCheckResponseSnapshot_Error_NetworkTypeNotSupported(t *testing.T) {
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	})
@@ -7261,6 +7291,7 @@ func TestCheckResponseSnapshot_Error_StorageQuotaExceededFault(t *testing.T) {
 		ManageMasterUserPassword: ptr.Bool(true),
 		MasterUserSecretKmsKeyId: ptr.String("__MasterUserSecretKmsKeyId__"),
 		NetworkType:              ptr.String("__NetworkType__"),
+		CopyTagsToSnapshot:       ptr.Bool(true),
 		SourceRegion:             ptr.String("__SourceRegion__"),
 		destinationRegion:        ptr.String("__destinationRegion__"),
 	})

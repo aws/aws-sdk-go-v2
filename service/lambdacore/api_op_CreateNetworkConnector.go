@@ -5,7 +5,9 @@ package lambdacore
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambdacore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambdacore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,26 @@ type CreateNetworkConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNetworkConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNetworkConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNetworkConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateNetworkConnectorRequest_ClientToken, *v.ClientToken)
+	}
+	serializeNetworkConnectorConfiguration(s, schemas.CreateNetworkConnectorRequest_Configuration, v.Configuration)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNetworkConnectorRequest_Name, *v.Name)
+	}
+	if v.OperatorRole != nil {
+		s.WriteString(schemas.CreateNetworkConnectorRequest_OperatorRole, *v.OperatorRole)
+	}
+	serializeNetworkConnectorTags(s, schemas.CreateNetworkConnectorRequest_Tags, v.Tags)
+}
+
 type CreateNetworkConnectorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the network connector.
@@ -106,13 +128,63 @@ type CreateNetworkConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNetworkConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNetworkConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNetworkConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateNetworkConnectorResponse_Arn, *v.Arn)
+	}
+	serializeNetworkConnectorConfiguration(s, schemas.CreateNetworkConnectorResponse_Configuration, v.Configuration)
+	if v.Id != nil {
+		s.WriteString(schemas.CreateNetworkConnectorResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNetworkConnectorResponse_Name, *v.Name)
+	}
+	if v.OperatorRole != nil {
+		s.WriteString(schemas.CreateNetworkConnectorResponse_OperatorRole, *v.OperatorRole)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateNetworkConnectorResponse_State, string(v.State))
+	}
+}
+func (v *CreateNetworkConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNetworkConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNetworkConnectorResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateNetworkConnectorResponse_Arn, v.Arn)
+		case schemas.CreateNetworkConnectorResponse_Configuration:
+			return deserializeNetworkConnectorConfiguration(d, schemas.CreateNetworkConnectorResponse_Configuration, &v.Configuration)
+		case schemas.CreateNetworkConnectorResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateNetworkConnectorResponse_Id, v.Id)
+		case schemas.CreateNetworkConnectorResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateNetworkConnectorResponse_Name, v.Name)
+		case schemas.CreateNetworkConnectorResponse_OperatorRole:
+			v.OperatorRole = new(string)
+			return d.ReadString(schemas.CreateNetworkConnectorResponse_OperatorRole, v.OperatorRole)
+		case schemas.CreateNetworkConnectorResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.CreateNetworkConnectorResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.NetworkConnectorState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNetworkConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNetworkConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNetworkConnector, schemas.CreateNetworkConnectorRequest, schemas.CreateNetworkConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNetworkConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNetworkConnector, schemas.CreateNetworkConnectorRequest, schemas.CreateNetworkConnectorResponse), output: &CreateNetworkConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

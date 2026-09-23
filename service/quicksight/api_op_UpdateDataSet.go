@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -108,6 +110,63 @@ type UpdateDataSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateDataSetRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeColumnGroupList(s, schemas.UpdateDataSetRequest_ColumnGroups, v.ColumnGroups)
+	serializeColumnLevelPermissionRuleList(s, schemas.UpdateDataSetRequest_ColumnLevelPermissionRules, v.ColumnLevelPermissionRules)
+	if v.DataPrepConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataSetRequest_DataPrepConfiguration)
+		v.DataPrepConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.UpdateDataSetRequest_DataSetId, *v.DataSetId)
+	}
+	if v.DataSetUsageConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataSetRequest_DataSetUsageConfiguration)
+		v.DataSetUsageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDatasetParameterList(s, schemas.UpdateDataSetRequest_DatasetParameters, v.DatasetParameters)
+	serializeFieldFolderMap(s, schemas.UpdateDataSetRequest_FieldFolders, v.FieldFolders)
+	if v.ImportMode != "" {
+		s.WriteString(schemas.UpdateDataSetRequest_ImportMode, string(v.ImportMode))
+	}
+	serializeLogicalTableMap(s, schemas.UpdateDataSetRequest_LogicalTableMap, v.LogicalTableMap)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataSetRequest_Name, *v.Name)
+	}
+	if v.PerformanceConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataSetRequest_PerformanceConfiguration)
+		v.PerformanceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePhysicalTableMap(s, schemas.UpdateDataSetRequest_PhysicalTableMap, v.PhysicalTableMap)
+	if v.RowLevelPermissionDataSet != nil {
+		s.WriteStruct(schemas.UpdateDataSetRequest_RowLevelPermissionDataSet)
+		v.RowLevelPermissionDataSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RowLevelPermissionTagConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataSetRequest_RowLevelPermissionTagConfiguration)
+		v.RowLevelPermissionTagConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SemanticModelConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataSetRequest_SemanticModelConfiguration)
+		v.SemanticModelConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateDataSetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset.
@@ -137,13 +196,61 @@ type UpdateDataSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateDataSetResponse_Arn, *v.Arn)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.UpdateDataSetResponse_DataSetId, *v.DataSetId)
+	}
+	if v.IngestionArn != nil {
+		s.WriteString(schemas.UpdateDataSetResponse_IngestionArn, *v.IngestionArn)
+	}
+	if v.IngestionId != nil {
+		s.WriteString(schemas.UpdateDataSetResponse_IngestionId, *v.IngestionId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateDataSetResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateDataSetResponse_Status, v.Status)
+	}
+}
+func (v *UpdateDataSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataSetResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateDataSetResponse_Arn, v.Arn)
+		case schemas.UpdateDataSetResponse_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.UpdateDataSetResponse_DataSetId, v.DataSetId)
+		case schemas.UpdateDataSetResponse_IngestionArn:
+			v.IngestionArn = new(string)
+			return d.ReadString(schemas.UpdateDataSetResponse_IngestionArn, v.IngestionArn)
+		case schemas.UpdateDataSetResponse_IngestionId:
+			v.IngestionId = new(string)
+			return d.ReadString(schemas.UpdateDataSetResponse_IngestionId, v.IngestionId)
+		case schemas.UpdateDataSetResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateDataSetResponse_RequestId, v.RequestId)
+		case schemas.UpdateDataSetResponse_Status:
+			return d.ReadInt32(schemas.UpdateDataSetResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSet, schemas.UpdateDataSetRequest, schemas.UpdateDataSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSet, schemas.UpdateDataSetRequest, schemas.UpdateDataSetResponse), output: &UpdateDataSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

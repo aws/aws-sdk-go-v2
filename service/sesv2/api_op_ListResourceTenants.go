@@ -5,7 +5,9 @@ package sesv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type ListResourceTenantsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceTenantsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceTenantsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceTenantsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceTenantsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListResourceTenantsRequest_PageSize, *v.PageSize)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListResourceTenantsRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 // Information about tenants associated with a specific resource.
 type ListResourceTenantsOutput struct {
 
@@ -69,13 +89,35 @@ type ListResourceTenantsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceTenantsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceTenantsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceTenantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceTenantsResponse_NextToken, *v.NextToken)
+	}
+	serializeResourceTenantMetadataList(s, schemas.ListResourceTenantsResponse_ResourceTenants, v.ResourceTenants)
+}
+func (v *ListResourceTenantsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceTenantsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceTenantsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceTenantsResponse_NextToken, v.NextToken)
+		case schemas.ListResourceTenantsResponse_ResourceTenants:
+			return deserializeResourceTenantMetadataList(d, schemas.ListResourceTenantsResponse_ResourceTenants, &v.ResourceTenants)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceTenantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResourceTenants{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceTenants, schemas.ListResourceTenantsRequest, schemas.ListResourceTenantsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResourceTenants{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceTenants, schemas.ListResourceTenantsRequest, schemas.ListResourceTenantsResponse), output: &ListResourceTenantsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

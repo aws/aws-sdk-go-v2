@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,47 @@ type UpdateAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.UpdateAnalysisRequest_AnalysisId, *v.AnalysisId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateAnalysisRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.UpdateAnalysisRequest_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAnalysisRequest_Name, *v.Name)
+	}
+	if v.Parameters != nil {
+		s.WriteStruct(schemas.UpdateAnalysisRequest_Parameters)
+		v.Parameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceEntity != nil {
+		s.WriteStruct(schemas.UpdateAnalysisRequest_SourceEntity)
+		v.SourceEntity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThemeArn != nil {
+		s.WriteString(schemas.UpdateAnalysisRequest_ThemeArn, *v.ThemeArn)
+	}
+	if v.ValidationStrategy != nil {
+		s.WriteStruct(schemas.UpdateAnalysisRequest_ValidationStrategy)
+		v.ValidationStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateAnalysisOutput struct {
 
 	// The ID of the analysis.
@@ -94,13 +137,59 @@ type UpdateAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.UpdateAnalysisResponse_AnalysisId, *v.AnalysisId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateAnalysisResponse_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateAnalysisResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateAnalysisResponse_Status, v.Status)
+	}
+	if v.UpdateStatus != "" {
+		s.WriteString(schemas.UpdateAnalysisResponse_UpdateStatus, string(v.UpdateStatus))
+	}
+}
+func (v *UpdateAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAnalysisResponse_AnalysisId:
+			v.AnalysisId = new(string)
+			return d.ReadString(schemas.UpdateAnalysisResponse_AnalysisId, v.AnalysisId)
+		case schemas.UpdateAnalysisResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateAnalysisResponse_Arn, v.Arn)
+		case schemas.UpdateAnalysisResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateAnalysisResponse_RequestId, v.RequestId)
+		case schemas.UpdateAnalysisResponse_Status:
+			return d.ReadInt32(schemas.UpdateAnalysisResponse_Status, &v.Status)
+		case schemas.UpdateAnalysisResponse_UpdateStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAnalysisResponse_UpdateStatus, &ev); err != nil {
+				return err
+			}
+			v.UpdateStatus = types.ResourceStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnalysis, schemas.UpdateAnalysisRequest, schemas.UpdateAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnalysis, schemas.UpdateAnalysisRequest, schemas.UpdateAnalysisResponse), output: &UpdateAnalysisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

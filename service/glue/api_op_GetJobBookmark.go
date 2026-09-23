@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,21 @@ type GetJobBookmarkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobBookmarkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobBookmarkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobBookmarkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.GetJobBookmarkRequest_JobName, *v.JobName)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.GetJobBookmarkRequest_RunId, *v.RunId)
+	}
+}
+
 type GetJobBookmarkOutput struct {
 
 	// A structure that defines a point that a job can resume processing.
@@ -60,13 +77,34 @@ type GetJobBookmarkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobBookmarkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobBookmarkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobBookmarkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobBookmarkEntry != nil {
+		s.WriteStruct(schemas.GetJobBookmarkResponse_JobBookmarkEntry)
+		v.JobBookmarkEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetJobBookmarkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetJobBookmarkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetJobBookmarkResponse_JobBookmarkEntry:
+			v.JobBookmarkEntry = &types.JobBookmarkEntry{}
+			return v.JobBookmarkEntry.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetJobBookmarkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetJobBookmark{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobBookmark, schemas.GetJobBookmarkRequest, schemas.GetJobBookmarkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetJobBookmark{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobBookmark, schemas.GetJobBookmarkRequest, schemas.GetJobBookmarkResponse), output: &GetJobBookmarkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

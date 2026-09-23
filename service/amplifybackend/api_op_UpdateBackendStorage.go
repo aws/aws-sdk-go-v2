@@ -4,7 +4,9 @@ package amplifybackend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,29 @@ type UpdateBackendStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBackendStorageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBackendStorageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBackendStorageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateBackendStorageRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.UpdateBackendStorageRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.ResourceConfig != nil {
+		s.WriteStruct(schemas.UpdateBackendStorageRequest_ResourceConfig)
+		v.ResourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.UpdateBackendStorageRequest_ResourceName, *v.ResourceName)
+	}
+}
+
 type UpdateBackendStorageOutput struct {
 
 	// The app ID.
@@ -70,13 +95,50 @@ type UpdateBackendStorageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBackendStorageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBackendStorageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBackendStorageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateBackendStorageResponse_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.UpdateBackendStorageResponse_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.UpdateBackendStorageResponse_JobId, *v.JobId)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.UpdateBackendStorageResponse_Status, *v.Status)
+	}
+}
+func (v *UpdateBackendStorageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBackendStorageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBackendStorageResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.UpdateBackendStorageResponse_AppId, v.AppId)
+		case schemas.UpdateBackendStorageResponse_BackendEnvironmentName:
+			v.BackendEnvironmentName = new(string)
+			return d.ReadString(schemas.UpdateBackendStorageResponse_BackendEnvironmentName, v.BackendEnvironmentName)
+		case schemas.UpdateBackendStorageResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.UpdateBackendStorageResponse_JobId, v.JobId)
+		case schemas.UpdateBackendStorageResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.UpdateBackendStorageResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBackendStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBackendStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBackendStorage, schemas.UpdateBackendStorageRequest, schemas.UpdateBackendStorageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBackendStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBackendStorage, schemas.UpdateBackendStorageRequest, schemas.UpdateBackendStorageResponse), output: &UpdateBackendStorageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

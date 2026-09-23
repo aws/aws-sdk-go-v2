@@ -5818,6 +5818,25 @@ func TestCheckRequestSnapshot_CreateTable(t *testing.T) {
 					1,
 					1,
 				},
+				SubObjectsStatistics: []types.SubObjectStatistics{
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+				},
+				SparkPipelineInfo: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 		},
 		PartitionIndexes: []types.PartitionIndex{
@@ -18321,6 +18340,25 @@ func TestCheckRequestSnapshot_UpdateTable(t *testing.T) {
 					1,
 					1,
 				},
+				SubObjectsStatistics: []types.SubObjectStatistics{
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+				},
+				SparkPipelineInfo: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 		},
 		SkipArchive:      ptr.Bool(true),
@@ -24395,6 +24433,25 @@ func TestUpdateRequestSnapshot_CreateTable(t *testing.T) {
 				SubObjectVersionIds: []int64{
 					1,
 					1,
+				},
+				SubObjectsStatistics: []types.SubObjectStatistics{
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+				},
+				SparkPipelineInfo: map[string]string{
+					"key0": "__Value__",
 				},
 			},
 		},
@@ -36898,6 +36955,25 @@ func TestUpdateRequestSnapshot_UpdateTable(t *testing.T) {
 				SubObjectVersionIds: []int64{
 					1,
 					1,
+				},
+				SubObjectsStatistics: []types.SubObjectStatistics{
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+					{
+						SourceType:     types.SubObjectSourceType("HIVE_PARQUET"),
+						GlueVersionId:  ptr.String("__GlueVersionId__"),
+						PartitionCount: ptr.Int64(1),
+						FileCount:      ptr.Int64(1),
+						TotalFileBytes: ptr.Int64(1),
+					},
+				},
+				SparkPipelineInfo: map[string]string{
+					"key0": "__Value__",
 				},
 			},
 		},

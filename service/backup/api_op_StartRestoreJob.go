@@ -5,6 +5,8 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -148,6 +150,31 @@ type StartRestoreJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRestoreJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRestoreJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRestoreJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopySourceTagsToRestoredResource != false {
+		s.WriteBool(schemas.StartRestoreJobInput_CopySourceTagsToRestoredResource, v.CopySourceTagsToRestoredResource)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.StartRestoreJobInput_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.StartRestoreJobInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	serializeMetadata(s, schemas.StartRestoreJobInput_Metadata, v.Metadata)
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.StartRestoreJobInput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.StartRestoreJobInput_ResourceType, *v.ResourceType)
+	}
+}
+
 type StartRestoreJobOutput struct {
 
 	// Uniquely identifies the job that restores a recovery point.
@@ -159,13 +186,32 @@ type StartRestoreJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRestoreJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRestoreJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRestoreJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RestoreJobId != nil {
+		s.WriteString(schemas.StartRestoreJobOutput_RestoreJobId, *v.RestoreJobId)
+	}
+}
+func (v *StartRestoreJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRestoreJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRestoreJobOutput_RestoreJobId:
+			v.RestoreJobId = new(string)
+			return d.ReadString(schemas.StartRestoreJobOutput_RestoreJobId, v.RestoreJobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartRestoreJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartRestoreJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRestoreJob, schemas.StartRestoreJobInput, schemas.StartRestoreJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartRestoreJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRestoreJob, schemas.StartRestoreJobInput, schemas.StartRestoreJobOutput), output: &StartRestoreJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

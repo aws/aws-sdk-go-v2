@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,20 @@ type CreateScriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateScriptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateScriptRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateScriptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDagEdges(s, schemas.CreateScriptRequest_DagEdges, v.DagEdges)
+	serializeDagNodes(s, schemas.CreateScriptRequest_DagNodes, v.DagNodes)
+	if v.Language != "" {
+		s.WriteString(schemas.CreateScriptRequest_Language, string(v.Language))
+	}
+}
+
 type CreateScriptOutput struct {
 
 	// The Python script generated from the DAG.
@@ -52,13 +68,38 @@ type CreateScriptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateScriptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateScriptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateScriptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PythonScript != nil {
+		s.WriteString(schemas.CreateScriptResponse_PythonScript, *v.PythonScript)
+	}
+	if v.ScalaCode != nil {
+		s.WriteString(schemas.CreateScriptResponse_ScalaCode, *v.ScalaCode)
+	}
+}
+func (v *CreateScriptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateScriptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateScriptResponse_PythonScript:
+			v.PythonScript = new(string)
+			return d.ReadString(schemas.CreateScriptResponse_PythonScript, v.PythonScript)
+		case schemas.CreateScriptResponse_ScalaCode:
+			v.ScalaCode = new(string)
+			return d.ReadString(schemas.CreateScriptResponse_ScalaCode, v.ScalaCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateScript{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScript, schemas.CreateScriptRequest, schemas.CreateScriptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateScript{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScript, schemas.CreateScriptRequest, schemas.CreateScriptResponse), output: &CreateScriptOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,19 @@ type DescribeEventCategoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventCategoriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventCategoriesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventCategoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeEventCategoriesMessage_Filters, v.Filters)
+	if v.SourceType != nil {
+		s.WriteString(schemas.DescribeEventCategoriesMessage_SourceType, *v.SourceType)
+	}
+}
+
 type DescribeEventCategoriesOutput struct {
 
 	// A list of event categories.
@@ -52,13 +67,29 @@ type DescribeEventCategoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventCategoriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventCategoriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventCategoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventCategoryGroupList(s, schemas.DescribeEventCategoriesResponse_EventCategoryGroupList, v.EventCategoryGroupList)
+}
+func (v *DescribeEventCategoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEventCategoriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEventCategoriesResponse_EventCategoryGroupList:
+			return deserializeEventCategoryGroupList(d, schemas.DescribeEventCategoriesResponse_EventCategoryGroupList, &v.EventCategoryGroupList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEventCategoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEventCategories{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventCategories, schemas.DescribeEventCategoriesMessage, schemas.DescribeEventCategoriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEventCategories{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventCategories, schemas.DescribeEventCategoriesMessage, schemas.DescribeEventCategoriesResponse), output: &DescribeEventCategoriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListBackupPlanTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupPlanTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupPlanTemplatesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupPlanTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBackupPlanTemplatesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupPlanTemplatesInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListBackupPlanTemplatesOutput struct {
 
 	// An array of template list items containing metadata about your saved templates.
@@ -56,13 +73,35 @@ type ListBackupPlanTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupPlanTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupPlanTemplatesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupPlanTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBackupPlanTemplatesList(s, schemas.ListBackupPlanTemplatesOutput_BackupPlanTemplatesList, v.BackupPlanTemplatesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupPlanTemplatesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBackupPlanTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBackupPlanTemplatesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBackupPlanTemplatesOutput_BackupPlanTemplatesList:
+			return deserializeBackupPlanTemplatesList(d, schemas.ListBackupPlanTemplatesOutput_BackupPlanTemplatesList, &v.BackupPlanTemplatesList)
+		case schemas.ListBackupPlanTemplatesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBackupPlanTemplatesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBackupPlanTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBackupPlanTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupPlanTemplates, schemas.ListBackupPlanTemplatesInput, schemas.ListBackupPlanTemplatesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBackupPlanTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupPlanTemplates, schemas.ListBackupPlanTemplatesInput, schemas.ListBackupPlanTemplatesOutput), output: &ListBackupPlanTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -88,6 +90,42 @@ type StartScanJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartScanJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartScanJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartScanJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.StartScanJobInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.ContinuousScanEndTime != nil {
+		s.WriteTime(schemas.StartScanJobInput_ContinuousScanEndTime, *v.ContinuousScanEndTime)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.StartScanJobInput_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.StartScanJobInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.MalwareScanner != "" {
+		s.WriteString(schemas.StartScanJobInput_MalwareScanner, string(v.MalwareScanner))
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.StartScanJobInput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.ScanBaseRecoveryPointArn != nil {
+		s.WriteString(schemas.StartScanJobInput_ScanBaseRecoveryPointArn, *v.ScanBaseRecoveryPointArn)
+	}
+	if v.ScanMode != "" {
+		s.WriteString(schemas.StartScanJobInput_ScanMode, string(v.ScanMode))
+	}
+	if v.ScannerRoleArn != nil {
+		s.WriteString(schemas.StartScanJobInput_ScannerRoleArn, *v.ScannerRoleArn)
+	}
+}
+
 type StartScanJobOutput struct {
 
 	// The date and time that a backup job is created, in Unix format and Coordinated
@@ -109,13 +147,38 @@ type StartScanJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartScanJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartScanJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartScanJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.StartScanJobOutput_CreationDate, *v.CreationDate)
+	}
+	if v.ScanJobId != nil {
+		s.WriteString(schemas.StartScanJobOutput_ScanJobId, *v.ScanJobId)
+	}
+}
+func (v *StartScanJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartScanJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartScanJobOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.StartScanJobOutput_CreationDate, v.CreationDate)
+		case schemas.StartScanJobOutput_ScanJobId:
+			v.ScanJobId = new(string)
+			return d.ReadString(schemas.StartScanJobOutput_ScanJobId, v.ScanJobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartScanJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartScanJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartScanJob, schemas.StartScanJobInput, schemas.StartScanJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartScanJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartScanJob, schemas.StartScanJobInput, schemas.StartScanJobOutput), output: &StartScanJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

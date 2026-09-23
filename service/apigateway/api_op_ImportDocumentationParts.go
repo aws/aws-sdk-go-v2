@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type ImportDocumentationPartsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportDocumentationPartsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportDocumentationPartsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportDocumentationPartsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteBlob(schemas.ImportDocumentationPartsRequest_body, v.Body)
+	}
+	if v.FailOnWarnings != false {
+		s.WriteBool(schemas.ImportDocumentationPartsRequest_failOnWarnings, v.FailOnWarnings)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.ImportDocumentationPartsRequest_mode, string(v.Mode))
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.ImportDocumentationPartsRequest_restApiId, *v.RestApiId)
+	}
+}
+
 // A collection of the imported DocumentationPart identifiers.
 type ImportDocumentationPartsOutput struct {
 
@@ -66,13 +89,32 @@ type ImportDocumentationPartsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportDocumentationPartsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentationPartIds)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportDocumentationPartsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfString(s, schemas.DocumentationPartIds_ids, v.Ids)
+	serializeListOfString(s, schemas.DocumentationPartIds_warnings, v.Warnings)
+}
+func (v *ImportDocumentationPartsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentationPartIds, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentationPartIds_ids:
+			return deserializeListOfString(d, schemas.DocumentationPartIds_ids, &v.Ids)
+		case schemas.DocumentationPartIds_warnings:
+			return deserializeListOfString(d, schemas.DocumentationPartIds_warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportDocumentationPartsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportDocumentationParts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportDocumentationParts, schemas.ImportDocumentationPartsRequest, schemas.DocumentationPartIds)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportDocumentationParts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportDocumentationParts, schemas.ImportDocumentationPartsRequest, schemas.DocumentationPartIds), output: &ImportDocumentationPartsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

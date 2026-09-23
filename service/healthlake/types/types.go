@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -28,6 +30,38 @@ type AgentInputMessage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AgentInputMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentInputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentInputMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.AgentInputMessage_Body, *v.Body)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AgentInputMessage_Type, string(v.Type))
+	}
+}
+func (v *AgentInputMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentInputMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentInputMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.AgentInputMessage_Body, v.Body)
+		case schemas.AgentInputMessage_Type:
+			var ev string
+			if err := d.ReadString(schemas.AgentInputMessage_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = AgentInputMessageType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents a response message from the agent during chat-based profile
 // customization.
 type AgentOutputMessage struct {
@@ -49,6 +83,41 @@ type AgentOutputMessage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AgentOutputMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentOutputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentOutputMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.AgentOutputMessage_Body, *v.Body)
+	}
+	serializeDataTransformationChatOptionsList(s, schemas.AgentOutputMessage_OptionsList, v.OptionsList)
+	if v.Type != "" {
+		s.WriteString(schemas.AgentOutputMessage_Type, string(v.Type))
+	}
+}
+func (v *AgentOutputMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentOutputMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentOutputMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.AgentOutputMessage_Body, v.Body)
+		case schemas.AgentOutputMessage_OptionsList:
+			return deserializeDataTransformationChatOptionsList(d, schemas.AgentOutputMessage_OptionsList, &v.OptionsList)
+		case schemas.AgentOutputMessage_Type:
+			var ev string
+			if err := d.ReadString(schemas.AgentOutputMessage_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = AgentOutputMessageType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The analytics configuration for a data store.
 type AnalyticsConfiguration struct {
 
@@ -56,6 +125,32 @@ type AnalyticsConfiguration struct {
 	Status AnalyticsStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *AnalyticsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalyticsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalyticsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.AnalyticsConfiguration_Status, string(v.Status))
+	}
+}
+func (v *AnalyticsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalyticsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalyticsConfiguration_Status:
+			var ev string
+			if err := d.ReadString(schemas.AnalyticsConfiguration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AnalyticsStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The backup configuration for the data store.
@@ -76,6 +171,53 @@ type BackupConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BackupConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupTagsEnabled != false {
+		s.WriteBool(schemas.BackupConfiguration_BackupTagsEnabled, v.BackupTagsEnabled)
+	}
+	if v.BackupType != "" {
+		s.WriteString(schemas.BackupConfiguration_BackupType, string(v.BackupType))
+	}
+	if v.RetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.BackupConfiguration_RetentionPeriodInDays, *v.RetentionPeriodInDays)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.BackupConfiguration_Status, string(v.Status))
+	}
+}
+func (v *BackupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupConfiguration_BackupTagsEnabled:
+			return d.ReadBool(schemas.BackupConfiguration_BackupTagsEnabled, &v.BackupTagsEnabled)
+		case schemas.BackupConfiguration_BackupType:
+			var ev string
+			if err := d.ReadString(schemas.BackupConfiguration_BackupType, &ev); err != nil {
+				return err
+			}
+			v.BackupType = BackupType(ev)
+			return nil
+		case schemas.BackupConfiguration_RetentionPeriodInDays:
+			v.RetentionPeriodInDays = new(int32)
+			return d.ReadInt32(schemas.BackupConfiguration_RetentionPeriodInDays, v.RetentionPeriodInDays)
+		case schemas.BackupConfiguration_Status:
+			var ev string
+			if err := d.ReadString(schemas.BackupConfiguration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = BackupStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Configuration for continuous backup (point-in-time) restore.
 type ContinuousBackupRestoreConfiguration struct {
 
@@ -83,6 +225,28 @@ type ContinuousBackupRestoreConfiguration struct {
 	RestorePointTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContinuousBackupRestoreConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContinuousBackupRestoreConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContinuousBackupRestoreConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RestorePointTime != nil {
+		s.WriteTime(schemas.ContinuousBackupRestoreConfiguration_RestorePointTime, *v.RestorePointTime)
+	}
+}
+func (v *ContinuousBackupRestoreConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContinuousBackupRestoreConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContinuousBackupRestoreConfiguration_RestorePointTime:
+			v.RestorePointTime = new(time.Time)
+			return d.ReadTime(schemas.ContinuousBackupRestoreConfiguration_RestorePointTime, v.RestorePointTime)
+		}
+		return nil
+	})
 }
 
 // The source for initial content when creating a data transformation profile.
@@ -108,6 +272,14 @@ type CreateDataTransformationProfileSourceMemberExistingVersionedProfileId struc
 
 func (*CreateDataTransformationProfileSourceMemberExistingVersionedProfileId) isCreateDataTransformationProfileSource() {
 }
+func (v *CreateDataTransformationProfileSourceMemberExistingVersionedProfileId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataTransformationProfileSource_ExistingVersionedProfileId)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CreateDataTransformationProfileSourceMemberExistingVersionedProfileId) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Creates the profile from raw profile content that you provide directly. Use
 // this variant for continuous integration and continuous delivery (CI/CD)
@@ -120,6 +292,14 @@ type CreateDataTransformationProfileSourceMemberProfileMapping struct {
 
 func (*CreateDataTransformationProfileSourceMemberProfileMapping) isCreateDataTransformationProfileSource() {
 }
+func (v *CreateDataTransformationProfileSourceMemberProfileMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataTransformationProfileSource_ProfileMapping)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CreateDataTransformationProfileSourceMemberProfileMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Creates the profile from a sample data file stored in Amazon S3. Valid only
 // when the source format is Comma-separated values (CSV).
@@ -131,6 +311,14 @@ type CreateDataTransformationProfileSourceMemberSampleData struct {
 
 func (*CreateDataTransformationProfileSourceMemberSampleData) isCreateDataTransformationProfileSource() {
 }
+func (v *CreateDataTransformationProfileSourceMemberSampleData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataTransformationProfileSource_SampleData)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CreateDataTransformationProfileSourceMemberSampleData) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Creates the profile from a built-in starter profile. Valid only when the source
 // format is Consolidated Clinical Document Architecture (C-CDA).
@@ -141,6 +329,14 @@ type CreateDataTransformationProfileSourceMemberStarterProfile struct {
 }
 
 func (*CreateDataTransformationProfileSourceMemberStarterProfile) isCreateDataTransformationProfileSource() {
+}
+func (v *CreateDataTransformationProfileSourceMemberStarterProfile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataTransformationProfileSource_StarterProfile)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CreateDataTransformationProfileSourceMemberStarterProfile) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The backup status information for the data store.
@@ -164,6 +360,54 @@ type DatastoreBackupStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatastoreBackupStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatastoreBackupStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatastoreBackupStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupEnabledAt != nil {
+		s.WriteTime(schemas.DatastoreBackupStatus_BackupEnabledAt, *v.BackupEnabledAt)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.DatastoreBackupStatus_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EarliestRestorePoint != nil {
+		s.WriteTime(schemas.DatastoreBackupStatus_EarliestRestorePoint, *v.EarliestRestorePoint)
+	}
+	if v.LatestRestorePoint != nil {
+		s.WriteTime(schemas.DatastoreBackupStatus_LatestRestorePoint, *v.LatestRestorePoint)
+	}
+	if v.ScheduledPermanentDeletionTime != nil {
+		s.WriteTime(schemas.DatastoreBackupStatus_ScheduledPermanentDeletionTime, *v.ScheduledPermanentDeletionTime)
+	}
+}
+func (v *DatastoreBackupStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatastoreBackupStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatastoreBackupStatus_BackupEnabledAt:
+			v.BackupEnabledAt = new(time.Time)
+			return d.ReadTime(schemas.DatastoreBackupStatus_BackupEnabledAt, v.BackupEnabledAt)
+		case schemas.DatastoreBackupStatus_Configuration:
+			v.Configuration = &BackupConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.DatastoreBackupStatus_EarliestRestorePoint:
+			v.EarliestRestorePoint = new(time.Time)
+			return d.ReadTime(schemas.DatastoreBackupStatus_EarliestRestorePoint, v.EarliestRestorePoint)
+		case schemas.DatastoreBackupStatus_LatestRestorePoint:
+			v.LatestRestorePoint = new(time.Time)
+			return d.ReadTime(schemas.DatastoreBackupStatus_LatestRestorePoint, v.LatestRestorePoint)
+		case schemas.DatastoreBackupStatus_ScheduledPermanentDeletionTime:
+			v.ScheduledPermanentDeletionTime = new(time.Time)
+			return d.ReadTime(schemas.DatastoreBackupStatus_ScheduledPermanentDeletionTime, v.ScheduledPermanentDeletionTime)
+		}
+		return nil
+	})
+}
+
 // The filters applied to a data store query.
 type DatastoreFilter struct {
 
@@ -182,6 +426,50 @@ type DatastoreFilter struct {
 	DatastoreStatus DatastoreStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatastoreFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatastoreFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatastoreFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.DatastoreFilter_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.DatastoreFilter_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.DatastoreName != nil {
+		s.WriteString(schemas.DatastoreFilter_DatastoreName, *v.DatastoreName)
+	}
+	if v.DatastoreStatus != "" {
+		s.WriteString(schemas.DatastoreFilter_DatastoreStatus, string(v.DatastoreStatus))
+	}
+}
+func (v *DatastoreFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatastoreFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatastoreFilter_CreatedAfter:
+			v.CreatedAfter = new(time.Time)
+			return d.ReadTime(schemas.DatastoreFilter_CreatedAfter, v.CreatedAfter)
+		case schemas.DatastoreFilter_CreatedBefore:
+			v.CreatedBefore = new(time.Time)
+			return d.ReadTime(schemas.DatastoreFilter_CreatedBefore, v.CreatedBefore)
+		case schemas.DatastoreFilter_DatastoreName:
+			v.DatastoreName = new(string)
+			return d.ReadString(schemas.DatastoreFilter_DatastoreName, v.DatastoreName)
+		case schemas.DatastoreFilter_DatastoreStatus:
+			var ev string
+			if err := d.ReadString(schemas.DatastoreFilter_DatastoreStatus, &ev); err != nil {
+				return err
+			}
+			v.DatastoreStatus = DatastoreStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The data store properties.
@@ -247,6 +535,136 @@ type DatastoreProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatastoreProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatastoreProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatastoreProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsConfiguration != nil {
+		s.WriteStruct(schemas.DatastoreProperties_AnalyticsConfiguration)
+		v.AnalyticsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BackupStatusInfo != nil {
+		s.WriteStruct(schemas.DatastoreProperties_BackupStatusInfo)
+		v.BackupStatusInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DatastoreProperties_CreatedAt, *v.CreatedAt)
+	}
+	if v.DatastoreArn != nil {
+		s.WriteString(schemas.DatastoreProperties_DatastoreArn, *v.DatastoreArn)
+	}
+	if v.DatastoreEndpoint != nil {
+		s.WriteString(schemas.DatastoreProperties_DatastoreEndpoint, *v.DatastoreEndpoint)
+	}
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.DatastoreProperties_DatastoreId, *v.DatastoreId)
+	}
+	if v.DatastoreName != nil {
+		s.WriteString(schemas.DatastoreProperties_DatastoreName, *v.DatastoreName)
+	}
+	if v.DatastoreStatus != "" {
+		s.WriteString(schemas.DatastoreProperties_DatastoreStatus, string(v.DatastoreStatus))
+	}
+	if v.DatastoreTypeVersion != "" {
+		s.WriteString(schemas.DatastoreProperties_DatastoreTypeVersion, string(v.DatastoreTypeVersion))
+	}
+	if v.ErrorCause != nil {
+		s.WriteStruct(schemas.DatastoreProperties_ErrorCause)
+		v.ErrorCause.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentityProviderConfiguration != nil {
+		s.WriteStruct(schemas.DatastoreProperties_IdentityProviderConfiguration)
+		v.IdentityProviderConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NlpConfiguration != nil {
+		s.WriteStruct(schemas.DatastoreProperties_NlpConfiguration)
+		v.NlpConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PreloadDataConfig != nil {
+		s.WriteStruct(schemas.DatastoreProperties_PreloadDataConfig)
+		v.PreloadDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProfileConfiguration != nil {
+		s.WriteStruct(schemas.DatastoreProperties_ProfileConfiguration)
+		v.ProfileConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SseConfiguration != nil {
+		s.WriteStruct(schemas.DatastoreProperties_SseConfiguration)
+		v.SseConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DatastoreProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatastoreProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatastoreProperties_AnalyticsConfiguration:
+			v.AnalyticsConfiguration = &AnalyticsConfiguration{}
+			return v.AnalyticsConfiguration.Deserialize(d)
+		case schemas.DatastoreProperties_BackupStatusInfo:
+			v.BackupStatusInfo = &DatastoreBackupStatus{}
+			return v.BackupStatusInfo.Deserialize(d)
+		case schemas.DatastoreProperties_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DatastoreProperties_CreatedAt, v.CreatedAt)
+		case schemas.DatastoreProperties_DatastoreArn:
+			v.DatastoreArn = new(string)
+			return d.ReadString(schemas.DatastoreProperties_DatastoreArn, v.DatastoreArn)
+		case schemas.DatastoreProperties_DatastoreEndpoint:
+			v.DatastoreEndpoint = new(string)
+			return d.ReadString(schemas.DatastoreProperties_DatastoreEndpoint, v.DatastoreEndpoint)
+		case schemas.DatastoreProperties_DatastoreId:
+			v.DatastoreId = new(string)
+			return d.ReadString(schemas.DatastoreProperties_DatastoreId, v.DatastoreId)
+		case schemas.DatastoreProperties_DatastoreName:
+			v.DatastoreName = new(string)
+			return d.ReadString(schemas.DatastoreProperties_DatastoreName, v.DatastoreName)
+		case schemas.DatastoreProperties_DatastoreStatus:
+			var ev string
+			if err := d.ReadString(schemas.DatastoreProperties_DatastoreStatus, &ev); err != nil {
+				return err
+			}
+			v.DatastoreStatus = DatastoreStatus(ev)
+			return nil
+		case schemas.DatastoreProperties_DatastoreTypeVersion:
+			var ev string
+			if err := d.ReadString(schemas.DatastoreProperties_DatastoreTypeVersion, &ev); err != nil {
+				return err
+			}
+			v.DatastoreTypeVersion = FHIRVersion(ev)
+			return nil
+		case schemas.DatastoreProperties_ErrorCause:
+			v.ErrorCause = &ErrorCause{}
+			return v.ErrorCause.Deserialize(d)
+		case schemas.DatastoreProperties_IdentityProviderConfiguration:
+			v.IdentityProviderConfiguration = &IdentityProviderConfiguration{}
+			return v.IdentityProviderConfiguration.Deserialize(d)
+		case schemas.DatastoreProperties_NlpConfiguration:
+			v.NlpConfiguration = &NlpConfiguration{}
+			return v.NlpConfiguration.Deserialize(d)
+		case schemas.DatastoreProperties_PreloadDataConfig:
+			v.PreloadDataConfig = &PreloadDataConfig{}
+			return v.PreloadDataConfig.Deserialize(d)
+		case schemas.DatastoreProperties_ProfileConfiguration:
+			v.ProfileConfiguration = &ProfileConfiguration{}
+			return v.ProfileConfiguration.Deserialize(d)
+		case schemas.DatastoreProperties_SseConfiguration:
+			v.SseConfiguration = &SseConfiguration{}
+			return v.SseConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains summary information about a data transformation profile. To retrieve
 // profile content, call GetDataTransformationProfile .
 type DataTransformationProfileSummary struct {
@@ -281,6 +699,72 @@ type DataTransformationProfileSummary struct {
 	ProfileName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataTransformationProfileSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataTransformationProfileSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataTransformationProfileSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.DataTransformationProfileSummary_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ProfileDescription != nil {
+		s.WriteString(schemas.DataTransformationProfileSummary_ProfileDescription, *v.ProfileDescription)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.DataTransformationProfileSummary_ProfileId, *v.ProfileId)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.DataTransformationProfileSummary_ProfileName, *v.ProfileName)
+	}
+	if v.SourceFormat != "" {
+		s.WriteString(schemas.DataTransformationProfileSummary_SourceFormat, string(v.SourceFormat))
+	}
+	if v.TargetFormat != "" {
+		s.WriteString(schemas.DataTransformationProfileSummary_TargetFormat, string(v.TargetFormat))
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.DataTransformationProfileSummary_Version, *v.Version)
+	}
+}
+func (v *DataTransformationProfileSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataTransformationProfileSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataTransformationProfileSummary_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DataTransformationProfileSummary_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.DataTransformationProfileSummary_ProfileDescription:
+			v.ProfileDescription = new(string)
+			return d.ReadString(schemas.DataTransformationProfileSummary_ProfileDescription, v.ProfileDescription)
+		case schemas.DataTransformationProfileSummary_ProfileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.DataTransformationProfileSummary_ProfileId, v.ProfileId)
+		case schemas.DataTransformationProfileSummary_ProfileName:
+			v.ProfileName = new(string)
+			return d.ReadString(schemas.DataTransformationProfileSummary_ProfileName, v.ProfileName)
+		case schemas.DataTransformationProfileSummary_SourceFormat:
+			var ev string
+			if err := d.ReadString(schemas.DataTransformationProfileSummary_SourceFormat, &ev); err != nil {
+				return err
+			}
+			v.SourceFormat = SourceFormat(ev)
+			return nil
+		case schemas.DataTransformationProfileSummary_TargetFormat:
+			var ev string
+			if err := d.ReadString(schemas.DataTransformationProfileSummary_TargetFormat, &ev); err != nil {
+				return err
+			}
+			v.TargetFormat = TargetFormat(ev)
+			return nil
+		case schemas.DataTransformationProfileSummary_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.DataTransformationProfileSummary_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Contains summary information about a specific version of a data transformation
@@ -319,6 +803,72 @@ type DataTransformationProfileVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataTransformationProfileVersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataTransformationProfileVersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataTransformationProfileVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeDescription != nil {
+		s.WriteString(schemas.DataTransformationProfileVersionSummary_ChangeDescription, *v.ChangeDescription)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.DataTransformationProfileVersionSummary_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.DataTransformationProfileVersionSummary_ProfileId, *v.ProfileId)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.DataTransformationProfileVersionSummary_ProfileName, *v.ProfileName)
+	}
+	if v.SourceFormat != "" {
+		s.WriteString(schemas.DataTransformationProfileVersionSummary_SourceFormat, string(v.SourceFormat))
+	}
+	if v.TargetFormat != "" {
+		s.WriteString(schemas.DataTransformationProfileVersionSummary_TargetFormat, string(v.TargetFormat))
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.DataTransformationProfileVersionSummary_Version, *v.Version)
+	}
+}
+func (v *DataTransformationProfileVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataTransformationProfileVersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataTransformationProfileVersionSummary_ChangeDescription:
+			v.ChangeDescription = new(string)
+			return d.ReadString(schemas.DataTransformationProfileVersionSummary_ChangeDescription, v.ChangeDescription)
+		case schemas.DataTransformationProfileVersionSummary_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DataTransformationProfileVersionSummary_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.DataTransformationProfileVersionSummary_ProfileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.DataTransformationProfileVersionSummary_ProfileId, v.ProfileId)
+		case schemas.DataTransformationProfileVersionSummary_ProfileName:
+			v.ProfileName = new(string)
+			return d.ReadString(schemas.DataTransformationProfileVersionSummary_ProfileName, v.ProfileName)
+		case schemas.DataTransformationProfileVersionSummary_SourceFormat:
+			var ev string
+			if err := d.ReadString(schemas.DataTransformationProfileVersionSummary_SourceFormat, &ev); err != nil {
+				return err
+			}
+			v.SourceFormat = SourceFormat(ev)
+			return nil
+		case schemas.DataTransformationProfileVersionSummary_TargetFormat:
+			var ev string
+			if err := d.ReadString(schemas.DataTransformationProfileVersionSummary_TargetFormat, &ev); err != nil {
+				return err
+			}
+			v.TargetFormat = TargetFormat(ev)
+			return nil
+		case schemas.DataTransformationProfileVersionSummary_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.DataTransformationProfileVersionSummary_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 output configuration for a data transformation job, including the
 // output location and encryption settings.
 type DataTransformationS3Configuration struct {
@@ -337,6 +887,34 @@ type DataTransformationS3Configuration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataTransformationS3Configuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataTransformationS3Configuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataTransformationS3Configuration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DataTransformationS3Configuration_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.DataTransformationS3Configuration_S3Uri, *v.S3Uri)
+	}
+}
+func (v *DataTransformationS3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataTransformationS3Configuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataTransformationS3Configuration_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DataTransformationS3Configuration_KmsKeyId, v.KmsKeyId)
+		case schemas.DataTransformationS3Configuration_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.DataTransformationS3Configuration_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
 // The error information for CreateFHIRDatastore and DeleteFHIRDatastore actions.
 type ErrorCause struct {
 
@@ -347,6 +925,38 @@ type ErrorCause struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ErrorCause) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorCause)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorCause) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCategory != "" {
+		s.WriteString(schemas.ErrorCause_ErrorCategory, string(v.ErrorCategory))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ErrorCause_ErrorMessage, *v.ErrorMessage)
+	}
+}
+func (v *ErrorCause) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorCause, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorCause_ErrorCategory:
+			var ev string
+			if err := d.ReadString(schemas.ErrorCause_ErrorCategory, &ev); err != nil {
+				return err
+			}
+			v.ErrorCategory = ErrorCategory(ev)
+			return nil
+		case schemas.ErrorCause_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ErrorCause_ErrorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 // Identifies an existing data transformation profile and version to clone when
@@ -364,6 +974,34 @@ type ExistingVersionedProfileSource struct {
 	Version *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExistingVersionedProfileSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExistingVersionedProfileSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExistingVersionedProfileSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileId != nil {
+		s.WriteString(schemas.ExistingVersionedProfileSource_ProfileId, *v.ProfileId)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.ExistingVersionedProfileSource_Version, *v.Version)
+	}
+}
+func (v *ExistingVersionedProfileSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExistingVersionedProfileSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExistingVersionedProfileSource_ProfileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.ExistingVersionedProfileSource_ProfileId, v.ProfileId)
+		case schemas.ExistingVersionedProfileSource_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.ExistingVersionedProfileSource_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // The properties of a FHIR export job.
@@ -407,6 +1045,77 @@ type ExportJobProperties struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportJobProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportJobProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.ExportJobProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.ExportJobProperties_DatastoreId, *v.DatastoreId)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ExportJobProperties_EndTime, *v.EndTime)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.ExportJobProperties_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.ExportJobProperties_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.ExportJobProperties_JobStatus, string(v.JobStatus))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ExportJobProperties_Message, *v.Message)
+	}
+	serializeOutputDataConfig(s, schemas.ExportJobProperties_OutputDataConfig, v.OutputDataConfig)
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.ExportJobProperties_SubmitTime, *v.SubmitTime)
+	}
+}
+func (v *ExportJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportJobProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportJobProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.ExportJobProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.ExportJobProperties_DatastoreId:
+			v.DatastoreId = new(string)
+			return d.ReadString(schemas.ExportJobProperties_DatastoreId, v.DatastoreId)
+		case schemas.ExportJobProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ExportJobProperties_EndTime, v.EndTime)
+		case schemas.ExportJobProperties_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.ExportJobProperties_JobId, v.JobId)
+		case schemas.ExportJobProperties_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.ExportJobProperties_JobName, v.JobName)
+		case schemas.ExportJobProperties_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.ExportJobProperties_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.ExportJobProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ExportJobProperties_Message, v.Message)
+		case schemas.ExportJobProperties_OutputDataConfig:
+			return deserializeOutputDataConfig(d, schemas.ExportJobProperties_OutputDataConfig, &v.OutputDataConfig)
+		case schemas.ExportJobProperties_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.ExportJobProperties_SubmitTime, v.SubmitTime)
+		}
+		return nil
+	})
 }
 
 // The identity provider configuration selected when the data store was created.
@@ -460,6 +1169,49 @@ type IdentityProviderConfiguration struct {
 	Metadata *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IdentityProviderConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityProviderConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentityProviderConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizationStrategy != "" {
+		s.WriteString(schemas.IdentityProviderConfiguration_AuthorizationStrategy, string(v.AuthorizationStrategy))
+	}
+	if v.FineGrainedAuthorizationEnabled != false {
+		s.WriteBool(schemas.IdentityProviderConfiguration_FineGrainedAuthorizationEnabled, v.FineGrainedAuthorizationEnabled)
+	}
+	if v.IdpLambdaArn != nil {
+		s.WriteString(schemas.IdentityProviderConfiguration_IdpLambdaArn, *v.IdpLambdaArn)
+	}
+	if v.Metadata != nil {
+		s.WriteString(schemas.IdentityProviderConfiguration_Metadata, *v.Metadata)
+	}
+}
+func (v *IdentityProviderConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentityProviderConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentityProviderConfiguration_AuthorizationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.IdentityProviderConfiguration_AuthorizationStrategy, &ev); err != nil {
+				return err
+			}
+			v.AuthorizationStrategy = AuthorizationStrategy(ev)
+			return nil
+		case schemas.IdentityProviderConfiguration_FineGrainedAuthorizationEnabled:
+			return d.ReadBool(schemas.IdentityProviderConfiguration_FineGrainedAuthorizationEnabled, &v.FineGrainedAuthorizationEnabled)
+		case schemas.IdentityProviderConfiguration_IdpLambdaArn:
+			v.IdpLambdaArn = new(string)
+			return d.ReadString(schemas.IdentityProviderConfiguration_IdpLambdaArn, v.IdpLambdaArn)
+		case schemas.IdentityProviderConfiguration_Metadata:
+			v.Metadata = new(string)
+			return d.ReadString(schemas.IdentityProviderConfiguration_Metadata, v.Metadata)
+		}
+		return nil
+	})
 }
 
 // The import job properties.
@@ -516,6 +1268,98 @@ type ImportJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportJobProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportJobProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.ImportJobProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.ImportJobProperties_DatastoreId, *v.DatastoreId)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ImportJobProperties_EndTime, *v.EndTime)
+	}
+	serializeInputDataConfig(s, schemas.ImportJobProperties_InputDataConfig, v.InputDataConfig)
+	if v.JobId != nil {
+		s.WriteString(schemas.ImportJobProperties_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.ImportJobProperties_JobName, *v.JobName)
+	}
+	serializeOutputDataConfig(s, schemas.ImportJobProperties_JobOutputDataConfig, v.JobOutputDataConfig)
+	if v.JobProgressReport != nil {
+		s.WriteStruct(schemas.ImportJobProperties_JobProgressReport)
+		v.JobProgressReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.ImportJobProperties_JobStatus, string(v.JobStatus))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ImportJobProperties_Message, *v.Message)
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.ImportJobProperties_SubmitTime, *v.SubmitTime)
+	}
+	if v.ValidationLevel != "" {
+		s.WriteString(schemas.ImportJobProperties_ValidationLevel, string(v.ValidationLevel))
+	}
+}
+func (v *ImportJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportJobProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportJobProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.ImportJobProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.ImportJobProperties_DatastoreId:
+			v.DatastoreId = new(string)
+			return d.ReadString(schemas.ImportJobProperties_DatastoreId, v.DatastoreId)
+		case schemas.ImportJobProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ImportJobProperties_EndTime, v.EndTime)
+		case schemas.ImportJobProperties_InputDataConfig:
+			return deserializeInputDataConfig(d, schemas.ImportJobProperties_InputDataConfig, &v.InputDataConfig)
+		case schemas.ImportJobProperties_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.ImportJobProperties_JobId, v.JobId)
+		case schemas.ImportJobProperties_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.ImportJobProperties_JobName, v.JobName)
+		case schemas.ImportJobProperties_JobOutputDataConfig:
+			return deserializeOutputDataConfig(d, schemas.ImportJobProperties_JobOutputDataConfig, &v.JobOutputDataConfig)
+		case schemas.ImportJobProperties_JobProgressReport:
+			v.JobProgressReport = &JobProgressReport{}
+			return v.JobProgressReport.Deserialize(d)
+		case schemas.ImportJobProperties_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.ImportJobProperties_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.ImportJobProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ImportJobProperties_Message, v.Message)
+		case schemas.ImportJobProperties_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.ImportJobProperties_SubmitTime, v.SubmitTime)
+		case schemas.ImportJobProperties_ValidationLevel:
+			var ev string
+			if err := d.ReadString(schemas.ImportJobProperties_ValidationLevel, &ev); err != nil {
+				return err
+			}
+			v.ValidationLevel = ValidationLevel(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	The import job input properties.
 //
 // The following types satisfy this interface:
@@ -534,6 +1378,12 @@ type InputDataConfigMemberS3Uri struct {
 }
 
 func (*InputDataConfigMemberS3Uri) isInputDataConfig() {}
+func (v *InputDataConfigMemberS3Uri) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.InputDataConfig_S3Uri, v.Value)
+}
+func (v *InputDataConfigMemberS3Uri) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.InputDataConfig_S3Uri, &v.Value)
+}
 
 // The progress report for the import job.
 type JobProgressReport struct {
@@ -599,6 +1449,124 @@ type JobProgressReport struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobProgressReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobProgressReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobProgressReport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Throughput != nil {
+		s.WriteFloat64(schemas.JobProgressReport_Throughput, *v.Throughput)
+	}
+	if v.TotalFilesConverted != nil {
+		s.WriteInt64(schemas.JobProgressReport_TotalFilesConverted, *v.TotalFilesConverted)
+	}
+	if v.TotalNumberOfFilesReadWithCustomerError != nil {
+		s.WriteInt64(schemas.JobProgressReport_TotalNumberOfFilesReadWithCustomerError, *v.TotalNumberOfFilesReadWithCustomerError)
+	}
+	if v.TotalNumberOfImportedFiles != nil {
+		s.WriteInt64(schemas.JobProgressReport_TotalNumberOfImportedFiles, *v.TotalNumberOfImportedFiles)
+	}
+	if v.TotalNumberOfImportedNonFhirFiles != nil {
+		s.WriteInt64(schemas.JobProgressReport_TotalNumberOfImportedNonFhirFiles, *v.TotalNumberOfImportedNonFhirFiles)
+	}
+	if v.TotalNumberOfNonFhirFilesReadWithCustomerError != nil {
+		s.WriteInt64(schemas.JobProgressReport_TotalNumberOfNonFhirFilesReadWithCustomerError, *v.TotalNumberOfNonFhirFilesReadWithCustomerError)
+	}
+	if v.TotalNumberOfNonFhirResourcesImported != nil {
+		s.WriteInt64(schemas.JobProgressReport_TotalNumberOfNonFhirResourcesImported, *v.TotalNumberOfNonFhirResourcesImported)
+	}
+	if v.TotalNumberOfNonFhirResourcesScanned != nil {
+		s.WriteInt64(schemas.JobProgressReport_TotalNumberOfNonFhirResourcesScanned, *v.TotalNumberOfNonFhirResourcesScanned)
+	}
+	if v.TotalNumberOfNonFhirResourcesWithCustomerError != nil {
+		s.WriteInt64(schemas.JobProgressReport_TotalNumberOfNonFhirResourcesWithCustomerError, *v.TotalNumberOfNonFhirResourcesWithCustomerError)
+	}
+	if v.TotalNumberOfResourcesImported != nil {
+		s.WriteInt64(schemas.JobProgressReport_TotalNumberOfResourcesImported, *v.TotalNumberOfResourcesImported)
+	}
+	if v.TotalNumberOfResourcesScanned != nil {
+		s.WriteInt64(schemas.JobProgressReport_TotalNumberOfResourcesScanned, *v.TotalNumberOfResourcesScanned)
+	}
+	if v.TotalNumberOfResourcesWithCustomerError != nil {
+		s.WriteInt64(schemas.JobProgressReport_TotalNumberOfResourcesWithCustomerError, *v.TotalNumberOfResourcesWithCustomerError)
+	}
+	if v.TotalNumberOfScannedFiles != nil {
+		s.WriteInt64(schemas.JobProgressReport_TotalNumberOfScannedFiles, *v.TotalNumberOfScannedFiles)
+	}
+	if v.TotalNumberOfScannedNonFhirFiles != nil {
+		s.WriteInt64(schemas.JobProgressReport_TotalNumberOfScannedNonFhirFiles, *v.TotalNumberOfScannedNonFhirFiles)
+	}
+	if v.TotalResourcesGenerated != nil {
+		s.WriteInt64(schemas.JobProgressReport_TotalResourcesGenerated, *v.TotalResourcesGenerated)
+	}
+	if v.TotalSizeOfScannedFilesInMB != nil {
+		s.WriteFloat64(schemas.JobProgressReport_TotalSizeOfScannedFilesInMB, *v.TotalSizeOfScannedFilesInMB)
+	}
+	if v.TotalSizeOfScannedNonFhirFilesInMB != nil {
+		s.WriteFloat64(schemas.JobProgressReport_TotalSizeOfScannedNonFhirFilesInMB, *v.TotalSizeOfScannedNonFhirFilesInMB)
+	}
+}
+func (v *JobProgressReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobProgressReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobProgressReport_Throughput:
+			v.Throughput = new(float64)
+			return d.ReadFloat64(schemas.JobProgressReport_Throughput, v.Throughput)
+		case schemas.JobProgressReport_TotalFilesConverted:
+			v.TotalFilesConverted = new(int64)
+			return d.ReadInt64(schemas.JobProgressReport_TotalFilesConverted, v.TotalFilesConverted)
+		case schemas.JobProgressReport_TotalNumberOfFilesReadWithCustomerError:
+			v.TotalNumberOfFilesReadWithCustomerError = new(int64)
+			return d.ReadInt64(schemas.JobProgressReport_TotalNumberOfFilesReadWithCustomerError, v.TotalNumberOfFilesReadWithCustomerError)
+		case schemas.JobProgressReport_TotalNumberOfImportedFiles:
+			v.TotalNumberOfImportedFiles = new(int64)
+			return d.ReadInt64(schemas.JobProgressReport_TotalNumberOfImportedFiles, v.TotalNumberOfImportedFiles)
+		case schemas.JobProgressReport_TotalNumberOfImportedNonFhirFiles:
+			v.TotalNumberOfImportedNonFhirFiles = new(int64)
+			return d.ReadInt64(schemas.JobProgressReport_TotalNumberOfImportedNonFhirFiles, v.TotalNumberOfImportedNonFhirFiles)
+		case schemas.JobProgressReport_TotalNumberOfNonFhirFilesReadWithCustomerError:
+			v.TotalNumberOfNonFhirFilesReadWithCustomerError = new(int64)
+			return d.ReadInt64(schemas.JobProgressReport_TotalNumberOfNonFhirFilesReadWithCustomerError, v.TotalNumberOfNonFhirFilesReadWithCustomerError)
+		case schemas.JobProgressReport_TotalNumberOfNonFhirResourcesImported:
+			v.TotalNumberOfNonFhirResourcesImported = new(int64)
+			return d.ReadInt64(schemas.JobProgressReport_TotalNumberOfNonFhirResourcesImported, v.TotalNumberOfNonFhirResourcesImported)
+		case schemas.JobProgressReport_TotalNumberOfNonFhirResourcesScanned:
+			v.TotalNumberOfNonFhirResourcesScanned = new(int64)
+			return d.ReadInt64(schemas.JobProgressReport_TotalNumberOfNonFhirResourcesScanned, v.TotalNumberOfNonFhirResourcesScanned)
+		case schemas.JobProgressReport_TotalNumberOfNonFhirResourcesWithCustomerError:
+			v.TotalNumberOfNonFhirResourcesWithCustomerError = new(int64)
+			return d.ReadInt64(schemas.JobProgressReport_TotalNumberOfNonFhirResourcesWithCustomerError, v.TotalNumberOfNonFhirResourcesWithCustomerError)
+		case schemas.JobProgressReport_TotalNumberOfResourcesImported:
+			v.TotalNumberOfResourcesImported = new(int64)
+			return d.ReadInt64(schemas.JobProgressReport_TotalNumberOfResourcesImported, v.TotalNumberOfResourcesImported)
+		case schemas.JobProgressReport_TotalNumberOfResourcesScanned:
+			v.TotalNumberOfResourcesScanned = new(int64)
+			return d.ReadInt64(schemas.JobProgressReport_TotalNumberOfResourcesScanned, v.TotalNumberOfResourcesScanned)
+		case schemas.JobProgressReport_TotalNumberOfResourcesWithCustomerError:
+			v.TotalNumberOfResourcesWithCustomerError = new(int64)
+			return d.ReadInt64(schemas.JobProgressReport_TotalNumberOfResourcesWithCustomerError, v.TotalNumberOfResourcesWithCustomerError)
+		case schemas.JobProgressReport_TotalNumberOfScannedFiles:
+			v.TotalNumberOfScannedFiles = new(int64)
+			return d.ReadInt64(schemas.JobProgressReport_TotalNumberOfScannedFiles, v.TotalNumberOfScannedFiles)
+		case schemas.JobProgressReport_TotalNumberOfScannedNonFhirFiles:
+			v.TotalNumberOfScannedNonFhirFiles = new(int64)
+			return d.ReadInt64(schemas.JobProgressReport_TotalNumberOfScannedNonFhirFiles, v.TotalNumberOfScannedNonFhirFiles)
+		case schemas.JobProgressReport_TotalResourcesGenerated:
+			v.TotalResourcesGenerated = new(int64)
+			return d.ReadInt64(schemas.JobProgressReport_TotalResourcesGenerated, v.TotalResourcesGenerated)
+		case schemas.JobProgressReport_TotalSizeOfScannedFilesInMB:
+			v.TotalSizeOfScannedFilesInMB = new(float64)
+			return d.ReadFloat64(schemas.JobProgressReport_TotalSizeOfScannedFilesInMB, v.TotalSizeOfScannedFilesInMB)
+		case schemas.JobProgressReport_TotalSizeOfScannedNonFhirFilesInMB:
+			v.TotalSizeOfScannedNonFhirFilesInMB = new(float64)
+			return d.ReadFloat64(schemas.JobProgressReport_TotalSizeOfScannedNonFhirFilesInMB, v.TotalSizeOfScannedNonFhirFilesInMB)
+		}
+		return nil
+	})
+}
+
 // The customer-managed-key (CMK) used when creating a data store. If a
 // customer-owned key is not specified, an Amazon Web Services-owned key is used
 // for encryption.
@@ -616,6 +1584,38 @@ type KmsEncryptionConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KmsEncryptionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KmsEncryptionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KmsEncryptionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CmkType != "" {
+		s.WriteString(schemas.KmsEncryptionConfig_CmkType, string(v.CmkType))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.KmsEncryptionConfig_KmsKeyId, *v.KmsKeyId)
+	}
+}
+func (v *KmsEncryptionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KmsEncryptionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KmsEncryptionConfig_CmkType:
+			var ev string
+			if err := d.ReadString(schemas.KmsEncryptionConfig_CmkType, &ev); err != nil {
+				return err
+			}
+			v.CmkType = CmkType(ev)
+			return nil
+		case schemas.KmsEncryptionConfig_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.KmsEncryptionConfig_KmsKeyId, v.KmsKeyId)
+		}
+		return nil
+	})
+}
+
 // The natural language processing (NLP) configuration for a data store.
 type NlpConfiguration struct {
 
@@ -623,6 +1623,32 @@ type NlpConfiguration struct {
 	Status NlpStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *NlpConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NlpConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NlpConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.NlpConfiguration_Status, string(v.Status))
+	}
+}
+func (v *NlpConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NlpConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NlpConfiguration_Status:
+			var ev string
+			if err := d.ReadString(schemas.NlpConfiguration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = NlpStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The output data configuration supplied when the export job was created.
@@ -642,6 +1668,14 @@ type OutputDataConfigMemberS3Configuration struct {
 }
 
 func (*OutputDataConfigMemberS3Configuration) isOutputDataConfig() {}
+func (v *OutputDataConfigMemberS3Configuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputDataConfig_S3Configuration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OutputDataConfigMemberS3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The input properties for the preloaded (Synthea) data store.
 type PreloadDataConfig struct {
@@ -654,6 +1688,32 @@ type PreloadDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PreloadDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreloadDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreloadDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PreloadDataType != "" {
+		s.WriteString(schemas.PreloadDataConfig_PreloadDataType, string(v.PreloadDataType))
+	}
+}
+func (v *PreloadDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PreloadDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PreloadDataConfig_PreloadDataType:
+			var ev string
+			if err := d.ReadString(schemas.PreloadDataConfig_PreloadDataType, &ev); err != nil {
+				return err
+			}
+			v.PreloadDataType = PreloadDataType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The profile configuration for a data store.
 type ProfileConfiguration struct {
 
@@ -661,6 +1721,25 @@ type ProfileConfiguration struct {
 	DefaultProfiles []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProfileConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfileConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProfileConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDefaultProfiles(s, schemas.ProfileConfiguration_DefaultProfiles, v.DefaultProfiles)
+}
+func (v *ProfileConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfileConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfileConfiguration_DefaultProfiles:
+			return deserializeDefaultProfiles(d, schemas.ProfileConfiguration_DefaultProfiles, &v.DefaultProfiles)
+		}
+		return nil
+	})
 }
 
 // Contains raw content to use as the source when creating a data transformation
@@ -673,6 +1752,25 @@ type ProfileMappingSource struct {
 	ProfileMapping map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProfileMappingSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfileMappingSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProfileMappingSource) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringMap(s, schemas.ProfileMappingSource_ProfileMapping, v.ProfileMapping)
+}
+func (v *ProfileMappingSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfileMappingSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfileMappingSource_ProfileMapping:
+			return deserializeStringMap(d, schemas.ProfileMappingSource_ProfileMapping, &v.ProfileMapping)
+		}
+		return nil
+	})
 }
 
 // Specifies the type and parameters for the restore operation.
@@ -692,6 +1790,14 @@ type RestoreConfigurationMemberContinuousBackupRestoreConfiguration struct {
 }
 
 func (*RestoreConfigurationMemberContinuousBackupRestoreConfiguration) isRestoreConfiguration() {}
+func (v *RestoreConfigurationMemberContinuousBackupRestoreConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreConfiguration_ContinuousBackupRestoreConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RestoreConfigurationMemberContinuousBackupRestoreConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The configuration of the Amazon S3 bucket for either an import or export job.
 // This includes assigning access permissions.
@@ -711,6 +1817,34 @@ type S3Configuration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Configuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Configuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Configuration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.S3Configuration_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.S3Configuration_S3Uri, *v.S3Uri)
+	}
+}
+func (v *S3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Configuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Configuration_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.S3Configuration_KmsKeyId, v.KmsKeyId)
+		case schemas.S3Configuration_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.S3Configuration_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
 // Identifies a sample data file in Amazon S3 to use as the source when creating a
 // data transformation profile. Valid only when the source format is
 // Comma-separated values (CSV).
@@ -722,6 +1856,28 @@ type SampleDataSource struct {
 	S3Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SampleDataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SampleDataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SampleDataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.SampleDataSource_S3Uri, *v.S3Uri)
+	}
+}
+func (v *SampleDataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SampleDataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SampleDataSource_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.SampleDataSource_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
 }
 
 // The server-side encryption key configuration for a customer-provided encryption
@@ -737,6 +1893,30 @@ type SseConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SseConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SseConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SseConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsEncryptionConfig != nil {
+		s.WriteStruct(schemas.SseConfiguration_KmsEncryptionConfig)
+		v.KmsEncryptionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SseConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SseConfiguration_KmsEncryptionConfig:
+			v.KmsEncryptionConfig = &KmsEncryptionConfig{}
+			return v.KmsEncryptionConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Identifies a built-in starter profile to use as the source when creating a data
 // transformation profile. Valid only when the source format is Consolidated
 // Clinical Document Architecture (C-CDA).
@@ -748,6 +1928,28 @@ type StarterProfileSource struct {
 	StarterProfileName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StarterProfileSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StarterProfileSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StarterProfileSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StarterProfileName != nil {
+		s.WriteString(schemas.StarterProfileSource_StarterProfileName, *v.StarterProfileName)
+	}
+}
+func (v *StarterProfileSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StarterProfileSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StarterProfileSource_StarterProfileName:
+			v.StarterProfileName = new(string)
+			return d.ReadString(schemas.StarterProfileSource_StarterProfileName, v.StarterProfileName)
+		}
+		return nil
+	})
 }
 
 // A label consisting of a user-defined key and value. The form for tags is
@@ -767,6 +1969,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 location and source format configuration for input data in a
 // transformation job.
 type TransformationInputDataConfig struct {
@@ -780,6 +2010,38 @@ type TransformationInputDataConfig struct {
 	SourceFormat SourceFormat
 
 	noSmithyDocumentSerde
+}
+
+func (v *TransformationInputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransformationInputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransformationInputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.TransformationInputDataConfig_S3Uri, *v.S3Uri)
+	}
+	if v.SourceFormat != "" {
+		s.WriteString(schemas.TransformationInputDataConfig_SourceFormat, string(v.SourceFormat))
+	}
+}
+func (v *TransformationInputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransformationInputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransformationInputDataConfig_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.TransformationInputDataConfig_S3Uri, v.S3Uri)
+		case schemas.TransformationInputDataConfig_SourceFormat:
+			var ev string
+			if err := d.ReadString(schemas.TransformationInputDataConfig_SourceFormat, &ev); err != nil {
+				return err
+			}
+			v.SourceFormat = SourceFormat(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains progress metrics for a data transformation job, including counts of
@@ -807,6 +2069,46 @@ type TransformationJobProgressReport struct {
 	TotalResourcesGenerated *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *TransformationJobProgressReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransformationJobProgressReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransformationJobProgressReport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TotalFilesConverted != nil {
+		s.WriteInt64(schemas.TransformationJobProgressReport_TotalFilesConverted, *v.TotalFilesConverted)
+	}
+	if v.TotalFilesFailed != nil {
+		s.WriteInt64(schemas.TransformationJobProgressReport_TotalFilesFailed, *v.TotalFilesFailed)
+	}
+	if v.TotalFilesScanned != nil {
+		s.WriteInt64(schemas.TransformationJobProgressReport_TotalFilesScanned, *v.TotalFilesScanned)
+	}
+	if v.TotalResourcesGenerated != nil {
+		s.WriteInt64(schemas.TransformationJobProgressReport_TotalResourcesGenerated, *v.TotalResourcesGenerated)
+	}
+}
+func (v *TransformationJobProgressReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransformationJobProgressReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransformationJobProgressReport_TotalFilesConverted:
+			v.TotalFilesConverted = new(int64)
+			return d.ReadInt64(schemas.TransformationJobProgressReport_TotalFilesConverted, v.TotalFilesConverted)
+		case schemas.TransformationJobProgressReport_TotalFilesFailed:
+			v.TotalFilesFailed = new(int64)
+			return d.ReadInt64(schemas.TransformationJobProgressReport_TotalFilesFailed, v.TotalFilesFailed)
+		case schemas.TransformationJobProgressReport_TotalFilesScanned:
+			v.TotalFilesScanned = new(int64)
+			return d.ReadInt64(schemas.TransformationJobProgressReport_TotalFilesScanned, v.TotalFilesScanned)
+		case schemas.TransformationJobProgressReport_TotalResourcesGenerated:
+			v.TotalResourcesGenerated = new(int64)
+			return d.ReadInt64(schemas.TransformationJobProgressReport_TotalResourcesGenerated, v.TotalResourcesGenerated)
+		}
+		return nil
+	})
 }
 
 // Contains the properties of a data transformation job, including its status,
@@ -883,6 +2185,122 @@ type TransformationJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransformationJobProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransformationJobProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransformationJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.TransformationJobProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DriftDetectionEnabled != nil {
+		s.WriteBool(schemas.TransformationJobProperties_DriftDetectionEnabled, *v.DriftDetectionEnabled)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.TransformationJobProperties_EndTime, *v.EndTime)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.TransformationJobProperties_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.TransformationJobProperties_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.TransformationJobProperties_JobName, *v.JobName)
+	}
+	if v.JobProgressReport != nil {
+		s.WriteStruct(schemas.TransformationJobProperties_JobProgressReport)
+		v.JobProgressReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.TransformationJobProperties_JobStatus, string(v.JobStatus))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TransformationJobProperties_Message, *v.Message)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.TransformationJobProperties_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.TransformationJobProperties_ProfileId, *v.ProfileId)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.TransformationJobProperties_ProfileName, *v.ProfileName)
+	}
+	if v.ProfileVersion != nil {
+		s.WriteInt32(schemas.TransformationJobProperties_ProfileVersion, *v.ProfileVersion)
+	}
+	if v.ProvenanceEnabled != nil {
+		s.WriteBool(schemas.TransformationJobProperties_ProvenanceEnabled, *v.ProvenanceEnabled)
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.TransformationJobProperties_SubmitTime, *v.SubmitTime)
+	}
+}
+func (v *TransformationJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransformationJobProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransformationJobProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.TransformationJobProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.TransformationJobProperties_DriftDetectionEnabled:
+			v.DriftDetectionEnabled = new(bool)
+			return d.ReadBool(schemas.TransformationJobProperties_DriftDetectionEnabled, v.DriftDetectionEnabled)
+		case schemas.TransformationJobProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.TransformationJobProperties_EndTime, v.EndTime)
+		case schemas.TransformationJobProperties_InputDataConfig:
+			v.InputDataConfig = &TransformationInputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.TransformationJobProperties_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.TransformationJobProperties_JobId, v.JobId)
+		case schemas.TransformationJobProperties_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.TransformationJobProperties_JobName, v.JobName)
+		case schemas.TransformationJobProperties_JobProgressReport:
+			v.JobProgressReport = &TransformationJobProgressReport{}
+			return v.JobProgressReport.Deserialize(d)
+		case schemas.TransformationJobProperties_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.TransformationJobProperties_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = TransformationJobStatus(ev)
+			return nil
+		case schemas.TransformationJobProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TransformationJobProperties_Message, v.Message)
+		case schemas.TransformationJobProperties_OutputDataConfig:
+			v.OutputDataConfig = &TransformationOutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.TransformationJobProperties_ProfileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.TransformationJobProperties_ProfileId, v.ProfileId)
+		case schemas.TransformationJobProperties_ProfileName:
+			v.ProfileName = new(string)
+			return d.ReadString(schemas.TransformationJobProperties_ProfileName, v.ProfileName)
+		case schemas.TransformationJobProperties_ProfileVersion:
+			v.ProfileVersion = new(int32)
+			return d.ReadInt32(schemas.TransformationJobProperties_ProfileVersion, v.ProfileVersion)
+		case schemas.TransformationJobProperties_ProvenanceEnabled:
+			v.ProvenanceEnabled = new(bool)
+			return d.ReadBool(schemas.TransformationJobProperties_ProvenanceEnabled, v.ProvenanceEnabled)
+		case schemas.TransformationJobProperties_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.TransformationJobProperties_SubmitTime, v.SubmitTime)
+		}
+		return nil
+	})
+}
+
 // Contains summary information about a data transformation job. To retrieve full
 // job details, call DescribeDataTransformationJob .
 type TransformationJobSummary struct {
@@ -914,6 +2332,66 @@ type TransformationJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransformationJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransformationJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransformationJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.TransformationJobSummary_EndTime, *v.EndTime)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.TransformationJobSummary_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.TransformationJobSummary_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.TransformationJobSummary_JobStatus, string(v.JobStatus))
+	}
+	if v.SourceFormat != "" {
+		s.WriteString(schemas.TransformationJobSummary_SourceFormat, string(v.SourceFormat))
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.TransformationJobSummary_SubmitTime, *v.SubmitTime)
+	}
+}
+func (v *TransformationJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransformationJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransformationJobSummary_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.TransformationJobSummary_EndTime, v.EndTime)
+		case schemas.TransformationJobSummary_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.TransformationJobSummary_JobId, v.JobId)
+		case schemas.TransformationJobSummary_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.TransformationJobSummary_JobName, v.JobName)
+		case schemas.TransformationJobSummary_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.TransformationJobSummary_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = TransformationJobStatus(ev)
+			return nil
+		case schemas.TransformationJobSummary_SourceFormat:
+			var ev string
+			if err := d.ReadString(schemas.TransformationJobSummary_SourceFormat, &ev); err != nil {
+				return err
+			}
+			v.SourceFormat = SourceFormat(ev)
+			return nil
+		case schemas.TransformationJobSummary_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.TransformationJobSummary_SubmitTime, v.SubmitTime)
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 output location and encryption configuration for a transformation
 // job.
 type TransformationOutputDataConfig struct {
@@ -925,6 +2403,30 @@ type TransformationOutputDataConfig struct {
 	S3Configuration *DataTransformationS3Configuration
 
 	noSmithyDocumentSerde
+}
+
+func (v *TransformationOutputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransformationOutputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransformationOutputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.TransformationOutputDataConfig_S3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TransformationOutputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransformationOutputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransformationOutputDataConfig_S3Configuration:
+			v.S3Configuration = &DataTransformationS3Configuration{}
+			return v.S3Configuration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

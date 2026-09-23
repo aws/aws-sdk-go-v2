@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,26 @@ type StartMigrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMigrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMigrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMigrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.StartMigrationRequest_applicationId, *v.ApplicationId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartMigrationRequest_clientToken, *v.ClientToken)
+	}
+	if v.MigrationOptions != nil {
+		s.WriteStruct(schemas.StartMigrationRequest_migrationOptions)
+		v.MigrationOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartMigrationOutput struct {
 
 	// The unique identifier of the migration job.
@@ -65,13 +87,38 @@ type StartMigrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMigrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMigrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMigrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationId != nil {
+		s.WriteString(schemas.StartMigrationResponse_migrationId, *v.MigrationId)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.StartMigrationResponse_status, *v.Status)
+	}
+}
+func (v *StartMigrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMigrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMigrationResponse_migrationId:
+			v.MigrationId = new(string)
+			return d.ReadString(schemas.StartMigrationResponse_migrationId, v.MigrationId)
+		case schemas.StartMigrationResponse_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.StartMigrationResponse_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMigration, schemas.StartMigrationRequest, schemas.StartMigrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMigration, schemas.StartMigrationRequest, schemas.StartMigrationResponse), output: &StartMigrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

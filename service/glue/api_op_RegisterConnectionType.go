@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,40 @@ type RegisterConnectionTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterConnectionTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterConnectionTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterConnectionTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionProperties != nil {
+		s.WriteStruct(schemas.RegisterConnectionTypeRequest_ConnectionProperties)
+		v.ConnectionProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectionType != nil {
+		s.WriteString(schemas.RegisterConnectionTypeRequest_ConnectionType, *v.ConnectionType)
+	}
+	if v.ConnectorAuthenticationConfiguration != nil {
+		s.WriteStruct(schemas.RegisterConnectionTypeRequest_ConnectorAuthenticationConfiguration)
+		v.ConnectorAuthenticationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RegisterConnectionTypeRequest_Description, *v.Description)
+	}
+	if v.IntegrationType != "" {
+		s.WriteString(schemas.RegisterConnectionTypeRequest_IntegrationType, string(v.IntegrationType))
+	}
+	if v.RestConfiguration != nil {
+		s.WriteStruct(schemas.RegisterConnectionTypeRequest_RestConfiguration)
+		v.RestConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.RegisterConnectionTypeRequest_Tags, v.Tags)
+}
+
 // Contains the Amazon Resource Name (ARN) of the newly registered connection type.
 type RegisterConnectionTypeOutput struct {
 
@@ -92,13 +128,32 @@ type RegisterConnectionTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterConnectionTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterConnectionTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterConnectionTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionTypeArn != nil {
+		s.WriteString(schemas.RegisterConnectionTypeResponse_ConnectionTypeArn, *v.ConnectionTypeArn)
+	}
+}
+func (v *RegisterConnectionTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterConnectionTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterConnectionTypeResponse_ConnectionTypeArn:
+			v.ConnectionTypeArn = new(string)
+			return d.ReadString(schemas.RegisterConnectionTypeResponse_ConnectionTypeArn, v.ConnectionTypeArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterConnectionTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterConnectionType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterConnectionType, schemas.RegisterConnectionTypeRequest, schemas.RegisterConnectionTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterConnectionType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterConnectionType, schemas.RegisterConnectionTypeRequest, schemas.RegisterConnectionTypeResponse), output: &RegisterConnectionTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

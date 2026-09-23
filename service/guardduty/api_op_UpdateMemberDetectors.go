@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,25 @@ type UpdateMemberDetectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMemberDetectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMemberDetectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMemberDetectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.UpdateMemberDetectorsRequest_AccountIds, v.AccountIds)
+	if v.DataSources != nil {
+		s.WriteStruct(schemas.UpdateMemberDetectorsRequest_DataSources)
+		v.DataSources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.UpdateMemberDetectorsRequest_DetectorId, *v.DetectorId)
+	}
+	serializeMemberFeaturesConfigurations(s, schemas.UpdateMemberDetectorsRequest_Features, v.Features)
+}
+
 type UpdateMemberDetectorsOutput struct {
 
 	// A list of member account IDs that were unable to be processed along with an
@@ -78,13 +99,29 @@ type UpdateMemberDetectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMemberDetectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMemberDetectorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMemberDetectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUnprocessedAccounts(s, schemas.UpdateMemberDetectorsResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+}
+func (v *UpdateMemberDetectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMemberDetectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMemberDetectorsResponse_UnprocessedAccounts:
+			return deserializeUnprocessedAccounts(d, schemas.UpdateMemberDetectorsResponse_UnprocessedAccounts, &v.UnprocessedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMemberDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMemberDetectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMemberDetectors, schemas.UpdateMemberDetectorsRequest, schemas.UpdateMemberDetectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMemberDetectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMemberDetectors, schemas.UpdateMemberDetectorsRequest, schemas.UpdateMemberDetectorsResponse), output: &UpdateMemberDetectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,6 +5,8 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type ListAddonsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAddonsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAddonsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAddonsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListAddonsRequest_clusterName, *v.ClusterName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAddonsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAddonsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAddonsOutput struct {
 
 	// A list of installed add-ons.
@@ -71,13 +91,35 @@ type ListAddonsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAddonsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAddonsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAddonsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.ListAddonsResponse_addons, v.Addons)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAddonsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAddonsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAddonsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAddonsResponse_addons:
+			return deserializeStringList(d, schemas.ListAddonsResponse_addons, &v.Addons)
+		case schemas.ListAddonsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAddonsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAddonsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAddons{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAddons, schemas.ListAddonsRequest, schemas.ListAddonsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAddons{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAddons, schemas.ListAddonsRequest, schemas.ListAddonsResponse), output: &ListAddonsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

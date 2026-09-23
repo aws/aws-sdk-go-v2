@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -164,6 +166,65 @@ type CreateFirewallInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFirewallInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZoneChangeProtection != false {
+		s.WriteBool(schemas.CreateFirewallRequest_AvailabilityZoneChangeProtection, v.AvailabilityZoneChangeProtection)
+	}
+	serializeAvailabilityZoneMappings(s, schemas.CreateFirewallRequest_AvailabilityZoneMappings, v.AvailabilityZoneMappings)
+	if v.DeleteProtection != false {
+		s.WriteBool(schemas.CreateFirewallRequest_DeleteProtection, v.DeleteProtection)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFirewallRequest_Description, *v.Description)
+	}
+	serializeEnabledAnalysisTypes(s, schemas.CreateFirewallRequest_EnabledAnalysisTypes, v.EnabledAnalysisTypes)
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateFirewallRequest_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.CreateFirewallRequest_FirewallName, *v.FirewallName)
+	}
+	if v.FirewallPolicyArn != nil {
+		s.WriteString(schemas.CreateFirewallRequest_FirewallPolicyArn, *v.FirewallPolicyArn)
+	}
+	if v.FirewallPolicyChangeProtection != false {
+		s.WriteBool(schemas.CreateFirewallRequest_FirewallPolicyChangeProtection, v.FirewallPolicyChangeProtection)
+	}
+	serializeNatGatewayMappingsList(s, schemas.CreateFirewallRequest_NatGatewayMappings, v.NatGatewayMappings)
+	if v.NoSourcePreservation != false {
+		s.WriteBool(schemas.CreateFirewallRequest_NoSourcePreservation, v.NoSourcePreservation)
+	}
+	if v.ProxySettings != nil {
+		s.WriteStruct(schemas.CreateFirewallRequest_ProxySettings)
+		v.ProxySettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubnetChangeProtection != false {
+		s.WriteBool(schemas.CreateFirewallRequest_SubnetChangeProtection, v.SubnetChangeProtection)
+	}
+	serializeSubnetMappings(s, schemas.CreateFirewallRequest_SubnetMappings, v.SubnetMappings)
+	serializeTagList(s, schemas.CreateFirewallRequest_Tags, v.Tags)
+	if v.TransitGatewayId != nil {
+		s.WriteString(schemas.CreateFirewallRequest_TransitGatewayId, *v.TransitGatewayId)
+	}
+	if v.VpcEndpoint != nil {
+		s.WriteStruct(schemas.CreateFirewallRequest_VpcEndpoint)
+		v.VpcEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.CreateFirewallRequest_VpcId, *v.VpcId)
+	}
+}
+
 type CreateFirewallOutput struct {
 
 	// The configuration settings for the firewall. These settings include the
@@ -185,13 +246,42 @@ type CreateFirewallOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFirewallOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Firewall != nil {
+		s.WriteStruct(schemas.CreateFirewallResponse_Firewall)
+		v.Firewall.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallStatus != nil {
+		s.WriteStruct(schemas.CreateFirewallResponse_FirewallStatus)
+		v.FirewallStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFirewallOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFirewallResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFirewallResponse_Firewall:
+			v.Firewall = &types.Firewall{}
+			return v.Firewall.Deserialize(d)
+		case schemas.CreateFirewallResponse_FirewallStatus:
+			v.FirewallStatus = &types.FirewallStatus{}
+			return v.FirewallStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFirewallMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateFirewall{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewall, schemas.CreateFirewallRequest, schemas.CreateFirewallResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateFirewall{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewall, schemas.CreateFirewallRequest, schemas.CreateFirewallResponse), output: &CreateFirewallOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,26 @@ type UpdateRefreshScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRefreshScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRefreshScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRefreshScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateRefreshScheduleRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.UpdateRefreshScheduleRequest_DataSetId, *v.DataSetId)
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.UpdateRefreshScheduleRequest_Schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateRefreshScheduleOutput struct {
 
 	// The Amazon Resource Name (ARN) for the refresh schedule.
@@ -64,13 +86,49 @@ type UpdateRefreshScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRefreshScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRefreshScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRefreshScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateRefreshScheduleResponse_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateRefreshScheduleResponse_RequestId, *v.RequestId)
+	}
+	if v.ScheduleId != nil {
+		s.WriteString(schemas.UpdateRefreshScheduleResponse_ScheduleId, *v.ScheduleId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateRefreshScheduleResponse_Status, v.Status)
+	}
+}
+func (v *UpdateRefreshScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRefreshScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRefreshScheduleResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateRefreshScheduleResponse_Arn, v.Arn)
+		case schemas.UpdateRefreshScheduleResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateRefreshScheduleResponse_RequestId, v.RequestId)
+		case schemas.UpdateRefreshScheduleResponse_ScheduleId:
+			v.ScheduleId = new(string)
+			return d.ReadString(schemas.UpdateRefreshScheduleResponse_ScheduleId, v.ScheduleId)
+		case schemas.UpdateRefreshScheduleResponse_Status:
+			return d.ReadInt32(schemas.UpdateRefreshScheduleResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRefreshScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRefreshSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRefreshSchedule, schemas.UpdateRefreshScheduleRequest, schemas.UpdateRefreshScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRefreshSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRefreshSchedule, schemas.UpdateRefreshScheduleRequest, schemas.UpdateRefreshScheduleResponse), output: &UpdateRefreshScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

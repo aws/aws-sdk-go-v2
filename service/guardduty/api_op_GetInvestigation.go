@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,21 @@ type GetInvestigationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInvestigationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvestigationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvestigationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetInvestigationRequest_DetectorId, *v.DetectorId)
+	}
+	if v.InvestigationId != nil {
+		s.WriteString(schemas.GetInvestigationRequest_InvestigationId, *v.InvestigationId)
+	}
+}
+
 type GetInvestigationOutput struct {
 
 	// The details and results of the requested investigation.
@@ -66,13 +83,34 @@ type GetInvestigationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInvestigationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvestigationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvestigationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Investigation != nil {
+		s.WriteStruct(schemas.GetInvestigationResponse_Investigation)
+		v.Investigation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetInvestigationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInvestigationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInvestigationResponse_Investigation:
+			v.Investigation = &types.Investigation{}
+			return v.Investigation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInvestigationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInvestigation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvestigation, schemas.GetInvestigationRequest, schemas.GetInvestigationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInvestigation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvestigation, schemas.GetInvestigationRequest, schemas.GetInvestigationResponse), output: &GetInvestigationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

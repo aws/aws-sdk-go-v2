@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,35 @@ type UpdateThemeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThemeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThemeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThemeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateThemeRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.BaseThemeId != nil {
+		s.WriteString(schemas.UpdateThemeRequest_BaseThemeId, *v.BaseThemeId)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.UpdateThemeRequest_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateThemeRequest_Name, *v.Name)
+	}
+	if v.ThemeId != nil {
+		s.WriteString(schemas.UpdateThemeRequest_ThemeId, *v.ThemeId)
+	}
+	if v.VersionDescription != nil {
+		s.WriteString(schemas.UpdateThemeRequest_VersionDescription, *v.VersionDescription)
+	}
+}
+
 type UpdateThemeOutput struct {
 
 	// The Amazon Resource Name (ARN) for the theme.
@@ -83,13 +114,65 @@ type UpdateThemeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThemeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThemeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThemeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateThemeResponse_Arn, *v.Arn)
+	}
+	if v.CreationStatus != "" {
+		s.WriteString(schemas.UpdateThemeResponse_CreationStatus, string(v.CreationStatus))
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateThemeResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateThemeResponse_Status, v.Status)
+	}
+	if v.ThemeId != nil {
+		s.WriteString(schemas.UpdateThemeResponse_ThemeId, *v.ThemeId)
+	}
+	if v.VersionArn != nil {
+		s.WriteString(schemas.UpdateThemeResponse_VersionArn, *v.VersionArn)
+	}
+}
+func (v *UpdateThemeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateThemeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateThemeResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateThemeResponse_Arn, v.Arn)
+		case schemas.UpdateThemeResponse_CreationStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateThemeResponse_CreationStatus, &ev); err != nil {
+				return err
+			}
+			v.CreationStatus = types.ResourceStatus(ev)
+			return nil
+		case schemas.UpdateThemeResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateThemeResponse_RequestId, v.RequestId)
+		case schemas.UpdateThemeResponse_Status:
+			return d.ReadInt32(schemas.UpdateThemeResponse_Status, &v.Status)
+		case schemas.UpdateThemeResponse_ThemeId:
+			v.ThemeId = new(string)
+			return d.ReadString(schemas.UpdateThemeResponse_ThemeId, v.ThemeId)
+		case schemas.UpdateThemeResponse_VersionArn:
+			v.VersionArn = new(string)
+			return d.ReadString(schemas.UpdateThemeResponse_VersionArn, v.VersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateThemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTheme{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTheme, schemas.UpdateThemeRequest, schemas.UpdateThemeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTheme{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTheme, schemas.UpdateThemeRequest, schemas.UpdateThemeResponse), output: &UpdateThemeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

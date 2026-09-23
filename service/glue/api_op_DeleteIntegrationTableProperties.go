@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteIntegrationTablePropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIntegrationTablePropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIntegrationTablePropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIntegrationTablePropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DeleteIntegrationTablePropertiesRequest_ResourceArn, *v.ResourceArn)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.DeleteIntegrationTablePropertiesRequest_TableName, *v.TableName)
+	}
+}
+
 type DeleteIntegrationTablePropertiesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeleteIntegrationTablePropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIntegrationTablePropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIntegrationTablePropertiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIntegrationTablePropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteIntegrationTablePropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIntegrationTablePropertiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIntegrationTablePropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteIntegrationTableProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIntegrationTableProperties, schemas.DeleteIntegrationTablePropertiesRequest, schemas.DeleteIntegrationTablePropertiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteIntegrationTableProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIntegrationTableProperties, schemas.DeleteIntegrationTablePropertiesRequest, schemas.DeleteIntegrationTablePropertiesResponse), output: &DeleteIntegrationTablePropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

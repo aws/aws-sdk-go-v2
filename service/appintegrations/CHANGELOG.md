@@ -1,3 +1,7 @@
+# v1.48.0 (2026-09-21)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.47.0 (2026-09-18)
 
 * **Feature**: This release adds support for A2A servers via the ApplicationType and AuthConfig fields, allowing customers to register their agent-to-agent servers with API key authentication.

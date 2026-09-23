@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -105,6 +107,50 @@ type CreateKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKnowledgeBaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKnowledgeBaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlConfiguration != nil {
+		s.WriteStruct(schemas.CreateKnowledgeBaseRequest_AccessControlConfiguration)
+		v.AccessControlConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSourceArn != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_DataSourceArn, *v.DataSourceArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_Description, *v.Description)
+	}
+	if v.KnowledgeBaseConfiguration != nil {
+		s.WriteStruct(schemas.CreateKnowledgeBaseRequest_KnowledgeBaseConfiguration)
+		v.KnowledgeBaseConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_KnowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.MediaExtractionConfiguration != nil {
+		s.WriteStruct(schemas.CreateKnowledgeBaseRequest_MediaExtractionConfiguration)
+		v.MediaExtractionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_Name, *v.Name)
+	}
+	serializeResourcePermissionList(s, schemas.CreateKnowledgeBaseRequest_Permissions, v.Permissions)
+	if v.PrimaryOwnerArn != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_PrimaryOwnerArn, *v.PrimaryOwnerArn)
+	}
+	serializeTagList(s, schemas.CreateKnowledgeBaseRequest_Tags, v.Tags)
+}
+
 type CreateKnowledgeBaseOutput struct {
 
 	// The creation status of the knowledge base.
@@ -134,13 +180,60 @@ type CreateKnowledgeBaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKnowledgeBaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKnowledgeBaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKnowledgeBaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationStatus != "" {
+		s.WriteString(schemas.CreateKnowledgeBaseResponse_CreationStatus, string(v.CreationStatus))
+	}
+	if v.KnowledgeBaseArn != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseResponse_KnowledgeBaseArn, *v.KnowledgeBaseArn)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseResponse_KnowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != nil {
+		s.WriteInt32(schemas.CreateKnowledgeBaseResponse_Status, *v.Status)
+	}
+}
+func (v *CreateKnowledgeBaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateKnowledgeBaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateKnowledgeBaseResponse_CreationStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateKnowledgeBaseResponse_CreationStatus, &ev); err != nil {
+				return err
+			}
+			v.CreationStatus = types.DataSetStatus(ev)
+			return nil
+		case schemas.CreateKnowledgeBaseResponse_KnowledgeBaseArn:
+			v.KnowledgeBaseArn = new(string)
+			return d.ReadString(schemas.CreateKnowledgeBaseResponse_KnowledgeBaseArn, v.KnowledgeBaseArn)
+		case schemas.CreateKnowledgeBaseResponse_KnowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.CreateKnowledgeBaseResponse_KnowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.CreateKnowledgeBaseResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateKnowledgeBaseResponse_RequestId, v.RequestId)
+		case schemas.CreateKnowledgeBaseResponse_Status:
+			v.Status = new(int32)
+			return d.ReadInt32(schemas.CreateKnowledgeBaseResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateKnowledgeBaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKnowledgeBase, schemas.CreateKnowledgeBaseRequest, schemas.CreateKnowledgeBaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKnowledgeBase, schemas.CreateKnowledgeBaseRequest, schemas.CreateKnowledgeBaseResponse), output: &CreateKnowledgeBaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

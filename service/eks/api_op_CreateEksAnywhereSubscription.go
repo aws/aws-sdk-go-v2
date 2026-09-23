@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,36 @@ type CreateEksAnywhereSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEksAnywhereSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEksAnywhereSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEksAnywhereSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoRenew != false {
+		s.WriteBool(schemas.CreateEksAnywhereSubscriptionRequest_autoRenew, v.AutoRenew)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateEksAnywhereSubscriptionRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.LicenseQuantity != 0 {
+		s.WriteInt32(schemas.CreateEksAnywhereSubscriptionRequest_licenseQuantity, v.LicenseQuantity)
+	}
+	if v.LicenseType != "" {
+		s.WriteString(schemas.CreateEksAnywhereSubscriptionRequest_licenseType, string(v.LicenseType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEksAnywhereSubscriptionRequest_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateEksAnywhereSubscriptionRequest_tags, v.Tags)
+	if v.Term != nil {
+		s.WriteStruct(schemas.CreateEksAnywhereSubscriptionRequest_term)
+		v.Term.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateEksAnywhereSubscriptionOutput struct {
 
 	// The full description of the subscription.
@@ -85,13 +117,34 @@ type CreateEksAnywhereSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEksAnywhereSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEksAnywhereSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEksAnywhereSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Subscription != nil {
+		s.WriteStruct(schemas.CreateEksAnywhereSubscriptionResponse_subscription)
+		v.Subscription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateEksAnywhereSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEksAnywhereSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEksAnywhereSubscriptionResponse_subscription:
+			v.Subscription = &types.EksAnywhereSubscription{}
+			return v.Subscription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEksAnywhereSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEksAnywhereSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEksAnywhereSubscription, schemas.CreateEksAnywhereSubscriptionRequest, schemas.CreateEksAnywhereSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEksAnywhereSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEksAnywhereSubscription, schemas.CreateEksAnywhereSubscriptionRequest, schemas.CreateEksAnywhereSubscriptionResponse), output: &CreateEksAnywhereSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

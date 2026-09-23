@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,25 @@ type BatchDeleteTableVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteTableVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteTableVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteTableVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.BatchDeleteTableVersionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.BatchDeleteTableVersionRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.BatchDeleteTableVersionRequest_TableName, *v.TableName)
+	}
+	serializeBatchDeleteTableVersionList(s, schemas.BatchDeleteTableVersionRequest_VersionIds, v.VersionIds)
+}
+
 type BatchDeleteTableVersionOutput struct {
 
 	// A list of errors encountered while trying to delete the specified table
@@ -62,13 +83,29 @@ type BatchDeleteTableVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteTableVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteTableVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteTableVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTableVersionErrors(s, schemas.BatchDeleteTableVersionResponse_Errors, v.Errors)
+}
+func (v *BatchDeleteTableVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteTableVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteTableVersionResponse_Errors:
+			return deserializeTableVersionErrors(d, schemas.BatchDeleteTableVersionResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteTableVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteTableVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteTableVersion, schemas.BatchDeleteTableVersionRequest, schemas.BatchDeleteTableVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDeleteTableVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteTableVersion, schemas.BatchDeleteTableVersionRequest, schemas.BatchDeleteTableVersionResponse), output: &BatchDeleteTableVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type DeleteAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetIdentifier != nil {
+		s.WriteString(schemas.DeleteAttachmentRequest_AssetIdentifier, *v.AssetIdentifier)
+	}
+	if v.AttachmentName != nil {
+		s.WriteString(schemas.DeleteAttachmentRequest_AttachmentName, *v.AttachmentName)
+	}
+	if v.ItemIdentifier != nil {
+		s.WriteString(schemas.DeleteAttachmentRequest_ItemIdentifier, *v.ItemIdentifier)
+	}
+	if v.IterableFormName != nil {
+		s.WriteString(schemas.DeleteAttachmentRequest_IterableFormName, *v.IterableFormName)
+	}
+}
+
 type DeleteAttachmentOutput struct {
 
 	// The unique identifier of the asset.
@@ -64,13 +87,44 @@ type DeleteAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetIdentifier != nil {
+		s.WriteString(schemas.DeleteAttachmentResponse_AssetIdentifier, *v.AssetIdentifier)
+	}
+	if v.ItemIdentifier != nil {
+		s.WriteString(schemas.DeleteAttachmentResponse_ItemIdentifier, *v.ItemIdentifier)
+	}
+	if v.IterableFormName != nil {
+		s.WriteString(schemas.DeleteAttachmentResponse_IterableFormName, *v.IterableFormName)
+	}
+}
+func (v *DeleteAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAttachmentResponse_AssetIdentifier:
+			v.AssetIdentifier = new(string)
+			return d.ReadString(schemas.DeleteAttachmentResponse_AssetIdentifier, v.AssetIdentifier)
+		case schemas.DeleteAttachmentResponse_ItemIdentifier:
+			v.ItemIdentifier = new(string)
+			return d.ReadString(schemas.DeleteAttachmentResponse_ItemIdentifier, v.ItemIdentifier)
+		case schemas.DeleteAttachmentResponse_IterableFormName:
+			v.IterableFormName = new(string)
+			return d.ReadString(schemas.DeleteAttachmentResponse_IterableFormName, v.IterableFormName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAttachment, schemas.DeleteAttachmentRequest, schemas.DeleteAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAttachment, schemas.DeleteAttachmentRequest, schemas.DeleteAttachmentResponse), output: &DeleteAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

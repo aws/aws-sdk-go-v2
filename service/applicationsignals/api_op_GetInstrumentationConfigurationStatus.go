@@ -5,7 +5,9 @@ package applicationsignals
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -83,6 +85,43 @@ type GetInstrumentationConfigurationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstrumentationConfigurationStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstrumentationConfigurationStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstrumentationConfigurationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetInstrumentationConfigurationStatusRequest_EndTime, *v.EndTime)
+	}
+	if v.Environment != nil {
+		s.WriteString(schemas.GetInstrumentationConfigurationStatusRequest_Environment, *v.Environment)
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.GetInstrumentationConfigurationStatusRequest_InstrumentationType, string(v.InstrumentationType))
+	}
+	serializeLocationIdentifier(s, schemas.GetInstrumentationConfigurationStatusRequest_LocationIdentifier, v.LocationIdentifier)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetInstrumentationConfigurationStatusRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetInstrumentationConfigurationStatusRequest_NextToken, *v.NextToken)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.GetInstrumentationConfigurationStatusRequest_Service, *v.Service)
+	}
+	if v.SignalType != "" {
+		s.WriteString(schemas.GetInstrumentationConfigurationStatusRequest_SignalType, string(v.SignalType))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetInstrumentationConfigurationStatusRequest_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetInstrumentationConfigurationStatusRequest_Status, string(v.Status))
+	}
+}
+
 type GetInstrumentationConfigurationStatusOutput struct {
 
 	// The environment echoed from the request.
@@ -125,13 +164,70 @@ type GetInstrumentationConfigurationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstrumentationConfigurationStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstrumentationConfigurationStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstrumentationConfigurationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Environment != nil {
+		s.WriteString(schemas.GetInstrumentationConfigurationStatusResponse_Environment, *v.Environment)
+	}
+	serializeInstrumentationStatusEventList(s, schemas.GetInstrumentationConfigurationStatusResponse_Events, v.Events)
+	serializeLocation(s, schemas.GetInstrumentationConfigurationStatusResponse_Location, v.Location)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetInstrumentationConfigurationStatusResponse_NextToken, *v.NextToken)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.GetInstrumentationConfigurationStatusResponse_Service, *v.Service)
+	}
+	if v.SignalType != "" {
+		s.WriteString(schemas.GetInstrumentationConfigurationStatusResponse_SignalType, string(v.SignalType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetInstrumentationConfigurationStatusResponse_Status, string(v.Status))
+	}
+}
+func (v *GetInstrumentationConfigurationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInstrumentationConfigurationStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInstrumentationConfigurationStatusResponse_Environment:
+			v.Environment = new(string)
+			return d.ReadString(schemas.GetInstrumentationConfigurationStatusResponse_Environment, v.Environment)
+		case schemas.GetInstrumentationConfigurationStatusResponse_Events:
+			return deserializeInstrumentationStatusEventList(d, schemas.GetInstrumentationConfigurationStatusResponse_Events, &v.Events)
+		case schemas.GetInstrumentationConfigurationStatusResponse_Location:
+			return deserializeLocation(d, schemas.GetInstrumentationConfigurationStatusResponse_Location, &v.Location)
+		case schemas.GetInstrumentationConfigurationStatusResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetInstrumentationConfigurationStatusResponse_NextToken, v.NextToken)
+		case schemas.GetInstrumentationConfigurationStatusResponse_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.GetInstrumentationConfigurationStatusResponse_Service, v.Service)
+		case schemas.GetInstrumentationConfigurationStatusResponse_SignalType:
+			var ev string
+			if err := d.ReadString(schemas.GetInstrumentationConfigurationStatusResponse_SignalType, &ev); err != nil {
+				return err
+			}
+			v.SignalType = types.DynamicInstrumentationSignalType(ev)
+			return nil
+		case schemas.GetInstrumentationConfigurationStatusResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetInstrumentationConfigurationStatusResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InstrumentationConfigurationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInstrumentationConfigurationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInstrumentationConfigurationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstrumentationConfigurationStatus, schemas.GetInstrumentationConfigurationStatusRequest, schemas.GetInstrumentationConfigurationStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInstrumentationConfigurationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstrumentationConfigurationStatus, schemas.GetInstrumentationConfigurationStatusRequest, schemas.GetInstrumentationConfigurationStatusResponse), output: &GetInstrumentationConfigurationStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package amplifyuibuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,40 @@ type ExportThemesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportThemesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportThemesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportThemesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.ExportThemesRequest_appId, *v.AppId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.ExportThemesRequest_environmentName, *v.EnvironmentName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ExportThemesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ExportThemesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportThemesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportThemesRequest_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.ExportThemesRequest_appId, v.AppId)
+		case schemas.ExportThemesRequest_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.ExportThemesRequest_environmentName, v.EnvironmentName)
+		case schemas.ExportThemesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ExportThemesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ExportThemesOutput struct {
 
 	// Represents the configuration of the exported themes.
@@ -60,13 +96,35 @@ type ExportThemesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportThemesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportThemesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportThemesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeThemeList(s, schemas.ExportThemesResponse_entities, v.Entities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ExportThemesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ExportThemesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportThemesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportThemesResponse_entities:
+			return deserializeThemeList(d, schemas.ExportThemesResponse_entities, &v.Entities)
+		case schemas.ExportThemesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ExportThemesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportThemesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportThemes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportThemes, schemas.ExportThemesRequest, schemas.ExportThemesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExportThemes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportThemes, schemas.ExportThemesRequest, schemas.ExportThemesResponse), output: &ExportThemesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

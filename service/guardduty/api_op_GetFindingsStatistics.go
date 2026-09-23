@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,33 @@ type GetFindingsStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetFindingsStatisticsRequest_DetectorId, *v.DetectorId)
+	}
+	if v.FindingCriteria != nil {
+		s.WriteStruct(schemas.GetFindingsStatisticsRequest_FindingCriteria)
+		v.FindingCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFindingStatisticTypes(s, schemas.GetFindingsStatisticsRequest_FindingStatisticTypes, v.FindingStatisticTypes)
+	if v.GroupBy != "" {
+		s.WriteString(schemas.GetFindingsStatisticsRequest_GroupBy, string(v.GroupBy))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetFindingsStatisticsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.OrderBy != "" {
+		s.WriteString(schemas.GetFindingsStatisticsRequest_OrderBy, string(v.OrderBy))
+	}
+}
+
 type GetFindingsStatisticsOutput struct {
 
 	// The finding statistics object.
@@ -90,13 +119,40 @@ type GetFindingsStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingStatistics != nil {
+		s.WriteStruct(schemas.GetFindingsStatisticsResponse_FindingStatistics)
+		v.FindingStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFindingsStatisticsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetFindingsStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingsStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingsStatisticsResponse_FindingStatistics:
+			v.FindingStatistics = &types.FindingStatistics{}
+			return v.FindingStatistics.Deserialize(d)
+		case schemas.GetFindingsStatisticsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetFindingsStatisticsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingsStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingsStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsStatistics, schemas.GetFindingsStatisticsRequest, schemas.GetFindingsStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingsStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsStatistics, schemas.GetFindingsStatisticsRequest, schemas.GetFindingsStatisticsResponse), output: &GetFindingsStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

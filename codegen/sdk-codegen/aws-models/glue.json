@@ -38839,6 +38839,9 @@
         "com.amazonaws.glue#NullableInteger": {
             "type": "integer"
         },
+        "com.amazonaws.glue#NullableLong": {
+            "type": "long"
+        },
         "com.amazonaws.glue#NullableString": {
             "type": "string"
         },
@@ -46837,6 +46840,39 @@
                 "smithy.api#documentation": "<p>Specifies a target that uses an Apache Spark connector.</p>"
             }
         },
+        "com.amazonaws.glue#SparkPipelineInfoKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.glue#SparkPipelineInfoMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#SparkPipelineInfoKey"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#SparkPipelineInfoValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.glue#SparkPipelineInfoValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
+        },
         "com.amazonaws.glue#SparkSQL": {
             "type": "structure",
             "members": {
@@ -49227,6 +49263,97 @@
             },
             "value": {
                 "target": "com.amazonaws.glue#NullableString"
+            }
+        },
+        "com.amazonaws.glue#SubObjectSourceType": {
+            "type": "enum",
+            "members": {
+                "HIVE_PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIVE_PARQUET"
+                    }
+                },
+                "HIVE_ORC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIVE_ORC"
+                    }
+                },
+                "HIVE_CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIVE_CSV"
+                    }
+                },
+                "HIVE_JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIVE_JSON"
+                    }
+                },
+                "PLAIN_PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLAIN_PARQUET"
+                    }
+                },
+                "ICEBERG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICEBERG"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#SubObjectStatistics": {
+            "type": "structure",
+            "members": {
+                "SourceType": {
+                    "target": "com.amazonaws.glue#SubObjectSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source type of the sub-object (for example, its table format), which identifies the\n      sub-object.</p>"
+                    }
+                },
+                "GlueVersionId": {
+                    "target": "com.amazonaws.glue#NullableString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Glue version ID of the sub-object that the statistics were captured for.</p>"
+                    }
+                },
+                "PartitionCount": {
+                    "target": "com.amazonaws.glue#NullableLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of sub-object partitions selected for that refresh. Not present for\n      unpartitioned sub-objects.</p>"
+                    }
+                },
+                "FileCount": {
+                    "target": "com.amazonaws.glue#NullableLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of sub-object data files selected for that refresh.</p>"
+                    }
+                },
+                "TotalFileBytes": {
+                    "target": "com.amazonaws.glue#NullableLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total size, in bytes, of the data files counted by <code>FileCount</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Statistics for one sub-object referenced by a materialized view, recorded when the\n      materialized view was created or last fully refreshed. These values describe what that refresh\n      selected from the sub-object, which can be a subset of the table when the materialized view's\n      definition limits the data it reads. The fields present depend on the sub-object's format.</p>"
+            }
+        },
+        "com.amazonaws.glue#SubObjectsStatisticsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#SubObjectStatistics"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 250
+                }
             }
         },
         "com.amazonaws.glue#SupportedDialect": {
@@ -54726,10 +54853,22 @@
                         "smithy.api#documentation": "<p>List of the Apache Iceberg table versions referenced by the materialized view.</p>"
                     }
                 },
+                "SubObjectsStatistics": {
+                    "target": "com.amazonaws.glue#SubObjectsStatisticsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Statistics captured for each sub-object referenced by the materialized view as of its most\n      recent refresh, such as the source type, Glue version ID, and the partition,\n      file, and byte counts. Each entry describes one sub-object, identified by its source type.</p>"
+                    }
+                },
                 "Representations": {
                     "target": "com.amazonaws.glue#ViewRepresentationList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of representations.</p>"
+                    }
+                },
+                "SparkPipelineInfo": {
+                    "target": "com.amazonaws.glue#SparkPipelineInfoMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs containing Spark Declarative Pipelines (SDP) information for the\n      materialized view.</p>"
                     }
                 }
             },
@@ -54793,6 +54932,18 @@
                     "target": "com.amazonaws.glue#ViewSubObjectVersionIdsList",
                     "traits": {
                         "smithy.api#documentation": "<p>List of the Apache Iceberg table versions referenced by the materialized view.</p>"
+                    }
+                },
+                "SubObjectsStatistics": {
+                    "target": "com.amazonaws.glue#SubObjectsStatisticsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Statistics for each sub-object referenced by the materialized view, such as the source\n      type, Glue version ID, and the partition, file, and byte counts. Each entry\n      describes one sub-object, identified by its source type.</p>"
+                    }
+                },
+                "SparkPipelineInfo": {
+                    "target": "com.amazonaws.glue#SparkPipelineInfoMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs containing Spark Declarative Pipelines (SDP) information for the\n      materialized view.</p>"
                     }
                 }
             },

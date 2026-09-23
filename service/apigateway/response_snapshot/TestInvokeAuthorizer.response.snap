@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"authorization":{"key0":["__Member__","__Member__"]},"claims":{"key0":"__Value__"},"clientStatus":1,"latency":1,"log":"__Log__","policy":"__Policy__","principalId":"__PrincipalId__"}

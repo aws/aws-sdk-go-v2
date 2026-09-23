@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: MTurkRequesterServiceV20170117.CreateQualificationType
+
+{"QualificationType":{"AnswerKey":"__AnswerKey__","AutoGranted":true,"AutoGrantedValue":1,"CreationTime":946684800,"Description":"__Description__","IsRequestable":true,"Keywords":"__Keywords__","Name":"__Name__","QualificationTypeId":"__QualificationTypeId__","QualificationTypeStatus":"Active","RetryDelayInSeconds":1,"Test":"__Test__","TestDurationInSeconds":1}}

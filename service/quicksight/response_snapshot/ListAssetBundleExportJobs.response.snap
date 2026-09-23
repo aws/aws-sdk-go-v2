@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AssetBundleExportJobSummaryList":[{"Arn":"__Arn__","AssetBundleExportJobId":"__AssetBundleExportJobId__","CreatedTime":946684800,"ExportFormat":"CLOUDFORMATION_JSON","IncludeAllDependencies":true,"IncludePermissions":true,"IncludeTags":true,"JobStatus":"QUEUED_FOR_IMMEDIATE_EXECUTION"},{"Arn":"__Arn__","AssetBundleExportJobId":"__AssetBundleExportJobId__","CreatedTime":946684800,"ExportFormat":"CLOUDFORMATION_JSON","IncludeAllDependencies":true,"IncludePermissions":true,"IncludeTags":true,"JobStatus":"QUEUED_FOR_IMMEDIATE_EXECUTION"}],"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200}

@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteWorkflowRequest_Name, *v.Name)
+	}
+}
+
 type DeleteWorkflowOutput struct {
 
 	// Name of the workflow specified in input.
@@ -44,13 +58,32 @@ type DeleteWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteWorkflowResponse_Name, *v.Name)
+	}
+}
+func (v *DeleteWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWorkflowResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteWorkflowResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkflow, schemas.DeleteWorkflowRequest, schemas.DeleteWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkflow, schemas.DeleteWorkflowRequest, schemas.DeleteWorkflowResponse), output: &DeleteWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

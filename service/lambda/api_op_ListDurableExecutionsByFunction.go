@@ -5,7 +5,9 @@ package lambda
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -69,6 +71,40 @@ type ListDurableExecutionsByFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDurableExecutionsByFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDurableExecutionsByFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDurableExecutionsByFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurableExecutionName != nil {
+		s.WriteString(schemas.ListDurableExecutionsByFunctionRequest_DurableExecutionName, *v.DurableExecutionName)
+	}
+	if v.FunctionName != nil {
+		s.WriteString(schemas.ListDurableExecutionsByFunctionRequest_FunctionName, *v.FunctionName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListDurableExecutionsByFunctionRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != 0 {
+		s.WriteInt32(schemas.ListDurableExecutionsByFunctionRequest_MaxItems, v.MaxItems)
+	}
+	if v.Qualifier != nil {
+		s.WriteString(schemas.ListDurableExecutionsByFunctionRequest_Qualifier, *v.Qualifier)
+	}
+	if v.ReverseOrder != nil {
+		s.WriteBool(schemas.ListDurableExecutionsByFunctionRequest_ReverseOrder, *v.ReverseOrder)
+	}
+	if v.StartedAfter != nil {
+		s.WriteTime(schemas.ListDurableExecutionsByFunctionRequest_StartedAfter, *v.StartedAfter)
+	}
+	if v.StartedBefore != nil {
+		s.WriteTime(schemas.ListDurableExecutionsByFunctionRequest_StartedBefore, *v.StartedBefore)
+	}
+	serializeExecutionStatusList(s, schemas.ListDurableExecutionsByFunctionRequest_Statuses, v.Statuses)
+}
+
 // The response from the ListDurableExecutionsByFunction operation, containing a
 // list of durable executions and pagination information.
 type ListDurableExecutionsByFunctionOutput struct {
@@ -86,13 +122,35 @@ type ListDurableExecutionsByFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDurableExecutionsByFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDurableExecutionsByFunctionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDurableExecutionsByFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDurableExecutions(s, schemas.ListDurableExecutionsByFunctionResponse_DurableExecutions, v.DurableExecutions)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListDurableExecutionsByFunctionResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListDurableExecutionsByFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDurableExecutionsByFunctionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDurableExecutionsByFunctionResponse_DurableExecutions:
+			return deserializeDurableExecutions(d, schemas.ListDurableExecutionsByFunctionResponse_DurableExecutions, &v.DurableExecutions)
+		case schemas.ListDurableExecutionsByFunctionResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListDurableExecutionsByFunctionResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDurableExecutionsByFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDurableExecutionsByFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDurableExecutionsByFunction, schemas.ListDurableExecutionsByFunctionRequest, schemas.ListDurableExecutionsByFunctionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDurableExecutionsByFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDurableExecutionsByFunction, schemas.ListDurableExecutionsByFunctionRequest, schemas.ListDurableExecutionsByFunctionResponse), output: &ListDurableExecutionsByFunctionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

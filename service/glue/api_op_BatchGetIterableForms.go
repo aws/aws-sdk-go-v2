@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type BatchGetIterableFormsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetIterableFormsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetIterableFormsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetIterableFormsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetIdentifier != nil {
+		s.WriteString(schemas.BatchGetIterableFormsRequest_AssetIdentifier, *v.AssetIdentifier)
+	}
+	serializeItemIdentifierList(s, schemas.BatchGetIterableFormsRequest_ItemIdentifiers, v.ItemIdentifiers)
+	if v.IterableFormName != nil {
+		s.WriteString(schemas.BatchGetIterableFormsRequest_IterableFormName, *v.IterableFormName)
+	}
+}
+
 type BatchGetIterableFormsOutput struct {
 
 	// The list of errors for items that could not be retrieved.
@@ -60,13 +78,32 @@ type BatchGetIterableFormsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetIterableFormsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetIterableFormsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetIterableFormsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeItemErrorList(s, schemas.BatchGetIterableFormsResponse_Errors, v.Errors)
+	serializeIterableFormItemList(s, schemas.BatchGetIterableFormsResponse_Items, v.Items)
+}
+func (v *BatchGetIterableFormsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetIterableFormsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetIterableFormsResponse_Errors:
+			return deserializeItemErrorList(d, schemas.BatchGetIterableFormsResponse_Errors, &v.Errors)
+		case schemas.BatchGetIterableFormsResponse_Items:
+			return deserializeIterableFormItemList(d, schemas.BatchGetIterableFormsResponse_Items, &v.Items)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetIterableFormsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetIterableForms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetIterableForms, schemas.BatchGetIterableFormsRequest, schemas.BatchGetIterableFormsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetIterableForms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetIterableForms, schemas.BatchGetIterableFormsRequest, schemas.BatchGetIterableFormsResponse), output: &BatchGetIterableFormsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

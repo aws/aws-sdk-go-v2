@@ -4,6 +4,8 @@ package datapipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,24 @@ type EvaluateExpressionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluateExpressionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluateExpressionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluateExpressionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expression != nil {
+		s.WriteString(schemas.EvaluateExpressionInput_expression, *v.Expression)
+	}
+	if v.ObjectId != nil {
+		s.WriteString(schemas.EvaluateExpressionInput_objectId, *v.ObjectId)
+	}
+	if v.PipelineId != nil {
+		s.WriteString(schemas.EvaluateExpressionInput_pipelineId, *v.PipelineId)
+	}
+}
+
 // Contains the output of EvaluateExpression.
 type EvaluateExpressionOutput struct {
 
@@ -75,13 +95,32 @@ type EvaluateExpressionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluateExpressionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluateExpressionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluateExpressionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluatedExpression != nil {
+		s.WriteString(schemas.EvaluateExpressionOutput_evaluatedExpression, *v.EvaluatedExpression)
+	}
+}
+func (v *EvaluateExpressionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluateExpressionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluateExpressionOutput_evaluatedExpression:
+			v.EvaluatedExpression = new(string)
+			return d.ReadString(schemas.EvaluateExpressionOutput_evaluatedExpression, v.EvaluatedExpression)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEvaluateExpressionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEvaluateExpression{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EvaluateExpression, schemas.EvaluateExpressionInput, schemas.EvaluateExpressionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEvaluateExpression{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EvaluateExpression, schemas.EvaluateExpressionInput, schemas.EvaluateExpressionOutput), output: &EvaluateExpressionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

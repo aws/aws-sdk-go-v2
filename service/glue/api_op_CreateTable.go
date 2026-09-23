@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,38 @@ type CreateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.CreateTableRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.CreateTableRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTableRequest_Name, *v.Name)
+	}
+	if v.OpenTableFormatInput != nil {
+		s.WriteStruct(schemas.CreateTableRequest_OpenTableFormatInput)
+		v.OpenTableFormatInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePartitionIndexList(s, schemas.CreateTableRequest_PartitionIndexes, v.PartitionIndexes)
+	if v.TableInput != nil {
+		s.WriteStruct(schemas.CreateTableRequest_TableInput)
+		v.TableInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransactionId != nil {
+		s.WriteString(schemas.CreateTableRequest_TransactionId, *v.TransactionId)
+	}
+}
+
 type CreateTableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +96,26 @@ type CreateTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTableResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTable, schemas.CreateTableRequest, schemas.CreateTableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTable, schemas.CreateTableRequest, schemas.CreateTableResponse), output: &CreateTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

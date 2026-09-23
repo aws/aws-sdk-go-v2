@@ -1,3 +1,7 @@
+# v1.40.0 (2026-09-21)
+
+* **Feature**: Launching Auto Billing Transfer Billing Group Creation Preference feature
+
 # v1.39.0 (2026-09-14)
 
 * **Feature**: This release adds support for custom volume tiering. You can now define custom tiers on a pricing rule's tiering configuration, where each tier specifies a usage range and the rate applied to usage in that range.

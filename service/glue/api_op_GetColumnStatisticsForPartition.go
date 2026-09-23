@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,26 @@ type GetColumnStatisticsForPartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetColumnStatisticsForPartitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetColumnStatisticsForPartitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetColumnStatisticsForPartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetColumnStatisticsForPartitionRequest_CatalogId, *v.CatalogId)
+	}
+	serializeGetColumnNamesList(s, schemas.GetColumnStatisticsForPartitionRequest_ColumnNames, v.ColumnNames)
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetColumnStatisticsForPartitionRequest_DatabaseName, *v.DatabaseName)
+	}
+	serializeValueStringList(s, schemas.GetColumnStatisticsForPartitionRequest_PartitionValues, v.PartitionValues)
+	if v.TableName != nil {
+		s.WriteString(schemas.GetColumnStatisticsForPartitionRequest_TableName, *v.TableName)
+	}
+}
+
 type GetColumnStatisticsForPartitionOutput struct {
 
 	// List of ColumnStatistics that failed to be retrieved.
@@ -70,13 +92,32 @@ type GetColumnStatisticsForPartitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetColumnStatisticsForPartitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetColumnStatisticsForPartitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetColumnStatisticsForPartitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeColumnStatisticsList(s, schemas.GetColumnStatisticsForPartitionResponse_ColumnStatisticsList, v.ColumnStatisticsList)
+	serializeColumnErrors(s, schemas.GetColumnStatisticsForPartitionResponse_Errors, v.Errors)
+}
+func (v *GetColumnStatisticsForPartitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetColumnStatisticsForPartitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetColumnStatisticsForPartitionResponse_ColumnStatisticsList:
+			return deserializeColumnStatisticsList(d, schemas.GetColumnStatisticsForPartitionResponse_ColumnStatisticsList, &v.ColumnStatisticsList)
+		case schemas.GetColumnStatisticsForPartitionResponse_Errors:
+			return deserializeColumnErrors(d, schemas.GetColumnStatisticsForPartitionResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetColumnStatisticsForPartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetColumnStatisticsForPartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetColumnStatisticsForPartition, schemas.GetColumnStatisticsForPartitionRequest, schemas.GetColumnStatisticsForPartitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetColumnStatisticsForPartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetColumnStatisticsForPartition, schemas.GetColumnStatisticsForPartitionRequest, schemas.GetColumnStatisticsForPartitionResponse), output: &GetColumnStatisticsForPartitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

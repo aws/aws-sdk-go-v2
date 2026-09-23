@@ -4,6 +4,8 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactListName != nil {
+		s.WriteString(schemas.DeleteContactRequest_ContactListName, *v.ContactListName)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.DeleteContactRequest_EmailAddress, *v.EmailAddress)
+	}
+}
+
 type DeleteContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContact, schemas.DeleteContactRequest, schemas.DeleteContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContact, schemas.DeleteContactRequest, schemas.DeleteContactResponse), output: &DeleteContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

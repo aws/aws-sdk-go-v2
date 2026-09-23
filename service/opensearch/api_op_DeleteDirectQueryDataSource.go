@@ -4,6 +4,8 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteDirectQueryDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDirectQueryDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDirectQueryDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDirectQueryDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceName != nil {
+		s.WriteString(schemas.DeleteDirectQueryDataSourceRequest_DataSourceName, *v.DataSourceName)
+	}
+}
+
 type DeleteDirectQueryDataSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteDirectQueryDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDirectQueryDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDirectQueryDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDirectQueryDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDirectQueryDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDirectQueryDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDirectQueryDataSource, schemas.DeleteDirectQueryDataSourceRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDirectQueryDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDirectQueryDataSource, schemas.DeleteDirectQueryDataSourceRequest, nil), output: &DeleteDirectQueryDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

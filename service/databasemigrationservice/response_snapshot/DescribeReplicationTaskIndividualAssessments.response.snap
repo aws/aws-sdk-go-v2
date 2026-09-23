@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.DescribeReplicationTaskIndividualAssessments
+
+{"Marker":"__Marker__","ReplicationTaskIndividualAssessments":[{"IndividualAssessmentName":"__IndividualAssessmentName__","ReplicationTaskAssessmentRunArn":"__ReplicationTaskAssessmentRunArn__","ReplicationTaskIndividualAssessmentArn":"__ReplicationTaskIndividualAssessmentArn__","ReplicationTaskIndividualAssessmentStartDate":946684800,"Status":"__Status__"},{"IndividualAssessmentName":"__IndividualAssessmentName__","ReplicationTaskAssessmentRunArn":"__ReplicationTaskAssessmentRunArn__","ReplicationTaskIndividualAssessmentArn":"__ReplicationTaskIndividualAssessmentArn__","ReplicationTaskIndividualAssessmentStartDate":946684800,"Status":"__Status__"}]}

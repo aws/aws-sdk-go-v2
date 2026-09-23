@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,34 @@ type ListInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInsightsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInsightsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInsightsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entity != nil {
+		s.WriteStruct(schemas.ListInsightsRequest_Entity)
+		v.Entity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInsightsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInsightsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListInsightsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.TimeRange != nil {
+		s.WriteStruct(schemas.ListInsightsRequest_TimeRange)
+		v.TimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The result of a ListInsights request. Contains the list of insights and a
 // pagination token for retrieving the next page of results.
 type ListInsightsOutput struct {
@@ -74,13 +104,35 @@ type ListInsightsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInsightsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInsightsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInsightsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInsightList(s, schemas.ListInsightsResponse_Insights, v.Insights)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInsightsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInsightsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInsightsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInsightsResponse_Insights:
+			return deserializeInsightList(d, schemas.ListInsightsResponse_Insights, &v.Insights)
+		case schemas.ListInsightsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInsightsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInsights, schemas.ListInsightsRequest, schemas.ListInsightsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInsights, schemas.ListInsightsRequest, schemas.ListInsightsResponse), output: &ListInsightsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

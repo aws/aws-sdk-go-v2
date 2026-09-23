@@ -4,7 +4,9 @@ package lambdamicrovms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,24 @@ type UpdateMicrovmImageVersionInput struct {
 	Status types.MicrovmImageVersionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateMicrovmImageVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMicrovmImageVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMicrovmImageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageIdentifier != nil {
+		s.WriteString(schemas.UpdateMicrovmImageVersionRequest_imageIdentifier, *v.ImageIdentifier)
+	}
+	if v.ImageVersion != nil {
+		s.WriteString(schemas.UpdateMicrovmImageVersionRequest_imageVersion, *v.ImageVersion)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateMicrovmImageVersionRequest_status, string(v.Status))
+	}
 }
 
 type UpdateMicrovmImageVersionOutput struct {
@@ -130,13 +150,132 @@ type UpdateMicrovmImageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMicrovmImageVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMicrovmImageVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMicrovmImageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapabilityList(s, schemas.UpdateMicrovmImageVersionResponse_additionalOsCapabilities, v.AdditionalOsCapabilities)
+	if v.BaseImageArn != nil {
+		s.WriteString(schemas.UpdateMicrovmImageVersionResponse_baseImageArn, *v.BaseImageArn)
+	}
+	if v.BaseImageVersion != nil {
+		s.WriteString(schemas.UpdateMicrovmImageVersionResponse_baseImageVersion, *v.BaseImageVersion)
+	}
+	if v.BuildRoleArn != nil {
+		s.WriteString(schemas.UpdateMicrovmImageVersionResponse_buildRoleArn, *v.BuildRoleArn)
+	}
+	serializeCodeArtifact(s, schemas.UpdateMicrovmImageVersionResponse_codeArtifact, v.CodeArtifact)
+	serializeCpuConfigurationList(s, schemas.UpdateMicrovmImageVersionResponse_cpuConfigurations, v.CpuConfigurations)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateMicrovmImageVersionResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateMicrovmImageVersionResponse_description, *v.Description)
+	}
+	serializeNetworkConnectorList(s, schemas.UpdateMicrovmImageVersionResponse_egressNetworkConnectors, v.EgressNetworkConnectors)
+	serializeEnvironmentVariableMap(s, schemas.UpdateMicrovmImageVersionResponse_environmentVariables, v.EnvironmentVariables)
+	if v.Hooks != nil {
+		s.WriteStruct(schemas.UpdateMicrovmImageVersionResponse_hooks)
+		v.Hooks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.UpdateMicrovmImageVersionResponse_imageArn, *v.ImageArn)
+	}
+	if v.ImageVersion != nil {
+		s.WriteString(schemas.UpdateMicrovmImageVersionResponse_imageVersion, *v.ImageVersion)
+	}
+	serializeLogging(s, schemas.UpdateMicrovmImageVersionResponse_logging, v.Logging)
+	serializeResourcesList(s, schemas.UpdateMicrovmImageVersionResponse_resources, v.Resources)
+	if v.State != "" {
+		s.WriteString(schemas.UpdateMicrovmImageVersionResponse_state, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.UpdateMicrovmImageVersionResponse_stateReason, *v.StateReason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateMicrovmImageVersionResponse_status, string(v.Status))
+	}
+	serializeTags(s, schemas.UpdateMicrovmImageVersionResponse_tags, v.Tags)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateMicrovmImageVersionResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateMicrovmImageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMicrovmImageVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMicrovmImageVersionResponse_additionalOsCapabilities:
+			return deserializeCapabilityList(d, schemas.UpdateMicrovmImageVersionResponse_additionalOsCapabilities, &v.AdditionalOsCapabilities)
+		case schemas.UpdateMicrovmImageVersionResponse_baseImageArn:
+			v.BaseImageArn = new(string)
+			return d.ReadString(schemas.UpdateMicrovmImageVersionResponse_baseImageArn, v.BaseImageArn)
+		case schemas.UpdateMicrovmImageVersionResponse_baseImageVersion:
+			v.BaseImageVersion = new(string)
+			return d.ReadString(schemas.UpdateMicrovmImageVersionResponse_baseImageVersion, v.BaseImageVersion)
+		case schemas.UpdateMicrovmImageVersionResponse_buildRoleArn:
+			v.BuildRoleArn = new(string)
+			return d.ReadString(schemas.UpdateMicrovmImageVersionResponse_buildRoleArn, v.BuildRoleArn)
+		case schemas.UpdateMicrovmImageVersionResponse_codeArtifact:
+			return deserializeCodeArtifact(d, schemas.UpdateMicrovmImageVersionResponse_codeArtifact, &v.CodeArtifact)
+		case schemas.UpdateMicrovmImageVersionResponse_cpuConfigurations:
+			return deserializeCpuConfigurationList(d, schemas.UpdateMicrovmImageVersionResponse_cpuConfigurations, &v.CpuConfigurations)
+		case schemas.UpdateMicrovmImageVersionResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateMicrovmImageVersionResponse_createdAt, v.CreatedAt)
+		case schemas.UpdateMicrovmImageVersionResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateMicrovmImageVersionResponse_description, v.Description)
+		case schemas.UpdateMicrovmImageVersionResponse_egressNetworkConnectors:
+			return deserializeNetworkConnectorList(d, schemas.UpdateMicrovmImageVersionResponse_egressNetworkConnectors, &v.EgressNetworkConnectors)
+		case schemas.UpdateMicrovmImageVersionResponse_environmentVariables:
+			return deserializeEnvironmentVariableMap(d, schemas.UpdateMicrovmImageVersionResponse_environmentVariables, &v.EnvironmentVariables)
+		case schemas.UpdateMicrovmImageVersionResponse_hooks:
+			v.Hooks = &types.Hooks{}
+			return v.Hooks.Deserialize(d)
+		case schemas.UpdateMicrovmImageVersionResponse_imageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.UpdateMicrovmImageVersionResponse_imageArn, v.ImageArn)
+		case schemas.UpdateMicrovmImageVersionResponse_imageVersion:
+			v.ImageVersion = new(string)
+			return d.ReadString(schemas.UpdateMicrovmImageVersionResponse_imageVersion, v.ImageVersion)
+		case schemas.UpdateMicrovmImageVersionResponse_logging:
+			return deserializeLogging(d, schemas.UpdateMicrovmImageVersionResponse_logging, &v.Logging)
+		case schemas.UpdateMicrovmImageVersionResponse_resources:
+			return deserializeResourcesList(d, schemas.UpdateMicrovmImageVersionResponse_resources, &v.Resources)
+		case schemas.UpdateMicrovmImageVersionResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.UpdateMicrovmImageVersionResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.MicrovmImageVersionState(ev)
+			return nil
+		case schemas.UpdateMicrovmImageVersionResponse_stateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.UpdateMicrovmImageVersionResponse_stateReason, v.StateReason)
+		case schemas.UpdateMicrovmImageVersionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateMicrovmImageVersionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MicrovmImageVersionStatus(ev)
+			return nil
+		case schemas.UpdateMicrovmImageVersionResponse_tags:
+			return deserializeTags(d, schemas.UpdateMicrovmImageVersionResponse_tags, &v.Tags)
+		case schemas.UpdateMicrovmImageVersionResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateMicrovmImageVersionResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMicrovmImageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMicrovmImageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMicrovmImageVersion, schemas.UpdateMicrovmImageVersionRequest, schemas.UpdateMicrovmImageVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMicrovmImageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMicrovmImageVersion, schemas.UpdateMicrovmImageVersionRequest, schemas.UpdateMicrovmImageVersionResponse), output: &UpdateMicrovmImageVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

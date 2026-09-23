@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DataSourceType":{"S3GlueDataCatalog":{"RoleArn":"__RoleArn__"}},"Description":"__Description__","Name":"__Name__","Status":"ACTIVE"}

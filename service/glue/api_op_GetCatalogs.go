@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,33 @@ type GetCatalogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCatalogsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCatalogsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCatalogsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HasDatabases != nil {
+		s.WriteBool(schemas.GetCatalogsRequest_HasDatabases, *v.HasDatabases)
+	}
+	if v.IncludeRoot != nil {
+		s.WriteBool(schemas.GetCatalogsRequest_IncludeRoot, *v.IncludeRoot)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCatalogsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCatalogsRequest_NextToken, *v.NextToken)
+	}
+	if v.ParentCatalogId != nil {
+		s.WriteString(schemas.GetCatalogsRequest_ParentCatalogId, *v.ParentCatalogId)
+	}
+	if v.Recursive != false {
+		s.WriteBool(schemas.GetCatalogsRequest_Recursive, v.Recursive)
+	}
+}
+
 type GetCatalogsOutput struct {
 
 	// An array of Catalog objects. A list of Catalog objects from the specified
@@ -79,13 +108,35 @@ type GetCatalogsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCatalogsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCatalogsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCatalogsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCatalogList(s, schemas.GetCatalogsResponse_CatalogList, v.CatalogList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCatalogsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetCatalogsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCatalogsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCatalogsResponse_CatalogList:
+			return deserializeCatalogList(d, schemas.GetCatalogsResponse_CatalogList, &v.CatalogList)
+		case schemas.GetCatalogsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCatalogsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCatalogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCatalogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCatalogs, schemas.GetCatalogsRequest, schemas.GetCatalogsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCatalogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCatalogs, schemas.GetCatalogsRequest, schemas.GetCatalogsResponse), output: &GetCatalogsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

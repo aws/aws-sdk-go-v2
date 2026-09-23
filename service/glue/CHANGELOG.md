@@ -1,3 +1,12 @@
+# v1.162.0 (2026-09-22)
+
+* **Feature**: Adding two new fields for Glue Materialized Views feature - (1) SubObjectsStatistics and (2) SparkPipelineInfo.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.161.0 (2026-09-21)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.160.0 (2026-09-18)
 
 * **Feature**: Introducing AWS Glue Data Quality advanced rule recommendations for faster recommendations. This capability uses Amazon Athena to analyze a sample of table data and Amazon Bedrock to recommend DQDL rules.

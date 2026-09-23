@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type RebootDbNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootDbNodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootDbNodeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootDbNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudVmClusterId != nil {
+		s.WriteString(schemas.RebootDbNodeInput_cloudVmClusterId, *v.CloudVmClusterId)
+	}
+	if v.DbNodeId != nil {
+		s.WriteString(schemas.RebootDbNodeInput_dbNodeId, *v.DbNodeId)
+	}
+	if v.ExadbVmClusterId != nil {
+		s.WriteString(schemas.RebootDbNodeInput_exadbVmClusterId, *v.ExadbVmClusterId)
+	}
+}
+
 type RebootDbNodeOutput struct {
 
 	// The unique identifier of the DB node that was rebooted.
@@ -62,13 +82,48 @@ type RebootDbNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootDbNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootDbNodeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootDbNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbNodeId != nil {
+		s.WriteString(schemas.RebootDbNodeOutput_dbNodeId, *v.DbNodeId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RebootDbNodeOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.RebootDbNodeOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *RebootDbNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootDbNodeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootDbNodeOutput_dbNodeId:
+			v.DbNodeId = new(string)
+			return d.ReadString(schemas.RebootDbNodeOutput_dbNodeId, v.DbNodeId)
+		case schemas.RebootDbNodeOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.RebootDbNodeOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DbNodeResourceStatus(ev)
+			return nil
+		case schemas.RebootDbNodeOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.RebootDbNodeOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootDbNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRebootDbNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootDbNode, schemas.RebootDbNodeInput, schemas.RebootDbNodeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRebootDbNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootDbNode, schemas.RebootDbNodeInput, schemas.RebootDbNodeOutput), output: &RebootDbNodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package marketplaceagreement
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,16 @@ type BatchCreateBillingAdjustmentRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateBillingAdjustmentRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateBillingAdjustmentRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateBillingAdjustmentRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchCreateBillingAdjustmentRequestEntryList(s, schemas.BatchCreateBillingAdjustmentRequestInput_billingAdjustmentRequestEntries, v.BillingAdjustmentRequestEntries)
+}
+
 type BatchCreateBillingAdjustmentRequestOutput struct {
 
 	// A list of errors for entries that failed validation, each containing the
@@ -60,13 +72,32 @@ type BatchCreateBillingAdjustmentRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateBillingAdjustmentRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateBillingAdjustmentRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateBillingAdjustmentRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchCreateBillingAdjustmentErrorList(s, schemas.BatchCreateBillingAdjustmentRequestOutput_errors, v.Errors)
+	serializeBatchCreateBillingAdjustmentItemList(s, schemas.BatchCreateBillingAdjustmentRequestOutput_items, v.Items)
+}
+func (v *BatchCreateBillingAdjustmentRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateBillingAdjustmentRequestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateBillingAdjustmentRequestOutput_errors:
+			return deserializeBatchCreateBillingAdjustmentErrorList(d, schemas.BatchCreateBillingAdjustmentRequestOutput_errors, &v.Errors)
+		case schemas.BatchCreateBillingAdjustmentRequestOutput_items:
+			return deserializeBatchCreateBillingAdjustmentItemList(d, schemas.BatchCreateBillingAdjustmentRequestOutput_items, &v.Items)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchCreateBillingAdjustmentRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchCreateBillingAdjustmentRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateBillingAdjustmentRequest, schemas.BatchCreateBillingAdjustmentRequestInput, schemas.BatchCreateBillingAdjustmentRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchCreateBillingAdjustmentRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateBillingAdjustmentRequest, schemas.BatchCreateBillingAdjustmentRequestInput, schemas.BatchCreateBillingAdjustmentRequestOutput), output: &BatchCreateBillingAdjustmentRequestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

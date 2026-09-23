@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,22 @@ type UpdateDashboardLinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDashboardLinksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDashboardLinksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDashboardLinksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateDashboardLinksRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.UpdateDashboardLinksRequest_DashboardId, *v.DashboardId)
+	}
+	serializeLinkEntityArnList(s, schemas.UpdateDashboardLinksRequest_LinkEntities, v.LinkEntities)
+}
+
 type UpdateDashboardLinksOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dashboard.
@@ -64,13 +82,46 @@ type UpdateDashboardLinksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDashboardLinksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDashboardLinksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDashboardLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardArn != nil {
+		s.WriteString(schemas.UpdateDashboardLinksResponse_DashboardArn, *v.DashboardArn)
+	}
+	serializeLinkEntityArnList(s, schemas.UpdateDashboardLinksResponse_LinkEntities, v.LinkEntities)
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateDashboardLinksResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateDashboardLinksResponse_Status, v.Status)
+	}
+}
+func (v *UpdateDashboardLinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDashboardLinksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDashboardLinksResponse_DashboardArn:
+			v.DashboardArn = new(string)
+			return d.ReadString(schemas.UpdateDashboardLinksResponse_DashboardArn, v.DashboardArn)
+		case schemas.UpdateDashboardLinksResponse_LinkEntities:
+			return deserializeLinkEntityArnList(d, schemas.UpdateDashboardLinksResponse_LinkEntities, &v.LinkEntities)
+		case schemas.UpdateDashboardLinksResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateDashboardLinksResponse_RequestId, v.RequestId)
+		case schemas.UpdateDashboardLinksResponse_Status:
+			return d.ReadInt32(schemas.UpdateDashboardLinksResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDashboardLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDashboardLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDashboardLinks, schemas.UpdateDashboardLinksRequest, schemas.UpdateDashboardLinksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDashboardLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDashboardLinks, schemas.UpdateDashboardLinksRequest, schemas.UpdateDashboardLinksResponse), output: &UpdateDashboardLinksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

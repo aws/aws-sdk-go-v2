@@ -4,7 +4,9 @@ package applicationsignals
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,40 @@ type UpdateServiceLevelObjectiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceLevelObjectiveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceLevelObjectiveInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceLevelObjectiveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoInvestigationEnabled != nil {
+		s.WriteBool(schemas.UpdateServiceLevelObjectiveInput_AutoInvestigationEnabled, *v.AutoInvestigationEnabled)
+	}
+	serializeBurnRateConfigurations(s, schemas.UpdateServiceLevelObjectiveInput_BurnRateConfigurations, v.BurnRateConfigurations)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateServiceLevelObjectiveInput_Description, *v.Description)
+	}
+	if v.Goal != nil {
+		s.WriteStruct(schemas.UpdateServiceLevelObjectiveInput_Goal)
+		v.Goal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateServiceLevelObjectiveInput_Id, *v.Id)
+	}
+	if v.RequestBasedSliConfig != nil {
+		s.WriteStruct(schemas.UpdateServiceLevelObjectiveInput_RequestBasedSliConfig)
+		v.RequestBasedSliConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SliConfig != nil {
+		s.WriteStruct(schemas.UpdateServiceLevelObjectiveInput_SliConfig)
+		v.SliConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateServiceLevelObjectiveOutput struct {
 
 	// A structure that contains information about the SLO that you just updated.
@@ -79,13 +115,34 @@ type UpdateServiceLevelObjectiveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceLevelObjectiveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceLevelObjectiveOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceLevelObjectiveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Slo != nil {
+		s.WriteStruct(schemas.UpdateServiceLevelObjectiveOutput_Slo)
+		v.Slo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateServiceLevelObjectiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceLevelObjectiveOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceLevelObjectiveOutput_Slo:
+			v.Slo = &types.ServiceLevelObjective{}
+			return v.Slo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceLevelObjectiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateServiceLevelObjective{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceLevelObjective, schemas.UpdateServiceLevelObjectiveInput, schemas.UpdateServiceLevelObjectiveOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateServiceLevelObjective{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceLevelObjective, schemas.UpdateServiceLevelObjectiveInput, schemas.UpdateServiceLevelObjectiveOutput), output: &UpdateServiceLevelObjectiveOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

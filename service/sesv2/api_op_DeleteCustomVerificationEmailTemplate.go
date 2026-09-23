@@ -4,6 +4,8 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DeleteCustomVerificationEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomVerificationEmailTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomVerificationEmailTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomVerificationEmailTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DeleteCustomVerificationEmailTemplateRequest_TemplateName, *v.TemplateName)
+	}
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type DeleteCustomVerificationEmailTemplateOutput struct {
@@ -50,13 +64,26 @@ type DeleteCustomVerificationEmailTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomVerificationEmailTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomVerificationEmailTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomVerificationEmailTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCustomVerificationEmailTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCustomVerificationEmailTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCustomVerificationEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCustomVerificationEmailTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomVerificationEmailTemplate, schemas.DeleteCustomVerificationEmailTemplateRequest, schemas.DeleteCustomVerificationEmailTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCustomVerificationEmailTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomVerificationEmailTemplate, schemas.DeleteCustomVerificationEmailTemplateRequest, schemas.DeleteCustomVerificationEmailTemplateResponse), output: &DeleteCustomVerificationEmailTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

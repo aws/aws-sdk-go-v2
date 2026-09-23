@@ -4,6 +4,8 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type PreviewPortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PreviewPortalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreviewPortalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreviewPortalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortalId != nil {
+		s.WriteString(schemas.PreviewPortalRequest_PortalId, *v.PortalId)
+	}
+}
+
 type PreviewPortalOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type PreviewPortalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PreviewPortalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreviewPortalResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreviewPortalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PreviewPortalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PreviewPortalResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPreviewPortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPreviewPortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PreviewPortal, schemas.PreviewPortalRequest, schemas.PreviewPortalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPreviewPortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PreviewPortal, schemas.PreviewPortalRequest, schemas.PreviewPortalResponse), output: &PreviewPortalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

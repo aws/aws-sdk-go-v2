@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetDataQualityRulesetEvaluationRunInput struct {
 	RunId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDataQualityRulesetEvaluationRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataQualityRulesetEvaluationRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataQualityRulesetEvaluationRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RunId != nil {
+		s.WriteString(schemas.GetDataQualityRulesetEvaluationRunRequest_RunId, *v.RunId)
+	}
 }
 
 type GetDataQualityRulesetEvaluationRunOutput struct {
@@ -93,13 +107,114 @@ type GetDataQualityRulesetEvaluationRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataQualityRulesetEvaluationRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataQualityRulesetEvaluationRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataQualityRulesetEvaluationRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSourceMap(s, schemas.GetDataQualityRulesetEvaluationRunResponse_AdditionalDataSources, v.AdditionalDataSources)
+	if v.AdditionalRunOptions != nil {
+		s.WriteStruct(schemas.GetDataQualityRulesetEvaluationRunResponse_AdditionalRunOptions)
+		v.AdditionalRunOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompletedOn != nil {
+		s.WriteTime(schemas.GetDataQualityRulesetEvaluationRunResponse_CompletedOn, *v.CompletedOn)
+	}
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.GetDataQualityRulesetEvaluationRunResponse_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorString != nil {
+		s.WriteString(schemas.GetDataQualityRulesetEvaluationRunResponse_ErrorString, *v.ErrorString)
+	}
+	if v.ExecutionTime != 0 {
+		s.WriteInt32(schemas.GetDataQualityRulesetEvaluationRunResponse_ExecutionTime, v.ExecutionTime)
+	}
+	if v.LastModifiedOn != nil {
+		s.WriteTime(schemas.GetDataQualityRulesetEvaluationRunResponse_LastModifiedOn, *v.LastModifiedOn)
+	}
+	if v.NumberOfWorkers != nil {
+		s.WriteInt32(schemas.GetDataQualityRulesetEvaluationRunResponse_NumberOfWorkers, *v.NumberOfWorkers)
+	}
+	serializeDataQualityResultIdList(s, schemas.GetDataQualityRulesetEvaluationRunResponse_ResultIds, v.ResultIds)
+	if v.Role != nil {
+		s.WriteString(schemas.GetDataQualityRulesetEvaluationRunResponse_Role, *v.Role)
+	}
+	serializeRulesetNames(s, schemas.GetDataQualityRulesetEvaluationRunResponse_RulesetNames, v.RulesetNames)
+	if v.RunId != nil {
+		s.WriteString(schemas.GetDataQualityRulesetEvaluationRunResponse_RunId, *v.RunId)
+	}
+	if v.StartedOn != nil {
+		s.WriteTime(schemas.GetDataQualityRulesetEvaluationRunResponse_StartedOn, *v.StartedOn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDataQualityRulesetEvaluationRunResponse_Status, string(v.Status))
+	}
+	if v.Timeout != nil {
+		s.WriteInt32(schemas.GetDataQualityRulesetEvaluationRunResponse_Timeout, *v.Timeout)
+	}
+}
+func (v *GetDataQualityRulesetEvaluationRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataQualityRulesetEvaluationRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataQualityRulesetEvaluationRunResponse_AdditionalDataSources:
+			return deserializeDataSourceMap(d, schemas.GetDataQualityRulesetEvaluationRunResponse_AdditionalDataSources, &v.AdditionalDataSources)
+		case schemas.GetDataQualityRulesetEvaluationRunResponse_AdditionalRunOptions:
+			v.AdditionalRunOptions = &types.DataQualityEvaluationRunAdditionalRunOptions{}
+			return v.AdditionalRunOptions.Deserialize(d)
+		case schemas.GetDataQualityRulesetEvaluationRunResponse_CompletedOn:
+			v.CompletedOn = new(time.Time)
+			return d.ReadTime(schemas.GetDataQualityRulesetEvaluationRunResponse_CompletedOn, v.CompletedOn)
+		case schemas.GetDataQualityRulesetEvaluationRunResponse_DataSource:
+			v.DataSource = &types.DataSource{}
+			return v.DataSource.Deserialize(d)
+		case schemas.GetDataQualityRulesetEvaluationRunResponse_ErrorString:
+			v.ErrorString = new(string)
+			return d.ReadString(schemas.GetDataQualityRulesetEvaluationRunResponse_ErrorString, v.ErrorString)
+		case schemas.GetDataQualityRulesetEvaluationRunResponse_ExecutionTime:
+			return d.ReadInt32(schemas.GetDataQualityRulesetEvaluationRunResponse_ExecutionTime, &v.ExecutionTime)
+		case schemas.GetDataQualityRulesetEvaluationRunResponse_LastModifiedOn:
+			v.LastModifiedOn = new(time.Time)
+			return d.ReadTime(schemas.GetDataQualityRulesetEvaluationRunResponse_LastModifiedOn, v.LastModifiedOn)
+		case schemas.GetDataQualityRulesetEvaluationRunResponse_NumberOfWorkers:
+			v.NumberOfWorkers = new(int32)
+			return d.ReadInt32(schemas.GetDataQualityRulesetEvaluationRunResponse_NumberOfWorkers, v.NumberOfWorkers)
+		case schemas.GetDataQualityRulesetEvaluationRunResponse_ResultIds:
+			return deserializeDataQualityResultIdList(d, schemas.GetDataQualityRulesetEvaluationRunResponse_ResultIds, &v.ResultIds)
+		case schemas.GetDataQualityRulesetEvaluationRunResponse_Role:
+			v.Role = new(string)
+			return d.ReadString(schemas.GetDataQualityRulesetEvaluationRunResponse_Role, v.Role)
+		case schemas.GetDataQualityRulesetEvaluationRunResponse_RulesetNames:
+			return deserializeRulesetNames(d, schemas.GetDataQualityRulesetEvaluationRunResponse_RulesetNames, &v.RulesetNames)
+		case schemas.GetDataQualityRulesetEvaluationRunResponse_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.GetDataQualityRulesetEvaluationRunResponse_RunId, v.RunId)
+		case schemas.GetDataQualityRulesetEvaluationRunResponse_StartedOn:
+			v.StartedOn = new(time.Time)
+			return d.ReadTime(schemas.GetDataQualityRulesetEvaluationRunResponse_StartedOn, v.StartedOn)
+		case schemas.GetDataQualityRulesetEvaluationRunResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetDataQualityRulesetEvaluationRunResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TaskStatusType(ev)
+			return nil
+		case schemas.GetDataQualityRulesetEvaluationRunResponse_Timeout:
+			v.Timeout = new(int32)
+			return d.ReadInt32(schemas.GetDataQualityRulesetEvaluationRunResponse_Timeout, v.Timeout)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataQualityRulesetEvaluationRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataQualityRulesetEvaluationRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataQualityRulesetEvaluationRun, schemas.GetDataQualityRulesetEvaluationRunRequest, schemas.GetDataQualityRulesetEvaluationRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDataQualityRulesetEvaluationRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataQualityRulesetEvaluationRun, schemas.GetDataQualityRulesetEvaluationRunRequest, schemas.GetDataQualityRulesetEvaluationRunResponse), output: &GetDataQualityRulesetEvaluationRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type UpdateDataQualityRulesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataQualityRulesetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataQualityRulesetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataQualityRulesetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDataQualityRulesetRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataQualityRulesetRequest_Name, *v.Name)
+	}
+	if v.Ruleset != nil {
+		s.WriteString(schemas.UpdateDataQualityRulesetRequest_Ruleset, *v.Ruleset)
+	}
+}
+
 type UpdateDataQualityRulesetOutput struct {
 
 	// A description of the ruleset.
@@ -58,13 +78,44 @@ type UpdateDataQualityRulesetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataQualityRulesetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataQualityRulesetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataQualityRulesetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDataQualityRulesetResponse_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataQualityRulesetResponse_Name, *v.Name)
+	}
+	if v.Ruleset != nil {
+		s.WriteString(schemas.UpdateDataQualityRulesetResponse_Ruleset, *v.Ruleset)
+	}
+}
+func (v *UpdateDataQualityRulesetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataQualityRulesetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataQualityRulesetResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateDataQualityRulesetResponse_Description, v.Description)
+		case schemas.UpdateDataQualityRulesetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateDataQualityRulesetResponse_Name, v.Name)
+		case schemas.UpdateDataQualityRulesetResponse_Ruleset:
+			v.Ruleset = new(string)
+			return d.ReadString(schemas.UpdateDataQualityRulesetResponse_Ruleset, v.Ruleset)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataQualityRulesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDataQualityRuleset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataQualityRuleset, schemas.UpdateDataQualityRulesetRequest, schemas.UpdateDataQualityRulesetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDataQualityRuleset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataQualityRuleset, schemas.UpdateDataQualityRulesetRequest, schemas.UpdateDataQualityRulesetResponse), output: &UpdateDataQualityRulesetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

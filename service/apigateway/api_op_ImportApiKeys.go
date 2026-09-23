@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type ImportApiKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportApiKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportApiKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportApiKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteBlob(schemas.ImportApiKeysRequest_body, v.Body)
+	}
+	if v.FailOnWarnings != false {
+		s.WriteBool(schemas.ImportApiKeysRequest_failOnWarnings, v.FailOnWarnings)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.ImportApiKeysRequest_format, string(v.Format))
+	}
+}
+
 // The identifier of an ApiKey used in a UsagePlan.
 type ImportApiKeysOutput struct {
 
@@ -62,13 +82,32 @@ type ImportApiKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportApiKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApiKeyIds)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportApiKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfString(s, schemas.ApiKeyIds_ids, v.Ids)
+	serializeListOfString(s, schemas.ApiKeyIds_warnings, v.Warnings)
+}
+func (v *ImportApiKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApiKeyIds, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApiKeyIds_ids:
+			return deserializeListOfString(d, schemas.ApiKeyIds_ids, &v.Ids)
+		case schemas.ApiKeyIds_warnings:
+			return deserializeListOfString(d, schemas.ApiKeyIds_warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportApiKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportApiKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportApiKeys, schemas.ImportApiKeysRequest, schemas.ApiKeyIds)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportApiKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportApiKeys, schemas.ImportApiKeysRequest, schemas.ApiKeyIds), output: &ImportApiKeysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

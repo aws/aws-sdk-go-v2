@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","ReputationEntities":[{"AwsSesManagedStatus":{"Cause":"__Cause__","LastUpdatedTimestamp":946684800,"Status":"ENABLED"},"CustomerManagedStatus":{"Cause":"__Cause__","LastUpdatedTimestamp":946684800,"Status":"ENABLED"},"ReputationEntityReference":"__ReputationEntityReference__","ReputationEntityType":"RESOURCE","ReputationImpact":"LOW","ReputationManagementPolicy":"__ReputationManagementPolicy__","SendingStatusAggregate":"ENABLED"},{"AwsSesManagedStatus":{"Cause":"__Cause__","LastUpdatedTimestamp":946684800,"Status":"ENABLED"},"CustomerManagedStatus":{"Cause":"__Cause__","LastUpdatedTimestamp":946684800,"Status":"ENABLED"},"ReputationEntityReference":"__ReputationEntityReference__","ReputationEntityType":"RESOURCE","ReputationImpact":"LOW","ReputationManagementPolicy":"__ReputationManagementPolicy__","SendingStatusAggregate":"ENABLED"}]}

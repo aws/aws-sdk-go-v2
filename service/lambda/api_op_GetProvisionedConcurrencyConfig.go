@@ -4,7 +4,9 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,21 @@ type GetProvisionedConcurrencyConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProvisionedConcurrencyConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProvisionedConcurrencyConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProvisionedConcurrencyConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionName != nil {
+		s.WriteString(schemas.GetProvisionedConcurrencyConfigRequest_FunctionName, *v.FunctionName)
+	}
+	if v.Qualifier != nil {
+		s.WriteString(schemas.GetProvisionedConcurrencyConfigRequest_Qualifier, *v.Qualifier)
+	}
+}
+
 type GetProvisionedConcurrencyConfigOutput struct {
 
 	// The amount of provisioned concurrency allocated. When a weighted alias is used
@@ -82,13 +99,66 @@ type GetProvisionedConcurrencyConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProvisionedConcurrencyConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProvisionedConcurrencyConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProvisionedConcurrencyConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedProvisionedConcurrentExecutions != nil {
+		s.WriteInt32(schemas.GetProvisionedConcurrencyConfigResponse_AllocatedProvisionedConcurrentExecutions, *v.AllocatedProvisionedConcurrentExecutions)
+	}
+	if v.AvailableProvisionedConcurrentExecutions != nil {
+		s.WriteInt32(schemas.GetProvisionedConcurrencyConfigResponse_AvailableProvisionedConcurrentExecutions, *v.AvailableProvisionedConcurrentExecutions)
+	}
+	if v.LastModified != nil {
+		s.WriteString(schemas.GetProvisionedConcurrencyConfigResponse_LastModified, *v.LastModified)
+	}
+	if v.RequestedProvisionedConcurrentExecutions != nil {
+		s.WriteInt32(schemas.GetProvisionedConcurrencyConfigResponse_RequestedProvisionedConcurrentExecutions, *v.RequestedProvisionedConcurrentExecutions)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetProvisionedConcurrencyConfigResponse_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetProvisionedConcurrencyConfigResponse_StatusReason, *v.StatusReason)
+	}
+}
+func (v *GetProvisionedConcurrencyConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProvisionedConcurrencyConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProvisionedConcurrencyConfigResponse_AllocatedProvisionedConcurrentExecutions:
+			v.AllocatedProvisionedConcurrentExecutions = new(int32)
+			return d.ReadInt32(schemas.GetProvisionedConcurrencyConfigResponse_AllocatedProvisionedConcurrentExecutions, v.AllocatedProvisionedConcurrentExecutions)
+		case schemas.GetProvisionedConcurrencyConfigResponse_AvailableProvisionedConcurrentExecutions:
+			v.AvailableProvisionedConcurrentExecutions = new(int32)
+			return d.ReadInt32(schemas.GetProvisionedConcurrencyConfigResponse_AvailableProvisionedConcurrentExecutions, v.AvailableProvisionedConcurrentExecutions)
+		case schemas.GetProvisionedConcurrencyConfigResponse_LastModified:
+			v.LastModified = new(string)
+			return d.ReadString(schemas.GetProvisionedConcurrencyConfigResponse_LastModified, v.LastModified)
+		case schemas.GetProvisionedConcurrencyConfigResponse_RequestedProvisionedConcurrentExecutions:
+			v.RequestedProvisionedConcurrentExecutions = new(int32)
+			return d.ReadInt32(schemas.GetProvisionedConcurrencyConfigResponse_RequestedProvisionedConcurrentExecutions, v.RequestedProvisionedConcurrentExecutions)
+		case schemas.GetProvisionedConcurrencyConfigResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetProvisionedConcurrencyConfigResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ProvisionedConcurrencyStatusEnum(ev)
+			return nil
+		case schemas.GetProvisionedConcurrencyConfigResponse_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetProvisionedConcurrencyConfigResponse_StatusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProvisionedConcurrencyConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProvisionedConcurrencyConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProvisionedConcurrencyConfig, schemas.GetProvisionedConcurrencyConfigRequest, schemas.GetProvisionedConcurrencyConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProvisionedConcurrencyConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProvisionedConcurrencyConfig, schemas.GetProvisionedConcurrencyConfigRequest, schemas.GetProvisionedConcurrencyConfigResponse), output: &GetProvisionedConcurrencyConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
