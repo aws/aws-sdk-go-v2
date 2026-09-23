@@ -1,12 +1,36 @@
 package transfermanager
 
 import (
+	"bytes"
 	"fmt"
 	"sync"
 	"testing"
 	"time"
 	"unsafe"
 )
+
+type writeCall struct {
+	off int64
+	n   int
+}
+
+type recordingWriterAt struct {
+	mu    sync.Mutex
+	calls []writeCall
+}
+
+func (w *recordingWriterAt) WriteAt(p []byte, off int64) (int, error) {
+	w.mu.Lock()
+	w.calls = append(w.calls, writeCall{off: off, n: len(p)})
+	w.mu.Unlock()
+	return len(p), nil
+}
+
+func (w *recordingWriterAt) snapshot() []writeCall {
+	w.mu.Lock()
+	defer w.mu.Unlock()
+	return append([]writeCall(nil), w.calls...)
+}
 
 type alignmentCheckingWriterAt struct {
 	alignment int64
@@ -33,6 +57,38 @@ type scalingBlockingWriterAt struct {
 func (w *scalingBlockingWriterAt) WriteAt(p []byte, _ int64) (int, error) {
 	<-w.release
 	return len(p), nil
+}
+
+func TestWriteBehindSubmitsConfiguredChunkSize(t *testing.T) {
+	destination := &recordingWriterAt{}
+	writer := newWriteBehindWriterAtWithConfig(destination, 4, testWriteBehindConfig(2))
+	chunk := &dlChunk{w: writer}
+
+	if n, err := chunk.ReadFrom(bytes.NewReader(make([]byte, 10))); err != nil {
+		t.Fatalf("ReadFrom: %v", err)
+	} else if n != 10 {
+		t.Fatalf("ReadFrom count = %d, want 10", n)
+	}
+	if err := writer.drain(); err != nil {
+		t.Fatalf("drain: %v", err)
+	}
+
+	calls := destination.snapshot()
+	if got, want := len(calls), 3; got != want {
+		t.Fatalf("write calls = %d, want %d", got, want)
+	}
+	for _, want := range []writeCall{{off: 0, n: 4}, {off: 4, n: 4}, {off: 8, n: 2}} {
+		found := false
+		for _, call := range calls {
+			if call == want {
+				found = true
+				break
+			}
+		}
+		if !found {
+			t.Fatalf("write calls = %+v, missing %+v", calls, want)
+		}
+	}
 }
 
 func TestWriteBehindUsesFixedChunkSize(t *testing.T) {
@@ -137,159 +193,6 @@ func TestWriteBehindScalesWorkersWhileQueueRemainsFull(t *testing.T) {
 	}
 	if got := writer.workerCount.Load(); got != 0 {
 		t.Fatalf("worker count after drain = %d, want 0", got)
-	}
-}
-
-func TestWriteBehindOwnedWriterBatchesOriginalBuffers(t *testing.T) {
-	destination := &recordingVectorWriterAt{}
-	grouped := newGroupedVectorWriterAt(destination, 4, 4, false)
-	writer := newWriteBehindWriterAtWithConfig(grouped, 4, testWriteBehindConfig(4))
-
-	pointers := map[int64]uintptr{}
-	var lastSeq uint64
-	for _, off := range []int64{8, 0, 12, 4} {
-		buf := writer.getBuffer()
-		copy(buf, []byte{byte(off), byte(off + 1), byte(off + 2), byte(off + 3)})
-		pointers[off] = uintptr(unsafe.Pointer(unsafe.SliceData(buf)))
-		seq, err := writer.enqueue(buf, 4, off)
-		if err != nil {
-			t.Fatalf("enqueue at %d: %v", off, err)
-		}
-		lastSeq = seq
-	}
-	if err := writer.waitThrough(lastSeq); err != nil {
-		t.Fatalf("waitThrough: %v", err)
-	}
-	if err := writer.drain(); err != nil {
-		t.Fatalf("drain: %v", err)
-	}
-
-	calls := destination.snapshot()
-	if len(calls) != 1 {
-		t.Fatalf("calls = %d, want 1", len(calls))
-	}
-	got := calls[0].pointers
-	want := []uintptr{pointers[0], pointers[4], pointers[8], pointers[12]}
-	if len(got) != len(want) {
-		t.Fatalf("pwritev vector count = %d, want %d", len(got), len(want))
-	}
-	for i := range want {
-		if got[i] != want[i] {
-			t.Fatalf("pwritev pointer %d = %#x, want original buffer %#x", i, got[i], want[i])
-		}
-	}
-}
-
-func TestWriteBehindBufferLimitFlushesOwnedPendingWrites(t *testing.T) {
-	destination := &recordingVectorWriterAt{}
-	grouped := newGroupedVectorWriterAt(destination, 4, 4, false)
-	config := testWriteBehindConfig(4)
-	config.maxBuffers = 4
-	writer := newWriteBehindWriterAtWithConfig(grouped, 4, config)
-
-	var lastSeq uint64
-	for _, off := range []int64{0, 16, 32, 48} {
-		buf := writer.getBuffer()
-		seq, err := writer.enqueue(buf, 4, off)
-		if err != nil {
-			t.Fatalf("enqueue at %d: %v", off, err)
-		}
-		lastSeq = seq
-	}
-	writer.waitAcceptedThrough(lastSeq)
-
-	gotBuffer := make(chan []byte, 1)
-	go func() {
-		gotBuffer <- writer.getBuffer()
-	}()
-
-	select {
-	case buf := <-gotBuffer:
-		writer.putBuffer(buf)
-	case <-time.After(time.Second):
-		t.Fatal("getBuffer remained blocked with flushable pending writes")
-	}
-
-	if got := len(destination.snapshot()); got != 4 {
-		t.Fatalf("pwritev calls = %d, want 4 after budget flush", got)
-	}
-	if err := writer.drain(); err != nil {
-		t.Fatalf("drain: %v", err)
-	}
-}
-
-func TestWriteBehindOwnedWriterCompletesOnlyAfterPwritev(t *testing.T) {
-	started := make(chan struct{})
-	release := make(chan struct{})
-	grouped := newGroupedVectorWriterAt(&blockingVectorWriterAt{started: started, release: release}, 1, 4, false)
-	writer := newWriteBehindWriterAtWithConfig(grouped, 1, testWriteBehindConfig(4))
-
-	var lastSeq uint64
-	for i := 0; i < 4; i++ {
-		buf := writer.getBuffer()
-		buf[0] = byte(i)
-		seq, err := writer.enqueue(buf, 1, int64(i))
-		if err != nil {
-			t.Fatalf("enqueue %d: %v", i, err)
-		}
-		lastSeq = seq
-	}
-
-	<-started
-	writer.completeMu.Lock()
-	completed := writer.completedThrough
-	writer.completeMu.Unlock()
-	if completed != 0 {
-		close(release)
-		t.Fatalf("completed through = %d before pwritev returned, want 0", completed)
-	}
-
-	close(release)
-	if err := writer.waitThrough(lastSeq); err != nil {
-		t.Fatalf("waitThrough: %v", err)
-	}
-	if err := writer.drain(); err != nil {
-		t.Fatalf("drain: %v", err)
-	}
-}
-
-func TestWriteBehindWaitThroughFlushesPartialOwnedGroup(t *testing.T) {
-	destination := &recordingVectorWriterAt{}
-	grouped := newGroupedVectorWriterAt(destination, 4, 4, false)
-	writer := newWriteBehindWriterAtWithConfig(grouped, 4, testWriteBehindConfig(1))
-
-	buf := writer.getBuffer()
-	copy(buf, "data")
-	seq, err := writer.enqueue(buf, 4, 0)
-	if err != nil {
-		t.Fatalf("enqueue: %v", err)
-	}
-	if err := writer.waitThrough(seq); err != nil {
-		t.Fatalf("waitThrough: %v", err)
-	}
-	if got := len(destination.snapshot()); got != 1 {
-		t.Fatalf("pwritev calls = %d after barrier, want 1", got)
-	}
-	if err := writer.drain(); err != nil {
-		t.Fatalf("drain: %v", err)
-	}
-}
-
-func TestWriteBehindSynchronousWriteFlushesOwnedGroup(t *testing.T) {
-	destination := &recordingVectorWriterAt{}
-	grouped := newGroupedVectorWriterAt(destination, 4, 4, false)
-	writer := newWriteBehindWriterAtWithConfig(grouped, 4, testWriteBehindConfig(1))
-
-	if n, err := writer.WriteAt([]byte("data"), 0); err != nil {
-		t.Fatalf("WriteAt: %v", err)
-	} else if n != 4 {
-		t.Fatalf("WriteAt count = %d, want 4", n)
-	}
-	if got := len(destination.snapshot()); got != 1 {
-		t.Fatalf("pwritev calls = %d, want 1", got)
-	}
-	if err := writer.drain(); err != nil {
-		t.Fatalf("drain: %v", err)
 	}
 }
 

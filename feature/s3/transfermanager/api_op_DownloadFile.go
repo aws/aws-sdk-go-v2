@@ -16,10 +16,6 @@ type downloadFilePreallocator interface {
 	preallocate(size int64) error
 }
 
-type downloadFileFlusher interface {
-	flush() error
-}
-
 // DownloadFileInput represents a request to the DownloadFile() call. It mirrors the
 // common fields of an S3 GetObject request, but instead of a caller-supplied
 // io.WriterAt the object is written to a local file at FilePath.
@@ -154,12 +150,6 @@ func (c *Client) DownloadFile(ctx context.Context, input *DownloadFileInput, opt
 		return out, fmt.Errorf("DownloadFile: %w", closeDownloadFile(f, err))
 	}
 
-	if flusher, ok := writer.(downloadFileFlusher); ok {
-		if err := flusher.flush(); err != nil {
-			err = fmt.Errorf("flush destination: %w", err)
-			return out, fmt.Errorf("DownloadFile: %w", closeDownloadFile(f, err))
-		}
-	}
 	if err := f.Truncate(aws.ToInt64(out.ContentLength)); err != nil {
 		err = fmt.Errorf("truncate destination to %d bytes: %w", aws.ToInt64(out.ContentLength), err)
 		return out, fmt.Errorf("DownloadFile: %w", closeDownloadFile(f, err))

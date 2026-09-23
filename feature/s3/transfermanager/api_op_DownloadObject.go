@@ -1016,6 +1016,8 @@ func (c *dlChunk) ReadFrom(r io.Reader) (int64, error) {
 		}
 		if err != nil {
 			if lastSeq != 0 {
+				// we HAVE to wait for all writes from this chunk so any retry
+				// full overwrites them
 				if werr := sink.waitThrough(lastSeq); werr != nil {
 					return total, werr
 				}

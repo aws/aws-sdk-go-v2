@@ -9,15 +9,12 @@ import (
 	"os"
 	"syscall"
 	"unsafe"
-
-	"golang.org/x/sys/unix"
 )
 
 func openDownloadFile(path string) (*os.File, io.WriterAt, error) {
 	f, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC|syscall.O_DIRECT, 0o644)
 	if err == nil {
-		writer := &fileVectorWriterAt{fd: int(f.Fd()), direct: true}
-		return f, newGroupedVectorWriterAt(writer, downloadFileVectorChunkSize, downloadFileVectorCount, true), nil
+		return f, &fileWriterAt{file: f, direct: true}, nil
 	}
 	if !errors.Is(err, syscall.EINVAL) && !errors.Is(err, syscall.EOPNOTSUPP) {
 		return nil, nil, err
@@ -27,48 +24,53 @@ func openDownloadFile(path string) (*os.File, io.WriterAt, error) {
 	if err != nil {
 		return nil, nil, err
 	}
-	writer := &fileVectorWriterAt{fd: int(f.Fd())}
-	return f, newGroupedVectorWriterAt(writer, downloadFileVectorChunkSize, downloadFileVectorCount, false), nil
+	return f, &fileWriterAt{file: f}, nil
 }
 
-type fileVectorWriterAt struct {
-	fd     int
+type fileWriterAt struct {
+	file   *os.File
 	direct bool
 }
 
-func (w *fileVectorWriterAt) writeBufferAlignment() int64 {
+func (w *fileWriterAt) writeBufferAlignment() int64 {
 	if w.direct {
 		return directIOAlignment
 	}
 	return 1
 }
 
-func (w *fileVectorWriterAt) preallocate(size int64) error {
+func (w *fileWriterAt) preallocate(size int64) error {
 	if !w.direct || size <= 0 {
 		return nil
 	}
 	for {
-		err := syscall.Fallocate(w.fd, 0, 0, size)
+		err := syscall.Fallocate(int(w.file.Fd()), 0, 0, size)
 		if !errors.Is(err, syscall.EINTR) {
 			return err
 		}
 	}
 }
 
-func (w *fileVectorWriterAt) writeVectorAt(vectors [][]byte, off int64) (int, error) {
+func (w *fileWriterAt) WriteAt(p []byte, off int64) (int, error) {
+	logicalLen := len(p)
 	if w.direct {
-		if err := validateDirectIOVectors(vectors, off); err != nil {
+		if err := validateDirectIOVectors([][]byte{p}, off); err != nil {
 			return 0, err
+		}
+
+		physicalLen := logicalLen
+		if remainder := physicalLen % directIOAlignment; remainder != 0 {
+			physicalLen += directIOAlignment - remainder
+			if physicalLen > cap(p) {
+				return 0, fmt.Errorf("write buffer capacity %d is smaller than padded length %d", cap(p), physicalLen)
+			}
+			p = p[:physicalLen]
+			clear(p[logicalLen:])
 		}
 	}
 
-	for {
-		n, err := unix.Pwritev(w.fd, vectors, off)
-		if errors.Is(err, syscall.EINTR) {
-			continue
-		}
-		return n, err
-	}
+	n, err := w.file.WriteAt(p, off)
+	return min(n, logicalLen), err
 }
 
 func validateDirectIOVectors(vectors [][]byte, off int64) error {

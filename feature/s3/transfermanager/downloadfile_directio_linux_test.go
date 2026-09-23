@@ -10,18 +10,18 @@ import (
 	"testing"
 )
 
-func TestDirectFileVectorWriterAtPadsPhysicalWrite(t *testing.T) {
+func TestDirectFileWriterAtPadsPhysicalWrite(t *testing.T) {
 	f := openDirectTestFile(t)
 	defer f.Close()
 
 	want := []byte("short direct write")
 	buf := newWriteBuffer(directIOAlignment, directIOAlignment)
 	copy(buf, want)
-	destination := &fileVectorWriterAt{fd: int(f.Fd()), direct: true}
-	writer := newGroupedVectorWriterAt(destination, directIOAlignment, 4, true)
-	requireOwnedWrite(t, submitOwnedWrite(writer, buf, len(want), 0), len(want))
-	if err := writer.flush(); err != nil {
-		t.Fatalf("flush: %v", err)
+	writer := &fileWriterAt{file: f, direct: true}
+	if n, err := writer.WriteAt(buf[:len(want)], 0); err != nil {
+		t.Fatalf("WriteAt: %v", err)
+	} else if n != len(want) {
+		t.Fatalf("WriteAt count = %d, want %d", n, len(want))
 	}
 
 	got, err := os.ReadFile(f.Name())
@@ -39,13 +39,11 @@ func TestDirectFileVectorWriterAtPadsPhysicalWrite(t *testing.T) {
 	}
 }
 
-func TestDirectFileVectorWriterAtWritesFourVectors(t *testing.T) {
+func TestDirectFileWriterAtWritesSeparateChunks(t *testing.T) {
 	f := openDirectTestFile(t)
 	name := f.Name()
 
-	destination := &fileVectorWriterAt{fd: int(f.Fd()), direct: true}
-	writer := newGroupedVectorWriterAt(destination, directIOAlignment, 4, true)
-	completions := make([]<-chan ownedWriteResult, 0, 4)
+	writer := &fileWriterAt{file: f, direct: true}
 	want := make([]byte, 4*directIOAlignment)
 	for i := 0; i < 4; i++ {
 		buf := newWriteBuffer(directIOAlignment, directIOAlignment)
@@ -53,13 +51,11 @@ func TestDirectFileVectorWriterAtWritesFourVectors(t *testing.T) {
 			buf[j] = byte(i + 1)
 		}
 		copy(want[i*directIOAlignment:], buf)
-		completions = append(completions, submitOwnedWrite(writer, buf, len(buf), int64(i*directIOAlignment)))
-	}
-	for _, done := range completions {
-		requireOwnedWrite(t, done, directIOAlignment)
-	}
-	if err := writer.flush(); err != nil {
-		t.Fatalf("flush: %v", err)
+		if n, err := writer.WriteAt(buf, int64(i*directIOAlignment)); err != nil {
+			t.Fatalf("WriteAt %d: %v", i, err)
+		} else if n != len(buf) {
+			t.Fatalf("WriteAt %d count = %d, want %d", i, n, len(buf))
+		}
 	}
 	if err := f.Close(); err != nil {
 		t.Fatalf("Close: %v", err)
@@ -70,7 +66,7 @@ func TestDirectFileVectorWriterAtWritesFourVectors(t *testing.T) {
 		t.Fatalf("ReadFile: %v", err)
 	}
 	if !bytes.Equal(got, want) {
-		t.Fatal("four-vector direct write does not match source buffers")
+		t.Fatal("separate direct writes do not match source buffers")
 	}
 }
 
@@ -87,28 +83,28 @@ func openDirectTestFile(t *testing.T) *os.File {
 	return f
 }
 
-func TestDirectFileVectorWriterAtRejectsUnalignedOffset(t *testing.T) {
+func TestDirectFileWriterAtRejectsUnalignedOffset(t *testing.T) {
 	f, err := os.CreateTemp(t.TempDir(), "direct-write-*.bin")
 	if err != nil {
 		t.Fatalf("CreateTemp: %v", err)
 	}
 	defer f.Close()
 
-	writer := &fileVectorWriterAt{fd: int(f.Fd()), direct: true}
+	writer := &fileWriterAt{file: f, direct: true}
 	buf := newWriteBuffer(directIOAlignment, directIOAlignment)
-	if _, err := writer.writeVectorAt([][]byte{buf}, 1); err == nil {
-		t.Fatal("writeVectorAt with unaligned offset returned no error")
+	if _, err := writer.WriteAt(buf, 1); err == nil {
+		t.Fatal("WriteAt with unaligned offset returned no error")
 	}
 }
 
-func TestDirectFileVectorWriterAtPreallocates(t *testing.T) {
+func TestDirectFileWriterAtPreallocates(t *testing.T) {
 	f, err := os.CreateTemp(t.TempDir(), "direct-preallocate-*.bin")
 	if err != nil {
 		t.Fatalf("CreateTemp: %v", err)
 	}
 	defer f.Close()
 
-	writer := &fileVectorWriterAt{fd: int(f.Fd()), direct: true}
+	writer := &fileWriterAt{file: f, direct: true}
 	want := int64(2 * directIOAlignment)
 	if err := writer.preallocate(want); err != nil {
 		t.Fatalf("preallocate: %v", err)
