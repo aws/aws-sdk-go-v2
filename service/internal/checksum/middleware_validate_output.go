@@ -100,10 +100,13 @@ func (m *validateOutputPayloadChecksum) HandleDeserialize(
 
 	// Skip validation if no checksum algorithm or checksum is available.
 	if len(expectedChecksum) == 0 || len(algorithmToUse) == 0 {
-		if response.Body != http.NoBody && m.LogValidationSkipped {
+		// Only log for successful responses. Error responses (4xx/5xx) carry an
+		// error document rather than an object payload and legitimately have no
+		// checksum, so logging there is just noise.
+		if response.StatusCode < 400 && response.Body != http.NoBody && m.LogValidationSkipped {
 			// TODO this probably should have more information about the
 			// operation output that won't be validated.
-			logger.Logf(logging.Warn,
+			logger.Logf(logging.Debug,
 				"Response has no supported checksum. Not validating response payload.")
 		}
 		return out, metadata, nil
