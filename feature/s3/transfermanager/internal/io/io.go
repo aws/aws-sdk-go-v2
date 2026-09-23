@@ -56,44 +56,73 @@ func (bps *BufferPools) Pool(size int) *sync.Pool {
 	return p
 }
 
-// AsyncWriterAt wraps an io.WraterAt to expose an interface which writes to it
+// AsyncWriterAt wraps an io.WriterAt to expose an interface which writes to it
 // asynchronously.
+//
+// The async writer also owns all of the buffers it uses to write. The caller
+// requests a buffer from it using Buffer(), and WriteAt immediately reclaims
+// ownership of that buffer.
 type AsyncWriterAt struct {
-	w    io.WriterAt
-	err  chan error
-	done chan struct{}
+	w            io.WriterAt
+	bufs         *sync.Pool
+	startWorkers int
+	maxWorkers   int
 
-	startWorkers, maxWorkers int
-	queue                    chan writeAtJob
+	wg       sync.WaitGroup
+	queue    chan writeAtJob
+	doneOnce sync.Once
+	done     chan struct{}
+	errOnce  sync.Once
+	err      error
 }
 
-func NewAsyncWriterAt(w io.WriterAt, startWorkers, maxWorkers, queueDepth int) *AsyncWriterAt {
+func NewAsyncWriterAt(w io.WriterAt, bufs *sync.Pool, startWorkers, maxWorkers, queueDepth int) *AsyncWriterAt {
 	return &AsyncWriterAt{
 		w:            w,
-		err:          make(chan error, 1),
-		done:         make(chan struct{}, 1),
+		bufs:         bufs,
+		done:         make(chan struct{}),
 		startWorkers: startWorkers,
 		maxWorkers:   maxWorkers,
 		queue:        make(chan writeAtJob, queueDepth),
 	}
 }
 
-// WriteAt queues the bytes for writing.
-//
-// WriteAt retains p, callers MUST NOT retain or modify p.
-func (w *AsyncWriterAt) WriteAt(p []byte, off int64) {
-	select {
-	case <-w.done:
-		return
-	}
-
-	w.queue <- writeAtJob{p, off}
+// Buffer returns a pooled byte buffer. The caller will fill this buffer and
+// then pass it back to the dispatcher via WriteAt.
+func (w *AsyncWriterAt) Buffer() []byte {
+	return w.bufs.Get().([]byte)
 }
 
-func (w *AsyncWriterAt) Error() chan error {
+// WriteAt queues the bytes for writing.
+//
+// Unlike the synchronous io.WriteAt:
+//   - The write length is explicitly passed in n, because the job that
+//     eventually performs the write needs the original slice header of p (i.e.
+//     NOT a subslice) so it can return the full slice to the pool.
+//   - This method retains p, callers MUST NOT retain or modify p.
+func (w *AsyncWriterAt) WriteAt(p []byte, n int, off int64) {
+	w.wg.Add(1)
+
+	select {
+	case <-w.done:
+		w.wg.Done()
+		w.bufs.Put(p)
+		return
+	case w.queue <- writeAtJob{p, n, off}:
+	}
+}
+
+// Done returns a channel that's closed when the writer is done.
+func (w *AsyncWriterAt) Done() chan struct{} {
+	return w.done
+}
+
+// Error returns the write error (if any) encountered during async write.
+func (w *AsyncWriterAt) Error() error {
 	return w.err
 }
 
+// Start spins up write workers.
 func (w *AsyncWriterAt) Start() {
 	// TODO maxWorkers
 	for range w.startWorkers {
@@ -101,8 +130,34 @@ func (w *AsyncWriterAt) Start() {
 	}
 }
 
+// Stop immediately terminates all write workers.
 func (w *AsyncWriterAt) Stop() {
-	close(w.done)
+	w.doneOnce.Do(func() {
+		close(w.done)
+		for {
+			select {
+			case job := <-w.queue:
+				w.bufs.Put(job.p)
+				w.wg.Done()
+			default:
+				return
+			}
+		}
+	})
+}
+
+// Wait blocks until internal WaitGroup counter of the dispatcher is zero,
+// which means that there are no more write jobs queued.
+//
+// By contrast, Wait DOES NOT signal that no future write jobs will be
+// submitted. The caller MUST first Wait() on the internal downloader's
+// WaitGroup to confirm that.
+func (w *AsyncWriterAt) Wait() {
+	select {
+	case <-w.done:
+	default:
+		w.wg.Wait()
+	}
 }
 
 func (w *AsyncWriterAt) doWrites() {
@@ -111,19 +166,28 @@ func (w *AsyncWriterAt) doWrites() {
 		case <-w.done:
 			return
 		case job := <-w.queue:
-			if _, err := w.w.WriteAt(job.p, job.off); err != nil {
-				w.err <- err
+			n, err := w.w.WriteAt(job.p[:job.n], job.off)
+			if err == nil && n != job.n {
+				err = io.ErrShortWrite
 			}
+			if err != nil {
+				w.errOnce.Do(func() { w.err = err })
+				w.Stop()
+			}
+
+			w.wg.Done()
+			w.bufs.Put(job.p)
 		}
 	}
 }
 
 type writeAtJob struct {
 	p   []byte
+	n   int
 	off int64
 }
 
-// File is a lazily initialized download destination.
+// File is a lazily-initialized download destination.
 type File interface {
 	io.WriterAt
 	Init(int64, int64) error

@@ -564,6 +564,7 @@ type downloader struct {
 	emitter *singleObjectProgressEmitter
 
 	bufpool *sync.Pool
+	writer  *internalio.AsyncWriterAt
 }
 
 func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error) {
@@ -602,7 +603,7 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 					break
 				}
 
-				ch <- dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, part: i}
+				ch <- dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, part: i, sink: d.writer}
 				d.pos += partSize
 			}
 
@@ -658,13 +659,21 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 			}
 
 			// Queue the next range of bytes to read.
-			ch <- dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, withRange: d.byteRange()}
+			ch <- dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, withRange: d.byteRange(), sink: d.writer}
 			d.pos += d.options.PartSizeBytes
 		}
 
 		// Wait for completion
 		close(ch)
 		d.wg.Wait()
+	}
+
+	// we've already Wait()ed on d.wg so we know that all of the downloaders
+	// are finished, now wait for the writers
+	d.writer.Wait()
+	d.writer.Stop()
+	if err := d.writer.Error(); err != nil {
+		d.err = err
 	}
 
 	if d.err != nil {
@@ -697,6 +706,8 @@ func (d *downloader) init() error {
 	d.emitter = &singleObjectProgressEmitter{
 		Listeners: d.options.ObjectProgressListeners,
 	}
+	d.bufpool = internalio.Pools.Pool(bufsize)
+	d.writer = internalio.NewAsyncWriterAt(d.in.WriterAt, d.bufpool, startWorkers, startWorkers, queueDepth)
 
 	return nil
 }
@@ -723,7 +734,7 @@ func (d *downloader) downloadPart(ctx context.Context, ch chan dlChunk, clientOp
 // getChunk grabs a chunk of data from the body.
 // Not thread safe. Should only be used when grabbing data on a single thread.
 func (d *downloader) getChunk(ctx context.Context, part int32, rng string, clientOptions ...func(*s3.Options)) *DownloadObjectOutput {
-	chunk := dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, part: part, withRange: rng}
+	chunk := dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, part: part, withRange: rng, sink: d.writer}
 
 	output, err := d.downloadChunk(ctx, chunk, clientOptions...)
 	if err != nil {
@@ -738,6 +749,12 @@ func (d *downloader) getChunk(ctx context.Context, part int32, rng string, clien
 
 // downloadChunk downloads the chunk from s3
 func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOptions ...func(*s3.Options)) (*DownloadObjectOutput, error) {
+	select {
+	case <-d.writer.Done():
+		return nil, d.writer.Error()
+	default:
+	}
+
 	params := d.in.mapGetObjectInput(!d.options.DisableChecksumValidation)
 	if chunk.part != 0 {
 		params.PartNumber = aws.Int32(chunk.part)
@@ -781,6 +798,11 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 	return output, err
 }
 
+// TODO vary this
+const bufsize = 8 * 1024 * 1024
+const startWorkers = 16
+const queueDepth = 64
+
 func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectInput, chunk *dlChunk, clientOptions ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
 	out, err := d.options.S3.GetObject(ctx, params, clientOptions...)
 	if err != nil {
@@ -820,18 +842,16 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 		d.setTotalBytes(out)
 		d.emitter.Start(ctx, d.in, d.totalBytes-d.offset)
 
-		// TODO vary this
-		d.bufpool = internalio.Pools.Pool(8 * 1024 * 1024)
 		if i, ok := d.in.WriterAt.(internalio.File); ok {
-			if err := i.Init(d.totalBytes, 8*1024*1024); err != nil {
+			if err := i.Init(d.totalBytes, bufsize); err != nil {
 				initErr = err
 				return
 			}
 		}
-
-	}) // Set total in first GET
+		d.writer.Start()
+	})
 	if initErr != nil {
-		return nil, err
+		return nil, initErr
 	}
 
 	var n int64
@@ -958,19 +978,17 @@ type dlChunk struct {
 	part      int32
 	withRange string
 
-	// TODO wire these in
-	bufpool *sync.Pool
-	sink    internalio.AsyncWriterAt
+	sink *internalio.AsyncWriterAt
 }
 
 func (c *dlChunk) ReadFrom(r io.Reader) (int64, error) {
 	var total int64
 	for {
-		buf := c.bufpool.Get().([]byte)
+		buf := c.sink.Buffer()
 		n, err := r.Read(buf)
 		off := c.start + total
 		if n > 0 {
-			c.sink.WriteAt(buf[:n], c.start+total)
+			c.sink.WriteAt(buf, n, off)
 		}
 		total += int64(n)
 
