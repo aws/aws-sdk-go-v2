@@ -800,7 +800,7 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 
 // TODO vary this
 const bufsize = 8 * 1024 * 1024
-const startWorkers = 16
+const startWorkers = 32
 const queueDepth = 64
 
 func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectInput, chunk *dlChunk, clientOptions ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
@@ -857,6 +857,11 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 	var n int64
 	defer out.Body.Close()
 	n, err = chunk.ReadFrom(out.Body)
+	if errors.Is(err, io.ErrUnexpectedEOF) &&
+		out.ContentLength != nil &&
+		n == aws.ToInt64(out.ContentLength) {
+		err = nil
+	}
 	if err != nil {
 		return nil, &errReadingBody{err: err}
 	}
@@ -981,11 +986,23 @@ type dlChunk struct {
 	sink *internalio.AsyncWriterAt
 }
 
+func readChunk(r io.Reader, buf []byte) (int, error) {
+	var n int
+	for n < len(buf) {
+		nr, err := r.Read(buf[n:])
+		n += nr
+		if err != nil {
+			return n, err
+		}
+	}
+	return n, nil
+}
+
 func (c *dlChunk) ReadFrom(r io.Reader) (int64, error) {
 	var total int64
 	for {
 		buf := c.sink.Buffer()
-		n, err := io.ReadFull(r, buf)
+		n, err := readChunk(r, buf)
 		off := c.start + total
 		if n > 0 {
 			c.sink.WriteAt(buf, n, off)
@@ -996,7 +1013,7 @@ func (c *dlChunk) ReadFrom(r io.Reader) (int64, error) {
 			return total, nil
 		}
 		if err != nil {
-			return 0, err
+			return total, err
 		}
 	}
 }
