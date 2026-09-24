@@ -281,18 +281,18 @@ type CreateFirewallRuleEntry struct {
 	// exactly one of its members. This setting is mutually exclusive with the
 	// top-level FirewallDomainListId and DnsThreatProtection fields. Use one of:
 	//
-	//   - FirewallAdvancedContentCategory — match an AWS-managed content category (for
-	//   example, VIOLENCE_AND_HATE_SPEECH ).
+	//   - FirewallAdvancedContentCategory — match an Amazon Web Services-managed
+	//   content category (for example, VIOLENCE_AND_HATE_SPEECH ).
 	//
-	//   - FirewallAdvancedThreatCategory — match an AWS-managed advanced threat
-	//   category (for example, PHISHING ).
+	//   - FirewallAdvancedThreatCategory — match an Amazon Web Services-managed
+	//   advanced threat category (for example, PHISHING ).
 	//
 	//   - DnsThreatProtection — match a built-in DNS Firewall Advanced threat detector
 	//   ( DGA , DNS_TUNNELING , or DICTIONARY_DGA ).
 	//
 	//   - PartnerThreatProtection — match a third-party threat feed delivered through
-	//   AWS Marketplace. The selected partner must be an active subscription on the
-	//   calling account.
+	//   Amazon Web Services Marketplace. The selected partner must be an active
+	//   subscription on the calling account.
 	//
 	// To enumerate the values supported in your account, call ListFirewallRuleTypes.
 	FirewallRuleType *FirewallRuleType
@@ -1296,17 +1296,17 @@ type FirewallRule struct {
 	// The rule type configuration for the firewall rule. This is a tagged union —
 	// exactly one of its members will be populated. Possible members are:
 	//
-	//   - FirewallAdvancedContentCategory — an AWS-managed content category (for
-	//   example, VIOLENCE_AND_HATE_SPEECH ).
+	//   - FirewallAdvancedContentCategory — an Amazon Web Services-managed content
+	//   category (for example, VIOLENCE_AND_HATE_SPEECH ).
 	//
-	//   - FirewallAdvancedThreatCategory — an AWS-managed advanced threat category
-	//   (for example, PHISHING ).
+	//   - FirewallAdvancedThreatCategory — an Amazon Web Services-managed advanced
+	//   threat category (for example, PHISHING ).
 	//
 	//   - DnsThreatProtection — a built-in DNS Firewall Advanced threat detector ( DGA
 	//   , DNS_TUNNELING , or DICTIONARY_DGA ).
 	//
-	//   - PartnerThreatProtection — a third-party threat feed delivered through AWS
-	//   Marketplace.
+	//   - PartnerThreatProtection — a third-party threat feed delivered through Amazon
+	//   Web Services Marketplace.
 	//
 	// To enumerate the values supported in your account, call ListFirewallRuleTypes.
 	FirewallRuleType *FirewallRuleType
@@ -1365,7 +1365,7 @@ type FirewallRule struct {
 	//
 	//   - CREATING — DNS Firewall is provisioning the rule. Rules created with the
 	//   PartnerThreatProtection rule type begin in this state while DNS Firewall
-	//   verifies the calling account's AWS Marketplace entitlement.
+	//   verifies the calling account's Amazon Web Services Marketplace entitlement.
 	//
 	//   - COMPLETE — The rule is provisioned and enforcing matches.
 	//
@@ -1944,19 +1944,19 @@ type FirewallRuleType struct {
 	// DGA , DNS_TUNNELING , or DICTIONARY_DGA . See DnsThreatProtectionRuleTypeConfig.
 	DnsThreatProtection *DnsThreatProtectionRuleTypeConfig
 
-	// Configures the rule to match an AWS-managed content category (for example,
-	// VIOLENCE_AND_HATE_SPEECH ). See FirewallAdvancedContentCategoryConfig.
+	// Configures the rule to match an Amazon Web Services-managed content category
+	// (for example, VIOLENCE_AND_HATE_SPEECH ). See FirewallAdvancedContentCategoryConfig.
 	FirewallAdvancedContentCategory *FirewallAdvancedContentCategoryConfig
 
-	// Configures the rule to match an AWS-managed advanced threat category (for
-	// example, PHISHING ). See FirewallAdvancedThreatCategoryConfig.
+	// Configures the rule to match an Amazon Web Services-managed advanced threat
+	// category (for example, PHISHING ). See FirewallAdvancedThreatCategoryConfig.
 	FirewallAdvancedThreatCategory *FirewallAdvancedThreatCategoryConfig
 
-	// Configures the rule to match a third-party threat feed delivered through AWS
-	// Marketplace. The calling account must hold an active subscription to the partner
-	// product named in Partner ; if the subscription is missing or revoked, the rule
-	// is created with Status CREATION_FAILED and cannot be modified — only deleted.
-	// See PartnerThreatProtectionConfig.
+	// Configures the rule to match a third-party threat feed delivered through Amazon
+	// Web Services Marketplace. The calling account must hold an active subscription
+	// to the partner product named in Partner ; if the subscription is missing or
+	// revoked, the rule is created with Status CREATION_FAILED and cannot be modified
+	// — only deleted. See PartnerThreatProtectionConfig.
 	PartnerThreatProtection *PartnerThreatProtectionConfig
 
 	noSmithyDocumentSerde
@@ -2025,9 +2025,9 @@ type FirewallRuleTypeDefinition struct {
 	RuleType *string
 
 	// For rule types that require an external subscription (today, only the
-	// PartnerThreatProtection variant), describes the AWS Marketplace product that
-	// backs the rule type. Absent for rule types that are managed by AWS and do not
-	// require a separate subscription. See SubscriptionInfo.
+	// PartnerThreatProtection variant), describes the Amazon Web Services Marketplace
+	// product that backs the rule type. Absent for rule types that are managed by
+	// Amazon Web Services and do not require a separate subscription. See SubscriptionInfo.
 	SubscriptionInfo *SubscriptionInfo
 
 	// The specific identifier within the rule type category, such as
@@ -2093,6 +2093,17 @@ func (v *FirewallRuleTypeDefinition) Deserialize(d smithy.ShapeDeserializer) err
 type IpAddressRequest struct {
 
 	// The ID of the subnet that contains the IP address.
+	//
+	// We recommend using [VPC Resolver on Outposts] to create endpoints on Outposts Racks.
+	//
+	// Outposts subnets with [Local Network Interface (LNI)] enabled are not compatible with Route 53 Resolver
+	// endpoints. If you enable LNI on a subnet that contains Route 53 Resolver
+	// endpoint elastic network interfaces (ENIs), those ENIs will stop functioning.
+	// For more information, see [Subnet compatibility for Resolver endpoints]in the Amazon Route 53 Developer Guide.
+	//
+	// [VPC Resolver on Outposts]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/outpost-resolver-getting-started.html
+	// [Subnet compatibility for Resolver endpoints]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver.html#best-practices-resolver-subnet-compatibility
+	// [Local Network Interface (LNI)]: https://docs.aws.amazon.com/outposts/latest/server-userguide/local-network-interface.html
 	//
 	// This member is required.
 	SubnetId *string
@@ -2263,7 +2274,17 @@ type IpAddressUpdate struct {
 	// The ID of the subnet that includes the IP address that you want to update. To
 	// get this ID, use [GetResolverEndpoint].
 	//
+	// We recommend using [VPC Resolver on Outposts] to create endpoints on Outposts Racks.
+	//
+	// Outposts subnets with [Local Network Interface (LNI)] enabled are not compatible with Route 53 Resolver
+	// endpoints. If you enable LNI on a subnet that contains Route 53 Resolver
+	// endpoint elastic network interfaces (ENIs), those ENIs will stop functioning.
+	// For more information, see [Subnet compatibility for Resolver endpoints]in the Amazon Route 53 Developer Guide.
+	//
 	// [GetResolverEndpoint]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html
+	// [VPC Resolver on Outposts]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/outpost-resolver-getting-started.html
+	// [Subnet compatibility for Resolver endpoints]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver.html#best-practices-resolver-subnet-compatibility
+	// [Local Network Interface (LNI)]: https://docs.aws.amazon.com/outposts/latest/server-userguide/local-network-interface.html
 	SubnetId *string
 
 	noSmithyDocumentSerde
@@ -2440,13 +2461,14 @@ func (v *OutpostResolver) Deserialize(d smithy.ShapeDeserializer) error {
 
 // The configuration for a partner threat-protection rule. To enumerate the
 // partners available in your account, call ListFirewallRuleTypeswith RuleType set to
-// PartnerThreatProtection — each returned FirewallRuleTypeDefinition includes a SubscriptionInfo identifying the AWS
-// Marketplace product that backs it.
+// PartnerThreatProtection — each returned FirewallRuleTypeDefinition includes a SubscriptionInfo identifying the Amazon Web
+// Services Marketplace product that backs it.
 type PartnerThreatProtectionConfig struct {
 
 	// The identifier of the partner threat-protection product, exactly as returned in
 	// the Value field of a FirewallRuleTypeDefinition with RuleType set to PartnerThreatProtection . The calling
-	// account must hold an active AWS Marketplace subscription to this product.
+	// account must hold an active Amazon Web Services Marketplace subscription to this
+	// product.
 	//
 	// This member is required.
 	Partner *string
@@ -3561,18 +3583,18 @@ func (v *ResolverRuleConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Identifies the AWS Marketplace product that backs a partner-managed rule type.
-// Returned as part of FirewallRuleTypeDefinitionwhen the rule type variant requires an active customer
-// subscription to the named product.
+// Identifies the Amazon Web Services Marketplace product that backs a
+// partner-managed rule type. Returned as part of FirewallRuleTypeDefinitionwhen the rule type variant
+// requires an active customer subscription to the named product.
 type SubscriptionInfo struct {
 
-	// The AWS Marketplace product identifier of the partner threat-protection
-	// product. Use this value to verify or manage the calling account's subscription
-	// in AWS Marketplace.
+	// The Amazon Web Services Marketplace product identifier of the partner
+	// threat-protection product. Use this value to verify or manage the calling
+	// account's subscription in Amazon Web Services Marketplace.
 	ProductId *string
 
-	// The name of the AWS Marketplace seller (vendor) that publishes the partner
-	// threat-protection product (for example, Palo Alto Networks ).
+	// The name of the Amazon Web Services Marketplace seller (vendor) that publishes
+	// the partner threat-protection product (for example, Palo Alto Networks ).
 	VendorName *string
 
 	noSmithyDocumentSerde
@@ -3827,18 +3849,18 @@ type UpdateFirewallRuleEntry struct {
 	// exactly one of its members. This setting is mutually exclusive with the
 	// top-level FirewallDomainListId and DnsThreatProtection fields. Use one of:
 	//
-	//   - FirewallAdvancedContentCategory — match an AWS-managed content category (for
-	//   example, VIOLENCE_AND_HATE_SPEECH ).
+	//   - FirewallAdvancedContentCategory — match an Amazon Web Services-managed
+	//   content category (for example, VIOLENCE_AND_HATE_SPEECH ).
 	//
-	//   - FirewallAdvancedThreatCategory — match an AWS-managed advanced threat
-	//   category (for example, PHISHING ).
+	//   - FirewallAdvancedThreatCategory — match an Amazon Web Services-managed
+	//   advanced threat category (for example, PHISHING ).
 	//
 	//   - DnsThreatProtection — match a built-in DNS Firewall Advanced threat detector
 	//   ( DGA , DNS_TUNNELING , or DICTIONARY_DGA ).
 	//
 	//   - PartnerThreatProtection — match a third-party threat feed delivered through
-	//   AWS Marketplace. The selected partner must be an active subscription on the
-	//   calling account.
+	//   Amazon Web Services Marketplace. The selected partner must be an active
+	//   subscription on the calling account.
 	//
 	// To enumerate the values supported in your account, call ListFirewallRuleTypes.
 	FirewallRuleType *FirewallRuleType

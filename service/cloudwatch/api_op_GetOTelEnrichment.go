@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"time"
 )
 
 // Returns the current status of vended metric enrichment for the account,
@@ -52,6 +53,24 @@ type GetOTelEnrichmentOutput struct {
 	// This member is required.
 	Status types.OTelEnrichmentStatus
 
+	// The date and time that enrichment started for the account. This parameter is
+	// omitted when enrichment is stopped.
+	CreatedAt *time.Time
+
+	// The metric namespaces, and the metric names, that are left unenriched. This
+	// parameter is omitted when enrichment is stopped, and when enrichment is running
+	// with no exclude filters, which means that nothing is excluded.
+	ExcludeFilters []types.OTelEnrichmentMetricSelector
+
+	// The metric namespaces, and the metric names, that are enriched. This parameter
+	// is omitted when enrichment is stopped, and when enrichment is running with no
+	// include filters, which means that every supported namespace is in scope.
+	IncludeFilters []types.OTelEnrichmentMetricSelector
+
+	// The date and time that the enrichment configuration for the account was last
+	// stored.
+	UpdatedAt *time.Time
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -65,13 +84,28 @@ func (v *GetOTelEnrichmentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetOTelEnrichmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetOTelEnrichmentOutput_CreatedAt, *v.CreatedAt)
+	}
+	serializeOTelEnrichmentMetricSelectorList(s, schemas.GetOTelEnrichmentOutput_ExcludeFilters, v.ExcludeFilters)
+	serializeOTelEnrichmentMetricSelectorList(s, schemas.GetOTelEnrichmentOutput_IncludeFilters, v.IncludeFilters)
 	if v.Status != "" {
 		s.WriteString(schemas.GetOTelEnrichmentOutput_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetOTelEnrichmentOutput_UpdatedAt, *v.UpdatedAt)
 	}
 }
 func (v *GetOTelEnrichmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetOTelEnrichmentOutput, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.GetOTelEnrichmentOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetOTelEnrichmentOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetOTelEnrichmentOutput_ExcludeFilters:
+			return deserializeOTelEnrichmentMetricSelectorList(d, schemas.GetOTelEnrichmentOutput_ExcludeFilters, &v.ExcludeFilters)
+		case schemas.GetOTelEnrichmentOutput_IncludeFilters:
+			return deserializeOTelEnrichmentMetricSelectorList(d, schemas.GetOTelEnrichmentOutput_IncludeFilters, &v.IncludeFilters)
 		case schemas.GetOTelEnrichmentOutput_Status:
 			var ev string
 			if err := d.ReadString(schemas.GetOTelEnrichmentOutput_Status, &ev); err != nil {
@@ -79,6 +113,9 @@ func (v *GetOTelEnrichmentOutput) Deserialize(d smithy.ShapeDeserializer) error 
 			}
 			v.Status = types.OTelEnrichmentStatus(ev)
 			return nil
+		case schemas.GetOTelEnrichmentOutput_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetOTelEnrichmentOutput_UpdatedAt, v.UpdatedAt)
 		}
 		return nil
 	})

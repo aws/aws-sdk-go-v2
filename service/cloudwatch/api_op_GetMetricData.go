@@ -27,8 +27,10 @@ import (
 //
 // If you include a Metrics Insights query, each GetMetricData operation can
 // include only one query. But the same GetMetricData operation can also retrieve
-// other metrics. Metrics Insights queries can query only the most recent three
-// hours of metric data. For more information about Metrics Insights, see [Query your metrics with CloudWatch Metrics Insights].
+// other metrics. Metrics Insights queries can query the most recent two weeks of
+// metric data. For alarm condition evaluations, Metrics Insights queries can query
+// only the most recent three hours of metric data. For more information about
+// Metrics Insights, see [Query your metrics with CloudWatch Metrics Insights].
 //
 // Calls to the GetMetricData API have a different pricing structure than calls to
 // GetMetricStatistics . For more information about pricing, see [Amazon CloudWatch Pricing].

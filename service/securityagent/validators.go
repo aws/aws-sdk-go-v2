@@ -3127,6 +3127,11 @@ func validateOpCreateCodeReviewInput(v *CreateCodeReviewInput) error {
 			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3197,6 +3202,11 @@ func validateOpCreatePentestInput(v *CreatePentestInput) error {
 	if v.Assets != nil {
 		if err := validateAssets(v.Assets); err != nil {
 			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4048,6 +4058,11 @@ func validateOpUpdateCodeReviewInput(v *UpdateCodeReviewInput) error {
 			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4112,6 +4127,11 @@ func validateOpUpdatePentestInput(v *UpdatePentestInput) error {
 	if v.Assets != nil {
 		if err := validateAssets(v.Assets); err != nil {
 			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4209,6 +4229,11 @@ func validateOpUpdateThreatModelInput(v *UpdateThreatModelInput) error {
 	if v.ScopeDocs != nil {
 		if err := validateDocumentList(v.ScopeDocs); err != nil {
 			invalidParams.AddNested("ScopeDocs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

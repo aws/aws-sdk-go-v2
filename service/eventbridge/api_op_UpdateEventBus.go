@@ -78,7 +78,7 @@ type UpdateEventBusInput struct {
 	//
 	// For more information, see [Configuring logs for event buses] in the EventBridge User Guide.
 	//
-	// [Configuring logs for event buses]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+	// [Configuring logs for event buses]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html
 	LogConfig *types.LogConfig
 
 	// The name of the event bus.
@@ -143,7 +143,7 @@ type UpdateEventBusOutput struct {
 	//
 	// For more information, see [Configuring logs for event buses] in the EventBridge User Guide.
 	//
-	// [Configuring logs for event buses]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+	// [Configuring logs for event buses]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html
 	LogConfig *types.LogConfig
 
 	// The event bus name.

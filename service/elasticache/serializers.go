@@ -6443,6 +6443,13 @@ func awsAwsquery_serializeOpDocumentCreateGlobalReplicationGroupInput(v *CreateG
 		objectKey.String(*v.PrimaryReplicationGroupId)
 	}
 
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

@@ -4173,6 +4173,16 @@ func awsRestjson1_deserializeOpDocumentCreateCodeReviewOutput(v **CreateCodeRevi
 				}
 			}
 
+		case "reportDestination":
+			if err := awsRestjson1_deserializeDocumentReportDestination(&sv.ReportDestination, value); err != nil {
+				return err
+			}
+
+		case "reportFilters":
+			if err := awsRestjson1_deserializeDocumentReportFilters(&sv.ReportFilters, value); err != nil {
+				return err
+			}
+
 		case "serviceRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4666,6 +4676,16 @@ func awsRestjson1_deserializeOpDocumentCreatePentestOutput(v **CreatePentestOutp
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.PentestId = ptr.String(jtv)
+			}
+
+		case "reportDestination":
+			if err := awsRestjson1_deserializeDocumentReportDestination(&sv.ReportDestination, value); err != nil {
+				return err
+			}
+
+		case "reportFilters":
+			if err := awsRestjson1_deserializeDocumentReportFilters(&sv.ReportFilters, value); err != nil {
+				return err
 			}
 
 		case "serviceRole":
@@ -5878,6 +5898,11 @@ func awsRestjson1_deserializeOpDocumentCreateThreatModelOutput(v **CreateThreatM
 
 		case "logConfig":
 			if err := awsRestjson1_deserializeDocumentCloudWatchLog(&sv.LogConfig, value); err != nil {
+				return err
+			}
+
+		case "reportDestination":
+			if err := awsRestjson1_deserializeDocumentReportDestination(&sv.ReportDestination, value); err != nil {
 				return err
 			}
 
@@ -14089,6 +14114,16 @@ func awsRestjson1_deserializeOpDocumentUpdateCodeReviewOutput(v **UpdateCodeRevi
 				}
 			}
 
+		case "reportDestination":
+			if err := awsRestjson1_deserializeDocumentReportDestination(&sv.ReportDestination, value); err != nil {
+				return err
+			}
+
+		case "reportFilters":
+			if err := awsRestjson1_deserializeDocumentReportFilters(&sv.ReportFilters, value); err != nil {
+				return err
+			}
+
 		case "serviceRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14514,6 +14549,16 @@ func awsRestjson1_deserializeOpDocumentUpdatePentestOutput(v **UpdatePentestOutp
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.PentestId = ptr.String(jtv)
+			}
+
+		case "reportDestination":
+			if err := awsRestjson1_deserializeDocumentReportDestination(&sv.ReportDestination, value); err != nil {
+				return err
+			}
+
+		case "reportFilters":
+			if err := awsRestjson1_deserializeDocumentReportFilters(&sv.ReportFilters, value); err != nil {
+				return err
 			}
 
 		case "serviceRole":
@@ -15735,6 +15780,11 @@ func awsRestjson1_deserializeOpDocumentUpdateThreatModelOutput(v **UpdateThreatM
 
 		case "logConfig":
 			if err := awsRestjson1_deserializeDocumentCloudWatchLog(&sv.LogConfig, value); err != nil {
+				return err
+			}
+
+		case "reportDestination":
+			if err := awsRestjson1_deserializeDocumentReportDestination(&sv.ReportDestination, value); err != nil {
 				return err
 			}
 
@@ -18279,6 +18329,16 @@ func awsRestjson1_deserializeDocumentCodeReview(v **types.CodeReview, value inte
 				}
 			}
 
+		case "reportDestination":
+			if err := awsRestjson1_deserializeDocumentReportDestination(&sv.ReportDestination, value); err != nil {
+				return err
+			}
+
+		case "reportFilters":
+			if err := awsRestjson1_deserializeDocumentReportFilters(&sv.ReportFilters, value); err != nil {
+				return err
+			}
+
 		case "serviceRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18492,6 +18552,11 @@ func awsRestjson1_deserializeDocumentCodeReviewJob(v **types.CodeReviewJob, valu
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Overview = ptr.String(jtv)
+			}
+
+		case "reportDestination":
+			if err := awsRestjson1_deserializeDocumentReportDestination(&sv.ReportDestination, value); err != nil {
+				return err
 			}
 
 		case "serviceRole":
@@ -19271,6 +19336,42 @@ func awsRestjson1_deserializeDocumentCodeReviewSummaryList(v *[]types.CodeReview
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConfidenceLevelFilterList(v *[]types.ConfidenceLevel, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ConfidenceLevel
+	if *v == nil {
+		cv = []types.ConfidenceLevel{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ConfidenceLevel
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ConfidenceLevel to be of type string, got %T instead", value)
+			}
+			col = types.ConfidenceLevel(jtv)
+		}
 		cv = append(cv, col)
 
 	}
@@ -20615,6 +20716,42 @@ func awsRestjson1_deserializeDocumentFindingList(v *[]types.Finding, value inter
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFindingStatusFilterList(v *[]types.FindingStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FindingStatus
+	if *v == nil {
+		cv = []types.FindingStatus{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FindingStatus
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected FindingStatus to be of type string, got %T instead", value)
+			}
+			col = types.FindingStatus(jtv)
+		}
 		cv = append(cv, col)
 
 	}
@@ -22265,6 +22402,16 @@ func awsRestjson1_deserializeDocumentPentest(v **types.Pentest, value interface{
 				sv.PentestId = ptr.String(jtv)
 			}
 
+		case "reportDestination":
+			if err := awsRestjson1_deserializeDocumentReportDestination(&sv.ReportDestination, value); err != nil {
+				return err
+			}
+
+		case "reportFilters":
+			if err := awsRestjson1_deserializeDocumentReportFilters(&sv.ReportFilters, value); err != nil {
+				return err
+			}
+
 		case "serviceRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22527,6 +22674,11 @@ func awsRestjson1_deserializeDocumentPentestJob(v **types.PentestJob, value inte
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.PentestJobId = ptr.String(jtv)
+			}
+
+		case "reportDestination":
+			if err := awsRestjson1_deserializeDocumentReportDestination(&sv.ReportDestination, value); err != nil {
+				return err
 			}
 
 		case "selectedFindingIds":
@@ -23186,6 +23338,188 @@ loop:
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentReportDestination(v **types.ReportDestination, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReportDestination
+	if *v == nil {
+		sv = &types.ReportDestination{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "containerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContainerId = ptr.String(jtv)
+			}
+
+		case "documentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DocumentId = ptr.String(jtv)
+			}
+
+		case "integrationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.IntegrationId = ptr.String(jtv)
+			}
+
+		case "parentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ParentId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReportFilterList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ReportFilterValue to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReportFilters(v **types.ReportFilters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReportFilters
+	if *v == nil {
+		sv = &types.ReportFilters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "annotationNotes":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AnnotationNotes = ptr.Bool(jtv)
+			}
+
+		case "complianceReport":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ComplianceReport = ptr.Bool(jtv)
+			}
+
+		case "confidenceLevels":
+			if err := awsRestjson1_deserializeDocumentConfidenceLevelFilterList(&sv.ConfidenceLevels, value); err != nil {
+				return err
+			}
+
+		case "findingTypes":
+			if err := awsRestjson1_deserializeDocumentReportFilterList(&sv.FindingTypes, value); err != nil {
+				return err
+			}
+
+		case "riskLevels":
+			if err := awsRestjson1_deserializeDocumentRiskLevelFilterList(&sv.RiskLevels, value); err != nil {
+				return err
+			}
+
+		case "riskTypes":
+			if err := awsRestjson1_deserializeDocumentRiskTypeFilterList(&sv.RiskTypes, value); err != nil {
+				return err
+			}
+
+		case "statuses":
+			if err := awsRestjson1_deserializeDocumentFindingStatusFilterList(&sv.Statuses, value); err != nil {
+				return err
+			}
+
+		case "taskStatuses":
+			if err := awsRestjson1_deserializeDocumentTaskExecutionStatusFilterList(&sv.TaskStatuses, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -23223,6 +23557,78 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRiskLevelFilterList(v *[]types.RiskLevel, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RiskLevel
+	if *v == nil {
+		cv = []types.RiskLevel{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RiskLevel
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RiskLevel to be of type string, got %T instead", value)
+			}
+			col = types.RiskLevel(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRiskTypeFilterList(v *[]types.RiskType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RiskType
+	if *v == nil {
+		cv = []types.RiskType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RiskType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RiskType to be of type string, got %T instead", value)
+			}
+			col = types.RiskType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -24510,6 +24916,42 @@ func awsRestjson1_deserializeDocumentTask(v **types.Task, value interface{}) err
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentTaskExecutionStatusFilterList(v *[]types.TaskExecutionStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TaskExecutionStatus
+	if *v == nil {
+		cv = []types.TaskExecutionStatus{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TaskExecutionStatus
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TaskExecutionStatus to be of type string, got %T instead", value)
+			}
+			col = types.TaskExecutionStatus(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTaskIdList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25250,6 +25692,11 @@ func awsRestjson1_deserializeDocumentThreatModel(v **types.ThreatModel, value in
 				return err
 			}
 
+		case "reportDestination":
+			if err := awsRestjson1_deserializeDocumentReportDestination(&sv.ReportDestination, value); err != nil {
+				return err
+			}
+
 		case "scopeDocs":
 			if err := awsRestjson1_deserializeDocumentDocumentList(&sv.ScopeDocs, value); err != nil {
 				return err
@@ -25422,6 +25869,11 @@ func awsRestjson1_deserializeDocumentThreatModelJob(v **types.ThreatModelJob, va
 
 		case "integratedRepositories":
 			if err := awsRestjson1_deserializeDocumentIntegratedRepositoryList(&sv.IntegratedRepositories, value); err != nil {
+				return err
+			}
+
+		case "reportDestination":
+			if err := awsRestjson1_deserializeDocumentReportDestination(&sv.ReportDestination, value); err != nil {
 				return err
 			}
 

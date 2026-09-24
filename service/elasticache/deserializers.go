@@ -137,8 +137,14 @@ func awsAwsquery_deserializeOpErrorAddTagsToResource(response *smithyhttp.Respon
 	case strings.EqualFold("CacheSubnetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorCacheSubnetGroupNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("GlobalReplicationGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorGlobalReplicationGroupNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("InvalidARN", errorCode):
 		return awsAwsquery_deserializeErrorInvalidARNFault(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValue", errorCode):
+		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
@@ -1593,6 +1599,9 @@ func awsAwsquery_deserializeOpErrorCreateGlobalReplicationGroup(response *smithy
 
 	case strings.EqualFold("ServiceLinkedRoleNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorServiceLinkedRoleNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
+		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -7177,8 +7186,14 @@ func awsAwsquery_deserializeOpErrorListTagsForResource(response *smithyhttp.Resp
 	case strings.EqualFold("CacheSubnetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorCacheSubnetGroupNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("GlobalReplicationGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorGlobalReplicationGroupNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("InvalidARN", errorCode):
 		return awsAwsquery_deserializeErrorInvalidARNFault(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValue", errorCode):
+		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
@@ -8924,8 +8939,14 @@ func awsAwsquery_deserializeOpErrorRemoveTagsFromResource(response *smithyhttp.R
 	case strings.EqualFold("CacheSubnetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorCacheSubnetGroupNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("GlobalReplicationGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorGlobalReplicationGroupNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("InvalidARN", errorCode):
 		return awsAwsquery_deserializeErrorInvalidARNFault(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValue", errorCode):
+		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("InvalidReplicationGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)

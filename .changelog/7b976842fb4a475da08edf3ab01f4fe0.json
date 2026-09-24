@@ -1,0 +1,8 @@
+{
+    "id": "7b976842-fb4a-475d-a08e-df3ab01f4fe0",
+    "type": "documentation",
+    "description": "Fixed ListV2LoggingLevels and DeleteV2LoggingLevel documentation to include all supported target-types",
+    "modules": [
+        "service/iot"
+    ]
+}

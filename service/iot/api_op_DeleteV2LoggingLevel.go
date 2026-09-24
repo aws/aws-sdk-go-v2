@@ -37,7 +37,8 @@ type DeleteV2LoggingLevelInput struct {
 	// This member is required.
 	TargetName *string
 
-	// The type of resource for which you are configuring logging. Must be THING_Group .
+	// The type of resource for which you are configuring logging. Must be DEFAULT ,
+	// THING_GROUP , CLIENT_ID , SOURCE_IP , or PRINCIPAL_ID .
 	//
 	// This member is required.
 	TargetType types.LogTargetType

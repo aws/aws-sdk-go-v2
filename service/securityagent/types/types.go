@@ -600,6 +600,12 @@ type CodeReview struct {
 	// not set, jobs run to completion with no budget cap.
 	MaxTaskHours *float64
 
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
+	// The report-generation filters applied when the report is exported.
+	ReportFilters *ReportFilters
+
 	// The IAM service role used for the code review.
 	ServiceRole *string
 
@@ -651,6 +657,9 @@ type CodeReviewJob struct {
 
 	// An overview of the code review job results.
 	Overview *string
+
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
 
 	// The IAM service role used for the code review job.
 	ServiceRole *string
@@ -1922,6 +1931,12 @@ type Pentest struct {
 	// The network traffic configuration for the pentest.
 	NetworkTrafficConfig *NetworkTrafficConfig
 
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
+	// The report-generation filters applied when the report is exported.
+	ReportFilters *ReportFilters
+
 	// The IAM service role used for the pentest.
 	ServiceRole *string
 
@@ -2000,6 +2015,9 @@ type PentestJob struct {
 
 	// The unique identifier of the pentest job.
 	PentestJobId *string
+
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
 
 	// The list of finding identifiers selected for revalidation. Present only when
 	// jobType is REVALIDATION.
@@ -2282,6 +2300,37 @@ type ReportDestination struct {
 
 	// The parent document identifier under which the report will be created.
 	ParentId *string
+
+	noSmithyDocumentSerde
+}
+
+// The report-generation filters applied when a pentest or code review report is
+// exported.
+type ReportFilters struct {
+
+	// Whether to include reviewer annotation notes under each finding.
+	AnnotationNotes *bool
+
+	// Whether to include the compliance-ready report additions.
+	ComplianceReport *bool
+
+	// The confidence levels to include in the report.
+	ConfidenceLevels []ConfidenceLevel
+
+	// The finding types to include in the report.
+	FindingTypes []string
+
+	// The severity levels to include in the report.
+	RiskLevels []RiskLevel
+
+	// The risk types to include in the report.
+	RiskTypes []RiskType
+
+	// The finding statuses to include in the report.
+	Statuses []FindingStatus
+
+	// The task execution statuses to include in the report's task table.
+	TaskStatuses []TaskExecutionStatus
 
 	noSmithyDocumentSerde
 }
@@ -2734,6 +2783,9 @@ type ThreatModel struct {
 	// The CloudWatch Logs configuration for the threat model.
 	LogConfig *CloudWatchLog
 
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
 	// The scoped documents for the agent to focus on during threat modeling.
 	ScopeDocs []DocumentInfo
 
@@ -2769,6 +2821,9 @@ type ThreatModelJob struct {
 
 	// The list of integrated repositories used for threat modeling.
 	IntegratedRepositories []IntegratedRepository
+
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
 
 	// The scoped documents for the agent to focus on during threat modeling.
 	ScopeDocs []DocumentInfo
@@ -2967,7 +3022,7 @@ type ThreatSummary struct {
 // A trust anchor used when validating a target endpoint's TLS certificate.
 type TrustedCaCertificate struct {
 
-	// The source that AWS Security Agent reads the certificate from.
+	// The source that Security Agent reads the certificate from.
 	//
 	// This member is required.
 	Source CaCertificateSource
@@ -3096,14 +3151,15 @@ type VerificationScriptEnvVar struct {
 // subnets to use during testing.
 type VpcConfig struct {
 
-	// The Amazon Resource Names (ARNs) of the security groups for the VPC
+	// The Amazon Resource Names (ARNs) or IDs of the security groups for the VPC
 	// configuration.
 	SecurityGroupArns []string
 
-	// The Amazon Resource Names (ARNs) of the subnets for the VPC configuration.
+	// The Amazon Resource Names (ARNs) or IDs of the subnets for the VPC
+	// configuration.
 	SubnetArns []string
 
-	// The Amazon Resource Name (ARN) of the VPC.
+	// The Amazon Resource Name (ARN) or ID of the VPC.
 	VpcArn *string
 
 	noSmithyDocumentSerde

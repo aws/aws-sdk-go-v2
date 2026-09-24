@@ -1,0 +1,8 @@
+{
+    "id": "89969cd8-d215-493a-853f-f3ca5952f67f",
+    "type": "documentation",
+    "description": "Documentation updates for Route 53 Resolver. Clarifies which Outpost Resolver operations apply to first-generation AWS Outposts and that Resolver is managed automatically on second-generation Outposts. Adds Local Network Interface subnet compatibility notes for Resolver endpoints.",
+    "modules": [
+        "service/route53resolver"
+    ]
+}

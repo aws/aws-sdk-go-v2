@@ -40,7 +40,8 @@ type ListV2LoggingLevelsInput struct {
 	// response; otherwise null to receive the first set of results.
 	NextToken *string
 
-	// The type of resource for which you are configuring logging. Must be THING_Group .
+	// The type of resource for which you are configuring logging. Must be DEFAULT ,
+	// THING_GROUP , CLIENT_ID , SOURCE_IP , or PRINCIPAL_ID .
 	TargetType types.LogTargetType
 
 	noSmithyDocumentSerde

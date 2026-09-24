@@ -1,0 +1,7 @@
+POST /service/AWSEventsV2/operation/CreateEventBus
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kClientTokeno__ClientToken__kDescriptiono__Description__wEncryptionConfiguration¿pKmsKeyIdentifiert__KmsKeyIdentifier__ÿdNameh__Name__tStorageConfiguration¿uRetentionPeriodInDaysÿdTags¿dkey0i__Value__ÿÿ

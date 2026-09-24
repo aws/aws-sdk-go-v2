@@ -32,6 +32,12 @@ type GetListingInput struct {
 	// This member is required.
 	ListingId *string
 
+	// A BCP 47 language tag or comma-separated priority list specifying the preferred
+	// locale for response content. See Locale for supported values, constraints,
+	// fallback behavior, and the default locale. If omitted, the service returns
+	// content in the default locale.
+	Locale *string
+
 	noSmithyDocumentSerde
 }
 
@@ -140,6 +146,11 @@ type GetListingOutput struct {
 	// Optional guidance explaining how to use data in this listing. Primarily defines
 	// how to integrate with a multi-product listing.
 	IntegrationGuide *string
+
+	// The locale of the returned content. Indicates whether the response contains
+	// content in the requested locale, or fell back to the default locale. See Locale
+	// for details.
+	Locale *string
 
 	// A summary of customer reviews available for the listing, including average
 	// rating and total review count by source.

@@ -47,6 +47,9 @@ type UpdateThreatModelInput struct {
 	// The updated CloudWatch Logs configuration for the threat model.
 	LogConfig *types.CloudWatchLog
 
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *types.ReportDestination
+
 	// The updated scoped documents for the agent to focus on during threat modeling.
 	ScopeDocs []types.DocumentInfo
 
@@ -81,6 +84,9 @@ type UpdateThreatModelOutput struct {
 
 	// The CloudWatch Logs configuration for the threat model.
 	LogConfig *types.CloudWatchLog
+
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *types.ReportDestination
 
 	// The scoped documents for the agent to focus on during threat modeling.
 	ScopeDocs []types.DocumentInfo

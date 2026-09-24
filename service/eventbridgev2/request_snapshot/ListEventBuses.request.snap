@@ -1,0 +1,7 @@
+POST /service/AWSEventsV2/operation/ListEventBuses
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿qEventBusAccountIdu__EventBusAccountId__jMaxResultsjNamePrefixn__NamePrefix__iNextTokenm__NextToken__ÿ

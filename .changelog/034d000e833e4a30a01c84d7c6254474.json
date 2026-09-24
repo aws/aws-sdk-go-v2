@@ -1,0 +1,8 @@
+{
+    "id": "034d000e-833e-4a30-a01c-84d7c6254474",
+    "type": "feature",
+    "description": "Adds a ManagedBy field to the DescribeEventBus and ListEventBuses responses, identifying the AWS service that created an event bus on your behalf.",
+    "modules": [
+        "service/eventbridge"
+    ]
+}

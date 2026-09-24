@@ -42,6 +42,10 @@ type CreateEnvironmentBlueprintInput struct {
 	// This member is required.
 	ProvisioningProperties types.ProvisioningProperties
 
+	// The category of the Amazon DataZone blueprint. The only valid value is TOOLING ,
+	// which creates a blueprint that provisions the tooling resources of a project.
+	BlueprintCategory types.BlueprintCategory
+
 	// The description of the Amazon DataZone blueprint.
 	Description *string
 
@@ -72,6 +76,10 @@ type CreateEnvironmentBlueprintOutput struct {
 	//
 	// This member is required.
 	ProvisioningProperties types.ProvisioningProperties
+
+	// The category of the Amazon DataZone blueprint. The only valid value is TOOLING ,
+	// which indicates a blueprint that provisions the tooling resources of a project.
+	BlueprintCategory types.BlueprintCategory
 
 	// The timestamp at which the environment blueprint was created.
 	CreatedAt *time.Time

@@ -543,6 +543,17 @@ func serializeMetricDataResults(s smithy.ShapeSerializer, schema *smithy.Schema,
 	s.CloseList()
 }
 
+func serializeMetricNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeMetrics(s smithy.ShapeSerializer, schema *smithy.Schema, v []Metric) {
 	if v == nil {
 		return
@@ -652,6 +663,30 @@ func serializeMuteTargetAlarmNameList(s smithy.ShapeSerializer, schema *smithy.S
 	s.CloseList()
 }
 
+func serializeOTelEnrichmentMetricNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeOTelEnrichmentMetricSelectorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []OTelEnrichmentMetricSelector) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeOwningAccounts(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
@@ -670,6 +705,19 @@ func serializeResourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeResourceMetricSelectionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceMetricSelection) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -1277,6 +1325,20 @@ func deserializeMetricDataResults(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	})
 }
 
+func deserializeMetricNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Metric) error {
 	*v = make([]Metric, 0)
 	var vv Metric
@@ -1403,6 +1465,34 @@ func deserializeMuteTargetAlarmNameList(d smithy.ShapeDeserializer, s *smithy.Sc
 	})
 }
 
+func deserializeOTelEnrichmentMetricNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOTelEnrichmentMetricSelectorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]OTelEnrichmentMetricSelector) error {
+	*v = make([]OTelEnrichmentMetricSelector, 0)
+	var vv OTelEnrichmentMetricSelector
+	return smithy.ReadList(d, s, func() error {
+		vv = OTelEnrichmentMetricSelector{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeOwningAccounts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -1423,6 +1513,20 @@ func deserializeResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	return smithy.ReadList(d, s, func() error {
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeResourceMetricSelectionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ResourceMetricSelection) error {
+	*v = make([]ResourceMetricSelection, 0)
+	var vv ResourceMetricSelection
+	return smithy.ReadList(d, s, func() error {
+		vv = ResourceMetricSelection{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

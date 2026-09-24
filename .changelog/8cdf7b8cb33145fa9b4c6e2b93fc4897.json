@@ -1,0 +1,8 @@
+{
+    "id": "8cdf7b8c-b331-45fa-9b4c-6e2b93fc4897",
+    "type": "feature",
+    "description": "Added support for Confluence export, enabling customers to publish security findings to Confluence pages.",
+    "modules": [
+        "service/securityagent"
+    ]
+}

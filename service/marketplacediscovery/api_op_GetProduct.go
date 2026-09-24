@@ -32,6 +32,12 @@ type GetProductInput struct {
 	// This member is required.
 	ProductId *string
 
+	// A BCP 47 language tag or comma-separated priority list specifying the preferred
+	// locale for response content. See Locale for supported values, constraints,
+	// fallback behavior, and the default locale. If omitted, the service returns
+	// content in the default locale.
+	Locale *string
+
 	noSmithyDocumentSerde
 }
 
@@ -62,6 +68,11 @@ type GetProductOutput struct {
 	//
 	// This member is required.
 	Highlights []string
+
+	// The default listing identifier associated with the product.
+	//
+	// This member is required.
+	ListingId *string
 
 	// The URL of the logo thumbnail image for the product.
 	//
@@ -111,6 +122,11 @@ type GetProductOutput struct {
 	//
 	// This member is required.
 	ShortDescription *string
+
+	// The locale of the returned content. Indicates whether the response contains
+	// content in the requested locale, or fell back to the default locale. See Locale
+	// for details.
+	Locale *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

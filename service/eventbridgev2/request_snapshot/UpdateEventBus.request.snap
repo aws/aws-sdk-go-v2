@@ -1,0 +1,7 @@
+POST /service/AWSEventsV2/operation/UpdateEventBus
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kDescriptiono__Description__wEncryptionConfiguration¿pKmsKeyIdentifiert__KmsKeyIdentifier__ÿkEventBusArno__EventBusArn__tStorageConfiguration¿uRetentionPeriodInDaysÿÿ

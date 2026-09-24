@@ -1,0 +1,8 @@
+{
+    "id": "05228175-56e8-49f4-935c-b3b76b264054",
+    "type": "feature",
+    "description": "Added tagging support for ElastiCache Global DataStore.",
+    "modules": [
+        "service/elasticache"
+    ]
+}

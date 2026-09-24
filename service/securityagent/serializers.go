@@ -2282,6 +2282,20 @@ func awsRestjson1_serializeOpDocumentCreateCodeReviewInput(v *CreateCodeReviewIn
 		}
 	}
 
+	if v.ReportDestination != nil {
+		ok := object.Key("reportDestination")
+		if err := awsRestjson1_serializeDocumentReportDestination(v.ReportDestination, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReportFilters != nil {
+		ok := object.Key("reportFilters")
+		if err := awsRestjson1_serializeDocumentReportFilters(v.ReportFilters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ServiceRole != nil {
 		ok := object.Key("serviceRole")
 		ok.String(*v.ServiceRole)
@@ -2645,6 +2659,20 @@ func awsRestjson1_serializeOpDocumentCreatePentestInput(v *CreatePentestInput, v
 	if v.NetworkTrafficConfig != nil {
 		ok := object.Key("networkTrafficConfig")
 		if err := awsRestjson1_serializeDocumentNetworkTrafficConfig(v.NetworkTrafficConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReportDestination != nil {
+		ok := object.Key("reportDestination")
+		if err := awsRestjson1_serializeDocumentReportDestination(v.ReportDestination, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReportFilters != nil {
+		ok := object.Key("reportFilters")
+		if err := awsRestjson1_serializeDocumentReportFilters(v.ReportFilters, ok); err != nil {
 			return err
 		}
 	}
@@ -7803,6 +7831,20 @@ func awsRestjson1_serializeOpDocumentUpdateCodeReviewInput(v *UpdateCodeReviewIn
 		}
 	}
 
+	if v.ReportDestination != nil {
+		ok := object.Key("reportDestination")
+		if err := awsRestjson1_serializeDocumentReportDestination(v.ReportDestination, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReportFilters != nil {
+		ok := object.Key("reportFilters")
+		if err := awsRestjson1_serializeDocumentReportFilters(v.ReportFilters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ServiceRole != nil {
 		ok := object.Key("serviceRole")
 		ok.String(*v.ServiceRole)
@@ -8184,6 +8226,20 @@ func awsRestjson1_serializeOpDocumentUpdatePentestInput(v *UpdatePentestInput, v
 	if v.PentestId != nil {
 		ok := object.Key("pentestId")
 		ok.String(*v.PentestId)
+	}
+
+	if v.ReportDestination != nil {
+		ok := object.Key("reportDestination")
+		if err := awsRestjson1_serializeDocumentReportDestination(v.ReportDestination, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReportFilters != nil {
+		ok := object.Key("reportFilters")
+		if err := awsRestjson1_serializeDocumentReportFilters(v.ReportFilters, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ServiceRole != nil {
@@ -8735,6 +8791,13 @@ func awsRestjson1_serializeOpDocumentUpdateThreatModelInput(v *UpdateThreatModel
 		}
 	}
 
+	if v.ReportDestination != nil {
+		ok := object.Key("reportDestination")
+		if err := awsRestjson1_serializeDocumentReportDestination(v.ReportDestination, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ScopeDocs != nil {
 		ok := object.Key("scopeDocs")
 		if err := awsRestjson1_serializeDocumentDocumentList(v.ScopeDocs, ok); err != nil {
@@ -9173,6 +9236,17 @@ func awsRestjson1_serializeDocumentCodeReviewSettings(v *types.CodeReviewSetting
 	return nil
 }
 
+func awsRestjson1_serializeDocumentConfidenceLevelFilterList(v []types.ConfidenceLevel, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentConfluenceDocumentResource(v *types.ConfluenceDocumentResource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9414,6 +9488,17 @@ func awsRestjson1_serializeDocumentFindingIdList(v []string, value smithyjson.Va
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFindingStatusFilterList(v []types.FindingStatus, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -10007,6 +10092,98 @@ func awsRestjson1_serializeDocumentReportDestination(v *types.ReportDestination,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentReportFilterList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentReportFilters(v *types.ReportFilters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnnotationNotes != nil {
+		ok := object.Key("annotationNotes")
+		ok.Boolean(*v.AnnotationNotes)
+	}
+
+	if v.ComplianceReport != nil {
+		ok := object.Key("complianceReport")
+		ok.Boolean(*v.ComplianceReport)
+	}
+
+	if v.ConfidenceLevels != nil {
+		ok := object.Key("confidenceLevels")
+		if err := awsRestjson1_serializeDocumentConfidenceLevelFilterList(v.ConfidenceLevels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FindingTypes != nil {
+		ok := object.Key("findingTypes")
+		if err := awsRestjson1_serializeDocumentReportFilterList(v.FindingTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RiskLevels != nil {
+		ok := object.Key("riskLevels")
+		if err := awsRestjson1_serializeDocumentRiskLevelFilterList(v.RiskLevels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RiskTypes != nil {
+		ok := object.Key("riskTypes")
+		if err := awsRestjson1_serializeDocumentRiskTypeFilterList(v.RiskTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Statuses != nil {
+		ok := object.Key("statuses")
+		if err := awsRestjson1_serializeDocumentFindingStatusFilterList(v.Statuses, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TaskStatuses != nil {
+		ok := object.Key("taskStatuses")
+		if err := awsRestjson1_serializeDocumentTaskExecutionStatusFilterList(v.TaskStatuses, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRiskLevelFilterList(v []types.RiskLevel, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRiskTypeFilterList(v []types.RiskType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRiskTypeList(v []types.RiskType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -10259,6 +10436,17 @@ func awsRestjson1_serializeDocumentTargetDomainIdList(v []string, value smithyjs
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTaskExecutionStatusFilterList(v []types.TaskExecutionStatus, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }

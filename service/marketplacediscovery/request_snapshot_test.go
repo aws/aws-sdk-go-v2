@@ -207,6 +207,7 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 }
 func TestCheckRequestSnapshot_GetListing(t *testing.T) {
 	input := &GetListingInput{
+		Locale:    ptr.String("__Locale__"),
 		ListingId: ptr.String("__ListingId__"),
 	}
 	body := &bytes.Buffer{}
@@ -234,6 +235,7 @@ func TestCheckRequestSnapshot_GetListing(t *testing.T) {
 
 func TestCheckRequestSnapshot_GetOffer(t *testing.T) {
 	input := &GetOfferInput{
+		Locale:  ptr.String("__Locale__"),
 		OfferId: ptr.String("__OfferId__"),
 	}
 	body := &bytes.Buffer{}
@@ -261,6 +263,7 @@ func TestCheckRequestSnapshot_GetOffer(t *testing.T) {
 
 func TestCheckRequestSnapshot_GetOfferSet(t *testing.T) {
 	input := &GetOfferSetInput{
+		Locale:     ptr.String("__Locale__"),
 		OfferSetId: ptr.String("__OfferSetId__"),
 	}
 	body := &bytes.Buffer{}
@@ -288,6 +291,7 @@ func TestCheckRequestSnapshot_GetOfferSet(t *testing.T) {
 
 func TestCheckRequestSnapshot_GetOfferTerms(t *testing.T) {
 	input := &GetOfferTermsInput{
+		Locale:     ptr.String("__Locale__"),
 		OfferId:    ptr.String("__OfferId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
@@ -317,6 +321,7 @@ func TestCheckRequestSnapshot_GetOfferTerms(t *testing.T) {
 
 func TestCheckRequestSnapshot_GetProduct(t *testing.T) {
 	input := &GetProductInput{
+		Locale:    ptr.String("__Locale__"),
 		ProductId: ptr.String("__ProductId__"),
 	}
 	body := &bytes.Buffer{}
@@ -344,6 +349,7 @@ func TestCheckRequestSnapshot_GetProduct(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListFulfillmentOptions(t *testing.T) {
 	input := &ListFulfillmentOptionsInput{
+		Locale:     ptr.String("__Locale__"),
 		ProductId:  ptr.String("__ProductId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
@@ -373,6 +379,7 @@ func TestCheckRequestSnapshot_ListFulfillmentOptions(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListPurchaseOptions(t *testing.T) {
 	input := &ListPurchaseOptionsInput{
+		Locale: ptr.String("__Locale__"),
 		Filters: []types.PurchaseOptionFilter{
 			{
 				FilterType: types.PurchaseOptionFilterType("PRODUCT_ID"),
@@ -417,6 +424,7 @@ func TestCheckRequestSnapshot_ListPurchaseOptions(t *testing.T) {
 
 func TestCheckRequestSnapshot_SearchFacets(t *testing.T) {
 	input := &SearchFacetsInput{
+		Locale:     ptr.String("__Locale__"),
 		SearchText: ptr.String("__SearchText__"),
 		Filters: []types.SearchFilter{
 			{
@@ -465,6 +473,7 @@ func TestCheckRequestSnapshot_SearchFacets(t *testing.T) {
 
 func TestCheckRequestSnapshot_SearchListings(t *testing.T) {
 	input := &SearchListingsInput{
+		Locale:     ptr.String("__Locale__"),
 		SearchText: ptr.String("__SearchText__"),
 		Filters: []types.SearchFilter{
 			{
@@ -511,6 +520,7 @@ func TestCheckRequestSnapshot_SearchListings(t *testing.T) {
 }
 func TestUpdateRequestSnapshot_GetListing(t *testing.T) {
 	input := &GetListingInput{
+		Locale:    ptr.String("__Locale__"),
 		ListingId: ptr.String("__ListingId__"),
 	}
 	body := &bytes.Buffer{}
@@ -538,6 +548,7 @@ func TestUpdateRequestSnapshot_GetListing(t *testing.T) {
 
 func TestUpdateRequestSnapshot_GetOffer(t *testing.T) {
 	input := &GetOfferInput{
+		Locale:  ptr.String("__Locale__"),
 		OfferId: ptr.String("__OfferId__"),
 	}
 	body := &bytes.Buffer{}
@@ -565,6 +576,7 @@ func TestUpdateRequestSnapshot_GetOffer(t *testing.T) {
 
 func TestUpdateRequestSnapshot_GetOfferSet(t *testing.T) {
 	input := &GetOfferSetInput{
+		Locale:     ptr.String("__Locale__"),
 		OfferSetId: ptr.String("__OfferSetId__"),
 	}
 	body := &bytes.Buffer{}
@@ -592,6 +604,7 @@ func TestUpdateRequestSnapshot_GetOfferSet(t *testing.T) {
 
 func TestUpdateRequestSnapshot_GetOfferTerms(t *testing.T) {
 	input := &GetOfferTermsInput{
+		Locale:     ptr.String("__Locale__"),
 		OfferId:    ptr.String("__OfferId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
@@ -621,6 +634,7 @@ func TestUpdateRequestSnapshot_GetOfferTerms(t *testing.T) {
 
 func TestUpdateRequestSnapshot_GetProduct(t *testing.T) {
 	input := &GetProductInput{
+		Locale:    ptr.String("__Locale__"),
 		ProductId: ptr.String("__ProductId__"),
 	}
 	body := &bytes.Buffer{}
@@ -648,6 +662,7 @@ func TestUpdateRequestSnapshot_GetProduct(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListFulfillmentOptions(t *testing.T) {
 	input := &ListFulfillmentOptionsInput{
+		Locale:     ptr.String("__Locale__"),
 		ProductId:  ptr.String("__ProductId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
@@ -677,6 +692,7 @@ func TestUpdateRequestSnapshot_ListFulfillmentOptions(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListPurchaseOptions(t *testing.T) {
 	input := &ListPurchaseOptionsInput{
+		Locale: ptr.String("__Locale__"),
 		Filters: []types.PurchaseOptionFilter{
 			{
 				FilterType: types.PurchaseOptionFilterType("PRODUCT_ID"),
@@ -721,6 +737,7 @@ func TestUpdateRequestSnapshot_ListPurchaseOptions(t *testing.T) {
 
 func TestUpdateRequestSnapshot_SearchFacets(t *testing.T) {
 	input := &SearchFacetsInput{
+		Locale:     ptr.String("__Locale__"),
 		SearchText: ptr.String("__SearchText__"),
 		Filters: []types.SearchFilter{
 			{
@@ -769,6 +786,7 @@ func TestUpdateRequestSnapshot_SearchFacets(t *testing.T) {
 
 func TestUpdateRequestSnapshot_SearchListings(t *testing.T) {
 	input := &SearchListingsInput{
+		Locale:     ptr.String("__Locale__"),
 		SearchText: ptr.String("__SearchText__"),
 		Filters: []types.SearchFilter{
 			{

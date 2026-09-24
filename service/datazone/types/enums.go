@@ -80,6 +80,23 @@ func (AuthType) Values() []AuthType {
 	}
 }
 
+type BlueprintCategory string
+
+// Enum values for BlueprintCategory
+const (
+	BlueprintCategoryTooling BlueprintCategory = "TOOLING"
+)
+
+// Values returns all known values for BlueprintCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BlueprintCategory) Values() []BlueprintCategory {
+	return []BlueprintCategory{
+		"TOOLING",
+	}
+}
+
 type ChangeAction string
 
 // Enum values for ChangeAction

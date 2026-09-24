@@ -34,6 +34,12 @@ type GetOfferSetInput struct {
 	// This member is required.
 	OfferSetId *string
 
+	// A BCP 47 language tag or comma-separated priority list specifying the preferred
+	// locale for response content. See Locale for supported values, constraints,
+	// fallback behavior, and the default locale. If omitted, the service returns
+	// content in the default locale.
+	Locale *string
+
 	noSmithyDocumentSerde
 }
 
@@ -75,6 +81,11 @@ type GetOfferSetOutput struct {
 	// The date and time when the offer set expires and is no longer available for
 	// procurement.
 	ExpirationTime *time.Time
+
+	// The locale of the returned content. Indicates whether the response contains
+	// content in the requested locale, or fell back to the default locale. See Locale
+	// for details.
+	Locale *string
 
 	// The display name of the offer set.
 	OfferSetName *string

@@ -1,0 +1,8 @@
+{
+    "id": "a6ff9242-0c91-456a-8550-3d9873bb13a0",
+    "type": "feature",
+    "description": "AWS Marketplace Discovery API now supports localized responses and SigV4a request signing. It returns new fulfillment details, including AMI architecture, EBS volume and security group information, SaaS quick-launch status, and SageMaker input and output MIME types.",
+    "modules": [
+        "service/marketplacediscovery"
+    ]
+}
