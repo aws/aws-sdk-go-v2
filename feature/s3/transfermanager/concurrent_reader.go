@@ -294,7 +294,7 @@ func (r *concurrentReader) partRead(p []byte) (int, error) {
 		// only directly feed into p if this is the next neighbor part
 		if oc.index == r.consecutiveIndex && written < cap(p) {
 			if oc.rangeStart >= 0 {
-				if es, as := int64(written), oc.rangeStart-r.written; es != as { // oc.cur must be zero for a refresh received chunk
+				if es, as := int64(written), oc.rangeStart-r.written; es != as {
 					r.setErr(fmt.Errorf("range mismatch between computed start position %d and actual start position %d for part %d in p", es, as, oc.index+1))
 					r.clean()
 					return 0, r.getErr()
