@@ -1,0 +1,8 @@
+{
+    "id": "6f3b96df-d403-4448-9ed4-a503b4ade7a2",
+    "type": "bugfix",
+    "description": "Add reassembly check for GetObject parts mode so mismatch between response part range and calculated position will throw error",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
