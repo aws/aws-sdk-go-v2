@@ -1,8 +1,0 @@
-{
-    "id": "ac24883b-f5c6-4112-aead-55697b92f27f",
-    "type": "feature",
-    "description": "Amazon DataZone now supports the TOOLING blueprint category on CreateEnvironmentBlueprint, UpdateEnvironmentBlueprint, GetEnvironmentBlueprint, and ListEnvironmentBlueprints, for custom tooling blueprints. CreateConnection now accepts roleArn in iamProperties.",
-    "modules": [
-        "service/datazone"
-    ]
-}

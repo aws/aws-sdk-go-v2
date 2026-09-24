@@ -1,8 +1,0 @@
-{
-    "id": "2dd4b751-b0dd-4b4f-8196-94f14dc5000d",
-    "type": "feature",
-    "description": "Updates to the ListDatabases and WorkgroupName validation",
-    "modules": [
-        "service/redshiftdata"
-    ]
-}

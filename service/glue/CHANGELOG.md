@@ -1,3 +1,8 @@
+# v1.163.0 (2026-09-24)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.162.0 (2026-09-22)
 
 * **Feature**: Adding two new fields for Glue Materialized Views feature - (1) SubObjectsStatistics and (2) SparkPipelineInfo.

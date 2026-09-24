@@ -1,3 +1,7 @@
+# v1.336.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.336.0 (2026-09-22)
 
 * **Feature**: Amazon EC2 now supports quote-based start date changes for future-dated Capacity Reservations

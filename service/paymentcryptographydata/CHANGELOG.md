@@ -1,3 +1,7 @@
+# v1.37.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.0 (2026-09-23)
 
 * **Feature**: Adds asymmetric key support to ReEncryptData for re-encrypting data between RSA and symmetric data encryption keys.

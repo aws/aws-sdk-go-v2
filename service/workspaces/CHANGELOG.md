@@ -1,3 +1,7 @@
+# v1.81.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.81.0 (2026-09-15)
 
 * **Feature**: Added support for 4 new graphics-optimized compute types - Graphics.g7 (2xlarge, 4xlarge, 8xlarge, 12xlarge).

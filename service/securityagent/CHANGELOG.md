@@ -1,3 +1,8 @@
+# v1.18.0 (2026-09-24)
+
+* **Feature**: Added support for Confluence export, enabling customers to publish security findings to Confluence pages.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

@@ -1,3 +1,7 @@
+# v1.52.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.0 (2026-09-16)
 
 * **Feature**: This release enhances the ListEntities API to support issuerAccountId and SourceAuthorization filter for ResaleAuthorization entity.

@@ -1,3 +1,7 @@
+# v1.17.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2026-09-17)
 
 * **Feature**: Added support for attachments on managed notification events. Added support to access and subscribe sensitive managed notification events.

@@ -1,3 +1,8 @@
+# v1.62.0 (2026-09-24)
+
+* **Feature**: Added tagging support for ElastiCache Global DataStore.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

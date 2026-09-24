@@ -1,3 +1,7 @@
+# v1.21.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2026-09-23)
 
 * **Feature**: Added the ListBillingViewSegments API, which returns billing view segment information for a specified billing view ARN and time range. This API enables customers and integrated tools to programmatically determine the billing context of their accounts.

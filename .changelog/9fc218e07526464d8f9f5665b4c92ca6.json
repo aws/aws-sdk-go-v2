@@ -1,8 +1,0 @@
-{
-    "id": "9fc218e0-7526-464d-8f9f-5665b4c92ca6",
-    "type": "feature",
-    "description": "This release adds Create, Get, Update, and DeleteResourceMetricsConfiguration to enable detailed metric collection for an AWS resource, and adds UpdateOTelEnrichment plus include and exclude filters on StartOTelEnrichment so you can choose which metric namespaces CloudWatch enriches.",
-    "modules": [
-        "service/cloudwatch"
-    ]
-}

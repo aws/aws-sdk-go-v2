@@ -1,3 +1,7 @@
+# v1.12.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2026-09-23)
 
 * **Feature**: Multi language support with code switching, custom template sectionHeader now allows underscores.

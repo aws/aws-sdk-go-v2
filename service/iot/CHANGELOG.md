@@ -1,3 +1,8 @@
+# v1.84.1 (2026-09-24)
+
+* **Documentation**: Fixed ListV2LoggingLevels and DeleteV2LoggingLevel documentation to include all supported target-types
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.84.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

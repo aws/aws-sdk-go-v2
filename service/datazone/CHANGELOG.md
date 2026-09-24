@@ -1,3 +1,8 @@
+# v1.76.0 (2026-09-24)
+
+* **Feature**: Amazon DataZone now supports the TOOLING blueprint category on CreateEnvironmentBlueprint, UpdateEnvironmentBlueprint, GetEnvironmentBlueprint, and ListEnvironmentBlueprints, for custom tooling blueprints. CreateConnection now accepts roleArn in iamProperties.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.75.0 (2026-09-18)
 
 * **Feature**: Adds support for specifying Notebook type

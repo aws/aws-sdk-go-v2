@@ -1,3 +1,7 @@
+# v1.50.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.0 (2026-09-23)
 
 * **Feature**: This release adds support for signalling start and end in the ContentKeyPeriod element in key request from MediaPackageV2

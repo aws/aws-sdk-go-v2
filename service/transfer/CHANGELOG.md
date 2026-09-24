@@ -1,3 +1,7 @@
+# v1.83.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.83.0 (2026-09-15)
 
 * **Feature**: AWS Transfer Family now preserves the original source IP address using Proxy Protocol v2 when you place a Network Load Balancer in front of your server for SFTP connections.

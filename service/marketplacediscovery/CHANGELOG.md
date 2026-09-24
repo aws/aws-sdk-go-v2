@@ -1,3 +1,8 @@
+# v1.11.0 (2026-09-24)
+
+* **Feature**: AWS Marketplace Discovery API now supports localized responses and SigV4a request signing. It returns new fulfillment details, including AMI architecture, EBS volume and security group information, SaaS quick-launch status, and SageMaker input and output MIME types.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

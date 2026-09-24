@@ -1,3 +1,7 @@
+# v1.72.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.72.0 (2026-09-16)
 
 * **Feature**: This release introduces the SearchRecommendations API, which retrieves recommendations for a profile identified by a search key.

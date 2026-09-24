@@ -1,3 +1,7 @@
+# v1.56.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.0 (2026-09-23)
 
 * **Feature**: Amazon Kinesis Data Streams now supports service managed record distribution for on demand streams. Set the record distribution strategy to AUTO to evenly distribute records across shards. Configure it at stream creation with CreateStream or update anytime with UpdateStreamRecordDistributionStrategy
