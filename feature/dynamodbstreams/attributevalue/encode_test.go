@@ -328,6 +328,57 @@ func TestMarshalMapOmitEmptyElem(t *testing.T) {
 	}
 }
 
+func TestMarshalOmitEmptyElemDoublePointer(t *testing.T) {
+	var inner *int
+	doublePointer := &inner
+
+	cases := map[string]struct {
+		input    interface{}
+		expected types.AttributeValue
+	}{
+		"list": {
+			input: struct {
+				Values []**int `dynamodbav:",omitemptyelem"`
+			}{
+				Values: []**int{
+					doublePointer,
+				},
+			},
+			expected: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Values": &types.AttributeValueMemberL{Value: []types.AttributeValue{}},
+				},
+			},
+		},
+		"map": {
+			input: struct {
+				Values map[string]**int `dynamodbav:",omitemptyelem"`
+			}{
+				Values: map[string]**int{
+					"value": doublePointer,
+				},
+			},
+			expected: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Values": &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}},
+				},
+			},
+		},
+	}
+
+	for name, testCase := range cases {
+		t.Run(name, func(t *testing.T) {
+			actual, err := Marshal(testCase.input)
+			if err != nil {
+				t.Fatalf("expect nil, got %v", err)
+			}
+			if diff := cmpDiff(testCase.expected, actual); len(diff) != 0 {
+				t.Errorf("expect match\n%s", diff)
+			}
+		})
+	}
+}
+
 type testNullEmptyElemListStruct struct {
 	Values []string `dynamodbav:",nullemptyelem"`
 }
@@ -864,5 +915,147 @@ func TestEncodeEmptyTime(t *testing.T) {
 
 	if e, a := expect2, actual2; !reflect.DeepEqual(e, a) {
 		t.Errorf("expect %v, got %v", e, a)
+	}
+}
+
+func TestEncodeDoublePointerOmitEmpty(t *testing.T) {
+	type input struct {
+		Foo **int `dynamodbav:"Foo,omitempty"`
+	}
+	var nilDouble **int
+	var nilSingle *int
+	number := 42
+	nonNil := &number
+
+	cases := []struct {
+		input    input
+		expected types.AttributeValue
+	}{
+		{
+			input: input{
+				Foo: nil,
+			},
+			expected: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{},
+			},
+		},
+		{
+			input: input{
+				Foo: nilDouble,
+			},
+			expected: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{},
+			},
+		},
+		{
+			input: input{
+				Foo: &nilSingle,
+			},
+			expected: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Foo": &types.AttributeValueMemberNULL{
+						Value: true,
+					},
+				},
+			},
+		},
+		{
+			input: input{
+				Foo: &nonNil,
+			},
+			expected: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Foo": &types.AttributeValueMemberN{
+						Value: "42",
+					},
+				},
+			},
+		},
+	}
+
+	for i, c := range cases {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			actual, err := Marshal(c.input)
+			if err != nil {
+				t.Errorf("unexpected error: %v", err)
+				t.Fail()
+			}
+
+			if diff := cmpDiff(c.expected, actual); diff != "" {
+				t.Errorf("unexpected diff: %v", diff)
+			}
+		})
+	}
+}
+
+func TestEncodeDoublePointer(t *testing.T) {
+	type input struct {
+		Foo **int `dynamodbav:"Foo"`
+	}
+	var nilDouble **int
+	var nilSingle *int
+	number := 42
+	nonNil := &number
+
+	cases := []struct {
+		input    input
+		expected types.AttributeValue
+	}{
+		{
+			input: input{
+				Foo: nil,
+			},
+			expected: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Foo": &types.AttributeValueMemberNULL{Value: true},
+				},
+			},
+		},
+		{
+			input: input{
+				Foo: nilDouble,
+			},
+			expected: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Foo": &types.AttributeValueMemberNULL{Value: true},
+				},
+			},
+		},
+		{
+			input: input{
+				Foo: &nilSingle,
+			},
+			expected: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Foo": &types.AttributeValueMemberNULL{Value: true},
+				},
+			},
+		},
+		{
+			input: input{
+				Foo: &nonNil,
+			},
+			expected: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Foo": &types.AttributeValueMemberN{
+						Value: "42",
+					},
+				},
+			},
+		},
+	}
+
+	for i, c := range cases {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			actual, err := Marshal(c.input)
+			if err != nil {
+				t.Errorf("unexpected error: %v", err)
+				t.Fail()
+			}
+
+			if diff := cmpDiff(c.expected, actual); diff != "" {
+				t.Errorf("unexpected diff: %v", diff)
+			}
+		})
 	}
 }
