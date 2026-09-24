@@ -91,7 +91,13 @@
                     "target": "com.amazonaws.elasticache#CacheSubnetGroupNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#GlobalReplicationGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.elasticache#InvalidARNFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidParameterValueException"
                 },
                 {
                     "target": "com.amazonaws.elasticache#InvalidReplicationGroupStateFault"
@@ -128,7 +134,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A tag is a key-value pair where the key and value are case-sensitive. You can use tags\n            to categorize and track all your ElastiCache resources, with the exception of global\n            replication group. When you add or remove tags on replication groups, those actions will\n            be replicated to all nodes in the replication group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n         <p> For example, you can use cost-allocation tags to your ElastiCache resources, Amazon\n            generates a cost allocation report as a comma-separated value (CSV) file with your usage\n            and costs aggregated by your tags. You can apply tags that represent business categories\n            (such as cost centers, application names, or owners) to organize your costs across\n            multiple services.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Tagging.html\">Using Cost Allocation Tags in\n                Amazon ElastiCache</a> in the <i>ElastiCache User\n            Guide</i>.</p>",
+                "smithy.api#documentation": "<p>A tag is a key-value pair where the key and value are case-sensitive. You can use tags\n            to categorize and track all your ElastiCache resources.\n            When you add or remove tags on replication groups, those actions will\n            be replicated to all nodes in the replication group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n         <p> For example, you can use cost-allocation tags to your ElastiCache resources, Amazon\n            generates a cost allocation report as a comma-separated value (CSV) file with your usage\n            and costs aggregated by your tags. You can apply tags that represent business categories\n            (such as cost centers, application names, or owners) to organize your costs across\n            multiple services.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Tagging.html\">Using Cost Allocation Tags in\n                Amazon ElastiCache</a> in the <i>ElastiCache User\n            Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "AddTagsToResource",
@@ -4188,6 +4194,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticache#ServiceLinkedRoleNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#TagQuotaPerResourceExceeded"
                 }
             ],
             "traits": {
@@ -4217,6 +4226,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the primary cluster that accepts writes and will replicate updates to the\n            secondary cluster. This value is stored as a lowercase string.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.elasticache#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must\n            be accompanied by a tag value, although null is accepted.</p>"
                     }
                 }
             },
@@ -11172,7 +11187,13 @@
                     "target": "com.amazonaws.elasticache#CacheSubnetGroupNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#GlobalReplicationGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.elasticache#InvalidARNFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidParameterValueException"
                 },
                 {
                     "target": "com.amazonaws.elasticache#InvalidReplicationGroupStateFault"
@@ -11206,7 +11227,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all tags currently on a named resource.</p>\n         <p> A tag is a key-value pair where the key and value are case-sensitive. You can use\n            tags to categorize and track all your ElastiCache resources, with the exception of\n            global replication group. When you add or remove tags on replication groups, those\n            actions will be replicated to all nodes in the replication group. For more information,\n            see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n         <p>If the cluster is not in the <i>available</i> state,\n                <code>ListTagsForResource</code> returns an error.</p>",
+                "smithy.api#documentation": "<p>Lists all tags currently on a named resource.</p>\n         <p> A tag is a key-value pair where the key and value are case-sensitive. You can use\n            tags to categorize and track all your ElastiCache resources.\n            When you add or remove tags on replication groups, those\n            actions will be replicated to all nodes in the replication group. For more information,\n            see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n         <p>If the cluster is not in the <i>available</i> state,\n                <code>ListTagsForResource</code> returns an error.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "ListTagsForResource",
@@ -13880,7 +13901,13 @@
                     "target": "com.amazonaws.elasticache#CacheSubnetGroupNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#GlobalReplicationGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.elasticache#InvalidARNFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidParameterValueException"
                 },
                 {
                     "target": "com.amazonaws.elasticache#InvalidReplicationGroupStateFault"
@@ -13917,7 +13944,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the tags identified by the <code>TagKeys</code> list from the named resource.\n            A tag is a key-value pair where the key and value are case-sensitive. You can use tags\n            to categorize and track all your ElastiCache resources, with the exception of global\n            replication group. When you add or remove tags on replication groups, those actions will\n            be replicated to all nodes in the replication group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>",
+                "smithy.api#documentation": "<p>Removes the tags identified by the <code>TagKeys</code> list from the named resource.\n            A tag is a key-value pair where the key and value are case-sensitive. You can use tags\n            to categorize and track all your ElastiCache resources.\n            When you add or remove tags on replication groups, those actions will\n            be replicated to all nodes in the replication group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "RemoveTagsFromResource",
@@ -16031,7 +16058,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A tag that can be added to an ElastiCache cluster or replication group. Tags are\n            composed of a Key/Value pair. You can use tags to categorize and track all your\n            ElastiCache resources, with the exception of global replication group. When you add or\n            remove tags on replication groups, those actions will be replicated to all nodes in the\n            replication group. A tag with a null Value is permitted.</p>"
+                "smithy.api#documentation": "<p>A tag that can be added to an ElastiCache cluster or replication group. Tags are\n            composed of a Key/Value pair. You can use tags to categorize and track all your\n            ElastiCache resources. When you add or\n            remove tags on replication groups, those actions will be replicated to all nodes in the\n            replication group. A tag with a null Value is permitted.</p>"
             }
         },
         "com.amazonaws.elasticache#TagList": {

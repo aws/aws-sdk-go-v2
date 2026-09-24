@@ -56,9 +56,16 @@
                 "aws.auth#sigv4": {
                     "name": "aws-marketplace"
                 },
+                "aws.auth#sigv4a": {
+                    "name": "aws-marketplace"
+                },
                 "aws.endpoints#dualStackOnlyEndpoints": {},
                 "aws.endpoints#standardRegionalEndpoints": {},
                 "aws.protocols#restJson1": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4",
+                    "aws.auth#sigv4a"
+                ],
                 "smithy.api#documentation": "<p>The AWS Marketplace Discovery API provides programmatic access to the AWS Marketplace catalog, including searching and browsing listings, retrieving product details and fulfillment options, and accessing public and private offer pricing and terms.</p>",
                 "smithy.api#title": "AWS Marketplace Discovery",
                 "smithy.rules#endpointBdd": {
@@ -432,6 +439,52 @@
                 "smithy.api#pattern": "^[A-Za-z0-9_/-]+$"
             }
         },
+        "com.amazonaws.marketplacediscovery#AmazonMachineImageCidrIpAddressList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.marketplacediscovery#AmazonMachineImageEbsVolume": {
+            "type": "structure",
+            "members": {
+                "volumeTypes": {
+                    "target": "com.amazonaws.marketplacediscovery#AmazonMachineImageEbsVolumeTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported Amazon EBS volume types.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "iops": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of provisioned IOPS supported.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains supported Amazon EBS volume information for an AMI fulfillment option.</p>"
+            }
+        },
+        "com.amazonaws.marketplacediscovery#AmazonMachineImageEbsVolumeTypeList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "max": 256
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
         "com.amazonaws.marketplacediscovery#AmazonMachineImageFulfillmentOption": {
             "type": "structure",
             "members": {
@@ -493,6 +546,55 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Instructions on how to deploy and use this fulfillment option.</p>"
                     }
+                },
+                "availableFromTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the AMI became available for fulfillment.</p>"
+                    }
+                },
+                "accessUrlTemplate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL pattern for accessing the product when an instance is running.</p>",
+                        "smithy.api#length": {
+                            "max": 1024
+                        }
+                    }
+                },
+                "architecture": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The architecture of the AMI, such as <code>x86_64</code>.</p>",
+                        "smithy.api#length": {
+                            "max": 256
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "amiAlias": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the AMI associated with this fulfillment option.</p>",
+                        "smithy.api#length": {
+                            "max": 1024
+                        }
+                    }
+                },
+                "ebsVolume": {
+                    "target": "com.amazonaws.marketplacediscovery#AmazonMachineImageEbsVolume",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported Amazon EBS volume configuration for the AMI.</p>"
+                    }
+                },
+                "shortDescription": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short description of the fulfillment option.</p>",
+                        "smithy.api#length": {
+                            "max": 4096
+                        }
+                    }
                 }
             },
             "traits": {
@@ -542,10 +644,58 @@
                         "smithy.api#documentation": "<p>The recommended EC2 instance type for this AMI.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "securityGroups": {
+                    "target": "com.amazonaws.marketplacediscovery#AmazonMachineImageSecurityGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended security group configurations for this AMI.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Recommended instance types for running an AMI fulfillment option.</p>"
+            }
+        },
+        "com.amazonaws.marketplacediscovery#AmazonMachineImageSecurityGroup": {
+            "type": "structure",
+            "members": {
+                "protocol": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP protocol name, such as <code>tcp</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fromPort": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of the port range.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "toPort": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the port range.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cidrIpAddresses": {
+                    "target": "com.amazonaws.marketplacediscovery#AmazonMachineImageCidrIpAddressList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address ranges in CIDR format.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a recommended security group configuration for an AMI fulfillment option.</p>"
+            }
+        },
+        "com.amazonaws.marketplacediscovery#AmazonMachineImageSecurityGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacediscovery#AmazonMachineImageSecurityGroup"
             }
         },
         "com.amazonaws.marketplacediscovery#ApiFulfillmentOption": {
@@ -758,6 +908,30 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Instructions on how to deploy and use this CloudFormation template.</p>"
+                    }
+                },
+                "availableFromTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the CloudFormation fulfillment option became available for fulfillment.</p>"
+                    }
+                },
+                "shortDescription": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short description of the fulfillment option.</p>",
+                        "smithy.api#length": {
+                            "max": 4096
+                        }
+                    }
+                },
+                "longDescription": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed description of the fulfillment option.</p>",
+                        "smithy.api#length": {
+                            "max": 8192
+                        }
                     }
                 }
             },
@@ -1632,9 +1806,11 @@
                     {
                         "title": "GetListing for SaaS listing",
                         "input": {
+                            "locale": "en-US",
                             "listingId": "prodview-sampleSaasId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "listingId": "prodview-sampleSaasId",
                             "catalog": "AWSMarketplace",
                             "listingName": "sample SaaS listing",
@@ -1745,9 +1921,11 @@
                     {
                         "title": "GetListing for AMI listing with video",
                         "input": {
+                            "locale": "en-US",
                             "listingId": "prodview-sampleAmiId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "listingId": "prodview-sampleAmiId",
                             "catalog": "AWSMarketplace",
                             "listingName": "sample AMI listing",
@@ -1884,9 +2062,11 @@
                     {
                         "title": "GetListing for multi-product listing",
                         "input": {
+                            "locale": "en-US",
                             "listingId": "prodview-sampleMultiProductId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "listingId": "prodview-sampleMultiProductId",
                             "catalog": "AWSMarketplace",
                             "listingName": "sample multi-product listing",
@@ -2016,6 +2196,12 @@
         "com.amazonaws.marketplacediscovery#GetListingInput": {
             "type": "structure",
             "members": {
+                "locale": {
+                    "target": "com.amazonaws.marketplacediscovery#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A BCP 47 language tag or comma-separated priority list specifying the preferred locale for response content. See <code>Locale</code> for supported values, constraints, fallback behavior, and the default locale. If omitted, the service returns content in the default locale.</p>"
+                    }
+                },
                 "listingId": {
                     "target": "com.amazonaws.marketplacediscovery#ListingId",
                     "traits": {
@@ -2031,6 +2217,12 @@
         "com.amazonaws.marketplacediscovery#GetListingOutput": {
             "type": "structure",
             "members": {
+                "locale": {
+                    "target": "com.amazonaws.marketplacediscovery#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the returned content. Indicates whether the response contains content in the requested locale, or fell back to the default locale. See <code>Locale</code> for details.</p>"
+                    }
+                },
                 "associatedEntities": {
                     "target": "com.amazonaws.marketplacediscovery#ListingAssociatedEntityList",
                     "traits": {
@@ -2196,9 +2388,11 @@
                     {
                         "title": "Invoke GetOffer for Contract Pricing offer",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleContractId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleContractId",
                             "catalog": "AWSMarketplace",
                             "offerName": "sample contract offer",
@@ -2248,9 +2442,11 @@
                     {
                         "title": "Invoke GetOffer for Usage Pricing offer",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleUsageId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleUsageId",
                             "catalog": "AWSMarketplace",
                             "offerName": "sample usage offer",
@@ -2288,9 +2484,11 @@
                     {
                         "title": "Invoke GetOffer for BYOL Pricing offer",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleByolId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleByolId",
                             "catalog": "AWSMarketplace",
                             "offerName": "sample BYOL offer",
@@ -2323,9 +2521,11 @@
                     {
                         "title": "Invoke GetOffer for FREE Pricing offer",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleFreeId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleFreeId",
                             "catalog": "AWSMarketplace",
                             "offerName": "sample free offer",
@@ -2384,6 +2584,12 @@
         "com.amazonaws.marketplacediscovery#GetOfferInput": {
             "type": "structure",
             "members": {
+                "locale": {
+                    "target": "com.amazonaws.marketplacediscovery#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A BCP 47 language tag or comma-separated priority list specifying the preferred locale for response content. See <code>Locale</code> for supported values, constraints, fallback behavior, and the default locale. If omitted, the service returns content in the default locale.</p>"
+                    }
+                },
                 "offerId": {
                     "target": "com.amazonaws.marketplacediscovery#OfferId",
                     "traits": {
@@ -2399,6 +2605,12 @@
         "com.amazonaws.marketplacediscovery#GetOfferOutput": {
             "type": "structure",
             "members": {
+                "locale": {
+                    "target": "com.amazonaws.marketplacediscovery#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the returned content. Indicates whether the response contains content in the requested locale, or fell back to the default locale. See <code>Locale</code> for details.</p>"
+                    }
+                },
                 "offerId": {
                     "target": "com.amazonaws.marketplacediscovery#OfferId",
                     "traits": {
@@ -2496,9 +2708,11 @@
                     {
                         "title": "Get offer set with multiple products",
                         "input": {
+                            "locale": "en-US",
                             "offerSetId": "offerset-sampleId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "catalog": "AWSMarketplace",
                             "offerSetId": "offerset-sampleId",
                             "offerSetName": "sample offer set",
@@ -2513,6 +2727,14 @@
                                 {
                                     "displayName": "Private Pricing",
                                     "badgeType": "PRIVATE_PRICING"
+                                },
+                                {
+                                    "displayName": "Future Dated",
+                                    "badgeType": "FUTURE_DATED"
+                                },
+                                {
+                                    "displayName": "Replacement Offer",
+                                    "badgeType": "REPLACEMENT_OFFER"
                                 }
                             ],
                             "associatedEntities": [
@@ -2554,6 +2776,85 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "title": "Get offer set with only required fields",
+                        "input": {
+                            "offerSetId": "offerset-sampleMinimalId"
+                        },
+                        "output": {
+                            "catalog": "AWSMarketplace",
+                            "offerSetId": "offerset-sampleMinimalId",
+                            "sellerOfRecord": {
+                                "sellerProfileId": "seller-sampleResellerId",
+                                "displayName": "sample reseller"
+                            },
+                            "badges": [],
+                            "associatedEntities": [
+                                {
+                                    "product": {
+                                        "productId": "prod-sampleMinimalId",
+                                        "productName": "sample product name",
+                                        "manufacturer": {
+                                            "sellerProfileId": "seller-sampleId1",
+                                            "displayName": "sample seller name 1"
+                                        }
+                                    },
+                                    "offer": {
+                                        "offerId": "offer-sampleMinimalId",
+                                        "sellerOfRecord": {
+                                            "sellerProfileId": "seller-sampleResellerId",
+                                            "displayName": "sample reseller"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "Get offer set that never expires from a first-party seller",
+                        "input": {
+                            "locale": "en-US",
+                            "offerSetId": "offerset-samplePerpetualId"
+                        },
+                        "output": {
+                            "locale": "en-US",
+                            "catalog": "AWSMarketplace",
+                            "offerSetId": "offerset-samplePerpetualId",
+                            "offerSetName": "sample perpetual offer set",
+                            "availableFromTime": "2024-03-20T00:00:00.000Z",
+                            "buyerNotes": "This offer set does not expire. Omitting expirationTime indicates the offer set remains available for procurement indefinitely.",
+                            "sellerOfRecord": {
+                                "sellerProfileId": "seller-sampleFirstPartyId",
+                                "displayName": "sample first-party seller"
+                            },
+                            "badges": [
+                                {
+                                    "displayName": "Private Pricing",
+                                    "badgeType": "PRIVATE_PRICING"
+                                }
+                            ],
+                            "associatedEntities": [
+                                {
+                                    "product": {
+                                        "productId": "prod-samplePerpetualId",
+                                        "productName": "sample perpetual product",
+                                        "manufacturer": {
+                                            "sellerProfileId": "seller-sampleFirstPartyId",
+                                            "displayName": "sample first-party seller"
+                                        }
+                                    },
+                                    "offer": {
+                                        "offerId": "offer-samplePerpetualId",
+                                        "offerName": "sample perpetual offer",
+                                        "sellerOfRecord": {
+                                            "sellerProfileId": "seller-sampleFirstPartyId",
+                                            "displayName": "sample first-party seller"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
                     }
                 ],
                 "smithy.api#http": {
@@ -2584,6 +2885,12 @@
         "com.amazonaws.marketplacediscovery#GetOfferSetInput": {
             "type": "structure",
             "members": {
+                "locale": {
+                    "target": "com.amazonaws.marketplacediscovery#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A BCP 47 language tag or comma-separated priority list specifying the preferred locale for response content. See <code>Locale</code> for supported values, constraints, fallback behavior, and the default locale. If omitted, the service returns content in the default locale.</p>"
+                    }
+                },
                 "offerSetId": {
                     "target": "com.amazonaws.marketplacediscovery#OfferSetId",
                     "traits": {
@@ -2599,6 +2906,12 @@
         "com.amazonaws.marketplacediscovery#GetOfferSetOutput": {
             "type": "structure",
             "members": {
+                "locale": {
+                    "target": "com.amazonaws.marketplacediscovery#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the returned content. Indicates whether the response contains content in the requested locale, or fell back to the default locale. See <code>Locale</code> for details.</p>"
+                    }
+                },
                 "offerSetId": {
                     "target": "com.amazonaws.marketplacediscovery#OfferSetId",
                     "traits": {
@@ -2682,9 +2995,11 @@
                     {
                         "title": "GetOfferTerms for Usage-based ML Model offer",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleUsageBasedId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerTerms": [
                                 {
                                     "usageBasedPricingTerm": {
@@ -2860,9 +3175,11 @@
                     {
                         "title": "GetOfferTerms for BYOL offer",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleByolId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerTerms": [
                                 {
                                     "byolPricingTerm": {
@@ -2888,9 +3205,11 @@
                     {
                         "title": "GetOfferTerms for configurable upfront pricing",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleConfigUpfrontId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerTerms": [
                                 {
                                     "configurableUpfrontPricingTerm": {
@@ -2945,9 +3264,11 @@
                     {
                         "title": "GetOfferTerms for free trial offer",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleFreeTrialId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerTerms": [
                                 {
                                     "freeTrialPricingTerm": {
@@ -2977,9 +3298,11 @@
                     {
                         "title": "GetOfferTerms for recurring payment",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleRecurringId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerTerms": [
                                 {
                                     "recurringPaymentTerm": {
@@ -2996,9 +3319,11 @@
                     {
                         "title": "GetOfferTerms for variable payment",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleVariableId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerTerms": [
                                 {
                                     "variablePaymentTerm": {
@@ -3014,9 +3339,11 @@
                     {
                         "title": "GetOfferTerms for renewal term",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleRenewalId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerTerms": [
                                 {
                                     "renewalTerm": {
@@ -3062,9 +3389,11 @@
                     {
                         "title": "GetOfferTerms for renewal term with fixed percentage",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleRenewalFixedId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerTerms": [
                                 {
                                     "renewalTerm": {
@@ -3085,9 +3414,11 @@
                     {
                         "title": "GetOfferTerms for renewal term with identical pricing (no price increase)",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleRenewalNoPriceIncreaseId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerTerms": [
                                 {
                                     "renewalTerm": {
@@ -3103,9 +3434,11 @@
                     {
                         "title": "GetOfferTerms for support term",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleSupportId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerTerms": [
                                 {
                                     "supportTerm": {
@@ -3120,9 +3453,11 @@
                     {
                         "title": "GetOfferTerms for validity term with dates",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleValidityId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerTerms": [
                                 {
                                     "validityTerm": {
@@ -3139,9 +3474,11 @@
                     {
                         "title": "GetOfferTerms for net payment term",
                         "input": {
+                            "locale": "en-US",
                             "offerId": "offer-sampleNetPaymentId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "offerTerms": [
                                 {
                                     "netPaymentTerm": {
@@ -3188,6 +3525,12 @@
         "com.amazonaws.marketplacediscovery#GetOfferTermsInput": {
             "type": "structure",
             "members": {
+                "locale": {
+                    "target": "com.amazonaws.marketplacediscovery#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A BCP 47 language tag or comma-separated priority list specifying the preferred locale for response content. See <code>Locale</code> for supported values, constraints, fallback behavior, and the default locale. If omitted, the service returns content in the default locale.</p>"
+                    }
+                },
                 "offerId": {
                     "target": "com.amazonaws.marketplacediscovery#OfferId",
                     "traits": {
@@ -3220,6 +3563,12 @@
         "com.amazonaws.marketplacediscovery#GetOfferTermsOutput": {
             "type": "structure",
             "members": {
+                "locale": {
+                    "target": "com.amazonaws.marketplacediscovery#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the returned content. Indicates whether the response contains content in the requested locale, or fell back to the default locale. See <code>Locale</code> for details.</p>"
+                    }
+                },
                 "offerTerms": {
                     "target": "com.amazonaws.marketplacediscovery#OfferTermsList",
                     "traits": {
@@ -3257,9 +3606,11 @@
                     {
                         "title": "GetProduct for SaaS product with DEPLOYED status",
                         "input": {
+                            "locale": "en-US",
                             "productId": "prod-sampleSaasId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "productId": "prod-sampleSaasId",
                             "catalog": "AWSMarketplace",
                             "productName": "sample SaaS product",
@@ -3323,15 +3674,18 @@
                                     "contentType": "LINK",
                                     "value": "https://aws.amazon.com/marketplace/customer-connect/demo/prodview-sampleSaasId"
                                 }
-                            ]
+                            ],
+                            "listingId": "listing-sampleSaasId"
                         }
                     },
                     {
                         "title": "GetProduct for AMI product with NOT_DEPLOYED status",
                         "input": {
+                            "locale": "en-US",
                             "productId": "prod-sampleAmiId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "productId": "prod-sampleAmiId",
                             "catalog": "AWSMarketplace",
                             "productName": "sample AMI product",
@@ -3401,15 +3755,18 @@
                                     "contentType": "LINK",
                                     "value": "https://aws.amazon.com/marketplace/customer-connect/private-offer/prodview-sampleAmiId"
                                 }
-                            ]
+                            ],
+                            "listingId": "listing-sampleAmiId"
                         }
                     },
                     {
                         "title": "GetProduct for professional services with NOT_APPLICABLE status",
                         "input": {
+                            "locale": "en-US",
                             "productId": "prod-sampleProServId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "productId": "prod-sampleProServId",
                             "catalog": "AWSMarketplace",
                             "productName": "sample professional services product",
@@ -3467,7 +3824,8 @@
                                     "engagementType": "REQUEST_FOR_DEMO",
                                     "value": "https://aws.amazon.com/marketplace/customer-connect/demo/prodview-sampleProServId"
                                 }
-                            ]
+                            ],
+                            "listingId": "listing-sampleProServId"
                         }
                     }
                 ],
@@ -3499,6 +3857,12 @@
         "com.amazonaws.marketplacediscovery#GetProductInput": {
             "type": "structure",
             "members": {
+                "locale": {
+                    "target": "com.amazonaws.marketplacediscovery#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A BCP 47 language tag or comma-separated priority list specifying the preferred locale for response content. See <code>Locale</code> for supported values, constraints, fallback behavior, and the default locale. If omitted, the service returns content in the default locale.</p>"
+                    }
+                },
                 "productId": {
                     "target": "com.amazonaws.marketplacediscovery#ProductId",
                     "traits": {
@@ -3514,6 +3878,12 @@
         "com.amazonaws.marketplacediscovery#GetProductOutput": {
             "type": "structure",
             "members": {
+                "locale": {
+                    "target": "com.amazonaws.marketplacediscovery#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the returned content. Indicates whether the response contains content in the requested locale, or fell back to the default locale. See <code>Locale</code> for details.</p>"
+                    }
+                },
                 "productId": {
                     "target": "com.amazonaws.marketplacediscovery#ProductId",
                     "traits": {
@@ -3612,6 +3982,13 @@
                     "target": "com.amazonaws.marketplacediscovery#SellerEngagementList",
                     "traits": {
                         "smithy.api#documentation": "<p>Engagement options available to potential buyers, such as requesting a private offer or requesting a demo.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "listingId": {
+                    "target": "com.amazonaws.marketplacediscovery#ListingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default listing identifier associated with the product.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3874,9 +4251,11 @@
                     {
                         "title": "List AMI Fulfillment Options",
                         "input": {
+                            "locale": "en-US",
                             "productId": "prod-sampleAmiId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "fulfillmentOptions": [
                                 {
                                     "amazonMachineImageFulfillmentOption": {
@@ -3893,10 +4272,30 @@
                                             }
                                         ],
                                         "recommendation": {
-                                            "instanceType": "t3a.medium"
+                                            "instanceType": "t3a.medium",
+                                            "securityGroups": [
+                                                {
+                                                    "protocol": "tcp",
+                                                    "fromPort": 22,
+                                                    "toPort": 22,
+                                                    "cidrIpAddresses": [
+                                                        "0.0.0.0/0"
+                                                    ]
+                                                }
+                                            ]
                                         },
                                         "releaseNotes": "https://aws.amazon.com/amazon-linux-2/release-notes/",
-                                        "usageInstructions": "The Amazon Linux 2 AMI can be launched through the EC2 console's Quick Launch page."
+                                        "usageInstructions": "The Amazon Linux 2 AMI can be launched through the EC2 console's Quick Launch page.",
+                                        "availableFromTime": "2022-03-07T00:00:00Z",
+                                        "accessUrlTemplate": "http://{0}:8888/",
+                                        "architecture": "x86_64",
+                                        "amiAlias": "/aws/service/marketplace/prod-sampleAmiId/2.0.20260120.1",
+                                        "ebsVolume": {
+                                            "volumeTypes": [
+                                                "gp2"
+                                            ]
+                                        },
+                                        "shortDescription": "Amazon Linux 2 AMI for x86_64 EC2 instances."
                                     }
                                 }
                             ]
@@ -3905,9 +4304,11 @@
                     {
                         "title": "List API Fulfillment Options",
                         "input": {
+                            "locale": "en-US",
                             "productId": "prod-sampleApiId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "fulfillmentOptions": [
                                 {
                                     "apiFulfillmentOption": {
@@ -3928,11 +4329,40 @@
                         }
                     },
                     {
+                        "title": "List API Fulfillment Options with Dynamic Endpoint",
+                        "input": {
+                            "locale": "en-US",
+                            "productId": "prod-sampleApiDynamicId"
+                        },
+                        "output": {
+                            "locale": "en-US",
+                            "fulfillmentOptions": [
+                                {
+                                    "apiFulfillmentOption": {
+                                        "fulfillmentOptionId": "fo-sampleApiDynamicId",
+                                        "fulfillmentOptionType": "API",
+                                        "fulfillmentOptionDisplayName": "API-Based Agents & Tools",
+                                        "usageInstructions": "Deploy to your preferred region using the dynamic endpoint.",
+                                        "awsSupportedServices": [
+                                            {
+                                                "supportedServiceType": "BEDROCK_AGENTCORE",
+                                                "displayName": "Amazon Bedrock AgentCore",
+                                                "description": "A managed service that enables you to develop, deploy, and maintain AI agents seamlessly."
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
                         "title": "List CloudFormation Template Fulfillment Options",
                         "input": {
+                            "locale": "en-US",
                             "productId": "prod-sampleCftId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "fulfillmentOptions": [
                                 {
                                     "cloudFormationFulfillmentOption": {
@@ -3942,7 +4372,10 @@
                                         "fulfillmentOptionType": "CLOUDFORMATION_TEMPLATE",
                                         "fulfillmentOptionDisplayName": "CloudFormation Template",
                                         "releaseNotes": "https://community.sophos.com/products/xg-firewall/b/blog",
-                                        "usageInstructions": "You can manage your Sophos XG Firewall on AWS from the Web Interface using HTTPS (TCP port 4444)."
+                                        "usageInstructions": "You can manage your Sophos XG Firewall on AWS from the Web Interface using HTTPS (TCP port 4444).",
+                                        "availableFromTime": "2021-12-15T00:00:00Z",
+                                        "shortDescription": "Deploy Sophos XG Firewall on AWS with high availability.",
+                                        "longDescription": "This CloudFormation template deploys the Sophos XG Firewall with auto-scaling and load balancing for enterprise environments."
                                     }
                                 }
                             ]
@@ -3951,9 +4384,11 @@
                     {
                         "title": "List Container Fulfillment Options",
                         "input": {
+                            "locale": "en-US",
                             "productId": "prod-sampleContainerId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "fulfillmentOptions": [
                                 {
                                     "containerFulfillmentOption": {
@@ -3985,9 +4420,11 @@
                     {
                         "title": "List Helm Fulfillment Options",
                         "input": {
+                            "locale": "en-US",
                             "productId": "prod-sampleHelmId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "fulfillmentOptions": [
                                 {
                                     "helmFulfillmentOption": {
@@ -4019,9 +4456,11 @@
                     {
                         "title": "List EKS Add-On Fulfillment Options",
                         "input": {
+                            "locale": "en-US",
                             "productId": "prod-sampleEksId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "fulfillmentOptions": [
                                 {
                                     "eksAddOnFulfillmentOption": {
@@ -4053,9 +4492,11 @@
                     {
                         "title": "List EC2 Image Builder Component Fulfillment Options",
                         "input": {
+                            "locale": "en-US",
                             "productId": "prod-sampleImageBuilderId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "fulfillmentOptions": [
                                 {
                                     "ec2ImageBuilderComponentFulfillmentOption": {
@@ -4087,9 +4528,11 @@
                     {
                         "title": "List Data Exchange Fulfillment Options",
                         "input": {
+                            "locale": "en-US",
                             "productId": "prod-sampleDataExchangeId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "fulfillmentOptions": [
                                 {
                                     "dataExchangeFulfillmentOption": {
@@ -4112,9 +4555,11 @@
                     {
                         "title": "List Professional Services Fulfillment Options",
                         "input": {
+                            "locale": "en-US",
                             "productId": "prod-sampleProServId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "fulfillmentOptions": [
                                 {
                                     "professionalServicesFulfillmentOption": {
@@ -4129,16 +4574,22 @@
                     {
                         "title": "List SaaS Fulfillment Options",
                         "input": {
+                            "locale": "en-US",
                             "productId": "prod-sampleSaasId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "fulfillmentOptions": [
                                 {
                                     "saasFulfillmentOption": {
                                         "fulfillmentOptionId": "fo-sampleSaasId",
                                         "fulfillmentOptionType": "SAAS",
                                         "fulfillmentOptionDisplayName": "SaaS",
-                                        "fulfillmentUrl": "https://example.com/order/SAMPLE123"
+                                        "fulfillmentUrl": "https://example.com/order/SAMPLE123",
+                                        "usageInstructions": "Refer to the seller's setup guide to configure and start using this SaaS product.",
+                                        "availableFromTime": "2018-08-07T00:00:00.000Z",
+                                        "launchUrl": "https://example.com/saas/launch",
+                                        "quickLaunch": "ENABLED"
                                     }
                                 }
                             ]
@@ -4147,9 +4598,11 @@
                     {
                         "title": "List SageMaker Algorithm Fulfillment Options",
                         "input": {
+                            "locale": "en-US",
                             "productId": "prod-sampleSmAlgoId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "fulfillmentOptions": [
                                 {
                                     "sageMakerAlgorithmFulfillmentOption": {
@@ -4172,9 +4625,11 @@
                     {
                         "title": "List SageMaker Model Fulfillment Options",
                         "input": {
+                            "locale": "en-US",
                             "productId": "prod-sampleSmModelId"
                         },
                         "output": {
+                            "locale": "en-US",
                             "fulfillmentOptions": [
                                 {
                                     "sageMakerModelFulfillmentOption": {
@@ -4187,7 +4642,14 @@
                                         "recommendation": {
                                             "recommendedBatchTransformInstanceType": "ml.g5.12xlarge",
                                             "recommendedRealtimeInferenceInstanceType": "ml.g5.12xlarge"
-                                        }
+                                        },
+                                        "supportedContentTypes": [
+                                            "application/json",
+                                            "text/csv"
+                                        ],
+                                        "supportedResponseMimeTypes": [
+                                            "application/json"
+                                        ]
                                     }
                                 }
                             ]
@@ -4228,6 +4690,12 @@
         "com.amazonaws.marketplacediscovery#ListFulfillmentOptionsInput": {
             "type": "structure",
             "members": {
+                "locale": {
+                    "target": "com.amazonaws.marketplacediscovery#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A BCP 47 language tag or comma-separated priority list specifying the preferred locale for response content. See <code>Locale</code> for supported values, constraints, fallback behavior, and the default locale. If omitted, the service returns content in the default locale.</p>"
+                    }
+                },
                 "productId": {
                     "target": "com.amazonaws.marketplacediscovery#ProductId",
                     "traits": {
@@ -4260,6 +4728,9 @@
         "com.amazonaws.marketplacediscovery#ListFulfillmentOptionsOutput": {
             "type": "structure",
             "members": {
+                "locale": {
+                    "target": "com.amazonaws.marketplacediscovery#Locale"
+                },
                 "fulfillmentOptions": {
                     "target": "com.amazonaws.marketplacediscovery#FulfillmentOptionsList",
                     "traits": {
@@ -4292,6 +4763,7 @@
                     {
                         "title": "Filter by Product ID",
                         "input": {
+                            "locale": "en-US",
                             "filters": [
                                 {
                                     "filterType": "PRODUCT_ID",
@@ -4340,6 +4812,7 @@
                     {
                         "title": "Filter by Seller with Private Offerset",
                         "input": {
+                            "locale": "en-US",
                             "filters": [
                                 {
                                     "filterType": "SELLER_OF_RECORD_PROFILE_ID",
@@ -4459,6 +4932,12 @@
         "com.amazonaws.marketplacediscovery#ListPurchaseOptionsInput": {
             "type": "structure",
             "members": {
+                "locale": {
+                    "target": "com.amazonaws.marketplacediscovery#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A BCP 47 language tag or comma-separated priority list specifying the preferred locale for response content. See <code>Locale</code> for supported values, constraints, fallback behavior, and the default locale. If omitted, the service returns content in the default locale.</p>"
+                    }
+                },
                 "filters": {
                     "target": "com.amazonaws.marketplacediscovery#PurchaseOptionFilterList",
                     "traits": {
@@ -4792,6 +5271,17 @@
                 "target": "com.amazonaws.marketplacediscovery#ListingSummary"
             }
         },
+        "com.amazonaws.marketplacediscovery#Locale": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A BCP 47 language tag or comma-separated priority list of language tags that specifies the preferred locale for response content. The field accepts a maximum of two language tags.</p> <p>The service resolves a locale string to the nearest supported locale. If no supported locale matches, the service applies the fallback behavior described below.</p> <ul> <li> <p> <b>Preferred locale</b> (first tag) – The locale you want the service to return content in.</p> </li> <li> <p> <b>Fallback locale</b> (optional, second tag) – The service default locale (<code>en-US</code> or <code>en</code>). The service returns content in this locale when translated content for the preferred locale is unavailable.</p> </li> </ul> <p>The field is optional. If omitted or null, the service returns content in the default locale (<code>en-US</code>).</p> <p> <b>Supported locales:</b> </p> <ul> <li> <p> <code>en-US</code> – English (service default, also resolves from <code>en</code>)</p> </li> <li> <p> <code>fr</code> – French</p> </li> <li> <p> <code>es</code> – Spanish</p> </li> <li> <p> <code>ko</code> – Korean</p> </li> <li> <p> <code>ja</code> – Japanese</p> </li> </ul> <p> <b>Fallback behavior:</b> </p> <ul> <li> <p>If translated content for the preferred locale is unavailable, the service returns content in the default locale.</p> </li> <li> <p>If the preferred locale is not supported and no fallback is provided, the service returns a <code>ValidationException</code>.</p> </li> <li> <p>If you provide an unsupported locale with the default locale as fallback (for example, <code>xx, en-US</code>), the service returns content in the default locale.</p> </li> </ul> <p> <b>Response locale field (Get APIs):</b> The <code>locale</code> field in Get API responses indicates the locale of the returned content. You can use this field to determine whether the response contains content in the requested locale or the default locale.</p> <p> <b>Examples:</b> </p> <ul> <li> <p> <code>fr</code> – Request French content. If unavailable, falls back to <code>en-US</code>.</p> </li> <li> <p> <code>fr, en-US</code> – Request French content with explicit fallback to English.</p> </li> <li> <p> <code>en-US</code> – Request content in the default locale.</p> </li> </ul>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^;,]+(\\s*,\\s*[^;,]+){0,1}$"
+            }
+        },
         "com.amazonaws.marketplacediscovery#MaxResults": {
             "type": "integer",
             "traits": {
@@ -5064,21 +5554,21 @@
                 "chargeDateOffset": {
                     "target": "com.amazonaws.marketplacediscovery#BoundedString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The relative offset from the renewal agreement start date when this installment is due, in ISO 8601 duration format. The offset uses months only or days only (for example, P1M or P30D); mixed units are not supported, and every offset in a schedule uses the same unit.</p>",
+                        "smithy.api#documentation": "<p>The relative offset from the renewal agreement start date when this installment is due, represented in ISO 8601 duration format (for example, P1M or P30D).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "chargePercentage": {
                     "target": "com.amazonaws.marketplacediscovery#BoundedString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The percentage of the increased TCV to charge in this installment. All entries in a schedule sum to 100.00.</p>",
+                        "smithy.api#documentation": "<p>The percentage of the increased Total Contract Value (TCV) to charge in this installment. All entries in a schedule sum to 100.00.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "dayOfMonth": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional calendar day of month on which the charge occurs. When absent, the charge day is derived from <code>chargeDateOffset</code>, and this field does not apply when <code>chargeDateOffset</code> is expressed in days. For months with fewer days than the specified day, the charge occurs on the last day of the month. For example, if <code>dayOfMonth</code> is 31, the charge in April occurs on April 30.</p>",
+                        "smithy.api#documentation": "<p>The optional calendar day of month on which the charge occurs. When absent, the charge day is derived from <code>chargeDateOffset</code>. For months with fewer days than the specified day, the charge occurs on the last day of the month. For example, if <code>dayOfMonth</code> is 31, the charge in April occurs on April 30.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 31
@@ -5621,7 +6111,7 @@
                 "filterValues": {
                     "target": "com.amazonaws.marketplacediscovery#PurchaseOptionFilterValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values to filter by. Multiple values within the same filter are combined with OR logic.</p>",
+                        "smithy.api#documentation": "<p>The values to filter by. Supported values depend on <code>filterType</code>:</p> <ul> <li> <p> <code>PRODUCT_ID</code> – One or more product identifiers to filter by.</p> </li> <li> <p> <code>SELLER_OF_RECORD_PROFILE_ID</code> – One or more seller profile identifiers to filter by.</p> </li> <li> <p> <code>PURCHASE_OPTION_TYPE</code> – One or more purchase option types to filter by: <code>OFFER</code> or <code>OFFERSET</code>.</p> </li> <li> <p> <code>VISIBILITY_SCOPE</code> – The visibility scope to filter by: <code>PRIVATE</code>.</p> </li> <li> <p> <code>AVAILABILITY_STATUS</code> – One or more availability statuses to filter by: <code>AVAILABLE</code> or <code>EXPIRED</code>.</p> </li> </ul> <p>To retrieve private offers and offer sets visible to you, use <code>VISIBILITY_SCOPE</code> with <code>PRIVATE</code>. OR logic combines multiple values within the same filter.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6182,10 +6672,46 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Instructions on how to access and use this SaaS product.</p>"
                     }
+                },
+                "availableFromTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the SaaS product became available for fulfillment.</p>"
+                    }
+                },
+                "launchUrl": {
+                    "target": "com.amazonaws.marketplacediscovery#URL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL that a buyer uses to launch the seller's SaaS product. This URL is distinct from <code>fulfillmentUrl</code>, which is the seller's software registration landing page.</p>"
+                    }
+                },
+                "quickLaunch": {
+                    "target": "com.amazonaws.marketplacediscovery#SaasQuickLaunchStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the SaaS product supports quick-launch deployment.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a Software as a Service (SaaS) fulfillment option.</p>"
+            }
+        },
+        "com.amazonaws.marketplacediscovery#SaasQuickLaunchStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.marketplacediscovery#SageMakerAlgorithmFulfillmentOption": {
@@ -6269,6 +6795,22 @@
                 "smithy.api#documentation": "<p>Recommended instance types for training and inference with a SageMaker algorithm.</p>"
             }
         },
+        "com.amazonaws.marketplacediscovery#SageMakerModelContentTypeList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "max": 256
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.marketplacediscovery#SageMakerModelFulfillmentOption": {
             "type": "structure",
             "members": {
@@ -6316,6 +6858,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Recommended instance types for inference with this model.</p>"
                     }
+                },
+                "supportedContentTypes": {
+                    "target": "com.amazonaws.marketplacediscovery#SageMakerModelContentTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME types that this model accepts as input.</p>"
+                    }
+                },
+                "supportedResponseMimeTypes": {
+                    "target": "com.amazonaws.marketplacediscovery#SageMakerModelResponseMimeTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME types that this model returns as output.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6341,6 +6895,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Recommended instance types for inference with a SageMaker model.</p>"
+            }
+        },
+        "com.amazonaws.marketplacediscovery#SageMakerModelResponseMimeTypeList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "max": 256
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.marketplacediscovery#ScheduleItem": {
@@ -6439,6 +7009,7 @@
                         "title": "Get facets for machine learning category",
                         "documentation": "Retrieve available facet values for listings in the machine learning category",
                         "input": {
+                            "locale": "en-US",
                             "searchText": "analytics",
                             "filters": [
                                 {
@@ -6497,6 +7068,7 @@
                         "title": "Get facets with term and rating range filters",
                         "documentation": "Retrieve facets for security listings with ratings between 3.0 and 5.0 stars",
                         "input": {
+                            "locale": "en-US",
                             "filters": [
                                 {
                                     "filterType": "CATEGORY",
@@ -6587,6 +7159,12 @@
         "com.amazonaws.marketplacediscovery#SearchFacetsInput": {
             "type": "structure",
             "members": {
+                "locale": {
+                    "target": "com.amazonaws.marketplacediscovery#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A BCP 47 language tag or comma-separated priority list specifying the preferred locale for response content. See <code>Locale</code> for supported values, constraints, fallback behavior, and the default locale. If omitted, the service returns content in the default locale.</p>"
+                    }
+                },
                 "searchText": {
                     "target": "com.amazonaws.marketplacediscovery#SearchText",
                     "traits": {
@@ -6778,6 +7356,7 @@
                         "title": "Search for machine learning listings",
                         "documentation": "Search for SaaS listings in the machine learning category with sorting by relevance",
                         "input": {
+                            "locale": "en-US",
                             "searchText": "computer vision",
                             "filters": [
                                 {
@@ -6898,6 +7477,12 @@
         "com.amazonaws.marketplacediscovery#SearchListingsInput": {
             "type": "structure",
             "members": {
+                "locale": {
+                    "target": "com.amazonaws.marketplacediscovery#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A BCP 47 language tag or comma-separated priority list specifying the preferred locale for response content. See <code>Locale</code> for supported values, constraints, fallback behavior, and the default locale. If omitted, the service returns content in the default locale.</p>"
+                    }
+                },
                 "searchText": {
                     "target": "com.amazonaws.marketplacediscovery#SearchText",
                     "traits": {

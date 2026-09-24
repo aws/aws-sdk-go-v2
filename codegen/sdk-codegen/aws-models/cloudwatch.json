@@ -940,6 +940,66 @@
                 "target": "com.amazonaws.cloudwatch#DatapointValue"
             }
         },
+        "com.amazonaws.cloudwatch#CreateResourceMetricsConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#CreateResourceMetricsConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#CreateResourceMetricsConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a resource metrics configuration for an Amazon Web Services resource. After you\n            create a configuration, Amazon CloudWatch collects detailed metrics for that\n            resource.</p>\n         <p>Each Amazon Web Services resource can have only one resource metrics configuration. If a\n            configuration already exists for the specified resource ARN, this operation returns a\n            <code>ConflictException</code>. To modify an existing configuration, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html\">UpdateResourceMetricsConfiguration</a>.</p>\n         <p>If the Amazon Web Services resource that you specify in <code>ResourceArn</code> does\n            not exist, this operation returns a <code>ResourceNotFoundException</code>. Verify that\n            the resource ARN is correct and that the resource exists before you retry the\n            request.</p>\n         <p>To create a resource metrics configuration, you must have the\n                <code>cloudwatch:CreateResourceMetricsConfiguration</code> permission. For information about scoping\n            this permission to specific resources, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html\">Condition keys for resource metrics configuration access</a> in the\n                <i>Amazon CloudWatch User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#CreateResourceMetricsConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.cloudwatch#ResourceArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to enable detailed\n            monitoring for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricSelections": {
+                    "target": "com.amazonaws.cloudwatch#ResourceMetricSelectionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which metrics Amazon CloudWatch collects for the resource. If you omit\n            this parameter, Amazon CloudWatch collects all available detailed metrics for the\n            resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the resource ARN and optional metric selections for a\n            <code>CreateResourceMetricsConfiguration</code> request.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#CreateResourceMetricsConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "ResourceMetricsConfiguration": {
+                    "target": "com.amazonaws.cloudwatch#ResourceMetricsConfiguration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The resource metrics configuration that was created by this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the newly created resource metrics configuration.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatch#DashboardArn": {
             "type": "string"
         },
@@ -1484,6 +1544,48 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#DeleteResourceMetricsConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#DeleteResourceMetricsConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#DeleteResourceMetricsConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the resource metrics configuration for an Amazon Web Services resource. After\n            you delete the configuration, Amazon CloudWatch stops collecting detailed metrics\n            for the resource. Metric data that Amazon CloudWatch already collected for the\n            resource is not deleted.</p>\n         <p>This operation returns a <code>ResourceNotFoundException</code> if no resource metrics\n            configuration exists for the specified resource ARN. Verify that the resource ARN is\n            correct.</p>\n         <p>To delete a resource metrics configuration, you must have the\n                <code>cloudwatch:DeleteResourceMetricsConfiguration</code> permission. For information about scoping\n            this permission to specific resources, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html\">Condition keys for resource metrics configuration access</a> in the\n                <i>Amazon CloudWatch User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#DeleteResourceMetricsConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.cloudwatch#ResourceArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to delete the\n            resource metrics configuration for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the resource ARN for a <code>DeleteResourceMetricsConfiguration</code>\n            request.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#DeleteResourceMetricsConfigurationOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>No data is returned.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -2755,7 +2857,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Displays the details of the dashboard that you specify.</p>\n         <p>To copy an existing dashboard, use <code>GetDashboard</code>, and then use the data\n            returned within <code>DashboardBody</code> as the template for the new dashboard when\n            you call <code>PutDashboard</code> to create the copy.</p>"
+                "smithy.api#documentation": "<p>Displays the details of the dashboard that you specify.</p>\n         <p>To copy an existing dashboard, use <code>GetDashboard</code>, and then use the data\n            returned within <code>DashboardBody</code> as the template for the new dashboard when\n            you call <code>PutDashboard</code> to create the copy.</p>\n         <p>You might have recently enabled an <a href=\"https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#optinregion\">opt-in Region (Region that is disabled by default)</a> for your account. In\n            that Region, <code>GetDashboard</code> can return an access denied error for up to 24\n            hours after you enable the Region. This delay occurs while dashboard data propagates.\n            The error does not\n            indicate a problem with your permissions. Because dashboards are global, you can call\n            <code>GetDashboard</code> in any other enabled Region, or retry after propagation\n            completes.</p>"
             }
         },
         "com.amazonaws.cloudwatch#GetDashboardInput": {
@@ -3003,7 +3105,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>You can use the <code>GetMetricData</code> API to retrieve CloudWatch metric\n            values. The operation can also include a CloudWatch Metrics Insights query, and\n            one or more metric math functions.</p>\n         <p>A <code>GetMetricData</code> operation that does not include a query can retrieve\n            as many as 500 different metrics in a single request, with a total of as many as 100,800\n            data points. You can also optionally perform metric math expressions on the values of\n            the returned statistics, to create new time series that represent new insights into your\n            data. For example, using Lambda metrics, you could divide the Errors metric by the\n            Invocations metric to get an error rate time series. For more information about metric\n            math expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User\n                Guide</i>.</p>\n         <p>If you include a Metrics Insights query, each <code>GetMetricData</code> operation can\n            include only one query. But the same <code>GetMetricData</code> operation can also\n            retrieve other metrics. Metrics Insights queries can query only the most recent three\n            hours of metric data. For more information about Metrics Insights, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/query_with_cloudwatch-metrics-insights.html\">Query your metrics with CloudWatch Metrics Insights</a>.</p>\n         <p>Calls to the <code>GetMetricData</code> API have a different pricing structure than\n            calls to <code>GetMetricStatistics</code>. For more information about pricing, see\n                <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch\n                Pricing</a>.</p>\n         <p>Amazon CloudWatch retains metric data as follows:</p>\n         <ul>\n            <li>\n               <p>Data points with a period of less than 60 seconds are available for 3\n                    hours. These data points are high-resolution metrics and are available only for\n                    custom metrics that have been defined with a <code>StorageResolution</code> of\n                    1.</p>\n            </li>\n            <li>\n               <p>Data points with a period of 60 seconds (1-minute) are available for 15\n                    days.</p>\n            </li>\n            <li>\n               <p>Data points with a period of 300 seconds (5-minute) are available for 63\n                    days.</p>\n            </li>\n            <li>\n               <p>Data points with a period of 3600 seconds (1 hour) are available for 455\n                    days (15 months).</p>\n            </li>\n         </ul>\n         <p>Data points that are initially published with a shorter period are aggregated\n            together for long-term storage. For example, if you collect data using a period of 1\n            minute, the data remains available for 15 days with 1-minute resolution. After 15 days,\n            this data is still available, but is aggregated and retrievable only with a resolution\n            of 5 minutes. After 63 days, the data is further aggregated and is available with a\n            resolution of 1 hour.</p>\n         <p>If you omit <code>Unit</code> in your request, all data that was collected with any\n            unit is returned, along with the corresponding units that were specified when the data\n            was reported to CloudWatch. If you specify a unit, the operation returns only data that\n            was collected with that unit specified. If you specify a unit that does not match the\n            data collected, the results of the operation are null. CloudWatch does not perform unit\n            conversions.</p>\n         <p>\n            <b>Using Metrics Insights queries with metric\n            math</b>\n         </p>\n         <p>You can't mix a Metric Insights query and metric math syntax in the same expression,\n            but you can reference results from a Metrics Insights query within other Metric math\n            expressions. A Metrics Insights query without a <b>GROUP\n                BY</b> clause returns a single time-series (TS), and can be used as input for\n            a metric math expression that expects a single time series. A Metrics Insights query\n            with a <b>GROUP BY</b> clause returns an array of time-series\n            (TS[]), and can be used as input for a metric math expression that expects an array of\n            time series. </p>",
+                "smithy.api#documentation": "<p>You can use the <code>GetMetricData</code> API to retrieve CloudWatch metric\n            values. The operation can also include a CloudWatch Metrics Insights query, and\n            one or more metric math functions.</p>\n         <p>A <code>GetMetricData</code> operation that does not include a query can retrieve\n            as many as 500 different metrics in a single request, with a total of as many as 100,800\n            data points. You can also optionally perform metric math expressions on the values of\n            the returned statistics, to create new time series that represent new insights into your\n            data. For example, using Lambda metrics, you could divide the Errors metric by the\n            Invocations metric to get an error rate time series. For more information about metric\n            math expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User\n                Guide</i>.</p>\n         <p>If you include a Metrics Insights query, each <code>GetMetricData</code> operation can\n            include only one query. But the same <code>GetMetricData</code> operation can also\n            retrieve other metrics. Metrics Insights queries can query the most recent two weeks of\n            metric data. For alarm condition evaluations, Metrics Insights queries can query only\n            the most recent three hours of metric data. For more information about Metrics Insights,\n            see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/query_with_cloudwatch-metrics-insights.html\">Query your metrics with CloudWatch Metrics Insights</a>.</p>\n         <p>Calls to the <code>GetMetricData</code> API have a different pricing structure than\n            calls to <code>GetMetricStatistics</code>. For more information about pricing, see\n                <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch\n                Pricing</a>.</p>\n         <p>Amazon CloudWatch retains metric data as follows:</p>\n         <ul>\n            <li>\n               <p>Data points with a period of less than 60 seconds are available for 3\n                    hours. These data points are high-resolution metrics and are available only for\n                    custom metrics that have been defined with a <code>StorageResolution</code> of\n                    1.</p>\n            </li>\n            <li>\n               <p>Data points with a period of 60 seconds (1-minute) are available for 15\n                    days.</p>\n            </li>\n            <li>\n               <p>Data points with a period of 300 seconds (5-minute) are available for 63\n                    days.</p>\n            </li>\n            <li>\n               <p>Data points with a period of 3600 seconds (1 hour) are available for 455\n                    days (15 months).</p>\n            </li>\n         </ul>\n         <p>Data points that are initially published with a shorter period are aggregated\n            together for long-term storage. For example, if you collect data using a period of 1\n            minute, the data remains available for 15 days with 1-minute resolution. After 15 days,\n            this data is still available, but is aggregated and retrievable only with a resolution\n            of 5 minutes. After 63 days, the data is further aggregated and is available with a\n            resolution of 1 hour.</p>\n         <p>If you omit <code>Unit</code> in your request, all data that was collected with any\n            unit is returned, along with the corresponding units that were specified when the data\n            was reported to CloudWatch. If you specify a unit, the operation returns only data that\n            was collected with that unit specified. If you specify a unit that does not match the\n            data collected, the results of the operation are null. CloudWatch does not perform unit\n            conversions.</p>\n         <p>\n            <b>Using Metrics Insights queries with metric\n            math</b>\n         </p>\n         <p>You can't mix a Metric Insights query and metric math syntax in the same expression,\n            but you can reference results from a Metrics Insights query within other Metric math\n            expressions. A Metrics Insights query without a <b>GROUP\n                BY</b> clause returns a single time-series (TS), and can be used as input for\n            a metric math expression that expects a single time series. A Metrics Insights query\n            with a <b>GROUP BY</b> clause returns an array of time-series\n            (TS[]), and can be used as input for a metric math expression that expects an array of\n            time series. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3419,9 +3521,84 @@
                         "smithy.api#documentation": "<p>The status of OTel enrichment for the account. Valid values are\n                <code>Running</code> (enrichment is enabled) and <code>Stopped</code> (enrichment is\n            disabled).</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "IncludeFilters": {
+                    "target": "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric namespaces, and the metric names, that are enriched. This parameter is\n            omitted when enrichment is stopped, and when enrichment is running with no include\n            filters, which means that every supported namespace is in scope.</p>"
+                    }
+                },
+                "ExcludeFilters": {
+                    "target": "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric namespaces, and the metric names, that are left unenriched. This\n            parameter is omitted when enrichment is stopped, and when enrichment is running with no\n            exclude filters, which means that nothing is excluded.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that enrichment started for the account. This parameter is\n            omitted when enrichment is stopped.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the enrichment configuration for the account was last\n            stored.</p>"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#GetResourceMetricsConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#GetResourceMetricsConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#GetResourceMetricsConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the current resource metrics configuration for an Amazon Web Services\n            resource. The response includes the resource ARN, any metric selections, and the times\n            at which the configuration was created and last updated.</p>\n         <p>This operation returns a <code>ResourceNotFoundException</code> if no resource metrics\n            configuration exists for the specified resource ARN. To create a configuration, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html\">CreateResourceMetricsConfiguration</a>.</p>\n         <p>To retrieve a resource metrics configuration, you must have the\n                <code>cloudwatch:GetResourceMetricsConfiguration</code> permission. For information\n            about scoping this permission to specific resources, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html\">Condition keys for resource metrics configuration access</a> in the\n                <i>Amazon CloudWatch User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#GetResourceMetricsConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.cloudwatch#ResourceArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to retrieve the\n            resource metrics configuration for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the resource ARN for a <code>GetResourceMetricsConfiguration</code>\n            request.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#GetResourceMetricsConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "ResourceMetricsConfiguration": {
+                    "target": "com.amazonaws.cloudwatch#ResourceMetricsConfiguration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The resource metrics configuration for the specified resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the current resource metrics configuration for the specified resource.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -3431,6 +3608,9 @@
             "operations": [
                 {
                     "target": "com.amazonaws.cloudwatch#AssociateDatasetKmsKey"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#CreateResourceMetricsConfiguration"
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#DeleteAlarmMuteRule"
@@ -3449,6 +3629,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#DeleteMetricStream"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#DeleteResourceMetricsConfiguration"
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#DescribeAlarmContributors"
@@ -3509,6 +3692,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#GetOTelEnrichment"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#GetResourceMetricsConfiguration"
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#ListAlarmMuteRules"
@@ -3578,6 +3764,12 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#UpdateOTelEnrichment"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#UpdateResourceMetricsConfiguration"
                 }
             ],
             "traits": {
@@ -5232,7 +5424,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of the dashboards for your account. If you include\n                <code>DashboardNamePrefix</code>, only those dashboards with names starting with the\n            prefix are listed. Otherwise, all dashboards in your account are listed. </p>\n         <p>\n            <code>ListDashboards</code> returns up to 1000 results on one page. If there are\n            more than 1000 dashboards, you can call <code>ListDashboards</code> again and include\n            the value you received for <code>NextToken</code> in the first call, to receive the next\n            1000 results.</p>",
+                "smithy.api#documentation": "<p>Returns a list of the dashboards for your account. If you include\n                <code>DashboardNamePrefix</code>, only those dashboards with names starting with the\n            prefix are listed. Otherwise, all dashboards in your account are listed. </p>\n         <p>\n            <code>ListDashboards</code> returns up to 1000 results on one page. If there are\n            more than 1000 dashboards, you can call <code>ListDashboards</code> again and include\n            the value you received for <code>NextToken</code> in the first call, to receive the next\n            1000 results.</p>\n         <p>You might have recently enabled an <a href=\"https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#optinregion\">opt-in Region (Region that is disabled by default)</a> for your account. In\n            that Region, <code>ListDashboards</code> can return an access denied error for up to 24\n            hours after you enable the Region. This delay occurs while dashboard data propagates.\n            The error does not\n            indicate a problem with your permissions. Because dashboards are global, you can call\n            <code>ListDashboards</code> in any other enabled Region, or retry after propagation\n            completes.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -6386,6 +6578,18 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatch#MetricNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatch#MetricName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
         "com.amazonaws.cloudwatch#MetricStat": {
             "type": "structure",
             "members": {
@@ -6712,6 +6916,52 @@
         },
         "com.amazonaws.cloudwatch#NextToken": {
             "type": "string"
+        },
+        "com.amazonaws.cloudwatch#OTelEnrichmentMetricNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatch#MetricName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelector": {
+            "type": "structure",
+            "members": {
+                "Namespace": {
+                    "target": "com.amazonaws.cloudwatch#Namespace",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The namespace of the metrics to select. Namespaces are matched exactly and are\n            case-sensitive.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricNames": {
+                    "target": "com.amazonaws.cloudwatch#OTelEnrichmentMetricNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the metrics to select within the namespace. Metric names are matched\n            exactly and are case-sensitive. If this parameter is omitted, every metric in the\n            namespace is selected.</p>\n         <p>A maximum of 100 metric names is allowed for each selector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Selects the metrics in one namespace, for use in the <code>IncludeFilters</code> or\n                <code>ExcludeFilters</code> parameter of <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_StartOTelEnrichment.html\">StartOTelEnrichment</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateOTelEnrichment.html\">UpdateOTelEnrichment</a>.</p>\n         <p>A maximum of 100 selectors is allowed across <code>IncludeFilters</code> and\n                <code>ExcludeFilters</code> combined.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelectorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelector"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
         },
         "com.amazonaws.cloudwatch#OTelEnrichmentStatus": {
             "type": "enum",
@@ -7838,6 +8088,16 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatch#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[a-zA-Z0-9-]+:[a-zA-Z0-9-]+:[a-zA-Z0-9-]*:\\d{12}:.+$"
+            }
+        },
         "com.amazonaws.cloudwatch#ResourceConflict": {
             "type": "structure",
             "members": {
@@ -7868,6 +8128,72 @@
                     "min": 0,
                     "max": 5
                 }
+            }
+        },
+        "com.amazonaws.cloudwatch#ResourceMetricSelection": {
+            "type": "structure",
+            "members": {
+                "IncludeMetrics": {
+                    "target": "com.amazonaws.cloudwatch#MetricNameList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The names of the metrics to collect for the resource. Amazon CloudWatch collects\n            only the metrics that you list here.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies which metrics Amazon CloudWatch collects for a resource metrics\n            configuration. Include this in a <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html\">CreateResourceMetricsConfiguration</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html\">UpdateResourceMetricsConfiguration</a> request to limit collection to a specific\n            set of metrics. If you omit metric selections, Amazon CloudWatch collects all\n            available detailed metrics for the resource.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#ResourceMetricSelectionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatch#ResourceMetricSelection"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.cloudwatch#ResourceMetricsConfiguration": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.cloudwatch#ResourceArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services resource that this\n            configuration applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The date and time that the resource metrics configuration was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The date and time that the resource metrics configuration was last updated. When the\n            configuration is first created, this value is the same as\n            <code>CreatedAt</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricSelections": {
+                    "target": "com.amazonaws.cloudwatch#ResourceMetricSelectionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metrics that Amazon CloudWatch collects for the resource. If this field is not\n            present, Amazon CloudWatch collects all available detailed metrics for the\n            resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a resource metrics configuration for an Amazon Web Services resource. A\n            resource metrics configuration enables detailed metric collection for the resource that\n            is identified by its Amazon Resource Name (ARN). Each Amazon Web Services resource can\n            have only one resource metrics configuration.</p>\n         <p>This structure is returned by the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html\">CreateResourceMetricsConfiguration</a>, <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html\">UpdateResourceMetricsConfiguration</a>, and <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetResourceMetricsConfiguration.html\">GetResourceMetricsConfiguration</a> operations.</p>"
             }
         },
         "com.amazonaws.cloudwatch#ResourceName": {
@@ -8415,20 +8741,63 @@
             "output": {
                 "target": "com.amazonaws.cloudwatch#StartOTelEnrichmentOutput"
             },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#ValidationException"
+                }
+            ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables enrichment and PromQL access for CloudWatch vended metrics for <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html\">supported Amazon Web Services resources</a> in the account. Once enabled,\n            metrics that contain a resource identifier dimension (for example, EC2\n                <code>CPUUtilization</code> with an <code>InstanceId</code> dimension) are enriched\n            with resource ARN and resource tag labels and become queryable using PromQL.</p>\n         <p>Before calling this operation, you must enable resource tags on telemetry for your\n            account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EnableResourceTagsOnTelemetry.html\">Enable\n                resource tags on telemetry</a>.</p>"
+                "smithy.api#documentation": "<p>Enables enrichment and PromQL access for CloudWatch vended metrics for <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html\">supported Amazon Web Services resources</a> in the account. Once enabled,\n            metrics that contain a resource identifier dimension (for example, EC2\n                <code>CPUUtilization</code> with an <code>InstanceId</code> dimension) are enriched\n            with resource ARN and resource tag labels and become queryable using PromQL.</p>\n         <p>Before calling this operation, you must enable resource tags on telemetry for your\n            account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EnableResourceTagsOnTelemetry.html\">Enable\n                resource tags on telemetry</a>.</p>\n         <p>Optionally, <code>IncludeFilters</code> and <code>ExcludeFilters</code> limit\n            enrichment to a subset of the account's metrics. These filters are stored only when this\n            operation starts enrichment. Calling <code>StartOTelEnrichment</code> for an account\n            where enrichment is already running has no effect and does not modify the filters that\n            are applied. To change them, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateOTelEnrichment.html\">UpdateOTelEnrichment</a>.</p>"
             }
         },
         "com.amazonaws.cloudwatch#StartOTelEnrichmentInput": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "IncludeFilters": {
+                    "target": "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric namespaces, and the metric names, to enrich. If this parameter is\n            omitted, every namespace that Amazon CloudWatch supports for enrichment is in\n            scope.</p>\n         <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and\n                <code>ExcludeFilters</code> combined.</p>"
+                    }
+                },
+                "ExcludeFilters": {
+                    "target": "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric namespaces, and the metric names, to leave unenriched. If this parameter\n            is omitted, nothing is excluded.</p>\n         <p>Amazon CloudWatch applies <code>ExcludeFilters</code> after\n                <code>IncludeFilters</code>, so a metric that both parameters match is not\n            enriched.</p>\n         <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and\n                <code>ExcludeFilters</code> combined.</p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatch#StartOTelEnrichmentOutput": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "IncludeFilters": {
+                    "target": "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The include filters that are stored for the account.</p>"
+                    }
+                },
+                "ExcludeFilters": {
+                    "target": "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exclude filters that are stored for the account.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that enrichment started for the account.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the enrichment configuration for the account was last\n            stored.</p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
@@ -8904,6 +9273,155 @@
             "traits": {
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.cloudwatch#UpdateOTelEnrichment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#UpdateOTelEnrichmentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#UpdateOTelEnrichmentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Replaces the filters that determine which CloudWatch vended metrics are enriched\n            with resource ARN and resource tag labels for the account. Enrichment must already be\n            running for the account. If it is not, this operation returns a\n                <code>ResourceNotFoundException</code>. To start enrichment, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_StartOTelEnrichment.html\">StartOTelEnrichment</a>.</p>\n         <p>The filters in the request completely replace the stored filters; they are not\n            merged with them. <code>IncludeFilters</code> and <code>ExcludeFilters</code> are\n            replaced as a pair, so a request that specifies only <code>IncludeFilters</code> also\n            clears the stored <code>ExcludeFilters</code>, and a request that specifies neither\n            clears both.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#UpdateOTelEnrichmentInput": {
+            "type": "structure",
+            "members": {
+                "IncludeFilters": {
+                    "target": "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric namespaces, and the metric names, to enrich. If this parameter is\n            omitted, every namespace that Amazon CloudWatch supports for enrichment is in\n            scope.</p>\n         <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and\n                <code>ExcludeFilters</code> combined.</p>"
+                    }
+                },
+                "ExcludeFilters": {
+                    "target": "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric namespaces, and the metric names, to leave unenriched. If this parameter\n            is omitted, nothing is excluded.</p>\n         <p>Amazon CloudWatch applies <code>ExcludeFilters</code> after\n                <code>IncludeFilters</code>, so a metric that both parameters match is not\n            enriched.</p>\n         <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and\n                <code>ExcludeFilters</code> combined.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#UpdateOTelEnrichmentOutput": {
+            "type": "structure",
+            "members": {
+                "IncludeFilters": {
+                    "target": "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The include filters that are stored for the account after the replacement. This\n            parameter is omitted when the request cleared the include filters, which means that\n            every supported namespace is in scope.</p>"
+                    }
+                },
+                "ExcludeFilters": {
+                    "target": "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exclude filters that are stored for the account after the replacement. This\n            parameter is omitted when the request cleared the exclude filters, which means that\n            nothing is excluded.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that enrichment started for the account.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the enrichment configuration for the account was last\n            stored.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#UpdateResourceMetricsConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#UpdateResourceMetricsConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#UpdateResourceMetricsConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the resource metrics configuration for an Amazon Web Services resource. The\n            <code>MetricSelections</code> value that you provide replaces any existing metric\n            selections for the resource; it is not merged with them.</p>\n         <p>If you omit <code>MetricSelections</code>, Amazon CloudWatch removes any existing\n            metric selection filter and collects all available detailed metrics for the\n            resource.</p>\n         <p>This operation returns a <code>ResourceNotFoundException</code> if no resource metrics\n            configuration exists for the specified resource ARN. To create a configuration, use\n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html\">CreateResourceMetricsConfiguration</a>.</p>\n         <p>To update a resource metrics configuration, you must have the\n                <code>cloudwatch:UpdateResourceMetricsConfiguration</code> permission. For information about scoping\n            this permission to specific resources, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html\">Condition keys for resource metrics configuration access</a> in the\n                <i>Amazon CloudWatch User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#UpdateResourceMetricsConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.cloudwatch#ResourceArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to update the\n            resource metrics configuration for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricSelections": {
+                    "target": "com.amazonaws.cloudwatch#ResourceMetricSelectionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which metrics Amazon CloudWatch collects for the resource. The selections\n            that you provide completely replace any existing metric selections.</p>\n         <p>If you omit this parameter, Amazon CloudWatch removes any existing metric selection\n            filter and collects all available detailed metrics for the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the resource ARN and optional replacement metric selections for an\n            <code>UpdateResourceMetricsConfiguration</code> request.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#UpdateResourceMetricsConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "ResourceMetricsConfiguration": {
+                    "target": "com.amazonaws.cloudwatch#ResourceMetricsConfiguration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The resource metrics configuration after the update was applied.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the updated resource metrics configuration.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cloudwatch#ValidationExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ValidationError",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The request failed validation. One or more input parameters do not satisfy the\n            constraints that the operation requires.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudwatch#ValidationExceptionMessage": {
+            "type": "string"
         },
         "com.amazonaws.cloudwatch#Values": {
             "type": "list",
