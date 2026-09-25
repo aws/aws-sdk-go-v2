@@ -510,8 +510,8 @@ func testDownloadObject(t *testing.T, bucket string, testData downloadObjectTest
 		return
 	}
 
-	if e, a := testData.ExpectBody, w.Bytes(); !bytes.EqualFold(e, a) {
-		t.Errorf("expect %s, got %s", e, a)
+	if e, a := testData.ExpectBody, w.Bytes(); !bytes.Equal(e, a) {
+		t.Errorf("downloaded object does not match the uploaded body: %s", describeBytesDiff(e, a))
 	}
 }
 
@@ -714,6 +714,12 @@ type downloadDirectoryTestData struct {
 	ExpectObjectsDownloaded int64
 	ExpectFiles             []string
 	ExpectError             string
+	// PartSizes, when set, uploads the object at each key as a multipart object
+	// whose parts have exactly these byte sizes (all but the last must be >= 5MB
+	// per the S3 minimum). Keys absent from the map are uploaded with a single
+	// PutObject. Used to exercise directory downloads of objects with unequal
+	// part sizes (#3526).
+	PartSizes map[string][]int64
 }
 
 func testDownloadDirectory(t *testing.T, bucket string, testData downloadDirectoryTestData) {
@@ -733,14 +739,18 @@ func testDownloadDirectory(t *testing.T, bucket string, testData downloadDirecto
 		if err != nil {
 			t.Fatalf("error when mocking test data for object %s", key)
 		}
-		_, err = s3Client.PutObject(context.Background(),
-			&s3.PutObjectInput{
-				Bucket: aws.String(bucket),
-				Key:    aws.String(key),
-				Body:   bytes.NewReader(fileBuf),
-			})
-		if err != nil {
-			t.Fatalf("error when putting object %s", key)
+		if partSizes, ok := testData.PartSizes[key]; ok {
+			putMultipartObject(t, bucket, key, fileBuf, partSizes)
+		} else {
+			_, err = s3Client.PutObject(context.Background(),
+				&s3.PutObjectInput{
+					Bucket: aws.String(bucket),
+					Key:    aws.String(key),
+					Body:   bytes.NewReader(fileBuf),
+				})
+			if err != nil {
+				t.Fatalf("error when putting object %s", key)
+			}
 		}
 		file := strings.ReplaceAll(strings.TrimPrefix(key, keyprefix), delimiter, string(os.PathSeparator))
 		expectFiles[file] = fileBuf
@@ -782,9 +792,75 @@ func testDownloadDirectory(t *testing.T, bucket string, testData downloadDirecto
 			t.Errorf("no data recorded for file %s", path)
 			continue
 		}
-		if e, a := expectData, b; !bytes.EqualFold(e, a) {
-			t.Errorf("for file %s, expect %s, got %s", f, e, a)
+		if e, a := expectData, b; !bytes.Equal(e, a) {
+			t.Errorf("downloaded file %s does not match the uploaded object: %s", f, describeBytesDiff(e, a))
 		}
+	}
+}
+
+// putMultipartObject uploads body as a multipart object whose parts have exactly
+// the sizes in partSizes, which must sum to len(body). S3 requires every part
+// except the last to be at least 5MB, so partSizes must respect that.
+func putMultipartObject(t *testing.T, bucket, key string, body []byte, partSizes []int64) {
+	var total int64
+	for _, s := range partSizes {
+		total += s
+	}
+	if total != int64(len(body)) {
+		t.Fatalf("PartSizes for %s sum to %d but the object is %d bytes; they must match", key, total, len(body))
+	}
+
+	createOut, err := s3Client.CreateMultipartUpload(context.Background(),
+		&s3.CreateMultipartUploadInput{
+			Bucket: aws.String(bucket),
+			Key:    aws.String(key),
+		})
+	if err != nil {
+		t.Fatalf("expect no error creating multipart upload for %s, got %v", key, err)
+	}
+	uploadID := createOut.UploadId
+
+	abort := func() {
+		_, _ = s3Client.AbortMultipartUpload(context.Background(),
+			&s3.AbortMultipartUploadInput{
+				Bucket:   aws.String(bucket),
+				Key:      aws.String(key),
+				UploadId: uploadID,
+			})
+	}
+
+	var completedParts []s3types.CompletedPart
+	var offset int64
+	for i, size := range partSizes {
+		partNum := int32(i + 1)
+		partOut, err := s3Client.UploadPart(context.Background(),
+			&s3.UploadPartInput{
+				Bucket:     aws.String(bucket),
+				Key:        aws.String(key),
+				UploadId:   uploadID,
+				PartNumber: aws.Int32(partNum),
+				Body:       bytes.NewReader(body[offset : offset+size]),
+			})
+		if err != nil {
+			abort()
+			t.Fatalf("expect no error uploading part %d of %s, got %v", partNum, key, err)
+		}
+		completedParts = append(completedParts, s3types.CompletedPart{
+			ETag:       partOut.ETag,
+			PartNumber: aws.Int32(partNum),
+		})
+		offset += size
+	}
+
+	if _, err := s3Client.CompleteMultipartUpload(context.Background(),
+		&s3.CompleteMultipartUploadInput{
+			Bucket:          aws.String(bucket),
+			Key:             aws.String(key),
+			UploadId:        uploadID,
+			MultipartUpload: &s3types.CompletedMultipartUpload{Parts: completedParts},
+		}); err != nil {
+		abort()
+		t.Fatalf("expect no error completing multipart upload for %s, got %v", key, err)
 	}
 }
 
