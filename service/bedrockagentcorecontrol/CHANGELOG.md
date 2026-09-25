@@ -1,3 +1,7 @@
+# v1.70.0 (2026-09-25)
+
+* **Feature**: Amazon Bedrock AgentCore Payments now supports credential rotation for payment connectors, letting you rotate API and wallet secrets for Quick Create payment auths from the console. This release also adds Type and Creation type columns to the payment managers views.
+
 # v1.69.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

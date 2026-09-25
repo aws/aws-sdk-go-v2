@@ -1,3 +1,7 @@
+# v1.42.0 (2026-09-25)
+
+* **Feature**: Release shapes for the proactive agentic recommendations and the multi-knowledge base search features. Increases the maximum length of QuickResponseContent.
+
 # v1.41.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

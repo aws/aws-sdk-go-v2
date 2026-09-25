@@ -1,3 +1,7 @@
+# v1.60.0 (2026-09-25)
+
+* **Feature**: This release adds support for Feedback and Metadata in the GetFaceLivenessSessionResults response. Feedback returns codes explaining why a Face Liveness check produced its result. Metadata includes the client SDK type.
+
 # v1.59.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

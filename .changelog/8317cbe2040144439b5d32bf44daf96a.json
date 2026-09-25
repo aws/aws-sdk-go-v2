@@ -1,8 +1,0 @@
-{
-    "id": "8317cbe2-0401-4443-9b5d-32bf44daf96a",
-    "type": "feature",
-    "description": "Adds support for calling VPC configuration API's in Bedrock. These configurations allow the use of On Prem connectors in Bedrock Managed Knowledge bases",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

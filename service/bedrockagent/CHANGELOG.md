@@ -1,3 +1,7 @@
+# v1.67.0 (2026-09-25)
+
+* **Feature**: Adds support for calling VPC configuration API's in Bedrock. These configurations allow the use of On Prem connectors in Bedrock Managed Knowledge bases
+
 # v1.66.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

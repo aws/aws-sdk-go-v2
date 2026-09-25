@@ -1,3 +1,7 @@
+# v1.61.0 (2026-09-25)
+
+* **Feature**: This release adds support for RTMP push router outputs in AWS Elemental MediaConnect.
+
 # v1.60.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,8 @@
+# v1.164.0 (2026-09-25)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Feature**: add support for table level federation
+
 # v1.163.0 (2026-09-24)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

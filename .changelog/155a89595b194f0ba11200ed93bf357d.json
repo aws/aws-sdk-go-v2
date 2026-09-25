@@ -1,8 +1,0 @@
-{
-    "id": "155a8959-5b19-4f0b-a112-00ed93bf357d",
-    "type": "feature",
-    "description": "add support for table level federation",
-    "modules": [
-        "service/glue"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.31.0 (2026-09-25)
+
+* **Feature**: Add GraphIdentifier filter for ListImportTasks
+
 # v1.30.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

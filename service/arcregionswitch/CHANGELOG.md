@@ -1,3 +1,7 @@
+# v1.20.0 (2026-09-25)
+
+* **Feature**: Adds a service quota checker to Region switch to verify quota parity between your primary and standby Region, and automatically submit quota limit increases. Adds an optional EC2 Auto Scaling and ECS setting that waits for instances or tasks in the scaled-up Region to be healthy in target groups.
+
 # v1.19.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

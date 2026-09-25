@@ -1,3 +1,30 @@
+# Release (2026-09-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.20.0](service/arcregionswitch/CHANGELOG.md#v1200-2026-09-25)
+  * **Feature**: Adds a service quota checker to Region switch to verify quota parity between your primary and standby Region, and automatically submit quota limit increases. Adds an optional EC2 Auto Scaling and ECS setting that waits for instances or tasks in the scaled-up Region to be healthy in target groups.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.67.0](service/bedrockagent/CHANGELOG.md#v1670-2026-09-25)
+  * **Feature**: Adds support for calling VPC configuration API's in Bedrock. These configurations allow the use of On Prem connectors in Bedrock Managed Knowledge bases
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.70.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1700-2026-09-25)
+  * **Feature**: Amazon Bedrock AgentCore Payments now supports credential rotation for payment connectors, letting you rotate API and wallet secrets for Quick Create payment auths from the console. This release also adds Type and Creation type columns to the payment managers views.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.202.0](service/connect/CHANGELOG.md#v12020-2026-09-25)
+  * **Feature**: Agent Privacy During Hold is a new privacy capability for Amazon Connect Voice that prevents agent audio from being captured in call recordings or Contact Lens conversational analytics during hold. When enabled, agents are automatically muted on entering hold and unmuted on resuming the contact
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.164.0](service/glue/CHANGELOG.md#v11640-2026-09-25)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+  * **Feature**: add support for table level federation
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.61.0](service/mediaconnect/CHANGELOG.md#v1610-2026-09-25)
+  * **Feature**: This release adds support for RTMP push router outputs in AWS Elemental MediaConnect.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.31.0](service/neptunegraph/CHANGELOG.md#v1310-2026-09-25)
+  * **Feature**: Add GraphIdentifier filter for ListImportTasks
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.42.0](service/qconnect/CHANGELOG.md#v1420-2026-09-25)
+  * **Feature**: Release shapes for the proactive agentic recommendations and the multi-knowledge base search features. Increases the maximum length of QuickResponseContent.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.60.0](service/rekognition/CHANGELOG.md#v1600-2026-09-25)
+  * **Feature**: This release adds support for Feedback and Metadata in the GetFaceLivenessSessionResults response. Feedback returns codes explaining why a Face Liveness check produced its result. Metadata includes the client SDK type.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.19.0](service/securityagent/CHANGELOG.md#v1190-2026-09-25)
+  * **Feature**: This release adds the ListActorMessages operation, which returns the multi-factor authentication messages received at an actor's server-generated email address
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.50.0](service/wellarchitected/CHANGELOG.md#v1500-2026-09-25)
+  * **Feature**: This change releases the Well-Architected Agent, a generative AI service that analyzes a customer's AWS environment and delivers personalized, prioritized recommendations across cost, security, performance, and resilience.
+
 # Release (2026-09-24)
 
 ## General Highlights
