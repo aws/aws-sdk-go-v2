@@ -141,6 +141,45 @@
                 "target": "com.amazonaws.securityagent#Actor"
             }
         },
+        "com.amazonaws.securityagent#ActorMessage": {
+            "type": "structure",
+            "members": {
+                "sender": {
+                    "target": "com.amazonaws.securityagent#SensitiveMessageSender",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address the message was sent from.</p>"
+                    }
+                },
+                "subject": {
+                    "target": "com.amazonaws.securityagent#SensitiveMessageSubject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subject line of the message.</p>"
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.securityagent#SensitiveMessageBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The plain-text body of the message, containing the MFA code or verification link.</p>"
+                    }
+                },
+                "receivedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the message was received.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A message received at an actor's server-generated email MFA address.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#ActorMessageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#ActorMessage"
+            }
+        },
         "com.amazonaws.securityagent#AddArtifact": {
             "type": "operation",
             "input": {
@@ -7779,6 +7818,89 @@
                 "target": "com.amazonaws.securityagent#LambdaFunctionArn"
             }
         },
+        "com.amazonaws.securityagent#ListActorMessages": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityagent#ListActorMessagesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.securityagent#ListActorMessagesOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of the email MFA messages received for an actor at its server-generated email address, most recent first.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListActorMessages"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "messages"
+                }
+            }
+        },
+        "com.amazonaws.securityagent#ListActorMessagesInput": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.securityagent#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.securityagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the nextToken value returned from the previous request.</p>"
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space that owns the pentest.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "pentestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the pentest that the actor belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "actorIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the actor whose messages to list. The identifier is case-insensitive.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityagent#ListActorMessagesOutput": {
+            "type": "structure",
+            "members": {
+                "messages": {
+                    "target": "com.amazonaws.securityagent#ActorMessageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of messages received for the actor, most recent first.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.securityagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the nextToken value returned from the previous request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityagent#ListAgentSpaces": {
             "type": "operation",
             "input": {
@@ -11380,6 +11502,9 @@
                     "target": "com.amazonaws.securityagent#InitiateProviderRegistration"
                 },
                 {
+                    "target": "com.amazonaws.securityagent#ListActorMessages"
+                },
+                {
                     "target": "com.amazonaws.securityagent#ListArtifacts"
                 },
                 {
@@ -12245,6 +12370,24 @@
             }
         },
         "com.amazonaws.securityagent#SensitiveEmailAddress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.securityagent#SensitiveMessageBody": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.securityagent#SensitiveMessageSender": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.securityagent#SensitiveMessageSubject": {
             "type": "string",
             "traits": {
                 "smithy.api#sensitive": {}

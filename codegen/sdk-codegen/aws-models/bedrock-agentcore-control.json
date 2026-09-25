@@ -3872,6 +3872,50 @@
                 "smithy.api#documentation": "<p>Coinbase CDP configuration output with secret ARNs.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#CoinbaseCdpRotationTargets": {
+            "type": "structure",
+            "members": {
+                "secrets": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CoinbaseCdpSecrets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secrets to rotate. Specify at least one value. Each secret that you specify is rotated independently.</p> <ul> <li> <p> <code>API_KEY</code> - The API key that the payment connector uses to call Coinbase CDP. Rotate it as routine maintenance, or if you suspect that it is compromised.</p> </li> <li> <p> <code>WALLET_SECRET</code> - The wallet secret that signs transactions. Rotate it only if it is lost or compromised. Coinbase CDP allows one wallet secret per project, so it is replaced in place and signing can be briefly interrupted.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the service-managed Coinbase CDP secrets to rotate.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CoinbaseCdpSecret": {
+            "type": "enum",
+            "members": {
+                "API_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API_KEY"
+                    }
+                },
+                "WALLET_SECRET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WALLET_SECRET"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CoinbaseCdpSecrets": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#CoinbaseCdpSecret"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ComponentConfiguration": {
             "type": "structure",
             "members": {
@@ -9456,6 +9500,20 @@
                         "smithy.api#enumValue": "CognitoOauth2"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CredentialRotationConfig": {
+            "type": "union",
+            "members": {
+                "coinbaseCDP": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CoinbaseCdpRotationTargets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The credentials to rotate for a Coinbase CDP payment connector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the service-managed credentials to rotate. Provide the member that matches the payment connector's <code>type</code>.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#CredentialsProviderConfiguration": {
@@ -18559,6 +18617,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "provisionMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PaymentConnectorProvisionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how the payment connector was provisioned. Payment connectors that were created before this field was available return <code>MANUAL</code>.</p> <ul> <li> <p> <code>MANUAL</code> - You provided the credential provider configurations, so you own the credentials. Rotate them with the payment provider, then call <code>UpdatePaymentCredentialProvider</code>.</p> </li> <li> <p> <code>QUICK_CREATE</code> - AgentCore provisioned the credential provider for you, so the credentials are service-managed. You can rotate them with <code>RotatePaymentConnectorCredentials</code>.</p> </li> </ul>"
+                    }
+                },
                 "credentialProviderConfigurations": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#CredentialsProviderConfigurations",
                     "traits": {
@@ -18591,6 +18655,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#PaymentConnectorAuthorizationUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>The URL that the user must open to complete OAuth consent. This field is only present when the payment connector status is <code>PENDING_AUTHENTICATION</code>.</p>"
+                    }
+                },
+                "credentialsUpdatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the payment connector's current service-managed credentials took effect. It is first set when the credentials are provisioned and is updated by each rotation. This field is present only for payment connectors with a <code>provisionMode</code> of <code>QUICK_CREATE</code>.</p>"
                     }
                 }
             },
@@ -27852,7 +27922,7 @@
                 "mcpToolSchema": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#McpToolSchemaConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tool schema configuration for the MCP server target. Supported only when the credential provider is configured with an authorization code grant type. Dynamic tool discovery/synchronization will be disabled when target is configured with mcpToolSchema.</p>"
+                        "smithy.api#documentation": "<p>A static tool list for the MCP server target. It is supported for all credential providers. Dynamic tool discovery/synchronization will be disabled when a target is configured with mcpToolSchema.</p>"
                     }
                 },
                 "listingMode": {
@@ -30179,7 +30249,12 @@
             },
             "list": {
                 "target": "com.amazonaws.bedrockagentcorecontrol#ListPaymentConnectors"
-            }
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RotatePaymentConnectorCredentials"
+                }
+            ]
         },
         "com.amazonaws.bedrockagentcorecontrol#PaymentConnectorStatus": {
             "type": "enum",
@@ -30286,6 +30361,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of the payment connector, which determines the payment provider integration.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "provisionMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PaymentConnectorProvisionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how the payment connector was provisioned. Payment connectors that were created before this field was available return <code>MANUAL</code>.</p> <ul> <li> <p> <code>MANUAL</code> - You provided the credential provider configurations, so you own the credentials.</p> </li> <li> <p> <code>QUICK_CREATE</code> - AgentCore provisioned the credential provider for you, so the credentials are service-managed and you can rotate them with <code>RotatePaymentConnectorCredentials</code>.</p> </li> </ul>"
                     }
                 },
                 "status": {
@@ -33001,6 +33082,118 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration for the root volume of a capacity provider instance. Specify the amount of free space to guarantee on the root volume. The device name and delete-on-termination settings are fixed and cannot be changed.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#RotatePaymentConnectorCredentials": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#RotatePaymentConnectorCredentialsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#RotatePaymentConnectorCredentialsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Replaces the service-managed credentials of a payment connector with newly issued credentials.</p> <p>Use this operation only for payment connectors with a <code>provisionMode</code> of <code>QUICK_CREATE</code>. For payment connectors with a <code>provisionMode</code> of <code>MANUAL</code>, call <code>UpdatePaymentCredentialProvider</code> instead after rotating credentials with the payment provider directly.</p> <p>The rotation finishes before the response is returned, and only one rotation runs at a time for a given payment connector. When it succeeds, the new credential is in effect and the payment connector stays in the <code>READY</code> state. When it fails, an error is returned, the payment connector and its existing credential are left unchanged, and you can retry the request.</p> <p>Rotation replaces the credential on the connector's credential provider, so every payment connector that uses that provider is affected. Replace any copy of the previous credential that you use outside AgentCore.</p>",
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "POST",
+                    "uri": "/payments/managers/{paymentManagerId}/connectors/{paymentConnectorId}/rotate-credentials"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#RotatePaymentConnectorCredentialsRequest": {
+            "type": "structure",
+            "members": {
+                "paymentManagerId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PaymentManagerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the parent payment manager.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "paymentConnectorId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PaymentConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the payment connector whose credentials you want to rotate.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "credentialsToRotate": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CredentialRotationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The credentials to rotate. Specify the member that matches the payment connector's <code>type</code>. Each credential that you select is rotated independently.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#RotatePaymentConnectorCredentialsResponse": {
+            "type": "structure",
+            "members": {
+                "paymentConnectorId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PaymentConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the payment connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "paymentManagerId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PaymentManagerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the parent payment manager.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the payment connector was last updated, which is when the rotation completed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PaymentConnectorStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the payment connector, which is <code>READY</code> after a successful rotation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#RouteToTargetAction": {

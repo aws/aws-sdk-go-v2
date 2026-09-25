@@ -28675,6 +28675,12 @@
                         "smithy.api#documentation": "<p>A structure containing the Lake Formation <a href=\"https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html\">audit context</a>.</p>"
                     }
                 },
+                "ResourceShareType": {
+                    "target": "com.amazonaws.glue#TableResourceShareType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which tables the <code>GetTables</code> call returns. The allowable values are <code>FEDERATED</code> or <code>ALL</code>. </p>\n         <ul>\n            <li>\n               <p>If set to <code>FEDERATED</code>, returns only federated tables, which reference an entity outside the Glue Data Catalog.</p>\n            </li>\n            <li>\n               <p>If set to <code>ALL</code>, returns all tables in the database, both federated and non-federated. </p>\n            </li>\n         </ul>"
+                    }
+                },
                 "IncludeStatusDetails": {
                     "target": "com.amazonaws.glue#BooleanNullable",
                     "traits": {
@@ -49729,6 +49735,12 @@
                         "smithy.api#documentation": "<p>A <code>TableIdentifier</code> structure that describes a target table for resource linking.</p>"
                     }
                 },
+                "FederatedTable": {
+                    "target": "com.amazonaws.glue#FederatedTable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>FederatedTable</code> structure that references an entity outside the Glue Data Catalog. Specify this field to create a federated table, which points to a table in an external metastore instead of describing data managed in the Glue Data Catalog.</p>"
+                    }
+                },
                 "ViewDefinition": {
                     "target": "com.amazonaws.glue#ViewDefinitionInput",
                     "traits": {
@@ -49971,6 +49983,23 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 128
+                }
+            }
+        },
+        "com.amazonaws.glue#TableResourceShareType": {
+            "type": "enum",
+            "members": {
+                "FEDERATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FEDERATED"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
                 }
             }
         },

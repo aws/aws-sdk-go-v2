@@ -33427,6 +33427,12 @@
                         "smithy.api#enumValue": "MULTI_PARTY_CONFERENCE"
                     }
                 },
+                "AUTO_MUTE_AGENT_ON_HOLD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO_MUTE_AGENT_ON_HOLD"
+                    }
+                },
                 "HIGH_VOLUME_OUTBOUND": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -64126,7 +64132,7 @@
                 "AttributeType": {
                     "target": "com.amazonaws.connect#InstanceAttributeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of attribute.</p>\n         <note>\n            <p>Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature, contact Amazon Web Services Support for allowlisting.</p>\n         </note>\n         <note>\n            <p>If you set the attribute type as <code>MESSAGE_STREAMING</code>, you need to update the Lex bot alias resource\n    based policy to include the <code>lex:RecognizeMessageAsync</code> action for the connect instance ARN\n    resource.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The type of attribute.</p>\n         <note>\n            <p>Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature, contact Amazon Web Services Support for allowlisting.</p>\n         </note>\n         <note>\n            <p>If you set the attribute type as <code>MESSAGE_STREAMING</code>, you need to update the Lex bot alias resource\n    based policy to include the <code>lex:RecognizeMessageAsync</code> action for the connect instance ARN\n    resource.</p>\n         </note>\n         <note>\n            <p>If you set the attribute type <code>AUTO_MUTE_AGENT_ON_HOLD</code> to <code>true</code>, the system\n    automatically mutes agents while they're on hold and unmutes them when they resume the contact. Agents can't\n    change their mute state while on hold.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }

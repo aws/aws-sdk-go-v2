@@ -607,6 +607,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "generationId": {
+                    "target": "com.amazonaws.wellarchitected#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the generation process that produced this recommendation.</p>"
+                    }
+                },
                 "title": {
                     "target": "com.amazonaws.wellarchitected#SensitiveString",
                     "traits": {
@@ -2165,8 +2171,13 @@
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
-                    "COIN"
+                    "AGENT"
                 ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                },
                 "smithy.test#smokeTests": [
                     {
                         "id": "CreateAgentContext",
@@ -2295,8 +2306,13 @@
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
-                    "COIN"
+                    "AGENT"
                 ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                },
                 "smithy.test#smokeTests": [
                     {
                         "id": "CreateAgentGoal",
@@ -2427,8 +2443,13 @@
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
-                    "COIN"
+                    "AGENT"
                 ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                },
                 "smithy.test#smokeTests": [
                     {
                         "id": "CreateAgentProfile",
@@ -3766,8 +3787,13 @@
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
-                    "COIN"
+                    "AGENT"
                 ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                },
                 "smithy.test#smokeTests": [
                     {
                         "id": "DeleteAgentContext",
@@ -3850,8 +3876,13 @@
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
-                    "COIN"
+                    "AGENT"
                 ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                },
                 "smithy.test#smokeTests": [
                     {
                         "id": "DeleteAgentGoal",
@@ -3937,8 +3968,13 @@
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
-                    "COIN"
+                    "AGENT"
                 ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                },
                 "smithy.test#smokeTests": [
                     {
                         "id": "DeleteAgentProfile",
@@ -4983,8 +5019,13 @@
                 },
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
-                    "COIN"
+                    "AGENT"
                 ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                },
                 "smithy.test#smokeTests": [
                     {
                         "id": "GetAgentContext",
@@ -5075,8 +5116,13 @@
                 },
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
-                    "COIN"
+                    "AGENT"
                 ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                },
                 "smithy.test#smokeTests": [
                     {
                         "id": "GetAgentGoal",
@@ -5167,8 +5213,13 @@
                 },
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
-                    "COIN"
+                    "AGENT"
                 ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                },
                 "smithy.test#smokeTests": [
                     {
                         "id": "GetAgentProfile",
@@ -5381,8 +5432,13 @@
                 },
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
-                    "COIN"
-                ]
+                    "AGENT"
+                ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#GetAgentRecommendationGeneration": {
@@ -5418,8 +5474,13 @@
                 },
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
-                    "COIN"
-                ]
+                    "AGENT"
+                ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#GetAgentRecommendationGenerationRequest": {
@@ -5600,6 +5661,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the associated profile.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "generationId": {
+                    "target": "com.amazonaws.wellarchitected#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the generation process that produced this recommendation.</p>"
                     }
                 },
                 "title": {
@@ -8047,8 +8114,13 @@
                 },
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
-                    "COIN"
+                    "AGENT"
                 ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                },
                 "smithy.test#smokeTests": [
                     {
                         "id": "ListAgentContexts",
@@ -8161,8 +8233,13 @@
                 },
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
-                    "COIN"
+                    "AGENT"
                 ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                },
                 "smithy.test#smokeTests": [
                     {
                         "id": "ListAgentGoals",
@@ -8278,14 +8355,19 @@
                 },
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
-                    "COIN"
+                    "AGENT"
                 ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                },
                 "smithy.test#smokeTests": [
                     {
                         "id": "ListAgentProfiles",
                         "params": {},
                         "expect": {
-                            "failure": {}
+                            "success": {}
                         },
                         "vendorParamsShape": "aws.test#AwsVendorParams",
                         "vendorParams": {
@@ -8388,8 +8470,13 @@
                 },
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
-                    "COIN"
-                ]
+                    "AGENT"
+                ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#ListAgentRecommendationGenerationsRequest": {
@@ -8500,8 +8587,13 @@
                 },
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
-                    "COIN"
-                ]
+                    "AGENT"
+                ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#ListAgentRecommendationItemsRequest": {
@@ -8612,8 +8704,13 @@
                 },
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
-                    "COIN"
-                ]
+                    "AGENT"
+                ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#ListAgentRecommendationsRequest": {
@@ -11568,8 +11665,13 @@
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
-                    "COIN"
-                ]
+                    "AGENT"
+                ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#PutAgentRecommendationFeedbackRequest": {
@@ -13121,8 +13223,13 @@
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
-                    "COIN"
-                ]
+                    "AGENT"
+                ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#StartAgentRecommendationGenerationRequest": {
@@ -13313,7 +13420,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^(?!aws:)[\\p{L}\\p{N}\\p{Z}_.:/=+@-]+$"
+                "smithy.api#pattern": "^[\\p{L}\\p{N}\\p{Z}_.:/=+@-]+$"
             }
         },
         "com.amazonaws.wellarchitected#TagKeyList": {
@@ -13698,8 +13805,13 @@
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
-                    "COIN"
+                    "AGENT"
                 ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                },
                 "smithy.test#smokeTests": [
                     {
                         "id": "UpdateAgentContext",
@@ -13819,8 +13931,13 @@
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
-                    "COIN"
+                    "AGENT"
                 ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                },
                 "smithy.test#smokeTests": [
                     {
                         "id": "UpdateAgentGoal",
@@ -13951,8 +14068,13 @@
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
-                    "COIN"
+                    "AGENT"
                 ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                },
                 "smithy.test#smokeTests": [
                     {
                         "id": "UpdateAgentProfile",
@@ -14232,8 +14354,13 @@
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
-                    "COIN"
-                ]
+                    "AGENT"
+                ],
+                "smithy.rules#staticContextParams": {
+                    "SubServiceType": {
+                        "value": "AGENT"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#UpdateAgentRecommendationStatusRequest": {
@@ -15920,18 +16047,14 @@
                 "aws.auth#sigv4": {
                     "name": "wellarchitected"
                 },
+                "aws.endpoints#rulesBasedEndpoints": {},
+                "aws.endpoints#standardRegionalEndpoints": {},
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<fullname>Amazon Web Services Well-Architected</fullname> <p>Amazon Web Services Well-Architected helps you evaluate your architectures against Amazon Web Services best practices across operational excellence, security, reliability, performance efficiency, cost optimization, and sustainability. The service includes the Amazon Web Services Well-Architected Agent for AI-powered recommendations tailored to your specific environment, and the <a href=\"http://aws.amazon.com/well-architected-tool\">Well-Architected Tool</a> for conducting reviews and tracking improvements.</p> <p>This is the <i>Amazon Web Services Well-Architected API Reference</i>. Through this API, you can programmatically access personalized recommendations and automation scripts from the Amazon Web Services Well-Architected Agent, and create and manage workloads, conduct lens reviews, track milestones, manage custom lenses, share workloads across accounts, and manage profiles with the Well-Architected Tool.</p> <p>For more information about the service, see the <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html\">Amazon Web Services Well-Architected User Guide</a>.</p>",
                 "smithy.api#title": "AWS Well-Architected Tool",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {
-                        "Region": {
-                            "builtIn": "AWS::Region",
-                            "required": false,
-                            "documentation": "The AWS region used to dispatch the request.",
-                            "type": "string"
-                        },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
@@ -15950,6 +16073,17 @@
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "SubServiceType": {
+                            "required": false,
+                            "documentation": "Identifies the sub-service used for endpoint routing. This value is set automatically per operation and is not client-configurable. It is unset for Well-Architected Tool operations. It is AGENT for Well-Architected Agent operations, which resolve to the wellarchitected-agent endpoint.",
                             "type": "string"
                         }
                     },
@@ -15992,6 +16126,38 @@
                             "fn": "booleanEquals",
                             "argv": [
                                 {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "SubServiceType"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "ref": "SubServiceType"
+                                },
+                                "AGENT"
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
                                     "ref": "UseDualStack"
                                 },
                                 true
@@ -16007,21 +16173,6 @@
                                             "ref": "PartitionResult"
                                         },
                                         "supportsDualStack"
-                                    ]
-                                },
-                                true
-                            ]
-                        },
-                        {
-                            "fn": "booleanEquals",
-                            "argv": [
-                                {
-                                    "fn": "getAttr",
-                                    "argv": [
-                                        {
-                                            "ref": "PartitionResult"
-                                        },
-                                        "supportsFIPS"
                                     ]
                                 },
                                 true
@@ -16053,8 +16204,16 @@
                         {
                             "conditions": [],
                             "endpoint": {
-                                "url": "https://wellarchitected-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                "properties": {},
+                                "url": "https://wellarchitected-agent-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingName": "wellarchitected",
+                                            "signingRegion": "{Region}"
+                                        }
+                                    ]
+                                },
                                 "headers": {}
                             },
                             "type": "endpoint"
@@ -16067,8 +16226,16 @@
                         {
                             "conditions": [],
                             "endpoint": {
-                                "url": "https://wellarchitected-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                "properties": {},
+                                "url": "https://wellarchitected-agent-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingName": "wellarchitected",
+                                            "signingRegion": "{Region}"
+                                        }
+                                    ]
+                                },
                                 "headers": {}
                             },
                             "type": "endpoint"
@@ -16081,8 +16248,16 @@
                         {
                             "conditions": [],
                             "endpoint": {
-                                "url": "https://wellarchitected.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                "properties": {},
+                                "url": "https://wellarchitected-agent.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingName": "wellarchitected",
+                                            "signingRegion": "{Region}"
+                                        }
+                                    ]
+                                },
                                 "headers": {}
                             },
                             "type": "endpoint"
@@ -16091,6 +16266,50 @@
                             "conditions": [],
                             "error": "DualStack is enabled but this partition does not support DualStack",
                             "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://wellarchitected-agent.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingName": "wellarchitected",
+                                            "signingRegion": "{Region}"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://wellarchitected-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://wellarchitected-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://wellarchitected.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
                         },
                         {
                             "conditions": [],
@@ -16108,18 +16327,12 @@
                         }
                     ],
                     "root": 2,
-                    "nodeCount": 13,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                    "nodeCount": 21,
+                    "nodes": "/////wAAAAH/////AAAAAAAAABQAAAADAAAAAQAAAAQF9eEPAAAAAgAAAAUF9eEPAAAAAwAAAAwAAAAGAAAABQAAAAcAAAAIAAAABgAAAAoAAAAIAAAABwAAAAkF9eEOAAAACAX14Q0F9eEJAAAABwAAAAsF9eEKAAAACAX14QgF9eEJAAAABAAAAA4AAAANAAAABwX14QUF9eEHAAAABQAAAA8AAAAQAAAABgAAABIAAAAQAAAABwAAABEF9eEMAAAACAX14QsF9eEFAAAABwAAABMF9eEGAAAACAX14QQF9eEFAAAAAwX14QEAAAAVAAAABwX14QIF9eED"
                 },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
-                        "Region": {
-                            "builtIn": "AWS::Region",
-                            "required": false,
-                            "documentation": "The AWS region used to dispatch the request.",
-                            "type": "string"
-                        },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
@@ -16138,6 +16351,17 @@
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "SubServiceType": {
+                            "required": false,
+                            "documentation": "Identifies the sub-service used for endpoint routing. This value is set automatically per operation and is not client-configurable. It is unset for Well-Architected Tool operations. It is AGENT for Well-Architected Agent operations, which resolve to the wellarchitected-agent endpoint.",
                             "type": "string"
                         }
                     },
@@ -16170,58 +16394,7 @@
                                     "type": "error"
                                 },
                                 {
-                                    "conditions": [
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": [
-                                                {
-                                                    "ref": "UseDualStack"
-                                                },
-                                                true
-                                            ]
-                                        }
-                                    ],
-                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                    "type": "error"
-                                },
-                                {
                                     "conditions": [],
-                                    "endpoint": {
-                                        "url": {
-                                            "ref": "Endpoint"
-                                        },
-                                        "properties": {},
-                                        "headers": {}
-                                    },
-                                    "type": "endpoint"
-                                }
-                            ],
-                            "type": "tree"
-                        },
-                        {
-                            "conditions": [
-                                {
-                                    "fn": "isSet",
-                                    "argv": [
-                                        {
-                                            "ref": "Region"
-                                        }
-                                    ]
-                                }
-                            ],
-                            "rules": [
-                                {
-                                    "conditions": [
-                                        {
-                                            "fn": "aws.partition",
-                                            "argv": [
-                                                {
-                                                    "ref": "Region"
-                                                }
-                                            ],
-                                            "assign": "PartitionResult"
-                                        }
-                                    ],
                                     "rules": [
                                         {
                                             "conditions": [
@@ -16229,184 +16402,21 @@
                                                     "fn": "booleanEquals",
                                                     "argv": [
                                                         {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
-                                                },
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        {
                                                             "ref": "UseDualStack"
                                                         },
                                                         true
                                                     ]
                                                 }
                                             ],
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                true,
-                                                                {
-                                                                    "fn": "getAttr",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "PartitionResult"
-                                                                        },
-                                                                        "supportsFIPS"
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                true,
-                                                                {
-                                                                    "fn": "getAttr",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "PartitionResult"
-                                                                        },
-                                                                        "supportsDualStack"
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://wellarchitected-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ],
-                                                    "type": "tree"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                    "type": "error"
-                                                }
-                                            ],
-                                            "type": "tree"
-                                        },
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "UseFIPS"
-                                                        },
-                                                        true
-                                                    ]
-                                                }
-                                            ],
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "fn": "getAttr",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "PartitionResult"
-                                                                        },
-                                                                        "supportsFIPS"
-                                                                    ]
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://wellarchitected-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ],
-                                                    "type": "tree"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                    "type": "error"
-                                                }
-                                            ],
-                                            "type": "tree"
-                                        },
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "UseDualStack"
-                                                        },
-                                                        true
-                                                    ]
-                                                }
-                                            ],
-                                            "rules": [
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                true,
-                                                                {
-                                                                    "fn": "getAttr",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "PartitionResult"
-                                                                        },
-                                                                        "supportsDualStack"
-                                                                    ]
-                                                                }
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://wellarchitected.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ],
-                                                    "type": "tree"
-                                                },
-                                                {
-                                                    "conditions": [],
-                                                    "error": "DualStack is enabled but this partition does not support DualStack",
-                                                    "type": "error"
-                                                }
-                                            ],
-                                            "type": "tree"
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
                                         },
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": "https://wellarchitected.{Region}.{PartitionResult#dnsSuffix}",
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -16419,246 +16429,552 @@
                             "type": "tree"
                         },
                         {
+                            "documentation": "Route AGENT operations to wellarchitected-agent endpoint",
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "SubServiceType"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "stringEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "SubServiceType"
+                                        },
+                                        "AGENT"
+                                    ]
+                                },
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://wellarchitected-agent-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                "properties": {
+                                                    "authSchemes": [
+                                                        {
+                                                            "name": "sigv4",
+                                                            "signingName": "wellarchitected",
+                                                            "signingRegion": "{Region}"
+                                                        }
+                                                    ]
+                                                },
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                false
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://wellarchitected-agent-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                "properties": {
+                                                    "authSchemes": [
+                                                        {
+                                                            "name": "sigv4",
+                                                            "signingName": "wellarchitected",
+                                                            "signingRegion": "{Region}"
+                                                        }
+                                                    ]
+                                                },
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                false
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://wellarchitected-agent.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                "properties": {
+                                                    "authSchemes": [
+                                                        {
+                                                            "name": "sigv4",
+                                                            "signingName": "wellarchitected",
+                                                            "signingRegion": "{Region}"
+                                                        }
+                                                    ]
+                                                },
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://wellarchitected-agent.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {
+                                            "authSchemes": [
+                                                {
+                                                    "name": "sigv4",
+                                                    "signingName": "wellarchitected",
+                                                    "signingRegion": "{Region}"
+                                                }
+                                            ]
+                                        },
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
                             "conditions": [],
-                            "error": "Invalid Configuration: Missing Region",
-                            "type": "error"
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://wellarchitected-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://wellarchitected-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://wellarchitected.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://wellarchitected.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
-                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For custom endpoint with region not set and fips disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://wellarchitected.ap-east-1.amazonaws.com"
+                                    "url": "https://example.com"
                                 }
                             },
                             "params": {
-                                "Region": "ap-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For custom endpoint with fips enabled",
                             "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.ap-northeast-1.amazonaws.com"
-                                }
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
                             }
                         },
                         {
-                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
                             "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.ap-northeast-2.amazonaws.com"
-                                }
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
+                                "Endpoint": "https://example.com",
                                 "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.ap-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-south-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.ap-southeast-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-southeast-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.ap-southeast-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ap-southeast-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.ca-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "ca-central-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.eu-central-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-central-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-north-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.eu-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.eu-west-3.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "eu-west-3",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.me-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "me-south-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.sa-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "sa-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.us-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.us-east-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-east-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.us-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.us-west-2.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-west-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -16701,105 +17017,92 @@
                             }
                         },
                         {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://wellarchitected-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                    "url": "https://wellarchitected.us-east-1.amazonaws.com"
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected-fips.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.cn-north-1.api.amazonwebservices.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://wellarchitected.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://wellarchitected-fips.us-gov-east-1.api.aws"
+                                    "url": "https://wellarchitected-fips.cn-northwest-1.api.amazonwebservices.com.cn"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "Region": "cn-northwest-1",
                                 "UseFIPS": true,
                                 "UseDualStack": true
                             }
                         },
                         {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://wellarchitected-fips.us-gov-east-1.amazonaws.com"
+                                    "url": "https://wellarchitected-fips.cn-northwest-1.amazonaws.com.cn"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "Region": "cn-northwest-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://wellarchitected.us-gov-east-1.api.aws"
+                                    "url": "https://wellarchitected.cn-northwest-1.api.amazonwebservices.com.cn"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "Region": "cn-northwest-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true
                             }
                         },
                         {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://wellarchitected.us-gov-east-1.amazonaws.com"
+                                    "url": "https://wellarchitected.cn-northwest-1.amazonaws.com.cn"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.eusc-de-east-1.amazonaws.eu"
+                                }
+                            },
+                            "params": {
+                                "Region": "eusc-de-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.eusc-de-east-1.amazonaws.eu"
+                                }
+                            },
+                            "params": {
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -16857,60 +17160,257 @@
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://example.com"
+                                    "url": "https://wellarchitected-fips.eu-isoe-west-1.cloud.adc-e.uk"
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Endpoint": "https://example.com"
-                            }
-                        },
-                        {
-                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://example.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Endpoint": "https://example.com"
-                            }
-                        },
-                        {
-                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
-                            "expect": {
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-                            },
-                            "params": {
-                                "Region": "us-east-1",
+                                "Region": "eu-isoe-west-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Endpoint": "https://example.com"
+                                "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack disabled",
                             "expect": {
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                                "endpoint": {
+                                    "url": "https://wellarchitected.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "Region": "eu-isoe-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Endpoint": "https://example.com"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
                             "documentation": "Missing region",
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
+                            }
+                        },
+                        {
+                            "documentation": "AGENT case: standard region, no FIPS, no DualStack -> amazonaws.com",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
+                                                "signingName": "wellarchitected"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://wellarchitected-agent.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "SubServiceType": "AGENT"
+                            }
+                        },
+                        {
+                            "documentation": "AGENT case: FIPS enabled -> amazonaws.com with -fips",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
+                                                "signingName": "wellarchitected"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://wellarchitected-agent-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "SubServiceType": "AGENT"
+                            }
+                        },
+                        {
+                            "documentation": "AGENT case: DualStack enabled -> api.aws",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingRegion": "us-west-2",
+                                                "name": "sigv4",
+                                                "signingName": "wellarchitected"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://wellarchitected-agent.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "SubServiceType": "AGENT"
+                            }
+                        },
+                        {
+                            "documentation": "AGENT case: FIPS + DualStack -> api.aws with -fips",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingRegion": "us-east-1",
+                                                "name": "sigv4",
+                                                "signingName": "wellarchitected"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://wellarchitected-agent-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "SubServiceType": "AGENT"
+                            }
+                        },
+                        {
+                            "documentation": "AGENT case: us-west-2 standard -> amazonaws.com",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingRegion": "us-west-2",
+                                                "name": "sigv4",
+                                                "signingName": "wellarchitected"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://wellarchitected-agent.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "SubServiceType": "AGENT"
+                            }
+                        },
+                        {
+                            "documentation": "AGENT case: custom endpoint override still works",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://custom.endpoint.example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "SubServiceType": "AGENT",
+                                "Endpoint": "https://custom.endpoint.example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Non-AGENT SubServiceType falls through to the base WA endpoint",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "SubServiceType": "SOMETHING-ELSE"
                             }
                         }
                     ],

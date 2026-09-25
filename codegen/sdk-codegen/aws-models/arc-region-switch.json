@@ -378,6 +378,9 @@
                     "target": "com.amazonaws.arcregionswitch#ListRoute53HealthChecksInRegion"
                 },
                 {
+                    "target": "com.amazonaws.arcregionswitch#ListServiceQuotaWarnings"
+                },
+                {
                     "target": "com.amazonaws.arcregionswitch#StartPlanExecution"
                 },
                 {
@@ -1838,6 +1841,13 @@
                         "aws.cloudformation#cfnMutability": "full"
                     }
                 },
+                "serviceQuotaChecksEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>Specifies whether to enable service quota checks for the Region switch plan.</p>"
+                    }
+                },
                 "name": {
                     "target": "com.amazonaws.arcregionswitch#PlanName",
                     "traits": {
@@ -2153,6 +2163,12 @@
                         "smithy.api#default": "sampledMaxInLast24Hours",
                         "smithy.api#documentation": "<p>The monitoring approach that you specify EC2 Auto Scaling groups for the configuration.</p>"
                     }
+                },
+                "waitELBTargetGroupHealthy": {
+                    "target": "com.amazonaws.arcregionswitch#WaitELBTargetGroupHealthy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If enabled, the step completes only after each attached ELB target group reports a healthy target count that matches the group's new desired capacity calculated in the step.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2233,6 +2249,12 @@
                     "traits": {
                         "smithy.api#default": "sampledMaxInLast24Hours",
                         "smithy.api#documentation": "<p>The monitoring approach specified for the configuration, for example, <code>Most_Recent</code>.</p>"
+                    }
+                },
+                "waitELBTargetGroupHealthy": {
+                    "target": "com.amazonaws.arcregionswitch#WaitELBTargetGroupHealthy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If enabled, the step completes only after each attached ELB target group reports a healthy target count that matches the service's new desired task count calculated in the step.</p>"
                     }
                 }
             },
@@ -4627,6 +4649,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.arcregionswitch#ListServiceQuotaWarnings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.arcregionswitch#ListServiceQuotaWarningsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.arcregionswitch#ListServiceQuotaWarningsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.arcregionswitch#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.arcregionswitch#InternalServerException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list service quota warnings for a plan in a specific AWS Region using the Region switch Regional data plane"
+                },
+                "smithy.api#documentation": "<p>Lists the service quota warnings for the plans that you can access. Region switch creates a warning when the applied quota value in one Region of a plan is lower than the value required for the matching resource in another Region or account in the plan.</p> <p>Returns the warnings for the plans that you own and for plans that are shared with your account through AWS Resource Access Manager (AWS RAM). To return warnings for specific plans, provide a list of plan Amazon Resource Names (ARNs). Region switch ignores any plan ARN that you can't access. If you don't provide any plan ARNs, Region switch returns the warnings for all of your accessible plans.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "serviceQuotaWarningSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.arcregionswitch#ListServiceQuotaWarningsRequest": {
+            "type": "structure",
+            "members": {
+                "planArns": {
+                    "target": "com.amazonaws.arcregionswitch#PlanArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the plans to return service quota warnings for. You can specify up to 100 plan ARNs. Region switch ignores any plan ARN that you can't access. If you omit this parameter, Region switch returns the warnings for all of your accessible plans.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.arcregionswitch#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with this call. Valid values are <code>1</code> to <code>100</code>. If you don't specify a value, the operation returns up to the maximum number of results.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.arcregionswitch#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.arcregionswitch#ListServiceQuotaWarningsResponse": {
+            "type": "structure",
+            "members": {
+                "serviceQuotaWarningSummaries": {
+                    "target": "com.amazonaws.arcregionswitch#ServiceQuotaWarningSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service quota warnings for the plans that you can access.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.arcregionswitch#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token. A response may contain no results while still including a <code>nextToken</code>. Continue paginating until <code>nextToken</code> is null to retrieve all results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.arcregionswitch#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -4922,6 +5021,13 @@
                         "smithy.api#documentation": "<p>The report configuration for a plan.</p>"
                     }
                 },
+                "serviceQuotaChecksEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>Indicates whether service quota checks are enabled for the Region switch plan. When enabled, Region switch compares the applied service quota values across the plan's Amazon Web Services Regions and creates a warning when a quota in one Region is lower than the value required for the matching resource in another Region. Service quota checks are advisory and don't prevent you from creating, evaluating, or executing a plan.</p>"
+                    }
+                },
                 "name": {
                     "target": "com.amazonaws.arcregionswitch#PlanName",
                     "traits": {
@@ -4984,6 +5090,17 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:arc-region-switch::[0-9]{12}:plan/([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,30}[a-zA-Z0-9])?):([a-z0-9]{6})$"
+            }
+        },
+        "com.amazonaws.arcregionswitch#PlanArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.arcregionswitch#PlanArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.arcregionswitch#PlanList": {
@@ -5842,6 +5959,134 @@
                 }
             }
         },
+        "com.amazonaws.arcregionswitch#ServiceQuotaWarningStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "denied"
+                    }
+                },
+                "INSUFFICIENT_PERMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "insufficientPermissions"
+                    }
+                },
+                "MAX_REGION_SWITCH_REQUESTS_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "maxRegionSwitchRequestsExceeded"
+                    }
+                },
+                "MAX_ACCOUNT_REQUESTS_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "maxAccountRequestsExceeded"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a service quota warning. Valid values:</p> <p> <code>pending</code> - Region switch submitted a quota increase request that is still open.</p> <p> <code>denied</code> - The quota increase request was denied.</p> <p> <code>insufficientPermissions</code> - The plan's execution role is missing a permission that service quota checks require.</p> <p> <code>maxRegionSwitchRequestsExceeded</code> - Region switch reached its limit on the number of open quota increase requests.</p> <p> <code>maxAccountRequestsExceeded</code> - The account reached the maximum number of open quota increase requests.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#ServiceQuotaWarningSummary": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.arcregionswitch#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the plan that the warning applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "quotaRegion": {
+                    "target": "com.amazonaws.arcregionswitch#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region that the quota applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service code of the service that the quota belongs to, as defined in Service Quotas. For example, <code>ec2</code>.</p>"
+                    }
+                },
+                "quotaCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota code of the quota that the warning applies to, as defined in Service Quotas.</p>"
+                    }
+                },
+                "quotaName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the quota that the warning applies to, as defined in Service Quotas.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.arcregionswitch#ServiceQuotaWarningStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the service quota warning.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "planArn": {
+                    "target": "com.amazonaws.arcregionswitch#PlanArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the plan that the warning applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the quota increase request that Region switch submitted, if it submitted one for this quota.</p>"
+                    }
+                },
+                "caseId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the support case associated with the quota increase request, if Region switch submitted one for this quota.</p>"
+                    }
+                },
+                "warningMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the service quota warning.</p>"
+                    }
+                },
+                "lastCheckedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time (UTC) when Region switch last checked this quota.</p>"
+                    }
+                },
+                "warningCreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time (UTC) when Region switch created this warning.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A service quota warning for a plan. Region switch creates a warning when the applied quota value in one Region of a plan is lower than the value for the matching resource in another Region or account in the plan, or when it can't complete a service quota check.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#ServiceQuotaWarningSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.arcregionswitch#ServiceQuotaWarningSummary"
+            }
+        },
         "com.amazonaws.arcregionswitch#StartPlanExecution": {
             "type": "operation",
             "input": {
@@ -6641,6 +6886,13 @@
                         "aws.cloudformation#cfnMutability": "full",
                         "smithy.api#documentation": "<p>The updated report configuration for the plan.</p>"
                     }
+                },
+                "serviceQuotaChecksEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>Specifies whether service quota checks are enabled for the Region switch plan.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6659,6 +6911,23 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.arcregionswitch#WaitELBTargetGroupHealthy": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                }
             }
         },
         "com.amazonaws.arcregionswitch#Workflow": {
