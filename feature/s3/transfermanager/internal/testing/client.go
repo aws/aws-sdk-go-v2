@@ -456,6 +456,28 @@ var ErrPartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObj
 	return out, err
 }
 
+// WrongPartRangeStartGetObjectFn mocks getobject behavior of s3 client to return wrong content range during parts GET
+var WrongPartRangeStartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+	out, err := PartGetObjectFn(c, params)
+	c.index++
+	partSize := len(c.Data)
+	if c.index > 1 {
+		out.ContentRange = aws.String(fmt.Sprintf("bytes 0-%d/%d", partSize*c.index-1, int64(partSize)*int64(c.PartsCount)))
+	}
+	return out, err
+}
+
+// WrongPartRangeEndGetObjectFn mocks getobject behavior of s3 client to return wrong content range during parts GET
+var WrongPartRangeEndGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+	out, err := PartGetObjectFn(c, params)
+	c.index++
+	partSize := len(c.Data)
+	if c.index > 1 {
+		out.ContentRange = aws.String(fmt.Sprintf("bytes %d-0/%d", partSize*(c.index-1), int64(partSize)*int64(c.PartsCount)))
+	}
+	return out, err
+}
+
 // MismatchPartGetObjectFn mocks getobject behavior of s3 client to return mismatch error when object is updated during parts GET
 var MismatchPartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	out, err := PartGetObjectFn(c, params)
