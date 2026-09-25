@@ -1,6 +1,11 @@
 package retry
 
-import "testing"
+import (
+	"context"
+	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
+)
 
 func TestAdaptiveMode_defaultOptions(t *testing.T) {
 	a := NewAdaptiveMode()
@@ -58,5 +63,51 @@ func TestAdaptiveMode_copyOptions(t *testing.T) {
 
 	if a.options.Throttles[0] != nil {
 		t.Errorf("expect throttles to be changed")
+	}
+}
+
+func TestAdaptiveMode_attemptTokenRefillsRetryQuota(t *testing.T) {
+	cases := map[string]struct {
+		opErr       error
+		expectRetry bool
+	}{
+		"success": {
+			opErr:       nil,
+			expectRetry: true,
+		},
+		"failure": {
+			opErr:       newStubResponseError(500),
+			expectRetry: false,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			retryer := NewAdaptiveMode(func(ao *AdaptiveModeOptions) {
+				ao.StandardOptions = append(ao.StandardOptions, func(o *StandardOptions) {
+					o.RateLimiter = ratelimit.NewTokenRateLimit(1)
+					o.RetryCost = 1
+					o.NoRetryIncrement = 1
+				})
+			})
+
+			// Trigger a failed request to reduce the retry tokens to zero.
+			opErr := newStubResponseError(500)
+			if _, err := retryer.GetRetryToken(context.Background(), opErr); err != nil {
+				t.Fatalf("expect get retry token not to fail, %v", err)
+			}
+
+			// Execute processing based on whether the request succeeded or failed
+			release, _ := retryer.GetAttemptToken(context.Background())
+			if err := release(c.opErr); err != nil {
+				t.Fatalf("expect release attempt token not to fail, %v", err)
+			}
+
+			// Verify whether the retry token has been restored.
+			_, err := retryer.GetRetryToken(context.Background(), opErr)
+			if e, a := c.expectRetry, err == nil; e != a {
+				t.Errorf("expect retry allowed to be %v, got %v, %v", e, a, err)
+			}
+		})
 	}
 }
