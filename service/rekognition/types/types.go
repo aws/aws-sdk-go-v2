@@ -1156,6 +1156,26 @@ type FaceSearchSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a condition that was detected in the Face Liveness video and that
+// contributed to the confidence score returned for the session.
+type FeedbackItem struct {
+
+	// A code identifying the condition that was detected during the Face Liveness
+	// session.
+	//
+	// This member is required.
+	Code FeedbackCode
+
+	// A human-readable description of the detected condition, suitable for displaying
+	// to an end user before they retry a Face Liveness check. Use Code rather than
+	// this message for programmatic decisions, because the message text can change.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // The predicted gender of a detected face.
 //
 // Amazon Rekognition makes gender binary (male/female) predictions based on the
@@ -2333,6 +2353,22 @@ type SegmentTypeInfo struct {
 
 	// The type of a segment (technical cue or shot detection).
 	Type SegmentType
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about the client that streamed the video for a Face Liveness
+// session.
+type SessionMetadata struct {
+
+	// The type of SDK that was used to stream the video for the Face Liveness session.
+	//
+	// This value is self-reported by the client that streamed the session, and Amazon
+	// Rekognition doesn't verify it. Don't rely on it for authentication,
+	// authorization, or any other security decision.
+	//
+	// This member is required.
+	SDKType *string
 
 	noSmithyDocumentSerde
 }

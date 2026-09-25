@@ -40,6 +40,10 @@ type UpdateInstanceAttributeInput struct {
 	// bot alias resource based policy to include the lex:RecognizeMessageAsync action
 	// for the connect instance ARN resource.
 	//
+	// If you set the attribute type AUTO_MUTE_AGENT_ON_HOLD to true , the system
+	// automatically mutes agents while they're on hold and unmutes them when they
+	// resume the contact. Agents can't change their mute state while on hold.
+	//
 	// This member is required.
 	AttributeType types.InstanceAttributeType
 

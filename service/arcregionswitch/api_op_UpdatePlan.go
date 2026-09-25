@@ -59,6 +59,9 @@ type UpdatePlanInput struct {
 	// The updated report configuration for the plan.
 	ReportConfiguration *types.ReportConfiguration
 
+	// Specifies whether service quota checks are enabled for the Region switch plan.
+	ServiceQuotaChecksEnabled *bool
+
 	// The updated conditions that can automatically trigger the execution of the plan.
 	Triggers []types.Trigger
 
@@ -89,6 +92,9 @@ func (v *UpdatePlanInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteStruct(schemas.UpdatePlanRequest_reportConfiguration)
 		v.ReportConfiguration.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.ServiceQuotaChecksEnabled != nil {
+		s.WriteBool(schemas.UpdatePlanRequest_serviceQuotaChecksEnabled, *v.ServiceQuotaChecksEnabled)
 	}
 	serializeTriggerList(s, schemas.UpdatePlanRequest_triggers, v.Triggers)
 	serializeWorkflowList(s, schemas.UpdatePlanRequest_workflows, v.Workflows)

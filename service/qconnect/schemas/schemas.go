@@ -730,8 +730,10 @@ var AIAgentConfiguration_caseSummarizationAIAgentConfiguration *smithy.Schema
 var AIAgentConfigurationData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AIAgentConfigurationData",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var AIAgentConfigurationData_aiAgentId *smithy.Schema
+
+var AIAgentConfigurationData_enabled *smithy.Schema
 
 var _AIAgentConfigurationMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -1840,7 +1842,7 @@ var CustomerProfileAttributes_custom *smithy.Schema
 var DataDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "DataDetails",
-}, smithy.ShapeTypeUnion, 12)
+}, smithy.ShapeTypeUnion, 13)
 var DataDetails_contentData *smithy.Schema
 
 var DataDetails_generativeData *smithy.Schema
@@ -1864,6 +1866,8 @@ var DataDetails_suggestedMessageData *smithy.Schema
 var DataDetails_notesData *smithy.Schema
 
 var DataDetails_notesChunkData *smithy.Schema
+
+var DataDetails_proactiveRecommendationData *smithy.Schema
 
 var DataReference = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -3366,6 +3370,12 @@ var _Priority = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Priority",
 }, smithy.ShapeTypeString, 0)
 
+var ProactiveRecommendationDataDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "ProactiveRecommendationDataDetails",
+}, smithy.ShapeTypeStructure, 1)
+var ProactiveRecommendationDataDetails_nextMessageToken *smithy.Schema
+
 var _Probability = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "Probability",
@@ -3986,6 +3996,27 @@ var _RetrievalFilterList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RetrievalFilterList",
 }, smithy.ShapeTypeList, 1)
 var _RetrievalFilterList_member *smithy.Schema
+
+var RetrieveError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "RetrieveError",
+}, smithy.ShapeTypeStructure, 3)
+var RetrieveError_associationId *smithy.Schema
+
+var RetrieveError_code *smithy.Schema
+
+var RetrieveError_message *smithy.Schema
+
+var _RetrieveErrorCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "RetrieveErrorCode",
+}, smithy.ShapeTypeString, 0)
+
+var _RetrieveErrorList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "RetrieveErrorList",
+}, smithy.ShapeTypeList, 1)
+var _RetrieveErrorList_member *smithy.Schema
 
 var RetrieveResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -6296,8 +6327,10 @@ var RetrieveRequest_retrievalQuery *smithy.Schema
 var RetrieveResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "RetrieveResponse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var RetrieveResponse_results *smithy.Schema
+
+var RetrieveResponse_errors *smithy.Schema
 
 var SearchContentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -6987,6 +7020,8 @@ func init() {
 	AIAgentConfiguration_caseSummarizationAIAgentConfiguration = AIAgentConfiguration.AddMember("caseSummarizationAIAgentConfiguration", CaseSummarizationAIAgentConfiguration)
 
 	AIAgentConfigurationData_aiAgentId = AIAgentConfigurationData.AddMember("aiAgentId", _UuidWithQualifier)
+
+	AIAgentConfigurationData_enabled = AIAgentConfigurationData.AddMember("enabled", smithyprelude.Boolean)
 
 	_AIAgentConfigurationMap_key = _AIAgentConfigurationMap.AddMember("key", _AIAgentType)
 
@@ -7798,6 +7833,8 @@ func init() {
 
 	NotesChunkDataDetails_nextChunkToken = NotesChunkDataDetails.AddMember("nextChunkToken", _NextToken)
 
+	ProactiveRecommendationDataDetails_nextMessageToken = ProactiveRecommendationDataDetails.AddMember("nextMessageToken", _NextToken)
+
 	DataDetails_contentData = DataDetails.AddMember("contentData", ContentDataDetails)
 
 	DataDetails_generativeData = DataDetails.AddMember("generativeData", GenerativeDataDetails)
@@ -7821,6 +7858,8 @@ func init() {
 	DataDetails_notesData = DataDetails.AddMember("notesData", NotesDataDetails)
 
 	DataDetails_notesChunkData = DataDetails.AddMember("notesChunkData", NotesChunkDataDetails)
+
+	DataDetails_proactiveRecommendationData = DataDetails.AddMember("proactiveRecommendationData", ProactiveRecommendationDataDetails)
 
 	DependencyFailedException_message = DependencyFailedException.AddMember("message", smithyprelude.String)
 
@@ -8699,6 +8738,14 @@ func init() {
 	RetrievalConfiguration_numberOfResults = RetrievalConfiguration.AddMember("numberOfResults", smithyprelude.Integer)
 
 	RetrievalConfiguration_overrideKnowledgeBaseSearchType = RetrievalConfiguration.AddMember("overrideKnowledgeBaseSearchType", _KnowledgeBaseSearchType)
+
+	RetrieveError_associationId = RetrieveError.AddMember("associationId", _Uuid)
+
+	RetrieveError_code = RetrieveError.AddMember("code", _RetrieveErrorCode)
+
+	RetrieveError_message = RetrieveError.AddMember("message", smithyprelude.String)
+
+	_RetrieveErrorList_member = _RetrieveErrorList.AddMember("member", RetrieveError)
 
 	RetrieveResult_associationId = RetrieveResult.AddMember("associationId", _Uuid)
 
@@ -9711,6 +9758,8 @@ func init() {
 	RetrieveRequest_retrievalQuery = RetrieveRequest.AddMember("retrievalQuery", _NonEmptySensitiveString)
 
 	RetrieveResponse_results = RetrieveResponse.AddMember("results", _RetrieveResultList)
+
+	RetrieveResponse_errors = RetrieveResponse.AddMember("errors", _RetrieveErrorList)
 
 	SearchContentRequest_nextToken = SearchContentRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
 

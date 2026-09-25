@@ -5280,6 +5280,47 @@ func TestCheckResponseSnapshot_InitiateProviderRegistration(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListActorMessages(t *testing.T) {
+	want := &ListActorMessagesOutput{
+		Messages: []types.ActorMessage{
+			{
+				Sender:     ptr.String("__Sender__"),
+				Subject:    ptr.String("__Subject__"),
+				Body:       ptr.String("__Body__"),
+				ReceivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Sender:     ptr.String("__Sender__"),
+				Subject:    ptr.String("__Subject__"),
+				Body:       ptr.String("__Body__"),
+				ReceivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListActorMessages.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListActorMessages(context.Background(), &ListActorMessagesInput{
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestId:       ptr.String("__PentestId__"),
+		ActorIdentifier: ptr.String("__ActorIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListActorMessages.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListAgentSpaces(t *testing.T) {
 	want := &ListAgentSpacesOutput{
 		AgentSpaceSummaries: []types.AgentSpaceSummary{

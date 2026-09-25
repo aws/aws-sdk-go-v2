@@ -1146,6 +1146,25 @@ type CoinbaseCdpConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the service-managed Coinbase CDP secrets to rotate.
+type CoinbaseCdpRotationTargets struct {
+
+	// The secrets to rotate. Specify at least one value. Each secret that you specify
+	// is rotated independently.
+	//
+	//   - API_KEY - The API key that the payment connector uses to call Coinbase CDP.
+	//   Rotate it as routine maintenance, or if you suspect that it is compromised.
+	//
+	//   - WALLET_SECRET - The wallet secret that signs transactions. Rotate it only if
+	//   it is lost or compromised. Coinbase CDP allows one wallet secret per project, so
+	//   it is replaced in place and signing can be briefly interrupted.
+	//
+	// This member is required.
+	Secrets []CoinbaseCdpSecret
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for a component within a configuration bundle. The component
 // type is inferred from the component identifier ARN.
 type ComponentConfiguration struct {
@@ -1597,6 +1616,25 @@ type CredentialProviderConfiguration struct {
 
 	noSmithyDocumentSerde
 }
+
+// Specifies the service-managed credentials to rotate. Provide the member that
+// matches the payment connector's type .
+//
+// The following types satisfy this interface:
+//
+//	CredentialRotationConfigMemberCoinbaseCDP
+type CredentialRotationConfig interface {
+	isCredentialRotationConfig()
+}
+
+// The credentials to rotate for a Coinbase CDP payment connector.
+type CredentialRotationConfigMemberCoinbaseCDP struct {
+	Value CoinbaseCdpRotationTargets
+
+	noSmithyDocumentSerde
+}
+
+func (*CredentialRotationConfigMemberCoinbaseCDP) isCredentialRotationConfig() {}
 
 // The credential provider configuration for a payment connector. Specifies the
 // payment provider type and its associated credential provider.
@@ -5570,10 +5608,9 @@ type McpServerTargetConfiguration struct {
 	// for dynamic targets will be dynamically retrieved when listing tools.
 	ListingMode ListingMode
 
-	// The tool schema configuration for the MCP server target. Supported only when
-	// the credential provider is configured with an authorization code grant type.
-	// Dynamic tool discovery/synchronization will be disabled when target is
-	// configured with mcpToolSchema.
+	// A static tool list for the MCP server target. It is supported for all
+	// credential providers. Dynamic tool discovery/synchronization will be disabled
+	// when a target is configured with mcpToolSchema.
 	McpToolSchema McpToolSchemaConfiguration
 
 	// Priority for resolving MCP server targets with shared resource URIs. Lower
@@ -6808,6 +6845,17 @@ type PaymentConnectorSummary struct {
 	//
 	// This member is required.
 	Type PaymentConnectorType
+
+	// Specifies how the payment connector was provisioned. Payment connectors that
+	// were created before this field was available return MANUAL .
+	//
+	//   - MANUAL - You provided the credential provider configurations, so you own the
+	//   credentials.
+	//
+	//   - QUICK_CREATE - AgentCore provisioned the credential provider for you, so the
+	//   credentials are service-managed and you can rotate them with
+	//   RotatePaymentConnectorCredentials .
+	ProvisionMode PaymentConnectorProvisionMode
 
 	noSmithyDocumentSerde
 }
@@ -9906,6 +9954,7 @@ func (*UnknownUnionMember) isConfigurationBundleAction()              {}
 func (*UnknownUnionMember) isConsolidationConfiguration()             {}
 func (*UnknownUnionMember) isContent()                                {}
 func (*UnknownUnionMember) isCredentialProvider()                     {}
+func (*UnknownUnionMember) isCredentialRotationConfig()               {}
 func (*UnknownUnionMember) isCredentialsProviderConfiguration()       {}
 func (*UnknownUnionMember) isCustomConfigurationInput()               {}
 func (*UnknownUnionMember) isCustomConsolidationConfiguration()       {}

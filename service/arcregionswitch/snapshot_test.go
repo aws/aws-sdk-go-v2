@@ -230,6 +230,18 @@ func TestCheckSnapshot_ListRoute53HealthChecksInRegion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListServiceQuotaWarnings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceQuotaWarnings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListServiceQuotaWarnings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -474,6 +486,18 @@ func TestUpdateSnapshot_ListRoute53HealthChecksInRegion(t *testing.T) {
 	_, err := svc.ListRoute53HealthChecksInRegion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListRoute53HealthChecksInRegion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListServiceQuotaWarnings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceQuotaWarnings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListServiceQuotaWarnings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

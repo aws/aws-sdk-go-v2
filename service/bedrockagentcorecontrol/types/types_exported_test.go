@@ -309,6 +309,24 @@ var _ *types.IamCredentialProvider
 var _ *types.GatewayApiKeyCredentialProvider
 var _ *types.OAuthCredentialProvider
 
+func ExampleCredentialRotationConfig_outputUsage() {
+	var union types.CredentialRotationConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CredentialRotationConfigMemberCoinbaseCDP:
+		_ = v.Value // Value is types.CoinbaseCdpRotationTargets
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CoinbaseCdpRotationTargets
+
 func ExampleCredentialsProviderConfiguration_outputUsage() {
 	var union types.CredentialsProviderConfiguration
 	// type switches can be used to check the union value

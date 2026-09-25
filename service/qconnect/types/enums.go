@@ -1289,6 +1289,7 @@ const (
 	RecommendationTypeSuggestedMessage              RecommendationType = "SUGGESTED_MESSAGE"
 	RecommendationTypeNotesChunk                    RecommendationType = "NOTES_CHUNK"
 	RecommendationTypeBlockedNotesChunk             RecommendationType = "BLOCKED_NOTES_CHUNK"
+	RecommendationTypeProactiveRecommendation       RecommendationType = "PROACTIVE_RECOMMENDATION"
 )
 
 // Values returns all known values for RecommendationType. Note that this can be
@@ -1313,6 +1314,7 @@ func (RecommendationType) Values() []RecommendationType {
 		"SUGGESTED_MESSAGE",
 		"NOTES_CHUNK",
 		"BLOCKED_NOTES_CHUNK",
+		"PROACTIVE_RECOMMENDATION",
 	}
 }
 
@@ -1388,6 +1390,33 @@ func (RelevanceLevel) Values() []RelevanceLevel {
 		"HIGH",
 		"MEDIUM",
 		"LOW",
+	}
+}
+
+type RetrieveErrorCode string
+
+// Enum values for RetrieveErrorCode
+const (
+	RetrieveErrorCodeAccessDenied        RetrieveErrorCode = "ACCESS_DENIED"
+	RetrieveErrorCodeResourceNotFound    RetrieveErrorCode = "RESOURCE_NOT_FOUND"
+	RetrieveErrorCodeValidationError     RetrieveErrorCode = "VALIDATION_ERROR"
+	RetrieveErrorCodeThrottled           RetrieveErrorCode = "THROTTLED"
+	RetrieveErrorCodeDependencyFailed    RetrieveErrorCode = "DEPENDENCY_FAILED"
+	RetrieveErrorCodeInternalServerError RetrieveErrorCode = "INTERNAL_SERVER_ERROR"
+)
+
+// Values returns all known values for RetrieveErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RetrieveErrorCode) Values() []RetrieveErrorCode {
+	return []RetrieveErrorCode{
+		"ACCESS_DENIED",
+		"RESOURCE_NOT_FOUND",
+		"VALIDATION_ERROR",
+		"THROTTLED",
+		"DEPENDENCY_FAILED",
+		"INTERNAL_SERVER_ERROR",
 	}
 }
 

@@ -1761,6 +1761,17 @@ func serializeStringListValue(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	s.CloseList()
 }
 
+func serializeSubnetIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeSupplementalDataStorageLocations(s smithy.ShapeSerializer, schema *smithy.Schema, v []SupplementalDataStorageLocation) {
 	if v == nil {
 		return
@@ -1834,6 +1845,19 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeVideoConfigurations(s smithy.ShapeSerializer, schema *smithy.Schema, v []VideoConfiguration) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeVpcConfigurationSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []VpcConfigurationSummary) {
 	if v == nil {
 		return
 	}
@@ -2602,6 +2626,20 @@ func deserializeStringListValue(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	})
 }
 
+func deserializeSubnetIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeSupplementalDataStorageLocations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SupplementalDataStorageLocation) error {
 	*v = make([]SupplementalDataStorageLocation, 0)
 	var vv SupplementalDataStorageLocation
@@ -2691,6 +2729,20 @@ func deserializeVideoConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema
 	var vv VideoConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = VideoConfiguration{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeVpcConfigurationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]VpcConfigurationSummary) error {
+	*v = make([]VpcConfigurationSummary, 0)
+	var vv VpcConfigurationSummary
+	return smithy.ReadList(d, s, func() error {
+		vv = VpcConfigurationSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

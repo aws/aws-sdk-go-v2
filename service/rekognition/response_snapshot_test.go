@@ -3386,6 +3386,19 @@ func TestCheckResponseSnapshot_GetFaceLivenessSessionResults(t *testing.T) {
 			Type:    types.ChallengeType("FaceMovementAndLightChallenge"),
 			Version: ptr.String("__Version__"),
 		},
+		Feedback: []types.FeedbackItem{
+			{
+				Code:    types.FeedbackCode("FACE_NOT_VISIBLE"),
+				Message: ptr.String("__Message__"),
+			},
+			{
+				Code:    types.FeedbackCode("FACE_NOT_VISIBLE"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+		Metadata: &types.SessionMetadata{
+			SDKType: ptr.String("__SDKType__"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetFaceLivenessSessionResults.response")
 	if errors.Is(err, fs.ErrNotExist) {

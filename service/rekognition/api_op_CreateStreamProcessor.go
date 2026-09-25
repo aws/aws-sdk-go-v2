@@ -8,6 +8,12 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+// Service availability notice: Streaming Video and Bulk Image Analysis is no
+// longer available to new customers. For more information, see [Rekognition feature availability changes].
+//
+// This change does not impact the availability of other Amazon Rekognition
+// features.
+//
 // Creates an Amazon Rekognition stream processor that you can use to detect and
 // recognize faces or to detect labels in a streaming video.
 //
@@ -41,6 +47,8 @@ import (
 // rekognition:CreateStreamProcessor action. If you want to tag your stream
 // processor, you also require permission to perform the rekognition:TagResource
 // operation.
+//
+// [Rekognition feature availability changes]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
 func (c *Client) CreateStreamProcessor(ctx context.Context, params *CreateStreamProcessorInput, optFns ...func(*Options)) (*CreateStreamProcessorOutput, error) {
 	if params == nil {
 		params = &CreateStreamProcessorInput{}

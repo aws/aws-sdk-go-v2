@@ -9,8 +9,16 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+// Service availability notice: Streaming Video and Bulk Image Analysis is no
+// longer available to new customers. For more information, see [Rekognition feature availability changes].
+//
+// This change does not impact the availability of other Amazon Rekognition
+// features.
+//
 // Returns a list of media analysis jobs. Results are sorted by CreationTimestamp
 // in descending order.
+//
+// [Rekognition feature availability changes]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
 func (c *Client) ListMediaAnalysisJobs(ctx context.Context, params *ListMediaAnalysisJobsInput, optFns ...func(*Options)) (*ListMediaAnalysisJobsOutput, error) {
 	if params == nil {
 		params = &ListMediaAnalysisJobsInput{}

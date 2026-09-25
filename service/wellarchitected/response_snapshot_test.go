@@ -1228,6 +1228,7 @@ func TestCheckResponseSnapshot_GetAgentRecommendation(t *testing.T) {
 	want := &GetAgentRecommendationOutput{
 		RecommendationArn: ptr.String("__RecommendationArn__"),
 		ProfileArn:        ptr.String("__ProfileArn__"),
+		GenerationId:      ptr.String("__GenerationId__"),
 		Title:             ptr.String("__Title__"),
 		Description:       ptr.String("__Description__"),
 		Type:              types.RecommendationType("RESOURCE"),
@@ -3285,6 +3286,7 @@ func TestCheckResponseSnapshot_ListAgentRecommendations(t *testing.T) {
 			{
 				RecommendationArn: ptr.String("__RecommendationArn__"),
 				ProfileArn:        ptr.String("__ProfileArn__"),
+				GenerationId:      ptr.String("__GenerationId__"),
 				Title:             ptr.String("__Title__"),
 				Description:       ptr.String("__Description__"),
 				Type:              types.RecommendationType("RESOURCE"),
@@ -3320,6 +3322,7 @@ func TestCheckResponseSnapshot_ListAgentRecommendations(t *testing.T) {
 			{
 				RecommendationArn: ptr.String("__RecommendationArn__"),
 				ProfileArn:        ptr.String("__ProfileArn__"),
+				GenerationId:      ptr.String("__GenerationId__"),
 				Title:             ptr.String("__Title__"),
 				Description:       ptr.String("__Description__"),
 				Type:              types.RecommendationType("RESOURCE"),

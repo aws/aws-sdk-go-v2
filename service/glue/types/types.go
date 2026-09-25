@@ -31427,6 +31427,12 @@ type TableInput struct {
 	// A description of the table.
 	Description *string
 
+	// A FederatedTable structure that references an entity outside the Glue Data
+	// Catalog. Specify this field to create a federated table, which points to a table
+	// in an external metastore instead of describing data managed in the Glue Data
+	// Catalog.
+	FederatedTable *FederatedTable
+
 	// The last time that the table was accessed.
 	LastAccessTime *time.Time
 
@@ -31496,6 +31502,11 @@ func (v *TableInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.TableInput_Description, *v.Description)
 	}
+	if v.FederatedTable != nil {
+		s.WriteStruct(schemas.TableInput_FederatedTable)
+		v.FederatedTable.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.LastAccessTime != nil {
 		s.WriteTime(schemas.TableInput_LastAccessTime, *v.LastAccessTime)
 	}
@@ -31544,6 +31555,9 @@ func (v *TableInput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TableInput_Description:
 			v.Description = new(string)
 			return d.ReadString(schemas.TableInput_Description, v.Description)
+		case schemas.TableInput_FederatedTable:
+			v.FederatedTable = &FederatedTable{}
+			return v.FederatedTable.Deserialize(d)
 		case schemas.TableInput_LastAccessTime:
 			v.LastAccessTime = new(time.Time)
 			return d.ReadTime(schemas.TableInput_LastAccessTime, v.LastAccessTime)

@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Updates the status of a recommendation to track its progress through the
@@ -61,6 +62,10 @@ func (v *UpdateAgentRecommendationStatusInput) SerializeMembers(s smithy.ShapeSe
 	if v.UpdateReason != nil {
 		s.WriteString(schemas.UpdateAgentRecommendationStatusRequest_updateReason, *v.UpdateReason)
 	}
+}
+func (in *UpdateAgentRecommendationStatusInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type UpdateAgentRecommendationStatusOutput struct {

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"vpcConfiguration":{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","hostHeader":"__HostHeader__","name":"__Name__","port":1,"protocol":"HTTP","resolutionMode":"PUBLIC","resourceTarget":"__ResourceTarget__","status":"CREATING","statusMessage":"__StatusMessage__","subnetIds":["__Member__","__Member__"],"tlsServerName":"__TlsServerName__","updatedAt":"2000-01-01T00:00:00Z","vpcConfigurationId":"__VpcConfigurationId__","vpcId":"__VpcId__"}}

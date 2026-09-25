@@ -5787,6 +5787,12 @@ func TestCheckRequestSnapshot_CreateTable(t *testing.T) {
 				Name:         ptr.String("__Name__"),
 				Region:       ptr.String("__Region__"),
 			},
+			FederatedTable: &types.FederatedTable{
+				Identifier:         ptr.String("__Identifier__"),
+				DatabaseIdentifier: ptr.String("__DatabaseIdentifier__"),
+				ConnectionName:     ptr.String("__ConnectionName__"),
+				ConnectionType:     ptr.String("__ConnectionType__"),
+			},
 			ViewDefinition: &types.ViewDefinitionInput{
 				IsProtected: ptr.Bool(true),
 				Definer:     ptr.String("__Definer__"),
@@ -9802,6 +9808,7 @@ func TestCheckRequestSnapshot_GetTables(t *testing.T) {
 			},
 			AllColumnsRequested: ptr.Bool(true),
 		},
+		ResourceShareType:    types.TableResourceShareType("FEDERATED"),
 		IncludeStatusDetails: ptr.Bool(true),
 		AttributesToGet: []types.TableAttributes{
 			types.TableAttributes("NAME"),
@@ -18309,6 +18316,12 @@ func TestCheckRequestSnapshot_UpdateTable(t *testing.T) {
 				Name:         ptr.String("__Name__"),
 				Region:       ptr.String("__Region__"),
 			},
+			FederatedTable: &types.FederatedTable{
+				Identifier:         ptr.String("__Identifier__"),
+				DatabaseIdentifier: ptr.String("__DatabaseIdentifier__"),
+				ConnectionName:     ptr.String("__ConnectionName__"),
+				ConnectionType:     ptr.String("__ConnectionType__"),
+			},
 			ViewDefinition: &types.ViewDefinitionInput{
 				IsProtected: ptr.Bool(true),
 				Definer:     ptr.String("__Definer__"),
@@ -24403,6 +24416,12 @@ func TestUpdateRequestSnapshot_CreateTable(t *testing.T) {
 				Name:         ptr.String("__Name__"),
 				Region:       ptr.String("__Region__"),
 			},
+			FederatedTable: &types.FederatedTable{
+				Identifier:         ptr.String("__Identifier__"),
+				DatabaseIdentifier: ptr.String("__DatabaseIdentifier__"),
+				ConnectionName:     ptr.String("__ConnectionName__"),
+				ConnectionType:     ptr.String("__ConnectionType__"),
+			},
 			ViewDefinition: &types.ViewDefinitionInput{
 				IsProtected: ptr.Bool(true),
 				Definer:     ptr.String("__Definer__"),
@@ -28418,6 +28437,7 @@ func TestUpdateRequestSnapshot_GetTables(t *testing.T) {
 			},
 			AllColumnsRequested: ptr.Bool(true),
 		},
+		ResourceShareType:    types.TableResourceShareType("FEDERATED"),
 		IncludeStatusDetails: ptr.Bool(true),
 		AttributesToGet: []types.TableAttributes{
 			types.TableAttributes("NAME"),
@@ -36924,6 +36944,12 @@ func TestUpdateRequestSnapshot_UpdateTable(t *testing.T) {
 				DatabaseName: ptr.String("__DatabaseName__"),
 				Name:         ptr.String("__Name__"),
 				Region:       ptr.String("__Region__"),
+			},
+			FederatedTable: &types.FederatedTable{
+				Identifier:         ptr.String("__Identifier__"),
+				DatabaseIdentifier: ptr.String("__DatabaseIdentifier__"),
+				ConnectionName:     ptr.String("__ConnectionName__"),
+				ConnectionType:     ptr.String("__ConnectionType__"),
 			},
 			ViewDefinition: &types.ViewDefinitionInput{
 				IsProtected: ptr.Bool(true),

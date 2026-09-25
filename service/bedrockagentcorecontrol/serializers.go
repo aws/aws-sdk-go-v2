@@ -12045,6 +12045,116 @@ func awsRestjson1_serializeOpDocumentPutResourcePolicyInput(v *PutResourcePolicy
 	return nil
 }
 
+type awsRestjson1_serializeOpRotatePaymentConnectorCredentials struct {
+}
+
+func (*awsRestjson1_serializeOpRotatePaymentConnectorCredentials) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpRotatePaymentConnectorCredentials) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RotatePaymentConnectorCredentialsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/payments/managers/{paymentManagerId}/connectors/{paymentConnectorId}/rotate-credentials")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsRotatePaymentConnectorCredentialsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentRotatePaymentConnectorCredentialsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsRotatePaymentConnectorCredentialsInput(v *RotatePaymentConnectorCredentialsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.PaymentConnectorId == nil || len(*v.PaymentConnectorId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member paymentConnectorId must not be empty")}
+	}
+	if v.PaymentConnectorId != nil {
+		if err := encoder.SetURI("paymentConnectorId").String(*v.PaymentConnectorId); err != nil {
+			return err
+		}
+	}
+
+	if v.PaymentManagerId == nil || len(*v.PaymentManagerId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member paymentManagerId must not be empty")}
+	}
+	if v.PaymentManagerId != nil {
+		if err := encoder.SetURI("paymentManagerId").String(*v.PaymentManagerId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentRotatePaymentConnectorCredentialsInput(v *RotatePaymentConnectorCredentialsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.CredentialsToRotate != nil {
+		ok := object.Key("credentialsToRotate")
+		if err := awsRestjson1_serializeDocumentCredentialRotationConfig(v.CredentialsToRotate, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpSetTokenVaultCMK struct {
 }
 
@@ -16863,6 +16973,31 @@ func awsRestjson1_serializeDocumentCoinbaseCdpConfigurationInput(v *types.Coinba
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCoinbaseCdpRotationTargets(v *types.CoinbaseCdpRotationTargets, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Secrets != nil {
+		ok := object.Key("secrets")
+		if err := awsRestjson1_serializeDocumentCoinbaseCdpSecrets(v.Secrets, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCoinbaseCdpSecrets(v []types.CoinbaseCdpSecret, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentComponentConfiguration(v *types.ComponentConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17306,6 +17441,24 @@ func awsRestjson1_serializeDocumentCredentialProviderConfigurations(v []types.Cr
 		if err := awsRestjson1_serializeDocumentCredentialProviderConfiguration(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCredentialRotationConfig(v types.CredentialRotationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CredentialRotationConfigMemberCoinbaseCDP:
+		av := object.Key("coinbaseCDP")
+		if err := awsRestjson1_serializeDocumentCoinbaseCdpRotationTargets(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }

@@ -1021,6 +1021,7 @@ const (
 	RouterOutputProtocolRist        RouterOutputProtocol = "RIST"
 	RouterOutputProtocolSrtCaller   RouterOutputProtocol = "SRT_CALLER"
 	RouterOutputProtocolSrtListener RouterOutputProtocol = "SRT_LISTENER"
+	RouterOutputProtocolRtmpPush    RouterOutputProtocol = "RTMP_PUSH"
 )
 
 // Values returns all known values for RouterOutputProtocol. Note that this can be
@@ -1033,6 +1034,7 @@ func (RouterOutputProtocol) Values() []RouterOutputProtocol {
 		"RIST",
 		"SRT_CALLER",
 		"SRT_LISTENER",
+		"RTMP_PUSH",
 	}
 }
 
@@ -1290,5 +1292,22 @@ func (ThumbnailState) Values() []ThumbnailState {
 	return []ThumbnailState{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type TlsEncryptionType string
+
+// Enum values for TlsEncryptionType
+const (
+	TlsEncryptionTypePublic TlsEncryptionType = "PUBLIC"
+)
+
+// Values returns all known values for TlsEncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TlsEncryptionType) Values() []TlsEncryptionType {
+	return []TlsEncryptionType{
+		"PUBLIC",
 	}
 }

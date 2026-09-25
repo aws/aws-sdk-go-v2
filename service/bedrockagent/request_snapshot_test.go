@@ -1466,6 +1466,47 @@ func TestCheckRequestSnapshot_CreatePromptVersion(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateVpcConfiguration(t *testing.T) {
+	input := &CreateVpcConfigurationInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		VpcId:           ptr.String("__VpcId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceTarget: ptr.String("__ResourceTarget__"),
+		Port:           ptr.Int32(1),
+		Protocol:       types.VpcProtocol("HTTP"),
+		ResolutionMode: types.VpcResolutionMode("PUBLIC"),
+		HostHeader:     ptr.String("__HostHeader__"),
+		TlsServerName:  ptr.String("__TlsServerName__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateVpcConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateVpcConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteAgent(t *testing.T) {
 	input := &DeleteAgentInput{
 		AgentId:                ptr.String("__AgentId__"),
@@ -1822,6 +1863,34 @@ func TestCheckRequestSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteResourcePolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteVpcConfiguration(t *testing.T) {
+	input := &DeleteVpcConfigurationInput{
+		KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+		VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteVpcConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteVpcConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2323,6 +2392,34 @@ func TestCheckRequestSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourcePolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetVpcConfiguration(t *testing.T) {
+	input := &GetVpcConfigurationInput{
+		KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+		VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetVpcConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetVpcConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2965,6 +3062,36 @@ func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTagsForResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListVpcConfigurations(t *testing.T) {
+	input := &ListVpcConfigurationsInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		StatusFilter:    types.VpcConfigurationStatus("CREATING"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListVpcConfigurations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListVpcConfigurations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5731,6 +5858,47 @@ func TestUpdateRequestSnapshot_CreatePromptVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateVpcConfiguration(t *testing.T) {
+	input := &CreateVpcConfigurationInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		VpcId:           ptr.String("__VpcId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceTarget: ptr.String("__ResourceTarget__"),
+		Port:           ptr.Int32(1),
+		Protocol:       types.VpcProtocol("HTTP"),
+		ResolutionMode: types.VpcResolutionMode("PUBLIC"),
+		HostHeader:     ptr.String("__HostHeader__"),
+		TlsServerName:  ptr.String("__TlsServerName__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateVpcConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateVpcConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteAgent(t *testing.T) {
 	input := &DeleteAgentInput{
 		AgentId:                ptr.String("__AgentId__"),
@@ -6087,6 +6255,34 @@ func TestUpdateRequestSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteResourcePolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteVpcConfiguration(t *testing.T) {
+	input := &DeleteVpcConfigurationInput{
+		KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+		VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteVpcConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteVpcConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6588,6 +6784,34 @@ func TestUpdateRequestSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourcePolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetVpcConfiguration(t *testing.T) {
+	input := &GetVpcConfigurationInput{
+		KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+		VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetVpcConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetVpcConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7230,6 +7454,36 @@ func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTagsForResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListVpcConfigurations(t *testing.T) {
+	input := &ListVpcConfigurationsInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		StatusFilter:    types.VpcConfigurationStatus("CREATING"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListVpcConfigurations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListVpcConfigurations"); err != nil {
 		t.Fatal(err)
 	}
 }

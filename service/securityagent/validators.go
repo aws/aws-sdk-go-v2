@@ -950,6 +950,26 @@ func (m *validateOpInitiateProviderRegistration) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListActorMessages struct {
+}
+
+func (*validateOpListActorMessages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListActorMessages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListActorMessagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListActorMessagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListArtifacts struct {
 }
 
@@ -1896,6 +1916,10 @@ func addOpImportSecurityRequirementsValidationMiddleware(stack *middleware.Stack
 
 func addOpInitiateProviderRegistrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInitiateProviderRegistration{}, middleware.After)
+}
+
+func addOpListActorMessagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListActorMessages{}, middleware.After)
 }
 
 func addOpListArtifactsValidationMiddleware(stack *middleware.Stack) error {
@@ -3561,6 +3585,27 @@ func validateOpInitiateProviderRegistrationInput(v *InitiateProviderRegistration
 	invalidParams := smithy.InvalidParamsError{Context: "InitiateProviderRegistrationInput"}
 	if len(v.Provider) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Provider"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListActorMessagesInput(v *ListActorMessagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListActorMessagesInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.PentestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PentestId"))
+	}
+	if v.ActorIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActorIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

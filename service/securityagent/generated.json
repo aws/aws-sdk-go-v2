@@ -56,6 +56,7 @@
         "api_op_GetSecurityRequirementPack.go",
         "api_op_ImportSecurityRequirements.go",
         "api_op_InitiateProviderRegistration.go",
+        "api_op_ListActorMessages.go",
         "api_op_ListAgentSpaces.go",
         "api_op_ListApplications.go",
         "api_op_ListArtifacts.go",

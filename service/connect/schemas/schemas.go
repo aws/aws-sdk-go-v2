@@ -9410,7 +9410,7 @@ var Instance_Tags *smithy.Schema
 var InstanceAttributeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "InstanceAttributeType",
-}, smithy.ShapeTypeEnum, 13)
+}, smithy.ShapeTypeEnum, 14)
 var InstanceAttributeType_INBOUND_CALLS *smithy.Schema
 
 var InstanceAttributeType_OUTBOUND_CALLS *smithy.Schema
@@ -9426,6 +9426,8 @@ var InstanceAttributeType_USE_CUSTOM_TTS_VOICES *smithy.Schema
 var InstanceAttributeType_EARLY_MEDIA *smithy.Schema
 
 var InstanceAttributeType_MULTI_PARTY_CONFERENCE *smithy.Schema
+
+var InstanceAttributeType_AUTO_MUTE_AGENT_ON_HOLD *smithy.Schema
 
 var InstanceAttributeType_HIGH_VOLUME_OUTBOUND *smithy.Schema
 
@@ -25267,6 +25269,8 @@ func init() {
 	InstanceAttributeType_EARLY_MEDIA = InstanceAttributeType.AddMember("EARLY_MEDIA", smithyprelude.Unit)
 
 	InstanceAttributeType_MULTI_PARTY_CONFERENCE = InstanceAttributeType.AddMember("MULTI_PARTY_CONFERENCE", smithyprelude.Unit)
+
+	InstanceAttributeType_AUTO_MUTE_AGENT_ON_HOLD = InstanceAttributeType.AddMember("AUTO_MUTE_AGENT_ON_HOLD", smithyprelude.Unit)
 
 	InstanceAttributeType_HIGH_VOLUME_OUTBOUND = InstanceAttributeType.AddMember("HIGH_VOLUME_OUTBOUND", smithyprelude.Unit)
 

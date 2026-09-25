@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Lists contexts associated with a profile.
@@ -59,6 +60,10 @@ func (v *ListAgentContextsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProfileArn != nil {
 		s.WriteString(schemas.ListAgentContextsRequest_profileArn, *v.ProfileArn)
 	}
+}
+func (in *ListAgentContextsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type ListAgentContextsOutput struct {

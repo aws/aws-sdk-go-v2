@@ -1,0 +1,5 @@
+POST /ListActorMessages
+
+Content-Type: application/json
+
+{"actorIdentifier":"__ActorIdentifier__","agentSpaceId":"__AgentSpaceId__","maxResults":1,"nextToken":"__NextToken__","pentestId":"__PentestId__"}

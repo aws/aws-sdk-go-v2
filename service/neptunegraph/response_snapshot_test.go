@@ -1017,8 +1017,9 @@ func TestCheckResponseSnapshot_ListImportTasks(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListImportTasks(context.Background(), &ListImportTasksInput{
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
+		GraphIdentifier: ptr.String("__GraphIdentifier__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
 	})
 	if err != nil {
 		t.Fatal(err)

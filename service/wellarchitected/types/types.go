@@ -812,6 +812,9 @@ type AgentRecommendationSummary struct {
 	// The business units that own the affected resources.
 	BusinessUnits []string
 
+	// The identifier of the generation process that produced this recommendation.
+	GenerationId *string
+
 	// The timestamp when the recommendation was last modified.
 	LastModifiedAt *time.Time
 
@@ -849,6 +852,9 @@ func (v *AgentRecommendationSummary) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 	if v.Effort != "" {
 		s.WriteString(schemas.AgentRecommendationSummary_effort, string(v.Effort))
+	}
+	if v.GenerationId != nil {
+		s.WriteString(schemas.AgentRecommendationSummary_generationId, *v.GenerationId)
 	}
 	if v.Impact != "" {
 		s.WriteString(schemas.AgentRecommendationSummary_impact, string(v.Impact))
@@ -920,6 +926,9 @@ func (v *AgentRecommendationSummary) Deserialize(d smithy.ShapeDeserializer) err
 			}
 			v.Effort = Effort(ev)
 			return nil
+		case schemas.AgentRecommendationSummary_generationId:
+			v.GenerationId = new(string)
+			return d.ReadString(schemas.AgentRecommendationSummary_generationId, v.GenerationId)
 		case schemas.AgentRecommendationSummary_impact:
 			var ev string
 			if err := d.ReadString(schemas.AgentRecommendationSummary_impact, &ev); err != nil {

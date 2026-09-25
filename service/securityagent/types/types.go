@@ -33,6 +33,25 @@ type Actor struct {
 	noSmithyDocumentSerde
 }
 
+// A message received at an actor's server-generated email MFA address.
+type ActorMessage struct {
+
+	// The plain-text body of the message, containing the MFA code or verification
+	// link.
+	Body *string
+
+	// The time the message was received.
+	ReceivedAt *time.Time
+
+	// The address the message was sent from.
+	Sender *string
+
+	// The subject line of the message.
+	Subject *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents an agent space, which is a dedicated workspace for securing a
 // specific application. An agent space contains the configuration, resources, and
 // settings needed for security testing.

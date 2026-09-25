@@ -9,7 +9,15 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+// Service availability notice: Streaming Video and Bulk Image Analysis is no
+// longer available to new customers. For more information, see [Rekognition feature availability changes].
+//
+// This change does not impact the availability of other Amazon Rekognition
+// features.
+//
 // Gets a list of stream processors that you have created with CreateStreamProcessor.
+//
+// [Rekognition feature availability changes]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
 func (c *Client) ListStreamProcessors(ctx context.Context, params *ListStreamProcessorsInput, optFns ...func(*Options)) (*ListStreamProcessorsOutput, error) {
 	if params == nil {
 		params = &ListStreamProcessorsInput{}

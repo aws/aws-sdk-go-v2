@@ -1,0 +1,8 @@
+{
+    "id": "91708c6f-c479-4ba2-9416-f9a01f1406c6",
+    "type": "feature",
+    "description": "Add GraphIdentifier filter for ListImportTasks",
+    "modules": [
+        "service/neptunegraph"
+    ]
+}

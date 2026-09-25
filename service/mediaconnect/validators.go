@@ -3081,6 +3081,11 @@ func validateRouterOutputProtocolConfiguration(v types.RouterOutputProtocolConfi
 			invalidParams.AddNested("[Rist]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.RouterOutputProtocolConfigurationMemberRtmpPush:
+		if err := validateRtmpPushRouterOutputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[RtmpPush]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.RouterOutputProtocolConfigurationMemberRtp:
 		if err := validateRtpRouterOutputConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[Rtp]", err.(smithy.InvalidParamsError))
@@ -3096,6 +3101,35 @@ func validateRouterOutputProtocolConfiguration(v types.RouterOutputProtocolConfi
 			invalidParams.AddNested("[SrtListener]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRtmpPushRouterOutputConfiguration(v *types.RtmpPushRouterOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RtmpPushRouterOutputConfiguration"}
+	if v.DestinationAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationAddress"))
+	}
+	if v.DestinationPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPort"))
+	}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.StreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
+	}
+	if v.TlsEncryption != nil {
+		if err := validateTlsEncryption(v.TlsEncryption); err != nil {
+			invalidParams.AddNested("TlsEncryption", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3392,6 +3426,21 @@ func validateStandardRouterOutputConfiguration(v *types.StandardRouterOutputConf
 		if err := validateRouterOutputProtocolConfiguration(v.ProtocolConfiguration); err != nil {
 			invalidParams.AddNested("ProtocolConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTlsEncryption(v *types.TlsEncryption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TlsEncryption"}
+	if v.EncryptionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionConfiguration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

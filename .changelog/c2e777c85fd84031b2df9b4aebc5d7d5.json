@@ -1,0 +1,8 @@
+{
+    "id": "c2e777c8-5fd8-4031-b2df-9b4aebc5d7d5",
+    "type": "feature",
+    "description": "Adds a service quota checker to Region switch to verify quota parity between your primary and standby Region, and automatically submit quota limit increases. Adds an optional EC2 Auto Scaling and ECS setting that waits for instances or tasks in the scaled-up Region to be healthy in target groups.",
+    "modules": [
+        "service/arcregionswitch"
+    ]
+}

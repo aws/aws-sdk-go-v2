@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Lists active optimization recommendations for a specified profile with optional
@@ -74,6 +75,10 @@ func (v *ListAgentRecommendationsInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.State != "" {
 		s.WriteString(schemas.ListAgentRecommendationsRequest_state, string(v.State))
 	}
+}
+func (in *ListAgentRecommendationsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type ListAgentRecommendationsOutput struct {

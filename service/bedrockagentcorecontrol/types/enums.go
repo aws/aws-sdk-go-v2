@@ -426,6 +426,25 @@ func (CodeInterpreterStatus) Values() []CodeInterpreterStatus {
 	}
 }
 
+type CoinbaseCdpSecret string
+
+// Enum values for CoinbaseCdpSecret
+const (
+	CoinbaseCdpSecretApiKey       CoinbaseCdpSecret = "API_KEY"
+	CoinbaseCdpSecretWalletSecret CoinbaseCdpSecret = "WALLET_SECRET"
+)
+
+// Values returns all known values for CoinbaseCdpSecret. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CoinbaseCdpSecret) Values() []CoinbaseCdpSecret {
+	return []CoinbaseCdpSecret{
+		"API_KEY",
+		"WALLET_SECRET",
+	}
+}
+
 type ConfigurationBundleStatus string
 
 // Enum values for ConfigurationBundleStatus

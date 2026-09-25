@@ -231,6 +231,12 @@ func serializeDataDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v Dat
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *DataDetailsMemberProactiveRecommendationData:
+		s.WriteUnion(schema, schemas.DataDetails_proactiveRecommendationData)
+		s.WriteStruct(schemas.DataDetails_proactiveRecommendationData)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *DataDetailsMemberSourceContentData:
 		s.WriteUnion(schema, schemas.DataDetails_sourceContentData)
 		s.WriteStruct(schemas.DataDetails_sourceContentData)
@@ -820,6 +826,10 @@ func deserializeDataDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *Dat
 			return vv.Deserialize(d)
 		case schemas.DataDetails_notesData:
 			vv := &DataDetailsMemberNotesData{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.DataDetails_proactiveRecommendationData:
+			vv := &DataDetailsMemberProactiveRecommendationData{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.DataDetails_sourceContentData:
@@ -2019,6 +2029,19 @@ func serializeRetrievalFilterList(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.CloseList()
 }
 
+func serializeRetrieveErrorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RetrieveError) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeRetrieveResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RetrieveResult) {
 	if v == nil {
 		return
@@ -3173,6 +3196,20 @@ func deserializeRetrievalFilterList(d smithy.ShapeDeserializer, s *smithy.Schema
 	return smithy.ReadList(d, s, func() error {
 
 		if err := deserializeRetrievalFilterConfiguration(d, s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRetrieveErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RetrieveError) error {
+	*v = make([]RetrieveError, 0)
+	var vv RetrieveError
+	return smithy.ReadList(d, s, func() error {
+		vv = RetrieveError{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

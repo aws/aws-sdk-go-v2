@@ -9,8 +9,16 @@ import (
 	"time"
 )
 
+// Service availability notice: Streaming Video and Bulk Image Analysis is no
+// longer available to new customers. For more information, see [Rekognition feature availability changes].
+//
+// This change does not impact the availability of other Amazon Rekognition
+// features.
+//
 // Retrieves the results for a given media analysis job. Takes a JobId returned by
 // StartMediaAnalysisJob.
+//
+// [Rekognition feature availability changes]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
 func (c *Client) GetMediaAnalysisJob(ctx context.Context, params *GetMediaAnalysisJobInput, optFns ...func(*Options)) (*GetMediaAnalysisJobOutput, error) {
 	if params == nil {
 		params = &GetMediaAnalysisJobInput{}

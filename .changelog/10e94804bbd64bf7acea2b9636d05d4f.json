@@ -1,0 +1,8 @@
+{
+    "id": "10e94804-bbd6-4bf7-acea-2b9636d05d4f",
+    "type": "feature",
+    "description": "This release adds support for RTMP push router outputs in AWS Elemental MediaConnect.",
+    "modules": [
+        "service/mediaconnect"
+    ]
+}

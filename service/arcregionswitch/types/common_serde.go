@@ -380,6 +380,17 @@ func serializeLambdaList(s smithy.ShapeSerializer, schema *smithy.Schema, v []La
 	s.CloseList()
 }
 
+func serializePlanArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializePlanList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AbbreviatedPlan) {
 	if v == nil {
 		return
@@ -466,6 +477,19 @@ func serializeRoute53ResourceRecordSetList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeServiceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Service) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeServiceQuotaWarningSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ServiceQuotaWarningSummary) {
 	if v == nil {
 		return
 	}
@@ -694,6 +718,20 @@ func deserializeLambdaList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]La
 	})
 }
 
+func deserializePlanArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializePlanList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AbbreviatedPlan) error {
 	*v = make([]AbbreviatedPlan, 0)
 	var vv AbbreviatedPlan
@@ -797,6 +835,20 @@ func deserializeServiceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]S
 	var vv Service
 	return smithy.ReadList(d, s, func() error {
 		vv = Service{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeServiceQuotaWarningSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ServiceQuotaWarningSummary) error {
+	*v = make([]ServiceQuotaWarningSummary, 0)
+	var vv ServiceQuotaWarningSummary
+	return smithy.ReadList(d, s, func() error {
+		vv = ServiceQuotaWarningSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

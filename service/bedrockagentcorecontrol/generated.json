@@ -145,6 +145,7 @@
         "api_op_ListTagsForResource.go",
         "api_op_ListWorkloadIdentities.go",
         "api_op_PutResourcePolicy.go",
+        "api_op_RotatePaymentConnectorCredentials.go",
         "api_op_SetTokenVaultCMK.go",
         "api_op_StartPolicyGeneration.go",
         "api_op_SubmitRegistryRecordForApproval.go",

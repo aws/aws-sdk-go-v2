@@ -2211,6 +2211,12 @@ type BedrockEmbeddingModelConfiguration struct {
 	//
 	// The fields that this object accepts depend on the embedding model. For the
 	// settings that each model accepts, see the documentation for that model.
+	//
+	// For an example of a [CreateKnowledgeBase] request that uses this field to configure a multimodal
+	// embedding model, see the [Examples]section of [CreateKnowledgeBase].
+	//
+	// [CreateKnowledgeBase]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateKnowledgeBase.html
+	// [Examples]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateKnowledgeBase.html#API_agent_CreateKnowledgeBase_Examples
 	ModelConfiguration document.Interface
 
 	// Configuration settings for processing video content in multimodal knowledge
@@ -14996,6 +15002,367 @@ func (v *VideoSegmentationConfiguration) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.VideoSegmentationConfiguration_fixedLengthDuration:
 			v.FixedLengthDuration = new(int32)
 			return d.ReadInt32(schemas.VideoSegmentationConfiguration_fixedLengthDuration, v.FixedLengthDuration)
+		}
+		return nil
+	})
+}
+
+// Contains the details of a VPC configuration, including its connection settings,
+// resolution mode, and current lifecycle status.
+type VpcConfiguration struct {
+
+	// The time at which the VPC configuration was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The port on which the resource is reached.
+	//
+	// This member is required.
+	Port *int32
+
+	// The protocol used to connect to the resource.
+	//
+	// This member is required.
+	Protocol VpcProtocol
+
+	// Specifies how the resource target is resolved.
+	//
+	// This member is required.
+	ResolutionMode VpcResolutionMode
+
+	// The private IPv4 address or DNS name of the resource.
+	//
+	// This member is required.
+	ResourceTarget *string
+
+	// The current lifecycle status of the VPC configuration.
+	//
+	// This member is required.
+	Status VpcConfigurationStatus
+
+	// The subnets that the knowledge base uses to connect to the resource.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The time at which the VPC configuration was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The unique identifier of the VPC configuration.
+	//
+	// This member is required.
+	VpcConfigurationId *string
+
+	// The identifier of the VPC that the knowledge base connects through to reach the
+	// resource.
+	//
+	// This member is required.
+	VpcId *string
+
+	// The description of the VPC configuration, if provided.
+	Description *string
+
+	// The HTTP Host header value sent when invoking the resource, if configured.
+	HostHeader *string
+
+	// The human-readable name of the VPC configuration, if provided.
+	Name *string
+
+	// Additional detail about the current status, such as the cause of a CREATE_FAILED
+	// or DELETE_FAILED status.
+	StatusMessage *string
+
+	// The expected TLS server name that the service matches against the Subject
+	// Alternative Names on the resource's TLS certificate. Present when protocol is
+	// HTTPS .
+	TlsServerName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *VpcConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.VpcConfiguration_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.VpcConfiguration_description, *v.Description)
+	}
+	if v.HostHeader != nil {
+		s.WriteString(schemas.VpcConfiguration_hostHeader, *v.HostHeader)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.VpcConfiguration_name, *v.Name)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.VpcConfiguration_port, *v.Port)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.VpcConfiguration_protocol, string(v.Protocol))
+	}
+	if v.ResolutionMode != "" {
+		s.WriteString(schemas.VpcConfiguration_resolutionMode, string(v.ResolutionMode))
+	}
+	if v.ResourceTarget != nil {
+		s.WriteString(schemas.VpcConfiguration_resourceTarget, *v.ResourceTarget)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.VpcConfiguration_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.VpcConfiguration_statusMessage, *v.StatusMessage)
+	}
+	serializeSubnetIdList(s, schemas.VpcConfiguration_subnetIds, v.SubnetIds)
+	if v.TlsServerName != nil {
+		s.WriteString(schemas.VpcConfiguration_tlsServerName, *v.TlsServerName)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.VpcConfiguration_updatedAt, *v.UpdatedAt)
+	}
+	if v.VpcConfigurationId != nil {
+		s.WriteString(schemas.VpcConfiguration_vpcConfigurationId, *v.VpcConfigurationId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.VpcConfiguration_vpcId, *v.VpcId)
+	}
+}
+func (v *VpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcConfiguration_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.VpcConfiguration_createdAt, v.CreatedAt)
+		case schemas.VpcConfiguration_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.VpcConfiguration_description, v.Description)
+		case schemas.VpcConfiguration_hostHeader:
+			v.HostHeader = new(string)
+			return d.ReadString(schemas.VpcConfiguration_hostHeader, v.HostHeader)
+		case schemas.VpcConfiguration_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.VpcConfiguration_name, v.Name)
+		case schemas.VpcConfiguration_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.VpcConfiguration_port, v.Port)
+		case schemas.VpcConfiguration_protocol:
+			var ev string
+			if err := d.ReadString(schemas.VpcConfiguration_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = VpcProtocol(ev)
+			return nil
+		case schemas.VpcConfiguration_resolutionMode:
+			var ev string
+			if err := d.ReadString(schemas.VpcConfiguration_resolutionMode, &ev); err != nil {
+				return err
+			}
+			v.ResolutionMode = VpcResolutionMode(ev)
+			return nil
+		case schemas.VpcConfiguration_resourceTarget:
+			v.ResourceTarget = new(string)
+			return d.ReadString(schemas.VpcConfiguration_resourceTarget, v.ResourceTarget)
+		case schemas.VpcConfiguration_status:
+			var ev string
+			if err := d.ReadString(schemas.VpcConfiguration_status, &ev); err != nil {
+				return err
+			}
+			v.Status = VpcConfigurationStatus(ev)
+			return nil
+		case schemas.VpcConfiguration_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.VpcConfiguration_statusMessage, v.StatusMessage)
+		case schemas.VpcConfiguration_subnetIds:
+			return deserializeSubnetIdList(d, schemas.VpcConfiguration_subnetIds, &v.SubnetIds)
+		case schemas.VpcConfiguration_tlsServerName:
+			v.TlsServerName = new(string)
+			return d.ReadString(schemas.VpcConfiguration_tlsServerName, v.TlsServerName)
+		case schemas.VpcConfiguration_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.VpcConfiguration_updatedAt, v.UpdatedAt)
+		case schemas.VpcConfiguration_vpcConfigurationId:
+			v.VpcConfigurationId = new(string)
+			return d.ReadString(schemas.VpcConfiguration_vpcConfigurationId, v.VpcConfigurationId)
+		case schemas.VpcConfiguration_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.VpcConfiguration_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
+// A summary of a VPC configuration returned by ListVpcConfigurations .
+type VpcConfigurationSummary struct {
+
+	// The time at which the VPC configuration was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The port on which the resource is reached.
+	//
+	// This member is required.
+	Port *int32
+
+	// The protocol used to connect to the resource.
+	//
+	// This member is required.
+	Protocol VpcProtocol
+
+	// Specifies how the resource target is resolved.
+	//
+	// This member is required.
+	ResolutionMode VpcResolutionMode
+
+	// The private IPv4 address or DNS name of the resource.
+	//
+	// This member is required.
+	ResourceTarget *string
+
+	// The current lifecycle status of the VPC configuration.
+	//
+	// This member is required.
+	Status VpcConfigurationStatus
+
+	// The unique identifier of the VPC configuration.
+	//
+	// This member is required.
+	VpcConfigurationId *string
+
+	// The identifier of the VPC that the knowledge base connects through to reach the
+	// resource.
+	//
+	// This member is required.
+	VpcId *string
+
+	// The description of the VPC configuration, if provided.
+	Description *string
+
+	// The HTTP Host header value sent when invoking the resource, if configured.
+	HostHeader *string
+
+	// The human-readable name of the VPC configuration, if provided.
+	Name *string
+
+	// Additional detail about the current status, such as the cause of a failure.
+	StatusMessage *string
+
+	// The expected TLS server name that the service matches against the Subject
+	// Alternative Names on the resource's TLS certificate. Present when protocol is
+	// HTTPS .
+	TlsServerName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *VpcConfigurationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcConfigurationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.VpcConfigurationSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.VpcConfigurationSummary_description, *v.Description)
+	}
+	if v.HostHeader != nil {
+		s.WriteString(schemas.VpcConfigurationSummary_hostHeader, *v.HostHeader)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.VpcConfigurationSummary_name, *v.Name)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.VpcConfigurationSummary_port, *v.Port)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.VpcConfigurationSummary_protocol, string(v.Protocol))
+	}
+	if v.ResolutionMode != "" {
+		s.WriteString(schemas.VpcConfigurationSummary_resolutionMode, string(v.ResolutionMode))
+	}
+	if v.ResourceTarget != nil {
+		s.WriteString(schemas.VpcConfigurationSummary_resourceTarget, *v.ResourceTarget)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.VpcConfigurationSummary_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.VpcConfigurationSummary_statusMessage, *v.StatusMessage)
+	}
+	if v.TlsServerName != nil {
+		s.WriteString(schemas.VpcConfigurationSummary_tlsServerName, *v.TlsServerName)
+	}
+	if v.VpcConfigurationId != nil {
+		s.WriteString(schemas.VpcConfigurationSummary_vpcConfigurationId, *v.VpcConfigurationId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.VpcConfigurationSummary_vpcId, *v.VpcId)
+	}
+}
+func (v *VpcConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcConfigurationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcConfigurationSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.VpcConfigurationSummary_createdAt, v.CreatedAt)
+		case schemas.VpcConfigurationSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.VpcConfigurationSummary_description, v.Description)
+		case schemas.VpcConfigurationSummary_hostHeader:
+			v.HostHeader = new(string)
+			return d.ReadString(schemas.VpcConfigurationSummary_hostHeader, v.HostHeader)
+		case schemas.VpcConfigurationSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.VpcConfigurationSummary_name, v.Name)
+		case schemas.VpcConfigurationSummary_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.VpcConfigurationSummary_port, v.Port)
+		case schemas.VpcConfigurationSummary_protocol:
+			var ev string
+			if err := d.ReadString(schemas.VpcConfigurationSummary_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = VpcProtocol(ev)
+			return nil
+		case schemas.VpcConfigurationSummary_resolutionMode:
+			var ev string
+			if err := d.ReadString(schemas.VpcConfigurationSummary_resolutionMode, &ev); err != nil {
+				return err
+			}
+			v.ResolutionMode = VpcResolutionMode(ev)
+			return nil
+		case schemas.VpcConfigurationSummary_resourceTarget:
+			v.ResourceTarget = new(string)
+			return d.ReadString(schemas.VpcConfigurationSummary_resourceTarget, v.ResourceTarget)
+		case schemas.VpcConfigurationSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.VpcConfigurationSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = VpcConfigurationStatus(ev)
+			return nil
+		case schemas.VpcConfigurationSummary_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.VpcConfigurationSummary_statusMessage, v.StatusMessage)
+		case schemas.VpcConfigurationSummary_tlsServerName:
+			v.TlsServerName = new(string)
+			return d.ReadString(schemas.VpcConfigurationSummary_tlsServerName, v.TlsServerName)
+		case schemas.VpcConfigurationSummary_vpcConfigurationId:
+			v.VpcConfigurationId = new(string)
+			return d.ReadString(schemas.VpcConfigurationSummary_vpcConfigurationId, v.VpcConfigurationId)
+		case schemas.VpcConfigurationSummary_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.VpcConfigurationSummary_vpcId, v.VpcId)
 		}
 		return nil
 	})

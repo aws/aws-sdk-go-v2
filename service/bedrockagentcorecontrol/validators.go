@@ -2310,6 +2310,26 @@ func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRotatePaymentConnectorCredentials struct {
+}
+
+func (*validateOpRotatePaymentConnectorCredentials) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRotatePaymentConnectorCredentials) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RotatePaymentConnectorCredentialsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRotatePaymentConnectorCredentialsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSetTokenVaultCMK struct {
 }
 
@@ -3430,6 +3450,10 @@ func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
 }
 
+func addOpRotatePaymentConnectorCredentialsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRotatePaymentConnectorCredentials{}, middleware.After)
+}
+
 func addOpSetTokenVaultCMKValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetTokenVaultCMK{}, middleware.After)
 }
@@ -4221,6 +4245,21 @@ func validateCoinbaseCdpConfigurationInput(v *types.CoinbaseCdpConfigurationInpu
 	}
 }
 
+func validateCoinbaseCdpRotationTargets(v *types.CoinbaseCdpRotationTargets) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CoinbaseCdpRotationTargets"}
+	if v.Secrets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Secrets"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateComponentConfiguration(v *types.ComponentConfiguration) error {
 	if v == nil {
 		return nil
@@ -4622,6 +4661,25 @@ func validateCredentialProviderConfigurations(v []types.CredentialProviderConfig
 		if err := validateCredentialProviderConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCredentialRotationConfig(v types.CredentialRotationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CredentialRotationConfig"}
+	switch uv := v.(type) {
+	case *types.CredentialRotationConfigMemberCoinbaseCDP:
+		if err := validateCoinbaseCdpRotationTargets(&uv.Value); err != nil {
+			invalidParams.AddNested("[coinbaseCDP]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11434,6 +11492,31 @@ func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
 	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRotatePaymentConnectorCredentialsInput(v *RotatePaymentConnectorCredentialsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RotatePaymentConnectorCredentialsInput"}
+	if v.PaymentManagerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerId"))
+	}
+	if v.PaymentConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentConnectorId"))
+	}
+	if v.CredentialsToRotate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialsToRotate"))
+	} else if v.CredentialsToRotate != nil {
+		if err := validateCredentialRotationConfig(v.CredentialsToRotate); err != nil {
+			invalidParams.AddNested("CredentialsToRotate", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

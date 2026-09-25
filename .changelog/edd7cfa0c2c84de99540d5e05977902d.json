@@ -1,0 +1,8 @@
+{
+    "id": "edd7cfa0-c2c8-4de9-9540-d5e05977902d",
+    "type": "feature",
+    "description": "This release adds the ListActorMessages operation, which returns the multi-factor authentication messages received at an actor's server-generated email address",
+    "modules": [
+        "service/securityagent"
+    ]
+}

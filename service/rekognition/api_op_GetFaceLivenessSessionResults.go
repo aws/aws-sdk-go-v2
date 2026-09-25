@@ -17,6 +17,11 @@ import (
 // The number of audit images returned by GetFaceLivenessSessionResults is defined
 // by the AuditImagesLimit paramater when calling CreateFaceLivenessSession .
 // Reference images are always returned when possible.
+//
+// For a session that has completed, the response can also include a Feedback list
+// describing conditions that were detected in the selfie-video, such as low
+// lighting or an obstructed face, and Metadata about the client that streamed the
+// session.
 func (c *Client) GetFaceLivenessSessionResults(ctx context.Context, params *GetFaceLivenessSessionResultsInput, optFns ...func(*Options)) (*GetFaceLivenessSessionResultsOutput, error) {
 	if params == nil {
 		params = &GetFaceLivenessSessionResultsInput{}
@@ -71,6 +76,15 @@ type GetFaceLivenessSessionResultsOutput struct {
 	// Probabalistic confidence score for if the person in the given video was live,
 	// represented as a float value between 0 to 100.
 	Confidence *float32
+
+	// A list of conditions that were detected in the Face Liveness video and that
+	// contributed to the returned Confidence score. Each item contains a code and a
+	// human-readable message. Feedback is returned only for sessions with a Status of
+	// SUCCEEDED , and the list is empty when no such conditions were detected.
+	Feedback []types.FeedbackItem
+
+	// Metadata about the client that streamed the video for the Face Liveness session.
+	Metadata *types.SessionMetadata
 
 	// A high-quality image from the Face Liveness video that can be used for face
 	// comparison or search. It includes a bounding box of the face and the

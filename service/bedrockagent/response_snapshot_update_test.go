@@ -1651,6 +1651,31 @@ func TestUpdateResponseSnapshot_CreatePromptVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateVpcConfiguration(t *testing.T) {
+	want := &CreateVpcConfigurationOutput{
+		VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+		Status:             types.VpcConfigurationStatus("CREATING"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentBuildTimeLambda)
+	opSchema := smithy.NewOperationSchema(schemas.CreateVpcConfiguration, schemas.CreateVpcConfigurationResponse, schemas.CreateVpcConfigurationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateVpcConfiguration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteAgent(t *testing.T) {
 	want := &DeleteAgentOutput{
 		AgentId:     ptr.String("__AgentId__"),
@@ -1978,6 +2003,31 @@ func TestUpdateResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteResourcePolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteVpcConfiguration(t *testing.T) {
+	want := &DeleteVpcConfigurationOutput{
+		VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+		Status:             types.VpcConfigurationStatus("CREATING"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentBuildTimeLambda)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteVpcConfiguration, schemas.DeleteVpcConfigurationResponse, schemas.DeleteVpcConfigurationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteVpcConfiguration.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3660,6 +3710,49 @@ func TestUpdateResponseSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetVpcConfiguration(t *testing.T) {
+	want := &GetVpcConfigurationOutput{
+		VpcConfiguration: &types.VpcConfiguration{
+			VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+			Status:             types.VpcConfigurationStatus("CREATING"),
+			StatusMessage:      ptr.String("__StatusMessage__"),
+			VpcId:              ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceTarget: ptr.String("__ResourceTarget__"),
+			Port:           ptr.Int32(1),
+			Protocol:       types.VpcProtocol("HTTP"),
+			ResolutionMode: types.VpcResolutionMode("PUBLIC"),
+			HostHeader:     ptr.String("__HostHeader__"),
+			TlsServerName:  ptr.String("__TlsServerName__"),
+			Name:           ptr.String("__Name__"),
+			Description:    ptr.String("__Description__"),
+			CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentBuildTimeLambda)
+	opSchema := smithy.NewOperationSchema(schemas.GetVpcConfiguration, schemas.GetVpcConfigurationResponse, schemas.GetVpcConfigurationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetVpcConfiguration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_IngestKnowledgeBaseDocuments(t *testing.T) {
 	want := &IngestKnowledgeBaseDocumentsOutput{
 		DocumentDetails: []types.KnowledgeBaseDocumentDetail{
@@ -4435,6 +4528,62 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListTagsForResource.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListVpcConfigurations(t *testing.T) {
+	want := &ListVpcConfigurationsOutput{
+		Items: []types.VpcConfigurationSummary{
+			{
+				VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+				Status:             types.VpcConfigurationStatus("CREATING"),
+				StatusMessage:      ptr.String("__StatusMessage__"),
+				VpcId:              ptr.String("__VpcId__"),
+				ResourceTarget:     ptr.String("__ResourceTarget__"),
+				Port:               ptr.Int32(1),
+				Protocol:           types.VpcProtocol("HTTP"),
+				ResolutionMode:     types.VpcResolutionMode("PUBLIC"),
+				HostHeader:         ptr.String("__HostHeader__"),
+				TlsServerName:      ptr.String("__TlsServerName__"),
+				Name:               ptr.String("__Name__"),
+				Description:        ptr.String("__Description__"),
+				CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+				Status:             types.VpcConfigurationStatus("CREATING"),
+				StatusMessage:      ptr.String("__StatusMessage__"),
+				VpcId:              ptr.String("__VpcId__"),
+				ResourceTarget:     ptr.String("__ResourceTarget__"),
+				Port:               ptr.Int32(1),
+				Protocol:           types.VpcProtocol("HTTP"),
+				ResolutionMode:     types.VpcResolutionMode("PUBLIC"),
+				HostHeader:         ptr.String("__HostHeader__"),
+				TlsServerName:      ptr.String("__TlsServerName__"),
+				Name:               ptr.String("__Name__"),
+				Description:        ptr.String("__Description__"),
+				CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentBuildTimeLambda)
+	opSchema := smithy.NewOperationSchema(schemas.ListVpcConfigurations, schemas.ListVpcConfigurationsResponse, schemas.ListVpcConfigurationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListVpcConfigurations.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
