@@ -27,7 +27,7 @@ const (
 // ownership of that buffer.
 type AsyncWriterAt struct {
 	w    io.WriterAt
-	bufs *sync.Pool
+	bufs BufferPool
 
 	jobs    sync.WaitGroup // tracks write jobs in queue
 	workers sync.WaitGroup // tracks actual write goroutines
@@ -35,15 +35,16 @@ type AsyncWriterAt struct {
 
 	// stop is the explicit "shut it down" from the outside caller
 	// failed is "a write failed, shut it down" internally
-	stopOnce sync.Once
-	stop     chan struct{}
-	failed   chan struct{}
-	errOnce  sync.Once
-	err      error
+	startOnce sync.Once
+	stopOnce  sync.Once
+	stop      chan struct{}
+	failed    chan struct{}
+	errOnce   sync.Once
+	err       error
 }
 
 // NewAsyncWriterAt initializes an async writer for the given sink and buffer pool.
-func NewAsyncWriterAt(w io.WriterAt, bufs *sync.Pool) *AsyncWriterAt {
+func NewAsyncWriterAt(w io.WriterAt, bufs BufferPool) *AsyncWriterAt {
 	return &AsyncWriterAt{
 		w:      w,
 		bufs:   bufs,
@@ -59,6 +60,12 @@ func (w *AsyncWriterAt) Buffer() []byte {
 	return w.bufs.Get().([]byte)
 }
 
+// Release returns a buffer obtained from Buffer that will not be passed to
+// WriteAt.
+func (w *AsyncWriterAt) Release(p []byte) {
+	w.bufs.Put(p)
+}
+
 // WriteAt queues the bytes for writing.
 //
 // Unlike the synchronous io.WriteAt:
@@ -66,6 +73,10 @@ func (w *AsyncWriterAt) Buffer() []byte {
 //     eventually performs the write needs the original slice header of p (i.e.
 //     NOT a subslice) so it can return the full slice to the pool.
 //   - This method retains p, callers MUST NOT retain or modify p.
+//
+// WriteAt MUST NOT be called concurrently with or after Stop. Calls made
+// before Start are queued, but at most jobQueueDepth of them can be pending
+// before WriteAt blocks until Start is called.
 func (w *AsyncWriterAt) WriteAt(p []byte, n int, off int64) {
 	w.jobs.Add(1)
 
@@ -88,22 +99,31 @@ func (w *AsyncWriterAt) Done() <-chan struct{} {
 }
 
 // Error returns the first write error, if any.
+//
+// Error is only safe to call after Done is closed or Stop has returned.
 func (w *AsyncWriterAt) Error() error {
 	return w.err
 }
 
-// Start spins up write workers.
+// Start spins up write workers. Subsequent calls are no-ops.
 func (w *AsyncWriterAt) Start() {
-	w.workers.Add(numWriteWorkers)
-	for range numWriteWorkers {
-		go func() {
-			defer w.workers.Done()
-			w.doWrites()
-		}()
-	}
+	w.startOnce.Do(func() {
+		w.workers.Add(numWriteWorkers)
+		for range numWriteWorkers {
+			go func() {
+				defer w.workers.Done()
+				w.doWrites()
+			}()
+		}
+	})
 }
 
-// Stop terminates workers and releases any jobs they did not process.
+// Stop terminates workers and releases any jobs they did not process. Writes
+// already in progress complete before Stop returns, and no writes to the
+// underlying io.WriterAt occur after it returns.
+//
+// All WriteAt calls MUST have returned before Stop is called. Subsequent calls
+// are no-ops.
 func (w *AsyncWriterAt) Stop() {
 	w.stopOnce.Do(func() {
 		close(w.stop)

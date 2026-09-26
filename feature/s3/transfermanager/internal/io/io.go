@@ -10,6 +10,12 @@ var Pools BufferPools
 
 const alignedBy = 4096
 
+// BufferPool is a pool of byte buffers. *sync.Pool satisfies this interface.
+type BufferPool interface {
+	Get() any
+	Put(any)
+}
+
 // BufferPools retains a separate sync.Pool for each buffer size.
 type BufferPools struct {
 	mu    sync.Mutex

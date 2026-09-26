@@ -570,6 +570,7 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 	if err := d.init(); err != nil {
 		return nil, fmt.Errorf("unable to initialize download: %w", err)
 	}
+	defer d.writer.Stop()
 
 	clientOptions := []func(*s3.Options){
 		func(o *s3.Options) {
@@ -602,7 +603,7 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 					break
 				}
 
-				ch <- dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, part: i, sink: d.writer}
+				ch <- dlChunk{start: d.pos - d.offset, part: i, sink: d.writer}
 				d.pos += partSize
 			}
 
@@ -658,7 +659,7 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 			}
 
 			// Queue the next range of bytes to read.
-			ch <- dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, withRange: d.byteRange(), sink: d.writer}
+			ch <- dlChunk{start: d.pos - d.offset, withRange: d.byteRange(), sink: d.writer}
 			d.pos += d.options.PartSizeBytes
 		}
 
@@ -668,8 +669,11 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 	}
 
 	// we've already Wait()ed on d.wg so we know that all of the downloaders
-	// are finished, now wait for the writers
-	d.writer.Wait()
+	// are finished, now wait for the writers unless we've already failed, in
+	// which case Stop discards whatever is still queued
+	if d.err == nil {
+		d.writer.Wait()
+	}
 	d.writer.Stop()
 	if err := d.writer.Error(); err != nil {
 		d.err = err
@@ -732,7 +736,7 @@ func (d *downloader) downloadPart(ctx context.Context, ch chan dlChunk, clientOp
 // getChunk grabs a chunk of data from the body.
 // Not thread safe. Should only be used when grabbing data on a single thread.
 func (d *downloader) getChunk(ctx context.Context, part int32, rng string, clientOptions ...func(*s3.Options)) *DownloadObjectOutput {
-	chunk := dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, part: part, withRange: rng, sink: d.writer}
+	chunk := dlChunk{start: d.pos - d.offset, part: part, withRange: rng, sink: d.writer}
 
 	output, err := d.downloadChunk(ctx, chunk, clientOptions...)
 	if err != nil {
@@ -781,8 +785,6 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 		} else {
 			return nil, err
 		}
-
-		chunk.cur = 0
 	}
 
 	var output *DownloadObjectOutput
@@ -968,48 +970,4 @@ func (d *downloader) setErr(e error) {
 	defer d.m.Unlock()
 
 	d.err = e
-}
-
-type dlChunk struct {
-	w io.WriterAt
-
-	start int64
-	cur   int64
-
-	part      int32
-	withRange string
-
-	sink *internalio.AsyncWriterAt
-}
-
-func readChunk(r io.Reader, buf []byte) (int, error) {
-	var n int
-	for n < len(buf) {
-		nr, err := r.Read(buf[n:])
-		n += nr
-		if err != nil {
-			return n, err
-		}
-	}
-	return n, nil
-}
-
-func (c *dlChunk) ReadFrom(r io.Reader) (int64, error) {
-	var total int64
-	for {
-		buf := c.sink.Buffer()
-		n, err := readChunk(r, buf)
-		off := c.start + total
-		if n > 0 {
-			c.sink.WriteAt(buf, n, off)
-		}
-		total += int64(n)
-
-		if err == io.EOF {
-			return total, nil
-		}
-		if err != nil {
-			return total, err
-		}
-	}
 }
