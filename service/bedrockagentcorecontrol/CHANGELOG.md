@@ -1,3 +1,7 @@
+# v1.71.0 (2026-09-28)
+
+* **Feature**: Amazon Bedrock AgentCore Gateway now supports returning the complete MCP tools list in a single response by disabling pagination for the tools list operation. This feature is available in limited preview.
+
 # v1.70.0 (2026-09-25)
 
 * **Feature**: Amazon Bedrock AgentCore Payments now supports credential rotation for payment connectors, letting you rotate API and wallet secrets for Quick Create payment auths from the console. This release also adds Type and Creation type columns to the payment managers views.

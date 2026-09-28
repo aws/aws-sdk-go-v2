@@ -1,8 +1,0 @@
-{
-    "id": "d4abfa5b-50f4-4f3a-9bef-4fe4969176f8",
-    "type": "feature",
-    "description": "This release adds ConnectionTypes and ChatStreamingConfiguration to StartChatContact, and ConnectionCredentials, Websocket, and StreamingId to its response, so customers can request connection information and chat streaming in the same call that starts the chat.",
-    "modules": [
-        "service/connect"
-    ]
-}

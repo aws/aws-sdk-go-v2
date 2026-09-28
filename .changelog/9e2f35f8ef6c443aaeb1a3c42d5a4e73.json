@@ -1,8 +1,0 @@
-{
-    "id": "9e2f35f8-ef6c-443a-aeb1-a3c42d5a4e73",
-    "type": "feature",
-    "description": "Amazon Bedrock AgentCore Gateway now supports returning the complete MCP tools list in a single response by disabling pagination for the tools list operation. This feature is available in limited preview.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

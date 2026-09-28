@@ -1,3 +1,31 @@
+# Release (2026-09-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.4.11](feature/s3/transfermanager/CHANGELOG.md#v0411-2026-09-28)
+  * **Bug Fix**: Add reassembly check for GetObject parts mode so mismatch between response part range and calculated position will throw error
+* `github.com/aws/aws-sdk-go-v2/service/agentregistry`: [v1.7.0](service/agentregistry/CHANGELOG.md#v170-2026-09-28)
+  * **Feature**: AWS Agent Registry adds support for custom metadata. Discovery APIs now return custom metadata on registry records and support filtering by metadata fields. Semantic search includes custom metadata for improved relevance. Filter customMetadata fields using eq, ne, and in operators.
+* `github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol`: [v1.7.0](service/agentregistrycontrol/CHANGELOG.md#v170-2026-09-28)
+  * **Feature**: AWS Agent Registry adds support for custom metadata. Define a typed metadata schema on your registry and attach structured key-value metadata to registry records. Schemas are additive only. Enforcement is progressive. Records show a compliance status computed against the current schema.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.71.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1710-2026-09-28)
+  * **Feature**: Amazon Bedrock AgentCore Gateway now supports returning the complete MCP tools list in a single response by disabling pagination for the tools list operation. This feature is available in limited preview.
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.22.0](service/billing/CHANGELOG.md#v1220-2026-09-28)
+  * **Feature**: Adds support for (a) listing Business Support account charges via ListBusinessSupportAccountCharges and (b) subscription history via ListBusinessSupportSubscriptionHistory through the AWS Billing API.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.203.0](service/connect/CHANGELOG.md#v12030-2026-09-28)
+  * **Feature**: This release adds ConnectionTypes and ChatStreamingConfiguration to StartChatContact, and ConnectionCredentials, Websocket, and StreamingId to its response, so customers can request connection information and chat streaming in the same call that starts the chat.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.337.0](service/ec2/CHANGELOG.md#v13370-2026-09-28)
+  * **Feature**: API changes to AWS Client VPN to support device posture assessment and Cedar authorization policies
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.102.0](service/eks/CHANGELOG.md#v11020-2026-09-28)
+  * **Feature**: An optional customer provided prefix used to construct the hostname of the Argo CD server endpoint for EKS Argo CD Capability.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.96.0](service/guardduty/CHANGELOG.md#v1960-2026-09-28)
+  * **Feature**: Adding awsServiceName field to GuardDuty Findings
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.20.0](service/securityagent/CHANGELOG.md#v1200-2026-09-28)
+  * **Feature**: Run automated penetration tests directly from your CI-CD pipeline to scan code changes before they ship, gating deployments on the findings
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.79.0](service/ssm/CHANGELOG.md#v1790-2026-09-28)
+  * **Feature**: Add support for sharing SSM documents with organizations and OUs using RAM.
+
 # Release (2026-09-25)
 
 ## Module Highlights

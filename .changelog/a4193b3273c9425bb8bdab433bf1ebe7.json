@@ -1,8 +1,0 @@
-{
-    "id": "a4193b32-73c9-425b-b8bd-ab433bf1ebe7",
-    "type": "feature",
-    "description": "API changes to AWS Client VPN to support device posture assessment and Cedar authorization policies",
-    "modules": [
-        "service/ec2"
-    ]
-}

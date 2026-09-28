@@ -1,3 +1,7 @@
+# v1.20.0 (2026-09-28)
+
+* **Feature**: Run automated penetration tests directly from your CI-CD pipeline to scan code changes before they ship, gating deployments on the findings
+
 # v1.19.0 (2026-09-25)
 
 * **Feature**: This release adds the ListActorMessages operation, which returns the multi-factor authentication messages received at an actor's server-generated email address

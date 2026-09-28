@@ -1,8 +1,0 @@
-{
-    "id": "af69997e-8709-458b-afb8-e1954c22fd22",
-    "type": "feature",
-    "description": "Adding awsServiceName field to GuardDuty Findings",
-    "modules": [
-        "service/guardduty"
-    ]
-}

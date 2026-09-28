@@ -1,3 +1,8 @@
+# v1.96.0 (2026-09-28)
+
+* **Feature**: Adding awsServiceName field to GuardDuty Findings
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.95.0 (2026-09-24)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

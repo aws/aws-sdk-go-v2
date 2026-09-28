@@ -1,3 +1,8 @@
+# v1.102.0 (2026-09-28)
+
+* **Feature**: An optional customer provided prefix used to construct the hostname of the Argo CD server endpoint for EKS Argo CD Capability.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.101.0 (2026-09-24)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

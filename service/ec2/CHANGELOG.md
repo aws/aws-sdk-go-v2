@@ -1,3 +1,7 @@
+# v1.337.0 (2026-09-28)
+
+* **Feature**: API changes to AWS Client VPN to support device posture assessment and Cedar authorization policies
+
 # v1.336.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

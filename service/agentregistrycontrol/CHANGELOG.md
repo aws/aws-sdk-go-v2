@@ -1,3 +1,7 @@
+# v1.7.0 (2026-09-28)
+
+* **Feature**: AWS Agent Registry adds support for custom metadata. Define a typed metadata schema on your registry and attach structured key-value metadata to registry records. Schemas are additive only. Enforcement is progressive. Records show a compliance status computed against the current schema.
+
 # v1.6.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

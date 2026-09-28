@@ -1,8 +1,0 @@
-{
-    "id": "4da9767a-8c5b-4c07-b6b9-73e507ebbc48",
-    "type": "feature",
-    "description": "Add support for sharing SSM documents with organizations and OUs using RAM.",
-    "modules": [
-        "service/ssm"
-    ]
-}
