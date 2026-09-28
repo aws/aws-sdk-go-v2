@@ -1,0 +1,8 @@
+{
+    "id": "36056d80-ef7e-4278-a3d6-012551d38ed9",
+    "type": "feature",
+    "description": "Improve CPU usage of DownloadObject calls by buffering disk writes.",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
