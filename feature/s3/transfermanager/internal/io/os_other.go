@@ -8,7 +8,7 @@ type file struct {
 	*os.File
 }
 
-func (*file) Init(_, _ int64) error {
+func (*file) Init(_, _, _ int64, _ bool) error {
 	return nil
 }
 

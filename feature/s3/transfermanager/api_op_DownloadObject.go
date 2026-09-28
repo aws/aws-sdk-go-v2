@@ -709,7 +709,7 @@ func (d *downloader) init() error {
 	d.emitter = &singleObjectProgressEmitter{
 		Listeners: d.options.ObjectProgressListeners,
 	}
-	d.writer = internalio.NewAsyncWriterAt(d.in.WriterAt, internalio.Pools.Pool(bufsize))
+	d.writer = internalio.NewAsyncWriterAt(d.in.WriterAt, internalio.Pools.Pool(int(getWriteSize(d.options.PartSizeBytes))))
 
 	return nil
 }
@@ -795,8 +795,18 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 	return output, err
 }
 
-// TODO vary this
-const bufsize = 8 * 1024 * 1024
+const maxWriteSize = 8 * 1024 * 1024
+
+func getWriteSize(partSize int64) int64 {
+	if partSize <= 0 || partSize > maxWriteSize {
+		return maxWriteSize
+	}
+	return partSize
+}
+
+func directIOEnabled(getObjectType types.GetObjectType) bool {
+	return getObjectType == types.GetObjectRanges
+}
 
 func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectInput, chunk *dlChunk, clientOptions ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
 	out, err := d.options.S3.GetObject(ctx, params, clientOptions...)
@@ -842,7 +852,7 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 		d.emitter.Start(ctx, d.in, d.totalBytes-d.offset)
 
 		if i, ok := d.in.WriterAt.(internalio.File); ok {
-			if err := i.Init(d.totalBytes, bufsize); err != nil {
+			if err := i.Init(d.totalBytes, d.options.PartSizeBytes, getWriteSize(d.options.PartSizeBytes), directIOEnabled(d.options.GetObjectType)); err != nil {
 				initErr = err
 				return
 			}

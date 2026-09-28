@@ -67,6 +67,6 @@ func (bps *BufferPools) Pool(size int) *sync.Pool {
 // File is a lazily-initialized download destination.
 type File interface {
 	io.WriterAt
-	Init(int64, int64) error
+	Init(size, partSize, writeSize int64, directIO bool) error
 	Close() error
 }

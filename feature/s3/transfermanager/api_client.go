@@ -49,7 +49,9 @@ type Client struct {
 //
 // NewFromConfig defaults object downloads to ranged GETs. Ranged GETs provide
 // fixed byte ranges, allowing downloaded responses to be written at known
-// offsets and enabling optimized write paths for file downloads.
+// offsets and enabling optimized direct-I/O write paths when alignment permits.
+// GetObjectParts downloads do not use direct I/O because multipart part sizes
+// may be unequal and their write boundaries cannot be validated in advance.
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	s3Client := s3.NewFromConfig(cfg, func(o *s3.Options) {
 		buildable, ok := o.HTTPClient.(*awshttp.BuildableClient)

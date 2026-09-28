@@ -5,14 +5,21 @@ package io
 import (
 	"errors"
 	"os"
+	"path/filepath"
 	"syscall"
 )
 
 const oDirectThreshold = 64 * 1024 * 1024 // 64MiB
 
-// Linux files open with O_DIRECT above a size threshold when the write size is
-// aligned. This bypasses the page cache and an inode lock, which drastically
-// improves performance for writes that are sustained enough.
+var (
+	statfs    = syscall.Statfs
+	openFile  = os.OpenFile
+	fallocate = syscall.Fallocate
+)
+
+// Linux files open with O_DIRECT above a size threshold when the filesystem and
+// transfer sizes are aligned. This bypasses the page cache and an inode lock,
+// which drastically improves performance for writes that are sustained enough.
 type file struct {
 	*os.File
 	direct bool
@@ -40,30 +47,47 @@ func (f *file) WriteAt(p []byte, off int64) (int, error) {
 	return len(p), err
 }
 
-func (f *file) Init(size, writeSize int64) error {
+func (f *file) Init(size, partSize, writeSize int64, directIO bool) error {
 	if f.File != nil {
 		return errors.New("file was already initialized")
 	}
 
 	f.size = size
-	if size < oDirectThreshold || writeSize%alignedBy != 0 {
+	if size < oDirectThreshold || !directIO || !supportsDirectIO(f.path, partSize, writeSize) {
 		ff, err := os.Create(f.path)
 		f.File = ff
 		return err
 	}
 
-	ff, err := os.OpenFile(f.path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC|syscall.O_DIRECT, 0o644)
+	ff, err := openFile(f.path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC|syscall.O_DIRECT, 0o644)
 	if err != nil {
 		return err
 	}
 
-	if err := syscall.Fallocate(int(ff.Fd()), 0, 0, size); err != nil {
+	if err := fallocate(int(ff.Fd()), 0, 0, size); err != nil {
+		_ = ff.Close()
 		return err
 	}
 
 	f.File = ff
 	f.direct = true
 	return nil
+}
+
+func supportsDirectIO(path string, partSize, writeSize int64) bool {
+	if writeSize <= 0 || writeSize%alignedBy != 0 {
+		return false
+	}
+	if partSize <= 0 || partSize%writeSize%alignedBy != 0 {
+		return false
+	}
+
+	var stat syscall.Statfs_t
+	if err := statfs(filepath.Dir(path), &stat); err != nil {
+		return false
+	}
+
+	return stat.Bsize > 0 && alignedBy%stat.Bsize == 0
 }
 
 func (f *file) Close() error {
