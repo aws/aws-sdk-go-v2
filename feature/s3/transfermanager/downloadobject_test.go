@@ -230,7 +230,7 @@ func TestDownloadObject(t *testing.T) {
 		"range download with success retry": {
 			getObjectFn: s3testing.ErrReaderFn,
 			errReaders: []s3testing.TestErrReader{
-				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
+				{Buf: []byte("12"), Len: 3, Err: io.ErrUnexpectedEOF},
 				{Buf: []byte("123"), Len: 3, Err: io.EOF},
 			},
 			optFn: func(o *Options) {
@@ -238,6 +238,7 @@ func TestDownloadObject(t *testing.T) {
 				o.GetObjectType = types.GetObjectRanges
 			},
 			expectInvocations: 2,
+			expectETags:       []string{"", etag},
 			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
 				if e, a := "123", string(w.Bytes()); e != a {
 					t.Errorf("expect %q response, got %q", e, a)
@@ -434,7 +435,7 @@ func TestDownloadObject(t *testing.T) {
 		"part download with success retry": {
 			getObjectFn: s3testing.ErrReaderFn,
 			errReaders: []s3testing.TestErrReader{
-				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
+				{Buf: []byte("12"), Len: 3, Err: io.ErrUnexpectedEOF},
 				{Buf: []byte("123"), Len: 3, Err: io.EOF},
 			},
 			optFn: func(o *Options) {
@@ -443,6 +444,7 @@ func TestDownloadObject(t *testing.T) {
 			partsCount:        1,
 			expectInvocations: 2,
 			expectParts:       []int32{1, 1},
+			expectETags:       []string{"", etag},
 			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
 				if e, a := "123", string(w.Bytes()); e != a {
 					t.Errorf("expect %q response, got %q", e, a)
@@ -582,6 +584,84 @@ func TestDownloadObject(t *testing.T) {
 				c.dataValidationFn(t, w)
 			}
 		})
+	}
+}
+
+func TestDownloadObjectRetryETag(t *testing.T) {
+	for _, test := range []struct {
+		name         string
+		getObjectTyp types.GetObjectType
+	}{
+		{name: "range", getObjectTyp: types.GetObjectRanges},
+		{name: "part", getObjectTyp: types.GetObjectParts},
+	} {
+		for _, changed := range []bool{false, true} {
+			name := test.name
+			if changed {
+				name += "/changed"
+			} else {
+				name += "/unchanged"
+			}
+
+			t.Run(name, func(t *testing.T) {
+				client := &s3testing.TransferManagerLoggingClient{}
+				client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+					if c.GetObjectInvocations == 1 {
+						body := &s3testing.TestErrReader{
+							Buf: []byte("12"),
+							Err: io.ErrUnexpectedEOF,
+							Len: 3,
+						}
+						return &s3.GetObjectOutput{
+							Body:          io.NopCloser(body),
+							ContentLength: aws.Int64(3),
+							ContentRange:  aws.String("bytes 0-2/3"),
+							ETag:          aws.String(etag),
+							PartsCount:    aws.Int32(1),
+						}, nil
+					}
+
+					if got, want := aws.ToString(params.IfMatch), etag; got != want {
+						t.Errorf("expected retry If-Match %q, got %q", want, got)
+					}
+					if changed {
+						return nil, errors.New("PreconditionFailed")
+					}
+
+					return &s3.GetObjectOutput{
+						Body:          io.NopCloser(bytes.NewReader([]byte("123"))),
+						ContentLength: aws.Int64(3),
+						ContentRange:  aws.String("bytes 0-2/3"),
+						ETag:          aws.String(etag),
+						PartsCount:    aws.Int32(1),
+					}, nil
+				}
+
+				manager := New(client, func(o *Options) {
+					o.Concurrency = 1
+					o.GetObjectType = test.getObjectTyp
+				})
+				writer := types.NewWriteAtBuffer(nil)
+				_, err := manager.DownloadObject(context.Background(), &DownloadObjectInput{
+					Bucket:   aws.String("bucket"),
+					Key:      aws.String("key"),
+					WriterAt: writer,
+				})
+
+				if changed {
+					if err == nil || !strings.Contains(err.Error(), "PreconditionFailed") {
+						t.Fatalf("expected PreconditionFailed, got %v", err)
+					}
+					return
+				}
+				if err != nil {
+					t.Fatalf("expected successful retry, got %v", err)
+				}
+				if got, want := string(writer.Bytes()), "123"; got != want {
+					t.Fatalf("expected downloaded data %q, got %q", want, got)
+				}
+			})
+		}
 	}
 }
 

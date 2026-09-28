@@ -764,13 +764,13 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 	if chunk.withRange != "" {
 		params.Range = aws.String(chunk.withRange)
 	}
-	if params.VersionId == nil && d.etag != "" {
-		params.IfMatch = aws.String(d.etag)
-	}
-
 	var out *s3.GetObjectOutput
 	var err error
 	for retry := 0; retry < d.options.PartBodyMaxRetries; retry++ {
+		if params.VersionId == nil && d.etag != "" {
+			params.IfMatch = aws.String(d.etag)
+		}
+
 		out, err = d.tryDownloadChunk(ctx, params, &chunk, clientOptions...)
 		if err == nil {
 			break
@@ -791,9 +791,6 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 	if out != nil {
 		output = &DownloadObjectOutput{}
 		output.mapFromGetObjectOutput(out, params.ChecksumMode)
-		d.etagOnce.Do(func() {
-			d.etag = aws.ToString(out.ETag)
-		})
 	}
 	return output, err
 }
@@ -834,6 +831,10 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 		}
 		chunk.start = respStart
 	}
+
+	d.etagOnce.Do(func() {
+		d.etag = aws.ToString(out.ETag)
+	})
 
 	var initErr error
 	d.totalBytesOnce.Do(func() {
