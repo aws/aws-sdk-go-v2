@@ -1,0 +1,8 @@
+{
+    "id": "f882ea92-98d8-4aec-b240-69ac3c8b170c",
+    "type": "bugfix",
+    "description": "Fixed the login credential panic when a retrieved token missed required fields",
+    "modules": [
+        "credentials"
+    ]
+}
