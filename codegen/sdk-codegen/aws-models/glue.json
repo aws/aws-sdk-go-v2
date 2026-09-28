@@ -3515,6 +3515,9 @@
                     "target": "com.amazonaws.glue#AlreadyExistsException"
                 },
                 {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
                     "target": "com.amazonaws.glue#EntityNotFoundException"
                 },
                 {
@@ -3657,6 +3660,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
                     "target": "com.amazonaws.glue#EntityNotFoundException"
                 },
                 {
@@ -3743,6 +3749,9 @@
                 "target": "com.amazonaws.glue#BatchDeleteTableResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
                 {
                     "target": "com.amazonaws.glue#EntityNotFoundException"
                 },
@@ -5060,6 +5069,9 @@
                 "target": "com.amazonaws.glue#BatchUpdatePartitionResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
                 {
                     "target": "com.amazonaws.glue#EntityNotFoundException"
                 },

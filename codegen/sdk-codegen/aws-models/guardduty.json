@@ -18427,6 +18427,13 @@
                         "smithy.api#documentation": "<p>Details on whether the Amazon Web Services account of the remote API caller is related to your GuardDuty environment. If this value is <code>True</code> the API caller is affiliated to your account in some way. If it is <code>False</code> the API caller is from outside your environment.</p>",
                         "smithy.api#jsonName": "affiliated"
                     }
+                },
+                "AwsServiceName": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the remote account belongs to an Amazon Web Services service, this field indicates which service the remote account belongs to.</p>",
+                        "smithy.api#jsonName": "awsServiceName"
+                    }
                 }
             },
             "traits": {

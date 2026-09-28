@@ -3220,6 +3220,9 @@
                     "target": "com.amazonaws.ec2#DeleteClientVpnEndpoint"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DeleteClientVpnEndpointAuthorizationPolicy"
+                },
+                {
                     "target": "com.amazonaws.ec2#DeleteClientVpnRoute"
                 },
                 {
@@ -4366,6 +4369,9 @@
                     "target": "com.amazonaws.ec2#GetCapacityReservationUsage"
                 },
                 {
+                    "target": "com.amazonaws.ec2#GetClientVpnEndpointAuthorizationPolicy"
+                },
+                {
                     "target": "com.amazonaws.ec2#GetCoipPoolUsage"
                 },
                 {
@@ -4616,6 +4622,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyClientVpnEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifyClientVpnEndpointAuthorizationPolicy"
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyDefaultCreditSpecification"
@@ -16814,6 +16823,64 @@
                 }
             }
         },
+        "com.amazonaws.ec2#ClientVpnAuthorizationPolicyShadowMode": {
+            "type": "enum",
+            "members": {
+                "enabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "disabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates whether the authorization policy for a Client VPN endpoint is evaluated in shadow mode. Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>enabled</code> - The authorization policy is evaluated and the results are logged, but access is not enforced.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disabled</code> - The authorization policy is enforced.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.ec2#ClientVpnAuthorizationPolicyStatus": {
+            "type": "enum",
+            "members": {
+                "creating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "creating"
+                    }
+                },
+                "updating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "updating"
+                    }
+                },
+                "active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "active"
+                    }
+                },
+                "failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the state of an authorization policy for a Client VPN endpoint. Possible states include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>creating</code> - The authorization policy is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>updating</code> - The authorization policy is being updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code> - The authorization policy has been applied to the Client VPN endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>failed</code> - The authorization policy could not be applied to the Client VPN endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code> - The authorization policy is being deleted.</p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.ec2#ClientVpnAuthorizationRuleStatus": {
             "type": "structure",
             "members": {
@@ -17007,6 +17074,14 @@
                         "smithy.api#documentation": "<p>The statuses returned by the client connect handler for posture compliance, if applicable.</p>",
                         "smithy.api#xmlName": "postureComplianceStatusSet"
                     }
+                },
+                "AuthorizationPolicyLastEvaluatedTime": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AuthorizationPolicyLastEvaluatedTime",
+                        "smithy.api#documentation": "<p>The date and time the authorization policy was last evaluated for the client connection, if applicable.</p>",
+                        "smithy.api#xmlName": "authorizationPolicyLastEvaluatedTime"
+                    }
                 }
             },
             "traits": {
@@ -17071,6 +17146,29 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "terminated"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#ClientVpnDeviceTrustProviderType": {
+            "type": "enum",
+            "members": {
+                "crowdstrike": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "crowdstrike"
+                    }
+                },
+                "jamf": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "jamf"
+                    }
+                },
+                "jumpcloud": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "jumpcloud"
                     }
                 }
             }
@@ -17303,6 +17401,14 @@
                         "aws.protocols#ec2QueryName": "TransitGatewayConfiguration",
                         "smithy.api#documentation": "<p>The Transit Gateway configuration for the Client VPN endpoint.</p>",
                         "smithy.api#xmlName": "transitGatewayConfiguration"
+                    }
+                },
+                "DevicePostureOptions": {
+                    "target": "com.amazonaws.ec2#DevicePostureResponseOptions",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DevicePostureOptions",
+                        "smithy.api#documentation": "<p>The device trust providers configured for the Client VPN endpoint, if applicable.</p>",
+                        "smithy.api#xmlName": "devicePostureOptions"
                     }
                 }
             },
@@ -17560,6 +17666,82 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ec2#SecurityGroupId",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ClientVpnTrustProvider": {
+            "type": "structure",
+            "members": {
+                "TrustProviderType": {
+                    "target": "com.amazonaws.ec2#ClientVpnDeviceTrustProviderType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TrustProviderType",
+                        "smithy.api#documentation": "<p>The type of the device trust provider. Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>crowdstrike</code> - CrowdStrike device trust provider.</p>\n            </li>\n            <li>\n               <p>\n                  <code>jamf</code> - Jamf device trust provider.</p>\n            </li>\n            <li>\n               <p>\n                  <code>jumpcloud</code> - JumpCloud device trust provider.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "trustProviderType"
+                    }
+                },
+                "TenantId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TenantId",
+                        "smithy.api#documentation": "<p>The tenant ID associated with your device trust provider account.</p>",
+                        "smithy.api#xmlName": "tenantId"
+                    }
+                },
+                "PublicSigningKeyUrl": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PublicSigningKeyUrl",
+                        "smithy.api#documentation": "<p>The URL of the public signing key that is used to verify the identity token issued by the device trust provider.</p>",
+                        "smithy.api#xmlName": "publicSigningKeyUrl"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a device trust provider configured for a Client VPN endpoint.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ClientVpnTrustProviderRequest": {
+            "type": "structure",
+            "members": {
+                "TrustProviderType": {
+                    "target": "com.amazonaws.ec2#ClientVpnDeviceTrustProviderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the device trust provider. Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>crowdstrike</code> - CrowdStrike device trust provider.</p>\n            </li>\n            <li>\n               <p>\n                  <code>jamf</code> - Jamf device trust provider.</p>\n            </li>\n            <li>\n               <p>\n                  <code>jumpcloud</code> - JumpCloud device trust provider.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "TenantId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tenant ID associated with your device trust provider account.</p>"
+                    }
+                },
+                "PublicSigningKeyUrl": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the public signing key that is used to verify the identity token issued by the device trust provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a device trust provider to configure for a Client VPN endpoint.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ClientVpnTrustProviderRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ClientVpnTrustProviderRequest",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ClientVpnTrustProviderSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ClientVpnTrustProvider",
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
@@ -17981,6 +18163,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the CloudWatch Logs log stream to which the connection data is published.</p>"
                     }
+                },
+                "IncludeAuthorizationPolicyContext": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to include the authorization policy evaluation context in the connection logs for the Client VPN endpoint.</p>"
+                    }
                 }
             },
             "traits": {
@@ -18006,6 +18194,12 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Amazon CloudWatch Logs log stream to which connection logging data is published.</p>"
+                    }
+                },
+                "IncludeAuthorizationPolicyContext": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the authorization policy evaluation context is included in the connection logs for the Client VPN endpoint.</p>"
                     }
                 }
             },
@@ -20101,6 +20295,12 @@
                     "target": "com.amazonaws.ec2#TransitGatewayConfigurationInputStructure",
                     "traits": {
                         "smithy.api#documentation": "<p>The Transit Gateway configuration for the Client VPN endpoint. Use this parameter to associate the endpoint with a Transit Gateway instead of a VPC. You cannot specify both <code>TransitGatewayConfiguration</code> and <code>VpcId</code>/<code>SecurityGroupIds</code>.</p>"
+                    }
+                },
+                "DevicePostureOptions": {
+                    "target": "com.amazonaws.ec2#DevicePostureOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device posture options for the Client VPN endpoint. Use this parameter to specify the device trust providers that the endpoint uses to evaluate the security posture of connecting devices.</p>"
                     }
                 }
             },
@@ -29152,7 +29352,7 @@
                 "VpcEndpointType": {
                     "target": "com.amazonaws.ec2#VpcEndpointType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of endpoint.</p>\n         <p>Default: Gateway</p>"
+                        "smithy.api#documentation": "<p>The type of endpoint.</p>\n         <p>For more information about the types of VPC endpoints, see <a href=\"https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints\">VPC endpoints</a> in the <i>Amazon Web Services PrivateLink User Guide</i>.</p>\n         <p>Default: Gateway</p>"
                     }
                 },
                 "VpcId": {
@@ -29185,14 +29385,14 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.ec2#VpcEndpointSubnetIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Interface and Gateway Load Balancer endpoints) The IDs of the subnets in which to create endpoint\n            network interfaces. For a Gateway Load Balancer endpoint, you can specify only one subnet.</p>",
+                        "smithy.api#documentation": "<p>(Interface, Gateway Load Balancer endpoints, Resource, ServiceNetwork, and Tunnel endpoints only) The IDs of the\n            subnets in which to create endpoint network interfaces. For a Gateway Load Balancer endpoint, you can\n            specify only one subnet. For a <code>Tunnel</code> endpoint, the subnets must be in the\n            Availability Zones of the resource gateway associated with the shared resource\n            configuration. An endpoint network interface is created only in an Availability Zone\n            that the resource gateway is also in.</p>",
                         "smithy.api#xmlName": "SubnetId"
                     }
                 },
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.ec2#VpcEndpointSecurityGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Interface endpoint) The IDs of the security groups to associate with the\n            endpoint network interfaces. If this parameter is not specified, we use the default \n            security group for the VPC.</p>",
+                        "smithy.api#documentation": "<p>(Interface, Resource, ServiceNetwork, and Tunnel endpoints only) The IDs of the security groups\n            to associate with the endpoint network interfaces. If this parameter is not specified,\n            we use the default security group for the VPC.</p>",
                         "smithy.api#xmlName": "SecurityGroupId"
                     }
                 },
@@ -29243,7 +29443,7 @@
                 "ResourceConfigurationArn": {
                     "target": "com.amazonaws.ec2#ResourceConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a resource configuration that will be associated with\n         the VPC endpoint of type resource.</p>"
+                        "smithy.api#documentation": "<p>(Resource and Tunnel endpoints only) The Amazon Resource Name (ARN) of a resource\n         configuration associated with the VPC endpoint. The type of resource configuration depends\n         on the endpoint type:</p>\n         <ul>\n            <li>\n               <p>For a Resource endpoint, you can specify a resource configuration that is of type\n               <code>SINGLE</code>, <code>GROUP</code>, or <code>ARN</code>. To reach a resource\n               that belongs to a group, specify the parent <code>GROUP</code> resource\n               configuration.</p>\n            </li>\n            <li>\n               <p>For a Tunnel endpoint, you can specify a resource configuration that is of type\n               <code>CIDR</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about the types of resource configurations, see <a href=\"https://docs.aws.amazon.com/vpc/latest/privatelink/resource-configuration.html\">Types of resource configurations</a> in the <i>Amazon Web Services PrivateLink User Guide</i>.</p>\n         <p>This request fails if a VPC endpoint owned by a different Amazon Web Services account\n         already exists on a resource gateway that is enabled for <code>ResourceGatewayCharges</code>\n         payer responsibility.</p>"
                     }
                 },
                 "ServiceRegion": {
@@ -30725,6 +30925,56 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the specified Client VPN endpoint. You must disassociate all target networks before you \n\t\t\tcan delete a Client VPN endpoint.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DeleteClientVpnEndpointAuthorizationPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DeleteClientVpnEndpointAuthorizationPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DeleteClientVpnEndpointAuthorizationPolicyResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the authorization policy for a Client VPN endpoint.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DeleteClientVpnEndpointAuthorizationPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ClientVpnEndpointId": {
+                    "target": "com.amazonaws.ec2#ClientVpnEndpointId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Client VPN endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DeleteClientVpnEndpointAuthorizationPolicyResult": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.ec2#ClientVpnAuthorizationPolicyStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Status",
+                        "smithy.api#documentation": "<p>The current state of the authorization policy.</p>",
+                        "smithy.api#xmlName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ec2#DeleteClientVpnEndpointRequest": {
@@ -55727,7 +55977,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ip-address-type</code> - The IP address type (<code>ipv4</code> | <code>ipv6</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-name</code> - The name of the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-region</code> - The Region of the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-id</code> - The ID of the endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-state</code> - The state of the endpoint\n                        (<code>pendingAcceptance</code> | <code>pending</code> |\n                        <code>available</code> | <code>deleting</code> | <code>deleted</code> |\n                        <code>rejected</code> | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-type</code> - The type of VPC endpoint (<code>Interface</code> |\n                    <code>Gateway</code> | <code>GatewayLoadBalancer</code> | <code>Resource</code> | \n                    <code>ServiceNetwork</code>).</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ip-address-type</code> - The IP address type (<code>ipv4</code> | <code>ipv6</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-name</code> - The name of the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-region</code> - The Region of the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-id</code> - The ID of the endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-state</code> - The state of the endpoint\n                        (<code>pendingAcceptance</code> | <code>pending</code> |\n                        <code>available</code> | <code>deleting</code> | <code>deleted</code> |\n                        <code>rejected</code> | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-type</code> - The type of VPC endpoint (<code>Interface</code> |\n                    <code>Gateway</code> | <code>GatewayLoadBalancer</code> | <code>Resource</code> | \n                    <code>ServiceNetwork</code> | <code>Tunnel</code>).</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -56852,6 +57102,43 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the options for an Amazon Web Services Verified Access device-identity based trust provider.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DevicePostureOptions": {
+            "type": "structure",
+            "members": {
+                "TrustProviders": {
+                    "target": "com.amazonaws.ec2#ClientVpnTrustProviderRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device trust providers to configure for the Client VPN endpoint.</p>",
+                        "smithy.api#xmlName": "TrustProvider"
+                    }
+                },
+                "Enabled": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether device posture evaluation is enabled for the Client VPN endpoint. Specify <code>false</code> to disable device posture, which clears the configured device trust providers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the device posture options for a Client VPN endpoint. Device posture options specify the device trust providers that the endpoint uses to evaluate the security posture of connecting devices.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DevicePostureResponseOptions": {
+            "type": "structure",
+            "members": {
+                "TrustProviders": {
+                    "target": "com.amazonaws.ec2#ClientVpnTrustProviderSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TrustProviderSet",
+                        "smithy.api#documentation": "<p>The device trust providers configured for the Client VPN endpoint.</p>",
+                        "smithy.api#xmlName": "trustProviderSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the device posture options for a Client VPN endpoint.</p>"
             }
         },
         "com.amazonaws.ec2#DeviceTrustProviderType": {
@@ -68127,6 +68414,88 @@
                         "aws.protocols#ec2QueryName": "InterruptionInfo",
                         "smithy.api#documentation": "<p>\n\t\t\tDetails about the interruption configuration and source reservation for interruptible Capacity Reservations.\n\t\t</p>",
                         "smithy.api#xmlName": "interruptionInfo"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#GetClientVpnEndpointAuthorizationPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetClientVpnEndpointAuthorizationPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetClientVpnEndpointAuthorizationPolicyResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the authorization policy for a Client VPN endpoint.</p>"
+            }
+        },
+        "com.amazonaws.ec2#GetClientVpnEndpointAuthorizationPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ClientVpnEndpointId": {
+                    "target": "com.amazonaws.ec2#ClientVpnEndpointId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Client VPN endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#GetClientVpnEndpointAuthorizationPolicyResult": {
+            "type": "structure",
+            "members": {
+                "ClientVpnEndpointId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ClientVpnEndpointId",
+                        "smithy.api#documentation": "<p>The ID of the Client VPN endpoint.</p>",
+                        "smithy.api#xmlName": "clientVpnEndpointId"
+                    }
+                },
+                "PolicyDocument": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PolicyDocument",
+                        "smithy.api#documentation": "<p>The authorization policy document, written in the Cedar policy language.</p>",
+                        "smithy.api#xmlName": "policyDocument"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Description",
+                        "smithy.api#documentation": "<p>A brief description of the authorization policy.</p>",
+                        "smithy.api#xmlName": "description"
+                    }
+                },
+                "ShadowMode": {
+                    "target": "com.amazonaws.ec2#ClientVpnAuthorizationPolicyShadowMode",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ShadowMode",
+                        "smithy.api#documentation": "<p>Specifies whether the authorization policy is evaluated in shadow mode. Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>enabled</code> - The authorization policy is evaluated and the results are logged, but access is not enforced.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disabled</code> - The authorization policy is enforced.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "shadowMode"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ec2#ClientVpnAuthorizationPolicyStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Status",
+                        "smithy.api#documentation": "<p>The current state of the authorization policy.</p>",
+                        "smithy.api#xmlName": "status"
                     }
                 }
             },
@@ -93139,6 +93508,24 @@
                         "smithy.api#enumValue": "enable-failed"
                     }
                 },
+                "disable_in_progress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disable-in-progress"
+                    }
+                },
+                "disable_complete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disable-complete"
+                    }
+                },
+                "disable_failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disable-failed"
+                    }
+                },
                 "delete_in_progress": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -103509,6 +103896,81 @@
                 "smithy.api#documentation": "<p>Modifies the specified Client VPN endpoint. Modifying the DNS server resets existing client connections.</p>"
             }
         },
+        "com.amazonaws.ec2#ModifyClientVpnEndpointAuthorizationPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyClientVpnEndpointAuthorizationPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyClientVpnEndpointAuthorizationPolicyResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates the authorization policy for a Client VPN endpoint. A Client VPN endpoint can have one authorization policy. If a policy already exists for the endpoint, the values that you specify replace the corresponding values in the existing policy, and values that you do not specify remain unchanged.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyClientVpnEndpointAuthorizationPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ClientVpnEndpointId": {
+                    "target": "com.amazonaws.ec2#ClientVpnEndpointId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Client VPN endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyDocument": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization policy document, written in the Cedar policy language. This parameter is required when you create the authorization policy for a Client VPN endpoint that does not already have one.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief description of the authorization policy.</p>"
+                    }
+                },
+                "ShadowMode": {
+                    "target": "com.amazonaws.ec2#ClientVpnAuthorizationPolicyShadowMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the authorization policy is evaluated in shadow mode. Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>enabled</code> - The authorization policy is evaluated and the results are logged, but access is not enforced.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disabled</code> - The authorization policy is enforced.</p>\n            </li>\n         </ul>\n         <p>The default value is <code>disabled</code>.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. \nFor more information, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyClientVpnEndpointAuthorizationPolicyResult": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.ec2#ClientVpnAuthorizationPolicyStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Status",
+                        "smithy.api#documentation": "<p>The current state of the authorization policy.</p>",
+                        "smithy.api#xmlName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#ModifyClientVpnEndpointRequest": {
             "type": "structure",
             "members": {
@@ -103615,6 +104077,12 @@
                     "target": "com.amazonaws.ec2#TransitGatewayConfigurationInputStructure",
                     "traits": {
                         "smithy.api#documentation": "<p>The Transit Gateway configuration for the Client VPN endpoint. This option is currently not supported.</p>"
+                    }
+                },
+                "DevicePostureOptions": {
+                    "target": "com.amazonaws.ec2#DevicePostureOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device posture options for the Client VPN endpoint. Specifying this parameter replaces the entire device posture configuration for the endpoint. To remove all device trust providers, specify an empty list.</p>"
                     }
                 }
             },
@@ -124428,6 +124896,12 @@
                     "traits": {
                         "smithy.api#enumValue": "lacnic"
                     }
+                },
+                "nicbr": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nicbr"
+                    }
                 }
             },
             "traits": {
@@ -144545,7 +145019,7 @@
                     "target": "com.amazonaws.ec2#VpcEndpointType",
                     "traits": {
                         "aws.protocols#ec2QueryName": "VpcEndpointType",
-                        "smithy.api#documentation": "<p>The type of endpoint.</p>",
+                        "smithy.api#documentation": "<p>The type of endpoint.</p>\n         <p>For more information about the types of VPC endpoints, see <a href=\"https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints\">VPC endpoints</a> in the <i>Amazon Web Services PrivateLink User Guide</i>.</p>",
                         "smithy.api#xmlName": "vpcEndpointType"
                     }
                 },
@@ -144593,7 +145067,7 @@
                     "target": "com.amazonaws.ec2#ValueStringList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "SubnetIdSet",
-                        "smithy.api#documentation": "<p>(Interface endpoint) The subnets for the endpoint.</p>",
+                        "smithy.api#documentation": "<p>(Interface, Gateway Load Balancer endpoints, Resource, ServiceNetwork, and Tunnel endpoints only) The subnets for the endpoint.</p>",
                         "smithy.api#xmlName": "subnetIdSet"
                     }
                 },
@@ -144601,7 +145075,7 @@
                     "target": "com.amazonaws.ec2#GroupIdentifierSet",
                     "traits": {
                         "aws.protocols#ec2QueryName": "GroupSet",
-                        "smithy.api#documentation": "<p>(Interface endpoint) Information about the security groups that are associated with\n            the network interface.</p>",
+                        "smithy.api#documentation": "<p>(Interface, Resource, ServiceNetwork, and Tunnel endpoints only) Information about the security groups that are associated with\n            the network interface.</p>",
                         "smithy.api#xmlName": "groupSet"
                     }
                 },
@@ -144641,7 +145115,7 @@
                     "target": "com.amazonaws.ec2#ValueStringList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "NetworkInterfaceIdSet",
-                        "smithy.api#documentation": "<p>(Interface endpoint) The network interfaces for the endpoint.</p>",
+                        "smithy.api#documentation": "<p>(Interface, Gateway Load Balancer endpoints, Resource, ServiceNetwork, and Tunnel endpoints only) The network interfaces for the endpoint.</p>",
                         "smithy.api#xmlName": "networkInterfaceIdSet"
                     }
                 },
