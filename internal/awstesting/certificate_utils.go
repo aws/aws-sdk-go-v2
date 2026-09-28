@@ -92,17 +92,21 @@ func generateRootCA() (
 
 	// PEM encode CA certificate and private key
 	var caPEMBuf bytes.Buffer
-	pem.Encode(&caPEMBuf, &pem.Block{
+	err = pem.Encode(&caPEMBuf, &pem.Block{
 		Type:  "CERTIFICATE",
 		Bytes: caBytes,
 	})
-
+	if err != nil {
+		return nil, nil, nil, nil, fmt.Errorf("failed to encode CA certificate: %w", err)
+	}
 	var caPrivKeyPEMBuf bytes.Buffer
-	pem.Encode(&caPrivKeyPEMBuf, &pem.Block{
+	err = pem.Encode(&caPrivKeyPEMBuf, &pem.Block{
 		Type:  "RSA PRIVATE KEY",
 		Bytes: x509.MarshalPKCS1PrivateKey(caPrivKey),
 	})
-
+	if err != nil {
+		return nil, nil, nil, nil, fmt.Errorf("failed to encode CA private key: %w", err)
+	}
 	return caPEMBuf.Bytes(), caPrivKeyPEMBuf.Bytes(), caCert, caPrivKey, nil
 }
 
@@ -143,17 +147,21 @@ func generateLocalCert(parentCert *x509.Certificate, parentPrivKey *rsa.PrivateK
 
 	// PEM encode certificate and private key
 	var certPEMBuf bytes.Buffer
-	pem.Encode(&certPEMBuf, &pem.Block{
+	err = pem.Encode(&certPEMBuf, &pem.Block{
 		Type:  "CERTIFICATE",
 		Bytes: certBytes,
 	})
-
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to encode certificate: %w", err)
+	}
 	var certPrivKeyPEMBuf bytes.Buffer
-	pem.Encode(&certPrivKeyPEMBuf, &pem.Block{
+	err = pem.Encode(&certPrivKeyPEMBuf, &pem.Block{
 		Type:  "RSA PRIVATE KEY",
 		Bytes: x509.MarshalPKCS1PrivateKey(certPrivKey),
 	})
-
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to encode private key: %w", err)
+	}
 	return certPEMBuf.Bytes(), certPrivKeyPEMBuf.Bytes(), nil
 }
 
