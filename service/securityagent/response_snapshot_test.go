@@ -427,6 +427,9 @@ func TestCheckResponseSnapshot_BatchDeletePentests(t *testing.T) {
 					AnnotationNotes:  ptr.Bool(true),
 					ComplianceReport: ptr.Bool(true),
 				},
+				CicdConfiguration: &types.CiCdConfiguration{
+					Enabled: ptr.Bool(true),
+				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -608,6 +611,9 @@ func TestCheckResponseSnapshot_BatchDeletePentests(t *testing.T) {
 					},
 					AnnotationNotes:  ptr.Bool(true),
 					ComplianceReport: ptr.Bool(true),
+				},
+				CicdConfiguration: &types.CiCdConfiguration{
+					Enabled: ptr.Bool(true),
 				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2019,6 +2025,30 @@ func TestCheckResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 					ParentId:      ptr.String("__ParentId__"),
 					DocumentId:    ptr.String("__DocumentId__"),
 				},
+				ReportUrl: ptr.String("__ReportUrl__"),
+				ScopeResult: &types.ScopeResult{
+					Decision: types.ScopeDecision("IN_SCOPE"),
+					Reason:   ptr.String("__Reason__"),
+				},
+				ScopeChanges: []types.ScopeChange{
+					{
+						IntegrationId:      ptr.String("__IntegrationId__"),
+						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+						HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+						TriggerRunId:       ptr.String("__TriggerRunId__"),
+					},
+					{
+						IntegrationId:      ptr.String("__IntegrationId__"),
+						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+						HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+						TriggerRunId:       ptr.String("__TriggerRunId__"),
+					},
+				},
+				CicdConfiguration: &types.CiCdConfiguration{
+					Enabled: ptr.Bool(true),
+				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -2223,6 +2253,30 @@ func TestCheckResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 					ContainerId:   ptr.String("__ContainerId__"),
 					ParentId:      ptr.String("__ParentId__"),
 					DocumentId:    ptr.String("__DocumentId__"),
+				},
+				ReportUrl: ptr.String("__ReportUrl__"),
+				ScopeResult: &types.ScopeResult{
+					Decision: types.ScopeDecision("IN_SCOPE"),
+					Reason:   ptr.String("__Reason__"),
+				},
+				ScopeChanges: []types.ScopeChange{
+					{
+						IntegrationId:      ptr.String("__IntegrationId__"),
+						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+						HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+						TriggerRunId:       ptr.String("__TriggerRunId__"),
+					},
+					{
+						IntegrationId:      ptr.String("__IntegrationId__"),
+						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+						HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+						TriggerRunId:       ptr.String("__TriggerRunId__"),
+					},
+				},
+				CicdConfiguration: &types.CiCdConfiguration{
+					Enabled: ptr.Bool(true),
 				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2438,6 +2492,9 @@ func TestCheckResponseSnapshot_BatchGetPentests(t *testing.T) {
 					AnnotationNotes:  ptr.Bool(true),
 					ComplianceReport: ptr.Bool(true),
 				},
+				CicdConfiguration: &types.CiCdConfiguration{
+					Enabled: ptr.Bool(true),
+				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -2619,6 +2676,9 @@ func TestCheckResponseSnapshot_BatchGetPentests(t *testing.T) {
 					},
 					AnnotationNotes:  ptr.Bool(true),
 					ComplianceReport: ptr.Bool(true),
+				},
+				CicdConfiguration: &types.CiCdConfiguration{
+					Enabled: ptr.Bool(true),
 				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -4169,6 +4229,9 @@ func TestCheckResponseSnapshot_CreatePentest(t *testing.T) {
 			AnnotationNotes:  ptr.Bool(true),
 			ComplianceReport: ptr.Bool(true),
 		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreatePentest.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4354,6 +4417,9 @@ func TestCheckResponseSnapshot_CreatePentest(t *testing.T) {
 			},
 			AnnotationNotes:  ptr.Bool(true),
 			ComplianceReport: ptr.Bool(true),
+		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
 		},
 	})
 	if err != nil {
@@ -5929,6 +5995,8 @@ func TestCheckResponseSnapshot_ListPentestJobsForPentest(t *testing.T) {
 				Status:       types.JobStatus("IN_PROGRESS"),
 				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				JobType:      types.JobType("FULL"),
+				ReportUrl:    ptr.String("__ReportUrl__"),
 			},
 			{
 				PentestJobId: ptr.String("__PentestJobId__"),
@@ -5937,6 +6005,8 @@ func TestCheckResponseSnapshot_ListPentestJobsForPentest(t *testing.T) {
 				Status:       types.JobStatus("IN_PROGRESS"),
 				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				JobType:      types.JobType("FULL"),
+				ReportUrl:    ptr.String("__ReportUrl__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -5954,6 +6024,7 @@ func TestCheckResponseSnapshot_ListPentestJobsForPentest(t *testing.T) {
 		PentestId:    ptr.String("__PentestId__"),
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		NextToken:    ptr.String("__NextToken__"),
+		JobType:      types.JobType("FULL"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6492,6 +6563,22 @@ func TestCheckResponseSnapshot_StartPentestJob(t *testing.T) {
 		SelectedFindingIds: []string{
 			"__Member__",
 			"__Member__",
+		},
+		ScopeChanges: []types.ScopeChange{
+			{
+				IntegrationId:      ptr.String("__IntegrationId__"),
+				ProviderResourceId: ptr.String("__ProviderResourceId__"),
+				BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+				HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+				TriggerRunId:       ptr.String("__TriggerRunId__"),
+			},
+			{
+				IntegrationId:      ptr.String("__IntegrationId__"),
+				ProviderResourceId: ptr.String("__ProviderResourceId__"),
+				BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+				HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+				TriggerRunId:       ptr.String("__TriggerRunId__"),
+			},
 		},
 	})
 	if err != nil {
@@ -7325,6 +7412,9 @@ func TestCheckResponseSnapshot_UpdatePentest(t *testing.T) {
 			AnnotationNotes:  ptr.Bool(true),
 			ComplianceReport: ptr.Bool(true),
 		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdatePentest.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -7511,6 +7601,9 @@ func TestCheckResponseSnapshot_UpdatePentest(t *testing.T) {
 			},
 			AnnotationNotes:  ptr.Bool(true),
 			ComplianceReport: ptr.Bool(true),
+		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
 		},
 	})
 	if err != nil {

@@ -13598,6 +13598,11 @@ func awsAwsjson11_serializeOpDocumentDeleteResourcePolicyInput(v *DeleteResource
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.DeletionMode) > 0 {
+		ok := object.Key("DeletionMode")
+		ok.String(string(v.DeletionMode))
+	}
+
 	if v.PolicyHash != nil {
 		ok := object.Key("PolicyHash")
 		ok.String(*v.PolicyHash)

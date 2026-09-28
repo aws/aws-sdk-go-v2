@@ -855,6 +855,167 @@ func TestUpdateResponseSnapshot_ListBillingViews(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListBusinessSupportAccountCharges(t *testing.T) {
+	want := &ListBusinessSupportAccountChargesOutput{
+		BillingMonth:              ptr.String("__BillingMonth__"),
+		IsEstimated:               ptr.Bool(true),
+		TotalSupportCharge:        ptr.String("__TotalSupportCharge__"),
+		TotalSupportEligibleSpend: ptr.String("__TotalSupportEligibleSpend__"),
+		AccountCount:              ptr.Int32(1),
+		AccountCharges: []types.BusinessSupportAccountCharge{
+			{
+				AccountId:       ptr.String("__AccountId__"),
+				SupportPlanName: ptr.String("__SupportPlanName__"),
+				TotalCharge:     ptr.String("__TotalCharge__"),
+				TotalUsageBasis: ptr.String("__TotalUsageBasis__"),
+				TierCharges: []types.BusinessSupportTierCharge{
+					{
+						TierDescription:       ptr.String("__TierDescription__"),
+						TierRate:              ptr.String("__TierRate__"),
+						UsageSlice:            ptr.String("__UsageSlice__"),
+						TierCharge:            ptr.String("__TierCharge__"),
+						ChargePeriodStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ChargePeriodEndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						TierDescription:       ptr.String("__TierDescription__"),
+						TierRate:              ptr.String("__TierRate__"),
+						UsageSlice:            ptr.String("__UsageSlice__"),
+						TierCharge:            ptr.String("__TierCharge__"),
+						ChargePeriodStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ChargePeriodEndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				SupportDiscount: &types.BusinessSupportDiscount{
+					DiscountAmount:     ptr.String("__DiscountAmount__"),
+					DiscountPercentage: ptr.String("__DiscountPercentage__"),
+					DiscountType:       ptr.String("__DiscountType__"),
+					DiscountSource:     ptr.String("__DiscountSource__"),
+				},
+				SupportEligibleSpendByService: []types.BusinessSupportServiceSpend{
+					{
+						ContributingService: ptr.String("__ContributingService__"),
+						ItemType:            ptr.String("__ItemType__"),
+						Description:         ptr.String("__Description__"),
+						ChargeAmount:        ptr.String("__ChargeAmount__"),
+						Currency:            ptr.String("__Currency__"),
+					},
+					{
+						ContributingService: ptr.String("__ContributingService__"),
+						ItemType:            ptr.String("__ItemType__"),
+						Description:         ptr.String("__Description__"),
+						ChargeAmount:        ptr.String("__ChargeAmount__"),
+						Currency:            ptr.String("__Currency__"),
+					},
+				},
+			},
+			{
+				AccountId:       ptr.String("__AccountId__"),
+				SupportPlanName: ptr.String("__SupportPlanName__"),
+				TotalCharge:     ptr.String("__TotalCharge__"),
+				TotalUsageBasis: ptr.String("__TotalUsageBasis__"),
+				TierCharges: []types.BusinessSupportTierCharge{
+					{
+						TierDescription:       ptr.String("__TierDescription__"),
+						TierRate:              ptr.String("__TierRate__"),
+						UsageSlice:            ptr.String("__UsageSlice__"),
+						TierCharge:            ptr.String("__TierCharge__"),
+						ChargePeriodStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ChargePeriodEndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						TierDescription:       ptr.String("__TierDescription__"),
+						TierRate:              ptr.String("__TierRate__"),
+						UsageSlice:            ptr.String("__UsageSlice__"),
+						TierCharge:            ptr.String("__TierCharge__"),
+						ChargePeriodStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						ChargePeriodEndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				SupportDiscount: &types.BusinessSupportDiscount{
+					DiscountAmount:     ptr.String("__DiscountAmount__"),
+					DiscountPercentage: ptr.String("__DiscountPercentage__"),
+					DiscountType:       ptr.String("__DiscountType__"),
+					DiscountSource:     ptr.String("__DiscountSource__"),
+				},
+				SupportEligibleSpendByService: []types.BusinessSupportServiceSpend{
+					{
+						ContributingService: ptr.String("__ContributingService__"),
+						ItemType:            ptr.String("__ItemType__"),
+						Description:         ptr.String("__Description__"),
+						ChargeAmount:        ptr.String("__ChargeAmount__"),
+						Currency:            ptr.String("__Currency__"),
+					},
+					{
+						ContributingService: ptr.String("__ContributingService__"),
+						ItemType:            ptr.String("__ItemType__"),
+						Description:         ptr.String("__Description__"),
+						ChargeAmount:        ptr.String("__ChargeAmount__"),
+						Currency:            ptr.String("__Currency__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.AWSBilling)
+	opSchema := smithy.NewOperationSchema(schemas.ListBusinessSupportAccountCharges, schemas.ListBusinessSupportAccountChargesResponse, schemas.ListBusinessSupportAccountChargesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListBusinessSupportAccountCharges.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListBusinessSupportSubscriptionHistory(t *testing.T) {
+	want := &ListBusinessSupportSubscriptionHistoryOutput{
+		SubscriptionContracts: []types.BusinessSupportSubscriptionContract{
+			{
+				AccountId:         ptr.String("__AccountId__"),
+				PlanName:          ptr.String("__PlanName__"),
+				ContractStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ContractEndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				AccountId:         ptr.String("__AccountId__"),
+				PlanName:          ptr.String("__PlanName__"),
+				ContractStartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ContractEndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.AWSBilling)
+	opSchema := smithy.NewOperationSchema(schemas.ListBusinessSupportSubscriptionHistory, schemas.ListBusinessSupportSubscriptionHistoryResponse, schemas.ListBusinessSupportSubscriptionHistoryResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListBusinessSupportSubscriptionHistory.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListEnterpriseSupportLinkedAccountCharges(t *testing.T) {
 	want := &ListEnterpriseSupportLinkedAccountChargesOutput{
 		LinkedAccount: []types.LinkedAccountCharge{

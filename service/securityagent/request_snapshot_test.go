@@ -1441,6 +1441,9 @@ func TestCheckRequestSnapshot_CreatePentest(t *testing.T) {
 			AnnotationNotes:  ptr.Bool(true),
 			ComplianceReport: ptr.Bool(true),
 		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2590,6 +2593,7 @@ func TestCheckRequestSnapshot_ListPentestJobsForPentest(t *testing.T) {
 		PentestId:    ptr.String("__PentestId__"),
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		NextToken:    ptr.String("__NextToken__"),
+		JobType:      types.JobType("FULL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3010,6 +3014,22 @@ func TestCheckRequestSnapshot_StartPentestJob(t *testing.T) {
 		SelectedFindingIds: []string{
 			"__Member__",
 			"__Member__",
+		},
+		ScopeChanges: []types.ScopeChange{
+			{
+				IntegrationId:      ptr.String("__IntegrationId__"),
+				ProviderResourceId: ptr.String("__ProviderResourceId__"),
+				BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+				HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+				TriggerRunId:       ptr.String("__TriggerRunId__"),
+			},
+			{
+				IntegrationId:      ptr.String("__IntegrationId__"),
+				ProviderResourceId: ptr.String("__ProviderResourceId__"),
+				BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+				HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+				TriggerRunId:       ptr.String("__TriggerRunId__"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -3754,6 +3774,9 @@ func TestCheckRequestSnapshot_UpdatePentest(t *testing.T) {
 			},
 			AnnotationNotes:  ptr.Bool(true),
 			ComplianceReport: ptr.Bool(true),
+		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -5337,6 +5360,9 @@ func TestUpdateRequestSnapshot_CreatePentest(t *testing.T) {
 			AnnotationNotes:  ptr.Bool(true),
 			ComplianceReport: ptr.Bool(true),
 		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6486,6 +6512,7 @@ func TestUpdateRequestSnapshot_ListPentestJobsForPentest(t *testing.T) {
 		PentestId:    ptr.String("__PentestId__"),
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		NextToken:    ptr.String("__NextToken__"),
+		JobType:      types.JobType("FULL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6906,6 +6933,22 @@ func TestUpdateRequestSnapshot_StartPentestJob(t *testing.T) {
 		SelectedFindingIds: []string{
 			"__Member__",
 			"__Member__",
+		},
+		ScopeChanges: []types.ScopeChange{
+			{
+				IntegrationId:      ptr.String("__IntegrationId__"),
+				ProviderResourceId: ptr.String("__ProviderResourceId__"),
+				BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+				HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+				TriggerRunId:       ptr.String("__TriggerRunId__"),
+			},
+			{
+				IntegrationId:      ptr.String("__IntegrationId__"),
+				ProviderResourceId: ptr.String("__ProviderResourceId__"),
+				BaseCommitSha:      ptr.String("__BaseCommitSha__"),
+				HeadCommitSha:      ptr.String("__HeadCommitSha__"),
+				TriggerRunId:       ptr.String("__TriggerRunId__"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -7650,6 +7693,9 @@ func TestUpdateRequestSnapshot_UpdatePentest(t *testing.T) {
 			},
 			AnnotationNotes:  ptr.Bool(true),
 			ComplianceReport: ptr.Bool(true),
+		},
+		CicdConfiguration: &types.CiCdConfiguration{
+			Enabled: ptr.Bool(true),
 		},
 	}
 	body := &bytes.Buffer{}

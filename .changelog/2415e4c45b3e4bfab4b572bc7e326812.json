@@ -1,0 +1,8 @@
+{
+    "id": "2415e4c4-5b3e-4bfa-b4b5-72bc7e326812",
+    "type": "feature",
+    "description": "Added a new exception to several batch APIs",
+    "modules": [
+        "service/glue"
+    ]
+}

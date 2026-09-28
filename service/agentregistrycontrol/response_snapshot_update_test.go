@@ -9,6 +9,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/document"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/types"
 	smithy "github.com/aws/smithy-go"
@@ -314,6 +315,19 @@ func TestUpdateResponseSnapshot_GetRegistry(t *testing.T) {
 			AutoApprovalRules: []types.AutoApprovalRule{
 				types.AutoApprovalRule("APPROVE_ALL"),
 				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
+			DefaultSchema: ptr.String("__DefaultSchema__"),
+			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
 			},
 		},
 		Status:       types.RegistryStatus("CREATING"),
@@ -747,8 +761,10 @@ func TestUpdateResponseSnapshot_GetRegistryRecord(t *testing.T) {
 				},
 			},
 		},
-		CreatedByAutoDetection: ptr.Bool(true),
-		CreatedBy:              ptr.String("__CreatedBy__"),
+		CreatedByAutoDetection:               ptr.Bool(true),
+		CreatedBy:                            ptr.String("__CreatedBy__"),
+		CustomMetadata:                       document.NewLazyDocument("__Document__"),
+		CustomMetadataSchemaComplianceStatus: types.CustomMetadataSchemaComplianceStatus("COMPLIANT"),
 	}
 	proto := restjson1.New(schemas.AgentRegistryControl)
 	opSchema := smithy.NewOperationSchema(schemas.GetRegistryRecord, schemas.GetRegistryRecordResponse, schemas.GetRegistryRecordResponse)
@@ -991,6 +1007,7 @@ func TestUpdateResponseSnapshot_ListRegistryRecords(t *testing.T) {
 						SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
 					},
 				},
+				CustomMetadataSchemaComplianceStatus: types.CustomMetadataSchemaComplianceStatus("COMPLIANT"),
 			},
 			{
 				RegistryArn:            ptr.String("__RegistryArn__"),
@@ -1018,6 +1035,7 @@ func TestUpdateResponseSnapshot_ListRegistryRecords(t *testing.T) {
 						SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
 					},
 				},
+				CustomMetadataSchemaComplianceStatus: types.CustomMetadataSchemaComplianceStatus("COMPLIANT"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1218,6 +1236,19 @@ func TestUpdateResponseSnapshot_UpdateRegistry(t *testing.T) {
 			AutoApprovalRules: []types.AutoApprovalRule{
 				types.AutoApprovalRule("APPROVE_ALL"),
 				types.AutoApprovalRule("APPROVE_ALL"),
+			},
+		},
+		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
+			DefaultSchema: ptr.String("__DefaultSchema__"),
+			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
+				{
+					RecordType: types.RecordType("MCP"),
+					Schema:     ptr.String("__Schema__"),
+				},
 			},
 		},
 		Status:       types.RegistryStatus("CREATING"),
@@ -1651,8 +1682,10 @@ func TestUpdateResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 				},
 			},
 		},
-		CreatedByAutoDetection: ptr.Bool(true),
-		CreatedBy:              ptr.String("__CreatedBy__"),
+		CreatedByAutoDetection:               ptr.Bool(true),
+		CreatedBy:                            ptr.String("__CreatedBy__"),
+		CustomMetadata:                       document.NewLazyDocument("__Document__"),
+		CustomMetadataSchemaComplianceStatus: types.CustomMetadataSchemaComplianceStatus("COMPLIANT"),
 	}
 	proto := restjson1.New(schemas.AgentRegistryControl)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateRegistryRecord, schemas.UpdateRegistryRecordResponse, schemas.UpdateRegistryRecordResponse)

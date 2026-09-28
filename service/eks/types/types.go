@@ -1050,6 +1050,11 @@ type ArgoCdConfigRequest struct {
 	// This member is required.
 	AwsIdc *ArgoCdAwsIdcConfigRequest
 
+	// An optional prefix used to construct the hostname of the Argo CD server
+	// endpoint. If not specified, Amazon EKS automatically generates the endpoint.
+	// This value can't be changed after the capability is created.
+	EndpointPrefix *string
+
 	// The Kubernetes namespace where Argo CD resources will be created. If not
 	// specified, the default namespace is used.
 	Namespace *string
@@ -1083,6 +1088,9 @@ func (v *ArgoCdConfigRequest) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AwsIdc.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.EndpointPrefix != nil {
+		s.WriteString(schemas.ArgoCdConfigRequest_endpointPrefix, *v.EndpointPrefix)
+	}
 	if v.Namespace != nil {
 		s.WriteString(schemas.ArgoCdConfigRequest_namespace, *v.Namespace)
 	}
@@ -1099,6 +1107,9 @@ func (v *ArgoCdConfigRequest) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ArgoCdConfigRequest_awsIdc:
 			v.AwsIdc = &ArgoCdAwsIdcConfigRequest{}
 			return v.AwsIdc.Deserialize(d)
+		case schemas.ArgoCdConfigRequest_endpointPrefix:
+			v.EndpointPrefix = new(string)
+			return d.ReadString(schemas.ArgoCdConfigRequest_endpointPrefix, v.EndpointPrefix)
 		case schemas.ArgoCdConfigRequest_namespace:
 			v.Namespace = new(string)
 			return d.ReadString(schemas.ArgoCdConfigRequest_namespace, v.Namespace)
@@ -1118,6 +1129,10 @@ type ArgoCdConfigResponse struct {
 
 	// The IAM Identity CenterIAM; Identity Center integration configuration.
 	AwsIdc *ArgoCdAwsIdcConfigResponse
+
+	// The prefix that was configured for the hostname of the Argo CD server endpoint
+	// when the capability was created.
+	EndpointPrefix *string
 
 	// The Kubernetes namespace where Argo CD resources are monitored by your Argo CD
 	// Capability.
@@ -1151,6 +1166,9 @@ func (v *ArgoCdConfigResponse) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AwsIdc.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.EndpointPrefix != nil {
+		s.WriteString(schemas.ArgoCdConfigResponse_endpointPrefix, *v.EndpointPrefix)
+	}
 	if v.Namespace != nil {
 		s.WriteString(schemas.ArgoCdConfigResponse_namespace, *v.Namespace)
 	}
@@ -1170,6 +1188,9 @@ func (v *ArgoCdConfigResponse) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ArgoCdConfigResponse_awsIdc:
 			v.AwsIdc = &ArgoCdAwsIdcConfigResponse{}
 			return v.AwsIdc.Deserialize(d)
+		case schemas.ArgoCdConfigResponse_endpointPrefix:
+			v.EndpointPrefix = new(string)
+			return d.ReadString(schemas.ArgoCdConfigResponse_endpointPrefix, v.EndpointPrefix)
 		case schemas.ArgoCdConfigResponse_namespace:
 			v.Namespace = new(string)
 			return d.ReadString(schemas.ArgoCdConfigResponse_namespace, v.Namespace)

@@ -51582,6 +51582,15 @@ func awsRestjson1_deserializeDocumentMCPGatewayConfiguration(v **types.MCPGatewa
 
 	for key, value := range shape {
 		switch key {
+		case "disableMcpListToolsPagination":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableMcpListToolsPagination = ptr.Bool(jtv)
+			}
+
 		case "instructions":
 			if value != nil {
 				jtv, ok := value.(string)

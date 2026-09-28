@@ -45,8 +45,8 @@ type UpdateDocumentInput struct {
 	// version.
 	DisplayName *string
 
-	// Specify the document format for the new document version. Systems Manager
-	// supports JSON and YAML documents. JSON is the default format.
+	// Specify the document format for the new document version. The document format
+	// can be JSON, YAML, or TEXT. JSON is the default format.
 	DocumentFormat types.DocumentFormat
 
 	// The version of the document that you want to update. Currently, Systems Manager

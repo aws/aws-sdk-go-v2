@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/agentregistry/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/agentregistry/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistry/schemas"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
@@ -988,6 +990,11 @@ type RegistryRecordSummary struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	//  The custom metadata attached to this registry record. Values are strings
+	// (maximum 128 characters) or booleans. This field is only present if the registry
+	// has a custom metadata schema configured.
+	CustomMetadata document.Interface
+
 	//  A human-readable description of the registry record. Use this field to explain
 	// the record's purpose or content to consumers discovering it in the registry.
 	Description *string
@@ -1007,6 +1014,9 @@ func (v *RegistryRecordSummary) Serialize(s smithy.ShapeSerializer) {
 func (v *RegistryRecordSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.RegistryRecordSummary_createdAt, *v.CreatedAt)
+	}
+	if v.CustomMetadata != nil {
+		s.WriteDocument(schemas.RegistryRecordSummary_customMetadata, &smithydocument.Opaque{Value: v.CustomMetadata})
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.RegistryRecordSummary_description, *v.Description)
@@ -1050,6 +1060,15 @@ func (v *RegistryRecordSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RegistryRecordSummary_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.RegistryRecordSummary_createdAt, v.CreatedAt)
+		case schemas.RegistryRecordSummary_customMetadata:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.RegistryRecordSummary_customMetadata, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.CustomMetadata = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
 		case schemas.RegistryRecordSummary_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.RegistryRecordSummary_description, v.Description)

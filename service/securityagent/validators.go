@@ -2571,6 +2571,44 @@ func validateReportDestination(v *types.ReportDestination) error {
 	}
 }
 
+func validateScopeChange(v *types.ScopeChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScopeChange"}
+	if v.IntegrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
+	}
+	if v.ProviderResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderResourceId"))
+	}
+	if v.HeadCommitSha == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HeadCommitSha"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScopeChangeList(v []types.ScopeChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScopeChangeList"}
+	for i := range v {
+		if err := validateScopeChange(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSecurityRequirementArtifact(v *types.SecurityRequirementArtifact) error {
 	if v == nil {
 		return nil
@@ -3936,6 +3974,11 @@ func validateOpStartPentestJobInput(v *StartPentestJobInput) error {
 	}
 	if v.PentestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PentestId"))
+	}
+	if v.ScopeChanges != nil {
+		if err := validateScopeChangeList(v.ScopeChanges); err != nil {
+			invalidParams.AddNested("ScopeChanges", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

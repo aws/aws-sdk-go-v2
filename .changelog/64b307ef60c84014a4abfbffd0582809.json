@@ -1,0 +1,8 @@
+{
+    "id": "64b307ef-60c8-4014-a4ab-fbffd0582809",
+    "type": "feature",
+    "description": "Amazon FSx has expanded the model-level maximum on the ThroughputCapacity, ThroughputCapacityPerHAPair, and Iops API parameters. Actual supported values are unchanged and depend on file system type and configuration.",
+    "modules": [
+        "service/fsx"
+    ]
+}

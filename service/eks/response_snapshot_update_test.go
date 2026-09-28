@@ -595,7 +595,8 @@ func TestUpdateResponseSnapshot_CreateCapability(t *testing.T) {
 							"__Member__",
 						},
 					},
-					ServerUrl: ptr.String("__ServerUrl__"),
+					ServerUrl:      ptr.String("__ServerUrl__"),
+					EndpointPrefix: ptr.String("__EndpointPrefix__"),
 				},
 			},
 			Tags: map[string]string{
@@ -1410,7 +1411,8 @@ func TestUpdateResponseSnapshot_DeleteCapability(t *testing.T) {
 							"__Member__",
 						},
 					},
-					ServerUrl: ptr.String("__ServerUrl__"),
+					ServerUrl:      ptr.String("__ServerUrl__"),
+					EndpointPrefix: ptr.String("__EndpointPrefix__"),
 				},
 			},
 			Tags: map[string]string{
@@ -2706,7 +2708,8 @@ func TestUpdateResponseSnapshot_DescribeCapability(t *testing.T) {
 							"__Member__",
 						},
 					},
-					ServerUrl: ptr.String("__ServerUrl__"),
+					ServerUrl:      ptr.String("__ServerUrl__"),
+					EndpointPrefix: ptr.String("__EndpointPrefix__"),
 				},
 			},
 			Tags: map[string]string{

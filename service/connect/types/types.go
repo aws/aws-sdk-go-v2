@@ -4434,6 +4434,49 @@ func (v *Condition) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The credentials that a chat participant uses to connect to the Connect Customer
+// Participant Service.
+type ConnectionCredentials struct {
+
+	// The connection token used by the chat participant to call the Connect Customer
+	// Participant Service.
+	ConnectionToken *string
+
+	// The expiration of the token. It's specified in ISO 8601 format:
+	// yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+	Expiry *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConnectionCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionToken != nil {
+		s.WriteString(schemas.ConnectionCredentials_ConnectionToken, *v.ConnectionToken)
+	}
+	if v.Expiry != nil {
+		s.WriteString(schemas.ConnectionCredentials_Expiry, *v.Expiry)
+	}
+}
+func (v *ConnectionCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionCredentials_ConnectionToken:
+			v.ConnectionToken = new(string)
+			return d.ReadString(schemas.ConnectionCredentials_ConnectionToken, v.ConnectionToken)
+		case schemas.ConnectionCredentials_Expiry:
+			v.Expiry = new(string)
+			return d.ReadString(schemas.ConnectionCredentials_Expiry, v.Expiry)
+		}
+		return nil
+	})
+}
+
 // Information required to join the call.
 type ConnectionData struct {
 
@@ -35160,6 +35203,48 @@ func (v *WebNotificationSource) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.WebNotificationSource_SourceCampaign:
 			v.SourceCampaign = &SourceCampaign{}
 			return v.SourceCampaign.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The websocket that a chat participant uses to receive messages and events for
+// the chat.
+type Websocket struct {
+
+	// The expiration of the websocket URL. It's specified in ISO 8601 format:
+	// yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+	ConnectionExpiry *string
+
+	// The URL of the websocket.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Websocket) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Websocket)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Websocket) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionExpiry != nil {
+		s.WriteString(schemas.Websocket_ConnectionExpiry, *v.ConnectionExpiry)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.Websocket_Url, *v.Url)
+	}
+}
+func (v *Websocket) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Websocket, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Websocket_ConnectionExpiry:
+			v.ConnectionExpiry = new(string)
+			return d.ReadString(schemas.Websocket_ConnectionExpiry, v.ConnectionExpiry)
+		case schemas.Websocket_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.Websocket_Url, v.Url)
 		}
 		return nil
 	})

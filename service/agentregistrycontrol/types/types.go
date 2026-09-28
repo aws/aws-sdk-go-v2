@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/schemas"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
@@ -62,7 +64,8 @@ func (v *A2aAgentCardDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Source details for a record auto-detected from an AgentCore Gateway resource.
+// The source details for a registry record that was auto-detected from an Amazon
+// Bedrock AgentCore Gateway resource.
 type AgentCoreGatewaySourceDetails struct {
 
 	// The authorizer configuration for a registry. Exactly one member is set.
@@ -72,10 +75,12 @@ type AgentCoreGatewaySourceDetails struct {
 	// registry record was detected from.
 	AuthorizerType *string
 
-	// The protocol type of an AgentCore Gateway.
+	// The protocol type of the AgentCore Gateway resource that the registry record
+	// was detected from, for example MCP .
 	ProtocolType AgentCoreGatewayProtocolType
 
-	// Workload identity details associated with a source resource.
+	// The workload identity details for the AgentCore Gateway resource. Present when
+	// the gateway has a workload identity configured.
 	WorkloadIdentityDetails *WorkloadIdentityDetails
 
 	noSmithyDocumentSerde
@@ -124,10 +129,12 @@ func (v *AgentCoreGatewaySourceDetails) Deserialize(d smithy.ShapeDeserializer) 
 	})
 }
 
-// Protocol configuration for an AgentCore Runtime.
+// The protocol configuration of an AgentCore Runtime resource that a registry
+// record was auto-detected from.
 type AgentCoreRuntimeProtocolConfiguration struct {
 
-	// The server protocol used by an AgentCore Runtime.
+	// The server protocol used by the AgentCore Runtime, such as MCP , HTTP , A2A , or
+	// AGUI .
 	ServerProtocol AgentCoreRuntimeServerProtocol
 
 	noSmithyDocumentSerde
@@ -159,16 +166,19 @@ func (v *AgentCoreRuntimeProtocolConfiguration) Deserialize(d smithy.ShapeDeseri
 	})
 }
 
-// Source details for a record auto-detected from an AgentCore Runtime resource.
+// The source details for a registry record that was auto-detected from an Amazon
+// Bedrock AgentCore Runtime resource.
 type AgentCoreRuntimeSourceDetails struct {
 
 	// The authorizer configuration for a registry. Exactly one member is set.
 	AuthorizerConfiguration AuthorizerConfiguration
 
-	// Protocol configuration for an AgentCore Runtime.
+	// The protocol configuration of the AgentCore Runtime resource that the registry
+	// record was detected from.
 	ProtocolConfiguration *AgentCoreRuntimeProtocolConfiguration
 
-	// Workload identity details associated with a source resource.
+	// The workload identity details for the AgentCore Runtime resource. Present when
+	// the runtime has a workload identity configured.
 	WorkloadIdentityDetails *WorkloadIdentityDetails
 
 	noSmithyDocumentSerde
@@ -809,6 +819,51 @@ func (v *CustomJWTAuthorizerConfiguration) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 
+// Configuration that defines a typed metadata schema for a registry. Specify at
+// least one of a default schema or per-record-type schema overrides. You can
+// provide both.
+type CustomMetadataSchemaConfiguration struct {
+
+	// The default JSON Schema that applies to record types without a specific
+	// override. Supported property types are string , string with an enum constraint,
+	// string with a uri format, and boolean .
+	DefaultSchema *string
+
+	// A list of per-record-type schema overrides. When a record's type matches an
+	// override, that override's schema is used instead of the default schema for
+	// validation. If you don't specify an override for a record type, the default
+	// schema applies. If no default schema exists, custom metadata on records of that
+	// type is rejected.
+	RecordTypeSchemaOverrides []RecordTypeSchemaOverride
+
+	noSmithyDocumentSerde
+}
+
+func (v *CustomMetadataSchemaConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomMetadataSchemaConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomMetadataSchemaConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultSchema != nil {
+		s.WriteString(schemas.CustomMetadataSchemaConfiguration_defaultSchema, *v.DefaultSchema)
+	}
+	serializeRecordTypeSchemaOverrideList(s, schemas.CustomMetadataSchemaConfiguration_recordTypeSchemaOverrides, v.RecordTypeSchemaOverrides)
+}
+func (v *CustomMetadataSchemaConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomMetadataSchemaConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomMetadataSchemaConfiguration_defaultSchema:
+			v.DefaultSchema = new(string)
+			return d.ReadString(schemas.CustomMetadataSchemaConfiguration_defaultSchema, v.DefaultSchema)
+		case schemas.CustomMetadataSchemaConfiguration_recordTypeSchemaOverrides:
+			return deserializeRecordTypeSchemaOverrideList(d, schemas.CustomMetadataSchemaConfiguration_recordTypeSchemaOverrides, &v.RecordTypeSchemaOverrides)
+		}
+		return nil
+	})
+}
+
 // The typed set of descriptors for a registry record. Exactly one descriptor
 // field is populated based on the record type.
 type Descriptors struct {
@@ -1396,10 +1451,14 @@ func (v *PrivateEndpointOverride) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
-// One provenance entry describing the lineage of a registry record.
+// A provenance entry that describes the lineage of a registry record. Records
+// that were auto-detected by Amazon Web Services Agent Registry carry a provenance
+// entry that links the record back to its upstream source.
 type Provenance struct {
 
-	// The relationship between the registry record and its provenance source.
+	// The relationship between the registry record and its upstream source.
+	// DETECTED_FROM indicates that the record was auto-detected from the source
+	// resource.
 	//
 	// This member is required.
 	Relation ProvenanceRelation
@@ -1466,12 +1525,14 @@ func (v *Provenance) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Condensed provenance entry for list results — the key triple only (no
-// sourceDetails union). Enough to display and client-side-filter lineage without
-// the full-read config payload.
+// A condensed provenance entry surfaced in list results. Contains the source
+// identity of a lineage entry without the source details returned by
+// GetRegistryRecord .
 type ProvenanceSummary struct {
 
-	// The relationship between the registry record and its provenance source.
+	// The relationship between the registry record and its upstream source.
+	// DETECTED_FROM indicates that the record was auto-detected from the source
+	// resource.
 	//
 	// This member is required.
 	Relation ProvenanceRelation
@@ -1525,6 +1586,56 @@ func (v *ProvenanceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.SourceType = SourceType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// A schema override for a specific record type within a custom metadata schema
+// configuration.
+type RecordTypeSchemaOverride struct {
+
+	// The record type that this schema override applies to.
+	//
+	// This member is required.
+	RecordType RecordType
+
+	// The JSON Schema for the specified record type. Must follow the same structural
+	// rules as the default schema.
+	//
+	// This member is required.
+	Schema *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RecordTypeSchemaOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordTypeSchemaOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordTypeSchemaOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordType != "" {
+		s.WriteString(schemas.RecordTypeSchemaOverride_recordType, string(v.RecordType))
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.RecordTypeSchemaOverride_schema, *v.Schema)
+	}
+}
+func (v *RecordTypeSchemaOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecordTypeSchemaOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecordTypeSchemaOverride_recordType:
+			var ev string
+			if err := d.ReadString(schemas.RecordTypeSchemaOverride_recordType, &ev); err != nil {
+				return err
+			}
+			v.RecordType = RecordType(ev)
+			return nil
+		case schemas.RecordTypeSchemaOverride_schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.RecordTypeSchemaOverride_schema, v.Schema)
 		}
 		return nil
 	})
@@ -1884,15 +1995,19 @@ type RegistryRecordSummary struct {
 	// through a control-plane API call.
 	CreatedByAutoDetection *bool
 
+	// Indicates whether this record's custom metadata conforms to the registry's
+	// current schema.
+	CustomMetadataSchemaComplianceStatus CustomMetadataSchemaComplianceStatus
+
 	// A description of the registry record.
 	Description *string
 
 	// The human-readable display name of the registry record.
 	DisplayName *string
 
-	// List of condensed provenance entries surfaced on RegistryRecordSummary. Mirrors
-	// ProvenanceList's cardinality (one entry today); modeled as a list for
-	// forward-compatibility.
+	// The condensed provenance lineage for the registry record. Each entry contains
+	// the source relation, source identifier, and source type of an auto-detection
+	// lineage entry. Populated for records created by auto-detection.
 	ProvenanceSummaryList []ProvenanceSummary
 
 	noSmithyDocumentSerde
@@ -1913,6 +2028,9 @@ func (v *RegistryRecordSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.CreatedByAutoDetection != nil {
 		s.WriteBool(schemas.RegistryRecordSummary_createdByAutoDetection, *v.CreatedByAutoDetection)
+	}
+	if v.CustomMetadataSchemaComplianceStatus != "" {
+		s.WriteString(schemas.RegistryRecordSummary_customMetadataSchemaComplianceStatus, string(v.CustomMetadataSchemaComplianceStatus))
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.RegistryRecordSummary_description, *v.Description)
@@ -1958,6 +2076,13 @@ func (v *RegistryRecordSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RegistryRecordSummary_createdByAutoDetection:
 			v.CreatedByAutoDetection = new(bool)
 			return d.ReadBool(schemas.RegistryRecordSummary_createdByAutoDetection, v.CreatedByAutoDetection)
+		case schemas.RegistryRecordSummary_customMetadataSchemaComplianceStatus:
+			var ev string
+			if err := d.ReadString(schemas.RegistryRecordSummary_customMetadataSchemaComplianceStatus, &ev); err != nil {
+				return err
+			}
+			v.CustomMetadataSchemaComplianceStatus = CustomMetadataSchemaComplianceStatus(ev)
+			return nil
 		case schemas.RegistryRecordSummary_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.RegistryRecordSummary_description, v.Description)
@@ -2176,7 +2301,9 @@ type SourceDetails interface {
 	isSourceDetails()
 }
 
-// Source details for a record auto-detected from an AgentCore Gateway resource.
+// The source details for a registry record that was auto-detected from an Amazon
+// Bedrock AgentCore Gateway resource. Populated when the source type is
+// AWS::BedrockAgentCore::Gateway .
 type SourceDetailsMemberAgentcoreGateway struct {
 	Value AgentCoreGatewaySourceDetails
 
@@ -2193,7 +2320,9 @@ func (v *SourceDetailsMemberAgentcoreGateway) Deserialize(d smithy.ShapeDeserial
 	return v.Value.Deserialize(d)
 }
 
-// Source details for a record auto-detected from an AgentCore Runtime resource.
+// The source details for a registry record that was auto-detected from an Amazon
+// Bedrock AgentCore Runtime resource. Populated when the source type is
+// AWS::BedrockAgentCore::Runtime .
 type SourceDetailsMemberAgentcoreRuntime struct {
 	Value AgentCoreRuntimeSourceDetails
 
@@ -2780,6 +2909,79 @@ func (v *UpdatedCustomDescriptorFields) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.UpdatedCustomDescriptorFields_data:
 			v.Data = &UpdatedDescriptorData{}
 			return v.Data.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The custom metadata patch wrapper. Omit to leave the existing metadata
+// unchanged; supply with a null value to clear all metadata; supply with key-value
+// pairs to replace the existing metadata.
+type UpdatedCustomMetadataMap struct {
+
+	// The value to set for this field. Omit the wrapper to leave the field unchanged.
+	OptionalValue document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedCustomMetadataMap) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedCustomMetadataMap)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedCustomMetadataMap) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptionalValue != nil {
+		s.WriteDocument(schemas.UpdatedCustomMetadataMap_optionalValue, &smithydocument.Opaque{Value: v.OptionalValue})
+	}
+}
+func (v *UpdatedCustomMetadataMap) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedCustomMetadataMap, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedCustomMetadataMap_optionalValue:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.UpdatedCustomMetadataMap_optionalValue, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.OptionalValue = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
+
+// The custom metadata schema configuration patch wrapper. Omit to leave the
+// existing schema unchanged.
+type UpdatedCustomMetadataSchemaConfiguration struct {
+
+	// The value to set for this field. Omit the wrapper to leave the field unchanged.
+	OptionalValue *CustomMetadataSchemaConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedCustomMetadataSchemaConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedCustomMetadataSchemaConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedCustomMetadataSchemaConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptionalValue != nil {
+		s.WriteStruct(schemas.UpdatedCustomMetadataSchemaConfiguration_optionalValue)
+		v.OptionalValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatedCustomMetadataSchemaConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedCustomMetadataSchemaConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedCustomMetadataSchemaConfiguration_optionalValue:
+			v.OptionalValue = &CustomMetadataSchemaConfiguration{}
+			return v.OptionalValue.Deserialize(d)
 		}
 		return nil
 	})
@@ -3463,7 +3665,9 @@ func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
-// Workload identity details associated with a source resource.
+// The workload identity details associated with a source resource. Present on the
+// source details of a provenance entry when the upstream resource has a workload
+// identity configured.
 type WorkloadIdentityDetails struct {
 
 	// The Amazon Resource Name (ARN) of the workload identity associated with the

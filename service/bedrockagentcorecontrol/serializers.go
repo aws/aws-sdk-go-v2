@@ -21182,6 +21182,11 @@ func awsRestjson1_serializeDocumentMCPGatewayConfiguration(v *types.MCPGatewayCo
 	object := value.Object()
 	defer object.Close()
 
+	if v.DisableMcpListToolsPagination != nil {
+		ok := object.Key("disableMcpListToolsPagination")
+		ok.Boolean(*v.DisableMcpListToolsPagination)
+	}
+
 	if v.Instructions != nil {
 		ok := object.Key("instructions")
 		ok.String(*v.Instructions)

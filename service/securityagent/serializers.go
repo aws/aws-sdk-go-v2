@@ -2612,6 +2612,13 @@ func awsRestjson1_serializeOpDocumentCreatePentestInput(v *CreatePentestInput, v
 		}
 	}
 
+	if v.CicdConfiguration != nil {
+		ok := object.Key("cicdConfiguration")
+		if err := awsRestjson1_serializeDocumentCiCdConfiguration(v.CicdConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.CodeRemediationStrategy) > 0 {
 		ok := object.Key("codeRemediationStrategy")
 		ok.String(string(v.CodeRemediationStrategy))
@@ -5782,6 +5789,11 @@ func awsRestjson1_serializeOpDocumentListPentestJobsForPentestInput(v *ListPente
 		ok.String(*v.AgentSpaceId)
 	}
 
+	if len(v.JobType) > 0 {
+		ok := object.Key("jobType")
+		ok.String(string(v.JobType))
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
@@ -7082,6 +7094,13 @@ func awsRestjson1_serializeOpDocumentStartPentestJobInput(v *StartPentestJobInpu
 		ok.String(*v.PentestId)
 	}
 
+	if v.ScopeChanges != nil {
+		ok := object.Key("scopeChanges")
+		if err := awsRestjson1_serializeDocumentScopeChangeList(v.ScopeChanges, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SelectedFindingIds != nil {
 		ok := object.Key("selectedFindingIds")
 		if err := awsRestjson1_serializeDocumentStringList(v.SelectedFindingIds, ok); err != nil {
@@ -8273,6 +8292,13 @@ func awsRestjson1_serializeOpDocumentUpdatePentestInput(v *UpdatePentestInput, v
 		}
 	}
 
+	if v.CicdConfiguration != nil {
+		ok := object.Key("cicdConfiguration")
+		if err := awsRestjson1_serializeDocumentCiCdConfiguration(v.CicdConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.CodeRemediationStrategy) > 0 {
 		ok := object.Key("codeRemediationStrategy")
 		ok.String(string(v.CodeRemediationStrategy))
@@ -9278,6 +9304,18 @@ func awsRestjson1_serializeDocumentCaCertificateSource(v types.CaCertificateSour
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCiCdConfiguration(v *types.CiCdConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
 	return nil
 }
 
@@ -10303,6 +10341,51 @@ func awsRestjson1_serializeDocumentS3BucketArns(v []string, value smithyjson.Val
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentScopeChange(v *types.ScopeChange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BaseCommitSha != nil {
+		ok := object.Key("baseCommitSha")
+		ok.String(*v.BaseCommitSha)
+	}
+
+	if v.HeadCommitSha != nil {
+		ok := object.Key("headCommitSha")
+		ok.String(*v.HeadCommitSha)
+	}
+
+	if v.IntegrationId != nil {
+		ok := object.Key("integrationId")
+		ok.String(*v.IntegrationId)
+	}
+
+	if v.ProviderResourceId != nil {
+		ok := object.Key("providerResourceId")
+		ok.String(*v.ProviderResourceId)
+	}
+
+	if v.TriggerRunId != nil {
+		ok := object.Key("triggerRunId")
+		ok.String(*v.TriggerRunId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentScopeChangeList(v []types.ScopeChange, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentScopeChange(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

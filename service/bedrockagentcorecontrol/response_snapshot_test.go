@@ -1395,6 +1395,7 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -1574,6 +1575,7 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -6124,6 +6126,7 @@ func TestCheckResponseSnapshot_GetGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -11307,6 +11310,7 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -11486,6 +11490,7 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),

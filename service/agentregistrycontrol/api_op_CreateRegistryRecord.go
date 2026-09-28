@@ -5,9 +5,11 @@ package agentregistrycontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/document"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/types"
 	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,16 +57,21 @@ type CreateRegistryRecordInput struct {
 	// Client token for idempotency
 	ClientToken *string
 
+	// The custom metadata to attach to the registry record. Each key must match a
+	// property defined in the registry's custom metadata schema. Values can be strings
+	// (maximum 128 characters) or native JSON booleans ( true or false ). Values are
+	// validated against the schema at creation time.
+	CustomMetadata document.Interface
+
 	// The description of the registry record
 	Description *string
 
 	// The human-readable display name of the registry record
 	DisplayName *string
 
-	// List of provenance entries on a registry record. Capped at one entry today: a
-	// record carries a single DETECTED_FROM lineage. Modeled as a list so additional
-	// relations can be unlocked post-GA by raising this bound without a breaking shape
-	// change.
+	// The provenance lineage entries for the registry record. This field is reserved
+	// for the Amazon Web Services Agent Registry auto-detection service principal.
+	// Requests that include this field from other callers are rejected.
 	Provenance []types.Provenance
 
 	// The version of the registry record
@@ -85,6 +92,9 @@ func (v *CreateRegistryRecordInput) Serialize(s smithy.ShapeSerializer) {
 func (v *CreateRegistryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateRegistryRecordRequest_clientToken, *v.ClientToken)
+	}
+	if v.CustomMetadata != nil {
+		s.WriteDocument(schemas.CreateRegistryRecordRequest_customMetadata, &smithydocument.Opaque{Value: v.CustomMetadata})
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateRegistryRecordRequest_description, *v.Description)

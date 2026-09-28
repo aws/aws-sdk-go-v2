@@ -19349,6 +19349,11 @@ func validateOpStartChatContactInput(v *StartChatContactInput) error {
 			invalidParams.AddNested("InitialMessage", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ChatStreamingConfiguration != nil {
+		if err := validateChatStreamingConfiguration(v.ChatStreamingConfiguration); err != nil {
+			invalidParams.AddNested("ChatStreamingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

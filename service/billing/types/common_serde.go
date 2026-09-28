@@ -150,6 +150,58 @@ func serializeBillingViewTypeList(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.CloseList()
 }
 
+func serializeBusinessSupportAccountChargeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []BusinessSupportAccountCharge) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBusinessSupportServiceSpendList(s smithy.ShapeSerializer, schema *smithy.Schema, v []BusinessSupportServiceSpend) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBusinessSupportSubscriptionContractList(s smithy.ShapeSerializer, schema *smithy.Schema, v []BusinessSupportSubscriptionContract) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBusinessSupportTierChargeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []BusinessSupportTierCharge) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeChargeAccountList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ChargeAccount) {
 	if v == nil {
 		return
@@ -536,6 +588,62 @@ func deserializeBillingViewTypeList(d smithy.ShapeDeserializer, s *smithy.Schema
 		}
 
 		*v = append(*v, BillingViewType(vv))
+		return nil
+	})
+}
+
+func deserializeBusinessSupportAccountChargeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BusinessSupportAccountCharge) error {
+	*v = make([]BusinessSupportAccountCharge, 0)
+	var vv BusinessSupportAccountCharge
+	return smithy.ReadList(d, s, func() error {
+		vv = BusinessSupportAccountCharge{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBusinessSupportServiceSpendList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BusinessSupportServiceSpend) error {
+	*v = make([]BusinessSupportServiceSpend, 0)
+	var vv BusinessSupportServiceSpend
+	return smithy.ReadList(d, s, func() error {
+		vv = BusinessSupportServiceSpend{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBusinessSupportSubscriptionContractList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BusinessSupportSubscriptionContract) error {
+	*v = make([]BusinessSupportSubscriptionContract, 0)
+	var vv BusinessSupportSubscriptionContract
+	return smithy.ReadList(d, s, func() error {
+		vv = BusinessSupportSubscriptionContract{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBusinessSupportTierChargeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BusinessSupportTierCharge) error {
+	*v = make([]BusinessSupportTierCharge, 0)
+	var vv BusinessSupportTierCharge
+	return smithy.ReadList(d, s, func() error {
+		vv = BusinessSupportTierCharge{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }

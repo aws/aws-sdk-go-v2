@@ -556,6 +556,29 @@ func (ConfigurableNotificationPriority) Values() []ConfigurableNotificationPrior
 	}
 }
 
+type ConnectionType string
+
+// Enum values for ConnectionType
+const (
+	ConnectionTypeWebsocket             ConnectionType = "WEBSOCKET"
+	ConnectionTypeConnectionCredentials ConnectionType = "CONNECTION_CREDENTIALS"
+	ConnectionTypeAuthenticationSession ConnectionType = "AUTHENTICATION_SESSION"
+	ConnectionTypeWebrtcConnection      ConnectionType = "WEBRTC_CONNECTION"
+)
+
+// Values returns all known values for ConnectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionType) Values() []ConnectionType {
+	return []ConnectionType{
+		"WEBSOCKET",
+		"CONNECTION_CREDENTIALS",
+		"AUTHENTICATION_SESSION",
+		"WEBRTC_CONNECTION",
+	}
+}
+
 type ContactEvaluationAttributeComparisonType string
 
 // Enum values for ContactEvaluationAttributeComparisonType

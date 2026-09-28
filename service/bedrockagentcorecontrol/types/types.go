@@ -5553,6 +5553,12 @@ type McpDescriptor struct {
 // defines how the gateway implements the MCP protocol.
 type MCPGatewayConfiguration struct {
 
+	// Specifies whether pagination is disabled for the Model Context Protocol (MCP)
+	// tools/list operation. When set to true , the gateway returns the complete list
+	// of tools in a single response without a pagination cursor. When set to false or
+	// omitted, the gateway returns tools in paginated responses.
+	DisableMcpListToolsPagination *bool
+
 	// The instructions for using the Model Context Protocol gateway. These
 	// instructions provide guidance on how to interact with the gateway.
 	Instructions *string

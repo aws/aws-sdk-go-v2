@@ -4547,9 +4547,10 @@ func TestCheckResponseSnapshot_CreateClientVpnEndpoint(t *testing.T) {
 			},
 		},
 		ConnectionLogOptions: &types.ConnectionLogOptions{
-			Enabled:             ptr.Bool(true),
-			CloudwatchLogGroup:  ptr.String("__CloudwatchLogGroup__"),
-			CloudwatchLogStream: ptr.String("__CloudwatchLogStream__"),
+			Enabled:                           ptr.Bool(true),
+			CloudwatchLogGroup:                ptr.String("__CloudwatchLogGroup__"),
+			CloudwatchLogStream:               ptr.String("__CloudwatchLogStream__"),
+			IncludeAuthorizationPolicyContext: ptr.Bool(true),
 		},
 		DnsServers: []string{
 			"__Member__",
@@ -4620,6 +4621,21 @@ func TestCheckResponseSnapshot_CreateClientVpnEndpoint(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+		},
+		DevicePostureOptions: &types.DevicePostureOptions{
+			TrustProviders: []types.ClientVpnTrustProviderRequest{
+				{
+					TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+					TenantId:            ptr.String("__TenantId__"),
+					PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+				},
+				{
+					TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+					TenantId:            ptr.String("__TenantId__"),
+					PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+				},
+			},
+			Enabled: ptr.Bool(true),
 		},
 	})
 	if err != nil {
@@ -17576,6 +17592,30 @@ func TestCheckResponseSnapshot_DeleteClientVpnEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	want := &DeleteClientVpnEndpointAuthorizationPolicyOutput{
+		Status: types.ClientVpnAuthorizationPolicyStatus("creating"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteClientVpnEndpointAuthorizationPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteClientVpnEndpointAuthorizationPolicy(context.Background(), &DeleteClientVpnEndpointAuthorizationPolicyInput{
+		ClientVpnEndpointId: ptr.String("__ClientVpnEndpointId__"),
+		DryRun:              ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteClientVpnEndpointAuthorizationPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteClientVpnRoute(t *testing.T) {
 	want := &DeleteClientVpnRouteOutput{
 		Status: &types.ClientVpnRouteStatus{
@@ -24077,6 +24117,7 @@ func TestCheckResponseSnapshot_DescribeClientVpnConnections(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				AuthorizationPolicyLastEvaluatedTime: ptr.String("__AuthorizationPolicyLastEvaluatedTime__"),
 			},
 			{
 				ClientVpnEndpointId:       ptr.String("__ClientVpnEndpointId__"),
@@ -24100,6 +24141,7 @@ func TestCheckResponseSnapshot_DescribeClientVpnConnections(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				AuthorizationPolicyLastEvaluatedTime: ptr.String("__AuthorizationPolicyLastEvaluatedTime__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -24204,9 +24246,10 @@ func TestCheckResponseSnapshot_DescribeClientVpnEndpoints(t *testing.T) {
 					},
 				},
 				ConnectionLogOptions: &types.ConnectionLogResponseOptions{
-					Enabled:             ptr.Bool(true),
-					CloudwatchLogGroup:  ptr.String("__CloudwatchLogGroup__"),
-					CloudwatchLogStream: ptr.String("__CloudwatchLogStream__"),
+					Enabled:                           ptr.Bool(true),
+					CloudwatchLogGroup:                ptr.String("__CloudwatchLogGroup__"),
+					CloudwatchLogStream:               ptr.String("__CloudwatchLogStream__"),
+					IncludeAuthorizationPolicyContext: ptr.Bool(true),
 				},
 				Tags: []types.Tag{
 					{
@@ -24253,6 +24296,20 @@ func TestCheckResponseSnapshot_DescribeClientVpnEndpoints(t *testing.T) {
 					AvailabilityZoneIds: []string{
 						"__Member__",
 						"__Member__",
+					},
+				},
+				DevicePostureOptions: &types.DevicePostureResponseOptions{
+					TrustProviders: []types.ClientVpnTrustProvider{
+						{
+							TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+							TenantId:            ptr.String("__TenantId__"),
+							PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+						},
+						{
+							TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+							TenantId:            ptr.String("__TenantId__"),
+							PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+						},
 					},
 				},
 			},
@@ -24315,9 +24372,10 @@ func TestCheckResponseSnapshot_DescribeClientVpnEndpoints(t *testing.T) {
 					},
 				},
 				ConnectionLogOptions: &types.ConnectionLogResponseOptions{
-					Enabled:             ptr.Bool(true),
-					CloudwatchLogGroup:  ptr.String("__CloudwatchLogGroup__"),
-					CloudwatchLogStream: ptr.String("__CloudwatchLogStream__"),
+					Enabled:                           ptr.Bool(true),
+					CloudwatchLogGroup:                ptr.String("__CloudwatchLogGroup__"),
+					CloudwatchLogStream:               ptr.String("__CloudwatchLogStream__"),
+					IncludeAuthorizationPolicyContext: ptr.Bool(true),
 				},
 				Tags: []types.Tag{
 					{
@@ -24364,6 +24422,20 @@ func TestCheckResponseSnapshot_DescribeClientVpnEndpoints(t *testing.T) {
 					AvailabilityZoneIds: []string{
 						"__Member__",
 						"__Member__",
+					},
+				},
+				DevicePostureOptions: &types.DevicePostureResponseOptions{
+					TrustProviders: []types.ClientVpnTrustProvider{
+						{
+							TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+							TenantId:            ptr.String("__TenantId__"),
+							PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+						},
+						{
+							TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+							TenantId:            ptr.String("__TenantId__"),
+							PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+						},
 					},
 				},
 			},
@@ -64616,6 +64688,34 @@ func TestCheckResponseSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	want := &GetClientVpnEndpointAuthorizationPolicyOutput{
+		ClientVpnEndpointId: ptr.String("__ClientVpnEndpointId__"),
+		PolicyDocument:      ptr.String("__PolicyDocument__"),
+		Description:         ptr.String("__Description__"),
+		ShadowMode:          types.ClientVpnAuthorizationPolicyShadowMode("enabled"),
+		Status:              types.ClientVpnAuthorizationPolicyStatus("creating"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetClientVpnEndpointAuthorizationPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetClientVpnEndpointAuthorizationPolicy(context.Background(), &GetClientVpnEndpointAuthorizationPolicyInput{
+		ClientVpnEndpointId: ptr.String("__ClientVpnEndpointId__"),
+		DryRun:              ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetClientVpnEndpointAuthorizationPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetCoipPoolUsage(t *testing.T) {
 	want := &GetCoipPoolUsageOutput{
 		CoipPoolId: ptr.String("__CoipPoolId__"),
@@ -74621,9 +74721,10 @@ func TestCheckResponseSnapshot_ModifyClientVpnEndpoint(t *testing.T) {
 		ClientVpnEndpointId:  ptr.String("__ClientVpnEndpointId__"),
 		ServerCertificateArn: ptr.String("__ServerCertificateArn__"),
 		ConnectionLogOptions: &types.ConnectionLogOptions{
-			Enabled:             ptr.Bool(true),
-			CloudwatchLogGroup:  ptr.String("__CloudwatchLogGroup__"),
-			CloudwatchLogStream: ptr.String("__CloudwatchLogStream__"),
+			Enabled:                           ptr.Bool(true),
+			CloudwatchLogGroup:                ptr.String("__CloudwatchLogGroup__"),
+			CloudwatchLogStream:               ptr.String("__CloudwatchLogStream__"),
+			IncludeAuthorizationPolicyContext: ptr.Bool(true),
 		},
 		DnsServers: &types.DnsServersOptionsModifyStructure{
 			CustomDnsServers: []string{
@@ -74666,12 +74767,55 @@ func TestCheckResponseSnapshot_ModifyClientVpnEndpoint(t *testing.T) {
 				"__Member__",
 			},
 		},
+		DevicePostureOptions: &types.DevicePostureOptions{
+			TrustProviders: []types.ClientVpnTrustProviderRequest{
+				{
+					TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+					TenantId:            ptr.String("__TenantId__"),
+					PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+				},
+				{
+					TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+					TenantId:            ptr.String("__TenantId__"),
+					PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+				},
+			},
+			Enabled: ptr.Bool(true),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ModifyClientVpnEndpoint.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ModifyClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	want := &ModifyClientVpnEndpointAuthorizationPolicyOutput{
+		Status: types.ClientVpnAuthorizationPolicyStatus("creating"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ModifyClientVpnEndpointAuthorizationPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ModifyClientVpnEndpointAuthorizationPolicy(context.Background(), &ModifyClientVpnEndpointAuthorizationPolicyInput{
+		ClientVpnEndpointId: ptr.String("__ClientVpnEndpointId__"),
+		PolicyDocument:      ptr.String("__PolicyDocument__"),
+		Description:         ptr.String("__Description__"),
+		ShadowMode:          types.ClientVpnAuthorizationPolicyShadowMode("enabled"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		DryRun:              ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ModifyClientVpnEndpointAuthorizationPolicy.response", err)
 	}
 }
 

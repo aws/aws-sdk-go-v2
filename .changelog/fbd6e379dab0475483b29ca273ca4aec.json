@@ -1,0 +1,8 @@
+{
+    "id": "fbd6e379-dab0-4754-83b2-9ca273ca4aec",
+    "type": "feature",
+    "description": "AWS Agent Registry adds support for custom metadata. Discovery APIs now return custom metadata on registry records and support filtering by metadata fields. Semantic search includes custom metadata for improved relevance. Filter customMetadata fields using eq, ne, and in operators.",
+    "modules": [
+        "service/agentregistry"
+    ]
+}

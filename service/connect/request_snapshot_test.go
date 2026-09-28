@@ -13500,6 +13500,13 @@ func TestCheckRequestSnapshot_StartChatContact(t *testing.T) {
 			types.DisconnectOnCustomerExitParticipantType("AGENT"),
 			types.DisconnectOnCustomerExitParticipantType("AGENT"),
 		},
+		ConnectionTypes: []types.ConnectionType{
+			types.ConnectionType("WEBSOCKET"),
+			types.ConnectionType("WEBSOCKET"),
+		},
+		ChatStreamingConfiguration: &types.ChatStreamingConfiguration{
+			StreamingEndpointArn: ptr.String("__StreamingEndpointArn__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -31790,6 +31797,13 @@ func TestUpdateRequestSnapshot_StartChatContact(t *testing.T) {
 		DisconnectOnCustomerExit: []types.DisconnectOnCustomerExitParticipantType{
 			types.DisconnectOnCustomerExitParticipantType("AGENT"),
 			types.DisconnectOnCustomerExitParticipantType("AGENT"),
+		},
+		ConnectionTypes: []types.ConnectionType{
+			types.ConnectionType("WEBSOCKET"),
+			types.ConnectionType("WEBSOCKET"),
+		},
+		ChatStreamingConfiguration: &types.ChatStreamingConfiguration{
+			StreamingEndpointArn: ptr.String("__StreamingEndpointArn__"),
 		},
 	}
 	body := &bytes.Buffer{}

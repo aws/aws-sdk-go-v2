@@ -4538,6 +4538,14 @@ var ConflictException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
+var ConnectionCredentials = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ConnectionCredentials",
+}, smithy.ShapeTypeStructure, 2)
+var ConnectionCredentials_ConnectionToken *smithy.Schema
+
+var ConnectionCredentials_Expiry *smithy.Schema
+
 var ConnectionData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ConnectionData",
@@ -4545,6 +4553,24 @@ var ConnectionData = smithy.NewSchema(smithy.ShapeID{
 var ConnectionData_Attendee *smithy.Schema
 
 var ConnectionData_Meeting *smithy.Schema
+
+var ConnectionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ConnectionType",
+}, smithy.ShapeTypeEnum, 4)
+var ConnectionType_WEBSOCKET *smithy.Schema
+
+var ConnectionType_CONNECTION_CREDENTIALS *smithy.Schema
+
+var ConnectionType_AUTHENTICATION_SESSION *smithy.Schema
+
+var ConnectionType_WEBRTC_CONNECTION *smithy.Schema
+
+var _ConnectionTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ConnectionTypeList",
+}, smithy.ShapeTypeList, 1)
+var _ConnectionTypeList_member *smithy.Schema
 
 var Contact = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -12233,6 +12259,11 @@ var _PreSignedAttachmentUrl = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PreSignedAttachmentUrl",
 }, smithy.ShapeTypeString, 0)
 
+var _PreSignedConnectionUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "PreSignedConnectionUrl",
+}, smithy.ShapeTypeString, 0)
+
 var Preview = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "Preview",
@@ -16760,6 +16791,14 @@ var _WebSessionId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "WebSessionId",
 }, smithy.ShapeTypeString, 0)
+
+var Websocket = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "Websocket",
+}, smithy.ShapeTypeStructure, 2)
+var Websocket_Url *smithy.Schema
+
+var Websocket_ConnectionExpiry *smithy.Schema
 
 var _WeekdayOccurrenceInteger = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -22757,7 +22796,7 @@ var StartAttachedFileUploadResponse_UploadUrlMetadata *smithy.Schema
 var StartChatContactRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "StartChatContactRequest",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 16)
 var StartChatContactRequest_InstanceId *smithy.Schema
 
 var StartChatContactRequest_ContactFlowId *smithy.Schema
@@ -22786,10 +22825,14 @@ var StartChatContactRequest_CustomerId *smithy.Schema
 
 var StartChatContactRequest_DisconnectOnCustomerExit *smithy.Schema
 
+var StartChatContactRequest_ConnectionTypes *smithy.Schema
+
+var StartChatContactRequest_ChatStreamingConfiguration *smithy.Schema
+
 var StartChatContactResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "StartChatContactResponse",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 7)
 var StartChatContactResponse_ContactId *smithy.Schema
 
 var StartChatContactResponse_ParticipantId *smithy.Schema
@@ -22797,6 +22840,12 @@ var StartChatContactResponse_ParticipantId *smithy.Schema
 var StartChatContactResponse_ParticipantToken *smithy.Schema
 
 var StartChatContactResponse_ContinuedFromContactId *smithy.Schema
+
+var StartChatContactResponse_ConnectionCredentials *smithy.Schema
+
+var StartChatContactResponse_Websocket *smithy.Schema
+
+var StartChatContactResponse_StreamingId *smithy.Schema
 
 var StartContactConversationalAnalyticsJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -26332,6 +26381,10 @@ func init() {
 
 	ConflictException_Message = ConflictException.AddMember("Message", _Message)
 
+	ConnectionCredentials_ConnectionToken = ConnectionCredentials.AddMember("ConnectionToken", _ParticipantToken)
+
+	ConnectionCredentials_Expiry = ConnectionCredentials.AddMember("Expiry", _ISO8601Datetime)
+
 	MediaPlacement_AudioHostUrl = MediaPlacement.AddMember("AudioHostUrl", _URI)
 
 	MediaPlacement_AudioFallbackUrl = MediaPlacement.AddMember("AudioFallbackUrl", _URI)
@@ -26355,6 +26408,16 @@ func init() {
 	ConnectionData_Attendee = ConnectionData.AddMember("Attendee", Attendee)
 
 	ConnectionData_Meeting = ConnectionData.AddMember("Meeting", Meeting)
+
+	ConnectionType_WEBSOCKET = ConnectionType.AddMember("WEBSOCKET", smithyprelude.Unit)
+
+	ConnectionType_CONNECTION_CREDENTIALS = ConnectionType.AddMember("CONNECTION_CREDENTIALS", smithyprelude.Unit)
+
+	ConnectionType_AUTHENTICATION_SESSION = ConnectionType.AddMember("AUTHENTICATION_SESSION", smithyprelude.Unit)
+
+	ConnectionType_WEBRTC_CONNECTION = ConnectionType.AddMember("WEBRTC_CONNECTION", smithyprelude.Unit)
+
+	_ConnectionTypeList_member = _ConnectionTypeList.AddMember("member", ConnectionType)
 
 	QueueInfo_Id = QueueInfo.AddMember("Id", _QueueId)
 
@@ -31644,6 +31707,10 @@ func init() {
 
 	WebNotificationSource_SourceCampaign = WebNotificationSource.AddMember("SourceCampaign", SourceCampaign)
 
+	Websocket_Url = Websocket.AddMember("Url", _PreSignedConnectionUrl)
+
+	Websocket_ConnectionExpiry = Websocket.AddMember("ConnectionExpiry", _ISO8601Datetime)
+
 	WidgetDestination_WidgetId = WidgetDestination.AddMember("WidgetId", _WidgetId)
 
 	WidgetDestination_ProfileId = WidgetDestination.AddMember("ProfileId", _CustomerProfileId)
@@ -35190,6 +35257,10 @@ func init() {
 
 	StartChatContactRequest_DisconnectOnCustomerExit = StartChatContactRequest.AddMember("DisconnectOnCustomerExit", _DisconnectOnCustomerExit)
 
+	StartChatContactRequest_ConnectionTypes = StartChatContactRequest.AddMember("ConnectionTypes", _ConnectionTypeList)
+
+	StartChatContactRequest_ChatStreamingConfiguration = StartChatContactRequest.AddMember("ChatStreamingConfiguration", ChatStreamingConfiguration)
+
 	StartChatContactResponse_ContactId = StartChatContactResponse.AddMember("ContactId", _ContactId)
 
 	StartChatContactResponse_ParticipantId = StartChatContactResponse.AddMember("ParticipantId", _ParticipantId)
@@ -35197,6 +35268,12 @@ func init() {
 	StartChatContactResponse_ParticipantToken = StartChatContactResponse.AddMember("ParticipantToken", _ParticipantToken)
 
 	StartChatContactResponse_ContinuedFromContactId = StartChatContactResponse.AddMember("ContinuedFromContactId", _ContactId)
+
+	StartChatContactResponse_ConnectionCredentials = StartChatContactResponse.AddMember("ConnectionCredentials", ConnectionCredentials)
+
+	StartChatContactResponse_Websocket = StartChatContactResponse.AddMember("Websocket", Websocket)
+
+	StartChatContactResponse_StreamingId = StartChatContactResponse.AddMember("StreamingId", _StreamingId)
 
 	StartContactConversationalAnalyticsJobRequest_InstanceId = StartContactConversationalAnalyticsJobRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
 

@@ -4646,6 +4646,11 @@ func awsRestjson1_deserializeOpDocumentCreatePentestOutput(v **CreatePentestOutp
 				return err
 			}
 
+		case "cicdConfiguration":
+			if err := awsRestjson1_deserializeDocumentCiCdConfiguration(&sv.CicdConfiguration, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14680,6 +14685,11 @@ func awsRestjson1_deserializeOpDocumentUpdatePentestOutput(v **UpdatePentestOutp
 				return err
 			}
 
+		case "cicdConfiguration":
+			if err := awsRestjson1_deserializeDocumentCiCdConfiguration(&sv.CicdConfiguration, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18182,6 +18192,46 @@ func awsRestjson1_deserializeDocumentCategoryList(v *[]types.Category, value int
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCiCdConfiguration(v **types.CiCdConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CiCdConfiguration
+	if *v == nil {
+		sv = &types.CiCdConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -22574,6 +22624,11 @@ func awsRestjson1_deserializeDocumentPentest(v **types.Pentest, value interface{
 				return err
 			}
 
+		case "cicdConfiguration":
+			if err := awsRestjson1_deserializeDocumentCiCdConfiguration(&sv.CicdConfiguration, value); err != nil {
+				return err
+			}
+
 		case "cleanUpStrategy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22791,6 +22846,11 @@ func awsRestjson1_deserializeDocumentPentestJob(v **types.PentestJob, value inte
 				return err
 			}
 
+		case "cicdConfiguration":
+			if err := awsRestjson1_deserializeDocumentCiCdConfiguration(&sv.CicdConfiguration, value); err != nil {
+				return err
+			}
+
 		case "cleanUpStrategy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22944,6 +23004,25 @@ func awsRestjson1_deserializeDocumentPentestJob(v **types.PentestJob, value inte
 
 		case "reportDestination":
 			if err := awsRestjson1_deserializeDocumentReportDestination(&sv.ReportDestination, value); err != nil {
+				return err
+			}
+
+		case "reportUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ReportUrl = ptr.String(jtv)
+			}
+
+		case "scopeChanges":
+			if err := awsRestjson1_deserializeDocumentScopeChangeList(&sv.ScopeChanges, value); err != nil {
+				return err
+			}
+
+		case "scopeResult":
+			if err := awsRestjson1_deserializeDocumentScopeResult(&sv.ScopeResult, value); err != nil {
 				return err
 			}
 
@@ -23126,6 +23205,15 @@ func awsRestjson1_deserializeDocumentPentestJobSummary(v **types.PentestJobSumma
 				sv.CreatedAt = ptr.Time(t)
 			}
 
+		case "jobType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobType to be of type string, got %T instead", value)
+				}
+				sv.JobType = types.JobType(jtv)
+			}
+
 		case "pentestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23142,6 +23230,15 @@ func awsRestjson1_deserializeDocumentPentestJobSummary(v **types.PentestJobSumma
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.PentestJobId = ptr.String(jtv)
+			}
+
+		case "reportUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ReportUrl = ptr.String(jtv)
 			}
 
 		case "status":
@@ -23967,6 +24064,165 @@ func awsRestjson1_deserializeDocumentS3BucketArns(v *[]string, value interface{}
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScopeChange(v **types.ScopeChange, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScopeChange
+	if *v == nil {
+		sv = &types.ScopeChange{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "baseCommitSha":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.BaseCommitSha = ptr.String(jtv)
+			}
+
+		case "headCommitSha":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.HeadCommitSha = ptr.String(jtv)
+			}
+
+		case "integrationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.IntegrationId = ptr.String(jtv)
+			}
+
+		case "providerResourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ProviderResourceId = ptr.String(jtv)
+			}
+
+		case "triggerRunId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TriggerRunId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScopeChangeList(v *[]types.ScopeChange, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ScopeChange
+	if *v == nil {
+		cv = []types.ScopeChange{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ScopeChange
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentScopeChange(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScopeResult(v **types.ScopeResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScopeResult
+	if *v == nil {
+		sv = &types.ScopeResult{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "decision":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScopeDecision to be of type string, got %T instead", value)
+				}
+				sv.Decision = types.ScopeDecision(jtv)
+			}
+
+		case "reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Reason = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

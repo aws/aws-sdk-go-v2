@@ -1,0 +1,8 @@
+{
+    "id": "842c481a-28ef-4597-a6a0-6c4806412472",
+    "type": "feature",
+    "description": "Run automated penetration tests directly from your CI-CD pipeline to scan code changes before they ship, gating deployments on the findings",
+    "modules": [
+        "service/securityagent"
+    ]
+}

@@ -15440,6 +15440,15 @@ func TestUpdateResponseSnapshot_StartChatContact(t *testing.T) {
 		ParticipantId:          ptr.String("__ParticipantId__"),
 		ParticipantToken:       ptr.String("__ParticipantToken__"),
 		ContinuedFromContactId: ptr.String("__ContinuedFromContactId__"),
+		ConnectionCredentials: &types.ConnectionCredentials{
+			ConnectionToken: ptr.String("__ConnectionToken__"),
+			Expiry:          ptr.String("__Expiry__"),
+		},
+		Websocket: &types.Websocket{
+			Url:              ptr.String("__Url__"),
+			ConnectionExpiry: ptr.String("__ConnectionExpiry__"),
+		},
+		StreamingId: ptr.String("__StreamingId__"),
 	}
 	proto := restjson1.New(schemas.AmazonConnectService)
 	opSchema := smithy.NewOperationSchema(schemas.StartChatContact, schemas.StartChatContactResponse, schemas.StartChatContactResponse)

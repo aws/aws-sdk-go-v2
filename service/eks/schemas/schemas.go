@@ -872,7 +872,7 @@ var ArgoCdAwsIdcConfigResponse_idcManagedApplicationArn *smithy.Schema
 var ArgoCdConfigRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "ArgoCdConfigRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var ArgoCdConfigRequest_namespace *smithy.Schema
 
 var ArgoCdConfigRequest_awsIdc *smithy.Schema
@@ -881,10 +881,12 @@ var ArgoCdConfigRequest_rbacRoleMappings *smithy.Schema
 
 var ArgoCdConfigRequest_networkAccess *smithy.Schema
 
+var ArgoCdConfigRequest_endpointPrefix *smithy.Schema
+
 var ArgoCdConfigResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "ArgoCdConfigResponse",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var ArgoCdConfigResponse_namespace *smithy.Schema
 
 var ArgoCdConfigResponse_awsIdc *smithy.Schema
@@ -894,6 +896,13 @@ var ArgoCdConfigResponse_rbacRoleMappings *smithy.Schema
 var ArgoCdConfigResponse_networkAccess *smithy.Schema
 
 var ArgoCdConfigResponse_serverUrl *smithy.Schema
+
+var ArgoCdConfigResponse_endpointPrefix *smithy.Schema
+
+var _ArgoCdEndpointPrefix = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eks",
+	Name:      "ArgoCdEndpointPrefix",
+}, smithy.ShapeTypeString, 0)
 
 var ArgoCdNetworkAccessConfigRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
@@ -5349,6 +5358,8 @@ func init() {
 
 	ArgoCdConfigRequest_networkAccess = ArgoCdConfigRequest.AddMember("networkAccess", ArgoCdNetworkAccessConfigRequest)
 
+	ArgoCdConfigRequest_endpointPrefix = ArgoCdConfigRequest.AddMember("endpointPrefix", _ArgoCdEndpointPrefix)
+
 	ArgoCdNetworkAccessConfigResponse_vpceIds = ArgoCdNetworkAccessConfigResponse.AddMember("vpceIds", _StringList)
 
 	ArgoCdConfigResponse_namespace = ArgoCdConfigResponse.AddMember("namespace", _String)
@@ -5360,6 +5371,8 @@ func init() {
 	ArgoCdConfigResponse_networkAccess = ArgoCdConfigResponse.AddMember("networkAccess", ArgoCdNetworkAccessConfigResponse)
 
 	ArgoCdConfigResponse_serverUrl = ArgoCdConfigResponse.AddMember("serverUrl", _String)
+
+	ArgoCdConfigResponse_endpointPrefix = ArgoCdConfigResponse.AddMember("endpointPrefix", _ArgoCdEndpointPrefix)
 
 	AssociatedAccessPolicy_policyArn = AssociatedAccessPolicy.AddMember("policyArn", _String)
 

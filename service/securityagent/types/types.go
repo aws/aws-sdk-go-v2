@@ -514,6 +514,16 @@ type Category struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration that enables a pentest to run as part of a CI/CD pipeline,
+// scoped to the code changes in each pipeline run.
+type CiCdConfiguration struct {
+
+	// Whether CI/CD pentesting is enabled for this pentest.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon CloudWatch Logs configuration for pentest job logging.
 type CloudWatchLog struct {
 
@@ -1923,6 +1933,10 @@ type Pentest struct {
 	// This member is required.
 	Title *string
 
+	// The CI/CD pentesting configuration for this pentest. Present when the pentest
+	// is set up to run from a CI/CD pipeline.
+	CicdConfiguration *CiCdConfiguration
+
 	// Strategy for cleaning up resources after pentest job completion.
 	CleanUpStrategy CleanUpStrategy
 
@@ -1979,6 +1993,10 @@ type PentestJob struct {
 	// The list of domains allowed during the pentest job.
 	AllowedDomains []Endpoint
 
+	// The configuration that enables a pentest to run as part of a CI/CD pipeline,
+	// scoped to the code changes in each pipeline run.
+	CicdConfiguration *CiCdConfiguration
+
 	// Strategy for cleaning up resources after pentest job completion.
 	CleanUpStrategy CleanUpStrategy
 
@@ -2013,7 +2031,7 @@ type PentestJob struct {
 	// The list of integrated repositories associated with the pentest job.
 	IntegratedRepositories []IntegratedRepository
 
-	// The type of the pentest job. Valid values are FULL and REVALIDATION.
+	// The type of the pentest job. Valid values are FULL, REVALIDATION, and CICD.
 	JobType JobType
 
 	// The CloudWatch Logs configuration for the pentest job.
@@ -2037,6 +2055,17 @@ type PentestJob struct {
 
 	// The destination for publishing scan reports to an integrated document provider.
 	ReportDestination *ReportDestination
+
+	// The URL to view this pentest job's findings report in the console.
+	ReportUrl *string
+
+	// The code changes that defined the scope of this CI/CD pentest job. Present only
+	// for jobs of type CICD.
+	ScopeChanges []ScopeChange
+
+	// The scoping outcome for this CI/CD pentest job. Present only for jobs of type
+	// CICD.
+	ScopeResult *ScopeResult
 
 	// The list of finding identifiers selected for revalidation. Present only when
 	// jobType is REVALIDATION.
@@ -2085,6 +2114,12 @@ type PentestJobSummary struct {
 
 	// The date and time the pentest job was created, in UTC format.
 	CreatedAt *time.Time
+
+	// The type of the pentest job. Valid values are FULL, REVALIDATION, and CICD.
+	JobType JobType
+
+	// The URL to view this pentest job's findings report in the console.
+	ReportUrl *string
 
 	// The current status of the pentest job.
 	Status JobStatus
@@ -2350,6 +2385,54 @@ type ReportFilters struct {
 
 	// The task execution statuses to include in the report's task table.
 	TaskStatuses []TaskExecutionStatus
+
+	noSmithyDocumentSerde
+}
+
+// A code change in a CI/CD pipeline run that defines what a CI/CD pentest job
+// tests. Each scope change identifies an integrated repository and the commit
+// range for the change.
+type ScopeChange struct {
+
+	// The commit SHA at the tip of the change to be tested.
+	//
+	// This member is required.
+	HeadCommitSha *string
+
+	// The identifier of the integration for the source-code provider that hosts the
+	// repository.
+	//
+	// This member is required.
+	IntegrationId *string
+
+	// The provider-specific identifier of the repository the change belongs to.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// The commit SHA that the change is compared against. When omitted, the change is
+	// evaluated against the head commit alone.
+	BaseCommitSha *string
+
+	// The identifier of the CI/CD pipeline run that triggered this pentest job.
+	TriggerRunId *string
+
+	noSmithyDocumentSerde
+}
+
+// The outcome of scoping a CI/CD pentest job's code changes, including the
+// decision and the reason for it.
+type ScopeResult struct {
+
+	// The scoping decision for the job's code changes.
+	//
+	// This member is required.
+	Decision ScopeDecision
+
+	// A human-readable explanation of the scoping decision.
+	//
+	// This member is required.
+	Reason *string
 
 	noSmithyDocumentSerde
 }

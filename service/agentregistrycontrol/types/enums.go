@@ -118,6 +118,26 @@ func (ClaimMatchOperatorType) Values() []ClaimMatchOperatorType {
 	}
 }
 
+type CustomMetadataSchemaComplianceStatus string
+
+// Enum values for CustomMetadataSchemaComplianceStatus
+const (
+	CustomMetadataSchemaComplianceStatusCompliant    CustomMetadataSchemaComplianceStatus = "COMPLIANT"
+	CustomMetadataSchemaComplianceStatusNonCompliant CustomMetadataSchemaComplianceStatus = "NON_COMPLIANT"
+)
+
+// Values returns all known values for CustomMetadataSchemaComplianceStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomMetadataSchemaComplianceStatus) Values() []CustomMetadataSchemaComplianceStatus {
+	return []CustomMetadataSchemaComplianceStatus{
+		"COMPLIANT",
+		"NON_COMPLIANT",
+	}
+}
+
 type EndpointIpAddressType string
 
 // Enum values for EndpointIpAddressType

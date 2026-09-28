@@ -2210,6 +2210,18 @@ func TestCheckSnapshot_DeleteClientVpnEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteClientVpnEndpointAuthorizationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteClientVpnRoute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteClientVpnRoute(context.Background(), nil, func(o *Options) {
@@ -6794,6 +6806,18 @@ func TestCheckSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetClientVpnEndpointAuthorizationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCoipPoolUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCoipPoolUsage(context.Background(), nil, func(o *Options) {
@@ -7795,6 +7819,18 @@ func TestCheckSnapshot_ModifyClientVpnEndpoint(t *testing.T) {
 	_, err := svc.ModifyClientVpnEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyClientVpnEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyClientVpnEndpointAuthorizationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -11850,6 +11886,18 @@ func TestUpdateSnapshot_DeleteClientVpnEndpoint(t *testing.T) {
 	_, err := svc.DeleteClientVpnEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteClientVpnEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteClientVpnEndpointAuthorizationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -16441,6 +16489,18 @@ func TestUpdateSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetClientVpnEndpointAuthorizationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCoipPoolUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCoipPoolUsage(context.Background(), nil, func(o *Options) {
@@ -17442,6 +17502,18 @@ func TestUpdateSnapshot_ModifyClientVpnEndpoint(t *testing.T) {
 	_, err := svc.ModifyClientVpnEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyClientVpnEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyClientVpnEndpointAuthorizationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
