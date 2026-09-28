@@ -210,7 +210,7 @@ type outChunk struct {
 }
 
 func (r *concurrentReader) read(p []byte) (int, error) {
-	if cap(p) == 0 {
+	if len(p) == 0 {
 		return 0, nil
 	}
 
@@ -360,7 +360,7 @@ func (r *concurrentReader) rangeRead(p []byte) (int, error) {
 
 	partSize := r.partSize
 	minIndex := int32(r.written / partSize)
-	maxIndex := min(int32((r.written+int64(cap(p))-1)/partSize), atomic.LoadInt32(&r.capacity)-1)
+	maxIndex := min(int32((r.written+int64(len(p))-1)/partSize), atomic.LoadInt32(&r.capacity)-1)
 	for i := minIndex; i <= maxIndex; i++ {
 		if e := r.getErr(); e != nil && e != io.EOF {
 			r.clean()
@@ -407,7 +407,7 @@ func (r *concurrentReader) rangeRead(p []byte) (int, error) {
 
 		index := r.partSize*int64(oc.index) - r.written
 
-		if index < int64(cap(p)) {
+		if index < int64(len(p)) {
 			n, err := oc.body.Read(p[index:])
 			oc.cur += int64(n)
 			written += n

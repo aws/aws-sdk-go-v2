@@ -1,0 +1,8 @@
+{
+    "id": "891e2645-9bd9-4f7b-9c5d-a4571ef3876e",
+    "type": "bugfix",
+    "description": "Fix the concurrent reader panic when buffer len is smaller than capacity",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
