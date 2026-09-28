@@ -381,6 +381,7 @@ var ErrReaderFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInpu
 		ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", 0, r.Len-1, r.Len)),
 		ContentLength: aws.Int64(r.Len),
 		PartsCount:    aws.Int32(c.PartsCount),
+		ETag:          aws.String(etag),
 	}
 	c.index++
 	return out, nil
