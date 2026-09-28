@@ -69,6 +69,7 @@ func BuildAuthToken(ctx context.Context, endpoint, region, dbUser string, creds 
 	if err != nil {
 		return "", err
 	}
+	req.URL.Path = "/"
 	values := req.URL.Query()
 	values.Set("Action", "connect")
 	values.Set("DBUser", dbUser)
