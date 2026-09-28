@@ -22,13 +22,13 @@ func TestBuildAuthToken(t *testing.T) {
 			endpoint:      "https://prod-instance.us-east-1.rds.amazonaws.com:3306",
 			region:        "us-west-2",
 			user:          "mysqlUser",
-			expectedRegex: `^prod-instance\.us-east-1\.rds\.amazonaws\.com:3306\?Action=connect.*?DBUser=mysqlUser.*`,
+			expectedRegex: `^prod-instance\.us-east-1\.rds\.amazonaws\.com:3306/\?Action=connect.*?DBUser=mysqlUser.*`,
 		},
 		{
 			endpoint:      "prod-instance.us-east-1.rds.amazonaws.com:3306",
 			region:        "us-west-2",
 			user:          "mysqlUser",
-			expectedRegex: `^prod-instance\.us-east-1\.rds\.amazonaws\.com:3306\?Action=connect.*?DBUser=mysqlUser.*`,
+			expectedRegex: `^prod-instance\.us-east-1\.rds\.amazonaws\.com:3306/\?Action=connect.*?DBUser=mysqlUser.*`,
 		},
 		{
 			endpoint:      "prod-instance.us-east-1.rds.amazonaws.com",
