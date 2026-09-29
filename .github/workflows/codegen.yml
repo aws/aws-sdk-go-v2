@@ -11,8 +11,13 @@ permissions:
   contents: read
 
 env:
-  # get owner of the repository. used by forks.
-  SMITHY_GO_REPOSITORY: ${{ github.event.pull_request.head.repo.owner.login }}/smithy-go
+  # smithy-go is always cloned from the canonical, public aws/smithy-go
+  # repository. We never clone or build smithy-go from a fork, so untrusted PR
+  # code never executes in this job. Which branch/ref of canonical is used
+  # depends on trust: trusted PRs/pushes (see TRUST_BRANCH_MATCH below) may
+  # honor a matching-named branch for co-development, while fork PRs always use
+  # the pinned SMITHY_GO_CODEGEN_VERSION.
+  SMITHY_GO_REPOSITORY: aws/smithy-go
 
 jobs:
   codegen-test:
@@ -28,6 +33,31 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
+
+    # Decide whether to honor a matching-named branch in aws/smithy-go for
+    # co-development. Maintainers push branches directly to aws/aws-sdk-go-v2
+    # (not forks), so a non-fork PR head means the author has write access and
+    # is trusted. For those, ci-find-smithy-go.sh looks for a same-named branch
+    # in canonical aws/smithy-go. External fork PRs skip that search and always
+    # use the pinned SMITHY_GO_CODEGEN_VERSION. Either way the repo is canonical
+    # aws/smithy-go, so this only gates branch matching, never code provenance.
+    - name: Determine smithy-go branch trust
+      shell: bash
+      env:
+        HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+        BASE_REPO: ${{ github.repository }}
+      run: |
+        if [ "${{ github.event_name }}" != "pull_request" ]; then
+          # push to main (or non-PR event): trusted
+          echo "TRUST_BRANCH_MATCH=true" >> "$GITHUB_ENV"
+        elif [ -n "$HEAD_REPO" ] && [ "$HEAD_REPO" = "$BASE_REPO" ]; then
+          echo "PR head is on $BASE_REPO (non-fork): honoring matching smithy-go branch"
+          echo "TRUST_BRANCH_MATCH=true" >> "$GITHUB_ENV"
+        else
+          echo "PR head is a fork ($HEAD_REPO): using pinned canonical smithy-go only"
+          echo "TRUST_BRANCH_MATCH=false" >> "$GITHUB_ENV"
+        fi
+
 
     - name: Download Coretto 17 JDK
       run: |
@@ -50,6 +80,7 @@ jobs:
       shell: bash
       env:
         RUNNER_TMPDIR: ${{ runner.temp }}
+        TRUST_BRANCH_MATCH: ${{ env.TRUST_BRANCH_MATCH }}
       run: ./ci-find-smithy-go.sh
 
     - name: Build and publish smithy-go

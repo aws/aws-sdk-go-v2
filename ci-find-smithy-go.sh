@@ -21,6 +21,20 @@ if [ -z "$RUNNER_TMPDIR" ]; then
     exit 1
 fi
 
+# TRUST_BRANCH_MATCH gates whether we honor a same-named branch in smithy-go for
+# co-development. It is set upstream in codegen.yml: true for pushes to main and
+# non-fork PRs (author has write access to canonical, so is trusted), false for
+# fork PRs. When not trusted, skip branch matching entirely and check out the
+# pinned canonical smithy-go, matching what prod codegen uses. Default to the
+# untrusted path when unset so a missing value never widens trust.
+if [ "$TRUST_BRANCH_MATCH" != "true" ]; then
+    codegen_version=$(tr -d '[:space:]' < SMITHY_GO_CODEGEN_VERSION)
+    echo "branch matching not trusted; checking out canonical smithy-go at SMITHY_GO_CODEGEN_VERSION=${codegen_version}"
+    git clone https://github.com/aws/smithy-go "$RUNNER_TMPDIR"/smithy-go
+    git -C "$RUNNER_TMPDIR"/smithy-go checkout "$codegen_version"
+    exit 0
+fi
+
 if [ -n "$GIT_PAT" ]; then
     repository=https://$GIT_PAT@github.com/$SMITHY_GO_REPOSITORY
 else
@@ -40,11 +54,10 @@ if [ -z "$branch" ]; then
     branch=$GITHUB_HEAD_REF
 fi
 
-echo on branch \"$branch\"
+echo on branch \""$branch"\"
 while [ -n "$branch" ] && [[ "$branch" == *-* ]]; do
     echo looking for "$branch"...
-    git ls-remote --exit-code --heads "$repository" refs/heads/"$branch"
-    if [ "$?" == 0 ]; then
+    if git ls-remote --exit-code --heads "$repository" refs/heads/"$branch"; then
         echo found "$branch"
         matched_branch=$branch
         break
@@ -57,8 +70,11 @@ if [ -z "$matched_branch" ]; then
     # default to SMITHY_GO_CODEGEN_VERSION so CI uses the same smithy-go as prod
     # strip any trailing whitespace/newlines that editors may add to the file
     codegen_version=$(tr -d '[:space:]' < SMITHY_GO_CODEGEN_VERSION)
-    echo "no matching branch, checking out smithy-go at SMITHY_GO_CODEGEN_VERSION=${codegen_version}"
-    git clone "$repository" "$RUNNER_TMPDIR"/smithy-go
+    echo "no matching branch, checking out canonical smithy-go at SMITHY_GO_CODEGEN_VERSION=${codegen_version}"
+    # Always clone canonical, public aws/smithy-go here rather than $repository:
+    # the pinned codegen commit only exists upstream, and $repository may point
+    # at a fork with no smithy-go repo (or no matching branch).
+    git clone https://github.com/aws/smithy-go "$RUNNER_TMPDIR"/smithy-go
     git -C "$RUNNER_TMPDIR"/smithy-go checkout "$codegen_version"
     exit 0
 fi
