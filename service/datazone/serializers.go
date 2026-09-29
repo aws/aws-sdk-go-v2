@@ -2866,6 +2866,11 @@ func awsRestjson1_serializeOpDocumentCreateEnvironmentBlueprintInput(v *CreateEn
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.BlueprintCategory) > 0 {
+		ok := object.Key("blueprintCategory")
+		ok.String(string(v.BlueprintCategory))
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -17808,6 +17813,11 @@ func awsRestjson1_serializeOpDocumentUpdateEnvironmentBlueprintInput(v *UpdateEn
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.BlueprintCategory) > 0 {
+		ok := object.Key("blueprintCategory")
+		ok.String(string(v.BlueprintCategory))
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -21905,6 +21915,11 @@ func awsRestjson1_serializeDocumentIamPropertiesInput(v *types.IamPropertiesInpu
 	if v.GlueLineageSyncEnabled != nil {
 		ok := object.Key("glueLineageSyncEnabled")
 		ok.Boolean(*v.GlueLineageSyncEnabled)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
 	}
 
 	return nil

@@ -1,0 +1,5 @@
+PATCH /rules/__RuleIdentifier__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","configuration":"__Document__","isPublished":true,"ruleDescription":"__RuleDescription__","ruleType":"CONFIGURATION","updateToken":"__UpdateToken__"}

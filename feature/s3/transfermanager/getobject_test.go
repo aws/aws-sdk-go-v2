@@ -267,6 +267,26 @@ func TestGetObject(t *testing.T) {
 			expectInvocations: 2,
 			expectReadErr:     "PreconditionFailed",
 		},
+		"part download with resp range start mismatch error": {
+			data:        buf20MB,
+			getObjectFn: s3testing.WrongPartRangeStartGetObjectFn,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
+			},
+			partsCount:        3,
+			expectInvocations: 2,
+			expectReadErr:     "range mismatch between computed start position",
+		},
+		"part download with resp range end mismatch error": {
+			data:        buf20MB,
+			getObjectFn: s3testing.WrongPartRangeEndGetObjectFn,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
+			},
+			partsCount:        3,
+			expectInvocations: 2,
+			expectReadErr:     "range mismatch between computed end position",
+		},
 		"part download single chunk": {
 			data:              []byte("123"),
 			getObjectFn:       s3testing.PartGetObjectFn,
@@ -437,6 +457,8 @@ func TestGetAsyncWithFailure(t *testing.T) {
 						if err != nil {
 							return
 						}
+					} else {
+						start, end = count*defaultPartSizeBytes, (count+1)*defaultPartSizeBytes-1
 					}
 					body := bytes.NewReader(make([]byte, defaultPartSizeBytes))
 					out = &s3.GetObjectOutput{

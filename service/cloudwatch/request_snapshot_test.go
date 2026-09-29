@@ -221,6 +221,47 @@ func TestCheckRequestSnapshot_AssociateDatasetKmsKey(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateResourceMetricsConfiguration(t *testing.T) {
+	input := &CreateResourceMetricsConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		MetricSelections: []types.ResourceMetricSelection{
+			{
+				IncludeMetrics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				IncludeMetrics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateResourceMetricsConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateResourceMetricsConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteAlarmMuteRule(t *testing.T) {
 	input := &DeleteAlarmMuteRuleInput{
 		AlarmMuteRuleName: ptr.String("__AlarmMuteRuleName__"),
@@ -475,6 +516,33 @@ func TestCheckRequestSnapshot_DeleteMetricStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteMetricStream"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteResourceMetricsConfiguration(t *testing.T) {
+	input := &DeleteResourceMetricsConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteResourceMetricsConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteResourceMetricsConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1184,6 +1252,33 @@ func TestCheckRequestSnapshot_GetOTelEnrichment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOTelEnrichment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetResourceMetricsConfiguration(t *testing.T) {
+	input := &GetResourceMetricsConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetResourceMetricsConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourceMetricsConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2390,7 +2485,40 @@ func TestCheckRequestSnapshot_StartMetricStreams(t *testing.T) {
 }
 
 func TestCheckRequestSnapshot_StartOTelEnrichment(t *testing.T) {
-	input := &StartOTelEnrichmentInput{}
+	input := &StartOTelEnrichmentInput{
+		IncludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExcludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
 	body := &bytes.Buffer{}
 	method := ""
 	rawPath := ""
@@ -2536,6 +2664,105 @@ func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckRequestSnapshot_UpdateOTelEnrichment(t *testing.T) {
+	input := &UpdateOTelEnrichmentInput{
+		IncludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExcludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateOTelEnrichment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateOTelEnrichment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateResourceMetricsConfiguration(t *testing.T) {
+	input := &UpdateResourceMetricsConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		MetricSelections: []types.ResourceMetricSelection{
+			{
+				IncludeMetrics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				IncludeMetrics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateResourceMetricsConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateResourceMetricsConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateRequestSnapshot_AssociateDatasetKmsKey(t *testing.T) {
 	input := &AssociateDatasetKmsKeyInput{
 		DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
@@ -2560,6 +2787,47 @@ func TestUpdateRequestSnapshot_AssociateDatasetKmsKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateDatasetKmsKey"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateResourceMetricsConfiguration(t *testing.T) {
+	input := &CreateResourceMetricsConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		MetricSelections: []types.ResourceMetricSelection{
+			{
+				IncludeMetrics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				IncludeMetrics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateResourceMetricsConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateResourceMetricsConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2818,6 +3086,33 @@ func TestUpdateRequestSnapshot_DeleteMetricStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteMetricStream"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteResourceMetricsConfiguration(t *testing.T) {
+	input := &DeleteResourceMetricsConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteResourceMetricsConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteResourceMetricsConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3527,6 +3822,33 @@ func TestUpdateRequestSnapshot_GetOTelEnrichment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOTelEnrichment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetResourceMetricsConfiguration(t *testing.T) {
+	input := &GetResourceMetricsConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetResourceMetricsConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourceMetricsConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4733,7 +5055,40 @@ func TestUpdateRequestSnapshot_StartMetricStreams(t *testing.T) {
 }
 
 func TestUpdateRequestSnapshot_StartOTelEnrichment(t *testing.T) {
-	input := &StartOTelEnrichmentInput{}
+	input := &StartOTelEnrichmentInput{
+		IncludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExcludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
 	body := &bytes.Buffer{}
 	method := ""
 	rawPath := ""
@@ -4876,6 +5231,105 @@ func TestUpdateRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateOTelEnrichment(t *testing.T) {
+	input := &UpdateOTelEnrichmentInput{
+		IncludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExcludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateOTelEnrichment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateOTelEnrichment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateResourceMetricsConfiguration(t *testing.T) {
+	input := &UpdateResourceMetricsConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		MetricSelections: []types.ResourceMetricSelection{
+			{
+				IncludeMetrics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				IncludeMetrics: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateResourceMetricsConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateResourceMetricsConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -367,6 +367,9 @@ const (
 	// A targeted revalidation job that retests specific findings to determine whether
 	// they are still exploitable.
 	JobTypeRevalidation JobType = "REVALIDATION"
+	// A CI/CD pentest job that tests only the code changes in a single pipeline run,
+	// as determined by the scope changes supplied when the job is started.
+	JobTypeCicd JobType = "CICD"
 )
 
 // Values returns all known values for JobType. Note that this can be expanded in
@@ -377,6 +380,7 @@ func (JobType) Values() []JobType {
 	return []JobType{
 		"FULL",
 		"REVALIDATION",
+		"CICD",
 	}
 }
 
@@ -742,6 +746,32 @@ func (RiskType) Values() []RiskType {
 		"DATABASE_ACCESS",
 		"OUTBOUND_SERVICE_REQUEST",
 		"UNKNOWN",
+	}
+}
+
+type ScopeDecision string
+
+// Enum values for ScopeDecision
+const (
+	// The code changes are in scope and are tested by the pentest job.
+	ScopeDecisionInScope ScopeDecision = "IN_SCOPE"
+	// The code changes are out of scope and are not tested. No pentest is run for the
+	// changes.
+	ScopeDecisionScopedOut ScopeDecision = "SCOPED_OUT"
+	// The code changes could not be conclusively scoped because of a conflict in the
+	// scoping inputs.
+	ScopeDecisionScopeConflict ScopeDecision = "SCOPE_CONFLICT"
+)
+
+// Values returns all known values for ScopeDecision. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScopeDecision) Values() []ScopeDecision {
+	return []ScopeDecision{
+		"IN_SCOPE",
+		"SCOPED_OUT",
+		"SCOPE_CONFLICT",
 	}
 }
 

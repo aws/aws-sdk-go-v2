@@ -3310,6 +3310,25 @@ func (TableOptimizerType) Values() []TableOptimizerType {
 	}
 }
 
+type TableResourceShareType string
+
+// Enum values for TableResourceShareType
+const (
+	TableResourceShareTypeFederated TableResourceShareType = "FEDERATED"
+	TableResourceShareTypeAll       TableResourceShareType = "ALL"
+)
+
+// Values returns all known values for TableResourceShareType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TableResourceShareType) Values() []TableResourceShareType {
+	return []TableResourceShareType{
+		"FEDERATED",
+		"ALL",
+	}
+}
+
 type TargetFormat string
 
 // Enum values for TargetFormat

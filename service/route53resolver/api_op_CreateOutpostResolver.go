@@ -11,6 +11,10 @@ import (
 )
 
 // Creates a Route 53 Resolver on an Outpost.
+//
+// This operation applies to first-generation Outposts only. On second-generation
+// Outposts, Resolver is enabled by default and managed automatically by Amazon Web
+// Services, so you don't need to create it.
 func (c *Client) CreateOutpostResolver(ctx context.Context, params *CreateOutpostResolverInput, optFns ...func(*Options)) (*CreateOutpostResolverOutput, error) {
 	if params == nil {
 		params = &CreateOutpostResolverInput{}

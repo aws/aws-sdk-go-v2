@@ -92,6 +92,13 @@ var CreatePromptVersion = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/prompts/{promptIdentifier}/versions",
 	Code: 201})
 
+var CreateVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "CreateVpcConfiguration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/knowledgebases/{knowledgeBaseId}/vpcconfigurations/",
+	Code: 202})
+
 var DeleteAgent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "DeleteAgent",
@@ -175,6 +182,13 @@ var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/resourcepolicy/{resourceArn}",
 	Code: 200})
+
+var DeleteVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "DeleteVpcConfiguration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/knowledgebases/{knowledgeBaseId}/vpcconfigurations/{vpcConfigurationId}",
+	Code: 202})
 
 var DisassociateAgentCollaborator = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
@@ -295,6 +309,13 @@ var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/resourcepolicy/{resourceArn}",
 	Code: 200})
 
+var GetVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "GetVpcConfiguration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/knowledgebases/{knowledgeBaseId}/vpcconfigurations/{vpcConfigurationId}",
+	Code: 200})
+
 var IngestKnowledgeBaseDocuments = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "IngestKnowledgeBaseDocuments",
@@ -405,6 +426,13 @@ var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListTagsForResource",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
+	Code: 200})
+
+var ListVpcConfigurations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "ListVpcConfigurations",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/knowledgebases/{knowledgeBaseId}/vpcconfigurations/",
 	Code: 200})
 
 var PrepareAgent = smithy.NewSchema(smithy.ShapeID{
@@ -2538,6 +2566,11 @@ var _HierarchicalChunkingLevelConfigurations = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _HierarchicalChunkingLevelConfigurations_member *smithy.Schema
 
+var _HostHeader = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "HostHeader",
+}, smithy.ShapeTypeString, 0)
+
 var _HttpsUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "HttpsUrl",
@@ -3699,6 +3732,11 @@ var _PineconeNamespace = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PineconeNamespace",
 }, smithy.ShapeTypeString, 0)
 
+var _Port = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "Port",
+}, smithy.ShapeTypeInteger, 0)
+
 var PromptAgentResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "PromptAgentResource",
@@ -4299,6 +4337,11 @@ var _ResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ResourcePolicy",
 }, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"})
 
+var _ResourceTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "ResourceTarget",
+}, smithy.ShapeTypeString, 0)
+
 var RetrievalFlowNodeConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "RetrievalFlowNodeConfiguration",
@@ -4628,6 +4671,17 @@ var _StringValue = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StringValue",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
+var _SubnetId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "SubnetId",
+}, smithy.ShapeTypeString, 0)
+
+var _SubnetIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "SubnetIdList",
+}, smithy.ShapeTypeList, 1)
+var _SubnetIdList_member *smithy.Schema
+
 var SupplementalDataStorageConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "SupplementalDataStorageConfiguration",
@@ -4744,6 +4798,11 @@ var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ThrottlingException",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
+
+var _TlsServerName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "TlsServerName",
+}, smithy.ShapeTypeString, 0)
 
 var Tool = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
@@ -5051,6 +5110,131 @@ var VideoSegmentationConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "VideoSegmentationConfiguration",
 }, smithy.ShapeTypeStructure, 1)
 var VideoSegmentationConfiguration_fixedLengthDuration *smithy.Schema
+
+var VpcConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "VpcConfiguration",
+}, smithy.ShapeTypeStructure, 15)
+var VpcConfiguration_vpcConfigurationId *smithy.Schema
+
+var VpcConfiguration_status *smithy.Schema
+
+var VpcConfiguration_statusMessage *smithy.Schema
+
+var VpcConfiguration_vpcId *smithy.Schema
+
+var VpcConfiguration_subnetIds *smithy.Schema
+
+var VpcConfiguration_resourceTarget *smithy.Schema
+
+var VpcConfiguration_port *smithy.Schema
+
+var VpcConfiguration_protocol *smithy.Schema
+
+var VpcConfiguration_resolutionMode *smithy.Schema
+
+var VpcConfiguration_hostHeader *smithy.Schema
+
+var VpcConfiguration_tlsServerName *smithy.Schema
+
+var VpcConfiguration_name *smithy.Schema
+
+var VpcConfiguration_description *smithy.Schema
+
+var VpcConfiguration_createdAt *smithy.Schema
+
+var VpcConfiguration_updatedAt *smithy.Schema
+
+var _VpcConfigurationDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "VpcConfigurationDescription",
+}, smithy.ShapeTypeString, 0)
+
+var _VpcConfigurationId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "VpcConfigurationId",
+}, smithy.ShapeTypeString, 0)
+
+var _VpcConfigurationName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "VpcConfigurationName",
+}, smithy.ShapeTypeString, 0)
+
+var VpcConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "VpcConfigurationStatus",
+}, smithy.ShapeTypeEnum, 5)
+var VpcConfigurationStatus_CREATING *smithy.Schema
+
+var VpcConfigurationStatus_CREATED *smithy.Schema
+
+var VpcConfigurationStatus_DELETING *smithy.Schema
+
+var VpcConfigurationStatus_CREATE_FAILED *smithy.Schema
+
+var VpcConfigurationStatus_DELETE_FAILED *smithy.Schema
+
+var _VpcConfigurationStatusMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "VpcConfigurationStatusMessage",
+}, smithy.ShapeTypeString, 0)
+
+var VpcConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "VpcConfigurationSummary",
+}, smithy.ShapeTypeStructure, 13)
+var VpcConfigurationSummary_vpcConfigurationId *smithy.Schema
+
+var VpcConfigurationSummary_status *smithy.Schema
+
+var VpcConfigurationSummary_statusMessage *smithy.Schema
+
+var VpcConfigurationSummary_vpcId *smithy.Schema
+
+var VpcConfigurationSummary_resourceTarget *smithy.Schema
+
+var VpcConfigurationSummary_port *smithy.Schema
+
+var VpcConfigurationSummary_protocol *smithy.Schema
+
+var VpcConfigurationSummary_resolutionMode *smithy.Schema
+
+var VpcConfigurationSummary_hostHeader *smithy.Schema
+
+var VpcConfigurationSummary_tlsServerName *smithy.Schema
+
+var VpcConfigurationSummary_name *smithy.Schema
+
+var VpcConfigurationSummary_description *smithy.Schema
+
+var VpcConfigurationSummary_createdAt *smithy.Schema
+
+var _VpcConfigurationSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "VpcConfigurationSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _VpcConfigurationSummaryList_member *smithy.Schema
+
+var _VpcId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "VpcId",
+}, smithy.ShapeTypeString, 0)
+
+var VpcProtocol = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "VpcProtocol",
+}, smithy.ShapeTypeEnum, 2)
+var VpcProtocol_HTTP *smithy.Schema
+
+var VpcProtocol_HTTPS *smithy.Schema
+
+var VpcResolutionMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "VpcResolutionMode",
+}, smithy.ShapeTypeEnum, 2)
+var VpcResolutionMode_PUBLIC *smithy.Schema
+
+var VpcResolutionMode_IN_VPC *smithy.Schema
 
 var WebCrawlerConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
@@ -5493,6 +5677,42 @@ var CreatePromptVersionResponse_createdAt *smithy.Schema
 
 var CreatePromptVersionResponse_updatedAt *smithy.Schema
 
+var CreateVpcConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "CreateVpcConfigurationRequest",
+}, smithy.ShapeTypeStructure, 12)
+var CreateVpcConfigurationRequest_knowledgeBaseId *smithy.Schema
+
+var CreateVpcConfigurationRequest_clientToken *smithy.Schema
+
+var CreateVpcConfigurationRequest_vpcId *smithy.Schema
+
+var CreateVpcConfigurationRequest_subnetIds *smithy.Schema
+
+var CreateVpcConfigurationRequest_resourceTarget *smithy.Schema
+
+var CreateVpcConfigurationRequest_port *smithy.Schema
+
+var CreateVpcConfigurationRequest_protocol *smithy.Schema
+
+var CreateVpcConfigurationRequest_resolutionMode *smithy.Schema
+
+var CreateVpcConfigurationRequest_hostHeader *smithy.Schema
+
+var CreateVpcConfigurationRequest_tlsServerName *smithy.Schema
+
+var CreateVpcConfigurationRequest_name *smithy.Schema
+
+var CreateVpcConfigurationRequest_description *smithy.Schema
+
+var CreateVpcConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "CreateVpcConfigurationResponse",
+}, smithy.ShapeTypeStructure, 2)
+var CreateVpcConfigurationResponse_vpcConfigurationId *smithy.Schema
+
+var CreateVpcConfigurationResponse_status *smithy.Schema
+
 var DeleteAgentActionGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "DeleteAgentActionGroupRequest",
@@ -5693,6 +5913,22 @@ var DeleteResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
 var DeleteResourcePolicyResponse_resourceArn *smithy.Schema
 
 var DeleteResourcePolicyResponse_revisionId *smithy.Schema
+
+var DeleteVpcConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "DeleteVpcConfigurationRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteVpcConfigurationRequest_knowledgeBaseId *smithy.Schema
+
+var DeleteVpcConfigurationRequest_vpcConfigurationId *smithy.Schema
+
+var DeleteVpcConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "DeleteVpcConfigurationResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteVpcConfigurationResponse_vpcConfigurationId *smithy.Schema
+
+var DeleteVpcConfigurationResponse_status *smithy.Schema
 
 var DisassociateAgentCollaboratorRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
@@ -6020,6 +6256,20 @@ var GetResourcePolicyResponse_policy *smithy.Schema
 
 var GetResourcePolicyResponse_revisionId *smithy.Schema
 
+var GetVpcConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "GetVpcConfigurationRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetVpcConfigurationRequest_knowledgeBaseId *smithy.Schema
+
+var GetVpcConfigurationRequest_vpcConfigurationId *smithy.Schema
+
+var GetVpcConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "GetVpcConfigurationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetVpcConfigurationResponse_vpcConfiguration *smithy.Schema
+
 var IngestKnowledgeBaseDocumentsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "IngestKnowledgeBaseDocumentsRequest",
@@ -6309,6 +6559,26 @@ var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListTagsForResourceResponse",
 }, smithy.ShapeTypeStructure, 1)
 var ListTagsForResourceResponse_tags *smithy.Schema
+
+var ListVpcConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "ListVpcConfigurationsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListVpcConfigurationsRequest_knowledgeBaseId *smithy.Schema
+
+var ListVpcConfigurationsRequest_statusFilter *smithy.Schema
+
+var ListVpcConfigurationsRequest_maxResults *smithy.Schema
+
+var ListVpcConfigurationsRequest_nextToken *smithy.Schema
+
+var ListVpcConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "ListVpcConfigurationsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListVpcConfigurationsResponse_items *smithy.Schema
+
+var ListVpcConfigurationsResponse_nextToken *smithy.Schema
 
 var PrepareAgentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
@@ -8925,6 +9195,8 @@ func init() {
 
 	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _NonBlankString)
 
+	_SubnetIdList_member = _SubnetIdList.AddMember("member", _SubnetId)
+
 	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
 
 	_TagsMap_key = _TagsMap.AddMember("key", _TagKey)
@@ -8942,6 +9214,82 @@ func init() {
 	ValidationException_message = ValidationException.AddMember("message", _NonBlankString)
 
 	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
+
+	VpcConfigurationStatus_CREATING = VpcConfigurationStatus.AddMember("CREATING", smithyprelude.Unit)
+
+	VpcConfigurationStatus_CREATED = VpcConfigurationStatus.AddMember("CREATED", smithyprelude.Unit)
+
+	VpcConfigurationStatus_DELETING = VpcConfigurationStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	VpcConfigurationStatus_CREATE_FAILED = VpcConfigurationStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
+
+	VpcConfigurationStatus_DELETE_FAILED = VpcConfigurationStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
+
+	VpcProtocol_HTTP = VpcProtocol.AddMember("HTTP", smithyprelude.Unit)
+
+	VpcProtocol_HTTPS = VpcProtocol.AddMember("HTTPS", smithyprelude.Unit)
+
+	VpcResolutionMode_PUBLIC = VpcResolutionMode.AddMember("PUBLIC", smithyprelude.Unit)
+
+	VpcResolutionMode_IN_VPC = VpcResolutionMode.AddMember("IN_VPC", smithyprelude.Unit)
+
+	VpcConfiguration_vpcConfigurationId = VpcConfiguration.AddMember("vpcConfigurationId", _VpcConfigurationId)
+
+	VpcConfiguration_status = VpcConfiguration.AddMember("status", VpcConfigurationStatus)
+
+	VpcConfiguration_statusMessage = VpcConfiguration.AddMember("statusMessage", _VpcConfigurationStatusMessage)
+
+	VpcConfiguration_vpcId = VpcConfiguration.AddMember("vpcId", _VpcId)
+
+	VpcConfiguration_subnetIds = VpcConfiguration.AddMember("subnetIds", _SubnetIdList)
+
+	VpcConfiguration_resourceTarget = VpcConfiguration.AddMember("resourceTarget", _ResourceTarget)
+
+	VpcConfiguration_port = VpcConfiguration.AddMember("port", _Port)
+
+	VpcConfiguration_protocol = VpcConfiguration.AddMember("protocol", VpcProtocol)
+
+	VpcConfiguration_resolutionMode = VpcConfiguration.AddMember("resolutionMode", VpcResolutionMode)
+
+	VpcConfiguration_hostHeader = VpcConfiguration.AddMember("hostHeader", _HostHeader)
+
+	VpcConfiguration_tlsServerName = VpcConfiguration.AddMember("tlsServerName", _TlsServerName)
+
+	VpcConfiguration_name = VpcConfiguration.AddMember("name", _VpcConfigurationName)
+
+	VpcConfiguration_description = VpcConfiguration.AddMember("description", _VpcConfigurationDescription)
+
+	VpcConfiguration_createdAt = VpcConfiguration.AddMember("createdAt", _DateTimestamp)
+
+	VpcConfiguration_updatedAt = VpcConfiguration.AddMember("updatedAt", _DateTimestamp)
+
+	VpcConfigurationSummary_vpcConfigurationId = VpcConfigurationSummary.AddMember("vpcConfigurationId", _VpcConfigurationId)
+
+	VpcConfigurationSummary_status = VpcConfigurationSummary.AddMember("status", VpcConfigurationStatus)
+
+	VpcConfigurationSummary_statusMessage = VpcConfigurationSummary.AddMember("statusMessage", _VpcConfigurationStatusMessage)
+
+	VpcConfigurationSummary_vpcId = VpcConfigurationSummary.AddMember("vpcId", _VpcId)
+
+	VpcConfigurationSummary_resourceTarget = VpcConfigurationSummary.AddMember("resourceTarget", _ResourceTarget)
+
+	VpcConfigurationSummary_port = VpcConfigurationSummary.AddMember("port", _Port)
+
+	VpcConfigurationSummary_protocol = VpcConfigurationSummary.AddMember("protocol", VpcProtocol)
+
+	VpcConfigurationSummary_resolutionMode = VpcConfigurationSummary.AddMember("resolutionMode", VpcResolutionMode)
+
+	VpcConfigurationSummary_hostHeader = VpcConfigurationSummary.AddMember("hostHeader", _HostHeader)
+
+	VpcConfigurationSummary_tlsServerName = VpcConfigurationSummary.AddMember("tlsServerName", _TlsServerName)
+
+	VpcConfigurationSummary_name = VpcConfigurationSummary.AddMember("name", _VpcConfigurationName)
+
+	VpcConfigurationSummary_description = VpcConfigurationSummary.AddMember("description", _VpcConfigurationDescription)
+
+	VpcConfigurationSummary_createdAt = VpcConfigurationSummary.AddMember("createdAt", _DateTimestamp)
+
+	_VpcConfigurationSummaryList_member = _VpcConfigurationSummaryList.AddMember("member", VpcConfigurationSummary)
 
 	AssociateAgentCollaboratorRequest_agentId = AssociateAgentCollaboratorRequest.AddMember("agentId", _Id, &smithytraits.HTTPLabel{})
 
@@ -9231,6 +9579,34 @@ func init() {
 
 	CreatePromptVersionResponse_updatedAt = CreatePromptVersionResponse.AddMember("updatedAt", _DateTimestamp)
 
+	CreateVpcConfigurationRequest_knowledgeBaseId = CreateVpcConfigurationRequest.AddMember("knowledgeBaseId", _Id, &smithytraits.HTTPLabel{})
+
+	CreateVpcConfigurationRequest_clientToken = CreateVpcConfigurationRequest.AddMember("clientToken", _ClientToken)
+
+	CreateVpcConfigurationRequest_vpcId = CreateVpcConfigurationRequest.AddMember("vpcId", _VpcId)
+
+	CreateVpcConfigurationRequest_subnetIds = CreateVpcConfigurationRequest.AddMember("subnetIds", _SubnetIdList)
+
+	CreateVpcConfigurationRequest_resourceTarget = CreateVpcConfigurationRequest.AddMember("resourceTarget", _ResourceTarget)
+
+	CreateVpcConfigurationRequest_port = CreateVpcConfigurationRequest.AddMember("port", _Port)
+
+	CreateVpcConfigurationRequest_protocol = CreateVpcConfigurationRequest.AddMember("protocol", VpcProtocol)
+
+	CreateVpcConfigurationRequest_resolutionMode = CreateVpcConfigurationRequest.AddMember("resolutionMode", VpcResolutionMode)
+
+	CreateVpcConfigurationRequest_hostHeader = CreateVpcConfigurationRequest.AddMember("hostHeader", _HostHeader)
+
+	CreateVpcConfigurationRequest_tlsServerName = CreateVpcConfigurationRequest.AddMember("tlsServerName", _TlsServerName)
+
+	CreateVpcConfigurationRequest_name = CreateVpcConfigurationRequest.AddMember("name", _VpcConfigurationName)
+
+	CreateVpcConfigurationRequest_description = CreateVpcConfigurationRequest.AddMember("description", _VpcConfigurationDescription)
+
+	CreateVpcConfigurationResponse_vpcConfigurationId = CreateVpcConfigurationResponse.AddMember("vpcConfigurationId", _VpcConfigurationId)
+
+	CreateVpcConfigurationResponse_status = CreateVpcConfigurationResponse.AddMember("status", VpcConfigurationStatus)
+
 	DeleteAgentActionGroupRequest_agentId = DeleteAgentActionGroupRequest.AddMember("agentId", _Id, &smithytraits.HTTPLabel{})
 
 	DeleteAgentActionGroupRequest_agentVersion = DeleteAgentActionGroupRequest.AddMember("agentVersion", _DraftVersion, &smithytraits.HTTPLabel{})
@@ -9334,6 +9710,14 @@ func init() {
 	DeleteResourcePolicyResponse_resourceArn = DeleteResourcePolicyResponse.AddMember("resourceArn", _ResourceArn)
 
 	DeleteResourcePolicyResponse_revisionId = DeleteResourcePolicyResponse.AddMember("revisionId", _RevisionId)
+
+	DeleteVpcConfigurationRequest_knowledgeBaseId = DeleteVpcConfigurationRequest.AddMember("knowledgeBaseId", _Id, &smithytraits.HTTPLabel{})
+
+	DeleteVpcConfigurationRequest_vpcConfigurationId = DeleteVpcConfigurationRequest.AddMember("vpcConfigurationId", _VpcConfigurationId, &smithytraits.HTTPLabel{})
+
+	DeleteVpcConfigurationResponse_vpcConfigurationId = DeleteVpcConfigurationResponse.AddMember("vpcConfigurationId", _VpcConfigurationId)
+
+	DeleteVpcConfigurationResponse_status = DeleteVpcConfigurationResponse.AddMember("status", VpcConfigurationStatus)
 
 	DisassociateAgentCollaboratorRequest_agentId = DisassociateAgentCollaboratorRequest.AddMember("agentId", _Id, &smithytraits.HTTPLabel{})
 
@@ -9523,6 +9907,12 @@ func init() {
 
 	GetResourcePolicyResponse_revisionId = GetResourcePolicyResponse.AddMember("revisionId", _RevisionId)
 
+	GetVpcConfigurationRequest_knowledgeBaseId = GetVpcConfigurationRequest.AddMember("knowledgeBaseId", _Id, &smithytraits.HTTPLabel{})
+
+	GetVpcConfigurationRequest_vpcConfigurationId = GetVpcConfigurationRequest.AddMember("vpcConfigurationId", _VpcConfigurationId, &smithytraits.HTTPLabel{})
+
+	GetVpcConfigurationResponse_vpcConfiguration = GetVpcConfigurationResponse.AddMember("vpcConfiguration", VpcConfiguration)
+
 	IngestKnowledgeBaseDocumentsRequest_knowledgeBaseId = IngestKnowledgeBaseDocumentsRequest.AddMember("knowledgeBaseId", _Id, &smithytraits.HTTPLabel{})
 
 	IngestKnowledgeBaseDocumentsRequest_dataSourceId = IngestKnowledgeBaseDocumentsRequest.AddMember("dataSourceId", _Id, &smithytraits.HTTPLabel{})
@@ -9684,6 +10074,18 @@ func init() {
 	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _TaggableResourcesArn, &smithytraits.HTTPLabel{})
 
 	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagsMap)
+
+	ListVpcConfigurationsRequest_knowledgeBaseId = ListVpcConfigurationsRequest.AddMember("knowledgeBaseId", _Id, &smithytraits.HTTPLabel{})
+
+	ListVpcConfigurationsRequest_statusFilter = ListVpcConfigurationsRequest.AddMember("statusFilter", VpcConfigurationStatus, &smithytraits.HTTPQuery{Name: "status"})
+
+	ListVpcConfigurationsRequest_maxResults = ListVpcConfigurationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListVpcConfigurationsRequest_nextToken = ListVpcConfigurationsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListVpcConfigurationsResponse_items = ListVpcConfigurationsResponse.AddMember("items", _VpcConfigurationSummaryList)
+
+	ListVpcConfigurationsResponse_nextToken = ListVpcConfigurationsResponse.AddMember("nextToken", _NextToken)
 
 	PrepareAgentRequest_agentId = PrepareAgentRequest.AddMember("agentId", _Id, &smithytraits.HTTPLabel{})
 

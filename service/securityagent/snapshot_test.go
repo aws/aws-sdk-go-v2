@@ -638,6 +638,18 @@ func TestCheckSnapshot_InitiateProviderRegistration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListActorMessages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListActorMessages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListActorMessages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAgentSpaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAgentSpaces(context.Background(), nil, func(o *Options) {
@@ -1734,6 +1746,18 @@ func TestUpdateSnapshot_InitiateProviderRegistration(t *testing.T) {
 	_, err := svc.InitiateProviderRegistration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "InitiateProviderRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListActorMessages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListActorMessages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListActorMessages")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

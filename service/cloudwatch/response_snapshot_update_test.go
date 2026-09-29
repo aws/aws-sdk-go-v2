@@ -163,6 +163,48 @@ func TestUpdateResponseSnapshot_AssociateDatasetKmsKey(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateResourceMetricsConfiguration(t *testing.T) {
+	want := &CreateResourceMetricsConfigurationOutput{
+		ResourceMetricsConfiguration: &types.ResourceMetricsConfiguration{
+			ResourceArn: ptr.String("__ResourceArn__"),
+			CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			MetricSelections: []types.ResourceMetricSelection{
+				{
+					IncludeMetrics: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					IncludeMetrics: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
+	opSchema := smithy.NewOperationSchema(schemas.CreateResourceMetricsConfiguration, schemas.CreateResourceMetricsConfigurationOutput, schemas.CreateResourceMetricsConfigurationOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateResourceMetricsConfiguration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteAlarmMuteRule(t *testing.T) {
 	want := &DeleteAlarmMuteRuleOutput{}
 	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
@@ -306,6 +348,28 @@ func TestUpdateResponseSnapshot_DeleteMetricStream(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteMetricStream.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteResourceMetricsConfiguration(t *testing.T) {
+	want := &DeleteResourceMetricsConfigurationOutput{}
+	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteResourceMetricsConfiguration, schemas.DeleteResourceMetricsConfigurationOutput, schemas.DeleteResourceMetricsConfigurationOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteResourceMetricsConfiguration.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1986,6 +2050,40 @@ func TestUpdateResponseSnapshot_GetMetricWidgetImage(t *testing.T) {
 func TestUpdateResponseSnapshot_GetOTelEnrichment(t *testing.T) {
 	want := &GetOTelEnrichmentOutput{
 		Status: types.OTelEnrichmentStatus("Running"),
+		IncludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExcludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
 	opSchema := smithy.NewOperationSchema(schemas.GetOTelEnrichment, schemas.GetOTelEnrichmentOutput, schemas.GetOTelEnrichmentOutput)
@@ -2003,6 +2101,48 @@ func TestUpdateResponseSnapshot_GetOTelEnrichment(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetOTelEnrichment.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetResourceMetricsConfiguration(t *testing.T) {
+	want := &GetResourceMetricsConfigurationOutput{
+		ResourceMetricsConfiguration: &types.ResourceMetricsConfiguration{
+			ResourceArn: ptr.String("__ResourceArn__"),
+			CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			MetricSelections: []types.ResourceMetricSelection{
+				{
+					IncludeMetrics: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					IncludeMetrics: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
+	opSchema := smithy.NewOperationSchema(schemas.GetResourceMetricsConfiguration, schemas.GetResourceMetricsConfigurationOutput, schemas.GetResourceMetricsConfigurationOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetResourceMetricsConfiguration.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2557,7 +2697,42 @@ func TestUpdateResponseSnapshot_StartMetricStreams(t *testing.T) {
 }
 
 func TestUpdateResponseSnapshot_StartOTelEnrichment(t *testing.T) {
-	want := &StartOTelEnrichmentOutput{}
+	want := &StartOTelEnrichmentOutput{
+		IncludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExcludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
 	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
 	opSchema := smithy.NewOperationSchema(schemas.StartOTelEnrichment, schemas.StartOTelEnrichmentOutput, schemas.StartOTelEnrichmentOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
@@ -2662,6 +2837,105 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UntagResource.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateOTelEnrichment(t *testing.T) {
+	want := &UpdateOTelEnrichmentOutput{
+		IncludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ExcludeFilters: []types.OTelEnrichmentMetricSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				MetricNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateOTelEnrichment, schemas.UpdateOTelEnrichmentOutput, schemas.UpdateOTelEnrichmentOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateOTelEnrichment.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateResourceMetricsConfiguration(t *testing.T) {
+	want := &UpdateResourceMetricsConfigurationOutput{
+		ResourceMetricsConfiguration: &types.ResourceMetricsConfiguration{
+			ResourceArn: ptr.String("__ResourceArn__"),
+			CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			MetricSelections: []types.ResourceMetricSelection{
+				{
+					IncludeMetrics: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					IncludeMetrics: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateResourceMetricsConfiguration, schemas.UpdateResourceMetricsConfigurationOutput, schemas.UpdateResourceMetricsConfigurationOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateResourceMetricsConfiguration.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3124,6 +3398,31 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	}
 	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 404, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
+	want := &types.ValidationException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
+	opSchema := smithy.NewOperationSchema(schemas.StartOTelEnrichment, schemas.ValidationException, schemas.ValidationException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ValidationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -11,9 +11,9 @@ import (
 )
 
 // Verifies the subscription and performs resource dependency checks on the
-// requested Amazon Web Services Marketplace resource. For Amazon Web Services
-// Marketplace components, the response contains fields to download the components
-// and their artifacts.
+// requested Amazon Web Services Marketplace resource. The caller must be entitled
+// to the resource. For Amazon Web Services Marketplace components, the response
+// contains fields to download the components and their artifacts.
 func (c *Client) GetMarketplaceResource(ctx context.Context, params *GetMarketplaceResourceInput, optFns ...func(*Options)) (*GetMarketplaceResourceOutput, error) {
 	if params == nil {
 		params = &GetMarketplaceResourceInput{}
@@ -43,7 +43,8 @@ type GetMarketplaceResourceInput struct {
 	// This member is required.
 	ResourceType types.MarketplaceResourceType
 
-	// The bucket path that you can specify to download the resource from Amazon S3.
+	// The Amazon S3 location of the component artifact to retrieve, in s3://bucket/key
+	// form.
 	ResourceLocation *string
 
 	noSmithyDocumentSerde
@@ -76,7 +77,8 @@ type GetMarketplaceResourceOutput struct {
 	// that was requested.
 	ResourceArn *string
 
-	// The obfuscated S3 URL to download the component artifact from.
+	// A time-limited presigned URL for downloading the component artifact from Amazon
+	// S3.
 	Url *string
 
 	// Metadata pertaining to the operation's result.

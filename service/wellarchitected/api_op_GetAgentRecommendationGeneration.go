@@ -11,6 +11,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	"time"
 )
 
@@ -62,6 +63,10 @@ func (v *GetAgentRecommendationGenerationInput) SerializeMembers(s smithy.ShapeS
 	if v.ProfileArn != nil {
 		s.WriteString(schemas.GetAgentRecommendationGenerationRequest_profileArn, *v.ProfileArn)
 	}
+}
+func (in *GetAgentRecommendationGenerationInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type GetAgentRecommendationGenerationOutput struct {

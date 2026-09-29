@@ -374,7 +374,8 @@ func TestUpdateResponseSnapshot_CreatePlan(t *testing.T) {
 					},
 				},
 			},
-			Name: ptr.String("__Name__"),
+			ServiceQuotaChecksEnabled: ptr.Bool(true),
+			Name:                      ptr.String("__Name__"),
 			Regions: []string{
 				"__Member__",
 				"__Member__",
@@ -617,7 +618,8 @@ func TestUpdateResponseSnapshot_GetPlan(t *testing.T) {
 					},
 				},
 			},
-			Name: ptr.String("__Name__"),
+			ServiceQuotaChecksEnabled: ptr.Bool(true),
+			Name:                      ptr.String("__Name__"),
 			Regions: []string{
 				"__Member__",
 				"__Member__",
@@ -921,7 +923,8 @@ func TestUpdateResponseSnapshot_GetPlanExecution(t *testing.T) {
 					},
 				},
 			},
-			Name: ptr.String("__Name__"),
+			ServiceQuotaChecksEnabled: ptr.Bool(true),
+			Name:                      ptr.String("__Name__"),
 			Regions: []string{
 				"__Member__",
 				"__Member__",
@@ -1162,7 +1165,8 @@ func TestUpdateResponseSnapshot_GetPlanInRegion(t *testing.T) {
 					},
 				},
 			},
-			Name: ptr.String("__Name__"),
+			ServiceQuotaChecksEnabled: ptr.Bool(true),
+			Name:                      ptr.String("__Name__"),
 			Regions: []string{
 				"__Member__",
 				"__Member__",
@@ -1504,6 +1508,60 @@ func TestUpdateResponseSnapshot_ListRoute53HealthChecksInRegion(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListServiceQuotaWarnings(t *testing.T) {
+	want := &ListServiceQuotaWarningsOutput{
+		ServiceQuotaWarningSummaries: []types.ServiceQuotaWarningSummary{
+			{
+				AccountId:        ptr.String("__AccountId__"),
+				QuotaRegion:      ptr.String("__QuotaRegion__"),
+				ServiceCode:      ptr.String("__ServiceCode__"),
+				QuotaCode:        ptr.String("__QuotaCode__"),
+				QuotaName:        ptr.String("__QuotaName__"),
+				Status:           types.ServiceQuotaWarningStatus("pending"),
+				PlanArn:          ptr.String("__PlanArn__"),
+				RequestId:        ptr.String("__RequestId__"),
+				CaseId:           ptr.String("__CaseId__"),
+				WarningMessage:   ptr.String("__WarningMessage__"),
+				LastCheckedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				WarningCreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				AccountId:        ptr.String("__AccountId__"),
+				QuotaRegion:      ptr.String("__QuotaRegion__"),
+				ServiceCode:      ptr.String("__ServiceCode__"),
+				QuotaCode:        ptr.String("__QuotaCode__"),
+				QuotaName:        ptr.String("__QuotaName__"),
+				Status:           types.ServiceQuotaWarningStatus("pending"),
+				PlanArn:          ptr.String("__PlanArn__"),
+				RequestId:        ptr.String("__RequestId__"),
+				CaseId:           ptr.String("__CaseId__"),
+				WarningMessage:   ptr.String("__WarningMessage__"),
+				LastCheckedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				WarningCreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.ArcRegionSwitch)
+	opSchema := smithy.NewOperationSchema(schemas.ListServiceQuotaWarnings, schemas.ListServiceQuotaWarningsResponse, schemas.ListServiceQuotaWarningsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListServiceQuotaWarnings.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 	want := &ListTagsForResourceOutput{
 		ResourceTags: map[string]string{
@@ -1791,7 +1849,8 @@ func TestUpdateResponseSnapshot_UpdatePlan(t *testing.T) {
 					},
 				},
 			},
-			Name: ptr.String("__Name__"),
+			ServiceQuotaChecksEnabled: ptr.Bool(true),
+			Name:                      ptr.String("__Name__"),
 			Regions: []string{
 				"__Member__",
 				"__Member__",

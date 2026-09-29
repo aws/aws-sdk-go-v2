@@ -28,7 +28,13 @@ func (c *Client) GetImage(ctx context.Context, params *GetImageInput, optFns ...
 
 type GetImageInput struct {
 
-	// The Amazon Resource Name (ARN) of the image that you want to get.
+	// The Amazon Resource Name (ARN) of the image that you want to get. You can
+	// specify a full build version ARN, or a version ARN with or without wildcards (
+	// x.x.x , 1.x.x , or 1.0.x ). A version or wildcard ARN resolves to the latest
+	// matching build version that has reached AVAILABLE status. Builds that were
+	// later deprecated, disabled, or deleted don't resolve. To get an image in any
+	// other state, such as a failed or in-progress build, specify the full build
+	// version ARN.
 	//
 	// This member is required.
 	ImageBuildVersionArn *string
@@ -53,7 +59,9 @@ type GetImageOutput struct {
 	// The image object.
 	Image *types.Image
 
-	// The resource ARNs with different wildcard variations of semantic versioning.
+	// A set of wildcard version ARNs that always reference the latest version of the
+	// resource. ARNs are included for the latest version overall, and for the latest
+	// versions within the same major, minor, and patch levels.
 	LatestVersionReferences *types.LatestVersionReferences
 
 	// The request ID that uniquely identifies this request.

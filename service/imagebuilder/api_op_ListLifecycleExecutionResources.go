@@ -42,13 +42,13 @@ type ListLifecycleExecutionResourcesInput struct {
 	// previously truncated response.
 	NextToken *string
 
-	// You can leave this empty to get a list of Image Builder resources that were
-	// identified for lifecycle actions.
-	//
-	// To get a list of associated resources that are impacted for an individual
-	// resource (the parent), specify its Amazon Resource Name (ARN). Associated
-	// resources are produced from your image and distributed when you run a build,
-	// such as AMIs or container images stored in ECR repositories.
+	// The Amazon Resource Name (ARN) of an image build version to get the output
+	// resources for, such as AMIs or container images in Amazon ECR. You can get this
+	// value from the resourceId in the top-level response. If you leave this property
+	// empty, the response lists the Image Builder resources that the lifecycle
+	// execution identified for lifecycle actions. If the image build version that you
+	// specify in parentResourceId wasn't part of this lifecycle execution, the
+	// response contains an empty list.
 	ParentResourceId *string
 
 	noSmithyDocumentSerde
@@ -77,7 +77,7 @@ func (v *ListLifecycleExecutionResourcesInput) SerializeMembers(s smithy.ShapeSe
 
 type ListLifecycleExecutionResourcesOutput struct {
 
-	// Runtime details for the specified runtime instance of the lifecycle policy.
+	// The unique identifier for the runtime instance of the lifecycle policy.
 	LifecycleExecutionId *string
 
 	// The current state of the lifecycle runtime instance.

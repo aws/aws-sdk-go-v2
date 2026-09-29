@@ -669,6 +669,9 @@ func TestCheckResponseSnapshot_CreateBotLocale(t *testing.T) {
 			},
 		},
 		SpeechDetectionSensitivity: types.SpeechDetectionSensitivity("Default"),
+		SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+			Enabled: true,
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateBotLocale.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -762,6 +765,9 @@ func TestCheckResponseSnapshot_CreateBotLocale(t *testing.T) {
 			},
 		},
 		SpeechDetectionSensitivity: types.SpeechDetectionSensitivity("Default"),
+		SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+			Enabled: true,
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -18420,6 +18426,9 @@ func TestCheckResponseSnapshot_DescribeBotLocale(t *testing.T) {
 			},
 		},
 		SpeechDetectionSensitivity: types.SpeechDetectionSensitivity("Default"),
+		SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+			Enabled: true,
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeBotLocale.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -18785,6 +18794,9 @@ func TestCheckResponseSnapshot_DescribeImport(t *testing.T) {
 					StartDelayInMilliseconds:            ptr.Int32(1),
 					MinimumPlayDurationInMilliseconds:   ptr.Int32(1),
 					ResponseDeliveryDelayInMilliseconds: ptr.Int32(1),
+				},
+				SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+					Enabled: true,
 				},
 			},
 			CustomVocabularyImportSpecification: &types.CustomVocabularyImportSpecification{
@@ -31041,6 +31053,9 @@ func TestCheckResponseSnapshot_StartImport(t *testing.T) {
 					MinimumPlayDurationInMilliseconds:   ptr.Int32(1),
 					ResponseDeliveryDelayInMilliseconds: ptr.Int32(1),
 				},
+				SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+					Enabled: true,
+				},
 			},
 			CustomVocabularyImportSpecification: &types.CustomVocabularyImportSpecification{
 				BotId:      ptr.String("__BotId__"),
@@ -31129,6 +31144,9 @@ func TestCheckResponseSnapshot_StartImport(t *testing.T) {
 					StartDelayInMilliseconds:            ptr.Int32(1),
 					MinimumPlayDurationInMilliseconds:   ptr.Int32(1),
 					ResponseDeliveryDelayInMilliseconds: ptr.Int32(1),
+				},
+				SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+					Enabled: true,
 				},
 			},
 			CustomVocabularyImportSpecification: &types.CustomVocabularyImportSpecification{
@@ -31721,6 +31739,9 @@ func TestCheckResponseSnapshot_UpdateBotLocale(t *testing.T) {
 			},
 		},
 		SpeechDetectionSensitivity: types.SpeechDetectionSensitivity("Default"),
+		SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+			Enabled: true,
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateBotLocale.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -31814,6 +31835,9 @@ func TestCheckResponseSnapshot_UpdateBotLocale(t *testing.T) {
 			},
 		},
 		SpeechDetectionSensitivity: types.SpeechDetectionSensitivity("Default"),
+		SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+			Enabled: true,
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

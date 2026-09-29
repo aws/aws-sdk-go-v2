@@ -2137,8 +2137,9 @@ func TestCheckResponseSnapshot_CreateEnvironmentBlueprint(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
+		CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateEnvironmentBlueprint.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2177,6 +2178,7 @@ func TestCheckResponseSnapshot_CreateEnvironmentBlueprint(t *testing.T) {
 				IsUpdateSupported: ptr.Bool(true),
 			},
 		},
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -5471,8 +5473,9 @@ func TestCheckResponseSnapshot_GetEnvironmentBlueprint(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
+		CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetEnvironmentBlueprint.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -8335,8 +8338,9 @@ func TestCheckResponseSnapshot_ListEnvironmentBlueprints(t *testing.T) {
 						TemplateUrl: ptr.String("__TemplateUrl__"),
 					},
 				},
-				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				BlueprintCategory: types.BlueprintCategory("TOOLING"),
 			},
 			{
 				Id:          ptr.String("__Id__"),
@@ -8348,8 +8352,9 @@ func TestCheckResponseSnapshot_ListEnvironmentBlueprints(t *testing.T) {
 						TemplateUrl: ptr.String("__TemplateUrl__"),
 					},
 				},
-				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				BlueprintCategory: types.BlueprintCategory("TOOLING"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -12921,8 +12926,9 @@ func TestCheckResponseSnapshot_UpdateEnvironmentBlueprint(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
+		CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateEnvironmentBlueprint.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -12961,6 +12967,7 @@ func TestCheckResponseSnapshot_UpdateEnvironmentBlueprint(t *testing.T) {
 				IsUpdateSupported: ptr.Bool(true),
 			},
 		},
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
 	})
 	if err != nil {
 		t.Fatal(err)

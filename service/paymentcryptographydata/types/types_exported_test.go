@@ -375,6 +375,9 @@ func ExampleReEncryptionAttributes_outputUsage() {
 	var union types.ReEncryptionAttributes
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ReEncryptionAttributesMemberAsymmetric:
+		_ = v.Value // Value is types.AsymmetricEncryptionAttributes
+
 	case *types.ReEncryptionAttributesMemberDukpt:
 		_ = v.Value // Value is types.DukptEncryptionAttributes
 
@@ -391,6 +394,7 @@ func ExampleReEncryptionAttributes_outputUsage() {
 }
 
 var _ *types.SymmetricEncryptionAttributes
+var _ *types.AsymmetricEncryptionAttributes
 var _ *types.DukptEncryptionAttributes
 
 func ExampleSessionKeyDerivation_outputUsage() {

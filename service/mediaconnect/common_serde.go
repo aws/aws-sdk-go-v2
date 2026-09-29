@@ -373,6 +373,12 @@ func serializeRouterOutputProtocolConfiguration(s smithy.ShapeSerializer, schema
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *types.RouterOutputProtocolConfigurationMemberRtmpPush:
+		s.WriteUnion(schema, schemas.RouterOutputProtocolConfiguration_RtmpPush)
+		s.WriteStruct(schemas.RouterOutputProtocolConfiguration_RtmpPush)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.RouterOutputProtocolConfigurationMemberRtp:
 		s.WriteUnion(schema, schemas.RouterOutputProtocolConfiguration_Rtp)
 		s.WriteStruct(schemas.RouterOutputProtocolConfiguration_Rtp)
@@ -411,6 +417,17 @@ func serializeRouterOutputStreamDetails(s smithy.ShapeSerializer, schema *smithy
 	case *types.RouterOutputStreamDetailsMemberStandard:
 		s.WriteUnion(schema, schemas.RouterOutputStreamDetails_Standard)
 		s.WriteStruct(schemas.RouterOutputStreamDetails_Standard)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeTlsEncryptionConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.TlsEncryptionConfiguration) {
+	switch vv := v.(type) {
+	case *types.TlsEncryptionConfigurationMemberPublic:
+		s.WriteUnion(schema, schemas.TlsEncryptionConfiguration_Public)
+		s.WriteStruct(schemas.TlsEncryptionConfiguration_Public)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -760,6 +777,10 @@ func deserializeRouterOutputProtocolConfiguration(d smithy.ShapeDeserializer, s 
 			vv := &types.RouterOutputProtocolConfigurationMemberRist{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.RouterOutputProtocolConfiguration_RtmpPush:
+			vv := &types.RouterOutputProtocolConfigurationMemberRtmpPush{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.RouterOutputProtocolConfiguration_Rtp:
 			vv := &types.RouterOutputProtocolConfigurationMemberRtp{}
 			*v = vv
@@ -790,6 +811,18 @@ func deserializeRouterOutputStreamDetails(d smithy.ShapeDeserializer, s *smithy.
 			return vv.Deserialize(d)
 		case schemas.RouterOutputStreamDetails_Standard:
 			vv := &types.RouterOutputStreamDetailsMemberStandard{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeTlsEncryptionConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.TlsEncryptionConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.TlsEncryptionConfiguration_Public:
+			vv := &types.TlsEncryptionConfigurationMemberPublic{}
 			*v = vv
 			return vv.Deserialize(d)
 		}

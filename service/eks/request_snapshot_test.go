@@ -525,6 +525,7 @@ func TestCheckRequestSnapshot_CreateCapability(t *testing.T) {
 						"__Member__",
 					},
 				},
+				EndpointPrefix: ptr.String("__EndpointPrefix__"),
 			},
 		},
 		Tags: map[string]string{
@@ -3303,6 +3304,7 @@ func TestUpdateRequestSnapshot_CreateCapability(t *testing.T) {
 						"__Member__",
 					},
 				},
+				EndpointPrefix: ptr.String("__EndpointPrefix__"),
 			},
 		},
 		Tags: map[string]string{

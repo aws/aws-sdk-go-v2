@@ -722,6 +722,7 @@ func TestUpdateResponseSnapshot_CreateAssistant(t *testing.T) {
 			AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 				"key0": {
 					AiAgentId: ptr.String("__AiAgentId__"),
+					Enabled:   ptr.Bool(true),
 				},
 			},
 			OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
@@ -1439,6 +1440,7 @@ func TestUpdateResponseSnapshot_CreateSession(t *testing.T) {
 			AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 				"key0": {
 					AiAgentId: ptr.String("__AiAgentId__"),
+					Enabled:   ptr.Bool(true),
 				},
 			},
 			Origin: types.Origin("SYSTEM"),
@@ -2121,6 +2123,7 @@ func TestUpdateResponseSnapshot_GetAssistant(t *testing.T) {
 			AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 				"key0": {
 					AiAgentId: ptr.String("__AiAgentId__"),
+					Enabled:   ptr.Bool(true),
 				},
 			},
 			OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
@@ -3042,6 +3045,7 @@ func TestUpdateResponseSnapshot_GetSession(t *testing.T) {
 			AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 				"key0": {
 					AiAgentId: ptr.String("__AiAgentId__"),
+					Enabled:   ptr.Bool(true),
 				},
 			},
 			Origin: types.Origin("SYSTEM"),
@@ -3694,6 +3698,7 @@ func TestUpdateResponseSnapshot_ListAssistants(t *testing.T) {
 				AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 					"key0": {
 						AiAgentId: ptr.String("__AiAgentId__"),
+						Enabled:   ptr.Bool(true),
 					},
 				},
 				OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
@@ -3729,6 +3734,7 @@ func TestUpdateResponseSnapshot_ListAssistants(t *testing.T) {
 				AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 					"key0": {
 						AiAgentId: ptr.String("__AiAgentId__"),
+						Enabled:   ptr.Bool(true),
 					},
 				},
 				OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
@@ -5606,6 +5612,18 @@ func TestUpdateResponseSnapshot_Retrieve(t *testing.T) {
 				ContentText:   ptr.String("__ContentText__"),
 			},
 		},
+		Errors: []types.RetrieveError{
+			{
+				AssociationId: ptr.String("__AssociationId__"),
+				Code:          types.RetrieveErrorCode("ACCESS_DENIED"),
+				Message:       ptr.String("__Message__"),
+			},
+			{
+				AssociationId: ptr.String("__AssociationId__"),
+				Code:          types.RetrieveErrorCode("ACCESS_DENIED"),
+				Message:       ptr.String("__Message__"),
+			},
+		},
 	}
 	proto := restjson1.New(schemas.WisdomService)
 	opSchema := smithy.NewOperationSchema(schemas.Retrieve, schemas.RetrieveResponse, schemas.RetrieveResponse)
@@ -6386,6 +6404,7 @@ func TestUpdateResponseSnapshot_UpdateAssistantAIAgent(t *testing.T) {
 			AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 				"key0": {
 					AiAgentId: ptr.String("__AiAgentId__"),
+					Enabled:   ptr.Bool(true),
 				},
 			},
 			OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
@@ -6973,6 +6992,7 @@ func TestUpdateResponseSnapshot_UpdateSession(t *testing.T) {
 			AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 				"key0": {
 					AiAgentId: ptr.String("__AiAgentId__"),
+					Enabled:   ptr.Bool(true),
 				},
 			},
 			Origin: types.Origin("SYSTEM"),

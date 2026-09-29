@@ -1196,6 +1196,16 @@ func TestCheckResponseSnapshot_CreateGlobalReplicationGroup(t *testing.T) {
 		GlobalReplicationGroupIdSuffix:    ptr.String("__GlobalReplicationGroupIdSuffix__"),
 		GlobalReplicationGroupDescription: ptr.String("__GlobalReplicationGroupDescription__"),
 		PrimaryReplicationGroupId:         ptr.String("__PrimaryReplicationGroupId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -9279,6 +9289,16 @@ func TestCheckResponseSnapshot_Error_GlobalReplicationGroupAlreadyExistsFault(t 
 		GlobalReplicationGroupIdSuffix:    ptr.String("__GlobalReplicationGroupIdSuffix__"),
 		GlobalReplicationGroupDescription: ptr.String("__GlobalReplicationGroupDescription__"),
 		PrimaryReplicationGroupId:         ptr.String("__PrimaryReplicationGroupId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -9304,65 +9324,8 @@ func TestCheckResponseSnapshot_Error_GlobalReplicationGroupNotFoundFault(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{
-		ReplicationGroupId:          ptr.String("__ReplicationGroupId__"),
-		ReplicationGroupDescription: ptr.String("__ReplicationGroupDescription__"),
-		GlobalReplicationGroupId:    ptr.String("__GlobalReplicationGroupId__"),
-		PrimaryClusterId:            ptr.String("__PrimaryClusterId__"),
-		AutomaticFailoverEnabled:    ptr.Bool(true),
-		MultiAZEnabled:              ptr.Bool(true),
-		NumCacheClusters:            ptr.Int32(1),
-		PreferredCacheClusterAZs: []string{
-			"__Member__",
-			"__Member__",
-		},
-		NumNodeGroups:        ptr.Int32(1),
-		ReplicasPerNodeGroup: ptr.Int32(1),
-		NodeGroupConfiguration: []types.NodeGroupConfiguration{
-			{
-				NodeGroupId:             ptr.String("__NodeGroupId__"),
-				Slots:                   ptr.String("__Slots__"),
-				ReplicaCount:            ptr.Int32(1),
-				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
-				ReplicaAvailabilityZones: []string{
-					"__Member__",
-					"__Member__",
-				},
-				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
-				ReplicaOutpostArns: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				NodeGroupId:             ptr.String("__NodeGroupId__"),
-				Slots:                   ptr.String("__Slots__"),
-				ReplicaCount:            ptr.Int32(1),
-				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
-				ReplicaAvailabilityZones: []string{
-					"__Member__",
-					"__Member__",
-				},
-				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
-				ReplicaOutpostArns: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		CacheNodeType:           ptr.String("__CacheNodeType__"),
-		Engine:                  ptr.String("__Engine__"),
-		EngineVersion:           ptr.String("__EngineVersion__"),
-		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
-		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
-		CacheSecurityGroupNames: []string{
-			"__Member__",
-			"__Member__",
-		},
-		SecurityGroupIds: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -9373,62 +9336,6 @@ func TestCheckResponseSnapshot_Error_GlobalReplicationGroupNotFoundFault(t *test
 				Value: ptr.String("__Value__"),
 			},
 		},
-		SnapshotArns: []string{
-			"__Member__",
-			"__Member__",
-		},
-		SnapshotName:               ptr.String("__SnapshotName__"),
-		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
-		Port:                       ptr.Int32(1),
-		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
-		AutoMinorVersionUpgrade:    ptr.Bool(true),
-		SnapshotRetentionLimit:     ptr.Int32(1),
-		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
-		AuthToken:                  ptr.String("__AuthToken__"),
-		TransitEncryptionEnabled:   ptr.Bool(true),
-		AtRestEncryptionEnabled:    ptr.Bool(true),
-		KmsKeyId:                   ptr.String("__KmsKeyId__"),
-		UserGroupIds: []string{
-			"__Member__",
-			"__Member__",
-		},
-		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
-			{
-				LogType:         types.LogType("slow-log"),
-				DestinationType: types.DestinationType("cloudwatch-logs"),
-				DestinationDetails: &types.DestinationDetails{
-					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
-						LogGroup: ptr.String("__LogGroup__"),
-					},
-					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
-						DeliveryStream: ptr.String("__DeliveryStream__"),
-					},
-				},
-				LogFormat: types.LogFormat("text"),
-				Enabled:   ptr.Bool(true),
-			},
-			{
-				LogType:         types.LogType("slow-log"),
-				DestinationType: types.DestinationType("cloudwatch-logs"),
-				DestinationDetails: &types.DestinationDetails{
-					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
-						LogGroup: ptr.String("__LogGroup__"),
-					},
-					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
-						DeliveryStream: ptr.String("__DeliveryStream__"),
-					},
-				},
-				LogFormat: types.LogFormat("text"),
-				Enabled:   ptr.Bool(true),
-			},
-		},
-		DataTieringEnabled:          ptr.Bool(true),
-		NetworkType:                 types.NetworkType("ipv4"),
-		IpDiscovery:                 types.IpDiscovery("ipv4"),
-		TransitEncryptionMode:       types.TransitEncryptionMode("preferred"),
-		ClusterMode:                 types.ClusterMode("enabled"),
-		ServerlessCacheSnapshotName: ptr.String("__ServerlessCacheSnapshotName__"),
-		Durability:                  types.Durability("default"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -10120,10 +10027,18 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AuthorizeCacheSecurityGroupIngress(context.Background(), &AuthorizeCacheSecurityGroupIngressInput{
-		CacheSecurityGroupName:  ptr.String("__CacheSecurityGroupName__"),
-		EC2SecurityGroupName:    ptr.String("__EC2SecurityGroupName__"),
-		EC2SecurityGroupOwnerId: ptr.String("__EC2SecurityGroupOwnerId__"),
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

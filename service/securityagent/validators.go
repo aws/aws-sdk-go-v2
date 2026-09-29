@@ -950,6 +950,26 @@ func (m *validateOpInitiateProviderRegistration) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListActorMessages struct {
+}
+
+func (*validateOpListActorMessages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListActorMessages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListActorMessagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListActorMessagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListArtifacts struct {
 }
 
@@ -1898,6 +1918,10 @@ func addOpInitiateProviderRegistrationValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpInitiateProviderRegistration{}, middleware.After)
 }
 
+func addOpListActorMessagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListActorMessages{}, middleware.After)
+}
+
 func addOpListArtifactsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListArtifacts{}, middleware.After)
 }
@@ -2547,6 +2571,44 @@ func validateReportDestination(v *types.ReportDestination) error {
 	}
 }
 
+func validateScopeChange(v *types.ScopeChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScopeChange"}
+	if v.IntegrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
+	}
+	if v.ProviderResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderResourceId"))
+	}
+	if v.HeadCommitSha == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HeadCommitSha"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScopeChangeList(v []types.ScopeChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScopeChangeList"}
+	for i := range v {
+		if err := validateScopeChange(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSecurityRequirementArtifact(v *types.SecurityRequirementArtifact) error {
 	if v == nil {
 		return nil
@@ -3127,6 +3189,11 @@ func validateOpCreateCodeReviewInput(v *CreateCodeReviewInput) error {
 			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3197,6 +3264,11 @@ func validateOpCreatePentestInput(v *CreatePentestInput) error {
 	if v.Assets != nil {
 		if err := validateAssets(v.Assets); err != nil {
 			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3559,6 +3631,27 @@ func validateOpInitiateProviderRegistrationInput(v *InitiateProviderRegistration
 	}
 }
 
+func validateOpListActorMessagesInput(v *ListActorMessagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListActorMessagesInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.PentestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PentestId"))
+	}
+	if v.ActorIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActorIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListArtifactsInput(v *ListArtifactsInput) error {
 	if v == nil {
 		return nil
@@ -3882,6 +3975,11 @@ func validateOpStartPentestJobInput(v *StartPentestJobInput) error {
 	if v.PentestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PentestId"))
 	}
+	if v.ScopeChanges != nil {
+		if err := validateScopeChangeList(v.ScopeChanges); err != nil {
+			invalidParams.AddNested("ScopeChanges", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4048,6 +4146,11 @@ func validateOpUpdateCodeReviewInput(v *UpdateCodeReviewInput) error {
 			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4112,6 +4215,11 @@ func validateOpUpdatePentestInput(v *UpdatePentestInput) error {
 	if v.Assets != nil {
 		if err := validateAssets(v.Assets); err != nil {
 			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4209,6 +4317,11 @@ func validateOpUpdateThreatModelInput(v *UpdateThreatModelInput) error {
 	if v.ScopeDocs != nil {
 		if err := validateDocumentList(v.ScopeDocs); err != nil {
 			invalidParams.AddNested("ScopeDocs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

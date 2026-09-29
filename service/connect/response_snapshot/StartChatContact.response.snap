@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"ContactId":"__ContactId__","ContinuedFromContactId":"__ContinuedFromContactId__","ParticipantId":"__ParticipantId__","ParticipantToken":"__ParticipantToken__"}
+{"ConnectionCredentials":{"ConnectionToken":"__ConnectionToken__","Expiry":"__Expiry__"},"ContactId":"__ContactId__","ContinuedFromContactId":"__ContinuedFromContactId__","ParticipantId":"__ParticipantId__","ParticipantToken":"__ParticipantToken__","StreamingId":"__StreamingId__","Websocket":{"ConnectionExpiry":"__ConnectionExpiry__","Url":"__Url__"}}

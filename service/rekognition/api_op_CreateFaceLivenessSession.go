@@ -20,6 +20,15 @@ import (
 // GetFaceLivenessSessionResults is called. This number is between 0 and 4. By
 // default, it is set to 0. The limit is best effort and based on the duration of
 // the selfie-video.
+//
+// You can use the ChallengePreferences option in the Settings parameter to choose
+// between the 'FaceMovementAndLightChallenge' or FaceMovementChallenge' settings.
+// See the [Shared Responsibility]page for details on guidance for which setting to choose between these
+// two settings depending on your use case and preferences. This parameter is
+// optional and if no parameter is provided, then the
+// 'FaceMovementAndLightChallenge' settings is applied by default.
+//
+// [Shared Responsibility]: https://docs.aws.amazon.com/rekognition/latest/dg/face-liveness-shared-responsibility-model.html
 func (c *Client) CreateFaceLivenessSession(ctx context.Context, params *CreateFaceLivenessSessionInput, optFns ...func(*Options)) (*CreateFaceLivenessSessionOutput, error) {
 	if params == nil {
 		params = &CreateFaceLivenessSessionInput{}

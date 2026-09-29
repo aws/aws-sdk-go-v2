@@ -595,6 +595,9 @@ func TestCheckRequestSnapshot_CreateBotLocale(t *testing.T) {
 			},
 		},
 		SpeechDetectionSensitivity: types.SpeechDetectionSensitivity("Default"),
+		SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+			Enabled: true,
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -11952,6 +11955,9 @@ func TestCheckRequestSnapshot_StartImport(t *testing.T) {
 					MinimumPlayDurationInMilliseconds:   ptr.Int32(1),
 					ResponseDeliveryDelayInMilliseconds: ptr.Int32(1),
 				},
+				SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+					Enabled: true,
+				},
 			},
 			CustomVocabularyImportSpecification: &types.CustomVocabularyImportSpecification{
 				BotId:      ptr.String("__BotId__"),
@@ -12439,6 +12445,9 @@ func TestCheckRequestSnapshot_UpdateBotLocale(t *testing.T) {
 			},
 		},
 		SpeechDetectionSensitivity: types.SpeechDetectionSensitivity("Default"),
+		SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+			Enabled: true,
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -21354,6 +21363,9 @@ func TestUpdateRequestSnapshot_CreateBotLocale(t *testing.T) {
 			},
 		},
 		SpeechDetectionSensitivity: types.SpeechDetectionSensitivity("Default"),
+		SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+			Enabled: true,
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -32711,6 +32723,9 @@ func TestUpdateRequestSnapshot_StartImport(t *testing.T) {
 					MinimumPlayDurationInMilliseconds:   ptr.Int32(1),
 					ResponseDeliveryDelayInMilliseconds: ptr.Int32(1),
 				},
+				SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+					Enabled: true,
+				},
 			},
 			CustomVocabularyImportSpecification: &types.CustomVocabularyImportSpecification{
 				BotId:      ptr.String("__BotId__"),
@@ -33198,6 +33213,9 @@ func TestUpdateRequestSnapshot_UpdateBotLocale(t *testing.T) {
 			},
 		},
 		SpeechDetectionSensitivity: types.SpeechDetectionSensitivity("Default"),
+		SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+			Enabled: true,
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

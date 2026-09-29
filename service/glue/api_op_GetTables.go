@@ -74,6 +74,16 @@ type GetTablesInput struct {
 	// TransactionId .
 	QueryAsOfTime *time.Time
 
+	// Specifies which tables the GetTables call returns. The allowable values are
+	// FEDERATED or ALL .
+	//
+	//   - If set to FEDERATED , returns only federated tables, which reference an
+	//   entity outside the Glue Data Catalog.
+	//
+	//   - If set to ALL , returns all tables in the database, both federated and
+	//   non-federated.
+	ResourceShareType types.TableResourceShareType
+
 	// The transaction ID at which to read the table contents.
 	TransactionId *string
 
@@ -113,6 +123,9 @@ func (v *GetTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.QueryAsOfTime != nil {
 		s.WriteTime(schemas.GetTablesRequest_QueryAsOfTime, *v.QueryAsOfTime)
+	}
+	if v.ResourceShareType != "" {
+		s.WriteString(schemas.GetTablesRequest_ResourceShareType, string(v.ResourceShareType))
 	}
 	if v.TransactionId != nil {
 		s.WriteString(schemas.GetTablesRequest_TransactionId, *v.TransactionId)

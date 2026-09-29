@@ -8601,6 +8601,26 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.connect#ConnectionCredentials": {
+            "type": "structure",
+            "members": {
+                "ConnectionToken": {
+                    "target": "com.amazonaws.connect#ParticipantToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection token used by the chat participant to call the Connect Customer Participant Service.</p>"
+                    }
+                },
+                "Expiry": {
+                    "target": "com.amazonaws.connect#ISO8601Datetime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration of the token. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,\n   2019-11-08T02:41:28.172Z.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The credentials that a chat participant uses to connect to the Connect Customer Participant Service.</p>"
+            }
+        },
         "com.amazonaws.connect#ConnectionData": {
             "type": "structure",
             "members": {
@@ -8619,6 +8639,47 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information required to join the call.</p>"
+            }
+        },
+        "com.amazonaws.connect#ConnectionType": {
+            "type": "enum",
+            "members": {
+                "WEBSOCKET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEBSOCKET"
+                    }
+                },
+                "CONNECTION_CREDENTIALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTION_CREDENTIALS"
+                    }
+                },
+                "AUTHENTICATION_SESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTHENTICATION_SESSION"
+                    }
+                },
+                "WEBRTC_CONNECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEBRTC_CONNECTION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ConnectionTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ConnectionType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.connect#Contact": {
@@ -33427,6 +33488,12 @@
                         "smithy.api#enumValue": "MULTI_PARTY_CONFERENCE"
                     }
                 },
+                "AUTO_MUTE_AGENT_ON_HOLD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO_MUTE_AGENT_ON_HOLD"
+                    }
+                },
                 "HIGH_VOLUME_OUTBOUND": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -36633,6 +36700,12 @@
                     "method": "GET",
                     "uri": "/instances/{InstanceId}/evaluation-form-ai-versions",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AIVersionSummaries",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -47135,6 +47208,15 @@
                 }
             }
         },
+        "com.amazonaws.connect#PreSignedConnectionUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
+            }
+        },
         "com.amazonaws.connect#PredefinedAttribute": {
             "type": "structure",
             "members": {
@@ -57090,7 +57172,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a flow to start a new chat for the customer. Response of this API provides a token required to obtain\n   credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Connect Customer Participant Service.</p>\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the\n   created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n         <p>A 429 error occurs in the following situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code> exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for\n      concurrent active chats</a> is exceeded. Active chat throttling returns a\n     <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your account may not\n   support the ability to configure custom chat durations. For more information, contact Amazon Web Services Support. </p>\n         <p>For more information about chat, see the following topics in the <i>Connect Customer\n   Administrator Guide</i>: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Connect Customer</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Initiates a flow to start a new chat for the customer. Response of this API provides a token required to obtain\n   credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Connect Customer Participant Service.</p>\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the\n   created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n         <p>To receive connection information directly in the response, set <code>ConnectionTypes</code> on the request. To\n   initiate real-time message streaming when the chat is created, set <code>ChatStreamingConfiguration</code> on the\n   request. Both parameters are optional.</p>\n         <p>A 429 error occurs in the following situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code> exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for\n      concurrent active chats</a> is exceeded. Active chat throttling returns a\n     <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your account may not\n   support the ability to configure custom chat durations. For more information, contact Amazon Web Services Support. </p>\n         <p>For more information about chat, see the following topics in the <i>Connect Customer\n   Administrator Guide</i>: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Connect Customer</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/chat",
@@ -57188,6 +57270,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of participant types to automatically disconnect when the end customer ends the chat session, allowing them to continue through disconnect flows such as surveys or feedback forms.</p>"
                     }
+                },
+                "ConnectionTypes": {
+                    "target": "com.amazonaws.connect#ConnectionTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of connection information to return in the response. This parameter is optional.</p>\n         <p>Specify <code>CONNECTION_CREDENTIALS</code> to receive a connection token. Specify <code>WEBSOCKET</code> to\n   receive a websocket URL. You can specify both. No other value returns connection information.</p>\n         <p>Request <code>WEBSOCKET</code> to get a URL the participant connects to directly. You do not need to call <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> for it. Request <code>CONNECTION_CREDENTIALS</code> on its own and the response\n   returns a connection token but no websocket URL.</p>\n         <p>If you omit this parameter, the response has no connection information.</p>\n         <note>\n            <p>If the information you request cannot be returned, StartChatContact returns an error rather than a response that\n    omits it.</p>\n         </note>"
+                    }
+                },
+                "ChatStreamingConfiguration": {
+                    "target": "com.amazonaws.connect#ChatStreamingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The streaming configuration, such as the Amazon SNS streaming endpoint. Use it to initiate real-time\n   message streaming when the chat is created. This parameter is optional.</p>\n         <p>When you set this parameter, the response includes <code>StreamingId</code>. You do not need to call <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html\">StartContactStreaming</a>.</p>\n         <note>\n            <p>This parameter starts message streaming only. The response does not include connection information, and setting\n    this parameter does not remove the need to call <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a>.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -57219,6 +57313,24 @@
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
                         "smithy.api#documentation": "<p>The contactId from which a persistent chat session is started. This field is populated only for persistent\n   chats.</p>"
+                    }
+                },
+                "ConnectionCredentials": {
+                    "target": "com.amazonaws.connect#ConnectionCredentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection credentials for the chat participant. Returned only when the request includes\n    <code>CONNECTION_CREDENTIALS</code> in <code>ConnectionTypes</code>.</p>"
+                    }
+                },
+                "Websocket": {
+                    "target": "com.amazonaws.connect#Websocket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The websocket for the chat participant. Returned only when the request includes <code>WEBSOCKET</code> in\n    <code>ConnectionTypes</code>.</p>"
+                    }
+                },
+                "StreamingId": {
+                    "target": "com.amazonaws.connect#StreamingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the streaming configuration enabled with the chat. Returned only when the request sets\n    <code>ChatStreamingConfiguration</code>. Use this value to call <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StopContactStreaming.html\">StopContactStreaming</a>.</p>"
                     }
                 }
             },
@@ -69866,6 +69978,26 @@
                     "min": 1,
                     "max": 36
                 }
+            }
+        },
+        "com.amazonaws.connect#Websocket": {
+            "type": "structure",
+            "members": {
+                "Url": {
+                    "target": "com.amazonaws.connect#PreSignedConnectionUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the websocket.</p>"
+                    }
+                },
+                "ConnectionExpiry": {
+                    "target": "com.amazonaws.connect#ISO8601Datetime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration of the websocket URL. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,\n   2019-11-08T02:41:28.172Z.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The websocket that a chat participant uses to receive messages and events for the chat.</p>"
             }
         },
         "com.amazonaws.connect#WeekdayOccurrenceInteger": {

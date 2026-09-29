@@ -2634,9 +2634,10 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
-		PolicyId:    ptr.String("__PolicyId__"),
-		PolicyHash:  ptr.String("__PolicyHash__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		PolicyId:     ptr.String("__PolicyId__"),
+		PolicyHash:   ptr.String("__PolicyHash__"),
+		DeletionMode: types.DeletionMode("RemoveSharing"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -20963,9 +20964,10 @@ func TestCheckResponseSnapshot_Error_MalformedResourcePolicyDocumentException(t 
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
-		PolicyId:    ptr.String("__PolicyId__"),
-		PolicyHash:  ptr.String("__PolicyHash__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		PolicyId:     ptr.String("__PolicyId__"),
+		PolicyHash:   ptr.String("__PolicyHash__"),
+		DeletionMode: types.DeletionMode("RemoveSharing"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -22374,9 +22376,10 @@ func TestCheckResponseSnapshot_Error_ResourcePolicyConflictException(t *testing.
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
-		PolicyId:    ptr.String("__PolicyId__"),
-		PolicyHash:  ptr.String("__PolicyHash__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		PolicyId:     ptr.String("__PolicyId__"),
+		PolicyHash:   ptr.String("__PolicyHash__"),
+		DeletionMode: types.DeletionMode("RemoveSharing"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -22407,9 +22410,10 @@ func TestCheckResponseSnapshot_Error_ResourcePolicyInvalidParameterException(t *
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
-		PolicyId:    ptr.String("__PolicyId__"),
-		PolicyHash:  ptr.String("__PolicyHash__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		PolicyId:     ptr.String("__PolicyId__"),
+		PolicyHash:   ptr.String("__PolicyHash__"),
+		DeletionMode: types.DeletionMode("RemoveSharing"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -22468,9 +22472,10 @@ func TestCheckResponseSnapshot_Error_ResourcePolicyNotFoundException(t *testing.
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
-		PolicyId:    ptr.String("__PolicyId__"),
-		PolicyHash:  ptr.String("__PolicyHash__"),
+		ResourceArn:  ptr.String("__ResourceArn__"),
+		PolicyId:     ptr.String("__PolicyId__"),
+		PolicyHash:   ptr.String("__PolicyHash__"),
+		DeletionMode: types.DeletionMode("RemoveSharing"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

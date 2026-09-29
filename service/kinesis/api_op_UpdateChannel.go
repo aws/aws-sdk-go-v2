@@ -50,12 +50,14 @@ type UpdateChannelInput struct {
 	// The updated Amazon CloudWatch Logs configuration for the channel.
 	LoggingConfiguration *types.ChannelLoggingUpdateInput
 
-	// The updated configuration for a general purpose Amazon S3 destination. Only
-	// DataFreshnessInSeconds can be updated.
+	// The updated configuration for a general purpose Amazon S3 destination. Specify
+	// this parameter when the channel delivers to a general purpose Amazon S3 bucket.
+	// Only DataFreshnessInSeconds can be updated.
 	S3DestinationConfiguration *types.S3DestinationUpdateInput
 
-	// The updated configuration for a streaming table destination. Only
-	// DataFreshnessInSeconds can be updated.
+	// The updated configuration for a streaming table destination. Specify this
+	// parameter when the channel delivers to streaming tables on Apache Iceberg in
+	// Amazon S3 Tables. Only DataFreshnessInSeconds can be updated.
 	S3TablesDestinationConfiguration *types.S3TablesDestinationUpdateInput
 
 	noSmithyDocumentSerde
@@ -95,7 +97,9 @@ func (in *UpdateChannelInput) bindEndpointParams(p *EndpointParameters) {
 
 type UpdateChannelOutput struct {
 
-	// The configuration and current status of the updated channel.
+	// The configuration and current status of the channel after the update, including
+	// its ARN, destination configuration, and lifecycle state. Immediately after the
+	// request, the state is UPDATING .
 	//
 	// This member is required.
 	ChannelDescription *types.ChannelDescription

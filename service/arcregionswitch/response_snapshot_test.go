@@ -344,7 +344,8 @@ func TestCheckResponseSnapshot_CreatePlan(t *testing.T) {
 					},
 				},
 			},
-			Name: ptr.String("__Name__"),
+			ServiceQuotaChecksEnabled: ptr.Bool(true),
+			Name:                      ptr.String("__Name__"),
 			Regions: []string{
 				"__Member__",
 				"__Member__",
@@ -550,7 +551,8 @@ func TestCheckResponseSnapshot_CreatePlan(t *testing.T) {
 				},
 			},
 		},
-		Name: ptr.String("__Name__"),
+		ServiceQuotaChecksEnabled: ptr.Bool(true),
+		Name:                      ptr.String("__Name__"),
 		Regions: []string{
 			"__Member__",
 			"__Member__",
@@ -779,7 +781,8 @@ func TestCheckResponseSnapshot_GetPlan(t *testing.T) {
 					},
 				},
 			},
-			Name: ptr.String("__Name__"),
+			ServiceQuotaChecksEnabled: ptr.Bool(true),
+			Name:                      ptr.String("__Name__"),
 			Regions: []string{
 				"__Member__",
 				"__Member__",
@@ -1083,7 +1086,8 @@ func TestCheckResponseSnapshot_GetPlanExecution(t *testing.T) {
 					},
 				},
 			},
-			Name: ptr.String("__Name__"),
+			ServiceQuotaChecksEnabled: ptr.Bool(true),
+			Name:                      ptr.String("__Name__"),
 			Regions: []string{
 				"__Member__",
 				"__Member__",
@@ -1326,7 +1330,8 @@ func TestCheckResponseSnapshot_GetPlanInRegion(t *testing.T) {
 					},
 				},
 			},
-			Name: ptr.String("__Name__"),
+			ServiceQuotaChecksEnabled: ptr.Bool(true),
+			Name:                      ptr.String("__Name__"),
 			Regions: []string{
 				"__Member__",
 				"__Member__",
@@ -1678,6 +1683,64 @@ func TestCheckResponseSnapshot_ListRoute53HealthChecksInRegion(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListServiceQuotaWarnings(t *testing.T) {
+	want := &ListServiceQuotaWarningsOutput{
+		ServiceQuotaWarningSummaries: []types.ServiceQuotaWarningSummary{
+			{
+				AccountId:        ptr.String("__AccountId__"),
+				QuotaRegion:      ptr.String("__QuotaRegion__"),
+				ServiceCode:      ptr.String("__ServiceCode__"),
+				QuotaCode:        ptr.String("__QuotaCode__"),
+				QuotaName:        ptr.String("__QuotaName__"),
+				Status:           types.ServiceQuotaWarningStatus("pending"),
+				PlanArn:          ptr.String("__PlanArn__"),
+				RequestId:        ptr.String("__RequestId__"),
+				CaseId:           ptr.String("__CaseId__"),
+				WarningMessage:   ptr.String("__WarningMessage__"),
+				LastCheckedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				WarningCreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				AccountId:        ptr.String("__AccountId__"),
+				QuotaRegion:      ptr.String("__QuotaRegion__"),
+				ServiceCode:      ptr.String("__ServiceCode__"),
+				QuotaCode:        ptr.String("__QuotaCode__"),
+				QuotaName:        ptr.String("__QuotaName__"),
+				Status:           types.ServiceQuotaWarningStatus("pending"),
+				PlanArn:          ptr.String("__PlanArn__"),
+				RequestId:        ptr.String("__RequestId__"),
+				CaseId:           ptr.String("__CaseId__"),
+				WarningMessage:   ptr.String("__WarningMessage__"),
+				LastCheckedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				WarningCreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListServiceQuotaWarnings.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListServiceQuotaWarnings(context.Background(), &ListServiceQuotaWarningsInput{
+		PlanArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListServiceQuotaWarnings.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	want := &ListTagsForResourceOutput{
 		ResourceTags: map[string]string{
@@ -1975,7 +2038,8 @@ func TestCheckResponseSnapshot_UpdatePlan(t *testing.T) {
 					},
 				},
 			},
-			Name: ptr.String("__Name__"),
+			ServiceQuotaChecksEnabled: ptr.Bool(true),
+			Name:                      ptr.String("__Name__"),
 			Regions: []string{
 				"__Member__",
 				"__Member__",
@@ -2182,6 +2246,7 @@ func TestCheckResponseSnapshot_UpdatePlan(t *testing.T) {
 				},
 			},
 		},
+		ServiceQuotaChecksEnabled: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)

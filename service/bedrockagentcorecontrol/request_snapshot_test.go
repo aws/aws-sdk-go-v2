@@ -1292,6 +1292,7 @@ func TestCheckRequestSnapshot_CreateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -5955,6 +5956,43 @@ func TestCheckRequestSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_RotatePaymentConnectorCredentials(t *testing.T) {
+	input := &RotatePaymentConnectorCredentialsInput{
+		PaymentManagerId:   ptr.String("__PaymentManagerId__"),
+		PaymentConnectorId: ptr.String("__PaymentConnectorId__"),
+		CredentialsToRotate: &types.CredentialRotationConfigMemberCoinbaseCDP{
+			Value: types.CoinbaseCdpRotationTargets{
+				Secrets: []types.CoinbaseCdpSecret{
+					types.CoinbaseCdpSecret("API_KEY"),
+					types.CoinbaseCdpSecret("API_KEY"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RotatePaymentConnectorCredentials(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RotatePaymentConnectorCredentials"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_SetTokenVaultCMK(t *testing.T) {
 	input := &SetTokenVaultCMKInput{
 		TokenVaultId: ptr.String("__TokenVaultId__"),
@@ -6629,6 +6667,7 @@ func TestCheckRequestSnapshot_UpdateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -9653,6 +9692,7 @@ func TestUpdateRequestSnapshot_CreateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -14316,6 +14356,43 @@ func TestUpdateRequestSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_RotatePaymentConnectorCredentials(t *testing.T) {
+	input := &RotatePaymentConnectorCredentialsInput{
+		PaymentManagerId:   ptr.String("__PaymentManagerId__"),
+		PaymentConnectorId: ptr.String("__PaymentConnectorId__"),
+		CredentialsToRotate: &types.CredentialRotationConfigMemberCoinbaseCDP{
+			Value: types.CoinbaseCdpRotationTargets{
+				Secrets: []types.CoinbaseCdpSecret{
+					types.CoinbaseCdpSecret("API_KEY"),
+					types.CoinbaseCdpSecret("API_KEY"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RotatePaymentConnectorCredentials(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RotatePaymentConnectorCredentials"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_SetTokenVaultCMK(t *testing.T) {
 	input := &SetTokenVaultCMKInput{
 		TokenVaultId: ptr.String("__TokenVaultId__"),
@@ -14990,6 +15067,7 @@ func TestUpdateRequestSnapshot_UpdateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),

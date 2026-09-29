@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"associatedTemplateAndRuleList":[{"templateArn":"__AssociatedTemplateOrRuleMemberTemplateArn__"},{"templateArn":"__AssociatedTemplateOrRuleMemberTemplateArn__"}],"firewallType":"WAF","hasPublishedVersion":true,"isSnapshot":true,"policyArn":"__PolicyArn__","policyConfiguration":{"remediationEnabled":true,"resourcesCleanUp":true,"wafConfig":{"conflictResolution":"MERGE_WHERE_APPLICABLE","existingCustomerWebACLResolution":"RETROFIT"}},"policyDescription":"__PolicyDescription__","policyId":"__PolicyId__","policyName":"__PolicyName__","priority":1,"status":"DRAFT","updateToken":"__UpdateToken__","updatedAt":"2000-01-01T00:00:00Z","version":"__Version__"}

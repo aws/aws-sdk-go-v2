@@ -1327,6 +1327,7 @@ func TestCheckRequestSnapshot_CreateEnvironmentBlueprint(t *testing.T) {
 				IsUpdateSupported: ptr.Bool(true),
 			},
 		},
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6709,6 +6710,7 @@ func TestCheckRequestSnapshot_UpdateEnvironmentBlueprint(t *testing.T) {
 				IsUpdateSupported: ptr.Bool(true),
 			},
 		},
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8518,6 +8520,7 @@ func TestUpdateRequestSnapshot_CreateEnvironmentBlueprint(t *testing.T) {
 				IsUpdateSupported: ptr.Bool(true),
 			},
 		},
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -13900,6 +13903,7 @@ func TestUpdateRequestSnapshot_UpdateEnvironmentBlueprint(t *testing.T) {
 				IsUpdateSupported: ptr.Bool(true),
 			},
 		},
+		BlueprintCategory: types.BlueprintCategory("TOOLING"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

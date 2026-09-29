@@ -12,7 +12,11 @@ import (
 )
 
 // Updates a distribution configuration. Distribution configurations define and
-// configure the outputs of your pipeline.
+// configure the outputs for your images, including the target Regions, accounts,
+// and settings for each Region.
+//
+// This operation doesn't support selective updates. The request replaces the
+// stored configuration, so include every setting that you want to keep.
 func (c *Client) UpdateDistributionConfiguration(ctx context.Context, params *UpdateDistributionConfigurationInput, optFns ...func(*Options)) (*UpdateDistributionConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionConfigurationInput{}
@@ -31,9 +35,9 @@ func (c *Client) UpdateDistributionConfiguration(ctx context.Context, params *Up
 type UpdateDistributionConfigurationInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -46,7 +50,10 @@ type UpdateDistributionConfigurationInput struct {
 	// This member is required.
 	DistributionConfigurationArn *string
 
-	// The distributions of the distribution configuration.
+	// The distribution settings for the configuration. Each entry defines how output
+	// images are distributed in one target Amazon Web Services Region. A Region can
+	// appear at most once in the list. This list replaces the configuration's existing
+	// distributions entirely.
 	//
 	// This member is required.
 	Distributions []types.Distribution

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.ListBusinessSupportSubscriptionHistory
+
+{"accountId":"__AccountId__","billingMonth":"__BillingMonth__","endDate":946684800,"maxResults":1,"nextToken":"__NextToken__","startDate":946684800}

@@ -1119,6 +1119,12 @@ var ___listOfJobTemplate = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var ___listOfJobTemplate_member *smithy.Schema
 
+var ___listOfMotionImageInserter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "__listOfMotionImageInserter",
+}, smithy.ShapeTypeList, 1)
+var ___listOfMotionImageInserter_member *smithy.Schema
+
 var ___listOfMsSmoothAdditionalManifest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "__listOfMsSmoothAdditionalManifest",
@@ -2298,7 +2304,7 @@ var AudioProperties_SampleRate *smithy.Schema
 var AudioSelector = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "AudioSelector",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var AudioSelector_AudioDurationCorrection *smithy.Schema
 
 var AudioSelector_CustomLanguageCode *smithy.Schema
@@ -2320,6 +2326,8 @@ var AudioSelector_ProgramSelection *smithy.Schema
 var AudioSelector_RemixSettings *smithy.Schema
 
 var AudioSelector_SelectorType *smithy.Schema
+
+var AudioSelector_Smpte337Passthrough *smithy.Schema
 
 var AudioSelector_Streams *smithy.Schema
 
@@ -2346,6 +2354,14 @@ var AudioSelectorType_HLS_RENDITION_GROUP *smithy.Schema
 var AudioSelectorType_ALL_PCM *smithy.Schema
 
 var AudioSelectorType_STREAM *smithy.Schema
+
+var AudioSmpte337Passthrough = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "AudioSmpte337Passthrough",
+}, smithy.ShapeTypeEnum, 2)
+var AudioSmpte337Passthrough_ENABLED *smithy.Schema
+
+var AudioSmpte337Passthrough_DISABLED *smithy.Schema
 
 var AudioTypeControl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
@@ -4998,7 +5014,7 @@ var ForceIncludeRenditionSize_Width *smithy.Schema
 var Format = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "Format",
-}, smithy.ShapeTypeEnum, 13)
+}, smithy.ShapeTypeEnum, 18)
 var Format_mp4 *smithy.Schema
 
 var Format_quicktime *smithy.Schema
@@ -5024,6 +5040,16 @@ var Format_flac *smithy.Schema
 var Format_asf *smithy.Schema
 
 var Format_ogg *smithy.Schema
+
+var Format_three_gp *smithy.Schema
+
+var Format_three_g2 *smithy.Schema
+
+var Format_aac *smithy.Schema
+
+var Format_ac3 *smithy.Schema
+
+var Format_eac3 *smithy.Schema
 
 var FrameCaptureSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
@@ -6820,7 +6846,7 @@ var JobPhase_UPLOADING *smithy.Schema
 var JobSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "JobSettings",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var JobSettings_AdAvailOffset *smithy.Schema
 
 var JobSettings_AvailBlanking *smithy.Schema
@@ -6838,6 +6864,8 @@ var JobSettings_Inputs *smithy.Schema
 var JobSettings_KantarWatermark *smithy.Schema
 
 var JobSettings_MotionImageInserter *smithy.Schema
+
+var JobSettings_MotionImageInserters *smithy.Schema
 
 var JobSettings_NielsenConfiguration *smithy.Schema
 
@@ -6946,7 +6974,7 @@ var JobTemplateListBy_SYSTEM *smithy.Schema
 var JobTemplateSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "JobTemplateSettings",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var JobTemplateSettings_AdAvailOffset *smithy.Schema
 
 var JobTemplateSettings_AvailBlanking *smithy.Schema
@@ -6964,6 +6992,8 @@ var JobTemplateSettings_Inputs *smithy.Schema
 var JobTemplateSettings_KantarWatermark *smithy.Schema
 
 var JobTemplateSettings_MotionImageInserter *smithy.Schema
+
+var JobTemplateSettings_MotionImageInserters *smithy.Schema
 
 var JobTemplateSettings_NielsenConfiguration *smithy.Schema
 
@@ -8801,11 +8831,25 @@ var PartnerWatermarking = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var PartnerWatermarking_NexguardFileMarkerSettings *smithy.Schema
 
+var PassthroughSegmentationMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "PassthroughSegmentationMode",
+}, smithy.ShapeTypeEnum, 3)
+var PassthroughSegmentationMode_AUTO *smithy.Schema
+
+var PassthroughSegmentationMode_DURATION_BASED *smithy.Schema
+
+var PassthroughSegmentationMode_GOP_COUNT *smithy.Schema
+
 var PassthroughSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "PassthroughSettings",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 4)
 var PassthroughSettings_FrameControl *smithy.Schema
+
+var PassthroughSettings_GopsPerSegment *smithy.Schema
+
+var PassthroughSettings_SegmentationMode *smithy.Schema
 
 var PassthroughSettings_VideoSelectorMode *smithy.Schema
 
@@ -13274,6 +13318,10 @@ func init() {
 
 	AudioSelectorType_STREAM = AudioSelectorType.AddMember("STREAM", smithyprelude.Unit)
 
+	AudioSmpte337Passthrough_ENABLED = AudioSmpte337Passthrough.AddMember("ENABLED", smithyprelude.Unit)
+
+	AudioSmpte337Passthrough_DISABLED = AudioSmpte337Passthrough.AddMember("DISABLED", smithyprelude.Unit)
+
 	AudioSelector_AudioDurationCorrection = AudioSelector.AddMember("AudioDurationCorrection", AudioDurationCorrection, &smithytraits.JSONName{Name: "audioDurationCorrection"})
 
 	AudioSelector_CustomLanguageCode = AudioSelector.AddMember("CustomLanguageCode", ___stringMin3Max3PatternAZaZ3, &smithytraits.JSONName{Name: "customLanguageCode"})
@@ -13295,6 +13343,8 @@ func init() {
 	AudioSelector_RemixSettings = AudioSelector.AddMember("RemixSettings", RemixSettings, &smithytraits.JSONName{Name: "remixSettings"})
 
 	AudioSelector_SelectorType = AudioSelector.AddMember("SelectorType", AudioSelectorType, &smithytraits.JSONName{Name: "selectorType"})
+
+	AudioSelector_Smpte337Passthrough = AudioSelector.AddMember("Smpte337Passthrough", AudioSmpte337Passthrough, &smithytraits.JSONName{Name: "smpte337Passthrough"})
 
 	AudioSelector_Streams = AudioSelector.AddMember("Streams", ___listOf__integerMin1Max2147483647, &smithytraits.JSONName{Name: "streams"})
 
@@ -13981,6 +14031,8 @@ func init() {
 	MotionImageInserter_Playback = MotionImageInserter.AddMember("Playback", MotionImagePlayback, &smithytraits.JSONName{Name: "playback"})
 
 	MotionImageInserter_StartTime = MotionImageInserter.AddMember("StartTime", ___stringMin11Max11Pattern01D20305D205D, &smithytraits.JSONName{Name: "startTime"})
+
+	___listOfMotionImageInserter_member = ___listOfMotionImageInserter.AddMember("member", MotionImageInserter)
 
 	NielsenConfiguration_BreakoutCode = NielsenConfiguration.AddMember("BreakoutCode", ___integerMin0Max0, &smithytraits.JSONName{Name: "breakoutCode"})
 
@@ -16282,11 +16334,21 @@ func init() {
 
 	FrameControl_NEAREST_IFRAME = FrameControl.AddMember("NEAREST_IFRAME", smithyprelude.Unit)
 
+	PassthroughSegmentationMode_AUTO = PassthroughSegmentationMode.AddMember("AUTO", smithyprelude.Unit)
+
+	PassthroughSegmentationMode_DURATION_BASED = PassthroughSegmentationMode.AddMember("DURATION_BASED", smithyprelude.Unit)
+
+	PassthroughSegmentationMode_GOP_COUNT = PassthroughSegmentationMode.AddMember("GOP_COUNT", smithyprelude.Unit)
+
 	VideoSelectorMode_AUTO = VideoSelectorMode.AddMember("AUTO", smithyprelude.Unit)
 
 	VideoSelectorMode_REMUX_ALL = VideoSelectorMode.AddMember("REMUX_ALL", smithyprelude.Unit)
 
 	PassthroughSettings_FrameControl = PassthroughSettings.AddMember("FrameControl", FrameControl, &smithytraits.JSONName{Name: "frameControl"})
+
+	PassthroughSettings_GopsPerSegment = PassthroughSettings.AddMember("GopsPerSegment", ___integerMin1Max100, &smithytraits.JSONName{Name: "gopsPerSegment"})
+
+	PassthroughSettings_SegmentationMode = PassthroughSettings.AddMember("SegmentationMode", PassthroughSegmentationMode, &smithytraits.JSONName{Name: "segmentationMode"})
 
 	PassthroughSettings_VideoSelectorMode = PassthroughSettings.AddMember("VideoSelectorMode", VideoSelectorMode, &smithytraits.JSONName{Name: "videoSelectorMode"})
 
@@ -17172,6 +17234,8 @@ func init() {
 
 	JobSettings_MotionImageInserter = JobSettings.AddMember("MotionImageInserter", MotionImageInserter, &smithytraits.JSONName{Name: "motionImageInserter"})
 
+	JobSettings_MotionImageInserters = JobSettings.AddMember("MotionImageInserters", ___listOfMotionImageInserter, &smithytraits.JSONName{Name: "motionImageInserters"})
+
 	JobSettings_NielsenConfiguration = JobSettings.AddMember("NielsenConfiguration", NielsenConfiguration, &smithytraits.JSONName{Name: "nielsenConfiguration"})
 
 	JobSettings_NielsenNonLinearWatermark = JobSettings.AddMember("NielsenNonLinearWatermark", NielsenNonLinearWatermarkSettings, &smithytraits.JSONName{Name: "nielsenNonLinearWatermark"})
@@ -17360,6 +17424,8 @@ func init() {
 
 	JobTemplateSettings_MotionImageInserter = JobTemplateSettings.AddMember("MotionImageInserter", MotionImageInserter, &smithytraits.JSONName{Name: "motionImageInserter"})
 
+	JobTemplateSettings_MotionImageInserters = JobTemplateSettings.AddMember("MotionImageInserters", ___listOfMotionImageInserter, &smithytraits.JSONName{Name: "motionImageInserters"})
+
 	JobTemplateSettings_NielsenConfiguration = JobTemplateSettings.AddMember("NielsenConfiguration", NielsenConfiguration, &smithytraits.JSONName{Name: "nielsenConfiguration"})
 
 	JobTemplateSettings_NielsenNonLinearWatermark = JobTemplateSettings.AddMember("NielsenNonLinearWatermark", NielsenNonLinearWatermarkSettings, &smithytraits.JSONName{Name: "nielsenNonLinearWatermark"})
@@ -17457,6 +17523,16 @@ func init() {
 	Format_asf = Format.AddMember("asf", smithyprelude.Unit)
 
 	Format_ogg = Format.AddMember("ogg", smithyprelude.Unit)
+
+	Format_three_gp = Format.AddMember("three_gp", smithyprelude.Unit)
+
+	Format_three_g2 = Format.AddMember("three_g2", smithyprelude.Unit)
+
+	Format_aac = Format.AddMember("aac", smithyprelude.Unit)
+
+	Format_ac3 = Format.AddMember("ac3", smithyprelude.Unit)
+
+	Format_eac3 = Format.AddMember("eac3", smithyprelude.Unit)
 
 	FrameRate_Denominator = FrameRate.AddMember("Denominator", ___integer, &smithytraits.JSONName{Name: "denominator"})
 

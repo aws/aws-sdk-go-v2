@@ -13,6 +13,11 @@ var AssociateDatasetKmsKey = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AssociateDatasetKmsKey",
 }, smithy.ShapeTypeOperation, 0)
 
+var CreateResourceMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "CreateResourceMetricsConfiguration",
+}, smithy.ShapeTypeOperation, 0)
+
 var DeleteAlarmMuteRule = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "DeleteAlarmMuteRule",
@@ -41,6 +46,11 @@ var DeleteInsightRules = smithy.NewSchema(smithy.ShapeID{
 var DeleteMetricStream = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "DeleteMetricStream",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteResourceMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "DeleteResourceMetricsConfiguration",
 }, smithy.ShapeTypeOperation, 0)
 
 var DescribeAlarmContributors = smithy.NewSchema(smithy.ShapeID{
@@ -141,6 +151,11 @@ var GetMetricWidgetImage = smithy.NewSchema(smithy.ShapeID{
 var GetOTelEnrichment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "GetOTelEnrichment",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetResourceMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "GetResourceMetricsConfiguration",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListAlarmMuteRules = smithy.NewSchema(smithy.ShapeID{
@@ -256,6 +271,16 @@ var TagResource = smithy.NewSchema(smithy.ShapeID{
 var UntagResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "UntagResource",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateOTelEnrichment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "UpdateOTelEnrichment",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateResourceMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "UpdateResourceMetricsConfiguration",
 }, smithy.ShapeTypeOperation, 0)
 
 var _GraniteServiceVersion20100801 = smithy.NewSchema(smithy.ShapeID{
@@ -1658,6 +1683,12 @@ var _MetricName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MetricName",
 }, smithy.ShapeTypeString, 0)
 
+var _MetricNameList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "MetricNameList",
+}, smithy.ShapeTypeList, 1)
+var _MetricNameList_member *smithy.Schema
+
 var _Metrics = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "Metrics",
@@ -1840,6 +1871,26 @@ var _OnlyStartEvaluatingAfterWarmUpPeriodEnds = smithy.NewSchema(smithy.ShapeID{
 	Name:      "OnlyStartEvaluatingAfterWarmUpPeriodEnds",
 }, smithy.ShapeTypeBoolean, 0)
 
+var _OTelEnrichmentMetricNameList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "OTelEnrichmentMetricNameList",
+}, smithy.ShapeTypeList, 1)
+var _OTelEnrichmentMetricNameList_member *smithy.Schema
+
+var OTelEnrichmentMetricSelector = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "OTelEnrichmentMetricSelector",
+}, smithy.ShapeTypeStructure, 2)
+var OTelEnrichmentMetricSelector_Namespace *smithy.Schema
+
+var OTelEnrichmentMetricSelector_MetricNames *smithy.Schema
+
+var _OTelEnrichmentMetricSelectorList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "OTelEnrichmentMetricSelectorList",
+}, smithy.ShapeTypeList, 1)
+var _OTelEnrichmentMetricSelectorList_member *smithy.Schema
+
 var OTelEnrichmentStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "OTelEnrichmentStatus",
@@ -1925,6 +1976,11 @@ var _RecoveryPeriod = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RecoveryPeriod",
 }, smithy.ShapeTypeInteger, 0)
 
+var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "ResourceArn",
+}, smithy.ShapeTypeString, 0)
+
 var ResourceConflict = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "ResourceConflict",
@@ -1943,6 +1999,30 @@ var _ResourceList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ResourceList",
 }, smithy.ShapeTypeList, 1)
 var _ResourceList_member *smithy.Schema
+
+var ResourceMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "ResourceMetricsConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var ResourceMetricsConfiguration_ResourceArn *smithy.Schema
+
+var ResourceMetricsConfiguration_CreatedAt *smithy.Schema
+
+var ResourceMetricsConfiguration_UpdatedAt *smithy.Schema
+
+var ResourceMetricsConfiguration_MetricSelections *smithy.Schema
+
+var ResourceMetricSelection = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "ResourceMetricSelection",
+}, smithy.ShapeTypeStructure, 1)
+var ResourceMetricSelection_IncludeMetrics *smithy.Schema
+
+var _ResourceMetricSelectionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "ResourceMetricSelectionList",
+}, smithy.ShapeTypeList, 1)
+var _ResourceMetricSelectionList_member *smithy.Schema
 
 var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -2273,6 +2353,19 @@ var _TreatMissingData = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TreatMissingData",
 }, smithy.ShapeTypeString, 0)
 
+var ValidationException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "ValidationException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+	&smithytraits.AWSQueryError{ErrorCode: "ValidationError",
+		StatusCode: 400})
+var ValidationException_message *smithy.Schema
+
+var _ValidationExceptionMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "ValidationExceptionMessage",
+}, smithy.ShapeTypeString, 0)
+
 var _Values = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "Values",
@@ -2310,6 +2403,20 @@ var AssociateDatasetKmsKeyOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "AssociateDatasetKmsKeyOutput",
 }, smithy.ShapeTypeStructure, 0)
+
+var CreateResourceMetricsConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "CreateResourceMetricsConfigurationInput",
+}, smithy.ShapeTypeStructure, 2)
+var CreateResourceMetricsConfigurationInput_ResourceArn *smithy.Schema
+
+var CreateResourceMetricsConfigurationInput_MetricSelections *smithy.Schema
+
+var CreateResourceMetricsConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "CreateResourceMetricsConfigurationOutput",
+}, smithy.ShapeTypeStructure, 1)
+var CreateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration *smithy.Schema
 
 var DeleteAlarmMuteRuleInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -2378,6 +2485,17 @@ var DeleteMetricStreamInput_Name *smithy.Schema
 var DeleteMetricStreamOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "DeleteMetricStreamOutput",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteResourceMetricsConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "DeleteResourceMetricsConfigurationInput",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteResourceMetricsConfigurationInput_ResourceArn *smithy.Schema
+
+var DeleteResourceMetricsConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "DeleteResourceMetricsConfigurationOutput",
 }, smithy.ShapeTypeStructure, 0)
 
 var DescribeAlarmContributorsInput = smithy.NewSchema(smithy.ShapeID{
@@ -2783,8 +2901,28 @@ var GetOTelEnrichmentInput = smithy.NewSchema(smithy.ShapeID{
 var GetOTelEnrichmentOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "GetOTelEnrichmentOutput",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 5)
 var GetOTelEnrichmentOutput_Status *smithy.Schema
+
+var GetOTelEnrichmentOutput_IncludeFilters *smithy.Schema
+
+var GetOTelEnrichmentOutput_ExcludeFilters *smithy.Schema
+
+var GetOTelEnrichmentOutput_CreatedAt *smithy.Schema
+
+var GetOTelEnrichmentOutput_UpdatedAt *smithy.Schema
+
+var GetResourceMetricsConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "GetResourceMetricsConfigurationInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetResourceMetricsConfigurationInput_ResourceArn *smithy.Schema
+
+var GetResourceMetricsConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "GetResourceMetricsConfigurationOutput",
+}, smithy.ShapeTypeStructure, 1)
+var GetResourceMetricsConfigurationOutput_ResourceMetricsConfiguration *smithy.Schema
 
 var ListAlarmMuteRulesInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -3171,12 +3309,22 @@ var StartMetricStreamsOutput = smithy.NewSchema(smithy.ShapeID{
 var StartOTelEnrichmentInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "StartOTelEnrichmentInput",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 2)
+var StartOTelEnrichmentInput_IncludeFilters *smithy.Schema
+
+var StartOTelEnrichmentInput_ExcludeFilters *smithy.Schema
 
 var StartOTelEnrichmentOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "StartOTelEnrichmentOutput",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 4)
+var StartOTelEnrichmentOutput_IncludeFilters *smithy.Schema
+
+var StartOTelEnrichmentOutput_ExcludeFilters *smithy.Schema
+
+var StartOTelEnrichmentOutput_CreatedAt *smithy.Schema
+
+var StartOTelEnrichmentOutput_UpdatedAt *smithy.Schema
 
 var StopMetricStreamsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -3224,6 +3372,40 @@ var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "UntagResourceOutput",
 }, smithy.ShapeTypeStructure, 0)
+
+var UpdateOTelEnrichmentInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "UpdateOTelEnrichmentInput",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateOTelEnrichmentInput_IncludeFilters *smithy.Schema
+
+var UpdateOTelEnrichmentInput_ExcludeFilters *smithy.Schema
+
+var UpdateOTelEnrichmentOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "UpdateOTelEnrichmentOutput",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateOTelEnrichmentOutput_IncludeFilters *smithy.Schema
+
+var UpdateOTelEnrichmentOutput_ExcludeFilters *smithy.Schema
+
+var UpdateOTelEnrichmentOutput_CreatedAt *smithy.Schema
+
+var UpdateOTelEnrichmentOutput_UpdatedAt *smithy.Schema
+
+var UpdateResourceMetricsConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "UpdateResourceMetricsConfigurationInput",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateResourceMetricsConfigurationInput_ResourceArn *smithy.Schema
+
+var UpdateResourceMetricsConfigurationInput_MetricSelections *smithy.Schema
+
+var UpdateResourceMetricsConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "UpdateResourceMetricsConfigurationOutput",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -3942,6 +4124,8 @@ func init() {
 
 	_MetricDataResults_member = _MetricDataResults.AddMember("member", MetricDataResult)
 
+	_MetricNameList_member = _MetricNameList.AddMember("member", _MetricName)
+
 	_Metrics_member = _Metrics.AddMember("member", Metric)
 
 	MetricStreamOutputFormat_JSON = MetricStreamOutputFormat.AddMember("JSON", smithyprelude.Unit)
@@ -3996,6 +4180,14 @@ func init() {
 
 	MuteTargets_AlarmNames = MuteTargets.AddMember("AlarmNames", _MuteTargetAlarmNameList)
 
+	_OTelEnrichmentMetricNameList_member = _OTelEnrichmentMetricNameList.AddMember("member", _MetricName)
+
+	OTelEnrichmentMetricSelector_Namespace = OTelEnrichmentMetricSelector.AddMember("Namespace", _Namespace)
+
+	OTelEnrichmentMetricSelector_MetricNames = OTelEnrichmentMetricSelector.AddMember("MetricNames", _OTelEnrichmentMetricNameList)
+
+	_OTelEnrichmentMetricSelectorList_member = _OTelEnrichmentMetricSelectorList.AddMember("member", OTelEnrichmentMetricSelector)
+
 	OTelEnrichmentStatus_RUNNING = OTelEnrichmentStatus.AddMember("RUNNING", smithyprelude.Unit)
 
 	OTelEnrichmentStatus_STOPPED = OTelEnrichmentStatus.AddMember("STOPPED", smithyprelude.Unit)
@@ -4005,6 +4197,18 @@ func init() {
 	RecentlyActive_PT3H = RecentlyActive.AddMember("PT3H", smithyprelude.Unit)
 
 	ResourceConflict_message = ResourceConflict.AddMember("message", _ErrorMessage)
+
+	ResourceMetricSelection_IncludeMetrics = ResourceMetricSelection.AddMember("IncludeMetrics", _MetricNameList)
+
+	_ResourceMetricSelectionList_member = _ResourceMetricSelectionList.AddMember("member", ResourceMetricSelection)
+
+	ResourceMetricsConfiguration_ResourceArn = ResourceMetricsConfiguration.AddMember("ResourceArn", _ResourceArn)
+
+	ResourceMetricsConfiguration_CreatedAt = ResourceMetricsConfiguration.AddMember("CreatedAt", _Timestamp)
+
+	ResourceMetricsConfiguration_UpdatedAt = ResourceMetricsConfiguration.AddMember("UpdatedAt", _Timestamp)
+
+	ResourceMetricsConfiguration_MetricSelections = ResourceMetricsConfiguration.AddMember("MetricSelections", _ResourceMetricSelectionList)
 
 	ResourceNotFound_message = ResourceNotFound.AddMember("message", _ErrorMessage)
 
@@ -4030,9 +4234,17 @@ func init() {
 
 	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
 
+	ValidationException_message = ValidationException.AddMember("message", _ValidationExceptionMessage)
+
 	AssociateDatasetKmsKeyInput_DatasetIdentifier = AssociateDatasetKmsKeyInput.AddMember("DatasetIdentifier", _DatasetIdentifier)
 
 	AssociateDatasetKmsKeyInput_KmsKeyArn = AssociateDatasetKmsKeyInput.AddMember("KmsKeyArn", _KmsKeyArn)
+
+	CreateResourceMetricsConfigurationInput_ResourceArn = CreateResourceMetricsConfigurationInput.AddMember("ResourceArn", _ResourceArn)
+
+	CreateResourceMetricsConfigurationInput_MetricSelections = CreateResourceMetricsConfigurationInput.AddMember("MetricSelections", _ResourceMetricSelectionList)
+
+	CreateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration = CreateResourceMetricsConfigurationOutput.AddMember("ResourceMetricsConfiguration", ResourceMetricsConfiguration)
 
 	DeleteAlarmMuteRuleInput_AlarmMuteRuleName = DeleteAlarmMuteRuleInput.AddMember("AlarmMuteRuleName", _Name)
 
@@ -4059,6 +4271,8 @@ func init() {
 	DeleteInsightRulesOutput_Failures = DeleteInsightRulesOutput.AddMember("Failures", _BatchFailures)
 
 	DeleteMetricStreamInput_Name = DeleteMetricStreamInput.AddMember("Name", _MetricStreamName)
+
+	DeleteResourceMetricsConfigurationInput_ResourceArn = DeleteResourceMetricsConfigurationInput.AddMember("ResourceArn", _ResourceArn)
 
 	DescribeAlarmContributorsInput_AlarmName = DescribeAlarmContributorsInput.AddMember("AlarmName", _AlarmName)
 
@@ -4311,6 +4525,18 @@ func init() {
 	GetMetricWidgetImageOutput_MetricWidgetImage = GetMetricWidgetImageOutput.AddMember("MetricWidgetImage", _MetricWidgetImage)
 
 	GetOTelEnrichmentOutput_Status = GetOTelEnrichmentOutput.AddMember("Status", OTelEnrichmentStatus)
+
+	GetOTelEnrichmentOutput_IncludeFilters = GetOTelEnrichmentOutput.AddMember("IncludeFilters", _OTelEnrichmentMetricSelectorList)
+
+	GetOTelEnrichmentOutput_ExcludeFilters = GetOTelEnrichmentOutput.AddMember("ExcludeFilters", _OTelEnrichmentMetricSelectorList)
+
+	GetOTelEnrichmentOutput_CreatedAt = GetOTelEnrichmentOutput.AddMember("CreatedAt", _Timestamp)
+
+	GetOTelEnrichmentOutput_UpdatedAt = GetOTelEnrichmentOutput.AddMember("UpdatedAt", _Timestamp)
+
+	GetResourceMetricsConfigurationInput_ResourceArn = GetResourceMetricsConfigurationInput.AddMember("ResourceArn", _ResourceArn)
+
+	GetResourceMetricsConfigurationOutput_ResourceMetricsConfiguration = GetResourceMetricsConfigurationOutput.AddMember("ResourceMetricsConfiguration", ResourceMetricsConfiguration)
 
 	ListAlarmMuteRulesInput_AlarmName = ListAlarmMuteRulesInput.AddMember("AlarmName", _Name)
 
@@ -4572,6 +4798,18 @@ func init() {
 
 	StartMetricStreamsInput_Names = StartMetricStreamsInput.AddMember("Names", _MetricStreamNames)
 
+	StartOTelEnrichmentInput_IncludeFilters = StartOTelEnrichmentInput.AddMember("IncludeFilters", _OTelEnrichmentMetricSelectorList)
+
+	StartOTelEnrichmentInput_ExcludeFilters = StartOTelEnrichmentInput.AddMember("ExcludeFilters", _OTelEnrichmentMetricSelectorList)
+
+	StartOTelEnrichmentOutput_IncludeFilters = StartOTelEnrichmentOutput.AddMember("IncludeFilters", _OTelEnrichmentMetricSelectorList)
+
+	StartOTelEnrichmentOutput_ExcludeFilters = StartOTelEnrichmentOutput.AddMember("ExcludeFilters", _OTelEnrichmentMetricSelectorList)
+
+	StartOTelEnrichmentOutput_CreatedAt = StartOTelEnrichmentOutput.AddMember("CreatedAt", _Timestamp)
+
+	StartOTelEnrichmentOutput_UpdatedAt = StartOTelEnrichmentOutput.AddMember("UpdatedAt", _Timestamp)
+
 	StopMetricStreamsInput_Names = StopMetricStreamsInput.AddMember("Names", _MetricStreamNames)
 
 	TagResourceInput_ResourceARN = TagResourceInput.AddMember("ResourceARN", _AmazonResourceName)
@@ -4581,5 +4819,23 @@ func init() {
 	UntagResourceInput_ResourceARN = UntagResourceInput.AddMember("ResourceARN", _AmazonResourceName)
 
 	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeyList)
+
+	UpdateOTelEnrichmentInput_IncludeFilters = UpdateOTelEnrichmentInput.AddMember("IncludeFilters", _OTelEnrichmentMetricSelectorList)
+
+	UpdateOTelEnrichmentInput_ExcludeFilters = UpdateOTelEnrichmentInput.AddMember("ExcludeFilters", _OTelEnrichmentMetricSelectorList)
+
+	UpdateOTelEnrichmentOutput_IncludeFilters = UpdateOTelEnrichmentOutput.AddMember("IncludeFilters", _OTelEnrichmentMetricSelectorList)
+
+	UpdateOTelEnrichmentOutput_ExcludeFilters = UpdateOTelEnrichmentOutput.AddMember("ExcludeFilters", _OTelEnrichmentMetricSelectorList)
+
+	UpdateOTelEnrichmentOutput_CreatedAt = UpdateOTelEnrichmentOutput.AddMember("CreatedAt", _Timestamp)
+
+	UpdateOTelEnrichmentOutput_UpdatedAt = UpdateOTelEnrichmentOutput.AddMember("UpdatedAt", _Timestamp)
+
+	UpdateResourceMetricsConfigurationInput_ResourceArn = UpdateResourceMetricsConfigurationInput.AddMember("ResourceArn", _ResourceArn)
+
+	UpdateResourceMetricsConfigurationInput_MetricSelections = UpdateResourceMetricsConfigurationInput.AddMember("MetricSelections", _ResourceMetricSelectionList)
+
+	UpdateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration = UpdateResourceMetricsConfigurationOutput.AddMember("ResourceMetricsConfiguration", ResourceMetricsConfiguration)
 
 }

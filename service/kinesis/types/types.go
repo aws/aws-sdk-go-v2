@@ -66,7 +66,8 @@ type ChannelDescription struct {
 	// A message describing the reason for a FAILED status.
 	ChannelStatusReason *string
 
-	// The server-side encryption configuration for the channel.
+	// The Amazon Web Services KMS key configuration that Amazon Kinesis Data Streams
+	// uses to encrypt data delivered to the channel's destination.
 	EncryptionConfiguration *ChannelEncryptionConfiguration
 
 	// The configuration for delivery to a general purpose Amazon S3 bucket. Present
@@ -265,7 +266,8 @@ func (v *ChannelLoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) er
 // The updated Amazon CloudWatch Logs configuration for a channel. Used in UpdateChannel.
 type ChannelLoggingUpdateInput struct {
 
-	// The updated Amazon CloudWatch Logs settings for the channel.
+	// The updated Amazon CloudWatch Logs settings, including whether logging is
+	// enabled and the target log group and log stream.
 	//
 	// This member is required.
 	CloudWatchLogs *CloudWatchLogsUpdateInput
@@ -1253,6 +1255,10 @@ type PutRecordsRequestEntry struct {
 	// This member is required.
 	Data []byte
 
+	// The hash value used to determine explicitly the shard that the data record is
+	// assigned to by overriding the partition key hash.
+	ExplicitHashKey *string
+
 	// Determines which shard in the stream the data record is assigned to. Partition
 	// keys are Unicode strings with a maximum length limit of 256 characters for each
 	// key. Amazon Kinesis Data Streams uses the partition key as input to a hash
@@ -1262,12 +1268,14 @@ type PutRecordsRequestEntry struct {
 	// hashing mechanism, all data records with the same partition key map to the same
 	// shard within the stream.
 	//
-	// This member is required.
+	// If the stream uses the USER_PARTITION_KEY record distribution strategy (the
+	// default), a partition key is required for each record. If the stream uses the
+	// AUTO record distribution strategy, the partition key is optional and any value
+	// you provide is ignored, along with any ExplicitHashKey you provide. In that
+	// case, Amazon Kinesis Data Streams distributes records across shards using
+	// service-managed algorithms. For more information, see
+	// UpdateStreamRecordDistributionStrategy .
 	PartitionKey *string
-
-	// The hash value used to determine explicitly the shard that the data record is
-	// assigned to by overriding the partition key hash.
-	ExplicitHashKey *string
 
 	noSmithyDocumentSerde
 }
@@ -1383,11 +1391,6 @@ type Record struct {
 	// This member is required.
 	Data []byte
 
-	// Identifies which shard in the stream the data record is assigned to.
-	//
-	// This member is required.
-	PartitionKey *string
-
 	// The unique identifier of the record within its shard.
 	//
 	// This member is required.
@@ -1404,6 +1407,14 @@ type Record struct {
 	//   - KMS : Use server-side encryption on the records in the stream using a
 	//   customer-managed Amazon Web Services KMS key.
 	EncryptionType EncryptionType
+
+	// Identifies which shard in the stream the data record is assigned to.
+	//
+	// For a stream that uses the AUTO record distribution strategy, this value is not
+	// returned if the producer did not provide a partition key when writing the
+	// record. If the producer provided a partition key, the original value is returned
+	// even though it was not used to determine shard placement.
+	PartitionKey *string
 
 	noSmithyDocumentSerde
 }
@@ -1477,8 +1488,7 @@ type RecordConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services Glue Schema Registry
 	// schema used to validate records. Required when the channel destination is a
-	// streaming table (Amazon S3 Tables), for both the JSON and GSR_JSON record
-	// formats.
+	// streaming table.
 	GSRSchemaARN *string
 
 	noSmithyDocumentSerde
@@ -1524,8 +1534,8 @@ type S3DestinationConfiguration struct {
 	// This member is required.
 	StorageConfiguration *S3StorageConfiguration
 
-	// The maximum age, in seconds, of undelivered data. Valid range is 300 to 900
-	// seconds (5 to 15 minutes). The default value is 300 seconds.
+	// The maximum age, in seconds, of undelivered data before the channel delivers it
+	// to the destination. The default value is 300 seconds.
 	DataFreshnessInSeconds *int32
 
 	// The dead-letter queue configuration for records that cannot be delivered.
@@ -1638,8 +1648,8 @@ func (v *S3DestinationDescription) Deserialize(d smithy.ShapeDeserializer) error
 // . Only DataFreshnessInSeconds can be updated.
 type S3DestinationUpdateInput struct {
 
-	// The maximum age, in seconds, of undelivered data. Valid range is 300 to 900
-	// seconds (5 to 15 minutes).
+	// The maximum age, in seconds, of undelivered data before the channel delivers it
+	// to the destination.
 	//
 	// This member is required.
 	DataFreshnessInSeconds *int32
@@ -1701,7 +1711,7 @@ type S3StorageConfiguration struct {
 
 	// The Amazon S3 storage class for delivered objects. Valid values:
 	//
-	//   - STANDARD - Default storage class for frequently accessed data. (default)
+	//   - STANDARD - The default storage class, for frequently accessed data.
 	//
 	//   - INTELLIGENT_TIERING - Automatically moves objects to the most cost-effective
 	//   access tier based on usage patterns.
@@ -1870,8 +1880,8 @@ type S3TablesDestinationConfiguration struct {
 	// This member is required.
 	S3TablesConfigurationList []S3TablesConfiguration
 
-	// The maximum age, in seconds, of undelivered data. Valid range is 300 to 900
-	// seconds (5 to 15 minutes). The default value is 300 seconds.
+	// The maximum age, in seconds, of undelivered data before the channel delivers it
+	// to the destination. The default value is 300 seconds.
 	DataFreshnessInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -1969,8 +1979,8 @@ func (v *S3TablesDestinationDescription) Deserialize(d smithy.ShapeDeserializer)
 // DataFreshnessInSeconds can be updated.
 type S3TablesDestinationUpdateInput struct {
 
-	// The maximum age, in seconds, of undelivered data. Valid range is 300 to 900
-	// seconds (5 to 15 minutes).
+	// The maximum age, in seconds, of undelivered data before the channel delivers it
+	// to the destination.
 	//
 	// This member is required.
 	DataFreshnessInSeconds *int32
@@ -2548,6 +2558,13 @@ type StreamDescriptionSummary struct {
 	// to, and read from a stream.
 	MaxRecordSizeInKiB *int32
 
+	// The record distribution strategy that the stream currently uses. A value of AUTO
+	// indicates that Amazon Kinesis Data Streams distributes records across shards
+	// using service-managed algorithms. A value of USER_PARTITION_KEY indicates that
+	// shard placement is determined by the partition key that producers supply. This
+	// field is only present for streams that use the on-demand capacity mode.
+	RecordDistributionStrategy RecordDistributionStrategy
+
 	// Not Implemented. Reserved for future use.
 	StreamId *string
 
@@ -2588,6 +2605,9 @@ func (v *StreamDescriptionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.OpenShardCount != nil {
 		s.WriteInt32(schemas.StreamDescriptionSummary_OpenShardCount, *v.OpenShardCount)
+	}
+	if v.RecordDistributionStrategy != "" {
+		s.WriteString(schemas.StreamDescriptionSummary_RecordDistributionStrategy, string(v.RecordDistributionStrategy))
 	}
 	if v.RetentionPeriodHours != nil {
 		s.WriteInt32(schemas.StreamDescriptionSummary_RetentionPeriodHours, *v.RetentionPeriodHours)
@@ -2645,6 +2665,13 @@ func (v *StreamDescriptionSummary) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.StreamDescriptionSummary_OpenShardCount:
 			v.OpenShardCount = new(int32)
 			return d.ReadInt32(schemas.StreamDescriptionSummary_OpenShardCount, v.OpenShardCount)
+		case schemas.StreamDescriptionSummary_RecordDistributionStrategy:
+			var ev string
+			if err := d.ReadString(schemas.StreamDescriptionSummary_RecordDistributionStrategy, &ev); err != nil {
+				return err
+			}
+			v.RecordDistributionStrategy = RecordDistributionStrategy(ev)
+			return nil
 		case schemas.StreamDescriptionSummary_RetentionPeriodHours:
 			v.RetentionPeriodHours = new(int32)
 			return d.ReadInt32(schemas.StreamDescriptionSummary_RetentionPeriodHours, v.RetentionPeriodHours)

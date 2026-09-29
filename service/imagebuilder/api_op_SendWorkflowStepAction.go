@@ -11,8 +11,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Pauses or resumes image creation when the associated workflow runs a
-// WaitForAction step.
+// Sends an action to a workflow step that has paused at a WaitForAction step, so
+// that image creation can continue. To find the steps that are waiting for an
+// action, call ListWaitingWorkflowSteps.
 func (c *Client) SendWorkflowStepAction(ctx context.Context, params *SendWorkflowStepActionInput, optFns ...func(*Options)) (*SendWorkflowStepActionOutput, error) {
 	if params == nil {
 		params = &SendWorkflowStepActionInput{}
@@ -30,17 +31,19 @@ func (c *Client) SendWorkflowStepAction(ctx context.Context, params *SendWorkflo
 
 type SendWorkflowStepActionInput struct {
 
-	// The action to perform on the paused workflow step. The workflow step must be in
-	// a waiting state to accept an action. The request fails if the step has already
-	// timed out or been actioned.
+	// The action to perform on the paused workflow step. RESUME completes the waiting
+	// step, and the workflow continues. STOP fails the step, and the step's onFailure
+	// setting determines whether the workflow continues or aborts. The workflow step
+	// must be in a waiting state to accept an action. The request fails if the step
+	// has already timed out or been actioned.
 	//
 	// This member is required.
 	Action types.WorkflowStepActionType
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -55,7 +58,8 @@ type SendWorkflowStepActionInput struct {
 	// This member is required.
 	ImageBuildVersionArn *string
 
-	// Uniquely identifies the workflow step that sent the step action.
+	// Uniquely identifies the waiting workflow step that you send the action to. To
+	// get this identifier, call ListWaitingWorkflowSteps.
 	//
 	// This member is required.
 	StepExecutionId *string
@@ -100,7 +104,8 @@ type SendWorkflowStepActionOutput struct {
 	// action request.
 	ImageBuildVersionArn *string
 
-	// The workflow step that sent the step action.
+	// The unique identifier for the workflow step that received the action, as
+	// specified in the request.
 	StepExecutionId *string
 
 	// Metadata pertaining to the operation's result.

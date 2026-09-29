@@ -666,6 +666,521 @@ func (v *BillingViewListElement) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+//	A billing view segment. A segment represents a time range during which the
+//
+// billing domain and account relationships for a billing view remained unchanged.
+type BillingViewSegmentsListElement struct {
+
+	//  The billing group primary account ID. The response includes this field for
+	// billing group members. Compare this value to your own account ID to determine
+	// whether you are the primary account.
+	BillingGroupPrimaryAccountId *string
+
+	//  The billing transfer account ID. The response includes this field only when
+	// the caller is a billing transfer source account. The response omits this field
+	// for billing group billing views.
+	BillingTransferAccountId *string
+
+	// The billing domain for this segment. The following values are valid:
+	//
+	//   - PRO_FORMA - Data shaped by Billing Conductor that doesn't reflect the final
+	//   charges owed to Amazon Web Services.
+	//
+	//   - BILLABLE - Data that represents the final charges owed to Amazon Web
+	//   Services.
+	Domain BillingDomain
+
+	//  The management account ID of the organization. The response includes this
+	// field for organization member accounts.
+	ManagementAccountId *string
+
+	//  The time range during which this segment is effective.
+	TimeRange *BillingViewSegmentTimeRange
+
+	noSmithyDocumentSerde
+}
+
+func (v *BillingViewSegmentsListElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingViewSegmentsListElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingViewSegmentsListElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingGroupPrimaryAccountId != nil {
+		s.WriteString(schemas.BillingViewSegmentsListElement_billingGroupPrimaryAccountId, *v.BillingGroupPrimaryAccountId)
+	}
+	if v.BillingTransferAccountId != nil {
+		s.WriteString(schemas.BillingViewSegmentsListElement_billingTransferAccountId, *v.BillingTransferAccountId)
+	}
+	if v.Domain != "" {
+		s.WriteString(schemas.BillingViewSegmentsListElement_domain, string(v.Domain))
+	}
+	if v.ManagementAccountId != nil {
+		s.WriteString(schemas.BillingViewSegmentsListElement_managementAccountId, *v.ManagementAccountId)
+	}
+	if v.TimeRange != nil {
+		s.WriteStruct(schemas.BillingViewSegmentsListElement_timeRange)
+		v.TimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BillingViewSegmentsListElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingViewSegmentsListElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingViewSegmentsListElement_billingGroupPrimaryAccountId:
+			v.BillingGroupPrimaryAccountId = new(string)
+			return d.ReadString(schemas.BillingViewSegmentsListElement_billingGroupPrimaryAccountId, v.BillingGroupPrimaryAccountId)
+		case schemas.BillingViewSegmentsListElement_billingTransferAccountId:
+			v.BillingTransferAccountId = new(string)
+			return d.ReadString(schemas.BillingViewSegmentsListElement_billingTransferAccountId, v.BillingTransferAccountId)
+		case schemas.BillingViewSegmentsListElement_domain:
+			var ev string
+			if err := d.ReadString(schemas.BillingViewSegmentsListElement_domain, &ev); err != nil {
+				return err
+			}
+			v.Domain = BillingDomain(ev)
+			return nil
+		case schemas.BillingViewSegmentsListElement_managementAccountId:
+			v.ManagementAccountId = new(string)
+			return d.ReadString(schemas.BillingViewSegmentsListElement_managementAccountId, v.ManagementAccountId)
+		case schemas.BillingViewSegmentsListElement_timeRange:
+			v.TimeRange = &BillingViewSegmentTimeRange{}
+			return v.TimeRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Specifies a time range with an inclusive begin date and an exclusive end date.
+type BillingViewSegmentTimeRange struct {
+
+	//  The inclusive start of the time range. This value can't be in the future.
+	BeginDateInclusive *time.Time
+
+	//  The exclusive end of the time range. This value must be after
+	// beginDateInclusive .
+	EndDateExclusive *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *BillingViewSegmentTimeRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingViewSegmentTimeRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingViewSegmentTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginDateInclusive != nil {
+		s.WriteTime(schemas.BillingViewSegmentTimeRange_beginDateInclusive, *v.BeginDateInclusive)
+	}
+	if v.EndDateExclusive != nil {
+		s.WriteTime(schemas.BillingViewSegmentTimeRange_endDateExclusive, *v.EndDateExclusive)
+	}
+}
+func (v *BillingViewSegmentTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingViewSegmentTimeRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingViewSegmentTimeRange_beginDateInclusive:
+			v.BeginDateInclusive = new(time.Time)
+			return d.ReadTime(schemas.BillingViewSegmentTimeRange_beginDateInclusive, v.BeginDateInclusive)
+		case schemas.BillingViewSegmentTimeRange_endDateExclusive:
+			v.EndDateExclusive = new(time.Time)
+			return d.ReadTime(schemas.BillingViewSegmentTimeRange_endDateExclusive, v.EndDateExclusive)
+		}
+		return nil
+	})
+}
+
+// Business Support charges for a linked account.
+type BusinessSupportAccountCharge struct {
+
+	// The linked account ID.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The Support plan name for this account. Valid values: AWSSupportBusiness
+	// (Business Support plan), AWSSupportDeveloper (Developer Support plan),
+	// AWSSupportEssential (Basic Support plan).
+	//
+	// This member is required.
+	SupportPlanName *string
+
+	// The total Business Support charge amount for this account in the billing month.
+	//
+	// This member is required.
+	TotalCharge *string
+
+	// The total Support-eligible spend used as the basis for calculating the Business
+	// Support charge for this account.
+	//
+	// This member is required.
+	TotalUsageBasis *string
+
+	// The discount applied to the Business Support charge for this account, if any.
+	// This field is absent when no discount applies.
+	SupportDiscount *BusinessSupportDiscount
+
+	// The Support-eligible spend broken down by contributing service for this account.
+	SupportEligibleSpendByService []BusinessSupportServiceSpend
+
+	// The tier-level charges that make up the total Business Support charge for this
+	// account. Each tier represents a spend range with its own rate.
+	TierCharges []BusinessSupportTierCharge
+
+	noSmithyDocumentSerde
+}
+
+func (v *BusinessSupportAccountCharge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BusinessSupportAccountCharge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BusinessSupportAccountCharge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.BusinessSupportAccountCharge_accountId, *v.AccountId)
+	}
+	if v.SupportDiscount != nil {
+		s.WriteStruct(schemas.BusinessSupportAccountCharge_supportDiscount)
+		v.SupportDiscount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeBusinessSupportServiceSpendList(s, schemas.BusinessSupportAccountCharge_supportEligibleSpendByService, v.SupportEligibleSpendByService)
+	if v.SupportPlanName != nil {
+		s.WriteString(schemas.BusinessSupportAccountCharge_supportPlanName, *v.SupportPlanName)
+	}
+	serializeBusinessSupportTierChargeList(s, schemas.BusinessSupportAccountCharge_tierCharges, v.TierCharges)
+	if v.TotalCharge != nil {
+		s.WriteString(schemas.BusinessSupportAccountCharge_totalCharge, *v.TotalCharge)
+	}
+	if v.TotalUsageBasis != nil {
+		s.WriteString(schemas.BusinessSupportAccountCharge_totalUsageBasis, *v.TotalUsageBasis)
+	}
+}
+func (v *BusinessSupportAccountCharge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BusinessSupportAccountCharge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BusinessSupportAccountCharge_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.BusinessSupportAccountCharge_accountId, v.AccountId)
+		case schemas.BusinessSupportAccountCharge_supportDiscount:
+			v.SupportDiscount = &BusinessSupportDiscount{}
+			return v.SupportDiscount.Deserialize(d)
+		case schemas.BusinessSupportAccountCharge_supportEligibleSpendByService:
+			return deserializeBusinessSupportServiceSpendList(d, schemas.BusinessSupportAccountCharge_supportEligibleSpendByService, &v.SupportEligibleSpendByService)
+		case schemas.BusinessSupportAccountCharge_supportPlanName:
+			v.SupportPlanName = new(string)
+			return d.ReadString(schemas.BusinessSupportAccountCharge_supportPlanName, v.SupportPlanName)
+		case schemas.BusinessSupportAccountCharge_tierCharges:
+			return deserializeBusinessSupportTierChargeList(d, schemas.BusinessSupportAccountCharge_tierCharges, &v.TierCharges)
+		case schemas.BusinessSupportAccountCharge_totalCharge:
+			v.TotalCharge = new(string)
+			return d.ReadString(schemas.BusinessSupportAccountCharge_totalCharge, v.TotalCharge)
+		case schemas.BusinessSupportAccountCharge_totalUsageBasis:
+			v.TotalUsageBasis = new(string)
+			return d.ReadString(schemas.BusinessSupportAccountCharge_totalUsageBasis, v.TotalUsageBasis)
+		}
+		return nil
+	})
+}
+
+// A discount applied to a Business Support account charge, including the discount
+// amount, percentage, type, and source.
+type BusinessSupportDiscount struct {
+
+	// The discount amount applied to the Business Support charge. This value is
+	// negative, representing a reduction in the charge.
+	DiscountAmount *string
+
+	// The discount percentage applied to the Business Support charge, expressed as a
+	// decimal (for example, 0.12 for a 12% discount).
+	DiscountPercentage *string
+
+	// The source or program through which the discount was applied.
+	DiscountSource *string
+
+	// The type of discount applied. Valid values: Distributor_Discount (a discount
+	// applied through a distributor arrangement), SPP_Discount (a discount applied
+	// through the Solution Provider Program).
+	DiscountType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BusinessSupportDiscount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BusinessSupportDiscount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BusinessSupportDiscount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiscountAmount != nil {
+		s.WriteString(schemas.BusinessSupportDiscount_discountAmount, *v.DiscountAmount)
+	}
+	if v.DiscountPercentage != nil {
+		s.WriteString(schemas.BusinessSupportDiscount_discountPercentage, *v.DiscountPercentage)
+	}
+	if v.DiscountSource != nil {
+		s.WriteString(schemas.BusinessSupportDiscount_discountSource, *v.DiscountSource)
+	}
+	if v.DiscountType != nil {
+		s.WriteString(schemas.BusinessSupportDiscount_discountType, *v.DiscountType)
+	}
+}
+func (v *BusinessSupportDiscount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BusinessSupportDiscount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BusinessSupportDiscount_discountAmount:
+			v.DiscountAmount = new(string)
+			return d.ReadString(schemas.BusinessSupportDiscount_discountAmount, v.DiscountAmount)
+		case schemas.BusinessSupportDiscount_discountPercentage:
+			v.DiscountPercentage = new(string)
+			return d.ReadString(schemas.BusinessSupportDiscount_discountPercentage, v.DiscountPercentage)
+		case schemas.BusinessSupportDiscount_discountSource:
+			v.DiscountSource = new(string)
+			return d.ReadString(schemas.BusinessSupportDiscount_discountSource, v.DiscountSource)
+		case schemas.BusinessSupportDiscount_discountType:
+			v.DiscountType = new(string)
+			return d.ReadString(schemas.BusinessSupportDiscount_discountType, v.DiscountType)
+		}
+		return nil
+	})
+}
+
+// A service-level spend entry contributing to Business Support eligible spend.
+type BusinessSupportServiceSpend struct {
+
+	// The Support-eligible spend amount for this service.
+	//
+	// This member is required.
+	ChargeAmount *string
+
+	// The name of the Amazon Web Services service contributing to the
+	// Support-eligible spend.
+	//
+	// This member is required.
+	ContributingService *string
+
+	// The ISO 4217 currency code for the charge amount (for example, USD ).
+	//
+	// This member is required.
+	Currency *string
+
+	// The type of the line item. Valid values: Usage .
+	//
+	// This member is required.
+	ItemType *string
+
+	// A human-readable description of the service spend entry.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BusinessSupportServiceSpend) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BusinessSupportServiceSpend)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BusinessSupportServiceSpend) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChargeAmount != nil {
+		s.WriteString(schemas.BusinessSupportServiceSpend_chargeAmount, *v.ChargeAmount)
+	}
+	if v.ContributingService != nil {
+		s.WriteString(schemas.BusinessSupportServiceSpend_contributingService, *v.ContributingService)
+	}
+	if v.Currency != nil {
+		s.WriteString(schemas.BusinessSupportServiceSpend_currency, *v.Currency)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.BusinessSupportServiceSpend_description, *v.Description)
+	}
+	if v.ItemType != nil {
+		s.WriteString(schemas.BusinessSupportServiceSpend_itemType, *v.ItemType)
+	}
+}
+func (v *BusinessSupportServiceSpend) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BusinessSupportServiceSpend, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BusinessSupportServiceSpend_chargeAmount:
+			v.ChargeAmount = new(string)
+			return d.ReadString(schemas.BusinessSupportServiceSpend_chargeAmount, v.ChargeAmount)
+		case schemas.BusinessSupportServiceSpend_contributingService:
+			v.ContributingService = new(string)
+			return d.ReadString(schemas.BusinessSupportServiceSpend_contributingService, v.ContributingService)
+		case schemas.BusinessSupportServiceSpend_currency:
+			v.Currency = new(string)
+			return d.ReadString(schemas.BusinessSupportServiceSpend_currency, v.Currency)
+		case schemas.BusinessSupportServiceSpend_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.BusinessSupportServiceSpend_description, v.Description)
+		case schemas.BusinessSupportServiceSpend_itemType:
+			v.ItemType = new(string)
+			return d.ReadString(schemas.BusinessSupportServiceSpend_itemType, v.ItemType)
+		}
+		return nil
+	})
+}
+
+// A Business Support subscription contract for an account.
+type BusinessSupportSubscriptionContract struct {
+
+	// The account ID associated with this subscription contract.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The end date of the subscription contract.
+	//
+	// This member is required.
+	ContractEndDate *time.Time
+
+	// The start date of the subscription contract.
+	//
+	// This member is required.
+	ContractStartDate *time.Time
+
+	// The name of the Support plan for this subscription contract. Valid values:
+	// AWSSupportBusiness (Business Support plan), AWSSupportDeveloper (Developer
+	// Support plan), AWSSupportEssential (Basic Support plan).
+	//
+	// This member is required.
+	PlanName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BusinessSupportSubscriptionContract) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BusinessSupportSubscriptionContract)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BusinessSupportSubscriptionContract) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.BusinessSupportSubscriptionContract_accountId, *v.AccountId)
+	}
+	if v.ContractEndDate != nil {
+		s.WriteTime(schemas.BusinessSupportSubscriptionContract_contractEndDate, *v.ContractEndDate)
+	}
+	if v.ContractStartDate != nil {
+		s.WriteTime(schemas.BusinessSupportSubscriptionContract_contractStartDate, *v.ContractStartDate)
+	}
+	if v.PlanName != nil {
+		s.WriteString(schemas.BusinessSupportSubscriptionContract_planName, *v.PlanName)
+	}
+}
+func (v *BusinessSupportSubscriptionContract) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BusinessSupportSubscriptionContract, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BusinessSupportSubscriptionContract_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.BusinessSupportSubscriptionContract_accountId, v.AccountId)
+		case schemas.BusinessSupportSubscriptionContract_contractEndDate:
+			v.ContractEndDate = new(time.Time)
+			return d.ReadTime(schemas.BusinessSupportSubscriptionContract_contractEndDate, v.ContractEndDate)
+		case schemas.BusinessSupportSubscriptionContract_contractStartDate:
+			v.ContractStartDate = new(time.Time)
+			return d.ReadTime(schemas.BusinessSupportSubscriptionContract_contractStartDate, v.ContractStartDate)
+		case schemas.BusinessSupportSubscriptionContract_planName:
+			v.PlanName = new(string)
+			return d.ReadString(schemas.BusinessSupportSubscriptionContract_planName, v.PlanName)
+		}
+		return nil
+	})
+}
+
+// A tier-level charge within a Business Support pricing plan. Business Support
+// uses tiered pricing where different percentage rates apply to different ranges
+// of Support-eligible spend.
+type BusinessSupportTierCharge struct {
+
+	// The Business Support charge amount calculated for this pricing tier.
+	//
+	// This member is required.
+	TierCharge *string
+
+	// A human-readable description of the pricing tier, including the spend range and
+	// percentage rate applied.
+	//
+	// This member is required.
+	TierDescription *string
+
+	// The percentage rate applied to Support-eligible spend within this pricing tier.
+	//
+	// This member is required.
+	TierRate *string
+
+	// The amount of Support-eligible spend that falls within this pricing tier.
+	//
+	// This member is required.
+	UsageSlice *string
+
+	// The end date of the charge period for this tier charge.
+	ChargePeriodEndDate *time.Time
+
+	// The start date of the charge period for this tier charge.
+	ChargePeriodStartDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *BusinessSupportTierCharge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BusinessSupportTierCharge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BusinessSupportTierCharge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChargePeriodEndDate != nil {
+		s.WriteTime(schemas.BusinessSupportTierCharge_chargePeriodEndDate, *v.ChargePeriodEndDate)
+	}
+	if v.ChargePeriodStartDate != nil {
+		s.WriteTime(schemas.BusinessSupportTierCharge_chargePeriodStartDate, *v.ChargePeriodStartDate)
+	}
+	if v.TierCharge != nil {
+		s.WriteString(schemas.BusinessSupportTierCharge_tierCharge, *v.TierCharge)
+	}
+	if v.TierDescription != nil {
+		s.WriteString(schemas.BusinessSupportTierCharge_tierDescription, *v.TierDescription)
+	}
+	if v.TierRate != nil {
+		s.WriteString(schemas.BusinessSupportTierCharge_tierRate, *v.TierRate)
+	}
+	if v.UsageSlice != nil {
+		s.WriteString(schemas.BusinessSupportTierCharge_usageSlice, *v.UsageSlice)
+	}
+}
+func (v *BusinessSupportTierCharge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BusinessSupportTierCharge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BusinessSupportTierCharge_chargePeriodEndDate:
+			v.ChargePeriodEndDate = new(time.Time)
+			return d.ReadTime(schemas.BusinessSupportTierCharge_chargePeriodEndDate, v.ChargePeriodEndDate)
+		case schemas.BusinessSupportTierCharge_chargePeriodStartDate:
+			v.ChargePeriodStartDate = new(time.Time)
+			return d.ReadTime(schemas.BusinessSupportTierCharge_chargePeriodStartDate, v.ChargePeriodStartDate)
+		case schemas.BusinessSupportTierCharge_tierCharge:
+			v.TierCharge = new(string)
+			return d.ReadString(schemas.BusinessSupportTierCharge_tierCharge, v.TierCharge)
+		case schemas.BusinessSupportTierCharge_tierDescription:
+			v.TierDescription = new(string)
+			return d.ReadString(schemas.BusinessSupportTierCharge_tierDescription, v.TierDescription)
+		case schemas.BusinessSupportTierCharge_tierRate:
+			v.TierRate = new(string)
+			return d.ReadString(schemas.BusinessSupportTierCharge_tierRate, v.TierRate)
+		case schemas.BusinessSupportTierCharge_usageSlice:
+			v.UsageSlice = new(string)
+			return d.ReadString(schemas.BusinessSupportTierCharge_usageSlice, v.UsageSlice)
+		}
+		return nil
+	})
+}
+
 // An account that is charged all or a portion of the total Support charge and the
 // percentage of the charge allocated to it.
 type ChargeAccount struct {

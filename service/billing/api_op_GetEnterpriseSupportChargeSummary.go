@@ -74,7 +74,7 @@ type GetEnterpriseSupportChargeSummaryOutput struct {
 	// This member is required.
 	BillingPeriodStartDate *time.Time
 
-	// When true, the Support charge amount is estimated. When false, the Support
+	// Specifies whether the Support charge amount is estimated. When false, the
 	// charge amount is finalized.
 	//
 	// This member is required.

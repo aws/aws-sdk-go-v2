@@ -1642,6 +1642,69 @@ func (VectorSearchRerankingConfigurationType) Values() []VectorSearchRerankingCo
 	}
 }
 
+type VpcConfigurationStatus string
+
+// Enum values for VpcConfigurationStatus
+const (
+	VpcConfigurationStatusCreating     VpcConfigurationStatus = "CREATING"
+	VpcConfigurationStatusCreated      VpcConfigurationStatus = "CREATED"
+	VpcConfigurationStatusDeleting     VpcConfigurationStatus = "DELETING"
+	VpcConfigurationStatusCreateFailed VpcConfigurationStatus = "CREATE_FAILED"
+	VpcConfigurationStatusDeleteFailed VpcConfigurationStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for VpcConfigurationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VpcConfigurationStatus) Values() []VpcConfigurationStatus {
+	return []VpcConfigurationStatus{
+		"CREATING",
+		"CREATED",
+		"DELETING",
+		"CREATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
+type VpcProtocol string
+
+// Enum values for VpcProtocol
+const (
+	VpcProtocolHttp  VpcProtocol = "HTTP"
+	VpcProtocolHttps VpcProtocol = "HTTPS"
+)
+
+// Values returns all known values for VpcProtocol. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VpcProtocol) Values() []VpcProtocol {
+	return []VpcProtocol{
+		"HTTP",
+		"HTTPS",
+	}
+}
+
+type VpcResolutionMode string
+
+// Enum values for VpcResolutionMode
+const (
+	VpcResolutionModePublic VpcResolutionMode = "PUBLIC"
+	VpcResolutionModeInVpc  VpcResolutionMode = "IN_VPC"
+)
+
+// Values returns all known values for VpcResolutionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VpcResolutionMode) Values() []VpcResolutionMode {
+	return []VpcResolutionMode{
+		"PUBLIC",
+		"IN_VPC",
+	}
+}
+
 type WebScopeType string
 
 // Enum values for WebScopeType

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.ListBillingViewSegments
+
+{"items":[{"billingGroupPrimaryAccountId":"__BillingGroupPrimaryAccountId__","billingTransferAccountId":"__BillingTransferAccountId__","domain":"BILLABLE","managementAccountId":"__ManagementAccountId__","timeRange":{"beginDateInclusive":946684800,"endDateExclusive":946684800}},{"billingGroupPrimaryAccountId":"__BillingGroupPrimaryAccountId__","billingTransferAccountId":"__BillingTransferAccountId__","domain":"BILLABLE","managementAccountId":"__ManagementAccountId__","timeRange":{"beginDateInclusive":946684800,"endDateExclusive":946684800}}],"nextToken":"__NextToken__"}

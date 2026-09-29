@@ -637,7 +637,8 @@ func TestCheckResponseSnapshot_CreateCapability(t *testing.T) {
 							"__Member__",
 						},
 					},
-					ServerUrl: ptr.String("__ServerUrl__"),
+					ServerUrl:      ptr.String("__ServerUrl__"),
+					EndpointPrefix: ptr.String("__EndpointPrefix__"),
 				},
 			},
 			Tags: map[string]string{
@@ -715,6 +716,7 @@ func TestCheckResponseSnapshot_CreateCapability(t *testing.T) {
 						"__Member__",
 					},
 				},
+				EndpointPrefix: ptr.String("__EndpointPrefix__"),
 			},
 		},
 		Tags: map[string]string{
@@ -1800,7 +1802,8 @@ func TestCheckResponseSnapshot_DeleteCapability(t *testing.T) {
 							"__Member__",
 						},
 					},
-					ServerUrl: ptr.String("__ServerUrl__"),
+					ServerUrl:      ptr.String("__ServerUrl__"),
+					EndpointPrefix: ptr.String("__EndpointPrefix__"),
 				},
 			},
 			Tags: map[string]string{
@@ -3108,7 +3111,8 @@ func TestCheckResponseSnapshot_DescribeCapability(t *testing.T) {
 							"__Member__",
 						},
 					},
-					ServerUrl: ptr.String("__ServerUrl__"),
+					ServerUrl:      ptr.String("__ServerUrl__"),
+					EndpointPrefix: ptr.String("__EndpointPrefix__"),
 				},
 			},
 			Tags: map[string]string{
@@ -6517,6 +6521,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 						"__Member__",
 					},
 				},
+				EndpointPrefix: ptr.String("__EndpointPrefix__"),
 			},
 		},
 		Tags: map[string]string{

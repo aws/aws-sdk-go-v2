@@ -16,6 +16,7 @@ import (
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	"github.com/aws/aws-sdk-go-v2/internal/timeouts"
+	"github.com/aws/aws-sdk-go-v2/internal/v4a"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
@@ -204,6 +205,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	resolveHTTPSignerV4(&options)
 
 	resolveEndpointResolverV2(&options)
+
+	resolveHTTPSignerV4a(&options)
 
 	resolveTracerProvider(&options)
 
@@ -421,6 +424,11 @@ func resolveAuthSchemes(options *Options) {
 		options.AuthSchemes = []smithyhttp.AuthScheme{
 			internalauth.NewHTTPAuthScheme("aws.auth#sigv4", &internalauthsmithy.V4SignerAdapter{
 				Signer:     options.HTTPSignerV4,
+				Logger:     options.Logger,
+				LogSigning: options.ClientLogMode.IsSigning(),
+			}),
+			internalauth.NewHTTPAuthScheme("aws.auth#sigv4a", &v4a.SignerAdapter{
+				Signer:     options.httpSignerV4a,
 				Logger:     options.Logger,
 				LogSigning: options.ClientLogMode.IsSigning(),
 			}),
@@ -755,6 +763,26 @@ func resolveUseFIPSEndpoint(cfg aws.Config, o *Options) error {
 		o.EndpointOptions.UseFIPSEndpoint = value
 	}
 	return nil
+}
+
+type httpSignerV4a interface {
+	SignHTTP(ctx context.Context, credentials v4a.Credentials, r *http.Request, payloadHash,
+		service string, regionSet []string, signingTime time.Time,
+		optFns ...func(*v4a.SignerOptions)) error
+}
+
+func resolveHTTPSignerV4a(o *Options) {
+	if o.httpSignerV4a != nil {
+		return
+	}
+	o.httpSignerV4a = newDefaultV4aSigner(*o)
+}
+
+func newDefaultV4aSigner(o Options) *v4a.Signer {
+	return v4a.NewSigner(func(so *v4a.SignerOptions) {
+		so.Logger = o.Logger
+		so.LogSigning = o.ClientLogMode.IsSigning()
+	})
 }
 
 func initializeTimeOffsetResolver(c *Client) {

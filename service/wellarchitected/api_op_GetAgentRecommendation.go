@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	"time"
 )
 
@@ -54,6 +55,10 @@ func (v *GetAgentRecommendationInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.RemediationType != "" {
 		s.WriteString(schemas.GetAgentRecommendationRequest_remediationType, string(v.RemediationType))
 	}
+}
+func (in *GetAgentRecommendationInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type GetAgentRecommendationOutput struct {
@@ -160,6 +165,9 @@ type GetAgentRecommendationOutput struct {
 	// Cross-pillar benefits of acting on the recommendation.
 	CrossPillarBenefits []types.CrossPillarBenefit
 
+	// The identifier of the generation process that produced this recommendation.
+	GenerationId *string
+
 	// Goals that this recommendation targets.
 	Goals []types.RecommendationGoal
 
@@ -217,6 +225,9 @@ func (v *GetAgentRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer
 	}
 	if v.Effort != "" {
 		s.WriteString(schemas.GetAgentRecommendationResponse_effort, string(v.Effort))
+	}
+	if v.GenerationId != nil {
+		s.WriteString(schemas.GetAgentRecommendationResponse_generationId, *v.GenerationId)
 	}
 	serializeRecommendationGoals(s, schemas.GetAgentRecommendationResponse_goals, v.Goals)
 	serializeHighlights(s, schemas.GetAgentRecommendationResponse_highlights, v.Highlights)
@@ -303,6 +314,9 @@ func (v *GetAgentRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) e
 			}
 			v.Effort = types.Effort(ev)
 			return nil
+		case schemas.GetAgentRecommendationResponse_generationId:
+			v.GenerationId = new(string)
+			return d.ReadString(schemas.GetAgentRecommendationResponse_generationId, v.GenerationId)
 		case schemas.GetAgentRecommendationResponse_goals:
 			return deserializeRecommendationGoals(d, schemas.GetAgentRecommendationResponse_goals, &v.Goals)
 		case schemas.GetAgentRecommendationResponse_highlights:

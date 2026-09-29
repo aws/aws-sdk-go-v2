@@ -150,26 +150,6 @@ func (m *validateOpGetStatementResultV2) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpListDatabases struct {
-}
-
-func (*validateOpListDatabases) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListDatabases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListDatabasesInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListDatabasesInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpListSchemas struct {
 }
 
@@ -236,10 +216,6 @@ func addOpGetStatementResultValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetStatementResultV2ValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStatementResultV2{}, middleware.After)
-}
-
-func addOpListDatabasesValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListDatabases{}, middleware.After)
 }
 
 func addOpListSchemasValidationMiddleware(stack *middleware.Stack) error {
@@ -392,21 +368,6 @@ func validateOpGetStatementResultV2Input(v *GetStatementResultV2Input) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetStatementResultV2Input"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpListDatabasesInput(v *ListDatabasesInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListDatabasesInput"}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

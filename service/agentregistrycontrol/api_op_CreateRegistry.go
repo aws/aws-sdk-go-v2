@@ -52,6 +52,11 @@ type CreateRegistryInput struct {
 	// ignores the request, but does not return an error.
 	ClientToken *string
 
+	// The optional custom metadata schema configuration for the registry. When
+	// provided, registry records can carry structured metadata validated against this
+	// schema.
+	CustomMetadataSchemaConfiguration *types.CustomMetadataSchemaConfiguration
+
 	// The description of the registry
 	Description *string
 
@@ -90,6 +95,11 @@ func (v *CreateRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateRegistryRequest_clientToken, *v.ClientToken)
+	}
+	if v.CustomMetadataSchemaConfiguration != nil {
+		s.WriteStruct(schemas.CreateRegistryRequest_customMetadataSchemaConfiguration)
+		v.CustomMetadataSchemaConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateRegistryRequest_description, *v.Description)

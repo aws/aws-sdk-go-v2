@@ -395,7 +395,8 @@ func TestUpdateResponseSnapshot_CreateJob(t *testing.T) {
 									ChannelsIn:  ptr.Int32(1),
 									ChannelsOut: ptr.Int32(1),
 								},
-								SelectorType: types.AudioSelectorType("PID"),
+								SelectorType:        types.AudioSelectorType("PID"),
+								Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 								Streams: []int32{
 									1,
 									1,
@@ -632,7 +633,8 @@ func TestUpdateResponseSnapshot_CreateJob(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -752,7 +754,8 @@ func TestUpdateResponseSnapshot_CreateJob(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -901,7 +904,8 @@ func TestUpdateResponseSnapshot_CreateJob(t *testing.T) {
 									ChannelsIn:  ptr.Int32(1),
 									ChannelsOut: ptr.Int32(1),
 								},
-								SelectorType: types.AudioSelectorType("PID"),
+								SelectorType:        types.AudioSelectorType("PID"),
+								Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 								Streams: []int32{
 									1,
 									1,
@@ -1138,7 +1142,8 @@ func TestUpdateResponseSnapshot_CreateJob(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -1258,7 +1263,8 @@ func TestUpdateResponseSnapshot_CreateJob(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -1374,6 +1380,36 @@ func TestUpdateResponseSnapshot_CreateJob(t *testing.T) {
 					},
 					Playback:  types.MotionImagePlayback("ONCE"),
 					StartTime: ptr.String("__StartTime__"),
+				},
+				MotionImageInserters: []types.MotionImageInserter{
+					{
+						Framerate: &types.MotionImageInsertionFramerate{
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+						},
+						Input:         ptr.String("__Input__"),
+						InsertionMode: types.MotionImageInsertionMode("MOV"),
+						Offset: &types.MotionImageInsertionOffset{
+							ImageX: ptr.Int32(1),
+							ImageY: ptr.Int32(1),
+						},
+						Playback:  types.MotionImagePlayback("ONCE"),
+						StartTime: ptr.String("__StartTime__"),
+					},
+					{
+						Framerate: &types.MotionImageInsertionFramerate{
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+						},
+						Input:         ptr.String("__Input__"),
+						InsertionMode: types.MotionImageInsertionMode("MOV"),
+						Offset: &types.MotionImageInsertionOffset{
+							ImageX: ptr.Int32(1),
+							ImageY: ptr.Int32(1),
+						},
+						Playback:  types.MotionImagePlayback("ONCE"),
+						StartTime: ptr.String("__StartTime__"),
+					},
 				},
 				NielsenConfiguration: &types.NielsenConfiguration{
 					BreakoutCode:  ptr.Int32(1),
@@ -2857,6 +2893,8 @@ func TestUpdateResponseSnapshot_CreateJob(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -4103,6 +4141,8 @@ func TestUpdateResponseSnapshot_CreateJob(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -5834,6 +5874,8 @@ func TestUpdateResponseSnapshot_CreateJob(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -7080,6 +7122,8 @@ func TestUpdateResponseSnapshot_CreateJob(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -7535,7 +7579,8 @@ func TestUpdateResponseSnapshot_CreateJobTemplate(t *testing.T) {
 									ChannelsIn:  ptr.Int32(1),
 									ChannelsOut: ptr.Int32(1),
 								},
-								SelectorType: types.AudioSelectorType("PID"),
+								SelectorType:        types.AudioSelectorType("PID"),
+								Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 								Streams: []int32{
 									1,
 									1,
@@ -7745,7 +7790,8 @@ func TestUpdateResponseSnapshot_CreateJobTemplate(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -7865,7 +7911,8 @@ func TestUpdateResponseSnapshot_CreateJobTemplate(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -8014,7 +8061,8 @@ func TestUpdateResponseSnapshot_CreateJobTemplate(t *testing.T) {
 									ChannelsIn:  ptr.Int32(1),
 									ChannelsOut: ptr.Int32(1),
 								},
-								SelectorType: types.AudioSelectorType("PID"),
+								SelectorType:        types.AudioSelectorType("PID"),
+								Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 								Streams: []int32{
 									1,
 									1,
@@ -8224,7 +8272,8 @@ func TestUpdateResponseSnapshot_CreateJobTemplate(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -8344,7 +8393,8 @@ func TestUpdateResponseSnapshot_CreateJobTemplate(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -8460,6 +8510,36 @@ func TestUpdateResponseSnapshot_CreateJobTemplate(t *testing.T) {
 					},
 					Playback:  types.MotionImagePlayback("ONCE"),
 					StartTime: ptr.String("__StartTime__"),
+				},
+				MotionImageInserters: []types.MotionImageInserter{
+					{
+						Framerate: &types.MotionImageInsertionFramerate{
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+						},
+						Input:         ptr.String("__Input__"),
+						InsertionMode: types.MotionImageInsertionMode("MOV"),
+						Offset: &types.MotionImageInsertionOffset{
+							ImageX: ptr.Int32(1),
+							ImageY: ptr.Int32(1),
+						},
+						Playback:  types.MotionImagePlayback("ONCE"),
+						StartTime: ptr.String("__StartTime__"),
+					},
+					{
+						Framerate: &types.MotionImageInsertionFramerate{
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+						},
+						Input:         ptr.String("__Input__"),
+						InsertionMode: types.MotionImageInsertionMode("MOV"),
+						Offset: &types.MotionImageInsertionOffset{
+							ImageX: ptr.Int32(1),
+							ImageY: ptr.Int32(1),
+						},
+						Playback:  types.MotionImagePlayback("ONCE"),
+						StartTime: ptr.String("__StartTime__"),
+					},
 				},
 				NielsenConfiguration: &types.NielsenConfiguration{
 					BreakoutCode:  ptr.Int32(1),
@@ -9943,6 +10023,8 @@ func TestUpdateResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -11189,6 +11271,8 @@ func TestUpdateResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -12920,6 +13004,8 @@ func TestUpdateResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -14166,6 +14252,8 @@ func TestUpdateResponseSnapshot_CreateJobTemplate(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -15451,6 +15539,8 @@ func TestUpdateResponseSnapshot_CreatePreset(t *testing.T) {
 						},
 						PassthroughSettings: &types.PassthroughSettings{
 							FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+							GopsPerSegment:    ptr.Int32(1),
+							SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 							VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 						},
 						ProresSettings: &types.ProresSettings{
@@ -16172,7 +16262,8 @@ func TestUpdateResponseSnapshot_GetJob(t *testing.T) {
 									ChannelsIn:  ptr.Int32(1),
 									ChannelsOut: ptr.Int32(1),
 								},
-								SelectorType: types.AudioSelectorType("PID"),
+								SelectorType:        types.AudioSelectorType("PID"),
+								Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 								Streams: []int32{
 									1,
 									1,
@@ -16409,7 +16500,8 @@ func TestUpdateResponseSnapshot_GetJob(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -16529,7 +16621,8 @@ func TestUpdateResponseSnapshot_GetJob(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -16678,7 +16771,8 @@ func TestUpdateResponseSnapshot_GetJob(t *testing.T) {
 									ChannelsIn:  ptr.Int32(1),
 									ChannelsOut: ptr.Int32(1),
 								},
-								SelectorType: types.AudioSelectorType("PID"),
+								SelectorType:        types.AudioSelectorType("PID"),
+								Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 								Streams: []int32{
 									1,
 									1,
@@ -16915,7 +17009,8 @@ func TestUpdateResponseSnapshot_GetJob(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -17035,7 +17130,8 @@ func TestUpdateResponseSnapshot_GetJob(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -17151,6 +17247,36 @@ func TestUpdateResponseSnapshot_GetJob(t *testing.T) {
 					},
 					Playback:  types.MotionImagePlayback("ONCE"),
 					StartTime: ptr.String("__StartTime__"),
+				},
+				MotionImageInserters: []types.MotionImageInserter{
+					{
+						Framerate: &types.MotionImageInsertionFramerate{
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+						},
+						Input:         ptr.String("__Input__"),
+						InsertionMode: types.MotionImageInsertionMode("MOV"),
+						Offset: &types.MotionImageInsertionOffset{
+							ImageX: ptr.Int32(1),
+							ImageY: ptr.Int32(1),
+						},
+						Playback:  types.MotionImagePlayback("ONCE"),
+						StartTime: ptr.String("__StartTime__"),
+					},
+					{
+						Framerate: &types.MotionImageInsertionFramerate{
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+						},
+						Input:         ptr.String("__Input__"),
+						InsertionMode: types.MotionImageInsertionMode("MOV"),
+						Offset: &types.MotionImageInsertionOffset{
+							ImageX: ptr.Int32(1),
+							ImageY: ptr.Int32(1),
+						},
+						Playback:  types.MotionImagePlayback("ONCE"),
+						StartTime: ptr.String("__StartTime__"),
+					},
 				},
 				NielsenConfiguration: &types.NielsenConfiguration{
 					BreakoutCode:  ptr.Int32(1),
@@ -18634,6 +18760,8 @@ func TestUpdateResponseSnapshot_GetJob(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -19880,6 +20008,8 @@ func TestUpdateResponseSnapshot_GetJob(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -21611,6 +21741,8 @@ func TestUpdateResponseSnapshot_GetJob(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -22857,6 +22989,8 @@ func TestUpdateResponseSnapshot_GetJob(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -23312,7 +23446,8 @@ func TestUpdateResponseSnapshot_GetJobTemplate(t *testing.T) {
 									ChannelsIn:  ptr.Int32(1),
 									ChannelsOut: ptr.Int32(1),
 								},
-								SelectorType: types.AudioSelectorType("PID"),
+								SelectorType:        types.AudioSelectorType("PID"),
+								Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 								Streams: []int32{
 									1,
 									1,
@@ -23522,7 +23657,8 @@ func TestUpdateResponseSnapshot_GetJobTemplate(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -23642,7 +23778,8 @@ func TestUpdateResponseSnapshot_GetJobTemplate(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -23791,7 +23928,8 @@ func TestUpdateResponseSnapshot_GetJobTemplate(t *testing.T) {
 									ChannelsIn:  ptr.Int32(1),
 									ChannelsOut: ptr.Int32(1),
 								},
-								SelectorType: types.AudioSelectorType("PID"),
+								SelectorType:        types.AudioSelectorType("PID"),
+								Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 								Streams: []int32{
 									1,
 									1,
@@ -24001,7 +24139,8 @@ func TestUpdateResponseSnapshot_GetJobTemplate(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -24121,7 +24260,8 @@ func TestUpdateResponseSnapshot_GetJobTemplate(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -24237,6 +24377,36 @@ func TestUpdateResponseSnapshot_GetJobTemplate(t *testing.T) {
 					},
 					Playback:  types.MotionImagePlayback("ONCE"),
 					StartTime: ptr.String("__StartTime__"),
+				},
+				MotionImageInserters: []types.MotionImageInserter{
+					{
+						Framerate: &types.MotionImageInsertionFramerate{
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+						},
+						Input:         ptr.String("__Input__"),
+						InsertionMode: types.MotionImageInsertionMode("MOV"),
+						Offset: &types.MotionImageInsertionOffset{
+							ImageX: ptr.Int32(1),
+							ImageY: ptr.Int32(1),
+						},
+						Playback:  types.MotionImagePlayback("ONCE"),
+						StartTime: ptr.String("__StartTime__"),
+					},
+					{
+						Framerate: &types.MotionImageInsertionFramerate{
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+						},
+						Input:         ptr.String("__Input__"),
+						InsertionMode: types.MotionImageInsertionMode("MOV"),
+						Offset: &types.MotionImageInsertionOffset{
+							ImageX: ptr.Int32(1),
+							ImageY: ptr.Int32(1),
+						},
+						Playback:  types.MotionImagePlayback("ONCE"),
+						StartTime: ptr.String("__StartTime__"),
+					},
 				},
 				NielsenConfiguration: &types.NielsenConfiguration{
 					BreakoutCode:  ptr.Int32(1),
@@ -25720,6 +25890,8 @@ func TestUpdateResponseSnapshot_GetJobTemplate(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -26966,6 +27138,8 @@ func TestUpdateResponseSnapshot_GetJobTemplate(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -28697,6 +28871,8 @@ func TestUpdateResponseSnapshot_GetJobTemplate(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -29943,6 +30119,8 @@ func TestUpdateResponseSnapshot_GetJobTemplate(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -30465,7 +30643,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -30702,7 +30881,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -30822,7 +31002,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -30971,7 +31152,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -31208,7 +31390,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -31328,7 +31511,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -31444,6 +31628,36 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 						},
 						Playback:  types.MotionImagePlayback("ONCE"),
 						StartTime: ptr.String("__StartTime__"),
+					},
+					MotionImageInserters: []types.MotionImageInserter{
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
 					},
 					NielsenConfiguration: &types.NielsenConfiguration{
 						BreakoutCode:  ptr.Int32(1),
@@ -32927,6 +33141,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -34173,6 +34389,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -35904,6 +36122,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -37150,6 +37370,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -37668,7 +37890,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -37905,7 +38128,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -38025,7 +38249,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -38174,7 +38399,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -38411,7 +38637,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -38531,7 +38758,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -38647,6 +38875,36 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 						},
 						Playback:  types.MotionImagePlayback("ONCE"),
 						StartTime: ptr.String("__StartTime__"),
+					},
+					MotionImageInserters: []types.MotionImageInserter{
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
 					},
 					NielsenConfiguration: &types.NielsenConfiguration{
 						BreakoutCode:  ptr.Int32(1),
@@ -40130,6 +40388,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -41376,6 +41636,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -43107,6 +43369,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -44353,6 +44617,8 @@ func TestUpdateResponseSnapshot_GetJobsQueryResults(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -45689,6 +45955,8 @@ func TestUpdateResponseSnapshot_GetPreset(t *testing.T) {
 						},
 						PassthroughSettings: &types.PassthroughSettings{
 							FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+							GopsPerSegment:    ptr.Int32(1),
+							SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 							VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 						},
 						ProresSettings: &types.ProresSettings{
@@ -46161,7 +46429,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -46371,7 +46640,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -46491,7 +46761,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -46640,7 +46911,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -46850,7 +47122,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -46970,7 +47243,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -47086,6 +47360,36 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 						},
 						Playback:  types.MotionImagePlayback("ONCE"),
 						StartTime: ptr.String("__StartTime__"),
+					},
+					MotionImageInserters: []types.MotionImageInserter{
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
 					},
 					NielsenConfiguration: &types.NielsenConfiguration{
 						BreakoutCode:  ptr.Int32(1),
@@ -48569,6 +48873,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -49815,6 +50121,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -51546,6 +51854,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -52792,6 +53102,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -53204,7 +53516,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -53414,7 +53727,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -53534,7 +53848,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -53683,7 +53998,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -53893,7 +54209,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -54013,7 +54330,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -54129,6 +54447,36 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 						},
 						Playback:  types.MotionImagePlayback("ONCE"),
 						StartTime: ptr.String("__StartTime__"),
+					},
+					MotionImageInserters: []types.MotionImageInserter{
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
 					},
 					NielsenConfiguration: &types.NielsenConfiguration{
 						BreakoutCode:  ptr.Int32(1),
@@ -55612,6 +55960,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -56858,6 +57208,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -58589,6 +58941,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -59835,6 +60189,8 @@ func TestUpdateResponseSnapshot_ListJobTemplates(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -60359,7 +60715,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -60596,7 +60953,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -60716,7 +61074,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -60865,7 +61224,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -61102,7 +61462,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -61222,7 +61583,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -61338,6 +61700,36 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 						},
 						Playback:  types.MotionImagePlayback("ONCE"),
 						StartTime: ptr.String("__StartTime__"),
+					},
+					MotionImageInserters: []types.MotionImageInserter{
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
 					},
 					NielsenConfiguration: &types.NielsenConfiguration{
 						BreakoutCode:  ptr.Int32(1),
@@ -62821,6 +63213,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -64067,6 +64461,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -65798,6 +66194,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -67044,6 +67442,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -67562,7 +67962,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -67799,7 +68200,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -67919,7 +68321,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -68068,7 +68471,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -68305,7 +68709,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -68425,7 +68830,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -68541,6 +68947,36 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 						},
 						Playback:  types.MotionImagePlayback("ONCE"),
 						StartTime: ptr.String("__StartTime__"),
+					},
+					MotionImageInserters: []types.MotionImageInserter{
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
 					},
 					NielsenConfiguration: &types.NielsenConfiguration{
 						BreakoutCode:  ptr.Int32(1),
@@ -70024,6 +70460,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -71270,6 +71708,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -73001,6 +73441,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -74247,6 +74689,8 @@ func TestUpdateResponseSnapshot_ListJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -75556,6 +76000,8 @@ func TestUpdateResponseSnapshot_ListPresets(t *testing.T) {
 							},
 							PassthroughSettings: &types.PassthroughSettings{
 								FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+								GopsPerSegment:    ptr.Int32(1),
+								SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 								VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 							},
 							ProresSettings: &types.ProresSettings{
@@ -76795,6 +77241,8 @@ func TestUpdateResponseSnapshot_ListPresets(t *testing.T) {
 							},
 							PassthroughSettings: &types.PassthroughSettings{
 								FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+								GopsPerSegment:    ptr.Int32(1),
+								SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 								VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 							},
 							ProresSettings: &types.ProresSettings{
@@ -78003,7 +78451,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -78240,7 +78689,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -78360,7 +78810,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -78509,7 +78960,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -78746,7 +79198,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -78866,7 +79319,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -78982,6 +79436,36 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 						},
 						Playback:  types.MotionImagePlayback("ONCE"),
 						StartTime: ptr.String("__StartTime__"),
+					},
+					MotionImageInserters: []types.MotionImageInserter{
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
 					},
 					NielsenConfiguration: &types.NielsenConfiguration{
 						BreakoutCode:  ptr.Int32(1),
@@ -80465,6 +80949,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -81711,6 +82197,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -83442,6 +83930,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -84688,6 +85178,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -85206,7 +85698,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -85443,7 +85936,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -85563,7 +86057,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -85712,7 +86207,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 										ChannelsIn:  ptr.Int32(1),
 										ChannelsOut: ptr.Int32(1),
 									},
-									SelectorType: types.AudioSelectorType("PID"),
+									SelectorType:        types.AudioSelectorType("PID"),
+									Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 									Streams: []int32{
 										1,
 										1,
@@ -85949,7 +86445,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -86069,7 +86566,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 													ChannelsIn:  ptr.Int32(1),
 													ChannelsOut: ptr.Int32(1),
 												},
-												SelectorType: types.AudioSelectorType("PID"),
+												SelectorType:        types.AudioSelectorType("PID"),
+												Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 												Streams: []int32{
 													1,
 													1,
@@ -86185,6 +86683,36 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 						},
 						Playback:  types.MotionImagePlayback("ONCE"),
 						StartTime: ptr.String("__StartTime__"),
+					},
+					MotionImageInserters: []types.MotionImageInserter{
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
+						{
+							Framerate: &types.MotionImageInsertionFramerate{
+								FramerateDenominator: ptr.Int32(1),
+								FramerateNumerator:   ptr.Int32(1),
+							},
+							Input:         ptr.String("__Input__"),
+							InsertionMode: types.MotionImageInsertionMode("MOV"),
+							Offset: &types.MotionImageInsertionOffset{
+								ImageX: ptr.Int32(1),
+								ImageY: ptr.Int32(1),
+							},
+							Playback:  types.MotionImagePlayback("ONCE"),
+							StartTime: ptr.String("__StartTime__"),
+						},
 					},
 					NielsenConfiguration: &types.NielsenConfiguration{
 						BreakoutCode:  ptr.Int32(1),
@@ -87668,6 +88196,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -88914,6 +89444,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -90645,6 +91177,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -91891,6 +92425,8 @@ func TestUpdateResponseSnapshot_SearchJobs(t *testing.T) {
 											},
 											PassthroughSettings: &types.PassthroughSettings{
 												FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+												GopsPerSegment:    ptr.Int32(1),
+												SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 												VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 											},
 											ProresSettings: &types.ProresSettings{
@@ -92416,7 +92952,8 @@ func TestUpdateResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 									ChannelsIn:  ptr.Int32(1),
 									ChannelsOut: ptr.Int32(1),
 								},
-								SelectorType: types.AudioSelectorType("PID"),
+								SelectorType:        types.AudioSelectorType("PID"),
+								Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 								Streams: []int32{
 									1,
 									1,
@@ -92626,7 +93163,8 @@ func TestUpdateResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -92746,7 +93284,8 @@ func TestUpdateResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -92895,7 +93434,8 @@ func TestUpdateResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 									ChannelsIn:  ptr.Int32(1),
 									ChannelsOut: ptr.Int32(1),
 								},
-								SelectorType: types.AudioSelectorType("PID"),
+								SelectorType:        types.AudioSelectorType("PID"),
+								Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 								Streams: []int32{
 									1,
 									1,
@@ -93105,7 +93645,8 @@ func TestUpdateResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -93225,7 +93766,8 @@ func TestUpdateResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 												ChannelsIn:  ptr.Int32(1),
 												ChannelsOut: ptr.Int32(1),
 											},
-											SelectorType: types.AudioSelectorType("PID"),
+											SelectorType:        types.AudioSelectorType("PID"),
+											Smpte337Passthrough: types.AudioSmpte337Passthrough("ENABLED"),
 											Streams: []int32{
 												1,
 												1,
@@ -93341,6 +93883,36 @@ func TestUpdateResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 					},
 					Playback:  types.MotionImagePlayback("ONCE"),
 					StartTime: ptr.String("__StartTime__"),
+				},
+				MotionImageInserters: []types.MotionImageInserter{
+					{
+						Framerate: &types.MotionImageInsertionFramerate{
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+						},
+						Input:         ptr.String("__Input__"),
+						InsertionMode: types.MotionImageInsertionMode("MOV"),
+						Offset: &types.MotionImageInsertionOffset{
+							ImageX: ptr.Int32(1),
+							ImageY: ptr.Int32(1),
+						},
+						Playback:  types.MotionImagePlayback("ONCE"),
+						StartTime: ptr.String("__StartTime__"),
+					},
+					{
+						Framerate: &types.MotionImageInsertionFramerate{
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+						},
+						Input:         ptr.String("__Input__"),
+						InsertionMode: types.MotionImageInsertionMode("MOV"),
+						Offset: &types.MotionImageInsertionOffset{
+							ImageX: ptr.Int32(1),
+							ImageY: ptr.Int32(1),
+						},
+						Playback:  types.MotionImagePlayback("ONCE"),
+						StartTime: ptr.String("__StartTime__"),
+					},
 				},
 				NielsenConfiguration: &types.NielsenConfiguration{
 					BreakoutCode:  ptr.Int32(1),
@@ -94824,6 +95396,8 @@ func TestUpdateResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -96070,6 +96644,8 @@ func TestUpdateResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -97801,6 +98377,8 @@ func TestUpdateResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -99047,6 +99625,8 @@ func TestUpdateResponseSnapshot_UpdateJobTemplate(t *testing.T) {
 										},
 										PassthroughSettings: &types.PassthroughSettings{
 											FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+											GopsPerSegment:    ptr.Int32(1),
+											SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 											VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 										},
 										ProresSettings: &types.ProresSettings{
@@ -100332,6 +100912,8 @@ func TestUpdateResponseSnapshot_UpdatePreset(t *testing.T) {
 						},
 						PassthroughSettings: &types.PassthroughSettings{
 							FrameControl:      types.FrameControl("NEAREST_IDRFRAME"),
+							GopsPerSegment:    ptr.Int32(1),
+							SegmentationMode:  types.PassthroughSegmentationMode("AUTO"),
 							VideoSelectorMode: types.VideoSelectorMode("AUTO"),
 						},
 						ProresSettings: &types.ProresSettings{

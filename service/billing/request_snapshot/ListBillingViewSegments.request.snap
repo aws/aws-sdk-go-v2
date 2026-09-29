@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.ListBillingViewSegments
+
+{"arn":"__Arn__","maxResults":1,"nextToken":"__NextToken__","timeRange":{"beginDateInclusive":946684800,"endDateExclusive":946684800}}

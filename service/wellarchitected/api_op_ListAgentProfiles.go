@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Lists optimization profiles in your account. Profiles define the scope and
@@ -52,6 +53,10 @@ func (v *ListAgentProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgentProfilesRequest_nextToken, *v.NextToken)
 	}
+}
+func (in *ListAgentProfilesInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type ListAgentProfilesOutput struct {

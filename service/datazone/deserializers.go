@@ -5729,6 +5729,15 @@ func awsRestjson1_deserializeOpDocumentCreateEnvironmentBlueprintOutput(v **Crea
 
 	for key, value := range shape {
 		switch key {
+		case "blueprintCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BlueprintCategory to be of type string, got %T instead", value)
+				}
+				sv.BlueprintCategory = types.BlueprintCategory(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17591,6 +17600,15 @@ func awsRestjson1_deserializeOpDocumentGetEnvironmentBlueprintOutput(v **GetEnvi
 
 	for key, value := range shape {
 		switch key {
+		case "blueprintCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BlueprintCategory to be of type string, got %T instead", value)
+				}
+				sv.BlueprintCategory = types.BlueprintCategory(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -37973,6 +37991,15 @@ func awsRestjson1_deserializeOpDocumentUpdateEnvironmentBlueprintOutput(v **Upda
 
 	for key, value := range shape {
 		switch key {
+		case "blueprintCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BlueprintCategory to be of type string, got %T instead", value)
+				}
+				sv.BlueprintCategory = types.BlueprintCategory(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -48647,6 +48674,15 @@ func awsRestjson1_deserializeDocumentEnvironmentBlueprintSummary(v **types.Envir
 
 	for key, value := range shape {
 		switch key {
+		case "blueprintCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BlueprintCategory to be of type string, got %T instead", value)
+				}
+				sv.BlueprintCategory = types.BlueprintCategory(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)

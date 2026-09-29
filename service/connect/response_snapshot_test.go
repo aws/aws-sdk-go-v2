@@ -20225,6 +20225,15 @@ func TestCheckResponseSnapshot_StartChatContact(t *testing.T) {
 		ParticipantId:          ptr.String("__ParticipantId__"),
 		ParticipantToken:       ptr.String("__ParticipantToken__"),
 		ContinuedFromContactId: ptr.String("__ContinuedFromContactId__"),
+		ConnectionCredentials: &types.ConnectionCredentials{
+			ConnectionToken: ptr.String("__ConnectionToken__"),
+			Expiry:          ptr.String("__Expiry__"),
+		},
+		Websocket: &types.Websocket{
+			Url:              ptr.String("__Url__"),
+			ConnectionExpiry: ptr.String("__ConnectionExpiry__"),
+		},
+		StreamingId: ptr.String("__StreamingId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("StartChatContact.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -20279,6 +20288,13 @@ func TestCheckResponseSnapshot_StartChatContact(t *testing.T) {
 		DisconnectOnCustomerExit: []types.DisconnectOnCustomerExitParticipantType{
 			types.DisconnectOnCustomerExitParticipantType("AGENT"),
 			types.DisconnectOnCustomerExitParticipantType("AGENT"),
+		},
+		ConnectionTypes: []types.ConnectionType{
+			types.ConnectionType("WEBSOCKET"),
+			types.ConnectionType("WEBSOCKET"),
+		},
+		ChatStreamingConfiguration: &types.ChatStreamingConfiguration{
+			StreamingEndpointArn: ptr.String("__StreamingEndpointArn__"),
 		},
 	})
 	if err != nil {

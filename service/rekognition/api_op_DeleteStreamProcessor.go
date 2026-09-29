@@ -7,10 +7,18 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+// Service availability notice: Streaming Video and Bulk Image Analysis is no
+// longer available to new customers. For more information, see [Rekognition feature availability changes].
+//
+// This change does not impact the availability of other Amazon Rekognition
+// features.
+//
 // Deletes the stream processor identified by Name . You assign the value for Name
 // when you create the stream processor with CreateStreamProcessor. You might not be able to use the
 // same name for a stream processor for a few seconds after calling
 // DeleteStreamProcessor .
+//
+// [Rekognition feature availability changes]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
 func (c *Client) DeleteStreamProcessor(ctx context.Context, params *DeleteStreamProcessorInput, optFns ...func(*Options)) (*DeleteStreamProcessorOutput, error) {
 	if params == nil {
 		params = &DeleteStreamProcessorInput{}

@@ -118,6 +118,11 @@ var CustomDescriptor = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var CustomDescriptor_data *smithy.Schema
 
+var _CustomMetadataDocument = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistry",
+	Name:      "CustomMetadataDocument",
+}, smithy.ShapeTypeDocument, 0, &smithytraits.Sensitive{})
+
 var _DataSchemaVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "DataSchemaVersion",
@@ -392,7 +397,7 @@ var RegistryRecordStatus_UPDATE_FAILED *smithy.Schema
 var RegistryRecordSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "RegistryRecordSummary",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var RegistryRecordSummary_registryArn *smithy.Schema
 
 var RegistryRecordSummary_recordArn *smithy.Schema
@@ -416,6 +421,8 @@ var RegistryRecordSummary_status *smithy.Schema
 var RegistryRecordSummary_createdAt *smithy.Schema
 
 var RegistryRecordSummary_updatedAt *smithy.Schema
+
+var RegistryRecordSummary_customMetadata *smithy.Schema
 
 var _RegistryRecordSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
@@ -721,6 +728,8 @@ func init() {
 	RegistryRecordSummary_createdAt = RegistryRecordSummary.AddMember("createdAt", _DateTimestamp)
 
 	RegistryRecordSummary_updatedAt = RegistryRecordSummary.AddMember("updatedAt", _DateTimestamp)
+
+	RegistryRecordSummary_customMetadata = RegistryRecordSummary.AddMember("customMetadata", _CustomMetadataDocument)
 
 	_RegistryRecordSummaryList_member = _RegistryRecordSummaryList.AddMember("member", RegistryRecordSummary)
 

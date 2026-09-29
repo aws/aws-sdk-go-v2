@@ -83,5 +83,9 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.ResourceNotFoundException,
 			New:    func() any { return &types.ResourceNotFoundException{} },
 		},
+		"com.amazonaws.cloudwatch#ValidationException": {
+			Schema: schemas.ValidationException,
+			New:    func() any { return &types.ValidationException{} },
+		},
 	},
 }

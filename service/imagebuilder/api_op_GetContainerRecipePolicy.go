@@ -50,7 +50,8 @@ func (v *GetContainerRecipePolicyInput) SerializeMembers(s smithy.ShapeSerialize
 
 type GetContainerRecipePolicyOutput struct {
 
-	// The container recipe policy object that is returned.
+	// The resource policy for the container recipe, as a JSON policy document. If no
+	// policy has been applied, the response contains an empty JSON object ( {} ).
 	Policy *string
 
 	// The request ID that uniquely identifies this request.

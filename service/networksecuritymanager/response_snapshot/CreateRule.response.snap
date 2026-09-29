@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"configuration":"__Document__","firewallType":"WAF","hasPublishedVersion":true,"isSnapshot":true,"ruleArn":"__RuleArn__","ruleDescription":"__RuleDescription__","ruleId":"__RuleId__","ruleName":"__RuleName__","ruleType":"CONFIGURATION","status":"DRAFT","updateToken":"__UpdateToken__","updatedAt":"2000-01-01T00:00:00Z","version":"__Version__"}

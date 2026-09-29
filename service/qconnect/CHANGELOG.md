@@ -1,3 +1,11 @@
+# v1.42.0 (2026-09-25)
+
+* **Feature**: Release shapes for the proactive agentic recommendations and the multi-knowledge base search features. Increases the maximum length of QuickResponseContent.
+
+# v1.41.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.0 (2026-09-18)
 
 * **Feature**: Amazon Connect AI Agents now support multi-agent orchestration and structured JSON input and output messaging for orchestration agents.

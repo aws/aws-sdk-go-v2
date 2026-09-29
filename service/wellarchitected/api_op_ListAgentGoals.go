@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Lists optimization goals associated with a specified profile. Goals define
@@ -60,6 +61,10 @@ func (v *ListAgentGoalsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProfileArn != nil {
 		s.WriteString(schemas.ListAgentGoalsRequest_profileArn, *v.ProfileArn)
 	}
+}
+func (in *ListAgentGoalsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type ListAgentGoalsOutput struct {

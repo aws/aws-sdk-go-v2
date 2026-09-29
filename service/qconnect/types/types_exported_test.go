@@ -247,6 +247,9 @@ func ExampleDataDetails_outputUsage() {
 	case *types.DataDetailsMemberNotesData:
 		_ = v.Value // Value is types.NotesDataDetails
 
+	case *types.DataDetailsMemberProactiveRecommendationData:
+		_ = v.Value // Value is types.ProactiveRecommendationDataDetails
+
 	case *types.DataDetailsMemberSourceContentData:
 		_ = v.Value // Value is types.SourceContentDataDetails
 
@@ -267,11 +270,12 @@ var _ *types.EmailGenerativeAnswerChunkDataDetails
 var _ *types.CaseSummarizationChunkDataDetails
 var _ *types.ContentDataDetails
 var _ *types.GenerativeChunkDataDetails
+var _ *types.EmailOverviewChunkDataDetails
+var _ *types.ProactiveRecommendationDataDetails
 var _ *types.NotesChunkDataDetails
 var _ *types.SuggestedMessageDataDetails
 var _ *types.IntentDetectedDataDetails
 var _ *types.GenerativeDataDetails
-var _ *types.EmailOverviewChunkDataDetails
 var _ *types.SourceContentDataDetails
 var _ *types.EmailResponseChunkDataDetails
 

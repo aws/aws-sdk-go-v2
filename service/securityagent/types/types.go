@@ -33,6 +33,25 @@ type Actor struct {
 	noSmithyDocumentSerde
 }
 
+// A message received at an actor's server-generated email MFA address.
+type ActorMessage struct {
+
+	// The plain-text body of the message, containing the MFA code or verification
+	// link.
+	Body *string
+
+	// The time the message was received.
+	ReceivedAt *time.Time
+
+	// The address the message was sent from.
+	Sender *string
+
+	// The subject line of the message.
+	Subject *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents an agent space, which is a dedicated workspace for securing a
 // specific application. An agent space contains the configuration, resources, and
 // settings needed for security testing.
@@ -495,6 +514,16 @@ type Category struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration that enables a pentest to run as part of a CI/CD pipeline,
+// scoped to the code changes in each pipeline run.
+type CiCdConfiguration struct {
+
+	// Whether CI/CD pentesting is enabled for this pentest.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon CloudWatch Logs configuration for pentest job logging.
 type CloudWatchLog struct {
 
@@ -600,6 +629,12 @@ type CodeReview struct {
 	// not set, jobs run to completion with no budget cap.
 	MaxTaskHours *float64
 
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
+	// The report-generation filters applied when the report is exported.
+	ReportFilters *ReportFilters
+
 	// The IAM service role used for the code review.
 	ServiceRole *string
 
@@ -651,6 +686,9 @@ type CodeReviewJob struct {
 
 	// An overview of the code review job results.
 	Overview *string
+
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
 
 	// The IAM service role used for the code review job.
 	ServiceRole *string
@@ -1895,6 +1933,10 @@ type Pentest struct {
 	// This member is required.
 	Title *string
 
+	// The CI/CD pentesting configuration for this pentest. Present when the pentest
+	// is set up to run from a CI/CD pipeline.
+	CicdConfiguration *CiCdConfiguration
+
 	// Strategy for cleaning up resources after pentest job completion.
 	CleanUpStrategy CleanUpStrategy
 
@@ -1922,6 +1964,12 @@ type Pentest struct {
 	// The network traffic configuration for the pentest.
 	NetworkTrafficConfig *NetworkTrafficConfig
 
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
+	// The report-generation filters applied when the report is exported.
+	ReportFilters *ReportFilters
+
 	// The IAM service role used for the pentest.
 	ServiceRole *string
 
@@ -1944,6 +1992,10 @@ type PentestJob struct {
 
 	// The list of domains allowed during the pentest job.
 	AllowedDomains []Endpoint
+
+	// The configuration that enables a pentest to run as part of a CI/CD pipeline,
+	// scoped to the code changes in each pipeline run.
+	CicdConfiguration *CiCdConfiguration
 
 	// Strategy for cleaning up resources after pentest job completion.
 	CleanUpStrategy CleanUpStrategy
@@ -1979,7 +2031,7 @@ type PentestJob struct {
 	// The list of integrated repositories associated with the pentest job.
 	IntegratedRepositories []IntegratedRepository
 
-	// The type of the pentest job. Valid values are FULL and REVALIDATION.
+	// The type of the pentest job. Valid values are FULL, REVALIDATION, and CICD.
 	JobType JobType
 
 	// The CloudWatch Logs configuration for the pentest job.
@@ -2000,6 +2052,20 @@ type PentestJob struct {
 
 	// The unique identifier of the pentest job.
 	PentestJobId *string
+
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
+	// The URL to view this pentest job's findings report in the console.
+	ReportUrl *string
+
+	// The code changes that defined the scope of this CI/CD pentest job. Present only
+	// for jobs of type CICD.
+	ScopeChanges []ScopeChange
+
+	// The scoping outcome for this CI/CD pentest job. Present only for jobs of type
+	// CICD.
+	ScopeResult *ScopeResult
 
 	// The list of finding identifiers selected for revalidation. Present only when
 	// jobType is REVALIDATION.
@@ -2048,6 +2114,12 @@ type PentestJobSummary struct {
 
 	// The date and time the pentest job was created, in UTC format.
 	CreatedAt *time.Time
+
+	// The type of the pentest job. Valid values are FULL, REVALIDATION, and CICD.
+	JobType JobType
+
+	// The URL to view this pentest job's findings report in the console.
+	ReportUrl *string
 
 	// The current status of the pentest job.
 	Status JobStatus
@@ -2282,6 +2354,85 @@ type ReportDestination struct {
 
 	// The parent document identifier under which the report will be created.
 	ParentId *string
+
+	noSmithyDocumentSerde
+}
+
+// The report-generation filters applied when a pentest or code review report is
+// exported.
+type ReportFilters struct {
+
+	// Whether to include reviewer annotation notes under each finding.
+	AnnotationNotes *bool
+
+	// Whether to include the compliance-ready report additions.
+	ComplianceReport *bool
+
+	// The confidence levels to include in the report.
+	ConfidenceLevels []ConfidenceLevel
+
+	// The finding types to include in the report.
+	FindingTypes []string
+
+	// The severity levels to include in the report.
+	RiskLevels []RiskLevel
+
+	// The risk types to include in the report.
+	RiskTypes []RiskType
+
+	// The finding statuses to include in the report.
+	Statuses []FindingStatus
+
+	// The task execution statuses to include in the report's task table.
+	TaskStatuses []TaskExecutionStatus
+
+	noSmithyDocumentSerde
+}
+
+// A code change in a CI/CD pipeline run that defines what a CI/CD pentest job
+// tests. Each scope change identifies an integrated repository and the commit
+// range for the change.
+type ScopeChange struct {
+
+	// The commit SHA at the tip of the change to be tested.
+	//
+	// This member is required.
+	HeadCommitSha *string
+
+	// The identifier of the integration for the source-code provider that hosts the
+	// repository.
+	//
+	// This member is required.
+	IntegrationId *string
+
+	// The provider-specific identifier of the repository the change belongs to.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// The commit SHA that the change is compared against. When omitted, the change is
+	// evaluated against the head commit alone.
+	BaseCommitSha *string
+
+	// The identifier of the CI/CD pipeline run that triggered this pentest job.
+	TriggerRunId *string
+
+	noSmithyDocumentSerde
+}
+
+// The outcome of scoping a CI/CD pentest job's code changes, including the
+// decision and the reason for it.
+type ScopeResult struct {
+
+	// The scoping decision for the job's code changes.
+	//
+	// This member is required.
+	Decision ScopeDecision
+
+	// A human-readable explanation of the scoping decision.
+	//
+	// This member is required.
+	Reason *string
 
 	noSmithyDocumentSerde
 }
@@ -2734,6 +2885,9 @@ type ThreatModel struct {
 	// The CloudWatch Logs configuration for the threat model.
 	LogConfig *CloudWatchLog
 
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
 	// The scoped documents for the agent to focus on during threat modeling.
 	ScopeDocs []DocumentInfo
 
@@ -2769,6 +2923,9 @@ type ThreatModelJob struct {
 
 	// The list of integrated repositories used for threat modeling.
 	IntegratedRepositories []IntegratedRepository
+
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
 
 	// The scoped documents for the agent to focus on during threat modeling.
 	ScopeDocs []DocumentInfo
@@ -2967,7 +3124,7 @@ type ThreatSummary struct {
 // A trust anchor used when validating a target endpoint's TLS certificate.
 type TrustedCaCertificate struct {
 
-	// The source that AWS Security Agent reads the certificate from.
+	// The source that Security Agent reads the certificate from.
 	//
 	// This member is required.
 	Source CaCertificateSource
@@ -3096,14 +3253,15 @@ type VerificationScriptEnvVar struct {
 // subnets to use during testing.
 type VpcConfig struct {
 
-	// The Amazon Resource Names (ARNs) of the security groups for the VPC
+	// The Amazon Resource Names (ARNs) or IDs of the security groups for the VPC
 	// configuration.
 	SecurityGroupArns []string
 
-	// The Amazon Resource Names (ARNs) of the subnets for the VPC configuration.
+	// The Amazon Resource Names (ARNs) or IDs of the subnets for the VPC
+	// configuration.
 	SubnetArns []string
 
-	// The Amazon Resource Name (ARN) of the VPC.
+	// The Amazon Resource Name (ARN) or ID of the VPC.
 	VpcArn *string
 
 	noSmithyDocumentSerde

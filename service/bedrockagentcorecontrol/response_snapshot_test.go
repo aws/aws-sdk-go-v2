@@ -1395,6 +1395,7 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -1574,6 +1575,7 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -6124,6 +6126,7 @@ func TestCheckResponseSnapshot_GetGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -7433,6 +7436,7 @@ func TestCheckResponseSnapshot_GetPaymentConnector(t *testing.T) {
 		Name:               ptr.String("__Name__"),
 		Description:        ptr.String("__Description__"),
 		Type:               types.PaymentConnectorType("CoinbaseCDP"),
+		ProvisionMode:      types.PaymentConnectorProvisionMode("MANUAL"),
 		CredentialProviderConfigurations: []types.CredentialsProviderConfiguration{
 			&types.CredentialsProviderConfigurationMemberCoinbaseCDP{
 				Value: types.PaymentCredentialProviderConfiguration{
@@ -7445,10 +7449,11 @@ func TestCheckResponseSnapshot_GetPaymentConnector(t *testing.T) {
 				},
 			},
 		},
-		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		LastUpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Status:           types.PaymentConnectorStatus("CREATING"),
-		AuthorizationUrl: ptr.String("__AuthorizationUrl__"),
+		CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastUpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Status:               types.PaymentConnectorStatus("CREATING"),
+		AuthorizationUrl:     ptr.String("__AuthorizationUrl__"),
+		CredentialsUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetPaymentConnector.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -9657,6 +9662,7 @@ func TestCheckResponseSnapshot_ListPaymentConnectors(t *testing.T) {
 				PaymentConnectorId: ptr.String("__PaymentConnectorId__"),
 				Name:               ptr.String("__Name__"),
 				Type:               types.PaymentConnectorType("CoinbaseCDP"),
+				ProvisionMode:      types.PaymentConnectorProvisionMode("MANUAL"),
 				Status:             types.PaymentConnectorStatus("CREATING"),
 				LastUpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -9664,6 +9670,7 @@ func TestCheckResponseSnapshot_ListPaymentConnectors(t *testing.T) {
 				PaymentConnectorId: ptr.String("__PaymentConnectorId__"),
 				Name:               ptr.String("__Name__"),
 				Type:               types.PaymentConnectorType("CoinbaseCDP"),
+				ProvisionMode:      types.PaymentConnectorProvisionMode("MANUAL"),
 				Status:             types.PaymentConnectorStatus("CREATING"),
 				LastUpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -10359,6 +10366,42 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutResourcePolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_RotatePaymentConnectorCredentials(t *testing.T) {
+	want := &RotatePaymentConnectorCredentialsOutput{
+		PaymentConnectorId: ptr.String("__PaymentConnectorId__"),
+		PaymentManagerId:   ptr.String("__PaymentManagerId__"),
+		LastUpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Status:             types.PaymentConnectorStatus("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RotatePaymentConnectorCredentials.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RotatePaymentConnectorCredentials(context.Background(), &RotatePaymentConnectorCredentialsInput{
+		PaymentManagerId:   ptr.String("__PaymentManagerId__"),
+		PaymentConnectorId: ptr.String("__PaymentConnectorId__"),
+		CredentialsToRotate: &types.CredentialRotationConfigMemberCoinbaseCDP{
+			Value: types.CoinbaseCdpRotationTargets{
+				Secrets: []types.CoinbaseCdpSecret{
+					types.CoinbaseCdpSecret("API_KEY"),
+					types.CoinbaseCdpSecret("API_KEY"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RotatePaymentConnectorCredentials.response", err)
 	}
 }
 
@@ -11267,6 +11310,7 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),
@@ -11446,6 +11490,7 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 				StreamingConfiguration: &types.StreamingConfiguration{
 					EnableResponseStreaming: ptr.Bool(true),
 				},
+				DisableMcpListToolsPagination: ptr.Bool(true),
 			},
 		},
 		AuthorizerType: types.AuthorizerType("CUSTOM_JWT"),

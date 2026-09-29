@@ -1,0 +1,7 @@
+POST /service/AWSEventsV2/operation/UpdateEventSource
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿mConfiguration¡xAwsServiceEventsConfiguration¿jAwsServicen__AwsService__vOnFailureConfiguration¿cArng__Arn__ÿgPatternk__Pattern__ÿkDescriptiono__Description__nEventSourceArnr__EventSourceArn__ÿ

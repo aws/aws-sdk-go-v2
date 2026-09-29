@@ -439,7 +439,8 @@ func TestCheckRequestSnapshot_CreatePlan(t *testing.T) {
 				},
 			},
 		},
-		Name: ptr.String("__Name__"),
+		ServiceQuotaChecksEnabled: ptr.Bool(true),
+		Name:                      ptr.String("__Name__"),
 		Regions: []string{
 			"__Member__",
 			"__Member__",
@@ -792,6 +793,38 @@ func TestCheckRequestSnapshot_ListRoute53HealthChecksInRegion(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListServiceQuotaWarnings(t *testing.T) {
+	input := &ListServiceQuotaWarningsInput{
+		PlanArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListServiceQuotaWarnings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServiceQuotaWarnings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 	input := &ListTagsForResourceInput{
 		Arn: ptr.String("__Arn__"),
@@ -1102,6 +1135,7 @@ func TestCheckRequestSnapshot_UpdatePlan(t *testing.T) {
 				},
 			},
 		},
+		ServiceQuotaChecksEnabled: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1433,7 +1467,8 @@ func TestUpdateRequestSnapshot_CreatePlan(t *testing.T) {
 				},
 			},
 		},
-		Name: ptr.String("__Name__"),
+		ServiceQuotaChecksEnabled: ptr.Bool(true),
+		Name:                      ptr.String("__Name__"),
 		Regions: []string{
 			"__Member__",
 			"__Member__",
@@ -1786,6 +1821,38 @@ func TestUpdateRequestSnapshot_ListRoute53HealthChecksInRegion(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListServiceQuotaWarnings(t *testing.T) {
+	input := &ListServiceQuotaWarningsInput{
+		PlanArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListServiceQuotaWarnings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListServiceQuotaWarnings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 	input := &ListTagsForResourceInput{
 		Arn: ptr.String("__Arn__"),
@@ -2096,6 +2163,7 @@ func TestUpdateRequestSnapshot_UpdatePlan(t *testing.T) {
 				},
 			},
 		},
+		ServiceQuotaChecksEnabled: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -3359,9 +3359,10 @@ func TestCheckRequestSnapshot_CreateClientVpnEndpoint(t *testing.T) {
 			},
 		},
 		ConnectionLogOptions: &types.ConnectionLogOptions{
-			Enabled:             ptr.Bool(true),
-			CloudwatchLogGroup:  ptr.String("__CloudwatchLogGroup__"),
-			CloudwatchLogStream: ptr.String("__CloudwatchLogStream__"),
+			Enabled:                           ptr.Bool(true),
+			CloudwatchLogGroup:                ptr.String("__CloudwatchLogGroup__"),
+			CloudwatchLogStream:               ptr.String("__CloudwatchLogStream__"),
+			IncludeAuthorizationPolicyContext: ptr.Bool(true),
 		},
 		DnsServers: []string{
 			"__Member__",
@@ -3432,6 +3433,21 @@ func TestCheckRequestSnapshot_CreateClientVpnEndpoint(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+		},
+		DevicePostureOptions: &types.DevicePostureOptions{
+			TrustProviders: []types.ClientVpnTrustProviderRequest{
+				{
+					TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+					TenantId:            ptr.String("__TenantId__"),
+					PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+				},
+				{
+					TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+					TenantId:            ptr.String("__TenantId__"),
+					PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+				},
+			},
+			Enabled: ptr.Bool(true),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -11868,6 +11884,34 @@ func TestCheckRequestSnapshot_DeleteClientVpnEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteClientVpnEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	input := &DeleteClientVpnEndpointAuthorizationPolicyInput{
+		ClientVpnEndpointId: ptr.String("__ClientVpnEndpointId__"),
+		DryRun:              ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteClientVpnEndpointAuthorizationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteClientVpnEndpointAuthorizationPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -26472,6 +26516,34 @@ func TestCheckRequestSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	input := &GetClientVpnEndpointAuthorizationPolicyInput{
+		ClientVpnEndpointId: ptr.String("__ClientVpnEndpointId__"),
+		DryRun:              ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetClientVpnEndpointAuthorizationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetClientVpnEndpointAuthorizationPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetCoipPoolUsage(t *testing.T) {
 	input := &GetCoipPoolUsageInput{
 		PoolId: ptr.String("__PoolId__"),
@@ -29879,9 +29951,10 @@ func TestCheckRequestSnapshot_ModifyClientVpnEndpoint(t *testing.T) {
 		ClientVpnEndpointId:  ptr.String("__ClientVpnEndpointId__"),
 		ServerCertificateArn: ptr.String("__ServerCertificateArn__"),
 		ConnectionLogOptions: &types.ConnectionLogOptions{
-			Enabled:             ptr.Bool(true),
-			CloudwatchLogGroup:  ptr.String("__CloudwatchLogGroup__"),
-			CloudwatchLogStream: ptr.String("__CloudwatchLogStream__"),
+			Enabled:                           ptr.Bool(true),
+			CloudwatchLogGroup:                ptr.String("__CloudwatchLogGroup__"),
+			CloudwatchLogStream:               ptr.String("__CloudwatchLogStream__"),
+			IncludeAuthorizationPolicyContext: ptr.Bool(true),
 		},
 		DnsServers: &types.DnsServersOptionsModifyStructure{
 			CustomDnsServers: []string{
@@ -29924,6 +29997,21 @@ func TestCheckRequestSnapshot_ModifyClientVpnEndpoint(t *testing.T) {
 				"__Member__",
 			},
 		},
+		DevicePostureOptions: &types.DevicePostureOptions{
+			TrustProviders: []types.ClientVpnTrustProviderRequest{
+				{
+					TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+					TenantId:            ptr.String("__TenantId__"),
+					PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+				},
+				{
+					TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+					TenantId:            ptr.String("__TenantId__"),
+					PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+				},
+			},
+			Enabled: ptr.Bool(true),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -29944,6 +30032,38 @@ func TestCheckRequestSnapshot_ModifyClientVpnEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyClientVpnEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ModifyClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	input := &ModifyClientVpnEndpointAuthorizationPolicyInput{
+		ClientVpnEndpointId: ptr.String("__ClientVpnEndpointId__"),
+		PolicyDocument:      ptr.String("__PolicyDocument__"),
+		Description:         ptr.String("__Description__"),
+		ShadowMode:          types.ClientVpnAuthorizationPolicyShadowMode("enabled"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		DryRun:              ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyClientVpnEndpointAuthorizationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyClientVpnEndpointAuthorizationPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -42700,9 +42820,10 @@ func TestUpdateRequestSnapshot_CreateClientVpnEndpoint(t *testing.T) {
 			},
 		},
 		ConnectionLogOptions: &types.ConnectionLogOptions{
-			Enabled:             ptr.Bool(true),
-			CloudwatchLogGroup:  ptr.String("__CloudwatchLogGroup__"),
-			CloudwatchLogStream: ptr.String("__CloudwatchLogStream__"),
+			Enabled:                           ptr.Bool(true),
+			CloudwatchLogGroup:                ptr.String("__CloudwatchLogGroup__"),
+			CloudwatchLogStream:               ptr.String("__CloudwatchLogStream__"),
+			IncludeAuthorizationPolicyContext: ptr.Bool(true),
 		},
 		DnsServers: []string{
 			"__Member__",
@@ -42773,6 +42894,21 @@ func TestUpdateRequestSnapshot_CreateClientVpnEndpoint(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+		},
+		DevicePostureOptions: &types.DevicePostureOptions{
+			TrustProviders: []types.ClientVpnTrustProviderRequest{
+				{
+					TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+					TenantId:            ptr.String("__TenantId__"),
+					PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+				},
+				{
+					TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+					TenantId:            ptr.String("__TenantId__"),
+					PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+				},
+			},
+			Enabled: ptr.Bool(true),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -51209,6 +51345,34 @@ func TestUpdateRequestSnapshot_DeleteClientVpnEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteClientVpnEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	input := &DeleteClientVpnEndpointAuthorizationPolicyInput{
+		ClientVpnEndpointId: ptr.String("__ClientVpnEndpointId__"),
+		DryRun:              ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteClientVpnEndpointAuthorizationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteClientVpnEndpointAuthorizationPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -65813,6 +65977,34 @@ func TestUpdateRequestSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	input := &GetClientVpnEndpointAuthorizationPolicyInput{
+		ClientVpnEndpointId: ptr.String("__ClientVpnEndpointId__"),
+		DryRun:              ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetClientVpnEndpointAuthorizationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetClientVpnEndpointAuthorizationPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetCoipPoolUsage(t *testing.T) {
 	input := &GetCoipPoolUsageInput{
 		PoolId: ptr.String("__PoolId__"),
@@ -69220,9 +69412,10 @@ func TestUpdateRequestSnapshot_ModifyClientVpnEndpoint(t *testing.T) {
 		ClientVpnEndpointId:  ptr.String("__ClientVpnEndpointId__"),
 		ServerCertificateArn: ptr.String("__ServerCertificateArn__"),
 		ConnectionLogOptions: &types.ConnectionLogOptions{
-			Enabled:             ptr.Bool(true),
-			CloudwatchLogGroup:  ptr.String("__CloudwatchLogGroup__"),
-			CloudwatchLogStream: ptr.String("__CloudwatchLogStream__"),
+			Enabled:                           ptr.Bool(true),
+			CloudwatchLogGroup:                ptr.String("__CloudwatchLogGroup__"),
+			CloudwatchLogStream:               ptr.String("__CloudwatchLogStream__"),
+			IncludeAuthorizationPolicyContext: ptr.Bool(true),
 		},
 		DnsServers: &types.DnsServersOptionsModifyStructure{
 			CustomDnsServers: []string{
@@ -69265,6 +69458,21 @@ func TestUpdateRequestSnapshot_ModifyClientVpnEndpoint(t *testing.T) {
 				"__Member__",
 			},
 		},
+		DevicePostureOptions: &types.DevicePostureOptions{
+			TrustProviders: []types.ClientVpnTrustProviderRequest{
+				{
+					TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+					TenantId:            ptr.String("__TenantId__"),
+					PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+				},
+				{
+					TrustProviderType:   types.ClientVpnDeviceTrustProviderType("crowdstrike"),
+					TenantId:            ptr.String("__TenantId__"),
+					PublicSigningKeyUrl: ptr.String("__PublicSigningKeyUrl__"),
+				},
+			},
+			Enabled: ptr.Bool(true),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -69285,6 +69493,38 @@ func TestUpdateRequestSnapshot_ModifyClientVpnEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyClientVpnEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ModifyClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	input := &ModifyClientVpnEndpointAuthorizationPolicyInput{
+		ClientVpnEndpointId: ptr.String("__ClientVpnEndpointId__"),
+		PolicyDocument:      ptr.String("__PolicyDocument__"),
+		Description:         ptr.String("__Description__"),
+		ShadowMode:          types.ClientVpnAuthorizationPolicyShadowMode("enabled"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		DryRun:              ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyClientVpnEndpointAuthorizationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyClientVpnEndpointAuthorizationPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }

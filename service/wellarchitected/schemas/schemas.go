@@ -900,10 +900,12 @@ var _AgentRecommendationSummaries_member *smithy.Schema
 var AgentRecommendationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "AgentRecommendationSummary",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var AgentRecommendationSummary_recommendationArn *smithy.Schema
 
 var AgentRecommendationSummary_profileArn *smithy.Schema
+
+var AgentRecommendationSummary_generationId *smithy.Schema
 
 var AgentRecommendationSummary_title *smithy.Schema
 
@@ -4366,10 +4368,12 @@ var GetAgentRecommendationRequest_remediationType *smithy.Schema
 var GetAgentRecommendationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "GetAgentRecommendationResponse",
-}, smithy.ShapeTypeStructure, 31)
+}, smithy.ShapeTypeStructure, 32)
 var GetAgentRecommendationResponse_recommendationArn *smithy.Schema
 
 var GetAgentRecommendationResponse_profileArn *smithy.Schema
+
+var GetAgentRecommendationResponse_generationId *smithy.Schema
 
 var GetAgentRecommendationResponse_title *smithy.Schema
 
@@ -5978,6 +5982,8 @@ func init() {
 	AgentRecommendationSummary_recommendationArn = AgentRecommendationSummary.AddMember("recommendationArn", _RecommendationArn)
 
 	AgentRecommendationSummary_profileArn = AgentRecommendationSummary.AddMember("profileArn", _AgentProfileArn)
+
+	AgentRecommendationSummary_generationId = AgentRecommendationSummary.AddMember("generationId", _UUID)
 
 	AgentRecommendationSummary_title = AgentRecommendationSummary.AddMember("title", _SensitiveString)
 
@@ -7708,6 +7714,8 @@ func init() {
 	GetAgentRecommendationResponse_recommendationArn = GetAgentRecommendationResponse.AddMember("recommendationArn", _RecommendationArn)
 
 	GetAgentRecommendationResponse_profileArn = GetAgentRecommendationResponse.AddMember("profileArn", _AgentProfileArn)
+
+	GetAgentRecommendationResponse_generationId = GetAgentRecommendationResponse.AddMember("generationId", _UUID)
 
 	GetAgentRecommendationResponse_title = GetAgentRecommendationResponse.AddMember("title", _SensitiveString)
 

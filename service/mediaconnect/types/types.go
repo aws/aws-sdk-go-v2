@@ -7164,6 +7164,29 @@ func (v *PublicRouterNetworkInterfaceRule) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 
+// The TLS encryption configuration for destinations that present a certificate
+// from a publicly trusted certificate authority. This type does not require any
+// additional settings.
+type PublicTlsEncryptionConfiguration struct {
+	noSmithyDocumentSerde
+}
+
+func (v *PublicTlsEncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublicTlsEncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublicTlsEncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PublicTlsEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublicTlsEncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 //	A pricing agreement for a discounted rate for a specific outbound bandwidth
 //
 // that your MediaConnect account will use each month over a specific time period.
@@ -9260,6 +9283,7 @@ func (v *RouterOutputMessage) Deserialize(d smithy.ShapeDeserializer) error {
 // The following types satisfy this interface:
 //
 //	RouterOutputProtocolConfigurationMemberRist
+//	RouterOutputProtocolConfigurationMemberRtmpPush
 //	RouterOutputProtocolConfigurationMemberRtp
 //	RouterOutputProtocolConfigurationMemberSrtCaller
 //	RouterOutputProtocolConfigurationMemberSrtListener
@@ -9282,6 +9306,27 @@ func (v *RouterOutputProtocolConfigurationMemberRist) Serialize(s smithy.ShapeSe
 	s.CloseStruct()
 }
 func (v *RouterOutputProtocolConfigurationMemberRist) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a router output that pushes a stream to a
+// destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS
+// (RTMP over TLS) when TLS encryption is specified. These settings include the
+// destination address and port, the application and stream names, and optional TLS
+// encryption configuration.
+type RouterOutputProtocolConfigurationMemberRtmpPush struct {
+	Value RtmpPushRouterOutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RouterOutputProtocolConfigurationMemberRtmpPush) isRouterOutputProtocolConfiguration() {}
+func (v *RouterOutputProtocolConfigurationMemberRtmpPush) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterOutputProtocolConfiguration_RtmpPush)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RouterOutputProtocolConfigurationMemberRtmpPush) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -9408,6 +9453,96 @@ func (v *RouterOutputStreamDetailsMemberStandard) Serialize(s smithy.ShapeSerial
 }
 func (v *RouterOutputStreamDetailsMemberStandard) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a router output that pushes a stream to a
+// destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS
+// (RTMP over TLS) when TLS encryption is specified. These settings include the
+// destination address and port, the application and stream names, and optional TLS
+// encryption configuration.
+type RtmpPushRouterOutputConfiguration struct {
+
+	// The name of the RTMP application on the destination server. Together with the
+	// stream name, the application name forms the RTMP URL path, in the pattern
+	// rtmp://destinationAddress/applicationName/streamName .
+	//
+	// This member is required.
+	ApplicationName *string
+
+	// The IP address or hostname of the destination RTMP server that the router
+	// output pushes the stream to. Provide only the server address; specify the
+	// application and stream names separately.
+	//
+	// This member is required.
+	DestinationAddress *string
+
+	// The TCP port on the destination RTMP server. For RTMP, valid values range from
+	// 1024 to 65535 . For RTMPS (RTMP over TLS), valid values are 443 or 1024 to 65535
+	// . RTMP typically uses port 1935 , and RTMPS typically uses port 443 .
+	//
+	// This member is required.
+	DestinationPort *int32
+
+	// The name of the RTMP stream that the output publishes to the destination
+	// application. The stream name forms the final segment of the RTMP URL path.
+	//
+	// This member is required.
+	StreamName *string
+
+	// The TLS encryption settings for the output. When you specify these settings,
+	// the output uses RTMPS (RTMP over TLS) to establish a secure, encrypted
+	// connection to the destination server.
+	TlsEncryption *TlsEncryption
+
+	noSmithyDocumentSerde
+}
+
+func (v *RtmpPushRouterOutputConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RtmpPushRouterOutputConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RtmpPushRouterOutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.RtmpPushRouterOutputConfiguration_ApplicationName, *v.ApplicationName)
+	}
+	if v.DestinationAddress != nil {
+		s.WriteString(schemas.RtmpPushRouterOutputConfiguration_DestinationAddress, *v.DestinationAddress)
+	}
+	if v.DestinationPort != nil {
+		s.WriteInt32(schemas.RtmpPushRouterOutputConfiguration_DestinationPort, *v.DestinationPort)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.RtmpPushRouterOutputConfiguration_StreamName, *v.StreamName)
+	}
+	if v.TlsEncryption != nil {
+		s.WriteStruct(schemas.RtmpPushRouterOutputConfiguration_TlsEncryption)
+		v.TlsEncryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RtmpPushRouterOutputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RtmpPushRouterOutputConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RtmpPushRouterOutputConfiguration_ApplicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.RtmpPushRouterOutputConfiguration_ApplicationName, v.ApplicationName)
+		case schemas.RtmpPushRouterOutputConfiguration_DestinationAddress:
+			v.DestinationAddress = new(string)
+			return d.ReadString(schemas.RtmpPushRouterOutputConfiguration_DestinationAddress, v.DestinationAddress)
+		case schemas.RtmpPushRouterOutputConfiguration_DestinationPort:
+			v.DestinationPort = new(int32)
+			return d.ReadInt32(schemas.RtmpPushRouterOutputConfiguration_DestinationPort, v.DestinationPort)
+		case schemas.RtmpPushRouterOutputConfiguration_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.RtmpPushRouterOutputConfiguration_StreamName, v.StreamName)
+		case schemas.RtmpPushRouterOutputConfiguration_TlsEncryption:
+			v.TlsEncryption = &TlsEncryption{}
+			return v.TlsEncryption.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The configuration settings for a Router Input using the RTP (Real-Time
@@ -10821,6 +10956,77 @@ func (v *ThumbnailDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The Transport Layer Security (TLS) encryption settings used to establish a
+// secure connection to a destination.
+type TlsEncryption struct {
+
+	// The configuration settings for the specified TLS encryption type.
+	//
+	// This member is required.
+	EncryptionConfiguration TlsEncryptionConfiguration
+
+	// The type of TLS encryption to use for the connection.
+	EncryptionType TlsEncryptionType
+
+	noSmithyDocumentSerde
+}
+
+func (v *TlsEncryption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TlsEncryption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TlsEncryption) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTlsEncryptionConfiguration(s, schemas.TlsEncryption_EncryptionConfiguration, v.EncryptionConfiguration)
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.TlsEncryption_EncryptionType, string(v.EncryptionType))
+	}
+}
+func (v *TlsEncryption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TlsEncryption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TlsEncryption_EncryptionConfiguration:
+			return deserializeTlsEncryptionConfiguration(d, schemas.TlsEncryption_EncryptionConfiguration, &v.EncryptionConfiguration)
+		case schemas.TlsEncryption_EncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.TlsEncryption_EncryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = TlsEncryptionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The configuration settings for TLS encryption.
+//
+// The following types satisfy this interface:
+//
+//	TlsEncryptionConfigurationMemberPublic
+type TlsEncryptionConfiguration interface {
+	isTlsEncryptionConfiguration()
+}
+
+// The TLS encryption configuration that validates the destination by using a
+// publicly trusted certificate authority.
+type TlsEncryptionConfigurationMemberPublic struct {
+	Value PublicTlsEncryptionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*TlsEncryptionConfigurationMemberPublic) isTlsEncryptionConfiguration() {}
+func (v *TlsEncryptionConfigurationMemberPublic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TlsEncryptionConfiguration_Public)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TlsEncryptionConfigurationMemberPublic) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // Attributes related to the transport stream that are used in a source or output.
 type Transport struct {
 
@@ -12174,3 +12380,4 @@ func (*UnknownUnionMember) isRouterOutputConfiguration()                    {}
 func (*UnknownUnionMember) isRouterOutputFilter()                           {}
 func (*UnknownUnionMember) isRouterOutputProtocolConfiguration()            {}
 func (*UnknownUnionMember) isRouterOutputStreamDetails()                    {}
+func (*UnknownUnionMember) isTlsEncryptionConfiguration()                   {}

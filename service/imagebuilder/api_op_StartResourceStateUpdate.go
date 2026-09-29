@@ -12,8 +12,13 @@ import (
 	"time"
 )
 
-// Begins an asynchronous resource state update for lifecycle changes to the
-// specified image resources.
+// Begins an ad-hoc state change for the specified image build version. This is a
+// one-time operation - if you schedule the update, it runs only once. If the
+// request includes underlying resources, or schedules the update far enough in the
+// future, Image Builder runs the update as an asynchronous lifecycle execution and
+// returns its identifier. Otherwise, for target states other than DELETED , the
+// state change applies immediately. If a request that starts a lifecycle execution
+// arrives while the image already has one in progress, Image Builder rejects it.
 func (c *Client) StartResourceStateUpdate(ctx context.Context, params *StartResourceStateUpdateInput, optFns ...func(*Options)) (*StartResourceStateUpdateOutput, error) {
 	if params == nil {
 		params = &StartResourceStateUpdateInput{}
@@ -32,9 +37,9 @@ func (c *Client) StartResourceStateUpdate(ctx context.Context, params *StartReso
 type StartResourceStateUpdateInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -56,26 +61,32 @@ type StartResourceStateUpdateInput struct {
 	// This member is required.
 	State *types.ResourceState
 
-	// Skip action on the image resource and associated resources if specified
-	// exclusion rules are met.
+	// Rules that Image Builder evaluates against each of the image's AMIs. Matching
+	// AMIs and their snapshots are skipped. Exclusion rules only take effect when the
+	// request includes AMIs. If the target state is DELETED and any resource was
+	// skipped, the Image Builder image resource itself is also retained. For the
+	// DEPRECATED and DISABLED target states, Image Builder updates the image
+	// resource's state regardless of exclusions.
 	ExclusionRules *types.ResourceStateUpdateExclusionRules
 
-	// The name or Amazon Resource Name (ARN) of the IAM role that’s used to update
-	// image state.
+	// The name or Amazon Resource Name (ARN) of the IAM role that's used to update
+	// image state. You must provide this property together with includeResources .
+	// Neither is valid without the other.
 	ExecutionRole *string
 
-	// Specifies which image resources to include in the state update. When specified,
-	// the lifecycle action applies to underlying resources. These resources include
-	// AMIs, snapshots, and containers in addition to the Image Builder image resource.
-	// Requires executionRole to also be specified. To delete an image and its
-	// underlying resources, you must specify includeResources . To delete only the
-	// Image Builder image record without affecting underlying resources, use the
-	// DeleteImage API instead.
+	// Specifies which underlying resources to update, in addition to the Image
+	// Builder image resource itself. Snapshots and containers are only valid for the
+	// DELETED state. To set an image to DELETED , you must include its underlying
+	// resources. To delete only the Image Builder image record, use the DeleteImageoperation
+	// instead.
 	IncludeResources *types.ResourceStateUpdateIncludeResources
 
-	// Specifies the timestamp when the state transition takes effect. Use this
-	// parameter only when the target status is DEPRECATED . The value must be a future
-	// time.
+	// The timestamp that indicates when resources are updated by a lifecycle action.
+	// This property is valid only when the target status is DEPRECATED , and the value
+	// must be a future time. If you don't specify a value, Image Builder begins the
+	// state update right away. For a scheduled deprecation, included AMIs get their
+	// EC2 deprecation time set immediately, and Image Builder schedules the image
+	// resource to transition to DEPRECATED at that time.
 	UpdateAt *time.Time
 
 	noSmithyDocumentSerde
@@ -119,8 +130,9 @@ func (v *StartResourceStateUpdateInput) SerializeMembers(s smithy.ShapeSerialize
 
 type StartResourceStateUpdateOutput struct {
 
-	// Identifies the lifecycle runtime instance that started the resource state
-	// update.
+	// Identifies the lifecycle execution that performs the resource state update.
+	// Image Builder only returns this field when it started a lifecycle execution for
+	// the update. Use it with GetLifecycleExecutionto track progress.
 	LifecycleExecutionId *string
 
 	// The requested Amazon Resource Name (ARN) of the Image Builder resource for the

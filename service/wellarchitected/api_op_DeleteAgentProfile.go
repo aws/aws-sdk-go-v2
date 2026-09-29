@@ -7,6 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Deletes an optimization profile and its associated configuration. This action
@@ -46,6 +47,10 @@ func (v *DeleteAgentProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProfileArn != nil {
 		s.WriteString(schemas.DeleteAgentProfileRequest_profileArn, *v.ProfileArn)
 	}
+}
+func (in *DeleteAgentProfileInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type DeleteAgentProfileOutput struct {

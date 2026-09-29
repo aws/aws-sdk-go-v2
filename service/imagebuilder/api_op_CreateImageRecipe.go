@@ -31,16 +31,20 @@ func (c *Client) CreateImageRecipe(ctx context.Context, params *CreateImageRecip
 type CreateImageRecipeInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The name of the image recipe.
+	// The name of the image recipe. The recipe name, combined with the semantic
+	// version, must be unique to your account in each Amazon Web Services Region.
+	// Image Builder generates the image recipe ARN from a normalized form of the name,
+	// so names that differ only in case, spaces, or underscores count as the same
+	// name.
 	//
 	// This member is required.
 	Name *string
@@ -58,7 +62,8 @@ type CreateImageRecipeInput struct {
 	//   - Amazon Web Services Marketplace product ID
 	//
 	// If you enter an AMI ID or an SSM parameter that contains the AMI ID, you must
-	// have access to the AMI, and the AMI must be in the source Region.
+	// have access to the AMI. The AMI must also be in the Region where you're creating
+	// the recipe.
 	//
 	// This member is required.
 	ParentImage *string
@@ -95,24 +100,31 @@ type CreateImageRecipeInput struct {
 	// cannot be made public.
 	AmiWatermarks []string
 
-	// The block device mappings of the image recipe.
+	// The block device mappings that Image Builder applies to the build instance and
+	// the output AMI. For example, you can override the size of the base image's root
+	// volume or attach additional EBS volumes.
 	BlockDeviceMappings []types.InstanceBlockDeviceMapping
 
-	// The components included in the image recipe.
+	// The components included in the image recipe. Components are optional. A recipe
+	// with no components bakes the base image without additional customization. You
+	// can specify each component only one time in a recipe. Components with a status
+	// of DEPRECATED or DISABLED can't be added to new recipes.
 	Components []types.ComponentConfiguration
 
 	// The description of the image recipe.
 	Description *string
 
-	// Validates the required permissions and request parameters without making the
-	// request. If validation succeeds, the operation returns a
+	// Validates the required permissions and request parameters without performing
+	// the operation. If validation succeeds, the operation returns a
 	// DryRunOperationException error response.
 	DryRun bool
 
 	// The tags of the image recipe.
 	Tags map[string]string
 
-	// The working directory used during build and test workflows.
+	// The working directory used during build and test workflows. If you don't
+	// specify a working directory, Image Builder uses /tmp for Linux and macOS build
+	// instances, and C:/ for Windows build instances.
 	WorkingDirectory *string
 
 	noSmithyDocumentSerde
@@ -167,7 +179,9 @@ type CreateImageRecipeOutput struct {
 	// request.
 	ImageRecipeArn *string
 
-	// The resource ARNs with different wildcard variations of semantic versioning.
+	// A set of wildcard version ARNs that always reference the latest version of the
+	// resource. ARNs are included for the latest version overall, and for the latest
+	// versions within the same major, minor, and patch levels.
 	LatestVersionReferences *types.LatestVersionReferences
 
 	// The request ID that uniquely identifies this request.

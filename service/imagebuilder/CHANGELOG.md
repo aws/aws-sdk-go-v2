@@ -1,3 +1,11 @@
+# v1.66.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.66.0 (2026-09-23)
+
+* **Feature**: Documentation update for EC2 Image Builder - adds API request and response examples for all operations, improves descriptions throughout, and corrects response field patterns for image versions and workflow ARNs.
+
 # v1.65.0 (2026-09-15)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

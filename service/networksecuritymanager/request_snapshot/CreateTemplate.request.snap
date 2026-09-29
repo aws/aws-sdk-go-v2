@@ -1,0 +1,5 @@
+POST /templates
+
+Content-Type: application/json
+
+{"associatedRuleList":[{"ruleIdentifier":"__RuleIdentifier__"},{"ruleIdentifier":"__RuleIdentifier__"}],"clientToken":"__ClientToken__","firewallType":"WAF","isPublished":true,"tags":{"key0":"__Value__"},"templateDescription":"__TemplateDescription__","templateName":"__TemplateName__"}

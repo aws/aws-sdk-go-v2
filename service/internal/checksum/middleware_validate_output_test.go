@@ -48,6 +48,47 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectAlgorithmsUsed:     []string{"CRC32"},
 			expectPayload:            []byte("hello world"),
 		},
+		"success validate 206 partial content": {
+			// A partNumber or whole-object Range GET is answered with 206 and
+			// carries a valid, non-composite checksum covering exactly the
+			// returned bytes. It must be validated, not skipped.
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
+			response: &smithyhttp.Response{
+				Response: &http.Response{
+					StatusCode: 206,
+					Header: func() http.Header {
+						h := http.Header{}
+						h.Set(AlgorithmHTTPHeader(AlgorithmCRC32), "DUoRhQ==")
+						return h
+					}(),
+					Body: io.NopCloser(strings.NewReader("hello world")),
+				},
+			},
+			expectHaveAlgorithmsUsed: true,
+			expectAlgorithmsUsed:     []string{"CRC32"},
+			expectPayload:            []byte("hello world"),
+		},
+		"checksum mismatch failure on 206 partial content": {
+			// Corrupted bytes on a 206 response must surface a checksum error
+			// rather than being returned to the caller unverified.
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
+			response: &smithyhttp.Response{
+				Response: &http.Response{
+					StatusCode: 206,
+					Header: func() http.Header {
+						h := http.Header{}
+						h.Set(AlgorithmHTTPHeader(AlgorithmCRC32), "AAAAAA==")
+						return h
+					}(),
+					Body: io.NopCloser(strings.NewReader("hello world")),
+				},
+			},
+			expectReadErr: "checksum did not match",
+		},
 		"no checksum required": {
 			response: &smithyhttp.Response{
 				Response: &http.Response{

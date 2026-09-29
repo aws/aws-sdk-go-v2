@@ -94,6 +94,10 @@ type GetRegistryOutput struct {
 	// configured for the registry.
 	AutoDetection *types.AutoDetection
 
+	// The custom metadata schema configuration for this registry, if one has been
+	// defined.
+	CustomMetadataSchemaConfiguration *types.CustomMetadataSchemaConfiguration
+
 	// The description of the registry
 	Description *string
 
@@ -133,6 +137,11 @@ func (v *GetRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetRegistryResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CustomMetadataSchemaConfiguration != nil {
+		s.WriteStruct(schemas.GetRegistryResponse_customMetadataSchemaConfiguration)
+		v.CustomMetadataSchemaConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetRegistryResponse_description, *v.Description)
@@ -178,6 +187,9 @@ func (v *GetRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetRegistryResponse_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.GetRegistryResponse_createdAt, v.CreatedAt)
+		case schemas.GetRegistryResponse_customMetadataSchemaConfiguration:
+			v.CustomMetadataSchemaConfiguration = &types.CustomMetadataSchemaConfiguration{}
+			return v.CustomMetadataSchemaConfiguration.Deserialize(d)
 		case schemas.GetRegistryResponse_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.GetRegistryResponse_description, v.Description)

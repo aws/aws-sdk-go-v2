@@ -567,6 +567,9 @@ func TestUpdateResponseSnapshot_CreateBotLocale(t *testing.T) {
 			},
 		},
 		SpeechDetectionSensitivity: types.SpeechDetectionSensitivity("Default"),
+		SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+			Enabled: true,
+		},
 	}
 	proto := restjson1.New(schemas.LexModelBuildingServiceV2)
 	opSchema := smithy.NewOperationSchema(schemas.CreateBotLocale, schemas.CreateBotLocaleResponse, schemas.CreateBotLocaleResponse)
@@ -9892,6 +9895,9 @@ func TestUpdateResponseSnapshot_DescribeBotLocale(t *testing.T) {
 			},
 		},
 		SpeechDetectionSensitivity: types.SpeechDetectionSensitivity("Default"),
+		SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+			Enabled: true,
+		},
 	}
 	proto := restjson1.New(schemas.LexModelBuildingServiceV2)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeBotLocale, schemas.DescribeBotLocaleResponse, schemas.DescribeBotLocaleResponse)
@@ -10252,6 +10258,9 @@ func TestUpdateResponseSnapshot_DescribeImport(t *testing.T) {
 					StartDelayInMilliseconds:            ptr.Int32(1),
 					MinimumPlayDurationInMilliseconds:   ptr.Int32(1),
 					ResponseDeliveryDelayInMilliseconds: ptr.Int32(1),
+				},
+				SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+					Enabled: true,
 				},
 			},
 			CustomVocabularyImportSpecification: &types.CustomVocabularyImportSpecification{
@@ -21902,6 +21911,9 @@ func TestUpdateResponseSnapshot_StartImport(t *testing.T) {
 					MinimumPlayDurationInMilliseconds:   ptr.Int32(1),
 					ResponseDeliveryDelayInMilliseconds: ptr.Int32(1),
 				},
+				SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+					Enabled: true,
+				},
 			},
 			CustomVocabularyImportSpecification: &types.CustomVocabularyImportSpecification{
 				BotId:      ptr.String("__BotId__"),
@@ -22379,6 +22391,9 @@ func TestUpdateResponseSnapshot_UpdateBotLocale(t *testing.T) {
 			},
 		},
 		SpeechDetectionSensitivity: types.SpeechDetectionSensitivity("Default"),
+		SpeakerDiarizationSettings: &types.SpeakerDiarizationSettings{
+			Enabled: true,
+		},
 	}
 	proto := restjson1.New(schemas.LexModelBuildingServiceV2)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateBotLocale, schemas.UpdateBotLocaleResponse, schemas.UpdateBotLocaleResponse)

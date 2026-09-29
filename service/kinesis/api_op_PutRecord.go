@@ -85,6 +85,13 @@ type PutRecordInput struct {
 	// This member is required.
 	Data []byte
 
+	// Checks if your request will succeed. DryRun is an optional parameter.
+	DryRun *bool
+
+	// The hash value used to explicitly determine the shard the data record is
+	// assigned to by overriding the partition key hash.
+	ExplicitHashKey *string
+
 	// Determines which shard in the stream the data record is assigned to. Partition
 	// keys are Unicode strings with a maximum length limit of 256 characters for each
 	// key. Amazon Kinesis Data Streams uses the partition key as input to a hash
@@ -94,15 +101,13 @@ type PutRecordInput struct {
 	// hashing mechanism, all data records with the same partition key map to the same
 	// shard within the stream.
 	//
-	// This member is required.
+	// If the stream uses the USER_PARTITION_KEY record distribution strategy (the
+	// default), a partition key is required. If the stream uses the AUTO record
+	// distribution strategy, the partition key is optional and any value you provide
+	// is ignored, along with any ExplicitHashKey you provide. In that case, Amazon
+	// Kinesis Data Streams distributes the record across shards using service-managed
+	// algorithms. For more information, see UpdateStreamRecordDistributionStrategy .
 	PartitionKey *string
-
-	// Checks if your request will succeed. DryRun is an optional parameter.
-	DryRun *bool
-
-	// The hash value used to explicitly determine the shard the data record is
-	// assigned to by overriding the partition key hash.
-	ExplicitHashKey *string
 
 	// Guarantees strictly increasing sequence numbers, for puts from the same client
 	// and to the same partition key. Usage: set the SequenceNumberForOrdering of

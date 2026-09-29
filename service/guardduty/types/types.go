@@ -11665,6 +11665,10 @@ type RemoteAccountDetails struct {
 	// outside your environment.
 	Affiliated *bool
 
+	// If the remote account belongs to an Amazon Web Services service, this field
+	// indicates which service the remote account belongs to.
+	AwsServiceName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -11681,6 +11685,9 @@ func (v *RemoteAccountDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Affiliated != nil {
 		s.WriteBool(schemas.RemoteAccountDetails_Affiliated, *v.Affiliated)
 	}
+	if v.AwsServiceName != nil {
+		s.WriteString(schemas.RemoteAccountDetails_AwsServiceName, *v.AwsServiceName)
+	}
 }
 func (v *RemoteAccountDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RemoteAccountDetails, func(s *smithy.Schema) error {
@@ -11691,6 +11698,9 @@ func (v *RemoteAccountDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RemoteAccountDetails_Affiliated:
 			v.Affiliated = new(bool)
 			return d.ReadBool(schemas.RemoteAccountDetails_Affiliated, v.Affiliated)
+		case schemas.RemoteAccountDetails_AwsServiceName:
+			v.AwsServiceName = new(string)
+			return d.ReadString(schemas.RemoteAccountDetails_AwsServiceName, v.AwsServiceName)
 		}
 		return nil
 	})

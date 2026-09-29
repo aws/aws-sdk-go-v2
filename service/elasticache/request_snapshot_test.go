@@ -659,6 +659,16 @@ func TestCheckRequestSnapshot_CreateGlobalReplicationGroup(t *testing.T) {
 		GlobalReplicationGroupIdSuffix:    ptr.String("__GlobalReplicationGroupIdSuffix__"),
 		GlobalReplicationGroupDescription: ptr.String("__GlobalReplicationGroupDescription__"),
 		PrimaryReplicationGroupId:         ptr.String("__PrimaryReplicationGroupId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3606,6 +3616,16 @@ func TestUpdateRequestSnapshot_CreateGlobalReplicationGroup(t *testing.T) {
 		GlobalReplicationGroupIdSuffix:    ptr.String("__GlobalReplicationGroupIdSuffix__"),
 		GlobalReplicationGroupDescription: ptr.String("__GlobalReplicationGroupDescription__"),
 		PrimaryReplicationGroupId:         ptr.String("__PrimaryReplicationGroupId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

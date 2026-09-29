@@ -15404,6 +15404,89 @@ func awsAwsjson11_deserializeDocumentFaceSearchSettings(v **types.FaceSearchSett
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentFeedbackItem(v **types.FeedbackItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FeedbackItem
+	if *v == nil {
+		sv = &types.FeedbackItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FeedbackCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.FeedbackCode(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FeedbackMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFeedbackList(v *[]types.FeedbackItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FeedbackItem
+	if *v == nil {
+		cv = []types.FeedbackItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FeedbackItem
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentFeedbackItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentGender(v **types.Gender, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20533,6 +20616,46 @@ func awsAwsjson11_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSessionMetadata(v **types.SessionMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SessionMetadata
+	if *v == nil {
+		sv = &types.SessionMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SDKType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SDKTypeString to be of type string, got %T instead", value)
+				}
+				sv.SDKType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSessionNotFoundException(v **types.SessionNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -24697,6 +24820,16 @@ func awsAwsjson11_deserializeOpDocumentGetFaceLivenessSessionResultsOutput(v **G
 					return fmt.Errorf("expected Percent to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "Feedback":
+			if err := awsAwsjson11_deserializeDocumentFeedbackList(&sv.Feedback, value); err != nil {
+				return err
+			}
+
+		case "Metadata":
+			if err := awsAwsjson11_deserializeDocumentSessionMetadata(&sv.Metadata, value); err != nil {
+				return err
 			}
 
 		case "ReferenceImage":

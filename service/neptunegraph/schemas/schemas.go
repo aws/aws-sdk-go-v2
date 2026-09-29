@@ -1633,7 +1633,9 @@ var ListGraphsOutput_nextToken *smithy.Schema
 var ListImportTasksInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "ListImportTasksInput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
+var ListImportTasksInput_graphIdentifier *smithy.Schema
+
 var ListImportTasksInput_nextToken *smithy.Schema
 
 var ListImportTasksInput_maxResults *smithy.Schema
@@ -2842,6 +2844,8 @@ func init() {
 	ListGraphsOutput_graphs = ListGraphsOutput.AddMember("graphs", _GraphSummaryList)
 
 	ListGraphsOutput_nextToken = ListGraphsOutput.AddMember("nextToken", _PaginationToken)
+
+	ListImportTasksInput_graphIdentifier = ListImportTasksInput.AddMember("graphIdentifier", _GraphIdentifier, &smithytraits.HTTPQuery{Name: "graphIdentifier"})
 
 	ListImportTasksInput_nextToken = ListImportTasksInput.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
 

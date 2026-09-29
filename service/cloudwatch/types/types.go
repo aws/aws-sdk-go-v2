@@ -3287,6 +3287,57 @@ func (v *MuteTargets) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Selects the metrics in one namespace, for use in the IncludeFilters or
+// ExcludeFilters parameter of [StartOTelEnrichment] or [UpdateOTelEnrichment].
+//
+// A maximum of 100 selectors is allowed across IncludeFilters and ExcludeFilters
+// combined.
+//
+// [UpdateOTelEnrichment]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateOTelEnrichment.html
+// [StartOTelEnrichment]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_StartOTelEnrichment.html
+type OTelEnrichmentMetricSelector struct {
+
+	// The namespace of the metrics to select. Namespaces are matched exactly and are
+	// case-sensitive.
+	//
+	// This member is required.
+	Namespace *string
+
+	// The names of the metrics to select within the namespace. Metric names are
+	// matched exactly and are case-sensitive. If this parameter is omitted, every
+	// metric in the namespace is selected.
+	//
+	// A maximum of 100 metric names is allowed for each selector.
+	MetricNames []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OTelEnrichmentMetricSelector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OTelEnrichmentMetricSelector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OTelEnrichmentMetricSelector) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOTelEnrichmentMetricNameList(s, schemas.OTelEnrichmentMetricSelector_MetricNames, v.MetricNames)
+	if v.Namespace != nil {
+		s.WriteString(schemas.OTelEnrichmentMetricSelector_Namespace, *v.Namespace)
+	}
+}
+func (v *OTelEnrichmentMetricSelector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OTelEnrichmentMetricSelector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OTelEnrichmentMetricSelector_MetricNames:
+			return deserializeOTelEnrichmentMetricNameList(d, schemas.OTelEnrichmentMetricSelector_MetricNames, &v.MetricNames)
+		case schemas.OTelEnrichmentMetricSelector_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.OTelEnrichmentMetricSelector_Namespace, v.Namespace)
+		}
+		return nil
+	})
+}
+
 // This array is empty if the API operation was successful for all the rules
 // specified in the request. If the operation could not process one of the rules,
 // the following data is returned for each of those rules.
@@ -3389,6 +3440,117 @@ func (v *Range) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Range_StartTime:
 			v.StartTime = new(time.Time)
 			return d.ReadTime(schemas.Range_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
+// Represents a resource metrics configuration for an Amazon Web Services
+// resource. A resource metrics configuration enables detailed metric collection
+// for the resource that is identified by its Amazon Resource Name (ARN). Each
+// Amazon Web Services resource can have only one resource metrics configuration.
+//
+// This structure is returned by the [CreateResourceMetricsConfiguration], [UpdateResourceMetricsConfiguration], and [GetResourceMetricsConfiguration] operations.
+//
+// [CreateResourceMetricsConfiguration]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html
+// [UpdateResourceMetricsConfiguration]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html
+// [GetResourceMetricsConfiguration]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetResourceMetricsConfiguration.html
+type ResourceMetricsConfiguration struct {
+
+	// The date and time that the resource metrics configuration was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services resource that this
+	// configuration applies to.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	// The date and time that the resource metrics configuration was last updated.
+	// When the configuration is first created, this value is the same as CreatedAt .
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The metrics that Amazon CloudWatch collects for the resource. If this field is
+	// not present, Amazon CloudWatch collects all available detailed metrics for the
+	// resource.
+	MetricSelections []ResourceMetricSelection
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResourceMetricsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceMetricsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceMetricsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ResourceMetricsConfiguration_CreatedAt, *v.CreatedAt)
+	}
+	serializeResourceMetricSelectionList(s, schemas.ResourceMetricsConfiguration_MetricSelections, v.MetricSelections)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ResourceMetricsConfiguration_ResourceArn, *v.ResourceArn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ResourceMetricsConfiguration_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ResourceMetricsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceMetricsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceMetricsConfiguration_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ResourceMetricsConfiguration_CreatedAt, v.CreatedAt)
+		case schemas.ResourceMetricsConfiguration_MetricSelections:
+			return deserializeResourceMetricSelectionList(d, schemas.ResourceMetricsConfiguration_MetricSelections, &v.MetricSelections)
+		case schemas.ResourceMetricsConfiguration_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ResourceMetricsConfiguration_ResourceArn, v.ResourceArn)
+		case schemas.ResourceMetricsConfiguration_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ResourceMetricsConfiguration_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Specifies which metrics Amazon CloudWatch collects for a resource metrics
+// configuration. Include this in a [CreateResourceMetricsConfiguration]or [UpdateResourceMetricsConfiguration] request to limit collection to a specific
+// set of metrics. If you omit metric selections, Amazon CloudWatch collects all
+// available detailed metrics for the resource.
+//
+// [CreateResourceMetricsConfiguration]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html
+// [UpdateResourceMetricsConfiguration]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html
+type ResourceMetricSelection struct {
+
+	// The names of the metrics to collect for the resource. Amazon CloudWatch
+	// collects only the metrics that you list here.
+	//
+	// This member is required.
+	IncludeMetrics []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResourceMetricSelection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceMetricSelection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceMetricSelection) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricNameList(s, schemas.ResourceMetricSelection_IncludeMetrics, v.IncludeMetrics)
+}
+func (v *ResourceMetricSelection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceMetricSelection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceMetricSelection_IncludeMetrics:
+			return deserializeMetricNameList(d, schemas.ResourceMetricSelection_IncludeMetrics, &v.IncludeMetrics)
 		}
 		return nil
 	})

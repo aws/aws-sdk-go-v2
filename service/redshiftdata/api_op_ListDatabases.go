@@ -60,15 +60,13 @@ func (c *Client) ListDatabases(ctx context.Context, params *ListDatabasesInput, 
 
 type ListDatabasesInput struct {
 
-	// The name of the database. This parameter is required when authenticating using
-	// either Secrets Manager or temporary credentials.
-	//
-	// This member is required.
-	Database *string
-
 	// The cluster identifier. This parameter is required when connecting to a cluster
 	// and authenticating using either Secrets Manager or temporary credentials.
 	ClusterIdentifier *string
+
+	// The name of the database. This parameter is required when authenticating using
+	// either Secrets Manager or temporary credentials.
+	Database *string
 
 	// The database user name. This parameter is required when connecting to a cluster
 	// as a database user and authenticating using temporary credentials.
@@ -136,9 +134,6 @@ func (c *Client) addOperationListDatabasesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpListDatabasesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

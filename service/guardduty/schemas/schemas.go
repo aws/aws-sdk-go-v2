@@ -4693,10 +4693,12 @@ var _RelatedFilePathsList_member *smithy.Schema
 var RemoteAccountDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "RemoteAccountDetails",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var RemoteAccountDetails_AccountId *smithy.Schema
 
 var RemoteAccountDetails_Affiliated *smithy.Schema
+
+var RemoteAccountDetails_AwsServiceName *smithy.Schema
 
 var RemoteIpDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -8178,6 +8180,8 @@ func init() {
 	RemoteAccountDetails_AccountId = RemoteAccountDetails.AddMember("AccountId", _String, &smithytraits.JSONName{Name: "accountId"})
 
 	RemoteAccountDetails_Affiliated = RemoteAccountDetails.AddMember("Affiliated", _Boolean, &smithytraits.JSONName{Name: "affiliated"})
+
+	RemoteAccountDetails_AwsServiceName = RemoteAccountDetails.AddMember("AwsServiceName", _String, &smithytraits.JSONName{Name: "awsServiceName"})
 
 	_AffectedResources_key = _AffectedResources.AddMember("key", _String)
 

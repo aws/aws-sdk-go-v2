@@ -11,8 +11,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Retrieves a list of workflow steps that are waiting for action for workflows in
-// your Amazon Web Services account.
+// Lists the workflow steps in your Amazon Web Services account that have paused
+// at a WaitForAction step, and are waiting for you to respond. To send a
+// response, call SendWorkflowStepAction.
 func (c *Client) ListWaitingWorkflowSteps(ctx context.Context, params *ListWaitingWorkflowStepsInput, optFns ...func(*Options)) (*ListWaitingWorkflowStepsOutput, error) {
 	if params == nil {
 		params = &ListWaitingWorkflowStepsInput{}
@@ -63,7 +64,8 @@ type ListWaitingWorkflowStepsOutput struct {
 	NextToken *string
 
 	// An array of the workflow steps that are waiting for action in your Amazon Web
-	// Services account.
+	// Services account. Each step is paused at a WaitForAction step, and remains in
+	// the list until you respond with SendWorkflowStepActionor the wait times out.
 	Steps []types.WorkflowStepExecution
 
 	// Metadata pertaining to the operation's result.

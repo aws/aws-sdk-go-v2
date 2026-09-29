@@ -1,0 +1,5 @@
+PATCH /scopes/__ScopeIdentifier__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","isPublished":true,"scopeConfiguration":{"accountFilter":{"includeAll":{}},"resourceScopes":{"key0":{"exclude":{"explicitArns":["__Member__","__Member__"],"expression":{"criteria":{"tags":{"key0":"__Value__"}}}},"include":{"explicitArns":["__Member__","__Member__"],"expression":{"criteria":{"tags":{"key0":"__Value__"}}}},"includeAll":true}}},"scopeDescription":"__ScopeDescription__","updateToken":"__UpdateToken__"}

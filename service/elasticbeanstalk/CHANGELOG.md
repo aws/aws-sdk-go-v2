@@ -1,3 +1,7 @@
+# v1.43.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.0 (2026-09-16)
 
 * **Feature**: Adds support to create and manage Elastic Beanstalk Cluster Environments.

@@ -1,3 +1,214 @@
+# Release (2026-09-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.4.11](feature/s3/transfermanager/CHANGELOG.md#v0411-2026-09-28)
+  * **Bug Fix**: Add reassembly check for GetObject parts mode so mismatch between response part range and calculated position will throw error
+* `github.com/aws/aws-sdk-go-v2/service/agentregistry`: [v1.7.0](service/agentregistry/CHANGELOG.md#v170-2026-09-28)
+  * **Feature**: AWS Agent Registry adds support for custom metadata. Discovery APIs now return custom metadata on registry records and support filtering by metadata fields. Semantic search includes custom metadata for improved relevance. Filter customMetadata fields using eq, ne, and in operators.
+* `github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol`: [v1.7.0](service/agentregistrycontrol/CHANGELOG.md#v170-2026-09-28)
+  * **Feature**: AWS Agent Registry adds support for custom metadata. Define a typed metadata schema on your registry and attach structured key-value metadata to registry records. Schemas are additive only. Enforcement is progressive. Records show a compliance status computed against the current schema.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.71.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1710-2026-09-28)
+  * **Feature**: Amazon Bedrock AgentCore Gateway now supports returning the complete MCP tools list in a single response by disabling pagination for the tools list operation. This feature is available in limited preview.
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.22.0](service/billing/CHANGELOG.md#v1220-2026-09-28)
+  * **Feature**: Adds support for (a) listing Business Support account charges via ListBusinessSupportAccountCharges and (b) subscription history via ListBusinessSupportSubscriptionHistory through the AWS Billing API.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.203.0](service/connect/CHANGELOG.md#v12030-2026-09-28)
+  * **Feature**: This release adds ConnectionTypes and ChatStreamingConfiguration to StartChatContact, and ConnectionCredentials, Websocket, and StreamingId to its response, so customers can request connection information and chat streaming in the same call that starts the chat.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.337.0](service/ec2/CHANGELOG.md#v13370-2026-09-28)
+  * **Feature**: API changes to AWS Client VPN to support device posture assessment and Cedar authorization policies
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.102.0](service/eks/CHANGELOG.md#v11020-2026-09-28)
+  * **Feature**: An optional customer provided prefix used to construct the hostname of the Argo CD server endpoint for EKS Argo CD Capability.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.96.0](service/guardduty/CHANGELOG.md#v1960-2026-09-28)
+  * **Feature**: Adding awsServiceName field to GuardDuty Findings
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.20.0](service/securityagent/CHANGELOG.md#v1200-2026-09-28)
+  * **Feature**: Run automated penetration tests directly from your CI-CD pipeline to scan code changes before they ship, gating deployments on the findings
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.79.0](service/ssm/CHANGELOG.md#v1790-2026-09-28)
+  * **Feature**: Add support for sharing SSM documents with organizations and OUs using RAM.
+
+# Release (2026-09-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.20.0](service/arcregionswitch/CHANGELOG.md#v1200-2026-09-25)
+  * **Feature**: Adds a service quota checker to Region switch to verify quota parity between your primary and standby Region, and automatically submit quota limit increases. Adds an optional EC2 Auto Scaling and ECS setting that waits for instances or tasks in the scaled-up Region to be healthy in target groups.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.67.0](service/bedrockagent/CHANGELOG.md#v1670-2026-09-25)
+  * **Feature**: Adds support for calling VPC configuration API's in Bedrock. These configurations allow the use of On Prem connectors in Bedrock Managed Knowledge bases
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.70.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1700-2026-09-25)
+  * **Feature**: Amazon Bedrock AgentCore Payments now supports credential rotation for payment connectors, letting you rotate API and wallet secrets for Quick Create payment auths from the console. This release also adds Type and Creation type columns to the payment managers views.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.202.0](service/connect/CHANGELOG.md#v12020-2026-09-25)
+  * **Feature**: Agent Privacy During Hold is a new privacy capability for Amazon Connect Voice that prevents agent audio from being captured in call recordings or Contact Lens conversational analytics during hold. When enabled, agents are automatically muted on entering hold and unmuted on resuming the contact
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.164.0](service/glue/CHANGELOG.md#v11640-2026-09-25)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+  * **Feature**: add support for table level federation
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.61.0](service/mediaconnect/CHANGELOG.md#v1610-2026-09-25)
+  * **Feature**: This release adds support for RTMP push router outputs in AWS Elemental MediaConnect.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.31.0](service/neptunegraph/CHANGELOG.md#v1310-2026-09-25)
+  * **Feature**: Add GraphIdentifier filter for ListImportTasks
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.42.0](service/qconnect/CHANGELOG.md#v1420-2026-09-25)
+  * **Feature**: Release shapes for the proactive agentic recommendations and the multi-knowledge base search features. Increases the maximum length of QuickResponseContent.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.60.0](service/rekognition/CHANGELOG.md#v1600-2026-09-25)
+  * **Feature**: This release adds support for Feedback and Metadata in the GetFaceLivenessSessionResults response. Feedback returns codes explaining why a Face Liveness check produced its result. Metadata includes the client SDK type.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.19.0](service/securityagent/CHANGELOG.md#v1190-2026-09-25)
+  * **Feature**: This release adds the ListActorMessages operation, which returns the multi-factor authentication messages received at an actor's server-generated email address
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.50.0](service/wellarchitected/CHANGELOG.md#v1500-2026-09-25)
+  * **Feature**: This change releases the Well-Architected Agent, a generative AI service that analyzes a customer's AWS environment and delivers personalized, prioritized recommendations across cost, security, performance, and resilience.
+
+# Release (2026-09-24)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/aiops`: [v1.16.0](service/aiops/CHANGELOG.md#v1160-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/amplifybackend`: [v1.42.0](service/amplifybackend/CHANGELOG.md#v1420-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.38.0](service/amplifyuibuilder/CHANGELOG.md#v1380-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.50.0](service/apigateway/CHANGELOG.md#v1500-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi`: [v1.39.0](service/apigatewaymanagementapi/CHANGELOG.md#v1390-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.44.0](service/apigatewayv2/CHANGELOG.md#v1440-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/appfabric`: [v1.26.0](service/appfabric/CHANGELOG.md#v1260-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.49.0](service/appintegrations/CHANGELOG.md#v1490-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler`: [v1.37.0](service/applicationcostprofiler/CHANGELOG.md#v1370-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.32.0](service/applicationsignals/CHANGELOG.md#v1320-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.32.0](service/arczonalshift/CHANGELOG.md#v1320-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.27.0](service/artifact/CHANGELOG.md#v1270-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.67.0](service/backup/CHANGELOG.md#v1670-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.73.0](service/cloudwatch/CHANGELOG.md#v1730-2026-09-24)
+  * **Feature**: This release adds Create, Get, Update, and DeleteResourceMetricsConfiguration to enable detailed metric collection for an AWS resource, and adds UpdateOTelEnrichment plus include and exclude filters on StartOTelEnrichment so you can choose which metric namespaces CloudWatch enriches.
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.33.0](service/costoptimizationhub/CHANGELOG.md#v1330-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.73.0](service/databasemigrationservice/CHANGELOG.md#v1730-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/datapipeline`: [v1.40.0](service/datapipeline/CHANGELOG.md#v1400-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.76.0](service/datazone/CHANGELOG.md#v1760-2026-09-24)
+  * **Feature**: Amazon DataZone now supports the TOOLING blueprint category on CreateEnvironmentBlueprint, UpdateEnvironmentBlueprint, GetEnvironmentBlueprint, and ListEnvironmentBlueprints, for custom tooling blueprints. CreateConnection now accepts roleArn in iamProperties.
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.50.0](service/devicefarm/CHANGELOG.md#v1500-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.53.0](service/directconnect/CHANGELOG.md#v1530-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.43.0](service/dynamodbstreams/CHANGELOG.md#v1430-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect`: [v1.42.0](service/ec2instanceconnect/CHANGELOG.md#v1420-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.101.0](service/eks/CHANGELOG.md#v11010-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.62.0](service/elasticache/CHANGELOG.md#v1620-2026-09-24)
+  * **Feature**: Added tagging support for ElastiCache Global DataStore.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.55.0](service/eventbridge/CHANGELOG.md#v1550-2026-09-24)
+  * **Feature**: Adds a ManagedBy field to the DescribeEventBus and ListEventBuses responses, identifying the AWS service that created an event bus on your behalf.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridgev2`: [v1.0.0](service/eventbridgev2/CHANGELOG.md#v100-2026-09-24)
+  * **Release**: New AWS service client module
+  * **Feature**: Introducing Amazon EventBridge enhanced Custom event bus, a new shareable event bus for organizational-scale event-driven applications feature ordered delivery, deduplication, open event formats, and cross-account bus sharing.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.22.0](service/evs/CHANGELOG.md#v1220-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/freetier`: [v1.23.0](service/freetier/CHANGELOG.md#v1230-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.163.0](service/glue/CHANGELOG.md#v11630-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.95.0](service/guardduty/CHANGELOG.md#v1950-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.47.0](service/health/CHANGELOG.md#v1470-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.51.0](service/healthlake/CHANGELOG.md#v1510-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.46.0](service/identitystore/CHANGELOG.md#v1460-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.21.0](service/invoicing/CHANGELOG.md#v1210-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.84.1](service/iot/CHANGELOG.md#v1841-2026-09-24)
+  * **Documentation**: Fixed ListV2LoggingLevels and DeleteV2LoggingLevel documentation to include all supported target-types
+* `github.com/aws/aws-sdk-go-v2/service/iotthingsgraph`: [v1.40.0](service/iotthingsgraph/CHANGELOG.md#v1400-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.35.0](service/keyspaces/CHANGELOG.md#v1350-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/keyspacesstreams`: [v1.17.0](service/keyspacesstreams/CHANGELOG.md#v1170-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.110.0](service/lambda/CHANGELOG.md#v11100-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/lambdacore`: [v1.9.0](service/lambdacore/CHANGELOG.md#v190-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/lambdamicrovms`: [v1.9.0](service/lambdamicrovms/CHANGELOG.md#v190-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.46.0](service/lookoutequipment/CHANGELOG.md#v1460-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.28.0](service/marketplaceagreement/CHANGELOG.md#v1280-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacediscovery`: [v1.11.0](service/marketplacediscovery/CHANGELOG.md#v1110-2026-09-24)
+  * **Feature**: AWS Marketplace Discovery API now supports localized responses and SigV4a request signing. It returns new fulfillment details, including AMI architecture, EBS volume and security group information, SaaS quick-launch status, and SageMaker input and output MIME types.
+* `github.com/aws/aws-sdk-go-v2/service/mturk`: [v1.40.0](service/mturk/CHANGELOG.md#v1400-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/mwaaserverless`: [v1.11.0](service/mwaaserverless/CHANGELOG.md#v1110-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.74.0](service/networkfirewall/CHANGELOG.md#v1740-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.24.0](service/odb/CHANGELOG.md#v1240-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.82.0](service/opensearch/CHANGELOG.md#v1820-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralaccount`: [v1.15.0](service/partnercentralaccount/CHANGELOG.md#v1150-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits`: [v1.10.0](service/partnercentralbenefits/CHANGELOG.md#v1100-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointemail`: [v1.39.0](service/pinpointemail/CHANGELOG.md#v1390-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.133.0](service/quicksight/CHANGELOG.md#v11330-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.49.0](service/redshiftdata/CHANGELOG.md#v1490-2026-09-24)
+  * **Feature**: Updates to the ListDatabases and WorkgroupName validation
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.54.1](service/route53resolver/CHANGELOG.md#v1541-2026-09-24)
+  * **Documentation**: Documentation updates for Route 53 Resolver. Clarifies which Outpost Resolver operations apply to first-generation AWS Outposts and that Resolver is managed automatically on second-generation Outposts. Adds Local Network Interface subnet compatibility notes for Resolver endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakeredge`: [v1.41.0](service/sagemakeredge/CHANGELOG.md#v1410-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.46.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1460-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakermetrics`: [v1.28.0](service/sagemakermetrics/CHANGELOG.md#v1280-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.18.0](service/securityagent/CHANGELOG.md#v1180-2026-09-24)
+  * **Feature**: Added support for Confluence export, enabling customers to publish security findings to Confluence pages.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.76.0](service/sesv2/CHANGELOG.md#v1760-2026-09-24)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+
+# Release (2026-09-23)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.21.0](service/billing/CHANGELOG.md#v1210-2026-09-23)
+  * **Feature**: Added the ListBillingViewSegments API, which returns billing view segment information for a specified billing view ARN and time range. This API enables customers and integrated tools to programmatically determine the billing context of their accounts.
+* `github.com/aws/aws-sdk-go-v2/service/connecthealth`: [v1.12.0](service/connecthealth/CHANGELOG.md#v1120-2026-09-23)
+  * **Feature**: Multi language support with code switching, custom template sectionHeader now allows underscores.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.66.0](service/imagebuilder/CHANGELOG.md#v1660-2026-09-23)
+  * **Feature**: Documentation update for EC2 Image Builder - adds API request and response examples for all operations, improves descriptions throughout, and corrects response field patterns for image versions and workflow ARNs.
+* `github.com/aws/aws-sdk-go-v2/service/internal/checksum`: [v1.11.4](service/internal/checksum/CHANGELOG.md#v1114-2026-09-23)
+  * **Bug Fix**: Checksum non-200 http responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.56.0](service/kinesis/CHANGELOG.md#v1560-2026-09-23)
+  * **Feature**: Amazon Kinesis Data Streams now supports service managed record distribution for on demand streams. Set the record distribution strategy to AUTO to evenly distribute records across shards. Configure it at stream creation with CreateStream or update anytime with UpdateStreamRecordDistributionStrategy
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.71.0](service/lexmodelsv2/CHANGELOG.md#v1710-2026-09-23)
+  * **Feature**: Adds support for speaker diarization on Amazon Lex V2 bot locales. Speaker diarization keeps your bot on the primary (loudest) speaker during a streaming voice conversation, so background voices do not start a turn or interrupt a prompt.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.106.0](service/mediaconvert/CHANGELOG.md#v11060-2026-09-23)
+  * **Feature**: This release adds support for SMPTE 337M audio passthrough, compositing up to five motion graphic overlays in a single output, and controlling how passthrough video is segmented in ABR outputs. It also adds 3GP, 3G2, AAC, AC-3, and E-AC-3 as supported input containers for the Probe operation.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.50.0](service/mediapackagev2/CHANGELOG.md#v1500-2026-09-23)
+  * **Feature**: This release adds support for signalling start and end in the ContentKeyPeriod element in key request from MediaPackageV2
+* `github.com/aws/aws-sdk-go-v2/service/networksecuritymanager`: [v1.0.0](service/networksecuritymanager/CHANGELOG.md#v100-2026-09-23)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Network Security Manager is a new service that helps you centrally configure, deploy, and continuously enforce security policies on network security services across the accounts and resources in your AWS Organization.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.37.0](service/paymentcryptographydata/CHANGELOG.md#v1370-2026-09-23)
+  * **Feature**: Adds asymmetric key support to ReEncryptData for re-encrypting data between RSA and symmetric data encryption keys.
+
 # Release (2026-09-22)
 
 ## Module Highlights

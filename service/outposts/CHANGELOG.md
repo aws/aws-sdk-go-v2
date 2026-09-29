@@ -1,3 +1,7 @@
+# v1.74.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.74.0 (2026-09-10)
 
 * **Feature**: Added fields to identify Outpost generation and rack scaling configuration on Outpost and CatalogItem resources.

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"deployments":[{"deploymentArn":"__DeploymentArn__","deploymentId":"__DeploymentId__","deploymentName":"__DeploymentName__","hasPublishedVersion":true,"status":"DRAFT","updatedAt":"2000-01-01T00:00:00Z","version":"__Version__"},{"deploymentArn":"__DeploymentArn__","deploymentId":"__DeploymentId__","deploymentName":"__DeploymentName__","hasPublishedVersion":true,"status":"DRAFT","updatedAt":"2000-01-01T00:00:00Z","version":"__Version__"}],"nextToken":"__NextToken__"}

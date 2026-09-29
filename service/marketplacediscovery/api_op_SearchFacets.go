@@ -37,6 +37,12 @@ type SearchFacetsInput struct {
 	// AND logic. Multiple values within the same filter are combined with OR logic.
 	Filters []types.SearchFilter
 
+	// A BCP 47 language tag or comma-separated priority list specifying the preferred
+	// locale for response content. See Locale for supported values, constraints,
+	// fallback behavior, and the default locale. If omitted, the service returns
+	// content in the default locale.
+	Locale *string
+
 	// If nextToken is returned, there are more results available. Make the call again
 	// using the returned token to retrieve the next page.
 	NextToken *string

@@ -937,6 +937,25 @@ func (AudioSelectorType) Values() []AudioSelectorType {
 	}
 }
 
+type AudioSmpte337Passthrough string
+
+// Enum values for AudioSmpte337Passthrough
+const (
+	AudioSmpte337PassthroughEnabled  AudioSmpte337Passthrough = "ENABLED"
+	AudioSmpte337PassthroughDisabled AudioSmpte337Passthrough = "DISABLED"
+)
+
+// Values returns all known values for AudioSmpte337Passthrough. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AudioSmpte337Passthrough) Values() []AudioSmpte337Passthrough {
+	return []AudioSmpte337Passthrough{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type AudioTypeControl string
 
 // Enum values for AudioTypeControl
@@ -4128,6 +4147,11 @@ const (
 	FormatFlac      Format = "flac"
 	FormatAsf       Format = "asf"
 	FormatOgg       Format = "ogg"
+	FormatThreeGp   Format = "three_gp"
+	FormatThreeG2   Format = "three_g2"
+	FormatAac       Format = "aac"
+	FormatAc3       Format = "ac3"
+	FormatEac3      Format = "eac3"
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
@@ -4149,6 +4173,11 @@ func (Format) Values() []Format {
 		"flac",
 		"asf",
 		"ogg",
+		"three_gp",
+		"three_g2",
+		"aac",
+		"ac3",
+		"eac3",
 	}
 }
 
@@ -8480,6 +8509,27 @@ func (PadVideo) Values() []PadVideo {
 	return []PadVideo{
 		"DISABLED",
 		"BLACK",
+	}
+}
+
+type PassthroughSegmentationMode string
+
+// Enum values for PassthroughSegmentationMode
+const (
+	PassthroughSegmentationModeAuto          PassthroughSegmentationMode = "AUTO"
+	PassthroughSegmentationModeDurationBased PassthroughSegmentationMode = "DURATION_BASED"
+	PassthroughSegmentationModeGopCount      PassthroughSegmentationMode = "GOP_COUNT"
+)
+
+// Values returns all known values for PassthroughSegmentationMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PassthroughSegmentationMode) Values() []PassthroughSegmentationMode {
+	return []PassthroughSegmentationMode{
+		"AUTO",
+		"DURATION_BASED",
+		"GOP_COUNT",
 	}
 }
 

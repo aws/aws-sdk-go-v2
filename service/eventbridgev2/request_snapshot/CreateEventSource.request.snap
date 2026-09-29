@@ -1,0 +1,7 @@
+POST /service/AWSEventsV2/operation/CreateEventSource
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kClientTokeno__ClientToken__mConfiguration¡xAwsServiceEventsConfiguration¿jAwsServicen__AwsService__vOnFailureConfiguration¿cArng__Arn__ÿgPatternk__Pattern__ÿkDescriptiono__Description__kEventBusArno__EventBusArn__dNameh__Name__dTags¿dkey0i__Value__ÿÿ

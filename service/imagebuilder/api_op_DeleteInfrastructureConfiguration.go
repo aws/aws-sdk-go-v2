@@ -9,7 +9,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes an infrastructure configuration.
+// Deletes an infrastructure configuration. You can't delete a configuration that
+// an image pipeline still references. The request fails with
+// ResourceDependencyException . Update or delete the referencing pipelines first.
 func (c *Client) DeleteInfrastructureConfiguration(ctx context.Context, params *DeleteInfrastructureConfigurationInput, optFns ...func(*Options)) (*DeleteInfrastructureConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteInfrastructureConfigurationInput{}

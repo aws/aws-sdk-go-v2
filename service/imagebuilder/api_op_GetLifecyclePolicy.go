@@ -51,8 +51,7 @@ func (v *GetLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 
 type GetLifecyclePolicyOutput struct {
 
-	// The Amazon Resource Name (ARN) of the image lifecycle policy resource that was
-	// returned.
+	// The details of the lifecycle policy that the request retrieved.
 	LifecyclePolicy *types.LifecyclePolicy
 
 	// Metadata pertaining to the operation's result.

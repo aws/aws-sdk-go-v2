@@ -1008,8 +1008,10 @@ var RandomKeySendVariantMask_VARIANT_MASK_82 *smithy.Schema
 var ReEncryptionAttributes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "ReEncryptionAttributes",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 3)
 var ReEncryptionAttributes_Symmetric *smithy.Schema
+
+var ReEncryptionAttributes_Asymmetric *smithy.Schema
 
 var ReEncryptionAttributes_Dukpt *smithy.Schema
 
@@ -2234,6 +2236,8 @@ func init() {
 	RandomKeySendVariantMask_VARIANT_MASK_82 = RandomKeySendVariantMask.AddMember("VARIANT_MASK_82", smithyprelude.Unit)
 
 	ReEncryptionAttributes_Symmetric = ReEncryptionAttributes.AddMember("Symmetric", SymmetricEncryptionAttributes)
+
+	ReEncryptionAttributes_Asymmetric = ReEncryptionAttributes.AddMember("Asymmetric", AsymmetricEncryptionAttributes)
 
 	ReEncryptionAttributes_Dukpt = ReEncryptionAttributes.AddMember("Dukpt", DukptEncryptionAttributes)
 

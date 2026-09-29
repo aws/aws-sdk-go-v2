@@ -1,3 +1,8 @@
+# v1.49.0 (2026-09-24)
+
+* **Feature**: Updates to the ListDatabases and WorkgroupName validation
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

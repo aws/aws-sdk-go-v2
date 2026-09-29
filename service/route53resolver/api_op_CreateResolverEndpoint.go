@@ -62,6 +62,17 @@ type CreateResolverEndpointInput struct {
 	//
 	// Even though the minimum is 1, Route 53 requires that you create at least two.
 	//
+	// We recommend using [VPC Resolver on Outposts] to create endpoints on Outposts Racks.
+	//
+	// Outposts subnets with [Local Network Interface (LNI)] enabled are not compatible with Route 53 Resolver
+	// endpoints. If you enable LNI on a subnet that contains Route 53 Resolver
+	// endpoint elastic network interfaces (ENIs), those ENIs will stop functioning.
+	// For more information, see [Subnet compatibility for Resolver endpoints]in the Amazon Route 53 Developer Guide.
+	//
+	// [VPC Resolver on Outposts]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/outpost-resolver-getting-started.html
+	// [Subnet compatibility for Resolver endpoints]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver.html#best-practices-resolver-subnet-compatibility
+	// [Local Network Interface (LNI)]: https://docs.aws.amazon.com/outposts/latest/server-userguide/local-network-interface.html
+	//
 	// This member is required.
 	IpAddresses []types.IpAddressRequest
 
@@ -112,6 +123,10 @@ type CreateResolverEndpointInput struct {
 
 	// The Amazon Resource Name (ARN) of the Outpost. If you specify this, you must
 	// also specify a value for the PreferredInstanceType .
+	//
+	// Resolver endpoints on Outposts are supported on first-generation Outposts only.
+	// Inbound and outbound Resolver endpoints aren't supported on second-generation
+	// Outposts.
 	OutpostArn *string
 
 	// The instance type. If you specify this, you must also specify a value for the

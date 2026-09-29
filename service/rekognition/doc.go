@@ -3,8 +3,8 @@
 // Package rekognition provides the API client, operations, and parameter types
 // for Amazon Rekognition.
 //
-// This is the API Reference for [Amazon Rekognition Image], [Amazon Rekognition Custom Labels], [Amazon Rekognition Stored Video], [Amazon Rekognition Streaming Video]. It provides descriptions of actions, data
-// types, common parameters, and common errors.
+// This is the API Reference for [Amazon Rekognition Image], [Amazon Rekognition Bulk Image Analysis], [Amazon Rekognition Custom Labels], [Amazon Rekognition Stored Video], [Amazon Rekognition Face Liveness], [Amazon Rekognition Streaming Video]. It provides descriptions of actions,
+// data types, common parameters, and common errors.
 //
 // # Amazon Rekognition Image
 //
@@ -38,13 +38,9 @@
 //
 // [GetCelebrityInfo]
 //
-// [GetMediaAnalysisJob]
-//
 // [IndexFaces]
 //
 // [ListCollections]
-//
-// [ListMediaAnalysisJob]
 //
 // [ListFaces]
 //
@@ -59,6 +55,12 @@
 // [SearchUsers]
 //
 // [SearchUsersByImage]
+//
+// # Amazon Rekognition Bulk Image Analysis
+//
+// [GetMediaAnalysisJob]
+//
+// [ListMediaAnalysisJob]
 //
 // [StartMediaAnalysisJob]
 //
@@ -104,7 +106,7 @@
 //
 // [UpdateDatasetEntries]
 //
-// # Amazon Rekognition Video Stored Video
+// # Amazon Rekognition Stored Video
 //
 // [GetCelebrityRecognition]
 //
@@ -138,7 +140,15 @@
 //
 // [StartTextDetection]
 //
-// # Amazon Rekognition Video Streaming Video
+// # Amazon Rekognition Face Liveness
+//
+// [CreateFaceLivenessSession]
+//
+// [GetFaceLivenessSessionResults]
+//
+// [StartFaceLivenessSession]
+//
+// # Amazon Rekognition Streaming Video
 //
 // [CreateStreamProcessor]
 //
@@ -166,6 +176,7 @@
 // [StartTextDetection]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartTextDetection.html
 // [SearchFaces]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_SearchFaces.html
 // [CreateCollection]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateCollection.html
+// [GetFaceLivenessSessionResults]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetFaceLivenessSessionResults.html
 // [GetContentModeration]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetContentModeration.html
 // [CopyProjectVersion]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CopyProjectVersion.html
 // [StartFaceSearch]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartFaceSearch.html
@@ -175,6 +186,7 @@
 // [StartCelebrityRecognition]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartCelebrityRecognition.html
 // [StartFaceDetection]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartFaceDetection.html
 // [UpdateDatasetEntries]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_UpdateDatasetEntries.html
+// [Amazon Rekognition Face Liveness]: https://docs.aws.amazon.com/rekognition/latest/dg/face-liveness.html
 // [DetectFaces]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectFaces.html
 // [ListCollections]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListCollections.html
 // [GetTextDetection]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetTextDetection.html
@@ -208,8 +220,10 @@
 // [DeleteDataset]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteDataset.html
 // [StartContentModeration]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartContentModeration.html
 // [GetFaceSearch]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetFaceSearch.html
+// [StartFaceLivenessSession]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_rekognitionstreaming_StartFaceLivenessSession.html
 // [Amazon Rekognition Image]: https://docs.aws.amazon.com/rekognition/latest/dg/images.html
 // [GetLabelDetection]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetLabelDetection.html
+// [CreateFaceLivenessSession]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateFaceLivenessSession.html
 // [GetCelebrityInfo]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetCelebrityInfo.html
 // [CompareFaces]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CompareFaces.html
 // [Amazon Rekognition Stored Video]: https://docs.aws.amazon.com/rekognition/latest/dg/video.html
@@ -220,6 +234,7 @@
 // [CreateProjectVersion]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateProjectVersion.html
 // [StopStreamProcessor]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StopStreamProcessor.html
 // [DescribeProjects]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DescribeProjects.html
+// [Amazon Rekognition Bulk Image Analysis]: https://docs.aws.amazon.com/rekognition/latest/dg/bulk-analysis.html
 // [StartLabelDetection]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartLabelDetection.html
 // [ListProjectPolicies]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListProjectPolicies.html
 // [DisassociateFaces]: https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DisassociateFaces.html

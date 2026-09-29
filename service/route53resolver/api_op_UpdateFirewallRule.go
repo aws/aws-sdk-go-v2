@@ -123,18 +123,18 @@ type UpdateFirewallRuleInput struct {
 	// exactly one of its members. This setting is mutually exclusive with the
 	// top-level FirewallDomainListId and DnsThreatProtection fields. Use one of:
 	//
-	//   - FirewallAdvancedContentCategory — match an AWS-managed content category (for
-	//   example, VIOLENCE_AND_HATE_SPEECH ).
+	//   - FirewallAdvancedContentCategory — match an Amazon Web Services-managed
+	//   content category (for example, VIOLENCE_AND_HATE_SPEECH ).
 	//
-	//   - FirewallAdvancedThreatCategory — match an AWS-managed advanced threat
-	//   category (for example, PHISHING ).
+	//   - FirewallAdvancedThreatCategory — match an Amazon Web Services-managed
+	//   advanced threat category (for example, PHISHING ).
 	//
 	//   - DnsThreatProtection — match a built-in DNS Firewall Advanced threat detector
 	//   ( DGA , DNS_TUNNELING , or DICTIONARY_DGA ).
 	//
 	//   - PartnerThreatProtection — match a third-party threat feed delivered through
-	//   AWS Marketplace. The selected partner must be an active subscription on the
-	//   calling account.
+	//   Amazon Web Services Marketplace. The selected partner must be an active
+	//   subscription on the calling account.
 	//
 	// To enumerate the values supported in your account, call ListFirewallRuleTypes.
 	FirewallRuleType *types.FirewallRuleType

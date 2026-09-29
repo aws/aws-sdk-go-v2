@@ -8,9 +8,16 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Allows you to update a stream processor. You can change some settings and
+// Service availability notice: Streaming Video and Bulk Image Analysis is no
+// longer available to new customers. For more information, see [Rekognition feature availability changes].
 //
+// This change does not impact the availability of other Amazon Rekognition
+// features.
+//
+// Allows you to update a stream processor. You can change some settings and
 // regions of interest and delete certain parameters.
+//
+// [Rekognition feature availability changes]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
 func (c *Client) UpdateStreamProcessor(ctx context.Context, params *UpdateStreamProcessorInput, optFns ...func(*Options)) (*UpdateStreamProcessorOutput, error) {
 	if params == nil {
 		params = &UpdateStreamProcessorInput{}

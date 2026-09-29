@@ -11,7 +11,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Creates a new workflow or a new version of an existing workflow.
+// Creates a new workflow or a new version of an existing workflow. If a workflow
+// with the same name and semantic version already exists, and your request changes
+// its configuration, Image Builder creates a new build version. If the
+// configuration is identical to the latest build version, the request fails
+// because that workflow configuration already exists.
 func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput, optFns ...func(*Options)) (*CreateWorkflowOutput, error) {
 	if params == nil {
 		params = &CreateWorkflowInput{}
@@ -30,16 +34,22 @@ func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput
 type CreateWorkflowInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The name of the workflow to create.
+	// The name of the workflow to create. Image Builder generates the workflow ARN
+	// from a normalized form of the name, so names that differ only in case, spaces,
+	// or underscores count as the same name. If a workflow with the same name and
+	// semantic version already exists in your account in the same Amazon Web Services
+	// Region, the request creates a new build version for it. If the content is also
+	// identical to the latest build version, the request fails because the workflow
+	// already exists.
 	//
 	// This member is required.
 	Name *string
@@ -61,8 +71,8 @@ type CreateWorkflowInput struct {
 	// This member is required.
 	SemanticVersion *string
 
-	// The phase in the image build process for which the workflow resource is
-	// responsible.
+	// The image creation stage that this workflow applies to. Image Builder validates
+	// the workflow document steps against the stage you specify.
 	//
 	// This member is required.
 	Type types.WorkflowType
@@ -71,22 +81,25 @@ type CreateWorkflowInput struct {
 	// makes this version different from other versions of the workflow.
 	ChangeDescription *string
 
-	// Contains the UTF-8 encoded YAML document content for the workflow.
-	// Alternatively, you can specify the uri of a YAML document file stored in Amazon
-	// S3. However, you cannot specify both properties.
+	// The UTF-8 encoded YAML document content for the workflow, up to 16,000
+	// characters. For larger documents, store the document in Amazon S3 and specify
+	// the uri property instead. You must specify exactly one of the data or uri
+	// properties.
 	Data *string
 
 	// Describes the workflow.
 	Description *string
 
-	// Validates the required permissions and request parameters without making the
-	// request. If validation succeeds, the operation returns a
+	// Validates the required permissions and request parameters without performing
+	// the operation. If validation succeeds, the operation returns a
 	// DryRunOperationException error response.
 	DryRun bool
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
 	// encrypt this workflow resource. This can be either the Key ARN or the Alias ARN.
-	// For more information, see [Key identifiers (KeyId)]in the Key Management Service Developer Guide.
+	// For more information, see [Key identifiers (KeyId)]in the Key Management Service Developer Guide. If you
+	// don't specify a key, Image Builder encrypts the workflow document with a KMS key
+	// that Image Builder owns.
 	//
 	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KmsKeyId *string
@@ -94,13 +107,13 @@ type CreateWorkflowInput struct {
 	// Tags that apply to the workflow resource.
 	Tags map[string]string
 
-	// The uri of a YAML component document file. This must be an S3 URL (
-	// s3://bucket/key ), and you must have permission to access the S3 bucket it
-	// points to. If you use Amazon S3, you can specify component content up to your
-	// service quota.
+	// The uri of a YAML workflow document file stored in Amazon S3. This must be an
+	// S3 URL ( s3://bucket/key ), and you must have permission to access the S3 bucket
+	// it points to. A workflow document that you provide from Amazon S3 can be up to
+	// your service quota for workflow size.
 	//
-	// Alternatively, you can specify the YAML document inline, using the component
-	// data property. You cannot specify both properties.
+	// Alternatively, you can specify the YAML document inline, using the workflow data
+	// property. You must specify exactly one of the data or uri properties.
 	Uri *string
 
 	noSmithyDocumentSerde
@@ -151,7 +164,9 @@ type CreateWorkflowOutput struct {
 	// The client token that uniquely identifies the request.
 	ClientToken *string
 
-	// The resource ARNs with different wildcard variations of semantic versioning.
+	// A set of wildcard version ARNs that always reference the latest version of the
+	// resource. ARNs are included for the latest version overall, and for the latest
+	// versions within the same major, minor, and patch levels.
 	LatestVersionReferences *types.LatestVersionReferences
 
 	// The Amazon Resource Name (ARN) of the workflow resource that the request

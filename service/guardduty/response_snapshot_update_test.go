@@ -2240,8 +2240,9 @@ func TestUpdateResponseSnapshot_GetFindings(t *testing.T) {
 							},
 							ServiceName: ptr.String("__ServiceName__"),
 							RemoteAccountDetails: &types.RemoteAccountDetails{
-								AccountId:  ptr.String("__AccountId__"),
-								Affiliated: ptr.Bool(true),
+								AccountId:      ptr.String("__AccountId__"),
+								Affiliated:     ptr.Bool(true),
+								AwsServiceName: ptr.String("__AwsServiceName__"),
 							},
 							AffectedResources: map[string]string{
 								"key0": "__Value__",
@@ -4174,8 +4175,9 @@ func TestUpdateResponseSnapshot_GetFindings(t *testing.T) {
 							},
 							ServiceName: ptr.String("__ServiceName__"),
 							RemoteAccountDetails: &types.RemoteAccountDetails{
-								AccountId:  ptr.String("__AccountId__"),
-								Affiliated: ptr.Bool(true),
+								AccountId:      ptr.String("__AccountId__"),
+								Affiliated:     ptr.Bool(true),
+								AwsServiceName: ptr.String("__AwsServiceName__"),
 							},
 							AffectedResources: map[string]string{
 								"key0": "__Value__",

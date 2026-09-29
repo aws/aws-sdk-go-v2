@@ -2,4 +2,4 @@ POST /assistants/__AssistantId__/aiagentConfiguration
 
 Content-Type: application/json
 
-{"aiAgentType":"MANUAL_SEARCH","configuration":{"aiAgentId":"__AiAgentId__"},"orchestratorUseCase":"__OrchestratorUseCase__"}
+{"aiAgentType":"MANUAL_SEARCH","configuration":{"aiAgentId":"__AiAgentId__","enabled":true},"orchestratorUseCase":"__OrchestratorUseCase__"}

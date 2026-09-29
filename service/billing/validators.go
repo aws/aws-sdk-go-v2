@@ -250,6 +250,26 @@ func (m *validateOpListBillingViews) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListBusinessSupportAccountCharges struct {
+}
+
+func (*validateOpListBusinessSupportAccountCharges) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListBusinessSupportAccountCharges) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListBusinessSupportAccountChargesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListBusinessSupportAccountChargesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListEnterpriseSupportLinkedAccountCharges struct {
 }
 
@@ -456,6 +476,10 @@ func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListBillingViewsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBillingViews{}, middleware.After)
+}
+
+func addOpListBusinessSupportAccountChargesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListBusinessSupportAccountCharges{}, middleware.After)
 }
 
 func addOpListEnterpriseSupportLinkedAccountChargesValidationMiddleware(stack *middleware.Stack) error {
@@ -898,6 +922,21 @@ func validateOpListBillingViewsInput(v *ListBillingViewsInput) error {
 		if err := validateStringSearches(v.Names); err != nil {
 			invalidParams.AddNested("Names", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListBusinessSupportAccountChargesInput(v *ListBusinessSupportAccountChargesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListBusinessSupportAccountChargesInput"}
+	if v.BillingMonth == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BillingMonth"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

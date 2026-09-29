@@ -2212,7 +2212,7 @@ var _BotLocaleHistoryEventsList_member *smithy.Schema
 var BotLocaleImportSpecification = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "BotLocaleImportSpecification",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var BotLocaleImportSpecification_botId *smithy.Schema
 
 var BotLocaleImportSpecification_botVersion *smithy.Schema
@@ -2230,6 +2230,8 @@ var BotLocaleImportSpecification_speechDetectionSensitivity *smithy.Schema
 var BotLocaleImportSpecification_unifiedSpeechSettings *smithy.Schema
 
 var BotLocaleImportSpecification_audioFillerSettings *smithy.Schema
+
+var BotLocaleImportSpecification_speakerDiarizationSettings *smithy.Schema
 
 var BotLocaleSortAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
@@ -5111,6 +5113,12 @@ var SortOrder_Ascending *smithy.Schema
 
 var SortOrder_Descending *smithy.Schema
 
+var SpeakerDiarizationSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lexmodelsv2",
+	Name:      "SpeakerDiarizationSettings",
+}, smithy.ShapeTypeStructure, 1)
+var SpeakerDiarizationSettings_enabled *smithy.Schema
+
 var Specifications = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "Specifications",
@@ -5146,12 +5154,14 @@ var SpeechModelConfig_deepgramConfig *smithy.Schema
 var SpeechModelPreference = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "SpeechModelPreference",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var SpeechModelPreference_Standard *smithy.Schema
 
 var SpeechModelPreference_Neural *smithy.Schema
 
 var SpeechModelPreference_Deepgram *smithy.Schema
+
+var SpeechModelPreference_Advanced *smithy.Schema
 
 var SpeechRecognitionSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
@@ -6226,7 +6236,7 @@ var CreateBotRequest_errorLogSettings *smithy.Schema
 var CreateBotLocaleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "CreateBotLocaleRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var CreateBotLocaleRequest_botId *smithy.Schema
 
 var CreateBotLocaleRequest_botVersion *smithy.Schema
@@ -6249,10 +6259,12 @@ var CreateBotLocaleRequest_generativeAISettings *smithy.Schema
 
 var CreateBotLocaleRequest_speechDetectionSensitivity *smithy.Schema
 
+var CreateBotLocaleRequest_speakerDiarizationSettings *smithy.Schema
+
 var CreateBotLocaleResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "CreateBotLocaleResponse",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var CreateBotLocaleResponse_botId *smithy.Schema
 
 var CreateBotLocaleResponse_botVersion *smithy.Schema
@@ -6280,6 +6292,8 @@ var CreateBotLocaleResponse_creationDateTime *smithy.Schema
 var CreateBotLocaleResponse_generativeAISettings *smithy.Schema
 
 var CreateBotLocaleResponse_speechDetectionSensitivity *smithy.Schema
+
+var CreateBotLocaleResponse_speakerDiarizationSettings *smithy.Schema
 
 var CreateBotResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
@@ -6991,7 +7005,7 @@ var DescribeBotLocaleRequest_localeId *smithy.Schema
 var DescribeBotLocaleResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "DescribeBotLocaleResponse",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var DescribeBotLocaleResponse_botId *smithy.Schema
 
 var DescribeBotLocaleResponse_botVersion *smithy.Schema
@@ -7033,6 +7047,8 @@ var DescribeBotLocaleResponse_recommendedActions *smithy.Schema
 var DescribeBotLocaleResponse_generativeAISettings *smithy.Schema
 
 var DescribeBotLocaleResponse_speechDetectionSensitivity *smithy.Schema
+
+var DescribeBotLocaleResponse_speakerDiarizationSettings *smithy.Schema
 
 var DescribeBotResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
@@ -8825,7 +8841,7 @@ var UpdateBotRequest_errorLogSettings *smithy.Schema
 var UpdateBotLocaleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "UpdateBotLocaleRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var UpdateBotLocaleRequest_botId *smithy.Schema
 
 var UpdateBotLocaleRequest_botVersion *smithy.Schema
@@ -8848,10 +8864,12 @@ var UpdateBotLocaleRequest_generativeAISettings *smithy.Schema
 
 var UpdateBotLocaleRequest_speechDetectionSensitivity *smithy.Schema
 
+var UpdateBotLocaleRequest_speakerDiarizationSettings *smithy.Schema
+
 var UpdateBotLocaleResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "UpdateBotLocaleResponse",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var UpdateBotLocaleResponse_botId *smithy.Schema
 
 var UpdateBotLocaleResponse_botVersion *smithy.Schema
@@ -8885,6 +8903,8 @@ var UpdateBotLocaleResponse_recommendedActions *smithy.Schema
 var UpdateBotLocaleResponse_generativeAISettings *smithy.Schema
 
 var UpdateBotLocaleResponse_speechDetectionSensitivity *smithy.Schema
+
+var UpdateBotLocaleResponse_speakerDiarizationSettings *smithy.Schema
 
 var UpdateBotResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
@@ -10019,6 +10039,8 @@ func init() {
 
 	SpeechModelPreference_Deepgram = SpeechModelPreference.AddMember("Deepgram", smithyprelude.Unit)
 
+	SpeechModelPreference_Advanced = SpeechModelPreference.AddMember("Advanced", smithyprelude.Unit)
+
 	DeepgramSpeechModelConfig_apiTokenSecretArn = DeepgramSpeechModelConfig.AddMember("apiTokenSecretArn", _SecretsManagerSecretArn)
 
 	DeepgramSpeechModelConfig_modelId = DeepgramSpeechModelConfig.AddMember("modelId", _DeepgramModelId)
@@ -10041,6 +10063,8 @@ func init() {
 
 	UnifiedSpeechSettings_speechFoundationModel = UnifiedSpeechSettings.AddMember("speechFoundationModel", SpeechFoundationModel)
 
+	SpeakerDiarizationSettings_enabled = SpeakerDiarizationSettings.AddMember("enabled", _Enabled)
+
 	BotLocaleImportSpecification_botId = BotLocaleImportSpecification.AddMember("botId", _Id)
 
 	BotLocaleImportSpecification_botVersion = BotLocaleImportSpecification.AddMember("botVersion", _DraftBotVersion)
@@ -10058,6 +10082,8 @@ func init() {
 	BotLocaleImportSpecification_unifiedSpeechSettings = BotLocaleImportSpecification.AddMember("unifiedSpeechSettings", UnifiedSpeechSettings)
 
 	BotLocaleImportSpecification_audioFillerSettings = BotLocaleImportSpecification.AddMember("audioFillerSettings", AudioFillerSettings)
+
+	BotLocaleImportSpecification_speakerDiarizationSettings = BotLocaleImportSpecification.AddMember("speakerDiarizationSettings", SpeakerDiarizationSettings)
 
 	BotLocaleSortAttribute_BotLocaleName = BotLocaleSortAttribute.AddMember("BotLocaleName", smithyprelude.Unit)
 
@@ -11929,6 +11955,8 @@ func init() {
 
 	CreateBotLocaleRequest_speechDetectionSensitivity = CreateBotLocaleRequest.AddMember("speechDetectionSensitivity", SpeechDetectionSensitivity)
 
+	CreateBotLocaleRequest_speakerDiarizationSettings = CreateBotLocaleRequest.AddMember("speakerDiarizationSettings", SpeakerDiarizationSettings)
+
 	CreateBotLocaleResponse_botId = CreateBotLocaleResponse.AddMember("botId", _Id)
 
 	CreateBotLocaleResponse_botVersion = CreateBotLocaleResponse.AddMember("botVersion", _DraftBotVersion)
@@ -11956,6 +11984,8 @@ func init() {
 	CreateBotLocaleResponse_generativeAISettings = CreateBotLocaleResponse.AddMember("generativeAISettings", GenerativeAISettings)
 
 	CreateBotLocaleResponse_speechDetectionSensitivity = CreateBotLocaleResponse.AddMember("speechDetectionSensitivity", SpeechDetectionSensitivity)
+
+	CreateBotLocaleResponse_speakerDiarizationSettings = CreateBotLocaleResponse.AddMember("speakerDiarizationSettings", SpeakerDiarizationSettings)
 
 	CreateBotResponse_botId = CreateBotResponse.AddMember("botId", _Id)
 
@@ -12482,6 +12512,8 @@ func init() {
 	DescribeBotLocaleResponse_generativeAISettings = DescribeBotLocaleResponse.AddMember("generativeAISettings", GenerativeAISettings)
 
 	DescribeBotLocaleResponse_speechDetectionSensitivity = DescribeBotLocaleResponse.AddMember("speechDetectionSensitivity", SpeechDetectionSensitivity)
+
+	DescribeBotLocaleResponse_speakerDiarizationSettings = DescribeBotLocaleResponse.AddMember("speakerDiarizationSettings", SpeakerDiarizationSettings)
 
 	DescribeBotResponse_botId = DescribeBotResponse.AddMember("botId", _Id)
 
@@ -13795,6 +13827,8 @@ func init() {
 
 	UpdateBotLocaleRequest_speechDetectionSensitivity = UpdateBotLocaleRequest.AddMember("speechDetectionSensitivity", SpeechDetectionSensitivity)
 
+	UpdateBotLocaleRequest_speakerDiarizationSettings = UpdateBotLocaleRequest.AddMember("speakerDiarizationSettings", SpeakerDiarizationSettings)
+
 	UpdateBotLocaleResponse_botId = UpdateBotLocaleResponse.AddMember("botId", _Id)
 
 	UpdateBotLocaleResponse_botVersion = UpdateBotLocaleResponse.AddMember("botVersion", _DraftBotVersion)
@@ -13828,6 +13862,8 @@ func init() {
 	UpdateBotLocaleResponse_generativeAISettings = UpdateBotLocaleResponse.AddMember("generativeAISettings", GenerativeAISettings)
 
 	UpdateBotLocaleResponse_speechDetectionSensitivity = UpdateBotLocaleResponse.AddMember("speechDetectionSensitivity", SpeechDetectionSensitivity)
+
+	UpdateBotLocaleResponse_speakerDiarizationSettings = UpdateBotLocaleResponse.AddMember("speakerDiarizationSettings", SpeakerDiarizationSettings)
 
 	UpdateBotResponse_botId = UpdateBotResponse.AddMember("botId", _Id)
 

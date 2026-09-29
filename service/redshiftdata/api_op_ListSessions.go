@@ -17,7 +17,7 @@ import (
 //
 // Returns only the sessions that the caller created. When identity-enhanced role
 // sessions are used, you must provide either the ClusterIdentifier or
-// WorkgroupName parameter to ensure that the AWS IAM Identity Center user can only
+// WorkgroupName parameter to ensure that the IAM Identity Center user can only
 // access the Amazon Redshift IAM Identity Center applications they are assigned.
 // For more information, see [Trusted identity propagation overview].
 //

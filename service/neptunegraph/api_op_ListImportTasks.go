@@ -30,6 +30,11 @@ func (c *Client) ListImportTasks(ctx context.Context, params *ListImportTasksInp
 
 type ListImportTasksInput struct {
 
+	// The unique identifier of the Neptune Analytics graph. When provided, the
+	// service returns only import tasks associated with this graph. If not specified,
+	// the service returns all import tasks.
+	GraphIdentifier *string
+
 	// The total number of records to return in the command's output.
 	//
 	// If the total number of records available is more than the value specified,
@@ -55,6 +60,9 @@ func (v *ListImportTasksInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImportTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.ListImportTasksInput_graphIdentifier, *v.GraphIdentifier)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListImportTasksInput_maxResults, *v.MaxResults)
 	}

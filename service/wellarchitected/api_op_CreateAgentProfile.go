@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	"time"
 )
 
@@ -107,6 +108,10 @@ func (v *CreateAgentProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	serializePillars(s, schemas.CreateAgentProfileRequest_pillars, v.Pillars)
 	serializeTags(s, schemas.CreateAgentProfileRequest_tags, v.Tags)
+}
+func (in *CreateAgentProfileInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type CreateAgentProfileOutput struct {

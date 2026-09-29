@@ -9,7 +9,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes a component build version.
+// Deletes a component build version. The request fails with
+// ResourceDependencyException if an image recipe or container recipe references
+// this component version. It also fails if the component build version is shared
+// with other accounts.
 func (c *Client) DeleteComponent(ctx context.Context, params *DeleteComponentInput, optFns ...func(*Options)) (*DeleteComponentOutput, error) {
 	if params == nil {
 		params = &DeleteComponentInput{}

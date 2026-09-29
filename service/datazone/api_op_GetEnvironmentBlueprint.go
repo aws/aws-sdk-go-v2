@@ -62,6 +62,11 @@ type GetEnvironmentBlueprintOutput struct {
 	// This member is required.
 	ProvisioningProperties types.ProvisioningProperties
 
+	// The category of this Amazon DataZone blueprint. The only valid value is TOOLING
+	// , which indicates a blueprint that provisions the tooling resources of a
+	// project.
+	BlueprintCategory types.BlueprintCategory
+
 	// A timestamp of when this blueprint was created.
 	CreatedAt *time.Time
 

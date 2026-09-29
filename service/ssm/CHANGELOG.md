@@ -1,3 +1,11 @@
+# v1.79.0 (2026-09-28)
+
+* **Feature**: Add support for sharing SSM documents with organizations and OUs using RAM.
+
+# v1.78.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.78.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

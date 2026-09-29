@@ -9,10 +9,18 @@ import (
 	"time"
 )
 
+// Service availability notice: Streaming Video and Bulk Image Analysis is no
+// longer available to new customers. For more information, see [Rekognition feature availability changes].
+//
+// This change does not impact the availability of other Amazon Rekognition
+// features.
+//
 // Provides information about a stream processor created by CreateStreamProcessor. You can get
 // information about the input and output streams, the input parameters for the
 // face recognition being performed, and the current status of the stream
 // processor.
+//
+// [Rekognition feature availability changes]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
 func (c *Client) DescribeStreamProcessor(ctx context.Context, params *DescribeStreamProcessorInput, optFns ...func(*Options)) (*DescribeStreamProcessorOutput, error) {
 	if params == nil {
 		params = &DescribeStreamProcessorInput{}

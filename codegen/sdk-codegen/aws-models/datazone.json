@@ -2880,6 +2880,17 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#BlueprintCategory": {
+            "type": "enum",
+            "members": {
+                "TOOLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOOLING"
+                    }
+                }
+            }
+        },
         "com.amazonaws.datazone#BusinessNameGenerationConfiguration": {
             "type": "structure",
             "members": {
@@ -6684,6 +6695,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The user parameters of this Amazon DataZone blueprint.</p>"
                     }
+                },
+                "blueprintCategory": {
+                    "target": "com.amazonaws.datazone#BlueprintCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the Amazon DataZone blueprint. The only valid value is <code>TOOLING</code>, which creates a blueprint that provisions the tooling resources of a project.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6743,6 +6760,12 @@
                     "target": "com.amazonaws.datazone#GlossaryTerms",
                     "traits": {
                         "smithy.api#documentation": "<p>The glossary terms attached to this Amazon DataZone blueprint.</p>"
+                    }
+                },
+                "blueprintCategory": {
+                    "target": "com.amazonaws.datazone#BlueprintCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the Amazon DataZone blueprint. The only valid value is <code>TOOLING</code>, which indicates a blueprint that provisions the tooling resources of a project.</p>"
                     }
                 },
                 "createdAt": {
@@ -15617,6 +15640,12 @@
                         "smithy.api#documentation": "<p>The timestamp of when the blueprint was enabled.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
+                },
+                "blueprintCategory": {
+                    "target": "com.amazonaws.datazone#BlueprintCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the environment blueprint. The only valid value is <code>TOOLING</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19156,6 +19185,12 @@
                     "target": "com.amazonaws.datazone#GlossaryTerms",
                     "traits": {
                         "smithy.api#documentation": "<p>The glossary terms attached to this Amazon DataZone blueprint.</p>"
+                    }
+                },
+                "blueprintCategory": {
+                    "target": "com.amazonaws.datazone#BlueprintCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of this Amazon DataZone blueprint. The only valid value is <code>TOOLING</code>, which indicates a blueprint that provisions the tooling resources of a project.</p>"
                     }
                 },
                 "createdAt": {
@@ -24426,6 +24461,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a connection.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.datazone#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role to associate with the connection as the project user role. To use this operation, you must have <code>iam:PassRole</code> permission for this role.</p>"
                     }
                 }
             },
@@ -42409,6 +42450,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The user parameters to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>"
                     }
+                },
+                "blueprintCategory": {
+                    "target": "com.amazonaws.datazone#BlueprintCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category to update. The only valid value is <code>TOOLING</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -42468,6 +42515,12 @@
                     "target": "com.amazonaws.datazone#GlossaryTerms",
                     "traits": {
                         "smithy.api#documentation": "<p>The glossary terms to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>"
+                    }
+                },
+                "blueprintCategory": {
+                    "target": "com.amazonaws.datazone#BlueprintCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the environment blueprint. The only valid value is <code>TOOLING</code>.</p>"
                     }
                 },
                 "createdAt": {

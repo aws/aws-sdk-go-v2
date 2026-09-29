@@ -11,9 +11,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns the list of components that can be filtered by name, or by using the
-// listed filters to streamline results. Newly created components can take up to
-// two minutes to appear in the ListComponents API Results.
+// Returns the list of components that you have access to. By default, the
+// response doesn't include components in the DEPRECATED state. To list deprecated
+// components, use the status filter with the value DEPRECATED .
 //
 // The semantic version has four nodes: ../. You can assign values for the first
 // three, and can filter on all of them.
@@ -39,7 +39,9 @@ func (c *Client) ListComponents(ctx context.Context, params *ListComponentsInput
 
 type ListComponentsInput struct {
 
-	// Returns the list of components for the specified name.
+	// Specifies whether to return one entry per component name, with all versions of
+	// each component aggregated. Defaults to false , which returns one entry per
+	// component version. You can't combine this option with the version filter.
 	ByName bool
 
 	// Use the following filters to streamline results:
@@ -49,6 +51,10 @@ type ListComponentsInput struct {
 	//   - name
 	//
 	//   - platform
+	//
+	//   - productCodes
+	//
+	//   - status
 	//
 	//   - supportedOsVersion
 	//
@@ -66,8 +72,9 @@ type ListComponentsInput struct {
 
 	// Filters results based on the type of owner for the component. By default, this
 	// request returns a list of components that your account owns. To see results for
-	// other types of owners, you can specify components that Amazon manages, third
-	// party components, or components that other accounts have shared with you.
+	// other types of owners, you can specify components that Amazon manages,
+	// components from the Amazon Web Services Marketplace, third party components, or
+	// components that other accounts have shared with you.
 	Owner types.Ownership
 
 	noSmithyDocumentSerde

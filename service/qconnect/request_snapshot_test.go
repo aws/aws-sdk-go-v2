@@ -1093,6 +1093,7 @@ func TestCheckRequestSnapshot_CreateSession(t *testing.T) {
 		AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 			"key0": {
 				AiAgentId: ptr.String("__AiAgentId__"),
+				Enabled:   ptr.Bool(true),
 			},
 		},
 		ContactArn: ptr.String("__ContactArn__"),
@@ -3615,6 +3616,7 @@ func TestCheckRequestSnapshot_UpdateAssistantAIAgent(t *testing.T) {
 		AiAgentType: types.AIAgentType("MANUAL_SEARCH"),
 		Configuration: &types.AIAgentConfigurationData{
 			AiAgentId: ptr.String("__AiAgentId__"),
+			Enabled:   ptr.Bool(true),
 		},
 		OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
 	}
@@ -3949,6 +3951,7 @@ func TestCheckRequestSnapshot_UpdateSession(t *testing.T) {
 		AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 			"key0": {
 				AiAgentId: ptr.String("__AiAgentId__"),
+				Enabled:   ptr.Bool(true),
 			},
 		},
 		OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
@@ -4914,6 +4917,7 @@ func TestUpdateRequestSnapshot_CreateSession(t *testing.T) {
 		AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 			"key0": {
 				AiAgentId: ptr.String("__AiAgentId__"),
+				Enabled:   ptr.Bool(true),
 			},
 		},
 		ContactArn: ptr.String("__ContactArn__"),
@@ -7436,6 +7440,7 @@ func TestUpdateRequestSnapshot_UpdateAssistantAIAgent(t *testing.T) {
 		AiAgentType: types.AIAgentType("MANUAL_SEARCH"),
 		Configuration: &types.AIAgentConfigurationData{
 			AiAgentId: ptr.String("__AiAgentId__"),
+			Enabled:   ptr.Bool(true),
 		},
 		OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
 	}
@@ -7770,6 +7775,7 @@ func TestUpdateRequestSnapshot_UpdateSession(t *testing.T) {
 		AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
 			"key0": {
 				AiAgentId: ptr.String("__AiAgentId__"),
+				Enabled:   ptr.Bool(true),
 			},
 		},
 		OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{

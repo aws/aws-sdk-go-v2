@@ -31,9 +31,9 @@ func (c *Client) CreateContainerRecipe(ctx context.Context, params *CreateContai
 type CreateContainerRecipeInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -45,12 +45,18 @@ type CreateContainerRecipeInput struct {
 	// This member is required.
 	ContainerType types.ContainerType
 
-	// The name of the container recipe.
+	// The name of the container recipe. The recipe name, combined with the semantic
+	// version, must be unique to your account in each Amazon Web Services Region.
+	// Image Builder generates the container recipe ARN from a normalized form of the
+	// name, so names that differ only in case, spaces, or underscores count as the
+	// same name.
 	//
 	// This member is required.
 	Name *string
 
-	// The base image for the container recipe.
+	// The base image for the container recipe. This can be an Image Builder image
+	// resource ARN or a container image URI from a registry, for example
+	// amazonlinux:latest .
 	//
 	// This member is required.
 	ParentImage *string
@@ -72,29 +78,43 @@ type CreateContainerRecipeInput struct {
 	// This member is required.
 	SemanticVersion *string
 
-	// The destination repository for the container image.
+	// The destination repository for the container image. The Amazon ECR repository
+	// must already exist in the Amazon Web Services Region where the build runs.
 	//
 	// This member is required.
 	TargetRepository *types.TargetContainerRepository
 
-	// The components included in the container recipe.
+	// The components included in the container recipe. You can specify each component
+	// only one time in a recipe.
 	Components []types.ComponentConfiguration
 
 	// The description of the container recipe.
 	Description *string
 
-	// The Dockerfile template used to build your image as an inline data blob.
+	// The Dockerfile template used to build your image, as an inline data blob. You
+	// must specify exactly one of the dockerfileTemplateData or dockerfileTemplateUri
+	// properties. For the contextual variables that the template can include, see [Create a new version of a container recipe]in
+	// the EC2 Image Builder User Guide.
+	//
+	// [Create a new version of a container recipe]: https://docs.aws.amazon.com/imagebuilder/latest/userguide/create-container-recipes.html
 	DockerfileTemplateData *string
 
-	// The Amazon S3 URI for the Dockerfile that is used to build your container image.
+	// The Amazon S3 URI for the Dockerfile template that is used to build your
+	// container image. You must have permission to read the object. Image Builder
+	// reads the object once, when it creates the recipe, and stores its content in the
+	// recipe. Later changes to the S3 object don't affect the recipe. You must specify
+	// exactly one of the dockerfileTemplateData or dockerfileTemplateUri properties.
 	DockerfileTemplateUri *string
 
-	// Validates the required permissions and request parameters without making the
-	// request. If validation succeeds, the operation returns a
+	// Validates the required permissions and request parameters without performing
+	// the operation. If validation succeeds, the operation returns a
 	// DryRunOperationException error response.
 	DryRun bool
 
-	// Specifies the operating system version for the base image.
+	// Specifies the operating system version for the base image. Use this property
+	// only when the base image is a container image from a registry. When the base
+	// image is an Image Builder image, the operating system version comes from the
+	// parent image.
 	ImageOsVersionOverride *string
 
 	// A group of options that can be used to configure an instance for building and
@@ -109,6 +129,7 @@ type CreateContainerRecipeInput struct {
 	KmsKeyId *string
 
 	// Specifies the operating system platform when you use a custom base image.
+	// Container recipes support only the Linux and Windows platforms.
 	PlatformOverride types.Platform
 
 	// Tags that are attached to the container recipe.
@@ -189,7 +210,9 @@ type CreateContainerRecipeOutput struct {
 	// created.
 	ContainerRecipeArn *string
 
-	// The resource ARNs with different wildcard variations of semantic versioning.
+	// A set of wildcard version ARNs that always reference the latest version of the
+	// resource. ARNs are included for the latest version overall, and for the latest
+	// versions within the same major, minor, and patch levels.
 	LatestVersionReferences *types.LatestVersionReferences
 
 	// The request ID that uniquely identifies this request.

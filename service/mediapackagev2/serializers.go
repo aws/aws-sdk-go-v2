@@ -3012,6 +3012,18 @@ func awsRestjson1_serializeDocumentCdnIdentifierSecretArns(v []string, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentContentKeyPeriodConfiguration(v *types.ContentKeyPeriodConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ContentKeyPeriodTiming) > 0 {
+		ok := object.Key("ContentKeyPeriodTiming")
+		ok.String(string(v.ContentKeyPeriodTiming))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCreateDashManifestConfiguration(v *types.CreateDashManifestConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4075,6 +4087,13 @@ func awsRestjson1_serializeDocumentSpekeKeyProvider(v *types.SpekeKeyProvider, v
 		ok.String(*v.CertificateArn)
 	}
 
+	if v.ContentKeyPeriodConfiguration != nil {
+		ok := object.Key("ContentKeyPeriodConfiguration")
+		if err := awsRestjson1_serializeDocumentContentKeyPeriodConfiguration(v.ContentKeyPeriodConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DrmSystems != nil {
 		ok := object.Key("DrmSystems")
 		if err := awsRestjson1_serializeDocumentDrmSystems(v.DrmSystems, ok); err != nil {
@@ -4097,6 +4116,11 @@ func awsRestjson1_serializeDocumentSpekeKeyProvider(v *types.SpekeKeyProvider, v
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	if len(v.SpekeVersion) > 0 {
+		ok := object.Key("SpekeVersion")
+		ok.String(string(v.SpekeVersion))
 	}
 
 	if v.Url != nil {

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"adminAccounts":[{"accountId":"__AccountId__","email":"__Email__","name":"__Name__","priority":1},{"accountId":"__AccountId__","email":"__Email__","name":"__Name__","priority":1}],"nextToken":"__NextToken__"}

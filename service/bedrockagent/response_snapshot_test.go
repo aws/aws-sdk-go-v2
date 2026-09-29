@@ -2541,6 +2541,44 @@ func TestCheckResponseSnapshot_CreatePromptVersion(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateVpcConfiguration(t *testing.T) {
+	want := &CreateVpcConfigurationOutput{
+		VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+		Status:             types.VpcConfigurationStatus("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateVpcConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateVpcConfiguration(context.Background(), &CreateVpcConfigurationInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		VpcId:           ptr.String("__VpcId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceTarget: ptr.String("__ResourceTarget__"),
+		Port:           ptr.Int32(1),
+		Protocol:       types.VpcProtocol("HTTP"),
+		ResolutionMode: types.VpcResolutionMode("PUBLIC"),
+		HostHeader:     ptr.String("__HostHeader__"),
+		TlsServerName:  ptr.String("__TlsServerName__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateVpcConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteAgent(t *testing.T) {
 	want := &DeleteAgentOutput{
 		AgentId:     ptr.String("__AgentId__"),
@@ -2893,6 +2931,31 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteResourcePolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteVpcConfiguration(t *testing.T) {
+	want := &DeleteVpcConfigurationOutput{
+		VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+		Status:             types.VpcConfigurationStatus("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteVpcConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteVpcConfiguration(context.Background(), &DeleteVpcConfigurationInput{
+		KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+		VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteVpcConfiguration.response", err)
 	}
 }
 
@@ -4599,6 +4662,49 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetVpcConfiguration(t *testing.T) {
+	want := &GetVpcConfigurationOutput{
+		VpcConfiguration: &types.VpcConfiguration{
+			VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+			Status:             types.VpcConfigurationStatus("CREATING"),
+			StatusMessage:      ptr.String("__StatusMessage__"),
+			VpcId:              ptr.String("__VpcId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceTarget: ptr.String("__ResourceTarget__"),
+			Port:           ptr.Int32(1),
+			Protocol:       types.VpcProtocol("HTTP"),
+			ResolutionMode: types.VpcResolutionMode("PUBLIC"),
+			HostHeader:     ptr.String("__HostHeader__"),
+			TlsServerName:  ptr.String("__TlsServerName__"),
+			Name:           ptr.String("__Name__"),
+			Description:    ptr.String("__Description__"),
+			CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetVpcConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetVpcConfiguration(context.Background(), &GetVpcConfigurationInput{
+		KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+		VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetVpcConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_IngestKnowledgeBaseDocuments(t *testing.T) {
 	want := &IngestKnowledgeBaseDocumentsOutput{
 		DocumentDetails: []types.KnowledgeBaseDocumentDetail{
@@ -5569,6 +5675,64 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListTagsForResource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListVpcConfigurations(t *testing.T) {
+	want := &ListVpcConfigurationsOutput{
+		Items: []types.VpcConfigurationSummary{
+			{
+				VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+				Status:             types.VpcConfigurationStatus("CREATING"),
+				StatusMessage:      ptr.String("__StatusMessage__"),
+				VpcId:              ptr.String("__VpcId__"),
+				ResourceTarget:     ptr.String("__ResourceTarget__"),
+				Port:               ptr.Int32(1),
+				Protocol:           types.VpcProtocol("HTTP"),
+				ResolutionMode:     types.VpcResolutionMode("PUBLIC"),
+				HostHeader:         ptr.String("__HostHeader__"),
+				TlsServerName:      ptr.String("__TlsServerName__"),
+				Name:               ptr.String("__Name__"),
+				Description:        ptr.String("__Description__"),
+				CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+				Status:             types.VpcConfigurationStatus("CREATING"),
+				StatusMessage:      ptr.String("__StatusMessage__"),
+				VpcId:              ptr.String("__VpcId__"),
+				ResourceTarget:     ptr.String("__ResourceTarget__"),
+				Port:               ptr.Int32(1),
+				Protocol:           types.VpcProtocol("HTTP"),
+				ResolutionMode:     types.VpcResolutionMode("PUBLIC"),
+				HostHeader:         ptr.String("__HostHeader__"),
+				TlsServerName:      ptr.String("__TlsServerName__"),
+				Name:               ptr.String("__Name__"),
+				Description:        ptr.String("__Description__"),
+				CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListVpcConfigurations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListVpcConfigurations(context.Background(), &ListVpcConfigurationsInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		StatusFilter:    types.VpcConfigurationStatus("CREATING"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListVpcConfigurations.response", err)
 	}
 }
 

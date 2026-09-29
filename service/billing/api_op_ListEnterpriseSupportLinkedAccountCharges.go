@@ -35,10 +35,11 @@ type ListEnterpriseSupportLinkedAccountChargesInput struct {
 	// This member is required.
 	BillingMonth *string
 
-	// An optional linked account ID to filter results to a specific account.
+	// The linked account ID to filter results to a specific account. If you don't
+	// specify a value, the response includes charges for all linked accounts.
 	AccountId *string
 
-	// The maximum number of results to return per page.
+	// The maximum number of results to return per page. Default is 100.
 	MaxResults *int32
 
 	// The pagination token for the next page of results.
@@ -153,7 +154,7 @@ func (c *Client) addOperationListEnterpriseSupportLinkedAccountChargesMiddleware
 // ListEnterpriseSupportLinkedAccountChargesPaginatorOptions is the paginator
 // options for ListEnterpriseSupportLinkedAccountCharges
 type ListEnterpriseSupportLinkedAccountChargesPaginatorOptions struct {
-	// The maximum number of results to return per page.
+	// The maximum number of results to return per page. Default is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

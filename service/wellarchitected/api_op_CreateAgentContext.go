@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Creates a context associated with an optimization profile. Contexts provide
@@ -82,6 +83,10 @@ func (v *CreateAgentContextInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Title != nil {
 		s.WriteString(schemas.CreateAgentContextRequest_title, *v.Title)
 	}
+}
+func (in *CreateAgentContextInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type CreateAgentContextOutput struct {

@@ -76,14 +76,13 @@ type CreateChannelInput struct {
 	// The Amazon CloudWatch Logs configuration for the channel.
 	LoggingConfiguration *types.ChannelLoggingConfiguration
 
-	// The configuration for delivery to a general purpose Amazon S3 bucket. You must
-	// specify either S3DestinationConfiguration or S3TablesDestinationConfiguration ,
-	// but not both.
+	// The configuration for delivery to a general purpose Amazon S3 bucket. Specify
+	// this parameter when S3TablesDestinationConfiguration is not specified.
 	S3DestinationConfiguration *types.S3DestinationConfiguration
 
 	// The configuration for delivery to streaming tables on Apache Iceberg in Amazon
-	// S3 Tables. You must specify either S3DestinationConfiguration or
-	// S3TablesDestinationConfiguration , but not both.
+	// S3 Tables. Specify this parameter when S3DestinationConfiguration is not
+	// specified.
 	S3TablesDestinationConfiguration *types.S3TablesDestinationConfiguration
 
 	// A set of key-value pairs to assign to the channel. A tag consists of a required
@@ -136,7 +135,9 @@ func (in *CreateChannelInput) bindEndpointParams(p *EndpointParameters) {
 
 type CreateChannelOutput struct {
 
-	// The configuration and current status of the channel.
+	// The configuration and current status of the channel, including its ARN,
+	// destination configuration, and lifecycle state. Immediately after creation, the
+	// state is CREATING .
 	//
 	// This member is required.
 	ChannelDescription *types.ChannelDescription

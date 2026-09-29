@@ -1,3 +1,7 @@
+# v1.33.1 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2026-09-17)
 
 * **Feature**: Adding support for CIDR Resource Configuration

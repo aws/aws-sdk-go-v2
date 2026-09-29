@@ -37,7 +37,9 @@ type ListWorkflowBuildVersionsInput struct {
 	NextToken *string
 
 	// The Amazon Resource Name (ARN) of the workflow resource for which to get a list
-	// of build versions.
+	// of build versions. The version segments can contain wildcards ( x ) to match
+	// multiple versions of the workflow. If you don't specify an ARN, the response
+	// lists build versions for all of the workflows in your account.
 	WorkflowVersionArn *string
 
 	noSmithyDocumentSerde
@@ -68,8 +70,8 @@ type ListWorkflowBuildVersionsOutput struct {
 	// this token with the next request to retrieve additional objects.
 	NextToken *string
 
-	// A list that contains metadata for the workflow builds that have run for the
-	// workflow resource specified in the request.
+	// A list that contains metadata for the build versions of the workflow resource
+	// specified in the request.
 	WorkflowSummaryList []types.WorkflowSummary
 
 	// Metadata pertaining to the operation's result.

@@ -83,8 +83,26 @@ type GetPaymentConnectorOutput struct {
 	// present when the payment connector status is PENDING_AUTHENTICATION .
 	AuthorizationUrl *string
 
+	// The timestamp when the payment connector's current service-managed credentials
+	// took effect. It is first set when the credentials are provisioned and is updated
+	// by each rotation. This field is present only for payment connectors with a
+	// provisionMode of QUICK_CREATE .
+	CredentialsUpdatedAt *time.Time
+
 	// The description of the payment connector.
 	Description *string
+
+	// Specifies how the payment connector was provisioned. Payment connectors that
+	// were created before this field was available return MANUAL .
+	//
+	//   - MANUAL - You provided the credential provider configurations, so you own the
+	//   credentials. Rotate them with the payment provider, then call
+	//   UpdatePaymentCredentialProvider .
+	//
+	//   - QUICK_CREATE - AgentCore provisioned the credential provider for you, so the
+	//   credentials are service-managed. You can rotate them with
+	//   RotatePaymentConnectorCredentials .
+	ProvisionMode types.PaymentConnectorProvisionMode
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

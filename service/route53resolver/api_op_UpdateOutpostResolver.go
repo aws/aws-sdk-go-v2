@@ -12,6 +12,10 @@ import (
 
 // You can use UpdateOutpostResolver to update the instance count, type, or name
 // of a Resolver on an Outpost.
+//
+// This operation applies to first-generation Outposts only. On second-generation
+// Outposts, Resolver is managed automatically by Amazon Web Services and can't be
+// updated directly.
 func (c *Client) UpdateOutpostResolver(ctx context.Context, params *UpdateOutpostResolverInput, optFns ...func(*Options)) (*UpdateOutpostResolverOutput, error) {
 	if params == nil {
 		params = &UpdateOutpostResolverInput{}

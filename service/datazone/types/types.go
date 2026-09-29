@@ -2577,6 +2577,9 @@ type EnvironmentBlueprintSummary struct {
 	// This member is required.
 	ProvisioningProperties ProvisioningProperties
 
+	// The category of the environment blueprint. The only valid value is TOOLING .
+	BlueprintCategory BlueprintCategory
+
 	// The timestamp of when an environment blueprint was created.
 	CreatedAt *time.Time
 
@@ -3754,6 +3757,11 @@ type IamPropertiesInput struct {
 	// Specifies whether Amazon Web Services Glue lineage sync is enabled for a
 	// connection.
 	GlueLineageSyncEnabled *bool
+
+	// The ARN of the IAM role to associate with the connection as the project user
+	// role. To use this operation, you must have iam:PassRole permission for this
+	// role.
+	RoleArn *string
 
 	noSmithyDocumentSerde
 }

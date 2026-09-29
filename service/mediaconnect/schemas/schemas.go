@@ -2638,6 +2638,11 @@ var PublicRouterNetworkInterfaceRule = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var PublicRouterNetworkInterfaceRule_Cidr *smithy.Schema
 
+var PublicTlsEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "PublicTlsEncryptionConfiguration",
+}, smithy.ShapeTypeStructure, 0)
+
 var Range = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "Range",
@@ -3241,7 +3246,7 @@ var _RouterOutputMessages_member *smithy.Schema
 var RouterOutputProtocol = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterOutputProtocol",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var RouterOutputProtocol_RTP *smithy.Schema
 
 var RouterOutputProtocol_RIST *smithy.Schema
@@ -3250,13 +3255,17 @@ var RouterOutputProtocol_SRT_CALLER *smithy.Schema
 
 var RouterOutputProtocol_SRT_LISTENER *smithy.Schema
 
+var RouterOutputProtocol_RTMP_PUSH *smithy.Schema
+
 var RouterOutputProtocolConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterOutputProtocolConfiguration",
-}, smithy.ShapeTypeUnion, 4)
+}, smithy.ShapeTypeUnion, 5)
 var RouterOutputProtocolConfiguration_Rist *smithy.Schema
 
 var RouterOutputProtocolConfiguration_SrtListener *smithy.Schema
+
+var RouterOutputProtocolConfiguration_RtmpPush *smithy.Schema
 
 var RouterOutputProtocolConfiguration_SrtCaller *smithy.Schema
 
@@ -3351,6 +3360,20 @@ var _RoutingScopeList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RoutingScopeList",
 }, smithy.ShapeTypeList, 1)
 var _RoutingScopeList_member *smithy.Schema
+
+var RtmpPushRouterOutputConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RtmpPushRouterOutputConfiguration",
+}, smithy.ShapeTypeStructure, 5)
+var RtmpPushRouterOutputConfiguration_DestinationAddress *smithy.Schema
+
+var RtmpPushRouterOutputConfiguration_DestinationPort *smithy.Schema
+
+var RtmpPushRouterOutputConfiguration_ApplicationName *smithy.Schema
+
+var RtmpPushRouterOutputConfiguration_StreamName *smithy.Schema
+
+var RtmpPushRouterOutputConfiguration_TlsEncryption *smithy.Schema
 
 var RtpRouterInputConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -3702,6 +3725,26 @@ var ThumbnailState = smithy.NewSchema(smithy.ShapeID{
 var ThumbnailState_ENABLED *smithy.Schema
 
 var ThumbnailState_DISABLED *smithy.Schema
+
+var TlsEncryption = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "TlsEncryption",
+}, smithy.ShapeTypeStructure, 2)
+var TlsEncryption_EncryptionType *smithy.Schema
+
+var TlsEncryption_EncryptionConfiguration *smithy.Schema
+
+var TlsEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "TlsEncryptionConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var TlsEncryptionConfiguration_Public *smithy.Schema
+
+var TlsEncryptionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "TlsEncryptionType",
+}, smithy.ShapeTypeEnum, 1)
+var TlsEncryptionType_PUBLIC *smithy.Schema
 
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -7239,6 +7282,24 @@ func init() {
 
 	SrtListenerRouterOutputConfiguration_EncryptionConfiguration = SrtListenerRouterOutputConfiguration.AddMember("EncryptionConfiguration", SrtEncryptionConfiguration, &smithytraits.JSONName{Name: "encryptionConfiguration"})
 
+	TlsEncryptionType_PUBLIC = TlsEncryptionType.AddMember("PUBLIC", smithyprelude.Unit)
+
+	TlsEncryptionConfiguration_Public = TlsEncryptionConfiguration.AddMember("Public", PublicTlsEncryptionConfiguration, &smithytraits.JSONName{Name: "public"})
+
+	TlsEncryption_EncryptionType = TlsEncryption.AddMember("EncryptionType", TlsEncryptionType, &smithytraits.JSONName{Name: "encryptionType"})
+
+	TlsEncryption_EncryptionConfiguration = TlsEncryption.AddMember("EncryptionConfiguration", TlsEncryptionConfiguration, &smithytraits.JSONName{Name: "encryptionConfiguration"})
+
+	RtmpPushRouterOutputConfiguration_DestinationAddress = RtmpPushRouterOutputConfiguration.AddMember("DestinationAddress", smithyprelude.String, &smithytraits.JSONName{Name: "destinationAddress"})
+
+	RtmpPushRouterOutputConfiguration_DestinationPort = RtmpPushRouterOutputConfiguration.AddMember("DestinationPort", smithyprelude.Integer, &smithytraits.JSONName{Name: "destinationPort"})
+
+	RtmpPushRouterOutputConfiguration_ApplicationName = RtmpPushRouterOutputConfiguration.AddMember("ApplicationName", smithyprelude.String, &smithytraits.JSONName{Name: "applicationName"})
+
+	RtmpPushRouterOutputConfiguration_StreamName = RtmpPushRouterOutputConfiguration.AddMember("StreamName", smithyprelude.String, &smithytraits.JSONName{Name: "streamName"})
+
+	RtmpPushRouterOutputConfiguration_TlsEncryption = RtmpPushRouterOutputConfiguration.AddMember("TlsEncryption", TlsEncryption, &smithytraits.JSONName{Name: "tlsEncryption"})
+
 	SrtCallerRouterOutputConfiguration_DestinationAddress = SrtCallerRouterOutputConfiguration.AddMember("DestinationAddress", smithyprelude.String, &smithytraits.JSONName{Name: "destinationAddress"})
 
 	SrtCallerRouterOutputConfiguration_DestinationPort = SrtCallerRouterOutputConfiguration.AddMember("DestinationPort", smithyprelude.Integer, &smithytraits.JSONName{Name: "destinationPort"})
@@ -7259,6 +7320,8 @@ func init() {
 
 	RouterOutputProtocolConfiguration_SrtListener = RouterOutputProtocolConfiguration.AddMember("SrtListener", SrtListenerRouterOutputConfiguration, &smithytraits.JSONName{Name: "srtListener"})
 
+	RouterOutputProtocolConfiguration_RtmpPush = RouterOutputProtocolConfiguration.AddMember("RtmpPush", RtmpPushRouterOutputConfiguration, &smithytraits.JSONName{Name: "rtmpPush"})
+
 	RouterOutputProtocolConfiguration_SrtCaller = RouterOutputProtocolConfiguration.AddMember("SrtCaller", SrtCallerRouterOutputConfiguration, &smithytraits.JSONName{Name: "srtCaller"})
 
 	RouterOutputProtocolConfiguration_Rtp = RouterOutputProtocolConfiguration.AddMember("Rtp", RtpRouterOutputConfiguration, &smithytraits.JSONName{Name: "rtp"})
@@ -7270,6 +7333,8 @@ func init() {
 	RouterOutputProtocol_SRT_CALLER = RouterOutputProtocol.AddMember("SRT_CALLER", smithyprelude.Unit)
 
 	RouterOutputProtocol_SRT_LISTENER = RouterOutputProtocol.AddMember("SRT_LISTENER", smithyprelude.Unit)
+
+	RouterOutputProtocol_RTMP_PUSH = RouterOutputProtocol.AddMember("RTMP_PUSH", smithyprelude.Unit)
 
 	StandardRouterOutputConfiguration_NetworkInterfaceArn = StandardRouterOutputConfiguration.AddMember("NetworkInterfaceArn", _RouterNetworkInterfaceArn, &smithytraits.JSONName{Name: "networkInterfaceArn"})
 

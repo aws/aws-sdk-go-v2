@@ -250,6 +250,26 @@ func (m *validateOpCreatePromptVersion) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateVpcConfiguration struct {
+}
+
+func (*validateOpCreateVpcConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVpcConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVpcConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVpcConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAgentActionGroup struct {
 }
 
@@ -485,6 +505,26 @@ func (m *validateOpDeleteResourcePolicy) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteVpcConfiguration struct {
+}
+
+func (*validateOpDeleteVpcConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVpcConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVpcConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVpcConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -830,6 +870,26 @@ func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetVpcConfiguration struct {
+}
+
+func (*validateOpGetVpcConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetVpcConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetVpcConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetVpcConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpIngestKnowledgeBaseDocuments struct {
 }
 
@@ -1065,6 +1125,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListVpcConfigurations struct {
+}
+
+func (*validateOpListVpcConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListVpcConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListVpcConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListVpcConfigurationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1478,6 +1558,10 @@ func addOpCreatePromptVersionValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreatePromptVersion{}, middleware.After)
 }
 
+func addOpCreateVpcConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVpcConfiguration{}, middleware.After)
+}
+
 func addOpDeleteAgentActionGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAgentActionGroup{}, middleware.After)
 }
@@ -1524,6 +1608,10 @@ func addOpDeletePromptValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
+}
+
+func addOpDeleteVpcConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVpcConfiguration{}, middleware.After)
 }
 
 func addOpDisassociateAgentCollaboratorValidationMiddleware(stack *middleware.Stack) error {
@@ -1594,6 +1682,10 @@ func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
 }
 
+func addOpGetVpcConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetVpcConfiguration{}, middleware.After)
+}
+
 func addOpIngestKnowledgeBaseDocumentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpIngestKnowledgeBaseDocuments{}, middleware.After)
 }
@@ -1640,6 +1732,10 @@ func addOpListKnowledgeBaseDocumentsValidationMiddleware(stack *middleware.Stack
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListVpcConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListVpcConfigurations{}, middleware.After)
 }
 
 func addOpPrepareAgentValidationMiddleware(stack *middleware.Stack) error {
@@ -5742,6 +5838,39 @@ func validateOpCreatePromptVersionInput(v *CreatePromptVersionInput) error {
 	}
 }
 
+func validateOpCreateVpcConfigurationInput(v *CreateVpcConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVpcConfigurationInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if v.ResourceTarget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceTarget"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if len(v.Protocol) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if len(v.ResolutionMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolutionMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAgentActionGroupInput(v *DeleteAgentActionGroupInput) error {
 	if v == nil {
 		return nil
@@ -5945,6 +6074,24 @@ func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourcePolicyInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteVpcConfigurationInput(v *DeleteVpcConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVpcConfigurationInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.VpcConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcConfigurationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6269,6 +6416,24 @@ func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
 	}
 }
 
+func validateOpGetVpcConfigurationInput(v *GetVpcConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetVpcConfigurationInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.VpcConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcConfigurationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpIngestKnowledgeBaseDocumentsInput(v *IngestKnowledgeBaseDocumentsInput) error {
 	if v == nil {
 		return nil
@@ -6476,6 +6641,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListVpcConfigurationsInput(v *ListVpcConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListVpcConfigurationsInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

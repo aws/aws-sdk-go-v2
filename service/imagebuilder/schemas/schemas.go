@@ -3087,6 +3087,11 @@ var _VersionNumber = smithy.NewSchema(smithy.ShapeID{
 	Name:      "VersionNumber",
 }, smithy.ShapeTypeString, 0)
 
+var _VersionNumberWithBuild = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "VersionNumberWithBuild",
+}, smithy.ShapeTypeString, 0)
+
 var _VulnerabilityId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "VulnerabilityId",
@@ -3275,11 +3280,6 @@ var WorkflowExecutionStatus_ROLLBACK_IN_PROGRESS *smithy.Schema
 var WorkflowExecutionStatus_ROLLBACK_COMPLETED *smithy.Schema
 
 var WorkflowExecutionStatus_CANCELLED *smithy.Schema
-
-var _WorkflowNameArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.imagebuilder",
-	Name:      "WorkflowNameArn",
-}, smithy.ShapeTypeString, 0)
 
 var WorkflowParameter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
@@ -3556,11 +3556,6 @@ var WorkflowVersion_type *smithy.Schema
 var WorkflowVersion_owner *smithy.Schema
 
 var WorkflowVersion_dateCreated *smithy.Schema
-
-var _WorkflowVersionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.imagebuilder",
-	Name:      "WorkflowVersionArn",
-}, smithy.ShapeTypeString, 0)
 
 var _WorkflowVersionArnOrBuildVersionArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
@@ -6063,7 +6058,7 @@ func init() {
 
 	Image_name = Image.AddMember("name", _ResourceName)
 
-	Image_version = Image.AddMember("version", _VersionNumber)
+	Image_version = Image.AddMember("version", _VersionNumberWithBuild)
 
 	Image_platform = Image.AddMember("platform", Platform)
 
@@ -6323,7 +6318,7 @@ func init() {
 
 	ImageSummary_type = ImageSummary.AddMember("type", ImageType)
 
-	ImageSummary_version = ImageSummary.AddMember("version", _VersionNumber)
+	ImageSummary_version = ImageSummary.AddMember("version", _VersionNumberWithBuild)
 
 	ImageSummary_platform = ImageSummary.AddMember("platform", Platform)
 
@@ -6839,7 +6834,7 @@ func init() {
 
 	_WorkflowStepExecutionsList_member = _WorkflowStepExecutionsList.AddMember("member", WorkflowStepMetadata)
 
-	WorkflowSummary_arn = WorkflowSummary.AddMember("arn", _WorkflowNameArn)
+	WorkflowSummary_arn = WorkflowSummary.AddMember("arn", _WorkflowBuildVersionArn)
 
 	WorkflowSummary_name = WorkflowSummary.AddMember("name", _ResourceName)
 
@@ -6861,7 +6856,7 @@ func init() {
 
 	_WorkflowSummaryList_member = _WorkflowSummaryList.AddMember("member", WorkflowSummary)
 
-	WorkflowVersion_arn = WorkflowVersion.AddMember("arn", _WorkflowVersionArn)
+	WorkflowVersion_arn = WorkflowVersion.AddMember("arn", _WorkflowWildcardVersionArn)
 
 	WorkflowVersion_name = WorkflowVersion.AddMember("name", _ResourceName)
 

@@ -29,6 +29,9 @@ func (c *Client) GetWorkflow(ctx context.Context, params *GetWorkflowInput, optF
 type GetWorkflowInput struct {
 
 	// The Amazon Resource Name (ARN) of the workflow resource that you want to get.
+	// You can specify a build version ARN, or a version ARN with or without wildcards
+	// ( x ) in its version segments. Image Builder resolves version and wildcard ARNs
+	// to the most recent matching build version.
 	//
 	// This member is required.
 	WorkflowBuildVersionArn *string
@@ -50,7 +53,9 @@ func (v *GetWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
 
 type GetWorkflowOutput struct {
 
-	// The resource ARNs with different wildcard variations of semantic versioning.
+	// A set of wildcard version ARNs that always reference the latest version of the
+	// resource. ARNs are included for the latest version overall, and for the latest
+	// versions within the same major, minor, and patch levels.
 	LatestVersionReferences *types.LatestVersionReferences
 
 	// The workflow resource specified in the request.

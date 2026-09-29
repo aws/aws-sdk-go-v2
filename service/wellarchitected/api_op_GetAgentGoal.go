@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Retrieves detailed information about a specific optimization goal.
@@ -54,6 +55,10 @@ func (v *GetAgentGoalInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProfileArn != nil {
 		s.WriteString(schemas.GetAgentGoalRequest_profileArn, *v.ProfileArn)
 	}
+}
+func (in *GetAgentGoalInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.SubServiceType = ptr.String("AGENT")
 }
 
 type GetAgentGoalOutput struct {

@@ -942,6 +942,11 @@ type Ec2AsgCapacityIncreaseConfiguration struct {
 	// The settings for ungraceful execution.
 	Ungraceful *Ec2Ungraceful
 
+	// If enabled, the step completes only after each attached ELB target group
+	// reports a healthy target count that matches the group's new desired capacity
+	// calculated in the step.
+	WaitELBTargetGroupHealthy WaitELBTargetGroupHealthy
+
 	noSmithyDocumentSerde
 }
 
@@ -967,6 +972,9 @@ func (v *Ec2AsgCapacityIncreaseConfiguration) SerializeMembers(s smithy.ShapeSer
 		v.Ungraceful.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.WaitELBTargetGroupHealthy != "" {
+		s.WriteString(schemas.Ec2AsgCapacityIncreaseConfiguration_waitELBTargetGroupHealthy, string(v.WaitELBTargetGroupHealthy))
+	}
 }
 func (v *Ec2AsgCapacityIncreaseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Ec2AsgCapacityIncreaseConfiguration, func(s *smithy.Schema) error {
@@ -989,6 +997,13 @@ func (v *Ec2AsgCapacityIncreaseConfiguration) Deserialize(d smithy.ShapeDeserial
 		case schemas.Ec2AsgCapacityIncreaseConfiguration_ungraceful:
 			v.Ungraceful = &Ec2Ungraceful{}
 			return v.Ungraceful.Deserialize(d)
+		case schemas.Ec2AsgCapacityIncreaseConfiguration_waitELBTargetGroupHealthy:
+			var ev string
+			if err := d.ReadString(schemas.Ec2AsgCapacityIncreaseConfiguration_waitELBTargetGroupHealthy, &ev); err != nil {
+				return err
+			}
+			v.WaitELBTargetGroupHealthy = WaitELBTargetGroupHealthy(ev)
+			return nil
 		}
 		return nil
 	})
@@ -1048,6 +1063,11 @@ type EcsCapacityIncreaseConfiguration struct {
 	// The settings for ungraceful execution.
 	Ungraceful *EcsUngraceful
 
+	// If enabled, the step completes only after each attached ELB target group
+	// reports a healthy target count that matches the service's new desired task count
+	// calculated in the step.
+	WaitELBTargetGroupHealthy WaitELBTargetGroupHealthy
+
 	noSmithyDocumentSerde
 }
 
@@ -1073,6 +1093,9 @@ func (v *EcsCapacityIncreaseConfiguration) SerializeMembers(s smithy.ShapeSerial
 		v.Ungraceful.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.WaitELBTargetGroupHealthy != "" {
+		s.WriteString(schemas.EcsCapacityIncreaseConfiguration_waitELBTargetGroupHealthy, string(v.WaitELBTargetGroupHealthy))
+	}
 }
 func (v *EcsCapacityIncreaseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EcsCapacityIncreaseConfiguration, func(s *smithy.Schema) error {
@@ -1095,6 +1118,13 @@ func (v *EcsCapacityIncreaseConfiguration) Deserialize(d smithy.ShapeDeserialize
 		case schemas.EcsCapacityIncreaseConfiguration_ungraceful:
 			v.Ungraceful = &EcsUngraceful{}
 			return v.Ungraceful.Deserialize(d)
+		case schemas.EcsCapacityIncreaseConfiguration_waitELBTargetGroupHealthy:
+			var ev string
+			if err := d.ReadString(schemas.EcsCapacityIncreaseConfiguration_waitELBTargetGroupHealthy, &ev); err != nil {
+				return err
+			}
+			v.WaitELBTargetGroupHealthy = WaitELBTargetGroupHealthy(ev)
+			return nil
 		}
 		return nil
 	})
@@ -2615,6 +2645,14 @@ type Plan struct {
 	// The report configuration for a plan.
 	ReportConfiguration *ReportConfiguration
 
+	// Indicates whether service quota checks are enabled for the Region switch plan.
+	// When enabled, Region switch compares the applied service quota values across the
+	// plan's Amazon Web Services Regions and creates a warning when a quota in one
+	// Region is lower than the value required for the matching resource in another
+	// Region. Service quota checks are advisory and don't prevent you from creating,
+	// evaluating, or executing a plan.
+	ServiceQuotaChecksEnabled *bool
+
 	// The triggers for a plan.
 	Triggers []Trigger
 
@@ -2665,6 +2703,9 @@ func (v *Plan) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ReportConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.ServiceQuotaChecksEnabled != nil {
+		s.WriteBool(schemas.Plan_serviceQuotaChecksEnabled, *v.ServiceQuotaChecksEnabled)
+	}
 	serializeTriggerList(s, schemas.Plan_triggers, v.Triggers)
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.Plan_updatedAt, *v.UpdatedAt)
@@ -2712,6 +2753,9 @@ func (v *Plan) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Plan_reportConfiguration:
 			v.ReportConfiguration = &ReportConfiguration{}
 			return v.ReportConfiguration.Deserialize(d)
+		case schemas.Plan_serviceQuotaChecksEnabled:
+			v.ServiceQuotaChecksEnabled = new(bool)
+			return d.ReadBool(schemas.Plan_serviceQuotaChecksEnabled, v.ServiceQuotaChecksEnabled)
 		case schemas.Plan_triggers:
 			return deserializeTriggerList(d, schemas.Plan_triggers, &v.Triggers)
 		case schemas.Plan_updatedAt:
@@ -3520,6 +3564,156 @@ func (v *Service) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Service_serviceArn:
 			v.ServiceArn = new(string)
 			return d.ReadString(schemas.Service_serviceArn, v.ServiceArn)
+		}
+		return nil
+	})
+}
+
+// A service quota warning for a plan. Region switch creates a warning when the
+// applied quota value in one Region of a plan is lower than the value for the
+// matching resource in another Region or account in the plan, or when it can't
+// complete a service quota check.
+type ServiceQuotaWarningSummary struct {
+
+	// The Amazon Web Services account ID that owns the plan that the warning applies
+	// to.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The Amazon Resource Name (ARN) of the plan that the warning applies to.
+	//
+	// This member is required.
+	PlanArn *string
+
+	// The Amazon Web Services Region that the quota applies to.
+	//
+	// This member is required.
+	QuotaRegion *string
+
+	// The status of the service quota warning.
+	//
+	// This member is required.
+	Status ServiceQuotaWarningStatus
+
+	// The ID of the support case associated with the quota increase request, if
+	// Region switch submitted one for this quota.
+	CaseId *string
+
+	// The time (UTC) when Region switch last checked this quota.
+	LastCheckedAt *time.Time
+
+	// The quota code of the quota that the warning applies to, as defined in Service
+	// Quotas.
+	QuotaCode *string
+
+	// The name of the quota that the warning applies to, as defined in Service Quotas.
+	QuotaName *string
+
+	// The ID of the quota increase request that Region switch submitted, if it
+	// submitted one for this quota.
+	RequestId *string
+
+	// The service code of the service that the quota belongs to, as defined in
+	// Service Quotas. For example, ec2 .
+	ServiceCode *string
+
+	// The time (UTC) when Region switch created this warning.
+	WarningCreatedAt *time.Time
+
+	// A message that describes the service quota warning.
+	WarningMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ServiceQuotaWarningSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceQuotaWarningSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceQuotaWarningSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_accountId, *v.AccountId)
+	}
+	if v.CaseId != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_caseId, *v.CaseId)
+	}
+	if v.LastCheckedAt != nil {
+		s.WriteTime(schemas.ServiceQuotaWarningSummary_lastCheckedAt, *v.LastCheckedAt)
+	}
+	if v.PlanArn != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_planArn, *v.PlanArn)
+	}
+	if v.QuotaCode != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_quotaCode, *v.QuotaCode)
+	}
+	if v.QuotaName != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_quotaName, *v.QuotaName)
+	}
+	if v.QuotaRegion != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_quotaRegion, *v.QuotaRegion)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_requestId, *v.RequestId)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_serviceCode, *v.ServiceCode)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_status, string(v.Status))
+	}
+	if v.WarningCreatedAt != nil {
+		s.WriteTime(schemas.ServiceQuotaWarningSummary_warningCreatedAt, *v.WarningCreatedAt)
+	}
+	if v.WarningMessage != nil {
+		s.WriteString(schemas.ServiceQuotaWarningSummary_warningMessage, *v.WarningMessage)
+	}
+}
+func (v *ServiceQuotaWarningSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaWarningSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaWarningSummary_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_accountId, v.AccountId)
+		case schemas.ServiceQuotaWarningSummary_caseId:
+			v.CaseId = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_caseId, v.CaseId)
+		case schemas.ServiceQuotaWarningSummary_lastCheckedAt:
+			v.LastCheckedAt = new(time.Time)
+			return d.ReadTime(schemas.ServiceQuotaWarningSummary_lastCheckedAt, v.LastCheckedAt)
+		case schemas.ServiceQuotaWarningSummary_planArn:
+			v.PlanArn = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_planArn, v.PlanArn)
+		case schemas.ServiceQuotaWarningSummary_quotaCode:
+			v.QuotaCode = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_quotaCode, v.QuotaCode)
+		case schemas.ServiceQuotaWarningSummary_quotaName:
+			v.QuotaName = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_quotaName, v.QuotaName)
+		case schemas.ServiceQuotaWarningSummary_quotaRegion:
+			v.QuotaRegion = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_quotaRegion, v.QuotaRegion)
+		case schemas.ServiceQuotaWarningSummary_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_requestId, v.RequestId)
+		case schemas.ServiceQuotaWarningSummary_serviceCode:
+			v.ServiceCode = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_serviceCode, v.ServiceCode)
+		case schemas.ServiceQuotaWarningSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ServiceQuotaWarningSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ServiceQuotaWarningStatus(ev)
+			return nil
+		case schemas.ServiceQuotaWarningSummary_warningCreatedAt:
+			v.WarningCreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ServiceQuotaWarningSummary_warningCreatedAt, v.WarningCreatedAt)
+		case schemas.ServiceQuotaWarningSummary_warningMessage:
+			v.WarningMessage = new(string)
+			return d.ReadString(schemas.ServiceQuotaWarningSummary_warningMessage, v.WarningMessage)
 		}
 		return nil
 	})

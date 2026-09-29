@@ -126,6 +126,13 @@
                         "smithy.api#documentation": "<p>The ID of the AI Agent to be configured.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Indicates whether the AI Agent configured for this AI Agent type is enabled. When this value is omitted or set to true, the configured AI Agent runs; when set to false, the AI Agent ID is retained but no AI Agent runs for the AI Agent type. Setting this value to false is currently supported only for the <code>ANSWER_RECOMMENDATION</code> AI Agent type; other requests to set it to false are rejected with a validation error.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1728,7 +1735,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1
+                    "max": 5
                 }
             }
         },
@@ -5448,6 +5455,12 @@
                     "target": "com.amazonaws.qconnect#NotesChunkDataDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about notes chunk data.</p>"
+                    }
+                },
+                "proactiveRecommendationData": {
+                    "target": "com.amazonaws.qconnect#ProactiveRecommendationDataDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a proactive recommendation, including the token used to retrieve its chunked response with <code>GetNextMessage</code>.</p>"
                     }
                 }
             },
@@ -13559,6 +13572,21 @@
                 ]
             }
         },
+        "com.amazonaws.qconnect#ProactiveRecommendationDataDetails": {
+            "type": "structure",
+            "members": {
+                "nextMessageToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used to retrieve the next message in the proactive recommendation. Pass this token in a <code>GetNextMessage</code> request to continue receiving the chunked proactive response. Each response returns the next token to use until the chunked response is complete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a proactive recommendation, including the token used to retrieve its chunked response with <code>GetNextMessage</code>.</p>"
+            }
+        },
         "com.amazonaws.qconnect#Probability": {
             "type": "float",
             "traits": {
@@ -14331,7 +14359,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1024
+                    "max": 4000
                 },
                 "smithy.api#sensitive": {}
             }
@@ -15326,6 +15354,10 @@
                     {
                         "value": "BLOCKED_NOTES_CHUNK",
                         "name": "BLOCKED_NOTES_CHUNK"
+                    },
+                    {
+                        "value": "PROACTIVE_RECOMMENDATION",
+                        "name": "PROACTIVE_RECOMMENDATION"
                     }
                 ]
             }
@@ -15888,6 +15920,81 @@
                 "smithy.api#readonly": {}
             }
         },
+        "com.amazonaws.qconnect#RetrieveError": {
+            "type": "structure",
+            "members": {
+                "associationId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the assistant association whose knowledge base retrieval failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.qconnect#RetrieveErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code that categorizes the retrieval failure for the assistant association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the retrieval failure for the assistant association.</p>",
+                        "smithy.api#length": {
+                            "max": 1024
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error returned for a single assistant association whose knowledge base retrieval failed during a <code>Retrieve</code> operation. The overall operation still succeeds and returns the results from the associations that were queried successfully.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#RetrieveErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The error code that categorizes a per-association retrieval failure.</p> <ul> <li> <p> <code>ACCESS_DENIED</code> – you do not have permission to retrieve from the knowledge base for the assistant association.</p> </li> <li> <p> <code>RESOURCE_NOT_FOUND</code> – the assistant association or its knowledge base could not be found.</p> </li> <li> <p> <code>VALIDATION_ERROR</code> – the retrieval request or the knowledge base configuration for the assistant association was not valid.</p> </li> <li> <p> <code>THROTTLED</code> – the retrieval request for the assistant association was throttled.</p> </li> <li> <p> <code>DEPENDENCY_FAILED</code> – a dependency required to query the assistant association failed.</p> </li> <li> <p> <code>INTERNAL_SERVER_ERROR</code> – an internal error occurred while querying the assistant association.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ACCESS_DENIED",
+                        "name": "ACCESS_DENIED"
+                    },
+                    {
+                        "value": "RESOURCE_NOT_FOUND",
+                        "name": "RESOURCE_NOT_FOUND"
+                    },
+                    {
+                        "value": "VALIDATION_ERROR",
+                        "name": "VALIDATION_ERROR"
+                    },
+                    {
+                        "value": "THROTTLED",
+                        "name": "THROTTLED"
+                    },
+                    {
+                        "value": "DEPENDENCY_FAILED",
+                        "name": "DEPENDENCY_FAILED"
+                    },
+                    {
+                        "value": "INTERNAL_SERVER_ERROR",
+                        "name": "INTERNAL_SERVER_ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#RetrieveErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#RetrieveError"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.qconnect#RetrieveRequest": {
             "type": "structure",
             "members": {
@@ -15926,6 +16033,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The results of the content retrieval operation.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.qconnect#RetrieveErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The per-association errors returned when one or more knowledge base associations fail during a <code>Retrieve</code> operation that spans multiple assistant associations. The overall operation still succeeds and returns the results from the associations that were queried successfully. This list contains one entry for each association that failed, up to a maximum of five.</p>"
                     }
                 }
             },

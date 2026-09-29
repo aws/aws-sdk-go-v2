@@ -20,9 +20,9 @@ import (
 // FirewallAdvancedThreatCategory , DnsThreatProtection , and
 // PartnerThreatProtection . When a returned definition's variant requires an
 // external subscription (currently only PartnerThreatProtection ), the response
-// also includes a SubscriptionInfoidentifying the AWS Marketplace product that backs it; absence
-// of SubscriptionInfo means the variant is fully managed by AWS and requires no
-// separate subscription.
+// also includes a SubscriptionInfoidentifying the Amazon Web Services Marketplace product that
+// backs it; absence of SubscriptionInfo means the variant is fully managed by
+// Amazon Web Services and requires no separate subscription.
 func (c *Client) ListFirewallRuleTypes(ctx context.Context, params *ListFirewallRuleTypesInput, optFns ...func(*Options)) (*ListFirewallRuleTypesOutput, error) {
 	if params == nil {
 		params = &ListFirewallRuleTypesInput{}

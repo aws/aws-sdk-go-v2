@@ -970,6 +970,7 @@ func TestCheckResponseSnapshot_DescribeEventBus(t *testing.T) {
 		},
 		CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ManagedBy:        ptr.String("__ManagedBy__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeEventBus.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1410,6 +1411,7 @@ func TestCheckResponseSnapshot_ListEventBuses(t *testing.T) {
 				Policy:           ptr.String("__Policy__"),
 				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ManagedBy:        ptr.String("__ManagedBy__"),
 			},
 			{
 				Name:             ptr.String("__Name__"),
@@ -1418,6 +1420,7 @@ func TestCheckResponseSnapshot_ListEventBuses(t *testing.T) {
 				Policy:           ptr.String("__Policy__"),
 				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ManagedBy:        ptr.String("__ManagedBy__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

@@ -296,6 +296,19 @@ func serializeProvenanceSummaryList(s smithy.ShapeSerializer, schema *smithy.Sch
 	s.CloseList()
 }
 
+func serializeRecordTypeSchemaOverrideList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RecordTypeSchemaOverride) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeRegistryFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RegistryFilter) {
 	if v == nil {
 		return
@@ -549,6 +562,20 @@ func deserializeProvenanceSummaryList(d smithy.ShapeDeserializer, s *smithy.Sche
 	var vv types.ProvenanceSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ProvenanceSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRecordTypeSchemaOverrideList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RecordTypeSchemaOverride) error {
+	*v = make([]types.RecordTypeSchemaOverride, 0)
+	var vv types.RecordTypeSchemaOverride
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RecordTypeSchemaOverride{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

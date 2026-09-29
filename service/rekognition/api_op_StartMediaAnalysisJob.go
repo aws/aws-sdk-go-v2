@@ -9,9 +9,17 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+// Service availability notice: Streaming Video and Bulk Image Analysis is no
+// longer available to new customers. For more information, see [Rekognition feature availability changes].
+//
+// This change does not impact the availability of other Amazon Rekognition
+// features.
+//
 // Initiates a new media analysis job. Accepts a manifest file in an Amazon S3
 // bucket. The output is a manifest file and a summary of the manifest stored in
 // the Amazon S3 bucket.
+//
+// [Rekognition feature availability changes]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
 func (c *Client) StartMediaAnalysisJob(ctx context.Context, params *StartMediaAnalysisJobInput, optFns ...func(*Options)) (*StartMediaAnalysisJobOutput, error) {
 	if params == nil {
 		params = &StartMediaAnalysisJobInput{}

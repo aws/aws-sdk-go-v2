@@ -47,6 +47,12 @@ type SearchDiscoverableRegistryRecordsInput struct {
 	//  An optional structured JSON metadata filter that narrows the search results.
 	// Supports the field-level operators $eq , $ne , and $in , and the logical
 	// operators $and and $or on filterable fields.
+	//
+	// You can also filter on custom metadata fields using the customMetadata.{key}
+	// prefix. For example, to filter by a custom metadata field:
+	// {"customMetadata.environment": {"$eq": "production"}} . Filter values must be
+	// strings, so match a boolean field on its string form:
+	// {"customMetadata.requiresApproval": {"$eq": "true"}} .
 	Filters document.Interface
 
 	//  The maximum number of results to return. Valid values are 1 through 20. The

@@ -1,3 +1,8 @@
+# v1.54.1 (2026-09-24)
+
+* **Documentation**: Documentation updates for Route 53 Resolver. Clarifies which Outpost Resolver operations apply to first-generation AWS Outposts and that Resolver is managed automatically on second-generation Outposts. Adds Local Network Interface subnet compatibility notes for Resolver endpoints.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

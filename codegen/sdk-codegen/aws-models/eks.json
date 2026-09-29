@@ -2481,6 +2481,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for network access to the Argo CD capability's managed API server endpoint. By default, the Argo CD server is accessible via a public endpoint. You can optionally specify one or more VPC endpoint IDs to enable private connectivity from your VPCs. When VPC endpoints are configured, public access is blocked and the Argo CD server is only accessible through the specified VPC endpoints.</p>"
                     }
+                },
+                "endpointPrefix": {
+                    "target": "com.amazonaws.eks#ArgoCdEndpointPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional prefix used to construct the hostname of the Argo CD server endpoint. If not specified, Amazon EKS automatically generates the endpoint. This value can't be changed after the capability is created.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2519,10 +2525,26 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The URL of the Argo CD server. Use this URL to access the Argo CD web interface and API.</p>"
                     }
+                },
+                "endpointPrefix": {
+                    "target": "com.amazonaws.eks#ArgoCdEndpointPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix that was configured for the hostname of the Argo CD server endpoint when the capability was created.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The response object containing Argo CD configuration details, including the server URL that you use to access the Argo CD web interface and API.</p>"
+            }
+        },
+        "com.amazonaws.eks#ArgoCdEndpointPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"
             }
         },
         "com.amazonaws.eks#ArgoCdNetworkAccessConfigRequest": {

@@ -11,7 +11,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Updates the specified lifecycle policy.
+// Updates the specified lifecycle policy. The request replaces the existing
+// policy configuration rather than merging changes, so re-specify every setting
+// that you want to keep. The resourceType must match the existing policy's value.
 func (c *Client) UpdateLifecyclePolicy(ctx context.Context, params *UpdateLifecyclePolicyInput, optFns ...func(*Options)) (*UpdateLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &UpdateLifecyclePolicyInput{}
@@ -30,17 +32,17 @@ func (c *Client) UpdateLifecyclePolicy(ctx context.Context, params *UpdateLifecy
 type UpdateLifecyclePolicyInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The name or Amazon Resource Name (ARN) of the IAM role that Image Builder uses
-	// to update the lifecycle policy.
+	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
+	// Image Builder access to run lifecycle actions.
 	//
 	// This member is required.
 	ExecutionRole *string
@@ -55,20 +57,26 @@ type UpdateLifecyclePolicyInput struct {
 	// This member is required.
 	PolicyDetails []types.LifecyclePolicyDetail
 
-	// Selection criteria for resources that the lifecycle policy applies to.
+	// Selection criteria for resources that the lifecycle policy applies to. You must
+	// specify exactly one selection criteria: either recipes or a tag map, not both.
 	//
 	// This member is required.
 	ResourceSelection *types.LifecyclePolicyResourceSelection
 
-	// The type of image resource that the lifecycle policy applies to.
+	// The type of image resource that the lifecycle policy applies to. The value must
+	// match the policy's existing resource type. You can't change the resource type of
+	// an existing lifecycle policy.
 	//
 	// This member is required.
 	ResourceType types.LifecyclePolicyResourceType
 
-	// Optional description for the lifecycle policy.
+	// Optional description for the lifecycle policy. Because the update replaces the
+	// entire configuration, omitting this property removes any existing description.
 	Description *string
 
-	// Indicates whether the lifecycle policy resource is enabled.
+	// Indicates whether the lifecycle policy resource is enabled. Defaults to ENABLED
+	// when omitted, so updating a disabled policy without setting this property
+	// re-enables it.
 	Status types.LifecyclePolicyStatus
 
 	noSmithyDocumentSerde

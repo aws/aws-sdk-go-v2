@@ -1387,6 +1387,17 @@ func serializeConditions(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 	s.CloseList()
 }
 
+func serializeConnectionTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ConnectionType) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeContactDataRequestList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContactDataRequest) {
 	if v == nil {
 		return
@@ -5680,6 +5691,20 @@ func deserializeConditions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeConnectionTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ConnectionType) error {
+	*v = make([]types.ConnectionType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.ConnectionType(vv))
 		return nil
 	})
 }

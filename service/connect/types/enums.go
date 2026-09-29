@@ -556,6 +556,29 @@ func (ConfigurableNotificationPriority) Values() []ConfigurableNotificationPrior
 	}
 }
 
+type ConnectionType string
+
+// Enum values for ConnectionType
+const (
+	ConnectionTypeWebsocket             ConnectionType = "WEBSOCKET"
+	ConnectionTypeConnectionCredentials ConnectionType = "CONNECTION_CREDENTIALS"
+	ConnectionTypeAuthenticationSession ConnectionType = "AUTHENTICATION_SESSION"
+	ConnectionTypeWebrtcConnection      ConnectionType = "WEBRTC_CONNECTION"
+)
+
+// Values returns all known values for ConnectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionType) Values() []ConnectionType {
+	return []ConnectionType{
+		"WEBSOCKET",
+		"CONNECTION_CREDENTIALS",
+		"AUTHENTICATION_SESSION",
+		"WEBRTC_CONNECTION",
+	}
+}
+
 type ContactEvaluationAttributeComparisonType string
 
 // Enum values for ContactEvaluationAttributeComparisonType
@@ -2135,6 +2158,7 @@ const (
 	InstanceAttributeTypeUseCustomTtsVoices        InstanceAttributeType = "USE_CUSTOM_TTS_VOICES"
 	InstanceAttributeTypeEarlyMedia                InstanceAttributeType = "EARLY_MEDIA"
 	InstanceAttributeTypeMultiPartyConference      InstanceAttributeType = "MULTI_PARTY_CONFERENCE"
+	InstanceAttributeTypeAutoMuteAgentOnHold       InstanceAttributeType = "AUTO_MUTE_AGENT_ON_HOLD"
 	InstanceAttributeTypeHighVolumeOutbound        InstanceAttributeType = "HIGH_VOLUME_OUTBOUND"
 	InstanceAttributeTypeEnhancedContactMonitoring InstanceAttributeType = "ENHANCED_CONTACT_MONITORING"
 	InstanceAttributeTypeEnhancedChatMonitoring    InstanceAttributeType = "ENHANCED_CHAT_MONITORING"
@@ -2156,6 +2180,7 @@ func (InstanceAttributeType) Values() []InstanceAttributeType {
 		"USE_CUSTOM_TTS_VOICES",
 		"EARLY_MEDIA",
 		"MULTI_PARTY_CONFERENCE",
+		"AUTO_MUTE_AGENT_ON_HOLD",
 		"HIGH_VOLUME_OUTBOUND",
 		"ENHANCED_CONTACT_MONITORING",
 		"ENHANCED_CHAT_MONITORING",

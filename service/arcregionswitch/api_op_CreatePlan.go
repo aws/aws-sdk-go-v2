@@ -82,6 +82,9 @@ type CreatePlanInput struct {
 	// alarm states.
 	ReportConfiguration *types.ReportConfiguration
 
+	// Specifies whether to enable service quota checks for the Region switch plan.
+	ServiceQuotaChecksEnabled *bool
+
 	// The tags to apply to the Region switch plan.
 	Tags map[string]string
 
@@ -122,6 +125,9 @@ func (v *CreatePlanInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteStruct(schemas.CreatePlanRequest_reportConfiguration)
 		v.ReportConfiguration.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.ServiceQuotaChecksEnabled != nil {
+		s.WriteBool(schemas.CreatePlanRequest_serviceQuotaChecksEnabled, *v.ServiceQuotaChecksEnabled)
 	}
 	serializeTags(s, schemas.CreatePlanRequest_tags, v.Tags)
 	serializeTriggerList(s, schemas.CreatePlanRequest_triggers, v.Triggers)

@@ -1,3 +1,7 @@
+# v1.47.2 (2026-09-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.1 (2026-09-17)
 
 * **Documentation**: SNS API reference documentation update

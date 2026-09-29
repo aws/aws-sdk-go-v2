@@ -275,6 +275,14 @@ type AIAgentConfigurationData struct {
 	// This member is required.
 	AiAgentId *string
 
+	// Indicates whether the AI Agent configured for this AI Agent type is enabled.
+	// When this value is omitted or set to true, the configured AI Agent runs; when
+	// set to false, the AI Agent ID is retained but no AI Agent runs for the AI Agent
+	// type. Setting this value to false is currently supported only for the
+	// ANSWER_RECOMMENDATION AI Agent type; other requests to set it to false are
+	// rejected with a validation error.
+	Enabled *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -288,6 +296,9 @@ func (v *AIAgentConfigurationData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AiAgentId != nil {
 		s.WriteString(schemas.AIAgentConfigurationData_aiAgentId, *v.AiAgentId)
 	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.AIAgentConfigurationData_enabled, *v.Enabled)
+	}
 }
 func (v *AIAgentConfigurationData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AIAgentConfigurationData, func(s *smithy.Schema) error {
@@ -295,6 +306,9 @@ func (v *AIAgentConfigurationData) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.AIAgentConfigurationData_aiAgentId:
 			v.AiAgentId = new(string)
 			return d.ReadString(schemas.AIAgentConfigurationData_aiAgentId, v.AiAgentId)
+		case schemas.AIAgentConfigurationData_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.AIAgentConfigurationData_enabled, v.Enabled)
 		}
 		return nil
 	})
@@ -4634,6 +4648,7 @@ func (v *CustomerProfileAttributes) Deserialize(d smithy.ShapeDeserializer) erro
 //	DataDetailsMemberIntentDetectedData
 //	DataDetailsMemberNotesChunkData
 //	DataDetailsMemberNotesData
+//	DataDetailsMemberProactiveRecommendationData
 //	DataDetailsMemberSourceContentData
 //	DataDetailsMemberSuggestedMessageData
 type DataDetails interface {
@@ -4809,6 +4824,24 @@ func (v *DataDetailsMemberNotesData) Serialize(s smithy.ShapeSerializer) {
 	s.CloseStruct()
 }
 func (v *DataDetailsMemberNotesData) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Details about a proactive recommendation, including the token used to retrieve
+// its chunked response with GetNextMessage .
+type DataDetailsMemberProactiveRecommendationData struct {
+	Value ProactiveRecommendationDataDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*DataDetailsMemberProactiveRecommendationData) isDataDetails() {}
+func (v *DataDetailsMemberProactiveRecommendationData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataDetails_proactiveRecommendationData)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DataDetailsMemberProactiveRecommendationData) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -10122,6 +10155,43 @@ func (v *ParsingPrompt) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Details about a proactive recommendation, including the token used to retrieve
+// its chunked response with GetNextMessage .
+type ProactiveRecommendationDataDetails struct {
+
+	// The token used to retrieve the next message in the proactive recommendation.
+	// Pass this token in a GetNextMessage request to continue receiving the chunked
+	// proactive response. Each response returns the next token to use until the
+	// chunked response is complete.
+	//
+	// This member is required.
+	NextMessageToken *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProactiveRecommendationDataDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProactiveRecommendationDataDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProactiveRecommendationDataDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMessageToken != nil {
+		s.WriteString(schemas.ProactiveRecommendationDataDetails_nextMessageToken, *v.NextMessageToken)
+	}
+}
+func (v *ProactiveRecommendationDataDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProactiveRecommendationDataDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProactiveRecommendationDataDetails_nextMessageToken:
+			v.NextMessageToken = new(string)
+			return d.ReadString(schemas.ProactiveRecommendationDataDetails_nextMessageToken, v.NextMessageToken)
+		}
+		return nil
+	})
+}
+
 // The content of the push message template that applies to ADM (Amazon Device
 // Messaging) notification service.
 type PushADMMessageTemplateContent struct {
@@ -12542,6 +12612,71 @@ func (v *RetrievalFilterConfigurationMemberStringContains) Serialize(s smithy.Sh
 }
 func (v *RetrievalFilterConfigurationMemberStringContains) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
+}
+
+// An error returned for a single assistant association whose knowledge base
+// retrieval failed during a Retrieve operation. The overall operation still
+// succeeds and returns the results from the associations that were queried
+// successfully.
+type RetrieveError struct {
+
+	// The identifier of the assistant association whose knowledge base retrieval
+	// failed.
+	//
+	// This member is required.
+	AssociationId *string
+
+	// The error code that categorizes the retrieval failure for the assistant
+	// association.
+	//
+	// This member is required.
+	Code RetrieveErrorCode
+
+	// A human-readable description of the retrieval failure for the assistant
+	// association.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RetrieveError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.RetrieveError_associationId, *v.AssociationId)
+	}
+	if v.Code != "" {
+		s.WriteString(schemas.RetrieveError_code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.RetrieveError_message, *v.Message)
+	}
+}
+func (v *RetrieveError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrieveError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrieveError_associationId:
+			v.AssociationId = new(string)
+			return d.ReadString(schemas.RetrieveError_associationId, v.AssociationId)
+		case schemas.RetrieveError_code:
+			var ev string
+			if err := d.ReadString(schemas.RetrieveError_code, &ev); err != nil {
+				return err
+			}
+			v.Code = RetrieveErrorCode(ev)
+			return nil
+		case schemas.RetrieveError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RetrieveError_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // A single result from a content retrieval operation.

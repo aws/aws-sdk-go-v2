@@ -38,6 +38,9 @@ type UpdateEnvironmentBlueprintInput struct {
 	// This member is required.
 	Identifier *string
 
+	// The category to update. The only valid value is TOOLING .
+	BlueprintCategory types.BlueprintCategory
+
 	// The description to be updated as part of the UpdateEnvironmentBlueprint action.
 	Description *string
 
@@ -74,6 +77,9 @@ type UpdateEnvironmentBlueprintOutput struct {
 	//
 	// This member is required.
 	ProvisioningProperties types.ProvisioningProperties
+
+	// The category of the environment blueprint. The only valid value is TOOLING .
+	BlueprintCategory types.BlueprintCategory
 
 	// The timestamp of when the environment blueprint was created.
 	CreatedAt *time.Time

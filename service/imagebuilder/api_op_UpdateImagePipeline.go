@@ -13,11 +13,12 @@ import (
 
 // Updates an image pipeline. Use image pipelines to automate the creation and
 // distribution of images. You must specify exactly one recipe for your image,
-// using either a containerRecipeArn or an imageRecipeArn .
+// using either a containerRecipeArn or an imageRecipeArn . The recipe must be the
+// same type, image or container, as the pipeline's current recipe.
 //
-// UpdateImagePipeline does not support selective updates for the pipeline. You
-// must specify all of the required properties in the update request, not just the
-// properties that have changed.
+// UpdateImagePipeline does not support selective updates. The request replaces
+// the pipeline's entire configuration, so include every setting that you want to
+// keep. Any optional property that you omit is removed or reset to its default.
 func (c *Client) UpdateImagePipeline(ctx context.Context, params *UpdateImagePipelineInput, optFns ...func(*Options)) (*UpdateImagePipelineOutput, error) {
 	if params == nil {
 		params = &UpdateImagePipelineInput{}
@@ -36,9 +37,9 @@ func (c *Client) UpdateImagePipeline(ctx context.Context, params *UpdateImagePip
 type UpdateImagePipelineInput struct {
 
 	// A unique, case-sensitive identifier you provide to ensure that the operation
-	// completes no more than one time. If this token matches a previous request, the
-	// service ignores the request, but does not return an error. For more information,
-	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -51,20 +52,21 @@ type UpdateImagePipelineInput struct {
 	ImagePipelineArn *string
 
 	// The Amazon Resource Name (ARN) of the infrastructure configuration that Image
-	// Builder uses to build images that this image pipeline has updated.
+	// Builder uses to build images created by this image pipeline.
 	//
 	// This member is required.
 	InfrastructureConfigurationArn *string
 
-	// The Amazon Resource Name (ARN) of the container pipeline to update.
+	// The Amazon Resource Name (ARN) of the container recipe that is used to
+	// configure images created by this container pipeline. You must specify either
+	// this property or imageRecipeArn , but not both.
 	ContainerRecipeArn *string
 
 	// The description of the image pipeline.
 	Description *string
 
 	// The Amazon Resource Name (ARN) of the distribution configuration that Image
-	// Builder uses to configure and distribute images that this image pipeline has
-	// updated.
+	// Builder uses to configure and distribute images created by this image pipeline.
 	DistributionConfigurationArn *string
 
 	// Specifies whether to collect additional information about the image being
@@ -73,33 +75,48 @@ type UpdateImagePipelineInput struct {
 	EnhancedImageMetadataEnabled *bool
 
 	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
-	// Image Builder access to perform workflow actions.
+	// Image Builder access to perform workflow actions. If you omit this property, the
+	// pipeline reverts to the Image Builder service-linked role.
 	ExecutionRole *string
 
 	// The Amazon Resource Name (ARN) of the image recipe that configures images
-	// updated by this image pipeline.
+	// created by this image pipeline. You must specify either this property or
+	// containerRecipeArn , but not both.
 	ImageRecipeArn *string
 
-	// Contains settings for vulnerability scans.
+	// Contains settings for vulnerability scans that Amazon Inspector runs against
+	// the test instance during image creation.
 	ImageScanningConfiguration *types.ImageScanningConfiguration
 
-	// The tags to be applied to the images produced by this pipeline.
+	// The tags that Image Builder applies to the Image Builder image resource that
+	// this pipeline's scheduled executions create. These tags don't apply to the
+	// output AMI. To tag output AMIs, use amiTags in the pipeline's distribution
+	// configuration.
 	ImageTags map[string]string
 
-	// The image test configuration of the image pipeline.
+	// Specifies the test settings that Image Builder applies to images that this
+	// pipeline creates. If you don't provide test settings, Image Builder stores a
+	// default configuration with image tests enabled.
 	ImageTestsConfiguration *types.ImageTestsConfiguration
 
-	// Update logging configuration for the output image that's created when the
-	// pipeline runs.
+	// Specifies the logging configuration for the image pipeline. Use this to define
+	// custom CloudWatch Logs log groups for your pipeline execution logs and image
+	// build logs. The service manages log groups with names starting with
+	// /aws/imagebuilder/ using the service-linked role. For custom log group names
+	// outside of this prefix, you must also provide an executionRole .
 	LoggingConfiguration *types.PipelineLoggingConfiguration
 
-	// The schedule of the image pipeline.
+	// The schedule of the image pipeline. Because the update replaces the entire
+	// configuration, omitting this property removes any existing schedule. The
+	// pipeline then runs only when you call StartImagePipelineExecution.
 	Schedule *types.Schedule
 
-	// The status of the image pipeline.
+	// The status of the image pipeline. Defaults to ENABLED when omitted. To keep a
+	// pipeline disabled, include this property set to DISABLED in your update request.
 	Status types.PipelineStatus
 
-	// Contains the workflows to run for the pipeline.
+	// The array of workflow configuration objects for builds that this pipeline
+	// starts. You must also specify executionRole when you provide workflows.
 	Workflows []types.WorkflowConfiguration
 
 	noSmithyDocumentSerde

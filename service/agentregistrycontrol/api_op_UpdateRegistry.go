@@ -48,6 +48,13 @@ type UpdateRegistryInput struct {
 	// an empty wrapper to unset it. Supply optionalValue to replace it.
 	AutoDetectionConfiguration *types.UpdatedAutoDetectionConfiguration
 
+	// Updated custom metadata schema configuration for the registry. Omit to leave
+	// the existing schema unchanged. Schema evolution is additive only: you can add
+	// properties and enum values, but you cannot remove properties, change property
+	// types or formats, add or remove enum constraints, or remove record type
+	// overrides.
+	CustomMetadataSchemaConfiguration *types.UpdatedCustomMetadataSchemaConfiguration
+
 	// The updated description of the registry
 	Description *types.UpdatedDescription
 
@@ -76,6 +83,11 @@ func (v *UpdateRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AutoDetectionConfiguration != nil {
 		s.WriteStruct(schemas.UpdateRegistryRequest_autoDetectionConfiguration)
 		v.AutoDetectionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomMetadataSchemaConfiguration != nil {
+		s.WriteStruct(schemas.UpdateRegistryRequest_customMetadataSchemaConfiguration)
+		v.CustomMetadataSchemaConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.Description != nil {
@@ -137,6 +149,10 @@ type UpdateRegistryOutput struct {
 	// configured for the registry.
 	AutoDetection *types.AutoDetection
 
+	// The custom metadata schema configuration for this registry, if one has been
+	// defined.
+	CustomMetadataSchemaConfiguration *types.CustomMetadataSchemaConfiguration
+
 	// The description of the registry
 	Description *string
 
@@ -176,6 +192,11 @@ func (v *UpdateRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateRegistryResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CustomMetadataSchemaConfiguration != nil {
+		s.WriteStruct(schemas.UpdateRegistryResponse_customMetadataSchemaConfiguration)
+		v.CustomMetadataSchemaConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateRegistryResponse_description, *v.Description)
@@ -221,6 +242,9 @@ func (v *UpdateRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UpdateRegistryResponse_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.UpdateRegistryResponse_createdAt, v.CreatedAt)
+		case schemas.UpdateRegistryResponse_customMetadataSchemaConfiguration:
+			v.CustomMetadataSchemaConfiguration = &types.CustomMetadataSchemaConfiguration{}
+			return v.CustomMetadataSchemaConfiguration.Deserialize(d)
 		case schemas.UpdateRegistryResponse_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.UpdateRegistryResponse_description, v.Description)

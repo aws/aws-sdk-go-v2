@@ -11,8 +11,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns the list of images that you have access to. Newly created images can
-// take up to two minutes to appear in the ListImages API Results.
+// Returns the list of images that you have access to.
 func (c *Client) ListImages(ctx context.Context, params *ListImagesInput, optFns ...func(*Options)) (*ListImagesOutput, error) {
 	if params == nil {
 		params = &ListImagesInput{}
@@ -30,7 +29,9 @@ func (c *Client) ListImages(ctx context.Context, params *ListImagesInput, optFns
 
 type ListImagesInput struct {
 
-	// Requests a list of images with a specific recipe name.
+	// Specifies whether to return one entry per image name, with all versions of each
+	// image aggregated. Defaults to false , which returns one entry per image version.
+	// You can't combine this option with the version filter.
 	ByName bool
 
 	// Use the following filters to streamline results:
@@ -46,7 +47,8 @@ type ListImagesInput struct {
 	//   - version
 	Filters []types.Filter
 
-	// Includes deprecated images in the response list.
+	// Specifies whether to include deprecated Amazon-managed images in the results.
+	// Deprecated images that you own are always returned. Defaults to false .
 	IncludeDeprecated *bool
 
 	// The maximum number of items to return in a single request.

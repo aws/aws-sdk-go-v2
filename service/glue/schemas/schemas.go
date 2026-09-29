@@ -12640,7 +12640,7 @@ var _TableIdString = smithy.NewSchema(smithy.ShapeID{
 var TableInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "TableInput",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var TableInput_Name *smithy.Schema
 
 var TableInput_Description *smithy.Schema
@@ -12666,6 +12666,8 @@ var TableInput_TableType *smithy.Schema
 var TableInput_Parameters *smithy.Schema
 
 var TableInput_TargetTable *smithy.Schema
+
+var TableInput_FederatedTable *smithy.Schema
 
 var TableInput_ViewDefinition *smithy.Schema
 
@@ -12778,6 +12780,14 @@ var _TablePrefix = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "TablePrefix",
 }, smithy.ShapeTypeString, 0)
+
+var TableResourceShareType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "TableResourceShareType",
+}, smithy.ShapeTypeEnum, 2)
+var TableResourceShareType_FEDERATED *smithy.Schema
+
+var TableResourceShareType_ALL *smithy.Schema
 
 var TableStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -17303,7 +17313,7 @@ var GetTableResponse_Table *smithy.Schema
 var GetTablesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "GetTablesRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var GetTablesRequest_CatalogId *smithy.Schema
 
 var GetTablesRequest_DatabaseName *smithy.Schema
@@ -17319,6 +17329,8 @@ var GetTablesRequest_TransactionId *smithy.Schema
 var GetTablesRequest_QueryAsOfTime *smithy.Schema
 
 var GetTablesRequest_AuditContext *smithy.Schema
+
+var GetTablesRequest_ResourceShareType *smithy.Schema
 
 var GetTablesRequest_IncludeStatusDetails *smithy.Schema
 
@@ -26427,11 +26439,17 @@ func init() {
 
 	TableInput_TargetTable = TableInput.AddMember("TargetTable", TableIdentifier)
 
+	TableInput_FederatedTable = TableInput.AddMember("FederatedTable", FederatedTable)
+
 	TableInput_ViewDefinition = TableInput.AddMember("ViewDefinition", ViewDefinitionInput)
 
 	_TableList_member = _TableList.AddMember("member", Table)
 
 	_TableOptimizerRuns_member = _TableOptimizerRuns.AddMember("member", TableOptimizerRun)
+
+	TableResourceShareType_FEDERATED = TableResourceShareType.AddMember("FEDERATED", smithyprelude.Unit)
+
+	TableResourceShareType_ALL = TableResourceShareType.AddMember("ALL", smithyprelude.Unit)
 
 	TableVersionError_TableName = TableVersionError.AddMember("TableName", _NameString)
 
@@ -28684,6 +28702,8 @@ func init() {
 	GetTablesRequest_QueryAsOfTime = GetTablesRequest.AddMember("QueryAsOfTime", _Timestamp)
 
 	GetTablesRequest_AuditContext = GetTablesRequest.AddMember("AuditContext", AuditContext)
+
+	GetTablesRequest_ResourceShareType = GetTablesRequest.AddMember("ResourceShareType", TableResourceShareType)
 
 	GetTablesRequest_IncludeStatusDetails = GetTablesRequest.AddMember("IncludeStatusDetails", _BooleanNullable)
 
