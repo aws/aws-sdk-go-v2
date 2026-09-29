@@ -866,11 +866,6 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 	var n int64
 	defer out.Body.Close()
 	n, err = chunk.ReadFrom(out.Body)
-	if errors.Is(err, io.ErrUnexpectedEOF) &&
-		out.ContentLength != nil &&
-		n == aws.ToInt64(out.ContentLength) {
-		err = nil
-	}
 	if err != nil {
 		return nil, &errReadingBody{err: err}
 	}

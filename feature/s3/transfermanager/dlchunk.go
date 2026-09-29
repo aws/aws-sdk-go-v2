@@ -27,14 +27,24 @@ func readChunk(r io.Reader, buf []byte) (int, error) {
 	return n, nil
 }
 
+// ReadFrom reads the body into pooled buffers and queues them for writing.
+//
+// On a read error other than io.EOF the partially filled buffer is discarded
+// rather than written: the chunk is retried from start anyway, and a short
+// write at an arbitrary length is not valid on a file opened with O_DIRECT.
+// The returned count only includes bytes that were queued for writing.
 func (c *dlChunk) ReadFrom(r io.Reader) (int64, error) {
 	var total int64
 	for {
 		buf := c.sink.Buffer()
 		n, err := readChunk(r, buf)
-		off := c.start + total
+		if err != nil && err != io.EOF {
+			c.sink.Release(buf)
+			return total, err
+		}
+
 		if n > 0 {
-			c.sink.WriteAt(buf, n, off)
+			c.sink.WriteAt(buf, n, c.start+total)
 		} else {
 			c.sink.Release(buf)
 		}
@@ -42,9 +52,6 @@ func (c *dlChunk) ReadFrom(r io.Reader) (int64, error) {
 
 		if err == io.EOF {
 			return total, nil
-		}
-		if err != nil {
-			return total, err
 		}
 	}
 }

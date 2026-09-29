@@ -150,15 +150,45 @@ func TestDlChunkReadFromError(t *testing.T) {
 				if err != errBody {
 					t.Fatalf("err = %v, want %v", err, errBody)
 				}
-				if n != int64(size) {
-					t.Errorf("ReadFrom returned %d, want %d", n, size)
+				if n > int64(size) || n%chunkTestBufSize != 0 {
+					t.Fatalf("ReadFrom returned %d, want a multiple of %d <= %d", n, chunkTestBufSize, size)
 				}
-				checkBytes(t, h.sink.buf[start:start+size], data)
-				if !isZero(h.sink.buf[start+size:]) {
-					t.Error("ReadFrom wrote past the data it read")
+				checkBytes(t, h.sink.buf[start:start+int(n)], data[:n])
+				if !isZero(h.sink.buf[start+int(n):]) {
+					t.Error("ReadFrom wrote a partial buffer")
 				}
 			})
 		}
+	}
+}
+
+// A body that ends with io.ErrUnexpectedEOF is truncated, even if it happens
+// to end on a buffer boundary, and the tail buffer is never written.
+func TestDlChunkReadFromUnexpectedEOF(t *testing.T) {
+	const start = 100
+
+	for _, size := range []int{chunkTestBufSize - 1, 3 * chunkTestBufSize, 3*chunkTestBufSize + 5} {
+		t.Run(fmt.Sprintf("size=%d", size), func(t *testing.T) {
+			data := randomBytes(int64(size), size)
+			h := newChunkHarness(t, start+size+chunkTestBufSize)
+
+			c := dlChunk{start: start, sink: h.w}
+			body := io.MultiReader(bytes.NewReader(data), iotest.ErrReader(io.ErrUnexpectedEOF))
+			n, err := c.ReadFrom(body)
+			h.finish(t)
+
+			if err != io.ErrUnexpectedEOF {
+				t.Fatalf("err = %v, want %v", err, io.ErrUnexpectedEOF)
+			}
+			wantRead := int64(size / chunkTestBufSize * chunkTestBufSize)
+			if n != wantRead {
+				t.Fatalf("ReadFrom returned %d, want %d", n, wantRead)
+			}
+			checkBytes(t, h.sink.buf[start:start+int(n)], data[:n])
+			if !isZero(h.sink.buf[start+int(n):]) {
+				t.Error("ReadFrom wrote past the bytes it reported")
+			}
+		})
 	}
 }
 
