@@ -1,3 +1,7 @@
+# v1.21.0 (2026-09-29)
+
+* **Feature**: Adds support for Azure DevOps and Bitbucket Data Center integration providers.
+
 # v1.20.0 (2026-09-28)
 
 * **Feature**: Run automated penetration tests directly from your CI-CD pipeline to scan code changes before they ship, gating deployments on the findings

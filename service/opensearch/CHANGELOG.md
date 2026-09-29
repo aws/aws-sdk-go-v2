@@ -1,3 +1,8 @@
+# v1.83.0 (2026-09-29)
+
+* **Feature**: Amazon OpenSearch Service now supports advisory pre-validations for domain config changes. Non-critical checks now surface as warnings you can acknowledge (via the new AcceptedWarnings parameter) and proceed, instead of hard-blocking. Severity is reported in change-progress and dry-run results.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.82.0 (2026-09-24)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

@@ -1,3 +1,43 @@
+# Release (2026-09-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.71.0](service/appstream/CHANGELOG.md#v1710-2026-09-29)
+  * **Feature**: Add support for NVIDIA GRID driver version metadata in Workspace Applications image responses through the new ImageSoftwareMetadata field.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.64.0](service/bedrockagentruntime/CHANGELOG.md#v1640-2026-09-29)
+  * **Feature**: Amazon Bedrock Agentic Retrieve now supports the Bedrock Mantle (OpenAI Responses) endpoint via a new MantleFoundationModel configuration with an optional projectId.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.43.0](service/deadline/CHANGELOG.md#v1430-2026-09-29)
+  * **Feature**: AWS Deadline Cloud now supports Docker software add-ons on service-managed fleets. Adds support for Open Job Description EXPR and Feature Bundle 1 job templates with typed job parameters and job, step, and parameter names up to 512 characters.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.338.0](service/ec2/CHANGELOG.md#v13380-2026-09-29)
+  * **Feature**: Adds the LaunchStatus field to CapacityReservation in the DescribeCapacityReservations response. This field indicates whether you can currently launch instances into an UltraServer.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.63.0](service/elasticache/CHANGELOG.md#v1630-2026-09-29)
+  * **Feature**: Amazon ElastiCache Serverless now supports public endpoints for Valkey caches. With the new Connection Type parameter, you can create a serverless cache accessible over the internet without any VPC configuration. Public endpoint caches require IAM authentication.
+* `github.com/aws/aws-sdk-go-v2/service/elementalinference`: [v1.13.0](service/elementalinference/CHANGELOG.md#v1130-2026-09-29)
+  * **Feature**: Adds an extendedAnalysis setting to contextual metadata outputs to control detection of people, environments, brands, and on-screen text, and updates the summaryGeneration documentation.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.165.0](service/glue/CHANGELOG.md#v11650-2026-09-29)
+  * **Feature**: Add support for Glue system-managed materialized views.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.47.0](service/identitystore/CHANGELOG.md#v1470-2026-09-29)
+  * **Feature**: Add support for network access controls to restrict Identity Store API and SCIM access to trusted networks, optimistic locking for users and groups via resource revisions, and resource ARNs as identifiers in requests.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.61.0](service/inspector2/CHANGELOG.md#v1610-2026-09-29)
+  * **Feature**: The ListFindingAggregations API now includes Low, Informational, and Untriaged counts alongside the existing severity counts in SeverityCounts.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.72.0](service/mediatailor/CHANGELOG.md#v1720-2026-09-29)
+  * **Feature**: AWS Elemental MediaTailor now supports beaconing configuration on playback configurations. In Insights reporting mode, MediaTailor will now gather client side beaconing metrics. Set the reporting mode to Disabled to turn this off.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.83.0](service/opensearch/CHANGELOG.md#v1830-2026-09-29)
+  * **Feature**: Amazon OpenSearch Service now supports advisory pre-validations for domain config changes. Non-critical checks now surface as warnings you can acknowledge (via the new AcceptedWarnings parameter) and proceed, instead of hard-blocking. Severity is reported in change-progress and dry-run results.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.130.0](service/rds/CHANGELOG.md#v11300-2026-09-29)
+  * **Feature**: Adds the TargetResourceConfigurations parameter to CreateBlueGreenDeployment, letting you specify a target KMS key for each resource in the green environment.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.280.0](service/sagemaker/CHANGELOG.md#v12800-2026-09-29)
+  * **Feature**: Adds support for cpu flex type instances on SageMaker Training and Processing. Also contains minor updates to DescribeTrainingPlan to support ARN inputs.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.21.0](service/securityagent/CHANGELOG.md#v1210-2026-09-29)
+  * **Feature**: Adds support for Azure DevOps and Bitbucket Data Center integration providers.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.77.0](service/sesv2/CHANGELOG.md#v1770-2026-09-29)
+  * **Feature**: Added Filter support for ListTenants, ListEmailIdentities, and ListConfigurationSets APIs.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.84.0](service/transfer/CHANGELOG.md#v1840-2026-09-29)
+  * **Feature**: AWS Transfer Family now supports configuring up to three custom ports on public SFTP servers, instead of the single default port 22. You can also set each port's communication mode (server-talk-first or client-talk-first) so legacy and modern SFTP clients connect reliably.
+
 # Release (2026-09-28)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.61.0 (2026-09-29)
+
+* **Feature**: The ListFindingAggregations API now includes Low, Informational, and Untriaged counts alongside the existing severity counts in SeverityCounts.
+
 # v1.60.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

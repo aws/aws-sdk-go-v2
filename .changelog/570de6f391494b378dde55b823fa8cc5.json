@@ -1,8 +1,0 @@
-{
-    "id": "570de6f3-9149-4b37-8dde-55b823fa8cc5",
-    "type": "feature",
-    "description": "Amazon ElastiCache Serverless now supports public endpoints for Valkey caches. With the new Connection Type parameter, you can create a serverless cache accessible over the internet without any VPC configuration. Public endpoint caches require IAM authentication.",
-    "modules": [
-        "service/elasticache"
-    ]
-}

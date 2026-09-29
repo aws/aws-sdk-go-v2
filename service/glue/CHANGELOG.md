@@ -1,3 +1,8 @@
+# v1.165.0 (2026-09-29)
+
+* **Feature**: Add support for Glue system-managed materialized views.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.164.0 (2026-09-25)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

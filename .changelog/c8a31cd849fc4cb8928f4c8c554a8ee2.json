@@ -1,8 +1,0 @@
-{
-    "id": "c8a31cd8-49fc-4cb8-928f-4c8c554a8ee2",
-    "type": "feature",
-    "description": "Add support for NVIDIA GRID driver version metadata in Workspace Applications image responses through the new ImageSoftwareMetadata field.",
-    "modules": [
-        "service/appstream"
-    ]
-}

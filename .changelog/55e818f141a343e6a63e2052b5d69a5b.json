@@ -1,8 +1,0 @@
-{
-    "id": "55e818f1-41a3-43e6-a63e-2052b5d69a5b",
-    "type": "feature",
-    "description": "Amazon OpenSearch Service now supports advisory pre-validations for domain config changes. Non-critical checks now surface as warnings you can acknowledge (via the new AcceptedWarnings parameter) and proceed, instead of hard-blocking. Severity is reported in change-progress and dry-run results.",
-    "modules": [
-        "service/opensearch"
-    ]
-}

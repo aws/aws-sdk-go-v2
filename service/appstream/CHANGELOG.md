@@ -1,3 +1,7 @@
+# v1.71.0 (2026-09-29)
+
+* **Feature**: Add support for NVIDIA GRID driver version metadata in Workspace Applications image responses through the new ImageSoftwareMetadata field.
+
 # v1.70.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

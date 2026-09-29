@@ -1,8 +1,0 @@
-{
-    "id": "65f9c589-8f0e-4d56-9d46-739cb1105805",
-    "type": "feature",
-    "description": "Add support for network access controls to restrict Identity Store API and SCIM access to trusted networks, optimistic locking for users and groups via resource revisions, and resource ARNs as identifiers in requests.",
-    "modules": [
-        "service/identitystore"
-    ]
-}

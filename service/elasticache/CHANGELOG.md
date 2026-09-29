@@ -1,3 +1,7 @@
+# v1.63.0 (2026-09-29)
+
+* **Feature**: Amazon ElastiCache Serverless now supports public endpoints for Valkey caches. With the new Connection Type parameter, you can create a serverless cache accessible over the internet without any VPC configuration. Public endpoint caches require IAM authentication.
+
 # v1.62.0 (2026-09-24)
 
 * **Feature**: Added tagging support for ElastiCache Global DataStore.

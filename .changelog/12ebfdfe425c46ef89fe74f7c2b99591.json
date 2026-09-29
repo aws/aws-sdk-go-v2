@@ -1,8 +1,0 @@
-{
-    "id": "12ebfdfe-425c-46ef-89fe-74f7c2b99591",
-    "type": "feature",
-    "description": "Adds support for Azure DevOps and Bitbucket Data Center integration providers.",
-    "modules": [
-        "service/securityagent"
-    ]
-}

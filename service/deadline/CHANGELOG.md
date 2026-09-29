@@ -1,3 +1,7 @@
+# v1.43.0 (2026-09-29)
+
+* **Feature**: AWS Deadline Cloud now supports Docker software add-ons on service-managed fleets. Adds support for Open Job Description EXPR and Feature Bundle 1 job templates with typed job parameters and job, step, and parameter names up to 512 characters.
+
 # v1.42.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

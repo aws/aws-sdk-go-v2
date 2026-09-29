@@ -1,8 +1,0 @@
-{
-    "id": "1629fc45-bb3d-495e-9141-3f13aa4425b7",
-    "type": "feature",
-    "description": "The ListFindingAggregations API now includes Low, Informational, and Untriaged counts alongside the existing severity counts in SeverityCounts.",
-    "modules": [
-        "service/inspector2"
-    ]
-}

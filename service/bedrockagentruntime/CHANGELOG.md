@@ -1,3 +1,7 @@
+# v1.64.0 (2026-09-29)
+
+* **Feature**: Amazon Bedrock Agentic Retrieve now supports the Bedrock Mantle (OpenAI Responses) endpoint via a new MantleFoundationModel configuration with an optional projectId.
+
 # v1.63.2 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

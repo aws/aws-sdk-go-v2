@@ -1,3 +1,7 @@
+# v1.13.0 (2026-09-29)
+
+* **Feature**: Adds an extendedAnalysis setting to contextual metadata outputs to control detection of people, environments, brands, and on-screen text, and updates the summaryGeneration documentation.
+
 # v1.12.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

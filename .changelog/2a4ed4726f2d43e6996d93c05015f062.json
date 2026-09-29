@@ -1,8 +1,0 @@
-{
-    "id": "2a4ed472-6f2d-43e6-996d-93c05015f062",
-    "type": "feature",
-    "description": "Adds the LaunchStatus field to CapacityReservation in the DescribeCapacityReservations response. This field indicates whether you can currently launch instances into an UltraServer.",
-    "modules": [
-        "service/ec2"
-    ]
-}

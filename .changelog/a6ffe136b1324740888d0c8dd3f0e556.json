@@ -1,8 +1,0 @@
-{
-    "id": "a6ffe136-b132-4740-888d-0c8dd3f0e556",
-    "type": "feature",
-    "description": "Adds support for cpu flex type instances on SageMaker Training and Processing. Also contains minor updates to DescribeTrainingPlan to support ARN inputs.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}
