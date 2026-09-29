@@ -5266,7 +5266,7 @@ var _Severity = smithy.NewSchema(smithy.ShapeID{
 var SeverityCounts = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "SeverityCounts",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 7)
 var SeverityCounts_all *smithy.Schema
 
 var SeverityCounts_medium *smithy.Schema
@@ -5274,6 +5274,12 @@ var SeverityCounts_medium *smithy.Schema
 var SeverityCounts_high *smithy.Schema
 
 var SeverityCounts_critical *smithy.Schema
+
+var SeverityCounts_low *smithy.Schema
+
+var SeverityCounts_informational *smithy.Schema
+
+var SeverityCounts_untriaged *smithy.Schema
 
 var SortCriteria = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -7462,6 +7468,12 @@ func init() {
 	SeverityCounts_high = SeverityCounts.AddMember("high", smithyprelude.Long)
 
 	SeverityCounts_critical = SeverityCounts.AddMember("critical", smithyprelude.Long)
+
+	SeverityCounts_low = SeverityCounts.AddMember("low", smithyprelude.Long)
+
+	SeverityCounts_informational = SeverityCounts.AddMember("informational", smithyprelude.Long)
+
+	SeverityCounts_untriaged = SeverityCounts.AddMember("untriaged", smithyprelude.Long)
 
 	AccountAggregationResponse_accountId = AccountAggregationResponse.AddMember("accountId", _AccountId)
 

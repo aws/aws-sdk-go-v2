@@ -1989,6 +1989,10 @@ type ServerlessCache struct {
 	// The cache usage limit for the serverless cache.
 	CacheUsageLimits *CacheUsageLimits
 
+	// The connection type for the serverless cache. Must be either vpc | public . If
+	// not specified, defaults to vpc .
+	ConnectionType ConnectionType
+
 	// When the serverless cache was created.
 	CreateTime *time.Time
 

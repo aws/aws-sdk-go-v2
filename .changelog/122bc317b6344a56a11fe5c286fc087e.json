@@ -1,0 +1,8 @@
+{
+    "id": "122bc317-b634-4a56-a11f-e5c286fc087e",
+    "type": "feature",
+    "description": "Adds the TargetResourceConfigurations parameter to CreateBlueGreenDeployment, letting you specify a target KMS key for each resource in the green environment.",
+    "modules": [
+        "service/rds"
+    ]
+}

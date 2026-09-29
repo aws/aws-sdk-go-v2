@@ -1034,6 +1034,42 @@ func (v *AwsServiceRequestConfiguration) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 
+// The beaconing configuration for a playback configuration. Beaconing controls
+// whether MediaTailor includes its own beacons in the ad tracking response, in
+// addition to the ad server beacons.
+type BeaconingConfiguration struct {
+
+	// The beaconing settings for client-side reporting sessions. If you omit this
+	// object, MediaTailor uses INSIGHTS reporting mode.
+	ClientSide *ClientSideBeaconingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *BeaconingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BeaconingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BeaconingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientSide != nil {
+		s.WriteStruct(schemas.BeaconingConfiguration_ClientSide)
+		v.ClientSide.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BeaconingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BeaconingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BeaconingConfiguration_ClientSide:
+			v.ClientSide = &ClientSideBeaconingConfiguration{}
+			return v.ClientSide.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The configuration for bumpers. Bumpers are short audio or video clips that play
 // at the start or before the end of an ad break. To learn more about bumpers, see [Bumpers]
 // .
@@ -1277,6 +1313,67 @@ func (v *Channel) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Channel_Tier:
 			v.Tier = new(string)
 			return d.ReadString(schemas.Channel_Tier, v.Tier)
+		}
+		return nil
+	})
+}
+
+// The beaconing settings that apply to client-side reporting sessions: whether
+// MediaTailor includes its beacons in the ad tracking response, and which player
+// operation events it reports on.
+type ClientSideBeaconingConfiguration struct {
+
+	// Specifies whether MediaTailor includes its beacons in the ad tracking response.
+	// Valid values, which are case-sensitive:
+	//
+	//   - INSIGHTS – MediaTailor includes its beacons in the ad tracking response.
+	//
+	//   - DISABLED – MediaTailor doesn't include its beacons in the ad tracking
+	//   response.
+	//
+	// If you send a ClientSide object, this setting is required. If you omit
+	// BeaconingConfiguration or ClientSide entirely, MediaTailor uses INSIGHTS .
+	//
+	// PutPlaybackConfiguration replaces the whole playback configuration. To keep
+	// beaconing off, include DISABLED in every subsequent write.
+	//
+	// This member is required.
+	ReportingMode ClientSideBeaconingMode
+
+	// The player operation events to report on, in addition to the ad progress events
+	// that MediaTailor always reports on. The default is an empty list. This parameter
+	// is valid only when ReportingMode is INSIGHTS . MediaTailor rejects the request
+	// if you specify a value while ReportingMode is DISABLED , or if you specify
+	// duplicate values.
+	AdditionalEventTypes []BeaconEventType
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClientSideBeaconingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientSideBeaconingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientSideBeaconingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBeaconEventTypeList(s, schemas.ClientSideBeaconingConfiguration_AdditionalEventTypes, v.AdditionalEventTypes)
+	if v.ReportingMode != "" {
+		s.WriteString(schemas.ClientSideBeaconingConfiguration_ReportingMode, string(v.ReportingMode))
+	}
+}
+func (v *ClientSideBeaconingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientSideBeaconingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientSideBeaconingConfiguration_AdditionalEventTypes:
+			return deserializeBeaconEventTypeList(d, schemas.ClientSideBeaconingConfiguration_AdditionalEventTypes, &v.AdditionalEventTypes)
+		case schemas.ClientSideBeaconingConfiguration_ReportingMode:
+			var ev string
+			if err := d.ReadString(schemas.ClientSideBeaconingConfiguration_ReportingMode, &ev); err != nil {
+				return err
+			}
+			v.ReportingMode = ClientSideBeaconingMode(ev)
+			return nil
 		}
 		return nil
 	})
@@ -2685,6 +2782,10 @@ type PlaybackConfiguration struct {
 	// [Ad Suppression]: https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html
 	AvailSuppression *AvailSuppression
 
+	// The beaconing configuration for this playback configuration, which controls
+	// whether MediaTailor includes beacons of its own in the ad tracking response.
+	BeaconingConfiguration *BeaconingConfiguration
+
 	// The configuration for bumpers. Bumpers are short audio or video clips that play
 	// at the start or before the end of an ad break. To learn more about bumpers, see [Bumpers]
 	// .
@@ -2835,6 +2936,11 @@ func (v *PlaybackConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AvailSuppression.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.BeaconingConfiguration != nil {
+		s.WriteStruct(schemas.PlaybackConfiguration_BeaconingConfiguration)
+		v.BeaconingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Bumper != nil {
 		s.WriteStruct(schemas.PlaybackConfiguration_Bumper)
 		v.Bumper.SerializeMembers(s)
@@ -2933,6 +3039,9 @@ func (v *PlaybackConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PlaybackConfiguration_AvailSuppression:
 			v.AvailSuppression = &AvailSuppression{}
 			return v.AvailSuppression.Deserialize(d)
+		case schemas.PlaybackConfiguration_BeaconingConfiguration:
+			v.BeaconingConfiguration = &BeaconingConfiguration{}
+			return v.BeaconingConfiguration.Deserialize(d)
 		case schemas.PlaybackConfiguration_Bumper:
 			v.Bumper = &Bumper{}
 			return v.Bumper.Deserialize(d)

@@ -23406,6 +23406,19 @@ func awsAwsquery_deserializeDocumentServerlessCache(v **types.ServerlessCache, d
 				return err
 			}
 
+		case strings.EqualFold("ConnectionType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ConnectionType = types.ConnectionType(xtv)
+			}
+
 		case strings.EqualFold("CreateTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

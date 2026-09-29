@@ -29,13 +29,28 @@ type DeleteGroupInput struct {
 
 	// The identifier for a group in the identity store.
 	//
+	// You can specify the group by ID or by Amazon Resource Name (ARN). For example,
+	// group ID a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 or group ARN
+	// arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
+	//
 	// This member is required.
 	GroupId *string
 
 	// The globally unique identifier for the identity store.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
+
+	// The expected current revision of the group. When you provide this value, the
+	// group is deleted only if it matches the current revision of the group in the
+	// identity store. If the value doesn't match, the operation fails with a
+	// ConflictException . If you don't provide this value, the group is deleted
+	// regardless of its current revision.
+	Revision *string
 
 	noSmithyDocumentSerde
 }
@@ -53,19 +68,9 @@ func (v *DeleteGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.DeleteGroupRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
-}
-func (v *DeleteGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteGroupRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteGroupRequest_GroupId:
-			v.GroupId = new(string)
-			return d.ReadString(schemas.DeleteGroupRequest_GroupId, v.GroupId)
-		case schemas.DeleteGroupRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.DeleteGroupRequest_IdentityStoreId, v.IdentityStoreId)
-		}
-		return nil
-	})
+	if v.Revision != nil {
+		s.WriteString(schemas.DeleteGroupRequest_Revision, *v.Revision)
+	}
 }
 
 type DeleteGroupOutput struct {

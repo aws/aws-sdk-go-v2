@@ -3741,6 +3741,38 @@ func validateFleetConfiguration(v types.FleetConfiguration) error {
 	}
 }
 
+func validateFleetSoftwareAddOn(v *types.FleetSoftwareAddOn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FleetSoftwareAddOn"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFleetSoftwareAddOns(v []types.FleetSoftwareAddOn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FleetSoftwareAddOns"}
+	for i := range v {
+		if err := validateFleetSoftwareAddOn(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHostConfiguration(v *types.HostConfiguration) error {
 	if v == nil {
 		return nil
@@ -4233,6 +4265,11 @@ func validateServiceManagedEc2InstanceCapabilities(v *types.ServiceManagedEc2Ins
 	if v.CustomAttributes != nil {
 		if err := validateCustomFleetAttributeCapabilities(v.CustomAttributes); err != nil {
 			invalidParams.AddNested("CustomAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SoftwareAddOns != nil {
+		if err := validateFleetSoftwareAddOns(v.SoftwareAddOns); err != nil {
+			invalidParams.AddNested("SoftwareAddOns", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

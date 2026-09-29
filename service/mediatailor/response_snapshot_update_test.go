@@ -2485,6 +2485,15 @@ func TestUpdateResponseSnapshot_GetPlaybackConfiguration(t *testing.T) {
 			MaxConcurrentAdsRequests:     ptr.Int32(1),
 			EnableVodVastParallelization: ptr.Bool(true),
 		},
+		BeaconingConfiguration: &types.BeaconingConfiguration{
+			ClientSide: &types.ClientSideBeaconingConfiguration{
+				ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+				AdditionalEventTypes: []types.BeaconEventType{
+					types.BeaconEventType("MUTE"),
+					types.BeaconEventType("MUTE"),
+				},
+			},
+		},
 	}
 	proto := restjson1.New(schemas.MediaTailor)
 	opSchema := smithy.NewOperationSchema(schemas.GetPlaybackConfiguration, schemas.GetPlaybackConfigurationResponse, schemas.GetPlaybackConfigurationResponse)
@@ -3213,6 +3222,15 @@ func TestUpdateResponseSnapshot_ListPlaybackConfigurations(t *testing.T) {
 					MaxConcurrentAdsRequests:     ptr.Int32(1),
 					EnableVodVastParallelization: ptr.Bool(true),
 				},
+				BeaconingConfiguration: &types.BeaconingConfiguration{
+					ClientSide: &types.ClientSideBeaconingConfiguration{
+						ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+						AdditionalEventTypes: []types.BeaconEventType{
+							types.BeaconEventType("MUTE"),
+							types.BeaconEventType("MUTE"),
+						},
+					},
+				},
 			},
 			{
 				AdDecisionServerUrl: ptr.String("__AdDecisionServerUrl__"),
@@ -3334,6 +3352,15 @@ func TestUpdateResponseSnapshot_ListPlaybackConfigurations(t *testing.T) {
 				AdsPersonalizationConcurrency: &types.AdsPersonalizationConcurrency{
 					MaxConcurrentAdsRequests:     ptr.Int32(1),
 					EnableVodVastParallelization: ptr.Bool(true),
+				},
+				BeaconingConfiguration: &types.BeaconingConfiguration{
+					ClientSide: &types.ClientSideBeaconingConfiguration{
+						ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+						AdditionalEventTypes: []types.BeaconEventType{
+							types.BeaconEventType("MUTE"),
+							types.BeaconEventType("MUTE"),
+						},
+					},
 				},
 			},
 		},
@@ -3972,6 +3999,15 @@ func TestUpdateResponseSnapshot_PutPlaybackConfiguration(t *testing.T) {
 		AdsPersonalizationConcurrency: &types.AdsPersonalizationConcurrency{
 			MaxConcurrentAdsRequests:     ptr.Int32(1),
 			EnableVodVastParallelization: ptr.Bool(true),
+		},
+		BeaconingConfiguration: &types.BeaconingConfiguration{
+			ClientSide: &types.ClientSideBeaconingConfiguration{
+				ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+				AdditionalEventTypes: []types.BeaconEventType{
+					types.BeaconEventType("MUTE"),
+					types.BeaconEventType("MUTE"),
+				},
+			},
 		},
 	}
 	proto := restjson1.New(schemas.MediaTailor)

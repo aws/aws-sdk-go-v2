@@ -563,6 +563,10 @@ func TestUpdateResponseSnapshot_BatchGetJobEntity(t *testing.T) {
 						},
 					},
 					SchemaVersion: ptr.String("__SchemaVersion__"),
+					Extensions: []string{
+						"__Member__",
+						"__Member__",
+					},
 					PathMappingRules: []types.PathMappingRule{
 						{
 							SourcePathFormat: types.PathFormat("windows"),
@@ -603,6 +607,10 @@ func TestUpdateResponseSnapshot_BatchGetJobEntity(t *testing.T) {
 						},
 					},
 					SchemaVersion: ptr.String("__SchemaVersion__"),
+					Extensions: []string{
+						"__Member__",
+						"__Member__",
+					},
 					PathMappingRules: []types.PathMappingRule{
 						{
 							SourcePathFormat: types.PathFormat("windows"),
@@ -5648,6 +5656,9 @@ func TestUpdateResponseSnapshot_UpdateWorkerSchedule(t *testing.T) {
 						"key0": "__Value__",
 					},
 					Error: ptr.String("__Error__"),
+				},
+				Metadata: map[string]string{
+					"key0": "__Value__",
 				},
 			},
 		},

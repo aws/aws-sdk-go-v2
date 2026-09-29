@@ -4524,9 +4524,29 @@ func awsRestjson1_serializeOpDocumentInitiateProviderRegistrationInput(v *Initia
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientId != nil {
+		ok := object.Key("clientId")
+		ok.String(*v.ClientId)
+	}
+
+	if v.ClientSecret != nil {
+		ok := object.Key("clientSecret")
+		ok.String(*v.ClientSecret)
+	}
+
+	if v.OrganizationName != nil {
+		ok := object.Key("organizationName")
+		ok.String(*v.OrganizationName)
+	}
+
 	if len(v.Provider) > 0 {
 		ok := object.Key("provider")
 		ok.String(string(v.Provider))
+	}
+
+	if v.TargetUrl != nil {
+		ok := object.Key("targetUrl")
+		ok.String(*v.TargetUrl)
 	}
 
 	return nil
@@ -8207,6 +8227,92 @@ func awsRestjson1_serializeOpDocumentUpdateIntegratedResourcesInput(v *UpdateInt
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateIntegration struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateIntegration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateIntegration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateIntegrationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/UpdateIntegration")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateIntegrationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateIntegrationInput(v *UpdateIntegrationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateIntegrationInput(v *UpdateIntegrationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IntegrationId != nil {
+		ok := object.Key("integrationId")
+		ok.String(*v.IntegrationId)
+	}
+
+	if len(v.WebhookAction) > 0 {
+		ok := object.Key("webhookAction")
+		ok.String(string(v.WebhookAction))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdatePentest struct {
 }
 
@@ -9222,6 +9328,89 @@ func awsRestjson1_serializeDocumentAWSResources(v *types.AWSResources, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAzureDevOpsIntegrationInput(v *types.AzureDevOpsIntegrationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Code != nil {
+		ok := object.Key("code")
+		ok.String(*v.Code)
+	}
+
+	if v.OrganizationName != nil {
+		ok := object.Key("organizationName")
+		ok.String(*v.OrganizationName)
+	}
+
+	if v.State != nil {
+		ok := object.Key("state")
+		ok.String(*v.State)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAzureDevOpsRepositoryResource(v *types.AzureDevOpsRepositoryResource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Organization != nil {
+		ok := object.Key("organization")
+		ok.String(*v.Organization)
+	}
+
+	if v.Project != nil {
+		ok := object.Key("project")
+		ok.String(*v.Project)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAzureDevOpsResourceCapabilities(v *types.AzureDevOpsResourceCapabilities, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LeaveComments != nil {
+		ok := object.Key("leaveComments")
+		ok.Boolean(*v.LeaveComments)
+	}
+
+	if v.RemediateCode != nil {
+		ok := object.Key("remediateCode")
+		ok.Boolean(*v.RemediateCode)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBitbucketDataCenterIntegrationInput(v *types.BitbucketDataCenterIntegrationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Code != nil {
+		ok := object.Key("code")
+		ok.String(*v.Code)
+	}
+
+	if v.State != nil {
+		ok := object.Key("state")
+		ok.String(*v.State)
+	}
+
+	if v.TargetUrl != nil {
+		ok := object.Key("targetUrl")
+		ok.String(*v.TargetUrl)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBitbucketIntegrationInput(v *types.BitbucketIntegrationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9855,6 +10044,12 @@ func awsRestjson1_serializeDocumentIntegratedResource(v types.IntegratedResource
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.IntegratedResourceMemberAzureDevOpsRepository:
+		av := object.Key("azureDevOpsRepository")
+		if err := awsRestjson1_serializeDocumentAzureDevOpsRepositoryResource(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.IntegratedResourceMemberBitbucketRepository:
 		av := object.Key("bitbucketRepository")
 		if err := awsRestjson1_serializeDocumentBitbucketRepositoryResource(&uv.Value, av); err != nil {
@@ -10137,9 +10332,21 @@ func awsRestjson1_serializeDocumentProviderInput(v types.ProviderInput, value sm
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ProviderInputMemberAzureDevOps:
+		av := object.Key("azureDevOps")
+		if err := awsRestjson1_serializeDocumentAzureDevOpsIntegrationInput(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ProviderInputMemberBitbucket:
 		av := object.Key("bitbucket")
 		if err := awsRestjson1_serializeDocumentBitbucketIntegrationInput(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ProviderInputMemberBitbucketDataCenter:
+		av := object.Key("bitbucketDataCenter")
+		if err := awsRestjson1_serializeDocumentBitbucketDataCenterIntegrationInput(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -10173,6 +10380,12 @@ func awsRestjson1_serializeDocumentProviderResourceCapabilities(v types.Provider
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ProviderResourceCapabilitiesMemberAzureDevOps:
+		av := object.Key("azureDevOps")
+		if err := awsRestjson1_serializeDocumentAzureDevOpsResourceCapabilities(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ProviderResourceCapabilitiesMemberBitbucket:
 		av := object.Key("bitbucket")
 		if err := awsRestjson1_serializeDocumentBitbucketResourceCapabilities(&uv.Value, av); err != nil {

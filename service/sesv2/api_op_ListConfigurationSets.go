@@ -37,6 +37,10 @@ func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigur
 // the current Amazon Web Services Region.
 type ListConfigurationSetsInput struct {
 
+	// An object that contains filters to apply when listing configuration sets. You
+	// can filter by configuration set name.
+	Filter map[string]string
+
 	// A token returned from a previous call to ListConfigurationSets to indicate the
 	// position in the list of configuration sets.
 	NextToken *string
@@ -57,6 +61,7 @@ func (v *ListConfigurationSetsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConfigurationSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationSetFilter(s, schemas.ListConfigurationSetsRequest_Filter, v.Filter)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfigurationSetsRequest_NextToken, *v.NextToken)
 	}

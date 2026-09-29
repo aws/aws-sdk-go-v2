@@ -171,17 +171,41 @@ func ExampleJobParameter_outputUsage() {
 	var union types.JobParameter
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.JobParameterMemberBool:
+		_ = v.Value // Value is string
+
+	case *types.JobParameterMemberBoolList:
+		_ = v.Value // Value is []string
+
 	case *types.JobParameterMemberFloat:
 		_ = v.Value // Value is string
+
+	case *types.JobParameterMemberFloatList:
+		_ = v.Value // Value is []string
 
 	case *types.JobParameterMemberInt:
 		_ = v.Value // Value is string
 
+	case *types.JobParameterMemberIntList:
+		_ = v.Value // Value is []string
+
+	case *types.JobParameterMemberIntListList:
+		_ = v.Value // Value is [][]string
+
 	case *types.JobParameterMemberPath:
+		_ = v.Value // Value is string
+
+	case *types.JobParameterMemberPathList:
+		_ = v.Value // Value is []string
+
+	case *types.JobParameterMemberRangeExpr:
 		_ = v.Value // Value is string
 
 	case *types.JobParameterMemberString:
 		_ = v.Value // Value is string
+
+	case *types.JobParameterMemberStringList:
+		_ = v.Value // Value is []string
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -192,10 +216,18 @@ func ExampleJobParameter_outputUsage() {
 	}
 }
 
+var _ []string
+var _ []string
+var _ []string
+var _ []string
 var _ *string
 var _ *string
 var _ *string
 var _ *string
+var _ *string
+var _ *string
+var _ [][]string
+var _ []string
 
 func ExampleSchedulingConfiguration_outputUsage() {
 	var union types.SchedulingConfiguration

@@ -111,6 +111,21 @@ type CreateBlueGreenDeploymentInput struct {
 	// [Amazon RDS DB instance storage]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html
 	TargetIops *int32
 
+	// Specifies resource-level configuration overrides for the green environment.
+	//
+	// Each entry identifies a resource in the blue environment by its Amazon Resource
+	// Name (ARN). It defines the desired configuration for the corresponding resource
+	// in the green environment. Any resource that you don't include in this parameter
+	// retains the same configuration as its counterpart in the blue environment.
+	//
+	// Use this parameter when one or more resources in the green environment require
+	// a different configuration than what they have in the blue environment.
+	//
+	// Constraints:
+	//
+	//   - You can't specify the same SourceArn in more than one entry.
+	TargetResourceConfigurations []types.TargetResourceConfiguration
+
 	// The storage throughput value for the green DB instance.
 	//
 	// This setting applies only to the gp3 storage type.

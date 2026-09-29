@@ -399,6 +399,10 @@ type AssignedSession struct {
 	// This member is required.
 	SessionActions []AssignedSessionAction
 
+	// Key-value hints that the service provides to guide how the session runs. This
+	// value is used by the worker agent.
+	Metadata map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -417,6 +421,7 @@ func (v *AssignedSession) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LogConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serializeSessionMetadata(s, schemas.AssignedSession_metadata, v.Metadata)
 	if v.QueueId != nil {
 		s.WriteString(schemas.AssignedSession_queueId, *v.QueueId)
 	}
@@ -431,6 +436,8 @@ func (v *AssignedSession) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AssignedSession_logConfiguration:
 			v.LogConfiguration = &LogConfiguration{}
 			return v.LogConfiguration.Deserialize(d)
+		case schemas.AssignedSession_metadata:
+			return deserializeSessionMetadata(d, schemas.AssignedSession_metadata, &v.Metadata)
 		case schemas.AssignedSession_queueId:
 			v.QueueId = new(string)
 			return d.ReadString(schemas.AssignedSession_queueId, v.QueueId)
@@ -3874,7 +3881,7 @@ func (v *CustomerManagedWorkerCapabilities) Deserialize(d smithy.ShapeDeserializ
 	})
 }
 
-// The time stamp in date-time format.
+// The timestamp in date-time format.
 type DateTimeFilterExpression struct {
 
 	// The date and time.
@@ -4071,6 +4078,14 @@ type EnvironmentDetailsEntity struct {
 	// This member is required.
 	Template document.Interface
 
+	// The Open Job Description extensions that the environment uses. This value is
+	// used by the worker agent.
+	Extensions []string
+
+	// The resolved symbol table for the environment's expressions, serialized as
+	// JSON. This value is used by the worker agent.
+	ResolvedSymbolTable *string
+
 	noSmithyDocumentSerde
 }
 
@@ -4084,8 +4099,12 @@ func (v *EnvironmentDetailsEntity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnvironmentId != nil {
 		s.WriteString(schemas.EnvironmentDetailsEntity_environmentId, *v.EnvironmentId)
 	}
+	serializeOpenjdExtensionNameList(s, schemas.EnvironmentDetailsEntity_extensions, v.Extensions)
 	if v.JobId != nil {
 		s.WriteString(schemas.EnvironmentDetailsEntity_jobId, *v.JobId)
+	}
+	if v.ResolvedSymbolTable != nil {
+		s.WriteString(schemas.EnvironmentDetailsEntity_resolvedSymbolTable, *v.ResolvedSymbolTable)
 	}
 	if v.SchemaVersion != nil {
 		s.WriteString(schemas.EnvironmentDetailsEntity_schemaVersion, *v.SchemaVersion)
@@ -4100,9 +4119,14 @@ func (v *EnvironmentDetailsEntity) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.EnvironmentDetailsEntity_environmentId:
 			v.EnvironmentId = new(string)
 			return d.ReadString(schemas.EnvironmentDetailsEntity_environmentId, v.EnvironmentId)
+		case schemas.EnvironmentDetailsEntity_extensions:
+			return deserializeOpenjdExtensionNameList(d, schemas.EnvironmentDetailsEntity_extensions, &v.Extensions)
 		case schemas.EnvironmentDetailsEntity_jobId:
 			v.JobId = new(string)
 			return d.ReadString(schemas.EnvironmentDetailsEntity_jobId, v.JobId)
+		case schemas.EnvironmentDetailsEntity_resolvedSymbolTable:
+			v.ResolvedSymbolTable = new(string)
+			return d.ReadString(schemas.EnvironmentDetailsEntity_resolvedSymbolTable, v.ResolvedSymbolTable)
 		case schemas.EnvironmentDetailsEntity_schemaVersion:
 			v.SchemaVersion = new(string)
 			return d.ReadString(schemas.EnvironmentDetailsEntity_schemaVersion, v.SchemaVersion)
@@ -4967,6 +4991,43 @@ func (v *FleetMember) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Software that the service installs on worker hosts in a service-managed fleet.
+type FleetSoftwareAddOn struct {
+
+	// The name of the software add-on. The supported value is docker .
+	//
+	// This member is required.
+	Name FleetSoftwareAddOnName
+
+	noSmithyDocumentSerde
+}
+
+func (v *FleetSoftwareAddOn) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FleetSoftwareAddOn)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FleetSoftwareAddOn) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.FleetSoftwareAddOn_name, string(v.Name))
+	}
+}
+func (v *FleetSoftwareAddOn) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FleetSoftwareAddOn, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FleetSoftwareAddOn_name:
+			var ev string
+			if err := d.ReadString(schemas.FleetSoftwareAddOn_name, &ev); err != nil {
+				return err
+			}
+			v.Name = FleetSoftwareAddOnName(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The details of a fleet.
 type FleetSummary struct {
 
@@ -5635,6 +5696,10 @@ type JobDetailsEntity struct {
 	// This member is required.
 	SchemaVersion *string
 
+	// The Open Job Description extensions that the job template uses. This value is
+	// used by the worker agent.
+	Extensions []string
+
 	// The job attachment settings.
 	JobAttachmentSettings *JobDetailsJobAttachmentSettings
 
@@ -5660,6 +5725,7 @@ func (v *JobDetailsEntity) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JobDetailsEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOpenjdExtensionNameList(s, schemas.JobDetailsEntity_extensions, v.Extensions)
 	if v.JobAttachmentSettings != nil {
 		s.WriteStruct(schemas.JobDetailsEntity_jobAttachmentSettings)
 		v.JobAttachmentSettings.SerializeMembers(s)
@@ -5688,6 +5754,8 @@ func (v *JobDetailsEntity) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *JobDetailsEntity) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JobDetailsEntity, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.JobDetailsEntity_extensions:
+			return deserializeOpenjdExtensionNameList(d, schemas.JobDetailsEntity_extensions, &v.Extensions)
 		case schemas.JobDetailsEntity_jobAttachmentSettings:
 			v.JobAttachmentSettings = &JobDetailsJobAttachmentSettings{}
 			return v.JobAttachmentSettings.Deserialize(d)
@@ -6123,12 +6191,51 @@ func (v *JobMember) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // The following types satisfy this interface:
 //
+//	JobParameterMemberBool
+//	JobParameterMemberBoolList
 //	JobParameterMemberFloat
+//	JobParameterMemberFloatList
 //	JobParameterMemberInt
+//	JobParameterMemberIntList
+//	JobParameterMemberIntListList
 //	JobParameterMemberPath
+//	JobParameterMemberPathList
+//	JobParameterMemberRangeExpr
 //	JobParameterMemberString
+//	JobParameterMemberStringList
 type JobParameter interface {
 	isJobParameter()
+}
+
+// A boolean value represented as a string. Accepted values are true , false , yes
+// , no , on , off , 1 , and 0 , case-insensitive.
+type JobParameterMemberBool struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*JobParameterMemberBool) isJobParameter() {}
+func (v *JobParameterMemberBool) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.JobParameter_bool, v.Value)
+}
+func (v *JobParameterMemberBool) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.JobParameter_bool, &v.Value)
+}
+
+// A list of boolean values, each represented as a string.
+type JobParameterMemberBoolList struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*JobParameterMemberBoolList) isJobParameter() {}
+func (v *JobParameterMemberBoolList) Serialize(s smithy.ShapeSerializer) {
+	serializeBooleanStringList(s, schemas.JobParameter_boolList, v.Value)
+}
+func (v *JobParameterMemberBoolList) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeBooleanStringList(d, schemas.JobParameter_boolList, &v.Value)
 }
 
 // A double precision IEEE-754 floating point number represented as a string.
@@ -6146,6 +6253,22 @@ func (v *JobParameterMemberFloat) Deserialize(d smithy.ShapeDeserializer) error 
 	return d.ReadString(schemas.JobParameter_float, &v.Value)
 }
 
+// A list of double precision IEEE-754 floating point numbers, each represented as
+// a string.
+type JobParameterMemberFloatList struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*JobParameterMemberFloatList) isJobParameter() {}
+func (v *JobParameterMemberFloatList) Serialize(s smithy.ShapeSerializer) {
+	serializeFloatStringList(s, schemas.JobParameter_floatList, v.Value)
+}
+func (v *JobParameterMemberFloatList) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeFloatStringList(d, schemas.JobParameter_floatList, &v.Value)
+}
+
 // A signed integer represented as a string.
 type JobParameterMemberInt struct {
 	Value string
@@ -6159,6 +6282,36 @@ func (v *JobParameterMemberInt) Serialize(s smithy.ShapeSerializer) {
 }
 func (v *JobParameterMemberInt) Deserialize(d smithy.ShapeDeserializer) error {
 	return d.ReadString(schemas.JobParameter_int, &v.Value)
+}
+
+// A list of signed integers, each represented as a string.
+type JobParameterMemberIntList struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*JobParameterMemberIntList) isJobParameter() {}
+func (v *JobParameterMemberIntList) Serialize(s smithy.ShapeSerializer) {
+	serializeIntStringList(s, schemas.JobParameter_intList, v.Value)
+}
+func (v *JobParameterMemberIntList) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeIntStringList(d, schemas.JobParameter_intList, &v.Value)
+}
+
+// A list of lists of signed integers, each represented as a string.
+type JobParameterMemberIntListList struct {
+	Value [][]string
+
+	noSmithyDocumentSerde
+}
+
+func (*JobParameterMemberIntListList) isJobParameter() {}
+func (v *JobParameterMemberIntListList) Serialize(s smithy.ShapeSerializer) {
+	serializeIntStringListList(s, schemas.JobParameter_intListList, v.Value)
+}
+func (v *JobParameterMemberIntListList) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeIntStringListList(d, schemas.JobParameter_intListList, &v.Value)
 }
 
 // A file system path represented as a string.
@@ -6176,6 +6329,37 @@ func (v *JobParameterMemberPath) Deserialize(d smithy.ShapeDeserializer) error {
 	return d.ReadString(schemas.JobParameter_path, &v.Value)
 }
 
+// A list of file system paths, each represented as a string.
+type JobParameterMemberPathList struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*JobParameterMemberPathList) isJobParameter() {}
+func (v *JobParameterMemberPathList) Serialize(s smithy.ShapeSerializer) {
+	serializePathStringList(s, schemas.JobParameter_pathList, v.Value)
+}
+func (v *JobParameterMemberPathList) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializePathStringList(d, schemas.JobParameter_pathList, &v.Value)
+}
+
+// An Open Job Description range expression represented as a string, such as 1-10:2
+// .
+type JobParameterMemberRangeExpr struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*JobParameterMemberRangeExpr) isJobParameter() {}
+func (v *JobParameterMemberRangeExpr) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.JobParameter_rangeExpr, v.Value)
+}
+func (v *JobParameterMemberRangeExpr) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.JobParameter_rangeExpr, &v.Value)
+}
+
 // A UTF-8 string.
 type JobParameterMemberString struct {
 	Value string
@@ -6189,6 +6373,21 @@ func (v *JobParameterMemberString) Serialize(s smithy.ShapeSerializer) {
 }
 func (v *JobParameterMemberString) Deserialize(d smithy.ShapeDeserializer) error {
 	return d.ReadString(schemas.JobParameter_string, &v.Value)
+}
+
+// A list of UTF-8 strings.
+type JobParameterMemberStringList struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*JobParameterMemberStringList) isJobParameter() {}
+func (v *JobParameterMemberStringList) Serialize(s smithy.ShapeSerializer) {
+	serializeParameterStringList(s, schemas.JobParameter_stringList, v.Value)
+}
+func (v *JobParameterMemberStringList) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeParameterStringList(d, schemas.JobParameter_stringList, &v.Value)
 }
 
 // Identifies the user for a job.
@@ -8966,6 +9165,9 @@ type ServiceManagedEc2InstanceCapabilities struct {
 	// The root EBS volume.
 	RootEbsVolume *Ec2EbsVolume
 
+	// The software add-ons that the service installs on worker hosts when they launch.
+	SoftwareAddOns []FleetSoftwareAddOn
+
 	noSmithyDocumentSerde
 }
 
@@ -9001,6 +9203,7 @@ func (v *ServiceManagedEc2InstanceCapabilities) SerializeMembers(s smithy.ShapeS
 		v.RootEbsVolume.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serializeFleetSoftwareAddOns(s, schemas.ServiceManagedEc2InstanceCapabilities_softwareAddOns, v.SoftwareAddOns)
 	if v.VCpuCount != nil {
 		s.WriteStruct(schemas.ServiceManagedEc2InstanceCapabilities_vCpuCount)
 		v.VCpuCount.SerializeMembers(s)
@@ -9041,6 +9244,8 @@ func (v *ServiceManagedEc2InstanceCapabilities) Deserialize(d smithy.ShapeDeseri
 		case schemas.ServiceManagedEc2InstanceCapabilities_rootEbsVolume:
 			v.RootEbsVolume = &Ec2EbsVolume{}
 			return v.RootEbsVolume.Deserialize(d)
+		case schemas.ServiceManagedEc2InstanceCapabilities_softwareAddOns:
+			return deserializeFleetSoftwareAddOns(d, schemas.ServiceManagedEc2InstanceCapabilities_softwareAddOns, &v.SoftwareAddOns)
 		case schemas.ServiceManagedEc2InstanceCapabilities_vCpuCount:
 			v.VCpuCount = &VCpuCountRange{}
 			return v.VCpuCount.Deserialize(d)
@@ -9952,6 +10157,14 @@ type StepDetailsEntity struct {
 	// This member is required.
 	Template document.Interface
 
+	// The Open Job Description extensions that the step uses. This value is used by
+	// the worker agent.
+	Extensions []string
+
+	// The resolved symbol table for the step's expressions, serialized as JSON. This
+	// value is used by the worker agent.
+	ResolvedSymbolTable *string
+
 	noSmithyDocumentSerde
 }
 
@@ -9963,8 +10176,12 @@ func (v *StepDetailsEntity) Serialize(s smithy.ShapeSerializer) {
 
 func (v *StepDetailsEntity) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeDependenciesList(s, schemas.StepDetailsEntity_dependencies, v.Dependencies)
+	serializeOpenjdExtensionNameList(s, schemas.StepDetailsEntity_extensions, v.Extensions)
 	if v.JobId != nil {
 		s.WriteString(schemas.StepDetailsEntity_jobId, *v.JobId)
+	}
+	if v.ResolvedSymbolTable != nil {
+		s.WriteString(schemas.StepDetailsEntity_resolvedSymbolTable, *v.ResolvedSymbolTable)
 	}
 	if v.SchemaVersion != nil {
 		s.WriteString(schemas.StepDetailsEntity_schemaVersion, *v.SchemaVersion)
@@ -9981,9 +10198,14 @@ func (v *StepDetailsEntity) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.StepDetailsEntity_dependencies:
 			return deserializeDependenciesList(d, schemas.StepDetailsEntity_dependencies, &v.Dependencies)
+		case schemas.StepDetailsEntity_extensions:
+			return deserializeOpenjdExtensionNameList(d, schemas.StepDetailsEntity_extensions, &v.Extensions)
 		case schemas.StepDetailsEntity_jobId:
 			v.JobId = new(string)
 			return d.ReadString(schemas.StepDetailsEntity_jobId, v.JobId)
+		case schemas.StepDetailsEntity_resolvedSymbolTable:
+			v.ResolvedSymbolTable = new(string)
+			return d.ReadString(schemas.StepDetailsEntity_resolvedSymbolTable, v.ResolvedSymbolTable)
 		case schemas.StepDetailsEntity_schemaVersion:
 			v.SchemaVersion = new(string)
 			return d.ReadString(schemas.StepDetailsEntity_schemaVersion, v.SchemaVersion)

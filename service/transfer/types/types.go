@@ -2253,6 +2253,9 @@ type DescribedServer struct {
 	//   CloudWatch Logs, so that you can determine when the client is making a SETSTAT
 	//   call.
 	//
+	//   - To specify which ports your Transfer Family server listens to, use the
+	//   SftpPorts parameter.
+	//
 	//   - To determine whether your Transfer Family server resumes recent, negotiated
 	//   sessions through a unique session ID, use the TlsSessionResumptionMode
 	//   parameter.
@@ -4862,6 +4865,32 @@ type ProtocolDetails struct {
 	// Transfer Family.
 	SetStatOption SetStatOption
 
+	// A property used with Transfer Family servers that use the SFTP protocol and
+	// have PUBLIC endpoints. This property accepts a list of up to three port
+	// configurations that the service opens on the server endpoint.
+	//
+	// Each entry in the list consists of two parameters, the SftpPort and the
+	// CommunicationMode . The SftpPort takes any integer from 2000 to 65535, or 22.
+	// CommunicationMode can be one of the following options:
+	//
+	//   - SERVER_TALK_FIRST : The server responds to initial TCP connections first.
+	//   Many older clients expect that an SFTP server responds with its server string
+	//   before starting SSH negotiations.
+	//
+	//   - CLIENT_TALK_FIRST : The server responds to the initial TCP connection only
+	//   after receiving a data packet. Most modern clients support this behavior and
+	//   send their client string along with the initial data packets for SSH
+	//   negotiation. Additionally, this mode is more resilient to TCP retransmissions
+	//   that can occur during the initial TCP connection.
+	//
+	// The following is an SftpPorts example for port 2222 with CLIENT_TALK_FIRST .
+	//
+	//     [ { "SftpPort": 2222, "CommunicationMode": "CLIENT_TALK_FIRST" } ]
+	//
+	// If you don't specify any configurations during CreateServer , the service uses
+	// port 22 with SERVER_TALK_FIRST by default.
+	SftpPorts []SftpPortWithOptions
+
 	// A property used with Transfer Family servers that use the FTPS protocol. TLS
 	// Session Resumption provides a mechanism to resume or share a negotiated secret
 	// key between the control and data connection for an FTPS session.
@@ -4910,6 +4939,7 @@ func (v *ProtocolDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SetStatOption != "" {
 		s.WriteString(schemas.ProtocolDetails_SetStatOption, string(v.SetStatOption))
 	}
+	serializeSftpPorts(s, schemas.ProtocolDetails_SftpPorts, v.SftpPorts)
 	if v.TlsSessionResumptionMode != "" {
 		s.WriteString(schemas.ProtocolDetails_TlsSessionResumptionMode, string(v.TlsSessionResumptionMode))
 	}
@@ -4932,6 +4962,8 @@ func (v *ProtocolDetails) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.SetStatOption = SetStatOption(ev)
 			return nil
+		case schemas.ProtocolDetails_SftpPorts:
+			return deserializeSftpPorts(d, schemas.ProtocolDetails_SftpPorts, &v.SftpPorts)
 		case schemas.ProtocolDetails_TlsSessionResumptionMode:
 			var ev string
 			if err := d.ReadString(schemas.ProtocolDetails_TlsSessionResumptionMode, &ev); err != nil {
@@ -4946,7 +4978,7 @@ func (v *ProtocolDetails) Deserialize(d smithy.ShapeDeserializer) error {
 
 // Contains configuration for PROXY protocol version 2 (PPv2) support on an
 // Transfer Family server. When enabled, Transfer Family reads the added PPv2
-// header from incoming connections to extract the original client IP address. This
+// header from incoming connections to extract the client's source IP address. This
 // address is then available in Amazon CloudWatch Logs entries and is passed to
 // custom identity providers during authentication, enabling IP-based access
 // policies. For more information, see [Working with Network Load Balancers].
@@ -4955,26 +4987,25 @@ func (v *ProtocolDetails) Deserialize(d smithy.ShapeDeserializer) error {
 type ProxyConfig struct {
 
 	// Specifies whether the Transfer Family server requires or ignores a PPv2 header
-	// containing the original client IP address on incoming SFTP connections. If you
+	// containing the client's source IP address on incoming SFTP connections. If you
 	// don't specify a value, the default is NONE
 	//
 	//   - NONE : the server reads and ignores any PPv2 header on incoming SFTP
 	//   connections. This is the default value. Use this value when your SFTP server is
-	//   not behind an NLB, or when you do not need to preserve client source IP
-	//   addresses through an NLB.
+	//   not behind an NLB, or when you do not need to preserve the client's source IP
+	//   address through an NLB.
 	//
 	//   - PROXY_PROTOCOL_V2_ENFORCED : the server requires a valid PPv2 header on
 	//   every incoming SFTP connection. When a valid header is present, the server
-	//   applies it and uses the client IP address from the header. If a connection
+	//   applies it and uses the source IP address from the header. If a connection
 	//   arrives without a PPv2 header, the server refuses the connection and logs an
 	//   error to Amazon CloudWatch Logs indicating that the expected PPv2 header was
 	//   missing. Use this value when your SFTP server is behind an NLB with PPv2 enabled
 	//   on the target group.
 	//
-	// When you enable PROXY_PROTOCOL_V2_ENFORCED , the server trusts the source IP
-	//   address in the PPv2 header. You must configure security groups on your server's
-	//   VPC endpoint to restrict inbound traffic to only the NLB's private IP addresses.
-	//   For the full requirements, see [Working with Network Load Balancers].
+	// With PROXY_PROTOCOL_V2_ENFORCED you must restrict the server's VPC endpoint
+	//   security group to allow inbound traffic only via the trusted NLB. For more
+	//   information, see [Working with Network Load Balancers].
 	//
 	// [Working with Network Load Balancers]: https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html
 	SftpMode ProxyMode
@@ -5389,6 +5420,60 @@ func (v *SftpConnectorConnectionDetails) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.SftpConnectorConnectionDetails_HostKey:
 			v.HostKey = new(string)
 			return d.ReadString(schemas.SftpConnectorConnectionDetails_HostKey, v.HostKey)
+		}
+		return nil
+	})
+}
+
+// Specifies the configuration for a single SFTP port on a Transfer Family server
+// that uses the SFTP protocol and has a PUBLIC endpoint. Each entry in the
+// SftpPorts list is an SftpPortWithOptions object that pairs a port number with a
+// communication mode.
+type SftpPortWithOptions struct {
+
+	// The port on which the Transfer Family server listens for SFTP connections.
+	// Specify any integer from 2000 to 65535, or 22. This value is required for each
+	// entry in the SftpPorts list.
+	//
+	// This member is required.
+	SftpPort *int32
+
+	// Determines whether the server or the client sends data first when a client
+	// establishes an SFTP connection on this port. Valid values are SERVER_TALK_FIRST
+	// and CLIENT_TALK_FIRST . For a description of each mode, see the SftpPorts
+	// property. This value is optional.
+	CommunicationMode CommunicationMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *SftpPortWithOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SftpPortWithOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SftpPortWithOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommunicationMode != "" {
+		s.WriteString(schemas.SftpPortWithOptions_CommunicationMode, string(v.CommunicationMode))
+	}
+	if v.SftpPort != nil {
+		s.WriteInt32(schemas.SftpPortWithOptions_SftpPort, *v.SftpPort)
+	}
+}
+func (v *SftpPortWithOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SftpPortWithOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SftpPortWithOptions_CommunicationMode:
+			var ev string
+			if err := d.ReadString(schemas.SftpPortWithOptions_CommunicationMode, &ev); err != nil {
+				return err
+			}
+			v.CommunicationMode = CommunicationMode(ev)
+			return nil
+		case schemas.SftpPortWithOptions_SftpPort:
+			v.SftpPort = new(int32)
+			return d.ReadInt32(schemas.SftpPortWithOptions_SftpPort, v.SftpPort)
 		}
 		return nil
 	})

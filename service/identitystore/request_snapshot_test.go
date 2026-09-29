@@ -391,6 +391,7 @@ func TestCheckRequestSnapshot_DeleteGroup(t *testing.T) {
 	input := &DeleteGroupInput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
 		GroupId:         ptr.String("__GroupId__"),
+		Revision:        ptr.String("__Revision__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -447,6 +448,7 @@ func TestCheckRequestSnapshot_DeleteUser(t *testing.T) {
 	input := &DeleteUserInput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
 		UserId:          ptr.String("__UserId__"),
+		Revision:        ptr.String("__Revision__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -523,6 +525,33 @@ func TestCheckRequestSnapshot_DescribeGroupMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeGroupMembership"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeIdentityStore(t *testing.T) {
+	input := &DescribeIdentityStoreInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeIdentityStore(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeIdentityStore"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -791,6 +820,34 @@ func TestCheckRequestSnapshot_ListGroups(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListIdentityStores(t *testing.T) {
+	input := &ListIdentityStoresInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListIdentityStores(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIdentityStores"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListUsers(t *testing.T) {
 	input := &ListUsersInput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
@@ -848,6 +905,7 @@ func TestCheckRequestSnapshot_UpdateGroup(t *testing.T) {
 				AttributeValue: document.NewLazyDocument("__Document__"),
 			},
 		},
+		Revision: ptr.String("__Revision__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -872,6 +930,48 @@ func TestCheckRequestSnapshot_UpdateGroup(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateIdentityStore(t *testing.T) {
+	input := &UpdateIdentityStoreInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			VpceAccessRequired: ptr.Bool(true),
+			ApiRestrictSourceVpcs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ApiAllowSourceIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ScimAllowSourceIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateIdentityStore(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIdentityStore"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateUser(t *testing.T) {
 	input := &UpdateUserInput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
@@ -886,6 +986,7 @@ func TestCheckRequestSnapshot_UpdateUser(t *testing.T) {
 				AttributeValue: document.NewLazyDocument("__Document__"),
 			},
 		},
+		Revision: ptr.String("__Revision__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1094,6 +1195,7 @@ func TestUpdateRequestSnapshot_DeleteGroup(t *testing.T) {
 	input := &DeleteGroupInput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
 		GroupId:         ptr.String("__GroupId__"),
+		Revision:        ptr.String("__Revision__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1150,6 +1252,7 @@ func TestUpdateRequestSnapshot_DeleteUser(t *testing.T) {
 	input := &DeleteUserInput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
 		UserId:          ptr.String("__UserId__"),
+		Revision:        ptr.String("__Revision__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1226,6 +1329,33 @@ func TestUpdateRequestSnapshot_DescribeGroupMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeGroupMembership"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeIdentityStore(t *testing.T) {
+	input := &DescribeIdentityStoreInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeIdentityStore(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeIdentityStore"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1494,6 +1624,34 @@ func TestUpdateRequestSnapshot_ListGroups(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListIdentityStores(t *testing.T) {
+	input := &ListIdentityStoresInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListIdentityStores(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIdentityStores"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListUsers(t *testing.T) {
 	input := &ListUsersInput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
@@ -1551,6 +1709,7 @@ func TestUpdateRequestSnapshot_UpdateGroup(t *testing.T) {
 				AttributeValue: document.NewLazyDocument("__Document__"),
 			},
 		},
+		Revision: ptr.String("__Revision__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1575,6 +1734,48 @@ func TestUpdateRequestSnapshot_UpdateGroup(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateIdentityStore(t *testing.T) {
+	input := &UpdateIdentityStoreInput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			VpceAccessRequired: ptr.Bool(true),
+			ApiRestrictSourceVpcs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ApiAllowSourceIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ScimAllowSourceIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateIdentityStore(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIdentityStore"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateUser(t *testing.T) {
 	input := &UpdateUserInput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
@@ -1589,6 +1790,7 @@ func TestUpdateRequestSnapshot_UpdateUser(t *testing.T) {
 				AttributeValue: document.NewLazyDocument("__Document__"),
 			},
 		},
+		Revision: ptr.String("__Revision__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

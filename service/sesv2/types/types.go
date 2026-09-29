@@ -6918,6 +6918,15 @@ type TenantInfo struct {
 	// The date and time when the tenant was created.
 	CreatedTimestamp *time.Time
 
+	// The sending status for a reputation entity. This can be one of the following:
+	//
+	//   - ENABLED – Sending is allowed for this entity.
+	//
+	//   - DISABLED – Sending is prevented for this entity.
+	//
+	//   - REINSTATED – Sending is allowed even if there are active reputation findings.
+	SendingStatus SendingStatus
+
 	// The Amazon Resource Name (ARN) of the tenant.
 	TenantArn *string
 
@@ -6940,6 +6949,9 @@ func (v *TenantInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.TenantInfo_CreatedTimestamp, *v.CreatedTimestamp)
 	}
+	if v.SendingStatus != "" {
+		s.WriteString(schemas.TenantInfo_SendingStatus, string(v.SendingStatus))
+	}
 	if v.TenantArn != nil {
 		s.WriteString(schemas.TenantInfo_TenantArn, *v.TenantArn)
 	}
@@ -6956,6 +6968,13 @@ func (v *TenantInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TenantInfo_CreatedTimestamp:
 			v.CreatedTimestamp = new(time.Time)
 			return d.ReadTime(schemas.TenantInfo_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.TenantInfo_SendingStatus:
+			var ev string
+			if err := d.ReadString(schemas.TenantInfo_SendingStatus, &ev); err != nil {
+				return err
+			}
+			v.SendingStatus = SendingStatus(ev)
+			return nil
 		case schemas.TenantInfo_TenantArn:
 			v.TenantArn = new(string)
 			return d.ReadString(schemas.TenantInfo_TenantArn, v.TenantArn)

@@ -666,6 +666,7 @@ type FoundationModelConfigurationType string
 // Enum values for FoundationModelConfigurationType
 const (
 	FoundationModelConfigurationTypeBedrockFoundationModel FoundationModelConfigurationType = "BEDROCK_FOUNDATION_MODEL"
+	FoundationModelConfigurationTypeMantleFoundationModel  FoundationModelConfigurationType = "MANTLE_FOUNDATION_MODEL"
 )
 
 // Values returns all known values for FoundationModelConfigurationType. Note that
@@ -676,6 +677,7 @@ const (
 func (FoundationModelConfigurationType) Values() []FoundationModelConfigurationType {
 	return []FoundationModelConfigurationType{
 		"BEDROCK_FOUNDATION_MODEL",
+		"MANTLE_FOUNDATION_MODEL",
 	}
 }
 

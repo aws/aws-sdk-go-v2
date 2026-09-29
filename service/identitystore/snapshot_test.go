@@ -158,6 +158,18 @@ func TestCheckSnapshot_DescribeGroupMembership(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeIdentityStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIdentityStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeIdentityStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeUser(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeUser(context.Background(), nil, func(o *Options) {
@@ -254,6 +266,18 @@ func TestCheckSnapshot_ListGroups(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListIdentityStores(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIdentityStores(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListIdentityStores")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListUsers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListUsers(context.Background(), nil, func(o *Options) {
@@ -271,6 +295,18 @@ func TestCheckSnapshot_UpdateGroup(t *testing.T) {
 	_, err := svc.UpdateGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateIdentityStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIdentityStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateIdentityStore")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -385,6 +421,18 @@ func TestUpdateSnapshot_DescribeGroupMembership(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeIdentityStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIdentityStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeIdentityStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeUser(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeUser(context.Background(), nil, func(o *Options) {
@@ -481,6 +529,18 @@ func TestUpdateSnapshot_ListGroups(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListIdentityStores(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIdentityStores(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListIdentityStores")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListUsers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListUsers(context.Background(), nil, func(o *Options) {
@@ -498,6 +558,18 @@ func TestUpdateSnapshot_UpdateGroup(t *testing.T) {
 	_, err := svc.UpdateGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateIdentityStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIdentityStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateIdentityStore")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

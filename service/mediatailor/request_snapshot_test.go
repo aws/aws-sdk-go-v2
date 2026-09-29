@@ -2206,6 +2206,15 @@ func TestCheckRequestSnapshot_PutPlaybackConfiguration(t *testing.T) {
 			MaxConcurrentAdsRequests:     ptr.Int32(1),
 			EnableVodVastParallelization: ptr.Bool(true),
 		},
+		BeaconingConfiguration: &types.BeaconingConfiguration{
+			ClientSide: &types.ClientSideBeaconingConfiguration{
+				ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+				AdditionalEventTypes: []types.BeaconEventType{
+					types.BeaconEventType("MUTE"),
+					types.BeaconEventType("MUTE"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5132,6 +5141,15 @@ func TestUpdateRequestSnapshot_PutPlaybackConfiguration(t *testing.T) {
 		AdsPersonalizationConcurrency: &types.AdsPersonalizationConcurrency{
 			MaxConcurrentAdsRequests:     ptr.Int32(1),
 			EnableVodVastParallelization: ptr.Bool(true),
+		},
+		BeaconingConfiguration: &types.BeaconingConfiguration{
+			ClientSide: &types.ClientSideBeaconingConfiguration{
+				ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+				AdditionalEventTypes: []types.BeaconEventType{
+					types.BeaconEventType("MUTE"),
+					types.BeaconEventType("MUTE"),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}

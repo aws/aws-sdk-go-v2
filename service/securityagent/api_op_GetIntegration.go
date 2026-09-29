@@ -72,6 +72,10 @@ type GetIntegrationOutput struct {
 	// integrations.
 	TargetUrl *string
 
+	// The payload URL of the integration's webhook, once it has been created. The
+	// signing secret is never returned on a read.
+	WebhookUrl *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

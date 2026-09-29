@@ -190,6 +190,30 @@ func serializeGroups(s smithy.ShapeSerializer, schema *smithy.Schema, v []Group)
 	s.CloseList()
 }
 
+func serializeIdentityStores(s smithy.ShapeSerializer, schema *smithy.Schema, v []IdentityStore) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeIpCidrList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializePhoneNumbers(s smithy.ShapeSerializer, schema *smithy.Schema, v []PhoneNumber) {
 	if v == nil {
 		return
@@ -238,6 +262,17 @@ func serializeUsers(s smithy.ShapeSerializer, schema *smithy.Schema, v []User) {
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeVpcIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -382,6 +417,34 @@ func deserializeGroups(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Group)
 	})
 }
 
+func deserializeIdentityStores(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IdentityStore) error {
+	*v = make([]IdentityStore, 0)
+	var vv IdentityStore
+	return smithy.ReadList(d, s, func() error {
+		vv = IdentityStore{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeIpCidrList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializePhoneNumbers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PhoneNumber) error {
 	*v = make([]PhoneNumber, 0)
 	var vv PhoneNumber
@@ -430,6 +493,20 @@ func deserializeUsers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]User) e
 	return smithy.ReadList(d, s, func() error {
 		vv = User{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeVpcIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

@@ -4024,6 +4024,38 @@ func validateRecommendedActionUpdateList(v []types.RecommendedActionUpdate) erro
 	}
 }
 
+func validateTargetResourceConfiguration(v *types.TargetResourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetResourceConfiguration"}
+	if v.SourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetResourceConfigurationList(v []types.TargetResourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetResourceConfigurationList"}
+	for i := range v {
+		if err := validateTargetResourceConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAddRoleToDBClusterInput(v *AddRoleToDBClusterInput) error {
 	if v == nil {
 		return nil
@@ -4277,6 +4309,11 @@ func validateOpCreateBlueGreenDeploymentInput(v *CreateBlueGreenDeploymentInput)
 	}
 	if v.Source == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if v.TargetResourceConfigurations != nil {
+		if err := validateTargetResourceConfigurationList(v.TargetResourceConfigurations); err != nil {
+			invalidParams.AddNested("TargetResourceConfigurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

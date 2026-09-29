@@ -31,6 +31,10 @@ type UpdateUserInput struct {
 
 	// The globally unique identifier for the identity store.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
 
@@ -45,8 +49,19 @@ type UpdateUserInput struct {
 
 	// The identifier for a user in the identity store.
 	//
+	// You can specify the user by ID or by Amazon Resource Name (ARN). For example,
+	// user ID a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 or user ARN
+	// arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
+	//
 	// This member is required.
 	UserId *string
+
+	// The expected current revision of the user. When you provide this value, the
+	// update is applied only if it matches the current revision of the user in the
+	// identity store, which prevents you from overwriting concurrent changes. If the
+	// value doesn't match, the operation fails with a ConflictException . If you don't
+	// provide this value, the update is applied unconditionally.
+	Revision *string
 
 	noSmithyDocumentSerde
 }
@@ -62,27 +77,37 @@ func (v *UpdateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.UpdateUserRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
 	serializeAttributeOperations(s, schemas.UpdateUserRequest_Operations, v.Operations)
+	if v.Revision != nil {
+		s.WriteString(schemas.UpdateUserRequest_Revision, *v.Revision)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.UpdateUserRequest_UserId, *v.UserId)
 	}
 }
-func (v *UpdateUserInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateUserRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateUserRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.UpdateUserRequest_IdentityStoreId, v.IdentityStoreId)
-		case schemas.UpdateUserRequest_Operations:
-			return deserializeAttributeOperations(d, schemas.UpdateUserRequest_Operations, &v.Operations)
-		case schemas.UpdateUserRequest_UserId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.UpdateUserRequest_UserId, v.UserId)
-		}
-		return nil
-	})
-}
 
 type UpdateUserOutput struct {
+
+	// The globally unique identifier for the identity store.
+	//
+	// This member is required.
+	IdentityStoreId *string
+
+	// The revision of the user after the requested update is applied.
+	//
+	// This member is required.
+	Revision *string
+
+	// The Amazon Resource Name (ARN) of the user in the identity store. For example,
+	// arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
+	//
+	// This member is required.
+	UserArn *string
+
+	// The identifier for a user in the identity store.
+	//
+	// This member is required.
+	UserId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -96,10 +121,34 @@ func (v *UpdateUserOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.UpdateUserResponse_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.UpdateUserResponse_Revision, *v.Revision)
+	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.UpdateUserResponse_UserArn, *v.UserArn)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.UpdateUserResponse_UserId, *v.UserId)
+	}
 }
 func (v *UpdateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateUserResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.UpdateUserResponse_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.UpdateUserResponse_IdentityStoreId, v.IdentityStoreId)
+		case schemas.UpdateUserResponse_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.UpdateUserResponse_Revision, v.Revision)
+		case schemas.UpdateUserResponse_UserArn:
+			v.UserArn = new(string)
+			return d.ReadString(schemas.UpdateUserResponse_UserArn, v.UserArn)
+		case schemas.UpdateUserResponse_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.UpdateUserResponse_UserId, v.UserId)
 		}
 		return nil
 	})

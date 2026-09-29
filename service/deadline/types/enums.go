@@ -610,6 +610,23 @@ func (FileSystemLocationType) Values() []FileSystemLocationType {
 	}
 }
 
+type FleetSoftwareAddOnName string
+
+// Enum values for FleetSoftwareAddOnName
+const (
+	FleetSoftwareAddOnNameDocker FleetSoftwareAddOnName = "docker"
+)
+
+// Values returns all known values for FleetSoftwareAddOnName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FleetSoftwareAddOnName) Values() []FleetSoftwareAddOnName {
+	return []FleetSoftwareAddOnName{
+		"docker",
+	}
+}
+
 type FleetStatus string
 
 // Enum values for FleetStatus

@@ -35,6 +35,10 @@ func (c *Client) ListTenants(ctx context.Context, params *ListTenantsInput, optF
 // current Amazon Web Services Region.
 type ListTenantsInput struct {
 
+	// An object that contains filters to apply when listing tenants. You can filter
+	// by tenant name or sending status.
+	Filter map[string]string
+
 	// A token returned from a previous call to ListTenants to indicate the position
 	// in the list of tenants.
 	NextToken *string
@@ -55,6 +59,7 @@ func (v *ListTenantsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTenantsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListTenantsFilter(s, schemas.ListTenantsRequest_Filter, v.Filter)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTenantsRequest_NextToken, *v.NextToken)
 	}

@@ -2195,7 +2195,11 @@ func TestCheckRequestSnapshot_ImportSecurityRequirements(t *testing.T) {
 
 func TestCheckRequestSnapshot_InitiateProviderRegistration(t *testing.T) {
 	input := &InitiateProviderRegistrationInput{
-		Provider: types.Provider("GITHUB"),
+		Provider:         types.Provider("GITHUB"),
+		TargetUrl:        ptr.String("__TargetUrl__"),
+		OrganizationName: ptr.String("__OrganizationName__"),
+		ClientId:         ptr.String("__ClientId__"),
+		ClientSecret:     ptr.String("__ClientSecret__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3592,6 +3596,34 @@ func TestCheckRequestSnapshot_UpdateIntegratedResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIntegratedResources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateIntegration(t *testing.T) {
+	input := &UpdateIntegrationInput{
+		IntegrationId: ptr.String("__IntegrationId__"),
+		WebhookAction: types.WebhookAction("CREATE_IF_ABSENT"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateIntegration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIntegration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6114,7 +6146,11 @@ func TestUpdateRequestSnapshot_ImportSecurityRequirements(t *testing.T) {
 
 func TestUpdateRequestSnapshot_InitiateProviderRegistration(t *testing.T) {
 	input := &InitiateProviderRegistrationInput{
-		Provider: types.Provider("GITHUB"),
+		Provider:         types.Provider("GITHUB"),
+		TargetUrl:        ptr.String("__TargetUrl__"),
+		OrganizationName: ptr.String("__OrganizationName__"),
+		ClientId:         ptr.String("__ClientId__"),
+		ClientSecret:     ptr.String("__ClientSecret__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7511,6 +7547,34 @@ func TestUpdateRequestSnapshot_UpdateIntegratedResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIntegratedResources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateIntegration(t *testing.T) {
+	input := &UpdateIntegrationInput{
+		IntegrationId: ptr.String("__IntegrationId__"),
+		WebhookAction: types.WebhookAction("CREATE_IF_ABSENT"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateIntegration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIntegration"); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -43,6 +43,10 @@ type GetUserIdInput struct {
 
 	// The globally unique identifier for the identity store.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
 
@@ -61,18 +65,6 @@ func (v *GetUserIdInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.GetUserIdRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
 }
-func (v *GetUserIdInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetUserIdRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetUserIdRequest_AlternateIdentifier:
-			return deserializeAlternateIdentifier(d, schemas.GetUserIdRequest_AlternateIdentifier, &v.AlternateIdentifier)
-		case schemas.GetUserIdRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.GetUserIdRequest_IdentityStoreId, v.IdentityStoreId)
-		}
-		return nil
-	})
-}
 
 type GetUserIdOutput struct {
 
@@ -80,6 +72,12 @@ type GetUserIdOutput struct {
 	//
 	// This member is required.
 	IdentityStoreId *string
+
+	// The Amazon Resource Name (ARN) of the user in the identity store. For example,
+	// arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
+	//
+	// This member is required.
+	UserArn *string
 
 	// The identifier for a user in the identity store.
 	//
@@ -102,6 +100,9 @@ func (v *GetUserIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.GetUserIdResponse_IdentityStoreId, *v.IdentityStoreId)
 	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.GetUserIdResponse_UserArn, *v.UserArn)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.GetUserIdResponse_UserId, *v.UserId)
 	}
@@ -112,6 +113,9 @@ func (v *GetUserIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetUserIdResponse_IdentityStoreId:
 			v.IdentityStoreId = new(string)
 			return d.ReadString(schemas.GetUserIdResponse_IdentityStoreId, v.IdentityStoreId)
+		case schemas.GetUserIdResponse_UserArn:
+			v.UserArn = new(string)
+			return d.ReadString(schemas.GetUserIdResponse_UserArn, v.UserArn)
 		case schemas.GetUserIdResponse_UserId:
 			v.UserId = new(string)
 			return d.ReadString(schemas.GetUserIdResponse_UserId, v.UserId)

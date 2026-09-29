@@ -1822,6 +1822,11 @@ func awsRestjson1_serializeDocumentContextualMetadataConfig(v *types.ContextualM
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ExtendedAnalysis) > 0 {
+		ok := object.Key("extendedAnalysis")
+		ok.String(string(v.ExtendedAnalysis))
+	}
+
 	if len(v.SummaryGeneration) > 0 {
 		ok := object.Key("summaryGeneration")
 		ok.String(string(v.SummaryGeneration))

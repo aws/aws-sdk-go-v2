@@ -547,10 +547,11 @@ type Provider string
 
 // Enum values for Provider
 const (
-	ProviderGithub     Provider = "GITHUB"
-	ProviderGitlab     Provider = "GITLAB"
-	ProviderBitbucket  Provider = "BITBUCKET"
-	ProviderConfluence Provider = "CONFLUENCE"
+	ProviderGithub      Provider = "GITHUB"
+	ProviderGitlab      Provider = "GITLAB"
+	ProviderBitbucket   Provider = "BITBUCKET"
+	ProviderConfluence  Provider = "CONFLUENCE"
+	ProviderAzureDevops Provider = "AZURE_DEVOPS"
 )
 
 // Values returns all known values for Provider. Note that this can be expanded in
@@ -563,6 +564,7 @@ func (Provider) Values() []Provider {
 		"GITLAB",
 		"BITBUCKET",
 		"CONFLUENCE",
+		"AZURE_DEVOPS",
 	}
 }
 
@@ -1139,5 +1141,28 @@ func (ValidationStatus) Values() []ValidationStatus {
 		"VALIDATION_FAILED",
 		"VALIDATING",
 		"NOT_VALIDATED",
+	}
+}
+
+type WebhookAction string
+
+// Enum values for WebhookAction
+const (
+	// Create the webhook if one does not already exist. Returns the payload URL and
+	// the signing secret.
+	WebhookActionCreateIfAbsent WebhookAction = "CREATE_IF_ABSENT"
+	// Generate a new signing secret for the existing webhook, keeping the same
+	// payload URL. Returns the new secret.
+	WebhookActionRotate WebhookAction = "ROTATE"
+)
+
+// Values returns all known values for WebhookAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebhookAction) Values() []WebhookAction {
+	return []WebhookAction{
+		"CREATE_IF_ABSENT",
+		"ROTATE",
 	}
 }

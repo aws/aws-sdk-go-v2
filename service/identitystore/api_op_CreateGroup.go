@@ -29,6 +29,10 @@ type CreateGroupInput struct {
 
 	// The globally unique identifier for the identity store.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
 
@@ -60,24 +64,15 @@ func (v *CreateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.CreateGroupRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
 }
-func (v *CreateGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateGroupRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateGroupRequest_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateGroupRequest_Description, v.Description)
-		case schemas.CreateGroupRequest_DisplayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.CreateGroupRequest_DisplayName, v.DisplayName)
-		case schemas.CreateGroupRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.CreateGroupRequest_IdentityStoreId, v.IdentityStoreId)
-		}
-		return nil
-	})
-}
 
 type CreateGroupOutput struct {
+
+	// The Amazon Resource Name (ARN) of the newly created group in the identity
+	// store. For example,
+	// arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
+	//
+	// This member is required.
+	GroupArn *string
 
 	// The identifier of the newly created group in the identity store.
 	//
@@ -88,6 +83,11 @@ type CreateGroupOutput struct {
 	//
 	// This member is required.
 	IdentityStoreId *string
+
+	// The revision of the newly created group in the identity store.
+	//
+	// This member is required.
+	Revision *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -102,22 +102,34 @@ func (v *CreateGroupOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupArn != nil {
+		s.WriteString(schemas.CreateGroupResponse_GroupArn, *v.GroupArn)
+	}
 	if v.GroupId != nil {
 		s.WriteString(schemas.CreateGroupResponse_GroupId, *v.GroupId)
 	}
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.CreateGroupResponse_IdentityStoreId, *v.IdentityStoreId)
 	}
+	if v.Revision != nil {
+		s.WriteString(schemas.CreateGroupResponse_Revision, *v.Revision)
+	}
 }
 func (v *CreateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateGroupResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.CreateGroupResponse_GroupArn:
+			v.GroupArn = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_GroupArn, v.GroupArn)
 		case schemas.CreateGroupResponse_GroupId:
 			v.GroupId = new(string)
 			return d.ReadString(schemas.CreateGroupResponse_GroupId, v.GroupId)
 		case schemas.CreateGroupResponse_IdentityStoreId:
 			v.IdentityStoreId = new(string)
 			return d.ReadString(schemas.CreateGroupResponse_IdentityStoreId, v.IdentityStoreId)
+		case schemas.CreateGroupResponse_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_Revision, v.Revision)
 		}
 		return nil
 	})

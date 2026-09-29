@@ -1897,6 +1897,10 @@ func (v *ChangeProgressStage) Deserialize(d smithy.ShapeDeserializer) error {
 // The progress details of a specific domain configuration change.
 type ChangeProgressStatusDetails struct {
 
+	// The list of advisory warning codes that were accepted for the configuration
+	// change.
+	AcceptedWarnings []string
+
 	// The unique change identifier associated with a specific domain configuration
 	// change.
 	ChangeId *string
@@ -1930,6 +1934,9 @@ type ChangeProgressStatusDetails struct {
 	// The total number of stages required for the configuration change.
 	TotalNumberOfStages int32
 
+	// The validation failures that occurred as a result of the configuration change.
+	ValidationFailures []ValidationFailure
+
 	noSmithyDocumentSerde
 }
 
@@ -1940,6 +1947,7 @@ func (v *ChangeProgressStatusDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ChangeProgressStatusDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAcceptedWarningsList(s, schemas.ChangeProgressStatusDetails_AcceptedWarnings, v.AcceptedWarnings)
 	if v.ChangeId != nil {
 		s.WriteString(schemas.ChangeProgressStatusDetails_ChangeId, *v.ChangeId)
 	}
@@ -1964,10 +1972,13 @@ func (v *ChangeProgressStatusDetails) SerializeMembers(s smithy.ShapeSerializer)
 	if v.TotalNumberOfStages != 0 {
 		s.WriteInt32(schemas.ChangeProgressStatusDetails_TotalNumberOfStages, v.TotalNumberOfStages)
 	}
+	serializeValidationFailures(s, schemas.ChangeProgressStatusDetails_ValidationFailures, v.ValidationFailures)
 }
 func (v *ChangeProgressStatusDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ChangeProgressStatusDetails, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ChangeProgressStatusDetails_AcceptedWarnings:
+			return deserializeAcceptedWarningsList(d, schemas.ChangeProgressStatusDetails_AcceptedWarnings, &v.AcceptedWarnings)
 		case schemas.ChangeProgressStatusDetails_ChangeId:
 			v.ChangeId = new(string)
 			return d.ReadString(schemas.ChangeProgressStatusDetails_ChangeId, v.ChangeId)
@@ -2006,6 +2017,8 @@ func (v *ChangeProgressStatusDetails) Deserialize(d smithy.ShapeDeserializer) er
 			return nil
 		case schemas.ChangeProgressStatusDetails_TotalNumberOfStages:
 			return d.ReadInt32(schemas.ChangeProgressStatusDetails_TotalNumberOfStages, &v.TotalNumberOfStages)
+		case schemas.ChangeProgressStatusDetails_ValidationFailures:
+			return deserializeValidationFailures(d, schemas.ChangeProgressStatusDetails_ValidationFailures, &v.ValidationFailures)
 		}
 		return nil
 	})
@@ -4314,7 +4327,11 @@ type DryRunProgressStatus struct {
 	// This member is required.
 	UpdateDate *string
 
-	// Any validation failures that occurred as a result of the dry run.
+	// The list of advisory warning codes that were accepted for the configuration
+	// change.
+	AcceptedWarnings []string
+
+	// The validation failures that occurred as a result of the dry run.
 	ValidationFailures []ValidationFailure
 
 	noSmithyDocumentSerde
@@ -4327,6 +4344,7 @@ func (v *DryRunProgressStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DryRunProgressStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAcceptedWarningsList(s, schemas.DryRunProgressStatus_AcceptedWarnings, v.AcceptedWarnings)
 	if v.CreationDate != nil {
 		s.WriteString(schemas.DryRunProgressStatus_CreationDate, *v.CreationDate)
 	}
@@ -4344,6 +4362,8 @@ func (v *DryRunProgressStatus) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *DryRunProgressStatus) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DryRunProgressStatus, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DryRunProgressStatus_AcceptedWarnings:
+			return deserializeAcceptedWarningsList(d, schemas.DryRunProgressStatus_AcceptedWarnings, &v.AcceptedWarnings)
 		case schemas.DryRunProgressStatus_CreationDate:
 			v.CreationDate = new(string)
 			return d.ReadString(schemas.DryRunProgressStatus_CreationDate, v.CreationDate)
@@ -9628,6 +9648,9 @@ type ValidationFailure struct {
 	// A message corresponding to the failure.
 	Message *string
 
+	// The severity of the validation failure.
+	Severity ValidationFailureSeverity
+
 	noSmithyDocumentSerde
 }
 
@@ -9644,6 +9667,9 @@ func (v *ValidationFailure) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ValidationFailure_Message, *v.Message)
 	}
+	if v.Severity != "" {
+		s.WriteString(schemas.ValidationFailure_Severity, string(v.Severity))
+	}
 }
 func (v *ValidationFailure) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidationFailure, func(s *smithy.Schema) error {
@@ -9654,6 +9680,13 @@ func (v *ValidationFailure) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ValidationFailure_Message:
 			v.Message = new(string)
 			return d.ReadString(schemas.ValidationFailure_Message, v.Message)
+		case schemas.ValidationFailure_Severity:
+			var ev string
+			if err := d.ReadString(schemas.ValidationFailure_Severity, &ev); err != nil {
+				return err
+			}
+			v.Severity = ValidationFailureSeverity(ev)
+			return nil
 		}
 		return nil
 	})

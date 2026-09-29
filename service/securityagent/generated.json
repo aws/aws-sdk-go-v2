@@ -94,6 +94,7 @@
         "api_op_UpdateCodeReview.go",
         "api_op_UpdateFinding.go",
         "api_op_UpdateIntegratedResources.go",
+        "api_op_UpdateIntegration.go",
         "api_op_UpdatePentest.go",
         "api_op_UpdatePrivateConnectionCertificate.go",
         "api_op_UpdateSecurityRequirementPack.go",

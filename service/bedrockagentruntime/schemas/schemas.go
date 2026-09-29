@@ -2241,16 +2241,20 @@ var _FlowTraceNodeOutputNextList_member *smithy.Schema
 var FoundationModelConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "FoundationModelConfiguration",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var FoundationModelConfiguration_type *smithy.Schema
 
 var FoundationModelConfiguration_bedrockFoundationModelConfiguration *smithy.Schema
 
+var FoundationModelConfiguration_mantleFoundationModelConfiguration *smithy.Schema
+
 var FoundationModelConfigurationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "FoundationModelConfigurationType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var FoundationModelConfigurationType_BEDROCK_FOUNDATION_MODEL *smithy.Schema
+
+var FoundationModelConfigurationType_MANTLE_FOUNDATION_MODEL *smithy.Schema
 
 var FoundationModelType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -3287,6 +3291,25 @@ var ManagedSearchRerankingConfigurationType = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ManagedSearchRerankingConfigurationType",
 }, smithy.ShapeTypeEnum, 1)
 var ManagedSearchRerankingConfigurationType_BEDROCK_RERANKING_MODEL *smithy.Schema
+
+var MantleFoundationModelConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "MantleFoundationModelConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var MantleFoundationModelConfiguration_modelConfiguration *smithy.Schema
+
+var MantleFoundationModelModelConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "MantleFoundationModelModelConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var MantleFoundationModelModelConfiguration_modelArn *smithy.Schema
+
+var MantleFoundationModelModelConfiguration_projectId *smithy.Schema
+
+var _MantleProjectId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "MantleProjectId",
+}, smithy.ShapeTypeString, 0)
 
 var _MaximumLength = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -6281,13 +6304,23 @@ func init() {
 
 	FoundationModelConfigurationType_BEDROCK_FOUNDATION_MODEL = FoundationModelConfigurationType.AddMember("BEDROCK_FOUNDATION_MODEL", smithyprelude.Unit)
 
+	FoundationModelConfigurationType_MANTLE_FOUNDATION_MODEL = FoundationModelConfigurationType.AddMember("MANTLE_FOUNDATION_MODEL", smithyprelude.Unit)
+
 	BedrockFoundationModelModelConfiguration_modelArn = BedrockFoundationModelModelConfiguration.AddMember("modelArn", _BedrockModelArn)
 
 	BedrockFoundationModelConfiguration_modelConfiguration = BedrockFoundationModelConfiguration.AddMember("modelConfiguration", BedrockFoundationModelModelConfiguration)
 
+	MantleFoundationModelModelConfiguration_modelArn = MantleFoundationModelModelConfiguration.AddMember("modelArn", _BedrockModelArn)
+
+	MantleFoundationModelModelConfiguration_projectId = MantleFoundationModelModelConfiguration.AddMember("projectId", _MantleProjectId)
+
+	MantleFoundationModelConfiguration_modelConfiguration = MantleFoundationModelConfiguration.AddMember("modelConfiguration", MantleFoundationModelModelConfiguration)
+
 	FoundationModelConfiguration_type = FoundationModelConfiguration.AddMember("type", FoundationModelConfigurationType)
 
 	FoundationModelConfiguration_bedrockFoundationModelConfiguration = FoundationModelConfiguration.AddMember("bedrockFoundationModelConfiguration", BedrockFoundationModelConfiguration)
+
+	FoundationModelConfiguration_mantleFoundationModelConfiguration = FoundationModelConfiguration.AddMember("mantleFoundationModelConfiguration", MantleFoundationModelConfiguration)
 
 	AgenticRetrieveRerankingModelType_CUSTOM = AgenticRetrieveRerankingModelType.AddMember("CUSTOM", smithyprelude.Unit)
 

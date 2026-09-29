@@ -3209,6 +3209,15 @@ func TestCheckResponseSnapshot_GetPlaybackConfiguration(t *testing.T) {
 			MaxConcurrentAdsRequests:     ptr.Int32(1),
 			EnableVodVastParallelization: ptr.Bool(true),
 		},
+		BeaconingConfiguration: &types.BeaconingConfiguration{
+			ClientSide: &types.ClientSideBeaconingConfiguration{
+				ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+				AdditionalEventTypes: []types.BeaconEventType{
+					types.BeaconEventType("MUTE"),
+					types.BeaconEventType("MUTE"),
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetPlaybackConfiguration.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3938,6 +3947,15 @@ func TestCheckResponseSnapshot_ListPlaybackConfigurations(t *testing.T) {
 					MaxConcurrentAdsRequests:     ptr.Int32(1),
 					EnableVodVastParallelization: ptr.Bool(true),
 				},
+				BeaconingConfiguration: &types.BeaconingConfiguration{
+					ClientSide: &types.ClientSideBeaconingConfiguration{
+						ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+						AdditionalEventTypes: []types.BeaconEventType{
+							types.BeaconEventType("MUTE"),
+							types.BeaconEventType("MUTE"),
+						},
+					},
+				},
 			},
 			{
 				AdDecisionServerUrl: ptr.String("__AdDecisionServerUrl__"),
@@ -4059,6 +4077,15 @@ func TestCheckResponseSnapshot_ListPlaybackConfigurations(t *testing.T) {
 				AdsPersonalizationConcurrency: &types.AdsPersonalizationConcurrency{
 					MaxConcurrentAdsRequests:     ptr.Int32(1),
 					EnableVodVastParallelization: ptr.Bool(true),
+				},
+				BeaconingConfiguration: &types.BeaconingConfiguration{
+					ClientSide: &types.ClientSideBeaconingConfiguration{
+						ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+						AdditionalEventTypes: []types.BeaconEventType{
+							types.BeaconEventType("MUTE"),
+							types.BeaconEventType("MUTE"),
+						},
+					},
 				},
 			},
 		},
@@ -4791,6 +4818,15 @@ func TestCheckResponseSnapshot_PutPlaybackConfiguration(t *testing.T) {
 			MaxConcurrentAdsRequests:     ptr.Int32(1),
 			EnableVodVastParallelization: ptr.Bool(true),
 		},
+		BeaconingConfiguration: &types.BeaconingConfiguration{
+			ClientSide: &types.ClientSideBeaconingConfiguration{
+				ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+				AdditionalEventTypes: []types.BeaconEventType{
+					types.BeaconEventType("MUTE"),
+					types.BeaconEventType("MUTE"),
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("PutPlaybackConfiguration.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4882,6 +4918,15 @@ func TestCheckResponseSnapshot_PutPlaybackConfiguration(t *testing.T) {
 		AdsPersonalizationConcurrency: &types.AdsPersonalizationConcurrency{
 			MaxConcurrentAdsRequests:     ptr.Int32(1),
 			EnableVodVastParallelization: ptr.Bool(true),
+		},
+		BeaconingConfiguration: &types.BeaconingConfiguration{
+			ClientSide: &types.ClientSideBeaconingConfiguration{
+				ReportingMode: types.ClientSideBeaconingMode("DISABLED"),
+				AdditionalEventTypes: []types.BeaconEventType{
+					types.BeaconEventType("MUTE"),
+					types.BeaconEventType("MUTE"),
+				},
+			},
 		},
 	})
 	if err != nil {

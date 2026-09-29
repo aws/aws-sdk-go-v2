@@ -2228,6 +2228,22 @@ func TestCheckResponseSnapshot_DescribeDomainChangeProgress(t *testing.T) {
 			LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ConfigChangeStatus: types.ConfigChangeStatus("Pending"),
 			InitiatedBy:        types.InitiatedBy("CUSTOMER"),
+			ValidationFailures: []types.ValidationFailure{
+				{
+					Code:     ptr.String("__Code__"),
+					Message:  ptr.String("__Message__"),
+					Severity: types.ValidationFailureSeverity("Critical"),
+				},
+				{
+					Code:     ptr.String("__Code__"),
+					Message:  ptr.String("__Message__"),
+					Severity: types.ValidationFailureSeverity("Critical"),
+				},
+			},
+			AcceptedWarnings: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeDomainChangeProgress.response")
@@ -3290,13 +3306,19 @@ func TestCheckResponseSnapshot_DescribeDryRunProgress(t *testing.T) {
 			UpdateDate:   ptr.String("__UpdateDate__"),
 			ValidationFailures: []types.ValidationFailure{
 				{
-					Code:    ptr.String("__Code__"),
-					Message: ptr.String("__Message__"),
+					Code:     ptr.String("__Code__"),
+					Message:  ptr.String("__Message__"),
+					Severity: types.ValidationFailureSeverity("Critical"),
 				},
 				{
-					Code:    ptr.String("__Code__"),
-					Message: ptr.String("__Message__"),
+					Code:     ptr.String("__Code__"),
+					Message:  ptr.String("__Message__"),
+					Severity: types.ValidationFailureSeverity("Critical"),
 				},
+			},
+			AcceptedWarnings: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 		DryRunConfig: &types.DomainStatus{
@@ -6609,13 +6631,19 @@ func TestCheckResponseSnapshot_UpdateDomainConfig(t *testing.T) {
 			UpdateDate:   ptr.String("__UpdateDate__"),
 			ValidationFailures: []types.ValidationFailure{
 				{
-					Code:    ptr.String("__Code__"),
-					Message: ptr.String("__Message__"),
+					Code:     ptr.String("__Code__"),
+					Message:  ptr.String("__Message__"),
+					Severity: types.ValidationFailureSeverity("Critical"),
 				},
 				{
-					Code:    ptr.String("__Code__"),
-					Message: ptr.String("__Message__"),
+					Code:     ptr.String("__Code__"),
+					Message:  ptr.String("__Message__"),
+					Severity: types.ValidationFailureSeverity("Critical"),
 				},
+			},
+			AcceptedWarnings: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 	}
@@ -6817,6 +6845,10 @@ func TestCheckResponseSnapshot_UpdateDomainConfig(t *testing.T) {
 		},
 		UseCase:    types.DomainUseCase("SEARCH"),
 		EngineMode: types.EngineMode("GENERAL"),
+		AcceptedWarnings: []string{
+			"__Member__",
+			"__Member__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

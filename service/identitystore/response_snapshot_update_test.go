@@ -144,8 +144,10 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 }
 func TestUpdateResponseSnapshot_CreateGroup(t *testing.T) {
 	want := &CreateGroupOutput{
-		GroupId:         ptr.String("__GroupId__"),
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		GroupId:         ptr.String("__GroupId__"),
+		GroupArn:        ptr.String("__GroupArn__"),
+		Revision:        ptr.String("__Revision__"),
 	}
 	proto := awsjson.New11(schemas.AWSIdentityStore)
 	opSchema := smithy.NewOperationSchema(schemas.CreateGroup, schemas.CreateGroupResponse, schemas.CreateGroupResponse)
@@ -169,8 +171,9 @@ func TestUpdateResponseSnapshot_CreateGroup(t *testing.T) {
 
 func TestUpdateResponseSnapshot_CreateGroupMembership(t *testing.T) {
 	want := &CreateGroupMembershipOutput{
-		MembershipId:    ptr.String("__MembershipId__"),
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		MembershipId:    ptr.String("__MembershipId__"),
+		MembershipArn:   ptr.String("__MembershipArn__"),
 	}
 	proto := awsjson.New11(schemas.AWSIdentityStore)
 	opSchema := smithy.NewOperationSchema(schemas.CreateGroupMembership, schemas.CreateGroupMembershipResponse, schemas.CreateGroupMembershipResponse)
@@ -196,6 +199,8 @@ func TestUpdateResponseSnapshot_CreateUser(t *testing.T) {
 	want := &CreateUserOutput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
 		UserId:          ptr.String("__UserId__"),
+		UserArn:         ptr.String("__UserArn__"),
+		Revision:        ptr.String("__Revision__"),
 	}
 	proto := awsjson.New11(schemas.AWSIdentityStore)
 	opSchema := smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserResponse, schemas.CreateUserResponse)
@@ -285,8 +290,11 @@ func TestUpdateResponseSnapshot_DeleteUser(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DescribeGroup(t *testing.T) {
 	want := &DescribeGroupOutput{
-		GroupId:     ptr.String("__GroupId__"),
-		DisplayName: ptr.String("__DisplayName__"),
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		GroupId:         ptr.String("__GroupId__"),
+		GroupArn:        ptr.String("__GroupArn__"),
+		Revision:        ptr.String("__Revision__"),
+		DisplayName:     ptr.String("__DisplayName__"),
 		ExternalIds: []types.ExternalId{
 			{
 				Issuer: ptr.String("__Issuer__"),
@@ -297,12 +305,11 @@ func TestUpdateResponseSnapshot_DescribeGroup(t *testing.T) {
 				Id:     ptr.String("__Id__"),
 			},
 		},
-		Description:     ptr.String("__Description__"),
-		CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		CreatedBy:       ptr.String("__CreatedBy__"),
-		UpdatedBy:       ptr.String("__UpdatedBy__"),
-		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		Description: ptr.String("__Description__"),
+		CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBy:   ptr.String("__CreatedBy__"),
+		UpdatedBy:   ptr.String("__UpdatedBy__"),
 	}
 	proto := awsjson.New11(schemas.AWSIdentityStore)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeGroup, schemas.DescribeGroupResponse, schemas.DescribeGroupResponse)
@@ -328,6 +335,7 @@ func TestUpdateResponseSnapshot_DescribeGroupMembership(t *testing.T) {
 	want := &DescribeGroupMembershipOutput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
 		MembershipId:    ptr.String("__MembershipId__"),
+		MembershipArn:   ptr.String("__MembershipArn__"),
 		GroupId:         ptr.String("__GroupId__"),
 		MemberId: &types.MemberIdMemberUserId{
 			Value: "__MemberIdMemberUserId__",
@@ -357,10 +365,52 @@ func TestUpdateResponseSnapshot_DescribeGroupMembership(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeIdentityStore(t *testing.T) {
+	want := &DescribeIdentityStoreOutput{
+		IdentityStoreId:  ptr.String("__IdentityStoreId__"),
+		IdentityStoreArn: ptr.String("__IdentityStoreArn__"),
+		NetworkConfiguration: &types.NetworkConfigurationDetails{
+			VpceAccessRequired: ptr.Bool(true),
+			ApiRestrictSourceVpcs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ApiAllowSourceIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ScimAllowSourceIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.AWSIdentityStore)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeIdentityStore, schemas.DescribeIdentityStoreResponse, schemas.DescribeIdentityStoreResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeIdentityStore.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeUser(t *testing.T) {
 	want := &DescribeUserOutput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
 		UserId:          ptr.String("__UserId__"),
+		UserArn:         ptr.String("__UserArn__"),
+		Revision:        ptr.String("__Revision__"),
 		UserName:        ptr.String("__UserName__"),
 		ExternalIds: []types.ExternalId{
 			{
@@ -493,8 +543,9 @@ func TestUpdateResponseSnapshot_DescribeUser(t *testing.T) {
 
 func TestUpdateResponseSnapshot_GetGroupId(t *testing.T) {
 	want := &GetGroupIdOutput{
-		GroupId:         ptr.String("__GroupId__"),
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		GroupId:         ptr.String("__GroupId__"),
+		GroupArn:        ptr.String("__GroupArn__"),
 	}
 	proto := awsjson.New11(schemas.AWSIdentityStore)
 	opSchema := smithy.NewOperationSchema(schemas.GetGroupId, schemas.GetGroupIdResponse, schemas.GetGroupIdResponse)
@@ -518,8 +569,9 @@ func TestUpdateResponseSnapshot_GetGroupId(t *testing.T) {
 
 func TestUpdateResponseSnapshot_GetGroupMembershipId(t *testing.T) {
 	want := &GetGroupMembershipIdOutput{
-		MembershipId:    ptr.String("__MembershipId__"),
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		MembershipId:    ptr.String("__MembershipId__"),
+		MembershipArn:   ptr.String("__MembershipArn__"),
 	}
 	proto := awsjson.New11(schemas.AWSIdentityStore)
 	opSchema := smithy.NewOperationSchema(schemas.GetGroupMembershipId, schemas.GetGroupMembershipIdResponse, schemas.GetGroupMembershipIdResponse)
@@ -545,6 +597,7 @@ func TestUpdateResponseSnapshot_GetUserId(t *testing.T) {
 	want := &GetUserIdOutput{
 		IdentityStoreId: ptr.String("__IdentityStoreId__"),
 		UserId:          ptr.String("__UserId__"),
+		UserArn:         ptr.String("__UserArn__"),
 	}
 	proto := awsjson.New11(schemas.AWSIdentityStore)
 	opSchema := smithy.NewOperationSchema(schemas.GetUserId, schemas.GetUserIdResponse, schemas.GetUserIdResponse)
@@ -611,6 +664,7 @@ func TestUpdateResponseSnapshot_ListGroupMemberships(t *testing.T) {
 			{
 				IdentityStoreId: ptr.String("__IdentityStoreId__"),
 				MembershipId:    ptr.String("__MembershipId__"),
+				MembershipArn:   ptr.String("__MembershipArn__"),
 				GroupId:         ptr.String("__GroupId__"),
 				MemberId: &types.MemberIdMemberUserId{
 					Value: "__MemberIdMemberUserId__",
@@ -623,6 +677,7 @@ func TestUpdateResponseSnapshot_ListGroupMemberships(t *testing.T) {
 			{
 				IdentityStoreId: ptr.String("__IdentityStoreId__"),
 				MembershipId:    ptr.String("__MembershipId__"),
+				MembershipArn:   ptr.String("__MembershipArn__"),
 				GroupId:         ptr.String("__GroupId__"),
 				MemberId: &types.MemberIdMemberUserId{
 					Value: "__MemberIdMemberUserId__",
@@ -661,6 +716,7 @@ func TestUpdateResponseSnapshot_ListGroupMembershipsForMember(t *testing.T) {
 			{
 				IdentityStoreId: ptr.String("__IdentityStoreId__"),
 				MembershipId:    ptr.String("__MembershipId__"),
+				MembershipArn:   ptr.String("__MembershipArn__"),
 				GroupId:         ptr.String("__GroupId__"),
 				MemberId: &types.MemberIdMemberUserId{
 					Value: "__MemberIdMemberUserId__",
@@ -673,6 +729,7 @@ func TestUpdateResponseSnapshot_ListGroupMembershipsForMember(t *testing.T) {
 			{
 				IdentityStoreId: ptr.String("__IdentityStoreId__"),
 				MembershipId:    ptr.String("__MembershipId__"),
+				MembershipArn:   ptr.String("__MembershipArn__"),
 				GroupId:         ptr.String("__GroupId__"),
 				MemberId: &types.MemberIdMemberUserId{
 					Value: "__MemberIdMemberUserId__",
@@ -709,8 +766,11 @@ func TestUpdateResponseSnapshot_ListGroups(t *testing.T) {
 	want := &ListGroupsOutput{
 		Groups: []types.Group{
 			{
-				GroupId:     ptr.String("__GroupId__"),
-				DisplayName: ptr.String("__DisplayName__"),
+				IdentityStoreId: ptr.String("__IdentityStoreId__"),
+				GroupId:         ptr.String("__GroupId__"),
+				GroupArn:        ptr.String("__GroupArn__"),
+				Revision:        ptr.String("__Revision__"),
+				DisplayName:     ptr.String("__DisplayName__"),
 				ExternalIds: []types.ExternalId{
 					{
 						Issuer: ptr.String("__Issuer__"),
@@ -721,16 +781,18 @@ func TestUpdateResponseSnapshot_ListGroups(t *testing.T) {
 						Id:     ptr.String("__Id__"),
 					},
 				},
-				Description:     ptr.String("__Description__"),
-				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				CreatedBy:       ptr.String("__CreatedBy__"),
-				UpdatedBy:       ptr.String("__UpdatedBy__"),
-				IdentityStoreId: ptr.String("__IdentityStoreId__"),
+				Description: ptr.String("__Description__"),
+				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedBy:   ptr.String("__CreatedBy__"),
+				UpdatedBy:   ptr.String("__UpdatedBy__"),
 			},
 			{
-				GroupId:     ptr.String("__GroupId__"),
-				DisplayName: ptr.String("__DisplayName__"),
+				IdentityStoreId: ptr.String("__IdentityStoreId__"),
+				GroupId:         ptr.String("__GroupId__"),
+				GroupArn:        ptr.String("__GroupArn__"),
+				Revision:        ptr.String("__Revision__"),
+				DisplayName:     ptr.String("__DisplayName__"),
 				ExternalIds: []types.ExternalId{
 					{
 						Issuer: ptr.String("__Issuer__"),
@@ -741,12 +803,11 @@ func TestUpdateResponseSnapshot_ListGroups(t *testing.T) {
 						Id:     ptr.String("__Id__"),
 					},
 				},
-				Description:     ptr.String("__Description__"),
-				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				CreatedBy:       ptr.String("__CreatedBy__"),
-				UpdatedBy:       ptr.String("__UpdatedBy__"),
-				IdentityStoreId: ptr.String("__IdentityStoreId__"),
+				Description: ptr.String("__Description__"),
+				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedBy:   ptr.String("__CreatedBy__"),
+				UpdatedBy:   ptr.String("__UpdatedBy__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -771,12 +832,48 @@ func TestUpdateResponseSnapshot_ListGroups(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListIdentityStores(t *testing.T) {
+	want := &ListIdentityStoresOutput{
+		IdentityStores: []types.IdentityStore{
+			{
+				IdentityStoreId:  ptr.String("__IdentityStoreId__"),
+				IdentityStoreArn: ptr.String("__IdentityStoreArn__"),
+			},
+			{
+				IdentityStoreId:  ptr.String("__IdentityStoreId__"),
+				IdentityStoreArn: ptr.String("__IdentityStoreArn__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.AWSIdentityStore)
+	opSchema := smithy.NewOperationSchema(schemas.ListIdentityStores, schemas.ListIdentityStoresResponse, schemas.ListIdentityStoresResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListIdentityStores.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListUsers(t *testing.T) {
 	want := &ListUsersOutput{
 		Users: []types.User{
 			{
 				IdentityStoreId: ptr.String("__IdentityStoreId__"),
 				UserId:          ptr.String("__UserId__"),
+				UserArn:         ptr.String("__UserArn__"),
+				Revision:        ptr.String("__Revision__"),
 				UserName:        ptr.String("__UserName__"),
 				ExternalIds: []types.ExternalId{
 					{
@@ -890,6 +987,8 @@ func TestUpdateResponseSnapshot_ListUsers(t *testing.T) {
 			{
 				IdentityStoreId: ptr.String("__IdentityStoreId__"),
 				UserId:          ptr.String("__UserId__"),
+				UserArn:         ptr.String("__UserArn__"),
+				Revision:        ptr.String("__Revision__"),
 				UserName:        ptr.String("__UserName__"),
 				ExternalIds: []types.ExternalId{
 					{
@@ -1024,7 +1123,12 @@ func TestUpdateResponseSnapshot_ListUsers(t *testing.T) {
 }
 
 func TestUpdateResponseSnapshot_UpdateGroup(t *testing.T) {
-	want := &UpdateGroupOutput{}
+	want := &UpdateGroupOutput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		GroupId:         ptr.String("__GroupId__"),
+		GroupArn:        ptr.String("__GroupArn__"),
+		Revision:        ptr.String("__Revision__"),
+	}
 	proto := awsjson.New11(schemas.AWSIdentityStore)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateGroup, schemas.UpdateGroupResponse, schemas.UpdateGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
@@ -1045,8 +1149,38 @@ func TestUpdateResponseSnapshot_UpdateGroup(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateIdentityStore(t *testing.T) {
+	want := &UpdateIdentityStoreOutput{
+		IdentityStoreId:  ptr.String("__IdentityStoreId__"),
+		IdentityStoreArn: ptr.String("__IdentityStoreArn__"),
+	}
+	proto := awsjson.New11(schemas.AWSIdentityStore)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateIdentityStore, schemas.UpdateIdentityStoreResponse, schemas.UpdateIdentityStoreResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateIdentityStore.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateUser(t *testing.T) {
-	want := &UpdateUserOutput{}
+	want := &UpdateUserOutput{
+		IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		UserId:          ptr.String("__UserId__"),
+		UserArn:         ptr.String("__UserArn__"),
+		Revision:        ptr.String("__Revision__"),
+	}
 	proto := awsjson.New11(schemas.AWSIdentityStore)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateUser, schemas.UpdateUserResponse, schemas.UpdateUserResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)

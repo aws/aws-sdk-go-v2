@@ -1796,6 +1796,25 @@ func (UpgradeStep) Values() []UpgradeStep {
 	}
 }
 
+type ValidationFailureSeverity string
+
+// Enum values for ValidationFailureSeverity
+const (
+	ValidationFailureSeverityCritical ValidationFailureSeverity = "Critical"
+	ValidationFailureSeverityWarning  ValidationFailureSeverity = "Warning"
+)
+
+// Values returns all known values for ValidationFailureSeverity. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationFailureSeverity) Values() []ValidationFailureSeverity {
+	return []ValidationFailureSeverity{
+		"Critical",
+		"Warning",
+	}
+}
+
 type VolumeType string
 
 // Enum values for VolumeType

@@ -31,6 +31,10 @@ type CreateUserInput struct {
 
 	// The globally unique identifier for the identity store.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
 
@@ -162,64 +166,6 @@ func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.CreateUserRequest_Website, *v.Website)
 	}
 }
-func (v *CreateUserInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateUserRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateUserRequest_Addresses:
-			return deserializeAddresses(d, schemas.CreateUserRequest_Addresses, &v.Addresses)
-		case schemas.CreateUserRequest_Birthdate:
-			v.Birthdate = new(string)
-			return d.ReadString(schemas.CreateUserRequest_Birthdate, v.Birthdate)
-		case schemas.CreateUserRequest_DisplayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.CreateUserRequest_DisplayName, v.DisplayName)
-		case schemas.CreateUserRequest_Emails:
-			return deserializeEmails(d, schemas.CreateUserRequest_Emails, &v.Emails)
-		case schemas.CreateUserRequest_Extensions:
-			return deserializeExtensions(d, schemas.CreateUserRequest_Extensions, &v.Extensions)
-		case schemas.CreateUserRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.CreateUserRequest_IdentityStoreId, v.IdentityStoreId)
-		case schemas.CreateUserRequest_Locale:
-			v.Locale = new(string)
-			return d.ReadString(schemas.CreateUserRequest_Locale, v.Locale)
-		case schemas.CreateUserRequest_Name:
-			v.Name = &types.Name{}
-			return v.Name.Deserialize(d)
-		case schemas.CreateUserRequest_NickName:
-			v.NickName = new(string)
-			return d.ReadString(schemas.CreateUserRequest_NickName, v.NickName)
-		case schemas.CreateUserRequest_PhoneNumbers:
-			return deserializePhoneNumbers(d, schemas.CreateUserRequest_PhoneNumbers, &v.PhoneNumbers)
-		case schemas.CreateUserRequest_Photos:
-			return deserializePhotos(d, schemas.CreateUserRequest_Photos, &v.Photos)
-		case schemas.CreateUserRequest_PreferredLanguage:
-			v.PreferredLanguage = new(string)
-			return d.ReadString(schemas.CreateUserRequest_PreferredLanguage, v.PreferredLanguage)
-		case schemas.CreateUserRequest_ProfileUrl:
-			v.ProfileUrl = new(string)
-			return d.ReadString(schemas.CreateUserRequest_ProfileUrl, v.ProfileUrl)
-		case schemas.CreateUserRequest_Roles:
-			return deserializeRoles(d, schemas.CreateUserRequest_Roles, &v.Roles)
-		case schemas.CreateUserRequest_Timezone:
-			v.Timezone = new(string)
-			return d.ReadString(schemas.CreateUserRequest_Timezone, v.Timezone)
-		case schemas.CreateUserRequest_Title:
-			v.Title = new(string)
-			return d.ReadString(schemas.CreateUserRequest_Title, v.Title)
-		case schemas.CreateUserRequest_UserName:
-			v.UserName = new(string)
-			return d.ReadString(schemas.CreateUserRequest_UserName, v.UserName)
-		case schemas.CreateUserRequest_UserType:
-			v.UserType = new(string)
-			return d.ReadString(schemas.CreateUserRequest_UserType, v.UserType)
-		case schemas.CreateUserRequest_Website:
-			v.Website = new(string)
-			return d.ReadString(schemas.CreateUserRequest_Website, v.Website)
-		}
-		return nil
-	})
-}
 
 type CreateUserOutput struct {
 
@@ -227,6 +173,17 @@ type CreateUserOutput struct {
 	//
 	// This member is required.
 	IdentityStoreId *string
+
+	// The revision of the newly created user in the identity store.
+	//
+	// This member is required.
+	Revision *string
+
+	// The Amazon Resource Name (ARN) of the newly created user in the identity store.
+	// For example, arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
+	//
+	// This member is required.
+	UserArn *string
 
 	// The identifier of the newly created user in the identity store.
 	//
@@ -249,6 +206,12 @@ func (v *CreateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.CreateUserResponse_IdentityStoreId, *v.IdentityStoreId)
 	}
+	if v.Revision != nil {
+		s.WriteString(schemas.CreateUserResponse_Revision, *v.Revision)
+	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.CreateUserResponse_UserArn, *v.UserArn)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.CreateUserResponse_UserId, *v.UserId)
 	}
@@ -259,6 +222,12 @@ func (v *CreateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CreateUserResponse_IdentityStoreId:
 			v.IdentityStoreId = new(string)
 			return d.ReadString(schemas.CreateUserResponse_IdentityStoreId, v.IdentityStoreId)
+		case schemas.CreateUserResponse_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.CreateUserResponse_Revision, v.Revision)
+		case schemas.CreateUserResponse_UserArn:
+			v.UserArn = new(string)
+			return d.ReadString(schemas.CreateUserResponse_UserArn, v.UserArn)
 		case schemas.CreateUserResponse_UserId:
 			v.UserId = new(string)
 			return d.ReadString(schemas.CreateUserResponse_UserId, v.UserId)

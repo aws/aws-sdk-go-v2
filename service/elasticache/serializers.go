@@ -6687,6 +6687,11 @@ func awsAwsquery_serializeOpDocumentCreateServerlessCacheInput(v *CreateServerle
 		}
 	}
 
+	if len(v.ConnectionType) > 0 {
+		objectKey := object.Key("ConnectionType")
+		objectKey.String(string(v.ConnectionType))
+	}
+
 	if v.DailySnapshotTime != nil {
 		objectKey := object.Key("DailySnapshotTime")
 		objectKey.String(*v.DailySnapshotTime)

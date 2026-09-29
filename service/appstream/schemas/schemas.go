@@ -1432,7 +1432,7 @@ var FleetType_ELASTIC *smithy.Schema
 var Image = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "Image",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var Image_Name *smithy.Schema
 
 var Image_Arn *smithy.Schema
@@ -1478,6 +1478,8 @@ var Image_ImageSharedWithOthers *smithy.Schema
 var Image_ManagedSoftwareIncluded *smithy.Schema
 
 var Image_ImageType *smithy.Schema
+
+var Image_ImageSoftwareMetadata *smithy.Schema
 
 var ImageBuilder = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
@@ -1610,6 +1612,12 @@ var ImageSharedWithOthers = smithy.NewSchema(smithy.ShapeID{
 var ImageSharedWithOthers_TRUE *smithy.Schema
 
 var ImageSharedWithOthers_FALSE *smithy.Schema
+
+var ImageSoftwareMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "ImageSoftwareMetadata",
+}, smithy.ShapeTypeStructure, 1)
+var ImageSoftwareMetadata_nvidiaGridDriverVersion *smithy.Schema
 
 var ImageState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
@@ -1780,6 +1788,11 @@ var NetworkAccessConfiguration_EniPrivateIpAddress *smithy.Schema
 var NetworkAccessConfiguration_EniIpv6Addresses *smithy.Schema
 
 var NetworkAccessConfiguration_EniId *smithy.Schema
+
+var _NvidiaGridDriverVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "NvidiaGridDriverVersion",
+}, smithy.ShapeTypeString, 0)
 
 var OperationNotPermittedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
@@ -4918,6 +4931,8 @@ func init() {
 
 	ImageType_BYOL = ImageType.AddMember("BYOL", smithyprelude.Unit)
 
+	ImageSoftwareMetadata_nvidiaGridDriverVersion = ImageSoftwareMetadata.AddMember("nvidiaGridDriverVersion", _NvidiaGridDriverVersion)
+
 	Image_Name = Image.AddMember("Name", _String)
 
 	Image_Arn = Image.AddMember("Arn", _Arn)
@@ -4963,6 +4978,8 @@ func init() {
 	Image_ManagedSoftwareIncluded = Image.AddMember("ManagedSoftwareIncluded", _Boolean)
 
 	Image_ImageType = Image.AddMember("ImageType", ImageType)
+
+	Image_ImageSoftwareMetadata = Image.AddMember("ImageSoftwareMetadata", ImageSoftwareMetadata)
 
 	ImageBuilderState_PENDING = ImageBuilderState.AddMember("PENDING", smithyprelude.Unit)
 

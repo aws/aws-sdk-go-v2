@@ -70,7 +70,7 @@ type StartSessionsStatisticsAggregationInput struct {
 	// The period to aggregate the statistics.
 	Period types.Period
 
-	// The timezone to use for the statistics. Use UTC notation such as "UTC+8."
+	// The time zone to use for the statistics. Use UTC notation such as "UTC+8."
 	Timezone *string
 
 	noSmithyDocumentSerde

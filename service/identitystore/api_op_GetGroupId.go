@@ -43,6 +43,10 @@ type GetGroupIdInput struct {
 
 	// The globally unique identifier for the identity store.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
 
@@ -61,20 +65,14 @@ func (v *GetGroupIdInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.GetGroupIdRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
 }
-func (v *GetGroupIdInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetGroupIdRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetGroupIdRequest_AlternateIdentifier:
-			return deserializeAlternateIdentifier(d, schemas.GetGroupIdRequest_AlternateIdentifier, &v.AlternateIdentifier)
-		case schemas.GetGroupIdRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.GetGroupIdRequest_IdentityStoreId, v.IdentityStoreId)
-		}
-		return nil
-	})
-}
 
 type GetGroupIdOutput struct {
+
+	// The Amazon Resource Name (ARN) of the group in the identity store. For example,
+	// arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
+	//
+	// This member is required.
+	GroupArn *string
 
 	// The identifier for a group in the identity store.
 	//
@@ -99,6 +97,9 @@ func (v *GetGroupIdOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetGroupIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupArn != nil {
+		s.WriteString(schemas.GetGroupIdResponse_GroupArn, *v.GroupArn)
+	}
 	if v.GroupId != nil {
 		s.WriteString(schemas.GetGroupIdResponse_GroupId, *v.GroupId)
 	}
@@ -109,6 +110,9 @@ func (v *GetGroupIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *GetGroupIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetGroupIdResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.GetGroupIdResponse_GroupArn:
+			v.GroupArn = new(string)
+			return d.ReadString(schemas.GetGroupIdResponse_GroupArn, v.GroupArn)
 		case schemas.GetGroupIdResponse_GroupId:
 			v.GroupId = new(string)
 			return d.ReadString(schemas.GetGroupIdResponse_GroupId, v.GroupId)

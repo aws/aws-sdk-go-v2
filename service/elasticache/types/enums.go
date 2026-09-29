@@ -145,6 +145,25 @@ func (ClusterMode) Values() []ClusterMode {
 	}
 }
 
+type ConnectionType string
+
+// Enum values for ConnectionType
+const (
+	ConnectionTypeVpc    ConnectionType = "vpc"
+	ConnectionTypePublic ConnectionType = "public"
+)
+
+// Values returns all known values for ConnectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionType) Values() []ConnectionType {
+	return []ConnectionType{
+		"vpc",
+		"public",
+	}
+}
+
 type DataStorageUnit string
 
 // Enum values for DataStorageUnit

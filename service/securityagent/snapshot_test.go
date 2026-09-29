@@ -1094,6 +1094,18 @@ func TestCheckSnapshot_UpdateIntegratedResources(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdatePentest(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdatePentest(context.Background(), nil, func(o *Options) {
@@ -2202,6 +2214,18 @@ func TestUpdateSnapshot_UpdateIntegratedResources(t *testing.T) {
 	_, err := svc.UpdateIntegratedResources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateIntegratedResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateIntegration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -34230,6 +34230,9 @@ type ViewDefinition struct {
 	// The definer of a view in SQL.
 	Definer *string
 
+	// Specifies whether the materialized view is managed by Glue.
+	IsManaged *bool
+
 	// You can set this flag as true to instruct the engine not to push user-provided
 	// operations into the logical plan of the view during query planning. However,
 	// setting this flag does not guarantee that the engine will comply. Refer to the
@@ -34282,6 +34285,9 @@ func (v *ViewDefinition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Definer != nil {
 		s.WriteString(schemas.ViewDefinition_Definer, *v.Definer)
 	}
+	if v.IsManaged != nil {
+		s.WriteBool(schemas.ViewDefinition_IsManaged, *v.IsManaged)
+	}
 	if v.IsProtected != nil {
 		s.WriteBool(schemas.ViewDefinition_IsProtected, *v.IsProtected)
 	}
@@ -34309,6 +34315,9 @@ func (v *ViewDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ViewDefinition_Definer:
 			v.Definer = new(string)
 			return d.ReadString(schemas.ViewDefinition_Definer, v.Definer)
+		case schemas.ViewDefinition_IsManaged:
+			v.IsManaged = new(bool)
+			return d.ReadBool(schemas.ViewDefinition_IsManaged, v.IsManaged)
 		case schemas.ViewDefinition_IsProtected:
 			v.IsProtected = new(bool)
 			return d.ReadBool(schemas.ViewDefinition_IsProtected, v.IsProtected)
@@ -34347,6 +34356,9 @@ type ViewDefinitionInput struct {
 
 	// The definer of a view in SQL.
 	Definer *string
+
+	// Specifies whether the materialized view is managed by Glue.
+	IsManaged *bool
 
 	// You can set this flag as true to instruct the engine not to push user-provided
 	// operations into the logical plan of the view during query planning. However,
@@ -34401,6 +34413,9 @@ func (v *ViewDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Definer != nil {
 		s.WriteString(schemas.ViewDefinitionInput_Definer, *v.Definer)
 	}
+	if v.IsManaged != nil {
+		s.WriteBool(schemas.ViewDefinitionInput_IsManaged, *v.IsManaged)
+	}
 	if v.IsProtected != nil {
 		s.WriteBool(schemas.ViewDefinitionInput_IsProtected, *v.IsProtected)
 	}
@@ -34428,6 +34443,9 @@ func (v *ViewDefinitionInput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ViewDefinitionInput_Definer:
 			v.Definer = new(string)
 			return d.ReadString(schemas.ViewDefinitionInput_Definer, v.Definer)
+		case schemas.ViewDefinitionInput_IsManaged:
+			v.IsManaged = new(bool)
+			return d.ReadBool(schemas.ViewDefinitionInput_IsManaged, v.IsManaged)
 		case schemas.ViewDefinitionInput_IsProtected:
 			v.IsProtected = new(bool)
 			return d.ReadBool(schemas.ViewDefinitionInput_IsProtected, v.IsProtected)

@@ -1612,6 +1612,7 @@ func TestCheckResponseSnapshot_CreateServerlessCache(t *testing.T) {
 			SnapshotRetentionLimit: ptr.Int32(1),
 			DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 			NetworkType:            types.NetworkType("ipv4"),
+			ConnectionType:         types.ConnectionType("vpc"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateServerlessCache.response")
@@ -1665,6 +1666,7 @@ func TestCheckResponseSnapshot_CreateServerlessCache(t *testing.T) {
 		SnapshotRetentionLimit: ptr.Int32(1),
 		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 		NetworkType:            types.NetworkType("ipv4"),
+		ConnectionType:         types.ConnectionType("vpc"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2886,6 +2888,7 @@ func TestCheckResponseSnapshot_DeleteServerlessCache(t *testing.T) {
 			SnapshotRetentionLimit: ptr.Int32(1),
 			DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 			NetworkType:            types.NetworkType("ipv4"),
+			ConnectionType:         types.ConnectionType("vpc"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteServerlessCache.response")
@@ -4777,6 +4780,7 @@ func TestCheckResponseSnapshot_DescribeServerlessCaches(t *testing.T) {
 				SnapshotRetentionLimit: ptr.Int32(1),
 				DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 				NetworkType:            types.NetworkType("ipv4"),
+				ConnectionType:         types.ConnectionType("vpc"),
 			},
 			{
 				ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
@@ -4820,6 +4824,7 @@ func TestCheckResponseSnapshot_DescribeServerlessCaches(t *testing.T) {
 				SnapshotRetentionLimit: ptr.Int32(1),
 				DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 				NetworkType:            types.NetworkType("ipv4"),
+				ConnectionType:         types.ConnectionType("vpc"),
 			},
 		},
 	}
@@ -7104,6 +7109,7 @@ func TestCheckResponseSnapshot_ModifyServerlessCache(t *testing.T) {
 			SnapshotRetentionLimit: ptr.Int32(1),
 			DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 			NetworkType:            types.NetworkType("ipv4"),
+			ConnectionType:         types.ConnectionType("vpc"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifyServerlessCache.response")
@@ -9768,6 +9774,7 @@ func TestCheckResponseSnapshot_Error_InvalidCredentialsException(t *testing.T) {
 		SnapshotRetentionLimit: ptr.Int32(1),
 		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 		NetworkType:            types.NetworkType("ipv4"),
+		ConnectionType:         types.ConnectionType("vpc"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -11441,6 +11448,7 @@ func TestCheckResponseSnapshot_Error_ServerlessCacheAlreadyExistsFault(t *testin
 		SnapshotRetentionLimit: ptr.Int32(1),
 		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 		NetworkType:            types.NetworkType("ipv4"),
+		ConnectionType:         types.ConnectionType("vpc"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -11546,6 +11554,7 @@ func TestCheckResponseSnapshot_Error_ServerlessCacheQuotaForCustomerExceededFaul
 		SnapshotRetentionLimit: ptr.Int32(1),
 		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 		NetworkType:            types.NetworkType("ipv4"),
+		ConnectionType:         types.ConnectionType("vpc"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

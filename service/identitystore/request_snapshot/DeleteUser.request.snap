@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSIdentityStore.DeleteUser
 
-{"IdentityStoreId":"__IdentityStoreId__","UserId":"__UserId__"}
+{"IdentityStoreId":"__IdentityStoreId__","Revision":"__Revision__","UserId":"__UserId__"}

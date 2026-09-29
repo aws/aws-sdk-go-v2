@@ -654,6 +654,16 @@ func TestCheckRequestSnapshot_CreateBlueGreenDeployment(t *testing.T) {
 		TargetStorageType:          ptr.String("__TargetStorageType__"),
 		TargetAllocatedStorage:     ptr.Int32(1),
 		TargetStorageThroughput:    ptr.Int32(1),
+		TargetResourceConfigurations: []types.TargetResourceConfiguration{
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8057,6 +8067,16 @@ func TestUpdateRequestSnapshot_CreateBlueGreenDeployment(t *testing.T) {
 		TargetStorageType:          ptr.String("__TargetStorageType__"),
 		TargetAllocatedStorage:     ptr.Int32(1),
 		TargetStorageThroughput:    ptr.Int32(1),
+		TargetResourceConfigurations: []types.TargetResourceConfiguration{
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

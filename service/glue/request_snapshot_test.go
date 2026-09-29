@@ -5795,6 +5795,7 @@ func TestCheckRequestSnapshot_CreateTable(t *testing.T) {
 			},
 			ViewDefinition: &types.ViewDefinitionInput{
 				IsProtected: ptr.Bool(true),
+				IsManaged:   ptr.Bool(true),
 				Definer:     ptr.String("__Definer__"),
 				Representations: []types.ViewRepresentationInput{
 					{
@@ -18324,6 +18325,7 @@ func TestCheckRequestSnapshot_UpdateTable(t *testing.T) {
 			},
 			ViewDefinition: &types.ViewDefinitionInput{
 				IsProtected: ptr.Bool(true),
+				IsManaged:   ptr.Bool(true),
 				Definer:     ptr.String("__Definer__"),
 				Representations: []types.ViewRepresentationInput{
 					{
@@ -24424,6 +24426,7 @@ func TestUpdateRequestSnapshot_CreateTable(t *testing.T) {
 			},
 			ViewDefinition: &types.ViewDefinitionInput{
 				IsProtected: ptr.Bool(true),
+				IsManaged:   ptr.Bool(true),
 				Definer:     ptr.String("__Definer__"),
 				Representations: []types.ViewRepresentationInput{
 					{
@@ -36953,6 +36956,7 @@ func TestUpdateRequestSnapshot_UpdateTable(t *testing.T) {
 			},
 			ViewDefinition: &types.ViewDefinitionInput{
 				IsProtected: ptr.Bool(true),
+				IsManaged:   ptr.Bool(true),
 				Definer:     ptr.String("__Definer__"),
 				Representations: []types.ViewRepresentationInput{
 					{

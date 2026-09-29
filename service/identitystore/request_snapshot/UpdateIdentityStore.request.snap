@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSIdentityStore.UpdateIdentityStore
+
+{"IdentityStoreId":"__IdentityStoreId__","NetworkConfiguration":{"ApiAllowSourceIps":["__Member__","__Member__"],"ApiRestrictSourceVpcs":["__Member__","__Member__"],"ScimAllowSourceIps":["__Member__","__Member__"],"VpceAccessRequired":true}}

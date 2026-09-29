@@ -1590,6 +1590,26 @@ func (m *validateOpUpdateIntegratedResources) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateIntegration struct {
+}
+
+func (*validateOpUpdateIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePentest struct {
 }
 
@@ -2046,6 +2066,10 @@ func addOpUpdateIntegratedResourcesValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpUpdateIntegratedResources{}, middleware.After)
 }
 
+func addOpUpdateIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIntegration{}, middleware.After)
+}
+
 func addOpUpdatePentestValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePentest{}, middleware.After)
 }
@@ -2093,6 +2117,66 @@ func validateAssets(v *types.Assets) error {
 		if err := validateTrustedCaCertificateList(v.TrustedCaCertificates); err != nil {
 			invalidParams.AddNested("TrustedCaCertificates", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureDevOpsIntegrationInput(v *types.AzureDevOpsIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureDevOpsIntegrationInput"}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if v.State == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if v.OrganizationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureDevOpsRepositoryResource(v *types.AzureDevOpsRepositoryResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureDevOpsRepositoryResource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Organization == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Organization"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBitbucketDataCenterIntegrationInput(v *types.BitbucketDataCenterIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BitbucketDataCenterIntegrationInput"}
+	if v.TargetUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetUrl"))
+	}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if v.State == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2431,6 +2515,11 @@ func validateIntegratedResource(v types.IntegratedResource) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IntegratedResource"}
 	switch uv := v.(type) {
+	case *types.IntegratedResourceMemberAzureDevOpsRepository:
+		if err := validateAzureDevOpsRepositoryResource(&uv.Value); err != nil {
+			invalidParams.AddNested("[azureDevOpsRepository]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.IntegratedResourceMemberBitbucketRepository:
 		if err := validateBitbucketRepositoryResource(&uv.Value); err != nil {
 			invalidParams.AddNested("[bitbucketRepository]", err.(smithy.InvalidParamsError))
@@ -2525,9 +2614,19 @@ func validateProviderInput(v types.ProviderInput) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProviderInput"}
 	switch uv := v.(type) {
+	case *types.ProviderInputMemberAzureDevOps:
+		if err := validateAzureDevOpsIntegrationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[azureDevOps]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ProviderInputMemberBitbucket:
 		if err := validateBitbucketIntegrationInput(&uv.Value); err != nil {
 			invalidParams.AddNested("[bitbucket]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProviderInputMemberBitbucketDataCenter:
+		if err := validateBitbucketDataCenterIntegrationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[bitbucketDataCenter]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ProviderInputMemberConfluence:
@@ -4193,6 +4292,24 @@ func validateOpUpdateIntegratedResourcesInput(v *UpdateIntegratedResourcesInput)
 		if err := validateIntegratedResourceInputItemList(v.Items); err != nil {
 			invalidParams.AddNested("Items", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIntegrationInput(v *UpdateIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIntegrationInput"}
+	if v.IntegrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
+	}
+	if len(v.WebhookAction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("WebhookAction"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

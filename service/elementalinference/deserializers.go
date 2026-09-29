@@ -4426,6 +4426,15 @@ func awsRestjson1_deserializeDocumentContextualMetadataConfig(v **types.Contextu
 
 	for key, value := range shape {
 		switch key {
+		case "extendedAnalysis":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExtendedAnalysisMode to be of type string, got %T instead", value)
+				}
+				sv.ExtendedAnalysis = types.ExtendedAnalysisMode(jtv)
+			}
+
 		case "summaryGeneration":
 			if value != nil {
 				jtv, ok := value.(string)

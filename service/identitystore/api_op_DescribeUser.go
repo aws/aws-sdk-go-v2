@@ -40,10 +40,18 @@ type DescribeUserInput struct {
 	// string that contains numbers and lower case letters. This value is generated at
 	// the time that a new identity store is created.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
 
 	// The identifier for a user in the identity store.
+	//
+	// You can specify the user by ID or by Amazon Resource Name (ARN). For example,
+	// user ID a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 or user ARN
+	// arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
 	//
 	// This member is required.
 	UserId *string
@@ -71,21 +79,6 @@ func (v *DescribeUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.DescribeUserRequest_UserId, *v.UserId)
 	}
 }
-func (v *DescribeUserInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeUserRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeUserRequest_Extensions:
-			return deserializeExtensionNames(d, schemas.DescribeUserRequest_Extensions, &v.Extensions)
-		case schemas.DescribeUserRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.DescribeUserRequest_IdentityStoreId, v.IdentityStoreId)
-		case schemas.DescribeUserRequest_UserId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.DescribeUserRequest_UserId, v.UserId)
-		}
-		return nil
-	})
-}
 
 type DescribeUserOutput struct {
 
@@ -93,6 +86,18 @@ type DescribeUserOutput struct {
 	//
 	// This member is required.
 	IdentityStoreId *string
+
+	// The current revision of the user in the identity store. This value changes each
+	// time the user is modified.
+	//
+	// This member is required.
+	Revision *string
+
+	// The Amazon Resource Name (ARN) of the user in the identity store. For example,
+	// arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
+	//
+	// This member is required.
+	UserArn *string
 
 	// The identifier for a user in the identity store.
 	//
@@ -230,6 +235,9 @@ func (v *DescribeUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProfileUrl != nil {
 		s.WriteString(schemas.DescribeUserResponse_ProfileUrl, *v.ProfileUrl)
 	}
+	if v.Revision != nil {
+		s.WriteString(schemas.DescribeUserResponse_Revision, *v.Revision)
+	}
 	serializeRoles(s, schemas.DescribeUserResponse_Roles, v.Roles)
 	if v.Timezone != nil {
 		s.WriteString(schemas.DescribeUserResponse_Timezone, *v.Timezone)
@@ -242,6 +250,9 @@ func (v *DescribeUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.UpdatedBy != nil {
 		s.WriteString(schemas.DescribeUserResponse_UpdatedBy, *v.UpdatedBy)
+	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.DescribeUserResponse_UserArn, *v.UserArn)
 	}
 	if v.UserId != nil {
 		s.WriteString(schemas.DescribeUserResponse_UserId, *v.UserId)
@@ -304,6 +315,9 @@ func (v *DescribeUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DescribeUserResponse_ProfileUrl:
 			v.ProfileUrl = new(string)
 			return d.ReadString(schemas.DescribeUserResponse_ProfileUrl, v.ProfileUrl)
+		case schemas.DescribeUserResponse_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_Revision, v.Revision)
 		case schemas.DescribeUserResponse_Roles:
 			return deserializeRoles(d, schemas.DescribeUserResponse_Roles, &v.Roles)
 		case schemas.DescribeUserResponse_Timezone:
@@ -318,6 +332,9 @@ func (v *DescribeUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DescribeUserResponse_UpdatedBy:
 			v.UpdatedBy = new(string)
 			return d.ReadString(schemas.DescribeUserResponse_UpdatedBy, v.UpdatedBy)
+		case schemas.DescribeUserResponse_UserArn:
+			v.UserArn = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_UserArn, v.UserArn)
 		case schemas.DescribeUserResponse_UserId:
 			v.UserId = new(string)
 			return d.ReadString(schemas.DescribeUserResponse_UserId, v.UserId)

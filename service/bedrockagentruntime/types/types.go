@@ -6444,6 +6444,9 @@ type FoundationModelConfiguration struct {
 	// The Bedrock foundation model configuration.
 	BedrockFoundationModelConfiguration *BedrockFoundationModelConfiguration
 
+	// The Mantle foundation model configuration.
+	MantleFoundationModelConfiguration *MantleFoundationModelConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -6459,6 +6462,11 @@ func (v *FoundationModelConfiguration) SerializeMembers(s smithy.ShapeSerializer
 		v.BedrockFoundationModelConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.MantleFoundationModelConfiguration != nil {
+		s.WriteStruct(schemas.FoundationModelConfiguration_mantleFoundationModelConfiguration)
+		v.MantleFoundationModelConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.FoundationModelConfiguration_type, string(v.Type))
 	}
@@ -6469,6 +6477,9 @@ func (v *FoundationModelConfiguration) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.FoundationModelConfiguration_bedrockFoundationModelConfiguration:
 			v.BedrockFoundationModelConfiguration = &BedrockFoundationModelConfiguration{}
 			return v.BedrockFoundationModelConfiguration.Deserialize(d)
+		case schemas.FoundationModelConfiguration_mantleFoundationModelConfiguration:
+			v.MantleFoundationModelConfiguration = &MantleFoundationModelConfiguration{}
+			return v.MantleFoundationModelConfiguration.Deserialize(d)
 		case schemas.FoundationModelConfiguration_type:
 			var ev string
 			if err := d.ReadString(schemas.FoundationModelConfiguration_type, &ev); err != nil {
@@ -9828,6 +9839,84 @@ func (v *ManagedSearchRerankingConfiguration) Deserialize(d smithy.ShapeDeserial
 			}
 			v.Type = ManagedSearchRerankingConfigurationType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Configuration for a Mantle foundation model.
+type MantleFoundationModelConfiguration struct {
+
+	// The model configuration containing the model ARN and project ID.
+	//
+	// This member is required.
+	ModelConfiguration *MantleFoundationModelModelConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *MantleFoundationModelConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MantleFoundationModelConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MantleFoundationModelConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelConfiguration != nil {
+		s.WriteStruct(schemas.MantleFoundationModelConfiguration_modelConfiguration)
+		v.ModelConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MantleFoundationModelConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MantleFoundationModelConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MantleFoundationModelConfiguration_modelConfiguration:
+			v.ModelConfiguration = &MantleFoundationModelModelConfiguration{}
+			return v.ModelConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Model configuration for a Mantle foundation model.
+type MantleFoundationModelModelConfiguration struct {
+
+	// The ARN of the Mantle foundation model.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// The Amazon Bedrock project ID used for billing and usage attribution. If you
+	// don't specify a value, the service uses the default project.
+	ProjectId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MantleFoundationModelModelConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MantleFoundationModelModelConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MantleFoundationModelModelConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelArn != nil {
+		s.WriteString(schemas.MantleFoundationModelModelConfiguration_modelArn, *v.ModelArn)
+	}
+	if v.ProjectId != nil {
+		s.WriteString(schemas.MantleFoundationModelModelConfiguration_projectId, *v.ProjectId)
+	}
+}
+func (v *MantleFoundationModelModelConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MantleFoundationModelModelConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MantleFoundationModelModelConfiguration_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.MantleFoundationModelModelConfiguration_modelArn, v.ModelArn)
+		case schemas.MantleFoundationModelModelConfiguration_projectId:
+			v.ProjectId = new(string)
+			return d.ReadString(schemas.MantleFoundationModelModelConfiguration_projectId, v.ProjectId)
 		}
 		return nil
 	})

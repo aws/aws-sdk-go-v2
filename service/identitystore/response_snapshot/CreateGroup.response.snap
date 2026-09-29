@@ -2,4 +2,4 @@
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSIdentityStore.CreateGroup
 
-{"GroupId":"__GroupId__","IdentityStoreId":"__IdentityStoreId__"}
+{"GroupArn":"__GroupArn__","GroupId":"__GroupId__","IdentityStoreId":"__IdentityStoreId__","Revision":"__Revision__"}

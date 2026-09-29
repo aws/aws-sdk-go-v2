@@ -48,6 +48,11 @@ var DescribeGroupMembership = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeGroupMembership",
 }, smithy.ShapeTypeOperation, 0)
 
+var DescribeIdentityStore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "DescribeIdentityStore",
+}, smithy.ShapeTypeOperation, 0)
+
 var DescribeUser = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "DescribeUser",
@@ -88,6 +93,11 @@ var ListGroups = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListGroups",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListIdentityStores = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "ListIdentityStores",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListUsers = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "ListUsers",
@@ -96,6 +106,11 @@ var ListUsers = smithy.NewSchema(smithy.ShapeID{
 var UpdateGroup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "UpdateGroup",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateIdentityStore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "UpdateIdentityStore",
 }, smithy.ShapeTypeOperation, 0)
 
 var UpdateUser = smithy.NewSchema(smithy.ShapeID{
@@ -293,8 +308,14 @@ var _Filters_member *smithy.Schema
 var Group = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "Group",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 11)
+var Group_IdentityStoreId *smithy.Schema
+
 var Group_GroupId *smithy.Schema
+
+var Group_GroupArn *smithy.Schema
+
+var Group_Revision *smithy.Schema
 
 var Group_DisplayName *smithy.Schema
 
@@ -310,8 +331,6 @@ var Group_CreatedBy *smithy.Schema
 
 var Group_UpdatedBy *smithy.Schema
 
-var Group_IdentityStoreId *smithy.Schema
-
 var _GroupDisplayName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "GroupDisplayName",
@@ -326,10 +345,12 @@ var _GroupIds_member *smithy.Schema
 var GroupMembership = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "GroupMembership",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var GroupMembership_IdentityStoreId *smithy.Schema
 
 var GroupMembership_MembershipId *smithy.Schema
+
+var GroupMembership_MembershipArn *smithy.Schema
 
 var GroupMembership_GroupId *smithy.Schema
 
@@ -371,10 +392,29 @@ var _Groups = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _Groups_member *smithy.Schema
 
+var IdentityStore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "IdentityStore",
+}, smithy.ShapeTypeStructure, 2)
+var IdentityStore_IdentityStoreId *smithy.Schema
+
+var IdentityStore_IdentityStoreArn *smithy.Schema
+
+var _IdentityStoreArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "IdentityStoreArn",
+}, smithy.ShapeTypeString, 0)
+
 var _IdentityStoreId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "IdentityStoreId",
 }, smithy.ShapeTypeString, 0)
+
+var _IdentityStores = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "IdentityStores",
+}, smithy.ShapeTypeList, 1)
+var _IdentityStores_member *smithy.Schema
 
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
@@ -385,6 +425,17 @@ var InternalServerException_Message *smithy.Schema
 var InternalServerException_RequestId *smithy.Schema
 
 var InternalServerException_RetryAfterSeconds *smithy.Schema
+
+var _IpCidrList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "IpCidrList",
+}, smithy.ShapeTypeList, 1)
+var _IpCidrList_member *smithy.Schema
+
+var _IpCidrType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "IpCidrType",
+}, smithy.ShapeTypeString, 0)
 
 var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
@@ -412,6 +463,30 @@ var Name_MiddleName *smithy.Schema
 var Name_HonorificPrefix *smithy.Schema
 
 var Name_HonorificSuffix *smithy.Schema
+
+var NetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "NetworkConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var NetworkConfiguration_VpceAccessRequired *smithy.Schema
+
+var NetworkConfiguration_ApiRestrictSourceVpcs *smithy.Schema
+
+var NetworkConfiguration_ApiAllowSourceIps *smithy.Schema
+
+var NetworkConfiguration_ScimAllowSourceIps *smithy.Schema
+
+var NetworkConfigurationDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "NetworkConfigurationDetails",
+}, smithy.ShapeTypeStructure, 4)
+var NetworkConfigurationDetails_VpceAccessRequired *smithy.Schema
+
+var NetworkConfigurationDetails_ApiRestrictSourceVpcs *smithy.Schema
+
+var NetworkConfigurationDetails_ApiAllowSourceIps *smithy.Schema
+
+var NetworkConfigurationDetails_ScimAllowSourceIps *smithy.Schema
 
 var _NextToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
@@ -457,6 +532,11 @@ var _RequestId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RequestId",
 }, smithy.ShapeTypeString, 0)
 
+var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "ResourceArn",
+}, smithy.ShapeTypeString, 0)
+
 var _ResourceId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "ResourceId",
@@ -481,6 +561,11 @@ var ResourceNotFoundExceptionReason = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ResourceNotFoundExceptionReason",
 }, smithy.ShapeTypeEnum, 1)
 var ResourceNotFoundExceptionReason_KMS_KEY_NOT_FOUND *smithy.Schema
+
+var _ResourceRevision = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "ResourceRevision",
+}, smithy.ShapeTypeString, 0)
 
 var ResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
@@ -564,10 +649,14 @@ var UniqueAttribute_AttributeValue *smithy.Schema
 var User = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "User",
-}, smithy.ShapeTypeStructure, 26)
+}, smithy.ShapeTypeStructure, 28)
 var User_IdentityStoreId *smithy.Schema
 
 var User_UserId *smithy.Schema
+
+var User_UserArn *smithy.Schema
+
+var User_Revision *smithy.Schema
 
 var User_UserName *smithy.Schema
 
@@ -658,6 +747,17 @@ var ValidationExceptionReason_KMS_INVALID_STATE *smithy.Schema
 
 var ValidationExceptionReason_KMS_DISABLED *smithy.Schema
 
+var _VpcIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "VpcIdList",
+}, smithy.ShapeTypeList, 1)
+var _VpcIdList_member *smithy.Schema
+
+var _VpcIdType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "VpcIdType",
+}, smithy.ShapeTypeString, 0)
+
 var CreateGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "CreateGroupRequest",
@@ -681,18 +781,24 @@ var CreateGroupMembershipRequest_MemberId *smithy.Schema
 var CreateGroupMembershipResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "CreateGroupMembershipResponse",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
+var CreateGroupMembershipResponse_IdentityStoreId *smithy.Schema
+
 var CreateGroupMembershipResponse_MembershipId *smithy.Schema
 
-var CreateGroupMembershipResponse_IdentityStoreId *smithy.Schema
+var CreateGroupMembershipResponse_MembershipArn *smithy.Schema
 
 var CreateGroupResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "CreateGroupResponse",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 4)
+var CreateGroupResponse_IdentityStoreId *smithy.Schema
+
 var CreateGroupResponse_GroupId *smithy.Schema
 
-var CreateGroupResponse_IdentityStoreId *smithy.Schema
+var CreateGroupResponse_GroupArn *smithy.Schema
+
+var CreateGroupResponse_Revision *smithy.Schema
 
 var CreateUserRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
@@ -739,18 +845,24 @@ var CreateUserRequest_Extensions *smithy.Schema
 var CreateUserResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "CreateUserResponse",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 4)
 var CreateUserResponse_IdentityStoreId *smithy.Schema
 
 var CreateUserResponse_UserId *smithy.Schema
 
+var CreateUserResponse_UserArn *smithy.Schema
+
+var CreateUserResponse_Revision *smithy.Schema
+
 var DeleteGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "DeleteGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var DeleteGroupRequest_IdentityStoreId *smithy.Schema
 
 var DeleteGroupRequest_GroupId *smithy.Schema
+
+var DeleteGroupRequest_Revision *smithy.Schema
 
 var DeleteGroupMembershipRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
@@ -773,10 +885,12 @@ var DeleteGroupResponse = smithy.NewSchema(smithy.ShapeID{
 var DeleteUserRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "DeleteUserRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var DeleteUserRequest_IdentityStoreId *smithy.Schema
 
 var DeleteUserRequest_UserId *smithy.Schema
+
+var DeleteUserRequest_Revision *smithy.Schema
 
 var DeleteUserResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
@@ -802,10 +916,12 @@ var DescribeGroupMembershipRequest_MembershipId *smithy.Schema
 var DescribeGroupMembershipResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "DescribeGroupMembershipResponse",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var DescribeGroupMembershipResponse_IdentityStoreId *smithy.Schema
 
 var DescribeGroupMembershipResponse_MembershipId *smithy.Schema
+
+var DescribeGroupMembershipResponse_MembershipArn *smithy.Schema
 
 var DescribeGroupMembershipResponse_GroupId *smithy.Schema
 
@@ -822,8 +938,14 @@ var DescribeGroupMembershipResponse_UpdatedBy *smithy.Schema
 var DescribeGroupResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "DescribeGroupResponse",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 11)
+var DescribeGroupResponse_IdentityStoreId *smithy.Schema
+
 var DescribeGroupResponse_GroupId *smithy.Schema
+
+var DescribeGroupResponse_GroupArn *smithy.Schema
+
+var DescribeGroupResponse_Revision *smithy.Schema
 
 var DescribeGroupResponse_DisplayName *smithy.Schema
 
@@ -839,7 +961,21 @@ var DescribeGroupResponse_CreatedBy *smithy.Schema
 
 var DescribeGroupResponse_UpdatedBy *smithy.Schema
 
-var DescribeGroupResponse_IdentityStoreId *smithy.Schema
+var DescribeIdentityStoreRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "DescribeIdentityStoreRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeIdentityStoreRequest_IdentityStoreId *smithy.Schema
+
+var DescribeIdentityStoreResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "DescribeIdentityStoreResponse",
+}, smithy.ShapeTypeStructure, 3)
+var DescribeIdentityStoreResponse_IdentityStoreId *smithy.Schema
+
+var DescribeIdentityStoreResponse_IdentityStoreArn *smithy.Schema
+
+var DescribeIdentityStoreResponse_NetworkConfiguration *smithy.Schema
 
 var DescribeUserRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
@@ -854,10 +990,14 @@ var DescribeUserRequest_Extensions *smithy.Schema
 var DescribeUserResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "DescribeUserResponse",
-}, smithy.ShapeTypeStructure, 26)
+}, smithy.ShapeTypeStructure, 28)
 var DescribeUserResponse_IdentityStoreId *smithy.Schema
 
 var DescribeUserResponse_UserId *smithy.Schema
+
+var DescribeUserResponse_UserArn *smithy.Schema
+
+var DescribeUserResponse_Revision *smithy.Schema
 
 var DescribeUserResponse_UserName *smithy.Schema
 
@@ -918,10 +1058,12 @@ var GetGroupIdRequest_AlternateIdentifier *smithy.Schema
 var GetGroupIdResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "GetGroupIdResponse",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
+var GetGroupIdResponse_IdentityStoreId *smithy.Schema
+
 var GetGroupIdResponse_GroupId *smithy.Schema
 
-var GetGroupIdResponse_IdentityStoreId *smithy.Schema
+var GetGroupIdResponse_GroupArn *smithy.Schema
 
 var GetGroupMembershipIdRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
@@ -936,10 +1078,12 @@ var GetGroupMembershipIdRequest_MemberId *smithy.Schema
 var GetGroupMembershipIdResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "GetGroupMembershipIdResponse",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
+var GetGroupMembershipIdResponse_IdentityStoreId *smithy.Schema
+
 var GetGroupMembershipIdResponse_MembershipId *smithy.Schema
 
-var GetGroupMembershipIdResponse_IdentityStoreId *smithy.Schema
+var GetGroupMembershipIdResponse_MembershipArn *smithy.Schema
 
 var GetUserIdRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
@@ -952,10 +1096,12 @@ var GetUserIdRequest_AlternateIdentifier *smithy.Schema
 var GetUserIdResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "GetUserIdResponse",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var GetUserIdResponse_IdentityStoreId *smithy.Schema
 
 var GetUserIdResponse_UserId *smithy.Schema
+
+var GetUserIdResponse_UserArn *smithy.Schema
 
 var IsMemberInGroupsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
@@ -1033,6 +1179,22 @@ var ListGroupsResponse_Groups *smithy.Schema
 
 var ListGroupsResponse_NextToken *smithy.Schema
 
+var ListIdentityStoresRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "ListIdentityStoresRequest",
+}, smithy.ShapeTypeStructure, 2)
+var ListIdentityStoresRequest_MaxResults *smithy.Schema
+
+var ListIdentityStoresRequest_NextToken *smithy.Schema
+
+var ListIdentityStoresResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "ListIdentityStoresResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListIdentityStoresResponse_IdentityStores *smithy.Schema
+
+var ListIdentityStoresResponse_NextToken *smithy.Schema
+
 var ListUsersRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "ListUsersRequest",
@@ -1058,32 +1220,66 @@ var ListUsersResponse_NextToken *smithy.Schema
 var UpdateGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "UpdateGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var UpdateGroupRequest_IdentityStoreId *smithy.Schema
 
 var UpdateGroupRequest_GroupId *smithy.Schema
 
 var UpdateGroupRequest_Operations *smithy.Schema
 
+var UpdateGroupRequest_Revision *smithy.Schema
+
 var UpdateGroupResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "UpdateGroupResponse",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 4)
+var UpdateGroupResponse_IdentityStoreId *smithy.Schema
+
+var UpdateGroupResponse_GroupId *smithy.Schema
+
+var UpdateGroupResponse_GroupArn *smithy.Schema
+
+var UpdateGroupResponse_Revision *smithy.Schema
+
+var UpdateIdentityStoreRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "UpdateIdentityStoreRequest",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateIdentityStoreRequest_IdentityStoreId *smithy.Schema
+
+var UpdateIdentityStoreRequest_NetworkConfiguration *smithy.Schema
+
+var UpdateIdentityStoreResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "UpdateIdentityStoreResponse",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateIdentityStoreResponse_IdentityStoreId *smithy.Schema
+
+var UpdateIdentityStoreResponse_IdentityStoreArn *smithy.Schema
 
 var UpdateUserRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "UpdateUserRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var UpdateUserRequest_IdentityStoreId *smithy.Schema
 
 var UpdateUserRequest_UserId *smithy.Schema
 
 var UpdateUserRequest_Operations *smithy.Schema
 
+var UpdateUserRequest_Revision *smithy.Schema
+
 var UpdateUserResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "UpdateUserResponse",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 4)
+var UpdateUserResponse_IdentityStoreId *smithy.Schema
+
+var UpdateUserResponse_UserId *smithy.Schema
+
+var UpdateUserResponse_UserArn *smithy.Schema
+
+var UpdateUserResponse_Revision *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -1164,7 +1360,13 @@ func init() {
 
 	_Filters_member = _Filters.AddMember("member", Filter)
 
+	Group_IdentityStoreId = Group.AddMember("IdentityStoreId", _IdentityStoreId)
+
 	Group_GroupId = Group.AddMember("GroupId", _ResourceId)
+
+	Group_GroupArn = Group.AddMember("GroupArn", _ResourceArn)
+
+	Group_Revision = Group.AddMember("Revision", _ResourceRevision)
 
 	Group_DisplayName = Group.AddMember("DisplayName", _GroupDisplayName)
 
@@ -1180,8 +1382,6 @@ func init() {
 
 	Group_UpdatedBy = Group.AddMember("UpdatedBy", _StringType)
 
-	Group_IdentityStoreId = Group.AddMember("IdentityStoreId", _IdentityStoreId)
-
 	_GroupIds_member = _GroupIds.AddMember("member", _ResourceId)
 
 	MemberId_UserId = MemberId.AddMember("UserId", _ResourceId)
@@ -1189,6 +1389,8 @@ func init() {
 	GroupMembership_IdentityStoreId = GroupMembership.AddMember("IdentityStoreId", _IdentityStoreId)
 
 	GroupMembership_MembershipId = GroupMembership.AddMember("MembershipId", _ResourceId)
+
+	GroupMembership_MembershipArn = GroupMembership.AddMember("MembershipArn", _ResourceArn)
 
 	GroupMembership_GroupId = GroupMembership.AddMember("GroupId", _ResourceId)
 
@@ -1214,11 +1416,19 @@ func init() {
 
 	_Groups_member = _Groups.AddMember("member", Group)
 
+	IdentityStore_IdentityStoreId = IdentityStore.AddMember("IdentityStoreId", _IdentityStoreId)
+
+	IdentityStore_IdentityStoreArn = IdentityStore.AddMember("IdentityStoreArn", _IdentityStoreArn)
+
+	_IdentityStores_member = _IdentityStores.AddMember("member", IdentityStore)
+
 	InternalServerException_Message = InternalServerException.AddMember("Message", _ExceptionMessage)
 
 	InternalServerException_RequestId = InternalServerException.AddMember("RequestId", _RequestId)
 
 	InternalServerException_RetryAfterSeconds = InternalServerException.AddMember("RetryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
+
+	_IpCidrList_member = _IpCidrList.AddMember("member", _IpCidrType)
 
 	Name_Formatted = Name.AddMember("Formatted", _SensitiveStringType)
 
@@ -1231,6 +1441,24 @@ func init() {
 	Name_HonorificPrefix = Name.AddMember("HonorificPrefix", _SensitiveStringType)
 
 	Name_HonorificSuffix = Name.AddMember("HonorificSuffix", _SensitiveStringType)
+
+	_VpcIdList_member = _VpcIdList.AddMember("member", _VpcIdType)
+
+	NetworkConfiguration_VpceAccessRequired = NetworkConfiguration.AddMember("VpceAccessRequired", _BooleanType)
+
+	NetworkConfiguration_ApiRestrictSourceVpcs = NetworkConfiguration.AddMember("ApiRestrictSourceVpcs", _VpcIdList)
+
+	NetworkConfiguration_ApiAllowSourceIps = NetworkConfiguration.AddMember("ApiAllowSourceIps", _IpCidrList)
+
+	NetworkConfiguration_ScimAllowSourceIps = NetworkConfiguration.AddMember("ScimAllowSourceIps", _IpCidrList)
+
+	NetworkConfigurationDetails_VpceAccessRequired = NetworkConfigurationDetails.AddMember("VpceAccessRequired", _BooleanType)
+
+	NetworkConfigurationDetails_ApiRestrictSourceVpcs = NetworkConfigurationDetails.AddMember("ApiRestrictSourceVpcs", _VpcIdList)
+
+	NetworkConfigurationDetails_ApiAllowSourceIps = NetworkConfigurationDetails.AddMember("ApiAllowSourceIps", _IpCidrList)
+
+	NetworkConfigurationDetails_ScimAllowSourceIps = NetworkConfigurationDetails.AddMember("ScimAllowSourceIps", _IpCidrList)
 
 	PhoneNumber_Value = PhoneNumber.AddMember("Value", _SensitiveStringType)
 
@@ -1301,6 +1529,10 @@ func init() {
 	User_IdentityStoreId = User.AddMember("IdentityStoreId", _IdentityStoreId)
 
 	User_UserId = User.AddMember("UserId", _ResourceId)
+
+	User_UserArn = User.AddMember("UserArn", _ResourceArn)
+
+	User_Revision = User.AddMember("Revision", _ResourceRevision)
 
 	User_UserName = User.AddMember("UserName", _UserName)
 
@@ -1378,13 +1610,19 @@ func init() {
 
 	CreateGroupMembershipRequest_MemberId = CreateGroupMembershipRequest.AddMember("MemberId", MemberId)
 
+	CreateGroupMembershipResponse_IdentityStoreId = CreateGroupMembershipResponse.AddMember("IdentityStoreId", _IdentityStoreId)
+
 	CreateGroupMembershipResponse_MembershipId = CreateGroupMembershipResponse.AddMember("MembershipId", _ResourceId)
 
-	CreateGroupMembershipResponse_IdentityStoreId = CreateGroupMembershipResponse.AddMember("IdentityStoreId", _IdentityStoreId)
+	CreateGroupMembershipResponse_MembershipArn = CreateGroupMembershipResponse.AddMember("MembershipArn", _ResourceArn)
+
+	CreateGroupResponse_IdentityStoreId = CreateGroupResponse.AddMember("IdentityStoreId", _IdentityStoreId)
 
 	CreateGroupResponse_GroupId = CreateGroupResponse.AddMember("GroupId", _ResourceId)
 
-	CreateGroupResponse_IdentityStoreId = CreateGroupResponse.AddMember("IdentityStoreId", _IdentityStoreId)
+	CreateGroupResponse_GroupArn = CreateGroupResponse.AddMember("GroupArn", _ResourceArn)
+
+	CreateGroupResponse_Revision = CreateGroupResponse.AddMember("Revision", _ResourceRevision)
 
 	CreateUserRequest_IdentityStoreId = CreateUserRequest.AddMember("IdentityStoreId", _IdentityStoreId)
 
@@ -1428,9 +1666,15 @@ func init() {
 
 	CreateUserResponse_UserId = CreateUserResponse.AddMember("UserId", _ResourceId)
 
+	CreateUserResponse_UserArn = CreateUserResponse.AddMember("UserArn", _ResourceArn)
+
+	CreateUserResponse_Revision = CreateUserResponse.AddMember("Revision", _ResourceRevision)
+
 	DeleteGroupRequest_IdentityStoreId = DeleteGroupRequest.AddMember("IdentityStoreId", _IdentityStoreId)
 
 	DeleteGroupRequest_GroupId = DeleteGroupRequest.AddMember("GroupId", _ResourceId)
+
+	DeleteGroupRequest_Revision = DeleteGroupRequest.AddMember("Revision", _ResourceRevision)
 
 	DeleteGroupMembershipRequest_IdentityStoreId = DeleteGroupMembershipRequest.AddMember("IdentityStoreId", _IdentityStoreId)
 
@@ -1439,6 +1683,8 @@ func init() {
 	DeleteUserRequest_IdentityStoreId = DeleteUserRequest.AddMember("IdentityStoreId", _IdentityStoreId)
 
 	DeleteUserRequest_UserId = DeleteUserRequest.AddMember("UserId", _ResourceId)
+
+	DeleteUserRequest_Revision = DeleteUserRequest.AddMember("Revision", _ResourceRevision)
 
 	DescribeGroupRequest_IdentityStoreId = DescribeGroupRequest.AddMember("IdentityStoreId", _IdentityStoreId)
 
@@ -1452,6 +1698,8 @@ func init() {
 
 	DescribeGroupMembershipResponse_MembershipId = DescribeGroupMembershipResponse.AddMember("MembershipId", _ResourceId)
 
+	DescribeGroupMembershipResponse_MembershipArn = DescribeGroupMembershipResponse.AddMember("MembershipArn", _ResourceArn)
+
 	DescribeGroupMembershipResponse_GroupId = DescribeGroupMembershipResponse.AddMember("GroupId", _ResourceId)
 
 	DescribeGroupMembershipResponse_MemberId = DescribeGroupMembershipResponse.AddMember("MemberId", MemberId)
@@ -1464,7 +1712,13 @@ func init() {
 
 	DescribeGroupMembershipResponse_UpdatedBy = DescribeGroupMembershipResponse.AddMember("UpdatedBy", _StringType)
 
+	DescribeGroupResponse_IdentityStoreId = DescribeGroupResponse.AddMember("IdentityStoreId", _IdentityStoreId)
+
 	DescribeGroupResponse_GroupId = DescribeGroupResponse.AddMember("GroupId", _ResourceId)
+
+	DescribeGroupResponse_GroupArn = DescribeGroupResponse.AddMember("GroupArn", _ResourceArn)
+
+	DescribeGroupResponse_Revision = DescribeGroupResponse.AddMember("Revision", _ResourceRevision)
 
 	DescribeGroupResponse_DisplayName = DescribeGroupResponse.AddMember("DisplayName", _GroupDisplayName)
 
@@ -1480,7 +1734,13 @@ func init() {
 
 	DescribeGroupResponse_UpdatedBy = DescribeGroupResponse.AddMember("UpdatedBy", _StringType)
 
-	DescribeGroupResponse_IdentityStoreId = DescribeGroupResponse.AddMember("IdentityStoreId", _IdentityStoreId)
+	DescribeIdentityStoreRequest_IdentityStoreId = DescribeIdentityStoreRequest.AddMember("IdentityStoreId", _IdentityStoreId)
+
+	DescribeIdentityStoreResponse_IdentityStoreId = DescribeIdentityStoreResponse.AddMember("IdentityStoreId", _IdentityStoreId)
+
+	DescribeIdentityStoreResponse_IdentityStoreArn = DescribeIdentityStoreResponse.AddMember("IdentityStoreArn", _IdentityStoreArn)
+
+	DescribeIdentityStoreResponse_NetworkConfiguration = DescribeIdentityStoreResponse.AddMember("NetworkConfiguration", NetworkConfigurationDetails)
 
 	DescribeUserRequest_IdentityStoreId = DescribeUserRequest.AddMember("IdentityStoreId", _IdentityStoreId)
 
@@ -1491,6 +1751,10 @@ func init() {
 	DescribeUserResponse_IdentityStoreId = DescribeUserResponse.AddMember("IdentityStoreId", _IdentityStoreId)
 
 	DescribeUserResponse_UserId = DescribeUserResponse.AddMember("UserId", _ResourceId)
+
+	DescribeUserResponse_UserArn = DescribeUserResponse.AddMember("UserArn", _ResourceArn)
+
+	DescribeUserResponse_Revision = DescribeUserResponse.AddMember("Revision", _ResourceRevision)
 
 	DescribeUserResponse_UserName = DescribeUserResponse.AddMember("UserName", _UserName)
 
@@ -1544,9 +1808,11 @@ func init() {
 
 	GetGroupIdRequest_AlternateIdentifier = GetGroupIdRequest.AddMember("AlternateIdentifier", AlternateIdentifier)
 
+	GetGroupIdResponse_IdentityStoreId = GetGroupIdResponse.AddMember("IdentityStoreId", _IdentityStoreId)
+
 	GetGroupIdResponse_GroupId = GetGroupIdResponse.AddMember("GroupId", _ResourceId)
 
-	GetGroupIdResponse_IdentityStoreId = GetGroupIdResponse.AddMember("IdentityStoreId", _IdentityStoreId)
+	GetGroupIdResponse_GroupArn = GetGroupIdResponse.AddMember("GroupArn", _ResourceArn)
 
 	GetGroupMembershipIdRequest_IdentityStoreId = GetGroupMembershipIdRequest.AddMember("IdentityStoreId", _IdentityStoreId)
 
@@ -1554,9 +1820,11 @@ func init() {
 
 	GetGroupMembershipIdRequest_MemberId = GetGroupMembershipIdRequest.AddMember("MemberId", MemberId)
 
+	GetGroupMembershipIdResponse_IdentityStoreId = GetGroupMembershipIdResponse.AddMember("IdentityStoreId", _IdentityStoreId)
+
 	GetGroupMembershipIdResponse_MembershipId = GetGroupMembershipIdResponse.AddMember("MembershipId", _ResourceId)
 
-	GetGroupMembershipIdResponse_IdentityStoreId = GetGroupMembershipIdResponse.AddMember("IdentityStoreId", _IdentityStoreId)
+	GetGroupMembershipIdResponse_MembershipArn = GetGroupMembershipIdResponse.AddMember("MembershipArn", _ResourceArn)
 
 	GetUserIdRequest_IdentityStoreId = GetUserIdRequest.AddMember("IdentityStoreId", _IdentityStoreId)
 
@@ -1565,6 +1833,8 @@ func init() {
 	GetUserIdResponse_IdentityStoreId = GetUserIdResponse.AddMember("IdentityStoreId", _IdentityStoreId)
 
 	GetUserIdResponse_UserId = GetUserIdResponse.AddMember("UserId", _ResourceId)
+
+	GetUserIdResponse_UserArn = GetUserIdResponse.AddMember("UserArn", _ResourceArn)
 
 	IsMemberInGroupsRequest_IdentityStoreId = IsMemberInGroupsRequest.AddMember("IdentityStoreId", _IdentityStoreId)
 
@@ -1610,6 +1880,14 @@ func init() {
 
 	ListGroupsResponse_NextToken = ListGroupsResponse.AddMember("NextToken", _NextToken)
 
+	ListIdentityStoresRequest_MaxResults = ListIdentityStoresRequest.AddMember("MaxResults", _MaxResults)
+
+	ListIdentityStoresRequest_NextToken = ListIdentityStoresRequest.AddMember("NextToken", _NextToken)
+
+	ListIdentityStoresResponse_IdentityStores = ListIdentityStoresResponse.AddMember("IdentityStores", _IdentityStores)
+
+	ListIdentityStoresResponse_NextToken = ListIdentityStoresResponse.AddMember("NextToken", _NextToken)
+
 	ListUsersRequest_IdentityStoreId = ListUsersRequest.AddMember("IdentityStoreId", _IdentityStoreId)
 
 	ListUsersRequest_Extensions = ListUsersRequest.AddMember("Extensions", _ExtensionNames)
@@ -1630,10 +1908,38 @@ func init() {
 
 	UpdateGroupRequest_Operations = UpdateGroupRequest.AddMember("Operations", _AttributeOperations)
 
+	UpdateGroupRequest_Revision = UpdateGroupRequest.AddMember("Revision", _ResourceRevision)
+
+	UpdateGroupResponse_IdentityStoreId = UpdateGroupResponse.AddMember("IdentityStoreId", _IdentityStoreId)
+
+	UpdateGroupResponse_GroupId = UpdateGroupResponse.AddMember("GroupId", _ResourceId)
+
+	UpdateGroupResponse_GroupArn = UpdateGroupResponse.AddMember("GroupArn", _ResourceArn)
+
+	UpdateGroupResponse_Revision = UpdateGroupResponse.AddMember("Revision", _ResourceRevision)
+
+	UpdateIdentityStoreRequest_IdentityStoreId = UpdateIdentityStoreRequest.AddMember("IdentityStoreId", _IdentityStoreId)
+
+	UpdateIdentityStoreRequest_NetworkConfiguration = UpdateIdentityStoreRequest.AddMember("NetworkConfiguration", NetworkConfiguration)
+
+	UpdateIdentityStoreResponse_IdentityStoreId = UpdateIdentityStoreResponse.AddMember("IdentityStoreId", _IdentityStoreId)
+
+	UpdateIdentityStoreResponse_IdentityStoreArn = UpdateIdentityStoreResponse.AddMember("IdentityStoreArn", _IdentityStoreArn)
+
 	UpdateUserRequest_IdentityStoreId = UpdateUserRequest.AddMember("IdentityStoreId", _IdentityStoreId)
 
 	UpdateUserRequest_UserId = UpdateUserRequest.AddMember("UserId", _ResourceId)
 
 	UpdateUserRequest_Operations = UpdateUserRequest.AddMember("Operations", _AttributeOperations)
+
+	UpdateUserRequest_Revision = UpdateUserRequest.AddMember("Revision", _ResourceRevision)
+
+	UpdateUserResponse_IdentityStoreId = UpdateUserResponse.AddMember("IdentityStoreId", _IdentityStoreId)
+
+	UpdateUserResponse_UserId = UpdateUserResponse.AddMember("UserId", _ResourceId)
+
+	UpdateUserResponse_UserArn = UpdateUserResponse.AddMember("UserArn", _ResourceArn)
+
+	UpdateUserResponse_Revision = UpdateUserResponse.AddMember("Revision", _ResourceRevision)
 
 }

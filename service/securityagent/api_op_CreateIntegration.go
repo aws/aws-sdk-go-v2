@@ -37,7 +37,7 @@ type CreateIntegrationInput struct {
 	// This member is required.
 	IntegrationDisplayName *string
 
-	// The integration provider. Currently, only GITHUB is supported.
+	// The integration provider.
 	//
 	// This member is required.
 	Provider types.Provider

@@ -909,6 +909,16 @@ func TestCheckResponseSnapshot_CreateBlueGreenDeployment(t *testing.T) {
 		TargetStorageType:          ptr.String("__TargetStorageType__"),
 		TargetAllocatedStorage:     ptr.Int32(1),
 		TargetStorageThroughput:    ptr.Int32(1),
+		TargetResourceConfigurations: []types.TargetResourceConfiguration{
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -22157,6 +22167,16 @@ func TestCheckResponseSnapshot_Error_BlueGreenDeploymentAlreadyExistsFault(t *te
 		TargetStorageType:          ptr.String("__TargetStorageType__"),
 		TargetAllocatedStorage:     ptr.Int32(1),
 		TargetStorageThroughput:    ptr.Int32(1),
+		TargetResourceConfigurations: []types.TargetResourceConfiguration{
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -23066,6 +23086,16 @@ func TestCheckResponseSnapshot_Error_DBClusterParameterGroupNotFoundFault(t *tes
 		TargetStorageType:          ptr.String("__TargetStorageType__"),
 		TargetAllocatedStorage:     ptr.Int32(1),
 		TargetStorageThroughput:    ptr.Int32(1),
+		TargetResourceConfigurations: []types.TargetResourceConfiguration{
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -23113,6 +23143,16 @@ func TestCheckResponseSnapshot_Error_DBClusterQuotaExceededFault(t *testing.T) {
 		TargetStorageType:          ptr.String("__TargetStorageType__"),
 		TargetAllocatedStorage:     ptr.Int32(1),
 		TargetStorageThroughput:    ptr.Int32(1),
+		TargetResourceConfigurations: []types.TargetResourceConfiguration{
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -26023,6 +26063,16 @@ func TestCheckResponseSnapshot_Error_InstanceQuotaExceededFault(t *testing.T) {
 		TargetStorageType:          ptr.String("__TargetStorageType__"),
 		TargetAllocatedStorage:     ptr.Int32(1),
 		TargetStorageThroughput:    ptr.Int32(1),
+		TargetResourceConfigurations: []types.TargetResourceConfiguration{
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -29639,6 +29689,16 @@ func TestCheckResponseSnapshot_Error_SourceClusterNotSupportedFault(t *testing.T
 		TargetStorageType:          ptr.String("__TargetStorageType__"),
 		TargetAllocatedStorage:     ptr.Int32(1),
 		TargetStorageThroughput:    ptr.Int32(1),
+		TargetResourceConfigurations: []types.TargetResourceConfiguration{
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -29686,6 +29746,16 @@ func TestCheckResponseSnapshot_Error_SourceDatabaseNotSupportedFault(t *testing.
 		TargetStorageType:          ptr.String("__TargetStorageType__"),
 		TargetAllocatedStorage:     ptr.Int32(1),
 		TargetStorageThroughput:    ptr.Int32(1),
+		TargetResourceConfigurations: []types.TargetResourceConfiguration{
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -29761,6 +29831,16 @@ func TestCheckResponseSnapshot_Error_StorageQuotaExceededFault(t *testing.T) {
 		TargetStorageType:          ptr.String("__TargetStorageType__"),
 		TargetAllocatedStorage:     ptr.Int32(1),
 		TargetStorageThroughput:    ptr.Int32(1),
+		TargetResourceConfigurations: []types.TargetResourceConfiguration{
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+			{
+				SourceArn:      ptr.String("__SourceArn__"),
+				TargetKmsKeyId: ptr.String("__TargetKmsKeyId__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

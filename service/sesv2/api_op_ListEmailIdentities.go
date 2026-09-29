@@ -37,6 +37,10 @@ func (c *Client) ListEmailIdentities(ctx context.Context, params *ListEmailIdent
 // but are no longer verified.
 type ListEmailIdentitiesInput struct {
 
+	// An object that contains filters to apply when listing email identities. You can
+	// filter by identity name, identity type, or verification status.
+	Filter map[string]string
+
 	// A token returned from a previous call to ListEmailIdentities to indicate the
 	// position in the list of identities.
 	NextToken *string
@@ -59,6 +63,7 @@ func (v *ListEmailIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEmailIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentityFilter(s, schemas.ListEmailIdentitiesRequest_Filter, v.Filter)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEmailIdentitiesRequest_NextToken, *v.NextToken)
 	}

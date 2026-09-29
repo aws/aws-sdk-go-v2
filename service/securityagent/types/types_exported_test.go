@@ -72,6 +72,9 @@ func ExampleIntegratedResource_outputUsage() {
 	var union types.IntegratedResource
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.IntegratedResourceMemberAzureDevOpsRepository:
+		_ = v.Value // Value is types.AzureDevOpsRepositoryResource
+
 	case *types.IntegratedResourceMemberBitbucketRepository:
 		_ = v.Value // Value is types.BitbucketRepositoryResource
 
@@ -97,11 +100,15 @@ var _ *types.GitHubRepositoryResource
 var _ *types.BitbucketRepositoryResource
 var _ *types.ConfluenceDocumentResource
 var _ *types.GitLabRepositoryResource
+var _ *types.AzureDevOpsRepositoryResource
 
 func ExampleIntegratedResourceMetadata_outputUsage() {
 	var union types.IntegratedResourceMetadata
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.IntegratedResourceMetadataMemberAzureDevOpsRepository:
+		_ = v.Value // Value is types.AzureDevOpsRepositoryMetadata
+
 	case *types.IntegratedResourceMetadataMemberBitbucketRepository:
 		_ = v.Value // Value is types.BitbucketRepositoryMetadata
 
@@ -125,6 +132,7 @@ func ExampleIntegratedResourceMetadata_outputUsage() {
 
 var _ *types.GitHubRepositoryMetadata
 var _ *types.BitbucketRepositoryMetadata
+var _ *types.AzureDevOpsRepositoryMetadata
 var _ *types.GitLabRepositoryMetadata
 var _ *types.ConfluenceDocumentMetadata
 
@@ -212,8 +220,14 @@ func ExampleProviderInput_outputUsage() {
 	var union types.ProviderInput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ProviderInputMemberAzureDevOps:
+		_ = v.Value // Value is types.AzureDevOpsIntegrationInput
+
 	case *types.ProviderInputMemberBitbucket:
 		_ = v.Value // Value is types.BitbucketIntegrationInput
+
+	case *types.ProviderInputMemberBitbucketDataCenter:
+		_ = v.Value // Value is types.BitbucketDataCenterIntegrationInput
 
 	case *types.ProviderInputMemberConfluence:
 		_ = v.Value // Value is types.ConfluenceIntegrationInput
@@ -233,8 +247,10 @@ func ExampleProviderInput_outputUsage() {
 	}
 }
 
+var _ *types.AzureDevOpsIntegrationInput
 var _ *types.BitbucketIntegrationInput
 var _ *types.GitLabIntegrationInput
+var _ *types.BitbucketDataCenterIntegrationInput
 var _ *types.ConfluenceIntegrationInput
 var _ *types.GitHubIntegrationInput
 
@@ -242,6 +258,9 @@ func ExampleProviderResourceCapabilities_outputUsage() {
 	var union types.ProviderResourceCapabilities
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ProviderResourceCapabilitiesMemberAzureDevOps:
+		_ = v.Value // Value is types.AzureDevOpsResourceCapabilities
+
 	case *types.ProviderResourceCapabilitiesMemberBitbucket:
 		_ = v.Value // Value is types.BitbucketResourceCapabilities
 
@@ -267,3 +286,4 @@ var _ *types.BitbucketResourceCapabilities
 var _ *types.GitLabResourceCapabilities
 var _ *types.ConfluenceResourceCapabilities
 var _ *types.GitHubResourceCapabilities
+var _ *types.AzureDevOpsResourceCapabilities

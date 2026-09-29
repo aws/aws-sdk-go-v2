@@ -63,15 +63,32 @@ type Competitor struct {
 // content.
 type ContextualMetadataConfig struct {
 
-	// Specifies whether Elemental Inference generates a descriptive summary of the
-	// media content for this output.
+	// Specifies whether Elemental Inference generates extended analysis of the media
+	// content for this output. Extended analysis identifies the people, environments,
+	// brands, and on-screen text in the media content. This setting is independent of
+	// summaryGeneration .
 	//
 	// Valid values:
 	//
-	//   - ENABLED (default) – Elemental Inference generates a descriptive summary
-	//   along with IAB taxonomy and GARM suitability classifications.
+	//   - ENABLED (default) – Elemental Inference populates the people, environments,
+	//   brands, and on-screen text fields.
 	//
-	//   - DISABLED – No descriptive summary is generated.
+	//   - DISABLED – Elemental Inference doesn't populate the people, environments,
+	//   brands, and on-screen text fields.
+	ExtendedAnalysis ExtendedAnalysisMode
+
+	// Specifies whether Elemental Inference generates a descriptive summary of the
+	// media content for this output, along with the objects and actions that it
+	// detects. This setting is independent of extendedAnalysis .
+	//
+	// Valid values:
+	//
+	//   - ENABLED (default) – Elemental Inference populates the summary, objects, and
+	//   actions fields, along with the IAB taxonomy and GARM suitability
+	//   classifications.
+	//
+	//   - DISABLED – Elemental Inference doesn't populate the summary, objects, and
+	//   actions fields.
 	SummaryGeneration SummaryGenerationMode
 
 	noSmithyDocumentSerde
@@ -354,7 +371,7 @@ type SearchFilter struct {
 }
 
 // A type of OutputConfig, used when the output in a feed is for the smart
-// subtitling feature. smart subtitling uses automatic speech recognition (ASR) to
+// subtitling feature. Smart subtitling uses automatic speech recognition (ASR) to
 // generate live TTML subtitles from the audio in your source media.
 type SubtitlingConfig struct {
 

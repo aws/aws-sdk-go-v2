@@ -142,6 +142,17 @@ func deserializeDirectQueryDataSourceType(d smithy.ShapeDeserializer, s *smithy.
 	})
 }
 
+func serializeAcceptedWarningsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeAdditionalLimitList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AdditionalLimit) {
 	if v == nil {
 		return
@@ -951,6 +962,20 @@ func serializeVpcEndpointSummaryList(s smithy.ShapeSerializer, schema *smithy.Sc
 		s.CloseStruct()
 	}
 	s.CloseList()
+}
+
+func deserializeAcceptedWarningsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
 }
 
 func deserializeAdditionalLimitList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AdditionalLimit) error {

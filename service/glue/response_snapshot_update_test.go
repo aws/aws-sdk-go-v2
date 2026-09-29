@@ -25975,6 +25975,7 @@ func TestUpdateResponseSnapshot_GetTable(t *testing.T) {
 			},
 			ViewDefinition: &types.ViewDefinition{
 				IsProtected:      ptr.Bool(true),
+				IsManaged:        ptr.Bool(true),
 				Definer:          ptr.String("__Definer__"),
 				ViewVersionId:    1,
 				ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -26462,6 +26463,7 @@ func TestUpdateResponseSnapshot_GetTableVersion(t *testing.T) {
 				},
 				ViewDefinition: &types.ViewDefinition{
 					IsProtected:      ptr.Bool(true),
+					IsManaged:        ptr.Bool(true),
 					Definer:          ptr.String("__Definer__"),
 					ViewVersionId:    1,
 					ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -26853,6 +26855,7 @@ func TestUpdateResponseSnapshot_GetTableVersions(t *testing.T) {
 					},
 					ViewDefinition: &types.ViewDefinition{
 						IsProtected:      ptr.Bool(true),
+						IsManaged:        ptr.Bool(true),
 						Definer:          ptr.String("__Definer__"),
 						ViewVersionId:    1,
 						ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -27220,6 +27223,7 @@ func TestUpdateResponseSnapshot_GetTableVersions(t *testing.T) {
 					},
 					ViewDefinition: &types.ViewDefinition{
 						IsProtected:      ptr.Bool(true),
+						IsManaged:        ptr.Bool(true),
 						Definer:          ptr.String("__Definer__"),
 						ViewVersionId:    1,
 						ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -27612,6 +27616,7 @@ func TestUpdateResponseSnapshot_GetTables(t *testing.T) {
 				},
 				ViewDefinition: &types.ViewDefinition{
 					IsProtected:      ptr.Bool(true),
+					IsManaged:        ptr.Bool(true),
 					Definer:          ptr.String("__Definer__"),
 					ViewVersionId:    1,
 					ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -27976,6 +27981,7 @@ func TestUpdateResponseSnapshot_GetTables(t *testing.T) {
 				},
 				ViewDefinition: &types.ViewDefinition{
 					IsProtected:      ptr.Bool(true),
+					IsManaged:        ptr.Bool(true),
 					Definer:          ptr.String("__Definer__"),
 					ViewVersionId:    1,
 					ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -28955,6 +28961,7 @@ func TestUpdateResponseSnapshot_GetUnfilteredTableMetadata(t *testing.T) {
 			},
 			ViewDefinition: &types.ViewDefinition{
 				IsProtected:      ptr.Bool(true),
+				IsManaged:        ptr.Bool(true),
 				Definer:          ptr.String("__Definer__"),
 				ViewVersionId:    1,
 				ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -33930,6 +33937,7 @@ func TestUpdateResponseSnapshot_SearchTables(t *testing.T) {
 				},
 				ViewDefinition: &types.ViewDefinition{
 					IsProtected:      ptr.Bool(true),
+					IsManaged:        ptr.Bool(true),
 					Definer:          ptr.String("__Definer__"),
 					ViewVersionId:    1,
 					ViewVersionToken: ptr.String("__ViewVersionToken__"),
@@ -34294,6 +34302,7 @@ func TestUpdateResponseSnapshot_SearchTables(t *testing.T) {
 				},
 				ViewDefinition: &types.ViewDefinition{
 					IsProtected:      ptr.Bool(true),
+					IsManaged:        ptr.Bool(true),
 					Definer:          ptr.String("__Definer__"),
 					ViewVersionId:    1,
 					ViewVersionToken: ptr.String("__ViewVersionToken__"),

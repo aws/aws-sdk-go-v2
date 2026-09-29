@@ -627,7 +627,7 @@ var AdSequencingMode_FOLLOW_AD_SEQUENCE_ONLY_VOD *smithy.Schema
 var AdsInteractionExcludeEventType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "AdsInteractionExcludeEventType",
-}, smithy.ShapeTypeEnum, 47)
+}, smithy.ShapeTypeEnum, 48)
 var AdsInteractionExcludeEventType_AD_MARKER_FOUND *smithy.Schema
 
 var AdsInteractionExcludeEventType_NON_AD_MARKER_FOUND *smithy.Schema
@@ -713,6 +713,8 @@ var AdsInteractionExcludeEventType_INTERSTITIAL_VOD_FAILURE *smithy.Schema
 var AdsInteractionExcludeEventType_PRE_ADS_REQUEST_HOOK_ERROR *smithy.Schema
 
 var AdsInteractionExcludeEventType_PRE_ADS_REQUEST_FUNCTION_ERROR *smithy.Schema
+
+var AdsInteractionExcludeEventType_BEACON_RECEIVED *smithy.Schema
 
 var AdsInteractionExcludeEventType_POST_ADS_RESPONSE_HOOK_ERROR *smithy.Schema
 
@@ -900,6 +902,30 @@ var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
 var BadRequestException_Message *smithy.Schema
 
+var BeaconEventType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediatailor",
+	Name:      "BeaconEventType",
+}, smithy.ShapeTypeEnum, 4)
+var BeaconEventType_MUTE *smithy.Schema
+
+var BeaconEventType_UNMUTE *smithy.Schema
+
+var BeaconEventType_PAUSE *smithy.Schema
+
+var BeaconEventType_SKIP *smithy.Schema
+
+var _BeaconEventTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediatailor",
+	Name:      "BeaconEventTypeList",
+}, smithy.ShapeTypeList, 1)
+var _BeaconEventTypeList_member *smithy.Schema
+
+var BeaconingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediatailor",
+	Name:      "BeaconingConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var BeaconingConfiguration_ClientSide *smithy.Schema
+
 var Bumper = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "Bumper",
@@ -951,6 +977,22 @@ var ChannelState = smithy.NewSchema(smithy.ShapeID{
 var ChannelState_RUNNING *smithy.Schema
 
 var ChannelState_STOPPED *smithy.Schema
+
+var ClientSideBeaconingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediatailor",
+	Name:      "ClientSideBeaconingConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var ClientSideBeaconingConfiguration_ReportingMode *smithy.Schema
+
+var ClientSideBeaconingConfiguration_AdditionalEventTypes *smithy.Schema
+
+var ClientSideBeaconingMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediatailor",
+	Name:      "ClientSideBeaconingMode",
+}, smithy.ShapeTypeEnum, 2)
+var ClientSideBeaconingMode_DISABLED *smithy.Schema
+
+var ClientSideBeaconingMode_INSIGHTS *smithy.Schema
 
 var ClipRange = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
@@ -1444,7 +1486,7 @@ var OriginManifestType_MULTI_PERIOD *smithy.Schema
 var PlaybackConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "PlaybackConfiguration",
-}, smithy.ShapeTypeStructure, 28)
+}, smithy.ShapeTypeStructure, 29)
 var PlaybackConfiguration_AdDecisionServerUrl *smithy.Schema
 
 var PlaybackConfiguration_AvailSuppression *smithy.Schema
@@ -1500,6 +1542,8 @@ var PlaybackConfiguration_FunctionMapping *smithy.Schema
 var PlaybackConfiguration_AdsPersonalizationTimeouts *smithy.Schema
 
 var PlaybackConfiguration_AdsPersonalizationConcurrency *smithy.Schema
+
+var PlaybackConfiguration_BeaconingConfiguration *smithy.Schema
 
 var PlaybackMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
@@ -2599,7 +2643,7 @@ var GetPlaybackConfigurationRequest_Name *smithy.Schema
 var GetPlaybackConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "GetPlaybackConfigurationResponse",
-}, smithy.ShapeTypeStructure, 28)
+}, smithy.ShapeTypeStructure, 29)
 var GetPlaybackConfigurationResponse_AdDecisionServerUrl *smithy.Schema
 
 var GetPlaybackConfigurationResponse_AvailSuppression *smithy.Schema
@@ -2655,6 +2699,8 @@ var GetPlaybackConfigurationResponse_FunctionMapping *smithy.Schema
 var GetPlaybackConfigurationResponse_AdsPersonalizationTimeouts *smithy.Schema
 
 var GetPlaybackConfigurationResponse_AdsPersonalizationConcurrency *smithy.Schema
+
+var GetPlaybackConfigurationResponse_BeaconingConfiguration *smithy.Schema
 
 var GetPrefetchScheduleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
@@ -2904,7 +2950,7 @@ var PutFunctionResponse_Arn *smithy.Schema
 var PutPlaybackConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "PutPlaybackConfigurationRequest",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var PutPlaybackConfigurationRequest_AdDecisionServerUrl *smithy.Schema
 
 var PutPlaybackConfigurationRequest_AvailSuppression *smithy.Schema
@@ -2947,10 +2993,12 @@ var PutPlaybackConfigurationRequest_AdsPersonalizationTimeouts *smithy.Schema
 
 var PutPlaybackConfigurationRequest_AdsPersonalizationConcurrency *smithy.Schema
 
+var PutPlaybackConfigurationRequest_BeaconingConfiguration *smithy.Schema
+
 var PutPlaybackConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "PutPlaybackConfigurationResponse",
-}, smithy.ShapeTypeStructure, 28)
+}, smithy.ShapeTypeStructure, 29)
 var PutPlaybackConfigurationResponse_AdDecisionServerUrl *smithy.Schema
 
 var PutPlaybackConfigurationResponse_AvailSuppression *smithy.Schema
@@ -3006,6 +3054,8 @@ var PutPlaybackConfigurationResponse_FunctionMapping *smithy.Schema
 var PutPlaybackConfigurationResponse_AdsPersonalizationTimeouts *smithy.Schema
 
 var PutPlaybackConfigurationResponse_AdsPersonalizationConcurrency *smithy.Schema
+
+var PutPlaybackConfigurationResponse_BeaconingConfiguration *smithy.Schema
 
 var StartChannelRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
@@ -3311,6 +3361,8 @@ func init() {
 	AdsInteractionExcludeEventType_PRE_ADS_REQUEST_HOOK_ERROR = AdsInteractionExcludeEventType.AddMember("PRE_ADS_REQUEST_HOOK_ERROR", smithyprelude.Unit)
 
 	AdsInteractionExcludeEventType_PRE_ADS_REQUEST_FUNCTION_ERROR = AdsInteractionExcludeEventType.AddMember("PRE_ADS_REQUEST_FUNCTION_ERROR", smithyprelude.Unit)
+
+	AdsInteractionExcludeEventType_BEACON_RECEIVED = AdsInteractionExcludeEventType.AddMember("BEACON_RECEIVED", smithyprelude.Unit)
 
 	AdsInteractionExcludeEventType_POST_ADS_RESPONSE_HOOK_ERROR = AdsInteractionExcludeEventType.AddMember("POST_ADS_RESPONSE_HOOK_ERROR", smithyprelude.Unit)
 
@@ -3916,6 +3968,26 @@ func init() {
 
 	AdsPersonalizationConcurrency_EnableVodVastParallelization = AdsPersonalizationConcurrency.AddMember("EnableVodVastParallelization", ___boolean)
 
+	ClientSideBeaconingMode_DISABLED = ClientSideBeaconingMode.AddMember("DISABLED", smithyprelude.Unit)
+
+	ClientSideBeaconingMode_INSIGHTS = ClientSideBeaconingMode.AddMember("INSIGHTS", smithyprelude.Unit)
+
+	BeaconEventType_MUTE = BeaconEventType.AddMember("MUTE", smithyprelude.Unit)
+
+	BeaconEventType_UNMUTE = BeaconEventType.AddMember("UNMUTE", smithyprelude.Unit)
+
+	BeaconEventType_PAUSE = BeaconEventType.AddMember("PAUSE", smithyprelude.Unit)
+
+	BeaconEventType_SKIP = BeaconEventType.AddMember("SKIP", smithyprelude.Unit)
+
+	_BeaconEventTypeList_member = _BeaconEventTypeList.AddMember("member", BeaconEventType)
+
+	ClientSideBeaconingConfiguration_ReportingMode = ClientSideBeaconingConfiguration.AddMember("ReportingMode", ClientSideBeaconingMode)
+
+	ClientSideBeaconingConfiguration_AdditionalEventTypes = ClientSideBeaconingConfiguration.AddMember("AdditionalEventTypes", _BeaconEventTypeList)
+
+	BeaconingConfiguration_ClientSide = BeaconingConfiguration.AddMember("ClientSide", ClientSideBeaconingConfiguration)
+
 	PlaybackConfiguration_AdDecisionServerUrl = PlaybackConfiguration.AddMember("AdDecisionServerUrl", ___string)
 
 	PlaybackConfiguration_AvailSuppression = PlaybackConfiguration.AddMember("AvailSuppression", AvailSuppression)
@@ -3971,6 +4043,8 @@ func init() {
 	PlaybackConfiguration_AdsPersonalizationTimeouts = PlaybackConfiguration.AddMember("AdsPersonalizationTimeouts", AdsPersonalizationTimeouts)
 
 	PlaybackConfiguration_AdsPersonalizationConcurrency = PlaybackConfiguration.AddMember("AdsPersonalizationConcurrency", AdsPersonalizationConcurrency)
+
+	PlaybackConfiguration_BeaconingConfiguration = PlaybackConfiguration.AddMember("BeaconingConfiguration", BeaconingConfiguration)
 
 	___listOfPlaybackConfiguration_member = ___listOfPlaybackConfiguration.AddMember("member", PlaybackConfiguration)
 
@@ -4682,6 +4756,8 @@ func init() {
 
 	GetPlaybackConfigurationResponse_AdsPersonalizationConcurrency = GetPlaybackConfigurationResponse.AddMember("AdsPersonalizationConcurrency", AdsPersonalizationConcurrency)
 
+	GetPlaybackConfigurationResponse_BeaconingConfiguration = GetPlaybackConfigurationResponse.AddMember("BeaconingConfiguration", BeaconingConfiguration)
+
 	GetPrefetchScheduleRequest_Name = GetPrefetchScheduleRequest.AddMember("Name", ___string, &smithytraits.HTTPLabel{})
 
 	GetPrefetchScheduleRequest_PlaybackConfigurationName = GetPrefetchScheduleRequest.AddMember("PlaybackConfigurationName", ___string, &smithytraits.HTTPLabel{})
@@ -4872,6 +4948,8 @@ func init() {
 
 	PutPlaybackConfigurationRequest_AdsPersonalizationConcurrency = PutPlaybackConfigurationRequest.AddMember("AdsPersonalizationConcurrency", AdsPersonalizationConcurrency)
 
+	PutPlaybackConfigurationRequest_BeaconingConfiguration = PutPlaybackConfigurationRequest.AddMember("BeaconingConfiguration", BeaconingConfiguration)
+
 	PutPlaybackConfigurationResponse_AdDecisionServerUrl = PutPlaybackConfigurationResponse.AddMember("AdDecisionServerUrl", ___string)
 
 	PutPlaybackConfigurationResponse_AvailSuppression = PutPlaybackConfigurationResponse.AddMember("AvailSuppression", AvailSuppression)
@@ -4927,6 +5005,8 @@ func init() {
 	PutPlaybackConfigurationResponse_AdsPersonalizationTimeouts = PutPlaybackConfigurationResponse.AddMember("AdsPersonalizationTimeouts", AdsPersonalizationTimeouts)
 
 	PutPlaybackConfigurationResponse_AdsPersonalizationConcurrency = PutPlaybackConfigurationResponse.AddMember("AdsPersonalizationConcurrency", AdsPersonalizationConcurrency)
+
+	PutPlaybackConfigurationResponse_BeaconingConfiguration = PutPlaybackConfigurationResponse.AddMember("BeaconingConfiguration", BeaconingConfiguration)
 
 	StartChannelRequest_ChannelName = StartChannelRequest.AddMember("ChannelName", ___string, &smithytraits.HTTPLabel{})
 

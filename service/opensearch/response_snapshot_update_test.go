@@ -1902,6 +1902,22 @@ func TestUpdateResponseSnapshot_DescribeDomainChangeProgress(t *testing.T) {
 			LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ConfigChangeStatus: types.ConfigChangeStatus("Pending"),
 			InitiatedBy:        types.InitiatedBy("CUSTOMER"),
+			ValidationFailures: []types.ValidationFailure{
+				{
+					Code:     ptr.String("__Code__"),
+					Message:  ptr.String("__Message__"),
+					Severity: types.ValidationFailureSeverity("Critical"),
+				},
+				{
+					Code:     ptr.String("__Code__"),
+					Message:  ptr.String("__Message__"),
+					Severity: types.ValidationFailureSeverity("Critical"),
+				},
+			},
+			AcceptedWarnings: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	}
 	proto := restjson1.New(schemas.AmazonOpenSearchService)
@@ -2965,13 +2981,19 @@ func TestUpdateResponseSnapshot_DescribeDryRunProgress(t *testing.T) {
 			UpdateDate:   ptr.String("__UpdateDate__"),
 			ValidationFailures: []types.ValidationFailure{
 				{
-					Code:    ptr.String("__Code__"),
-					Message: ptr.String("__Message__"),
+					Code:     ptr.String("__Code__"),
+					Message:  ptr.String("__Message__"),
+					Severity: types.ValidationFailureSeverity("Critical"),
 				},
 				{
-					Code:    ptr.String("__Code__"),
-					Message: ptr.String("__Message__"),
+					Code:     ptr.String("__Code__"),
+					Message:  ptr.String("__Message__"),
+					Severity: types.ValidationFailureSeverity("Critical"),
 				},
+			},
+			AcceptedWarnings: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 		DryRunConfig: &types.DomainStatus{
@@ -6117,13 +6139,19 @@ func TestUpdateResponseSnapshot_UpdateDomainConfig(t *testing.T) {
 			UpdateDate:   ptr.String("__UpdateDate__"),
 			ValidationFailures: []types.ValidationFailure{
 				{
-					Code:    ptr.String("__Code__"),
-					Message: ptr.String("__Message__"),
+					Code:     ptr.String("__Code__"),
+					Message:  ptr.String("__Message__"),
+					Severity: types.ValidationFailureSeverity("Critical"),
 				},
 				{
-					Code:    ptr.String("__Code__"),
-					Message: ptr.String("__Message__"),
+					Code:     ptr.String("__Code__"),
+					Message:  ptr.String("__Message__"),
+					Severity: types.ValidationFailureSeverity("Critical"),
 				},
+			},
+			AcceptedWarnings: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 	}

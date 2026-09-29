@@ -1216,6 +1216,9 @@ func TestCheckResponseSnapshot_CreateImportedImage(t *testing.T) {
 			ImageSharedWithOthers:      types.ImageSharedWithOthers("TRUE"),
 			ManagedSoftwareIncluded:    ptr.Bool(true),
 			ImageType:                  types.ImageType("CUSTOM"),
+			ImageSoftwareMetadata: &types.ImageSoftwareMetadata{
+				NvidiaGridDriverVersion: ptr.String("__NvidiaGridDriverVersion__"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateImportedImage.response")
@@ -1690,6 +1693,9 @@ func TestCheckResponseSnapshot_CreateUpdatedImage(t *testing.T) {
 			ImageSharedWithOthers:      types.ImageSharedWithOthers("TRUE"),
 			ManagedSoftwareIncluded:    ptr.Bool(true),
 			ImageType:                  types.ImageType("CUSTOM"),
+			ImageSoftwareMetadata: &types.ImageSoftwareMetadata{
+				NvidiaGridDriverVersion: ptr.String("__NvidiaGridDriverVersion__"),
+			},
 		},
 		CanUpdateImage: ptr.Bool(true),
 	}
@@ -1996,6 +2002,9 @@ func TestCheckResponseSnapshot_DeleteImage(t *testing.T) {
 			ImageSharedWithOthers:      types.ImageSharedWithOthers("TRUE"),
 			ManagedSoftwareIncluded:    ptr.Bool(true),
 			ImageType:                  types.ImageType("CUSTOM"),
+			ImageSoftwareMetadata: &types.ImageSoftwareMetadata{
+				NvidiaGridDriverVersion: ptr.String("__NvidiaGridDriverVersion__"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteImage.response")
@@ -3263,6 +3272,9 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 				ImageSharedWithOthers:      types.ImageSharedWithOthers("TRUE"),
 				ManagedSoftwareIncluded:    ptr.Bool(true),
 				ImageType:                  types.ImageType("CUSTOM"),
+				ImageSoftwareMetadata: &types.ImageSoftwareMetadata{
+					NvidiaGridDriverVersion: ptr.String("__NvidiaGridDriverVersion__"),
+				},
 			},
 			{
 				Name:                  ptr.String("__Name__"),
@@ -3365,6 +3377,9 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 				ImageSharedWithOthers:      types.ImageSharedWithOthers("TRUE"),
 				ManagedSoftwareIncluded:    ptr.Bool(true),
 				ImageType:                  types.ImageType("CUSTOM"),
+				ImageSoftwareMetadata: &types.ImageSoftwareMetadata{
+					NvidiaGridDriverVersion: ptr.String("__NvidiaGridDriverVersion__"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

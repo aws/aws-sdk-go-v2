@@ -38,6 +38,17 @@ type UpdateDomainConfigInput struct {
 	// Options for all machine learning features for the specified domain.
 	AIMLOptions *types.AIMLOptionsInput
 
+	// A list of advisory warning codes to accept for this configuration change. By
+	// default, any advisory warning blocks the change. Include the code of each
+	// warning you want to accept so the change can proceed. You can find warning codes
+	// in the ValidationFailures list returned by DescribeDomainChangeProgress and
+	// DescribeDryRunProgress . Critical validation failures cannot be accepted and
+	// always block the change. If you omit this parameter or pass an empty list, all
+	// warnings block the change. For more information, see [Validating a domain update].
+	//
+	// [Validating a domain update]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check
+	AcceptedWarnings []string
+
 	// Identity and Access Management (IAM) access policy as a JSON-formatted string.
 	AccessPolicies *string
 
@@ -169,6 +180,7 @@ func (v *UpdateDomainConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AIMLOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serializeAcceptedWarningsList(s, schemas.UpdateDomainConfigRequest_AcceptedWarnings, v.AcceptedWarnings)
 	if v.AccessPolicies != nil {
 		s.WriteString(schemas.UpdateDomainConfigRequest_AccessPolicies, *v.AccessPolicies)
 	}

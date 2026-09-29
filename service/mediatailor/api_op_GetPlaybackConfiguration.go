@@ -96,6 +96,14 @@ type GetPlaybackConfigurationOutput struct {
 	// [Ad Suppression]: https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html
 	AvailSuppression *types.AvailSuppression
 
+	// The beaconing configuration for this playback configuration, which controls
+	// whether MediaTailor includes beacons of its own in the ad tracking response.
+	// MediaTailor always returns this setting. If you created the playback
+	// configuration before this setting existed, MediaTailor reports ReportingMode as
+	// INSIGHTS . This is also the value MediaTailor uses for that configuration at
+	// playback time.
+	BeaconingConfiguration *types.BeaconingConfiguration
+
 	// The configuration for bumpers. Bumpers are short audio or video clips that play
 	// at the start or before the end of an ad break. To learn more about bumpers, see [Bumpers]
 	// .
@@ -249,6 +257,11 @@ func (v *GetPlaybackConfigurationOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.AvailSuppression.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.BeaconingConfiguration != nil {
+		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_BeaconingConfiguration)
+		v.BeaconingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Bumper != nil {
 		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_Bumper)
 		v.Bumper.SerializeMembers(s)
@@ -347,6 +360,9 @@ func (v *GetPlaybackConfigurationOutput) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.GetPlaybackConfigurationResponse_AvailSuppression:
 			v.AvailSuppression = &types.AvailSuppression{}
 			return v.AvailSuppression.Deserialize(d)
+		case schemas.GetPlaybackConfigurationResponse_BeaconingConfiguration:
+			v.BeaconingConfiguration = &types.BeaconingConfiguration{}
+			return v.BeaconingConfiguration.Deserialize(d)
 		case schemas.GetPlaybackConfigurationResponse_Bumper:
 			v.Bumper = &types.Bumper{}
 			return v.Bumper.Deserialize(d)

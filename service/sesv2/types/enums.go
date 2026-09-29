@@ -127,6 +127,23 @@ func (BulkEmailStatus) Values() []BulkEmailStatus {
 	}
 }
 
+type ConfigurationSetFilterKey string
+
+// Enum values for ConfigurationSetFilterKey
+const (
+	ConfigurationSetFilterKeyConfigurationSetNameContains ConfigurationSetFilterKey = "CONFIGURATION_SET_NAME_CONTAINS"
+)
+
+// Values returns all known values for ConfigurationSetFilterKey. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationSetFilterKey) Values() []ConfigurationSetFilterKey {
+	return []ConfigurationSetFilterKey{
+		"CONFIGURATION_SET_NAME_CONTAINS",
+	}
+}
+
 type ContactLanguage string
 
 // Enum values for ContactLanguage
@@ -554,6 +571,27 @@ func (IdentityCertificateStatus) Values() []IdentityCertificateStatus {
 	}
 }
 
+type IdentityFilterKey string
+
+// Enum values for IdentityFilterKey
+const (
+	IdentityFilterKeyIdentityNameContains IdentityFilterKey = "IDENTITY_NAME_CONTAINS"
+	IdentityFilterKeyIdentityType         IdentityFilterKey = "IDENTITY_TYPE"
+	IdentityFilterKeyVerificationStatus   IdentityFilterKey = "VERIFICATION_STATUS"
+)
+
+// Values returns all known values for IdentityFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdentityFilterKey) Values() []IdentityFilterKey {
+	return []IdentityFilterKey{
+		"IDENTITY_NAME_CONTAINS",
+		"IDENTITY_TYPE",
+		"VERIFICATION_STATUS",
+	}
+}
+
 type IdentityType string
 
 // Enum values for IdentityType
@@ -658,6 +696,25 @@ const (
 func (ListTenantResourcesFilterKey) Values() []ListTenantResourcesFilterKey {
 	return []ListTenantResourcesFilterKey{
 		"RESOURCE_TYPE",
+	}
+}
+
+type ListTenantsFilterKey string
+
+// Enum values for ListTenantsFilterKey
+const (
+	ListTenantsFilterKeyTenantNameContains ListTenantsFilterKey = "TENANT_NAME_CONTAINS"
+	ListTenantsFilterKeySendingStatus      ListTenantsFilterKey = "SENDING_STATUS"
+)
+
+// Values returns all known values for ListTenantsFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListTenantsFilterKey) Values() []ListTenantsFilterKey {
+	return []ListTenantsFilterKey{
+		"TENANT_NAME_CONTAINS",
+		"SENDING_STATUS",
 	}
 }
 

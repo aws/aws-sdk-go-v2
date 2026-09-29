@@ -1,0 +1,8 @@
+{
+    "id": "aba168bf-ee9b-4f3d-a6b7-3ca2097b293b",
+    "type": "feature",
+    "description": "Amazon Bedrock Agentic Retrieve now supports the Bedrock Mantle (OpenAI Responses) endpoint via a new MantleFoundationModel configuration with an optional projectId.",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}

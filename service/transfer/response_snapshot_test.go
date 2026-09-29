@@ -368,6 +368,16 @@ func TestCheckResponseSnapshot_CreateServer(t *testing.T) {
 			PassiveIp:                ptr.String("__PassiveIp__"),
 			TlsSessionResumptionMode: types.TlsSessionResumptionMode("DISABLED"),
 			SetStatOption:            types.SetStatOption("DEFAULT"),
+			SftpPorts: []types.SftpPortWithOptions{
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+			},
 			As2Transports: []types.As2Transport{
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
@@ -1547,6 +1557,16 @@ func TestCheckResponseSnapshot_DescribeServer(t *testing.T) {
 				PassiveIp:                ptr.String("__PassiveIp__"),
 				TlsSessionResumptionMode: types.TlsSessionResumptionMode("DISABLED"),
 				SetStatOption:            types.SetStatOption("DEFAULT"),
+				SftpPorts: []types.SftpPortWithOptions{
+					{
+						SftpPort:          ptr.Int32(1),
+						CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+					},
+					{
+						SftpPort:          ptr.Int32(1),
+						CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+					},
+				},
 				As2Transports: []types.As2Transport{
 					types.As2Transport("HTTP"),
 					types.As2Transport("HTTP"),
@@ -3339,6 +3359,16 @@ func TestCheckResponseSnapshot_UpdateServer(t *testing.T) {
 			PassiveIp:                ptr.String("__PassiveIp__"),
 			TlsSessionResumptionMode: types.TlsSessionResumptionMode("DISABLED"),
 			SetStatOption:            types.SetStatOption("DEFAULT"),
+			SftpPorts: []types.SftpPortWithOptions{
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+			},
 			As2Transports: []types.As2Transport{
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
@@ -3589,6 +3619,16 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 			PassiveIp:                ptr.String("__PassiveIp__"),
 			TlsSessionResumptionMode: types.TlsSessionResumptionMode("DISABLED"),
 			SetStatOption:            types.SetStatOption("DEFAULT"),
+			SftpPorts: []types.SftpPortWithOptions{
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+				{
+					SftpPort:          ptr.Int32(1),
+					CommunicationMode: types.CommunicationMode("CLIENT_TALK_FIRST"),
+				},
+			},
 			As2Transports: []types.As2Transport{
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),

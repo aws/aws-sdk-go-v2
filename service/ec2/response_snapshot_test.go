@@ -3825,6 +3825,7 @@ func TestCheckResponseSnapshot_CreateCapacityReservation(t *testing.T) {
 			},
 			OriginalStartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ZeroSizePreference: types.ZeroSizePreference("retain"),
+			LaunchStatus:       types.CapacityReservationLaunchStatus("launchable"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateCapacityReservation.response")
@@ -3987,6 +3988,7 @@ func TestCheckResponseSnapshot_CreateCapacityReservationBySplitting(t *testing.T
 			},
 			OriginalStartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ZeroSizePreference: types.ZeroSizePreference("retain"),
+			LaunchStatus:       types.CapacityReservationLaunchStatus("launchable"),
 		},
 		DestinationCapacityReservation: &types.CapacityReservation{
 			CapacityReservationId:  ptr.String("__CapacityReservationId__"),
@@ -4082,6 +4084,7 @@ func TestCheckResponseSnapshot_CreateCapacityReservationBySplitting(t *testing.T
 			},
 			OriginalStartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ZeroSizePreference: types.ZeroSizePreference("retain"),
+			LaunchStatus:       types.CapacityReservationLaunchStatus("launchable"),
 		},
 		InstanceCount: ptr.Int32(1),
 	}
@@ -23713,6 +23716,7 @@ func TestCheckResponseSnapshot_DescribeCapacityReservations(t *testing.T) {
 				},
 				OriginalStartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ZeroSizePreference: types.ZeroSizePreference("retain"),
+				LaunchStatus:       types.CapacityReservationLaunchStatus("launchable"),
 			},
 			{
 				CapacityReservationId:  ptr.String("__CapacityReservationId__"),
@@ -23808,6 +23812,7 @@ func TestCheckResponseSnapshot_DescribeCapacityReservations(t *testing.T) {
 				},
 				OriginalStartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ZeroSizePreference: types.ZeroSizePreference("retain"),
+				LaunchStatus:       types.CapacityReservationLaunchStatus("launchable"),
 			},
 		},
 	}
@@ -81016,6 +81021,7 @@ func TestCheckResponseSnapshot_MoveCapacityReservationInstances(t *testing.T) {
 			},
 			OriginalStartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ZeroSizePreference: types.ZeroSizePreference("retain"),
+			LaunchStatus:       types.CapacityReservationLaunchStatus("launchable"),
 		},
 		DestinationCapacityReservation: &types.CapacityReservation{
 			CapacityReservationId:  ptr.String("__CapacityReservationId__"),
@@ -81111,6 +81117,7 @@ func TestCheckResponseSnapshot_MoveCapacityReservationInstances(t *testing.T) {
 			},
 			OriginalStartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ZeroSizePreference: types.ZeroSizePreference("retain"),
+			LaunchStatus:       types.CapacityReservationLaunchStatus("launchable"),
 		},
 		InstanceCount: ptr.Int32(1),
 	}
@@ -81425,6 +81432,7 @@ func TestCheckResponseSnapshot_PurchaseCapacityBlock(t *testing.T) {
 			},
 			OriginalStartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ZeroSizePreference: types.ZeroSizePreference("retain"),
+			LaunchStatus:       types.CapacityReservationLaunchStatus("launchable"),
 		},
 		CapacityBlocks: []types.CapacityBlock{
 			{

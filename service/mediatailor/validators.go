@@ -1265,6 +1265,38 @@ func validateAwsServiceRequestConfiguration(v *types.AwsServiceRequestConfigurat
 	}
 }
 
+func validateBeaconingConfiguration(v *types.BeaconingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BeaconingConfiguration"}
+	if v.ClientSide != nil {
+		if err := validateClientSideBeaconingConfiguration(v.ClientSide); err != nil {
+			invalidParams.AddNested("ClientSide", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClientSideBeaconingConfiguration(v *types.ClientSideBeaconingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClientSideBeaconingConfiguration"}
+	if len(v.ReportingMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportingMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConcurrentExecutorConfiguration(v *types.ConcurrentExecutorConfiguration) error {
 	if v == nil {
 		return nil
@@ -2307,6 +2339,11 @@ func validateOpPutPlaybackConfigurationInput(v *PutPlaybackConfigurationInput) e
 	if v.YieldOptimizationConfiguration != nil {
 		if err := validateYieldOptimizationConfiguration(v.YieldOptimizationConfiguration); err != nil {
 			invalidParams.AddNested("YieldOptimizationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BeaconingConfiguration != nil {
+		if err := validateBeaconingConfiguration(v.BeaconingConfiguration); err != nil {
+			invalidParams.AddNested("BeaconingConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

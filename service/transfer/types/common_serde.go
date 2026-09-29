@@ -623,6 +623,19 @@ func serializeSftpConnectorTrustedHostKeyList(s smithy.ShapeSerializer, schema *
 	s.CloseList()
 }
 
+func serializeSftpPorts(s smithy.ShapeSerializer, schema *smithy.Schema, v []SftpPortWithOptions) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeSshPublicKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []SshPublicKey) {
 	if v == nil {
 		return
@@ -1135,6 +1148,20 @@ func deserializeSftpConnectorTrustedHostKeyList(d smithy.ShapeDeserializer, s *s
 	return smithy.ReadList(d, s, func() error {
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSftpPorts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SftpPortWithOptions) error {
+	*v = make([]SftpPortWithOptions, 0)
+	var vv SftpPortWithOptions
+	return smithy.ReadList(d, s, func() error {
+		vv = SftpPortWithOptions{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

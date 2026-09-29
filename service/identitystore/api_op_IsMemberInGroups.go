@@ -36,10 +36,18 @@ type IsMemberInGroupsInput struct {
 
 	// A list of identifiers for groups in the identity store.
 	//
+	// You can specify each group by ID or by Amazon Resource Name (ARN). For example,
+	// group ID a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 or group ARN
+	// arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
+	//
 	// This member is required.
 	GroupIds []string
 
 	// The globally unique identifier for the identity store.
+	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
 	//
 	// This member is required.
 	IdentityStoreId *string
@@ -64,20 +72,6 @@ func (v *IsMemberInGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.IsMemberInGroupsRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
 	serializeMemberId(s, schemas.IsMemberInGroupsRequest_MemberId, v.MemberId)
-}
-func (v *IsMemberInGroupsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsMemberInGroupsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsMemberInGroupsRequest_GroupIds:
-			return deserializeGroupIds(d, schemas.IsMemberInGroupsRequest_GroupIds, &v.GroupIds)
-		case schemas.IsMemberInGroupsRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.IsMemberInGroupsRequest_IdentityStoreId, v.IdentityStoreId)
-		case schemas.IsMemberInGroupsRequest_MemberId:
-			return deserializeMemberId(d, schemas.IsMemberInGroupsRequest_MemberId, &v.MemberId)
-		}
-		return nil
-	})
 }
 
 type IsMemberInGroupsOutput struct {

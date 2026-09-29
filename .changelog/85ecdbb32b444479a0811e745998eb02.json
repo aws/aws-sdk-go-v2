@@ -1,0 +1,8 @@
+{
+    "id": "85ecdbb3-2b44-4479-a081-1e745998eb02",
+    "type": "feature",
+    "description": "AWS Elemental MediaTailor now supports beaconing configuration on playback configurations. In Insights reporting mode, MediaTailor will now gather client side beaconing metrics. Set the reporting mode to Disabled to turn this off.",
+    "modules": [
+        "service/mediatailor"
+    ]
+}

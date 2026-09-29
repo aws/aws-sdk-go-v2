@@ -5231,6 +5231,7 @@ func TestCheckResponseSnapshot_GetIntegration(t *testing.T) {
 		DisplayName:           ptr.String("__DisplayName__"),
 		KmsKeyId:              ptr.String("__KmsKeyId__"),
 		TargetUrl:             ptr.String("__TargetUrl__"),
+		WebhookUrl:            ptr.String("__WebhookUrl__"),
 		PrivateConnectionName: ptr.String("__PrivateConnectionName__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetIntegration.response")
@@ -5336,7 +5337,11 @@ func TestCheckResponseSnapshot_InitiateProviderRegistration(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.InitiateProviderRegistration(context.Background(), &InitiateProviderRegistrationInput{
-		Provider: types.Provider("GITHUB"),
+		Provider:         types.Provider("GITHUB"),
+		TargetUrl:        ptr.String("__TargetUrl__"),
+		OrganizationName: ptr.String("__OrganizationName__"),
+		ClientId:         ptr.String("__ClientId__"),
+		ClientSecret:     ptr.String("__ClientSecret__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -5823,6 +5828,7 @@ func TestCheckResponseSnapshot_ListIntegrations(t *testing.T) {
 				ProviderType:          types.ProviderType("SOURCE_CODE"),
 				DisplayName:           ptr.String("__DisplayName__"),
 				TargetUrl:             ptr.String("__TargetUrl__"),
+				WebhookUrl:            ptr.String("__WebhookUrl__"),
 				PrivateConnectionName: ptr.String("__PrivateConnectionName__"),
 			},
 			{
@@ -5832,6 +5838,7 @@ func TestCheckResponseSnapshot_ListIntegrations(t *testing.T) {
 				ProviderType:          types.ProviderType("SOURCE_CODE"),
 				DisplayName:           ptr.String("__DisplayName__"),
 				TargetUrl:             ptr.String("__TargetUrl__"),
+				WebhookUrl:            ptr.String("__WebhookUrl__"),
 				PrivateConnectionName: ptr.String("__PrivateConnectionName__"),
 			},
 		},
@@ -7269,6 +7276,32 @@ func TestCheckResponseSnapshot_UpdateIntegratedResources(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateIntegratedResources.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateIntegration(t *testing.T) {
+	want := &UpdateIntegrationOutput{
+		IntegrationId: ptr.String("__IntegrationId__"),
+		WebhookUrl:    ptr.String("__WebhookUrl__"),
+		Secret:        ptr.String("__Secret__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateIntegration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateIntegration(context.Background(), &UpdateIntegrationInput{
+		IntegrationId: ptr.String("__IntegrationId__"),
+		WebhookAction: types.WebhookAction("CREATE_IF_ABSENT"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateIntegration.response", err)
 	}
 }
 

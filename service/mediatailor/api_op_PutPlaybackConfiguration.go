@@ -69,6 +69,11 @@ type PutPlaybackConfigurationInput struct {
 	// [Ad Suppression]: https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html
 	AvailSuppression *types.AvailSuppression
 
+	// The beaconing configuration for this playback configuration, which controls
+	// whether MediaTailor includes beacons of its own in the ad tracking response. If
+	// you omit this setting, MediaTailor uses INSIGHTS .
+	BeaconingConfiguration *types.BeaconingConfiguration
+
 	// The configuration for bumpers. Bumpers are short audio or video clips that play
 	// at the start or before the end of an ad break. To learn more about bumpers, see [Bumpers]
 	// .
@@ -190,6 +195,11 @@ func (v *PutPlaybackConfigurationInput) SerializeMembers(s smithy.ShapeSerialize
 		v.AvailSuppression.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.BeaconingConfiguration != nil {
+		s.WriteStruct(schemas.PutPlaybackConfigurationRequest_BeaconingConfiguration)
+		v.BeaconingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Bumper != nil {
 		s.WriteStruct(schemas.PutPlaybackConfigurationRequest_Bumper)
 		v.Bumper.SerializeMembers(s)
@@ -263,6 +273,9 @@ func (v *PutPlaybackConfigurationInput) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.PutPlaybackConfigurationRequest_AvailSuppression:
 			v.AvailSuppression = &types.AvailSuppression{}
 			return v.AvailSuppression.Deserialize(d)
+		case schemas.PutPlaybackConfigurationRequest_BeaconingConfiguration:
+			v.BeaconingConfiguration = &types.BeaconingConfiguration{}
+			return v.BeaconingConfiguration.Deserialize(d)
 		case schemas.PutPlaybackConfigurationRequest_Bumper:
 			v.Bumper = &types.Bumper{}
 			return v.Bumper.Deserialize(d)
@@ -348,6 +361,10 @@ type PutPlaybackConfigurationOutput struct {
 	//
 	// [Ad Suppression]: https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html
 	AvailSuppression *types.AvailSuppression
+
+	// The beaconing configuration for this playback configuration, which controls
+	// whether MediaTailor includes beacons of its own in the ad tracking response.
+	BeaconingConfiguration *types.BeaconingConfiguration
 
 	// The configuration for bumpers. Bumpers are short audio or video clips that play
 	// at the start or before the end of an ad break. To learn more about bumpers, see [Bumpers]
@@ -501,6 +518,11 @@ func (v *PutPlaybackConfigurationOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.AvailSuppression.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.BeaconingConfiguration != nil {
+		s.WriteStruct(schemas.PutPlaybackConfigurationResponse_BeaconingConfiguration)
+		v.BeaconingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Bumper != nil {
 		s.WriteStruct(schemas.PutPlaybackConfigurationResponse_Bumper)
 		v.Bumper.SerializeMembers(s)
@@ -599,6 +621,9 @@ func (v *PutPlaybackConfigurationOutput) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.PutPlaybackConfigurationResponse_AvailSuppression:
 			v.AvailSuppression = &types.AvailSuppression{}
 			return v.AvailSuppression.Deserialize(d)
+		case schemas.PutPlaybackConfigurationResponse_BeaconingConfiguration:
+			v.BeaconingConfiguration = &types.BeaconingConfiguration{}
+			return v.BeaconingConfiguration.Deserialize(d)
 		case schemas.PutPlaybackConfigurationResponse_Bumper:
 			v.Bumper = &types.Bumper{}
 			return v.Bumper.Deserialize(d)

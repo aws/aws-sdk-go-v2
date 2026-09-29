@@ -1,0 +1,8 @@
+{
+    "id": "5d0df00a-7796-41c2-990c-1057fcfe86cf",
+    "type": "feature",
+    "description": "Added Filter support for ListTenants, ListEmailIdentities, and ListConfigurationSets APIs.",
+    "modules": [
+        "service/sesv2"
+    ]
+}

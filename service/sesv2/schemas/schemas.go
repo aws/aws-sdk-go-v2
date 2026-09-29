@@ -410,8 +410,8 @@ var GetTenant = smithy.NewSchema(smithy.ShapeID{
 var ListConfigurationSets = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "ListConfigurationSets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v2/email/configuration-sets",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v2/email/list-configuration-sets",
 	Code: 200})
 
 var ListContactLists = smithy.NewSchema(smithy.ShapeID{
@@ -459,8 +459,8 @@ var ListDomainDeliverabilityCampaigns = smithy.NewSchema(smithy.ShapeID{
 var ListEmailIdentities = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "ListEmailIdentities",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v2/email/identities",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v2/email/list-identities",
 	Code: 200})
 
 var ListEmailIdentityCertificates = smithy.NewSchema(smithy.ShapeID{
@@ -1206,6 +1206,25 @@ var ConfigurationOverrides = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ConfigurationOverrides",
 }, smithy.ShapeTypeStructure, 1)
 var ConfigurationOverrides_Tracking *smithy.Schema
+
+var _ConfigurationSetFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sesv2",
+	Name:      "ConfigurationSetFilter",
+}, smithy.ShapeTypeMap, 2)
+var _ConfigurationSetFilter_key *smithy.Schema
+
+var _ConfigurationSetFilter_value *smithy.Schema
+
+var ConfigurationSetFilterKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sesv2",
+	Name:      "ConfigurationSetFilterKey",
+}, smithy.ShapeTypeEnum, 1)
+var ConfigurationSetFilterKey_CONFIGURATION_SET_NAME_CONTAINS *smithy.Schema
+
+var _ConfigurationSetFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sesv2",
+	Name:      "ConfigurationSetFilterValue",
+}, smithy.ShapeTypeString, 0)
 
 var _ConfigurationSetName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
@@ -2182,6 +2201,29 @@ var IdentityCertificateStatus_ACTIVE *smithy.Schema
 
 var IdentityCertificateStatus_FAILED *smithy.Schema
 
+var _IdentityFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sesv2",
+	Name:      "IdentityFilter",
+}, smithy.ShapeTypeMap, 2)
+var _IdentityFilter_key *smithy.Schema
+
+var _IdentityFilter_value *smithy.Schema
+
+var IdentityFilterKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sesv2",
+	Name:      "IdentityFilterKey",
+}, smithy.ShapeTypeEnum, 3)
+var IdentityFilterKey_IDENTITY_NAME_CONTAINS *smithy.Schema
+
+var IdentityFilterKey_IDENTITY_TYPE *smithy.Schema
+
+var IdentityFilterKey_VERIFICATION_STATUS *smithy.Schema
+
+var _IdentityFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sesv2",
+	Name:      "IdentityFilterValue",
+}, smithy.ShapeTypeString, 0)
+
 var IdentityInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "IdentityInfo",
@@ -2475,6 +2517,27 @@ var ListTenantResourcesFilterKey_RESOURCE_TYPE *smithy.Schema
 var _ListTenantResourcesFilterValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "ListTenantResourcesFilterValue",
+}, smithy.ShapeTypeString, 0)
+
+var _ListTenantsFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sesv2",
+	Name:      "ListTenantsFilter",
+}, smithy.ShapeTypeMap, 2)
+var _ListTenantsFilter_key *smithy.Schema
+
+var _ListTenantsFilter_value *smithy.Schema
+
+var ListTenantsFilterKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sesv2",
+	Name:      "ListTenantsFilterKey",
+}, smithy.ShapeTypeEnum, 2)
+var ListTenantsFilterKey_TENANT_NAME_CONTAINS *smithy.Schema
+
+var ListTenantsFilterKey_SENDING_STATUS *smithy.Schema
+
+var _ListTenantsFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sesv2",
+	Name:      "ListTenantsFilterValue",
 }, smithy.ShapeTypeString, 0)
 
 var MailboxValidation = smithy.NewSchema(smithy.ShapeID{
@@ -3551,7 +3614,7 @@ var _TenantId = smithy.NewSchema(smithy.ShapeID{
 var TenantInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "TenantInfo",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var TenantInfo_TenantName *smithy.Schema
 
 var TenantInfo_TenantId *smithy.Schema
@@ -3559,6 +3622,8 @@ var TenantInfo_TenantId *smithy.Schema
 var TenantInfo_TenantArn *smithy.Schema
 
 var TenantInfo_CreatedTimestamp *smithy.Schema
+
+var TenantInfo_SendingStatus *smithy.Schema
 
 var _TenantInfoList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
@@ -4761,7 +4826,9 @@ var GetTenantResponse_Tenant *smithy.Schema
 var ListConfigurationSetsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "ListConfigurationSetsRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
+var ListConfigurationSetsRequest_Filter *smithy.Schema
+
 var ListConfigurationSetsRequest_NextToken *smithy.Schema
 
 var ListConfigurationSetsRequest_PageSize *smithy.Schema
@@ -4883,7 +4950,9 @@ var ListDomainDeliverabilityCampaignsResponse_NextToken *smithy.Schema
 var ListEmailIdentitiesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "ListEmailIdentitiesRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
+var ListEmailIdentitiesRequest_Filter *smithy.Schema
+
 var ListEmailIdentitiesRequest_NextToken *smithy.Schema
 
 var ListEmailIdentitiesRequest_PageSize *smithy.Schema
@@ -5097,7 +5166,9 @@ var ListTenantResourcesResponse_NextToken *smithy.Schema
 var ListTenantsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "ListTenantsRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
+var ListTenantsRequest_Filter *smithy.Schema
+
 var ListTenantsRequest_NextToken *smithy.Schema
 
 var ListTenantsRequest_PageSize *smithy.Schema
@@ -5991,6 +6062,12 @@ func init() {
 
 	ConfigurationOverrides_Tracking = ConfigurationOverrides.AddMember("Tracking", TrackingConfigurationOverrides)
 
+	ConfigurationSetFilterKey_CONFIGURATION_SET_NAME_CONTAINS = ConfigurationSetFilterKey.AddMember("CONFIGURATION_SET_NAME_CONTAINS", smithyprelude.Unit)
+
+	_ConfigurationSetFilter_key = _ConfigurationSetFilter.AddMember("key", ConfigurationSetFilterKey)
+
+	_ConfigurationSetFilter_value = _ConfigurationSetFilter.AddMember("value", _ConfigurationSetFilterValue)
+
 	_ConfigurationSetNameList_member = _ConfigurationSetNameList.AddMember("member", _ConfigurationSetName)
 
 	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
@@ -6565,6 +6642,16 @@ func init() {
 
 	_IdentityCertificateList_member = _IdentityCertificateList.AddMember("member", IdentityCertificate)
 
+	IdentityFilterKey_IDENTITY_NAME_CONTAINS = IdentityFilterKey.AddMember("IDENTITY_NAME_CONTAINS", smithyprelude.Unit)
+
+	IdentityFilterKey_IDENTITY_TYPE = IdentityFilterKey.AddMember("IDENTITY_TYPE", smithyprelude.Unit)
+
+	IdentityFilterKey_VERIFICATION_STATUS = IdentityFilterKey.AddMember("VERIFICATION_STATUS", smithyprelude.Unit)
+
+	_IdentityFilter_key = _IdentityFilter.AddMember("key", IdentityFilterKey)
+
+	_IdentityFilter_value = _IdentityFilter.AddMember("value", _IdentityFilterValue)
+
 	IdentityType_EMAIL_ADDRESS = IdentityType.AddMember("EMAIL_ADDRESS", smithyprelude.Unit)
 
 	IdentityType_DOMAIN = IdentityType.AddMember("DOMAIN", smithyprelude.Unit)
@@ -6680,6 +6767,14 @@ func init() {
 	_ListTenantResourcesFilter_key = _ListTenantResourcesFilter.AddMember("key", ListTenantResourcesFilterKey)
 
 	_ListTenantResourcesFilter_value = _ListTenantResourcesFilter.AddMember("value", _ListTenantResourcesFilterValue)
+
+	ListTenantsFilterKey_TENANT_NAME_CONTAINS = ListTenantsFilterKey.AddMember("TENANT_NAME_CONTAINS", smithyprelude.Unit)
+
+	ListTenantsFilterKey_SENDING_STATUS = ListTenantsFilterKey.AddMember("SENDING_STATUS", smithyprelude.Unit)
+
+	_ListTenantsFilter_key = _ListTenantsFilter.AddMember("key", ListTenantsFilterKey)
+
+	_ListTenantsFilter_value = _ListTenantsFilter.AddMember("value", _ListTenantsFilterValue)
 
 	MailboxValidation_IsValid = MailboxValidation.AddMember("IsValid", EmailAddressInsightsVerdict)
 
@@ -6998,6 +7093,8 @@ func init() {
 	TenantInfo_TenantArn = TenantInfo.AddMember("TenantArn", _AmazonResourceName)
 
 	TenantInfo_CreatedTimestamp = TenantInfo.AddMember("CreatedTimestamp", _Timestamp)
+
+	TenantInfo_SendingStatus = TenantInfo.AddMember("SendingStatus", SendingStatus)
 
 	_TenantInfoList_member = _TenantInfoList.AddMember("member", TenantInfo)
 
@@ -7537,9 +7634,11 @@ func init() {
 
 	GetTenantResponse_Tenant = GetTenantResponse.AddMember("Tenant", Tenant)
 
-	ListConfigurationSetsRequest_NextToken = ListConfigurationSetsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
+	ListConfigurationSetsRequest_Filter = ListConfigurationSetsRequest.AddMember("Filter", _ConfigurationSetFilter)
 
-	ListConfigurationSetsRequest_PageSize = ListConfigurationSetsRequest.AddMember("PageSize", _MaxItems, &smithytraits.HTTPQuery{Name: "PageSize"})
+	ListConfigurationSetsRequest_NextToken = ListConfigurationSetsRequest.AddMember("NextToken", _NextToken)
+
+	ListConfigurationSetsRequest_PageSize = ListConfigurationSetsRequest.AddMember("PageSize", _MaxItems)
 
 	ListConfigurationSetsResponse_ConfigurationSets = ListConfigurationSetsResponse.AddMember("ConfigurationSets", _ConfigurationSetNameList)
 
@@ -7603,9 +7702,11 @@ func init() {
 
 	ListDomainDeliverabilityCampaignsResponse_NextToken = ListDomainDeliverabilityCampaignsResponse.AddMember("NextToken", _NextToken)
 
-	ListEmailIdentitiesRequest_NextToken = ListEmailIdentitiesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
+	ListEmailIdentitiesRequest_Filter = ListEmailIdentitiesRequest.AddMember("Filter", _IdentityFilter)
 
-	ListEmailIdentitiesRequest_PageSize = ListEmailIdentitiesRequest.AddMember("PageSize", _MaxItems, &smithytraits.HTTPQuery{Name: "PageSize"})
+	ListEmailIdentitiesRequest_NextToken = ListEmailIdentitiesRequest.AddMember("NextToken", _NextToken)
+
+	ListEmailIdentitiesRequest_PageSize = ListEmailIdentitiesRequest.AddMember("PageSize", _MaxItems)
 
 	ListEmailIdentitiesResponse_EmailIdentities = ListEmailIdentitiesResponse.AddMember("EmailIdentities", _IdentityInfoList)
 
@@ -7720,6 +7821,8 @@ func init() {
 	ListTenantResourcesResponse_TenantResources = ListTenantResourcesResponse.AddMember("TenantResources", _TenantResourceList)
 
 	ListTenantResourcesResponse_NextToken = ListTenantResourcesResponse.AddMember("NextToken", _NextToken)
+
+	ListTenantsRequest_Filter = ListTenantsRequest.AddMember("Filter", _ListTenantsFilter)
 
 	ListTenantsRequest_NextToken = ListTenantsRequest.AddMember("NextToken", _NextToken)
 

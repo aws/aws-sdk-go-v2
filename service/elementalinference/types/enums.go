@@ -73,6 +73,25 @@ func (DictionaryStatus) Values() []DictionaryStatus {
 	}
 }
 
+type ExtendedAnalysisMode string
+
+// Enum values for ExtendedAnalysisMode
+const (
+	ExtendedAnalysisModeEnabled  ExtendedAnalysisMode = "ENABLED"
+	ExtendedAnalysisModeDisabled ExtendedAnalysisMode = "DISABLED"
+)
+
+// Values returns all known values for ExtendedAnalysisMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExtendedAnalysisMode) Values() []ExtendedAnalysisMode {
+	return []ExtendedAnalysisMode{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type FeedStatus string
 
 // Enum values for FeedStatus

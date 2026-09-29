@@ -1634,6 +1634,11 @@ func validateFoundationModelConfiguration(v *types.FoundationModelConfiguration)
 			invalidParams.AddNested("BedrockFoundationModelConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MantleFoundationModelConfiguration != nil {
+		if err := validateMantleFoundationModelConfiguration(v.MantleFoundationModelConfiguration); err != nil {
+			invalidParams.AddNested("MantleFoundationModelConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2288,6 +2293,40 @@ func validateManagedSearchRerankingConfiguration(v *types.ManagedSearchReranking
 		if err := validateManagedSearchBedrockRerankingConfiguration(v.BedrockRerankingConfiguration); err != nil {
 			invalidParams.AddNested("BedrockRerankingConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMantleFoundationModelConfiguration(v *types.MantleFoundationModelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MantleFoundationModelConfiguration"}
+	if v.ModelConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelConfiguration"))
+	} else if v.ModelConfiguration != nil {
+		if err := validateMantleFoundationModelModelConfiguration(v.ModelConfiguration); err != nil {
+			invalidParams.AddNested("ModelConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMantleFoundationModelModelConfiguration(v *types.MantleFoundationModelModelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MantleFoundationModelModelConfiguration"}
+	if v.ModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

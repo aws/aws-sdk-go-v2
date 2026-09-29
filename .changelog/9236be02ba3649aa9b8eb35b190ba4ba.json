@@ -1,0 +1,8 @@
+{
+    "id": "9236be02-ba36-49aa-9b8e-b35b190ba4ba",
+    "type": "feature",
+    "description": "Add support for Glue system-managed materialized views.",
+    "modules": [
+        "service/glue"
+    ]
+}

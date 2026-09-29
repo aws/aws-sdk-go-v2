@@ -29,10 +29,18 @@ type DeleteGroupMembershipInput struct {
 
 	// The globally unique identifier for the identity store.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
 
 	// The identifier for a GroupMembership in an identity store.
+	//
+	// You can specify the group membership by ID or by Amazon Resource Name (ARN).
+	// For example, membership ID a1b2c3d4-5678-90ab-cdef-EXAMPLE33333 or membership
+	// ARN arn:aws:identitystore:::membership/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333 .
 	//
 	// This member is required.
 	MembershipId *string
@@ -53,19 +61,6 @@ func (v *DeleteGroupMembershipInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.MembershipId != nil {
 		s.WriteString(schemas.DeleteGroupMembershipRequest_MembershipId, *v.MembershipId)
 	}
-}
-func (v *DeleteGroupMembershipInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteGroupMembershipRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteGroupMembershipRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.DeleteGroupMembershipRequest_IdentityStoreId, v.IdentityStoreId)
-		case schemas.DeleteGroupMembershipRequest_MembershipId:
-			v.MembershipId = new(string)
-			return d.ReadString(schemas.DeleteGroupMembershipRequest_MembershipId, v.MembershipId)
-		}
-		return nil
-	})
 }
 
 type DeleteGroupMembershipOutput struct {

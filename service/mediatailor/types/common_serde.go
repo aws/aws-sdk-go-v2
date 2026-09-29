@@ -328,6 +328,17 @@ func serializeAudiences(s smithy.ShapeSerializer, schema *smithy.Schema, v []str
 	s.CloseList()
 }
 
+func serializeBeaconEventTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []BeaconEventType) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeHttpPackageConfigurations(s smithy.ShapeSerializer, schema *smithy.Schema, v []HttpPackageConfiguration) {
 	if v == nil {
 		return
@@ -751,6 +762,20 @@ func deserializeAudiences(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]str
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBeaconEventTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BeaconEventType) error {
+	*v = make([]BeaconEventType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, BeaconEventType(vv))
 		return nil
 	})
 }

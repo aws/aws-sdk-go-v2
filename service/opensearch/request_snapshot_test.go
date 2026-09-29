@@ -3416,6 +3416,10 @@ func TestCheckRequestSnapshot_UpdateDomainConfig(t *testing.T) {
 		},
 		UseCase:    types.DomainUseCase("SEARCH"),
 		EngineMode: types.EngineMode("GENERAL"),
+		AcceptedWarnings: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6853,6 +6857,10 @@ func TestUpdateRequestSnapshot_UpdateDomainConfig(t *testing.T) {
 		},
 		UseCase:    types.DomainUseCase("SEARCH"),
 		EngineMode: types.EngineMode("GENERAL"),
+		AcceptedWarnings: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

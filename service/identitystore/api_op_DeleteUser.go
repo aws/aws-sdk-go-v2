@@ -29,13 +29,28 @@ type DeleteUserInput struct {
 
 	// The globally unique identifier for the identity store.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
 
 	// The identifier for a user in the identity store.
 	//
+	// You can specify the user by ID or by Amazon Resource Name (ARN). For example,
+	// user ID a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 or user ARN
+	// arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
+	//
 	// This member is required.
 	UserId *string
+
+	// The expected current revision of the user. When you provide this value, the
+	// user is deleted only if it matches the current revision of the user in the
+	// identity store. If the value doesn't match, the operation fails with a
+	// ConflictException . If you don't provide this value, the user is deleted
+	// regardless of its current revision.
+	Revision *string
 
 	noSmithyDocumentSerde
 }
@@ -50,22 +65,12 @@ func (v *DeleteUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.DeleteUserRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
+	if v.Revision != nil {
+		s.WriteString(schemas.DeleteUserRequest_Revision, *v.Revision)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.DeleteUserRequest_UserId, *v.UserId)
 	}
-}
-func (v *DeleteUserInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteUserRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteUserRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.DeleteUserRequest_IdentityStoreId, v.IdentityStoreId)
-		case schemas.DeleteUserRequest_UserId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.DeleteUserRequest_UserId, v.UserId)
-		}
-		return nil
-	})
 }
 
 type DeleteUserOutput struct {

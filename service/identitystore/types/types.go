@@ -347,6 +347,12 @@ func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 // A group object that contains the metadata and attributes for a specified group.
 type Group struct {
 
+	// The Amazon Resource Name (ARN) of the group in the identity store. For example,
+	// arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
+	//
+	// This member is required.
+	GroupArn *string
+
 	// The identifier for a group in the identity store.
 	//
 	// This member is required.
@@ -356,6 +362,15 @@ type Group struct {
 	//
 	// This member is required.
 	IdentityStoreId *string
+
+	// The current revision of the group in the identity store. This value changes
+	// each time the group is modified. You can provide it as the Revision parameter
+	// of an UpdateGroup or DeleteGroup request to make the operation conditional on
+	// the group not having changed. Treat this value as an opaque token: don't parse
+	// it or rely on its format or ordering.
+	//
+	// This member is required.
+	Revision *string
 
 	// The date and time the group was created.
 	CreatedAt *time.Time
@@ -408,11 +423,17 @@ func (v *Group) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.Group_DisplayName, *v.DisplayName)
 	}
 	serializeExternalIds(s, schemas.Group_ExternalIds, v.ExternalIds)
+	if v.GroupArn != nil {
+		s.WriteString(schemas.Group_GroupArn, *v.GroupArn)
+	}
 	if v.GroupId != nil {
 		s.WriteString(schemas.Group_GroupId, *v.GroupId)
 	}
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.Group_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.Group_Revision, *v.Revision)
 	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.Group_UpdatedAt, *v.UpdatedAt)
@@ -438,12 +459,18 @@ func (v *Group) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.Group_DisplayName, v.DisplayName)
 		case schemas.Group_ExternalIds:
 			return deserializeExternalIds(d, schemas.Group_ExternalIds, &v.ExternalIds)
+		case schemas.Group_GroupArn:
+			v.GroupArn = new(string)
+			return d.ReadString(schemas.Group_GroupArn, v.GroupArn)
 		case schemas.Group_GroupId:
 			v.GroupId = new(string)
 			return d.ReadString(schemas.Group_GroupId, v.GroupId)
 		case schemas.Group_IdentityStoreId:
 			v.IdentityStoreId = new(string)
 			return d.ReadString(schemas.Group_IdentityStoreId, v.IdentityStoreId)
+		case schemas.Group_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.Group_Revision, v.Revision)
 		case schemas.Group_UpdatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.Group_UpdatedAt, v.UpdatedAt)
@@ -464,6 +491,18 @@ type GroupMembership struct {
 	// This member is required.
 	IdentityStoreId *string
 
+	// The Amazon Resource Name (ARN) of the group membership in the identity store.
+	// For example,
+	// arn:aws:identitystore:::membership/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333 .
+	//
+	// This member is required.
+	MembershipArn *string
+
+	// The identifier for a GroupMembership object in an identity store.
+	//
+	// This member is required.
+	MembershipId *string
+
 	// The date and time the group membership was created.
 	CreatedAt *time.Time
 
@@ -477,9 +516,6 @@ type GroupMembership struct {
 	// field to the specific identifier for a user indicates that the user is a member
 	// of the group.
 	MemberId MemberId
-
-	// The identifier for a GroupMembership object in an identity store.
-	MembershipId *string
 
 	// The date and time the group membership was last updated.
 	UpdatedAt *time.Time
@@ -510,6 +546,9 @@ func (v *GroupMembership) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.GroupMembership_IdentityStoreId, *v.IdentityStoreId)
 	}
 	serializeMemberId(s, schemas.GroupMembership_MemberId, v.MemberId)
+	if v.MembershipArn != nil {
+		s.WriteString(schemas.GroupMembership_MembershipArn, *v.MembershipArn)
+	}
 	if v.MembershipId != nil {
 		s.WriteString(schemas.GroupMembership_MembershipId, *v.MembershipId)
 	}
@@ -537,6 +576,9 @@ func (v *GroupMembership) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.GroupMembership_IdentityStoreId, v.IdentityStoreId)
 		case schemas.GroupMembership_MemberId:
 			return deserializeMemberId(d, schemas.GroupMembership_MemberId, &v.MemberId)
+		case schemas.GroupMembership_MembershipArn:
+			v.MembershipArn = new(string)
+			return d.ReadString(schemas.GroupMembership_MembershipArn, v.MembershipArn)
 		case schemas.GroupMembership_MembershipId:
 			v.MembershipId = new(string)
 			return d.ReadString(schemas.GroupMembership_MembershipId, v.MembershipId)
@@ -598,6 +640,52 @@ func (v *GroupMembershipExistenceResult) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 
+// A structure that contains the identifiers for an identity store: its globally
+// unique identifier (ID) and Amazon Resource Name (ARN).
+type IdentityStore struct {
+
+	// The Amazon Resource Name (ARN) of the identity store. For example,
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
+	// This member is required.
+	IdentityStoreArn *string
+
+	// The globally unique identifier for the identity store.
+	//
+	// This member is required.
+	IdentityStoreId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *IdentityStore) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityStore)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentityStore) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityStoreArn != nil {
+		s.WriteString(schemas.IdentityStore_IdentityStoreArn, *v.IdentityStoreArn)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.IdentityStore_IdentityStoreId, *v.IdentityStoreId)
+	}
+}
+func (v *IdentityStore) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentityStore, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentityStore_IdentityStoreArn:
+			v.IdentityStoreArn = new(string)
+			return d.ReadString(schemas.IdentityStore_IdentityStoreArn, v.IdentityStoreArn)
+		case schemas.IdentityStore_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.IdentityStore_IdentityStoreId, v.IdentityStoreId)
+		}
+		return nil
+	})
+}
+
 // An object containing the identifier of a group member.
 //
 // The following types satisfy this interface:
@@ -607,7 +695,11 @@ type MemberId interface {
 	isMemberId()
 }
 
-// An object containing the identifiers of resources that can be members.
+// The identifier for a user in the identity store.
+//
+// You can specify the user by ID or by Amazon Resource Name (ARN). For example,
+// user ID a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 or user ARN
+// arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
 type MemberIdMemberUserId struct {
 	Value string
 
@@ -693,6 +785,147 @@ func (v *Name) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Name_MiddleName:
 			v.MiddleName = new(string)
 			return d.ReadString(schemas.Name_MiddleName, v.MiddleName)
+		}
+		return nil
+	})
+}
+
+// The network configuration that controls how an identity store can be accessed.
+// You provide this object in a request.
+type NetworkConfiguration struct {
+
+	// Specifies whether the identity store can be accessed only through a virtual
+	// private cloud (VPC) endpoint. When set to true , requests must originate from a
+	// VPC endpoint.
+	//
+	// This value must be set to either true or false when you provide
+	// NetworkConfiguration in a request.
+	//
+	// This member is required.
+	VpceAccessRequired *bool
+
+	// A list of IP address CIDR ranges that are allowed to access the identity store
+	// API operations. A request from an IP address in this list bypasses the identity
+	// store's other API network controls: it's permitted even if it doesn't come
+	// through a VPC endpoint required by VpceAccessRequired , and even if it doesn't
+	// originate from a VPC in ApiRestrictSourceVpcs . If you don't specify a value, no
+	// such IP address exception applies.
+	ApiAllowSourceIps []string
+
+	// A list of virtual private cloud (VPC) IDs that are allowed to access the
+	// identity store API operations. A request is denied unless it originates from a
+	// VPC in this list, or from an IP address in ApiAllowSourceIps if you specified
+	// one. If you don't specify a value, access isn't restricted to specific VPCs, but
+	// the VPC endpoint requirement set by VpceAccessRequired still applies.
+	ApiRestrictSourceVpcs []string
+
+	// A list of IP address CIDR ranges that are allowed to access the identity store
+	// through the System for Cross-domain Identity Management (SCIM) protocol.
+	// Requests from IP addresses outside these ranges are denied. If you don't specify
+	// a value, SCIM requests remain subject to the identity store's other network
+	// controls, such as the VPC endpoint requirement set by VpceAccessRequired .
+	//
+	// For example, to allow SCIM traffic from the public internet while still
+	// requiring the identity store API operations to be accessed through a VPC
+	// endpoint, set VpceAccessRequired to true and set this value to 0.0.0.0/0 .
+	ScimAllowSourceIps []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *NetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpCidrList(s, schemas.NetworkConfiguration_ApiAllowSourceIps, v.ApiAllowSourceIps)
+	serializeVpcIdList(s, schemas.NetworkConfiguration_ApiRestrictSourceVpcs, v.ApiRestrictSourceVpcs)
+	serializeIpCidrList(s, schemas.NetworkConfiguration_ScimAllowSourceIps, v.ScimAllowSourceIps)
+	if v.VpceAccessRequired != nil {
+		s.WriteBool(schemas.NetworkConfiguration_VpceAccessRequired, *v.VpceAccessRequired)
+	}
+}
+func (v *NetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConfiguration_ApiAllowSourceIps:
+			return deserializeIpCidrList(d, schemas.NetworkConfiguration_ApiAllowSourceIps, &v.ApiAllowSourceIps)
+		case schemas.NetworkConfiguration_ApiRestrictSourceVpcs:
+			return deserializeVpcIdList(d, schemas.NetworkConfiguration_ApiRestrictSourceVpcs, &v.ApiRestrictSourceVpcs)
+		case schemas.NetworkConfiguration_ScimAllowSourceIps:
+			return deserializeIpCidrList(d, schemas.NetworkConfiguration_ScimAllowSourceIps, &v.ScimAllowSourceIps)
+		case schemas.NetworkConfiguration_VpceAccessRequired:
+			v.VpceAccessRequired = new(bool)
+			return d.ReadBool(schemas.NetworkConfiguration_VpceAccessRequired, v.VpceAccessRequired)
+		}
+		return nil
+	})
+}
+
+// The network configuration that controls how an identity store can be accessed.
+// This object is returned as part of service API responses.
+type NetworkConfigurationDetails struct {
+
+	// Specifies whether the identity store can be accessed only through a virtual
+	// private cloud (VPC) endpoint. When set to true , requests must originate from a
+	// VPC endpoint.
+	//
+	// This member is required.
+	VpceAccessRequired *bool
+
+	// A list of IP address CIDR ranges that are allowed to access the identity store
+	// API operations. A request from an IP address in this list bypasses the identity
+	// store's other API network controls: it's permitted even if it doesn't come
+	// through a VPC endpoint required by VpceAccessRequired , and even if it doesn't
+	// originate from a VPC in ApiRestrictSourceVpcs . If this field is empty, no such
+	// IP address exception applies.
+	ApiAllowSourceIps []string
+
+	// A list of virtual private cloud (VPC) IDs that are allowed to access the
+	// identity store API operations. A request is denied unless it originates from a
+	// VPC in this list, or from an IP address in ApiAllowSourceIps if one is
+	// configured. If this field is empty, access isn't restricted to specific VPCs,
+	// but the VPC endpoint requirement from VpceAccessRequired still applies.
+	ApiRestrictSourceVpcs []string
+
+	// A list of IP address CIDR ranges that are allowed to access the identity store
+	// through the System for Cross-domain Identity Management (SCIM) protocol.
+	// Requests from IP addresses outside these ranges are denied. If this field is
+	// empty, SCIM requests remain subject to the identity store's other network
+	// controls, such as the VPC endpoint requirement.
+	ScimAllowSourceIps []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *NetworkConfigurationDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConfigurationDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConfigurationDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpCidrList(s, schemas.NetworkConfigurationDetails_ApiAllowSourceIps, v.ApiAllowSourceIps)
+	serializeVpcIdList(s, schemas.NetworkConfigurationDetails_ApiRestrictSourceVpcs, v.ApiRestrictSourceVpcs)
+	serializeIpCidrList(s, schemas.NetworkConfigurationDetails_ScimAllowSourceIps, v.ScimAllowSourceIps)
+	if v.VpceAccessRequired != nil {
+		s.WriteBool(schemas.NetworkConfigurationDetails_VpceAccessRequired, *v.VpceAccessRequired)
+	}
+}
+func (v *NetworkConfigurationDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConfigurationDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConfigurationDetails_ApiAllowSourceIps:
+			return deserializeIpCidrList(d, schemas.NetworkConfigurationDetails_ApiAllowSourceIps, &v.ApiAllowSourceIps)
+		case schemas.NetworkConfigurationDetails_ApiRestrictSourceVpcs:
+			return deserializeVpcIdList(d, schemas.NetworkConfigurationDetails_ApiRestrictSourceVpcs, &v.ApiRestrictSourceVpcs)
+		case schemas.NetworkConfigurationDetails_ScimAllowSourceIps:
+			return deserializeIpCidrList(d, schemas.NetworkConfigurationDetails_ScimAllowSourceIps, &v.ScimAllowSourceIps)
+		case schemas.NetworkConfigurationDetails_VpceAccessRequired:
+			v.VpceAccessRequired = new(bool)
+			return d.ReadBool(schemas.NetworkConfigurationDetails_VpceAccessRequired, v.VpceAccessRequired)
 		}
 		return nil
 	})
@@ -922,6 +1155,21 @@ type User struct {
 	// This member is required.
 	IdentityStoreId *string
 
+	// The current revision of the user in the identity store. This value changes each
+	// time the user is modified. You can provide it as the Revision parameter of an
+	// UpdateUser or DeleteUser request to make the operation conditional on the user
+	// not having changed. Treat this value as an opaque token: don't parse it or rely
+	// on its format or ordering.
+	//
+	// This member is required.
+	Revision *string
+
+	// The Amazon Resource Name (ARN) of the user in the identity store. For example,
+	// arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
+	//
+	// This member is required.
+	UserArn *string
+
 	// The identifier for a user in the identity store.
 	//
 	// This member is required.
@@ -1061,6 +1309,9 @@ func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProfileUrl != nil {
 		s.WriteString(schemas.User_ProfileUrl, *v.ProfileUrl)
 	}
+	if v.Revision != nil {
+		s.WriteString(schemas.User_Revision, *v.Revision)
+	}
 	serializeRoles(s, schemas.User_Roles, v.Roles)
 	if v.Timezone != nil {
 		s.WriteString(schemas.User_Timezone, *v.Timezone)
@@ -1073,6 +1324,9 @@ func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.UpdatedBy != nil {
 		s.WriteString(schemas.User_UpdatedBy, *v.UpdatedBy)
+	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.User_UserArn, *v.UserArn)
 	}
 	if v.UserId != nil {
 		s.WriteString(schemas.User_UserId, *v.UserId)
@@ -1135,6 +1389,9 @@ func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.User_ProfileUrl:
 			v.ProfileUrl = new(string)
 			return d.ReadString(schemas.User_ProfileUrl, v.ProfileUrl)
+		case schemas.User_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.User_Revision, v.Revision)
 		case schemas.User_Roles:
 			return deserializeRoles(d, schemas.User_Roles, &v.Roles)
 		case schemas.User_Timezone:
@@ -1149,6 +1406,9 @@ func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.User_UpdatedBy:
 			v.UpdatedBy = new(string)
 			return d.ReadString(schemas.User_UpdatedBy, v.UpdatedBy)
+		case schemas.User_UserArn:
+			v.UserArn = new(string)
+			return d.ReadString(schemas.User_UserArn, v.UserArn)
 		case schemas.User_UserId:
 			v.UserId = new(string)
 			return d.ReadString(schemas.User_UserId, v.UserId)

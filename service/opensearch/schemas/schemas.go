@@ -687,6 +687,12 @@ var _AmazonOpenSearchService = smithy.NewSchema(smithy.ShapeID{
 
 var AmazonOpenSearchService = smithy.NewServiceSchema(_AmazonOpenSearchService, "2021-01-01")
 
+var _AcceptedWarningsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "AcceptedWarningsList",
+}, smithy.ShapeTypeList, 1)
+var _AcceptedWarningsList_member *smithy.Schema
+
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "AccessDeniedException",
@@ -1313,7 +1319,7 @@ var _ChangeProgressStageStatus = smithy.NewSchema(smithy.ShapeID{
 var ChangeProgressStatusDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ChangeProgressStatusDetails",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var ChangeProgressStatusDetails_ChangeId *smithy.Schema
 
 var ChangeProgressStatusDetails_StartTime *smithy.Schema
@@ -1333,6 +1339,10 @@ var ChangeProgressStatusDetails_LastUpdatedTime *smithy.Schema
 var ChangeProgressStatusDetails_ConfigChangeStatus *smithy.Schema
 
 var ChangeProgressStatusDetails_InitiatedBy *smithy.Schema
+
+var ChangeProgressStatusDetails_ValidationFailures *smithy.Schema
+
+var ChangeProgressStatusDetails_AcceptedWarnings *smithy.Schema
 
 var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -2126,7 +2136,7 @@ var DryRunMode_Verbose *smithy.Schema
 var DryRunProgressStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DryRunProgressStatus",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var DryRunProgressStatus_DryRunId *smithy.Schema
 
 var DryRunProgressStatus_DryRunStatus *smithy.Schema
@@ -2136,6 +2146,8 @@ var DryRunProgressStatus_CreationDate *smithy.Schema
 var DryRunProgressStatus_UpdateDate *smithy.Schema
 
 var DryRunProgressStatus_ValidationFailures *smithy.Schema
+
+var DryRunProgressStatus_AcceptedWarnings *smithy.Schema
 
 var DryRunResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -4515,16 +4527,26 @@ var ValidationException_message *smithy.Schema
 var ValidationFailure = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ValidationFailure",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ValidationFailure_Code *smithy.Schema
 
 var ValidationFailure_Message *smithy.Schema
+
+var ValidationFailure_Severity *smithy.Schema
 
 var _ValidationFailures = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ValidationFailures",
 }, smithy.ShapeTypeList, 1)
 var _ValidationFailures_member *smithy.Schema
+
+var ValidationFailureSeverity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ValidationFailureSeverity",
+}, smithy.ShapeTypeEnum, 2)
+var ValidationFailureSeverity_CRITICAL *smithy.Schema
+
+var ValidationFailureSeverity_WARNING *smithy.Schema
 
 var _ValueStringList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -6317,7 +6339,7 @@ var UpdateDirectQueryDataSourceResponse_DataSourceArn *smithy.Schema
 var UpdateDomainConfigRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "UpdateDomainConfigRequest",
-}, smithy.ShapeTypeStructure, 25)
+}, smithy.ShapeTypeStructure, 26)
 var UpdateDomainConfigRequest_DomainName *smithy.Schema
 
 var UpdateDomainConfigRequest_ClusterConfig *smithy.Schema
@@ -6367,6 +6389,8 @@ var UpdateDomainConfigRequest_AutomatedSnapshotPauseOptions *smithy.Schema
 var UpdateDomainConfigRequest_UseCase *smithy.Schema
 
 var UpdateDomainConfigRequest_EngineMode *smithy.Schema
+
+var UpdateDomainConfigRequest_AcceptedWarnings *smithy.Schema
 
 var UpdateDomainConfigResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -6501,6 +6525,8 @@ var UpgradeDomainResponse_ChangeProgressDetails *smithy.Schema
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
+	_AcceptedWarningsList_member = _AcceptedWarningsList.AddMember("member", _String)
+
 	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
 
 	OptionState_RequiresIndexDocuments = OptionState.AddMember("RequiresIndexDocuments", smithyprelude.Unit)
@@ -7009,6 +7035,18 @@ func init() {
 
 	_StringList_member = _StringList.AddMember("member", _String)
 
+	ValidationFailureSeverity_CRITICAL = ValidationFailureSeverity.AddMember("CRITICAL", smithyprelude.Unit)
+
+	ValidationFailureSeverity_WARNING = ValidationFailureSeverity.AddMember("WARNING", smithyprelude.Unit)
+
+	ValidationFailure_Code = ValidationFailure.AddMember("Code", _String)
+
+	ValidationFailure_Message = ValidationFailure.AddMember("Message", _String)
+
+	ValidationFailure_Severity = ValidationFailure.AddMember("Severity", ValidationFailureSeverity)
+
+	_ValidationFailures_member = _ValidationFailures.AddMember("member", ValidationFailure)
+
 	ChangeProgressStatusDetails_ChangeId = ChangeProgressStatusDetails.AddMember("ChangeId", _GUID)
 
 	ChangeProgressStatusDetails_StartTime = ChangeProgressStatusDetails.AddMember("StartTime", _UpdateTimestamp)
@@ -7028,6 +7066,10 @@ func init() {
 	ChangeProgressStatusDetails_ConfigChangeStatus = ChangeProgressStatusDetails.AddMember("ConfigChangeStatus", ConfigChangeStatus)
 
 	ChangeProgressStatusDetails_InitiatedBy = ChangeProgressStatusDetails.AddMember("InitiatedBy", InitiatedBy)
+
+	ChangeProgressStatusDetails_ValidationFailures = ChangeProgressStatusDetails.AddMember("ValidationFailures", _ValidationFailures)
+
+	ChangeProgressStatusDetails_AcceptedWarnings = ChangeProgressStatusDetails.AddMember("AcceptedWarnings", _AcceptedWarningsList)
 
 	CloudWatchDirectQueryDataSource_RoleArn = CloudWatchDirectQueryDataSource.AddMember("RoleArn", _DirectQueryDataSourceRoleArn)
 
@@ -7953,12 +7995,6 @@ func init() {
 
 	DryRunMode_Verbose = DryRunMode.AddMember("Verbose", smithyprelude.Unit)
 
-	ValidationFailure_Code = ValidationFailure.AddMember("Code", _String)
-
-	ValidationFailure_Message = ValidationFailure.AddMember("Message", _String)
-
-	_ValidationFailures_member = _ValidationFailures.AddMember("member", ValidationFailure)
-
 	DryRunProgressStatus_DryRunId = DryRunProgressStatus.AddMember("DryRunId", _GUID)
 
 	DryRunProgressStatus_DryRunStatus = DryRunProgressStatus.AddMember("DryRunStatus", _String)
@@ -7968,6 +8004,8 @@ func init() {
 	DryRunProgressStatus_UpdateDate = DryRunProgressStatus.AddMember("UpdateDate", _String)
 
 	DryRunProgressStatus_ValidationFailures = DryRunProgressStatus.AddMember("ValidationFailures", _ValidationFailures)
+
+	DryRunProgressStatus_AcceptedWarnings = DryRunProgressStatus.AddMember("AcceptedWarnings", _AcceptedWarningsList)
 
 	DryRunResults_DeploymentType = DryRunResults.AddMember("DeploymentType", _DeploymentType)
 
@@ -9542,6 +9580,8 @@ func init() {
 	UpdateDomainConfigRequest_UseCase = UpdateDomainConfigRequest.AddMember("UseCase", DomainUseCase)
 
 	UpdateDomainConfigRequest_EngineMode = UpdateDomainConfigRequest.AddMember("EngineMode", EngineMode)
+
+	UpdateDomainConfigRequest_AcceptedWarnings = UpdateDomainConfigRequest.AddMember("AcceptedWarnings", _AcceptedWarningsList)
 
 	UpdateDomainConfigResponse_DomainConfig = UpdateDomainConfigResponse.AddMember("DomainConfig", DomainConfig)
 

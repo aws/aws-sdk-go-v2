@@ -12271,6 +12271,35 @@ func awsAwsquery_serializeDocumentTagSpecificationList(v []types.TagSpecificatio
 	return nil
 }
 
+func awsAwsquery_serializeDocumentTargetResourceConfiguration(v *types.TargetResourceConfiguration, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.SourceArn != nil {
+		objectKey := object.Key("SourceArn")
+		objectKey.String(*v.SourceArn)
+	}
+
+	if v.TargetKmsKeyId != nil {
+		objectKey := object.Key("TargetKmsKeyId")
+		objectKey.String(*v.TargetKmsKeyId)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentTargetResourceConfigurationList(v []types.TargetResourceConfiguration, value query.Value) error {
+	array := value.Array("TargetResourceConfiguration")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentTargetResourceConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentUserAuthConfig(v *types.UserAuthConfig, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -12752,6 +12781,13 @@ func awsAwsquery_serializeOpDocumentCreateBlueGreenDeploymentInput(v *CreateBlue
 	if v.TargetIops != nil {
 		objectKey := object.Key("TargetIops")
 		objectKey.Integer(*v.TargetIops)
+	}
+
+	if v.TargetResourceConfigurations != nil {
+		objectKey := object.Key("TargetResourceConfigurations")
+		if err := awsAwsquery_serializeDocumentTargetResourceConfigurationList(v.TargetResourceConfigurations, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.TargetStorageThroughput != nil {

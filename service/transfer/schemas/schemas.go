@@ -560,6 +560,14 @@ var _CertSerial = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CertSerial",
 }, smithy.ShapeTypeString, 0)
 
+var CommunicationMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transfer",
+	Name:      "CommunicationMode",
+}, smithy.ShapeTypeEnum, 2)
+var CommunicationMode_CLIENT_TALK_FIRST *smithy.Schema
+
+var CommunicationMode_SERVER_TALK_FIRST *smithy.Schema
+
 var CompressionEnum = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "CompressionEnum",
@@ -1901,12 +1909,14 @@ var Protocol_AS2 *smithy.Schema
 var ProtocolDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "ProtocolDetails",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var ProtocolDetails_PassiveIp *smithy.Schema
 
 var ProtocolDetails_TlsSessionResumptionMode *smithy.Schema
 
 var ProtocolDetails_SetStatOption *smithy.Schema
+
+var ProtocolDetails_SftpPorts *smithy.Schema
 
 var ProtocolDetails_As2Transports *smithy.Schema
 
@@ -2222,6 +2232,20 @@ var _SftpPort = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "SftpPort",
 }, smithy.ShapeTypeInteger, 0)
+
+var _SftpPorts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transfer",
+	Name:      "SftpPorts",
+}, smithy.ShapeTypeList, 1)
+var _SftpPorts_member *smithy.Schema
+
+var SftpPortWithOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transfer",
+	Name:      "SftpPortWithOptions",
+}, smithy.ShapeTypeStructure, 2)
+var SftpPortWithOptions_SftpPort *smithy.Schema
+
+var SftpPortWithOptions_CommunicationMode *smithy.Schema
 
 var SigningAlg = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
@@ -3954,6 +3978,10 @@ func init() {
 
 	CertificateUsageType_TLS = CertificateUsageType.AddMember("TLS", smithyprelude.Unit)
 
+	CommunicationMode_CLIENT_TALK_FIRST = CommunicationMode.AddMember("CLIENT_TALK_FIRST", smithyprelude.Unit)
+
+	CommunicationMode_SERVER_TALK_FIRST = CommunicationMode.AddMember("SERVER_TALK_FIRST", smithyprelude.Unit)
+
 	ConflictException_Message = ConflictException.AddMember("Message", _Message)
 
 	ConnectorVpcLatticeEgressConfig_ResourceConfigurationArn = ConnectorVpcLatticeEgressConfig.AddMember("ResourceConfigurationArn", _VpcLatticeResourceConfigurationArn)
@@ -4384,6 +4412,12 @@ func init() {
 
 	SetStatOption_ENABLE_NO_OP = SetStatOption.AddMember("ENABLE_NO_OP", smithyprelude.Unit)
 
+	SftpPortWithOptions_SftpPort = SftpPortWithOptions.AddMember("SftpPort", _SftpPort)
+
+	SftpPortWithOptions_CommunicationMode = SftpPortWithOptions.AddMember("CommunicationMode", CommunicationMode)
+
+	_SftpPorts_member = _SftpPorts.AddMember("member", SftpPortWithOptions)
+
 	ProxyMode_NONE = ProxyMode.AddMember("NONE", smithyprelude.Unit)
 
 	ProxyMode_PROXY_PROTOCOL_V2_ENFORCED = ProxyMode.AddMember("PROXY_PROTOCOL_V2_ENFORCED", smithyprelude.Unit)
@@ -4395,6 +4429,8 @@ func init() {
 	ProtocolDetails_TlsSessionResumptionMode = ProtocolDetails.AddMember("TlsSessionResumptionMode", TlsSessionResumptionMode)
 
 	ProtocolDetails_SetStatOption = ProtocolDetails.AddMember("SetStatOption", SetStatOption)
+
+	ProtocolDetails_SftpPorts = ProtocolDetails.AddMember("SftpPorts", _SftpPorts)
 
 	ProtocolDetails_As2Transports = ProtocolDetails.AddMember("As2Transports", _As2Transports)
 

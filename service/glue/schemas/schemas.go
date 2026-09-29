@@ -13661,8 +13661,10 @@ var _VersionString = smithy.NewSchema(smithy.ShapeID{
 var ViewDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ViewDefinition",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var ViewDefinition_IsProtected *smithy.Schema
+
+var ViewDefinition_IsManaged *smithy.Schema
 
 var ViewDefinition_Definer *smithy.Schema
 
@@ -13687,8 +13689,10 @@ var ViewDefinition_SparkPipelineInfo *smithy.Schema
 var ViewDefinitionInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ViewDefinitionInput",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var ViewDefinitionInput_IsProtected *smithy.Schema
+
+var ViewDefinitionInput_IsManaged *smithy.Schema
 
 var ViewDefinitionInput_Definer *smithy.Schema
 
@@ -24907,6 +24911,8 @@ func init() {
 
 	ViewDefinition_IsProtected = ViewDefinition.AddMember("IsProtected", _NullableBoolean)
 
+	ViewDefinition_IsManaged = ViewDefinition.AddMember("IsManaged", _NullableBoolean)
+
 	ViewDefinition_Definer = ViewDefinition.AddMember("Definer", _ArnString)
 
 	ViewDefinition_ViewVersionId = ViewDefinition.AddMember("ViewVersionId", _TableVersionId)
@@ -26392,6 +26398,8 @@ func init() {
 	_ViewRepresentationInputList_member = _ViewRepresentationInputList.AddMember("member", ViewRepresentationInput)
 
 	ViewDefinitionInput_IsProtected = ViewDefinitionInput.AddMember("IsProtected", _NullableBoolean)
+
+	ViewDefinitionInput_IsManaged = ViewDefinitionInput.AddMember("IsManaged", _NullableBoolean)
 
 	ViewDefinitionInput_Definer = ViewDefinitionInput.AddMember("Definer", _ArnString)
 

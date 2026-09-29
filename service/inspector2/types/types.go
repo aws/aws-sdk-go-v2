@@ -13515,8 +13515,17 @@ type SeverityCounts struct {
 	// The total count of high severity findings.
 	High *int64
 
+	// The total count of informational severity findings.
+	Informational *int64
+
+	// The total count of low severity findings.
+	Low *int64
+
 	// The total count of medium severity findings.
 	Medium *int64
+
+	// The total count of untriaged findings.
+	Untriaged *int64
 
 	noSmithyDocumentSerde
 }
@@ -13537,8 +13546,17 @@ func (v *SeverityCounts) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.High != nil {
 		s.WriteInt64(schemas.SeverityCounts_high, *v.High)
 	}
+	if v.Informational != nil {
+		s.WriteInt64(schemas.SeverityCounts_informational, *v.Informational)
+	}
+	if v.Low != nil {
+		s.WriteInt64(schemas.SeverityCounts_low, *v.Low)
+	}
 	if v.Medium != nil {
 		s.WriteInt64(schemas.SeverityCounts_medium, *v.Medium)
+	}
+	if v.Untriaged != nil {
+		s.WriteInt64(schemas.SeverityCounts_untriaged, *v.Untriaged)
 	}
 }
 func (v *SeverityCounts) Deserialize(d smithy.ShapeDeserializer) error {
@@ -13553,9 +13571,18 @@ func (v *SeverityCounts) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SeverityCounts_high:
 			v.High = new(int64)
 			return d.ReadInt64(schemas.SeverityCounts_high, v.High)
+		case schemas.SeverityCounts_informational:
+			v.Informational = new(int64)
+			return d.ReadInt64(schemas.SeverityCounts_informational, v.Informational)
+		case schemas.SeverityCounts_low:
+			v.Low = new(int64)
+			return d.ReadInt64(schemas.SeverityCounts_low, v.Low)
 		case schemas.SeverityCounts_medium:
 			v.Medium = new(int64)
 			return d.ReadInt64(schemas.SeverityCounts_medium, v.Medium)
+		case schemas.SeverityCounts_untriaged:
+			v.Untriaged = new(int64)
+			return d.ReadInt64(schemas.SeverityCounts_untriaged, v.Untriaged)
 		}
 		return nil
 	})

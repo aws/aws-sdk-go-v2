@@ -887,6 +887,7 @@ func TestCheckRequestSnapshot_CreateServerlessCache(t *testing.T) {
 		SnapshotRetentionLimit: ptr.Int32(1),
 		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 		NetworkType:            types.NetworkType("ipv4"),
+		ConnectionType:         types.ConnectionType("vpc"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3844,6 +3845,7 @@ func TestUpdateRequestSnapshot_CreateServerlessCache(t *testing.T) {
 		SnapshotRetentionLimit: ptr.Int32(1),
 		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 		NetworkType:            types.NetworkType("ipv4"),
+		ConnectionType:         types.ConnectionType("vpc"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -273,6 +273,91 @@ type AWSResources struct {
 	noSmithyDocumentSerde
 }
 
+// Connection details for an Azure DevOps integration.
+type AzureDevOpsIntegrationInput struct {
+
+	// The OAuth 2.0 authorization code returned to your redirect URL after the
+	// connection is authorized.
+	//
+	// This member is required.
+	Code *string
+
+	// The name of the Azure DevOps organization to connect, for example my-org .
+	//
+	// This member is required.
+	OrganizationName *string
+
+	// The CSRF state value returned by InitiateProviderRegistration and echoed back
+	// on the authorization redirect.
+	//
+	// This member is required.
+	State *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for an integrated Azure DevOps repository.
+type AzureDevOpsRepositoryMetadata struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the Azure DevOps organization that owns the repository.
+	//
+	// This member is required.
+	Organization *string
+
+	// Provider Id of the resource e.g. GitHub repository id, etc.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// Defines the visibility level of provider resources. PRIVATE indicates
+	// restricted access, while PUBLIC indicates open access.
+	AccessType AccessType
+
+	// The name of the Azure DevOps project that contains the repository.
+	Project *string
+
+	// The GUID of the Azure DevOps project that contains the repository.
+	ProjectId *string
+
+	noSmithyDocumentSerde
+}
+
+// An Azure DevOps repository integrated as a resource.
+type AzureDevOpsRepositoryResource struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the Azure DevOps organization that owns the repository.
+	//
+	// This member is required.
+	Organization *string
+
+	// The name of the Azure DevOps project that contains the repository.
+	Project *string
+
+	noSmithyDocumentSerde
+}
+
+// Capabilities for an integrated Azure DevOps repository.
+type AzureDevOpsResourceCapabilities struct {
+
+	// Whether to post code review comments on pull requests.
+	LeaveComments *bool
+
+	// Whether to create pull requests with automated fixes.
+	RemediateCode *bool
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a successfully created security requirement.
 type BatchCreateSecurityRequirementResult struct {
 
@@ -379,6 +464,30 @@ type BatchSecurityRequirementError struct {
 	//
 	// This member is required.
 	SecurityRequirementName *string
+
+	noSmithyDocumentSerde
+}
+
+// Connection details for a self-managed Bitbucket Data Center integration.
+type BitbucketDataCenterIntegrationInput struct {
+
+	// The OAuth 2.0 authorization code returned to your redirect URL after the
+	// connection is authorized.
+	//
+	// This member is required.
+	Code *string
+
+	// The CSRF state value returned by InitiateProviderRegistration and echoed back
+	// on the authorization redirect.
+	//
+	// This member is required.
+	State *string
+
+	// The HTTPS URL of your Bitbucket Data Center instance, for example
+	// https://bitbucket.example.com .
+	//
+	// This member is required.
+	TargetUrl *string
 
 	noSmithyDocumentSerde
 }
@@ -1567,6 +1676,7 @@ type IntegratedRepository struct {
 //
 // The following types satisfy this interface:
 //
+//	IntegratedResourceMemberAzureDevOpsRepository
 //	IntegratedResourceMemberBitbucketRepository
 //	IntegratedResourceMemberConfluenceDocument
 //	IntegratedResourceMemberGithubRepository
@@ -1574,6 +1684,15 @@ type IntegratedRepository struct {
 type IntegratedResource interface {
 	isIntegratedResource()
 }
+
+// The Azure DevOps repository resource information.
+type IntegratedResourceMemberAzureDevOpsRepository struct {
+	Value AzureDevOpsRepositoryResource
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMemberAzureDevOpsRepository) isIntegratedResource() {}
 
 // A Bitbucket repository integrated as a resource.
 type IntegratedResourceMemberBitbucketRepository struct {
@@ -1631,6 +1750,7 @@ type IntegratedResourceInputItem struct {
 //
 // The following types satisfy this interface:
 //
+//	IntegratedResourceMetadataMemberAzureDevOpsRepository
 //	IntegratedResourceMetadataMemberBitbucketRepository
 //	IntegratedResourceMetadataMemberConfluenceDocument
 //	IntegratedResourceMetadataMemberGithubRepository
@@ -1638,6 +1758,15 @@ type IntegratedResourceInputItem struct {
 type IntegratedResourceMetadata interface {
 	isIntegratedResourceMetadata()
 }
+
+// The Azure DevOps repository metadata.
+type IntegratedResourceMetadataMemberAzureDevOpsRepository struct {
+	Value AzureDevOpsRepositoryMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMetadataMemberAzureDevOpsRepository) isIntegratedResourceMetadata() {}
 
 // Metadata for an integrated Bitbucket repository.
 type IntegratedResourceMetadataMemberBitbucketRepository struct {
@@ -1759,6 +1888,10 @@ type IntegrationSummary struct {
 	// Server or self-managed GitLab instance. This value is absent for SaaS
 	// integrations.
 	TargetUrl *string
+
+	// The payload URL of the integration's webhook, once it has been created. The
+	// signing secret is never returned on a read.
+	WebhookUrl *string
 
 	noSmithyDocumentSerde
 }
@@ -2243,13 +2376,24 @@ type PrivateConnectionSummary struct {
 //
 // The following types satisfy this interface:
 //
+//	ProviderInputMemberAzureDevOps
 //	ProviderInputMemberBitbucket
+//	ProviderInputMemberBitbucketDataCenter
 //	ProviderInputMemberConfluence
 //	ProviderInputMemberGithub
 //	ProviderInputMemberGitlab
 type ProviderInput interface {
 	isProviderInput()
 }
+
+// The Azure DevOps-specific input for creating an integration.
+type ProviderInputMemberAzureDevOps struct {
+	Value AzureDevOpsIntegrationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderInputMemberAzureDevOps) isProviderInput() {}
 
 // The configuration for a Bitbucket integration.
 type ProviderInputMemberBitbucket struct {
@@ -2259,6 +2403,15 @@ type ProviderInputMemberBitbucket struct {
 }
 
 func (*ProviderInputMemberBitbucket) isProviderInput() {}
+
+// The Bitbucket Data Center-specific input for creating an integration.
+type ProviderInputMemberBitbucketDataCenter struct {
+	Value BitbucketDataCenterIntegrationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderInputMemberBitbucketDataCenter) isProviderInput() {}
 
 // The configuration for a Confluence integration.
 type ProviderInputMemberConfluence struct {
@@ -2292,6 +2445,7 @@ func (*ProviderInputMemberGitlab) isProviderInput() {}
 //
 // The following types satisfy this interface:
 //
+//	ProviderResourceCapabilitiesMemberAzureDevOps
 //	ProviderResourceCapabilitiesMemberBitbucket
 //	ProviderResourceCapabilitiesMemberConfluence
 //	ProviderResourceCapabilitiesMemberGithub
@@ -2299,6 +2453,15 @@ func (*ProviderInputMemberGitlab) isProviderInput() {}
 type ProviderResourceCapabilities interface {
 	isProviderResourceCapabilities()
 }
+
+// The Azure DevOps-specific resource capabilities.
+type ProviderResourceCapabilitiesMemberAzureDevOps struct {
+	Value AzureDevOpsResourceCapabilities
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderResourceCapabilitiesMemberAzureDevOps) isProviderResourceCapabilities() {}
 
 // Capabilities for an integrated Bitbucket repository.
 type ProviderResourceCapabilitiesMemberBitbucket struct {

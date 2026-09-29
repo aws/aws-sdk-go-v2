@@ -2558,6 +2558,9 @@ type Image struct {
 	// Indicates whether the image is shared with another account ID.
 	ImageSharedWithOthers ImageSharedWithOthers
 
+	// The software metadata associated with the image.
+	ImageSoftwareMetadata *ImageSoftwareMetadata
+
 	// The type of the image. Images created through AMI import have type "custom",
 	// while WorkSpaces Applications provided images have type "native". Custom images
 	// support additional instance types including GeneralPurpose, MemoryOptimized,
@@ -2652,6 +2655,11 @@ func (v *Image) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImageSharedWithOthers != "" {
 		s.WriteString(schemas.Image_ImageSharedWithOthers, string(v.ImageSharedWithOthers))
 	}
+	if v.ImageSoftwareMetadata != nil {
+		s.WriteStruct(schemas.Image_ImageSoftwareMetadata)
+		v.ImageSoftwareMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ImageType != "" {
 		s.WriteString(schemas.Image_ImageType, string(v.ImageType))
 	}
@@ -2731,6 +2739,9 @@ func (v *Image) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ImageSharedWithOthers = ImageSharedWithOthers(ev)
 			return nil
+		case schemas.Image_ImageSoftwareMetadata:
+			v.ImageSoftwareMetadata = &ImageSoftwareMetadata{}
+			return v.ImageSoftwareMetadata.Deserialize(d)
 		case schemas.Image_ImageType:
 			var ev string
 			if err := d.ReadString(schemas.Image_ImageType, &ev); err != nil {
@@ -3203,6 +3214,39 @@ func (v *ImagePermissions) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ImagePermissions_allowImageBuilder:
 			v.AllowImageBuilder = new(bool)
 			return d.ReadBool(schemas.ImagePermissions_allowImageBuilder, v.AllowImageBuilder)
+		}
+		return nil
+	})
+}
+
+// Describes the software metadata for an image, such as the installed NVIDIA GRID
+// driver version.
+type ImageSoftwareMetadata struct {
+
+	// The version of the NVIDIA GRID driver installed on the image. This field is
+	// empty if no NVIDIA GRID driver is installed.
+	NvidiaGridDriverVersion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ImageSoftwareMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImageSoftwareMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImageSoftwareMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NvidiaGridDriverVersion != nil {
+		s.WriteString(schemas.ImageSoftwareMetadata_nvidiaGridDriverVersion, *v.NvidiaGridDriverVersion)
+	}
+}
+func (v *ImageSoftwareMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImageSoftwareMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImageSoftwareMetadata_nvidiaGridDriverVersion:
+			v.NvidiaGridDriverVersion = new(string)
+			return d.ReadString(schemas.ImageSoftwareMetadata_nvidiaGridDriverVersion, v.NvidiaGridDriverVersion)
 		}
 		return nil
 	})

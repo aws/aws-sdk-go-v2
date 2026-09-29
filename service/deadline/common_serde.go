@@ -157,21 +157,53 @@ func serializeJobEntityIdentifiersUnion(s smithy.ShapeSerializer, schema *smithy
 
 func serializeJobParameter(s smithy.ShapeSerializer, schema *smithy.Schema, v types.JobParameter) {
 	switch vv := v.(type) {
+	case *types.JobParameterMemberBool:
+		s.WriteUnion(schema, schemas.JobParameter_bool)
+		s.WriteString(schemas.JobParameter_bool, vv.Value)
+		s.CloseUnion()
+	case *types.JobParameterMemberBoolList:
+		s.WriteUnion(schema, schemas.JobParameter_boolList)
+		serializeBooleanStringList(s, schemas.JobParameter_boolList, vv.Value)
+		s.CloseUnion()
 	case *types.JobParameterMemberFloat:
 		s.WriteUnion(schema, schemas.JobParameter_float)
 		s.WriteString(schemas.JobParameter_float, vv.Value)
+		s.CloseUnion()
+	case *types.JobParameterMemberFloatList:
+		s.WriteUnion(schema, schemas.JobParameter_floatList)
+		serializeFloatStringList(s, schemas.JobParameter_floatList, vv.Value)
 		s.CloseUnion()
 	case *types.JobParameterMemberInt:
 		s.WriteUnion(schema, schemas.JobParameter_int)
 		s.WriteString(schemas.JobParameter_int, vv.Value)
 		s.CloseUnion()
+	case *types.JobParameterMemberIntList:
+		s.WriteUnion(schema, schemas.JobParameter_intList)
+		serializeIntStringList(s, schemas.JobParameter_intList, vv.Value)
+		s.CloseUnion()
+	case *types.JobParameterMemberIntListList:
+		s.WriteUnion(schema, schemas.JobParameter_intListList)
+		serializeIntStringListList(s, schemas.JobParameter_intListList, vv.Value)
+		s.CloseUnion()
 	case *types.JobParameterMemberPath:
 		s.WriteUnion(schema, schemas.JobParameter_path)
 		s.WriteString(schemas.JobParameter_path, vv.Value)
 		s.CloseUnion()
+	case *types.JobParameterMemberPathList:
+		s.WriteUnion(schema, schemas.JobParameter_pathList)
+		serializePathStringList(s, schemas.JobParameter_pathList, vv.Value)
+		s.CloseUnion()
+	case *types.JobParameterMemberRangeExpr:
+		s.WriteUnion(schema, schemas.JobParameter_rangeExpr)
+		s.WriteString(schemas.JobParameter_rangeExpr, vv.Value)
+		s.CloseUnion()
 	case *types.JobParameterMemberString:
 		s.WriteUnion(schema, schemas.JobParameter_string)
 		s.WriteString(schemas.JobParameter_string, vv.Value)
+		s.CloseUnion()
+	case *types.JobParameterMemberStringList:
+		s.WriteUnion(schema, schemas.JobParameter_stringList)
+		serializeParameterStringList(s, schemas.JobParameter_stringList, vv.Value)
 		s.CloseUnion()
 	}
 }
@@ -517,20 +549,52 @@ func deserializeJobEntityIdentifiersUnion(d smithy.ShapeDeserializer, s *smithy.
 func deserializeJobParameter(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.JobParameter) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.JobParameter_bool:
+			vv := &types.JobParameterMemberBool{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.JobParameter_boolList:
+			vv := &types.JobParameterMemberBoolList{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.JobParameter_float:
 			vv := &types.JobParameterMemberFloat{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.JobParameter_floatList:
+			vv := &types.JobParameterMemberFloatList{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.JobParameter_int:
 			vv := &types.JobParameterMemberInt{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.JobParameter_intList:
+			vv := &types.JobParameterMemberIntList{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.JobParameter_intListList:
+			vv := &types.JobParameterMemberIntListList{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.JobParameter_path:
 			vv := &types.JobParameterMemberPath{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.JobParameter_pathList:
+			vv := &types.JobParameterMemberPathList{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.JobParameter_rangeExpr:
+			vv := &types.JobParameterMemberRangeExpr{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.JobParameter_string:
 			vv := &types.JobParameterMemberString{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.JobParameter_stringList:
+			vv := &types.JobParameterMemberStringList{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -1118,6 +1182,17 @@ func serializeBatchUpdateTaskItems(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseList()
 }
 
+func serializeBooleanStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeBudgetActionsToAdd(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BudgetActionToAdd) {
 	if v == nil {
 		return
@@ -1283,6 +1358,19 @@ func serializeFleetMembers(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 	s.CloseList()
 }
 
+func serializeFleetSoftwareAddOns(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FleetSoftwareAddOn) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeFleetSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FleetSummary) {
 	if v == nil {
 		return
@@ -1296,6 +1384,17 @@ func serializeFleetSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 	s.CloseList()
 }
 
+func serializeFloatStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeInstanceTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
@@ -1303,6 +1402,28 @@ func serializeInstanceTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeIntStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeIntStringListList(s smithy.ShapeSerializer, schema *smithy.Schema, v [][]string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeNestedIntStringList(s, schema.ListMember(), vv)
 	}
 	s.CloseList()
 }
@@ -1479,7 +1600,40 @@ func serializeMonitorSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
+func serializeNestedIntStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeOpenjdExtensionNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeOutputRelativeDirectoriesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeParameterStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
 	}
@@ -1499,6 +1653,17 @@ func serializePathMappingRules(s smithy.ShapeSerializer, schema *smithy.Schema, 
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePathStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -2406,6 +2571,20 @@ func deserializeBatchUpdateTaskItems(d smithy.ShapeDeserializer, s *smithy.Schem
 	})
 }
 
+func deserializeBooleanStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeBudgetActionsToAdd(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BudgetActionToAdd) error {
 	*v = make([]types.BudgetActionToAdd, 0)
 	var vv types.BudgetActionToAdd
@@ -2588,6 +2767,20 @@ func deserializeFleetMembers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	})
 }
 
+func deserializeFleetSoftwareAddOns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FleetSoftwareAddOn) error {
+	*v = make([]types.FleetSoftwareAddOn, 0)
+	var vv types.FleetSoftwareAddOn
+	return smithy.ReadList(d, s, func() error {
+		vv = types.FleetSoftwareAddOn{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeFleetSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FleetSummary) error {
 	*v = make([]types.FleetSummary, 0)
 	var vv types.FleetSummary
@@ -2602,12 +2795,54 @@ func deserializeFleetSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	})
 }
 
+func deserializeFloatStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeInstanceTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeIntStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeIntStringListList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[][]string) error {
+	*v = make([][]string, 0)
+	var vv []string
+	return smithy.ReadList(d, s, func() error {
+		vv = nil
+		if err := deserializeNestedIntStringList(d, s.ListMember(), &vv); err != nil {
 			return err
 		}
 
@@ -2817,7 +3052,49 @@ func deserializeMonitorSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	})
 }
 
+func deserializeNestedIntStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOpenjdExtensionNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeOutputRelativeDirectoriesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeParameterStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
@@ -2837,6 +3114,20 @@ func deserializePathMappingRules(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PathMappingRule{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePathStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 
@@ -3465,6 +3756,18 @@ func serializeLogParameters(s smithy.ShapeSerializer, schema *smithy.Schema, v m
 	s.CloseMap()
 }
 
+func serializeSessionMetadata(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
 func serializeSettingsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	if v == nil {
 		return
@@ -3598,6 +3901,20 @@ func deserializeLogOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[
 }
 
 func deserializeLogParameters(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeSessionMetadata(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {

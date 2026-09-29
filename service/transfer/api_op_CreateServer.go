@@ -216,6 +216,9 @@ type CreateServerInput struct {
 	//   CloudWatch Logs, so that you can determine when the client is making a SETSTAT
 	//   call.
 	//
+	//   - To specify which ports your Transfer Family server listens to, use the
+	//   SftpPorts parameter.
+	//
 	//   - To determine whether your Transfer Family server resumes recent, negotiated
 	//   sessions through a unique session ID, use the TlsSessionResumptionMode
 	//   parameter.
