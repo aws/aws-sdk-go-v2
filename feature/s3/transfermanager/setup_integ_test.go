@@ -10,10 +10,12 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	mrand "math/rand"
 	"net/http"
 	"os"
 	"path/filepath"
 	"runtime"
+	"strconv"
 	"strings"
 	"testing"
 	"time"
@@ -956,4 +958,274 @@ func SetupExpressBucket(ctx context.Context, svc *s3.Client, bucketName string) 
 	}
 
 	return nil
+}
+
+// ---------------------------------------------------------------------------
+// Fuzzy/Property integration test suites for transfer manager v2 download. In
+// each test of a fuzzy test iteration, an object with random size is uploaded
+// in part(s) with random parts sizes via core S3. Then it is downloaded by
+// DownloadObject/GetObject and check if the data downloaded matches the initial
+// random source. Other main config options like concurrency, download type, max
+// retries etc. are also randomly chosen for each case.
+// ---------------------------------------------------------------------------
+
+const randMiB = 1024 * 1024
+
+// s3MinPartSize is S3's minimum size for every multipart part except the last.
+const s3MinPartSize = 5 * randMiB
+
+// maxRandomParts bounds the number of parts per generated object. Kept small so
+// the suite's real uploads/downloads stay within a reasonable time/data budget
+// (each non-last part is >= 5MiB).
+const maxRandomParts = 5
+
+// defaultReassemblyIterations is the number of randomized cases per run when
+// TM_REASSEMBLY_ITERATIONS is unset.
+const defaultReassemblyIterations = 25
+
+// reassemblyCase is one generated reassembly scenario, fully determined by the
+// seed. It fixes the object layout and the download options but not the API
+// (GetObject vs DownloadObject), which is chosen by the calling test.
+type reassemblyCase struct {
+	partSizes       []int64 // len 1 => single-part (non-multipart) object
+	useRanges       bool    // GetObjectRanges vs GetObjectParts
+	concurrency     int
+	bufferSize      int64
+	partSize        int64 // 0 => leave default
+	maxRetries      int
+	disableChecksum bool
+	rangeHeader     string // "" => whole object
+	rangeStart      int64
+	rangeEnd        int64
+}
+
+func (c reassemblyCase) total() int64 {
+	var t int64
+	for _, s := range c.partSizes {
+		t += s
+	}
+	return t
+}
+
+func (c reassemblyCase) String() string {
+	mode := "parts"
+	if c.useRanges {
+		mode = "ranges"
+	}
+	return fmt.Sprintf("mode=%s parts=%v total=%d concurrency=%d bufferSize=%d partSize=%d retries=%d disableChecksum=%t range=%q",
+		mode, c.partSizes, c.total(), c.concurrency, c.bufferSize, c.partSize, c.maxRetries, c.disableChecksum, c.rangeHeader)
+}
+
+// optFns renders the case's download options.
+func (c reassemblyCase) optFns() []func(*Options) {
+	return []func(*Options){func(o *Options) {
+		if c.useRanges {
+			o.GetObjectType = types.GetObjectRanges
+		} else {
+			o.GetObjectType = types.GetObjectParts
+		}
+		o.Concurrency = c.concurrency
+		o.GetObjectBufferSize = c.bufferSize
+		if c.partSize != 0 {
+			o.PartSizeBytes = c.partSize
+		}
+		o.PartBodyMaxRetries = c.maxRetries
+		o.DisableChecksumValidation = c.disableChecksum
+	}}
+}
+
+// rangePtr returns the case's Range header as a pointer, or nil for whole
+// object.
+func (c reassemblyCase) rangePtr() *string {
+	if c.rangeHeader == "" {
+		return nil
+	}
+	return aws.String(c.rangeHeader)
+}
+
+// generateReassemblyCase draws one fully-randomized scenario from rng.
+func generateReassemblyCase(rng *mrand.Rand) reassemblyCase {
+	c := reassemblyCase{}
+
+	n := 1 + rng.Intn(maxRandomParts)
+	if n == 1 {
+		c.partSizes = []int64{int64(1 + rng.Intn(9*randMiB))}
+	} else {
+		sizes := make([]int64, n)
+		for i := 0; i < n-1; i++ {
+			sizes[i] = int64(s3MinPartSize + rng.Intn(3*randMiB+1))
+		}
+		// Last part: anything from 1 byte up to ~6MiB, including sub-part sizes.
+		sizes[n-1] = int64(1 + rng.Intn(6*randMiB))
+		c.partSizes = sizes
+	}
+
+	c.useRanges = rng.Intn(2) == 0
+	c.concurrency = 1 + rng.Intn(8)
+	// Buffer size: bias toward small buffers, which stress the streaming
+	// in-order frontier in GetObject; occasionally use the large default.
+	switch rng.Intn(3) {
+	case 0:
+		c.bufferSize = int64(randMiB + rng.Intn(randMiB)) // ~1MiB, forces many refills
+	case 1:
+		c.bufferSize = int64(6 * randMiB)
+	default:
+		c.bufferSize = defaultGetBufferSize
+	}
+	// Download part/range chunk size: sometimes override, always >= 5MiB.
+	if rng.Intn(2) == 0 {
+		c.partSize = int64(s3MinPartSize + rng.Intn(4*randMiB))
+	}
+	c.maxRetries = 1 + rng.Intn(4)
+	c.disableChecksum = rng.Intn(2) == 0
+
+	// Occasionally issue a sub-range request. Range input is only exercised in
+	// ranges mode, matching the supported combinations in the hand-written
+	// integration cases.
+	total := c.total()
+	if c.useRanges && total > 1 && rng.Intn(3) == 0 {
+		start := int64(rng.Intn(int(total)))
+		end := start + int64(rng.Intn(int(total-start)))
+		c.rangeStart = start
+		c.rangeEnd = end
+		c.rangeHeader = fmt.Sprintf("bytes=%d-%d", start, end)
+	}
+	return c
+}
+
+// reassemblyDownloadFn performs the transfer-manager download for one case and
+// returns the reassembled bytes. GetObject and DownloadObject each supply one.
+type reassemblyDownloadFn func(t *testing.T, ctx context.Context, bucket, key string, c reassemblyCase) []byte
+
+// runRandomizedReassembly is the shared property loop for downloader fuzzy test. It generates
+// randomized layouts, uploads them (real multipart for >1 part), downloads them
+// via downloadFn under randomized options, and asserts byte-exact reassembly.
+// label distinguishes the calling test in logs.
+func runRandomizedReassembly(t *testing.T, label string, downloadFn reassemblyDownloadFn) {
+	t.Helper()
+
+	seed := time.Now().UnixNano()
+	if s := os.Getenv("TM_REASSEMBLY_SEED"); s != "" {
+		v, err := strconv.ParseInt(s, 10, 64)
+		if err != nil {
+			t.Fatalf("invalid TM_REASSEMBLY_SEED %q: %v", s, err)
+		}
+		seed = v
+	}
+	iterations := defaultReassemblyIterations
+	if s := os.Getenv("TM_REASSEMBLY_ITERATIONS"); s != "" {
+		v, err := strconv.Atoi(s)
+		if err != nil || v <= 0 {
+			t.Fatalf("invalid TM_REASSEMBLY_ITERATIONS %q", s)
+		}
+		iterations = v
+	}
+	t.Logf("%s randomized reassembly: seed=%d iterations=%d (set TM_REASSEMBLY_SEED=%d to reproduce)", label, seed, iterations, seed)
+
+	rng := mrand.New(mrand.NewSource(seed))
+	bucket := setupMetadata.Buckets.Source.Name
+	ctx := context.Background()
+
+	for i := 0; i < iterations; i++ {
+		c := generateReassemblyCase(rng)
+		// Derive the body deterministically from the same rng so a seed fully
+		// reproduces the case, content included.
+		body := make([]byte, c.total())
+		rng.Read(body)
+
+		t.Run(fmt.Sprintf("iter-%02d", i), func(t *testing.T) {
+			t.Logf("case: %s", c)
+			key := UniqueID()
+
+			if len(c.partSizes) == 1 {
+				if _, err := s3Client.PutObject(ctx, &s3.PutObjectInput{
+					Bucket: aws.String(bucket),
+					Key:    aws.String(key),
+					Body:   bytes.NewReader(body),
+				}); err != nil {
+					t.Fatalf("put single-part object: %v", err)
+				}
+			} else {
+				uploadMultipartExact(t, ctx, bucket, key, body, c.partSizes)
+			}
+
+			want := body
+			if c.rangeHeader != "" {
+				want = body[c.rangeStart : c.rangeEnd+1]
+			}
+
+			got := downloadFn(t, ctx, bucket, key, c)
+			if !bytes.Equal(want, got) {
+				t.Errorf("reassembly mismatch: want %d bytes, got %d bytes; first differing byte at %d\ncase: %s",
+					len(want), len(got), firstDiff(want, got), c)
+			}
+		})
+	}
+}
+
+// uploadMultipartExact uploads body as a multipart object whose parts have
+// exactly the given byte sizes (all but the last must be >= 5MiB).
+func uploadMultipartExact(t *testing.T, ctx context.Context, bucket, key string, body []byte, partSizes []int64) {
+	t.Helper()
+
+	createOut, err := s3Client.CreateMultipartUpload(ctx, &s3.CreateMultipartUploadInput{
+		Bucket: aws.String(bucket),
+		Key:    aws.String(key),
+	})
+	if err != nil {
+		t.Fatalf("create multipart upload: %v", err)
+	}
+	uploadID := createOut.UploadId
+	abort := func() {
+		_, _ = s3Client.AbortMultipartUpload(ctx, &s3.AbortMultipartUploadInput{
+			Bucket: aws.String(bucket), Key: aws.String(key), UploadId: uploadID,
+		})
+	}
+
+	var completed []s3types.CompletedPart
+	var offset int64
+	for i, size := range partSizes {
+		partNum := int32(i + 1)
+		partOut, err := s3Client.UploadPart(ctx, &s3.UploadPartInput{
+			Bucket:     aws.String(bucket),
+			Key:        aws.String(key),
+			UploadId:   uploadID,
+			PartNumber: aws.Int32(partNum),
+			Body:       bytes.NewReader(body[offset : offset+size]),
+		})
+		if err != nil {
+			abort()
+			t.Fatalf("upload part %d: %v", partNum, err)
+		}
+		completed = append(completed, s3types.CompletedPart{
+			ETag:       partOut.ETag,
+			PartNumber: aws.Int32(partNum),
+		})
+		offset += size
+	}
+
+	if _, err := s3Client.CompleteMultipartUpload(ctx, &s3.CompleteMultipartUploadInput{
+		Bucket:          aws.String(bucket),
+		Key:             aws.String(key),
+		UploadId:        uploadID,
+		MultipartUpload: &s3types.CompletedMultipartUpload{Parts: completed},
+	}); err != nil {
+		abort()
+		t.Fatalf("complete multipart upload: %v", err)
+	}
+}
+
+// firstDiff returns the index of the first differing byte between a and b, or
+// -1 if one is a prefix of the other (a length-only difference).
+func firstDiff(a, b []byte) int {
+	n := len(a)
+	if len(b) < n {
+		n = len(b)
+	}
+	for i := 0; i < n; i++ {
+		if a[i] != b[i] {
+			return i
+		}
+	}
+	return -1
 }
