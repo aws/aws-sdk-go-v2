@@ -627,10 +627,14 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 		if d.err != nil {
 			// early check to see if error is caused by range download a zero object
 			// which will always return an invalid range error from s3 side
+			//
+			// a caller-supplied range can also be unsatisfiable against a
+			// non-empty object, that is a real error and must not produce an
+			// empty result
 			var responseError interface {
 				HTTPStatusCode() int
 			}
-			if errors.As(d.err, &responseError) {
+			if errors.As(d.err, &responseError) && aws.ToString(d.in.Range) == "" {
 				if responseError.HTTPStatusCode() == http.StatusRequestedRangeNotSatisfiable {
 					if f, ok := d.in.WriterAt.(internalio.File); ok {
 						if err := f.Init(0, d.options.PartSizeBytes, getWriteSize(d.options.PartSizeBytes), false); err != nil {
@@ -685,6 +689,9 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 	d.writer.Stop()
 	if err := d.writer.Error(); err != nil {
 		d.err = err
+	}
+	if d.err == nil {
+		d.err = d.checkWritten()
 	}
 
 	if d.err != nil {
@@ -908,6 +915,17 @@ func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
 
 		d.totalBytes = total
 	}
+}
+
+// checkWritten reports an error if the bytes delivered to the writer don't
+// exactly cover the requested span. Every chunk is range-checked on its own,
+// this catches gaps or overlaps in how the chunks were planned.
+func (d *downloader) checkWritten() error {
+	want := d.totalBytes - d.offset
+	if got := d.written.Load(); got != want {
+		return fmt.Errorf("downloaded %d bytes, expected %d", got, want)
+	}
+	return nil
 }
 
 func (d *downloader) freshContext(ctx context.Context) (context.Context, context.CancelFunc) {

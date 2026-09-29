@@ -1,6 +1,10 @@
 package io
 
 import (
+	"errors"
+	"io/fs"
+	"path/filepath"
+	"runtime"
 	"sync"
 	"testing"
 )
@@ -55,5 +59,20 @@ func TestBufferPoolsConcurrent(t *testing.T) {
 		if pool != first {
 			t.Fatal("concurrent Pool calls returned different pools")
 		}
+	}
+}
+
+func TestSyncDir(t *testing.T) {
+	if err := SyncDir(t.TempDir()); err != nil {
+		t.Fatalf("SyncDir = %v, want nil", err)
+	}
+}
+
+func TestSyncDirMissing(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("SyncDir is a no-op on windows")
+	}
+	if err := SyncDir(filepath.Join(t.TempDir(), "missing")); !errors.Is(err, fs.ErrNotExist) {
+		t.Fatalf("SyncDir = %v, want %v", err, fs.ErrNotExist)
 	}
 }

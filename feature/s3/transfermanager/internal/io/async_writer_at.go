@@ -73,23 +73,26 @@ func (w *AsyncWriterAt) Release(p []byte) {
 //     eventually performs the write needs the original slice header of p (i.e.
 //     NOT a subslice) so it can return the full slice to the pool.
 //   - This method retains p, callers MUST NOT retain or modify p.
+//   - If done is non-nil, done.Done() is called once the job has been written
+//     or discarded. Callers use this to wait for a subset of their writes to
+//     land without waiting on the whole writer.
 //
 // WriteAt MUST NOT be called concurrently with or after Stop. Calls made
 // before Start are queued, but at most jobQueueDepth of them can be pending
 // before WriteAt blocks until Start is called.
-func (w *AsyncWriterAt) WriteAt(p []byte, n int, off int64) {
+func (w *AsyncWriterAt) WriteAt(p []byte, n int, off int64, done *sync.WaitGroup) {
+	job := writeAtJob{p: p, n: n, off: off, done: done}
 	w.jobs.Add(1)
+	if done != nil {
+		done.Add(1)
+	}
 
 	select {
 	case <-w.failed:
-		w.jobs.Done()
-		w.bufs.Put(p)
-		return
+		w.finish(job)
 	case <-w.stop:
-		w.jobs.Done()
-		w.bufs.Put(p)
-		return
-	case w.queue <- writeAtJob{p: p, n: n, off: off}:
+		w.finish(job)
+	case w.queue <- job:
 	}
 }
 
@@ -131,8 +134,7 @@ func (w *AsyncWriterAt) Stop() {
 		for {
 			select {
 			case job := <-w.queue:
-				w.bufs.Put(job.p)
-				w.jobs.Done()
+				w.finish(job)
 			default:
 				return
 			}
@@ -161,8 +163,7 @@ func (w *AsyncWriterAt) doWrites() {
 		case job := <-w.queue:
 			select {
 			case <-w.failed:
-				w.bufs.Put(job.p)
-				w.jobs.Done()
+				w.finish(job)
 				continue
 			default:
 			}
@@ -175,14 +176,23 @@ func (w *AsyncWriterAt) doWrites() {
 				w.fail(err)
 			}
 
-			w.jobs.Done()
-			w.bufs.Put(job.p)
+			w.finish(job)
 		}
 	}
 }
 
+// Every job, whether written or discarded, MUST be released through finish.
+func (w *AsyncWriterAt) finish(job writeAtJob) {
+	w.bufs.Put(job.p)
+	if job.done != nil {
+		job.done.Done()
+	}
+	w.jobs.Done()
+}
+
 type writeAtJob struct {
-	p   []byte
-	n   int
-	off int64
+	p    []byte
+	n    int
+	off  int64
+	done *sync.WaitGroup
 }

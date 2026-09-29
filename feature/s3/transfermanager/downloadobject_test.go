@@ -10,6 +10,7 @@ import (
 	"reflect"
 	"runtime"
 	"strings"
+	"sync"
 	"sync/atomic"
 	"testing"
 	"testing/iotest"
@@ -455,7 +456,8 @@ func TestDownloadObject(t *testing.T) {
 				l.expectByteTransfers(t, 3)
 			},
 		},
-		"part download success without retry": {
+		// the body ends cleanly one byte short of its Content-Range
+		"part download short body": {
 			getObjectFn: s3testing.ErrReaderFn,
 			errReaders: []s3testing.TestErrReader{
 				{Buf: []byte("ab"), Len: 3, Err: io.EOF},
@@ -466,14 +468,10 @@ func TestDownloadObject(t *testing.T) {
 			partsCount:        1,
 			expectInvocations: 1,
 			expectParts:       []int32{1},
-			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
-				if e, a := "ab", string(w.Bytes()); e != a {
-					t.Errorf("expect %q response, got %q", e, a)
-				}
-			},
+			expectErr:         "downloaded 2 bytes, expected 3",
 			listenerValidationFn: func(t *testing.T, l *mockListener, in, out any, err error) {
-				l.expectComplete(t, in, out)
-				l.expectByteTransfers(t, 2)
+				l.expectStartTotalBytes(t, 3)
+				l.expectFailed(t, in, err)
 			},
 		},
 		"part download fail retry": {
@@ -993,6 +991,203 @@ func TestDownloadObjectFirstChunkBodyError(t *testing.T) {
 			}
 			if n := w.late.Load(); n > 0 {
 				t.Errorf("%d writes happened after DownloadObject returned", n)
+			}
+		})
+	}
+}
+
+// sequencedWriterAt stores writes in memory. Writes of the poisoned content are
+// held back until another write lands at the same offset (or a timeout
+// passes), which forces the reordering a stale retry write would need to
+// corrupt the destination.
+type sequencedWriterAt struct {
+	poison []byte
+
+	mu     sync.Mutex
+	data   []byte
+	landed map[int64]chan struct{}
+}
+
+func (w *sequencedWriterAt) landedAt(off int64) chan struct{} {
+	w.mu.Lock()
+	defer w.mu.Unlock()
+
+	if w.landed == nil {
+		w.landed = map[int64]chan struct{}{}
+	}
+	ch, ok := w.landed[off]
+	if !ok {
+		ch = make(chan struct{})
+		w.landed[off] = ch
+	}
+	return ch
+}
+
+func (w *sequencedWriterAt) WriteAt(p []byte, off int64) (int, error) {
+	poisoned := bytes.Equal(p, w.poison)
+	if poisoned {
+		select {
+		case <-w.landedAt(off):
+		case <-time.After(200 * time.Millisecond):
+		}
+	}
+
+	w.mu.Lock()
+	copy(w.data[off:], p)
+	w.mu.Unlock()
+
+	if !poisoned {
+		ch := w.landedAt(off)
+		select {
+		case <-ch:
+		default:
+			close(ch)
+		}
+	}
+	return len(p), nil
+}
+
+// A chunk whose first attempt fails checksum validation is retried. The failed
+// attempt's writes carry corrupt bytes, and they must not land after the
+// retry's writes to the same offsets.
+func TestDownloadObjectRetryAfterCorruptBody(t *testing.T) {
+	const partSize = 8 * megabyte
+	data := randomBytes(3, 3*partSize)
+	corrupt := bytes.Repeat([]byte{0xff}, partSize)
+	errChecksum := errors.New("checksum did not match")
+
+	var corrupted atomic.Bool
+	s3Client := &s3testing.TransferManagerLoggingClient{Data: data}
+	s3Client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+		out, err := s3testing.RangeGetObjectFn(c, params)
+		if err != nil {
+			return nil, err
+		}
+		if strings.HasPrefix(aws.ToString(params.Range), fmt.Sprintf("bytes=%d-", partSize)) && corrupted.CompareAndSwap(false, true) {
+			out.Body = io.NopCloser(io.MultiReader(bytes.NewReader(corrupt), iotest.ErrReader(errChecksum)))
+		}
+		return out, nil
+	}
+
+	d := New(s3Client, func(o *Options) {
+		o.Concurrency = 2
+		o.GetObjectType = types.GetObjectRanges
+		o.PartSizeBytes = partSize
+	})
+
+	w := &sequencedWriterAt{poison: corrupt, data: make([]byte, len(data))}
+	if _, err := d.DownloadObject(context.Background(), &DownloadObjectInput{
+		Bucket:   aws.String("bucket"),
+		Key:      aws.String("key"),
+		WriterAt: w,
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if !corrupted.Load() {
+		t.Fatal("corrupt response was never served")
+	}
+	checkBytes(t, w.data, data)
+}
+
+// Without a caller range, 416 on the first request means the object is empty.
+// With one, it means the range is past the end of the object.
+func TestDownloadObjectRangeNotSatisfiable(t *testing.T) {
+	for name, c := range map[string]struct {
+		rng       string
+		expectErr bool
+	}{
+		"no range":       {},
+		"explicit range": {rng: "bytes=100-200", expectErr: true},
+	} {
+		t.Run(name, func(t *testing.T) {
+			s3Client := &s3testing.TransferManagerLoggingClient{
+				GetObjectFn: func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+					return nil, rangeNotSatisfiableError{}
+				},
+			}
+			d := New(s3Client, func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
+			})
+
+			in := &DownloadObjectInput{
+				Bucket:   aws.String("bucket"),
+				Key:      aws.String("key"),
+				WriterAt: types.NewWriteAtBuffer(nil),
+			}
+			if c.rng != "" {
+				in.Range = aws.String(c.rng)
+			}
+			out, err := d.DownloadObject(context.Background(), in)
+
+			if c.expectErr {
+				if err == nil {
+					t.Fatalf("expected error, got output %+v", out)
+				}
+				return
+			}
+			if err != nil {
+				t.Fatal(err)
+			}
+			if got := aws.ToInt64(out.ContentLength); got != 0 {
+				t.Errorf("ContentLength = %d, want 0", got)
+			}
+		})
+	}
+}
+
+// Each response is individually consistent (the body matches its
+// Content-Length) but together they don't cover the object.
+func TestDownloadObjectIncompleteCoverage(t *testing.T) {
+	data := randomBytes(4, 20*megabyte)
+
+	cases := map[string]struct {
+		typ types.GetObjectType
+		fn  func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
+	}{
+		// the object claims 3 parts' worth of bytes but reports only 1 part
+		"parts count too low": {
+			typ: types.GetObjectParts,
+			fn: func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+				body := data[:8*megabyte]
+				return &s3.GetObjectOutput{
+					Body:          io.NopCloser(bytes.NewReader(body)),
+					ContentLength: aws.Int64(int64(len(body))),
+					ContentRange:  aws.String(fmt.Sprintf("bytes 0-%d/%d", len(body)-1, len(data))),
+					PartsCount:    aws.Int32(1),
+					ETag:          aws.String(etag),
+				}, nil
+			},
+		},
+		// a middle range comes back one byte short
+		"short range body": {
+			typ: types.GetObjectRanges,
+			fn: func(c *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+				out, err := s3testing.RangeGetObjectFn(c, params)
+				if err != nil || !strings.HasPrefix(aws.ToString(params.Range), fmt.Sprintf("bytes=%d-", 8*megabyte)) {
+					return out, err
+				}
+				body := data[8*megabyte : 16*megabyte-1]
+				out.Body = io.NopCloser(bytes.NewReader(body))
+				out.ContentLength = aws.Int64(int64(len(body)))
+				return out, nil
+			},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			s3Client := &s3testing.TransferManagerLoggingClient{Data: data, GetObjectFn: c.fn}
+			d := New(s3Client, func(o *Options) {
+				o.GetObjectType = c.typ
+			})
+
+			_, err := d.DownloadObject(context.Background(), &DownloadObjectInput{
+				Bucket:   aws.String("bucket"),
+				Key:      aws.String("key"),
+				WriterAt: types.NewWriteAtBuffer(nil),
+			})
+			if err == nil || !strings.Contains(err.Error(), "expected") {
+				t.Fatalf("expected byte count error, got %v", err)
 			}
 		})
 	}

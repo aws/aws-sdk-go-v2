@@ -2,6 +2,7 @@ package transfermanager
 
 import (
 	"io"
+	"sync"
 
 	internalio "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/io"
 )
@@ -33,18 +34,25 @@ func readChunk(r io.Reader, buf []byte) (int, error) {
 // rather than written: the chunk is retried from start anyway, and a short
 // write at an arbitrary length is not valid on a file opened with O_DIRECT.
 // The returned count only includes bytes that were queued for writing.
+//
+// ReadFrom does not return an error until every write it queued has landed or
+// been discarded. The caller retries from start, and a retry's writes must not
+// race with this attempt's: if this attempt failed checksum validation, a stale
+// write that lands last would silently corrupt the destination.
 func (c *dlChunk) ReadFrom(r io.Reader) (int64, error) {
+	var pending sync.WaitGroup
 	var total int64
 	for {
 		buf := c.sink.Buffer()
 		n, err := readChunk(r, buf)
 		if err != nil && err != io.EOF {
 			c.sink.Release(buf)
+			pending.Wait()
 			return total, err
 		}
 
 		if n > 0 {
-			c.sink.WriteAt(buf, n, c.start+total)
+			c.sink.WriteAt(buf, n, c.start+total, &pending)
 		} else {
 			c.sink.Release(buf)
 		}

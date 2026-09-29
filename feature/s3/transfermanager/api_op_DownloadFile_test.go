@@ -30,6 +30,7 @@ type fakeInit struct {
 type fakeDownloadFile struct {
 	initErr  error
 	writeErr error
+	syncErr  error
 	closeErr error
 
 	h     *downloadFileHarness
@@ -61,6 +62,11 @@ func (f *fakeDownloadFile) WriteAt(p []byte, off int64) (int, error) {
 	return len(p), nil
 }
 
+func (f *fakeDownloadFile) Sync() error {
+	f.h.record("Sync")
+	return f.syncErr
+}
+
 func (f *fakeDownloadFile) Close() error {
 	f.h.record("Close")
 	return f.closeErr
@@ -69,11 +75,14 @@ func (f *fakeDownloadFile) Close() error {
 // downloadFileHarness records every filesystem operation DownloadFile makes.
 // Events excludes WriteAt, whose count depends on part size.
 type downloadFileHarness struct {
-	mu      sync.Mutex
-	events  []string
-	created []string
-	renames [][2]string
-	removes []string
+	syncDirErr error
+
+	mu         sync.Mutex
+	events     []string
+	created    []string
+	renames    [][2]string
+	removes    []string
+	syncedDirs []string
 }
 
 func (h *downloadFileHarness) record(event string) {
@@ -90,11 +99,18 @@ func stubDownloadFile(t *testing.T, file *fakeDownloadFile, createErr, renameErr
 		file.h = h
 	}
 
-	prevCreate, prevRename, prevRemove := createDownloadFileFn, renameFileFn, removeFileFn
+	prevCreate, prevRename, prevRemove, prevSyncDir := createDownloadFileFn, renameFileFn, removeFileFn, syncDirFn
 	t.Cleanup(func() {
-		createDownloadFileFn, renameFileFn, removeFileFn = prevCreate, prevRename, prevRemove
+		createDownloadFileFn, renameFileFn, removeFileFn, syncDirFn = prevCreate, prevRename, prevRemove, prevSyncDir
 	})
 
+	syncDirFn = func(dir string) error {
+		h.mu.Lock()
+		h.syncedDirs = append(h.syncedDirs, dir)
+		h.mu.Unlock()
+		h.record("SyncDir")
+		return h.syncDirErr
+	}
 	createDownloadFileFn = func(path string) (internalio.File, error) {
 		h.mu.Lock()
 		h.created = append(h.created, path)
@@ -140,12 +156,15 @@ func (h *downloadFileHarness) expect(t *testing.T, events ...string) {
 
 	var wantRenames [][2]string
 	var wantRemoves []string
+	var wantSyncedDirs []string
 	for _, e := range events {
 		switch e {
 		case "Rename":
 			wantRenames = append(wantRenames, [2]string{tmp, testFilePath})
 		case "Remove":
 			wantRemoves = append(wantRemoves, tmp)
+		case "SyncDir":
+			wantSyncedDirs = append(wantSyncedDirs, filepath.Dir(testFilePath))
 		}
 	}
 	if fmt.Sprint(h.renames) != fmt.Sprint(wantRenames) {
@@ -153,6 +172,9 @@ func (h *downloadFileHarness) expect(t *testing.T, events ...string) {
 	}
 	if fmt.Sprint(h.removes) != fmt.Sprint(wantRemoves) {
 		t.Fatalf("removes = %v, want %v", h.removes, wantRemoves)
+	}
+	if fmt.Sprint(h.syncedDirs) != fmt.Sprint(wantSyncedDirs) {
+		t.Fatalf("synced dirs = %v, want %v", h.syncedDirs, wantSyncedDirs)
 	}
 }
 
@@ -178,6 +200,8 @@ func TestDownloadFile(t *testing.T) {
 		rng         string
 		initErr     error
 		writeErr    error
+		syncErr     error
+		syncDirErr  error
 		closeErr    error
 		createErr   error
 		renameErr   error
@@ -191,7 +215,7 @@ func TestDownloadFile(t *testing.T) {
 			data:         data,
 			getObjectFn:  s3testing.RangeGetObjectFn,
 			optFn:        ranges,
-			expectEvents: []string{"Init", "Close", "Rename"},
+			expectEvents: []string{"Init", "Sync", "Close", "Rename", "SyncDir"},
 			expectData:   data,
 			expectInit:   &fakeInit{size: int64(len(data)), directIO: true},
 		},
@@ -199,7 +223,7 @@ func TestDownloadFile(t *testing.T) {
 			data:         data,
 			getObjectFn:  partsGetObjectFn(data, partSizes),
 			optFn:        parts,
-			expectEvents: []string{"Init", "Close", "Rename"},
+			expectEvents: []string{"Init", "Sync", "Close", "Rename", "SyncDir"},
 			expectData:   data,
 			expectInit:   &fakeInit{size: int64(len(data))},
 		},
@@ -208,7 +232,7 @@ func TestDownloadFile(t *testing.T) {
 			getObjectFn:  s3testing.RangeGetObjectFn,
 			optFn:        ranges,
 			rng:          "bytes=2-16777218",
-			expectEvents: []string{"Init", "Close", "Rename"},
+			expectEvents: []string{"Init", "Sync", "Close", "Rename", "SyncDir"},
 			expectData:   data[2:16777219],
 			expectInit:   &fakeInit{size: 16777217, directIO: true},
 		},
@@ -216,7 +240,7 @@ func TestDownloadFile(t *testing.T) {
 			data:         []byte{},
 			getObjectFn:  s3testing.RangeGetObjectFn,
 			optFn:        ranges,
-			expectEvents: []string{"Init", "Close", "Rename"},
+			expectEvents: []string{"Init", "Sync", "Close", "Rename", "SyncDir"},
 			expectData:   []byte{},
 			expectInit:   &fakeInit{size: 0, directIO: true},
 		},
@@ -225,7 +249,7 @@ func TestDownloadFile(t *testing.T) {
 				return nil, rangeNotSatisfiableError{}
 			},
 			optFn:        ranges,
-			expectEvents: []string{"Init", "Close", "Rename"},
+			expectEvents: []string{"Init", "Sync", "Close", "Rename", "SyncDir"},
 			expectData:   []byte{},
 			expectInit:   &fakeInit{size: 0},
 		},
@@ -272,7 +296,7 @@ func TestDownloadFile(t *testing.T) {
 			optFn:        ranges,
 			closeErr:     errors.New("close failed"),
 			expectErr:    "close failed",
-			expectEvents: []string{"Init", "Close", "Remove"},
+			expectEvents: []string{"Init", "Sync", "Close", "Remove"},
 		},
 		"rename fails": {
 			data:         data,
@@ -280,14 +304,43 @@ func TestDownloadFile(t *testing.T) {
 			optFn:        ranges,
 			renameErr:    errors.New("rename failed"),
 			expectErr:    "rename failed",
-			expectEvents: []string{"Init", "Close", "Rename", "Remove"},
+			expectEvents: []string{"Init", "Sync", "Close", "Rename", "Remove"},
+		},
+		"sync fails": {
+			data:         data,
+			getObjectFn:  s3testing.RangeGetObjectFn,
+			optFn:        ranges,
+			syncErr:      errors.New("sync failed"),
+			expectErr:    "sync failed",
+			expectEvents: []string{"Init", "Sync", "Close", "Remove"},
+		},
+		// the rename already happened, so the destination is left in place
+		"sync dir fails": {
+			data:         data,
+			getObjectFn:  s3testing.RangeGetObjectFn,
+			optFn:        ranges,
+			syncDirErr:   errors.New("sync dir failed"),
+			expectErr:    "sync dir failed",
+			expectEvents: []string{"Init", "Sync", "Close", "Rename", "SyncDir"},
+		},
+		// with a caller-supplied range, 416 means the range is past the end of
+		// a non-empty object, not that the object is empty
+		"explicit range not satisfiable": {
+			getObjectFn: func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+				return nil, rangeNotSatisfiableError{}
+			},
+			optFn:        ranges,
+			rng:          "bytes=100-200",
+			expectErr:    "InvalidRange",
+			expectEvents: []string{"Close", "Remove"},
 		},
 	}
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			file := &fakeDownloadFile{initErr: c.initErr, writeErr: c.writeErr, closeErr: c.closeErr}
+			file := &fakeDownloadFile{initErr: c.initErr, writeErr: c.writeErr, syncErr: c.syncErr, closeErr: c.closeErr}
 			h := stubDownloadFile(t, file, c.createErr, c.renameErr)
+			h.syncDirErr = c.syncDirErr
 
 			client := New(&s3testing.TransferManagerLoggingClient{
 				Data:        c.data,

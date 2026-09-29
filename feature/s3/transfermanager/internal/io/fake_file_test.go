@@ -14,6 +14,7 @@ type fakeFile struct {
 	fd          uintptr
 	writeErr    error
 	truncateErr error
+	syncErr     error
 	closeErr    error
 
 	calls     []string
@@ -34,6 +35,11 @@ func (f *fakeFile) Truncate(size int64) error {
 	f.calls = append(f.calls, "Truncate")
 	f.truncates = append(f.truncates, size)
 	return f.truncateErr
+}
+
+func (f *fakeFile) Sync() error {
+	f.calls = append(f.calls, "Sync")
+	return f.syncErr
 }
 
 func (f *fakeFile) Close() error {

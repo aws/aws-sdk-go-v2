@@ -8,6 +8,7 @@ import (
 	"sync"
 	"testing"
 	"testing/iotest"
+	"time"
 
 	internalio "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/io"
 )
@@ -193,8 +194,6 @@ func TestDlChunkReadFromUnexpectedEOF(t *testing.T) {
 }
 
 // Retries reuse the chunk, so a second ReadFrom must write from start again.
-// The first attempt's writes may still be queued, which is fine only because
-// they carry the same bytes.
 func TestDlChunkReadFromRetry(t *testing.T) {
 	const (
 		start = 100
@@ -223,6 +222,60 @@ func TestDlChunkReadFromRetry(t *testing.T) {
 			}
 			checkBytes(t, h.sink.buf[start:], data)
 		})
+	}
+}
+
+type blockingSink struct {
+	entered chan struct{}
+	release chan struct{}
+}
+
+func (s *blockingSink) WriteAt(p []byte, _ int64) (int, error) {
+	select {
+	case s.entered <- struct{}{}:
+	default:
+	}
+	<-s.release
+	return len(p), nil
+}
+
+// ReadFrom must not report a failure until every write it queued has landed,
+// otherwise a retry's writes could race with them.
+func TestDlChunkReadFromErrorWaitsForWrites(t *testing.T) {
+	pool := &countingPool{t: t, outstanding: map[*byte]struct{}{}}
+	sink := &blockingSink{entered: make(chan struct{}, 1), release: make(chan struct{})}
+	var releaseOnce sync.Once
+	release := func() { releaseOnce.Do(func() { close(sink.release) }) }
+	w := internalio.NewAsyncWriterAt(sink, pool)
+	w.Start()
+	defer w.Stop()
+	defer release()
+
+	errBody := errors.New("body failed")
+	c := dlChunk{sink: w}
+	body := io.MultiReader(bytes.NewReader(make([]byte, 2*chunkTestBufSize)), iotest.ErrReader(errBody))
+
+	returned := make(chan error, 1)
+	go func() {
+		_, err := c.ReadFrom(body)
+		returned <- err
+	}()
+
+	<-sink.entered
+	select {
+	case err := <-returned:
+		t.Fatalf("ReadFrom returned %v while its writes were still in progress", err)
+	case <-time.After(20 * time.Millisecond):
+	}
+
+	release()
+	select {
+	case err := <-returned:
+		if err != errBody {
+			t.Fatalf("err = %v, want %v", err, errBody)
+		}
+	case <-time.After(5 * time.Second):
+		t.Fatal("ReadFrom did not return after its writes were released")
 	}
 }
 

@@ -256,7 +256,7 @@ func fillWorkers(t *testing.T, w *AsyncWriterAt, g *gatedWriterAt, bufSize int) 
 
 	withTimeout(t, "filling queue", func() {
 		for i := range numWriteWorkers + jobQueueDepth {
-			w.WriteAt(w.Buffer(), bufSize, int64(i*bufSize))
+			w.WriteAt(w.Buffer(), bufSize, int64(i*bufSize), nil)
 		}
 	})
 
@@ -331,7 +331,7 @@ func produce(w *AsyncWriterAt, seed int64, chunks []chunk, producers int, jit bo
 				if jit {
 					jitter()
 				}
-				w.WriteAt(buf, c.n, c.off)
+				w.WriteAt(buf, c.n, c.off, nil)
 			}
 		}()
 	}
@@ -487,7 +487,7 @@ func TestAsyncWriterAtBuffer(t *testing.T) {
 	}
 
 	w.Start()
-	w.WriteAt(b, 0, 0)
+	w.WriteAt(b, 0, 0, nil)
 	shutdown(t, w, pool)
 }
 
@@ -514,7 +514,7 @@ func TestAsyncWriterAtWritesPrefix(t *testing.T) {
 	w.Start()
 
 	buf := w.Buffer()
-	w.WriteAt(buf, 5, 100)
+	w.WriteAt(buf, 5, 100, nil)
 	withTimeout(t, "Wait", w.Wait)
 
 	if len(got) != 5 {
@@ -537,8 +537,8 @@ func TestAsyncWriterAtZeroLengthWrite(t *testing.T) {
 	w := NewAsyncWriterAt(sink, pool)
 	w.Start()
 
-	w.WriteAt(w.Buffer(), 0, 0)
-	w.WriteAt(w.Buffer(), 0, 16)
+	w.WriteAt(w.Buffer(), 0, 0, nil)
+	w.WriteAt(w.Buffer(), 0, 16, nil)
 	shutdown(t, w, pool)
 
 	if err := w.Error(); err != nil {
@@ -616,7 +616,7 @@ func TestAsyncWriterAtStopWithoutStart(t *testing.T) {
 	w := NewAsyncWriterAt(sink, pool)
 
 	for i := range jobQueueDepth {
-		w.WriteAt(w.Buffer(), 8, int64(i*8))
+		w.WriteAt(w.Buffer(), 8, int64(i*8), nil)
 	}
 	withTimeout(t, "Stop", w.Stop)
 	withTimeout(t, "Wait", w.Wait)
@@ -675,7 +675,7 @@ func TestAsyncWriterAtWriteError(t *testing.T) {
 			}), pool)
 			w.Start()
 
-			w.WriteAt(w.Buffer(), 8, 0)
+			w.WriteAt(w.Buffer(), 8, 0, nil)
 			waitClosed(t, "Done", w.Done())
 			if err := w.Error(); !errors.Is(err, c.wantErr) {
 				t.Fatalf("Error() = %v, want %v", err, c.wantErr)
@@ -777,7 +777,7 @@ func TestAsyncWriterAtErrorUnblocksProducers(t *testing.T) {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			w.WriteAt(w.Buffer(), 8, int64((numWriteWorkers+jobQueueDepth+i)*8))
+			w.WriteAt(w.Buffer(), 8, int64((numWriteWorkers+jobQueueDepth+i)*8), nil)
 		}()
 	}
 
@@ -806,12 +806,12 @@ func TestAsyncWriterAtWriteAfterError(t *testing.T) {
 	}), pool)
 	w.Start()
 
-	w.WriteAt(w.Buffer(), 8, 0)
+	w.WriteAt(w.Buffer(), 8, 0, nil)
 	waitClosed(t, "Done", w.Done())
 
 	withTimeout(t, "WriteAt after failure", func() {
 		for i := range 1000 {
-			w.WriteAt(w.Buffer(), 8, int64(i*8))
+			w.WriteAt(w.Buffer(), 8, int64(i*8), nil)
 		}
 	})
 	shutdown(t, w, pool)
@@ -831,7 +831,7 @@ func TestAsyncWriterAtStopDuringFailingWrite(t *testing.T) {
 	w := NewAsyncWriterAt(g, pool)
 	w.Start()
 
-	w.WriteAt(w.Buffer(), 8, 0)
+	w.WriteAt(w.Buffer(), 8, 0, nil)
 	c := g.next(t)
 
 	stopped := make(chan struct{})
@@ -965,4 +965,110 @@ func TestAsyncWriterAtStress(t *testing.T) {
 			}
 		})
 	}
+}
+
+func waitGroupReleased(wg *sync.WaitGroup) <-chan struct{} {
+	ch := make(chan struct{})
+	go func() {
+		defer close(ch)
+		wg.Wait()
+	}()
+	return ch
+}
+
+// A done group passed to WriteAt must be released exactly when its job ends,
+// however it ends.
+func TestAsyncWriterAtDoneGroup(t *testing.T) {
+	t.Run("written", func(t *testing.T) {
+		checkGoroutines(t)
+
+		g := newGatedWriterAt()
+		pool := newTestPool(t, 8)
+		w := NewAsyncWriterAt(g, pool)
+		w.Start()
+
+		var done sync.WaitGroup
+		w.WriteAt(w.Buffer(), 8, 0, &done)
+		c := g.next(t)
+
+		released := waitGroupReleased(&done)
+		time.Sleep(10 * time.Millisecond)
+		if isClosed(released) {
+			t.Fatal("done released while the write was still in progress")
+		}
+
+		c.ok()
+		waitClosed(t, "done", released)
+		shutdown(t, w, pool)
+	})
+
+	t.Run("discarded by workers after failure", func(t *testing.T) {
+		checkGoroutines(t)
+
+		g := newGatedWriterAt()
+		pool := newTestPool(t, 8)
+		w := NewAsyncWriterAt(g, pool)
+		w.Start()
+
+		var done sync.WaitGroup
+		withTimeout(t, "filling queue", func() {
+			for i := range numWriteWorkers + jobQueueDepth {
+				w.WriteAt(w.Buffer(), 8, int64(i*8), &done)
+			}
+		})
+		inflight := make([]*gatedCall, numWriteWorkers)
+		for i := range inflight {
+			inflight[i] = g.next(t)
+		}
+
+		inflight[0].fail(errInjected)
+		waitClosed(t, "Done", w.Done())
+		for _, c := range inflight[1:] {
+			c.ok()
+		}
+		extra := g.autoRespond()
+		waitClosed(t, "done", waitGroupReleased(&done))
+		shutdown(t, w, pool)
+
+		if n := extra(); n != 0 {
+			t.Errorf("%d queued writes reached the sink after failure", n)
+		}
+	})
+
+	t.Run("discarded by WriteAt after failure", func(t *testing.T) {
+		checkGoroutines(t)
+
+		pool := newTestPool(t, 8)
+		w := NewAsyncWriterAt(writerAtFunc(func([]byte, int64) (int, error) {
+			return 0, errInjected
+		}), pool)
+		w.Start()
+
+		w.WriteAt(w.Buffer(), 8, 0, nil)
+		waitClosed(t, "Done", w.Done())
+
+		var done sync.WaitGroup
+		w.WriteAt(w.Buffer(), 8, 8, &done)
+		waitClosed(t, "done", waitGroupReleased(&done))
+		shutdown(t, w, pool)
+	})
+
+	t.Run("discarded by Stop", func(t *testing.T) {
+		checkGoroutines(t)
+
+		pool := newTestPool(t, 8)
+		w := NewAsyncWriterAt(newGatedWriterAt(), pool)
+
+		// never started, so every job sits in the queue until Stop drains it
+		var done sync.WaitGroup
+		for i := range jobQueueDepth {
+			w.WriteAt(w.Buffer(), 8, int64(i*8), &done)
+		}
+		withTimeout(t, "Stop", w.Stop)
+		waitClosed(t, "done", waitGroupReleased(&done))
+
+		if n := pool.numOutstanding(); n != 0 {
+			t.Errorf("%d buffers were never returned to the pool", n)
+		}
+	})
 }

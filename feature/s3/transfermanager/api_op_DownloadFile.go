@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path/filepath"
 	"time"
 
 	internalio "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/io"
@@ -17,6 +18,7 @@ var (
 	createDownloadFileFn = internalio.Create
 	renameFileFn         = os.Rename
 	removeFileFn         = os.Remove
+	syncDirFn            = internalio.SyncDir
 )
 
 // DownloadFileInput represents a request to the DownloadFile() call. It mirrors the
@@ -125,8 +127,9 @@ func (i *DownloadFileInput) toDownloadObjectInput(w io.WriterAt) *DownloadObject
 // splitting it into byte ranges fetched in parallel.
 //
 // The destination is replaced atomically: data is written to a temporary file
-// alongside input.FilePath and renamed into place on success. On failure the
-// temporary file is removed and an existing destination is not modified.
+// alongside input.FilePath, synced to stable storage, and renamed into place on
+// success. On failure the temporary file is removed and an existing destination
+// is not modified.
 //
 // For write-to-disk use cases, prefer DownloadFile over DownloadObject, since
 // DownloadFile has exclusive ownership of the file handle it can apply various
@@ -158,6 +161,11 @@ func (c *Client) DownloadFile(ctx context.Context, input *DownloadFileInput, opt
 		removeTemp(tmp)
 		return out, fmt.Errorf("download: %w", err)
 	}
+	if err := f.Sync(); err != nil {
+		_ = f.Close()
+		removeTemp(tmp)
+		return out, fmt.Errorf("sync: %w", err)
+	}
 	if err := f.Close(); err != nil {
 		removeTemp(tmp)
 		return out, fmt.Errorf("close: %w", err)
@@ -165,6 +173,11 @@ func (c *Client) DownloadFile(ctx context.Context, input *DownloadFileInput, opt
 	if err := renameFileFn(tmp, input.FilePath); err != nil {
 		removeTemp(tmp)
 		return out, fmt.Errorf("rename: %w", err)
+	}
+	// the destination now holds the complete object, but the rename itself
+	// isn't durable until the directory is synced
+	if err := syncDirFn(filepath.Dir(input.FilePath)); err != nil {
+		return out, fmt.Errorf("sync dir: %w", err)
 	}
 
 	return out, nil

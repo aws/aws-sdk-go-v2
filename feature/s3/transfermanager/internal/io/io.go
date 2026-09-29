@@ -3,6 +3,7 @@ package io
 import (
 	"io"
 	"os"
+	"runtime"
 	"sync"
 	"unsafe"
 )
@@ -80,6 +81,9 @@ func (bps *BufferPools) Pool(size int) *sync.Pool {
 type File interface {
 	io.WriterAt
 	Init(size, partSize, writeSize int64, directIO bool) error
+
+	// Sync commits the file's contents and final size to stable storage.
+	Sync() error
 	Close() error
 }
 
@@ -87,6 +91,7 @@ type File interface {
 type osFile interface {
 	io.WriterAt
 	Truncate(size int64) error
+	Sync() error
 	Close() error
 	Fd() uintptr
 }
@@ -97,4 +102,25 @@ var openFile = func(name string, flag int, perm os.FileMode) (osFile, error) {
 		return nil, err
 	}
 	return f, nil
+}
+
+// SyncDir commits directory entry changes in dir, such as a rename into it, to
+// stable storage.
+//
+// Windows does not support flushing a directory handle, so this is a no-op
+// there.
+func SyncDir(dir string) error {
+	if runtime.GOOS == "windows" {
+		return nil
+	}
+
+	d, err := os.Open(dir)
+	if err != nil {
+		return err
+	}
+	if err := d.Sync(); err != nil {
+		_ = d.Close()
+		return err
+	}
+	return d.Close()
 }

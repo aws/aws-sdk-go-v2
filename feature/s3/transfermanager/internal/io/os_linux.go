@@ -89,6 +89,21 @@ func supportsDirectIO(path string, partSize, writeSize int64) bool {
 	return stat.Bsize > 0 && alignedBy%stat.Bsize == 0
 }
 
+// Sync truncates away direct I/O padding before syncing, so the synced size is
+// the final one.
+func (f *file) Sync() error {
+	if f.File == nil {
+		return nil
+	}
+
+	if f.direct {
+		if err := f.File.Truncate(f.size); err != nil {
+			return err
+		}
+	}
+	return f.File.Sync()
+}
+
 func (f *file) Close() error {
 	if f.File == nil {
 		return nil

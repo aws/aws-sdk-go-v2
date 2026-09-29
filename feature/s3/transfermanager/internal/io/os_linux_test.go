@@ -385,6 +385,47 @@ func TestFileCloseUninitialized(t *testing.T) {
 	}
 }
 
+func TestFileSync(t *testing.T) {
+	const size = oDirectThreshold + 13
+	truncateErr := errors.New("truncate failed")
+	syncErr := errors.New("sync failed")
+
+	for _, test := range []struct {
+		name        string
+		direct      bool
+		truncateErr error
+		syncErr     error
+		expectErr   error
+		expectCalls []string
+	}{
+		{name: "buffered", expectCalls: []string{"Sync"}},
+		{name: "buffered sync error", syncErr: syncErr, expectErr: syncErr, expectCalls: []string{"Sync"}},
+		{name: "direct", direct: true, expectCalls: []string{"Truncate", "Sync"}},
+		{name: "direct truncate error", direct: true, truncateErr: truncateErr, expectErr: truncateErr, expectCalls: []string{"Truncate"}},
+		{name: "direct sync error", direct: true, syncErr: syncErr, expectErr: syncErr, expectCalls: []string{"Truncate", "Sync"}},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			ff := &fakeFile{truncateErr: test.truncateErr, syncErr: test.syncErr}
+			f := &file{File: ff, direct: test.direct, size: size}
+
+			if err := f.Sync(); !errors.Is(err, test.expectErr) {
+				t.Fatalf("Sync error = %v, want %v", err, test.expectErr)
+			}
+			expectCalls(t, ff, test.expectCalls...)
+			if test.direct && ff.truncates[0] != size {
+				t.Fatalf("Truncate size = %d, want %d", ff.truncates[0], size)
+			}
+		})
+	}
+}
+
+func TestFileSyncUninitialized(t *testing.T) {
+	f := &file{}
+	if err := f.Sync(); err != nil {
+		t.Fatalf("Sync on uninitialized file = %v, want nil", err)
+	}
+}
+
 // The type of Statfs_t.Bsize varies by GOARCH.
 func setBsize[T ~int32 | ~int64 | ~uint32](p *T, v int64) {
 	*p = T(v)

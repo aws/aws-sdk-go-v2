@@ -25,10 +25,13 @@ func TestCreate(t *testing.T) {
 	if _, err := f.WriteAt([]byte("abc"), 7); err != nil {
 		t.Fatal(err)
 	}
+	if err := f.Sync(); err != nil {
+		t.Fatal(err)
+	}
 	if err := f.Close(); err != nil {
 		t.Fatal(err)
 	}
-	expectCalls(t, ff, "WriteAt", "Close")
+	expectCalls(t, ff, "WriteAt", "Sync", "Close")
 	if w := ff.writes[0]; string(w.p) != "abc" || w.off != 7 {
 		t.Fatalf("write = %+v, want abc at 7", w)
 	}
