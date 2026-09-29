@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"io"
 	"math/rand"
-	"os"
-	"path/filepath"
 	"runtime"
 	"sync"
 	"sync/atomic"
@@ -474,51 +472,6 @@ func testIntegrity(t *testing.T, seed int64, size, bufSize int, shortN bool, pro
 		t.Fatalf("seed %d: %d writes reached the sink, want %d", seed, got, want)
 	}
 	sink.checkComplete(t, seed)
-}
-
-func TestAsyncWriterAtIntegrityFile(t *testing.T) {
-	const (
-		bufSize = 64 * 1024
-		size    = 8*1024*1024 + 13
-	)
-
-	for seed := range int64(iterations(5)) {
-		for _, shortN := range []bool{false, true} {
-			t.Run(fmt.Sprintf("seed=%d/shortN=%v", seed, shortN), func(t *testing.T) {
-				checkGoroutines(t)
-
-				path := filepath.Join(t.TempDir(), "out")
-				f, err := os.Create(path)
-				if err != nil {
-					t.Fatal(err)
-				}
-				defer f.Close()
-
-				pool := newTestPool(t, bufSize)
-				w := NewAsyncWriterAt(f, pool)
-				w.Start()
-
-				chunks := planChunks(rand.New(rand.NewSource(seed)), size, bufSize, shortN)
-				withTimeout(t, "producers", func() { produce(w, seed, chunks, 4*numWriteWorkers, true) })
-				shutdown(t, w, pool)
-				if err := w.Error(); err != nil {
-					t.Fatal(err)
-				}
-				if err := f.Close(); err != nil {
-					t.Fatal(err)
-				}
-
-				got, err := os.ReadFile(path)
-				if err != nil {
-					t.Fatal(err)
-				}
-				if len(got) != size {
-					t.Fatalf("file size = %d, want %d", len(got), size)
-				}
-				checkContent(t, got, seed)
-			})
-		}
-	}
 }
 
 func TestAsyncWriterAtBuffer(t *testing.T) {

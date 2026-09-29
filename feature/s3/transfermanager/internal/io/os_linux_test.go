@@ -28,7 +28,7 @@ func TestSupportsDirectIOFilesystemBlockSize(t *testing.T) {
 	} {
 		t.Run(test.name, func(t *testing.T) {
 			statfs = func(_ string, stat *syscall.Statfs_t) error {
-				stat.Bsize = test.bsize
+				setBsize(&stat.Bsize, test.bsize)
 				return nil
 			}
 
@@ -92,7 +92,7 @@ func TestFileInitUsesBufferedIO(t *testing.T) {
 			}
 			f := created.(*file)
 			statfs = func(_ string, stat *syscall.Statfs_t) error {
-				stat.Bsize = test.bsize
+				setBsize(&stat.Bsize, test.bsize)
 				return test.statErr
 			}
 
@@ -256,4 +256,9 @@ func TestFileInitDirectIODisabled(t *testing.T) {
 	if err := f.Close(); err != nil {
 		t.Fatal(err)
 	}
+}
+
+// The type of Statfs_t.Bsize varies by GOARCH.
+func setBsize[T ~int32 | ~int64 | ~uint32](p *T, v int64) {
+	*p = T(v)
 }

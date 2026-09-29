@@ -6,6 +6,7 @@ import (
 	"unsafe"
 )
 
+// Pools is the shared set of buffer pools used by transfer operations.
 var Pools BufferPools
 
 // right now we only do direct i/o on linux, according to the google the vast
