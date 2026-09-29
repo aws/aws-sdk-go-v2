@@ -389,7 +389,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The image type is the type of AppStream image resource."
+                "smithy.api#documentation": "<p>The image type is the type of AppStream image resource.</p>"
             }
         },
         "com.amazonaws.appstream#AmiName": {
@@ -7402,6 +7402,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of the image. Images created through AMI import have type \"custom\", while WorkSpaces Applications provided images have type \"native\". Custom images support additional instance types including GeneralPurpose, MemoryOptimized, ComputeOptimized, and Accelerated instance families.</p>"
                     }
+                },
+                "ImageSoftwareMetadata": {
+                    "target": "com.amazonaws.appstream#ImageSoftwareMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The software metadata associated with the image.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7736,6 +7742,20 @@
                 }
             }
         },
+        "com.amazonaws.appstream#ImageSoftwareMetadata": {
+            "type": "structure",
+            "members": {
+                "nvidiaGridDriverVersion": {
+                    "target": "com.amazonaws.appstream#NvidiaGridDriverVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the NVIDIA GRID driver installed on the image. This field is empty if no NVIDIA GRID driver is installed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the software metadata for an image, such as the installed NVIDIA GRID driver version.</p>"
+            }
+        },
         "com.amazonaws.appstream#ImageState": {
             "type": "enum",
             "members": {
@@ -7867,7 +7887,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The image type is the type of AppStream image resource."
+                "smithy.api#documentation": "<p>The image type is the type of AppStream image resource.</p>"
             }
         },
         "com.amazonaws.appstream#IncompatibleImageException": {
@@ -8389,6 +8409,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the network details of the fleet or image builder instance.</p>"
+            }
+        },
+        "com.amazonaws.appstream#NvidiaGridDriverVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[0-9]+(\\.[0-9]+){1,2}$"
             }
         },
         "com.amazonaws.appstream#OperationNotPermittedException": {
@@ -12940,6 +12970,7 @@
         "com.amazonaws.appstream#WorkspaceImageId": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "<p>WorkspaceImageId type with validation pattern</p>",
                 "smithy.api#length": {
                     "min": 12,
                     "max": 67

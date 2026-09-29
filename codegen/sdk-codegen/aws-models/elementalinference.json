@@ -227,7 +227,13 @@
                 "summaryGeneration": {
                     "target": "com.amazonaws.elementalinference#SummaryGenerationMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether Elemental Inference generates a descriptive summary of the media content for this output. </p> <p>Valid values:</p> <ul> <li> <p>ENABLED (default) – Elemental Inference generates a descriptive summary along with IAB taxonomy and GARM suitability classifications. </p> </li> <li> <p>DISABLED – No descriptive summary is generated.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether Elemental Inference generates a descriptive summary of the media content for this output, along with the objects and actions that it detects. This setting is independent of <code>extendedAnalysis</code>. </p> <p>Valid values:</p> <ul> <li> <p>ENABLED (default) – Elemental Inference populates the summary, objects, and actions fields, along with the IAB taxonomy and GARM suitability classifications. </p> </li> <li> <p>DISABLED – Elemental Inference doesn't populate the summary, objects, and actions fields. </p> </li> </ul>"
+                    }
+                },
+                "extendedAnalysis": {
+                    "target": "com.amazonaws.elementalinference#ExtendedAnalysisMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Elemental Inference generates extended analysis of the media content for this output. Extended analysis identifies the people, environments, brands, and on-screen text in the media content. This setting is independent of <code>summaryGeneration</code>. </p> <p>Valid values:</p> <ul> <li> <p>ENABLED (default) – Elemental Inference populates the people, environments, brands, and on-screen text fields. </p> </li> <li> <p>DISABLED – Elemental Inference doesn't populate the people, environments, brands, and on-screen text fields. </p> </li> </ul>"
                     }
                 }
             },
@@ -2114,6 +2120,23 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elementalinference#ExtendedAnalysisMode": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.elementalinference#FeedArn": {
             "type": "string",
             "traits": {
@@ -3667,7 +3690,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A type of OutputConfig, used when the output in a feed is for the smart subtitling feature. smart subtitling uses automatic speech recognition (ASR) to generate live TTML subtitles from the audio in your source media. </p>"
+                "smithy.api#documentation": "<p>A type of OutputConfig, used when the output in a feed is for the smart subtitling feature. Smart subtitling uses automatic speech recognition (ASR) to generate live TTML subtitles from the audio in your source media. </p>"
             }
         },
         "com.amazonaws.elementalinference#SummaryGenerationMode": {

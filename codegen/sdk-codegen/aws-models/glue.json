@@ -54851,6 +54851,12 @@
                         "smithy.api#documentation": "<p>You can set this flag as true to instruct the engine not to push user-provided operations into the logical plan of the view during query planning. However, setting this flag does not guarantee that the engine will comply. Refer to the engine's documentation to understand the guarantees provided, if any.</p>"
                     }
                 },
+                "IsManaged": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the materialized view is managed by Glue.</p>"
+                    }
+                },
                 "Definer": {
                     "target": "com.amazonaws.glue#ArnString",
                     "traits": {
@@ -54924,6 +54930,12 @@
                     "target": "com.amazonaws.glue#NullableBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>You can set this flag as true to instruct the engine not to push user-provided operations into the logical plan of the view during query planning. However, setting this flag does not guarantee that the engine will comply. Refer to the engine's documentation to understand the guarantees provided, if any.</p>"
+                    }
+                },
+                "IsManaged": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the materialized view is managed by Glue.</p>"
                     }
                 },
                 "Definer": {

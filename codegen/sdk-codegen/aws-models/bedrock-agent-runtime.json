@@ -738,7 +738,7 @@
                         "smithy.api#default": 5,
                         "smithy.api#documentation": "<p>The maximum number of agent iterations for retrieval.</p>",
                         "smithy.api#range": {
-                            "min": 2
+                            "min": 0
                         }
                     }
                 }
@@ -6443,6 +6443,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Bedrock foundation model configuration.</p>"
                     }
+                },
+                "mantleFoundationModelConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#MantleFoundationModelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Mantle foundation model configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6456,6 +6462,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "BEDROCK_FOUNDATION_MODEL"
+                    }
+                },
+                "MANTLE_FOUNDATION_MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANTLE_FOUNDATION_MODEL"
                     }
                 }
             },
@@ -10979,6 +10991,51 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The type of reranking configuration for managed search.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#MantleFoundationModelConfiguration": {
+            "type": "structure",
+            "members": {
+                "modelConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#MantleFoundationModelModelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model configuration containing the model ARN and project ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a Mantle foundation model.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#MantleFoundationModelModelConfiguration": {
+            "type": "structure",
+            "members": {
+                "modelArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#BedrockModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Mantle foundation model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectId": {
+                    "target": "com.amazonaws.bedrockagentruntime#MantleProjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Bedrock project ID used for billing and usage attribution. If you don't specify a value, the service uses the default project.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Model configuration for a Mantle foundation model.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#MantleProjectId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(proj_[a-zA-Z0-9]+|default)$"
             }
         },
         "com.amazonaws.bedrockagentruntime#MaxResults": {

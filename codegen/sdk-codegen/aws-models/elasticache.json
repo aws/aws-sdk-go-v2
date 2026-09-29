@@ -3312,6 +3312,23 @@
                 "smithy.api#documentation": "<p>Node group (shard) configuration options when adding or removing replicas. Each\n            node group (shard) configuration has the following members: NodeGroupId,\n            NewReplicaCount, and PreferredAvailabilityZones. </p>"
             }
         },
+        "com.amazonaws.elasticache#ConnectionType": {
+            "type": "enum",
+            "members": {
+                "VPC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vpc"
+                    }
+                },
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "public"
+                    }
+                }
+            }
+        },
         "com.amazonaws.elasticache#CopyServerlessCacheSnapshot": {
             "type": "operation",
             "input": {
@@ -4804,6 +4821,12 @@
                     "target": "com.amazonaws.elasticache#NetworkType",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP protocol version used by the serverless cache.\n           Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>.\n           <code>ipv6</code> is only supported with IPv6-only subnets.\n           If not specified, defaults to <code>ipv4</code>, unless all provided subnets are IPv6-only, in which case it defaults to <code>ipv6</code>.\n           </p>"
+                    }
+                },
+                "ConnectionType": {
+                    "target": "com.amazonaws.elasticache#ConnectionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection type for the serverless cache.\n           Must be either <code>vpc</code> | <code>public</code>.\n           Use <code>vpc</code> to access the cache through a VPC endpoint, or <code>public</code> to access the cache over the internet.\n           If not specified, defaults to <code>vpc</code>.\n           This value cannot be changed after the serverless cache is created.\n           Setting this to <code>public</code> requires Valkey 9 or above.</p>"
                     }
                 }
             },
@@ -15050,6 +15073,12 @@
                     "target": "com.amazonaws.elasticache#NetworkType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of IP address protocol used by the serverless cache. \n           Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>.\n           <code>ipv6</code> is only supported with IPv6-only subnets. \n           If not specified, defaults to <code>ipv4</code>, unless all provided subnets are IPv6-only, in which case it defaults to <code>ipv6</code>.</p>"
+                    }
+                },
+                "ConnectionType": {
+                    "target": "com.amazonaws.elasticache#ConnectionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection type for the serverless cache.\n           Must be either <code>vpc</code> | <code>public</code>.\n           If not specified, defaults to <code>vpc</code>.</p>"
                     }
                 }
             },

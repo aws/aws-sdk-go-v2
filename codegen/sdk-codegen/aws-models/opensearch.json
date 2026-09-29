@@ -226,6 +226,18 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.opensearch#AcceptedWarningsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
         "com.amazonaws.opensearch#AccessDeniedException": {
             "type": "structure",
             "members": {
@@ -3907,6 +3919,18 @@
                     "target": "com.amazonaws.opensearch#InitiatedBy",
                     "traits": {
                         "smithy.api#documentation": "<p>The IAM principal who initiated the configuration change.</p>"
+                    }
+                },
+                "ValidationFailures": {
+                    "target": "com.amazonaws.opensearch#ValidationFailures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validation failures that occurred as a result of the configuration change.</p>"
+                    }
+                },
+                "AcceptedWarnings": {
+                    "target": "com.amazonaws.opensearch#AcceptedWarningsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of advisory warning codes that were accepted for the configuration change.</p>"
                     }
                 }
             },
@@ -8842,7 +8866,13 @@
                 "ValidationFailures": {
                     "target": "com.amazonaws.opensearch#ValidationFailures",
                     "traits": {
-                        "smithy.api#documentation": "<p>Any validation failures that occurred as a result of the dry run.</p>"
+                        "smithy.api#documentation": "<p>The validation failures that occurred as a result of the dry run.</p>"
+                    }
+                },
+                "AcceptedWarnings": {
+                    "target": "com.amazonaws.opensearch#AcceptedWarningsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of advisory warning codes that were accepted for the configuration change.</p>"
                     }
                 }
             },
@@ -17924,6 +17954,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The engine mode for the domain. The engine mode can't be changed after the domain is created. For valid values, see <code>EngineMode</code>.</p>"
                     }
+                },
+                "AcceptedWarnings": {
+                    "target": "com.amazonaws.opensearch#AcceptedWarningsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of advisory warning codes to accept for this configuration change. By default, any advisory warning blocks the change. Include the code of each warning you want to accept so the change can proceed. You can find warning codes in the<code>ValidationFailures</code> list returned by <code>DescribeDomainChangeProgress</code>and <code>DescribeDryRunProgress</code>. Critical validation failures cannot be accepted and always block the change. If you omit this parameter or pass an empty list, all warnings block the change. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check\">Validating a domain update</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -18813,10 +18849,33 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A message corresponding to the failure.</p>"
                     }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.opensearch#ValidationFailureSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity of the validation failure.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A validation failure that occurred as the result of a pre-update validation check\n            (verbose dry run) on a domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#ValidationFailureSeverity": {
+            "type": "enum",
+            "members": {
+                "CRITICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Critical"
+                    }
+                },
+                "WARNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Warning"
+                    }
+                }
             }
         },
         "com.amazonaws.opensearch#ValidationFailures": {

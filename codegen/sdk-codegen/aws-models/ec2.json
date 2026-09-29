@@ -14819,6 +14819,14 @@
                         "smithy.api#documentation": "<p>\n\t\t\tThe zero-size preference configured for the interruptible Capacity Reservation. A value of <code>retain</code> keeps the interruptible Capacity Reservation active at zero capacity when you reduce its allocation to zero. A value of <code>default</code> cancels the interruptible Capacity Reservation when you reduce its allocation to zero.\n\t\t</p>",
                         "smithy.api#xmlName": "zeroSizePreference"
                     }
+                },
+                "LaunchStatus": {
+                    "target": "com.amazonaws.ec2#CapacityReservationLaunchStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "LaunchStatus",
+                        "smithy.api#documentation": "<note>\n            <p>Only supported for UltraServers.</p>\n         </note>\n         <p>Indicates whether you can launch instances into the Capacity Reservation. A Capacity\n\t\t\tReservation can have the following launch statuses:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>launchable</code> - You can launch instances into the Capacity\n\t\t\t\t\tReservation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlaunchable</code> - You can't launch instances into the Capacity\n\t\t\t\t\tReservation. For example, the Capacity Reservation is not active.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "launchStatus"
+                    }
                 }
             },
             "traits": {
@@ -15627,6 +15635,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Ubuntu Pro"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationLaunchStatus": {
+            "type": "enum",
+            "members": {
+                "LAUNCHABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "launchable"
+                    }
+                },
+                "UNLAUNCHABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unlaunchable"
                     }
                 }
             }
