@@ -2,12 +2,21 @@ package transfermanager
 
 import (
 	"context"
+	"crypto/rand"
+	"encoding/hex"
 	"fmt"
 	"io"
+	"os"
 	"time"
 
 	internalio "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/io"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
+)
+
+var (
+	createDownloadFileFn = internalio.Create
+	renameFileFn         = os.Rename
+	removeFileFn         = os.Remove
 )
 
 // DownloadFileInput represents a request to the DownloadFile() call. It mirrors the
@@ -20,8 +29,7 @@ type DownloadFileInput struct {
 	// Key of the object to get.
 	Key *string
 
-	// FilePath is the local destination path the object is written to. The file is
-	// created (or truncated if it exists). Required.
+	// FilePath is the local destination path the object is written to. Required.
 	FilePath string
 
 	// To retrieve the checksum, this mode must be enabled.
@@ -116,6 +124,10 @@ func (i *DownloadFileInput) toDownloadObjectInput(w io.WriterAt) *DownloadObject
 // DownloadFile downloads an object from S3 to a local file at input.FilePath,
 // splitting it into byte ranges fetched in parallel.
 //
+// The destination is replaced atomically: data is written to a temporary file
+// alongside input.FilePath and renamed into place on success. On failure the
+// temporary file is removed and an existing destination is not modified.
+//
 // For write-to-disk use cases, prefer DownloadFile over DownloadObject, since
 // DownloadFile has exclusive ownership of the file handle it can apply various
 // optimizations based on the downloaded size and platform.
@@ -129,20 +141,47 @@ func (c *Client) DownloadFile(ctx context.Context, input *DownloadFileInput, opt
 		opt(&options)
 	}
 
-	f, err := internalio.Create(input.FilePath)
+	tmp, err := tempPath(input.FilePath)
+	if err != nil {
+		return nil, err
+	}
+
+	f, err := createDownloadFileFn(tmp)
 	if err != nil {
 		return nil, fmt.Errorf("create: %w", err)
 	}
-	defer f.Close()
 
 	d := downloader{in: input.toDownloadObjectInput(f), options: options}
 	out, err := d.download(ctx)
 	if err != nil {
+		_ = f.Close()
+		removeTemp(tmp)
 		return out, fmt.Errorf("download: %w", err)
 	}
 	if err := f.Close(); err != nil {
+		removeTemp(tmp)
 		return out, fmt.Errorf("close: %w", err)
+	}
+	if err := renameFileFn(tmp, input.FilePath); err != nil {
+		removeTemp(tmp)
+		return out, fmt.Errorf("rename: %w", err)
 	}
 
 	return out, nil
+}
+
+// The temp file has to live in the destination's directory so the final rename
+// stays on one filesystem and is atomic.
+func tempPath(path string) (string, error) {
+	var b [8]byte
+	if _, err := rand.Read(b[:]); err != nil {
+		return "", fmt.Errorf("generate temp file name: %w", err)
+	}
+	return fmt.Sprintf("%s.%s.tmp", path, hex.EncodeToString(b[:])), nil
+}
+
+// On Linux the file is opened lazily after the first response, so the temp file
+// may not exist if the download failed early.
+func removeTemp(path string) {
+	_ = removeFileFn(path)
 }

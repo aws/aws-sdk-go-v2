@@ -5,17 +5,20 @@ package io
 import "os"
 
 type file struct {
-	*os.File
+	osFile
 }
 
 func (*file) Init(_, _, _ int64, _ bool) error {
 	return nil
 }
 
-// Create creates the named file.
+// Create creates the named file. The file must not already exist.
 //
-// Create in non-linux contexts just delegates to os.Create for now.
+// Create in non-linux contexts just delegates to os.OpenFile for now.
 func Create(path string) (File, error) {
-	f, err := os.Create(path)
-	return &file{f}, err
+	f, err := openFile(path, os.O_RDWR|os.O_CREATE|os.O_EXCL, 0o666)
+	if err != nil {
+		return nil, err
+	}
+	return &file{f}, nil
 }

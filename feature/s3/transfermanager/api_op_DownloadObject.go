@@ -632,6 +632,14 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 			}
 			if errors.As(d.err, &responseError) {
 				if responseError.HTTPStatusCode() == http.StatusRequestedRangeNotSatisfiable {
+					if f, ok := d.in.WriterAt.(internalio.File); ok {
+						if err := f.Init(0, d.options.PartSizeBytes, getWriteSize(d.options.PartSizeBytes), false); err != nil {
+							freshCtx, cancel := d.freshContext(ctx)
+							defer cancel()
+							d.emitter.Failed(freshCtx, err)
+							return nil, err
+						}
+					}
 					out := &DownloadObjectOutput{
 						ContentLength: aws.Int64(0),
 					}
@@ -852,7 +860,7 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 		d.emitter.Start(ctx, d.in, d.totalBytes-d.offset)
 
 		if i, ok := d.in.WriterAt.(internalio.File); ok {
-			if err := i.Init(d.totalBytes, d.options.PartSizeBytes, getWriteSize(d.options.PartSizeBytes), directIOEnabled(d.options.GetObjectType)); err != nil {
+			if err := i.Init(d.totalBytes-d.offset, d.options.PartSizeBytes, getWriteSize(d.options.PartSizeBytes), directIOEnabled(d.options.GetObjectType)); err != nil {
 				initErr = err
 				return
 			}

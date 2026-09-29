@@ -2,6 +2,7 @@ package io
 
 import (
 	"io"
+	"os"
 	"sync"
 	"unsafe"
 )
@@ -80,4 +81,20 @@ type File interface {
 	io.WriterAt
 	Init(size, partSize, writeSize int64, directIO bool) error
 	Close() error
+}
+
+// osFile is the subset of *os.File that File implementations use.
+type osFile interface {
+	io.WriterAt
+	Truncate(size int64) error
+	Close() error
+	Fd() uintptr
+}
+
+var openFile = func(name string, flag int, perm os.FileMode) (osFile, error) {
+	f, err := os.OpenFile(name, flag, perm)
+	if err != nil {
+		return nil, err
+	}
+	return f, nil
 }

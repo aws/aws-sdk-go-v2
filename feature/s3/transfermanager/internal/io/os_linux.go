@@ -13,7 +13,6 @@ const oDirectThreshold = 64 * 1024 * 1024 // 64MiB
 
 var (
 	statfs    = syscall.Statfs
-	openFile  = os.OpenFile
 	fallocate = syscall.Fallocate
 )
 
@@ -21,7 +20,7 @@ var (
 // transfer sizes are aligned. This bypasses the page cache and an inode lock,
 // which drastically improves performance for writes that are sustained enough.
 type file struct {
-	*os.File
+	File   osFile
 	direct bool
 	path   string
 	size   int64
@@ -54,12 +53,12 @@ func (f *file) Init(size, partSize, writeSize int64, directIO bool) error {
 
 	f.size = size
 	if size < oDirectThreshold || !directIO || !supportsDirectIO(f.path, partSize, writeSize) {
-		ff, err := os.Create(f.path)
+		ff, err := openFile(f.path, os.O_RDWR|os.O_CREATE|os.O_EXCL, 0o666)
 		f.File = ff
 		return err
 	}
 
-	ff, err := openFile(f.path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC|syscall.O_DIRECT, 0o644)
+	ff, err := openFile(f.path, os.O_WRONLY|os.O_CREATE|os.O_EXCL|syscall.O_DIRECT, 0o644)
 	if err != nil {
 		return err
 	}
@@ -97,13 +96,14 @@ func (f *file) Close() error {
 
 	if f.direct {
 		if err := f.File.Truncate(f.size); err != nil {
+			_ = f.File.Close()
 			return err
 		}
 	}
 	return f.File.Close()
 }
 
-// Create creates the named file.
+// Create creates the named file. The file must not already exist.
 //
 // Create on Linux returns a lazy wrapper. Actual file creation is delayed until
 // the file size and write chunk size are known.
