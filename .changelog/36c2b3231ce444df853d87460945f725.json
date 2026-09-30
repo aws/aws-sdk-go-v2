@@ -1,8 +1,0 @@
-{
-    "id": "36c2b323-1ce4-44df-853d-87460945f725",
-    "type": "bugfix",
-    "description": "Add fuzzy/property test for downloader to guarantee it can download objects with any valid parts sizes under random config options",
-    "modules": [
-        "feature/s3/transfermanager"
-    ]
-}
