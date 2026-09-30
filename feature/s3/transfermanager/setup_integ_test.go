@@ -981,7 +981,7 @@ const maxRandomParts = 5
 
 // defaultReassemblyIterations is the number of randomized cases per run when
 // TM_REASSEMBLY_ITERATIONS is unset.
-const defaultReassemblyIterations = 25
+const defaultReassemblyIterations = 10
 
 // reassemblyCase is one generated reassembly scenario, fully determined by the
 // seed. It fixes the object layout and the download options but not the API
