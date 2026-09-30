@@ -1,3 +1,7 @@
+# v1.89.0 (2026-09-30)
+
+* **Feature**: Amazon CloudWatch Logs now supports an optional roleArn parameter on PutDeliveryDestination for X-Ray trace delivery destinations, specifying the IAM role to assume when delivering traces.
+
 # v1.88.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

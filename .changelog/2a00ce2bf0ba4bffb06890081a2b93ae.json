@@ -1,8 +1,0 @@
-{
-    "id": "2a00ce2b-f0ba-4bff-b068-90081a2b93ae",
-    "type": "documentation",
-    "description": "Minor doc update for the AWS Agent Registry Custom metadata SearchDiscoverableRegistryRecords API",
-    "modules": [
-        "service/agentregistry"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "9176a0b4-f1dd-4c5f-bd31-ff6c0a889760",
-    "type": "feature",
-    "description": "GuardDuty AWS Organizations policy integration. GetDetector and GetMemberDetectors now show whether a GuardDuty policy manages a feature.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

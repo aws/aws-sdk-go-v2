@@ -1,3 +1,8 @@
+# v1.97.0 (2026-09-30)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Feature**: GuardDuty AWS Organizations policy integration. GetDetector and GetMemberDetectors now show whether a GuardDuty policy manages a feature.
+
 # v1.96.0 (2026-09-28)
 
 * **Feature**: Adding awsServiceName field to GuardDuty Findings

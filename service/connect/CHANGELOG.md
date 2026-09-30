@@ -1,3 +1,7 @@
+# v1.204.0 (2026-09-30)
+
+* **Feature**: Amazon Connect Rules can now trigger in-app notifications to users as a rule action. Notification character limit was increased to 500 visible characters.
+
 # v1.203.0 (2026-09-28)
 
 * **Feature**: This release adds ConnectionTypes and ChatStreamingConfiguration to StartChatContact, and ConnectionCredentials, Websocket, and StreamingId to its response, so customers can request connection information and chat streaming in the same call that starts the chat.

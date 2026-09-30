@@ -1,8 +1,0 @@
-{
-    "id": "f6809967-99d6-45fb-a695-60649e6ec729",
-    "type": "feature",
-    "description": "IpSets now include the Network Zone for each Static IP address.",
-    "modules": [
-        "service/globalaccelerator"
-    ]
-}

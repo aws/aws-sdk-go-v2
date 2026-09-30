@@ -1,8 +1,0 @@
-{
-    "id": "c879fa5a-623d-4d4e-98f5-f46c89eaa2d5",
-    "type": "feature",
-    "description": "Amazon CloudWatch Logs now supports an optional roleArn parameter on PutDeliveryDestination for X-Ray trace delivery destinations, specifying the IAM role to assume when delivering traces.",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

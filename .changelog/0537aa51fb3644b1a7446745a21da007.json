@@ -1,8 +1,0 @@
-{
-    "id": "0537aa51-fb36-44b1-a744-6745a21da007",
-    "type": "feature",
-    "description": "Enable Catalog ID for crawler, column statistics and materialized views.",
-    "modules": [
-        "service/glue"
-    ]
-}

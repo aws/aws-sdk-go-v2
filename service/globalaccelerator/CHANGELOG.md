@@ -1,3 +1,7 @@
+# v1.45.0 (2026-09-30)
+
+* **Feature**: IpSets now include the Network Zone for each Static IP address.
+
 # v1.44.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

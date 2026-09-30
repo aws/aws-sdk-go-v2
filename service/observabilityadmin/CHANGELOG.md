@@ -1,3 +1,7 @@
+# v1.30.0 (2026-09-30)
+
+* **Feature**: Enablement for Bedrock PaymentManager logs via Observability Admin Telemetry Rule
+
 # v1.29.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "3c1537cd-013c-4c5a-acc6-1c7f126c425c",
-    "type": "feature",
-    "description": "Add support for policy operations on the GUARDDUTY POLICY policy type.",
-    "modules": [
-        "service/organizations"
-    ]
-}

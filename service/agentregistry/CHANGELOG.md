@@ -1,3 +1,7 @@
+# v1.7.1 (2026-09-30)
+
+* **Documentation**: Minor doc update for the AWS Agent Registry Custom metadata SearchDiscoverableRegistryRecords API
+
 # v1.7.0 (2026-09-28)
 
 * **Feature**: AWS Agent Registry adds support for custom metadata. Discovery APIs now return custom metadata on registry records and support filtering by metadata fields. Semantic search includes custom metadata for improved relevance. Filter customMetadata fields using eq, ne, and in operators.

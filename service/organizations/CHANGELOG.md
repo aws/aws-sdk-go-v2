@@ -1,3 +1,7 @@
+# v1.61.0 (2026-09-30)
+
+* **Feature**: Add support for policy operations on the GUARDDUTY POLICY policy type.
+
 # v1.60.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

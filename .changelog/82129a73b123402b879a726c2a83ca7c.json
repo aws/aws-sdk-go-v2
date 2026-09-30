@@ -1,8 +1,0 @@
-{
-    "id": "82129a73-b123-402b-879a-726c2a83ca7c",
-    "type": "feature",
-    "description": "Enablement for Bedrock PaymentManager logs via Observability Admin Telemetry Rule",
-    "modules": [
-        "service/observabilityadmin"
-    ]
-}

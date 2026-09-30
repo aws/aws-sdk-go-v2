@@ -1,3 +1,46 @@
+# Release (2026-09-30)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.42.0](service/account/CHANGELOG.md#v1420-2026-09-30)
+  * **Feature**: This release adds support for verifying an AWS account's primary contact phone number. SendPhoneNumberVerification sends a one-time code by SMS, VerifyPhoneNumber validates it, and GetContactInformation now returns the verification status.
+* `github.com/aws/aws-sdk-go-v2/service/agentregistry`: [v1.7.1](service/agentregistry/CHANGELOG.md#v171-2026-09-30)
+  * **Documentation**: Minor doc update for the AWS Agent Registry Custom metadata SearchDiscoverableRegistryRecords API
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.78.0](service/batch/CHANGELOG.md#v1780-2026-09-30)
+  * **Feature**: AWS Batch adds support for Amazon EKS access entries on EKS compute environments through the new accessEntry setting in CreateComputeEnvironment and UpdateComputeEnvironment.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.72.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1720-2026-09-30)
+  * **Feature**: This release adds support for private certificate authorities on Amazon Bedrock AgentCore Gateway targets. The new certificateConfigurations parameter on CreateGatewayTarget and UpdateGatewayTarget references a PEM-encoded CA certificate in Amazon S3 or AWS Secrets Manager.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.89.0](service/cloudwatchlogs/CHANGELOG.md#v1890-2026-09-30)
+  * **Feature**: Amazon CloudWatch Logs now supports an optional roleArn parameter on PutDeliveryDestination for X-Ray trace delivery destinations, specifying the IAM role to assume when delivering traces.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.204.0](service/connect/CHANGELOG.md#v12040-2026-09-30)
+  * **Feature**: Amazon Connect Rules can now trigger in-app notifications to users as a rule action. Notification character limit was increased to 500 visible characters.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.77.0](service/datazone/CHANGELOG.md#v1770-2026-09-30)
+  * **Feature**: Support for setting notebook run notification configurations
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.70.0](service/dynamodb/CHANGELOG.md#v1700-2026-09-30)
+  * **Feature**: Adds support for filtering exported table data using FilterExpression, ProjectionExpression and KeyConditionExpression with ExportTableToPointInTime.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.100.0](service/ecs/CHANGELOG.md#v11000-2026-09-30)
+  * **Feature**: Releasing VPCL for BlueGreen ecs deployments.
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.45.0](service/globalaccelerator/CHANGELOG.md#v1450-2026-09-30)
+  * **Feature**: IpSets now include the Network Zone for each Static IP address.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.166.0](service/glue/CHANGELOG.md#v11660-2026-09-30)
+  * **Feature**: Enable Catalog ID for crawler, column statistics and materialized views.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.97.0](service/guardduty/CHANGELOG.md#v1970-2026-09-30)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+  * **Feature**: GuardDuty AWS Organizations policy integration. GetDetector and GetMemberDetectors now show whether a GuardDuty policy manages a feature.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.30.0](service/observabilityadmin/CHANGELOG.md#v1300-2026-09-30)
+  * **Feature**: Enablement for Bedrock PaymentManager logs via Observability Admin Telemetry Rule
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.61.0](service/organizations/CHANGELOG.md#v1610-2026-09-30)
+  * **Feature**: Add support for policy operations on the GUARDDUTY POLICY policy type.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.114.0](service/s3/CHANGELOG.md#v11140-2026-09-30)
+  * **Feature**: Amazon S3 adds a new optional S3 Inventory field, IntelligentTieringReferenceDate, reporting the reference date S3 Intelligent-Tiering uses to evaluate an object's tier-transition eligibility. The value is populated for objects in the Intelligent-Tiering storage class and left blank for others.
+* `github.com/aws/aws-sdk-go-v2/service/s3vectors`: [v1.16.0](service/s3vectors/CHANGELOG.md#v1160-2026-09-30)
+  * **Feature**: Amazon S3 Vectors now supports metadata prefiltering, providing higher recall on filtered queries.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.281.0](service/sagemaker/CHANGELOG.md#v12810-2026-09-30)
+  * **Feature**: This feature enables customers to modify their accounting database via API.
+
 # Release (2026-09-29)
 
 ## Module Highlights

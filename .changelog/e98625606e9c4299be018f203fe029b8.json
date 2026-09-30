@@ -1,8 +1,0 @@
-{
-    "id": "e9862560-6e9c-4299-be01-8f203fe029b8",
-    "type": "feature",
-    "description": "This feature enables customers to modify their accounting database via API.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

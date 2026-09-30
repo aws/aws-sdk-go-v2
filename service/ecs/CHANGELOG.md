@@ -1,3 +1,7 @@
+# v1.100.0 (2026-09-30)
+
+* **Feature**: Releasing VPCL for BlueGreen ecs deployments.
+
 # v1.99.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

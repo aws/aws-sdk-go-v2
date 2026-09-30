@@ -1,3 +1,7 @@
+# v1.16.0 (2026-09-30)
+
+* **Feature**: Amazon S3 Vectors now supports metadata prefiltering, providing higher recall on filtered queries.
+
 # v1.15.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

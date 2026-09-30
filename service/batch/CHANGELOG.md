@@ -1,3 +1,7 @@
+# v1.78.0 (2026-09-30)
+
+* **Feature**: AWS Batch adds support for Amazon EKS access entries on EKS compute environments through the new accessEntry setting in CreateComputeEnvironment and UpdateComputeEnvironment.
+
 # v1.77.1 (2026-09-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

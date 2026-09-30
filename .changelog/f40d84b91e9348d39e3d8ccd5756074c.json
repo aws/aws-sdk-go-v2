@@ -1,8 +1,0 @@
-{
-    "id": "f40d84b9-1e93-48d3-9e3d-8ccd5756074c",
-    "type": "feature",
-    "description": "This release adds support for verifying an AWS account's primary contact phone number. SendPhoneNumberVerification sends a one-time code by SMS, VerifyPhoneNumber validates it, and GetContactInformation now returns the verification status.",
-    "modules": [
-        "service/account"
-    ]
-}

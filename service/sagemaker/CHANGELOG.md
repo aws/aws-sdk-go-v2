@@ -1,3 +1,7 @@
+# v1.281.0 (2026-09-30)
+
+* **Feature**: This feature enables customers to modify their accounting database via API.
+
 # v1.280.0 (2026-09-29)
 
 * **Feature**: Adds support for cpu flex type instances on SageMaker Training and Processing. Also contains minor updates to DescribeTrainingPlan to support ARN inputs.
