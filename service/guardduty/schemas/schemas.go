@@ -2015,12 +2015,14 @@ var DetectorAdditionalConfiguration_Status *smithy.Schema
 var DetectorAdditionalConfigurationResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "DetectorAdditionalConfigurationResult",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var DetectorAdditionalConfigurationResult_Name *smithy.Schema
 
 var DetectorAdditionalConfigurationResult_Status *smithy.Schema
 
 var DetectorAdditionalConfigurationResult_UpdatedAt *smithy.Schema
+
+var DetectorAdditionalConfigurationResult_ManagedBy *smithy.Schema
 
 var _DetectorAdditionalConfigurationResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -2069,7 +2071,7 @@ var DetectorFeatureConfiguration_AdditionalConfiguration *smithy.Schema
 var DetectorFeatureConfigurationResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "DetectorFeatureConfigurationResult",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var DetectorFeatureConfigurationResult_Name *smithy.Schema
 
 var DetectorFeatureConfigurationResult_Status *smithy.Schema
@@ -2077,6 +2079,8 @@ var DetectorFeatureConfigurationResult_Status *smithy.Schema
 var DetectorFeatureConfigurationResult_UpdatedAt *smithy.Schema
 
 var DetectorFeatureConfigurationResult_AdditionalConfiguration *smithy.Schema
+
+var DetectorFeatureConfigurationResult_ManagedBy *smithy.Schema
 
 var _DetectorFeatureConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -3786,6 +3790,12 @@ var _MalwareScans = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _MalwareScans_member *smithy.Schema
 
+var ManagedBy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "ManagedBy",
+}, smithy.ShapeTypeEnum, 1)
+var ManagedBy_GUARDDUTY_POLICY *smithy.Schema
+
 var ManagementType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "ManagementType",
@@ -3866,12 +3876,14 @@ var MemberAdditionalConfiguration_Status *smithy.Schema
 var MemberAdditionalConfigurationResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "MemberAdditionalConfigurationResult",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var MemberAdditionalConfigurationResult_Name *smithy.Schema
 
 var MemberAdditionalConfigurationResult_Status *smithy.Schema
 
 var MemberAdditionalConfigurationResult_UpdatedAt *smithy.Schema
+
+var MemberAdditionalConfigurationResult_ManagedBy *smithy.Schema
 
 var _MemberAdditionalConfigurationResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -3914,7 +3926,7 @@ var MemberFeaturesConfiguration_AdditionalConfiguration *smithy.Schema
 var MemberFeaturesConfigurationResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "MemberFeaturesConfigurationResult",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var MemberFeaturesConfigurationResult_Name *smithy.Schema
 
 var MemberFeaturesConfigurationResult_Status *smithy.Schema
@@ -3922,6 +3934,8 @@ var MemberFeaturesConfigurationResult_Status *smithy.Schema
 var MemberFeaturesConfigurationResult_UpdatedAt *smithy.Schema
 
 var MemberFeaturesConfigurationResult_AdditionalConfiguration *smithy.Schema
+
+var MemberFeaturesConfigurationResult_ManagedBy *smithy.Schema
 
 var _MemberFeaturesConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -9539,11 +9553,15 @@ func init() {
 
 	DetectorAdditionalConfiguration_Status = DetectorAdditionalConfiguration.AddMember("Status", FeatureStatus, &smithytraits.JSONName{Name: "status"})
 
+	ManagedBy_GUARDDUTY_POLICY = ManagedBy.AddMember("GUARDDUTY_POLICY", smithyprelude.Unit)
+
 	DetectorAdditionalConfigurationResult_Name = DetectorAdditionalConfigurationResult.AddMember("Name", FeatureAdditionalConfiguration, &smithytraits.JSONName{Name: "name"})
 
 	DetectorAdditionalConfigurationResult_Status = DetectorAdditionalConfigurationResult.AddMember("Status", FeatureStatus, &smithytraits.JSONName{Name: "status"})
 
 	DetectorAdditionalConfigurationResult_UpdatedAt = DetectorAdditionalConfigurationResult.AddMember("UpdatedAt", _Timestamp, &smithytraits.JSONName{Name: "updatedAt"})
+
+	DetectorAdditionalConfigurationResult_ManagedBy = DetectorAdditionalConfigurationResult.AddMember("ManagedBy", ManagedBy, &smithytraits.JSONName{Name: "managedBy"})
 
 	_DetectorAdditionalConfigurationResults_member = _DetectorAdditionalConfigurationResults.AddMember("member", DetectorAdditionalConfigurationResult)
 
@@ -9604,6 +9622,8 @@ func init() {
 	DetectorFeatureConfigurationResult_UpdatedAt = DetectorFeatureConfigurationResult.AddMember("UpdatedAt", _Timestamp, &smithytraits.JSONName{Name: "updatedAt"})
 
 	DetectorFeatureConfigurationResult_AdditionalConfiguration = DetectorFeatureConfigurationResult.AddMember("AdditionalConfiguration", _DetectorAdditionalConfigurationResults, &smithytraits.JSONName{Name: "additionalConfiguration"})
+
+	DetectorFeatureConfigurationResult_ManagedBy = DetectorFeatureConfigurationResult.AddMember("ManagedBy", ManagedBy, &smithytraits.JSONName{Name: "managedBy"})
 
 	_DetectorFeatureConfigurations_member = _DetectorFeatureConfigurations.AddMember("member", DetectorFeatureConfiguration)
 
@@ -10667,6 +10687,8 @@ func init() {
 
 	MemberAdditionalConfigurationResult_UpdatedAt = MemberAdditionalConfigurationResult.AddMember("UpdatedAt", _Timestamp, &smithytraits.JSONName{Name: "updatedAt"})
 
+	MemberAdditionalConfigurationResult_ManagedBy = MemberAdditionalConfigurationResult.AddMember("ManagedBy", ManagedBy, &smithytraits.JSONName{Name: "managedBy"})
+
 	_MemberAdditionalConfigurationResults_member = _MemberAdditionalConfigurationResults.AddMember("member", MemberAdditionalConfigurationResult)
 
 	_MemberAdditionalConfigurations_member = _MemberAdditionalConfigurations.AddMember("member", MemberAdditionalConfiguration)
@@ -10694,6 +10716,8 @@ func init() {
 	MemberFeaturesConfigurationResult_UpdatedAt = MemberFeaturesConfigurationResult.AddMember("UpdatedAt", _Timestamp, &smithytraits.JSONName{Name: "updatedAt"})
 
 	MemberFeaturesConfigurationResult_AdditionalConfiguration = MemberFeaturesConfigurationResult.AddMember("AdditionalConfiguration", _MemberAdditionalConfigurationResults, &smithytraits.JSONName{Name: "additionalConfiguration"})
+
+	MemberFeaturesConfigurationResult_ManagedBy = MemberFeaturesConfigurationResult.AddMember("ManagedBy", ManagedBy, &smithytraits.JSONName{Name: "managedBy"})
 
 	_MemberFeaturesConfigurationsResults_member = _MemberFeaturesConfigurationsResults.AddMember("member", MemberFeaturesConfigurationResult)
 

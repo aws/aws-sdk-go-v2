@@ -36,6 +36,11 @@ type DeleteConfigurationBundleInput struct {
 
 type DeleteConfigurationBundleOutput struct {
 
+	// The Amazon Resource Name (ARN) of the deleted configuration bundle.
+	//
+	// This member is required.
+	BundleArn *string
+
 	// The unique identifier of the deleted configuration bundle.
 	//
 	// This member is required.

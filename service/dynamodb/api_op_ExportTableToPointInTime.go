@@ -71,6 +71,11 @@ type ExportTableToPointInTimeInput struct {
 	// be used.
 	ExportType types.ExportType
 
+	// The criteria used to filter which items are included in the point-in-time
+	// export. When you specify this parameter, only items that match the key
+	// conditions and filter expressions are exported.
+	FilterSpecification *types.FilterSpecification
+
 	// Optional object containing the parameters specific to an incremental export.
 	IncrementalExportSpecification *types.IncrementalExportSpecification
 
@@ -118,6 +123,11 @@ func (v *ExportTableToPointInTimeInput) SerializeMembers(s smithy.ShapeSerialize
 	}
 	if v.ExportType != "" {
 		s.WriteString(schemas.ExportTableToPointInTimeInput_ExportType, string(v.ExportType))
+	}
+	if v.FilterSpecification != nil {
+		s.WriteStruct(schemas.ExportTableToPointInTimeInput_FilterSpecification)
+		v.FilterSpecification.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.IncrementalExportSpecification != nil {
 		s.WriteStruct(schemas.ExportTableToPointInTimeInput_IncrementalExportSpecification)

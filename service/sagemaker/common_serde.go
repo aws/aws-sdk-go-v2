@@ -192,6 +192,12 @@ func serializeEventMetadata(s smithy.ShapeSerializer, schema *smithy.Schema, v t
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *types.EventMetadataMemberDatabaseConfiguration:
+		s.WriteUnion(schema, schemas.EventMetadata_DatabaseConfiguration)
+		s.WriteStruct(schemas.EventMetadata_DatabaseConfiguration)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.EventMetadataMemberInstance:
 		s.WriteUnion(schema, schemas.EventMetadata_Instance)
 		s.WriteStruct(schemas.EventMetadata_Instance)
@@ -207,6 +213,12 @@ func serializeEventMetadata(s smithy.ShapeSerializer, schema *smithy.Schema, v t
 	case *types.EventMetadataMemberInstanceGroupScaling:
 		s.WriteUnion(schema, schemas.EventMetadata_InstanceGroupScaling)
 		s.WriteStruct(schemas.EventMetadata_InstanceGroupScaling)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.EventMetadataMemberSlurmHealth:
+		s.WriteUnion(schema, schemas.EventMetadata_SlurmHealth)
+		s.WriteStruct(schemas.EventMetadata_SlurmHealth)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -467,6 +479,10 @@ func deserializeEventMetadata(d smithy.ShapeDeserializer, s *smithy.Schema, v *t
 			vv := &types.EventMetadataMemberCluster{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.EventMetadata_DatabaseConfiguration:
+			vv := &types.EventMetadataMemberDatabaseConfiguration{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.EventMetadata_Instance:
 			vv := &types.EventMetadataMemberInstance{}
 			*v = vv
@@ -477,6 +493,10 @@ func deserializeEventMetadata(d smithy.ShapeDeserializer, s *smithy.Schema, v *t
 			return vv.Deserialize(d)
 		case schemas.EventMetadata_InstanceGroupScaling:
 			vv := &types.EventMetadataMemberInstanceGroupScaling{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.EventMetadata_SlurmHealth:
+			vv := &types.EventMetadataMemberSlurmHealth{}
 			*v = vv
 			return vv.Deserialize(d)
 		}

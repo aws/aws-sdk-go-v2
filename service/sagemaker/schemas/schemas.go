@@ -5808,6 +5808,38 @@ var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ClientToken",
 }, smithy.ShapeTypeString, 0)
 
+var ClusterAccountingDatabase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterAccountingDatabase",
+}, smithy.ShapeTypeStructure, 4)
+var ClusterAccountingDatabase_Endpoint *smithy.Schema
+
+var ClusterAccountingDatabase_Port *smithy.Schema
+
+var ClusterAccountingDatabase_Name *smithy.Schema
+
+var ClusterAccountingDatabase_SecretArn *smithy.Schema
+
+var _ClusterAccountingDatabaseEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterAccountingDatabaseEndpoint",
+}, smithy.ShapeTypeString, 0)
+
+var _ClusterAccountingDatabaseName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterAccountingDatabaseName",
+}, smithy.ShapeTypeString, 0)
+
+var _ClusterAccountingDatabasePort = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterAccountingDatabasePort",
+}, smithy.ShapeTypeInteger, 0)
+
+var _ClusterAccountingDatabaseSecretArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterAccountingDatabaseSecretArn",
+}, smithy.ShapeTypeString, 0)
+
 var _ClusterArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterArn",
@@ -7011,8 +7043,10 @@ var ClusterOrchestratorEksConfig_ClusterArn *smithy.Schema
 var ClusterOrchestratorSlurmConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterOrchestratorSlurmConfig",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var ClusterOrchestratorSlurmConfig_SlurmConfigStrategy *smithy.Schema
+
+var ClusterOrchestratorSlurmConfig_AccountingDatabase *smithy.Schema
 
 var _ClusterPartitionName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -8051,6 +8085,26 @@ var _Database = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "Database",
 }, smithy.ShapeTypeString, 0)
+
+var DatabaseConfigurationMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DatabaseConfigurationMetadata",
+}, smithy.ShapeTypeStructure, 3)
+var DatabaseConfigurationMetadata_RollbackStatus *smithy.Schema
+
+var DatabaseConfigurationMetadata_Advisory *smithy.Schema
+
+var DatabaseConfigurationMetadata_FailureMessage *smithy.Schema
+
+var DatabaseConfigurationRollbackStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DatabaseConfigurationRollbackStatus",
+}, smithy.ShapeTypeEnum, 3)
+var DatabaseConfigurationRollbackStatus_NOT_APPLICABLE *smithy.Schema
+
+var DatabaseConfigurationRollbackStatus_REVERTED *smithy.Schema
+
+var DatabaseConfigurationRollbackStatus_REVERT_FAILED *smithy.Schema
 
 var DataCaptureConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -9614,7 +9668,7 @@ var _EventId = smithy.NewSchema(smithy.ShapeID{
 var EventMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "EventMetadata",
-}, smithy.ShapeTypeUnion, 4)
+}, smithy.ShapeTypeUnion, 6)
 var EventMetadata_Cluster *smithy.Schema
 
 var EventMetadata_InstanceGroup *smithy.Schema
@@ -9622,6 +9676,10 @@ var EventMetadata_InstanceGroup *smithy.Schema
 var EventMetadata_InstanceGroupScaling *smithy.Schema
 
 var EventMetadata_Instance *smithy.Schema
+
+var EventMetadata_DatabaseConfiguration *smithy.Schema
+
+var EventMetadata_SlurmHealth *smithy.Schema
 
 var EventSortBy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -21071,6 +21129,40 @@ var SkipModelValidation = smithy.NewSchema(smithy.ShapeID{
 var SkipModelValidation_ALL *smithy.Schema
 
 var SkipModelValidation_NONE *smithy.Schema
+
+var SlurmHealthComponent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "SlurmHealthComponent",
+}, smithy.ShapeTypeEnum, 1)
+var SlurmHealthComponent_SLURMDBD *smithy.Schema
+
+var SlurmHealthMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "SlurmHealthMetadata",
+}, smithy.ShapeTypeStructure, 3)
+var SlurmHealthMetadata_Component *smithy.Schema
+
+var SlurmHealthMetadata_Status *smithy.Schema
+
+var SlurmHealthMetadata_Reason *smithy.Schema
+
+var SlurmHealthReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "SlurmHealthReason",
+}, smithy.ShapeTypeEnum, 3)
+var SlurmHealthReason_DAEMON_DOWN *smithy.Schema
+
+var SlurmHealthReason_DAEMON_DISABLED *smithy.Schema
+
+var SlurmHealthReason_DB_UNREACHABLE *smithy.Schema
+
+var SlurmHealthStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "SlurmHealthStatus",
+}, smithy.ShapeTypeEnum, 2)
+var SlurmHealthStatus_HEALTHY *smithy.Schema
+
+var SlurmHealthStatus_UNHEALTHY *smithy.Schema
 
 var _SnsTopicArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -38969,6 +39061,14 @@ func init() {
 
 	ClarifyExplainerConfig_ShapConfig = ClarifyExplainerConfig.AddMember("ShapConfig", ClarifyShapConfig)
 
+	ClusterAccountingDatabase_Endpoint = ClusterAccountingDatabase.AddMember("Endpoint", _ClusterAccountingDatabaseEndpoint)
+
+	ClusterAccountingDatabase_Port = ClusterAccountingDatabase.AddMember("Port", _ClusterAccountingDatabasePort)
+
+	ClusterAccountingDatabase_Name = ClusterAccountingDatabase.AddMember("Name", _ClusterAccountingDatabaseName)
+
+	ClusterAccountingDatabase_SecretArn = ClusterAccountingDatabase.AddMember("SecretArn", _ClusterAccountingDatabaseSecretArn)
+
 	ClusterPatchingStrategy_WHEN_IDLE = ClusterPatchingStrategy.AddMember("WHEN_IDLE", smithyprelude.Unit)
 
 	ClusterPatchingStrategy_WHEN_ALL_IDLE = ClusterPatchingStrategy.AddMember("WHEN_ALL_IDLE", smithyprelude.Unit)
@@ -39101,6 +39201,36 @@ func init() {
 
 	InstanceMetadata_NodeLogicalId = InstanceMetadata.AddMember("NodeLogicalId", _ClusterNodeLogicalId)
 
+	DatabaseConfigurationRollbackStatus_NOT_APPLICABLE = DatabaseConfigurationRollbackStatus.AddMember("NOT_APPLICABLE", smithyprelude.Unit)
+
+	DatabaseConfigurationRollbackStatus_REVERTED = DatabaseConfigurationRollbackStatus.AddMember("REVERTED", smithyprelude.Unit)
+
+	DatabaseConfigurationRollbackStatus_REVERT_FAILED = DatabaseConfigurationRollbackStatus.AddMember("REVERT_FAILED", smithyprelude.Unit)
+
+	DatabaseConfigurationMetadata_RollbackStatus = DatabaseConfigurationMetadata.AddMember("RollbackStatus", DatabaseConfigurationRollbackStatus)
+
+	DatabaseConfigurationMetadata_Advisory = DatabaseConfigurationMetadata.AddMember("Advisory", smithyprelude.String)
+
+	DatabaseConfigurationMetadata_FailureMessage = DatabaseConfigurationMetadata.AddMember("FailureMessage", smithyprelude.String)
+
+	SlurmHealthComponent_SLURMDBD = SlurmHealthComponent.AddMember("SLURMDBD", smithyprelude.Unit)
+
+	SlurmHealthStatus_HEALTHY = SlurmHealthStatus.AddMember("HEALTHY", smithyprelude.Unit)
+
+	SlurmHealthStatus_UNHEALTHY = SlurmHealthStatus.AddMember("UNHEALTHY", smithyprelude.Unit)
+
+	SlurmHealthReason_DAEMON_DOWN = SlurmHealthReason.AddMember("DAEMON_DOWN", smithyprelude.Unit)
+
+	SlurmHealthReason_DAEMON_DISABLED = SlurmHealthReason.AddMember("DAEMON_DISABLED", smithyprelude.Unit)
+
+	SlurmHealthReason_DB_UNREACHABLE = SlurmHealthReason.AddMember("DB_UNREACHABLE", smithyprelude.Unit)
+
+	SlurmHealthMetadata_Component = SlurmHealthMetadata.AddMember("Component", SlurmHealthComponent)
+
+	SlurmHealthMetadata_Status = SlurmHealthMetadata.AddMember("Status", SlurmHealthStatus)
+
+	SlurmHealthMetadata_Reason = SlurmHealthMetadata.AddMember("Reason", SlurmHealthReason)
+
 	EventMetadata_Cluster = EventMetadata.AddMember("Cluster", ClusterMetadata)
 
 	EventMetadata_InstanceGroup = EventMetadata.AddMember("InstanceGroup", InstanceGroupMetadata)
@@ -39108,6 +39238,10 @@ func init() {
 	EventMetadata_InstanceGroupScaling = EventMetadata.AddMember("InstanceGroupScaling", InstanceGroupScalingMetadata)
 
 	EventMetadata_Instance = EventMetadata.AddMember("Instance", InstanceMetadata)
+
+	EventMetadata_DatabaseConfiguration = EventMetadata.AddMember("DatabaseConfiguration", DatabaseConfigurationMetadata)
+
+	EventMetadata_SlurmHealth = EventMetadata.AddMember("SlurmHealth", SlurmHealthMetadata)
 
 	EventDetails_EventMetadata = EventDetails.AddMember("EventMetadata", EventMetadata)
 
@@ -39530,6 +39664,8 @@ func init() {
 	ClusterSlurmConfigStrategy_MERGE = ClusterSlurmConfigStrategy.AddMember("MERGE", smithyprelude.Unit)
 
 	ClusterOrchestratorSlurmConfig_SlurmConfigStrategy = ClusterOrchestratorSlurmConfig.AddMember("SlurmConfigStrategy", ClusterSlurmConfigStrategy)
+
+	ClusterOrchestratorSlurmConfig_AccountingDatabase = ClusterOrchestratorSlurmConfig.AddMember("AccountingDatabase", ClusterAccountingDatabase)
 
 	ClusterOrchestrator_Eks = ClusterOrchestrator.AddMember("Eks", ClusterOrchestratorEksConfig)
 

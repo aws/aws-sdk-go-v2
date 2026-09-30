@@ -1,0 +1,8 @@
+{
+    "id": "4448044d-e46a-48a7-923c-9ecb405b9a39",
+    "type": "feature",
+    "description": "AWS Batch adds support for Amazon EKS access entries on EKS compute environments through the new accessEntry setting in CreateComputeEnvironment and UpdateComputeEnvironment.",
+    "modules": [
+        "service/batch"
+    ]
+}

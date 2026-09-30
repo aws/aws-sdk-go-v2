@@ -2620,6 +2620,12 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 			},
 			Slurm: &types.ClusterOrchestratorSlurmConfig{
 				SlurmConfigStrategy: types.ClusterSlurmConfigStrategy("Overwrite"),
+				AccountingDatabase: &types.ClusterAccountingDatabase{
+					Endpoint:  ptr.String("__Endpoint__"),
+					Port:      ptr.Int32(1),
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+				},
 			},
 		},
 		NodeRecovery: types.ClusterNodeRecovery("Automatic"),
@@ -13889,6 +13895,12 @@ func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 			},
 			Slurm: &types.ClusterOrchestratorSlurmConfig{
 				SlurmConfigStrategy: types.ClusterSlurmConfigStrategy("Overwrite"),
+				AccountingDatabase: &types.ClusterAccountingDatabase{
+					Endpoint:  ptr.String("__Endpoint__"),
+					Port:      ptr.Int32(1),
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+				},
 			},
 		},
 		TieredStorageConfig: &types.ClusterTieredStorageConfig{
@@ -41422,6 +41434,12 @@ func TestCheckResponseSnapshot_UpdateCluster(t *testing.T) {
 			},
 			Slurm: &types.ClusterOrchestratorSlurmConfig{
 				SlurmConfigStrategy: types.ClusterSlurmConfigStrategy("Overwrite"),
+				AccountingDatabase: &types.ClusterAccountingDatabase{
+					Endpoint:  ptr.String("__Endpoint__"),
+					Port:      ptr.Int32(1),
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+				},
 			},
 		},
 	})

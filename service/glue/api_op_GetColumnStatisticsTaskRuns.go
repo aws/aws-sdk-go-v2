@@ -39,6 +39,10 @@ type GetColumnStatisticsTaskRunsInput struct {
 	// This member is required.
 	TableName *string
 
+	// The ID of the Data Catalog where the table resides. If none is supplied, the
+	// Amazon Web Services account ID is used by default.
+	CatalogID *string
+
 	// The maximum size of the response.
 	MaxResults *int32
 
@@ -55,6 +59,9 @@ func (v *GetColumnStatisticsTaskRunsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetColumnStatisticsTaskRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogID != nil {
+		s.WriteString(schemas.GetColumnStatisticsTaskRunsRequest_CatalogID, *v.CatalogID)
+	}
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.GetColumnStatisticsTaskRunsRequest_DatabaseName, *v.DatabaseName)
 	}

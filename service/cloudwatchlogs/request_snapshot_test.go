@@ -2837,6 +2837,7 @@ func TestCheckRequestSnapshot_PutDeliveryDestination(t *testing.T) {
 			DestinationResourceArn: ptr.String("__DestinationResourceArn__"),
 		},
 		DeliveryDestinationType: types.DeliveryDestinationType("S3"),
+		RoleArn:                 ptr.String("__RoleArn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -7242,6 +7243,7 @@ func TestUpdateRequestSnapshot_PutDeliveryDestination(t *testing.T) {
 			DestinationResourceArn: ptr.String("__DestinationResourceArn__"),
 		},
 		DeliveryDestinationType: types.DeliveryDestinationType("S3"),
+		RoleArn:                 ptr.String("__RoleArn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},

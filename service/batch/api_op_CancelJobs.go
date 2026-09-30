@@ -29,6 +29,11 @@ import (
 // encountered errors are reported in the errors list. The response returns an
 // HTTP status code of 200 even when some jobs encountered errors, so check the
 // errors list. Jobs that can't be found are treated as successfully processed.
+//
+// This operation requires batch:CancelJob permission for each job in the request.
+// There is no separate batch:CancelJobs IAM action. If a caller's IAM policy
+// grants batch:CancelJob , they can use both the singular CancelJob and bulk CancelJobs
+// operations.
 func (c *Client) CancelJobs(ctx context.Context, params *CancelJobsInput, optFns ...func(*Options)) (*CancelJobsOutput, error) {
 	if params == nil {
 		params = &CancelJobsInput{}

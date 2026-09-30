@@ -4894,6 +4894,18 @@ type NotEqualToExpression struct {
 	noSmithyDocumentSerde
 }
 
+// The notification configuration for a notebook run in Amazon SageMaker Unified
+// Studio.
+type NotificationConfig struct {
+
+	// Notebook run states that trigger notifications. Ordering is not significant.
+	//
+	// This member is required.
+	NotifyOn []NotifyOnState
+
+	noSmithyDocumentSerde
+}
+
 // The details of a notification generated in Amazon DataZone.
 type NotificationOutput struct {
 

@@ -104,8 +104,8 @@ type StartChatContactInput struct {
 	// to initiate real-time message streaming when the chat is created. This parameter
 	// is optional.
 	//
-	// When you set this parameter, the response includes StreamingId . You do not need
-	// to call [StartContactStreaming].
+	// Setting this parameter returns a StreamingId in the response, and you do not
+	// need to call [StartContactStreaming].
 	//
 	// This parameter starts message streaming only. The response does not include
 	// connection information, and setting this parameter does not remove the need to
@@ -125,9 +125,14 @@ type StartChatContactInput struct {
 	// The types of connection information to return in the response. This parameter
 	// is optional.
 	//
-	// Specify CONNECTION_CREDENTIALS to receive a connection token. Specify WEBSOCKET
-	// to receive a websocket URL. You can specify both. No other value returns
-	// connection information.
+	// To receive connection information, specify one or both of the following values:
+	//
+	//   - CONNECTION_CREDENTIALS : Returns a connection token.
+	//
+	//   - WEBSOCKET : Returns a websocket URL.
+	//
+	// WEBSOCKET and CONNECTION_CREDENTIALS are the values this operation acts on. No
+	// other value returns connection information.
 	//
 	// Request WEBSOCKET to get a URL the participant connects to directly. You do not
 	// need to call [CreateParticipantConnection]for it. Request CONNECTION_CREDENTIALS on its own and the response
@@ -135,8 +140,10 @@ type StartChatContactInput struct {
 	//
 	// If you omit this parameter, the response has no connection information.
 	//
-	// If the information you request cannot be returned, StartChatContact returns an
-	// error rather than a response that omits it.
+	// When you start a new chat contact and the information you request cannot be
+	// returned, StartChatContact returns an error rather than a response that omits
+	// it. When you retry a request with the same ClientToken , the response repeats
+	// the original contact and can omit a websocket URL if the chat has already ended.
 	//
 	// [CreateParticipantConnection]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
 	ConnectionTypes []types.ConnectionType

@@ -81,13 +81,13 @@ type GetMetricDataV2Input struct {
 	//
 	// The following are valid filter keys for a GetMetricDataV2 request:
 	//
-	// AGENT | AI_AGENT | AI_AGENT_ID | AI_AGENT_NAME | AI_AGENT_TYPE | AI_PROMPT |
-	// AI_PROMPT_ID | AI_PROMPT_NAME | AI_PROMPT_TYPE | AI_TOOL_ID | AI_TOOL_NAME |
-	// AI_TOOL_TYPE | AI_USE_CASE | AGENT_HIERARCHY_LEVEL_ONE |
-	// AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE |
-	// AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE |
-	// ANSWERING_MACHINE_DETECTION_STATUS | BOT_ALIAS | BOT_ID | BOT_INTENT_NAME |
-	// BOT_LOCALE | BOT_VERSION | BROWSER_NAME | CAMPAIGN |
+	// AGENT | AI_AGENT | AI_AGENT_ID | AI_AGENT_NAME | AI_AGENT_NAME_VERSION |
+	// AI_AGENT_TYPE | AI_PROMPT | AI_PROMPT_ID | AI_PROMPT_NAME | AI_PROMPT_TYPE |
+	// AI_TOOL_ID | AI_TOOL_NAME | AI_TOOL_TYPE | AI_USE_CASE |
+	// AGENT_HIERARCHY_LEVEL_ONE | AGENT_HIERARCHY_LEVEL_TWO |
+	// AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR |
+	// AGENT_HIERARCHY_LEVEL_FIVE | ANSWERING_MACHINE_DETECTION_STATUS | BOT_ALIAS |
+	// BOT_ID | BOT_INTENT_NAME | BOT_LOCALE | BOT_VERSION | BROWSER_NAME | CAMPAIGN |
 	// CAMPAIGN_DELIVERY_EVENT_TYPE | CAMPAIGN_EXCLUDED_EVENT_TYPE | CASE_STATUS |
 	// CASE_TEMPLATE_ARN | CHANNEL | contact/segmentAttributes/connect:Subtype |
 	// contact/segmentAttributes/connect:ValidationTestType | DEVICE_MODEL |
@@ -414,199 +414,174 @@ type GetMetricDataV2Input struct {
 	//
 	// ACTIVE_AI_AGENTS Unit: Count
 	//
-	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+	// Session ID
 	//
 	// UI name: [Active AI Agents]
 	//
 	// AI_HANDOFF_RATE Unit: Percent
 	//
-	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name Version,
+	// AI Agent Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [AI Handoff Rate]
 	//
 	// AI_HANDOFFS Unit: Count
 	//
-	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name Version,
+	// AI Agent Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [AI Handoff Count]
 	//
 	// AI_AGENT_INVOCATION_SUCCESS Unit: Count
 	//
-	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
-	// Agent Type, AI Use Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+	// Session ID
 	//
 	// UI name: [AI Agent Invocation Success]
 	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
-	//
 	// AI_AGENT_INVOCATION_SUCCESS_RATE Unit: Percent
 	//
-	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
-	// Agent Type, AI Use Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+	// Session ID
 	//
 	// UI name: [AI Agent Invocation Success Rate]
 	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
-	//
 	// AI_AGENT_INVOCATIONS Unit: Count
 	//
-	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Type, AI Agent
-	// Name Version, AI Use Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+	// Session ID
 	//
 	// UI name: [AI Agent Invocation Count]
-	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
 	//
 	// AI_AGENT_RESPONSE_HELPFUL Unit: Count
 	//
 	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
-	// Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile
+	// Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+	// Session ID
 	//
 	// UI name: [AI Agent Response Helpful]
-	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
 	//
 	// AI_AGENT_RESPONSE_NOT_HELPFUL Unit: Count
 	//
 	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
-	// Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile
+	// Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+	// Session ID
 	//
 	// UI name: [AI Agent Response Not Helpful]
 	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
-	//
 	// AI_RESPONSE_COMPLETION_RATE Unit: Percent
 	//
-	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name Version,
+	// AI Agent Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [AI Response Completion Rate]
 	//
 	// AI_INVOLVED_CONTACTS Unit: Count
 	//
-	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name Version,
+	// AI Agent Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [AI Involved Contacts]
 	//
 	// AI_PROMPT_INVOCATION_SUCCESS Unit: Count
 	//
-	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
-	// Agent Type, AI Prompt, AI Prompt ID, AI Prompt Name, AI Prompt Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Prompt, AI Prompt ID, AI Prompt Name, AI Prompt
+	// Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [AI Prompt Invocation Success]
 	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
-	//
 	// AI_PROMPT_INVOCATION_SUCCESS_RATE Unit: Percent
 	//
-	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
-	// Agent Type, AI Prompt, AI Prompt ID, AI Prompt Name, AI Prompt Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Prompt, AI Prompt ID, AI Prompt Name, AI Prompt
+	// Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [AI Prompt Invocation Success Rate]
 	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
-	//
 	// AI_PROMPT_INVOCATIONS Unit: Count
 	//
-	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
-	// Agent Type, AI Prompt, AI Prompt ID, AI Prompt Name, AI Prompt Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Prompt, AI Prompt ID, AI Prompt Name, AI Prompt
+	// Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [AI Prompt Invocations]
 	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
-	//
 	// AI_TOOL_INVOCATION_SUCCESS Unit: Count
 	//
-	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
-	// Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI Use Case, Channel, Queue,
-	// Routing Profile
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI Use
+	// Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [AI Tool Invocation Success]
 	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
-	//
 	// AI_TOOL_INVOCATION_SUCCESS_RATE Unit: Percent
 	//
-	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
-	// Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI Use Case, Channel, Queue,
-	// Routing Profile
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI Use
+	// Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [AI Tool Invocation Success Rate]
 	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
-	//
 	// AI_TOOL_INVOCATIONS Unit: Count
 	//
-	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
-	// Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI Use Case, Channel, Queue,
-	// Routing Profile
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI Use
+	// Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [AI Tool Invocations]
 	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
-	//
 	// AVG_AI_AGENT_CONVERSATION_TURNS Unit: Count
 	//
-	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
-	// Agent Type, AI Use Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+	// Session ID
 	//
 	// UI name: [Average AI Agent Conversation Turns]
 	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
-	//
 	// AVG_AI_CONVERSATION_TURNS Unit: Count
 	//
-	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name Version,
+	// AI Agent Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [Average AI Conversation Turns]
 	//
 	// AVG_AI_PROMPT_INVOCATION_LATENCY Unit: Milliseconds
 	//
-	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
-	// Agent Type, AI Prompt, AI Prompt ID, AI Prompt Name, AI Prompt Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Prompt, AI Prompt ID, AI Prompt Name, AI Prompt
+	// Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [Average AI Prompt Invocation Latency]
 	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
-	//
 	// AVG_AI_TOOL_INVOCATION_LATENCY Unit: Milliseconds
 	//
-	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version, AI
-	// Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI Use Case, Channel, Queue,
-	// Routing Profile
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI Use
+	// Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [Average AI Tool Invocation Latency]
-	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
 	//
 	// AI_TOOL_PARAMETER_ACCURACY Unit: Double
 	//
 	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
 	// Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [AI Tool Parameter Accuracy]
-	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
 	//
 	// AI_TOOL_SELECTION_ACCURACY Unit: Double
 	//
 	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
 	// Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [AI Tool Selection Accuracy]
-	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
 	//
 	// AI_TOOL_UTILIZATION_ACCURACY Unit: Double
 	//
@@ -616,68 +591,67 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [AI Tool Utilization Accuracy]
 	//
-	// AI Agent Name Version is not a valid filter but a valid grouping.
-	//
 	// COMPLETENESS_SCORE Unit: Double
 	//
-	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
-	// Case, Channel, Queue, Routing Profile, Session ID
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name Version,
+	// AI Agent Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [Completeness Score]
 	//
 	// FAITHFULNESS_SCORE Unit: Double
 	//
-	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
-	// Case, Channel, Queue, Routing Profile, Session ID
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name Version,
+	// AI Agent Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [Faithfulness Score]
 	//
 	// GOAL_SUCCESS_RATE Unit: Double
 	//
-	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
-	// Case, Channel, Queue, Routing Profile, Session ID
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name Version,
+	// AI Agent Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [Goal Success Rate]
 	//
 	// KNOWLEDGE_CONTENT_REFERENCES Unit: Count
 	//
-	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Type, AI Use
-	// Case, Channel, Knowledge Base Name, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Use Case, Channel, Knowledge Base Name, Queue,
+	// Routing Profile, Session ID
 	//
 	// UI name: [Knowledge Content References]
 	//
 	// PROACTIVE_INTENT_ENGAGEMENT_RATE Unit: Percent
 	//
-	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name Version,
+	// AI Agent Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [Proactive Intent Engagement Rate]
 	//
 	// PROACTIVE_INTENT_RESPONSE_RATE Unit: Percent
 	//
-	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name Version,
+	// AI Agent Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [Proactive Intent Response Rate]
 	//
 	// PROACTIVE_INTENTS_ANSWERED Unit: Count
 	//
-	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name Version,
+	// AI Agent Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [Proactive Intents Answered]
 	//
 	// PROACTIVE_INTENTS_DETECTED Unit: Count
 	//
-	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name Version,
+	// AI Agent Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [Proactive Intents Detected]
 	//
 	// PROACTIVE_INTENTS_ENGAGED Unit: Count
 	//
-	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
-	// Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name Version,
+	// AI Agent Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
 	//
 	// UI name: [Proactive Intents Engaged]
 	//
@@ -1366,6 +1340,48 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Recipients interacted]
 	//
+	// AI_AGENT_COLLABORATORS Unit: Count
+	//
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name Version,
+	// AI Agent Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
+	//
+	// UI name: [AI Agent Collaborators]
+	//
+	// AI_AGENT_COLLABORATION_INVOCATIONS Unit: Count
+	//
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name Version,
+	// AI Agent Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
+	//
+	// UI name: [AI Agent Collaboration Invocations]
+	//
+	// AI_AGENT_SELECTION_ACCURACY Unit: Double
+	//
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+	// Session ID
+	//
+	// UI name: [AI Agent Selection Accuracy]
+	//
+	// This metric is available as part of Connect Customer AI.
+	//
+	// AVG_AI_AGENT_INVOCATION_LATENCY Unit: Milliseconds
+	//
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+	// Session ID
+	//
+	// UI name: [Average AI Agent Invocation Latency]
+	//
+	// CONTEXT_FIDELITY_SCORE Unit: Double
+	//
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+	// Session ID
+	//
+	// UI name: [Context Fidelity Score]
+	//
+	// This metric is available as part of Connect Customer AI.
+	//
 	// RECIPIENTS_TARGETED This metric is only available for outbound campaigns
 	// initiated using a customer segment. It is not available for event triggered
 	// campaigns.
@@ -1608,6 +1624,7 @@ type GetMetricDataV2Input struct {
 	// [Contacts hold customer disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-customer-disconnect
 	// [Human answered]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#human-answered
 	// [Contacts removed from queue in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-removed-from-queue
+	// [AI Agent Collaborators]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-collaborators
 	// [AI Tool Selection Accuracy]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-selection-accuracy
 	// [Contacts hold agent disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-agent-disconnect
 	// [Contacts transferred out internal]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-internal
@@ -1673,6 +1690,7 @@ type GetMetricDataV2Input struct {
 	// [Delivery attempt disposition rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempt-disposition-rate
 	// [Contact disconnected]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-disconnected
 	// [Contacts handled (connected to agent timestamp)]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled-by-connected-to-agent-timestamp
+	// [AI Agent Collaboration Invocations]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-collaboration-invocations
 	// [Average evaluation score]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-evaluation-score
 	// [AI Agent Invocation Success Rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocation-success-rate
 	// [Contacts resolved in X]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-resolved
@@ -1681,6 +1699,7 @@ type GetMetricDataV2Input struct {
 	// [Contact abandoned]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-abandoned
 	// [Campaign interactions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-interactions
 	// [Bot intents completed]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed
+	// [Context Fidelity Score]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#context-fidelity-score
 	// [Abandonment rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#abandonment-rate
 	// [Scheduled time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#scheduled-time
 	// [Contacts abandoned in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-abandoned-in-x-seconds
@@ -1689,9 +1708,11 @@ type GetMetricDataV2Input struct {
 	// [Completeness Score]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#completeness-score
 	// [Current cases]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#current-cases
 	// [Average queue answer time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time
+	// [AI Agent Selection Accuracy]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-selection-accuracy
 	// [AI Response Completion Rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-response-completion-rate
 	// [Customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#customer-hold-time
 	// [AI Tool Utilization Accuracy]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-utilization-accuracy
+	// [Average AI Agent Invocation Latency]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-agent-invocation-latency
 	// [Agent interaction and hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-interaction-and-hold-time
 	// [Delivery attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempts
 	// [Contacts put on hold]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-put-on-hold
@@ -1750,8 +1771,8 @@ type GetMetricDataV2Input struct {
 	// SESSION_ID | TEST_CASE | TEST_CASE_EXECUTION_FAILURE_REASON |
 	// TEST_CASE_INVOCATION_METHOD | WEB_NOTIFICATION_TYPE
 	//
-	// AI_AGENT_NAME_VERSION , AI_PROMPT_NAME_VERSION , and KNOWLEDGE_ARTICLE_NAME are
-	// valid groupings but not valid filters.
+	// AI_PROMPT_NAME_VERSION and KNOWLEDGE_ARTICLE_NAME are valid groupings but not
+	// valid filters.
 	//
 	// API, SCHEDULE, and EVENT are the only valid filterValues for
 	// TEST_CASE_INVOCATION_METHOD.

@@ -38,6 +38,10 @@ type GetColumnStatisticsTaskSettingsInput struct {
 	// This member is required.
 	TableName *string
 
+	// The ID of the Data Catalog where the table resides. If none is supplied, the
+	// Amazon Web Services account ID is used by default.
+	CatalogID *string
+
 	noSmithyDocumentSerde
 }
 
@@ -48,6 +52,9 @@ func (v *GetColumnStatisticsTaskSettingsInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *GetColumnStatisticsTaskSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogID != nil {
+		s.WriteString(schemas.GetColumnStatisticsTaskSettingsRequest_CatalogID, *v.CatalogID)
+	}
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.GetColumnStatisticsTaskSettingsRequest_DatabaseName, *v.DatabaseName)
 	}

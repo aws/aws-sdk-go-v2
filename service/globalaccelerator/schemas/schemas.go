@@ -936,6 +936,20 @@ var _IpAddress = smithy.NewSchema(smithy.ShapeID{
 	Name:      "IpAddress",
 }, smithy.ShapeTypeString, 0)
 
+var IpAddressDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.globalaccelerator",
+	Name:      "IpAddressDetail",
+}, smithy.ShapeTypeStructure, 2)
+var IpAddressDetail_IpAddress *smithy.Schema
+
+var IpAddressDetail_NetworkZone *smithy.Schema
+
+var _IpAddressDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.globalaccelerator",
+	Name:      "IpAddressDetails",
+}, smithy.ShapeTypeList, 1)
+var _IpAddressDetails_member *smithy.Schema
+
 var _IpAddresses = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "IpAddresses",
@@ -961,12 +975,14 @@ var IpAddressType_DUAL_STACK *smithy.Schema
 var IpSet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "IpSet",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var IpSet_IpFamily *smithy.Schema
 
 var IpSet_IpAddresses *smithy.Schema
 
 var IpSet_IpAddressFamily *smithy.Schema
+
+var IpSet_IpAddressDetails *smithy.Schema
 
 var _IpSets = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
@@ -1008,6 +1024,11 @@ var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "MaxResults",
 }, smithy.ShapeTypeInteger, 0)
+
+var _NetworkZone = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.globalaccelerator",
+	Name:      "NetworkZone",
+}, smithy.ShapeTypeString, 0)
 
 var PortMapping = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
@@ -2022,11 +2043,19 @@ func init() {
 
 	IpAddressFamily_IPv6 = IpAddressFamily.AddMember("IPv6", smithyprelude.Unit)
 
+	IpAddressDetail_IpAddress = IpAddressDetail.AddMember("IpAddress", _IpAddress)
+
+	IpAddressDetail_NetworkZone = IpAddressDetail.AddMember("NetworkZone", _NetworkZone)
+
+	_IpAddressDetails_member = _IpAddressDetails.AddMember("member", IpAddressDetail)
+
 	IpSet_IpFamily = IpSet.AddMember("IpFamily", _GenericString)
 
 	IpSet_IpAddresses = IpSet.AddMember("IpAddresses", _IpAddresses)
 
 	IpSet_IpAddressFamily = IpSet.AddMember("IpAddressFamily", IpAddressFamily)
+
+	IpSet_IpAddressDetails = IpSet.AddMember("IpAddressDetails", _IpAddressDetails)
 
 	_IpSets_member = _IpSets.AddMember("member", IpSet)
 

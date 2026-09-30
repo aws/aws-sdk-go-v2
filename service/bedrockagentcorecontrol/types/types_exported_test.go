@@ -109,6 +109,28 @@ func ExampleAuthorizerConfiguration_outputUsage() {
 
 var _ *types.CustomJWTAuthorizerConfiguration
 
+func ExampleCertificateConfiguration_outputUsage() {
+	var union types.CertificateConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CertificateConfigurationMemberS3:
+		_ = v.Value // Value is types.S3CertificateConfiguration
+
+	case *types.CertificateConfigurationMemberSecretsManager:
+		_ = v.Value // Value is types.SecretsManagerCertificateConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SecretsManagerCertificateConfiguration
+var _ *types.S3CertificateConfiguration
+
 func ExampleCertificateLocation_outputUsage() {
 	var union types.CertificateLocation
 	// type switches can be used to check the union value

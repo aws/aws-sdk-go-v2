@@ -242,6 +242,9 @@ func ExampleEventMetadata_outputUsage() {
 	case *types.EventMetadataMemberCluster:
 		_ = v.Value // Value is types.ClusterMetadata
 
+	case *types.EventMetadataMemberDatabaseConfiguration:
+		_ = v.Value // Value is types.DatabaseConfigurationMetadata
+
 	case *types.EventMetadataMemberInstance:
 		_ = v.Value // Value is types.InstanceMetadata
 
@@ -250,6 +253,9 @@ func ExampleEventMetadata_outputUsage() {
 
 	case *types.EventMetadataMemberInstanceGroupScaling:
 		_ = v.Value // Value is types.InstanceGroupScalingMetadata
+
+	case *types.EventMetadataMemberSlurmHealth:
+		_ = v.Value // Value is types.SlurmHealthMetadata
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -260,6 +266,8 @@ func ExampleEventMetadata_outputUsage() {
 	}
 }
 
+var _ *types.SlurmHealthMetadata
+var _ *types.DatabaseConfigurationMetadata
 var _ *types.ClusterMetadata
 var _ *types.InstanceGroupMetadata
 var _ *types.InstanceMetadata

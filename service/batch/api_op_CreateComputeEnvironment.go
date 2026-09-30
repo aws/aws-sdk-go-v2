@@ -91,7 +91,11 @@ type CreateComputeEnvironmentInput struct {
 	// The details for the Amazon EKS cluster that supports the compute environment.
 	//
 	// To create a compute environment that uses EKS resources, the caller must have
-	// permissions to call eks:DescribeCluster .
+	// permissions to call eks:DescribeCluster . Additional Amazon EKS permissions are
+	// required for Batch to manage an access entry on the cluster; see [Amazon EKS access entry authentication]in the Batch
+	// User Guide.
+	//
+	// [Amazon EKS access entry authentication]: https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html
 	EksConfiguration *types.EksConfiguration
 
 	// The full Amazon Resource Name (ARN) of the IAM role that allows Batch to make

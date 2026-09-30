@@ -3864,8 +3864,10 @@ var _RequiresAttributes_member *smithy.Schema
 var ResolvedConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ResolvedConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var ResolvedConfiguration_loadBalancers *smithy.Schema
+
+var ResolvedConfiguration_vpcLatticeConfigurations *smithy.Schema
 
 var Resource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -4599,6 +4601,20 @@ var ServiceRevisionSummary_pendingTaskCount *smithy.Schema
 var ServiceRevisionSummary_requestedTestTrafficWeight *smithy.Schema
 
 var ServiceRevisionSummary_requestedProductionTrafficWeight *smithy.Schema
+
+var ServiceRevisionVpcLatticeConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ServiceRevisionVpcLatticeConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var ServiceRevisionVpcLatticeConfiguration_targetGroupArn *smithy.Schema
+
+var ServiceRevisionVpcLatticeConfiguration_productionListenerRule *smithy.Schema
+
+var _ServiceRevisionVpcLatticeConfigurations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ServiceRevisionVpcLatticeConfigurations",
+}, smithy.ShapeTypeList, 1)
+var _ServiceRevisionVpcLatticeConfigurations_member *smithy.Schema
 
 var _Services = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -5411,15 +5427,27 @@ var _VolumeList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _VolumeList_member *smithy.Schema
 
+var VpcLatticeAdvancedConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "VpcLatticeAdvancedConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var VpcLatticeAdvancedConfiguration_alternateTargetGroupArn *smithy.Schema
+
+var VpcLatticeAdvancedConfiguration_productionListenerRule *smithy.Schema
+
+var VpcLatticeAdvancedConfiguration_testListenerRule *smithy.Schema
+
 var VpcLatticeConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "VpcLatticeConfiguration",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var VpcLatticeConfiguration_roleArn *smithy.Schema
 
 var VpcLatticeConfiguration_targetGroupArn *smithy.Schema
 
 var VpcLatticeConfiguration_portName *smithy.Schema
+
+var VpcLatticeConfiguration_advancedConfiguration *smithy.Schema
 
 var _VpcLatticeConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -8696,11 +8724,19 @@ func init() {
 
 	DeploymentEphemeralStorage_kmsKeyId = DeploymentEphemeralStorage.AddMember("kmsKeyId", _String)
 
+	VpcLatticeAdvancedConfiguration_alternateTargetGroupArn = VpcLatticeAdvancedConfiguration.AddMember("alternateTargetGroupArn", _String)
+
+	VpcLatticeAdvancedConfiguration_productionListenerRule = VpcLatticeAdvancedConfiguration.AddMember("productionListenerRule", _String)
+
+	VpcLatticeAdvancedConfiguration_testListenerRule = VpcLatticeAdvancedConfiguration.AddMember("testListenerRule", _String)
+
 	VpcLatticeConfiguration_roleArn = VpcLatticeConfiguration.AddMember("roleArn", _IAMRoleArn)
 
 	VpcLatticeConfiguration_targetGroupArn = VpcLatticeConfiguration.AddMember("targetGroupArn", _String)
 
 	VpcLatticeConfiguration_portName = VpcLatticeConfiguration.AddMember("portName", _String)
+
+	VpcLatticeConfiguration_advancedConfiguration = VpcLatticeConfiguration.AddMember("advancedConfiguration", VpcLatticeAdvancedConfiguration)
 
 	_VpcLatticeConfigurations_member = _VpcLatticeConfigurations.AddMember("member", VpcLatticeConfiguration)
 
@@ -9394,7 +9430,15 @@ func init() {
 
 	_ServiceRevisionLoadBalancers_member = _ServiceRevisionLoadBalancers.AddMember("member", ServiceRevisionLoadBalancer)
 
+	ServiceRevisionVpcLatticeConfiguration_targetGroupArn = ServiceRevisionVpcLatticeConfiguration.AddMember("targetGroupArn", _String)
+
+	ServiceRevisionVpcLatticeConfiguration_productionListenerRule = ServiceRevisionVpcLatticeConfiguration.AddMember("productionListenerRule", _String)
+
+	_ServiceRevisionVpcLatticeConfigurations_member = _ServiceRevisionVpcLatticeConfigurations.AddMember("member", ServiceRevisionVpcLatticeConfiguration)
+
 	ResolvedConfiguration_loadBalancers = ResolvedConfiguration.AddMember("loadBalancers", _ServiceRevisionLoadBalancers)
+
+	ResolvedConfiguration_vpcLatticeConfigurations = ResolvedConfiguration.AddMember("vpcLatticeConfigurations", _ServiceRevisionVpcLatticeConfigurations)
 
 	ResourceInUseException_message = ResourceInUseException.AddMember("message", _String)
 

@@ -88,6 +88,9 @@ type GetGatewayTargetOutput struct {
 	// type and requires user federation.
 	AuthorizationData types.AuthorizationData
 
+	// The private certificate authority (CA) configurations for the gateway target.
+	CertificateConfigurations []types.CertificateConfiguration
+
 	// The description of the gateway target.
 	Description *string
 

@@ -65,6 +65,10 @@ type StartNotebookRunInput struct {
 	// and optional VPC settings.
 	NetworkConfiguration *types.NetworkConfig
 
+	// The notification configuration for the notebook run. Use this to specify the
+	// notebook run states that trigger notifications.
+	NotificationConfiguration *types.NotificationConfig
+
 	// The sensitive parameters for the notebook run, specified as key-value pairs.
 	// You can specify up to 50 entries, with keys up to 128 characters and values up
 	// to 1024 characters.
@@ -137,6 +141,10 @@ type StartNotebookRunOutput struct {
 
 	// The network configuration of the notebook run.
 	NetworkConfiguration *types.NetworkConfig
+
+	// The notification configuration of the notebook run, including the notebook run
+	// states that trigger notifications.
+	NotificationConfiguration *types.NotificationConfig
 
 	// The sensitive parameters of the notebook run.
 	Parameters map[string]string

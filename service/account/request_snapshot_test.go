@@ -643,6 +643,33 @@ func TestCheckRequestSnapshot_PutContactInformation(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_SendPhoneNumberVerification(t *testing.T) {
+	input := &SendPhoneNumberVerificationInput{
+		AccountId: ptr.String("__AccountId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SendPhoneNumberVerification(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SendPhoneNumberVerification"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_StartPrimaryEmailUpdate(t *testing.T) {
 	input := &StartPrimaryEmailUpdateInput{
 		AccountId:    ptr.String("__AccountId__"),
@@ -667,6 +694,34 @@ func TestCheckRequestSnapshot_StartPrimaryEmailUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartPrimaryEmailUpdate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_VerifyPhoneNumber(t *testing.T) {
+	input := &VerifyPhoneNumberInput{
+		AccountId: ptr.String("__AccountId__"),
+		Otp:       ptr.String("__Otp__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.VerifyPhoneNumber(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "VerifyPhoneNumber"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1108,6 +1163,33 @@ func TestUpdateRequestSnapshot_PutContactInformation(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_SendPhoneNumberVerification(t *testing.T) {
+	input := &SendPhoneNumberVerificationInput{
+		AccountId: ptr.String("__AccountId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SendPhoneNumberVerification(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SendPhoneNumberVerification"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_StartPrimaryEmailUpdate(t *testing.T) {
 	input := &StartPrimaryEmailUpdateInput{
 		AccountId:    ptr.String("__AccountId__"),
@@ -1132,6 +1214,34 @@ func TestUpdateRequestSnapshot_StartPrimaryEmailUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartPrimaryEmailUpdate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_VerifyPhoneNumber(t *testing.T) {
+	input := &VerifyPhoneNumberInput{
+		AccountId: ptr.String("__AccountId__"),
+		Otp:       ptr.String("__Otp__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.VerifyPhoneNumber(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "VerifyPhoneNumber"); err != nil {
 		t.Fatal(err)
 	}
 }

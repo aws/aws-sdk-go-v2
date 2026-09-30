@@ -2127,6 +2127,13 @@ func awsRestjson1_serializeOpDocumentCreateGatewayTargetInput(v *CreateGatewayTa
 	object := value.Object()
 	defer object.Close()
 
+	if v.CertificateConfigurations != nil {
+		ok := object.Key("certificateConfigurations")
+		if err := awsRestjson1_serializeDocumentCertificateConfigurationList(v.CertificateConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
@@ -14243,6 +14250,13 @@ func awsRestjson1_serializeOpDocumentUpdateGatewayTargetInput(v *UpdateGatewayTa
 	object := value.Object()
 	defer object.Close()
 
+	if v.CertificateConfigurations != nil {
+		ok := object.Key("certificateConfigurations")
+		if err := awsRestjson1_serializeDocumentCertificateConfigurationList(v.CertificateConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CredentialProviderConfigurations != nil {
 		ok := object.Key("credentialProviderConfigurations")
 		if err := awsRestjson1_serializeDocumentCredentialProviderConfigurations(v.CredentialProviderConfigurations, ok); err != nil {
@@ -16715,6 +16729,46 @@ func awsRestjson1_serializeDocumentCertificate(v *types.Certificate, value smith
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCertificateConfiguration(v types.CertificateConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CertificateConfigurationMemberS3:
+		av := object.Key("s3")
+		if err := awsRestjson1_serializeDocumentS3CertificateConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.CertificateConfigurationMemberSecretsManager:
+		av := object.Key("secretsManager")
+		if err := awsRestjson1_serializeDocumentSecretsManagerCertificateConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCertificateConfigurationList(v []types.CertificateConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentCertificateConfiguration(v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -22995,6 +23049,23 @@ func awsRestjson1_serializeDocumentRuntimeTargetConfiguration(v *types.RuntimeTa
 	return nil
 }
 
+func awsRestjson1_serializeDocumentS3CertificateConfiguration(v *types.S3CertificateConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketOwnerAccountId != nil {
+		ok := object.Key("bucketOwnerAccountId")
+		ok.String(*v.BucketOwnerAccountId)
+	}
+
+	if v.Uri != nil {
+		ok := object.Key("uri")
+		ok.String(*v.Uri)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentS3Configuration(v *types.S3Configuration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -23225,6 +23296,18 @@ func awsRestjson1_serializeDocumentSecretReference(v *types.SecretReference, val
 	if v.SecretId != nil {
 		ok := object.Key("secretId")
 		ok.String(*v.SecretId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSecretsManagerCertificateConfiguration(v *types.SecretsManagerCertificateConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecretArn != nil {
+		ok := object.Key("secretArn")
+		ok.String(*v.SecretArn)
 	}
 
 	return nil

@@ -3512,6 +3512,30 @@ func TestCheckRequestSnapshot_CreateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 			{
 				ActionType: types.ActionType("CREATE_TASK"),
@@ -3638,6 +3662,30 @@ func TestCheckRequestSnapshot_CreateRule(t *testing.T) {
 							Identifier: ptr.String("__Identifier__"),
 						},
 					},
+				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
 				},
 			},
 		},
@@ -17340,6 +17388,30 @@ func TestCheckRequestSnapshot_UpdateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 			{
 				ActionType: types.ActionType("CREATE_TASK"),
@@ -17466,6 +17538,30 @@ func TestCheckRequestSnapshot_UpdateRule(t *testing.T) {
 							Identifier: ptr.String("__Identifier__"),
 						},
 					},
+				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
 				},
 			},
 		},
@@ -21810,6 +21906,30 @@ func TestUpdateRequestSnapshot_CreateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 			{
 				ActionType: types.ActionType("CREATE_TASK"),
@@ -21936,6 +22056,30 @@ func TestUpdateRequestSnapshot_CreateRule(t *testing.T) {
 							Identifier: ptr.String("__Identifier__"),
 						},
 					},
+				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
 				},
 			},
 		},
@@ -35638,6 +35782,30 @@ func TestUpdateRequestSnapshot_UpdateRule(t *testing.T) {
 						},
 					},
 				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
+				},
 			},
 			{
 				ActionType: types.ActionType("CREATE_TASK"),
@@ -35764,6 +35932,30 @@ func TestUpdateRequestSnapshot_UpdateRule(t *testing.T) {
 							Identifier: ptr.String("__Identifier__"),
 						},
 					},
+				},
+				SendInAppNotificationAction: &types.SendInAppNotificationActionDefinition{
+					Content: map[string]string{
+						"key0": "__Value__",
+					},
+					Recipient: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Exclusion: &types.NotificationRecipientType{
+						UserTags: map[string]string{
+							"key0": "__Value__",
+						},
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Priority: types.ConfigurableNotificationPriority("HIGH"),
 				},
 			},
 		},

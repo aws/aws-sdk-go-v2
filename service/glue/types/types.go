@@ -7497,6 +7497,9 @@ func (v *Crawl) Deserialize(d smithy.ShapeDeserializer) error {
 // concerning the data source in the Glue Data Catalog.
 type Crawler struct {
 
+	// The ID of the Data Catalog in which the crawler's output is stored.
+	CatalogId *string
+
 	// A list of UTF-8 strings that specify the custom classifiers that are associated
 	// with the crawler.
 	Classifiers []string
@@ -7576,6 +7579,9 @@ func (v *Crawler) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Crawler) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.Crawler_CatalogId, *v.CatalogId)
+	}
 	serializeClassifierNameList(s, schemas.Crawler_Classifiers, v.Classifiers)
 	if v.Configuration != nil {
 		s.WriteString(schemas.Crawler_Configuration, *v.Configuration)
@@ -7652,6 +7658,9 @@ func (v *Crawler) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *Crawler) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Crawler, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.Crawler_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.Crawler_CatalogId, v.CatalogId)
 		case schemas.Crawler_Classifiers:
 			return deserializeClassifierNameList(d, schemas.Crawler_Classifiers, &v.Classifiers)
 		case schemas.Crawler_Configuration:

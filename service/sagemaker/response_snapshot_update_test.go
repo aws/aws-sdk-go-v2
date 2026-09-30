@@ -6350,6 +6350,12 @@ func TestUpdateResponseSnapshot_DescribeCluster(t *testing.T) {
 			},
 			Slurm: &types.ClusterOrchestratorSlurmConfig{
 				SlurmConfigStrategy: types.ClusterSlurmConfigStrategy("Overwrite"),
+				AccountingDatabase: &types.ClusterAccountingDatabase{
+					Endpoint:  ptr.String("__Endpoint__"),
+					Port:      ptr.Int32(1),
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+				},
 			},
 		},
 		TieredStorageConfig: &types.ClusterTieredStorageConfig{

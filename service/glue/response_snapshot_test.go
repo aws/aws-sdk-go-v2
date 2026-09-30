@@ -837,6 +837,7 @@ func TestCheckResponseSnapshot_BatchGetCrawlers(t *testing.T) {
 					UseLakeFormationCredentials: ptr.Bool(true),
 					AccountId:                   ptr.String("__AccountId__"),
 				},
+				CatalogId: ptr.String("__CatalogId__"),
 			},
 			{
 				Name: ptr.String("__Name__"),
@@ -1051,6 +1052,7 @@ func TestCheckResponseSnapshot_BatchGetCrawlers(t *testing.T) {
 					UseLakeFormationCredentials: ptr.Bool(true),
 					AccountId:                   ptr.String("__AccountId__"),
 				},
+				CatalogId: ptr.String("__CatalogId__"),
 			},
 		},
 		CrawlersNotFound: []string{
@@ -10636,6 +10638,7 @@ func TestCheckResponseSnapshot_CreateCrawler(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		CatalogId: ptr.String("__CatalogId__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -15122,6 +15125,7 @@ func TestCheckResponseSnapshot_DeleteColumnStatisticsTaskSettings(t *testing.T) 
 	got, err := svc.DeleteColumnStatisticsTaskSettings(context.Background(), &DeleteColumnStatisticsTaskSettingsInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -18083,6 +18087,7 @@ func TestCheckResponseSnapshot_GetColumnStatisticsTaskRuns(t *testing.T) {
 		TableName:    ptr.String("__TableName__"),
 		MaxResults:   ptr.Int32(1),
 		NextToken:    ptr.String("__NextToken__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -18130,6 +18135,7 @@ func TestCheckResponseSnapshot_GetColumnStatisticsTaskSettings(t *testing.T) {
 	got, err := svc.GetColumnStatisticsTaskSettings(context.Background(), &GetColumnStatisticsTaskSettingsInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -18583,6 +18589,7 @@ func TestCheckResponseSnapshot_GetCrawler(t *testing.T) {
 				UseLakeFormationCredentials: ptr.Bool(true),
 				AccountId:                   ptr.String("__AccountId__"),
 			},
+			CatalogId: ptr.String("__CatalogId__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetCrawler.response")
@@ -18870,6 +18877,7 @@ func TestCheckResponseSnapshot_GetCrawlers(t *testing.T) {
 					UseLakeFormationCredentials: ptr.Bool(true),
 					AccountId:                   ptr.String("__AccountId__"),
 				},
+				CatalogId: ptr.String("__CatalogId__"),
 			},
 			{
 				Name: ptr.String("__Name__"),
@@ -19084,6 +19092,7 @@ func TestCheckResponseSnapshot_GetCrawlers(t *testing.T) {
 					UseLakeFormationCredentials: ptr.Bool(true),
 					AccountId:                   ptr.String("__AccountId__"),
 				},
+				CatalogId: ptr.String("__CatalogId__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -40564,6 +40573,7 @@ func TestCheckResponseSnapshot_StartColumnStatisticsTaskRunSchedule(t *testing.T
 	got, err := svc.StartColumnStatisticsTaskRunSchedule(context.Background(), &StartColumnStatisticsTaskRunScheduleInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -41019,6 +41029,7 @@ func TestCheckResponseSnapshot_StopColumnStatisticsTaskRun(t *testing.T) {
 	got, err := svc.StopColumnStatisticsTaskRun(context.Background(), &StopColumnStatisticsTaskRunInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -41041,6 +41052,7 @@ func TestCheckResponseSnapshot_StopColumnStatisticsTaskRunSchedule(t *testing.T)
 	got, err := svc.StopColumnStatisticsTaskRunSchedule(context.Background(), &StopColumnStatisticsTaskRunScheduleInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -42344,6 +42356,7 @@ func TestCheckResponseSnapshot_UpdateCrawler(t *testing.T) {
 		},
 		Configuration:                ptr.String("__Configuration__"),
 		CrawlerSecurityConfiguration: ptr.String("__CrawlerSecurityConfiguration__"),
+		CatalogId:                    ptr.String("__CatalogId__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -46652,6 +46665,7 @@ func TestCheckResponseSnapshot_Error_ColumnStatisticsTaskNotRunningException(t *
 	_, opErr := svc.StopColumnStatisticsTaskRun(context.Background(), &StopColumnStatisticsTaskRunInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -46720,6 +46734,7 @@ func TestCheckResponseSnapshot_Error_ColumnStatisticsTaskStoppingException(t *te
 	_, opErr := svc.StopColumnStatisticsTaskRun(context.Background(), &StopColumnStatisticsTaskRunInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

@@ -656,6 +656,7 @@ func TestUpdateResponseSnapshot_BatchGetCrawlers(t *testing.T) {
 					UseLakeFormationCredentials: ptr.Bool(true),
 					AccountId:                   ptr.String("__AccountId__"),
 				},
+				CatalogId: ptr.String("__CatalogId__"),
 			},
 			{
 				Name: ptr.String("__Name__"),
@@ -870,6 +871,7 @@ func TestUpdateResponseSnapshot_BatchGetCrawlers(t *testing.T) {
 					UseLakeFormationCredentials: ptr.Bool(true),
 					AccountId:                   ptr.String("__AccountId__"),
 				},
+				CatalogId: ptr.String("__CatalogId__"),
 			},
 		},
 		CrawlersNotFound: []string{
@@ -14117,6 +14119,7 @@ func TestUpdateResponseSnapshot_GetCrawler(t *testing.T) {
 				UseLakeFormationCredentials: ptr.Bool(true),
 				AccountId:                   ptr.String("__AccountId__"),
 			},
+			CatalogId: ptr.String("__CatalogId__"),
 		},
 	}
 	proto := awsjson.New11(schemas.AWSGlue)
@@ -14401,6 +14404,7 @@ func TestUpdateResponseSnapshot_GetCrawlers(t *testing.T) {
 					UseLakeFormationCredentials: ptr.Bool(true),
 					AccountId:                   ptr.String("__AccountId__"),
 				},
+				CatalogId: ptr.String("__CatalogId__"),
 			},
 			{
 				Name: ptr.String("__Name__"),
@@ -14615,6 +14619,7 @@ func TestUpdateResponseSnapshot_GetCrawlers(t *testing.T) {
 					UseLakeFormationCredentials: ptr.Bool(true),
 					AccountId:                   ptr.String("__AccountId__"),
 				},
+				CatalogId: ptr.String("__CatalogId__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

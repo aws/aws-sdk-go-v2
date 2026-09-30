@@ -1268,6 +1268,21 @@ func validateEFSVolumeConfiguration(v *types.EFSVolumeConfiguration) error {
 	}
 }
 
+func validateEksAccessEntry(v *types.EksAccessEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksAccessEntry"}
+	if len(v.DesiredState) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DesiredState"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEksConfiguration(v *types.EksConfiguration) error {
 	if v == nil {
 		return nil
@@ -1278,6 +1293,28 @@ func validateEksConfiguration(v *types.EksConfiguration) error {
 	}
 	if v.KubernetesNamespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KubernetesNamespace"))
+	}
+	if v.AccessEntry != nil {
+		if err := validateEksAccessEntry(v.AccessEntry); err != nil {
+			invalidParams.AddNested("AccessEntry", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksConfigurationUpdate(v *types.EksConfigurationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksConfigurationUpdate"}
+	if v.AccessEntry != nil {
+		if err := validateEksAccessEntry(v.AccessEntry); err != nil {
+			invalidParams.AddNested("AccessEntry", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3192,6 +3229,11 @@ func validateOpUpdateComputeEnvironmentInput(v *UpdateComputeEnvironmentInput) e
 	if v.ComputeResources != nil {
 		if err := validateComputeResourceUpdate(v.ComputeResources); err != nil {
 			invalidParams.AddNested("ComputeResources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EksConfiguration != nil {
+		if err := validateEksConfigurationUpdate(v.EksConfiguration); err != nil {
+			invalidParams.AddNested("EksConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

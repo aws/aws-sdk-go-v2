@@ -311,6 +311,10 @@ func TestCheckResponseSnapshot_CreateComputeEnvironment(t *testing.T) {
 		EksConfiguration: &types.EksConfiguration{
 			EksClusterArn:       ptr.String("__EksClusterArn__"),
 			KubernetesNamespace: ptr.String("__KubernetesNamespace__"),
+			AccessEntry: &types.EksAccessEntry{
+				DesiredState: types.EksAccessEntryDesiredState("ENABLED"),
+				Status:       types.EksAccessEntryStatus("ACTIVE"),
+			},
 		},
 		Context: ptr.String("__Context__"),
 		EcsSettings: &types.EcsSettings{
@@ -834,6 +838,10 @@ func TestCheckResponseSnapshot_DescribeComputeEnvironments(t *testing.T) {
 				EksConfiguration: &types.EksConfiguration{
 					EksClusterArn:       ptr.String("__EksClusterArn__"),
 					KubernetesNamespace: ptr.String("__KubernetesNamespace__"),
+					AccessEntry: &types.EksAccessEntry{
+						DesiredState: types.EksAccessEntryDesiredState("ENABLED"),
+						Status:       types.EksAccessEntryStatus("ACTIVE"),
+					},
 				},
 				ContainerOrchestrationType: types.OrchestrationType("ECS"),
 				Uuid:                       ptr.String("__Uuid__"),
@@ -978,6 +986,10 @@ func TestCheckResponseSnapshot_DescribeComputeEnvironments(t *testing.T) {
 				EksConfiguration: &types.EksConfiguration{
 					EksClusterArn:       ptr.String("__EksClusterArn__"),
 					KubernetesNamespace: ptr.String("__KubernetesNamespace__"),
+					AccessEntry: &types.EksAccessEntry{
+						DesiredState: types.EksAccessEntryDesiredState("ENABLED"),
+						Status:       types.EksAccessEntryStatus("ACTIVE"),
+					},
 				},
 				ContainerOrchestrationType: types.OrchestrationType("ECS"),
 				Uuid:                       ptr.String("__Uuid__"),
@@ -22669,6 +22681,12 @@ func TestCheckResponseSnapshot_UpdateComputeEnvironment(t *testing.T) {
 		Context: ptr.String("__Context__"),
 		EcsSettings: &types.EcsSettings{
 			ContainerInsights: types.ContainerInsights("ENABLED"),
+		},
+		EksConfiguration: &types.EksConfigurationUpdate{
+			AccessEntry: &types.EksAccessEntry{
+				DesiredState: types.EksAccessEntryDesiredState("ENABLED"),
+				Status:       types.EksAccessEntryStatus("ACTIVE"),
+			},
 		},
 	})
 	if err != nil {

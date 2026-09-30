@@ -2231,6 +2231,19 @@ func TestUpdateResponseSnapshot_DescribeExport(t *testing.T) {
 				ExportToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ExportViewType: types.ExportViewType("NEW_IMAGE"),
 			},
+			FilterSpecification: &types.FilterSpecification{
+				FilterExpression:       ptr.String("__FilterExpression__"),
+				ProjectionExpression:   ptr.String("__ProjectionExpression__"),
+				KeyConditionExpression: ptr.String("__KeyConditionExpression__"),
+				ExpressionAttributeNames: map[string]string{
+					"key0": "__Value__",
+				},
+				ExpressionAttributeValues: map[string]types.AttributeValue{
+					"key0": &types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+			},
 		},
 	}
 	proto := awsjson.New10(schemas.DynamoDB_20120810)
@@ -4138,6 +4151,19 @@ func TestUpdateResponseSnapshot_ExportTableToPointInTime(t *testing.T) {
 				ExportFromTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ExportToTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ExportViewType: types.ExportViewType("NEW_IMAGE"),
+			},
+			FilterSpecification: &types.FilterSpecification{
+				FilterExpression:       ptr.String("__FilterExpression__"),
+				ProjectionExpression:   ptr.String("__ProjectionExpression__"),
+				KeyConditionExpression: ptr.String("__KeyConditionExpression__"),
+				ExpressionAttributeNames: map[string]string{
+					"key0": "__Value__",
+				},
+				ExpressionAttributeValues: map[string]types.AttributeValue{
+					"key0": &types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
 			},
 		},
 	}

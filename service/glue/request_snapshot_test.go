@@ -1955,6 +1955,7 @@ func TestCheckRequestSnapshot_CreateCrawler(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		CatalogId: ptr.String("__CatalogId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6472,6 +6473,7 @@ func TestCheckRequestSnapshot_DeleteColumnStatisticsTaskSettings(t *testing.T) {
 	input := &DeleteColumnStatisticsTaskSettingsInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7919,6 +7921,7 @@ func TestCheckRequestSnapshot_GetColumnStatisticsTaskRuns(t *testing.T) {
 		TableName:    ptr.String("__TableName__"),
 		MaxResults:   ptr.Int32(1),
 		NextToken:    ptr.String("__NextToken__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7947,6 +7950,7 @@ func TestCheckRequestSnapshot_GetColumnStatisticsTaskSettings(t *testing.T) {
 	input := &GetColumnStatisticsTaskSettingsInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -13047,6 +13051,7 @@ func TestCheckRequestSnapshot_StartColumnStatisticsTaskRunSchedule(t *testing.T)
 	input := &StartColumnStatisticsTaskRunScheduleInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -13560,6 +13565,7 @@ func TestCheckRequestSnapshot_StopColumnStatisticsTaskRun(t *testing.T) {
 	input := &StopColumnStatisticsTaskRunInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -13588,6 +13594,7 @@ func TestCheckRequestSnapshot_StopColumnStatisticsTaskRunSchedule(t *testing.T) 
 	input := &StopColumnStatisticsTaskRunScheduleInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -14742,6 +14749,7 @@ func TestCheckRequestSnapshot_UpdateCrawler(t *testing.T) {
 		},
 		Configuration:                ptr.String("__Configuration__"),
 		CrawlerSecurityConfiguration: ptr.String("__CrawlerSecurityConfiguration__"),
+		CatalogId:                    ptr.String("__CatalogId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -20586,6 +20594,7 @@ func TestUpdateRequestSnapshot_CreateCrawler(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		CatalogId: ptr.String("__CatalogId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -25103,6 +25112,7 @@ func TestUpdateRequestSnapshot_DeleteColumnStatisticsTaskSettings(t *testing.T) 
 	input := &DeleteColumnStatisticsTaskSettingsInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -26550,6 +26560,7 @@ func TestUpdateRequestSnapshot_GetColumnStatisticsTaskRuns(t *testing.T) {
 		TableName:    ptr.String("__TableName__"),
 		MaxResults:   ptr.Int32(1),
 		NextToken:    ptr.String("__NextToken__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -26578,6 +26589,7 @@ func TestUpdateRequestSnapshot_GetColumnStatisticsTaskSettings(t *testing.T) {
 	input := &GetColumnStatisticsTaskSettingsInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -31678,6 +31690,7 @@ func TestUpdateRequestSnapshot_StartColumnStatisticsTaskRunSchedule(t *testing.T
 	input := &StartColumnStatisticsTaskRunScheduleInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -32191,6 +32204,7 @@ func TestUpdateRequestSnapshot_StopColumnStatisticsTaskRun(t *testing.T) {
 	input := &StopColumnStatisticsTaskRunInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -32219,6 +32233,7 @@ func TestUpdateRequestSnapshot_StopColumnStatisticsTaskRunSchedule(t *testing.T)
 	input := &StopColumnStatisticsTaskRunScheduleInput{
 		DatabaseName: ptr.String("__DatabaseName__"),
 		TableName:    ptr.String("__TableName__"),
+		CatalogID:    ptr.String("__CatalogID__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -33373,6 +33388,7 @@ func TestUpdateRequestSnapshot_UpdateCrawler(t *testing.T) {
 		},
 		Configuration:                ptr.String("__Configuration__"),
 		CrawlerSecurityConfiguration: ptr.String("__CrawlerSecurityConfiguration__"),
+		CatalogId:                    ptr.String("__CatalogId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

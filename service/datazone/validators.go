@@ -5937,6 +5937,21 @@ func validateNotEqualToExpression(v *types.NotEqualToExpression) error {
 	}
 }
 
+func validateNotificationConfig(v *types.NotificationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotificationConfig"}
+	if v.NotifyOn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotifyOn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNotInExpression(v *types.NotInExpression) error {
 	if v == nil {
 		return nil
@@ -10358,6 +10373,11 @@ func validateOpStartNotebookRunInput(v *StartNotebookRunInput) error {
 	if v.NetworkConfiguration != nil {
 		if err := validateNetworkConfig(v.NetworkConfiguration); err != nil {
 			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NotificationConfiguration != nil {
+		if err := validateNotificationConfig(v.NotificationConfiguration); err != nil {
+			invalidParams.AddNested("NotificationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

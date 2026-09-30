@@ -827,6 +827,39 @@ type Certificate struct {
 	noSmithyDocumentSerde
 }
 
+// A reference to a private certificate authority (CA) certificate that the
+// gateway uses to verify TLS connections to the target endpoint. Use this when the
+// target presents a certificate issued by a private CA that is not trusted by
+// default. Specify exactly one certificate source. The configuration is a
+// reference only and never contains the certificate content.
+//
+// The following types satisfy this interface:
+//
+//	CertificateConfigurationMemberS3
+//	CertificateConfigurationMemberSecretsManager
+type CertificateConfiguration interface {
+	isCertificateConfiguration()
+}
+
+// The Amazon S3 location of the PEM-encoded private CA certificate.
+type CertificateConfigurationMemberS3 struct {
+	Value S3CertificateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*CertificateConfigurationMemberS3) isCertificateConfiguration() {}
+
+// The Amazon Web Services Secrets Manager location of the PEM-encoded private CA
+// certificate.
+type CertificateConfigurationMemberSecretsManager struct {
+	Value SecretsManagerCertificateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*CertificateConfigurationMemberSecretsManager) isCertificateConfiguration() {}
+
 // The location from which to retrieve a certificate.
 //
 // The following types satisfy this interface:
@@ -3378,6 +3411,9 @@ type GatewayTarget struct {
 	// target is configured with a credential provider with authorization code grant
 	// type and requires user federation.
 	AuthorizationData AuthorizationData
+
+	// The private certificate authority (CA) configurations for the gateway target.
+	CertificateConfigurations []CertificateConfiguration
 
 	// The description for the gateway target.
 	Description *string
@@ -8141,6 +8177,22 @@ type RuntimeTargetConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A reference to a PEM-encoded private CA certificate stored as an Amazon S3
+// object.
+type S3CertificateConfiguration struct {
+
+	// The URI of the Amazon S3 object that contains the PEM-encoded certificate.
+	//
+	// This member is required.
+	Uri *string
+
+	// The account ID of the Amazon S3 bucket owner. This ID is used for cross-account
+	// access to the bucket.
+	BucketOwnerAccountId *string
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon S3 configuration for a gateway. This structure defines how the
 // gateway accesses files in Amazon S3.
 type S3Configuration struct {
@@ -8344,6 +8396,19 @@ type SecretReference struct {
 	//
 	// This member is required.
 	SecretId *string
+
+	noSmithyDocumentSerde
+}
+
+// A reference to a PEM-encoded private CA certificate stored in an Amazon Web
+// Services Secrets Manager secret.
+type SecretsManagerCertificateConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret that contains the PEM-encoded certificate.
+	//
+	// This member is required.
+	SecretArn *string
 
 	noSmithyDocumentSerde
 }
@@ -9950,6 +10015,7 @@ func (*UnknownUnionMember) isAgentRuntimeArtifact()                   {}
 func (*UnknownUnionMember) isApiSchemaConfiguration()                 {}
 func (*UnknownUnionMember) isAuthorizationData()                      {}
 func (*UnknownUnionMember) isAuthorizerConfiguration()                {}
+func (*UnknownUnionMember) isCertificateConfiguration()               {}
 func (*UnknownUnionMember) isCertificateLocation()                    {}
 func (*UnknownUnionMember) isClaimMatchValueType()                    {}
 func (*UnknownUnionMember) isCode()                                   {}

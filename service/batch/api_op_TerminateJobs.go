@@ -20,6 +20,11 @@ import (
 // encountered errors are reported in the errors list. The response returns an
 // HTTP status code of 200 even when some jobs encountered errors, so check the
 // errors list. Jobs that can't be found are treated as successfully processed.
+//
+// This operation requires batch:TerminateJob permission for each job in the
+// request. There is no separate batch:TerminateJobs IAM action. If a caller's IAM
+// policy grants batch:TerminateJob , they can use both the singular TerminateJob and bulk
+// TerminateJobs operations.
 func (c *Client) TerminateJobs(ctx context.Context, params *TerminateJobsInput, optFns ...func(*Options)) (*TerminateJobsOutput, error) {
 	if params == nil {
 		params = &TerminateJobsInput{}

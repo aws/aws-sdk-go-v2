@@ -4071,6 +4071,47 @@ func validateCertificate(v *types.Certificate) error {
 	}
 }
 
+func validateCertificateConfiguration(v types.CertificateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CertificateConfiguration"}
+	switch uv := v.(type) {
+	case *types.CertificateConfigurationMemberS3:
+		if err := validateS3CertificateConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CertificateConfigurationMemberSecretsManager:
+		if err := validateSecretsManagerCertificateConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[secretsManager]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCertificateConfigurationList(v []types.CertificateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CertificateConfigurationList"}
+	for i := range v {
+		if err := validateCertificateConfiguration(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCertificateLocation(v types.CertificateLocation) error {
 	if v == nil {
 		return nil
@@ -8226,6 +8267,21 @@ func validateRuntimeTargetConfiguration(v *types.RuntimeTargetConfiguration) err
 	}
 }
 
+func validateS3CertificateConfiguration(v *types.S3CertificateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3CertificateConfiguration"}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3FilesAccessPointConfiguration(v *types.S3FilesAccessPointConfiguration) error {
 	if v == nil {
 		return nil
@@ -8386,6 +8442,21 @@ func validateSecretReference(v *types.SecretReference) error {
 	}
 	if v.JsonKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JsonKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSecretsManagerCertificateConfiguration(v *types.SecretsManagerCertificateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SecretsManagerCertificateConfiguration"}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9788,6 +9859,11 @@ func validateOpCreateGatewayTargetInput(v *CreateGatewayTargetInput) error {
 	if v.PrivateEndpoint != nil {
 		if err := validatePrivateEndpoint(v.PrivateEndpoint); err != nil {
 			invalidParams.AddNested("PrivateEndpoint", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CertificateConfigurations != nil {
+		if err := validateCertificateConfigurationList(v.CertificateConfigurations); err != nil {
+			invalidParams.AddNested("CertificateConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -11764,6 +11840,9 @@ func validateOpUpdateConfigurationBundleInput(v *UpdateConfigurationBundleInput)
 	if v.ParentVersionIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParentVersionIds"))
 	}
+	if v.CommitMessage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CommitMessage"))
+	}
 	if v.CreatedBy != nil {
 		if err := validateVersionCreatedBySource(v.CreatedBy); err != nil {
 			invalidParams.AddNested("CreatedBy", err.(smithy.InvalidParamsError))
@@ -11967,6 +12046,11 @@ func validateOpUpdateGatewayTargetInput(v *UpdateGatewayTargetInput) error {
 	if v.PrivateEndpoint != nil {
 		if err := validatePrivateEndpoint(v.PrivateEndpoint); err != nil {
 			invalidParams.AddNested("PrivateEndpoint", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CertificateConfigurations != nil {
+		if err := validateCertificateConfigurationList(v.CertificateConfigurations); err != nil {
+			invalidParams.AddNested("CertificateConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

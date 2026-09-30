@@ -6282,6 +6282,12 @@ func TestCheckResponseSnapshot_GetNotebookRun(t *testing.T) {
 			ProjectS3Path: ptr.String("__ProjectS3Path__"),
 			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
 		},
+		NotificationConfiguration: &types.NotificationConfig{
+			NotifyOn: []types.NotifyOnState{
+				types.NotifyOnState("SUCCEEDED"),
+				types.NotifyOnState("SUCCEEDED"),
+			},
+		},
 		TriggerSource: &types.TriggerSource{
 			Type: types.TriggerSourceType("MANUAL"),
 			Name: ptr.String("__Name__"),
@@ -11834,6 +11840,12 @@ func TestCheckResponseSnapshot_StartNotebookRun(t *testing.T) {
 			ProjectS3Path: ptr.String("__ProjectS3Path__"),
 			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
 		},
+		NotificationConfiguration: &types.NotificationConfig{
+			NotifyOn: []types.NotifyOnState{
+				types.NotifyOnState("SUCCEEDED"),
+				types.NotifyOnState("SUCCEEDED"),
+			},
+		},
 		TriggerSource: &types.TriggerSource{
 			Type: types.TriggerSourceType("MANUAL"),
 			Name: ptr.String("__Name__"),
@@ -11879,6 +11891,12 @@ func TestCheckResponseSnapshot_StartNotebookRun(t *testing.T) {
 		},
 		TimeoutConfiguration: &types.TimeoutConfig{
 			RunTimeoutInMinutes: ptr.Int32(1),
+		},
+		NotificationConfiguration: &types.NotificationConfig{
+			NotifyOn: []types.NotifyOnState{
+				types.NotifyOnState("SUCCEEDED"),
+				types.NotifyOnState("SUCCEEDED"),
+			},
 		},
 		TriggerSource: &types.TriggerSource{
 			Type: types.TriggerSourceType("MANUAL"),

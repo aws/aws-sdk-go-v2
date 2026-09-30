@@ -1,0 +1,8 @@
+{
+    "id": "251477e9-9d41-4df6-b054-19a7b708a8e2",
+    "type": "feature",
+    "description": "Amazon S3 Vectors now supports metadata prefiltering, providing higher recall on filtered queries.",
+    "modules": [
+        "service/s3vectors"
+    ]
+}

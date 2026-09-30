@@ -283,6 +283,16 @@ func TestCheckResponseSnapshot_CreateAccelerator(t *testing.T) {
 						"__Member__",
 					},
 					IpAddressFamily: types.IpAddressFamily("IPv4"),
+					IpAddressDetails: []types.IpAddressDetail{
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+					},
 				},
 				{
 					IpFamily: ptr.String("__IpFamily__"),
@@ -291,6 +301,16 @@ func TestCheckResponseSnapshot_CreateAccelerator(t *testing.T) {
 						"__Member__",
 					},
 					IpAddressFamily: types.IpAddressFamily("IPv4"),
+					IpAddressDetails: []types.IpAddressDetail{
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+					},
 				},
 			},
 			DnsName:          ptr.String("__DnsName__"),
@@ -432,6 +452,16 @@ func TestCheckResponseSnapshot_CreateCustomRoutingAccelerator(t *testing.T) {
 						"__Member__",
 					},
 					IpAddressFamily: types.IpAddressFamily("IPv4"),
+					IpAddressDetails: []types.IpAddressDetail{
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+					},
 				},
 				{
 					IpFamily: ptr.String("__IpFamily__"),
@@ -440,6 +470,16 @@ func TestCheckResponseSnapshot_CreateCustomRoutingAccelerator(t *testing.T) {
 						"__Member__",
 					},
 					IpAddressFamily: types.IpAddressFamily("IPv4"),
+					IpAddressDetails: []types.IpAddressDetail{
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+					},
 				},
 			},
 			DnsName:          ptr.String("__DnsName__"),
@@ -971,6 +1011,16 @@ func TestCheckResponseSnapshot_DescribeAccelerator(t *testing.T) {
 						"__Member__",
 					},
 					IpAddressFamily: types.IpAddressFamily("IPv4"),
+					IpAddressDetails: []types.IpAddressDetail{
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+					},
 				},
 				{
 					IpFamily: ptr.String("__IpFamily__"),
@@ -979,6 +1029,16 @@ func TestCheckResponseSnapshot_DescribeAccelerator(t *testing.T) {
 						"__Member__",
 					},
 					IpAddressFamily: types.IpAddressFamily("IPv4"),
+					IpAddressDetails: []types.IpAddressDetail{
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+					},
 				},
 			},
 			DnsName:          ptr.String("__DnsName__"),
@@ -1103,6 +1163,16 @@ func TestCheckResponseSnapshot_DescribeCustomRoutingAccelerator(t *testing.T) {
 						"__Member__",
 					},
 					IpAddressFamily: types.IpAddressFamily("IPv4"),
+					IpAddressDetails: []types.IpAddressDetail{
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+					},
 				},
 				{
 					IpFamily: ptr.String("__IpFamily__"),
@@ -1111,6 +1181,16 @@ func TestCheckResponseSnapshot_DescribeCustomRoutingAccelerator(t *testing.T) {
 						"__Member__",
 					},
 					IpAddressFamily: types.IpAddressFamily("IPv4"),
+					IpAddressDetails: []types.IpAddressDetail{
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+					},
 				},
 			},
 			DnsName:          ptr.String("__DnsName__"),
@@ -1363,6 +1443,16 @@ func TestCheckResponseSnapshot_ListAccelerators(t *testing.T) {
 							"__Member__",
 						},
 						IpAddressFamily: types.IpAddressFamily("IPv4"),
+						IpAddressDetails: []types.IpAddressDetail{
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+						},
 					},
 					{
 						IpFamily: ptr.String("__IpFamily__"),
@@ -1371,6 +1461,16 @@ func TestCheckResponseSnapshot_ListAccelerators(t *testing.T) {
 							"__Member__",
 						},
 						IpAddressFamily: types.IpAddressFamily("IPv4"),
+						IpAddressDetails: []types.IpAddressDetail{
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+						},
 					},
 				},
 				DnsName:          ptr.String("__DnsName__"),
@@ -1402,6 +1502,16 @@ func TestCheckResponseSnapshot_ListAccelerators(t *testing.T) {
 							"__Member__",
 						},
 						IpAddressFamily: types.IpAddressFamily("IPv4"),
+						IpAddressDetails: []types.IpAddressDetail{
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+						},
 					},
 					{
 						IpFamily: ptr.String("__IpFamily__"),
@@ -1410,6 +1520,16 @@ func TestCheckResponseSnapshot_ListAccelerators(t *testing.T) {
 							"__Member__",
 						},
 						IpAddressFamily: types.IpAddressFamily("IPv4"),
+						IpAddressDetails: []types.IpAddressDetail{
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+						},
 					},
 				},
 				DnsName:          ptr.String("__DnsName__"),
@@ -1653,6 +1773,16 @@ func TestCheckResponseSnapshot_ListCustomRoutingAccelerators(t *testing.T) {
 							"__Member__",
 						},
 						IpAddressFamily: types.IpAddressFamily("IPv4"),
+						IpAddressDetails: []types.IpAddressDetail{
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+						},
 					},
 					{
 						IpFamily: ptr.String("__IpFamily__"),
@@ -1661,6 +1791,16 @@ func TestCheckResponseSnapshot_ListCustomRoutingAccelerators(t *testing.T) {
 							"__Member__",
 						},
 						IpAddressFamily: types.IpAddressFamily("IPv4"),
+						IpAddressDetails: []types.IpAddressDetail{
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+						},
 					},
 				},
 				DnsName:          ptr.String("__DnsName__"),
@@ -1681,6 +1821,16 @@ func TestCheckResponseSnapshot_ListCustomRoutingAccelerators(t *testing.T) {
 							"__Member__",
 						},
 						IpAddressFamily: types.IpAddressFamily("IPv4"),
+						IpAddressDetails: []types.IpAddressDetail{
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+						},
 					},
 					{
 						IpFamily: ptr.String("__IpFamily__"),
@@ -1689,6 +1839,16 @@ func TestCheckResponseSnapshot_ListCustomRoutingAccelerators(t *testing.T) {
 							"__Member__",
 						},
 						IpAddressFamily: types.IpAddressFamily("IPv4"),
+						IpAddressDetails: []types.IpAddressDetail{
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+							{
+								IpAddress:   ptr.String("__IpAddress__"),
+								NetworkZone: ptr.String("__NetworkZone__"),
+							},
+						},
 					},
 				},
 				DnsName:          ptr.String("__DnsName__"),
@@ -2342,6 +2502,16 @@ func TestCheckResponseSnapshot_UpdateAccelerator(t *testing.T) {
 						"__Member__",
 					},
 					IpAddressFamily: types.IpAddressFamily("IPv4"),
+					IpAddressDetails: []types.IpAddressDetail{
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+					},
 				},
 				{
 					IpFamily: ptr.String("__IpFamily__"),
@@ -2350,6 +2520,16 @@ func TestCheckResponseSnapshot_UpdateAccelerator(t *testing.T) {
 						"__Member__",
 					},
 					IpAddressFamily: types.IpAddressFamily("IPv4"),
+					IpAddressDetails: []types.IpAddressDetail{
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+					},
 				},
 			},
 			DnsName:          ptr.String("__DnsName__"),
@@ -2517,6 +2697,16 @@ func TestCheckResponseSnapshot_UpdateCustomRoutingAccelerator(t *testing.T) {
 						"__Member__",
 					},
 					IpAddressFamily: types.IpAddressFamily("IPv4"),
+					IpAddressDetails: []types.IpAddressDetail{
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+					},
 				},
 				{
 					IpFamily: ptr.String("__IpFamily__"),
@@ -2525,6 +2715,16 @@ func TestCheckResponseSnapshot_UpdateCustomRoutingAccelerator(t *testing.T) {
 						"__Member__",
 					},
 					IpAddressFamily: types.IpAddressFamily("IPv4"),
+					IpAddressDetails: []types.IpAddressDetail{
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+						{
+							IpAddress:   ptr.String("__IpAddress__"),
+							NetworkZone: ptr.String("__NetworkZone__"),
+						},
+					},
 				},
 			},
 			DnsName:          ptr.String("__DnsName__"),

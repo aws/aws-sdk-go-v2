@@ -40,6 +40,13 @@ type CreateGatewayTargetInput struct {
 	// This member is required.
 	TargetConfiguration types.TargetConfiguration
 
+	// The private certificate authority (CA) configurations for the gateway target.
+	// Use this to have the gateway trust a private CA when it establishes TLS
+	// connections to the target endpoint. Provide each certificate by reference to an
+	// Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can
+	// specify only one certificate authority configuration in this list.
+	CertificateConfigurations []types.CertificateConfiguration
+
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If you don't specify this field, a value is randomly
 	// generated for you. If this token matches a previous request, the service ignores
@@ -115,6 +122,9 @@ type CreateGatewayTargetOutput struct {
 	// when a target is configured with a credential provider with authorization code
 	// grant type and requires user federation.
 	AuthorizationData types.AuthorizationData
+
+	// The private certificate authority (CA) configurations for the gateway target.
+	CertificateConfigurations []types.CertificateConfiguration
 
 	// The description of the target.
 	Description *string

@@ -3944,6 +3944,88 @@ func (v *EFSVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Configures whether Batch manages an Amazon EKS access entry on the cluster for
+// the compute environment. For information on how the fields interact with the
+// cluster's authenticationMode and with other compute environments that share the
+// cluster, see [Amazon EKS access entry authentication]in the Batch User Guide.
+//
+// Setting desiredState=ENABLED on a single compute environment does not guarantee
+// that Batch creates an access entry, and setting desiredState=DISABLED on a
+// single compute environment does not guarantee that Batch deletes one. Batch
+// compares the desiredState across all compute environments that target the same
+// cluster. The Batch-managed access entry is created only when all compute
+// environments have desiredState=ENABLED , and deleted only when all have
+// desiredState=DISABLED . If you have multiple compute environments on the same
+// cluster, set desiredState consistently across all of them to avoid uncertainty.
+// For more information, see [Reconciling desiredState across compute environments]in the Batch User Guide.
+//
+// [Reconciling desiredState across compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html#eks-access-entries-reconciliation
+// [Amazon EKS access entry authentication]: https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html
+type EksAccessEntry struct {
+
+	// The desired access entry state for the compute environment. Valid values:
+	//
+	// ENABLED Batch manages an access entry on the cluster for the compute
+	// environment.
+	//
+	// DISABLED Batch deletes the Batch-managed access entry for the cluster. This
+	// value is rejected if the cluster's authenticationMode is API , because such a
+	// cluster doesn't support the aws-auth ConfigMap.
+	//
+	// INHERIT_FROM_CLUSTER Batch defers to the cluster's current access entry status .
+	// On a cluster whose authentication mode is API , Batch creates and manages an
+	// access entry. On a cluster whose authentication mode is API_AND_CONFIG_MAP or
+	// CONFIG_MAP , Batch neither adds nor removes an access entry.
+	//
+	// This member is required.
+	DesiredState EksAccessEntryDesiredState
+
+	// The observed state of the access entry on the cluster. ACTIVE means that an
+	// access entry for the compute environment exists on the cluster and takes
+	// precedence over the aws-auth ConfigMap. INACTIVE means that no Batch-managed
+	// access entry is present. This is a read-only field returned by
+	// DescribeComputeEnvironments .
+	Status EksAccessEntryStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *EksAccessEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EksAccessEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EksAccessEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredState != "" {
+		s.WriteString(schemas.EksAccessEntry_desiredState, string(v.DesiredState))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EksAccessEntry_status, string(v.Status))
+	}
+}
+func (v *EksAccessEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EksAccessEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EksAccessEntry_desiredState:
+			var ev string
+			if err := d.ReadString(schemas.EksAccessEntry_desiredState, &ev); err != nil {
+				return err
+			}
+			v.DesiredState = EksAccessEntryDesiredState(ev)
+			return nil
+		case schemas.EksAccessEntry_status:
+			var ev string
+			if err := d.ReadString(schemas.EksAccessEntry_status, &ev); err != nil {
+				return err
+			}
+			v.Status = EksAccessEntryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An object that represents the details for an attempt for a job attempt that an
 // Amazon EKS container runs.
 type EksAttemptContainerDetail struct {
@@ -4129,6 +4211,27 @@ type EksConfiguration struct {
 	// This member is required.
 	KubernetesNamespace *string
 
+	// The Batch-managed Amazon EKS access entry for the compute environment. Set
+	// desiredState to declare whether Batch manages an access entry on the cluster. In
+	// a DescribeComputeEnvironments response, desiredState is the value that Batch
+	// recorded for the compute environment and status is the observed state of the
+	// access entry on the cluster. To change the access entry on an existing compute
+	// environment, use [EksConfigurationUpdate.accessEntry]EksConfigurationUpdate.accessEntry .
+	//
+	// Whether the entry is provisioned on the cluster depends on the cluster's
+	// authenticationMode and the desiredState recorded for each Batch compute
+	// environment targeting the cluster. For more information, see [Amazon EKS access entry authentication]in the Batch User
+	// Guide.
+	//
+	// If you don't specify this field, Batch doesn't record a desiredState for the
+	// compute environment and DescribeComputeEnvironments doesn't return one. For the
+	// purpose of provisioning the access entry, Batch behaves as it does for
+	// INHERIT_FROM_CLUSTER .
+	//
+	// [EksConfigurationUpdate.accessEntry]: https://docs.aws.amazon.com/batch/latest/APIReference/API_EksConfigurationUpdate.html#Batch-Type-EksConfigurationUpdate-accessEntry
+	// [Amazon EKS access entry authentication]: https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html
+	AccessEntry *EksAccessEntry
+
 	noSmithyDocumentSerde
 }
 
@@ -4139,6 +4242,11 @@ func (v *EksConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EksConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessEntry != nil {
+		s.WriteStruct(schemas.EksConfiguration_accessEntry)
+		v.AccessEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.EksClusterArn != nil {
 		s.WriteString(schemas.EksConfiguration_eksClusterArn, *v.EksClusterArn)
 	}
@@ -4149,12 +4257,57 @@ func (v *EksConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *EksConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EksConfiguration, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.EksConfiguration_accessEntry:
+			v.AccessEntry = &EksAccessEntry{}
+			return v.AccessEntry.Deserialize(d)
 		case schemas.EksConfiguration_eksClusterArn:
 			v.EksClusterArn = new(string)
 			return d.ReadString(schemas.EksConfiguration_eksClusterArn, v.EksClusterArn)
 		case schemas.EksConfiguration_kubernetesNamespace:
 			v.KubernetesNamespace = new(string)
 			return d.ReadString(schemas.EksConfiguration_kubernetesNamespace, v.KubernetesNamespace)
+		}
+		return nil
+	})
+}
+
+// An object that represents the attributes of an Batch compute environment's
+// Amazon EKS configuration that can be updated. Currently accessEntry is the only
+// attribute that you can change after the compute environment is created. For more
+// information, see [Amazon EKS access entry authentication]in the Batch User Guide.
+//
+// [Amazon EKS access entry authentication]: https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html
+type EksConfigurationUpdate struct {
+
+	// The updated access entry configuration for the compute environment. Set
+	// desiredState to declare whether Batch will manage an access entry on the
+	// cluster. For the accepted values, see [EksAccessEntry]EksAccessEntry .
+	//
+	// [EksAccessEntry]: https://docs.aws.amazon.com/batch/latest/APIReference/API_EksAccessEntry.html
+	AccessEntry *EksAccessEntry
+
+	noSmithyDocumentSerde
+}
+
+func (v *EksConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EksConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EksConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessEntry != nil {
+		s.WriteStruct(schemas.EksConfigurationUpdate_accessEntry)
+		v.AccessEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EksConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EksConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EksConfigurationUpdate_accessEntry:
+			v.AccessEntry = &EksAccessEntry{}
+			return v.AccessEntry.Deserialize(d)
 		}
 		return nil
 	})
@@ -11812,8 +11965,8 @@ type TaskContainerProperties struct {
 	// The private repository authentication credentials to use.
 	RepositoryCredentials *RepositoryCredentials
 
-	// The type and amount of a resource to assign to a container. The only supported
-	// resource is a GPU.
+	// The type and amount of a resource to assign to a container. The supported
+	// resources include GPU , MEMORY , and VCPU .
 	ResourceRequirements []ResourceRequirement
 
 	// The secrets to pass to the container. For more information, see [Specifying Sensitive Data] in the Amazon

@@ -2985,6 +2985,11 @@ type ExportDescription struct {
 	// Export failure reason description.
 	FailureMessage *string
 
+	// The filter criteria applied to the export. When present, only items that match
+	// the specified key conditions and filter expressions are included in the export
+	// output.
+	FilterSpecification *FilterSpecification
+
 	// Optional object containing the parameters specific to an incremental export.
 	IncrementalExportSpecification *IncrementalExportSpecification
 
@@ -3065,6 +3070,11 @@ func (v *ExportDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.FailureMessage != nil {
 		s.WriteString(schemas.ExportDescription_FailureMessage, *v.FailureMessage)
+	}
+	if v.FilterSpecification != nil {
+		s.WriteStruct(schemas.ExportDescription_FilterSpecification)
+		v.FilterSpecification.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.IncrementalExportSpecification != nil {
 		s.WriteStruct(schemas.ExportDescription_IncrementalExportSpecification)
@@ -3147,6 +3157,9 @@ func (v *ExportDescription) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ExportDescription_FailureMessage:
 			v.FailureMessage = new(string)
 			return d.ReadString(schemas.ExportDescription_FailureMessage, v.FailureMessage)
+		case schemas.ExportDescription_FilterSpecification:
+			v.FilterSpecification = &FilterSpecification{}
+			return v.FilterSpecification.Deserialize(d)
 		case schemas.ExportDescription_IncrementalExportSpecification:
 			v.IncrementalExportSpecification = &IncrementalExportSpecification{}
 			return v.IncrementalExportSpecification.Deserialize(d)
@@ -3279,6 +3292,86 @@ func (v *FailureException) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.FailureException_ExceptionName:
 			v.ExceptionName = new(string)
 			return d.ReadString(schemas.FailureException_ExceptionName, v.ExceptionName)
+		}
+		return nil
+	})
+}
+
+// Contains the filter criteria used to limit which items are included in an
+// export. If you don't include this parameter, all items and attributes are
+// exported.
+type FilterSpecification struct {
+
+	// One or more substitution tokens for attribute names in an expression. For more
+	// information, see [Expression Attribute Names]in the Amazon DynamoDB Developer Guide.
+	//
+	// [Expression Attribute Names]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeNames.html
+	ExpressionAttributeNames map[string]string
+
+	// One or more values that can be substituted in an expression. For more
+	// information, see [Expression Attribute Values]in the Amazon DynamoDB Developer Guide.
+	//
+	// [Expression Attribute Values]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeValues.html
+	ExpressionAttributeValues map[string]AttributeValue
+
+	// A condition that filters which items are included in the export. This parameter
+	// uses the same syntax as FilterExpression in Query and Scan . If you don't
+	// provide KeyConditionExpression , this expression can also reference key
+	// attributes. If you don't specify this parameter, all items are included in the
+	// export.
+	FilterExpression *string
+
+	// A condition expression that filters items by key values. The expression must
+	// test equality on a single partition key value and can optionally compare a sort
+	// key value. This parameter uses the same syntax as KeyConditionExpression in
+	// Query . When you provide this parameter, FilterExpression can only reference
+	// non-key attributes. If you don't specify this parameter, all items are eligible
+	// for export.
+	KeyConditionExpression *string
+
+	// The attributes you want to retrieve for items included in the export. Separate
+	// attribute names in the expression with commas. If you don't specify this
+	// parameter, all attributes are returned.
+	ProjectionExpression *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FilterSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FilterSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FilterSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExpressionAttributeNameMap(s, schemas.FilterSpecification_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	serializeExpressionAttributeValueMap(s, schemas.FilterSpecification_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	if v.FilterExpression != nil {
+		s.WriteString(schemas.FilterSpecification_FilterExpression, *v.FilterExpression)
+	}
+	if v.KeyConditionExpression != nil {
+		s.WriteString(schemas.FilterSpecification_KeyConditionExpression, *v.KeyConditionExpression)
+	}
+	if v.ProjectionExpression != nil {
+		s.WriteString(schemas.FilterSpecification_ProjectionExpression, *v.ProjectionExpression)
+	}
+}
+func (v *FilterSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FilterSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FilterSpecification_ExpressionAttributeNames:
+			return deserializeExpressionAttributeNameMap(d, schemas.FilterSpecification_ExpressionAttributeNames, &v.ExpressionAttributeNames)
+		case schemas.FilterSpecification_ExpressionAttributeValues:
+			return deserializeExpressionAttributeValueMap(d, schemas.FilterSpecification_ExpressionAttributeValues, &v.ExpressionAttributeValues)
+		case schemas.FilterSpecification_FilterExpression:
+			v.FilterExpression = new(string)
+			return d.ReadString(schemas.FilterSpecification_FilterExpression, v.FilterExpression)
+		case schemas.FilterSpecification_KeyConditionExpression:
+			v.KeyConditionExpression = new(string)
+			return d.ReadString(schemas.FilterSpecification_KeyConditionExpression, v.KeyConditionExpression)
+		case schemas.FilterSpecification_ProjectionExpression:
+			v.ProjectionExpression = new(string)
+			return d.ReadString(schemas.FilterSpecification_ProjectionExpression, v.ProjectionExpression)
 		}
 		return nil
 	})

@@ -1026,11 +1026,21 @@ func TestCheckRequestSnapshot_CreateService(t *testing.T) {
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
 			},
 			{
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
 			},
 		},
 		Monitoring: &types.MonitoringConfiguration{
@@ -5596,11 +5606,21 @@ func TestCheckRequestSnapshot_UpdateService(t *testing.T) {
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
 			},
 			{
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
 			},
 		},
 		Monitoring: &types.MonitoringConfiguration{
@@ -6558,11 +6578,21 @@ func TestUpdateRequestSnapshot_CreateService(t *testing.T) {
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
 			},
 			{
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
 			},
 		},
 		Monitoring: &types.MonitoringConfiguration{
@@ -11128,11 +11158,21 @@ func TestUpdateRequestSnapshot_UpdateService(t *testing.T) {
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
 			},
 			{
 				RoleArn:        ptr.String("__RoleArn__"),
 				TargetGroupArn: ptr.String("__TargetGroupArn__"),
 				PortName:       ptr.String("__PortName__"),
+				AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+					AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+					ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+					TestListenerRule:        ptr.String("__TestListenerRule__"),
+				},
 			},
 		},
 		Monitoring: &types.MonitoringConfiguration{

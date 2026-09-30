@@ -1252,7 +1252,7 @@ var ExportConflictException_message *smithy.Schema
 var ExportDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ExportDescription",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var ExportDescription_ExportArn *smithy.Schema
 
 var ExportDescription_ExportStatus *smithy.Schema
@@ -1294,6 +1294,8 @@ var ExportDescription_ItemCount *smithy.Schema
 var ExportDescription_ExportType *smithy.Schema
 
 var ExportDescription_IncrementalExportSpecification *smithy.Schema
+
+var ExportDescription_FilterSpecification *smithy.Schema
 
 var _ExportEndTime = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
@@ -1437,6 +1439,20 @@ var _FilterConditionMap = smithy.NewSchema(smithy.ShapeID{
 var _FilterConditionMap_key *smithy.Schema
 
 var _FilterConditionMap_value *smithy.Schema
+
+var FilterSpecification = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "FilterSpecification",
+}, smithy.ShapeTypeStructure, 5)
+var FilterSpecification_FilterExpression *smithy.Schema
+
+var FilterSpecification_ProjectionExpression *smithy.Schema
+
+var FilterSpecification_KeyConditionExpression *smithy.Schema
+
+var FilterSpecification_ExpressionAttributeNames *smithy.Schema
+
+var FilterSpecification_ExpressionAttributeValues *smithy.Schema
 
 var Get = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
@@ -4115,7 +4131,7 @@ var ExecuteTransactionOutput_ConsumedCapacity *smithy.Schema
 var ExportTableToPointInTimeInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ExportTableToPointInTimeInput",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var ExportTableToPointInTimeInput_TableArn *smithy.Schema
 
 var ExportTableToPointInTimeInput_ExportTime *smithy.Schema
@@ -4137,6 +4153,8 @@ var ExportTableToPointInTimeInput_ExportFormat *smithy.Schema
 var ExportTableToPointInTimeInput_ExportType *smithy.Schema
 
 var ExportTableToPointInTimeInput_IncrementalExportSpecification *smithy.Schema
+
+var ExportTableToPointInTimeInput_FilterSpecification *smithy.Schema
 
 var ExportTableToPointInTimeOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
@@ -5603,6 +5621,16 @@ func init() {
 
 	IncrementalExportSpecification_ExportViewType = IncrementalExportSpecification.AddMember("ExportViewType", ExportViewType)
 
+	FilterSpecification_FilterExpression = FilterSpecification.AddMember("FilterExpression", _ConditionExpression)
+
+	FilterSpecification_ProjectionExpression = FilterSpecification.AddMember("ProjectionExpression", _ProjectionExpression)
+
+	FilterSpecification_KeyConditionExpression = FilterSpecification.AddMember("KeyConditionExpression", _KeyExpression)
+
+	FilterSpecification_ExpressionAttributeNames = FilterSpecification.AddMember("ExpressionAttributeNames", _ExpressionAttributeNameMap)
+
+	FilterSpecification_ExpressionAttributeValues = FilterSpecification.AddMember("ExpressionAttributeValues", _ExpressionAttributeValueMap)
+
 	ExportDescription_ExportArn = ExportDescription.AddMember("ExportArn", _ExportArn)
 
 	ExportDescription_ExportStatus = ExportDescription.AddMember("ExportStatus", ExportStatus)
@@ -5644,6 +5672,8 @@ func init() {
 	ExportDescription_ExportType = ExportDescription.AddMember("ExportType", ExportType)
 
 	ExportDescription_IncrementalExportSpecification = ExportDescription.AddMember("IncrementalExportSpecification", IncrementalExportSpecification)
+
+	ExportDescription_FilterSpecification = ExportDescription.AddMember("FilterSpecification", FilterSpecification)
 
 	ExportNotFoundException_message = ExportNotFoundException.AddMember("message", _ErrorMessage)
 
@@ -6740,6 +6770,8 @@ func init() {
 	ExportTableToPointInTimeInput_ExportType = ExportTableToPointInTimeInput.AddMember("ExportType", ExportType)
 
 	ExportTableToPointInTimeInput_IncrementalExportSpecification = ExportTableToPointInTimeInput.AddMember("IncrementalExportSpecification", IncrementalExportSpecification)
+
+	ExportTableToPointInTimeInput_FilterSpecification = ExportTableToPointInTimeInput.AddMember("FilterSpecification", FilterSpecification)
 
 	ExportTableToPointInTimeOutput_ExportDescription = ExportTableToPointInTimeOutput.AddMember("ExportDescription", ExportDescription)
 

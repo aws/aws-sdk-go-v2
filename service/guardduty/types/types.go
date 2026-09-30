@@ -4017,6 +4017,10 @@ func (v *DetectorAdditionalConfiguration) Deserialize(d smithy.ShapeDeserializer
 // Information about the additional configuration.
 type DetectorAdditionalConfigurationResult struct {
 
+	// Indicates what manages the additional configuration. A value of GUARDDUTY_POLICY
+	// means a GuardDuty policy manages the additional configuration.
+	ManagedBy ManagedBy
+
 	// Name of the additional configuration.
 	Name FeatureAdditionalConfiguration
 
@@ -4037,6 +4041,9 @@ func (v *DetectorAdditionalConfigurationResult) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *DetectorAdditionalConfigurationResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedBy != "" {
+		s.WriteString(schemas.DetectorAdditionalConfigurationResult_ManagedBy, string(v.ManagedBy))
+	}
 	if v.Name != "" {
 		s.WriteString(schemas.DetectorAdditionalConfigurationResult_Name, string(v.Name))
 	}
@@ -4050,6 +4057,13 @@ func (v *DetectorAdditionalConfigurationResult) SerializeMembers(s smithy.ShapeS
 func (v *DetectorAdditionalConfigurationResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DetectorAdditionalConfigurationResult, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DetectorAdditionalConfigurationResult_ManagedBy:
+			var ev string
+			if err := d.ReadString(schemas.DetectorAdditionalConfigurationResult_ManagedBy, &ev); err != nil {
+				return err
+			}
+			v.ManagedBy = ManagedBy(ev)
+			return nil
 		case schemas.DetectorAdditionalConfigurationResult_Name:
 			var ev string
 			if err := d.ReadString(schemas.DetectorAdditionalConfigurationResult_Name, &ev); err != nil {
@@ -4146,6 +4160,10 @@ type DetectorFeatureConfigurationResult struct {
 	// Additional configuration for a resource.
 	AdditionalConfiguration []DetectorAdditionalConfigurationResult
 
+	// Indicates what manages the feature. A value of GUARDDUTY_POLICY means a
+	// GuardDuty policy manages the feature.
+	ManagedBy ManagedBy
+
 	// Indicates the name of the feature that can be enabled for the detector.
 	Name DetectorFeatureResult
 
@@ -4166,6 +4184,9 @@ func (v *DetectorFeatureConfigurationResult) Serialize(s smithy.ShapeSerializer)
 
 func (v *DetectorFeatureConfigurationResult) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeDetectorAdditionalConfigurationResults(s, schemas.DetectorFeatureConfigurationResult_AdditionalConfiguration, v.AdditionalConfiguration)
+	if v.ManagedBy != "" {
+		s.WriteString(schemas.DetectorFeatureConfigurationResult_ManagedBy, string(v.ManagedBy))
+	}
 	if v.Name != "" {
 		s.WriteString(schemas.DetectorFeatureConfigurationResult_Name, string(v.Name))
 	}
@@ -4181,6 +4202,13 @@ func (v *DetectorFeatureConfigurationResult) Deserialize(d smithy.ShapeDeseriali
 		switch s {
 		case schemas.DetectorFeatureConfigurationResult_AdditionalConfiguration:
 			return deserializeDetectorAdditionalConfigurationResults(d, schemas.DetectorFeatureConfigurationResult_AdditionalConfiguration, &v.AdditionalConfiguration)
+		case schemas.DetectorFeatureConfigurationResult_ManagedBy:
+			var ev string
+			if err := d.ReadString(schemas.DetectorFeatureConfigurationResult_ManagedBy, &ev); err != nil {
+				return err
+			}
+			v.ManagedBy = ManagedBy(ev)
+			return nil
 		case schemas.DetectorFeatureConfigurationResult_Name:
 			var ev string
 			if err := d.ReadString(schemas.DetectorFeatureConfigurationResult_Name, &ev); err != nil {
@@ -8942,6 +8970,10 @@ func (v *MemberAdditionalConfiguration) Deserialize(d smithy.ShapeDeserializer) 
 // Information about the additional configuration for the member account.
 type MemberAdditionalConfigurationResult struct {
 
+	// Indicates what manages the additional configuration. A value of GUARDDUTY_POLICY
+	// means a GuardDuty policy manages the additional configuration.
+	ManagedBy ManagedBy
+
 	// Indicates the name of the additional configuration that is set for the member
 	// account.
 	Name OrgFeatureAdditionalConfiguration
@@ -8964,6 +8996,9 @@ func (v *MemberAdditionalConfigurationResult) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *MemberAdditionalConfigurationResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedBy != "" {
+		s.WriteString(schemas.MemberAdditionalConfigurationResult_ManagedBy, string(v.ManagedBy))
+	}
 	if v.Name != "" {
 		s.WriteString(schemas.MemberAdditionalConfigurationResult_Name, string(v.Name))
 	}
@@ -8977,6 +9012,13 @@ func (v *MemberAdditionalConfigurationResult) SerializeMembers(s smithy.ShapeSer
 func (v *MemberAdditionalConfigurationResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MemberAdditionalConfigurationResult, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.MemberAdditionalConfigurationResult_ManagedBy:
+			var ev string
+			if err := d.ReadString(schemas.MemberAdditionalConfigurationResult_ManagedBy, &ev); err != nil {
+				return err
+			}
+			v.ManagedBy = ManagedBy(ev)
+			return nil
 		case schemas.MemberAdditionalConfigurationResult_Name:
 			var ev string
 			if err := d.ReadString(schemas.MemberAdditionalConfigurationResult_Name, &ev); err != nil {
@@ -9114,6 +9156,10 @@ type MemberFeaturesConfigurationResult struct {
 	// the member account.
 	AdditionalConfiguration []MemberAdditionalConfigurationResult
 
+	// Indicates what manages the feature. A value of GUARDDUTY_POLICY means a
+	// GuardDuty policy manages the feature.
+	ManagedBy ManagedBy
+
 	// Indicates the name of the feature that is enabled for the detector.
 	Name OrgFeature
 
@@ -9134,6 +9180,9 @@ func (v *MemberFeaturesConfigurationResult) Serialize(s smithy.ShapeSerializer) 
 
 func (v *MemberFeaturesConfigurationResult) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeMemberAdditionalConfigurationResults(s, schemas.MemberFeaturesConfigurationResult_AdditionalConfiguration, v.AdditionalConfiguration)
+	if v.ManagedBy != "" {
+		s.WriteString(schemas.MemberFeaturesConfigurationResult_ManagedBy, string(v.ManagedBy))
+	}
 	if v.Name != "" {
 		s.WriteString(schemas.MemberFeaturesConfigurationResult_Name, string(v.Name))
 	}
@@ -9149,6 +9198,13 @@ func (v *MemberFeaturesConfigurationResult) Deserialize(d smithy.ShapeDeserializ
 		switch s {
 		case schemas.MemberFeaturesConfigurationResult_AdditionalConfiguration:
 			return deserializeMemberAdditionalConfigurationResults(d, schemas.MemberFeaturesConfigurationResult_AdditionalConfiguration, &v.AdditionalConfiguration)
+		case schemas.MemberFeaturesConfigurationResult_ManagedBy:
+			var ev string
+			if err := d.ReadString(schemas.MemberFeaturesConfigurationResult_ManagedBy, &ev); err != nil {
+				return err
+			}
+			v.ManagedBy = ManagedBy(ev)
+			return nil
 		case schemas.MemberFeaturesConfigurationResult_Name:
 			var ev string
 			if err := d.ReadString(schemas.MemberFeaturesConfigurationResult_Name, &ev); err != nil {

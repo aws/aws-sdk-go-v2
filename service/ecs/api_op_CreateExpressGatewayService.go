@@ -63,9 +63,8 @@ type CreateExpressGatewayServiceInput struct {
 	// Express service is 256 (.25 vCPU).
 	Cpu *string
 
-	// The CPU architecture that the tasks in the Express service run on. Amazon ECS
-	// applies this value to the task definition revision that it registers for the
-	// service. If you don't specify a value, the default is X86_64 .
+	// The CPU architecture that the task runs on. If you don't specify a value, the
+	// default is X86_64 .
 	//
 	// Valid values:
 	//
@@ -73,13 +72,10 @@ type CreateExpressGatewayServiceInput struct {
 	//
 	//   - ARM64 - The 64-bit ARM architecture.
 	//
-	// Make sure that the container image that you specify supports the architecture
-	// that you choose. The operating system family for an Express service is always
-	// LINUX .
+	// Ensure that the container image you specify supports the architecture you
+	// choose. The operating system family for an Express service is always LINUX .
 	//
-	// You can't specify cpuArchitecture when you also specify taskDefinitionArn ,
-	// because this value applies only to a task definition that Amazon ECS registers
-	// on your behalf.
+	// You can't specify cpuArchitecture together with taskDefinitionArn .
 	CpuArchitecture types.ExpressCpuArchitecture
 
 	// The Amazon Resource Name (ARN) of the task execution role that grants the

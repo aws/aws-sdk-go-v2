@@ -1,0 +1,8 @@
+{
+    "id": "ec125ace-cd2f-40a5-b0d0-390fa4063989",
+    "type": "feature",
+    "description": "Releasing VPCL for BlueGreen ecs deployments.",
+    "modules": [
+        "service/ecs"
+    ]
+}

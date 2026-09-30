@@ -1344,6 +1344,23 @@ func (MalwareProtectionScanType) Values() []MalwareProtectionScanType {
 	}
 }
 
+type ManagedBy string
+
+// Enum values for ManagedBy
+const (
+	ManagedByGuarddutyPolicy ManagedBy = "GUARDDUTY_POLICY"
+)
+
+// Values returns all known values for ManagedBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedBy) Values() []ManagedBy {
+	return []ManagedBy{
+		"GUARDDUTY_POLICY",
+	}
+}
+
 type ManagementType string
 
 // Enum values for ManagementType

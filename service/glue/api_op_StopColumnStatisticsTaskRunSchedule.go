@@ -37,6 +37,10 @@ type StopColumnStatisticsTaskRunScheduleInput struct {
 	// This member is required.
 	TableName *string
 
+	// The ID of the Data Catalog where the table resides. If none is supplied, the
+	// Amazon Web Services account ID is used by default.
+	CatalogID *string
+
 	noSmithyDocumentSerde
 }
 
@@ -47,6 +51,9 @@ func (v *StopColumnStatisticsTaskRunScheduleInput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *StopColumnStatisticsTaskRunScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogID != nil {
+		s.WriteString(schemas.StopColumnStatisticsTaskRunScheduleRequest_CatalogID, *v.CatalogID)
+	}
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.StopColumnStatisticsTaskRunScheduleRequest_DatabaseName, *v.DatabaseName)
 	}

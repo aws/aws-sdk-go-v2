@@ -645,6 +645,35 @@ func TestCheckRequestSnapshot_ListVectors(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_PutVectorBucketDefaultIndexMode(t *testing.T) {
+	input := &PutVectorBucketDefaultIndexModeInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+		DefaultIndexMode: types.IndexMode("CLASSIC"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutVectorBucketDefaultIndexMode(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutVectorBucketDefaultIndexMode"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_PutVectorBucketPolicy(t *testing.T) {
 	input := &PutVectorBucketPolicyInput{
 		VectorBucketName: ptr.String("__VectorBucketName__"),
@@ -738,6 +767,7 @@ func TestCheckRequestSnapshot_QueryVectors(t *testing.T) {
 			},
 		},
 		Filter:         document.NewLazyDocument("__Document__"),
+		QueryMode:      types.IndexMode("CLASSIC"),
 		ReturnMetadata: true,
 		ReturnDistance: true,
 		NextToken:      ptr.String("__NextToken__"),
@@ -822,6 +852,36 @@ func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateIndexMode(t *testing.T) {
+	input := &UpdateIndexModeInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+		IndexMode:        types.IndexMode("CLASSIC"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateIndexMode(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIndexMode"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1264,6 +1324,35 @@ func TestUpdateRequestSnapshot_ListVectors(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_PutVectorBucketDefaultIndexMode(t *testing.T) {
+	input := &PutVectorBucketDefaultIndexModeInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		VectorBucketArn:  ptr.String("__VectorBucketArn__"),
+		DefaultIndexMode: types.IndexMode("CLASSIC"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutVectorBucketDefaultIndexMode(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutVectorBucketDefaultIndexMode"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_PutVectorBucketPolicy(t *testing.T) {
 	input := &PutVectorBucketPolicyInput{
 		VectorBucketName: ptr.String("__VectorBucketName__"),
@@ -1357,6 +1446,7 @@ func TestUpdateRequestSnapshot_QueryVectors(t *testing.T) {
 			},
 		},
 		Filter:         document.NewLazyDocument("__Document__"),
+		QueryMode:      types.IndexMode("CLASSIC"),
 		ReturnMetadata: true,
 		ReturnDistance: true,
 		NextToken:      ptr.String("__NextToken__"),
@@ -1441,6 +1531,36 @@ func TestUpdateRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateIndexMode(t *testing.T) {
+	input := &UpdateIndexModeInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+		IndexMode:        types.IndexMode("CLASSIC"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateIndexMode(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIndexMode"); err != nil {
 		t.Fatal(err)
 	}
 }

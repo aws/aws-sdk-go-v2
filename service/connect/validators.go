@@ -12552,6 +12552,11 @@ func validateRuleAction(v *types.RuleAction) error {
 			invalidParams.AddNested("ExtractInformationAction", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SendInAppNotificationAction != nil {
+		if err := validateSendInAppNotificationActionDefinition(v.SendInAppNotificationAction); err != nil {
+			invalidParams.AddNested("SendInAppNotificationAction", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -12883,6 +12888,24 @@ func validateSearchCriteria(v *types.SearchCriteria) error {
 		if err := validateSearchableSegmentAttributes(v.SearchableSegmentAttributes); err != nil {
 			invalidParams.AddNested("SearchableSegmentAttributes", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSendInAppNotificationActionDefinition(v *types.SendInAppNotificationActionDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendInAppNotificationActionDefinition"}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if v.Recipient == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Recipient"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

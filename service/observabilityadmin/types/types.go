@@ -402,7 +402,8 @@ type LabelNameCondition struct {
 
 // The configuration parameters for log delivery, including logType settings.
 // Applies to resource types that support configurable log delivery, such as Amazon
-// Bedrock Knowledge Bases and Elastic Load Balancing Application Load Balancers.
+// Bedrock Knowledge Bases, Amazon Bedrock AgentCore payment managers, and Elastic
+// Load Balancing Application Load Balancers.
 type LogDeliveryParameters struct {
 
 	// The types of logs to collect from the resource.
@@ -765,8 +766,9 @@ type TelemetryDestinationConfiguration struct {
 	KmsKeyArn *string
 
 	// The configuration parameters for log delivery when the resource type supports
-	// configurable log types, such as Amazon Bedrock Knowledge Bases or Elastic Load
-	// Balancing Application Load Balancers.
+	// configurable log types, such as Amazon Bedrock Knowledge Bases, Amazon Bedrock
+	// AgentCore payment managers, or Elastic Load Balancing Application Load
+	// Balancers.
 	LogDeliveryParameters *LogDeliveryParameters
 
 	//  Configuration parameters specific to MSK monitoring when MSK is the resource
@@ -931,7 +933,8 @@ type TelemetryRule struct {
 
 	//  The type of Amazon Web Services resource to configure telemetry for (for
 	// example, AWS::EC2::VPC , AWS::EKS::Cluster ,
-	// AWS::ElasticLoadBalancingV2::LoadBalancer , or AWS::Bedrock::KnowledgeBase ).
+	// AWS::ElasticLoadBalancingV2::LoadBalancer , AWS::Bedrock::KnowledgeBase , or
+	// AWS::BedrockAgentCore::PaymentManager ).
 	ResourceType ResourceType
 
 	//  The organizational scope to which the rule applies, specified using accounts

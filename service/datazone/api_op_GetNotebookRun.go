@@ -98,6 +98,10 @@ type GetNotebookRunOutput struct {
 	// The network configuration of the notebook run.
 	NetworkConfiguration *types.NetworkConfig
 
+	// The notification configuration of the notebook run, including the notebook run
+	// states that trigger notifications.
+	NotificationConfiguration *types.NotificationConfig
+
 	// The sensitive parameters of the notebook run.
 	Parameters map[string]string
 

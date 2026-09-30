@@ -393,6 +393,10 @@ func TestCheckRequestSnapshot_CreateComputeEnvironment(t *testing.T) {
 		EksConfiguration: &types.EksConfiguration{
 			EksClusterArn:       ptr.String("__EksClusterArn__"),
 			KubernetesNamespace: ptr.String("__KubernetesNamespace__"),
+			AccessEntry: &types.EksAccessEntry{
+				DesiredState: types.EksAccessEntryDesiredState("ENABLED"),
+				Status:       types.EksAccessEntryStatus("ACTIVE"),
+			},
 		},
 		Context: ptr.String("__Context__"),
 		EcsSettings: &types.EcsSettings{
@@ -6438,6 +6442,12 @@ func TestCheckRequestSnapshot_UpdateComputeEnvironment(t *testing.T) {
 		EcsSettings: &types.EcsSettings{
 			ContainerInsights: types.ContainerInsights("ENABLED"),
 		},
+		EksConfiguration: &types.EksConfigurationUpdate{
+			AccessEntry: &types.EksAccessEntry{
+				DesiredState: types.EksAccessEntryDesiredState("ENABLED"),
+				Status:       types.EksAccessEntryStatus("ACTIVE"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6898,6 +6908,10 @@ func TestUpdateRequestSnapshot_CreateComputeEnvironment(t *testing.T) {
 		EksConfiguration: &types.EksConfiguration{
 			EksClusterArn:       ptr.String("__EksClusterArn__"),
 			KubernetesNamespace: ptr.String("__KubernetesNamespace__"),
+			AccessEntry: &types.EksAccessEntry{
+				DesiredState: types.EksAccessEntryDesiredState("ENABLED"),
+				Status:       types.EksAccessEntryStatus("ACTIVE"),
+			},
 		},
 		Context: ptr.String("__Context__"),
 		EcsSettings: &types.EcsSettings{
@@ -12942,6 +12956,12 @@ func TestUpdateRequestSnapshot_UpdateComputeEnvironment(t *testing.T) {
 		Context: ptr.String("__Context__"),
 		EcsSettings: &types.EcsSettings{
 			ContainerInsights: types.ContainerInsights("ENABLED"),
+		},
+		EksConfiguration: &types.EksConfigurationUpdate{
+			AccessEntry: &types.EksAccessEntry{
+				DesiredState: types.EksAccessEntryDesiredState("ENABLED"),
+				Status:       types.EksAccessEntryStatus("ACTIVE"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}

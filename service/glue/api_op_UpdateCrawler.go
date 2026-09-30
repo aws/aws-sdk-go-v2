@@ -34,6 +34,10 @@ type UpdateCrawlerInput struct {
 	// This member is required.
 	Name *string
 
+	// The ID of the Data Catalog in which to store the crawler's output. If you omit
+	// this value, the existing value on the crawler is preserved.
+	CatalogId *string
+
 	// A list of custom classifiers that the user has registered. By default, all
 	// built-in classifiers are included in a crawl, but these custom classifiers
 	// always override the default classifiers for a given classification.
@@ -94,6 +98,9 @@ func (v *UpdateCrawlerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateCrawlerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.UpdateCrawlerRequest_CatalogId, *v.CatalogId)
+	}
 	serializeClassifierNameList(s, schemas.UpdateCrawlerRequest_Classifiers, v.Classifiers)
 	if v.Configuration != nil {
 		s.WriteString(schemas.UpdateCrawlerRequest_Configuration, *v.Configuration)

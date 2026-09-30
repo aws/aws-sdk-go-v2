@@ -110,6 +110,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutVectorBucketDefaultIndexMode struct {
+}
+
+func (*validateOpPutVectorBucketDefaultIndexMode) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutVectorBucketDefaultIndexMode) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutVectorBucketDefaultIndexModeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutVectorBucketDefaultIndexModeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutVectorBucketPolicy struct {
 }
 
@@ -210,6 +230,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateIndexMode struct {
+}
+
+func (*validateOpUpdateIndexMode) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIndexMode) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIndexModeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIndexModeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIndex{}, middleware.After)
 }
@@ -230,6 +270,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpPutVectorBucketDefaultIndexModeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutVectorBucketDefaultIndexMode{}, middleware.After)
+}
+
 func addOpPutVectorBucketPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutVectorBucketPolicy{}, middleware.After)
 }
@@ -248,6 +292,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateIndexModeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIndexMode{}, middleware.After)
 }
 
 func validateMetadataConfiguration(v *types.MetadataConfiguration) error {
@@ -389,6 +437,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpPutVectorBucketDefaultIndexModeInput(v *PutVectorBucketDefaultIndexModeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutVectorBucketDefaultIndexModeInput"}
+	if len(v.DefaultIndexMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultIndexMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutVectorBucketPolicyInput(v *PutVectorBucketPolicyInput) error {
 	if v == nil {
 		return nil
@@ -469,6 +532,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIndexModeInput(v *UpdateIndexModeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIndexModeInput"}
+	if len(v.IndexMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

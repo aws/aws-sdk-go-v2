@@ -9625,6 +9625,24 @@ func validateClarifyTextConfig(v *types.ClarifyTextConfig) error {
 	}
 }
 
+func validateClusterAccountingDatabase(v *types.ClusterAccountingDatabase) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterAccountingDatabase"}
+	if v.Endpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateClusterAutoPatchConfig(v *types.ClusterAutoPatchConfig) error {
 	if v == nil {
 		return nil
@@ -9884,6 +9902,11 @@ func validateClusterOrchestrator(v *types.ClusterOrchestrator) error {
 			invalidParams.AddNested("Eks", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Slurm != nil {
+		if err := validateClusterOrchestratorSlurmConfig(v.Slurm); err != nil {
+			invalidParams.AddNested("Slurm", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -9898,6 +9921,23 @@ func validateClusterOrchestratorEksConfig(v *types.ClusterOrchestratorEksConfig)
 	invalidParams := smithy.InvalidParamsError{Context: "ClusterOrchestratorEksConfig"}
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClusterOrchestratorSlurmConfig(v *types.ClusterOrchestratorSlurmConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterOrchestratorSlurmConfig"}
+	if v.AccountingDatabase != nil {
+		if err := validateClusterAccountingDatabase(v.AccountingDatabase); err != nil {
+			invalidParams.AddNested("AccountingDatabase", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

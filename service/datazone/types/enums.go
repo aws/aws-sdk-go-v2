@@ -1474,6 +1474,42 @@ func (NotificationType) Values() []NotificationType {
 	}
 }
 
+type NotifyOnState string
+
+// Enum values for NotifyOnState
+const (
+	// Notify when the notebook run succeeds.
+	NotifyOnStateSucceeded NotifyOnState = "SUCCEEDED"
+	// Notify when the notebook run fails.
+	NotifyOnStateFailed NotifyOnState = "FAILED"
+	// Notify when the notebook run is stopped.
+	NotifyOnStateStopped NotifyOnState = "STOPPED"
+	// Notify when the notebook run is queued.
+	NotifyOnStateQueued NotifyOnState = "QUEUED"
+	// Notify when the notebook run is starting.
+	NotifyOnStateStarting NotifyOnState = "STARTING"
+	// Notify when the notebook run is running.
+	NotifyOnStateRunning NotifyOnState = "RUNNING"
+	// Notify when the notebook run is stopping.
+	NotifyOnStateStopping NotifyOnState = "STOPPING"
+)
+
+// Values returns all known values for NotifyOnState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotifyOnState) Values() []NotifyOnState {
+	return []NotifyOnState{
+		"SUCCEEDED",
+		"FAILED",
+		"STOPPED",
+		"QUEUED",
+		"STARTING",
+		"RUNNING",
+		"STOPPING",
+	}
+}
+
 type OAuth2GrantType string
 
 // Enum values for OAuth2GrantType

@@ -78,6 +78,17 @@ type QueryVectorsInput struct {
 	// an initial request.
 	NextToken *string
 
+	// The mode to use to process the query. If you don't specify a query mode, the
+	// operation uses the mode that's currently configured for the vector index.
+	//
+	// Valid values:
+	//
+	//   - CLASSIC - Applies metadata filters during the vector search. You can't
+	//   specify CLASSIC for an ENHANCED index.
+	//
+	//   - ENHANCED - Applies metadata filters before the vector search.
+	QueryMode types.IndexMode
+
 	// Indicates whether to include the computed distance in the response. The default
 	// value is false .
 	ReturnDistance bool

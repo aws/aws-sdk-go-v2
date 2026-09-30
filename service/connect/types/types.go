@@ -28278,6 +28278,16 @@ type RuleAction struct {
 	// Information about the extract information action.
 	ExtractInformationAction *ExtractInformationActionDefinition
 
+	// Information about the send in-app notification action.
+	//
+	// Supported only for TriggerEventSource values: OnPostCallAnalysisAvailable |
+	// OnRealTimeCallAnalysisAvailable | OnRealTimeChatAnalysisAvailable |
+	// OnPostChatAnalysisAvailable | OnAfterCallWorkAvailable |
+	// OnAfterChatWorkAvailable | OnEmailAnalysisAvailable | OnContactEvaluationSubmit
+	// | OnCaseCreate | OnCaseUpdate | OnSlaBreach | OnSchedulePublish |
+	// OnScheduleUpdate | OnScheduleTimeOffRequestActivity
+	SendInAppNotificationAction *SendInAppNotificationActionDefinition
+
 	// Information about the send notification action.
 	//
 	// Supported only for TriggerEventSource values: OnPostCallAnalysisAvailable |
@@ -28341,6 +28351,11 @@ func (v *RuleAction) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ExtractInformationAction.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.SendInAppNotificationAction != nil {
+		s.WriteStruct(schemas.RuleAction_SendInAppNotificationAction)
+		v.SendInAppNotificationAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SendNotificationAction != nil {
 		s.WriteStruct(schemas.RuleAction_SendNotificationAction)
 		v.SendNotificationAction.SerializeMembers(s)
@@ -28390,6 +28405,9 @@ func (v *RuleAction) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RuleAction_ExtractInformationAction:
 			v.ExtractInformationAction = &ExtractInformationActionDefinition{}
 			return v.ExtractInformationAction.Deserialize(d)
+		case schemas.RuleAction_SendInAppNotificationAction:
+			v.SendInAppNotificationAction = &SendInAppNotificationActionDefinition{}
+			return v.SendInAppNotificationAction.Deserialize(d)
 		case schemas.RuleAction_SendNotificationAction:
 			v.SendNotificationAction = &SendNotificationActionDefinition{}
 			return v.SendNotificationAction.Deserialize(d)
@@ -30173,6 +30191,76 @@ func (v *SegmentAttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SegmentAttributeValue_ValueString:
 			v.ValueString = new(string)
 			return d.ReadString(schemas.SegmentAttributeValue_ValueString, v.ValueString)
+		}
+		return nil
+	})
+}
+
+// Information about the send in-app notification action.
+type SendInAppNotificationActionDefinition struct {
+
+	// Notification content. Supports variable injection. For more information, see [JSONPath reference]
+	// in the Connect Customer Administrators Guide.
+	//
+	// [JSONPath reference]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html
+	//
+	// This member is required.
+	Content map[string]string
+
+	// Notification recipient.
+	//
+	// This member is required.
+	Recipient *NotificationRecipientType
+
+	// Recipients to exclude from notification.
+	Exclusion *NotificationRecipientType
+
+	// Notification priority.
+	Priority ConfigurableNotificationPriority
+
+	noSmithyDocumentSerde
+}
+
+func (v *SendInAppNotificationActionDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendInAppNotificationActionDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendInAppNotificationActionDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNotificationContent(s, schemas.SendInAppNotificationActionDefinition_Content, v.Content)
+	if v.Exclusion != nil {
+		s.WriteStruct(schemas.SendInAppNotificationActionDefinition_Exclusion)
+		v.Exclusion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Priority != "" {
+		s.WriteString(schemas.SendInAppNotificationActionDefinition_Priority, string(v.Priority))
+	}
+	if v.Recipient != nil {
+		s.WriteStruct(schemas.SendInAppNotificationActionDefinition_Recipient)
+		v.Recipient.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SendInAppNotificationActionDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendInAppNotificationActionDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendInAppNotificationActionDefinition_Content:
+			return deserializeNotificationContent(d, schemas.SendInAppNotificationActionDefinition_Content, &v.Content)
+		case schemas.SendInAppNotificationActionDefinition_Exclusion:
+			v.Exclusion = &NotificationRecipientType{}
+			return v.Exclusion.Deserialize(d)
+		case schemas.SendInAppNotificationActionDefinition_Priority:
+			var ev string
+			if err := d.ReadString(schemas.SendInAppNotificationActionDefinition_Priority, &ev); err != nil {
+				return err
+			}
+			v.Priority = ConfigurableNotificationPriority(ev)
+			return nil
+		case schemas.SendInAppNotificationActionDefinition_Recipient:
+			v.Recipient = &NotificationRecipientType{}
+			return v.Recipient.Deserialize(d)
 		}
 		return nil
 	})

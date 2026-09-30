@@ -2848,7 +2848,7 @@ var ActionSummary_ActionType *smithy.Schema
 var ActionType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ActionType",
-}, smithy.ShapeTypeEnum, 10)
+}, smithy.ShapeTypeEnum, 11)
 var ActionType_CREATE_TASK *smithy.Schema
 
 var ActionType_ASSIGN_CONTACT_CATEGORY *smithy.Schema
@@ -2868,6 +2868,8 @@ var ActionType_END_ASSOCIATED_TASKS *smithy.Schema
 var ActionType_SUBMIT_AUTO_EVALUATION *smithy.Schema
 
 var ActionType_EXTRACT_INFORMATION *smithy.Schema
+
+var ActionType_SEND_IN_APP_NOTIFICATION *smithy.Schema
 
 var _ActiveRegion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -14009,7 +14011,7 @@ var Rule_Tags *smithy.Schema
 var RuleAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "RuleAction",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var RuleAction_ActionType *smithy.Schema
 
 var RuleAction_TaskAction *smithy.Schema
@@ -14031,6 +14033,8 @@ var RuleAction_EndAssociatedTasksAction *smithy.Schema
 var RuleAction_SubmitAutoEvaluationAction *smithy.Schema
 
 var RuleAction_ExtractInformationAction *smithy.Schema
+
+var RuleAction_SendInAppNotificationAction *smithy.Schema
 
 var _RuleActions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -14673,6 +14677,18 @@ var _SegmentAttributeValueString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "SegmentAttributeValueString",
 }, smithy.ShapeTypeString, 0)
+
+var SendInAppNotificationActionDefinition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "SendInAppNotificationActionDefinition",
+}, smithy.ShapeTypeStructure, 4)
+var SendInAppNotificationActionDefinition_Content *smithy.Schema
+
+var SendInAppNotificationActionDefinition_Recipient *smithy.Schema
+
+var SendInAppNotificationActionDefinition_Exclusion *smithy.Schema
+
+var SendInAppNotificationActionDefinition_Priority *smithy.Schema
 
 var SendNotificationActionDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -24609,6 +24625,8 @@ func init() {
 
 	ActionType_EXTRACT_INFORMATION = ActionType.AddMember("EXTRACT_INFORMATION", smithyprelude.Unit)
 
+	ActionType_SEND_IN_APP_NOTIFICATION = ActionType.AddMember("SEND_IN_APP_NOTIFICATION", smithyprelude.Unit)
+
 	ActionSummary_ActionType = ActionSummary.AddMember("ActionType", ActionType)
 
 	_ActionSummaries_member = _ActionSummaries.AddMember("member", ActionSummary)
@@ -30737,6 +30755,14 @@ func init() {
 
 	SubmitAutoEvaluationActionDefinition_EvaluationFormId = SubmitAutoEvaluationActionDefinition.AddMember("EvaluationFormId", _EvaluationFormId)
 
+	SendInAppNotificationActionDefinition_Content = SendInAppNotificationActionDefinition.AddMember("Content", _NotificationContent)
+
+	SendInAppNotificationActionDefinition_Recipient = SendInAppNotificationActionDefinition.AddMember("Recipient", NotificationRecipientType)
+
+	SendInAppNotificationActionDefinition_Exclusion = SendInAppNotificationActionDefinition.AddMember("Exclusion", NotificationRecipientType)
+
+	SendInAppNotificationActionDefinition_Priority = SendInAppNotificationActionDefinition.AddMember("Priority", ConfigurableNotificationPriority)
+
 	RuleAction_ActionType = RuleAction.AddMember("ActionType", ActionType)
 
 	RuleAction_TaskAction = RuleAction.AddMember("TaskAction", TaskActionDefinition)
@@ -30758,6 +30784,8 @@ func init() {
 	RuleAction_SubmitAutoEvaluationAction = RuleAction.AddMember("SubmitAutoEvaluationAction", SubmitAutoEvaluationActionDefinition)
 
 	RuleAction_ExtractInformationAction = RuleAction.AddMember("ExtractInformationAction", ExtractInformationActionDefinition)
+
+	RuleAction_SendInAppNotificationAction = RuleAction.AddMember("SendInAppNotificationAction", SendInAppNotificationActionDefinition)
 
 	_RuleActions_member = _RuleActions.AddMember("member", RuleAction)
 

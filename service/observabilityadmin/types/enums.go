@@ -339,6 +339,7 @@ const (
 	ResourceTypeAwsBedrockAgentcoreGateway          ResourceType = "AWS::BedrockAgentCore::Gateway"
 	ResourceTypeAwsBedrockAgentcoreMemory           ResourceType = "AWS::BedrockAgentCore::Memory"
 	ResourceTypeAwsBedrockAgentcoreWorkloadIdentity ResourceType = "AWS::BedrockAgentCore::WorkloadIdentity"
+	ResourceTypeAwsBedrockAgentcorePaymentManager   ResourceType = "AWS::BedrockAgentCore::PaymentManager"
 	ResourceTypeAwsSecurityHub                      ResourceType = "AWS::SecurityHub::Hub"
 	ResourceTypeAwsCloudfrontDistribution           ResourceType = "AWS::CloudFront::Distribution"
 	ResourceTypeAwsSecurityHubHubv2                 ResourceType = "AWS::SecurityHub::HubV2"
@@ -368,6 +369,7 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::BedrockAgentCore::Gateway",
 		"AWS::BedrockAgentCore::Memory",
 		"AWS::BedrockAgentCore::WorkloadIdentity",
+		"AWS::BedrockAgentCore::PaymentManager",
 		"AWS::SecurityHub::Hub",
 		"AWS::CloudFront::Distribution",
 		"AWS::SecurityHub::HubV2",

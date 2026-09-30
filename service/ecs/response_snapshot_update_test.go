@@ -1283,11 +1283,21 @@ func TestUpdateResponseSnapshot_CreateService(t *testing.T) {
 							RoleArn:        ptr.String("__RoleArn__"),
 							TargetGroupArn: ptr.String("__TargetGroupArn__"),
 							PortName:       ptr.String("__PortName__"),
+							AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+								AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+								ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+								TestListenerRule:        ptr.String("__TestListenerRule__"),
+							},
 						},
 						{
 							RoleArn:        ptr.String("__RoleArn__"),
 							TargetGroupArn: ptr.String("__TargetGroupArn__"),
 							PortName:       ptr.String("__PortName__"),
+							AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+								AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+								ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+								TestListenerRule:        ptr.String("__TestListenerRule__"),
+							},
 						},
 					},
 				},
@@ -1551,11 +1561,21 @@ func TestUpdateResponseSnapshot_CreateService(t *testing.T) {
 							RoleArn:        ptr.String("__RoleArn__"),
 							TargetGroupArn: ptr.String("__TargetGroupArn__"),
 							PortName:       ptr.String("__PortName__"),
+							AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+								AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+								ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+								TestListenerRule:        ptr.String("__TestListenerRule__"),
+							},
 						},
 						{
 							RoleArn:        ptr.String("__RoleArn__"),
 							TargetGroupArn: ptr.String("__TargetGroupArn__"),
 							PortName:       ptr.String("__PortName__"),
+							AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+								AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+								ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+								TestListenerRule:        ptr.String("__TestListenerRule__"),
+							},
 						},
 					},
 				},
@@ -2998,11 +3018,21 @@ func TestUpdateResponseSnapshot_DeleteService(t *testing.T) {
 							RoleArn:        ptr.String("__RoleArn__"),
 							TargetGroupArn: ptr.String("__TargetGroupArn__"),
 							PortName:       ptr.String("__PortName__"),
+							AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+								AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+								ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+								TestListenerRule:        ptr.String("__TestListenerRule__"),
+							},
 						},
 						{
 							RoleArn:        ptr.String("__RoleArn__"),
 							TargetGroupArn: ptr.String("__TargetGroupArn__"),
 							PortName:       ptr.String("__PortName__"),
+							AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+								AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+								ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+								TestListenerRule:        ptr.String("__TestListenerRule__"),
+							},
 						},
 					},
 				},
@@ -3266,11 +3296,21 @@ func TestUpdateResponseSnapshot_DeleteService(t *testing.T) {
 							RoleArn:        ptr.String("__RoleArn__"),
 							TargetGroupArn: ptr.String("__TargetGroupArn__"),
 							PortName:       ptr.String("__PortName__"),
+							AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+								AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+								ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+								TestListenerRule:        ptr.String("__TestListenerRule__"),
+							},
 						},
 						{
 							RoleArn:        ptr.String("__RoleArn__"),
 							TargetGroupArn: ptr.String("__TargetGroupArn__"),
 							PortName:       ptr.String("__PortName__"),
+							AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+								AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+								ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+								TestListenerRule:        ptr.String("__TestListenerRule__"),
+							},
 						},
 					},
 				},
@@ -8392,15 +8432,35 @@ func TestUpdateResponseSnapshot_DescribeServiceRevisions(t *testing.T) {
 						RoleArn:        ptr.String("__RoleArn__"),
 						TargetGroupArn: ptr.String("__TargetGroupArn__"),
 						PortName:       ptr.String("__PortName__"),
+						AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+							AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+							ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+							TestListenerRule:        ptr.String("__TestListenerRule__"),
+						},
 					},
 					{
 						RoleArn:        ptr.String("__RoleArn__"),
 						TargetGroupArn: ptr.String("__TargetGroupArn__"),
 						PortName:       ptr.String("__PortName__"),
+						AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+							AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+							ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+							TestListenerRule:        ptr.String("__TestListenerRule__"),
+						},
 					},
 				},
 				ResolvedConfiguration: &types.ResolvedConfiguration{
 					LoadBalancers: []types.ServiceRevisionLoadBalancer{
+						{
+							TargetGroupArn:         ptr.String("__TargetGroupArn__"),
+							ProductionListenerRule: ptr.String("__ProductionListenerRule__"),
+						},
+						{
+							TargetGroupArn:         ptr.String("__TargetGroupArn__"),
+							ProductionListenerRule: ptr.String("__ProductionListenerRule__"),
+						},
+					},
+					VpcLatticeConfigurations: []types.ServiceRevisionVpcLatticeConfiguration{
 						{
 							TargetGroupArn:         ptr.String("__TargetGroupArn__"),
 							ProductionListenerRule: ptr.String("__ProductionListenerRule__"),
@@ -8954,15 +9014,35 @@ func TestUpdateResponseSnapshot_DescribeServiceRevisions(t *testing.T) {
 						RoleArn:        ptr.String("__RoleArn__"),
 						TargetGroupArn: ptr.String("__TargetGroupArn__"),
 						PortName:       ptr.String("__PortName__"),
+						AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+							AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+							ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+							TestListenerRule:        ptr.String("__TestListenerRule__"),
+						},
 					},
 					{
 						RoleArn:        ptr.String("__RoleArn__"),
 						TargetGroupArn: ptr.String("__TargetGroupArn__"),
 						PortName:       ptr.String("__PortName__"),
+						AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+							AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+							ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+							TestListenerRule:        ptr.String("__TestListenerRule__"),
+						},
 					},
 				},
 				ResolvedConfiguration: &types.ResolvedConfiguration{
 					LoadBalancers: []types.ServiceRevisionLoadBalancer{
+						{
+							TargetGroupArn:         ptr.String("__TargetGroupArn__"),
+							ProductionListenerRule: ptr.String("__ProductionListenerRule__"),
+						},
+						{
+							TargetGroupArn:         ptr.String("__TargetGroupArn__"),
+							ProductionListenerRule: ptr.String("__ProductionListenerRule__"),
+						},
+					},
+					VpcLatticeConfigurations: []types.ServiceRevisionVpcLatticeConfiguration{
 						{
 							TargetGroupArn:         ptr.String("__TargetGroupArn__"),
 							ProductionListenerRule: ptr.String("__ProductionListenerRule__"),
@@ -9853,11 +9933,21 @@ func TestUpdateResponseSnapshot_DescribeServices(t *testing.T) {
 								RoleArn:        ptr.String("__RoleArn__"),
 								TargetGroupArn: ptr.String("__TargetGroupArn__"),
 								PortName:       ptr.String("__PortName__"),
+								AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+									AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+									TestListenerRule:        ptr.String("__TestListenerRule__"),
+								},
 							},
 							{
 								RoleArn:        ptr.String("__RoleArn__"),
 								TargetGroupArn: ptr.String("__TargetGroupArn__"),
 								PortName:       ptr.String("__PortName__"),
+								AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+									AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+									TestListenerRule:        ptr.String("__TestListenerRule__"),
+								},
 							},
 						},
 					},
@@ -10121,11 +10211,21 @@ func TestUpdateResponseSnapshot_DescribeServices(t *testing.T) {
 								RoleArn:        ptr.String("__RoleArn__"),
 								TargetGroupArn: ptr.String("__TargetGroupArn__"),
 								PortName:       ptr.String("__PortName__"),
+								AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+									AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+									TestListenerRule:        ptr.String("__TestListenerRule__"),
+								},
 							},
 							{
 								RoleArn:        ptr.String("__RoleArn__"),
 								TargetGroupArn: ptr.String("__TargetGroupArn__"),
 								PortName:       ptr.String("__PortName__"),
+								AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+									AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+									TestListenerRule:        ptr.String("__TestListenerRule__"),
+								},
 							},
 						},
 					},
@@ -10811,11 +10911,21 @@ func TestUpdateResponseSnapshot_DescribeServices(t *testing.T) {
 								RoleArn:        ptr.String("__RoleArn__"),
 								TargetGroupArn: ptr.String("__TargetGroupArn__"),
 								PortName:       ptr.String("__PortName__"),
+								AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+									AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+									TestListenerRule:        ptr.String("__TestListenerRule__"),
+								},
 							},
 							{
 								RoleArn:        ptr.String("__RoleArn__"),
 								TargetGroupArn: ptr.String("__TargetGroupArn__"),
 								PortName:       ptr.String("__PortName__"),
+								AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+									AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+									TestListenerRule:        ptr.String("__TestListenerRule__"),
+								},
 							},
 						},
 					},
@@ -11079,11 +11189,21 @@ func TestUpdateResponseSnapshot_DescribeServices(t *testing.T) {
 								RoleArn:        ptr.String("__RoleArn__"),
 								TargetGroupArn: ptr.String("__TargetGroupArn__"),
 								PortName:       ptr.String("__PortName__"),
+								AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+									AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+									TestListenerRule:        ptr.String("__TestListenerRule__"),
+								},
 							},
 							{
 								RoleArn:        ptr.String("__RoleArn__"),
 								TargetGroupArn: ptr.String("__TargetGroupArn__"),
 								PortName:       ptr.String("__PortName__"),
+								AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+									AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+									TestListenerRule:        ptr.String("__TestListenerRule__"),
+								},
 							},
 						},
 					},
@@ -18227,11 +18347,21 @@ func TestUpdateResponseSnapshot_UpdateService(t *testing.T) {
 							RoleArn:        ptr.String("__RoleArn__"),
 							TargetGroupArn: ptr.String("__TargetGroupArn__"),
 							PortName:       ptr.String("__PortName__"),
+							AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+								AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+								ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+								TestListenerRule:        ptr.String("__TestListenerRule__"),
+							},
 						},
 						{
 							RoleArn:        ptr.String("__RoleArn__"),
 							TargetGroupArn: ptr.String("__TargetGroupArn__"),
 							PortName:       ptr.String("__PortName__"),
+							AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+								AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+								ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+								TestListenerRule:        ptr.String("__TestListenerRule__"),
+							},
 						},
 					},
 				},
@@ -18495,11 +18625,21 @@ func TestUpdateResponseSnapshot_UpdateService(t *testing.T) {
 							RoleArn:        ptr.String("__RoleArn__"),
 							TargetGroupArn: ptr.String("__TargetGroupArn__"),
 							PortName:       ptr.String("__PortName__"),
+							AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+								AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+								ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+								TestListenerRule:        ptr.String("__TestListenerRule__"),
+							},
 						},
 						{
 							RoleArn:        ptr.String("__RoleArn__"),
 							TargetGroupArn: ptr.String("__TargetGroupArn__"),
 							PortName:       ptr.String("__PortName__"),
+							AdvancedConfiguration: &types.VpcLatticeAdvancedConfiguration{
+								AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+								ProductionListenerRule:  ptr.String("__ProductionListenerRule__"),
+								TestListenerRule:        ptr.String("__TestListenerRule__"),
+							},
 						},
 					},
 				},

@@ -21870,6 +21870,11 @@ func awsRestjson1_deserializeOpDocumentGetNotebookRunOutput(v **GetNotebookRunOu
 				sv.NotebookId = ptr.String(jtv)
 			}
 
+		case "notificationConfiguration":
+			if err := awsRestjson1_deserializeDocumentNotificationConfig(&sv.NotificationConfiguration, value); err != nil {
+				return err
+			}
+
 		case "owningProjectId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -34801,6 +34806,11 @@ func awsRestjson1_deserializeOpDocumentStartNotebookRunOutput(v **StartNotebookR
 					return fmt.Errorf("expected NotebookId to be of type string, got %T instead", value)
 				}
 				sv.NotebookId = ptr.String(jtv)
+			}
+
+		case "notificationConfiguration":
+			if err := awsRestjson1_deserializeDocumentNotificationConfig(&sv.NotificationConfiguration, value); err != nil {
+				return err
 			}
 
 		case "owningProjectId":
@@ -56171,6 +56181,42 @@ func awsRestjson1_deserializeDocumentNotEqualToExpression(v **types.NotEqualToEx
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNotificationConfig(v **types.NotificationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NotificationConfig
+	if *v == nil {
+		sv = &types.NotificationConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "notifyOn":
+			if err := awsRestjson1_deserializeDocumentNotifyOnStates(&sv.NotifyOn, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentNotificationOutput(v **types.NotificationOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -56392,6 +56438,42 @@ func awsRestjson1_deserializeDocumentNotificationsList(v *[]types.NotificationOu
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNotifyOnStates(v *[]types.NotifyOnState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NotifyOnState
+	if *v == nil {
+		cv = []types.NotifyOnState{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NotifyOnState
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NotifyOnState to be of type string, got %T instead", value)
+			}
+			col = types.NotifyOnState(jtv)
+		}
 		cv = append(cv, col)
 
 	}

@@ -830,7 +830,7 @@ var EffectivePolicyNotFoundException_Message *smithy.Schema
 var EffectivePolicyType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "EffectivePolicyType",
-}, smithy.ShapeTypeEnum, 11)
+}, smithy.ShapeTypeEnum, 12)
 var EffectivePolicyType_TAG_POLICY *smithy.Schema
 
 var EffectivePolicyType_BACKUP_POLICY *smithy.Schema
@@ -852,6 +852,8 @@ var EffectivePolicyType_BEDROCK_POLICY *smithy.Schema
 var EffectivePolicyType_S3_POLICY *smithy.Schema
 
 var EffectivePolicyType_NETWORK_SECURITY_DIRECTOR_POLICY *smithy.Schema
+
+var EffectivePolicyType_GUARDDUTY_POLICY *smithy.Schema
 
 var EffectivePolicyValidationError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
@@ -1507,7 +1509,7 @@ var PolicyTargetSummary_Type *smithy.Schema
 var PolicyType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "PolicyType",
-}, smithy.ShapeTypeEnum, 13)
+}, smithy.ShapeTypeEnum, 14)
 var PolicyType_SERVICE_CONTROL_POLICY *smithy.Schema
 
 var PolicyType_RESOURCE_CONTROL_POLICY *smithy.Schema
@@ -1533,6 +1535,8 @@ var PolicyType_BEDROCK_POLICY *smithy.Schema
 var PolicyType_S3_POLICY *smithy.Schema
 
 var PolicyType_NETWORK_SECURITY_DIRECTOR_POLICY *smithy.Schema
+
+var PolicyType_GUARDDUTY_POLICY *smithy.Schema
 
 var PolicyTypeAlreadyEnabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
@@ -2984,6 +2988,8 @@ func init() {
 
 	EffectivePolicyType_NETWORK_SECURITY_DIRECTOR_POLICY = EffectivePolicyType.AddMember("NETWORK_SECURITY_DIRECTOR_POLICY", smithyprelude.Unit)
 
+	EffectivePolicyType_GUARDDUTY_POLICY = EffectivePolicyType.AddMember("GUARDDUTY_POLICY", smithyprelude.Unit)
+
 	EffectivePolicy_PolicyContent = EffectivePolicy.AddMember("PolicyContent", _PolicyContent)
 
 	EffectivePolicy_LastUpdatedTimestamp = EffectivePolicy.AddMember("LastUpdatedTimestamp", _Timestamp)
@@ -3263,6 +3269,8 @@ func init() {
 	PolicyType_S3_POLICY = PolicyType.AddMember("S3_POLICY", smithyprelude.Unit)
 
 	PolicyType_NETWORK_SECURITY_DIRECTOR_POLICY = PolicyType.AddMember("NETWORK_SECURITY_DIRECTOR_POLICY", smithyprelude.Unit)
+
+	PolicyType_GUARDDUTY_POLICY = PolicyType.AddMember("GUARDDUTY_POLICY", smithyprelude.Unit)
 
 	PolicyTypeStatus_ENABLED = PolicyTypeStatus.AddMember("ENABLED", smithyprelude.Unit)
 

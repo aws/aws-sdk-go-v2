@@ -1359,6 +1359,11 @@ type DeliveryDestination struct {
 	// The format of the logs that are sent to this delivery destination.
 	OutputFormat OutputFormat
 
+	// The ARN of the IAM role that CloudWatch Logs assumes to deliver to this
+	// delivery destination. This field is present only for X-Ray trace delivery
+	// destinations that were created with a role.
+	RoleArn *string
+
 	// The tags that have been assigned to this delivery destination.
 	Tags map[string]string
 
@@ -1389,6 +1394,9 @@ func (v *DeliveryDestination) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutputFormat != "" {
 		s.WriteString(schemas.DeliveryDestination_outputFormat, string(v.OutputFormat))
 	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DeliveryDestination_roleArn, *v.RoleArn)
+	}
 	serializeTags(s, schemas.DeliveryDestination_tags, v.Tags)
 }
 func (v *DeliveryDestination) Deserialize(d smithy.ShapeDeserializer) error {
@@ -1417,6 +1425,9 @@ func (v *DeliveryDestination) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.OutputFormat = OutputFormat(ev)
 			return nil
+		case schemas.DeliveryDestination_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DeliveryDestination_roleArn, v.RoleArn)
 		case schemas.DeliveryDestination_tags:
 			return deserializeTags(d, schemas.DeliveryDestination_tags, &v.Tags)
 		}
@@ -6829,12 +6840,14 @@ type S3DeliveryConfiguration struct {
 	EnableHiveCompatiblePath *bool
 
 	// This string allows re-configuring the S3 object prefix to contain either static
-	// or variable sections. The valid variables to use in the suffix path will vary by
-	// each log source. To find the values supported for the suffix path for each log
-	// source, use the [DescribeConfigurationTemplates]operation and check the allowedSuffixPathFields field in the
-	// response.
+	// or variable sections. The valid variables to use in the suffix path vary by log
+	// type. To find the values supported for the suffix path for each log type, use
+	// the [DescribeConfigurationTemplates]operation and check the allowedSuffixPathFields field in the response. For
+	// more information about how the destination prefix, suffix path, and
+	// Hive-compatible setting determine the Amazon S3 object key, see [Amazon S3 object key for V2 deliveries].
 	//
 	// [DescribeConfigurationTemplates]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeConfigurationTemplates.html
+	// [Amazon S3 object key for V2 deliveries]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-infrastructure-V2-S3.html#AWS-logs-infrastructure-V2-S3-object-key
 	SuffixPath *string
 
 	noSmithyDocumentSerde

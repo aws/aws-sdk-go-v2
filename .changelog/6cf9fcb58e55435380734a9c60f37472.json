@@ -1,0 +1,8 @@
+{
+    "id": "6cf9fcb5-8e55-4353-8073-4a9c60f37472",
+    "type": "feature",
+    "description": "Support for setting notebook run notification configurations",
+    "modules": [
+        "service/datazone"
+    ]
+}

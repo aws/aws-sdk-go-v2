@@ -1235,6 +1235,19 @@ func serializeServiceRevisionsSummaryList(s smithy.ShapeSerializer, schema *smit
 	s.CloseList()
 }
 
+func serializeServiceRevisionVpcLatticeConfigurations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ServiceRevisionVpcLatticeConfiguration) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeServices(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Service) {
 	if v == nil {
 		return
@@ -2861,6 +2874,20 @@ func deserializeServiceRevisionsSummaryList(d smithy.ShapeDeserializer, s *smith
 	var vv types.ServiceRevisionSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ServiceRevisionSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeServiceRevisionVpcLatticeConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ServiceRevisionVpcLatticeConfiguration) error {
+	*v = make([]types.ServiceRevisionVpcLatticeConfiguration, 0)
+	var vv types.ServiceRevisionVpcLatticeConfiguration
+	return smithy.ReadList(d, s, func() error {
+		vv = types.ServiceRevisionVpcLatticeConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

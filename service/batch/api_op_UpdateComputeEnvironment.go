@@ -49,6 +49,15 @@ type UpdateComputeEnvironmentInput struct {
 	// CloudWatch Container Insights collection for the compute environment.
 	EcsSettings *types.EcsSettings
 
+	// Updates the Amazon EKS configuration for the compute environment. Only specify
+	// this parameter if the compute environment's containerOrchestrationType is EKS .
+	// Currently, the accessEntry setting is the only Amazon EKS configuration that
+	// you can change after the compute environment is created. For more information,
+	// see [Amazon EKS access entry authentication]in the Batch User Guide.
+	//
+	// [Amazon EKS access entry authentication]: https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html
+	EksConfiguration *types.EksConfigurationUpdate
+
 	// The full Amazon Resource Name (ARN) of the IAM role that allows Batch to make
 	// calls to other Amazon Web Services services on your behalf. For more
 	// information, see [Batch service IAM role]in the Batch User Guide.
@@ -135,6 +144,11 @@ func (v *UpdateComputeEnvironmentInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.EcsSettings != nil {
 		s.WriteStruct(schemas.UpdateComputeEnvironmentRequest_ecsSettings)
 		v.EcsSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EksConfiguration != nil {
+		s.WriteStruct(schemas.UpdateComputeEnvironmentRequest_eksConfiguration)
+		v.EksConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.ServiceRole != nil {

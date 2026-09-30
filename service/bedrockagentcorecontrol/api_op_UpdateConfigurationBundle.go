@@ -34,6 +34,11 @@ type UpdateConfigurationBundleInput struct {
 	// This member is required.
 	BundleId *string
 
+	// A commit message describing the changes in this version.
+	//
+	// This member is required.
+	CommitMessage *string
+
 	// A list of parent version identifiers for lineage tracking. Regular commits have
 	// a single parent. Merge commits have two parents: the target branch parent and
 	// the source branch parent. If the branch already exists, the first parent must be
@@ -56,9 +61,6 @@ type UpdateConfigurationBundleInput struct {
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
-
-	// A commit message describing the changes in this version.
-	CommitMessage *string
 
 	// The updated component configurations. Creates a new version of the bundle.
 	Components map[string]types.ComponentConfiguration

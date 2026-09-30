@@ -1141,7 +1141,7 @@ var Delivery_tags *smithy.Schema
 var DeliveryDestination = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "DeliveryDestination",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var DeliveryDestination_name *smithy.Schema
 
 var DeliveryDestination_arn *smithy.Schema
@@ -1151,6 +1151,8 @@ var DeliveryDestination_deliveryDestinationType *smithy.Schema
 var DeliveryDestination_outputFormat *smithy.Schema
 
 var DeliveryDestination_deliveryDestinationConfiguration *smithy.Schema
+
+var DeliveryDestination_roleArn *smithy.Schema
 
 var DeliveryDestination_tags *smithy.Schema
 
@@ -5807,7 +5809,7 @@ var PutDataProtectionPolicyResponse_lastUpdatedTime *smithy.Schema
 var PutDeliveryDestinationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "PutDeliveryDestinationRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var PutDeliveryDestinationRequest_name *smithy.Schema
 
 var PutDeliveryDestinationRequest_outputFormat *smithy.Schema
@@ -5815,6 +5817,8 @@ var PutDeliveryDestinationRequest_outputFormat *smithy.Schema
 var PutDeliveryDestinationRequest_deliveryDestinationConfiguration *smithy.Schema
 
 var PutDeliveryDestinationRequest_deliveryDestinationType *smithy.Schema
+
+var PutDeliveryDestinationRequest_roleArn *smithy.Schema
 
 var PutDeliveryDestinationRequest_tags *smithy.Schema
 
@@ -6717,6 +6721,8 @@ func init() {
 	DeliveryDestination_outputFormat = DeliveryDestination.AddMember("outputFormat", OutputFormat)
 
 	DeliveryDestination_deliveryDestinationConfiguration = DeliveryDestination.AddMember("deliveryDestinationConfiguration", DeliveryDestinationConfiguration)
+
+	DeliveryDestination_roleArn = DeliveryDestination.AddMember("roleArn", _Arn)
 
 	DeliveryDestination_tags = DeliveryDestination.AddMember("tags", _Tags)
 
@@ -8735,6 +8741,8 @@ func init() {
 	PutDeliveryDestinationRequest_deliveryDestinationConfiguration = PutDeliveryDestinationRequest.AddMember("deliveryDestinationConfiguration", DeliveryDestinationConfiguration)
 
 	PutDeliveryDestinationRequest_deliveryDestinationType = PutDeliveryDestinationRequest.AddMember("deliveryDestinationType", DeliveryDestinationType)
+
+	PutDeliveryDestinationRequest_roleArn = PutDeliveryDestinationRequest.AddMember("roleArn", _Arn)
 
 	PutDeliveryDestinationRequest_tags = PutDeliveryDestinationRequest.AddMember("tags", _Tags)
 

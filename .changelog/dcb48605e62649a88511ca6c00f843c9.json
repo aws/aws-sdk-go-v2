@@ -1,0 +1,8 @@
+{
+    "id": "dcb48605-e626-49a8-8511-ca6c00f843c9",
+    "type": "feature",
+    "description": "Amazon Bedrock Automated Reasoning policies now accept Unicode letters in identifier names such as type names, type value names, and variable names. You can now author policies in non-English languages using accented or non-Latin characters.",
+    "modules": [
+        "service/bedrock"
+    ]
+}

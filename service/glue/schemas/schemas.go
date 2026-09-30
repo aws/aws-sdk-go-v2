@@ -4292,7 +4292,7 @@ var Crawl_LogStream *smithy.Schema
 var Crawler = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "Crawler",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 21)
 var Crawler_Name *smithy.Schema
 
 var Crawler_Role *smithy.Schema
@@ -4332,6 +4332,8 @@ var Crawler_Configuration *smithy.Schema
 var Crawler_CrawlerSecurityConfiguration *smithy.Schema
 
 var Crawler_LakeFormationConfiguration *smithy.Schema
+
+var Crawler_CatalogId *smithy.Schema
 
 var _CrawlerConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -14494,7 +14496,7 @@ var CreateConnectionResponse_CreateConnectionStatus *smithy.Schema
 var CreateCrawlerRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "CreateCrawlerRequest",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var CreateCrawlerRequest_Name *smithy.Schema
 
 var CreateCrawlerRequest_Role *smithy.Schema
@@ -14524,6 +14526,8 @@ var CreateCrawlerRequest_Configuration *smithy.Schema
 var CreateCrawlerRequest_CrawlerSecurityConfiguration *smithy.Schema
 
 var CreateCrawlerRequest_Tags *smithy.Schema
+
+var CreateCrawlerRequest_CatalogId *smithy.Schema
 
 var CreateCrawlerResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -15340,10 +15344,12 @@ var DeleteColumnStatisticsForTableResponse = smithy.NewSchema(smithy.ShapeID{
 var DeleteColumnStatisticsTaskSettingsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "DeleteColumnStatisticsTaskSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var DeleteColumnStatisticsTaskSettingsRequest_DatabaseName *smithy.Schema
 
 var DeleteColumnStatisticsTaskSettingsRequest_TableName *smithy.Schema
+
+var DeleteColumnStatisticsTaskSettingsRequest_CatalogID *smithy.Schema
 
 var DeleteColumnStatisticsTaskSettingsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -16125,7 +16131,7 @@ var GetColumnStatisticsTaskRunResponse_ColumnStatisticsTaskRun *smithy.Schema
 var GetColumnStatisticsTaskRunsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "GetColumnStatisticsTaskRunsRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var GetColumnStatisticsTaskRunsRequest_DatabaseName *smithy.Schema
 
 var GetColumnStatisticsTaskRunsRequest_TableName *smithy.Schema
@@ -16133,6 +16139,8 @@ var GetColumnStatisticsTaskRunsRequest_TableName *smithy.Schema
 var GetColumnStatisticsTaskRunsRequest_MaxResults *smithy.Schema
 
 var GetColumnStatisticsTaskRunsRequest_NextToken *smithy.Schema
+
+var GetColumnStatisticsTaskRunsRequest_CatalogID *smithy.Schema
 
 var GetColumnStatisticsTaskRunsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -16145,10 +16153,12 @@ var GetColumnStatisticsTaskRunsResponse_NextToken *smithy.Schema
 var GetColumnStatisticsTaskSettingsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "GetColumnStatisticsTaskSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var GetColumnStatisticsTaskSettingsRequest_DatabaseName *smithy.Schema
 
 var GetColumnStatisticsTaskSettingsRequest_TableName *smithy.Schema
+
+var GetColumnStatisticsTaskSettingsRequest_CatalogID *smithy.Schema
 
 var GetColumnStatisticsTaskSettingsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -18807,10 +18817,12 @@ var StartColumnStatisticsTaskRunResponse_ColumnStatisticsTaskRunId *smithy.Schem
 var StartColumnStatisticsTaskRunScheduleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "StartColumnStatisticsTaskRunScheduleRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var StartColumnStatisticsTaskRunScheduleRequest_DatabaseName *smithy.Schema
 
 var StartColumnStatisticsTaskRunScheduleRequest_TableName *smithy.Schema
+
+var StartColumnStatisticsTaskRunScheduleRequest_CatalogID *smithy.Schema
 
 var StartColumnStatisticsTaskRunScheduleResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -19032,10 +19044,12 @@ var StartWorkflowRunResponse_RunId *smithy.Schema
 var StopColumnStatisticsTaskRunRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "StopColumnStatisticsTaskRunRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var StopColumnStatisticsTaskRunRequest_DatabaseName *smithy.Schema
 
 var StopColumnStatisticsTaskRunRequest_TableName *smithy.Schema
+
+var StopColumnStatisticsTaskRunRequest_CatalogID *smithy.Schema
 
 var StopColumnStatisticsTaskRunResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -19045,10 +19059,12 @@ var StopColumnStatisticsTaskRunResponse = smithy.NewSchema(smithy.ShapeID{
 var StopColumnStatisticsTaskRunScheduleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "StopColumnStatisticsTaskRunScheduleRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var StopColumnStatisticsTaskRunScheduleRequest_DatabaseName *smithy.Schema
 
 var StopColumnStatisticsTaskRunScheduleRequest_TableName *smithy.Schema
+
+var StopColumnStatisticsTaskRunScheduleRequest_CatalogID *smithy.Schema
 
 var StopColumnStatisticsTaskRunScheduleResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -19323,7 +19339,7 @@ var UpdateConnectionResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateCrawlerRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "UpdateCrawlerRequest",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var UpdateCrawlerRequest_Name *smithy.Schema
 
 var UpdateCrawlerRequest_Role *smithy.Schema
@@ -19351,6 +19367,8 @@ var UpdateCrawlerRequest_LakeFormationConfiguration *smithy.Schema
 var UpdateCrawlerRequest_Configuration *smithy.Schema
 
 var UpdateCrawlerRequest_CrawlerSecurityConfiguration *smithy.Schema
+
+var UpdateCrawlerRequest_CatalogId *smithy.Schema
 
 var UpdateCrawlerResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -23677,6 +23695,8 @@ func init() {
 
 	Crawler_LakeFormationConfiguration = Crawler.AddMember("LakeFormationConfiguration", LakeFormationConfiguration)
 
+	Crawler_CatalogId = Crawler.AddMember("CatalogId", _CatalogIdString)
+
 	CrawlerHistoryState_RUNNING = CrawlerHistoryState.AddMember("RUNNING", smithyprelude.Unit)
 
 	CrawlerHistoryState_COMPLETED = CrawlerHistoryState.AddMember("COMPLETED", smithyprelude.Unit)
@@ -27033,7 +27053,7 @@ func init() {
 
 	CreateColumnStatisticsTaskSettingsRequest_SampleSize = CreateColumnStatisticsTaskSettingsRequest.AddMember("SampleSize", _SampleSizePercentage)
 
-	CreateColumnStatisticsTaskSettingsRequest_CatalogID = CreateColumnStatisticsTaskSettingsRequest.AddMember("CatalogID", _NameString)
+	CreateColumnStatisticsTaskSettingsRequest_CatalogID = CreateColumnStatisticsTaskSettingsRequest.AddMember("CatalogID", _CatalogIdString)
 
 	CreateColumnStatisticsTaskSettingsRequest_SecurityConfiguration = CreateColumnStatisticsTaskSettingsRequest.AddMember("SecurityConfiguration", _NameString)
 
@@ -27076,6 +27096,8 @@ func init() {
 	CreateCrawlerRequest_CrawlerSecurityConfiguration = CreateCrawlerRequest.AddMember("CrawlerSecurityConfiguration", _CrawlerSecurityConfiguration)
 
 	CreateCrawlerRequest_Tags = CreateCrawlerRequest.AddMember("Tags", _TagsMap)
+
+	CreateCrawlerRequest_CatalogId = CreateCrawlerRequest.AddMember("CatalogId", _CatalogIdString)
 
 	CreateCustomEntityTypeRequest_Name = CreateCustomEntityTypeRequest.AddMember("Name", _NameString)
 
@@ -27611,6 +27633,8 @@ func init() {
 
 	DeleteColumnStatisticsTaskSettingsRequest_TableName = DeleteColumnStatisticsTaskSettingsRequest.AddMember("TableName", _NameString)
 
+	DeleteColumnStatisticsTaskSettingsRequest_CatalogID = DeleteColumnStatisticsTaskSettingsRequest.AddMember("CatalogID", _CatalogIdString)
+
 	DeleteConnectionRequest_CatalogId = DeleteConnectionRequest.AddMember("CatalogId", _CatalogIdString)
 
 	DeleteConnectionRequest_ConnectionName = DeleteConnectionRequest.AddMember("ConnectionName", _NameString)
@@ -27977,6 +28001,8 @@ func init() {
 
 	GetColumnStatisticsTaskRunsRequest_NextToken = GetColumnStatisticsTaskRunsRequest.AddMember("NextToken", _Token)
 
+	GetColumnStatisticsTaskRunsRequest_CatalogID = GetColumnStatisticsTaskRunsRequest.AddMember("CatalogID", _CatalogIdString)
+
 	GetColumnStatisticsTaskRunsResponse_ColumnStatisticsTaskRuns = GetColumnStatisticsTaskRunsResponse.AddMember("ColumnStatisticsTaskRuns", _ColumnStatisticsTaskRunsList)
 
 	GetColumnStatisticsTaskRunsResponse_NextToken = GetColumnStatisticsTaskRunsResponse.AddMember("NextToken", _Token)
@@ -27984,6 +28010,8 @@ func init() {
 	GetColumnStatisticsTaskSettingsRequest_DatabaseName = GetColumnStatisticsTaskSettingsRequest.AddMember("DatabaseName", _NameString)
 
 	GetColumnStatisticsTaskSettingsRequest_TableName = GetColumnStatisticsTaskSettingsRequest.AddMember("TableName", _NameString)
+
+	GetColumnStatisticsTaskSettingsRequest_CatalogID = GetColumnStatisticsTaskSettingsRequest.AddMember("CatalogID", _CatalogIdString)
 
 	GetColumnStatisticsTaskSettingsResponse_ColumnStatisticsTaskSettings = GetColumnStatisticsTaskSettingsResponse.AddMember("ColumnStatisticsTaskSettings", ColumnStatisticsTaskSettings)
 
@@ -28365,7 +28393,7 @@ func init() {
 
 	GetMappingResponse_Mapping = GetMappingResponse.AddMember("Mapping", _MappingList)
 
-	GetMaterializedViewRefreshTaskRunRequest_CatalogId = GetMaterializedViewRefreshTaskRunRequest.AddMember("CatalogId", _NameString)
+	GetMaterializedViewRefreshTaskRunRequest_CatalogId = GetMaterializedViewRefreshTaskRunRequest.AddMember("CatalogId", _CatalogIdString)
 
 	GetMaterializedViewRefreshTaskRunRequest_MaterializedViewRefreshTaskRunId = GetMaterializedViewRefreshTaskRunRequest.AddMember("MaterializedViewRefreshTaskRunId", _UUIDv4)
 
@@ -29159,7 +29187,7 @@ func init() {
 
 	ListJobsResponse_NextToken = ListJobsResponse.AddMember("NextToken", _GenericString)
 
-	ListMaterializedViewRefreshTaskRunsRequest_CatalogId = ListMaterializedViewRefreshTaskRunsRequest.AddMember("CatalogId", _NameString)
+	ListMaterializedViewRefreshTaskRunsRequest_CatalogId = ListMaterializedViewRefreshTaskRunsRequest.AddMember("CatalogId", _CatalogIdString)
 
 	ListMaterializedViewRefreshTaskRunsRequest_DatabaseName = ListMaterializedViewRefreshTaskRunsRequest.AddMember("DatabaseName", _NameString)
 
@@ -29599,7 +29627,7 @@ func init() {
 
 	StartColumnStatisticsTaskRunRequest_SampleSize = StartColumnStatisticsTaskRunRequest.AddMember("SampleSize", _SampleSizePercentage)
 
-	StartColumnStatisticsTaskRunRequest_CatalogID = StartColumnStatisticsTaskRunRequest.AddMember("CatalogID", _NameString)
+	StartColumnStatisticsTaskRunRequest_CatalogID = StartColumnStatisticsTaskRunRequest.AddMember("CatalogID", _CatalogIdString)
 
 	StartColumnStatisticsTaskRunRequest_SecurityConfiguration = StartColumnStatisticsTaskRunRequest.AddMember("SecurityConfiguration", _NameString)
 
@@ -29608,6 +29636,8 @@ func init() {
 	StartColumnStatisticsTaskRunScheduleRequest_DatabaseName = StartColumnStatisticsTaskRunScheduleRequest.AddMember("DatabaseName", _NameString)
 
 	StartColumnStatisticsTaskRunScheduleRequest_TableName = StartColumnStatisticsTaskRunScheduleRequest.AddMember("TableName", _NameString)
+
+	StartColumnStatisticsTaskRunScheduleRequest_CatalogID = StartColumnStatisticsTaskRunScheduleRequest.AddMember("CatalogID", _CatalogIdString)
 
 	StartCrawlerRequest_Name = StartCrawlerRequest.AddMember("Name", _NameString)
 
@@ -29693,7 +29723,7 @@ func init() {
 
 	StartJobRunResponse_JobRunId = StartJobRunResponse.AddMember("JobRunId", _IdString)
 
-	StartMaterializedViewRefreshTaskRunRequest_CatalogId = StartMaterializedViewRefreshTaskRunRequest.AddMember("CatalogId", _NameString)
+	StartMaterializedViewRefreshTaskRunRequest_CatalogId = StartMaterializedViewRefreshTaskRunRequest.AddMember("CatalogId", _CatalogIdString)
 
 	StartMaterializedViewRefreshTaskRunRequest_DatabaseName = StartMaterializedViewRefreshTaskRunRequest.AddMember("DatabaseName", _NameString)
 
@@ -29727,15 +29757,19 @@ func init() {
 
 	StopColumnStatisticsTaskRunRequest_TableName = StopColumnStatisticsTaskRunRequest.AddMember("TableName", _NameString)
 
+	StopColumnStatisticsTaskRunRequest_CatalogID = StopColumnStatisticsTaskRunRequest.AddMember("CatalogID", _CatalogIdString)
+
 	StopColumnStatisticsTaskRunScheduleRequest_DatabaseName = StopColumnStatisticsTaskRunScheduleRequest.AddMember("DatabaseName", _NameString)
 
 	StopColumnStatisticsTaskRunScheduleRequest_TableName = StopColumnStatisticsTaskRunScheduleRequest.AddMember("TableName", _NameString)
+
+	StopColumnStatisticsTaskRunScheduleRequest_CatalogID = StopColumnStatisticsTaskRunScheduleRequest.AddMember("CatalogID", _CatalogIdString)
 
 	StopCrawlerRequest_Name = StopCrawlerRequest.AddMember("Name", _NameString)
 
 	StopCrawlerScheduleRequest_CrawlerName = StopCrawlerScheduleRequest.AddMember("CrawlerName", _NameString)
 
-	StopMaterializedViewRefreshTaskRunRequest_CatalogId = StopMaterializedViewRefreshTaskRunRequest.AddMember("CatalogId", _NameString)
+	StopMaterializedViewRefreshTaskRunRequest_CatalogId = StopMaterializedViewRefreshTaskRunRequest.AddMember("CatalogId", _CatalogIdString)
 
 	StopMaterializedViewRefreshTaskRunRequest_DatabaseName = StopMaterializedViewRefreshTaskRunRequest.AddMember("DatabaseName", _NameString)
 
@@ -29839,7 +29873,7 @@ func init() {
 
 	UpdateColumnStatisticsTaskSettingsRequest_SampleSize = UpdateColumnStatisticsTaskSettingsRequest.AddMember("SampleSize", _SampleSizePercentage)
 
-	UpdateColumnStatisticsTaskSettingsRequest_CatalogID = UpdateColumnStatisticsTaskSettingsRequest.AddMember("CatalogID", _NameString)
+	UpdateColumnStatisticsTaskSettingsRequest_CatalogID = UpdateColumnStatisticsTaskSettingsRequest.AddMember("CatalogID", _CatalogIdString)
 
 	UpdateColumnStatisticsTaskSettingsRequest_SecurityConfiguration = UpdateColumnStatisticsTaskSettingsRequest.AddMember("SecurityConfiguration", _NameString)
 
@@ -29876,6 +29910,8 @@ func init() {
 	UpdateCrawlerRequest_Configuration = UpdateCrawlerRequest.AddMember("Configuration", _CrawlerConfiguration)
 
 	UpdateCrawlerRequest_CrawlerSecurityConfiguration = UpdateCrawlerRequest.AddMember("CrawlerSecurityConfiguration", _CrawlerSecurityConfiguration)
+
+	UpdateCrawlerRequest_CatalogId = UpdateCrawlerRequest.AddMember("CatalogId", _CatalogIdString)
 
 	UpdateCrawlerScheduleRequest_CrawlerName = UpdateCrawlerScheduleRequest.AddMember("CrawlerName", _NameString)
 

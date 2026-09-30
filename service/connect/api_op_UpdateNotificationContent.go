@@ -29,7 +29,7 @@ func (c *Client) UpdateNotificationContent(ctx context.Context, params *UpdateNo
 type UpdateNotificationContentInput struct {
 
 	// The updated localized content of the notification. A map of locale codes and
-	// values. Maximum 500 characters per locale.
+	// values. Maximum 500 visible characters per locale.
 	//
 	// This member is required.
 	Content map[string]string

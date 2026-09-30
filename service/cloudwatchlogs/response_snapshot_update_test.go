@@ -1193,6 +1193,7 @@ func TestUpdateResponseSnapshot_DescribeDeliveryDestinations(t *testing.T) {
 				DeliveryDestinationConfiguration: &types.DeliveryDestinationConfiguration{
 					DestinationResourceArn: ptr.String("__DestinationResourceArn__"),
 				},
+				RoleArn: ptr.String("__RoleArn__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -1205,6 +1206,7 @@ func TestUpdateResponseSnapshot_DescribeDeliveryDestinations(t *testing.T) {
 				DeliveryDestinationConfiguration: &types.DeliveryDestinationConfiguration{
 					DestinationResourceArn: ptr.String("__DestinationResourceArn__"),
 				},
+				RoleArn: ptr.String("__RoleArn__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -2222,6 +2224,7 @@ func TestUpdateResponseSnapshot_GetDeliveryDestination(t *testing.T) {
 			DeliveryDestinationConfiguration: &types.DeliveryDestinationConfiguration{
 				DestinationResourceArn: ptr.String("__DestinationResourceArn__"),
 			},
+			RoleArn: ptr.String("__RoleArn__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -3885,6 +3888,7 @@ func TestUpdateResponseSnapshot_PutDeliveryDestination(t *testing.T) {
 			DeliveryDestinationConfiguration: &types.DeliveryDestinationConfiguration{
 				DestinationResourceArn: ptr.String("__DestinationResourceArn__"),
 			},
+			RoleArn: ptr.String("__RoleArn__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},

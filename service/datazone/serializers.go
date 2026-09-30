@@ -16277,6 +16277,13 @@ func awsRestjson1_serializeOpDocumentStartNotebookRunInput(v *StartNotebookRunIn
 		ok.String(*v.NotebookIdentifier)
 	}
 
+	if v.NotificationConfiguration != nil {
+		ok := object.Key("notificationConfiguration")
+		if err := awsRestjson1_serializeDocumentNotificationConfig(v.NotificationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OwningProjectIdentifier != nil {
 		ok := object.Key("owningProjectIdentifier")
 		ok.String(*v.OwningProjectIdentifier)
@@ -22386,6 +22393,31 @@ func awsRestjson1_serializeDocumentNotEqualToExpression(v *types.NotEqualToExpre
 		ok.String(*v.Value)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNotificationConfig(v *types.NotificationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NotifyOn != nil {
+		ok := object.Key("notifyOn")
+		if err := awsRestjson1_serializeDocumentNotifyOnStates(v.NotifyOn, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNotifyOnStates(v []types.NotifyOnState, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

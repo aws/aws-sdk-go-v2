@@ -1356,6 +1356,97 @@ func awsRestjson1_serializeOpDocumentListVectorsInput(v *ListVectorsInput, value
 	return nil
 }
 
+type awsRestjson1_serializeOpPutVectorBucketDefaultIndexMode struct {
+}
+
+func (*awsRestjson1_serializeOpPutVectorBucketDefaultIndexMode) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutVectorBucketDefaultIndexMode) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutVectorBucketDefaultIndexModeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/PutVectorBucketDefaultIndexMode")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutVectorBucketDefaultIndexModeInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutVectorBucketDefaultIndexModeInput(v *PutVectorBucketDefaultIndexModeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutVectorBucketDefaultIndexModeInput(v *PutVectorBucketDefaultIndexModeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DefaultIndexMode) > 0 {
+		ok := object.Key("defaultIndexMode")
+		ok.String(string(v.DefaultIndexMode))
+	}
+
+	if v.VectorBucketArn != nil {
+		ok := object.Key("vectorBucketArn")
+		ok.String(*v.VectorBucketArn)
+	}
+
+	if v.VectorBucketName != nil {
+		ok := object.Key("vectorBucketName")
+		ok.String(*v.VectorBucketName)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpPutVectorBucketPolicy struct {
 }
 
@@ -1640,6 +1731,11 @@ func awsRestjson1_serializeOpDocumentQueryVectorsInput(v *QueryVectorsInput, val
 		ok.String(*v.NextToken)
 	}
 
+	if len(v.QueryMode) > 0 {
+		ok := object.Key("queryMode")
+		ok.String(string(v.QueryMode))
+	}
+
 	if v.QueryVector != nil {
 		ok := object.Key("queryVector")
 		if err := awsRestjson1_serializeDocumentVectorData(v.QueryVector, ok); err != nil {
@@ -1838,6 +1934,102 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		for i := range v.TagKeys {
 			encoder.AddQuery("tagKeys").String(v.TagKeys[i])
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateIndexMode struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateIndexMode) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateIndexMode) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateIndexModeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/UpdateIndexMode")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateIndexModeInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateIndexModeInput(v *UpdateIndexModeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateIndexModeInput(v *UpdateIndexModeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IndexArn != nil {
+		ok := object.Key("indexArn")
+		ok.String(*v.IndexArn)
+	}
+
+	if len(v.IndexMode) > 0 {
+		ok := object.Key("indexMode")
+		ok.String(string(v.IndexMode))
+	}
+
+	if v.IndexName != nil {
+		ok := object.Key("indexName")
+		ok.String(*v.IndexName)
+	}
+
+	if v.VectorBucketName != nil {
+		ok := object.Key("vectorBucketName")
+		ok.String(*v.VectorBucketName)
 	}
 
 	return nil

@@ -1114,6 +1114,32 @@ var EFSVolumeConfiguration_transitEncryptionPort *smithy.Schema
 
 var EFSVolumeConfiguration_authorizationConfig *smithy.Schema
 
+var EksAccessEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.batch",
+	Name:      "EksAccessEntry",
+}, smithy.ShapeTypeStructure, 2)
+var EksAccessEntry_desiredState *smithy.Schema
+
+var EksAccessEntry_status *smithy.Schema
+
+var EksAccessEntryDesiredState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.batch",
+	Name:      "EksAccessEntryDesiredState",
+}, smithy.ShapeTypeEnum, 3)
+var EksAccessEntryDesiredState_ENABLED *smithy.Schema
+
+var EksAccessEntryDesiredState_DISABLED *smithy.Schema
+
+var EksAccessEntryDesiredState_INHERIT_FROM_CLUSTER *smithy.Schema
+
+var EksAccessEntryStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.batch",
+	Name:      "EksAccessEntryStatus",
+}, smithy.ShapeTypeEnum, 2)
+var EksAccessEntryStatus_ACTIVE *smithy.Schema
+
+var EksAccessEntryStatus_INACTIVE *smithy.Schema
+
 var _EksAnnotationsMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.batch",
 	Name:      "EksAnnotationsMap",
@@ -1171,10 +1197,18 @@ var _EksAttemptDetails_member *smithy.Schema
 var EksConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.batch",
 	Name:      "EksConfiguration",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var EksConfiguration_eksClusterArn *smithy.Schema
 
 var EksConfiguration_kubernetesNamespace *smithy.Schema
+
+var EksConfiguration_accessEntry *smithy.Schema
+
+var EksConfigurationUpdate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.batch",
+	Name:      "EksConfigurationUpdate",
+}, smithy.ShapeTypeStructure, 1)
+var EksConfigurationUpdate_accessEntry *smithy.Schema
 
 var EksContainer = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.batch",
@@ -4128,7 +4162,7 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateComputeEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.batch",
 	Name:      "UpdateComputeEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var UpdateComputeEnvironmentRequest_computeEnvironment *smithy.Schema
 
 var UpdateComputeEnvironmentRequest_state *smithy.Schema
@@ -4144,6 +4178,8 @@ var UpdateComputeEnvironmentRequest_updatePolicy *smithy.Schema
 var UpdateComputeEnvironmentRequest_context *smithy.Schema
 
 var UpdateComputeEnvironmentRequest_ecsSettings *smithy.Schema
+
+var UpdateComputeEnvironmentRequest_eksConfiguration *smithy.Schema
 
 var UpdateComputeEnvironmentResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.batch",
@@ -4553,9 +4589,25 @@ func init() {
 
 	UpdatePolicy_jobExecutionTimeoutMinutes = UpdatePolicy.AddMember("jobExecutionTimeoutMinutes", _JobExecutionTimeoutMinutes)
 
+	EksAccessEntryDesiredState_ENABLED = EksAccessEntryDesiredState.AddMember("ENABLED", smithyprelude.Unit)
+
+	EksAccessEntryDesiredState_DISABLED = EksAccessEntryDesiredState.AddMember("DISABLED", smithyprelude.Unit)
+
+	EksAccessEntryDesiredState_INHERIT_FROM_CLUSTER = EksAccessEntryDesiredState.AddMember("INHERIT_FROM_CLUSTER", smithyprelude.Unit)
+
+	EksAccessEntryStatus_ACTIVE = EksAccessEntryStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	EksAccessEntryStatus_INACTIVE = EksAccessEntryStatus.AddMember("INACTIVE", smithyprelude.Unit)
+
+	EksAccessEntry_desiredState = EksAccessEntry.AddMember("desiredState", EksAccessEntryDesiredState)
+
+	EksAccessEntry_status = EksAccessEntry.AddMember("status", EksAccessEntryStatus)
+
 	EksConfiguration_eksClusterArn = EksConfiguration.AddMember("eksClusterArn", _String)
 
 	EksConfiguration_kubernetesNamespace = EksConfiguration.AddMember("kubernetesNamespace", _String)
+
+	EksConfiguration_accessEntry = EksConfiguration.AddMember("accessEntry", EksAccessEntry)
 
 	OrchestrationType_ECS = OrchestrationType.AddMember("ECS", smithyprelude.Unit)
 
@@ -5200,6 +5252,8 @@ func init() {
 	EksAttemptDetail_statusReason = EksAttemptDetail.AddMember("statusReason", _String)
 
 	_EksAttemptDetails_member = _EksAttemptDetails.AddMember("member", EksAttemptDetail)
+
+	EksConfigurationUpdate_accessEntry = EksConfigurationUpdate.AddMember("accessEntry", EksAccessEntry)
 
 	EksContainerEnvironmentVariable_name = EksContainerEnvironmentVariable.AddMember("name", _String)
 
@@ -6568,6 +6622,8 @@ func init() {
 	UpdateComputeEnvironmentRequest_context = UpdateComputeEnvironmentRequest.AddMember("context", _String)
 
 	UpdateComputeEnvironmentRequest_ecsSettings = UpdateComputeEnvironmentRequest.AddMember("ecsSettings", EcsSettings)
+
+	UpdateComputeEnvironmentRequest_eksConfiguration = UpdateComputeEnvironmentRequest.AddMember("eksConfiguration", EksConfigurationUpdate)
 
 	UpdateComputeEnvironmentResponse_computeEnvironmentName = UpdateComputeEnvironmentResponse.AddMember("computeEnvironmentName", _String)
 

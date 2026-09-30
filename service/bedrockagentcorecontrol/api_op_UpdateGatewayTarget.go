@@ -47,6 +47,14 @@ type UpdateGatewayTargetInput struct {
 	// This member is required.
 	TargetId *string
 
+	// The private certificate authority (CA) configurations for the gateway target.
+	// Use this to have the gateway trust a private CA when it establishes TLS
+	// connections to the target endpoint. Provide each certificate by reference to an
+	// Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can
+	// specify only one certificate authority configuration in this list. To remove a
+	// previously configured certificate authority, omit this field on update.
+	CertificateConfigurations []types.CertificateConfiguration
+
 	// The updated credential provider configurations for the gateway target.
 	CredentialProviderConfigurations []types.CredentialProviderConfiguration
 
@@ -114,6 +122,9 @@ type UpdateGatewayTargetOutput struct {
 	// when a target is configured with a credential provider with authorization code
 	// grant type and requires user federation.
 	AuthorizationData types.AuthorizationData
+
+	// The private certificate authority (CA) configurations for the gateway target.
+	CertificateConfigurations []types.CertificateConfiguration
 
 	// The updated description of the gateway target.
 	Description *string

@@ -1,0 +1,8 @@
+{
+    "id": "e2a478c2-1192-4740-a004-50812fc35dff",
+    "type": "feature",
+    "description": "Adds support for filtering exported table data using FilterExpression, ProjectionExpression and KeyConditionExpression with ExportTableToPointInTime.",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

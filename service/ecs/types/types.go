@@ -7436,10 +7436,7 @@ type ExpressGatewayServiceConfiguration struct {
 	// The CPU allocation for tasks in this service revision.
 	Cpu *string
 
-	// The CPU architecture that the tasks in this service revision run on. This is
-	// the architecture from the task definition that the service revision uses, so it
-	// reflects the default or the previously configured architecture when the request
-	// that created the revision didn't specify one.
+	// The CPU architecture that the task runs on.
 	//
 	// Valid values:
 	//
@@ -7447,10 +7444,9 @@ type ExpressGatewayServiceConfiguration struct {
 	//
 	//   - ARM64 - The 64-bit ARM architecture.
 	//
-	// This value isn't returned when the task definition for the service revision
-	// doesn't specify a runtime platform. Because the architecture comes from each
-	// service revision's own task definition, revisions of the same service can report
-	// different architectures.
+	// Different service revisions can report different architectures. This value
+	// isn't returned when the service uses a customer-provided task definition that
+	// doesn't specify a CPU architecture.
 	CpuArchitecture ExpressCpuArchitecture
 
 	// The Unix timestamp for when this service revision was created.
@@ -12385,6 +12381,11 @@ type ResolvedConfiguration struct {
 	// rules direct traffic to them.
 	LoadBalancers []ServiceRevisionLoadBalancer
 
+	// The resolved VPC Lattice configuration for the service revision. This includes
+	// information about which target groups serve traffic and which listener rules
+	// direct traffic to them.
+	VpcLatticeConfigurations []ServiceRevisionVpcLatticeConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -12396,12 +12397,15 @@ func (v *ResolvedConfiguration) Serialize(s smithy.ShapeSerializer) {
 
 func (v *ResolvedConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeServiceRevisionLoadBalancers(s, schemas.ResolvedConfiguration_loadBalancers, v.LoadBalancers)
+	serializeServiceRevisionVpcLatticeConfigurations(s, schemas.ResolvedConfiguration_vpcLatticeConfigurations, v.VpcLatticeConfigurations)
 }
 func (v *ResolvedConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResolvedConfiguration, func(s *smithy.Schema) error {
 		switch s {
 		case schemas.ResolvedConfiguration_loadBalancers:
 			return deserializeServiceRevisionLoadBalancers(d, schemas.ResolvedConfiguration_loadBalancers, &v.LoadBalancers)
+		case schemas.ResolvedConfiguration_vpcLatticeConfigurations:
+			return deserializeServiceRevisionVpcLatticeConfigurations(d, schemas.ResolvedConfiguration_vpcLatticeConfigurations, &v.VpcLatticeConfigurations)
 		}
 		return nil
 	})
@@ -15361,6 +15365,50 @@ func (v *ServiceRevisionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The resolved VPC Lattice configuration for a service revision. This includes
+// information about which target groups serve traffic and which listener rules
+// direct traffic to them.
+type ServiceRevisionVpcLatticeConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the production listener rule or listener that
+	// directs traffic to the target group associated with the service revision.
+	ProductionListenerRule *string
+
+	// The Amazon Resource Name (ARN) of the target group associated with the service
+	// revision.
+	TargetGroupArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ServiceRevisionVpcLatticeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceRevisionVpcLatticeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceRevisionVpcLatticeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProductionListenerRule != nil {
+		s.WriteString(schemas.ServiceRevisionVpcLatticeConfiguration_productionListenerRule, *v.ProductionListenerRule)
+	}
+	if v.TargetGroupArn != nil {
+		s.WriteString(schemas.ServiceRevisionVpcLatticeConfiguration_targetGroupArn, *v.TargetGroupArn)
+	}
+}
+func (v *ServiceRevisionVpcLatticeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceRevisionVpcLatticeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceRevisionVpcLatticeConfiguration_productionListenerRule:
+			v.ProductionListenerRule = new(string)
+			return d.ReadString(schemas.ServiceRevisionVpcLatticeConfiguration_productionListenerRule, v.ProductionListenerRule)
+		case schemas.ServiceRevisionVpcLatticeConfiguration_targetGroupArn:
+			v.TargetGroupArn = new(string)
+			return d.ReadString(schemas.ServiceRevisionVpcLatticeConfiguration_targetGroupArn, v.TargetGroupArn)
+		}
+		return nil
+	})
+}
+
 // The configuration for a volume specified in the task definition as a volume
 // that is configured at launch time. Currently, the only supported volume type is
 // an Amazon EBS volume.
@@ -18205,6 +18253,63 @@ func (v *VolumeFrom) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The advanced settings for VPC Lattice used in blue/green deployments. Specify
+// the alternate target group and listener rules required for traffic shifting
+// during blue/green deployments. For more information, see [Required resources for Amazon ECS blue/green deployments]in the Amazon Elastic
+// Container Service Developer Guide.
+//
+// [Required resources for Amazon ECS blue/green deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-deployment-implementation.html
+type VpcLatticeAdvancedConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the alternate target group associated with
+	// the VPC Lattice Configuration for Amazon ECS blue/green deployments.
+	AlternateTargetGroupArn *string
+
+	// The Amazon Resource Name (ARN) that identifies the production listener rule or
+	// listener for routing production traffic.
+	ProductionListenerRule *string
+
+	// The Amazon Resource Name (ARN) that identifies the test listener rule or
+	// listener for routing test traffic.
+	TestListenerRule *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *VpcLatticeAdvancedConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcLatticeAdvancedConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcLatticeAdvancedConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlternateTargetGroupArn != nil {
+		s.WriteString(schemas.VpcLatticeAdvancedConfiguration_alternateTargetGroupArn, *v.AlternateTargetGroupArn)
+	}
+	if v.ProductionListenerRule != nil {
+		s.WriteString(schemas.VpcLatticeAdvancedConfiguration_productionListenerRule, *v.ProductionListenerRule)
+	}
+	if v.TestListenerRule != nil {
+		s.WriteString(schemas.VpcLatticeAdvancedConfiguration_testListenerRule, *v.TestListenerRule)
+	}
+}
+func (v *VpcLatticeAdvancedConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcLatticeAdvancedConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcLatticeAdvancedConfiguration_alternateTargetGroupArn:
+			v.AlternateTargetGroupArn = new(string)
+			return d.ReadString(schemas.VpcLatticeAdvancedConfiguration_alternateTargetGroupArn, v.AlternateTargetGroupArn)
+		case schemas.VpcLatticeAdvancedConfiguration_productionListenerRule:
+			v.ProductionListenerRule = new(string)
+			return d.ReadString(schemas.VpcLatticeAdvancedConfiguration_productionListenerRule, v.ProductionListenerRule)
+		case schemas.VpcLatticeAdvancedConfiguration_testListenerRule:
+			v.TestListenerRule = new(string)
+			return d.ReadString(schemas.VpcLatticeAdvancedConfiguration_testListenerRule, v.TestListenerRule)
+		}
+		return nil
+	})
+}
+
 // The VPC Lattice configuration for your service that holds the information for
 // the target group(s) Amazon ECS tasks will be registered to.
 type VpcLatticeConfiguration struct {
@@ -18229,6 +18334,14 @@ type VpcLatticeConfiguration struct {
 	// This member is required.
 	TargetGroupArn *string
 
+	// The advanced settings for VPC Lattice used in blue/green deployments. Specify
+	// the alternate target group and listener rules required for traffic shifting
+	// during blue/green deployments. For more information, see [Required resources for Amazon ECS blue/green deployments]in the Amazon Elastic
+	// Container Service Developer Guide.
+	//
+	// [Required resources for Amazon ECS blue/green deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-deployment-implementation.html
+	AdvancedConfiguration *VpcLatticeAdvancedConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -18239,6 +18352,11 @@ func (v *VpcLatticeConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcLatticeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdvancedConfiguration != nil {
+		s.WriteStruct(schemas.VpcLatticeConfiguration_advancedConfiguration)
+		v.AdvancedConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.PortName != nil {
 		s.WriteString(schemas.VpcLatticeConfiguration_portName, *v.PortName)
 	}
@@ -18252,6 +18370,9 @@ func (v *VpcLatticeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *VpcLatticeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcLatticeConfiguration, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.VpcLatticeConfiguration_advancedConfiguration:
+			v.AdvancedConfiguration = &VpcLatticeAdvancedConfiguration{}
+			return v.AdvancedConfiguration.Deserialize(d)
 		case schemas.VpcLatticeConfiguration_portName:
 			v.PortName = new(string)
 			return d.ReadString(schemas.VpcLatticeConfiguration_portName, v.PortName)

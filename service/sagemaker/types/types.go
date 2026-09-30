@@ -9543,6 +9543,78 @@ func (v *ClarifyTextConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The external MySQL-compatible database that the Slurm accounting daemon (
+// slurmdbd ) connects to for a SageMaker HyperPod cluster. You provide the
+// database credentials in an Amazon Web Services Secrets Manager secret instead of
+// in the request.
+type ClusterAccountingDatabase struct {
+
+	// The hostname or endpoint of the accounting database, such as the endpoint of an
+	// Amazon RDS for MySQL or Aurora MySQL database. The database must be reachable
+	// from the subnets and security groups that you configure for the cluster.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret that contains the user name and password for the accounting database. The
+	// database user must be able to create the schema and to read from and write to
+	// it.
+	//
+	// This member is required.
+	SecretArn *string
+
+	// The name of the database schema that stores the Slurm accounting data. The
+	// default is slurm_acct_db_ followed by the cluster ID from the cluster ARN, for
+	// example slurm_acct_db_a1b2c3d4e5f6 .
+	Name *string
+
+	// The port that the accounting database listens on. The default is 3306 .
+	Port *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClusterAccountingDatabase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterAccountingDatabase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterAccountingDatabase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteString(schemas.ClusterAccountingDatabase_Endpoint, *v.Endpoint)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ClusterAccountingDatabase_Name, *v.Name)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.ClusterAccountingDatabase_Port, *v.Port)
+	}
+	if v.SecretArn != nil {
+		s.WriteString(schemas.ClusterAccountingDatabase_SecretArn, *v.SecretArn)
+	}
+}
+func (v *ClusterAccountingDatabase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterAccountingDatabase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterAccountingDatabase_Endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.ClusterAccountingDatabase_Endpoint, v.Endpoint)
+		case schemas.ClusterAccountingDatabase_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ClusterAccountingDatabase_Name, v.Name)
+		case schemas.ClusterAccountingDatabase_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.ClusterAccountingDatabase_Port, v.Port)
+		case schemas.ClusterAccountingDatabase_SecretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.ClusterAccountingDatabase_SecretArn, v.SecretArn)
+		}
+		return nil
+	})
+}
+
 // The configuration for automatic patching of the instance group. When
 // configured, the system automatically applies security patch AMI updates to the
 // instance group.
@@ -12193,6 +12265,14 @@ func (v *ClusterOrchestratorEksConfig) Deserialize(d smithy.ShapeDeserializer) e
 // HyperPod cluster.
 type ClusterOrchestratorSlurmConfig struct {
 
+	// The external database that stores the Slurm accounting data for the cluster,
+	// such as job history, associations, and usage. When you omit this field, Slurm
+	// accounting uses a database on the cluster's controller node.
+	//
+	// This field is only supported for clusters using Continuous as the
+	// NodeProvisioningMode .
+	AccountingDatabase *ClusterAccountingDatabase
+
 	// The strategy for managing partitions for the Slurm configuration. Valid values
 	// are Managed , Overwrite , and Merge .
 	SlurmConfigStrategy ClusterSlurmConfigStrategy
@@ -12207,6 +12287,11 @@ func (v *ClusterOrchestratorSlurmConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ClusterOrchestratorSlurmConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountingDatabase != nil {
+		s.WriteStruct(schemas.ClusterOrchestratorSlurmConfig_AccountingDatabase)
+		v.AccountingDatabase.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SlurmConfigStrategy != "" {
 		s.WriteString(schemas.ClusterOrchestratorSlurmConfig_SlurmConfigStrategy, string(v.SlurmConfigStrategy))
 	}
@@ -12214,6 +12299,9 @@ func (v *ClusterOrchestratorSlurmConfig) SerializeMembers(s smithy.ShapeSerializ
 func (v *ClusterOrchestratorSlurmConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClusterOrchestratorSlurmConfig, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ClusterOrchestratorSlurmConfig_AccountingDatabase:
+			v.AccountingDatabase = &ClusterAccountingDatabase{}
+			return v.AccountingDatabase.Deserialize(d)
 		case schemas.ClusterOrchestratorSlurmConfig_SlurmConfigStrategy:
 			var ev string
 			if err := d.ReadString(schemas.ClusterOrchestratorSlurmConfig_SlurmConfigStrategy, &ev); err != nil {
@@ -15052,6 +15140,76 @@ func (v *CustomPosixUserConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CustomPosixUserConfig_Uid:
 			v.Uid = new(int64)
 			return d.ReadInt64(schemas.CustomPosixUserConfig_Uid, v.Uid)
+		}
+		return nil
+	})
+}
+
+// Metadata information about a change to the external Slurm accounting database
+// of a HyperPod cluster.
+type DatabaseConfigurationMetadata struct {
+
+	// Additional information about a change that succeeded, such as an action to take
+	// on the cluster.
+	Advisory *string
+
+	// An error message describing why the accounting database change failed, and how
+	// to resolve it.
+	FailureMessage *string
+
+	// Whether HyperPod restored the previous accounting database configuration after
+	// the change failed. Valid values:
+	//
+	//   - NotApplicable : The change failed before HyperPod modified the cluster, for
+	//   example because the database could not be reached or rejected the credentials,
+	//   so there was nothing to restore.
+	//
+	//   - Reverted : The change failed after it was applied, and HyperPod restored the
+	//   previous configuration. The cluster continues to use the previous accounting
+	//   database.
+	//
+	//   - RevertFailed : The change failed and HyperPod could not restore the previous
+	//   configuration, so Slurm accounting on the cluster might not be working.
+	//
+	// This field is omitted when the change succeeds.
+	RollbackStatus DatabaseConfigurationRollbackStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *DatabaseConfigurationMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseConfigurationMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseConfigurationMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Advisory != nil {
+		s.WriteString(schemas.DatabaseConfigurationMetadata_Advisory, *v.Advisory)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.DatabaseConfigurationMetadata_FailureMessage, *v.FailureMessage)
+	}
+	if v.RollbackStatus != "" {
+		s.WriteString(schemas.DatabaseConfigurationMetadata_RollbackStatus, string(v.RollbackStatus))
+	}
+}
+func (v *DatabaseConfigurationMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseConfigurationMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseConfigurationMetadata_Advisory:
+			v.Advisory = new(string)
+			return d.ReadString(schemas.DatabaseConfigurationMetadata_Advisory, v.Advisory)
+		case schemas.DatabaseConfigurationMetadata_FailureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.DatabaseConfigurationMetadata_FailureMessage, v.FailureMessage)
+		case schemas.DatabaseConfigurationMetadata_RollbackStatus:
+			var ev string
+			if err := d.ReadString(schemas.DatabaseConfigurationMetadata_RollbackStatus, &ev); err != nil {
+				return err
+			}
+			v.RollbackStatus = DatabaseConfigurationRollbackStatus(ev)
+			return nil
 		}
 		return nil
 	})
@@ -20030,9 +20188,11 @@ func (v *EventDetails) Deserialize(d smithy.ShapeDeserializer) error {
 // The following types satisfy this interface:
 //
 //	EventMetadataMemberCluster
+//	EventMetadataMemberDatabaseConfiguration
 //	EventMetadataMemberInstance
 //	EventMetadataMemberInstanceGroup
 //	EventMetadataMemberInstanceGroupScaling
+//	EventMetadataMemberSlurmHealth
 type EventMetadata interface {
 	isEventMetadata()
 }
@@ -20051,6 +20211,24 @@ func (v *EventMetadataMemberCluster) Serialize(s smithy.ShapeSerializer) {
 	s.CloseStruct()
 }
 func (v *EventMetadataMemberCluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Metadata specific to events about the external Slurm accounting database of the
+// cluster.
+type EventMetadataMemberDatabaseConfiguration struct {
+	Value DatabaseConfigurationMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*EventMetadataMemberDatabaseConfiguration) isEventMetadata() {}
+func (v *EventMetadataMemberDatabaseConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventMetadata_DatabaseConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EventMetadataMemberDatabaseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -20102,6 +20280,24 @@ func (v *EventMetadataMemberInstanceGroupScaling) Serialize(s smithy.ShapeSerial
 	s.CloseStruct()
 }
 func (v *EventMetadataMemberInstanceGroupScaling) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Metadata specific to events about the health of the Slurm components on the
+// controller node of the cluster.
+type EventMetadataMemberSlurmHealth struct {
+	Value SlurmHealthMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*EventMetadataMemberSlurmHealth) isEventMetadata() {}
+func (v *EventMetadataMemberSlurmHealth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventMetadata_SlurmHealth)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EventMetadataMemberSlurmHealth) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -49931,6 +50127,85 @@ func (v *ShuffleConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ShuffleConfig_Seed:
 			v.Seed = new(int64)
 			return d.ReadInt64(schemas.ShuffleConfig_Seed, v.Seed)
+		}
+		return nil
+	})
+}
+
+// Metadata information about the health of a Slurm component on the controller
+// node of a HyperPod cluster.
+type SlurmHealthMetadata struct {
+
+	// The Slurm component that the health information describes. The valid value is
+	// Slurmdbd , the Slurm accounting daemon.
+	//
+	// This member is required.
+	Component SlurmHealthComponent
+
+	// The health of the component. Valid values are Healthy and Unhealthy .
+	//
+	// This member is required.
+	Status SlurmHealthStatus
+
+	// The reason the component is unhealthy. Valid values:
+	//
+	//   - DaemonDown : The daemon is not running, so job accounting records are not
+	//   being written.
+	//
+	//   - DaemonDisabled : The daemon is running and its accounting database is
+	//   responding, but the daemon is not enabled to start automatically. Job accounting
+	//   stops the next time the controller node restarts.
+	//
+	//   - DbUnreachable : The daemon is running, but its accounting database did not
+	//   respond. Job accounting records might not be written.
+	//
+	// This field is omitted when the component is healthy.
+	Reason SlurmHealthReason
+
+	noSmithyDocumentSerde
+}
+
+func (v *SlurmHealthMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlurmHealthMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlurmHealthMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Component != "" {
+		s.WriteString(schemas.SlurmHealthMetadata_Component, string(v.Component))
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.SlurmHealthMetadata_Reason, string(v.Reason))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SlurmHealthMetadata_Status, string(v.Status))
+	}
+}
+func (v *SlurmHealthMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlurmHealthMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SlurmHealthMetadata_Component:
+			var ev string
+			if err := d.ReadString(schemas.SlurmHealthMetadata_Component, &ev); err != nil {
+				return err
+			}
+			v.Component = SlurmHealthComponent(ev)
+			return nil
+		case schemas.SlurmHealthMetadata_Reason:
+			var ev string
+			if err := d.ReadString(schemas.SlurmHealthMetadata_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = SlurmHealthReason(ev)
+			return nil
+		case schemas.SlurmHealthMetadata_Status:
+			var ev string
+			if err := d.ReadString(schemas.SlurmHealthMetadata_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = SlurmHealthStatus(ev)
+			return nil
 		}
 		return nil
 	})

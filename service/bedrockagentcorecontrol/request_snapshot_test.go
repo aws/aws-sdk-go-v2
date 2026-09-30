@@ -1721,6 +1721,20 @@ func TestCheckRequestSnapshot_CreateGatewayTarget(t *testing.T) {
 				Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 			},
 		},
+		CertificateConfigurations: []types.CertificateConfiguration{
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7096,6 +7110,20 @@ func TestCheckRequestSnapshot_UpdateGatewayTarget(t *testing.T) {
 				Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
 			},
 		},
+		CertificateConfigurations: []types.CertificateConfiguration{
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -10119,6 +10147,20 @@ func TestUpdateRequestSnapshot_CreateGatewayTarget(t *testing.T) {
 		PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
 			Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 				Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+			},
+		},
+		CertificateConfigurations: []types.CertificateConfiguration{
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
 			},
 		},
 	}
@@ -15494,6 +15536,20 @@ func TestUpdateRequestSnapshot_UpdateGatewayTarget(t *testing.T) {
 		PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
 			Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 				Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+			},
+		},
+		CertificateConfigurations: []types.CertificateConfiguration{
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
 			},
 		},
 	}

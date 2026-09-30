@@ -18,6 +18,11 @@ import (
 // response returns an HTTP status code of 200 even when some service jobs
 // encountered errors, so check the errors list. Service jobs that can't be found
 // are treated as successfully processed.
+//
+// This operation requires batch:TerminateServiceJob permission for each service
+// job in the request. There is no separate batch:TerminateServiceJobs IAM action.
+// If a caller's IAM policy grants batch:TerminateServiceJob , they can use both
+// the singular TerminateServiceJob and bulk TerminateServiceJobs operations.
 func (c *Client) TerminateServiceJobs(ctx context.Context, params *TerminateServiceJobsInput, optFns ...func(*Options)) (*TerminateServiceJobsOutput, error) {
 	if params == nil {
 		params = &TerminateServiceJobsInput{}

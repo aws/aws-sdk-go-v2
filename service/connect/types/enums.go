@@ -33,6 +33,7 @@ const (
 	ActionTypeEndAssociatedTasks       ActionType = "END_ASSOCIATED_TASKS"
 	ActionTypeSubmitAutoEvaluation     ActionType = "SUBMIT_AUTO_EVALUATION"
 	ActionTypeExtractInformation       ActionType = "EXTRACT_INFORMATION"
+	ActionTypeSendInAppNotification    ActionType = "SEND_IN_APP_NOTIFICATION"
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
@@ -51,6 +52,7 @@ func (ActionType) Values() []ActionType {
 		"END_ASSOCIATED_TASKS",
 		"SUBMIT_AUTO_EVALUATION",
 		"EXTRACT_INFORMATION",
+		"SEND_IN_APP_NOTIFICATION",
 	}
 }
 

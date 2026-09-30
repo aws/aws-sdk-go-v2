@@ -75,6 +75,18 @@ type GetContactInformationOutput struct {
 	// Amazon Web Services account.
 	ContactInformation *types.ContactInformation
 
+	// The verification status of the phone number in the primary contact information
+	// associated with an Amazon Web Services account. Valid values:
+	//
+	//   - PENDING – A one-time passcode has been sent and is waiting to be submitted.
+	//
+	//   - VERIFIED – The phone number has been verified.
+	//
+	//   - UNVERIFIED – The phone number has not been verified.
+	//
+	//   - NOT_SUPPORTED – Phone number verification isn't available for this account.
+	VerificationStatus types.PhoneNumberVerificationStatus
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -93,6 +105,9 @@ func (v *GetContactInformationOutput) SerializeMembers(s smithy.ShapeSerializer)
 		v.ContactInformation.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.VerificationStatus != "" {
+		s.WriteString(schemas.GetContactInformationResponse_VerificationStatus, string(v.VerificationStatus))
+	}
 }
 func (v *GetContactInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetContactInformationResponse, func(s *smithy.Schema) error {
@@ -100,6 +115,13 @@ func (v *GetContactInformationOutput) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.GetContactInformationResponse_ContactInformation:
 			v.ContactInformation = &types.ContactInformation{}
 			return v.ContactInformation.Deserialize(d)
+		case schemas.GetContactInformationResponse_VerificationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetContactInformationResponse_VerificationStatus, &ev); err != nil {
+				return err
+			}
+			v.VerificationStatus = types.PhoneNumberVerificationStatus(ev)
+			return nil
 		}
 		return nil
 	})

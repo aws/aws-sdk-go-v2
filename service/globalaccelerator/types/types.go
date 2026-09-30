@@ -757,9 +757,8 @@ type CustomRoutingAcceleratorAttributes struct {
 	// The prefix for the location in the Amazon S3 bucket for the flow logs.
 	// Attribute is required if FlowLogsEnabled is true .
 	//
-	// If you don’t specify a prefix, the flow logs are stored in the root of the
-	// bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket
-	// folder structure will include a double slash (//), like the following:
+	// If you specify slash (/) for the S3 bucket prefix, the log file bucket folder
+	// structure will include a double slash (//), like the following:
 	//
 	// DOC-EXAMPLE-BUCKET//AWSLogs/aws_account_id
 	FlowLogsS3Prefix *string
@@ -1569,8 +1568,53 @@ func (v *EndpointIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Detailed information for the IP addresses assigned to the Global Accelerator.
+type IpAddressDetail struct {
+
+	// The static IP address.
+	IpAddress *string
+
+	// The network zone that the specified IP address is located on.
+	NetworkZone *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *IpAddressDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IpAddressDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IpAddressDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddress != nil {
+		s.WriteString(schemas.IpAddressDetail_IpAddress, *v.IpAddress)
+	}
+	if v.NetworkZone != nil {
+		s.WriteString(schemas.IpAddressDetail_NetworkZone, *v.NetworkZone)
+	}
+}
+func (v *IpAddressDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IpAddressDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IpAddressDetail_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.IpAddressDetail_IpAddress, v.IpAddress)
+		case schemas.IpAddressDetail_NetworkZone:
+			v.NetworkZone = new(string)
+			return d.ReadString(schemas.IpAddressDetail_NetworkZone, v.NetworkZone)
+		}
+		return nil
+	})
+}
+
 // A complex type for the set of IP addresses for an accelerator.
 type IpSet struct {
+
+	// The array of IP addresses in the IP address set, with detailed information
+	// about the IP addresses. An IP address set can have a maximum of two IP
+	// addresses.
+	IpAddressDetails []IpAddressDetail
 
 	// The types of IP addresses included in this IP set.
 	IpAddressFamily IpAddressFamily
@@ -1594,6 +1638,7 @@ func (v *IpSet) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IpSet) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpAddressDetails(s, schemas.IpSet_IpAddressDetails, v.IpAddressDetails)
 	if v.IpAddressFamily != "" {
 		s.WriteString(schemas.IpSet_IpAddressFamily, string(v.IpAddressFamily))
 	}
@@ -1605,6 +1650,8 @@ func (v *IpSet) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *IpSet) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IpSet, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.IpSet_IpAddressDetails:
+			return deserializeIpAddressDetails(d, schemas.IpSet_IpAddressDetails, &v.IpAddressDetails)
 		case schemas.IpSet_IpAddressFamily:
 			var ev string
 			if err := d.ReadString(schemas.IpSet_IpAddressFamily, &ev); err != nil {

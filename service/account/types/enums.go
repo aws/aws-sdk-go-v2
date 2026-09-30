@@ -69,6 +69,30 @@ func (AwsAccountState) Values() []AwsAccountState {
 	}
 }
 
+type PhoneNumberVerificationStatus string
+
+// Enum values for PhoneNumberVerificationStatus
+const (
+	PhoneNumberVerificationStatusPending      PhoneNumberVerificationStatus = "PENDING"
+	PhoneNumberVerificationStatusVerified     PhoneNumberVerificationStatus = "VERIFIED"
+	PhoneNumberVerificationStatusUnverified   PhoneNumberVerificationStatus = "UNVERIFIED"
+	PhoneNumberVerificationStatusNotSupported PhoneNumberVerificationStatus = "NOT_SUPPORTED"
+)
+
+// Values returns all known values for PhoneNumberVerificationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PhoneNumberVerificationStatus) Values() []PhoneNumberVerificationStatus {
+	return []PhoneNumberVerificationStatus{
+		"PENDING",
+		"VERIFIED",
+		"UNVERIFIED",
+		"NOT_SUPPORTED",
+	}
+}
+
 type PrimaryEmailUpdateStatus string
 
 // Enum values for PrimaryEmailUpdateStatus

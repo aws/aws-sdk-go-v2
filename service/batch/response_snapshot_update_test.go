@@ -644,6 +644,10 @@ func TestUpdateResponseSnapshot_DescribeComputeEnvironments(t *testing.T) {
 				EksConfiguration: &types.EksConfiguration{
 					EksClusterArn:       ptr.String("__EksClusterArn__"),
 					KubernetesNamespace: ptr.String("__KubernetesNamespace__"),
+					AccessEntry: &types.EksAccessEntry{
+						DesiredState: types.EksAccessEntryDesiredState("ENABLED"),
+						Status:       types.EksAccessEntryStatus("ACTIVE"),
+					},
 				},
 				ContainerOrchestrationType: types.OrchestrationType("ECS"),
 				Uuid:                       ptr.String("__Uuid__"),
@@ -788,6 +792,10 @@ func TestUpdateResponseSnapshot_DescribeComputeEnvironments(t *testing.T) {
 				EksConfiguration: &types.EksConfiguration{
 					EksClusterArn:       ptr.String("__EksClusterArn__"),
 					KubernetesNamespace: ptr.String("__KubernetesNamespace__"),
+					AccessEntry: &types.EksAccessEntry{
+						DesiredState: types.EksAccessEntryDesiredState("ENABLED"),
+						Status:       types.EksAccessEntryStatus("ACTIVE"),
+					},
 				},
 				ContainerOrchestrationType: types.OrchestrationType("ECS"),
 				Uuid:                       ptr.String("__Uuid__"),

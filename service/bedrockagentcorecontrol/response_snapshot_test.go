@@ -2153,6 +2153,20 @@ func TestCheckResponseSnapshot_CreateGatewayTarget(t *testing.T) {
 			},
 		},
 		ProtocolType: types.TargetProtocolType("MCP"),
+		CertificateConfigurations: []types.CertificateConfiguration{
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateGatewayTarget.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2230,6 +2244,20 @@ func TestCheckResponseSnapshot_CreateGatewayTarget(t *testing.T) {
 		PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
 			Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 				Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+			},
+		},
+		CertificateConfigurations: []types.CertificateConfiguration{
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
 			},
 		},
 	})
@@ -4393,8 +4421,9 @@ func TestCheckResponseSnapshot_DeleteCodeInterpreter(t *testing.T) {
 
 func TestCheckResponseSnapshot_DeleteConfigurationBundle(t *testing.T) {
 	want := &DeleteConfigurationBundleOutput{
-		BundleId: ptr.String("__BundleId__"),
-		Status:   types.ConfigurationBundleStatus("ACTIVE"),
+		BundleArn: ptr.String("__BundleArn__"),
+		BundleId:  ptr.String("__BundleId__"),
+		Status:    types.ConfigurationBundleStatus("ACTIVE"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteConfigurationBundle.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -6589,6 +6618,20 @@ func TestCheckResponseSnapshot_GetGatewayTarget(t *testing.T) {
 			},
 		},
 		ProtocolType: types.TargetProtocolType("MCP"),
+		CertificateConfigurations: []types.CertificateConfiguration{
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetGatewayTarget.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10610,6 +10653,20 @@ func TestCheckResponseSnapshot_SynchronizeGatewayTargets(t *testing.T) {
 					},
 				},
 				ProtocolType: types.TargetProtocolType("MCP"),
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 			},
 			{
 				GatewayArn: ptr.String("__GatewayArn__"),
@@ -10708,6 +10765,20 @@ func TestCheckResponseSnapshot_SynchronizeGatewayTargets(t *testing.T) {
 					},
 				},
 				ProtocolType: types.TargetProtocolType("MCP"),
+				CertificateConfigurations: []types.CertificateConfiguration{
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+					&types.CertificateConfigurationMemberS3{
+						Value: types.S3CertificateConfiguration{
+							Uri:                  ptr.String("__Uri__"),
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+						},
+					},
+				},
 			},
 		},
 	}
@@ -12069,6 +12140,20 @@ func TestCheckResponseSnapshot_UpdateGatewayTarget(t *testing.T) {
 			},
 		},
 		ProtocolType: types.TargetProtocolType("MCP"),
+		CertificateConfigurations: []types.CertificateConfiguration{
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateGatewayTarget.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -12146,6 +12231,20 @@ func TestCheckResponseSnapshot_UpdateGatewayTarget(t *testing.T) {
 		PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
 			Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 				Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+			},
+		},
+		CertificateConfigurations: []types.CertificateConfiguration{
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
+			},
+			&types.CertificateConfigurationMemberS3{
+				Value: types.S3CertificateConfiguration{
+					Uri:                  ptr.String("__Uri__"),
+					BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
+				},
 			},
 		},
 	})

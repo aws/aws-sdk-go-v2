@@ -242,11 +242,35 @@ func TestCheckSnapshot_PutContactInformation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SendPhoneNumberVerification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendPhoneNumberVerification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendPhoneNumberVerification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartPrimaryEmailUpdate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartPrimaryEmailUpdate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartPrimaryEmailUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_VerifyPhoneNumber(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.VerifyPhoneNumber(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "VerifyPhoneNumber")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -433,11 +457,35 @@ func TestUpdateSnapshot_PutContactInformation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SendPhoneNumberVerification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendPhoneNumberVerification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendPhoneNumberVerification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartPrimaryEmailUpdate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartPrimaryEmailUpdate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartPrimaryEmailUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_VerifyPhoneNumber(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.VerifyPhoneNumber(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "VerifyPhoneNumber")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

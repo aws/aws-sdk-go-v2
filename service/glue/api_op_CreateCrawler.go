@@ -46,6 +46,10 @@ type CreateCrawlerInput struct {
 	// This member is required.
 	Targets *types.CrawlerTargets
 
+	// The ID of the Data Catalog in which to store the crawler's output. If none is
+	// supplied, the Amazon Web Services account ID is used by default.
+	CatalogId *string
+
 	// A list of custom classifiers that the user has registered. By default, all
 	// built-in classifiers are included in a crawl, but these custom classifiers
 	// always override the default classifiers for a given classification.
@@ -106,6 +110,9 @@ func (v *CreateCrawlerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateCrawlerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.CreateCrawlerRequest_CatalogId, *v.CatalogId)
+	}
 	serializeClassifierNameList(s, schemas.CreateCrawlerRequest_Classifiers, v.Classifiers)
 	if v.Configuration != nil {
 		s.WriteString(schemas.CreateCrawlerRequest_Configuration, *v.Configuration)

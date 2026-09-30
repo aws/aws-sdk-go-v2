@@ -6127,6 +6127,12 @@ func TestCheckRequestSnapshot_StartNotebookRun(t *testing.T) {
 		TimeoutConfiguration: &types.TimeoutConfig{
 			RunTimeoutInMinutes: ptr.Int32(1),
 		},
+		NotificationConfiguration: &types.NotificationConfig{
+			NotifyOn: []types.NotifyOnState{
+				types.NotifyOnState("SUCCEEDED"),
+				types.NotifyOnState("SUCCEEDED"),
+			},
+		},
 		TriggerSource: &types.TriggerSource{
 			Type: types.TriggerSourceType("MANUAL"),
 			Name: ptr.String("__Name__"),
@@ -13319,6 +13325,12 @@ func TestUpdateRequestSnapshot_StartNotebookRun(t *testing.T) {
 		},
 		TimeoutConfiguration: &types.TimeoutConfig{
 			RunTimeoutInMinutes: ptr.Int32(1),
+		},
+		NotificationConfiguration: &types.NotificationConfig{
+			NotifyOn: []types.NotifyOnState{
+				types.NotifyOnState("SUCCEEDED"),
+				types.NotifyOnState("SUCCEEDED"),
+			},
 		},
 		TriggerSource: &types.TriggerSource{
 			Type: types.TriggerSourceType("MANUAL"),

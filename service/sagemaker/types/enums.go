@@ -3065,6 +3065,28 @@ func (CustomizationTechnique) Values() []CustomizationTechnique {
 	}
 }
 
+type DatabaseConfigurationRollbackStatus string
+
+// Enum values for DatabaseConfigurationRollbackStatus
+const (
+	DatabaseConfigurationRollbackStatusNotApplicable DatabaseConfigurationRollbackStatus = "NotApplicable"
+	DatabaseConfigurationRollbackStatusReverted      DatabaseConfigurationRollbackStatus = "Reverted"
+	DatabaseConfigurationRollbackStatusRevertFailed  DatabaseConfigurationRollbackStatus = "RevertFailed"
+)
+
+// Values returns all known values for DatabaseConfigurationRollbackStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatabaseConfigurationRollbackStatus) Values() []DatabaseConfigurationRollbackStatus {
+	return []DatabaseConfigurationRollbackStatus{
+		"NotApplicable",
+		"Reverted",
+		"RevertFailed",
+	}
+}
+
 type DataDistributionType string
 
 // Enum values for DataDistributionType
@@ -9210,6 +9232,63 @@ func (SkipModelValidation) Values() []SkipModelValidation {
 	return []SkipModelValidation{
 		"All",
 		"None",
+	}
+}
+
+type SlurmHealthComponent string
+
+// Enum values for SlurmHealthComponent
+const (
+	SlurmHealthComponentSlurmdbd SlurmHealthComponent = "Slurmdbd"
+)
+
+// Values returns all known values for SlurmHealthComponent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SlurmHealthComponent) Values() []SlurmHealthComponent {
+	return []SlurmHealthComponent{
+		"Slurmdbd",
+	}
+}
+
+type SlurmHealthReason string
+
+// Enum values for SlurmHealthReason
+const (
+	SlurmHealthReasonDaemonDown     SlurmHealthReason = "DaemonDown"
+	SlurmHealthReasonDaemonDisabled SlurmHealthReason = "DaemonDisabled"
+	SlurmHealthReasonDbUnreachable  SlurmHealthReason = "DbUnreachable"
+)
+
+// Values returns all known values for SlurmHealthReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SlurmHealthReason) Values() []SlurmHealthReason {
+	return []SlurmHealthReason{
+		"DaemonDown",
+		"DaemonDisabled",
+		"DbUnreachable",
+	}
+}
+
+type SlurmHealthStatus string
+
+// Enum values for SlurmHealthStatus
+const (
+	SlurmHealthStatusHealthy   SlurmHealthStatus = "Healthy"
+	SlurmHealthStatusUnhealthy SlurmHealthStatus = "Unhealthy"
+)
+
+// Values returns all known values for SlurmHealthStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SlurmHealthStatus) Values() []SlurmHealthStatus {
+	return []SlurmHealthStatus{
+		"Healthy",
+		"Unhealthy",
 	}
 }
 

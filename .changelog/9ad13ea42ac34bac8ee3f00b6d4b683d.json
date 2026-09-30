@@ -1,0 +1,8 @@
+{
+    "id": "9ad13ea4-2ac3-4bac-8ee3-f00b6d4b683d",
+    "type": "feature",
+    "description": "Amazon S3 adds a new optional S3 Inventory field, IntelligentTieringReferenceDate, reporting the reference date S3 Intelligent-Tiering uses to evaluate an object's tier-transition eligibility. The value is populated for objects in the Intelligent-Tiering storage class and left blank for others.",
+    "modules": [
+        "service/s3"
+    ]
+}

@@ -113,11 +113,25 @@ var PutContactInformation = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/putContactInformation",
 	Code: 200})
 
+var SendPhoneNumberVerification = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.account",
+	Name:      "SendPhoneNumberVerification",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/sendPhoneNumberVerification",
+	Code: 200})
+
 var StartPrimaryEmailUpdate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
 	Name:      "StartPrimaryEmailUpdate",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/startPrimaryEmailUpdate",
+	Code: 200})
+
+var VerifyPhoneNumber = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.account",
+	Name:      "VerifyPhoneNumber",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/verifyPhoneNumber",
 	Code: 200})
 
 var _Account = smithy.NewSchema(smithy.ShapeID{
@@ -277,6 +291,11 @@ var _PhoneNumber = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
 	Name:      "PhoneNumber",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _PhoneNumberVerificationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.account",
+	Name:      "PhoneNumberVerificationStatus",
+}, smithy.ShapeTypeString, 0)
 
 var _PostalCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
@@ -477,8 +496,10 @@ var GetContactInformationRequest_AccountId *smithy.Schema
 var GetContactInformationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
 	Name:      "GetContactInformationResponse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var GetContactInformationResponse_ContactInformation *smithy.Schema
+
+var GetContactInformationResponse_VerificationStatus *smithy.Schema
 
 var GetGovCloudAccountInformationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
@@ -588,6 +609,18 @@ var PutContactInformationRequest_ContactInformation *smithy.Schema
 
 var PutContactInformationRequest_AccountId *smithy.Schema
 
+var SendPhoneNumberVerificationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.account",
+	Name:      "SendPhoneNumberVerificationRequest",
+}, smithy.ShapeTypeStructure, 1)
+var SendPhoneNumberVerificationRequest_AccountId *smithy.Schema
+
+var SendPhoneNumberVerificationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.account",
+	Name:      "SendPhoneNumberVerificationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var SendPhoneNumberVerificationResponse_Status *smithy.Schema
+
 var StartPrimaryEmailUpdateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.account",
 	Name:      "StartPrimaryEmailUpdateRequest",
@@ -601,6 +634,20 @@ var StartPrimaryEmailUpdateResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StartPrimaryEmailUpdateResponse",
 }, smithy.ShapeTypeStructure, 1)
 var StartPrimaryEmailUpdateResponse_Status *smithy.Schema
+
+var VerifyPhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.account",
+	Name:      "VerifyPhoneNumberRequest",
+}, smithy.ShapeTypeStructure, 2)
+var VerifyPhoneNumberRequest_AccountId *smithy.Schema
+
+var VerifyPhoneNumberRequest_Otp *smithy.Schema
+
+var VerifyPhoneNumberResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.account",
+	Name:      "VerifyPhoneNumberResponse",
+}, smithy.ShapeTypeStructure, 1)
+var VerifyPhoneNumberResponse_Status *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -723,6 +770,8 @@ func init() {
 
 	GetContactInformationResponse_ContactInformation = GetContactInformationResponse.AddMember("ContactInformation", ContactInformation)
 
+	GetContactInformationResponse_VerificationStatus = GetContactInformationResponse.AddMember("VerificationStatus", _PhoneNumberVerificationStatus)
+
 	GetGovCloudAccountInformationRequest_StandardAccountId = GetGovCloudAccountInformationRequest.AddMember("StandardAccountId", _AccountId)
 
 	GetGovCloudAccountInformationResponse_GovCloudAccountId = GetGovCloudAccountInformationResponse.AddMember("GovCloudAccountId", _AccountId)
@@ -779,10 +828,20 @@ func init() {
 
 	PutContactInformationRequest_AccountId = PutContactInformationRequest.AddMember("AccountId", _AccountId)
 
+	SendPhoneNumberVerificationRequest_AccountId = SendPhoneNumberVerificationRequest.AddMember("AccountId", _AccountId)
+
+	SendPhoneNumberVerificationResponse_Status = SendPhoneNumberVerificationResponse.AddMember("Status", _PhoneNumberVerificationStatus)
+
 	StartPrimaryEmailUpdateRequest_AccountId = StartPrimaryEmailUpdateRequest.AddMember("AccountId", _AccountId)
 
 	StartPrimaryEmailUpdateRequest_PrimaryEmail = StartPrimaryEmailUpdateRequest.AddMember("PrimaryEmail", _PrimaryEmailAddress)
 
 	StartPrimaryEmailUpdateResponse_Status = StartPrimaryEmailUpdateResponse.AddMember("Status", _PrimaryEmailUpdateStatus)
+
+	VerifyPhoneNumberRequest_AccountId = VerifyPhoneNumberRequest.AddMember("AccountId", _AccountId)
+
+	VerifyPhoneNumberRequest_Otp = VerifyPhoneNumberRequest.AddMember("Otp", _Otp)
+
+	VerifyPhoneNumberResponse_Status = VerifyPhoneNumberResponse.AddMember("Status", _PhoneNumberVerificationStatus)
 
 }

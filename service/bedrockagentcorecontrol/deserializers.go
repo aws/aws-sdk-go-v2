@@ -4039,6 +4039,11 @@ func awsRestjson1_deserializeOpDocumentCreateGatewayTargetOutput(v **CreateGatew
 				return err
 			}
 
+		case "certificateConfigurations":
+			if err := awsRestjson1_deserializeDocumentCertificateConfigurationList(&sv.CertificateConfigurations, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8380,6 +8385,15 @@ func awsRestjson1_deserializeOpDocumentDeleteConfigurationBundleOutput(v **Delet
 
 	for key, value := range shape {
 		switch key {
+		case "bundleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfigurationBundleArn to be of type string, got %T instead", value)
+				}
+				sv.BundleArn = ptr.String(jtv)
+			}
+
 		case "bundleId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16487,6 +16501,11 @@ func awsRestjson1_deserializeOpDocumentGetGatewayTargetOutput(v **GetGatewayTarg
 		switch key {
 		case "authorizationData":
 			if err := awsRestjson1_deserializeDocumentAuthorizationData(&sv.AuthorizationData, value); err != nil {
+				return err
+			}
+
+		case "certificateConfigurations":
+			if err := awsRestjson1_deserializeDocumentCertificateConfigurationList(&sv.CertificateConfigurations, value); err != nil {
 				return err
 			}
 
@@ -32628,6 +32647,11 @@ func awsRestjson1_deserializeOpDocumentUpdateGatewayTargetOutput(v **UpdateGatew
 				return err
 			}
 
+		case "certificateConfigurations":
+			if err := awsRestjson1_deserializeDocumentCertificateConfigurationList(&sv.CertificateConfigurations, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -39335,6 +39359,88 @@ func awsRestjson1_deserializeDocumentCertificate(v **types.Certificate, value in
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCertificateConfiguration(v *types.CertificateConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.CertificateConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "s3":
+			var mv types.S3CertificateConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3CertificateConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CertificateConfigurationMemberS3{Value: mv}
+			break loop
+
+		case "secretsManager":
+			var mv types.SecretsManagerCertificateConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSecretsManagerCertificateConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CertificateConfigurationMemberSecretsManager{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCertificateConfigurationList(v *[]types.CertificateConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CertificateConfiguration
+	if *v == nil {
+		cv = []types.CertificateConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CertificateConfiguration
+		if err := awsRestjson1_deserializeDocumentCertificateConfiguration(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCertificateLocation(v *types.CertificateLocation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45220,6 +45326,11 @@ func awsRestjson1_deserializeDocumentGatewayTarget(v **types.GatewayTarget, valu
 		switch key {
 		case "authorizationData":
 			if err := awsRestjson1_deserializeDocumentAuthorizationData(&sv.AuthorizationData, value); err != nil {
+				return err
+			}
+
+		case "certificateConfigurations":
+			if err := awsRestjson1_deserializeDocumentCertificateConfigurationList(&sv.CertificateConfigurations, value); err != nil {
 				return err
 			}
 
@@ -57885,6 +57996,55 @@ func awsRestjson1_deserializeDocumentRuntimeTargetConfiguration(v **types.Runtim
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentS3CertificateConfiguration(v **types.S3CertificateConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3CertificateConfiguration
+	if *v == nil {
+		sv = &types.S3CertificateConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bucketOwnerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CertificateBucketOwnerAccountId to be of type string, got %T instead", value)
+				}
+				sv.BucketOwnerAccountId = ptr.String(jtv)
+			}
+
+		case "uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CertificateS3Uri to be of type string, got %T instead", value)
+				}
+				sv.Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentS3Configuration(v **types.S3Configuration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -58407,6 +58567,46 @@ func awsRestjson1_deserializeDocumentSecret(v **types.Secret, value interface{})
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSecretsManagerCertificateConfiguration(v **types.SecretsManagerCertificateConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SecretsManagerCertificateConfiguration
+	if *v == nil {
+		sv = &types.SecretsManagerCertificateConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "secretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CertificateSecretArn to be of type string, got %T instead", value)
 				}
 				sv.SecretArn = ptr.String(jtv)
 			}
