@@ -5992,6 +5992,13 @@
                         "smithy.api#documentation": "<p>The timestamp at which the additional configuration was last updated. This is in UTC format.</p>",
                         "smithy.api#jsonName": "updatedAt"
                     }
+                },
+                "ManagedBy": {
+                    "target": "com.amazonaws.guardduty#ManagedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates what manages the additional configuration. A value of <code>GUARDDUTY_POLICY</code> means a GuardDuty policy manages the additional configuration.</p>",
+                        "smithy.api#jsonName": "managedBy"
+                    }
                 }
             },
             "traits": {
@@ -6127,6 +6134,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Additional configuration for a resource.</p>",
                         "smithy.api#jsonName": "additionalConfiguration"
+                    }
+                },
+                "ManagedBy": {
+                    "target": "com.amazonaws.guardduty#ManagedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates what manages the feature. A value of <code>GUARDDUTY_POLICY</code> means a GuardDuty policy manages the feature.</p>",
+                        "smithy.api#jsonName": "managedBy"
                     }
                 }
             },
@@ -16158,6 +16172,17 @@
                 "target": "com.amazonaws.guardduty#MalwareScan"
             }
         },
+        "com.amazonaws.guardduty#ManagedBy": {
+            "type": "enum",
+            "members": {
+                "GUARDDUTY_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GUARDDUTY_POLICY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.guardduty#ManagementType": {
             "type": "enum",
             "members": {
@@ -16381,6 +16406,13 @@
                         "smithy.api#documentation": "<p>The timestamp at which the additional configuration was set for the member account. This is in UTC format.</p>",
                         "smithy.api#jsonName": "updatedAt"
                     }
+                },
+                "ManagedBy": {
+                    "target": "com.amazonaws.guardduty#ManagedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates what manages the additional configuration. A value of <code>GUARDDUTY_POLICY</code> means a GuardDuty policy manages the additional configuration.</p>",
+                        "smithy.api#jsonName": "managedBy"
+                    }
                 }
             },
             "traits": {
@@ -16505,6 +16537,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the additional configuration of the feature that is configured for the member account.</p>",
                         "smithy.api#jsonName": "additionalConfiguration"
+                    }
+                },
+                "ManagedBy": {
+                    "target": "com.amazonaws.guardduty#ManagedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates what manages the feature. A value of <code>GUARDDUTY_POLICY</code> means a GuardDuty policy manages the feature.</p>",
+                        "smithy.api#jsonName": "managedBy"
                     }
                 }
             },

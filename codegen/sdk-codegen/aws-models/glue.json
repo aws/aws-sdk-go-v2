@@ -10507,6 +10507,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the crawler should use Lake Formation credentials for the crawler instead of the IAM role credentials.</p>"
                     }
+                },
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog in which the crawler's output is stored.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11203,7 +11209,7 @@
                     }
                 },
                 "CatalogID": {
-                    "target": "com.amazonaws.glue#NameString",
+                    "target": "com.amazonaws.glue#CatalogIdString",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Data Catalog in which the database resides.</p>"
                     }
@@ -11422,6 +11428,12 @@
                     "target": "com.amazonaws.glue#TagsMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to use with this crawler request. You may use tags to limit access to the\n            crawler. For more information about tags in Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">Amazon Web Services Tags in Glue</a> in the developer\n            guide.</p>"
+                    }
+                },
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog in which to store the crawler's output. If none is supplied, the Amazon Web Services account ID is used by default.</p>"
                     }
                 }
             },
@@ -17250,6 +17262,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the table for which to delete column statistics.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "CatalogID": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>"
                     }
                 }
             },
@@ -23560,6 +23578,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>"
                     }
+                },
+                "CatalogID": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23624,6 +23648,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the table for which to retrieve column statistics.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "CatalogID": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>"
                     }
                 }
             },
@@ -26811,7 +26841,7 @@
             "type": "structure",
             "members": {
                 "CatalogId": {
-                    "target": "com.amazonaws.glue#NameString",
+                    "target": "com.amazonaws.glue#CatalogIdString",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the account ID is used by default.</p>",
                         "smithy.api#required": {}
@@ -36530,7 +36560,7 @@
             "type": "structure",
             "members": {
                 "CatalogId": {
-                    "target": "com.amazonaws.glue#NameString",
+                    "target": "com.amazonaws.glue#CatalogIdString",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the account ID is used by default.</p>",
                         "smithy.api#required": {}
@@ -47184,7 +47214,7 @@
                     }
                 },
                 "CatalogID": {
-                    "target": "com.amazonaws.glue#NameString",
+                    "target": "com.amazonaws.glue#CatalogIdString",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Data Catalog where the table reside. If none is supplied, the Amazon Web Services account ID is used by default.</p>"
                     }
@@ -47255,6 +47285,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the table for which to start a column statistic task run schedule.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "CatalogID": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>"
                     }
                 }
             },
@@ -48007,7 +48043,7 @@
             "type": "structure",
             "members": {
                 "CatalogId": {
-                    "target": "com.amazonaws.glue#NameString",
+                    "target": "com.amazonaws.glue#CatalogIdString",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Data Catalog where the table reside. If none is supplied, the account ID is used by default.</p>",
                         "smithy.api#required": {}
@@ -48668,6 +48704,12 @@
                         "smithy.api#documentation": "<p>The name of the table.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "CatalogID": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>"
+                    }
                 }
             },
             "traits": {
@@ -48719,6 +48761,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the table for which to stop a column statistic task run schedule.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "CatalogID": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>"
                     }
                 }
             },
@@ -48862,7 +48910,7 @@
             "type": "structure",
             "members": {
                 "CatalogId": {
-                    "target": "com.amazonaws.glue#NameString",
+                    "target": "com.amazonaws.glue#CatalogIdString",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Data Catalog where the table reside. If none is supplied, the account ID is used by default.</p>",
                         "smithy.api#required": {}
@@ -52224,7 +52272,7 @@
                     }
                 },
                 "CatalogID": {
-                    "target": "com.amazonaws.glue#NameString",
+                    "target": "com.amazonaws.glue#CatalogIdString",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Data Catalog in which the database resides.</p>"
                     }
@@ -52423,6 +52471,12 @@
                     "target": "com.amazonaws.glue#CrawlerSecurityConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the <code>SecurityConfiguration</code> structure to be used by this\n      crawler.</p>"
+                    }
+                },
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog in which to store the crawler's output. If you omit this value, the existing value on the crawler is preserved.</p>"
                     }
                 }
             },

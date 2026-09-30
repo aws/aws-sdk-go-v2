@@ -21442,6 +21442,12 @@
                         "smithy.api#documentation": "<p>The storage configuration of the notebook run, including the Amazon Simple Storage Service path and KMS key ARN.</p>"
                     }
                 },
+                "notificationConfiguration": {
+                    "target": "com.amazonaws.datazone#NotificationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The notification configuration of the notebook run, including the notebook run states that trigger notifications.</p>"
+                    }
+                },
                 "triggerSource": {
                     "target": "com.amazonaws.datazone#TriggerSource",
                     "traits": {
@@ -31212,6 +31218,9 @@
                 "storageConfiguration": {
                     "target": "com.amazonaws.datazone#StorageConfig"
                 },
+                "notificationConfiguration": {
+                    "target": "com.amazonaws.datazone#NotificationConfig"
+                },
                 "triggerSource": {
                     "target": "com.amazonaws.datazone#TriggerSource"
                 },
@@ -31584,6 +31593,21 @@
                 "smithy.api#documentation": "<p>The type of a notebook in Amazon SageMaker Unified Studio.</p>"
             }
         },
+        "com.amazonaws.datazone#NotificationConfig": {
+            "type": "structure",
+            "members": {
+                "notifyOn": {
+                    "target": "com.amazonaws.datazone#NotifyOnStates",
+                    "traits": {
+                        "smithy.api#documentation": "Notebook run states that trigger notifications. Ordering is not significant.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The notification configuration for a notebook run in Amazon SageMaker Unified Studio.</p>"
+            }
+        },
         "com.amazonaws.datazone#NotificationOutput": {
             "type": "structure",
             "members": {
@@ -31768,6 +31792,76 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.datazone#NotificationOutput"
+            }
+        },
+        "com.amazonaws.datazone#NotifyOnState": {
+            "type": "enum",
+            "members": {
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notify when the notebook run succeeds.</p>",
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notify when the notebook run fails.</p>",
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notify when the notebook run is stopped.</p>",
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notify when the notebook run is queued.</p>",
+                        "smithy.api#enumValue": "QUEUED"
+                    }
+                },
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notify when the notebook run is starting.</p>",
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notify when the notebook run is running.</p>",
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notify when the notebook run is stopping.</p>",
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A notebook run state that triggers a notification in Amazon SageMaker Unified Studio.</p>"
+            }
+        },
+        "com.amazonaws.datazone#NotifyOnStates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#NotifyOnState"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 7
+                },
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.datazone#OAuth2ClientApplication": {
@@ -38387,6 +38481,12 @@
                         "smithy.api#documentation": "<p>The timeout configuration for the notebook run. The default timeout is 720 minutes (12 hours) and the maximum is 1440 minutes (24 hours).</p>"
                     }
                 },
+                "notificationConfiguration": {
+                    "target": "com.amazonaws.datazone#NotificationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The notification configuration for the notebook run. Use this to specify the notebook run states that trigger notifications.</p>"
+                    }
+                },
                 "triggerSource": {
                     "target": "com.amazonaws.datazone#TriggerSource",
                     "traits": {
@@ -38507,6 +38607,12 @@
                     "target": "com.amazonaws.datazone#StorageConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The storage configuration of the notebook run, including the Amazon Simple Storage Service path and KMS key ARN.</p>"
+                    }
+                },
+                "notificationConfiguration": {
+                    "target": "com.amazonaws.datazone#NotificationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The notification configuration of the notebook run, including the notebook run states that trigger notifications.</p>"
                     }
                 },
                 "triggerSource": {

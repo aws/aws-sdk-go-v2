@@ -37596,6 +37596,12 @@
                     "traits": {
                         "smithy.api#enumValue": "LifecycleExpirationDate"
                     }
+                },
+                "IntelligentTieringReferenceDate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IntelligentTieringReferenceDate"
+                    }
                 }
             }
         },

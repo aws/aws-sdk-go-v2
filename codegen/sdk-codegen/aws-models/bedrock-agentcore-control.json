@@ -3277,6 +3277,44 @@
                 "smithy.api#documentation": "<p>A certificate to install in the browser or code interpreter.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#CertificateBucketOwnerAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CertificateConfiguration": {
+            "type": "union",
+            "members": {
+                "s3": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#S3CertificateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the PEM-encoded private CA certificate.</p>"
+                    }
+                },
+                "secretsManager": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#SecretsManagerCertificateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Secrets Manager location of the PEM-encoded private CA certificate.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reference to a private certificate authority (CA) certificate that the gateway uses to verify TLS connections to the target endpoint. Use this when the target presents a certificate issued by a private CA that is not trusted by default. Specify exactly one certificate source. The configuration is a reference only and never contains the certificate content.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CertificateConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#CertificateConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#CertificateLocation": {
             "type": "union",
             "members": {
@@ -3289,6 +3327,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The location from which to retrieve a certificate.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CertificateS3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^s3://.{1,2043}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CertificateSecretArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:.+$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#Certificates": {
@@ -4089,6 +4139,9 @@
         "com.amazonaws.bedrockagentcorecontrol#ConfigurationBundleArn": {
             "type": "string",
             "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::BedrockAgentCore::ConfigurationBundle"
+                },
                 "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:configuration-bundle/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$"
             }
         },
@@ -7240,6 +7293,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The private endpoint configuration for the gateway target. Use this to connect the gateway to private resources in your VPC.</p>"
                     }
+                },
+                "certificateConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private certificate authority (CA) configurations for the gateway target. Use this to have the gateway trust a private CA when it establishes TLS connections to the target endpoint. Provide each certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can specify only one certificate authority configuration in this list.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7351,6 +7410,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#TargetProtocolType",
                     "traits": {
                         "smithy.api#documentation": "<p>The protocol type of the created gateway target.</p>"
+                    }
+                },
+                "certificateConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private certificate authority (CA) configurations for the gateway target.</p>"
                     }
                 }
             },
@@ -10135,6 +10200,9 @@
         "com.amazonaws.bedrockagentcorecontrol#DatasetArn": {
             "type": "string",
             "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::BedrockAgentCore::Dataset"
+                },
                 "smithy.api#pattern": "^arn:aws(-[a-z]+)*:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:dataset/[a-zA-Z0-9_-]{1,110}$"
             }
         },
@@ -11151,6 +11219,14 @@
         "com.amazonaws.bedrockagentcorecontrol#DeleteConfigurationBundleResponse": {
             "type": "structure",
             "members": {
+                "bundleArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConfigurationBundleArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the deleted configuration bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
                 "bundleId": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ConfigurationBundleId",
                     "traits": {
@@ -14913,7 +14989,7 @@
                     "min": 1,
                     "max": 170
                 },
-                "smithy.api#pattern": "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:policy-engine\\/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9_]{10}$"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:policy-engine\\/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9_]{10}$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#GatewayPolicyEngineConfiguration": {
@@ -15552,6 +15628,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#TargetProtocolType",
                     "traits": {
                         "smithy.api#documentation": "<p>The protocol type of the gateway target.</p>"
+                    }
+                },
+                "certificateConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private certificate authority (CA) configurations for the gateway target.</p>"
                     }
                 }
             },
@@ -17952,6 +18034,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#TargetProtocolType",
                     "traits": {
                         "smithy.api#documentation": "<p>The protocol type of the gateway target.</p>"
+                    }
+                },
+                "certificateConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private certificate authority (CA) configurations for the gateway target.</p>"
                     }
                 }
             },
@@ -33331,6 +33419,27 @@
                 "smithy.api#pattern": "^s3://.{1,2043}$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#S3CertificateConfiguration": {
+            "type": "structure",
+            "members": {
+                "uri": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateS3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the Amazon S3 object that contains the PEM-encoded certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "bucketOwnerAccountId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateBucketOwnerAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the Amazon S3 bucket owner. This ID is used for cross-account access to the bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reference to a PEM-encoded private CA certificate stored as an Amazon S3 object.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#S3Configuration": {
             "type": "structure",
             "members": {
@@ -33786,6 +33895,21 @@
                         "smithy.api#enumValue": "EXTERNAL"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#SecretsManagerCertificateConfiguration": {
+            "type": "structure",
+            "members": {
+                "secretArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateSecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the PEM-encoded certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reference to a PEM-encoded private CA certificate stored in an Amazon Web Services Secrets Manager secret.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#SecretsManagerLocation": {
@@ -37227,7 +37351,8 @@
                         "smithy.api#length": {
                             "min": 1,
                             "max": 500
-                        }
+                        },
+                        "smithy.api#required": {}
                     }
                 },
                 "createdBy": {
@@ -38466,6 +38591,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The private endpoint configuration for the gateway target. Use this to connect the gateway to private resources in your VPC.</p>"
                     }
+                },
+                "certificateConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private certificate authority (CA) configurations for the gateway target. Use this to have the gateway trust a private CA when it establishes TLS connections to the target endpoint. Provide each certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can specify only one certificate authority configuration in this list. To remove a previously configured certificate authority, omit this field on update.</p>"
+                    }
                 }
             },
             "traits": {
@@ -38576,6 +38707,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#TargetProtocolType",
                     "traits": {
                         "smithy.api#documentation": "<p>The protocol type of the updated gateway target.</p>"
+                    }
+                },
+                "certificateConfigurations": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CertificateConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private certificate authority (CA) configurations for the gateway target.</p>"
                     }
                 }
             },

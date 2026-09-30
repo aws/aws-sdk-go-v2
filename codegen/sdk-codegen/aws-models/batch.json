@@ -1965,7 +1965,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels up to 50 jobs in an Batch job queue. This is a bulk version of <a>CancelJob</a>. Jobs that are in a\n        <code>SUBMITTED</code>, <code>PENDING</code>, or <code>RUNNABLE</code> state are cancelled\n      and the job status is updated to <code>FAILED</code>.</p>\n         <note>\n            <p>A <code>PENDING</code> job is cancelled after all dependency jobs are completed.\n        Therefore, it might take longer than expected to cancel a job in <code>PENDING</code>\n        status.</p>\n            <p>When you try to cancel an array parent job in <code>PENDING</code>, Batch attempts to\n        cancel all child jobs. The array parent job is cancelled when all child jobs are\n        completed.</p>\n         </note>\n         <p>Jobs that progressed to the <code>STARTING</code> or <code>RUNNING</code> state aren't\n      cancelled. These jobs must be terminated with the <a>TerminateJob</a> or\n        <a>TerminateJobs</a> operation.</p>\n         <p>Batch reports the result for each job individually in the response. Jobs that\n      were processed successfully are reported in the <code>successful</code> list. Jobs that\n      encountered errors are reported in the <code>errors</code> list. The response returns an\n      HTTP status code of <code>200</code> even when some jobs encountered errors, so check the\n      <code>errors</code> list. Jobs that can't be found are treated as successfully\n      processed.</p>",
+                "smithy.api#documentation": "<p>Cancels up to 50 jobs in an Batch job queue. This is a bulk version of <a>CancelJob</a>. Jobs that are in a\n        <code>SUBMITTED</code>, <code>PENDING</code>, or <code>RUNNABLE</code> state are cancelled\n      and the job status is updated to <code>FAILED</code>.</p>\n         <note>\n            <p>A <code>PENDING</code> job is cancelled after all dependency jobs are completed.\n        Therefore, it might take longer than expected to cancel a job in <code>PENDING</code>\n        status.</p>\n            <p>When you try to cancel an array parent job in <code>PENDING</code>, Batch attempts to\n        cancel all child jobs. The array parent job is cancelled when all child jobs are\n        completed.</p>\n         </note>\n         <p>Jobs that progressed to the <code>STARTING</code> or <code>RUNNING</code> state aren't\n      cancelled. These jobs must be terminated with the <a>TerminateJob</a> or\n        <a>TerminateJobs</a> operation.</p>\n         <p>Batch reports the result for each job individually in the response. Jobs that\n      were processed successfully are reported in the <code>successful</code> list. Jobs that\n      encountered errors are reported in the <code>errors</code> list. The response returns an\n      HTTP status code of <code>200</code> even when some jobs encountered errors, so check the\n      <code>errors</code> list. Jobs that can't be found are treated as successfully\n      processed.</p>\n         <important>\n            <p>This operation requires <code>batch:CancelJob</code> permission for each job in the\n        request. There is no separate <code>batch:CancelJobs</code> IAM action. If a caller's IAM\n        policy grants <code>batch:CancelJob</code>, they can use both the singular\n        <a>CancelJob</a> and bulk <code>CancelJobs</code> operations.</p>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "To cancel multiple jobs",
@@ -3383,7 +3383,7 @@
                 "eksConfiguration": {
                     "target": "com.amazonaws.batch#EksConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details for the Amazon EKS cluster that supports the compute environment.</p>\n         <note>\n            <p>To create a compute environment that uses EKS resources, the caller must have\n        permissions to call <code>eks:DescribeCluster</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The details for the Amazon EKS cluster that supports the compute environment.</p>\n         <note>\n            <p>To create a compute environment that uses EKS resources, the caller must have\n        permissions to call <code>eks:DescribeCluster</code>. Additional Amazon EKS permissions are\n        required for Batch to manage an access entry on the cluster; see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html\">Amazon EKS access entry\n        authentication</a> in the <i>Batch User Guide</i>.</p>\n         </note>"
                     }
                 },
                 "context": {
@@ -5859,6 +5859,74 @@
                 "smithy.api#documentation": "<p>The properties for a task definition that describes the container and volume definitions of\n   an Amazon ECS task. You can specify which Docker images to use, the required resources, and other\n   configurations related to launching the task definition through an Amazon ECS service or task.</p>"
             }
         },
+        "com.amazonaws.batch#EksAccessEntry": {
+            "type": "structure",
+            "members": {
+                "desiredState": {
+                    "target": "com.amazonaws.batch#EksAccessEntryDesiredState",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The desired access entry state for the compute environment. Valid values:</p>\n         <dl>\n            <dt>ENABLED</dt>\n            <dd>\n               <p>Batch manages an access entry on the cluster for the compute environment.</p>\n            </dd>\n            <dt>DISABLED</dt>\n            <dd>\n               <p>Batch deletes the Batch-managed access entry for the cluster. This value is rejected if the cluster's\n       <code>authenticationMode</code> is <code>API</code>, because such a cluster doesn't support\n      the <code>aws-auth</code> ConfigMap.</p>\n            </dd>\n            <dt>INHERIT_FROM_CLUSTER</dt>\n            <dd>\n               <p>Batch defers to the cluster's current access entry <code>status</code>. On a cluster whose\n      authentication mode is <code>API</code>, Batch creates and manages an access entry. On a\n      cluster whose authentication mode is <code>API_AND_CONFIG_MAP</code> or\n       <code>CONFIG_MAP</code>, Batch neither adds nor removes an access entry.</p>\n            </dd>\n         </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.batch#EksAccessEntryStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The observed state of the access entry on the cluster. <code>ACTIVE</code> means that an\n   access entry for the compute environment exists on the cluster and takes\n   precedence over the <code>aws-auth</code> ConfigMap. <code>INACTIVE</code> means that no\n   Batch-managed access entry is present. This is a read-only field returned by\n    <code>DescribeComputeEnvironments</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configures whether Batch manages an Amazon EKS access entry on the cluster for the compute\n   environment. For information on how the fields interact with the cluster's\n    <code>authenticationMode</code> and with other compute environments that share the cluster,\n   see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html\">Amazon EKS access entry\n    authentication</a> in the <i>Batch User Guide</i>.</p>\n         <note>\n            <p>Setting <code>desiredState=ENABLED</code> on a single compute environment does not guarantee that Batch creates an access\n    entry, and setting <code>desiredState=DISABLED</code> on a single compute environment does not guarantee that Batch deletes\n    one. Batch compares the <code>desiredState</code> across all compute environments that\n    target the same cluster. The Batch-managed access entry is created only when all compute environments have\n     <code>desiredState=ENABLED</code>, and deleted only when all have\n     <code>desiredState=DISABLED</code>. If you have multiple compute environments on the same\n    cluster, set <code>desiredState</code> consistently across all of them to avoid uncertainty.\n    For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html#eks-access-entries-reconciliation\">Reconciling\n     desiredState across compute environments</a> in the\n     <i>Batch User Guide</i>.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.batch#EksAccessEntryDesiredState": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "INHERIT_FROM_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INHERIT_FROM_CLUSTER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The desired state for the Batch-managed Amazon EKS access entry on a compute environment.</p>"
+            }
+        },
+        "com.amazonaws.batch#EksAccessEntryStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The observed state of the Batch-managed Amazon EKS access entry on a compute environment.</p>"
+            }
+        },
         "com.amazonaws.batch#EksAnnotationsMap": {
             "type": "map",
             "key": {
@@ -5992,10 +6060,30 @@
                         "smithy.api#documentation": "<p>The namespace of the Amazon EKS cluster. Batch manages pods in this namespace. The value\n   can't left empty or null. It must be fewer than 64 characters long, can't be set to\n    <code>default</code>, can't start with \"<code>kube-</code>,\" and must match this regular\n   expression: <code>^[a-z0-9]([-a-z0-9]*[a-z0-9])?$</code>. For more information, see <a href=\"https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/\">Namespaces</a> in the Kubernetes documentation.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "accessEntry": {
+                    "target": "com.amazonaws.batch#EksAccessEntry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Batch-managed Amazon EKS access entry for the compute environment. Set\n    <code>desiredState</code> to declare whether Batch manages an access entry on the cluster. In\n   a <code>DescribeComputeEnvironments</code> response, <code>desiredState</code> is the value that\n   Batch recorded for the compute environment and <code>status</code> is the observed state of\n   the access entry on the cluster. To change the access entry on an existing compute environment,\n   use <a href=\"https://docs.aws.amazon.com/batch/latest/APIReference/API_EksConfigurationUpdate.html#Batch-Type-EksConfigurationUpdate-accessEntry\">\n               <code>EksConfigurationUpdate.accessEntry</code>\n            </a>.</p>\n         <p>Whether the entry is provisioned on the cluster depends on the cluster's\n    <code>authenticationMode</code> and the <code>desiredState</code> recorded for each Batch compute\n   environment targeting the cluster. For more information,\n   see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html\">Amazon EKS access entry\n    authentication</a> in the <i>Batch User Guide</i>.</p>\n         <p>If you don't specify this field, Batch doesn't record a <code>desiredState</code> for the\n   compute environment and <code>DescribeComputeEnvironments</code> doesn't return one. For the\n   purpose of provisioning the access entry, Batch behaves as it does for\n    <code>INHERIT_FROM_CLUSTER</code>.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for the Amazon EKS cluster that supports the Batch compute environment. The\n   cluster must exist before the compute environment can be created.</p>"
+            }
+        },
+        "com.amazonaws.batch#EksConfigurationUpdate": {
+            "type": "structure",
+            "members": {
+                "accessEntry": {
+                    "target": "com.amazonaws.batch#EksAccessEntry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated access entry configuration for the compute environment. Set\n    <code>desiredState</code> to declare whether Batch will manage an access entry on the cluster.\n   For the accepted values, see <a href=\"https://docs.aws.amazon.com/batch/latest/APIReference/API_EksAccessEntry.html\">\n               <code>EksAccessEntry</code>\n            </a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the attributes of an Batch compute environment's Amazon EKS\n   configuration that can be updated. Currently <code>accessEntry</code> is the only attribute that you can\n   change after the compute environment is created. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html\">Amazon EKS access entry\n    authentication</a> in the <i>Batch User Guide</i>.</p>"
             }
         },
         "com.amazonaws.batch#EksContainer": {
@@ -12144,7 +12232,7 @@
                 "resourceRequirements": {
                     "target": "com.amazonaws.batch#ResourceRequirements",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type and amount of a resource to assign to a container. The only supported resource is a\n   GPU.</p>"
+                        "smithy.api#documentation": "<p>The type and amount of a resource to assign to a container. The supported resources include\n   <code>GPU</code>, <code>MEMORY</code>, and <code>VCPU</code>.</p>"
                     }
                 },
                 "secrets": {
@@ -12281,7 +12369,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Terminates up to 50 jobs in a job queue. This is a bulk version of <a>TerminateJob</a>. Jobs that are in the <code>STARTING</code> or\n        <code>RUNNING</code> state are terminated, which causes them to transition to\n        <code>FAILED</code>. Jobs that have not progressed to the <code>STARTING</code> state are\n      cancelled.</p>\n         <p>Batch reports the result for each job individually in the response. Jobs that\n      were processed successfully are reported in the <code>successful</code> list. Jobs that\n      encountered errors are reported in the <code>errors</code> list. The response returns an\n      HTTP status code of <code>200</code> even when some jobs encountered errors, so check the\n      <code>errors</code> list. Jobs that can't be found are treated as successfully\n      processed.</p>",
+                "smithy.api#documentation": "<p>Terminates up to 50 jobs in a job queue. This is a bulk version of <a>TerminateJob</a>. Jobs that are in the <code>STARTING</code> or\n        <code>RUNNING</code> state are terminated, which causes them to transition to\n        <code>FAILED</code>. Jobs that have not progressed to the <code>STARTING</code> state are\n      cancelled.</p>\n         <p>Batch reports the result for each job individually in the response. Jobs that\n      were processed successfully are reported in the <code>successful</code> list. Jobs that\n      encountered errors are reported in the <code>errors</code> list. The response returns an\n      HTTP status code of <code>200</code> even when some jobs encountered errors, so check the\n      <code>errors</code> list. Jobs that can't be found are treated as successfully\n      processed.</p>\n         <important>\n            <p>This operation requires <code>batch:TerminateJob</code> permission for each job in the\n        request. There is no separate <code>batch:TerminateJobs</code> IAM action. If a caller's IAM\n        policy grants <code>batch:TerminateJob</code>, they can use both the singular\n        <a>TerminateJob</a> and bulk <code>TerminateJobs</code> operations.</p>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "To terminate multiple jobs",
@@ -12475,7 +12563,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Terminates up to 50 service jobs in a job queue. This is a bulk version of <a>TerminateServiceJob</a>.</p>\n         <p>Batch reports the result for each service job individually in the response. Service jobs that were processed successfully are reported in the <code>successful</code> list. Service jobs that encountered errors are reported in the <code>errors</code> list. The response returns an HTTP status code of <code>200</code> even when some service jobs encountered errors, so check the <code>errors</code> list. Service jobs that can't be found are treated as successfully processed.</p>",
+                "smithy.api#documentation": "<p>Terminates up to 50 service jobs in a job queue. This is a bulk version of <a>TerminateServiceJob</a>.</p>\n         <p>Batch reports the result for each service job individually in the response. Service jobs that were processed successfully are reported in the <code>successful</code> list. Service jobs that encountered errors are reported in the <code>errors</code> list. The response returns an HTTP status code of <code>200</code> even when some service jobs encountered errors, so check the <code>errors</code> list. Service jobs that can't be found are treated as successfully processed.</p>\n         <important>\n            <p>This operation requires <code>batch:TerminateServiceJob</code> permission for each service job in the\n            request. There is no separate <code>batch:TerminateServiceJobs</code> IAM action. If a caller's IAM\n            policy grants <code>batch:TerminateServiceJob</code>, they can use both the singular\n            <code>TerminateServiceJob</code> and bulk <code>TerminateServiceJobs</code> operations.</p>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "To terminate multiple service jobs",
@@ -12831,6 +12919,12 @@
                     "target": "com.amazonaws.batch#EcsSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon ECS settings for the compute environment. These settings control CloudWatch\n      Container Insights collection for the compute environment.</p>"
+                    }
+                },
+                "eksConfiguration": {
+                    "target": "com.amazonaws.batch#EksConfigurationUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the Amazon EKS configuration for the compute environment. Only specify this\n      parameter if the compute environment's <code>containerOrchestrationType</code> is\n      <code>EKS</code>. Currently, the <code>accessEntry</code> setting is the only Amazon EKS configuration that\n      you can change after the compute environment is created. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html\">Amazon EKS access entry\n      authentication</a> in the <i>Batch User Guide</i>.</p>"
                     }
                 }
             },

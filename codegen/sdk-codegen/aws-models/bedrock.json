@@ -3368,7 +3368,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                "smithy.api#pattern": "^\\p{L}[\\p{L}\\p{M}0-9_]*( [\\p{L}\\p{M}0-9_]+)*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3434,7 +3434,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                "smithy.api#pattern": "^\\p{L}[\\p{L}\\p{M}0-9_]*( [\\p{L}\\p{M}0-9_]+)*$"
             }
         },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionTypeValuePair": {
@@ -3529,7 +3529,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                "smithy.api#pattern": "^\\p{L}[\\p{L}\\p{M}0-9_]*( [\\p{L}\\p{M}0-9_]+)*$",
                 "smithy.api#sensitive": {}
             }
         },
