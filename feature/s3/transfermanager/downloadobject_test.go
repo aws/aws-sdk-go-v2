@@ -3,12 +3,17 @@ package transfermanager
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"io"
+	"math/rand"
 	"reflect"
+	"runtime"
 	"strings"
+	"sync"
 	"sync/atomic"
 	"testing"
+	"testing/iotest"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -226,7 +231,7 @@ func TestDownloadObject(t *testing.T) {
 		"range download with success retry": {
 			getObjectFn: s3testing.ErrReaderFn,
 			errReaders: []s3testing.TestErrReader{
-				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
+				{Buf: []byte("12"), Len: 3, Err: io.ErrUnexpectedEOF},
 				{Buf: []byte("123"), Len: 3, Err: io.EOF},
 			},
 			optFn: func(o *Options) {
@@ -234,6 +239,7 @@ func TestDownloadObject(t *testing.T) {
 				o.GetObjectType = types.GetObjectRanges
 			},
 			expectInvocations: 2,
+			expectETags:       []string{"", etag},
 			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
 				if e, a := "123", string(w.Bytes()); e != a {
 					t.Errorf("expect %q response, got %q", e, a)
@@ -430,7 +436,7 @@ func TestDownloadObject(t *testing.T) {
 		"part download with success retry": {
 			getObjectFn: s3testing.ErrReaderFn,
 			errReaders: []s3testing.TestErrReader{
-				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
+				{Buf: []byte("12"), Len: 3, Err: io.ErrUnexpectedEOF},
 				{Buf: []byte("123"), Len: 3, Err: io.EOF},
 			},
 			optFn: func(o *Options) {
@@ -439,6 +445,7 @@ func TestDownloadObject(t *testing.T) {
 			partsCount:        1,
 			expectInvocations: 2,
 			expectParts:       []int32{1, 1},
+			expectETags:       []string{"", etag},
 			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
 				if e, a := "123", string(w.Bytes()); e != a {
 					t.Errorf("expect %q response, got %q", e, a)
@@ -449,7 +456,8 @@ func TestDownloadObject(t *testing.T) {
 				l.expectByteTransfers(t, 3)
 			},
 		},
-		"part download success without retry": {
+		// the body ends cleanly one byte short of its Content-Range
+		"part download short body": {
 			getObjectFn: s3testing.ErrReaderFn,
 			errReaders: []s3testing.TestErrReader{
 				{Buf: []byte("ab"), Len: 3, Err: io.EOF},
@@ -460,14 +468,10 @@ func TestDownloadObject(t *testing.T) {
 			partsCount:        1,
 			expectInvocations: 1,
 			expectParts:       []int32{1},
-			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
-				if e, a := "ab", string(w.Bytes()); e != a {
-					t.Errorf("expect %q response, got %q", e, a)
-				}
-			},
+			expectErr:         "downloaded 2 bytes, expected 3",
 			listenerValidationFn: func(t *testing.T, l *mockListener, in, out any, err error) {
-				l.expectComplete(t, in, out)
-				l.expectByteTransfers(t, 2)
+				l.expectStartTotalBytes(t, 3)
+				l.expectFailed(t, in, err)
 			},
 		},
 		"part download fail retry": {
@@ -581,6 +585,84 @@ func TestDownloadObject(t *testing.T) {
 	}
 }
 
+func TestDownloadObjectRetryETag(t *testing.T) {
+	for _, test := range []struct {
+		name         string
+		getObjectTyp types.GetObjectType
+	}{
+		{name: "range", getObjectTyp: types.GetObjectRanges},
+		{name: "part", getObjectTyp: types.GetObjectParts},
+	} {
+		for _, changed := range []bool{false, true} {
+			name := test.name
+			if changed {
+				name += "/changed"
+			} else {
+				name += "/unchanged"
+			}
+
+			t.Run(name, func(t *testing.T) {
+				client := &s3testing.TransferManagerLoggingClient{}
+				client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+					if c.GetObjectInvocations == 1 {
+						body := &s3testing.TestErrReader{
+							Buf: []byte("12"),
+							Err: io.ErrUnexpectedEOF,
+							Len: 3,
+						}
+						return &s3.GetObjectOutput{
+							Body:          io.NopCloser(body),
+							ContentLength: aws.Int64(3),
+							ContentRange:  aws.String("bytes 0-2/3"),
+							ETag:          aws.String(etag),
+							PartsCount:    aws.Int32(1),
+						}, nil
+					}
+
+					if got, want := aws.ToString(params.IfMatch), etag; got != want {
+						t.Errorf("expected retry If-Match %q, got %q", want, got)
+					}
+					if changed {
+						return nil, errors.New("PreconditionFailed")
+					}
+
+					return &s3.GetObjectOutput{
+						Body:          io.NopCloser(bytes.NewReader([]byte("123"))),
+						ContentLength: aws.Int64(3),
+						ContentRange:  aws.String("bytes 0-2/3"),
+						ETag:          aws.String(etag),
+						PartsCount:    aws.Int32(1),
+					}, nil
+				}
+
+				manager := New(client, func(o *Options) {
+					o.Concurrency = 1
+					o.GetObjectType = test.getObjectTyp
+				})
+				writer := types.NewWriteAtBuffer(nil)
+				_, err := manager.DownloadObject(context.Background(), &DownloadObjectInput{
+					Bucket:   aws.String("bucket"),
+					Key:      aws.String("key"),
+					WriterAt: writer,
+				})
+
+				if changed {
+					if err == nil || !strings.Contains(err.Error(), "PreconditionFailed") {
+						t.Fatalf("expected PreconditionFailed, got %v", err)
+					}
+					return
+				}
+				if err != nil {
+					t.Fatalf("expected successful retry, got %v", err)
+				}
+				if got, want := string(writer.Bytes()), "123"; got != want {
+					t.Fatalf("expected downloaded data %q, got %q", want, got)
+				}
+			})
+		}
+	}
+}
+
 func TestDownloadAsyncWithFailure(t *testing.T) {
 	cases := map[string]struct {
 		downloadType types.GetObjectType
@@ -687,6 +769,425 @@ func TestDownloadObjectWithContextCanceled(t *testing.T) {
 			}
 			if e, a := "canceled", err.Error(); !strings.Contains(a, e) {
 				t.Errorf("expected error message to contain %q, but did not %q", e, a)
+			}
+		})
+	}
+}
+
+func randomBytes(seed int64, n int) []byte {
+	b := make([]byte, n)
+	rand.New(rand.NewSource(seed)).Read(b)
+	return b
+}
+
+func checkBytes(t *testing.T, got, want []byte) {
+	t.Helper()
+
+	if len(got) != len(want) {
+		t.Fatalf("got %d bytes, want %d", len(got), len(want))
+	}
+	for i := range got {
+		if got[i] != want[i] {
+			t.Fatalf("content mismatch at offset %d", i)
+		}
+	}
+}
+
+func partsGetObjectFn(data []byte, sizes []int) func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+	return func(_ *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+		part := int(aws.ToInt32(params.PartNumber))
+		var start int
+		for _, n := range sizes[:part-1] {
+			start += n
+		}
+		body := data[start : start+sizes[part-1]]
+		return &s3.GetObjectOutput{
+			Body:          io.NopCloser(bytes.NewReader(body)),
+			ContentLength: aws.Int64(int64(len(body))),
+			ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, start+len(body)-1, len(data))),
+			PartsCount:    aws.Int32(int32(len(sizes))),
+			ETag:          aws.String(etag),
+		}, nil
+	}
+}
+
+func TestDownloadObjectIntegrity(t *testing.T) {
+	cases := map[string]struct {
+		size   int
+		sizes  []int
+		optFn  func(*Options)
+		ranges bool
+	}{
+		"ranges": {
+			size:   20*megabyte + 13,
+			ranges: true,
+		},
+		"ranges custom part size": {
+			size:   20*megabyte + 13,
+			ranges: true,
+			optFn:  func(o *Options) { o.PartSizeBytes = 5*megabyte + 7 },
+		},
+		"ranges single chunk": {
+			size:   megabyte - 1,
+			ranges: true,
+		},
+		"parts": {
+			sizes: []int{8 * megabyte, 8 * megabyte, 8 * megabyte, 13},
+		},
+		"parts unequal": {
+			sizes: []int{8*megabyte + 1, 5 * megabyte, 9*megabyte + 3, 1, 7 * megabyte},
+		},
+		"single part": {
+			sizes: []int{3*megabyte + 5},
+		},
+	}
+
+	for name, c := range cases {
+		for _, concurrency := range []int{1, 5} {
+			t.Run(fmt.Sprintf("%s/concurrency=%d", name, concurrency), func(t *testing.T) {
+				size := c.size
+				for _, n := range c.sizes {
+					size += n
+				}
+				data := randomBytes(int64(size), size)
+
+				s3Client := &s3testing.TransferManagerLoggingClient{Data: data}
+				if c.ranges {
+					s3Client.GetObjectFn = s3testing.RangeGetObjectFn
+				} else {
+					s3Client.GetObjectFn = partsGetObjectFn(data, c.sizes)
+				}
+
+				d := New(s3Client, func(o *Options) {
+					o.Concurrency = concurrency
+					if c.ranges {
+						o.GetObjectType = types.GetObjectRanges
+					}
+					if c.optFn != nil {
+						c.optFn(o)
+					}
+				})
+
+				w := types.NewWriteAtBuffer(nil)
+				out, err := d.DownloadObject(context.Background(), &DownloadObjectInput{
+					Bucket:   aws.String("bucket"),
+					Key:      aws.String("key"),
+					WriterAt: w,
+				})
+				if err != nil {
+					t.Fatal(err)
+				}
+				if got := aws.ToInt64(out.ContentLength); got != int64(size) {
+					t.Errorf("ContentLength = %d, want %d", got, size)
+				}
+				checkBytes(t, w.Bytes(), data)
+			})
+		}
+	}
+}
+
+type failingWriterAt struct {
+	failOff int64
+	err     error
+}
+
+func (w *failingWriterAt) WriteAt(p []byte, off int64) (int, error) {
+	if off == w.failOff {
+		return 0, w.err
+	}
+	return len(p), nil
+}
+
+func TestDownloadObjectWriterAtError(t *testing.T) {
+	for name, typ := range map[string]types.GetObjectType{
+		"parts":  types.GetObjectParts,
+		"ranges": types.GetObjectRanges,
+	} {
+		t.Run(name, func(t *testing.T) {
+			data := buf20MB
+			s3Client := &s3testing.TransferManagerLoggingClient{Data: data}
+			if typ == types.GetObjectRanges {
+				s3Client.GetObjectFn = s3testing.RangeGetObjectFn
+			} else {
+				s3Client.GetObjectFn = partsGetObjectFn(data, []int{8 * megabyte, 8 * megabyte, 4 * megabyte})
+			}
+
+			d := New(s3Client, func(o *Options) {
+				o.Concurrency = 2
+				o.GetObjectType = typ
+			})
+
+			errWrite := errors.New("write failed")
+			_, err := d.DownloadObject(context.Background(), &DownloadObjectInput{
+				Bucket:   aws.String("bucket"),
+				Key:      aws.String("key"),
+				WriterAt: &failingWriterAt{failOff: 8 * megabyte, err: errWrite},
+			})
+			if !errors.Is(err, errWrite) {
+				t.Fatalf("err = %v, want %v", err, errWrite)
+			}
+		})
+	}
+}
+
+type afterReturnWriterAt struct {
+	returned atomic.Bool
+	late     atomic.Int64
+}
+
+func (w *afterReturnWriterAt) WriteAt(p []byte, _ int64) (int, error) {
+	time.Sleep(20 * time.Millisecond)
+	if w.returned.Load() {
+		w.late.Add(1)
+	}
+	return len(p), nil
+}
+
+// The first chunk's body fails after the async writer has started and has
+// writes queued. Those writes must not outlive DownloadObject.
+func TestDownloadObjectFirstChunkBodyError(t *testing.T) {
+	for name, typ := range map[string]types.GetObjectType{
+		"parts":  types.GetObjectParts,
+		"ranges": types.GetObjectRanges,
+	} {
+		t.Run(name, func(t *testing.T) {
+			base := runtime.NumGoroutine()
+
+			const total = 20 * megabyte
+			errBody := errors.New("body read failed")
+			s3Client := &s3testing.TransferManagerLoggingClient{}
+			s3Client.GetObjectFn = func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+				n := 9 * megabyte
+				return &s3.GetObjectOutput{
+					Body:          io.NopCloser(io.MultiReader(bytes.NewReader(make([]byte, n)), iotest.ErrReader(errBody))),
+					ContentLength: aws.Int64(int64(n)),
+					ContentRange:  aws.String(fmt.Sprintf("bytes 0-%d/%d", n-1, total)),
+					PartsCount:    aws.Int32(3),
+				}, nil
+			}
+
+			d := New(s3Client, func(o *Options) {
+				o.GetObjectType = typ
+			})
+
+			w := &afterReturnWriterAt{}
+			_, err := d.DownloadObject(context.Background(), &DownloadObjectInput{
+				Bucket:   aws.String("bucket"),
+				Key:      aws.String("key"),
+				WriterAt: w,
+			})
+			w.returned.Store(true)
+			if err == nil || !strings.Contains(err.Error(), errBody.Error()) {
+				t.Fatalf("err = %v, want %v", err, errBody)
+			}
+
+			deadline := time.Now().Add(5 * time.Second)
+			for runtime.NumGoroutine() > base {
+				if time.Now().After(deadline) {
+					t.Errorf("goroutines leaked: %d, want %d", runtime.NumGoroutine(), base)
+					break
+				}
+				time.Sleep(time.Millisecond)
+			}
+			if n := w.late.Load(); n > 0 {
+				t.Errorf("%d writes happened after DownloadObject returned", n)
+			}
+		})
+	}
+}
+
+// sequencedWriterAt stores writes in memory. Writes of the poisoned content are
+// held back until another write lands at the same offset (or a timeout
+// passes), which forces the reordering a stale retry write would need to
+// corrupt the destination.
+type sequencedWriterAt struct {
+	poison []byte
+
+	mu     sync.Mutex
+	data   []byte
+	landed map[int64]chan struct{}
+}
+
+func (w *sequencedWriterAt) landedAt(off int64) chan struct{} {
+	w.mu.Lock()
+	defer w.mu.Unlock()
+
+	if w.landed == nil {
+		w.landed = map[int64]chan struct{}{}
+	}
+	ch, ok := w.landed[off]
+	if !ok {
+		ch = make(chan struct{})
+		w.landed[off] = ch
+	}
+	return ch
+}
+
+func (w *sequencedWriterAt) WriteAt(p []byte, off int64) (int, error) {
+	poisoned := bytes.Equal(p, w.poison)
+	if poisoned {
+		select {
+		case <-w.landedAt(off):
+		case <-time.After(200 * time.Millisecond):
+		}
+	}
+
+	w.mu.Lock()
+	copy(w.data[off:], p)
+	w.mu.Unlock()
+
+	if !poisoned {
+		ch := w.landedAt(off)
+		select {
+		case <-ch:
+		default:
+			close(ch)
+		}
+	}
+	return len(p), nil
+}
+
+// A chunk whose first attempt fails checksum validation is retried. The failed
+// attempt's writes carry corrupt bytes, and they must not land after the
+// retry's writes to the same offsets.
+func TestDownloadObjectRetryAfterCorruptBody(t *testing.T) {
+	const partSize = 8 * megabyte
+	data := randomBytes(3, 3*partSize)
+	corrupt := bytes.Repeat([]byte{0xff}, partSize)
+	errChecksum := errors.New("checksum did not match")
+
+	var corrupted atomic.Bool
+	s3Client := &s3testing.TransferManagerLoggingClient{Data: data}
+	s3Client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+		out, err := s3testing.RangeGetObjectFn(c, params)
+		if err != nil {
+			return nil, err
+		}
+		if strings.HasPrefix(aws.ToString(params.Range), fmt.Sprintf("bytes=%d-", partSize)) && corrupted.CompareAndSwap(false, true) {
+			out.Body = io.NopCloser(io.MultiReader(bytes.NewReader(corrupt), iotest.ErrReader(errChecksum)))
+		}
+		return out, nil
+	}
+
+	d := New(s3Client, func(o *Options) {
+		o.Concurrency = 2
+		o.GetObjectType = types.GetObjectRanges
+		o.PartSizeBytes = partSize
+	})
+
+	w := &sequencedWriterAt{poison: corrupt, data: make([]byte, len(data))}
+	if _, err := d.DownloadObject(context.Background(), &DownloadObjectInput{
+		Bucket:   aws.String("bucket"),
+		Key:      aws.String("key"),
+		WriterAt: w,
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if !corrupted.Load() {
+		t.Fatal("corrupt response was never served")
+	}
+	checkBytes(t, w.data, data)
+}
+
+// Without a caller range, 416 on the first request means the object is empty.
+// With one, it means the range is past the end of the object.
+func TestDownloadObjectRangeNotSatisfiable(t *testing.T) {
+	for name, c := range map[string]struct {
+		rng       string
+		expectErr bool
+	}{
+		"no range":       {},
+		"explicit range": {rng: "bytes=100-200", expectErr: true},
+	} {
+		t.Run(name, func(t *testing.T) {
+			s3Client := &s3testing.TransferManagerLoggingClient{
+				GetObjectFn: func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+					return nil, rangeNotSatisfiableError{}
+				},
+			}
+			d := New(s3Client, func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
+			})
+
+			in := &DownloadObjectInput{
+				Bucket:   aws.String("bucket"),
+				Key:      aws.String("key"),
+				WriterAt: types.NewWriteAtBuffer(nil),
+			}
+			if c.rng != "" {
+				in.Range = aws.String(c.rng)
+			}
+			out, err := d.DownloadObject(context.Background(), in)
+
+			if c.expectErr {
+				if err == nil {
+					t.Fatalf("expected error, got output %+v", out)
+				}
+				return
+			}
+			if err != nil {
+				t.Fatal(err)
+			}
+			if got := aws.ToInt64(out.ContentLength); got != 0 {
+				t.Errorf("ContentLength = %d, want 0", got)
+			}
+		})
+	}
+}
+
+// Each response is individually consistent (the body matches its
+// Content-Length) but together they don't cover the object.
+func TestDownloadObjectIncompleteCoverage(t *testing.T) {
+	data := randomBytes(4, 20*megabyte)
+
+	cases := map[string]struct {
+		typ types.GetObjectType
+		fn  func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
+	}{
+		// the object claims 3 parts' worth of bytes but reports only 1 part
+		"parts count too low": {
+			typ: types.GetObjectParts,
+			fn: func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+				body := data[:8*megabyte]
+				return &s3.GetObjectOutput{
+					Body:          io.NopCloser(bytes.NewReader(body)),
+					ContentLength: aws.Int64(int64(len(body))),
+					ContentRange:  aws.String(fmt.Sprintf("bytes 0-%d/%d", len(body)-1, len(data))),
+					PartsCount:    aws.Int32(1),
+					ETag:          aws.String(etag),
+				}, nil
+			},
+		},
+		// a middle range comes back one byte short
+		"short range body": {
+			typ: types.GetObjectRanges,
+			fn: func(c *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+				out, err := s3testing.RangeGetObjectFn(c, params)
+				if err != nil || !strings.HasPrefix(aws.ToString(params.Range), fmt.Sprintf("bytes=%d-", 8*megabyte)) {
+					return out, err
+				}
+				body := data[8*megabyte : 16*megabyte-1]
+				out.Body = io.NopCloser(bytes.NewReader(body))
+				out.ContentLength = aws.Int64(int64(len(body)))
+				return out, nil
+			},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			s3Client := &s3testing.TransferManagerLoggingClient{Data: data, GetObjectFn: c.fn}
+			d := New(s3Client, func(o *Options) {
+				o.GetObjectType = c.typ
+			})
+
+			_, err := d.DownloadObject(context.Background(), &DownloadObjectInput{
+				Bucket:   aws.String("bucket"),
+				Key:      aws.String("key"),
+				WriterAt: types.NewWriteAtBuffer(nil),
+			})
+			if err == nil || !strings.Contains(err.Error(), "expected") {
+				t.Fatalf("expected byte count error, got %v", err)
 			}
 		})
 	}

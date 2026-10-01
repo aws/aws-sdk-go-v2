@@ -15,6 +15,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/middleware"
+	internalio "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/io"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
@@ -561,12 +562,17 @@ type downloader struct {
 	err error
 
 	emitter *singleObjectProgressEmitter
+
+	writer *internalio.AsyncWriterAt
+
+	directIO bool
 }
 
 func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error) {
 	if err := d.init(); err != nil {
 		return nil, fmt.Errorf("unable to initialize download: %w", err)
 	}
+	defer d.writer.Stop()
 
 	clientOptions := []func(*s3.Options){
 		func(o *s3.Options) {
@@ -599,7 +605,7 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 					break
 				}
 
-				ch <- dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, part: i}
+				ch <- dlChunk{start: d.pos - d.offset, part: i, sink: d.writer}
 				d.pos += partSize
 			}
 
@@ -623,11 +629,23 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 		if d.err != nil {
 			// early check to see if error is caused by range download a zero object
 			// which will always return an invalid range error from s3 side
+			//
+			// a caller-supplied range can also be unsatisfiable against a
+			// non-empty object, that is a real error and must not produce an
+			// empty result
 			var responseError interface {
 				HTTPStatusCode() int
 			}
-			if errors.As(d.err, &responseError) {
+			if errors.As(d.err, &responseError) && aws.ToString(d.in.Range) == "" {
 				if responseError.HTTPStatusCode() == http.StatusRequestedRangeNotSatisfiable {
+					if f, ok := d.in.WriterAt.(internalio.File); ok {
+						if err := f.Init(0, d.options.PartSizeBytes, getWriteSize(d.options.PartSizeBytes), false); err != nil {
+							freshCtx, cancel := d.freshContext(ctx)
+							defer cancel()
+							d.emitter.Failed(freshCtx, err)
+							return nil, err
+						}
+					}
 					out := &DownloadObjectOutput{
 						ContentLength: aws.Int64(0),
 					}
@@ -655,13 +673,27 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 			}
 
 			// Queue the next range of bytes to read.
-			ch <- dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, withRange: d.byteRange()}
+			ch <- dlChunk{start: d.pos - d.offset, withRange: d.byteRange(), sink: d.writer}
 			d.pos += d.options.PartSizeBytes
 		}
 
 		// Wait for completion
 		close(ch)
 		d.wg.Wait()
+	}
+
+	// we've already Wait()ed on d.wg so we know that all of the downloaders
+	// are finished, now wait for the writers unless we've already failed, in
+	// which case Stop discards whatever is still queued
+	if d.err == nil {
+		d.writer.Wait()
+	}
+	d.writer.Stop()
+	if err := d.writer.Error(); err != nil {
+		d.err = err
+	}
+	if d.err == nil {
+		d.err = d.checkWritten()
 	}
 
 	if d.err != nil {
@@ -694,6 +726,7 @@ func (d *downloader) init() error {
 	d.emitter = &singleObjectProgressEmitter{
 		Listeners: d.options.ObjectProgressListeners,
 	}
+	d.writer = internalio.NewAsyncWriterAt(d.in.WriterAt, internalio.Pools.Pool(int(getWriteSize(d.options.PartSizeBytes))))
 
 	return nil
 }
@@ -720,7 +753,7 @@ func (d *downloader) downloadPart(ctx context.Context, ch chan dlChunk, clientOp
 // getChunk grabs a chunk of data from the body.
 // Not thread safe. Should only be used when grabbing data on a single thread.
 func (d *downloader) getChunk(ctx context.Context, part int32, rng string, clientOptions ...func(*s3.Options)) *DownloadObjectOutput {
-	chunk := dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, part: part, withRange: rng}
+	chunk := dlChunk{start: d.pos - d.offset, part: part, withRange: rng, sink: d.writer}
 
 	output, err := d.downloadChunk(ctx, chunk, clientOptions...)
 	if err != nil {
@@ -735,6 +768,12 @@ func (d *downloader) getChunk(ctx context.Context, part int32, rng string, clien
 
 // downloadChunk downloads the chunk from s3
 func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOptions ...func(*s3.Options)) (*DownloadObjectOutput, error) {
+	select {
+	case <-d.writer.Done():
+		return nil, d.writer.Error()
+	default:
+	}
+
 	params := d.in.mapGetObjectInput(!d.options.DisableChecksumValidation)
 	if chunk.part != 0 {
 		params.PartNumber = aws.Int32(chunk.part)
@@ -742,13 +781,13 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 	if chunk.withRange != "" {
 		params.Range = aws.String(chunk.withRange)
 	}
-	if params.VersionId == nil && d.etag != "" {
-		params.IfMatch = aws.String(d.etag)
-	}
-
 	var out *s3.GetObjectOutput
 	var err error
 	for retry := 0; retry < d.options.PartBodyMaxRetries; retry++ {
+		if params.VersionId == nil && d.etag != "" {
+			params.IfMatch = aws.String(d.etag)
+		}
+
 		out, err = d.tryDownloadChunk(ctx, params, &chunk, clientOptions...)
 		if err == nil {
 			break
@@ -763,19 +802,27 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 		} else {
 			return nil, err
 		}
-
-		chunk.cur = 0
 	}
 
 	var output *DownloadObjectOutput
 	if out != nil {
 		output = &DownloadObjectOutput{}
 		output.mapFromGetObjectOutput(out, params.ChecksumMode)
-		d.etagOnce.Do(func() {
-			d.etag = aws.ToString(out.ETag)
-		})
 	}
 	return output, err
+}
+
+const maxWriteSize = 8 * 1024 * 1024
+
+func getWriteSize(partSize int64) int64 {
+	if partSize <= 0 || partSize > maxWriteSize {
+		return maxWriteSize
+	}
+	return partSize
+}
+
+func (d *downloader) useDirectIO() bool {
+	return d.directIO && d.options.GetObjectType == types.GetObjectRanges
 }
 
 func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectInput, chunk *dlChunk, clientOptions ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
@@ -812,14 +859,30 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 		chunk.start = respStart
 	}
 
+	d.etagOnce.Do(func() {
+		d.etag = aws.ToString(out.ETag)
+	})
+
+	var initErr error
 	d.totalBytesOnce.Do(func() {
 		d.setTotalBytes(out)
 		d.emitter.Start(ctx, d.in, d.totalBytes-d.offset)
-	}) // Set total in first GET
+
+		if i, ok := d.in.WriterAt.(internalio.File); ok {
+			if err := i.Init(d.totalBytes-d.offset, d.options.PartSizeBytes, getWriteSize(d.options.PartSizeBytes), d.useDirectIO()); err != nil {
+				initErr = err
+				return
+			}
+		}
+		d.writer.Start()
+	})
+	if initErr != nil {
+		return nil, initErr
+	}
 
 	var n int64
 	defer out.Body.Close()
-	n, err = io.Copy(chunk, out.Body)
+	n, err = chunk.ReadFrom(out.Body)
 	if err != nil {
 		return nil, &errReadingBody{err: err}
 	}
@@ -854,6 +917,17 @@ func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
 
 		d.totalBytes = total
 	}
+}
+
+// checkWritten reports an error if the bytes delivered to the writer don't
+// exactly cover the requested span. Every chunk is range-checked on its own,
+// this catches gaps or overlaps in how the chunks were planned.
+func (d *downloader) checkWritten() error {
+	want := d.totalBytes - d.offset
+	if got := d.written.Load(); got != want {
+		return fmt.Errorf("downloaded %d bytes, expected %d", got, want)
+	}
+	return nil
 }
 
 func (d *downloader) freshContext(ctx context.Context) (context.Context, context.CancelFunc) {
@@ -930,21 +1004,4 @@ func (d *downloader) setErr(e error) {
 	defer d.m.Unlock()
 
 	d.err = e
-}
-
-type dlChunk struct {
-	w io.WriterAt
-
-	start int64
-	cur   int64
-
-	part      int32
-	withRange string
-}
-
-func (c *dlChunk) Write(p []byte) (int, error) {
-	n, err := c.w.WriteAt(p, c.start+c.cur)
-	c.cur += int64(n)
-
-	return n, err
 }

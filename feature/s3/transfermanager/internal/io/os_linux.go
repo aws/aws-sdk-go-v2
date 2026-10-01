@@ -1,0 +1,126 @@
+//go:build linux
+
+package io
+
+import (
+	"errors"
+	"os"
+	"path/filepath"
+	"syscall"
+)
+
+var (
+	statfs    = syscall.Statfs
+	fallocate = syscall.Fallocate
+)
+
+// Linux files open with O_DIRECT when the caller opts in and the filesystem and
+// transfer sizes are aligned. This bypasses the page cache and an inode lock,
+// which drastically improves performance for writes that are sustained enough.
+type file struct {
+	File   osFile
+	direct bool
+	path   string
+	size   int64
+}
+
+func (f *file) WriteAt(p []byte, off int64) (int, error) {
+	if f.File == nil {
+		return 0, errors.New("file was not initialized")
+	}
+	if !f.direct || off+int64(len(p)) != f.size {
+		return f.File.WriteAt(p, off)
+	}
+
+	// last write needs pad
+	padded := makealigned(len(p) + int(align(f.size)-f.size))
+	copy(padded, p) // yes it's a copy but it's only the last write
+
+	_, err := f.File.WriteAt(padded, off)
+	if err != nil {
+		return 0, err
+	}
+
+	return len(p), err
+}
+
+func (f *file) Init(size, partSize, writeSize int64, directIO bool) error {
+	if f.File != nil {
+		return errors.New("file was already initialized")
+	}
+
+	f.size = size
+	// fallocate rejects a zero length, and there's nothing to write anyway
+	if size <= 0 || !directIO || !supportsDirectIO(f.path, partSize, writeSize) {
+		ff, err := openFile(f.path, os.O_RDWR|os.O_CREATE|os.O_EXCL, 0o666)
+		f.File = ff
+		return err
+	}
+
+	ff, err := openFile(f.path, os.O_WRONLY|os.O_CREATE|os.O_EXCL|syscall.O_DIRECT, 0o644)
+	if err != nil {
+		return err
+	}
+
+	if err := fallocate(int(ff.Fd()), 0, 0, size); err != nil {
+		_ = ff.Close()
+		return err
+	}
+
+	f.File = ff
+	f.direct = true
+	return nil
+}
+
+func supportsDirectIO(path string, partSize, writeSize int64) bool {
+	if writeSize <= 0 || writeSize%alignedBy != 0 {
+		return false
+	}
+	if partSize <= 0 || partSize%writeSize%alignedBy != 0 {
+		return false
+	}
+
+	var stat syscall.Statfs_t
+	if err := statfs(filepath.Dir(path), &stat); err != nil {
+		return false
+	}
+
+	return stat.Bsize > 0 && alignedBy%stat.Bsize == 0
+}
+
+// Sync truncates away direct I/O padding before syncing, so the synced size is
+// the final one.
+func (f *file) Sync() error {
+	if f.File == nil {
+		return nil
+	}
+
+	if f.direct {
+		if err := f.File.Truncate(f.size); err != nil {
+			return err
+		}
+	}
+	return f.File.Sync()
+}
+
+func (f *file) Close() error {
+	if f.File == nil {
+		return nil
+	}
+
+	if f.direct {
+		if err := f.File.Truncate(f.size); err != nil {
+			_ = f.File.Close()
+			return err
+		}
+	}
+	return f.File.Close()
+}
+
+// Create creates the named file. The file must not already exist.
+//
+// Create on Linux returns a lazy wrapper. Actual file creation is delayed until
+// the file size and write chunk size are known.
+func Create(path string) (File, error) {
+	return &file{path: path}, nil
+}
