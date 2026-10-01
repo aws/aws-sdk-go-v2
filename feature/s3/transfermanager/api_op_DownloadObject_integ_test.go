@@ -4,9 +4,11 @@ package transfermanager
 
 import (
 	"bytes"
+	"context"
 	"strings"
 	"testing"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 )
 
@@ -97,4 +99,25 @@ func TestInteg_DownloadObject_UnequalSize(t *testing.T) {
 			testDownloadObjectWithChangingPartSize(t, setupMetadata.Buckets.Source.Name, c)
 		})
 	}
+}
+
+// TestInteg_DownloadObject_RandomizedReassembly is the property-based
+// durability test for https://github.com/aws/aws-sdk-go-v2/issues/3526, driving the DownloadObject
+// (WriterAt) path. It uploads randomized multipart layouts and asserts the
+// downloaded bytes equal the uploaded bytes byte for byte. See
+// runRandomizedReassembly in setup_integ_test.go. Reproduce a failure with
+// TM_REASSEMBLY_SEED.
+func TestInteg_DownloadObject_RandomizedReassembly(t *testing.T) {
+	runRandomizedReassembly(t, "DownloadObject", func(t *testing.T, ctx context.Context, bucket, key string, c reassemblyCase) []byte {
+		w := types.NewWriteAtBuffer(make([]byte, 0))
+		if _, err := s3TransferManagerClient.DownloadObject(ctx, &DownloadObjectInput{
+			Bucket:   aws.String(bucket),
+			Key:      aws.String(key),
+			WriterAt: w,
+			Range:    c.rangePtr(),
+		}, c.optFns()...); err != nil {
+			t.Fatalf("DownloadObject: %v", err)
+		}
+		return w.Bytes()
+	})
 }
