@@ -20,6 +20,7 @@
         "api_op_DescribeEvents.go",
         "api_op_DescribeEventsForOrganization.go",
         "api_op_DescribeHealthServiceStatusForOrganization.go",
+        "api_op_DescribeServiceLifecycle.go",
         "api_op_DisableHealthServiceAccessForOrganization.go",
         "api_op_EnableHealthServiceAccessForOrganization.go",
         "auth.go",

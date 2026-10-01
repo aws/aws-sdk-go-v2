@@ -2436,6 +2436,8 @@ const (
 	ClusterInstanceTypeMlG712xlarge       ClusterInstanceType = "ml.g7.12xlarge"
 	ClusterInstanceTypeMlG724xlarge       ClusterInstanceType = "ml.g7.24xlarge"
 	ClusterInstanceTypeMlG748xlarge       ClusterInstanceType = "ml.g7.48xlarge"
+	ClusterInstanceTypeMlC8a16xlarge      ClusterInstanceType = "ml.c8a.16xlarge"
+	ClusterInstanceTypeMlM8a16xlarge      ClusterInstanceType = "ml.m8a.16xlarge"
 )
 
 // Values returns all known values for ClusterInstanceType. Note that this can be
@@ -2651,6 +2653,8 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 		"ml.g7.12xlarge",
 		"ml.g7.24xlarge",
 		"ml.g7.48xlarge",
+		"ml.c8a.16xlarge",
+		"ml.m8a.16xlarge",
 	}
 }
 

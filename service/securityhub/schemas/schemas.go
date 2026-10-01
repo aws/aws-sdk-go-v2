@@ -554,6 +554,13 @@ var GetRecommendedPolicyV2 = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/recommendedPolicyV2/{MetadataUid}",
 	Code: 200})
 
+var GetRemediationsV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GetRemediationsV2",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/GetRemediationsV2",
+	Code: 200})
+
 var GetResourcesStatisticsV2 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "GetResourcesStatisticsV2",
@@ -643,6 +650,13 @@ var ListEnabledProductsForImport = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListEnabledProductsForImport",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/productSubscriptions",
+	Code: 200})
+
+var ListExposuresByRemediationV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ListExposuresByRemediationV2",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ListExposuresByRemediationV2",
 	Code: 200})
 
 var ListFindingAggregators = smithy.NewSchema(smithy.ShapeID{
@@ -10042,6 +10056,50 @@ var EnumListConfigurationOptions_MaxItems *smithy.Schema
 
 var EnumListConfigurationOptions_AllowedValues *smithy.Schema
 
+var ExposureFinding = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExposureFinding",
+}, smithy.ShapeTypeStructure, 5)
+var ExposureFinding_MetadataUid *smithy.Schema
+
+var ExposureFinding_Title *smithy.Schema
+
+var ExposureFinding_PreviousSeverity *smithy.Schema
+
+var ExposureFinding_ProjectedSeverity *smithy.Schema
+
+var ExposureFinding_Impact *smithy.Schema
+
+var _ExposureFindingItemsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExposureFindingItemsList",
+}, smithy.ShapeTypeList, 1)
+var _ExposureFindingItemsList_member *smithy.Schema
+
+var ExposureImpact = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExposureImpact",
+}, smithy.ShapeTypeEnum, 3)
+var ExposureImpact_REDUCES *smithy.Schema
+
+var ExposureImpact_RESOLVES *smithy.Schema
+
+var ExposureImpact_UNCHANGED *smithy.Schema
+
+var ExposureSeverity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExposureSeverity",
+}, smithy.ShapeTypeEnum, 5)
+var ExposureSeverity_INFORMATIONAL *smithy.Schema
+
+var ExposureSeverity_LOW *smithy.Schema
+
+var ExposureSeverity_MEDIUM *smithy.Schema
+
+var ExposureSeverity_HIGH *smithy.Schema
+
+var ExposureSeverity_CRITICAL *smithy.Schema
+
 var ExternalIntegrationConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ExternalIntegrationConfiguration",
@@ -10514,6 +10572,28 @@ var _GroupByValues = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _GroupByValues_member *smithy.Schema
 
+var GuidanceFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GuidanceFormat",
+}, smithy.ShapeTypeEnum, 9)
+var GuidanceFormat_ALL *smithy.Schema
+
+var GuidanceFormat_AWS_CLI *smithy.Schema
+
+var GuidanceFormat_CLI *smithy.Schema
+
+var GuidanceFormat_PYTHON *smithy.Schema
+
+var GuidanceFormat_TERRAFORM *smithy.Schema
+
+var GuidanceFormat_CDK *smithy.Schema
+
+var GuidanceFormat_CLOUDFORMATION *smithy.Schema
+
+var GuidanceFormat_IAC *smithy.Schema
+
+var GuidanceFormat_TEMPLATE *smithy.Schema
+
 var HealthCheck = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "HealthCheck",
@@ -10829,6 +10909,20 @@ var JiraCloudUpdateConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "JiraCloudUpdateConfiguration",
 }, smithy.ShapeTypeStructure, 1)
 var JiraCloudUpdateConfiguration_ProjectKey *smithy.Schema
+
+var KbArticle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "KbArticle",
+}, smithy.ShapeTypeStructure, 2)
+var KbArticle_Title *smithy.Schema
+
+var KbArticle_Url *smithy.Schema
+
+var _KbArticleList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "KbArticleList",
+}, smithy.ShapeTypeList, 1)
+var _KbArticleList_member *smithy.Schema
 
 var KeywordFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -12016,6 +12110,305 @@ var Remediation = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Remediation",
 }, smithy.ShapeTypeStructure, 1)
 var Remediation_Recommendation *smithy.Schema
+
+var RemediationCompositeFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationCompositeFilter",
+}, smithy.ShapeTypeStructure, 1)
+var RemediationCompositeFilter_StringFilters *smithy.Schema
+
+var _RemediationCompositeFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationCompositeFilterList",
+}, smithy.ShapeTypeList, 1)
+var _RemediationCompositeFilterList_member *smithy.Schema
+
+var RemediationFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationFilters",
+}, smithy.ShapeTypeStructure, 1)
+var RemediationFilters_CompositeFilters *smithy.Schema
+
+var RemediationGuidance = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationGuidance",
+}, smithy.ShapeTypeStructure, 7)
+var RemediationGuidance_TargetTypeName *smithy.Schema
+
+var RemediationGuidance_Pattern *smithy.Schema
+
+var RemediationGuidance_Version *smithy.Schema
+
+var RemediationGuidance_Context *smithy.Schema
+
+var RemediationGuidance_Specification *smithy.Schema
+
+var RemediationGuidance_Examples *smithy.Schema
+
+var RemediationGuidance_Metadata *smithy.Schema
+
+var RemediationGuidanceContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationGuidanceContext",
+}, smithy.ShapeTypeStructure, 4)
+var RemediationGuidanceContext_ProblemStatement *smithy.Schema
+
+var RemediationGuidanceContext_RiskAssessment *smithy.Schema
+
+var RemediationGuidanceContext_AffectedScope *smithy.Schema
+
+var RemediationGuidanceContext_Prerequisites *smithy.Schema
+
+var RemediationGuidanceExamples = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationGuidanceExamples",
+}, smithy.ShapeTypeStructure, 8)
+var RemediationGuidanceExamples_AwsCli *smithy.Schema
+
+var RemediationGuidanceExamples_Cli *smithy.Schema
+
+var RemediationGuidanceExamples_Python *smithy.Schema
+
+var RemediationGuidanceExamples_Terraform *smithy.Schema
+
+var RemediationGuidanceExamples_Cdk *smithy.Schema
+
+var RemediationGuidanceExamples_CloudFormation *smithy.Schema
+
+var RemediationGuidanceExamples_IaC *smithy.Schema
+
+var RemediationGuidanceExamples_Template *smithy.Schema
+
+var RemediationGuidanceMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationGuidanceMetadata",
+}, smithy.ShapeTypeStructure, 10)
+var RemediationGuidanceMetadata_ResourceType *smithy.Schema
+
+var RemediationGuidanceMetadata_ExposureType *smithy.Schema
+
+var RemediationGuidanceMetadata_TraitTitles *smithy.Schema
+
+var RemediationGuidanceMetadata_Reversibility *smithy.Schema
+
+var RemediationGuidanceMetadata_FixEffect *smithy.Schema
+
+var RemediationGuidanceMetadata_RiskLevel *smithy.Schema
+
+var RemediationGuidanceMetadata_AutomationLevel *smithy.Schema
+
+var RemediationGuidanceMetadata_HumanReviewRequired *smithy.Schema
+
+var RemediationGuidanceMetadata_GeneratedAt *smithy.Schema
+
+var RemediationGuidanceMetadata_VerificationStatus *smithy.Schema
+
+var RemediationGuidanceSpecification = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationGuidanceSpecification",
+}, smithy.ShapeTypeStructure, 4)
+var RemediationGuidanceSpecification_Parameters *smithy.Schema
+
+var RemediationGuidanceSpecification_Steps *smithy.Schema
+
+var RemediationGuidanceSpecification_ExpectedEndState *smithy.Schema
+
+var RemediationGuidanceSpecification_RequiredPermissions *smithy.Schema
+
+var RemediationOutcome = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationOutcome",
+}, smithy.ShapeTypeStructure, 3)
+var RemediationOutcome_ResolvedFindingsCount *smithy.Schema
+
+var RemediationOutcome_SeverityReductionFindingsCount *smithy.Schema
+
+var RemediationOutcome_SeverityUnchangedCount *smithy.Schema
+
+var RemediationParameter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationParameter",
+}, smithy.ShapeTypeStructure, 4)
+var RemediationParameter_Name *smithy.Schema
+
+var RemediationParameter_Type *smithy.Schema
+
+var RemediationParameter_Description *smithy.Schema
+
+var RemediationParameter_Required *smithy.Schema
+
+var _RemediationParameterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationParameterList",
+}, smithy.ShapeTypeList, 1)
+var _RemediationParameterList_member *smithy.Schema
+
+var RemediationPriority = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationPriority",
+}, smithy.ShapeTypeEnum, 4)
+var RemediationPriority_CRITICAL *smithy.Schema
+
+var RemediationPriority_HIGH *smithy.Schema
+
+var RemediationPriority_MEDIUM *smithy.Schema
+
+var RemediationPriority_LOW *smithy.Schema
+
+var RemediationResource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationResource",
+}, smithy.ShapeTypeStructure, 10)
+var RemediationResource_AccountId *smithy.Schema
+
+var RemediationResource_Region *smithy.Schema
+
+var RemediationResource_ResourceOwnerAccountId *smithy.Schema
+
+var RemediationResource_ResourceOwnerOrgId *smithy.Schema
+
+var RemediationResource_Type *smithy.Schema
+
+var RemediationResource_Name *smithy.Schema
+
+var RemediationResource_Id *smithy.Schema
+
+var RemediationResource_ResourceGuid *smithy.Schema
+
+var RemediationResource_ResourceRegion *smithy.Schema
+
+var RemediationResource_CloudProvider *smithy.Schema
+
+var RemediationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationStatus",
+}, smithy.ShapeTypeEnum, 3)
+var RemediationStatus_NEW *smithy.Schema
+
+var RemediationStatus_UPDATED *smithy.Schema
+
+var RemediationStatus_RESOLVED *smithy.Schema
+
+var RemediationStep = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationStep",
+}, smithy.ShapeTypeStructure, 7)
+var RemediationStep_Phase *smithy.Schema
+
+var RemediationStep_Description *smithy.Schema
+
+var RemediationStep_Service *smithy.Schema
+
+var RemediationStep_Action *smithy.Schema
+
+var RemediationStep_Logic *smithy.Schema
+
+var RemediationStep_Inverse *smithy.Schema
+
+var RemediationStep_VerifyAfter *smithy.Schema
+
+var _RemediationStepList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationStepList",
+}, smithy.ShapeTypeList, 1)
+var _RemediationStepList_member *smithy.Schema
+
+var RemediationStringField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationStringField",
+}, smithy.ShapeTypeEnum, 6)
+var RemediationStringField_RESOURCE_TYPE *smithy.Schema
+
+var RemediationStringField_PRIORITY *smithy.Schema
+
+var RemediationStringField_STATUS *smithy.Schema
+
+var RemediationStringField_RESOURCE_ID *smithy.Schema
+
+var RemediationStringField_RESOURCE_OWNER_ACCOUNT_ID *smithy.Schema
+
+var RemediationStringField_RESOURCE_CLOUD_PROVIDER *smithy.Schema
+
+var RemediationStringFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationStringFilter",
+}, smithy.ShapeTypeStructure, 2)
+var RemediationStringFilter_FieldName *smithy.Schema
+
+var RemediationStringFilter_Filter *smithy.Schema
+
+var RemediationStringFilterCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationStringFilterCondition",
+}, smithy.ShapeTypeStructure, 1)
+var RemediationStringFilterCondition_Value *smithy.Schema
+
+var _RemediationStringFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationStringFilterList",
+}, smithy.ShapeTypeList, 1)
+var _RemediationStringFilterList_member *smithy.Schema
+
+var _RemediationStringList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationStringList",
+}, smithy.ShapeTypeList, 1)
+var _RemediationStringList_member *smithy.Schema
+
+var _RemediationStringUid = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationStringUid",
+}, smithy.ShapeTypeString, 0)
+
+var RemediationSummaryDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationSummaryDetail",
+}, smithy.ShapeTypeStructure, 5)
+var RemediationSummaryDetail_Action *smithy.Schema
+
+var RemediationSummaryDetail_Description *smithy.Schema
+
+var RemediationSummaryDetail_IsImmediate *smithy.Schema
+
+var RemediationSummaryDetail_PostRemediationSteps *smithy.Schema
+
+var RemediationSummaryDetail_KbArticles *smithy.Schema
+
+var RemediationTrait = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationTrait",
+}, smithy.ShapeTypeStructure, 2)
+var RemediationTrait_Type *smithy.Schema
+
+var RemediationTrait_Title *smithy.Schema
+
+var RemediationV2Item = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationV2Item",
+}, smithy.ShapeTypeStructure, 9)
+var RemediationV2Item_TargetUid *smithy.Schema
+
+var RemediationV2Item_Outcome *smithy.Schema
+
+var RemediationV2Item_Priority *smithy.Schema
+
+var RemediationV2Item_RemediationSummary *smithy.Schema
+
+var RemediationV2Item_Resource *smithy.Schema
+
+var RemediationV2Item_Status *smithy.Schema
+
+var RemediationV2Item_Trait *smithy.Schema
+
+var RemediationV2Item_Guidance *smithy.Schema
+
+var RemediationV2Item_UpdatedAt *smithy.Schema
+
+var _RemediationV2ItemList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "RemediationV2ItemList",
+}, smithy.ShapeTypeList, 1)
+var _RemediationV2ItemList_member *smithy.Schema
 
 var Resource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -15702,6 +16095,32 @@ var GetRecommendedPolicyV2Response_Status *smithy.Schema
 
 var GetRecommendedPolicyV2Response_ResourceArn *smithy.Schema
 
+var GetRemediationsV2Request = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GetRemediationsV2Request",
+}, smithy.ShapeTypeStructure, 7)
+var GetRemediationsV2Request_TargetUid *smithy.Schema
+
+var GetRemediationsV2Request_MetadataUid *smithy.Schema
+
+var GetRemediationsV2Request_Filters *smithy.Schema
+
+var GetRemediationsV2Request_ShowGuidance *smithy.Schema
+
+var GetRemediationsV2Request_GuidanceFormat *smithy.Schema
+
+var GetRemediationsV2Request_MaxResults *smithy.Schema
+
+var GetRemediationsV2Request_NextToken *smithy.Schema
+
+var GetRemediationsV2Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GetRemediationsV2Response",
+}, smithy.ShapeTypeStructure, 2)
+var GetRemediationsV2Response_Items *smithy.Schema
+
+var GetRemediationsV2Response_NextToken *smithy.Schema
+
 var GetResourcesStatisticsV2Request = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "GetResourcesStatisticsV2Request",
@@ -15931,6 +16350,32 @@ var ListEnabledProductsForImportResponse = smithy.NewSchema(smithy.ShapeID{
 var ListEnabledProductsForImportResponse_ProductSubscriptions *smithy.Schema
 
 var ListEnabledProductsForImportResponse_NextToken *smithy.Schema
+
+var ListExposuresByRemediationV2Request = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ListExposuresByRemediationV2Request",
+}, smithy.ShapeTypeStructure, 3)
+var ListExposuresByRemediationV2Request_TargetUid *smithy.Schema
+
+var ListExposuresByRemediationV2Request_MaxResults *smithy.Schema
+
+var ListExposuresByRemediationV2Request_NextToken *smithy.Schema
+
+var ListExposuresByRemediationV2Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ListExposuresByRemediationV2Response",
+}, smithy.ShapeTypeStructure, 6)
+var ListExposuresByRemediationV2Response_Items *smithy.Schema
+
+var ListExposuresByRemediationV2Response_TargetUid *smithy.Schema
+
+var ListExposuresByRemediationV2Response_Resource *smithy.Schema
+
+var ListExposuresByRemediationV2Response_TotalCount *smithy.Schema
+
+var ListExposuresByRemediationV2Response_Trait *smithy.Schema
+
+var ListExposuresByRemediationV2Response_NextToken *smithy.Schema
 
 var ListFindingAggregatorsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -23886,6 +24331,34 @@ func init() {
 
 	_EnabledStandardIdentifierList_member = _EnabledStandardIdentifierList.AddMember("member", _NonEmptyString)
 
+	ExposureSeverity_INFORMATIONAL = ExposureSeverity.AddMember("INFORMATIONAL", smithyprelude.Unit)
+
+	ExposureSeverity_LOW = ExposureSeverity.AddMember("LOW", smithyprelude.Unit)
+
+	ExposureSeverity_MEDIUM = ExposureSeverity.AddMember("MEDIUM", smithyprelude.Unit)
+
+	ExposureSeverity_HIGH = ExposureSeverity.AddMember("HIGH", smithyprelude.Unit)
+
+	ExposureSeverity_CRITICAL = ExposureSeverity.AddMember("CRITICAL", smithyprelude.Unit)
+
+	ExposureImpact_REDUCES = ExposureImpact.AddMember("REDUCES", smithyprelude.Unit)
+
+	ExposureImpact_RESOLVES = ExposureImpact.AddMember("RESOLVES", smithyprelude.Unit)
+
+	ExposureImpact_UNCHANGED = ExposureImpact.AddMember("UNCHANGED", smithyprelude.Unit)
+
+	ExposureFinding_MetadataUid = ExposureFinding.AddMember("MetadataUid", _NonEmptyString)
+
+	ExposureFinding_Title = ExposureFinding.AddMember("Title", _NonEmptyString)
+
+	ExposureFinding_PreviousSeverity = ExposureFinding.AddMember("PreviousSeverity", ExposureSeverity)
+
+	ExposureFinding_ProjectedSeverity = ExposureFinding.AddMember("ProjectedSeverity", ExposureSeverity)
+
+	ExposureFinding_Impact = ExposureFinding.AddMember("Impact", ExposureImpact)
+
+	_ExposureFindingItemsList_member = _ExposureFindingItemsList.AddMember("member", ExposureFinding)
+
 	FeatureStatus_ENABLED = FeatureStatus.AddMember("ENABLED", smithyprelude.Unit)
 
 	FeatureStatus_DISABLED = FeatureStatus.AddMember("DISABLED", smithyprelude.Unit)
@@ -24072,6 +24545,24 @@ func init() {
 
 	_GroupByRules_member = _GroupByRules.AddMember("member", GroupByRule)
 
+	GuidanceFormat_ALL = GuidanceFormat.AddMember("ALL", smithyprelude.Unit)
+
+	GuidanceFormat_AWS_CLI = GuidanceFormat.AddMember("AWS_CLI", smithyprelude.Unit)
+
+	GuidanceFormat_CLI = GuidanceFormat.AddMember("CLI", smithyprelude.Unit)
+
+	GuidanceFormat_PYTHON = GuidanceFormat.AddMember("PYTHON", smithyprelude.Unit)
+
+	GuidanceFormat_TERRAFORM = GuidanceFormat.AddMember("TERRAFORM", smithyprelude.Unit)
+
+	GuidanceFormat_CDK = GuidanceFormat.AddMember("CDK", smithyprelude.Unit)
+
+	GuidanceFormat_CLOUDFORMATION = GuidanceFormat.AddMember("CLOUDFORMATION", smithyprelude.Unit)
+
+	GuidanceFormat_IAC = GuidanceFormat.AddMember("IAC", smithyprelude.Unit)
+
+	GuidanceFormat_TEMPLATE = GuidanceFormat.AddMember("TEMPLATE", smithyprelude.Unit)
+
 	HealthCheck_ConnectorStatus = HealthCheck.AddMember("ConnectorStatus", ConnectorStatus)
 
 	HealthCheck_Message = HealthCheck.AddMember("Message", _NonEmptyString)
@@ -24157,6 +24648,12 @@ func init() {
 	JiraCloudProviderConfiguration_ProjectKey = JiraCloudProviderConfiguration.AddMember("ProjectKey", _NonEmptyString)
 
 	JiraCloudUpdateConfiguration_ProjectKey = JiraCloudUpdateConfiguration.AddMember("ProjectKey", _NonEmptyString)
+
+	KbArticle_Title = KbArticle.AddMember("Title", _NonEmptyString)
+
+	KbArticle_Url = KbArticle.AddMember("Url", _NonEmptyString)
+
+	_KbArticleList_member = _KbArticleList.AddMember("member", KbArticle)
 
 	LimitExceededException_Message = LimitExceededException.AddMember("Message", _NonEmptyString)
 
@@ -24351,6 +24848,200 @@ func init() {
 	RegionAvailabilityStatus_AVAILABLE = RegionAvailabilityStatus.AddMember("AVAILABLE", smithyprelude.Unit)
 
 	RegionAvailabilityStatus_UNAVAILABLE = RegionAvailabilityStatus.AddMember("UNAVAILABLE", smithyprelude.Unit)
+
+	RemediationStringField_RESOURCE_TYPE = RemediationStringField.AddMember("RESOURCE_TYPE", smithyprelude.Unit)
+
+	RemediationStringField_PRIORITY = RemediationStringField.AddMember("PRIORITY", smithyprelude.Unit)
+
+	RemediationStringField_STATUS = RemediationStringField.AddMember("STATUS", smithyprelude.Unit)
+
+	RemediationStringField_RESOURCE_ID = RemediationStringField.AddMember("RESOURCE_ID", smithyprelude.Unit)
+
+	RemediationStringField_RESOURCE_OWNER_ACCOUNT_ID = RemediationStringField.AddMember("RESOURCE_OWNER_ACCOUNT_ID", smithyprelude.Unit)
+
+	RemediationStringField_RESOURCE_CLOUD_PROVIDER = RemediationStringField.AddMember("RESOURCE_CLOUD_PROVIDER", smithyprelude.Unit)
+
+	RemediationStringFilterCondition_Value = RemediationStringFilterCondition.AddMember("Value", _NonEmptyString)
+
+	RemediationStringFilter_FieldName = RemediationStringFilter.AddMember("FieldName", RemediationStringField)
+
+	RemediationStringFilter_Filter = RemediationStringFilter.AddMember("Filter", RemediationStringFilterCondition)
+
+	_RemediationStringFilterList_member = _RemediationStringFilterList.AddMember("member", RemediationStringFilter)
+
+	RemediationCompositeFilter_StringFilters = RemediationCompositeFilter.AddMember("StringFilters", _RemediationStringFilterList)
+
+	_RemediationCompositeFilterList_member = _RemediationCompositeFilterList.AddMember("member", RemediationCompositeFilter)
+
+	RemediationFilters_CompositeFilters = RemediationFilters.AddMember("CompositeFilters", _RemediationCompositeFilterList)
+
+	_RemediationStringList_member = _RemediationStringList.AddMember("member", _NonEmptyString)
+
+	RemediationGuidanceContext_ProblemStatement = RemediationGuidanceContext.AddMember("ProblemStatement", _NonEmptyString)
+
+	RemediationGuidanceContext_RiskAssessment = RemediationGuidanceContext.AddMember("RiskAssessment", _NonEmptyString)
+
+	RemediationGuidanceContext_AffectedScope = RemediationGuidanceContext.AddMember("AffectedScope", _NonEmptyString)
+
+	RemediationGuidanceContext_Prerequisites = RemediationGuidanceContext.AddMember("Prerequisites", _RemediationStringList)
+
+	RemediationParameter_Name = RemediationParameter.AddMember("Name", _NonEmptyString)
+
+	RemediationParameter_Type = RemediationParameter.AddMember("Type", _NonEmptyString)
+
+	RemediationParameter_Description = RemediationParameter.AddMember("Description", _NonEmptyString)
+
+	RemediationParameter_Required = RemediationParameter.AddMember("Required", _Boolean)
+
+	_RemediationParameterList_member = _RemediationParameterList.AddMember("member", RemediationParameter)
+
+	RemediationStep_Phase = RemediationStep.AddMember("Phase", _NonEmptyString)
+
+	RemediationStep_Description = RemediationStep.AddMember("Description", _NonEmptyString)
+
+	RemediationStep_Service = RemediationStep.AddMember("Service", _NonEmptyString)
+
+	RemediationStep_Action = RemediationStep.AddMember("Action", _NonEmptyString)
+
+	RemediationStep_Logic = RemediationStep.AddMember("Logic", _NonEmptyString)
+
+	RemediationStep_Inverse = RemediationStep.AddMember("Inverse", _NonEmptyString)
+
+	RemediationStep_VerifyAfter = RemediationStep.AddMember("VerifyAfter", _NonEmptyString)
+
+	_RemediationStepList_member = _RemediationStepList.AddMember("member", RemediationStep)
+
+	RemediationGuidanceSpecification_Parameters = RemediationGuidanceSpecification.AddMember("Parameters", _RemediationParameterList)
+
+	RemediationGuidanceSpecification_Steps = RemediationGuidanceSpecification.AddMember("Steps", _RemediationStepList)
+
+	RemediationGuidanceSpecification_ExpectedEndState = RemediationGuidanceSpecification.AddMember("ExpectedEndState", _NonEmptyString)
+
+	RemediationGuidanceSpecification_RequiredPermissions = RemediationGuidanceSpecification.AddMember("RequiredPermissions", _RemediationStringList)
+
+	RemediationGuidanceExamples_AwsCli = RemediationGuidanceExamples.AddMember("AwsCli", _NonEmptyString)
+
+	RemediationGuidanceExamples_Cli = RemediationGuidanceExamples.AddMember("Cli", _NonEmptyString)
+
+	RemediationGuidanceExamples_Python = RemediationGuidanceExamples.AddMember("Python", _NonEmptyString)
+
+	RemediationGuidanceExamples_Terraform = RemediationGuidanceExamples.AddMember("Terraform", _NonEmptyString)
+
+	RemediationGuidanceExamples_Cdk = RemediationGuidanceExamples.AddMember("Cdk", _NonEmptyString)
+
+	RemediationGuidanceExamples_CloudFormation = RemediationGuidanceExamples.AddMember("CloudFormation", _NonEmptyString)
+
+	RemediationGuidanceExamples_IaC = RemediationGuidanceExamples.AddMember("IaC", _NonEmptyString)
+
+	RemediationGuidanceExamples_Template = RemediationGuidanceExamples.AddMember("Template", _NonEmptyString)
+
+	RemediationGuidanceMetadata_ResourceType = RemediationGuidanceMetadata.AddMember("ResourceType", _NonEmptyString)
+
+	RemediationGuidanceMetadata_ExposureType = RemediationGuidanceMetadata.AddMember("ExposureType", _NonEmptyString)
+
+	RemediationGuidanceMetadata_TraitTitles = RemediationGuidanceMetadata.AddMember("TraitTitles", _RemediationStringList)
+
+	RemediationGuidanceMetadata_Reversibility = RemediationGuidanceMetadata.AddMember("Reversibility", _NonEmptyString)
+
+	RemediationGuidanceMetadata_FixEffect = RemediationGuidanceMetadata.AddMember("FixEffect", _NonEmptyString)
+
+	RemediationGuidanceMetadata_RiskLevel = RemediationGuidanceMetadata.AddMember("RiskLevel", _NonEmptyString)
+
+	RemediationGuidanceMetadata_AutomationLevel = RemediationGuidanceMetadata.AddMember("AutomationLevel", _NonEmptyString)
+
+	RemediationGuidanceMetadata_HumanReviewRequired = RemediationGuidanceMetadata.AddMember("HumanReviewRequired", _Boolean)
+
+	RemediationGuidanceMetadata_GeneratedAt = RemediationGuidanceMetadata.AddMember("GeneratedAt", _Timestamp)
+
+	RemediationGuidanceMetadata_VerificationStatus = RemediationGuidanceMetadata.AddMember("VerificationStatus", _NonEmptyString)
+
+	RemediationGuidance_TargetTypeName = RemediationGuidance.AddMember("TargetTypeName", _NonEmptyString)
+
+	RemediationGuidance_Pattern = RemediationGuidance.AddMember("Pattern", _NonEmptyString)
+
+	RemediationGuidance_Version = RemediationGuidance.AddMember("Version", _NonEmptyString)
+
+	RemediationGuidance_Context = RemediationGuidance.AddMember("Context", RemediationGuidanceContext)
+
+	RemediationGuidance_Specification = RemediationGuidance.AddMember("Specification", RemediationGuidanceSpecification)
+
+	RemediationGuidance_Examples = RemediationGuidance.AddMember("Examples", RemediationGuidanceExamples)
+
+	RemediationGuidance_Metadata = RemediationGuidance.AddMember("Metadata", RemediationGuidanceMetadata)
+
+	RemediationOutcome_ResolvedFindingsCount = RemediationOutcome.AddMember("ResolvedFindingsCount", _Integer)
+
+	RemediationOutcome_SeverityReductionFindingsCount = RemediationOutcome.AddMember("SeverityReductionFindingsCount", _Integer)
+
+	RemediationOutcome_SeverityUnchangedCount = RemediationOutcome.AddMember("SeverityUnchangedCount", _Integer)
+
+	RemediationPriority_CRITICAL = RemediationPriority.AddMember("CRITICAL", smithyprelude.Unit)
+
+	RemediationPriority_HIGH = RemediationPriority.AddMember("HIGH", smithyprelude.Unit)
+
+	RemediationPriority_MEDIUM = RemediationPriority.AddMember("MEDIUM", smithyprelude.Unit)
+
+	RemediationPriority_LOW = RemediationPriority.AddMember("LOW", smithyprelude.Unit)
+
+	RemediationResource_AccountId = RemediationResource.AddMember("AccountId", _NonEmptyString)
+
+	RemediationResource_Region = RemediationResource.AddMember("Region", _NonEmptyString)
+
+	RemediationResource_ResourceOwnerAccountId = RemediationResource.AddMember("ResourceOwnerAccountId", _NonEmptyString)
+
+	RemediationResource_ResourceOwnerOrgId = RemediationResource.AddMember("ResourceOwnerOrgId", _NonEmptyString)
+
+	RemediationResource_Type = RemediationResource.AddMember("Type", _NonEmptyString)
+
+	RemediationResource_Name = RemediationResource.AddMember("Name", _NonEmptyString)
+
+	RemediationResource_Id = RemediationResource.AddMember("Id", _NonEmptyString)
+
+	RemediationResource_ResourceGuid = RemediationResource.AddMember("ResourceGuid", _NonEmptyString)
+
+	RemediationResource_ResourceRegion = RemediationResource.AddMember("ResourceRegion", _NonEmptyString)
+
+	RemediationResource_CloudProvider = RemediationResource.AddMember("CloudProvider", CloudProviderName)
+
+	RemediationStatus_NEW = RemediationStatus.AddMember("NEW", smithyprelude.Unit)
+
+	RemediationStatus_UPDATED = RemediationStatus.AddMember("UPDATED", smithyprelude.Unit)
+
+	RemediationStatus_RESOLVED = RemediationStatus.AddMember("RESOLVED", smithyprelude.Unit)
+
+	RemediationSummaryDetail_Action = RemediationSummaryDetail.AddMember("Action", _NonEmptyString)
+
+	RemediationSummaryDetail_Description = RemediationSummaryDetail.AddMember("Description", _NonEmptyString)
+
+	RemediationSummaryDetail_IsImmediate = RemediationSummaryDetail.AddMember("IsImmediate", _Boolean)
+
+	RemediationSummaryDetail_PostRemediationSteps = RemediationSummaryDetail.AddMember("PostRemediationSteps", _RemediationStringList)
+
+	RemediationSummaryDetail_KbArticles = RemediationSummaryDetail.AddMember("KbArticles", _KbArticleList)
+
+	RemediationTrait_Type = RemediationTrait.AddMember("Type", _NonEmptyString)
+
+	RemediationTrait_Title = RemediationTrait.AddMember("Title", _NonEmptyString)
+
+	RemediationV2Item_TargetUid = RemediationV2Item.AddMember("TargetUid", _NonEmptyString)
+
+	RemediationV2Item_Outcome = RemediationV2Item.AddMember("Outcome", RemediationOutcome)
+
+	RemediationV2Item_Priority = RemediationV2Item.AddMember("Priority", RemediationPriority)
+
+	RemediationV2Item_RemediationSummary = RemediationV2Item.AddMember("RemediationSummary", RemediationSummaryDetail)
+
+	RemediationV2Item_Resource = RemediationV2Item.AddMember("Resource", RemediationResource)
+
+	RemediationV2Item_Status = RemediationV2Item.AddMember("Status", RemediationStatus)
+
+	RemediationV2Item_Trait = RemediationV2Item.AddMember("Trait", RemediationTrait)
+
+	RemediationV2Item_Guidance = RemediationV2Item.AddMember("Guidance", RemediationGuidance)
+
+	RemediationV2Item_UpdatedAt = RemediationV2Item.AddMember("UpdatedAt", _Timestamp)
+
+	_RemediationV2ItemList_member = _RemediationV2ItemList.AddMember("member", RemediationV2Item)
 
 	ResourceCategory_COMPUTE = ResourceCategory.AddMember("COMPUTE", smithyprelude.Unit)
 
@@ -25688,6 +26379,24 @@ func init() {
 
 	GetRecommendedPolicyV2Response_ResourceArn = GetRecommendedPolicyV2Response.AddMember("ResourceArn", _NonEmptyString)
 
+	GetRemediationsV2Request_TargetUid = GetRemediationsV2Request.AddMember("TargetUid", _RemediationStringUid)
+
+	GetRemediationsV2Request_MetadataUid = GetRemediationsV2Request.AddMember("MetadataUid", _RemediationStringUid)
+
+	GetRemediationsV2Request_Filters = GetRemediationsV2Request.AddMember("Filters", RemediationFilters)
+
+	GetRemediationsV2Request_ShowGuidance = GetRemediationsV2Request.AddMember("ShowGuidance", _Boolean)
+
+	GetRemediationsV2Request_GuidanceFormat = GetRemediationsV2Request.AddMember("GuidanceFormat", GuidanceFormat)
+
+	GetRemediationsV2Request_MaxResults = GetRemediationsV2Request.AddMember("MaxResults", _MaxResults)
+
+	GetRemediationsV2Request_NextToken = GetRemediationsV2Request.AddMember("NextToken", _NextToken)
+
+	GetRemediationsV2Response_Items = GetRemediationsV2Response.AddMember("Items", _RemediationV2ItemList)
+
+	GetRemediationsV2Response_NextToken = GetRemediationsV2Response.AddMember("NextToken", _NextToken)
+
 	GetResourcesStatisticsV2Request_GroupByRules = GetResourcesStatisticsV2Request.AddMember("GroupByRules", _ResourceGroupByRules)
 
 	GetResourcesStatisticsV2Request_Scopes = GetResourcesStatisticsV2Request.AddMember("Scopes", ResourceScopes)
@@ -25813,6 +26522,24 @@ func init() {
 	ListEnabledProductsForImportResponse_ProductSubscriptions = ListEnabledProductsForImportResponse.AddMember("ProductSubscriptions", _ProductSubscriptionArnList)
 
 	ListEnabledProductsForImportResponse_NextToken = ListEnabledProductsForImportResponse.AddMember("NextToken", _NextToken)
+
+	ListExposuresByRemediationV2Request_TargetUid = ListExposuresByRemediationV2Request.AddMember("TargetUid", _RemediationStringUid)
+
+	ListExposuresByRemediationV2Request_MaxResults = ListExposuresByRemediationV2Request.AddMember("MaxResults", _MaxResults)
+
+	ListExposuresByRemediationV2Request_NextToken = ListExposuresByRemediationV2Request.AddMember("NextToken", _NextToken)
+
+	ListExposuresByRemediationV2Response_Items = ListExposuresByRemediationV2Response.AddMember("Items", _ExposureFindingItemsList)
+
+	ListExposuresByRemediationV2Response_TargetUid = ListExposuresByRemediationV2Response.AddMember("TargetUid", _NonEmptyString)
+
+	ListExposuresByRemediationV2Response_Resource = ListExposuresByRemediationV2Response.AddMember("Resource", RemediationResource)
+
+	ListExposuresByRemediationV2Response_TotalCount = ListExposuresByRemediationV2Response.AddMember("TotalCount", _Integer)
+
+	ListExposuresByRemediationV2Response_Trait = ListExposuresByRemediationV2Response.AddMember("Trait", RemediationTrait)
+
+	ListExposuresByRemediationV2Response_NextToken = ListExposuresByRemediationV2Response.AddMember("NextToken", _NextToken)
 
 	ListFindingAggregatorsRequest_NextToken = ListFindingAggregatorsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
 

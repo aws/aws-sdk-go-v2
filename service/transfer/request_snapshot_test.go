@@ -927,6 +927,10 @@ func TestCheckRequestSnapshot_CreateWorkflow(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		StructuredLogDestinations: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3707,6 +3711,10 @@ func TestUpdateRequestSnapshot_CreateWorkflow(t *testing.T) {
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
 			},
+		},
+		StructuredLogDestinations: []string{
+			"__Member__",
+			"__Member__",
 		},
 	}
 	body := &bytes.Buffer{}

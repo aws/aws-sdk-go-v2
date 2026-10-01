@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHealth_20160804.DescribeServiceLifecycle
+
+{"nextToken":"__NextToken__","serviceLifecycles":[{"lifecycleEvents":[{"date":946684800,"description":"__Description__","impactRisks":["__Member__","__Member__"],"lifecycleEventType":"__LifecycleEventType__","regions":["__Member__","__Member__"]},{"date":946684800,"description":"__Description__","impactRisks":["__Member__","__Member__"],"lifecycleEventType":"__LifecycleEventType__","regions":["__Member__","__Member__"]}],"recommendedVersion":"__RecommendedVersion__","service":"__Service__","title":"__Title__","version":"__Version__"},{"lifecycleEvents":[{"date":946684800,"description":"__Description__","impactRisks":["__Member__","__Member__"],"lifecycleEventType":"__LifecycleEventType__","regions":["__Member__","__Member__"]},{"date":946684800,"description":"__Description__","impactRisks":["__Member__","__Member__"],"lifecycleEventType":"__LifecycleEventType__","regions":["__Member__","__Member__"]}],"recommendedVersion":"__RecommendedVersion__","service":"__Service__","title":"__Title__","version":"__Version__"}]}

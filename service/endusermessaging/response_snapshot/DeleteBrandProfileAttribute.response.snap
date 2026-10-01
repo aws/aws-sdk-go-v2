@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"attributeName":"__AttributeName__","brandProfileId":"__BrandProfileId__"}

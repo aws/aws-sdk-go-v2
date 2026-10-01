@@ -1,0 +1,8 @@
+{
+    "id": "b3d02248-aa3b-41ef-b2dc-49d54ee8333c",
+    "type": "feature",
+    "description": "Release support for c8a.16xlarge and m8a.16xlarge instance types for SageMaker HyperPod",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

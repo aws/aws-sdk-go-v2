@@ -3695,6 +3695,43 @@ func serializeHeatMapMeasureFieldList(s smithy.ShapeSerializer, schema *smithy.S
 	s.CloseList()
 }
 
+func serializeHierarchyFilterLevelList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.HierarchyFilterLevel) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeHierarchyFilterNodeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.HierarchyFilterNode) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeHierarchyValuesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeHistogramMeasureFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MeasureField) {
 	if v == nil {
 		return
@@ -9162,6 +9199,48 @@ func deserializeHeatMapMeasureFieldList(d smithy.ShapeDeserializer, s *smithy.Sc
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MeasureField{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeHierarchyFilterLevelList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.HierarchyFilterLevel) error {
+	*v = make([]types.HierarchyFilterLevel, 0)
+	var vv types.HierarchyFilterLevel
+	return smithy.ReadList(d, s, func() error {
+		vv = types.HierarchyFilterLevel{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeHierarchyFilterNodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.HierarchyFilterNode) error {
+	*v = make([]types.HierarchyFilterNode, 0)
+	var vv types.HierarchyFilterNode
+	return smithy.ReadList(d, s, func() error {
+		vv = types.HierarchyFilterNode{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeHierarchyValuesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

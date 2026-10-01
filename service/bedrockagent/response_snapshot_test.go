@@ -4078,8 +4078,9 @@ func TestCheckResponseSnapshot_GetIngestionJob(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StartedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TextReadyAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetIngestionJob.response")
@@ -5431,6 +5432,7 @@ func TestCheckResponseSnapshot_ListIngestionJobs(t *testing.T) {
 				Status:          types.IngestionJobStatus("STARTING"),
 				StartedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				TextReadyAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Statistics: &types.IngestionJobStatistics{
 					NumberOfDocumentsScanned:          1,
 					NumberOfMetadataDocumentsScanned:  1,
@@ -5450,6 +5452,7 @@ func TestCheckResponseSnapshot_ListIngestionJobs(t *testing.T) {
 				Status:          types.IngestionJobStatus("STARTING"),
 				StartedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				TextReadyAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Statistics: &types.IngestionJobStatistics{
 					NumberOfDocumentsScanned:          1,
 					NumberOfMetadataDocumentsScanned:  1,
@@ -5834,8 +5837,9 @@ func TestCheckResponseSnapshot_StartIngestionJob(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StartedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TextReadyAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StartIngestionJob.response")
@@ -5882,8 +5886,9 @@ func TestCheckResponseSnapshot_StopIngestionJob(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StartedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TextReadyAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StopIngestionJob.response")

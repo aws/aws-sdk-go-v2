@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"Impact":"Reduces","MetadataUid":"__MetadataUid__","PreviousSeverity":"Informational","ProjectedSeverity":"Informational","Title":"__Title__"},{"Impact":"Reduces","MetadataUid":"__MetadataUid__","PreviousSeverity":"Informational","ProjectedSeverity":"Informational","Title":"__Title__"}],"NextToken":"__NextToken__","Resource":{"AccountId":"__AccountId__","CloudProvider":"Azure","Id":"__Id__","Name":"__Name__","Region":"__Region__","ResourceGuid":"__ResourceGuid__","ResourceOwnerAccountId":"__ResourceOwnerAccountId__","ResourceOwnerOrgId":"__ResourceOwnerOrgId__","ResourceRegion":"__ResourceRegion__","Type":"__Type__"},"TargetUid":"__TargetUid__","TotalCount":1,"Trait":{"Title":"__Title__","Type":"__Type__"}}

@@ -1112,6 +1112,103 @@ func TestCheckResponseSnapshot_DescribeHealthServiceStatusForOrganization(t *tes
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeServiceLifecycle(t *testing.T) {
+	want := &DescribeServiceLifecycleOutput{
+		ServiceLifecycles: []types.ServiceLifecycle{
+			{
+				Service:            ptr.String("__Service__"),
+				Version:            ptr.String("__Version__"),
+				Title:              ptr.String("__Title__"),
+				RecommendedVersion: ptr.String("__RecommendedVersion__"),
+				LifecycleEvents: []types.LifecycleEvent{
+					{
+						LifecycleEventType: ptr.String("__LifecycleEventType__"),
+						Date:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ImpactRisks: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Description: ptr.String("__Description__"),
+					},
+					{
+						LifecycleEventType: ptr.String("__LifecycleEventType__"),
+						Date:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ImpactRisks: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Description: ptr.String("__Description__"),
+					},
+				},
+			},
+			{
+				Service:            ptr.String("__Service__"),
+				Version:            ptr.String("__Version__"),
+				Title:              ptr.String("__Title__"),
+				RecommendedVersion: ptr.String("__RecommendedVersion__"),
+				LifecycleEvents: []types.LifecycleEvent{
+					{
+						LifecycleEventType: ptr.String("__LifecycleEventType__"),
+						Date:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ImpactRisks: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Description: ptr.String("__Description__"),
+					},
+					{
+						LifecycleEventType: ptr.String("__LifecycleEventType__"),
+						Date:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ImpactRisks: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Description: ptr.String("__Description__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeServiceLifecycle.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeServiceLifecycle(context.Background(), &DescribeServiceLifecycleInput{
+		Filter: &types.ServiceLifecycleFilter{
+			Service: ptr.String("__Service__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeServiceLifecycle.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DisableHealthServiceAccessForOrganization(t *testing.T) {
 	want := &DisableHealthServiceAccessForOrganizationOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DisableHealthServiceAccessForOrganization.response")

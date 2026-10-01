@@ -1,0 +1,8 @@
+{
+    "id": "31e43cd9-437c-47cd-b3e2-a7ce36b20b33",
+    "type": "feature",
+    "description": "Adds GetRemediationsV2 and ListExposuresByRemediationV2 APIs. This feature allows customers to see their highest priority remediations for their Exposure findings. Remediations target key changes customers can make to resources to drive finding resolution.",
+    "modules": [
+        "service/securityhub"
+    ]
+}

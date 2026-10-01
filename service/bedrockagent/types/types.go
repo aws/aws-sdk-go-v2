@@ -6704,6 +6704,13 @@ type IngestionJob struct {
 	// Contains statistics about the data ingestion job.
 	Statistics *IngestionJobStatistics
 
+	// The time at which all text content in the data ingestion job finished
+	// extraction and became available to query.
+	//
+	// This time isn't returned until text extraction is complete for all the
+	// documents in the job.
+	TextReadyAt *time.Time
+
 	noSmithyDocumentSerde
 }
 
@@ -6737,6 +6744,9 @@ func (v *IngestionJob) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Status != "" {
 		s.WriteString(schemas.IngestionJob_status, string(v.Status))
+	}
+	if v.TextReadyAt != nil {
+		s.WriteTime(schemas.IngestionJob_textReadyAt, *v.TextReadyAt)
 	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.IngestionJob_updatedAt, *v.UpdatedAt)
@@ -6772,6 +6782,9 @@ func (v *IngestionJob) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Status = IngestionJobStatus(ev)
 			return nil
+		case schemas.IngestionJob_textReadyAt:
+			v.TextReadyAt = new(time.Time)
+			return d.ReadTime(schemas.IngestionJob_textReadyAt, v.TextReadyAt)
 		case schemas.IngestionJob_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.IngestionJob_updatedAt, v.UpdatedAt)
@@ -7021,6 +7034,13 @@ type IngestionJobSummary struct {
 	// Contains statistics for the data ingestion job.
 	Statistics *IngestionJobStatistics
 
+	// The time at which all text content in the data ingestion job finished
+	// extraction and became available to query.
+	//
+	// This time isn't returned until text extraction is complete for all the
+	// documents in the job.
+	TextReadyAt *time.Time
+
 	noSmithyDocumentSerde
 }
 
@@ -7054,6 +7074,9 @@ func (v *IngestionJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.IngestionJobSummary_status, string(v.Status))
 	}
+	if v.TextReadyAt != nil {
+		s.WriteTime(schemas.IngestionJobSummary_textReadyAt, *v.TextReadyAt)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.IngestionJobSummary_updatedAt, *v.UpdatedAt)
 	}
@@ -7086,6 +7109,9 @@ func (v *IngestionJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Status = IngestionJobStatus(ev)
 			return nil
+		case schemas.IngestionJobSummary_textReadyAt:
+			v.TextReadyAt = new(time.Time)
+			return d.ReadTime(schemas.IngestionJobSummary_textReadyAt, v.TextReadyAt)
 		case schemas.IngestionJobSummary_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.IngestionJobSummary_updatedAt, v.UpdatedAt)

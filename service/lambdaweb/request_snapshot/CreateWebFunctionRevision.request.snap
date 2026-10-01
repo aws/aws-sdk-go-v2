@@ -1,0 +1,5 @@
+POST /2025-03-07/web-functions/__FunctionName__/revisions
+
+Content-Type: application/json
+
+{"buildConfig":{"codeConfig":{"s3Object":{"bucket":"__Bucket__","key":"__Key__","versionId":"__VersionId__"}},"runtimeConfig":{"runtime":"__Runtime__"}},"description":"__Description__","kmsKeyArn":"__KmsKeyArn__","serviceConfig":{"environmentVariables":{"key0":"__Value__"},"executionRoleArn":"__ExecutionRoleArn__","maxConcurrencyPerEnvironment":1,"telemetryConfig":{"loggingConfig":{"applicationLogLevel":"TRACE","logGroup":"__LogGroup__","systemLogLevel":"DEBUG"}},"timeoutSeconds":1}}

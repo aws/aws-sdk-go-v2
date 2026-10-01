@@ -624,9 +624,10 @@ type OriginAccessControlSigningBehaviors string
 
 // Enum values for OriginAccessControlSigningBehaviors
 const (
-	OriginAccessControlSigningBehaviorsNever      OriginAccessControlSigningBehaviors = "never"
-	OriginAccessControlSigningBehaviorsAlways     OriginAccessControlSigningBehaviors = "always"
-	OriginAccessControlSigningBehaviorsNoOverride OriginAccessControlSigningBehaviors = "no-override"
+	OriginAccessControlSigningBehaviorsNever         OriginAccessControlSigningBehaviors = "never"
+	OriginAccessControlSigningBehaviorsAlways        OriginAccessControlSigningBehaviors = "always"
+	OriginAccessControlSigningBehaviorsNoOverride    OriginAccessControlSigningBehaviors = "no-override"
+	OriginAccessControlSigningBehaviorsAlwaysAmzAuth OriginAccessControlSigningBehaviors = "always-amz-auth"
 )
 
 // Values returns all known values for OriginAccessControlSigningBehaviors. Note
@@ -639,6 +640,7 @@ func (OriginAccessControlSigningBehaviors) Values() []OriginAccessControlSigning
 		"never",
 		"always",
 		"no-override",
+		"always-amz-auth",
 	}
 }
 

@@ -814,6 +814,100 @@ func TestUpdateResponseSnapshot_DescribeHealthServiceStatusForOrganization(t *te
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeServiceLifecycle(t *testing.T) {
+	want := &DescribeServiceLifecycleOutput{
+		ServiceLifecycles: []types.ServiceLifecycle{
+			{
+				Service:            ptr.String("__Service__"),
+				Version:            ptr.String("__Version__"),
+				Title:              ptr.String("__Title__"),
+				RecommendedVersion: ptr.String("__RecommendedVersion__"),
+				LifecycleEvents: []types.LifecycleEvent{
+					{
+						LifecycleEventType: ptr.String("__LifecycleEventType__"),
+						Date:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ImpactRisks: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Description: ptr.String("__Description__"),
+					},
+					{
+						LifecycleEventType: ptr.String("__LifecycleEventType__"),
+						Date:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ImpactRisks: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Description: ptr.String("__Description__"),
+					},
+				},
+			},
+			{
+				Service:            ptr.String("__Service__"),
+				Version:            ptr.String("__Version__"),
+				Title:              ptr.String("__Title__"),
+				RecommendedVersion: ptr.String("__RecommendedVersion__"),
+				LifecycleEvents: []types.LifecycleEvent{
+					{
+						LifecycleEventType: ptr.String("__LifecycleEventType__"),
+						Date:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ImpactRisks: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Description: ptr.String("__Description__"),
+					},
+					{
+						LifecycleEventType: ptr.String("__LifecycleEventType__"),
+						Date:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ImpactRisks: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Description: ptr.String("__Description__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeServiceLifecycle, schemas.DescribeServiceLifecycleResponse, schemas.DescribeServiceLifecycleResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeServiceLifecycle.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DisableHealthServiceAccessForOrganization(t *testing.T) {
 	want := &DisableHealthServiceAccessForOrganizationOutput{}
 	proto := awsjson.New11(schemas.AWSHealth_20160804)

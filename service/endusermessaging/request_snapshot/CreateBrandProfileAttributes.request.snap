@@ -1,0 +1,5 @@
+POST /v1/brand-profiles/__BrandProfileId__/attributes
+
+Content-Type: application/json
+
+{"attributes":[{"attachmentBody":"YmxvYg==","attributeName":"__AttributeName__","attributeType":"TEXT","attributeValue":"__AttributeValue__","category":"__Category__","description":"__Description__"},{"attachmentBody":"YmxvYg==","attributeName":"__AttributeName__","attributeType":"TEXT","attributeValue":"__AttributeValue__","category":"__Category__","description":"__Description__"}],"clientToken":"__ClientToken__"}

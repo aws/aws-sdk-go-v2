@@ -21546,6 +21546,14 @@ type DatabricksParameters struct {
 	// This member is required.
 	SqlEndpointPath *string
 
+	// The authentication type that you want to use for your connection. This
+	// parameter accepts OAuth and non-OAuth authentication types.
+	AuthenticationType AuthenticationType
+
+	// An object that contains information needed to create a data source connection
+	// between an Quick Sight account and Databricks.
+	OAuthParameters *OAuthParameters
+
 	noSmithyDocumentSerde
 }
 
@@ -21556,8 +21564,16 @@ func (v *DatabricksParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DatabricksParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.DatabricksParameters_AuthenticationType, string(v.AuthenticationType))
+	}
 	if v.Host != nil {
 		s.WriteString(schemas.DatabricksParameters_Host, *v.Host)
+	}
+	if v.OAuthParameters != nil {
+		s.WriteStruct(schemas.DatabricksParameters_OAuthParameters)
+		v.OAuthParameters.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Port != nil {
 		s.WriteInt32(schemas.DatabricksParameters_Port, *v.Port)
@@ -21569,9 +21585,19 @@ func (v *DatabricksParameters) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *DatabricksParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DatabricksParameters, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DatabricksParameters_AuthenticationType:
+			var ev string
+			if err := d.ReadString(schemas.DatabricksParameters_AuthenticationType, &ev); err != nil {
+				return err
+			}
+			v.AuthenticationType = AuthenticationType(ev)
+			return nil
 		case schemas.DatabricksParameters_Host:
 			v.Host = new(string)
 			return d.ReadString(schemas.DatabricksParameters_Host, v.Host)
+		case schemas.DatabricksParameters_OAuthParameters:
+			v.OAuthParameters = &OAuthParameters{}
+			return v.OAuthParameters.Deserialize(d)
 		case schemas.DatabricksParameters_Port:
 			v.Port = new(int32)
 			return d.ReadInt32(schemas.DatabricksParameters_Port, v.Port)
@@ -26849,6 +26875,13 @@ type DefaultFilterControlOptions struct {
 	// The default options that correspond to the Dropdown filter control type.
 	DefaultDropdownOptions *DefaultFilterDropDownControlOptions
 
+	// The default options that correspond to the HierarchyDropdown filter control
+	// type.
+	DefaultHierarchyDropdown *DefaultHierarchyFilterDropDownControlOptions
+
+	// The default options that correspond to the HierarchyList filter control type.
+	DefaultHierarchyList *DefaultHierarchyFilterListControlOptions
+
 	// The default options that correspond to the List filter control type.
 	DefaultListOptions *DefaultFilterListControlOptions
 
@@ -26882,6 +26915,16 @@ func (v *DefaultFilterControlOptions) SerializeMembers(s smithy.ShapeSerializer)
 	if v.DefaultDropdownOptions != nil {
 		s.WriteStruct(schemas.DefaultFilterControlOptions_DefaultDropdownOptions)
 		v.DefaultDropdownOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultHierarchyDropdown != nil {
+		s.WriteStruct(schemas.DefaultFilterControlOptions_DefaultHierarchyDropdown)
+		v.DefaultHierarchyDropdown.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultHierarchyList != nil {
+		s.WriteStruct(schemas.DefaultFilterControlOptions_DefaultHierarchyList)
+		v.DefaultHierarchyList.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.DefaultListOptions != nil {
@@ -26919,6 +26962,12 @@ func (v *DefaultFilterControlOptions) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.DefaultFilterControlOptions_DefaultDropdownOptions:
 			v.DefaultDropdownOptions = &DefaultFilterDropDownControlOptions{}
 			return v.DefaultDropdownOptions.Deserialize(d)
+		case schemas.DefaultFilterControlOptions_DefaultHierarchyDropdown:
+			v.DefaultHierarchyDropdown = &DefaultHierarchyFilterDropDownControlOptions{}
+			return v.DefaultHierarchyDropdown.Deserialize(d)
+		case schemas.DefaultFilterControlOptions_DefaultHierarchyList:
+			v.DefaultHierarchyList = &DefaultHierarchyFilterListControlOptions{}
+			return v.DefaultHierarchyList.Deserialize(d)
 		case schemas.DefaultFilterControlOptions_DefaultListOptions:
 			v.DefaultListOptions = &DefaultFilterListControlOptions{}
 			return v.DefaultListOptions.Deserialize(d)
@@ -27202,6 +27251,173 @@ func (v *DefaultGridLayoutConfiguration) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.DefaultGridLayoutConfiguration_CanvasSizeOptions:
 			v.CanvasSizeOptions = &GridLayoutCanvasSizeOptions{}
 			return v.CanvasSizeOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The default options that correspond to the HierarchyDropdown filter control
+// type.
+type DefaultHierarchyFilterDropDownControlOptions struct {
+
+	// The visibility configuration of the Apply button on a
+	// HierarchyFilterDropDownControl .
+	CommitMode CommitMode
+
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
+
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
+	// The display options of a control.
+	DisplayOptions *HierarchyFilterDropDownControlDisplayOptions
+
+	// The type of the DefaultHierarchyFilterDropDownControlOptions . Choose one of the
+	// following options:
+	//
+	//   - MULTI_SELECT : The user can select multiple entries from a dropdown menu.
+	//
+	//   - SINGLE_SELECT : The user can select a single entry from a dropdown menu.
+	Type SheetControlListType
+
+	noSmithyDocumentSerde
+}
+
+func (v *DefaultHierarchyFilterDropDownControlOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefaultHierarchyFilterDropDownControlOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefaultHierarchyFilterDropDownControlOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitMode != "" {
+		s.WriteString(schemas.DefaultHierarchyFilterDropDownControlOptions_CommitMode, string(v.CommitMode))
+	}
+	serializeControlSortConfigurationList(s, schemas.DefaultHierarchyFilterDropDownControlOptions_ControlSortConfigurations, v.ControlSortConfigurations)
+	if v.ControlTitleFormatText != nil {
+		s.WriteStruct(schemas.DefaultHierarchyFilterDropDownControlOptions_ControlTitleFormatText)
+		v.ControlTitleFormatText.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisplayOptions != nil {
+		s.WriteStruct(schemas.DefaultHierarchyFilterDropDownControlOptions_DisplayOptions)
+		v.DisplayOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DefaultHierarchyFilterDropDownControlOptions_Type, string(v.Type))
+	}
+}
+func (v *DefaultHierarchyFilterDropDownControlOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DefaultHierarchyFilterDropDownControlOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DefaultHierarchyFilterDropDownControlOptions_CommitMode:
+			var ev string
+			if err := d.ReadString(schemas.DefaultHierarchyFilterDropDownControlOptions_CommitMode, &ev); err != nil {
+				return err
+			}
+			v.CommitMode = CommitMode(ev)
+			return nil
+		case schemas.DefaultHierarchyFilterDropDownControlOptions_ControlSortConfigurations:
+			return deserializeControlSortConfigurationList(d, schemas.DefaultHierarchyFilterDropDownControlOptions_ControlSortConfigurations, &v.ControlSortConfigurations)
+		case schemas.DefaultHierarchyFilterDropDownControlOptions_ControlTitleFormatText:
+			v.ControlTitleFormatText = &ControlTitleFormatText{}
+			return v.ControlTitleFormatText.Deserialize(d)
+		case schemas.DefaultHierarchyFilterDropDownControlOptions_DisplayOptions:
+			v.DisplayOptions = &HierarchyFilterDropDownControlDisplayOptions{}
+			return v.DisplayOptions.Deserialize(d)
+		case schemas.DefaultHierarchyFilterDropDownControlOptions_Type:
+			var ev string
+			if err := d.ReadString(schemas.DefaultHierarchyFilterDropDownControlOptions_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SheetControlListType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The default options that correspond to the HierarchyList filter control type.
+type DefaultHierarchyFilterListControlOptions struct {
+
+	// The visibility configuration of the Apply button on a HierarchyFilterListControl
+	// .
+	CommitMode CommitMode
+
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
+
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
+	// The display options of a control.
+	DisplayOptions *HierarchyFilterListControlDisplayOptions
+
+	// The type of the DefaultHierarchyFilterListControlOptions . Choose one of the
+	// following options:
+	//
+	//   - MULTI_SELECT : The user can select multiple entries from the list.
+	//
+	//   - SINGLE_SELECT : The user can select a single entry from the list.
+	Type SheetControlListType
+
+	noSmithyDocumentSerde
+}
+
+func (v *DefaultHierarchyFilterListControlOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefaultHierarchyFilterListControlOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefaultHierarchyFilterListControlOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitMode != "" {
+		s.WriteString(schemas.DefaultHierarchyFilterListControlOptions_CommitMode, string(v.CommitMode))
+	}
+	serializeControlSortConfigurationList(s, schemas.DefaultHierarchyFilterListControlOptions_ControlSortConfigurations, v.ControlSortConfigurations)
+	if v.ControlTitleFormatText != nil {
+		s.WriteStruct(schemas.DefaultHierarchyFilterListControlOptions_ControlTitleFormatText)
+		v.ControlTitleFormatText.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisplayOptions != nil {
+		s.WriteStruct(schemas.DefaultHierarchyFilterListControlOptions_DisplayOptions)
+		v.DisplayOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DefaultHierarchyFilterListControlOptions_Type, string(v.Type))
+	}
+}
+func (v *DefaultHierarchyFilterListControlOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DefaultHierarchyFilterListControlOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DefaultHierarchyFilterListControlOptions_CommitMode:
+			var ev string
+			if err := d.ReadString(schemas.DefaultHierarchyFilterListControlOptions_CommitMode, &ev); err != nil {
+				return err
+			}
+			v.CommitMode = CommitMode(ev)
+			return nil
+		case schemas.DefaultHierarchyFilterListControlOptions_ControlSortConfigurations:
+			return deserializeControlSortConfigurationList(d, schemas.DefaultHierarchyFilterListControlOptions_ControlSortConfigurations, &v.ControlSortConfigurations)
+		case schemas.DefaultHierarchyFilterListControlOptions_ControlTitleFormatText:
+			v.ControlTitleFormatText = &ControlTitleFormatText{}
+			return v.ControlTitleFormatText.Deserialize(d)
+		case schemas.DefaultHierarchyFilterListControlOptions_DisplayOptions:
+			v.DisplayOptions = &HierarchyFilterListControlDisplayOptions{}
+			return v.DisplayOptions.Deserialize(d)
+		case schemas.DefaultHierarchyFilterListControlOptions_Type:
+			var ev string
+			if err := d.ReadString(schemas.DefaultHierarchyFilterListControlOptions_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SheetControlListType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -30117,6 +30333,11 @@ type Filter struct {
 	// [Adding text filters]: https://docs.aws.amazon.com/quicksight/latest/user/add-a-text-filter-data-prep.html
 	CategoryFilter *CategoryFilter
 
+	// A HierarchyFilter filters data by drilling down through an ordered list of
+	// columns. Each level in the list narrows the data by one column, and the selected
+	// values at each level determine which values are available at the next.
+	HierarchyFilter *HierarchyFilter
+
 	// A NestedFilter filters data with a subset of data that is defined by the nested
 	// inner filter.
 	NestedFilter *NestedFilter
@@ -30156,6 +30377,11 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CategoryFilter != nil {
 		s.WriteStruct(schemas.Filter_CategoryFilter)
 		v.CategoryFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HierarchyFilter != nil {
+		s.WriteStruct(schemas.Filter_HierarchyFilter)
+		v.HierarchyFilter.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.NestedFilter != nil {
@@ -30200,6 +30426,9 @@ func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Filter_CategoryFilter:
 			v.CategoryFilter = &CategoryFilter{}
 			return v.CategoryFilter.Deserialize(d)
+		case schemas.Filter_HierarchyFilter:
+			v.HierarchyFilter = &HierarchyFilter{}
+			return v.HierarchyFilter.Deserialize(d)
 		case schemas.Filter_NestedFilter:
 			v.NestedFilter = &NestedFilter{}
 			return v.NestedFilter.Deserialize(d)
@@ -30303,6 +30532,16 @@ type FilterControl struct {
 	// single value.
 	Dropdown *FilterDropDownControl
 
+	// A control from a hierarchy filter that displays the hierarchy as a dropdown
+	// list. You can expand a value to see and select the values beneath it, and select
+	// either a single value or multiple values.
+	HierarchyDropdown *HierarchyFilterDropDownControl
+
+	// A control from a hierarchy filter that displays the hierarchy as a list. You
+	// can expand a value to see and select the values beneath it, and select either a
+	// single value or multiple values.
+	HierarchyList *HierarchyFilterListControl
+
 	// A control to display a list of buttons or boxes. This is used to select either
 	// a single value or multiple values.
 	List *FilterListControl
@@ -30345,6 +30584,16 @@ func (v *FilterControl) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Dropdown.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.HierarchyDropdown != nil {
+		s.WriteStruct(schemas.FilterControl_HierarchyDropdown)
+		v.HierarchyDropdown.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HierarchyList != nil {
+		s.WriteStruct(schemas.FilterControl_HierarchyList)
+		v.HierarchyList.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.List != nil {
 		s.WriteStruct(schemas.FilterControl_List)
 		v.List.SerializeMembers(s)
@@ -30383,6 +30632,12 @@ func (v *FilterControl) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.FilterControl_Dropdown:
 			v.Dropdown = &FilterDropDownControl{}
 			return v.Dropdown.Deserialize(d)
+		case schemas.FilterControl_HierarchyDropdown:
+			v.HierarchyDropdown = &HierarchyFilterDropDownControl{}
+			return v.HierarchyDropdown.Deserialize(d)
+		case schemas.FilterControl_HierarchyList:
+			v.HierarchyList = &HierarchyFilterListControl{}
+			return v.HierarchyList.Deserialize(d)
 		case schemas.FilterControl_List:
 			v.List = &FilterListControl{}
 			return v.List.Deserialize(d)
@@ -37648,6 +37903,607 @@ func (v *HeatMapVisual) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.HeatMapVisual_VisualId:
 			v.VisualId = new(string)
 			return d.ReadString(schemas.HeatMapVisual_VisualId, v.VisualId)
+		}
+		return nil
+	})
+}
+
+// A HierarchyFilter filters data by drilling down through an ordered list of
+// columns. Each level in the list narrows the data by one column, and the selected
+// values at each level determine which values are available at the next.
+type HierarchyFilter struct {
+
+	// The column that anchors the filter. This column determines the dataset that the
+	// whole filter applies to, so every column in HierarchyLevels and in HierarchyTree
+	// must belong to the same dataset.
+	//
+	// This member is required.
+	Column *ColumnIdentifier
+
+	// An identifier that uniquely identifies a filter within a dashboard, analysis,
+	// or template.
+	//
+	// This member is required.
+	FilterId *string
+
+	// The ordered list of columns that defines the drill-down path of the filter. The
+	// first level is the top of the hierarchy. You can specify a maximum of 5 levels.
+	//
+	// This member is required.
+	HierarchyLevels []HierarchyFilterLevel
+
+	// Determines whether the values selected in HierarchyTree are kept or removed.
+	// Choose one of the following options:
+	//
+	//   - INCLUDE : Keep only the selected values.
+	//
+	//   - EXCLUDE : Remove the selected values.
+	//
+	// This member is required.
+	MatchOperator HierarchyFilterMatchOperator
+
+	// This option determines how null values should be treated when filtering data.
+	//
+	//   - ALL_VALUES : Include null values in filtered results.
+	//
+	//   - NULLS_ONLY : Only include null values in filtered results.
+	//
+	//   - NON_NULLS_ONLY : Exclude null values from filtered results.
+	//
+	// This member is required.
+	NullOption FilterNullOption
+
+	// The default configurations for the associated controls. This applies only for
+	// filters that are scoped to multiple sheets.
+	DefaultFilterControlConfiguration *DefaultFilterControlConfiguration
+
+	// The tree of selected values for the filter. Each node records the values that
+	// are selected at one level of the hierarchy, and its children record the
+	// selections beneath those values. Omit this attribute to define the drill-down
+	// path without restricting any values.
+	HierarchyTree *HierarchyFilterNode
+
+	noSmithyDocumentSerde
+}
+
+func (v *HierarchyFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HierarchyFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HierarchyFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Column != nil {
+		s.WriteStruct(schemas.HierarchyFilter_Column)
+		v.Column.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultFilterControlConfiguration != nil {
+		s.WriteStruct(schemas.HierarchyFilter_DefaultFilterControlConfiguration)
+		v.DefaultFilterControlConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FilterId != nil {
+		s.WriteString(schemas.HierarchyFilter_FilterId, *v.FilterId)
+	}
+	serializeHierarchyFilterLevelList(s, schemas.HierarchyFilter_HierarchyLevels, v.HierarchyLevels)
+	if v.HierarchyTree != nil {
+		s.WriteStruct(schemas.HierarchyFilter_HierarchyTree)
+		v.HierarchyTree.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MatchOperator != "" {
+		s.WriteString(schemas.HierarchyFilter_MatchOperator, string(v.MatchOperator))
+	}
+	if v.NullOption != "" {
+		s.WriteString(schemas.HierarchyFilter_NullOption, string(v.NullOption))
+	}
+}
+func (v *HierarchyFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HierarchyFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HierarchyFilter_Column:
+			v.Column = &ColumnIdentifier{}
+			return v.Column.Deserialize(d)
+		case schemas.HierarchyFilter_DefaultFilterControlConfiguration:
+			v.DefaultFilterControlConfiguration = &DefaultFilterControlConfiguration{}
+			return v.DefaultFilterControlConfiguration.Deserialize(d)
+		case schemas.HierarchyFilter_FilterId:
+			v.FilterId = new(string)
+			return d.ReadString(schemas.HierarchyFilter_FilterId, v.FilterId)
+		case schemas.HierarchyFilter_HierarchyLevels:
+			return deserializeHierarchyFilterLevelList(d, schemas.HierarchyFilter_HierarchyLevels, &v.HierarchyLevels)
+		case schemas.HierarchyFilter_HierarchyTree:
+			v.HierarchyTree = &HierarchyFilterNode{}
+			return v.HierarchyTree.Deserialize(d)
+		case schemas.HierarchyFilter_MatchOperator:
+			var ev string
+			if err := d.ReadString(schemas.HierarchyFilter_MatchOperator, &ev); err != nil {
+				return err
+			}
+			v.MatchOperator = HierarchyFilterMatchOperator(ev)
+			return nil
+		case schemas.HierarchyFilter_NullOption:
+			var ev string
+			if err := d.ReadString(schemas.HierarchyFilter_NullOption, &ev); err != nil {
+				return err
+			}
+			v.NullOption = FilterNullOption(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A control from a hierarchy filter that displays the hierarchy as a dropdown
+// list. You can expand a value to see and select the values beneath it, and select
+// either a single value or multiple values.
+type HierarchyFilterDropDownControl struct {
+
+	// The ID of the HierarchyFilterDropDownControl .
+	//
+	// This member is required.
+	FilterControlId *string
+
+	// The source filter ID of the HierarchyFilterDropDownControl . This must be the
+	// FilterId of a HierarchyFilter .
+	//
+	// This member is required.
+	SourceFilterId *string
+
+	// The visibility configuration of the Apply button on a
+	// HierarchyFilterDropDownControl .
+	CommitMode CommitMode
+
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
+
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
+	// The display options of a control.
+	DisplayOptions *HierarchyFilterDropDownControlDisplayOptions
+
+	// The title of the HierarchyFilterDropDownControl .
+	Title *string
+
+	// The type of the HierarchyFilterDropDownControl . Choose one of the following
+	// options:
+	//
+	//   - MULTI_SELECT : The user can select multiple entries from a dropdown menu.
+	//
+	//   - SINGLE_SELECT : The user can select a single entry from a dropdown menu.
+	Type SheetControlListType
+
+	noSmithyDocumentSerde
+}
+
+func (v *HierarchyFilterDropDownControl) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HierarchyFilterDropDownControl)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HierarchyFilterDropDownControl) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitMode != "" {
+		s.WriteString(schemas.HierarchyFilterDropDownControl_CommitMode, string(v.CommitMode))
+	}
+	serializeControlSortConfigurationList(s, schemas.HierarchyFilterDropDownControl_ControlSortConfigurations, v.ControlSortConfigurations)
+	if v.ControlTitleFormatText != nil {
+		s.WriteStruct(schemas.HierarchyFilterDropDownControl_ControlTitleFormatText)
+		v.ControlTitleFormatText.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisplayOptions != nil {
+		s.WriteStruct(schemas.HierarchyFilterDropDownControl_DisplayOptions)
+		v.DisplayOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FilterControlId != nil {
+		s.WriteString(schemas.HierarchyFilterDropDownControl_FilterControlId, *v.FilterControlId)
+	}
+	if v.SourceFilterId != nil {
+		s.WriteString(schemas.HierarchyFilterDropDownControl_SourceFilterId, *v.SourceFilterId)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.HierarchyFilterDropDownControl_Title, *v.Title)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.HierarchyFilterDropDownControl_Type, string(v.Type))
+	}
+}
+func (v *HierarchyFilterDropDownControl) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HierarchyFilterDropDownControl, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HierarchyFilterDropDownControl_CommitMode:
+			var ev string
+			if err := d.ReadString(schemas.HierarchyFilterDropDownControl_CommitMode, &ev); err != nil {
+				return err
+			}
+			v.CommitMode = CommitMode(ev)
+			return nil
+		case schemas.HierarchyFilterDropDownControl_ControlSortConfigurations:
+			return deserializeControlSortConfigurationList(d, schemas.HierarchyFilterDropDownControl_ControlSortConfigurations, &v.ControlSortConfigurations)
+		case schemas.HierarchyFilterDropDownControl_ControlTitleFormatText:
+			v.ControlTitleFormatText = &ControlTitleFormatText{}
+			return v.ControlTitleFormatText.Deserialize(d)
+		case schemas.HierarchyFilterDropDownControl_DisplayOptions:
+			v.DisplayOptions = &HierarchyFilterDropDownControlDisplayOptions{}
+			return v.DisplayOptions.Deserialize(d)
+		case schemas.HierarchyFilterDropDownControl_FilterControlId:
+			v.FilterControlId = new(string)
+			return d.ReadString(schemas.HierarchyFilterDropDownControl_FilterControlId, v.FilterControlId)
+		case schemas.HierarchyFilterDropDownControl_SourceFilterId:
+			v.SourceFilterId = new(string)
+			return d.ReadString(schemas.HierarchyFilterDropDownControl_SourceFilterId, v.SourceFilterId)
+		case schemas.HierarchyFilterDropDownControl_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.HierarchyFilterDropDownControl_Title, v.Title)
+		case schemas.HierarchyFilterDropDownControl_Type:
+			var ev string
+			if err := d.ReadString(schemas.HierarchyFilterDropDownControl_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SheetControlListType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The display options of a control.
+type HierarchyFilterDropDownControlDisplayOptions struct {
+
+	// The configuration of info icon label options.
+	InfoIconLabelOptions *SheetControlInfoIconLabelOptions
+
+	// The options to configure the title visibility, name, and font size.
+	TitleOptions *LabelOptions
+
+	noSmithyDocumentSerde
+}
+
+func (v *HierarchyFilterDropDownControlDisplayOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HierarchyFilterDropDownControlDisplayOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HierarchyFilterDropDownControlDisplayOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InfoIconLabelOptions != nil {
+		s.WriteStruct(schemas.HierarchyFilterDropDownControlDisplayOptions_InfoIconLabelOptions)
+		v.InfoIconLabelOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TitleOptions != nil {
+		s.WriteStruct(schemas.HierarchyFilterDropDownControlDisplayOptions_TitleOptions)
+		v.TitleOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HierarchyFilterDropDownControlDisplayOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HierarchyFilterDropDownControlDisplayOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HierarchyFilterDropDownControlDisplayOptions_InfoIconLabelOptions:
+			v.InfoIconLabelOptions = &SheetControlInfoIconLabelOptions{}
+			return v.InfoIconLabelOptions.Deserialize(d)
+		case schemas.HierarchyFilterDropDownControlDisplayOptions_TitleOptions:
+			v.TitleOptions = &LabelOptions{}
+			return v.TitleOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// One level of the drill-down path of a HierarchyFilter .
+type HierarchyFilterLevel struct {
+
+	// The column that this level of the hierarchy drills down by. This column must
+	// belong to the same dataset as HierarchyFilter$Column .
+	//
+	// This member is required.
+	Column *ColumnIdentifier
+
+	noSmithyDocumentSerde
+}
+
+func (v *HierarchyFilterLevel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HierarchyFilterLevel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HierarchyFilterLevel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Column != nil {
+		s.WriteStruct(schemas.HierarchyFilterLevel_Column)
+		v.Column.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HierarchyFilterLevel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HierarchyFilterLevel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HierarchyFilterLevel_Column:
+			v.Column = &ColumnIdentifier{}
+			return v.Column.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A control from a hierarchy filter that displays the hierarchy as a list. You
+// can expand a value to see and select the values beneath it, and select either a
+// single value or multiple values.
+type HierarchyFilterListControl struct {
+
+	// The ID of the HierarchyFilterListControl .
+	//
+	// This member is required.
+	FilterControlId *string
+
+	// The source filter ID of the HierarchyFilterListControl . This must be the
+	// FilterId of a HierarchyFilter .
+	//
+	// This member is required.
+	SourceFilterId *string
+
+	// The visibility configuration of the Apply button on a HierarchyFilterListControl
+	// .
+	CommitMode CommitMode
+
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
+
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
+	// The display options of a control.
+	DisplayOptions *HierarchyFilterListControlDisplayOptions
+
+	// The title of the HierarchyFilterListControl .
+	Title *string
+
+	// The type of the HierarchyFilterListControl . Choose one of the following options:
+	//
+	//   - MULTI_SELECT : The user can select multiple entries from the list.
+	//
+	//   - SINGLE_SELECT : The user can select a single entry from the list.
+	Type SheetControlListType
+
+	noSmithyDocumentSerde
+}
+
+func (v *HierarchyFilterListControl) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HierarchyFilterListControl)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HierarchyFilterListControl) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitMode != "" {
+		s.WriteString(schemas.HierarchyFilterListControl_CommitMode, string(v.CommitMode))
+	}
+	serializeControlSortConfigurationList(s, schemas.HierarchyFilterListControl_ControlSortConfigurations, v.ControlSortConfigurations)
+	if v.ControlTitleFormatText != nil {
+		s.WriteStruct(schemas.HierarchyFilterListControl_ControlTitleFormatText)
+		v.ControlTitleFormatText.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisplayOptions != nil {
+		s.WriteStruct(schemas.HierarchyFilterListControl_DisplayOptions)
+		v.DisplayOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FilterControlId != nil {
+		s.WriteString(schemas.HierarchyFilterListControl_FilterControlId, *v.FilterControlId)
+	}
+	if v.SourceFilterId != nil {
+		s.WriteString(schemas.HierarchyFilterListControl_SourceFilterId, *v.SourceFilterId)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.HierarchyFilterListControl_Title, *v.Title)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.HierarchyFilterListControl_Type, string(v.Type))
+	}
+}
+func (v *HierarchyFilterListControl) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HierarchyFilterListControl, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HierarchyFilterListControl_CommitMode:
+			var ev string
+			if err := d.ReadString(schemas.HierarchyFilterListControl_CommitMode, &ev); err != nil {
+				return err
+			}
+			v.CommitMode = CommitMode(ev)
+			return nil
+		case schemas.HierarchyFilterListControl_ControlSortConfigurations:
+			return deserializeControlSortConfigurationList(d, schemas.HierarchyFilterListControl_ControlSortConfigurations, &v.ControlSortConfigurations)
+		case schemas.HierarchyFilterListControl_ControlTitleFormatText:
+			v.ControlTitleFormatText = &ControlTitleFormatText{}
+			return v.ControlTitleFormatText.Deserialize(d)
+		case schemas.HierarchyFilterListControl_DisplayOptions:
+			v.DisplayOptions = &HierarchyFilterListControlDisplayOptions{}
+			return v.DisplayOptions.Deserialize(d)
+		case schemas.HierarchyFilterListControl_FilterControlId:
+			v.FilterControlId = new(string)
+			return d.ReadString(schemas.HierarchyFilterListControl_FilterControlId, v.FilterControlId)
+		case schemas.HierarchyFilterListControl_SourceFilterId:
+			v.SourceFilterId = new(string)
+			return d.ReadString(schemas.HierarchyFilterListControl_SourceFilterId, v.SourceFilterId)
+		case schemas.HierarchyFilterListControl_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.HierarchyFilterListControl_Title, v.Title)
+		case schemas.HierarchyFilterListControl_Type:
+			var ev string
+			if err := d.ReadString(schemas.HierarchyFilterListControl_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SheetControlListType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The display options of a control.
+type HierarchyFilterListControlDisplayOptions struct {
+
+	// The configuration of info icon label options.
+	InfoIconLabelOptions *SheetControlInfoIconLabelOptions
+
+	// The configuration of the search options in a hierarchy list control.
+	SearchOptions *HierarchyFilterListControlSearchOptions
+
+	// The options to configure the title visibility, name, and font size.
+	TitleOptions *LabelOptions
+
+	noSmithyDocumentSerde
+}
+
+func (v *HierarchyFilterListControlDisplayOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HierarchyFilterListControlDisplayOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HierarchyFilterListControlDisplayOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InfoIconLabelOptions != nil {
+		s.WriteStruct(schemas.HierarchyFilterListControlDisplayOptions_InfoIconLabelOptions)
+		v.InfoIconLabelOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchOptions != nil {
+		s.WriteStruct(schemas.HierarchyFilterListControlDisplayOptions_SearchOptions)
+		v.SearchOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TitleOptions != nil {
+		s.WriteStruct(schemas.HierarchyFilterListControlDisplayOptions_TitleOptions)
+		v.TitleOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HierarchyFilterListControlDisplayOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HierarchyFilterListControlDisplayOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HierarchyFilterListControlDisplayOptions_InfoIconLabelOptions:
+			v.InfoIconLabelOptions = &SheetControlInfoIconLabelOptions{}
+			return v.InfoIconLabelOptions.Deserialize(d)
+		case schemas.HierarchyFilterListControlDisplayOptions_SearchOptions:
+			v.SearchOptions = &HierarchyFilterListControlSearchOptions{}
+			return v.SearchOptions.Deserialize(d)
+		case schemas.HierarchyFilterListControlDisplayOptions_TitleOptions:
+			v.TitleOptions = &LabelOptions{}
+			return v.TitleOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The configuration of the search options in a hierarchy list control.
+type HierarchyFilterListControlSearchOptions struct {
+
+	// The visibility configuration of the search options in a hierarchy list control.
+	Visibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+func (v *HierarchyFilterListControlSearchOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HierarchyFilterListControlSearchOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HierarchyFilterListControlSearchOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Visibility != "" {
+		s.WriteString(schemas.HierarchyFilterListControlSearchOptions_Visibility, string(v.Visibility))
+	}
+}
+func (v *HierarchyFilterListControlSearchOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HierarchyFilterListControlSearchOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HierarchyFilterListControlSearchOptions_Visibility:
+			var ev string
+			if err := d.ReadString(schemas.HierarchyFilterListControlSearchOptions_Visibility, &ev); err != nil {
+				return err
+			}
+			v.Visibility = Visibility(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A node in the selection tree of a HierarchyFilter . Each node records the values
+// that are selected at one level of the hierarchy. Nodes nest through Children to
+// record selections at deeper levels.
+//
+// The tree cannot be deeper than the number of levels declared in HierarchyLevels
+// . A tree can be a maximum of 5 levels deep, and a node can have a maximum of
+// 1,000 children.
+type HierarchyFilterNode struct {
+
+	// The column that this node selects values from. This column must match the
+	// column of the corresponding level in HierarchyFilter$HierarchyLevels . The node
+	// at depth 1 must match the first level, the node at depth 2 must match the second
+	// level, and so on.
+	//
+	// This member is required.
+	Column *ColumnIdentifier
+
+	// The nodes that record the selections at the next level of the hierarchy. You
+	// can specify a maximum of 1,000 children per node.
+	Children []HierarchyFilterNode
+
+	// The values that are selected at this level of the hierarchy. You can specify a
+	// maximum of 2,000 values per node.
+	HierarchyValues []string
+
+	// The value in the parent node's HierarchyValues that this node belongs to. When
+	// a parent selects several values, each of its children repeats one of them here
+	// to identify which branch of the hierarchy that child describes.
+	//
+	// Omit this attribute on the root node of HierarchyTree , which has no parent.
+	ParentValue *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *HierarchyFilterNode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HierarchyFilterNode)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HierarchyFilterNode) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHierarchyFilterNodeList(s, schemas.HierarchyFilterNode_Children, v.Children)
+	if v.Column != nil {
+		s.WriteStruct(schemas.HierarchyFilterNode_Column)
+		v.Column.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHierarchyValuesList(s, schemas.HierarchyFilterNode_HierarchyValues, v.HierarchyValues)
+	if v.ParentValue != nil {
+		s.WriteString(schemas.HierarchyFilterNode_ParentValue, *v.ParentValue)
+	}
+}
+func (v *HierarchyFilterNode) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HierarchyFilterNode, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HierarchyFilterNode_Children:
+			return deserializeHierarchyFilterNodeList(d, schemas.HierarchyFilterNode_Children, &v.Children)
+		case schemas.HierarchyFilterNode_Column:
+			v.Column = &ColumnIdentifier{}
+			return v.Column.Deserialize(d)
+		case schemas.HierarchyFilterNode_HierarchyValues:
+			return deserializeHierarchyValuesList(d, schemas.HierarchyFilterNode_HierarchyValues, &v.HierarchyValues)
+		case schemas.HierarchyFilterNode_ParentValue:
+			v.ParentValue = new(string)
+			return d.ReadString(schemas.HierarchyFilterNode_ParentValue, v.ParentValue)
 		}
 		return nil
 	})
@@ -46380,7 +47236,7 @@ func (v *OAuthClientCredentials) Deserialize(d smithy.ShapeDeserializer) error {
 
 // An object that contains information needed to create a data source connection
 // that uses OAuth client credentials. This option is available for data source
-// connections that are made with Snowflake and Starburst.
+// connections that are made with Snowflake, Starburst, and Databricks.
 type OAuthParameters struct {
 
 	// The token endpoint URL of the identity provider.

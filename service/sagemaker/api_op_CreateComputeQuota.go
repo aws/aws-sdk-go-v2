@@ -46,7 +46,9 @@ type CreateComputeQuotaInput struct {
 	// This member is required.
 	ComputeQuotaTarget *types.ComputeQuotaTarget
 
-	// Name to the compute allocation definition.
+	// The name of the compute allocation definition. The name must be unique within
+	// the SageMaker AI HyperPod cluster specified by ClusterArn . You can use the same
+	// name in other clusters within a Region or across Regions.
 	//
 	// This member is required.
 	Name *string

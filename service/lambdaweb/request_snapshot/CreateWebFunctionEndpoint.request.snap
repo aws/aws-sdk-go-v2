@@ -1,0 +1,5 @@
+PUT /2025-03-07/web-functions/__FunctionName__/endpoints
+
+Content-Type: application/json
+
+{"authType":"ApplicationManaged","autoDeploymentMode":"LatestRevision","description":"__Description__","endpointName":"__EndpointName__","endpointType":"HomeRegion","regions":["__Member__","__Member__"],"revisionWeights":[{"revisionId":"__RevisionId__","weight":1},{"revisionId":"__RevisionId__","weight":1}],"scalingConfig":{"maxEnvironments":1},"throttleConfig":{"rateLimit":1}}

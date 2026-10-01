@@ -206,6 +206,18 @@ func TestCheckSnapshot_DescribeHealthServiceStatusForOrganization(t *testing.T) 
 	}
 }
 
+func TestCheckSnapshot_DescribeServiceLifecycle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeServiceLifecycle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeServiceLifecycle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisableHealthServiceAccessForOrganization(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableHealthServiceAccessForOrganization(context.Background(), nil, func(o *Options) {
@@ -366,6 +378,18 @@ func TestUpdateSnapshot_DescribeHealthServiceStatusForOrganization(t *testing.T)
 	_, err := svc.DescribeHealthServiceStatusForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeHealthServiceStatusForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeServiceLifecycle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeServiceLifecycle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeServiceLifecycle")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,5 @@
+PUT /2025-03-07/web-functions
+
+Content-Type: application/json
+
+{"endpointConfig":{"authType":"ApplicationManaged","autoDeploymentMode":"LatestRevision","description":"__Description__","endpointName":"__EndpointName__","endpointType":"HomeRegion","regions":["__Member__","__Member__"],"scalingConfig":{"maxEnvironments":1},"throttleConfig":{"rateLimit":1}},"functionName":"__FunctionName__","revisionConfig":{"buildConfig":{"codeConfig":{"s3Object":{"bucket":"__Bucket__","key":"__Key__","versionId":"__VersionId__"}},"runtimeConfig":{"runtime":"__Runtime__"}},"description":"__Description__","kmsKeyArn":"__KmsKeyArn__","serviceConfig":{"environmentVariables":{"key0":"__Value__"},"executionRoleArn":"__ExecutionRoleArn__","maxConcurrencyPerEnvironment":1,"telemetryConfig":{"loggingConfig":{"applicationLogLevel":"TRACE","logGroup":"__LogGroup__","systemLogLevel":"DEBUG"}},"timeoutSeconds":1}},"tags":{"key0":"__Value__"}}

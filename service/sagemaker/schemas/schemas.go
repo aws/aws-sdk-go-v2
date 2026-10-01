@@ -6303,7 +6303,7 @@ var _ClusterInstanceStorageConfigs_member *smithy.Schema
 var ClusterInstanceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterInstanceType",
-}, smithy.ShapeTypeEnum, 207)
+}, smithy.ShapeTypeEnum, 209)
 var ClusterInstanceType_ML_P4D_24XLARGE *smithy.Schema
 
 var ClusterInstanceType_ML_P4DE_24XLARGE *smithy.Schema
@@ -6717,6 +6717,10 @@ var ClusterInstanceType_ML_G7_12XLARGE *smithy.Schema
 var ClusterInstanceType_ML_G7_24XLARGE *smithy.Schema
 
 var ClusterInstanceType_ML_G7_48XLARGE *smithy.Schema
+
+var ClusterInstanceType_ML_C8A_16XLARGE *smithy.Schema
+
+var ClusterInstanceType_ML_M8A_16XLARGE *smithy.Schema
 
 var ClusterInstanceTypeDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -34958,6 +34962,10 @@ func init() {
 	ClusterInstanceType_ML_G7_24XLARGE = ClusterInstanceType.AddMember("ML_G7_24XLARGE", smithyprelude.Unit)
 
 	ClusterInstanceType_ML_G7_48XLARGE = ClusterInstanceType.AddMember("ML_G7_48XLARGE", smithyprelude.Unit)
+
+	ClusterInstanceType_ML_C8A_16XLARGE = ClusterInstanceType.AddMember("ML_C8A_16XLARGE", smithyprelude.Unit)
+
+	ClusterInstanceType_ML_M8A_16XLARGE = ClusterInstanceType.AddMember("ML_M8A_16XLARGE", smithyprelude.Unit)
 
 	MIGProfileType_MIG_1G_5GB = MIGProfileType.AddMember("MIG_1G_5GB", smithyprelude.Unit)
 

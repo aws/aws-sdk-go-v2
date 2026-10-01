@@ -1,0 +1,3 @@
+DELETE /v1/brand-profiles/__BrandProfileId__/attributes/__AttributeName__
+
+

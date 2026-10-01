@@ -1,0 +1,8 @@
+{
+    "id": "274c245f-36ce-42cd-942d-9ac656c15f25",
+    "type": "documentation",
+    "description": "This release launches the AMI tag sharing feature, which lets AMI owners share tags alongside their AMIs, eliminating the need to build and maintain custom tag replication workflows.",
+    "modules": [
+        "service/ec2"
+    ]
+}

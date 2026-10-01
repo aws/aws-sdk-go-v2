@@ -8054,12 +8054,16 @@ var _DatabaseUser = smithy.NewSchema(smithy.ShapeID{
 var DatabricksParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "DatabricksParameters",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 5)
 var DatabricksParameters_Host *smithy.Schema
 
 var DatabricksParameters_Port *smithy.Schema
 
 var DatabricksParameters_SqlEndpointPath *smithy.Schema
+
+var DatabricksParameters_AuthenticationType *smithy.Schema
+
+var DatabricksParameters_OAuthParameters *smithy.Schema
 
 var DataColor = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -9596,7 +9600,7 @@ var DefaultFilterControlConfiguration_ControlTitleFormatText *smithy.Schema
 var DefaultFilterControlOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "DefaultFilterControlOptions",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 9)
 var DefaultFilterControlOptions_DefaultDateTimePickerOptions *smithy.Schema
 
 var DefaultFilterControlOptions_DefaultListOptions *smithy.Schema
@@ -9610,6 +9614,10 @@ var DefaultFilterControlOptions_DefaultTextAreaOptions *smithy.Schema
 var DefaultFilterControlOptions_DefaultSliderOptions *smithy.Schema
 
 var DefaultFilterControlOptions_DefaultRelativeDateTimeOptions *smithy.Schema
+
+var DefaultFilterControlOptions_DefaultHierarchyList *smithy.Schema
+
+var DefaultFilterControlOptions_DefaultHierarchyDropdown *smithy.Schema
 
 var DefaultFilterDropDownControlOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -9656,6 +9664,34 @@ var DefaultGridLayoutConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DefaultGridLayoutConfiguration",
 }, smithy.ShapeTypeStructure, 1)
 var DefaultGridLayoutConfiguration_CanvasSizeOptions *smithy.Schema
+
+var DefaultHierarchyFilterDropDownControlOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DefaultHierarchyFilterDropDownControlOptions",
+}, smithy.ShapeTypeStructure, 5)
+var DefaultHierarchyFilterDropDownControlOptions_DisplayOptions *smithy.Schema
+
+var DefaultHierarchyFilterDropDownControlOptions_Type *smithy.Schema
+
+var DefaultHierarchyFilterDropDownControlOptions_CommitMode *smithy.Schema
+
+var DefaultHierarchyFilterDropDownControlOptions_ControlSortConfigurations *smithy.Schema
+
+var DefaultHierarchyFilterDropDownControlOptions_ControlTitleFormatText *smithy.Schema
+
+var DefaultHierarchyFilterListControlOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DefaultHierarchyFilterListControlOptions",
+}, smithy.ShapeTypeStructure, 5)
+var DefaultHierarchyFilterListControlOptions_DisplayOptions *smithy.Schema
+
+var DefaultHierarchyFilterListControlOptions_Type *smithy.Schema
+
+var DefaultHierarchyFilterListControlOptions_CommitMode *smithy.Schema
+
+var DefaultHierarchyFilterListControlOptions_ControlSortConfigurations *smithy.Schema
+
+var DefaultHierarchyFilterListControlOptions_ControlTitleFormatText *smithy.Schema
 
 var DefaultInteractiveLayoutConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -10523,7 +10559,7 @@ var FilledMapVisual_GeocodingPreferences *smithy.Schema
 var Filter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var Filter_CategoryFilter *smithy.Schema
 
 var Filter_NumericRangeFilter *smithy.Schema
@@ -10539,6 +10575,8 @@ var Filter_RelativeDatesFilter *smithy.Schema
 var Filter_TopBottomFilter *smithy.Schema
 
 var Filter_NestedFilter *smithy.Schema
+
+var Filter_HierarchyFilter *smithy.Schema
 
 var FilterAggMetrics = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -10571,7 +10609,7 @@ var FilterClass_DASHBOARD_DEFAULT_FILTER *smithy.Schema
 var FilterControl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "FilterControl",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 10)
 var FilterControl_DateTimePicker *smithy.Schema
 
 var FilterControl_List *smithy.Schema
@@ -10587,6 +10625,10 @@ var FilterControl_Slider *smithy.Schema
 var FilterControl_RelativeDateTime *smithy.Schema
 
 var FilterControl_CrossSheet *smithy.Schema
+
+var FilterControl_HierarchyList *smithy.Schema
+
+var FilterControl_HierarchyDropdown *smithy.Schema
 
 var _FilterControlList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -12472,10 +12514,141 @@ var _HexColorWithTransparency = smithy.NewSchema(smithy.ShapeID{
 	Name:      "HexColorWithTransparency",
 }, smithy.ShapeTypeString, 0)
 
+var HierarchyFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "HierarchyFilter",
+}, smithy.ShapeTypeStructure, 7)
+var HierarchyFilter_FilterId *smithy.Schema
+
+var HierarchyFilter_Column *smithy.Schema
+
+var HierarchyFilter_HierarchyLevels *smithy.Schema
+
+var HierarchyFilter_HierarchyTree *smithy.Schema
+
+var HierarchyFilter_NullOption *smithy.Schema
+
+var HierarchyFilter_MatchOperator *smithy.Schema
+
+var HierarchyFilter_DefaultFilterControlConfiguration *smithy.Schema
+
+var HierarchyFilterDropDownControl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "HierarchyFilterDropDownControl",
+}, smithy.ShapeTypeStructure, 8)
+var HierarchyFilterDropDownControl_FilterControlId *smithy.Schema
+
+var HierarchyFilterDropDownControl_SourceFilterId *smithy.Schema
+
+var HierarchyFilterDropDownControl_Title *smithy.Schema
+
+var HierarchyFilterDropDownControl_DisplayOptions *smithy.Schema
+
+var HierarchyFilterDropDownControl_Type *smithy.Schema
+
+var HierarchyFilterDropDownControl_CommitMode *smithy.Schema
+
+var HierarchyFilterDropDownControl_ControlSortConfigurations *smithy.Schema
+
+var HierarchyFilterDropDownControl_ControlTitleFormatText *smithy.Schema
+
+var HierarchyFilterDropDownControlDisplayOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "HierarchyFilterDropDownControlDisplayOptions",
+}, smithy.ShapeTypeStructure, 2)
+var HierarchyFilterDropDownControlDisplayOptions_TitleOptions *smithy.Schema
+
+var HierarchyFilterDropDownControlDisplayOptions_InfoIconLabelOptions *smithy.Schema
+
+var HierarchyFilterLevel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "HierarchyFilterLevel",
+}, smithy.ShapeTypeStructure, 1)
+var HierarchyFilterLevel_Column *smithy.Schema
+
+var _HierarchyFilterLevelList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "HierarchyFilterLevelList",
+}, smithy.ShapeTypeList, 1)
+var _HierarchyFilterLevelList_member *smithy.Schema
+
+var HierarchyFilterListControl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "HierarchyFilterListControl",
+}, smithy.ShapeTypeStructure, 8)
+var HierarchyFilterListControl_FilterControlId *smithy.Schema
+
+var HierarchyFilterListControl_SourceFilterId *smithy.Schema
+
+var HierarchyFilterListControl_Title *smithy.Schema
+
+var HierarchyFilterListControl_DisplayOptions *smithy.Schema
+
+var HierarchyFilterListControl_Type *smithy.Schema
+
+var HierarchyFilterListControl_CommitMode *smithy.Schema
+
+var HierarchyFilterListControl_ControlSortConfigurations *smithy.Schema
+
+var HierarchyFilterListControl_ControlTitleFormatText *smithy.Schema
+
+var HierarchyFilterListControlDisplayOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "HierarchyFilterListControlDisplayOptions",
+}, smithy.ShapeTypeStructure, 3)
+var HierarchyFilterListControlDisplayOptions_TitleOptions *smithy.Schema
+
+var HierarchyFilterListControlDisplayOptions_InfoIconLabelOptions *smithy.Schema
+
+var HierarchyFilterListControlDisplayOptions_SearchOptions *smithy.Schema
+
+var HierarchyFilterListControlSearchOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "HierarchyFilterListControlSearchOptions",
+}, smithy.ShapeTypeStructure, 1)
+var HierarchyFilterListControlSearchOptions_Visibility *smithy.Schema
+
+var HierarchyFilterMatchOperator = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "HierarchyFilterMatchOperator",
+}, smithy.ShapeTypeEnum, 2)
+var HierarchyFilterMatchOperator_INCLUDE *smithy.Schema
+
+var HierarchyFilterMatchOperator_EXCLUDE *smithy.Schema
+
+var HierarchyFilterNode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "HierarchyFilterNode",
+}, smithy.ShapeTypeStructure, 4)
+var HierarchyFilterNode_Column *smithy.Schema
+
+var HierarchyFilterNode_ParentValue *smithy.Schema
+
+var HierarchyFilterNode_HierarchyValues *smithy.Schema
+
+var HierarchyFilterNode_Children *smithy.Schema
+
+var _HierarchyFilterNodeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "HierarchyFilterNodeList",
+}, smithy.ShapeTypeList, 1)
+var _HierarchyFilterNodeList_member *smithy.Schema
+
+var _HierarchyFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "HierarchyFilterValue",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var _HierarchyId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "HierarchyId",
 }, smithy.ShapeTypeString, 0)
+
+var _HierarchyValuesList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "HierarchyValuesList",
+}, smithy.ShapeTypeList, 1)
+var _HierarchyValuesList_member *smithy.Schema
 
 var HistogramAggregatedFieldWells = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -31962,6 +32135,50 @@ func init() {
 
 	FilterCrossSheetControl_CascadingControlConfiguration = FilterCrossSheetControl.AddMember("CascadingControlConfiguration", CascadingControlConfiguration)
 
+	HierarchyFilterListControlSearchOptions_Visibility = HierarchyFilterListControlSearchOptions.AddMember("Visibility", Visibility)
+
+	HierarchyFilterListControlDisplayOptions_TitleOptions = HierarchyFilterListControlDisplayOptions.AddMember("TitleOptions", LabelOptions)
+
+	HierarchyFilterListControlDisplayOptions_InfoIconLabelOptions = HierarchyFilterListControlDisplayOptions.AddMember("InfoIconLabelOptions", SheetControlInfoIconLabelOptions)
+
+	HierarchyFilterListControlDisplayOptions_SearchOptions = HierarchyFilterListControlDisplayOptions.AddMember("SearchOptions", HierarchyFilterListControlSearchOptions)
+
+	HierarchyFilterListControl_FilterControlId = HierarchyFilterListControl.AddMember("FilterControlId", _ShortRestrictiveResourceId)
+
+	HierarchyFilterListControl_SourceFilterId = HierarchyFilterListControl.AddMember("SourceFilterId", _ShortRestrictiveResourceId)
+
+	HierarchyFilterListControl_Title = HierarchyFilterListControl.AddMember("Title", _SheetControlTitle)
+
+	HierarchyFilterListControl_DisplayOptions = HierarchyFilterListControl.AddMember("DisplayOptions", HierarchyFilterListControlDisplayOptions)
+
+	HierarchyFilterListControl_Type = HierarchyFilterListControl.AddMember("Type", SheetControlListType)
+
+	HierarchyFilterListControl_CommitMode = HierarchyFilterListControl.AddMember("CommitMode", CommitMode)
+
+	HierarchyFilterListControl_ControlSortConfigurations = HierarchyFilterListControl.AddMember("ControlSortConfigurations", _ControlSortConfigurationList)
+
+	HierarchyFilterListControl_ControlTitleFormatText = HierarchyFilterListControl.AddMember("ControlTitleFormatText", ControlTitleFormatText)
+
+	HierarchyFilterDropDownControlDisplayOptions_TitleOptions = HierarchyFilterDropDownControlDisplayOptions.AddMember("TitleOptions", LabelOptions)
+
+	HierarchyFilterDropDownControlDisplayOptions_InfoIconLabelOptions = HierarchyFilterDropDownControlDisplayOptions.AddMember("InfoIconLabelOptions", SheetControlInfoIconLabelOptions)
+
+	HierarchyFilterDropDownControl_FilterControlId = HierarchyFilterDropDownControl.AddMember("FilterControlId", _ShortRestrictiveResourceId)
+
+	HierarchyFilterDropDownControl_SourceFilterId = HierarchyFilterDropDownControl.AddMember("SourceFilterId", _ShortRestrictiveResourceId)
+
+	HierarchyFilterDropDownControl_Title = HierarchyFilterDropDownControl.AddMember("Title", _SheetControlTitle)
+
+	HierarchyFilterDropDownControl_DisplayOptions = HierarchyFilterDropDownControl.AddMember("DisplayOptions", HierarchyFilterDropDownControlDisplayOptions)
+
+	HierarchyFilterDropDownControl_Type = HierarchyFilterDropDownControl.AddMember("Type", SheetControlListType)
+
+	HierarchyFilterDropDownControl_CommitMode = HierarchyFilterDropDownControl.AddMember("CommitMode", CommitMode)
+
+	HierarchyFilterDropDownControl_ControlSortConfigurations = HierarchyFilterDropDownControl.AddMember("ControlSortConfigurations", _ControlSortConfigurationList)
+
+	HierarchyFilterDropDownControl_ControlTitleFormatText = HierarchyFilterDropDownControl.AddMember("ControlTitleFormatText", ControlTitleFormatText)
+
 	FilterControl_DateTimePicker = FilterControl.AddMember("DateTimePicker", FilterDateTimePickerControl)
 
 	FilterControl_List = FilterControl.AddMember("List", FilterListControl)
@@ -31977,6 +32194,10 @@ func init() {
 	FilterControl_RelativeDateTime = FilterControl.AddMember("RelativeDateTime", FilterRelativeDateTimeControl)
 
 	FilterControl_CrossSheet = FilterControl.AddMember("CrossSheet", FilterCrossSheetControl)
+
+	FilterControl_HierarchyList = FilterControl.AddMember("HierarchyList", HierarchyFilterListControl)
+
+	FilterControl_HierarchyDropdown = FilterControl.AddMember("HierarchyDropdown", HierarchyFilterDropDownControl)
 
 	_FilterControlList_member = _FilterControlList.AddMember("member", FilterControl)
 
@@ -35936,6 +36157,26 @@ func init() {
 
 	DefaultRelativeDateTimeControlOptions_CommitMode = DefaultRelativeDateTimeControlOptions.AddMember("CommitMode", CommitMode)
 
+	DefaultHierarchyFilterListControlOptions_DisplayOptions = DefaultHierarchyFilterListControlOptions.AddMember("DisplayOptions", HierarchyFilterListControlDisplayOptions)
+
+	DefaultHierarchyFilterListControlOptions_Type = DefaultHierarchyFilterListControlOptions.AddMember("Type", SheetControlListType)
+
+	DefaultHierarchyFilterListControlOptions_CommitMode = DefaultHierarchyFilterListControlOptions.AddMember("CommitMode", CommitMode)
+
+	DefaultHierarchyFilterListControlOptions_ControlSortConfigurations = DefaultHierarchyFilterListControlOptions.AddMember("ControlSortConfigurations", _ControlSortConfigurationList)
+
+	DefaultHierarchyFilterListControlOptions_ControlTitleFormatText = DefaultHierarchyFilterListControlOptions.AddMember("ControlTitleFormatText", ControlTitleFormatText)
+
+	DefaultHierarchyFilterDropDownControlOptions_DisplayOptions = DefaultHierarchyFilterDropDownControlOptions.AddMember("DisplayOptions", HierarchyFilterDropDownControlDisplayOptions)
+
+	DefaultHierarchyFilterDropDownControlOptions_Type = DefaultHierarchyFilterDropDownControlOptions.AddMember("Type", SheetControlListType)
+
+	DefaultHierarchyFilterDropDownControlOptions_CommitMode = DefaultHierarchyFilterDropDownControlOptions.AddMember("CommitMode", CommitMode)
+
+	DefaultHierarchyFilterDropDownControlOptions_ControlSortConfigurations = DefaultHierarchyFilterDropDownControlOptions.AddMember("ControlSortConfigurations", _ControlSortConfigurationList)
+
+	DefaultHierarchyFilterDropDownControlOptions_ControlTitleFormatText = DefaultHierarchyFilterDropDownControlOptions.AddMember("ControlTitleFormatText", ControlTitleFormatText)
+
 	DefaultFilterControlOptions_DefaultDateTimePickerOptions = DefaultFilterControlOptions.AddMember("DefaultDateTimePickerOptions", DefaultDateTimePickerControlOptions)
 
 	DefaultFilterControlOptions_DefaultListOptions = DefaultFilterControlOptions.AddMember("DefaultListOptions", DefaultFilterListControlOptions)
@@ -35949,6 +36190,10 @@ func init() {
 	DefaultFilterControlOptions_DefaultSliderOptions = DefaultFilterControlOptions.AddMember("DefaultSliderOptions", DefaultSliderControlOptions)
 
 	DefaultFilterControlOptions_DefaultRelativeDateTimeOptions = DefaultFilterControlOptions.AddMember("DefaultRelativeDateTimeOptions", DefaultRelativeDateTimeControlOptions)
+
+	DefaultFilterControlOptions_DefaultHierarchyList = DefaultFilterControlOptions.AddMember("DefaultHierarchyList", DefaultHierarchyFilterListControlOptions)
+
+	DefaultFilterControlOptions_DefaultHierarchyDropdown = DefaultFilterControlOptions.AddMember("DefaultHierarchyDropdown", DefaultHierarchyFilterDropDownControlOptions)
 
 	DefaultFilterControlConfiguration_Title = DefaultFilterControlConfiguration.AddMember("Title", _SheetControlTitle)
 
@@ -36126,6 +36371,40 @@ func init() {
 
 	NestedFilter_InnerFilter = NestedFilter.AddMember("InnerFilter", InnerFilter)
 
+	HierarchyFilterLevel_Column = HierarchyFilterLevel.AddMember("Column", ColumnIdentifier)
+
+	_HierarchyFilterLevelList_member = _HierarchyFilterLevelList.AddMember("member", HierarchyFilterLevel)
+
+	_HierarchyValuesList_member = _HierarchyValuesList.AddMember("member", _HierarchyFilterValue)
+
+	_HierarchyFilterNodeList_member = _HierarchyFilterNodeList.AddMember("member", HierarchyFilterNode)
+
+	HierarchyFilterNode_Column = HierarchyFilterNode.AddMember("Column", ColumnIdentifier)
+
+	HierarchyFilterNode_ParentValue = HierarchyFilterNode.AddMember("ParentValue", _HierarchyFilterValue)
+
+	HierarchyFilterNode_HierarchyValues = HierarchyFilterNode.AddMember("HierarchyValues", _HierarchyValuesList)
+
+	HierarchyFilterNode_Children = HierarchyFilterNode.AddMember("Children", _HierarchyFilterNodeList)
+
+	HierarchyFilterMatchOperator_INCLUDE = HierarchyFilterMatchOperator.AddMember("INCLUDE", smithyprelude.Unit)
+
+	HierarchyFilterMatchOperator_EXCLUDE = HierarchyFilterMatchOperator.AddMember("EXCLUDE", smithyprelude.Unit)
+
+	HierarchyFilter_FilterId = HierarchyFilter.AddMember("FilterId", _ShortRestrictiveResourceId)
+
+	HierarchyFilter_Column = HierarchyFilter.AddMember("Column", ColumnIdentifier)
+
+	HierarchyFilter_HierarchyLevels = HierarchyFilter.AddMember("HierarchyLevels", _HierarchyFilterLevelList)
+
+	HierarchyFilter_HierarchyTree = HierarchyFilter.AddMember("HierarchyTree", HierarchyFilterNode)
+
+	HierarchyFilter_NullOption = HierarchyFilter.AddMember("NullOption", FilterNullOption)
+
+	HierarchyFilter_MatchOperator = HierarchyFilter.AddMember("MatchOperator", HierarchyFilterMatchOperator)
+
+	HierarchyFilter_DefaultFilterControlConfiguration = HierarchyFilter.AddMember("DefaultFilterControlConfiguration", DefaultFilterControlConfiguration)
+
 	Filter_CategoryFilter = Filter.AddMember("CategoryFilter", CategoryFilter)
 
 	Filter_NumericRangeFilter = Filter.AddMember("NumericRangeFilter", NumericRangeFilter)
@@ -36141,6 +36420,8 @@ func init() {
 	Filter_TopBottomFilter = Filter.AddMember("TopBottomFilter", TopBottomFilter)
 
 	Filter_NestedFilter = Filter.AddMember("NestedFilter", NestedFilter)
+
+	Filter_HierarchyFilter = Filter.AddMember("HierarchyFilter", HierarchyFilter)
 
 	_FilterList_member = _FilterList.AddMember("member", Filter)
 
@@ -37089,6 +37370,10 @@ func init() {
 	DatabricksParameters_Port = DatabricksParameters.AddMember("Port", _Port)
 
 	DatabricksParameters_SqlEndpointPath = DatabricksParameters.AddMember("SqlEndpointPath", _SqlEndpointPath)
+
+	DatabricksParameters_AuthenticationType = DatabricksParameters.AddMember("AuthenticationType", AuthenticationType)
+
+	DatabricksParameters_OAuthParameters = DatabricksParameters.AddMember("OAuthParameters", OAuthParameters)
 
 	StarburstProductType_GALAXY = StarburstProductType.AddMember("GALAXY", smithyprelude.Unit)
 

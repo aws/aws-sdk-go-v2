@@ -550,6 +550,52 @@ func (EnablementStatus) Values() []EnablementStatus {
 	}
 }
 
+type ExposureImpact string
+
+// Enum values for ExposureImpact
+const (
+	ExposureImpactReduces   ExposureImpact = "Reduces"
+	ExposureImpactResolves  ExposureImpact = "Resolves"
+	ExposureImpactUnchanged ExposureImpact = "Unchanged"
+)
+
+// Values returns all known values for ExposureImpact. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExposureImpact) Values() []ExposureImpact {
+	return []ExposureImpact{
+		"Reduces",
+		"Resolves",
+		"Unchanged",
+	}
+}
+
+type ExposureSeverity string
+
+// Enum values for ExposureSeverity
+const (
+	ExposureSeverityInformational ExposureSeverity = "Informational"
+	ExposureSeverityLow           ExposureSeverity = "Low"
+	ExposureSeverityMedium        ExposureSeverity = "Medium"
+	ExposureSeverityHigh          ExposureSeverity = "High"
+	ExposureSeverityCritical      ExposureSeverity = "Critical"
+)
+
+// Values returns all known values for ExposureSeverity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExposureSeverity) Values() []ExposureSeverity {
+	return []ExposureSeverity{
+		"Informational",
+		"Low",
+		"Medium",
+		"High",
+		"Critical",
+	}
+}
+
 type FeatureName string
 
 // Enum values for FeatureName
@@ -782,6 +828,39 @@ func (GroupByField) Values() []GroupByField {
 		"cloud.account.name",
 		"vendor_attributes.severity",
 		"metadata.product.vendor_name",
+	}
+}
+
+type GuidanceFormat string
+
+// Enum values for GuidanceFormat
+const (
+	GuidanceFormatAll            GuidanceFormat = "All"
+	GuidanceFormatAwsCli         GuidanceFormat = "AwsCli"
+	GuidanceFormatCli            GuidanceFormat = "Cli"
+	GuidanceFormatPython         GuidanceFormat = "Python"
+	GuidanceFormatTerraform      GuidanceFormat = "Terraform"
+	GuidanceFormatCdk            GuidanceFormat = "Cdk"
+	GuidanceFormatCloudformation GuidanceFormat = "CloudFormation"
+	GuidanceFormatIac            GuidanceFormat = "IaC"
+	GuidanceFormatTemplate       GuidanceFormat = "Template"
+)
+
+// Values returns all known values for GuidanceFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuidanceFormat) Values() []GuidanceFormat {
+	return []GuidanceFormat{
+		"All",
+		"AwsCli",
+		"Cli",
+		"Python",
+		"Terraform",
+		"Cdk",
+		"CloudFormation",
+		"IaC",
+		"Template",
 	}
 }
 
@@ -1429,6 +1508,77 @@ func (RegionAvailabilityStatus) Values() []RegionAvailabilityStatus {
 	return []RegionAvailabilityStatus{
 		"AVAILABLE",
 		"UNAVAILABLE",
+	}
+}
+
+type RemediationPriority string
+
+// Enum values for RemediationPriority
+const (
+	RemediationPriorityCritical RemediationPriority = "Critical"
+	RemediationPriorityHigh     RemediationPriority = "High"
+	RemediationPriorityMedium   RemediationPriority = "Medium"
+	RemediationPriorityLow      RemediationPriority = "Low"
+)
+
+// Values returns all known values for RemediationPriority. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RemediationPriority) Values() []RemediationPriority {
+	return []RemediationPriority{
+		"Critical",
+		"High",
+		"Medium",
+		"Low",
+	}
+}
+
+type RemediationStatus string
+
+// Enum values for RemediationStatus
+const (
+	RemediationStatusNew      RemediationStatus = "New"
+	RemediationStatusUpdated  RemediationStatus = "Updated"
+	RemediationStatusResolved RemediationStatus = "Resolved"
+)
+
+// Values returns all known values for RemediationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RemediationStatus) Values() []RemediationStatus {
+	return []RemediationStatus{
+		"New",
+		"Updated",
+		"Resolved",
+	}
+}
+
+type RemediationStringField string
+
+// Enum values for RemediationStringField
+const (
+	RemediationStringFieldResourceType           RemediationStringField = "Resource.Type"
+	RemediationStringFieldPriority               RemediationStringField = "Priority"
+	RemediationStringFieldStatus                 RemediationStringField = "Status"
+	RemediationStringFieldResourceId             RemediationStringField = "Resource.Id"
+	RemediationStringFieldResourceOwnerAccountId RemediationStringField = "Resource.ResourceOwnerAccountId"
+	RemediationStringFieldResourceCloudProvider  RemediationStringField = "Resource.CloudProvider"
+)
+
+// Values returns all known values for RemediationStringField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RemediationStringField) Values() []RemediationStringField {
+	return []RemediationStringField{
+		"Resource.Type",
+		"Priority",
+		"Status",
+		"Resource.Id",
+		"Resource.ResourceOwnerAccountId",
+		"Resource.CloudProvider",
 	}
 }
 

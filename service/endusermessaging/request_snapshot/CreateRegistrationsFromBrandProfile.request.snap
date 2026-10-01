@@ -1,0 +1,5 @@
+POST /v1/brand-profiles/__BrandProfileId__/create-registrations
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","registrationTypes":["__Member__","__Member__"],"smartMatch":true}

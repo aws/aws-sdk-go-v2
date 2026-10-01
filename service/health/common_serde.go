@@ -350,6 +350,30 @@ func serializeEventTypePersonaList(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseList()
 }
 
+func serializeImpactRiskList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeLifecycleEventList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.LifecycleEvent) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeOrganizationAccountIdsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
@@ -444,6 +468,19 @@ func serializeregionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeServiceLifecycleList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ServiceLifecycle) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -876,6 +913,34 @@ func deserializeEventTypePersonaList(d smithy.ShapeDeserializer, s *smithy.Schem
 	})
 }
 
+func deserializeImpactRiskList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeLifecycleEventList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LifecycleEvent) error {
+	*v = make([]types.LifecycleEvent, 0)
+	var vv types.LifecycleEvent
+	return smithy.ReadList(d, s, func() error {
+		vv = types.LifecycleEvent{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeOrganizationAccountIdsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -980,6 +1045,20 @@ func deserializeregionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	return smithy.ReadList(d, s, func() error {
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeServiceLifecycleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ServiceLifecycle) error {
+	*v = make([]types.ServiceLifecycle, 0)
+	var vv types.ServiceLifecycle
+	return smithy.ReadList(d, s, func() error {
+		vv = types.ServiceLifecycle{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

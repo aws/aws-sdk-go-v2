@@ -40071,6 +40071,106 @@ func (v *EnumListConfigurationOptions) Deserialize(d smithy.ShapeDeserializer) e
 	})
 }
 
+// Provides details about an exposure finding and the effect the specific
+// remediation target has on it.
+type ExposureFinding struct {
+
+	// The impact resolving a remediation target has on the exposure finding.
+	//
+	//   - Reduces specifies that resolving the remediation target lowers the severity
+	//   of the exposure finding, but does not resolve it.
+	//
+	//   - Resolves specifies that resolving the remediation target resolves the
+	//   exposure finding.
+	//
+	//   - Unchanged specifies that resolving the remediation target does not change
+	//   the severity of the exposure finding.
+	//
+	// This member is required.
+	Impact ExposureImpact
+
+	// The unique identifier (ID) of the Security Hub exposure finding, found under
+	// the metadata.uid field of the finding.
+	//
+	// This member is required.
+	MetadataUid *string
+
+	// The severity of the exposure finding before the remediation target is resolved.
+	//
+	// This member is required.
+	PreviousSeverity ExposureSeverity
+
+	// The severity of the exposure finding after the remediation target is resolved.
+	//
+	// This member is required.
+	ProjectedSeverity ExposureSeverity
+
+	// The title of the exposure finding.
+	//
+	// This member is required.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExposureFinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExposureFinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExposureFinding) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Impact != "" {
+		s.WriteString(schemas.ExposureFinding_Impact, string(v.Impact))
+	}
+	if v.MetadataUid != nil {
+		s.WriteString(schemas.ExposureFinding_MetadataUid, *v.MetadataUid)
+	}
+	if v.PreviousSeverity != "" {
+		s.WriteString(schemas.ExposureFinding_PreviousSeverity, string(v.PreviousSeverity))
+	}
+	if v.ProjectedSeverity != "" {
+		s.WriteString(schemas.ExposureFinding_ProjectedSeverity, string(v.ProjectedSeverity))
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.ExposureFinding_Title, *v.Title)
+	}
+}
+func (v *ExposureFinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExposureFinding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExposureFinding_Impact:
+			var ev string
+			if err := d.ReadString(schemas.ExposureFinding_Impact, &ev); err != nil {
+				return err
+			}
+			v.Impact = ExposureImpact(ev)
+			return nil
+		case schemas.ExposureFinding_MetadataUid:
+			v.MetadataUid = new(string)
+			return d.ReadString(schemas.ExposureFinding_MetadataUid, v.MetadataUid)
+		case schemas.ExposureFinding_PreviousSeverity:
+			var ev string
+			if err := d.ReadString(schemas.ExposureFinding_PreviousSeverity, &ev); err != nil {
+				return err
+			}
+			v.PreviousSeverity = ExposureSeverity(ev)
+			return nil
+		case schemas.ExposureFinding_ProjectedSeverity:
+			var ev string
+			if err := d.ReadString(schemas.ExposureFinding_ProjectedSeverity, &ev); err != nil {
+				return err
+			}
+			v.ProjectedSeverity = ExposureSeverity(ev)
+			return nil
+		case schemas.ExposureFinding_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.ExposureFinding_Title, v.Title)
+		}
+		return nil
+	})
+}
+
 // Defines the settings and parameters required for integrating external security
 // tools and services.
 type ExternalIntegrationConfiguration struct {
@@ -41041,7 +41141,7 @@ type FreeTrialStatus struct {
 	// This member is required.
 	StartedAt *time.Time
 
-	// Whether the free trial period is currently active. Valid values:
+	// Specifies whether the free trial period is currently active. Valid values:
 	//
 	//   - ACTIVE specifies that the free trial period is ongoing.
 	//
@@ -42222,6 +42322,51 @@ func (v *JiraCloudUpdateConfiguration) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.JiraCloudUpdateConfiguration_ProjectKey:
 			v.ProjectKey = new(string)
 			return d.ReadString(schemas.JiraCloudUpdateConfiguration_ProjectKey, v.ProjectKey)
+		}
+		return nil
+	})
+}
+
+// A knowledge base article that provides additional guidance related to the
+// remediation target.
+type KbArticle struct {
+
+	// The title of the KbArticle .
+	//
+	// This member is required.
+	Title *string
+
+	// The URL of the KbArticle .
+	//
+	// This member is required.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *KbArticle) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KbArticle)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KbArticle) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Title != nil {
+		s.WriteString(schemas.KbArticle_Title, *v.Title)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.KbArticle_Url, *v.Url)
+	}
+}
+func (v *KbArticle) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KbArticle, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KbArticle_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.KbArticle_Title, v.Title)
+		case schemas.KbArticle_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.KbArticle_Url, v.Url)
 		}
 		return nil
 	})
@@ -45443,6 +45588,1197 @@ func (v *Remediation) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Remediation_Recommendation:
 			v.Recommendation = &Recommendation{}
 			return v.Recommendation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Enables the creation of criteria for remediation targets.
+type RemediationCompositeFilter struct {
+
+	// Enables filtering based on string field values.
+	StringFilters []RemediationStringFilter
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationCompositeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationCompositeFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationCompositeFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRemediationStringFilterList(s, schemas.RemediationCompositeFilter_StringFilters, v.StringFilters)
+}
+func (v *RemediationCompositeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationCompositeFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationCompositeFilter_StringFilters:
+			return deserializeRemediationStringFilterList(d, schemas.RemediationCompositeFilter_StringFilters, &v.StringFilters)
+		}
+		return nil
+	})
+}
+
+// Contains the criteria used to filter remediation targets, such as resource
+// type, priority, or status.
+type RemediationFilters struct {
+
+	// A collection of complex filtering conditions that can be applied to remediation
+	// target data.
+	CompositeFilters []RemediationCompositeFilter
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRemediationCompositeFilterList(s, schemas.RemediationFilters_CompositeFilters, v.CompositeFilters)
+}
+func (v *RemediationFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationFilters_CompositeFilters:
+			return deserializeRemediationCompositeFilterList(d, schemas.RemediationFilters_CompositeFilters, &v.CompositeFilters)
+		}
+		return nil
+	})
+}
+
+// A remediation guidebook outlining guidance in resolving the remediation target.
+type RemediationGuidance struct {
+
+	// The context behind the remediation target's existence and guidance.
+	//
+	// This member is required.
+	Context *RemediationGuidanceContext
+
+	// Provided remediation guidance examples in different formats that can be run for
+	// remediating the target.
+	//
+	// This member is required.
+	Examples *RemediationGuidanceExamples
+
+	// The metadata of the remediation guidance.
+	//
+	// This member is required.
+	Metadata *RemediationGuidanceMetadata
+
+	// The remediation pattern of the remediation target.
+	//
+	// This member is required.
+	Pattern *string
+
+	// The specification of the remediation target guidance. This outlines required
+	// resource parameters and permissions, remediation steps, and the end state.
+	//
+	// This member is required.
+	Specification *RemediationGuidanceSpecification
+
+	// The name of the remediation target type.
+	//
+	// This member is required.
+	TargetTypeName *string
+
+	// The guidance version.
+	//
+	// This member is required.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationGuidance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationGuidance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationGuidance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Context != nil {
+		s.WriteStruct(schemas.RemediationGuidance_Context)
+		v.Context.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Examples != nil {
+		s.WriteStruct(schemas.RemediationGuidance_Examples)
+		v.Examples.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.RemediationGuidance_Metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Pattern != nil {
+		s.WriteString(schemas.RemediationGuidance_Pattern, *v.Pattern)
+	}
+	if v.Specification != nil {
+		s.WriteStruct(schemas.RemediationGuidance_Specification)
+		v.Specification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetTypeName != nil {
+		s.WriteString(schemas.RemediationGuidance_TargetTypeName, *v.TargetTypeName)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.RemediationGuidance_Version, *v.Version)
+	}
+}
+func (v *RemediationGuidance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationGuidance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationGuidance_Context:
+			v.Context = &RemediationGuidanceContext{}
+			return v.Context.Deserialize(d)
+		case schemas.RemediationGuidance_Examples:
+			v.Examples = &RemediationGuidanceExamples{}
+			return v.Examples.Deserialize(d)
+		case schemas.RemediationGuidance_Metadata:
+			v.Metadata = &RemediationGuidanceMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.RemediationGuidance_Pattern:
+			v.Pattern = new(string)
+			return d.ReadString(schemas.RemediationGuidance_Pattern, v.Pattern)
+		case schemas.RemediationGuidance_Specification:
+			v.Specification = &RemediationGuidanceSpecification{}
+			return v.Specification.Deserialize(d)
+		case schemas.RemediationGuidance_TargetTypeName:
+			v.TargetTypeName = new(string)
+			return d.ReadString(schemas.RemediationGuidance_TargetTypeName, v.TargetTypeName)
+		case schemas.RemediationGuidance_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.RemediationGuidance_Version, v.Version)
+		}
+		return nil
+	})
+}
+
+// The context behind the remediation target's existence and guidance.
+type RemediationGuidanceContext struct {
+
+	// The scope of the resources affected by the resolution of the remediation target.
+	AffectedScope *string
+
+	// An array of prerequisite steps in resolving the remediation target.
+	Prerequisites []string
+
+	// Explains the cause which directly created the remediation target.
+	ProblemStatement *string
+
+	// An assessment of the existing risk the remediation target creates.
+	RiskAssessment *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationGuidanceContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationGuidanceContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationGuidanceContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AffectedScope != nil {
+		s.WriteString(schemas.RemediationGuidanceContext_AffectedScope, *v.AffectedScope)
+	}
+	serializeRemediationStringList(s, schemas.RemediationGuidanceContext_Prerequisites, v.Prerequisites)
+	if v.ProblemStatement != nil {
+		s.WriteString(schemas.RemediationGuidanceContext_ProblemStatement, *v.ProblemStatement)
+	}
+	if v.RiskAssessment != nil {
+		s.WriteString(schemas.RemediationGuidanceContext_RiskAssessment, *v.RiskAssessment)
+	}
+}
+func (v *RemediationGuidanceContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationGuidanceContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationGuidanceContext_AffectedScope:
+			v.AffectedScope = new(string)
+			return d.ReadString(schemas.RemediationGuidanceContext_AffectedScope, v.AffectedScope)
+		case schemas.RemediationGuidanceContext_Prerequisites:
+			return deserializeRemediationStringList(d, schemas.RemediationGuidanceContext_Prerequisites, &v.Prerequisites)
+		case schemas.RemediationGuidanceContext_ProblemStatement:
+			v.ProblemStatement = new(string)
+			return d.ReadString(schemas.RemediationGuidanceContext_ProblemStatement, v.ProblemStatement)
+		case schemas.RemediationGuidanceContext_RiskAssessment:
+			v.RiskAssessment = new(string)
+			return d.ReadString(schemas.RemediationGuidanceContext_RiskAssessment, v.RiskAssessment)
+		}
+		return nil
+	})
+}
+
+// Provided remediation guidance examples in different formats that can be run for
+// remediating the target.
+type RemediationGuidanceExamples struct {
+
+	// An AWS CLI snippet version of the example.
+	AwsCli *string
+
+	// A CDK snippet version of the example.
+	Cdk *string
+
+	// A CLI snippet version of the example.
+	Cli *string
+
+	// A CloudFormation snippet version of the example.
+	CloudFormation *string
+
+	// An IaC snippet version of the example.
+	IaC *string
+
+	// A Python snippet version of the example.
+	Python *string
+
+	// A Template snippet version of the example.
+	Template *string
+
+	// A Terraform snippet version of the example.
+	Terraform *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationGuidanceExamples) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationGuidanceExamples)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationGuidanceExamples) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsCli != nil {
+		s.WriteString(schemas.RemediationGuidanceExamples_AwsCli, *v.AwsCli)
+	}
+	if v.Cdk != nil {
+		s.WriteString(schemas.RemediationGuidanceExamples_Cdk, *v.Cdk)
+	}
+	if v.Cli != nil {
+		s.WriteString(schemas.RemediationGuidanceExamples_Cli, *v.Cli)
+	}
+	if v.CloudFormation != nil {
+		s.WriteString(schemas.RemediationGuidanceExamples_CloudFormation, *v.CloudFormation)
+	}
+	if v.IaC != nil {
+		s.WriteString(schemas.RemediationGuidanceExamples_IaC, *v.IaC)
+	}
+	if v.Python != nil {
+		s.WriteString(schemas.RemediationGuidanceExamples_Python, *v.Python)
+	}
+	if v.Template != nil {
+		s.WriteString(schemas.RemediationGuidanceExamples_Template, *v.Template)
+	}
+	if v.Terraform != nil {
+		s.WriteString(schemas.RemediationGuidanceExamples_Terraform, *v.Terraform)
+	}
+}
+func (v *RemediationGuidanceExamples) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationGuidanceExamples, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationGuidanceExamples_AwsCli:
+			v.AwsCli = new(string)
+			return d.ReadString(schemas.RemediationGuidanceExamples_AwsCli, v.AwsCli)
+		case schemas.RemediationGuidanceExamples_Cdk:
+			v.Cdk = new(string)
+			return d.ReadString(schemas.RemediationGuidanceExamples_Cdk, v.Cdk)
+		case schemas.RemediationGuidanceExamples_Cli:
+			v.Cli = new(string)
+			return d.ReadString(schemas.RemediationGuidanceExamples_Cli, v.Cli)
+		case schemas.RemediationGuidanceExamples_CloudFormation:
+			v.CloudFormation = new(string)
+			return d.ReadString(schemas.RemediationGuidanceExamples_CloudFormation, v.CloudFormation)
+		case schemas.RemediationGuidanceExamples_IaC:
+			v.IaC = new(string)
+			return d.ReadString(schemas.RemediationGuidanceExamples_IaC, v.IaC)
+		case schemas.RemediationGuidanceExamples_Python:
+			v.Python = new(string)
+			return d.ReadString(schemas.RemediationGuidanceExamples_Python, v.Python)
+		case schemas.RemediationGuidanceExamples_Template:
+			v.Template = new(string)
+			return d.ReadString(schemas.RemediationGuidanceExamples_Template, v.Template)
+		case schemas.RemediationGuidanceExamples_Terraform:
+			v.Terraform = new(string)
+			return d.ReadString(schemas.RemediationGuidanceExamples_Terraform, v.Terraform)
+		}
+		return nil
+	})
+}
+
+// The metadata of the remediation guidance.
+type RemediationGuidanceMetadata struct {
+
+	// The exposure type of the related exposure findings.
+	//
+	// This member is required.
+	ExposureType *string
+
+	// When the fix takes effect, for example Immediate or Deferred .
+	//
+	// This member is required.
+	FixEffect *string
+
+	// The resource type of the remediation target.
+	//
+	// This member is required.
+	ResourceType *string
+
+	// The extent to which changes made in accordance with the guidance can be
+	// reversed, for example Fully reversible .
+	//
+	// This member is required.
+	Reversibility *string
+
+	// The risk when implementing the guidance provided.
+	//
+	// This member is required.
+	RiskLevel *string
+
+	// The titles of traits this guidance applies to.
+	//
+	// This member is required.
+	TraitTitles []string
+
+	// The extent to which the guidance can be automated, for example Full .
+	AutomationLevel *string
+
+	// Timestamp of when the guidance was generated.
+	//
+	// For more information about the validation and formatting of timestamp fields in
+	// Security Hub CSPM, see [Timestamps].
+	//
+	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+	GeneratedAt *time.Time
+
+	// Specifies whether human review is required.
+	HumanReviewRequired *bool
+
+	// Verification status of the guidance.
+	VerificationStatus *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationGuidanceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationGuidanceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationGuidanceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomationLevel != nil {
+		s.WriteString(schemas.RemediationGuidanceMetadata_AutomationLevel, *v.AutomationLevel)
+	}
+	if v.ExposureType != nil {
+		s.WriteString(schemas.RemediationGuidanceMetadata_ExposureType, *v.ExposureType)
+	}
+	if v.FixEffect != nil {
+		s.WriteString(schemas.RemediationGuidanceMetadata_FixEffect, *v.FixEffect)
+	}
+	if v.GeneratedAt != nil {
+		s.WriteTime(schemas.RemediationGuidanceMetadata_GeneratedAt, *v.GeneratedAt)
+	}
+	if v.HumanReviewRequired != nil {
+		s.WriteBool(schemas.RemediationGuidanceMetadata_HumanReviewRequired, *v.HumanReviewRequired)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.RemediationGuidanceMetadata_ResourceType, *v.ResourceType)
+	}
+	if v.Reversibility != nil {
+		s.WriteString(schemas.RemediationGuidanceMetadata_Reversibility, *v.Reversibility)
+	}
+	if v.RiskLevel != nil {
+		s.WriteString(schemas.RemediationGuidanceMetadata_RiskLevel, *v.RiskLevel)
+	}
+	serializeRemediationStringList(s, schemas.RemediationGuidanceMetadata_TraitTitles, v.TraitTitles)
+	if v.VerificationStatus != nil {
+		s.WriteString(schemas.RemediationGuidanceMetadata_VerificationStatus, *v.VerificationStatus)
+	}
+}
+func (v *RemediationGuidanceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationGuidanceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationGuidanceMetadata_AutomationLevel:
+			v.AutomationLevel = new(string)
+			return d.ReadString(schemas.RemediationGuidanceMetadata_AutomationLevel, v.AutomationLevel)
+		case schemas.RemediationGuidanceMetadata_ExposureType:
+			v.ExposureType = new(string)
+			return d.ReadString(schemas.RemediationGuidanceMetadata_ExposureType, v.ExposureType)
+		case schemas.RemediationGuidanceMetadata_FixEffect:
+			v.FixEffect = new(string)
+			return d.ReadString(schemas.RemediationGuidanceMetadata_FixEffect, v.FixEffect)
+		case schemas.RemediationGuidanceMetadata_GeneratedAt:
+			v.GeneratedAt = new(time.Time)
+			return d.ReadTime(schemas.RemediationGuidanceMetadata_GeneratedAt, v.GeneratedAt)
+		case schemas.RemediationGuidanceMetadata_HumanReviewRequired:
+			v.HumanReviewRequired = new(bool)
+			return d.ReadBool(schemas.RemediationGuidanceMetadata_HumanReviewRequired, v.HumanReviewRequired)
+		case schemas.RemediationGuidanceMetadata_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.RemediationGuidanceMetadata_ResourceType, v.ResourceType)
+		case schemas.RemediationGuidanceMetadata_Reversibility:
+			v.Reversibility = new(string)
+			return d.ReadString(schemas.RemediationGuidanceMetadata_Reversibility, v.Reversibility)
+		case schemas.RemediationGuidanceMetadata_RiskLevel:
+			v.RiskLevel = new(string)
+			return d.ReadString(schemas.RemediationGuidanceMetadata_RiskLevel, v.RiskLevel)
+		case schemas.RemediationGuidanceMetadata_TraitTitles:
+			return deserializeRemediationStringList(d, schemas.RemediationGuidanceMetadata_TraitTitles, &v.TraitTitles)
+		case schemas.RemediationGuidanceMetadata_VerificationStatus:
+			v.VerificationStatus = new(string)
+			return d.ReadString(schemas.RemediationGuidanceMetadata_VerificationStatus, v.VerificationStatus)
+		}
+		return nil
+	})
+}
+
+// The specification of the remediation target guidance. This outlines required
+// resource parameters and permissions, remediation steps, and the end state.
+type RemediationGuidanceSpecification struct {
+
+	// The expected end state of the associated resources after completion of the
+	// steps.
+	ExpectedEndState *string
+
+	// An array of the parameters used in running the steps provided.
+	Parameters []RemediationParameter
+
+	// An array of required permissions to run the steps.
+	RequiredPermissions []string
+
+	// An array of ordered steps for resolving the remediation targets.
+	Steps []RemediationStep
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationGuidanceSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationGuidanceSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationGuidanceSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpectedEndState != nil {
+		s.WriteString(schemas.RemediationGuidanceSpecification_ExpectedEndState, *v.ExpectedEndState)
+	}
+	serializeRemediationParameterList(s, schemas.RemediationGuidanceSpecification_Parameters, v.Parameters)
+	serializeRemediationStringList(s, schemas.RemediationGuidanceSpecification_RequiredPermissions, v.RequiredPermissions)
+	serializeRemediationStepList(s, schemas.RemediationGuidanceSpecification_Steps, v.Steps)
+}
+func (v *RemediationGuidanceSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationGuidanceSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationGuidanceSpecification_ExpectedEndState:
+			v.ExpectedEndState = new(string)
+			return d.ReadString(schemas.RemediationGuidanceSpecification_ExpectedEndState, v.ExpectedEndState)
+		case schemas.RemediationGuidanceSpecification_Parameters:
+			return deserializeRemediationParameterList(d, schemas.RemediationGuidanceSpecification_Parameters, &v.Parameters)
+		case schemas.RemediationGuidanceSpecification_RequiredPermissions:
+			return deserializeRemediationStringList(d, schemas.RemediationGuidanceSpecification_RequiredPermissions, &v.RequiredPermissions)
+		case schemas.RemediationGuidanceSpecification_Steps:
+			return deserializeRemediationStepList(d, schemas.RemediationGuidanceSpecification_Steps, &v.Steps)
+		}
+		return nil
+	})
+}
+
+// The outcome from resolving the remediation target.
+type RemediationOutcome struct {
+
+	// The number of associated exposure findings that are resolved by remediating the
+	// target.
+	//
+	// This member is required.
+	ResolvedFindingsCount *int32
+
+	// The number of associated exposure findings whose severity is reduced by
+	// remediating the target.
+	//
+	// This member is required.
+	SeverityReductionFindingsCount *int32
+
+	// The number of associated exposure findings whose severity is unchanged by
+	// remediating the target.
+	//
+	// This member is required.
+	SeverityUnchangedCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationOutcome) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationOutcome)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationOutcome) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolvedFindingsCount != nil {
+		s.WriteInt32(schemas.RemediationOutcome_ResolvedFindingsCount, *v.ResolvedFindingsCount)
+	}
+	if v.SeverityReductionFindingsCount != nil {
+		s.WriteInt32(schemas.RemediationOutcome_SeverityReductionFindingsCount, *v.SeverityReductionFindingsCount)
+	}
+	if v.SeverityUnchangedCount != nil {
+		s.WriteInt32(schemas.RemediationOutcome_SeverityUnchangedCount, *v.SeverityUnchangedCount)
+	}
+}
+func (v *RemediationOutcome) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationOutcome, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationOutcome_ResolvedFindingsCount:
+			v.ResolvedFindingsCount = new(int32)
+			return d.ReadInt32(schemas.RemediationOutcome_ResolvedFindingsCount, v.ResolvedFindingsCount)
+		case schemas.RemediationOutcome_SeverityReductionFindingsCount:
+			v.SeverityReductionFindingsCount = new(int32)
+			return d.ReadInt32(schemas.RemediationOutcome_SeverityReductionFindingsCount, v.SeverityReductionFindingsCount)
+		case schemas.RemediationOutcome_SeverityUnchangedCount:
+			v.SeverityUnchangedCount = new(int32)
+			return d.ReadInt32(schemas.RemediationOutcome_SeverityUnchangedCount, v.SeverityUnchangedCount)
+		}
+		return nil
+	})
+}
+
+// A parameter used in running the guidance steps.
+type RemediationParameter struct {
+
+	// A description of the parameter.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the parameter.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of the parameter.
+	//
+	// This member is required.
+	Type *string
+
+	// Specifies whether the parameter is required for running the guidance steps.
+	Required *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.RemediationParameter_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RemediationParameter_Name, *v.Name)
+	}
+	if v.Required != nil {
+		s.WriteBool(schemas.RemediationParameter_Required, *v.Required)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.RemediationParameter_Type, *v.Type)
+	}
+}
+func (v *RemediationParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationParameter_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RemediationParameter_Description, v.Description)
+		case schemas.RemediationParameter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RemediationParameter_Name, v.Name)
+		case schemas.RemediationParameter_Required:
+			v.Required = new(bool)
+			return d.ReadBool(schemas.RemediationParameter_Required, v.Required)
+		case schemas.RemediationParameter_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.RemediationParameter_Type, v.Type)
+		}
+		return nil
+	})
+}
+
+// Provides comprehensive details about a resource.
+type RemediationResource struct {
+
+	// The Amazon Web Services account that recorded the resource data in Security Hub.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The cloud provider where the resource exists.
+	//
+	//   - AWS specifies that the resource exists in Amazon Web Services.
+	//
+	//   - Azure specifies that the resource exists in Microsoft Azure.
+	//
+	// This member is required.
+	CloudProvider CloudProviderName
+
+	// The unique identifier for a resource.
+	//
+	// This member is required.
+	Id *string
+
+	// The Amazon Web Services Region in which Security Hub recorded the resource data.
+	//
+	// This member is required.
+	Region *string
+
+	// The native cloud region where the resource is located. For Amazon Web Services,
+	// this is an Amazon Web Services Region (for example, us-east-1 ). For Azure
+	// resources, this is the Azure region (for example, westus2 ). This field is
+	// always included.
+	//
+	// This member is required.
+	ResourceRegion *string
+
+	// The type of the resource.
+	//
+	// This member is required.
+	Type *string
+
+	// The name of the resource.
+	Name *string
+
+	// The global identifier used to identify a resource.
+	ResourceGuid *string
+
+	// The identifier of the cloud account that owns the resource. For Amazon Web
+	// Services resources, this is the Amazon Web Services account ID. For Azure
+	// resources, this is the Azure subscription ID.
+	ResourceOwnerAccountId *string
+
+	// The identifier of the cloud organization that owns the resource. For Amazon Web
+	// Services resources, this is the Organizations ID. For Azure resources, this is
+	// the Azure tenant ID.
+	ResourceOwnerOrgId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.RemediationResource_AccountId, *v.AccountId)
+	}
+	if v.CloudProvider != "" {
+		s.WriteString(schemas.RemediationResource_CloudProvider, string(v.CloudProvider))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RemediationResource_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RemediationResource_Name, *v.Name)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.RemediationResource_Region, *v.Region)
+	}
+	if v.ResourceGuid != nil {
+		s.WriteString(schemas.RemediationResource_ResourceGuid, *v.ResourceGuid)
+	}
+	if v.ResourceOwnerAccountId != nil {
+		s.WriteString(schemas.RemediationResource_ResourceOwnerAccountId, *v.ResourceOwnerAccountId)
+	}
+	if v.ResourceOwnerOrgId != nil {
+		s.WriteString(schemas.RemediationResource_ResourceOwnerOrgId, *v.ResourceOwnerOrgId)
+	}
+	if v.ResourceRegion != nil {
+		s.WriteString(schemas.RemediationResource_ResourceRegion, *v.ResourceRegion)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.RemediationResource_Type, *v.Type)
+	}
+}
+func (v *RemediationResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationResource_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.RemediationResource_AccountId, v.AccountId)
+		case schemas.RemediationResource_CloudProvider:
+			var ev string
+			if err := d.ReadString(schemas.RemediationResource_CloudProvider, &ev); err != nil {
+				return err
+			}
+			v.CloudProvider = CloudProviderName(ev)
+			return nil
+		case schemas.RemediationResource_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RemediationResource_Id, v.Id)
+		case schemas.RemediationResource_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RemediationResource_Name, v.Name)
+		case schemas.RemediationResource_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.RemediationResource_Region, v.Region)
+		case schemas.RemediationResource_ResourceGuid:
+			v.ResourceGuid = new(string)
+			return d.ReadString(schemas.RemediationResource_ResourceGuid, v.ResourceGuid)
+		case schemas.RemediationResource_ResourceOwnerAccountId:
+			v.ResourceOwnerAccountId = new(string)
+			return d.ReadString(schemas.RemediationResource_ResourceOwnerAccountId, v.ResourceOwnerAccountId)
+		case schemas.RemediationResource_ResourceOwnerOrgId:
+			v.ResourceOwnerOrgId = new(string)
+			return d.ReadString(schemas.RemediationResource_ResourceOwnerOrgId, v.ResourceOwnerOrgId)
+		case schemas.RemediationResource_ResourceRegion:
+			v.ResourceRegion = new(string)
+			return d.ReadString(schemas.RemediationResource_ResourceRegion, v.ResourceRegion)
+		case schemas.RemediationResource_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.RemediationResource_Type, v.Type)
+		}
+		return nil
+	})
+}
+
+// A step in the remediation guidance.
+type RemediationStep struct {
+
+	// The action to be taken for this step.
+	//
+	// This member is required.
+	Action *string
+
+	// A description of what the step does.
+	//
+	// This member is required.
+	Description *string
+
+	// The phase of the remediation plan that this step belongs to (for example, FIX ).
+	//
+	// This member is required.
+	Phase *string
+
+	// Which service this step is performed in.
+	//
+	// This member is required.
+	Service *string
+
+	// The inverse of the step, to be used if the step needs to be rolled back.
+	Inverse *string
+
+	// The logic behind the existence of this step.
+	Logic *string
+
+	// The action to take after the step to verify its success.
+	VerifyAfter *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationStep) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationStep)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationStep) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.RemediationStep_Action, *v.Action)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RemediationStep_Description, *v.Description)
+	}
+	if v.Inverse != nil {
+		s.WriteString(schemas.RemediationStep_Inverse, *v.Inverse)
+	}
+	if v.Logic != nil {
+		s.WriteString(schemas.RemediationStep_Logic, *v.Logic)
+	}
+	if v.Phase != nil {
+		s.WriteString(schemas.RemediationStep_Phase, *v.Phase)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.RemediationStep_Service, *v.Service)
+	}
+	if v.VerifyAfter != nil {
+		s.WriteString(schemas.RemediationStep_VerifyAfter, *v.VerifyAfter)
+	}
+}
+func (v *RemediationStep) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationStep, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationStep_Action:
+			v.Action = new(string)
+			return d.ReadString(schemas.RemediationStep_Action, v.Action)
+		case schemas.RemediationStep_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RemediationStep_Description, v.Description)
+		case schemas.RemediationStep_Inverse:
+			v.Inverse = new(string)
+			return d.ReadString(schemas.RemediationStep_Inverse, v.Inverse)
+		case schemas.RemediationStep_Logic:
+			v.Logic = new(string)
+			return d.ReadString(schemas.RemediationStep_Logic, v.Logic)
+		case schemas.RemediationStep_Phase:
+			v.Phase = new(string)
+			return d.ReadString(schemas.RemediationStep_Phase, v.Phase)
+		case schemas.RemediationStep_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.RemediationStep_Service, v.Service)
+		case schemas.RemediationStep_VerifyAfter:
+			v.VerifyAfter = new(string)
+			return d.ReadString(schemas.RemediationStep_VerifyAfter, v.VerifyAfter)
+		}
+		return nil
+	})
+}
+
+// A string filter for filtering remediation targets.
+type RemediationStringFilter struct {
+
+	// The name of the filter field. Valid values are Resource.Type , Priority , Status
+	// , Resource.Id , Resource.ResourceOwnerAccountId , and Resource.CloudProvider .
+	//
+	// This member is required.
+	FieldName RemediationStringField
+
+	// The string filter definition.
+	//
+	// This member is required.
+	Filter *RemediationStringFilterCondition
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationStringFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationStringFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationStringFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldName != "" {
+		s.WriteString(schemas.RemediationStringFilter_FieldName, string(v.FieldName))
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.RemediationStringFilter_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RemediationStringFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationStringFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationStringFilter_FieldName:
+			var ev string
+			if err := d.ReadString(schemas.RemediationStringFilter_FieldName, &ev); err != nil {
+				return err
+			}
+			v.FieldName = RemediationStringField(ev)
+			return nil
+		case schemas.RemediationStringFilter_Filter:
+			v.Filter = &RemediationStringFilterCondition{}
+			return v.Filter.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The condition to apply to the string filter.
+type RemediationStringFilterCondition struct {
+
+	// The value the string filter is comparing against.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationStringFilterCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationStringFilterCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationStringFilterCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Value != nil {
+		s.WriteString(schemas.RemediationStringFilterCondition_Value, *v.Value)
+	}
+}
+func (v *RemediationStringFilterCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationStringFilterCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationStringFilterCondition_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.RemediationStringFilterCondition_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// A summary of the remediation target.
+type RemediationSummaryDetail struct {
+
+	// A summarized action to take for the remediation target.
+	//
+	// This member is required.
+	Action *string
+
+	// Specifies whether the effect of this target is immediate.
+	//
+	// This member is required.
+	IsImmediate *bool
+
+	// A description of the remediation target.
+	Description *string
+
+	// An array of KbArticle objects.
+	KbArticles []KbArticle
+
+	// An array of steps to be taken after remediation.
+	PostRemediationSteps []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationSummaryDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationSummaryDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationSummaryDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.RemediationSummaryDetail_Action, *v.Action)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RemediationSummaryDetail_Description, *v.Description)
+	}
+	if v.IsImmediate != nil {
+		s.WriteBool(schemas.RemediationSummaryDetail_IsImmediate, *v.IsImmediate)
+	}
+	serializeKbArticleList(s, schemas.RemediationSummaryDetail_KbArticles, v.KbArticles)
+	serializeRemediationStringList(s, schemas.RemediationSummaryDetail_PostRemediationSteps, v.PostRemediationSteps)
+}
+func (v *RemediationSummaryDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationSummaryDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationSummaryDetail_Action:
+			v.Action = new(string)
+			return d.ReadString(schemas.RemediationSummaryDetail_Action, v.Action)
+		case schemas.RemediationSummaryDetail_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RemediationSummaryDetail_Description, v.Description)
+		case schemas.RemediationSummaryDetail_IsImmediate:
+			v.IsImmediate = new(bool)
+			return d.ReadBool(schemas.RemediationSummaryDetail_IsImmediate, v.IsImmediate)
+		case schemas.RemediationSummaryDetail_KbArticles:
+			return deserializeKbArticleList(d, schemas.RemediationSummaryDetail_KbArticles, &v.KbArticles)
+		case schemas.RemediationSummaryDetail_PostRemediationSteps:
+			return deserializeRemediationStringList(d, schemas.RemediationSummaryDetail_PostRemediationSteps, &v.PostRemediationSteps)
+		}
+		return nil
+	})
+}
+
+// The trait associated with the remediation target.
+type RemediationTrait struct {
+
+	// The trait title.
+	//
+	// This member is required.
+	Title *string
+
+	// The trait type.
+	//
+	// This member is required.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationTrait) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationTrait)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationTrait) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Title != nil {
+		s.WriteString(schemas.RemediationTrait_Title, *v.Title)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.RemediationTrait_Type, *v.Type)
+	}
+}
+func (v *RemediationTrait) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationTrait, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationTrait_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.RemediationTrait_Title, v.Title)
+		case schemas.RemediationTrait_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.RemediationTrait_Type, v.Type)
+		}
+		return nil
+	})
+}
+
+// A remediation target.
+type RemediationV2Item struct {
+
+	// The outcome of the remediation target's resolution.
+	//
+	// This member is required.
+	Outcome *RemediationOutcome
+
+	// The remediation target's priority. Valid values are Critical , High , Medium ,
+	// and Low .
+	//
+	// This member is required.
+	Priority RemediationPriority
+
+	// A summary of the remediation target.
+	//
+	// This member is required.
+	RemediationSummary *RemediationSummaryDetail
+
+	// The remediation target's associated resource.
+	//
+	// This member is required.
+	Resource *RemediationResource
+
+	// The current status of the remediation target.
+	//
+	//   - New specifies that the remediation target was newly identified.
+	//
+	//   - Updated specifies that the remediation target changed after it was
+	//   identified.
+	//
+	//   - Resolved specifies that the remediation target is no longer present.
+	//
+	// This member is required.
+	Status RemediationStatus
+
+	// The unique identifier (ID) of the remediation target.
+	//
+	// This member is required.
+	TargetUid *string
+
+	// The trait associated with the remediation target.
+	//
+	// This member is required.
+	Trait *RemediationTrait
+
+	// The remediation target's guidance. Returned only when ShowGuidance is true in
+	// the request.
+	Guidance *RemediationGuidance
+
+	// The remediation target's last updated timestamp.
+	//
+	// For more information about the validation and formatting of timestamp fields in
+	// Security Hub CSPM, see [Timestamps].
+	//
+	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemediationV2Item) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationV2Item)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationV2Item) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Guidance != nil {
+		s.WriteStruct(schemas.RemediationV2Item_Guidance)
+		v.Guidance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Outcome != nil {
+		s.WriteStruct(schemas.RemediationV2Item_Outcome)
+		v.Outcome.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Priority != "" {
+		s.WriteString(schemas.RemediationV2Item_Priority, string(v.Priority))
+	}
+	if v.RemediationSummary != nil {
+		s.WriteStruct(schemas.RemediationV2Item_RemediationSummary)
+		v.RemediationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.RemediationV2Item_Resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RemediationV2Item_Status, string(v.Status))
+	}
+	if v.TargetUid != nil {
+		s.WriteString(schemas.RemediationV2Item_TargetUid, *v.TargetUid)
+	}
+	if v.Trait != nil {
+		s.WriteStruct(schemas.RemediationV2Item_Trait)
+		v.Trait.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.RemediationV2Item_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *RemediationV2Item) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationV2Item, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationV2Item_Guidance:
+			v.Guidance = &RemediationGuidance{}
+			return v.Guidance.Deserialize(d)
+		case schemas.RemediationV2Item_Outcome:
+			v.Outcome = &RemediationOutcome{}
+			return v.Outcome.Deserialize(d)
+		case schemas.RemediationV2Item_Priority:
+			var ev string
+			if err := d.ReadString(schemas.RemediationV2Item_Priority, &ev); err != nil {
+				return err
+			}
+			v.Priority = RemediationPriority(ev)
+			return nil
+		case schemas.RemediationV2Item_RemediationSummary:
+			v.RemediationSummary = &RemediationSummaryDetail{}
+			return v.RemediationSummary.Deserialize(d)
+		case schemas.RemediationV2Item_Resource:
+			v.Resource = &RemediationResource{}
+			return v.Resource.Deserialize(d)
+		case schemas.RemediationV2Item_Status:
+			var ev string
+			if err := d.ReadString(schemas.RemediationV2Item_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = RemediationStatus(ev)
+			return nil
+		case schemas.RemediationV2Item_TargetUid:
+			v.TargetUid = new(string)
+			return d.ReadString(schemas.RemediationV2Item_TargetUid, v.TargetUid)
+		case schemas.RemediationV2Item_Trait:
+			v.Trait = &RemediationTrait{}
+			return v.Trait.Deserialize(d)
+		case schemas.RemediationV2Item_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.RemediationV2Item_UpdatedAt, v.UpdatedAt)
 		}
 		return nil
 	})
@@ -51599,7 +52935,13 @@ type StringFilter struct {
 	//
 	//   - To search for values that include the filter value, use CONTAINS . For
 	//   example, the filter Title CONTAINS CloudFront matches findings that have a
-	//   Title that includes the string CloudFront.
+	//   Title that includes the string CloudFront .
+	//
+	//   - To search for values that contain a word matching the filter value,
+	//   regardless of case, use CONTAINS_WORD . For example, the filter Title
+	//   CONTAINS_WORD lambda matches a finding whose Title is GuardDuty Lambda
+	//   Protection , because the Title contains the word Lambda. Including special
+	//   characters in the filter value might produce unexpected search results.
 	//
 	//   - To search for values that exactly match the filter value, use EQUALS . For
 	//   example, the filter AwsAccountId EQUALS 123456789012 only matches findings

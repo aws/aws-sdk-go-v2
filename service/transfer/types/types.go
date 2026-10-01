@@ -2330,7 +2330,7 @@ type DescribedServer struct {
 	// To specify a log group, you must provide the ARN for an existing log group. In
 	// this case, the format of the log group is as follows:
 	//
-	//     arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*
+	//     arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*
 	//
 	// For example, arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*
 	//
@@ -3015,6 +3015,16 @@ type DescribedWorkflow struct {
 	// Specifies the details for the steps that are in the specified workflow.
 	Steps []WorkflowStep
 
+	// Specifies the log groups to which your workflow logs are sent.
+	//
+	// To specify a log group, you must provide the ARN for an existing log group. In
+	// this case, the format of the log group is as follows:
+	//
+	//     arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*
+	//
+	// For example, arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*
+	StructuredLogDestinations []string
+
 	// Key-value pairs that can be used to group and search for workflows. Tags are
 	// metadata attached to workflows for any purpose.
 	Tags []Tag
@@ -3040,6 +3050,7 @@ func (v *DescribedWorkflow) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	serializeWorkflowSteps(s, schemas.DescribedWorkflow_OnExceptionSteps, v.OnExceptionSteps)
 	serializeWorkflowSteps(s, schemas.DescribedWorkflow_Steps, v.Steps)
+	serializeStructuredLogDestinations(s, schemas.DescribedWorkflow_StructuredLogDestinations, v.StructuredLogDestinations)
 	serializeTags(s, schemas.DescribedWorkflow_Tags, v.Tags)
 	if v.WorkflowId != nil {
 		s.WriteString(schemas.DescribedWorkflow_WorkflowId, *v.WorkflowId)
@@ -3058,6 +3069,8 @@ func (v *DescribedWorkflow) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeWorkflowSteps(d, schemas.DescribedWorkflow_OnExceptionSteps, &v.OnExceptionSteps)
 		case schemas.DescribedWorkflow_Steps:
 			return deserializeWorkflowSteps(d, schemas.DescribedWorkflow_Steps, &v.Steps)
+		case schemas.DescribedWorkflow_StructuredLogDestinations:
+			return deserializeStructuredLogDestinations(d, schemas.DescribedWorkflow_StructuredLogDestinations, &v.StructuredLogDestinations)
 		case schemas.DescribedWorkflow_Tags:
 			return deserializeTags(d, schemas.DescribedWorkflow_Tags, &v.Tags)
 		case schemas.DescribedWorkflow_WorkflowId:

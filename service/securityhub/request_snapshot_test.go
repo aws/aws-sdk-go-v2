@@ -9699,6 +9699,74 @@ func TestCheckRequestSnapshot_GetRecommendedPolicyV2(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetRemediationsV2(t *testing.T) {
+	input := &GetRemediationsV2Input{
+		TargetUid:   ptr.String("__TargetUid__"),
+		MetadataUid: ptr.String("__MetadataUid__"),
+		Filters: &types.RemediationFilters{
+			CompositeFilters: []types.RemediationCompositeFilter{
+				{
+					StringFilters: []types.RemediationStringFilter{
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				{
+					StringFilters: []types.RemediationStringFilter{
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		ShowGuidance:   ptr.Bool(true),
+		GuidanceFormat: types.GuidanceFormat("All"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetRemediationsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRemediationsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetResourcesStatisticsV2(t *testing.T) {
 	input := &GetResourcesStatisticsV2Input{
 		GroupByRules: []types.ResourceGroupByRule{
@@ -10715,6 +10783,35 @@ func TestCheckRequestSnapshot_ListEnabledProductsForImport(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnabledProductsForImport"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListExposuresByRemediationV2(t *testing.T) {
+	input := &ListExposuresByRemediationV2Input{
+		TargetUid:  ptr.String("__TargetUid__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExposuresByRemediationV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExposuresByRemediationV2"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -23790,6 +23887,74 @@ func TestUpdateRequestSnapshot_GetRecommendedPolicyV2(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetRemediationsV2(t *testing.T) {
+	input := &GetRemediationsV2Input{
+		TargetUid:   ptr.String("__TargetUid__"),
+		MetadataUid: ptr.String("__MetadataUid__"),
+		Filters: &types.RemediationFilters{
+			CompositeFilters: []types.RemediationCompositeFilter{
+				{
+					StringFilters: []types.RemediationStringFilter{
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				{
+					StringFilters: []types.RemediationStringFilter{
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						{
+							FieldName: types.RemediationStringField("Resource.Type"),
+							Filter: &types.RemediationStringFilterCondition{
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		ShowGuidance:   ptr.Bool(true),
+		GuidanceFormat: types.GuidanceFormat("All"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetRemediationsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRemediationsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetResourcesStatisticsV2(t *testing.T) {
 	input := &GetResourcesStatisticsV2Input{
 		GroupByRules: []types.ResourceGroupByRule{
@@ -24806,6 +24971,35 @@ func TestUpdateRequestSnapshot_ListEnabledProductsForImport(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnabledProductsForImport"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListExposuresByRemediationV2(t *testing.T) {
+	input := &ListExposuresByRemediationV2Input{
+		TargetUid:  ptr.String("__TargetUid__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExposuresByRemediationV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExposuresByRemediationV2"); err != nil {
 		t.Fatal(err)
 	}
 }

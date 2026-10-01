@@ -8689,6 +8689,284 @@ func TestUpdateResponseSnapshot_GetRecommendedPolicyV2(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetRemediationsV2(t *testing.T) {
+	want := &GetRemediationsV2Output{
+		Items: []types.RemediationV2Item{
+			{
+				TargetUid: ptr.String("__TargetUid__"),
+				Outcome: &types.RemediationOutcome{
+					ResolvedFindingsCount:          ptr.Int32(1),
+					SeverityReductionFindingsCount: ptr.Int32(1),
+					SeverityUnchangedCount:         ptr.Int32(1),
+				},
+				Priority: types.RemediationPriority("Critical"),
+				RemediationSummary: &types.RemediationSummaryDetail{
+					Action:      ptr.String("__Action__"),
+					Description: ptr.String("__Description__"),
+					IsImmediate: ptr.Bool(true),
+					PostRemediationSteps: []string{
+						"__Member__",
+						"__Member__",
+					},
+					KbArticles: []types.KbArticle{
+						{
+							Title: ptr.String("__Title__"),
+							Url:   ptr.String("__Url__"),
+						},
+						{
+							Title: ptr.String("__Title__"),
+							Url:   ptr.String("__Url__"),
+						},
+					},
+				},
+				Resource: &types.RemediationResource{
+					AccountId:              ptr.String("__AccountId__"),
+					Region:                 ptr.String("__Region__"),
+					ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+					ResourceOwnerOrgId:     ptr.String("__ResourceOwnerOrgId__"),
+					Type:                   ptr.String("__Type__"),
+					Name:                   ptr.String("__Name__"),
+					Id:                     ptr.String("__Id__"),
+					ResourceGuid:           ptr.String("__ResourceGuid__"),
+					ResourceRegion:         ptr.String("__ResourceRegion__"),
+					CloudProvider:          types.CloudProviderName("Azure"),
+				},
+				Status: types.RemediationStatus("New"),
+				Trait: &types.RemediationTrait{
+					Type:  ptr.String("__Type__"),
+					Title: ptr.String("__Title__"),
+				},
+				Guidance: &types.RemediationGuidance{
+					TargetTypeName: ptr.String("__TargetTypeName__"),
+					Pattern:        ptr.String("__Pattern__"),
+					Version:        ptr.String("__Version__"),
+					Context: &types.RemediationGuidanceContext{
+						ProblemStatement: ptr.String("__ProblemStatement__"),
+						RiskAssessment:   ptr.String("__RiskAssessment__"),
+						AffectedScope:    ptr.String("__AffectedScope__"),
+						Prerequisites: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Specification: &types.RemediationGuidanceSpecification{
+						Parameters: []types.RemediationParameter{
+							{
+								Name:        ptr.String("__Name__"),
+								Type:        ptr.String("__Type__"),
+								Description: ptr.String("__Description__"),
+								Required:    ptr.Bool(true),
+							},
+							{
+								Name:        ptr.String("__Name__"),
+								Type:        ptr.String("__Type__"),
+								Description: ptr.String("__Description__"),
+								Required:    ptr.Bool(true),
+							},
+						},
+						Steps: []types.RemediationStep{
+							{
+								Phase:       ptr.String("__Phase__"),
+								Description: ptr.String("__Description__"),
+								Service:     ptr.String("__Service__"),
+								Action:      ptr.String("__Action__"),
+								Logic:       ptr.String("__Logic__"),
+								Inverse:     ptr.String("__Inverse__"),
+								VerifyAfter: ptr.String("__VerifyAfter__"),
+							},
+							{
+								Phase:       ptr.String("__Phase__"),
+								Description: ptr.String("__Description__"),
+								Service:     ptr.String("__Service__"),
+								Action:      ptr.String("__Action__"),
+								Logic:       ptr.String("__Logic__"),
+								Inverse:     ptr.String("__Inverse__"),
+								VerifyAfter: ptr.String("__VerifyAfter__"),
+							},
+						},
+						ExpectedEndState: ptr.String("__ExpectedEndState__"),
+						RequiredPermissions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Examples: &types.RemediationGuidanceExamples{
+						AwsCli:         ptr.String("__AwsCli__"),
+						Cli:            ptr.String("__Cli__"),
+						Python:         ptr.String("__Python__"),
+						Terraform:      ptr.String("__Terraform__"),
+						Cdk:            ptr.String("__Cdk__"),
+						CloudFormation: ptr.String("__CloudFormation__"),
+						IaC:            ptr.String("__IaC__"),
+						Template:       ptr.String("__Template__"),
+					},
+					Metadata: &types.RemediationGuidanceMetadata{
+						ResourceType: ptr.String("__ResourceType__"),
+						ExposureType: ptr.String("__ExposureType__"),
+						TraitTitles: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Reversibility:       ptr.String("__Reversibility__"),
+						FixEffect:           ptr.String("__FixEffect__"),
+						RiskLevel:           ptr.String("__RiskLevel__"),
+						AutomationLevel:     ptr.String("__AutomationLevel__"),
+						HumanReviewRequired: ptr.Bool(true),
+						GeneratedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						VerificationStatus:  ptr.String("__VerificationStatus__"),
+					},
+				},
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				TargetUid: ptr.String("__TargetUid__"),
+				Outcome: &types.RemediationOutcome{
+					ResolvedFindingsCount:          ptr.Int32(1),
+					SeverityReductionFindingsCount: ptr.Int32(1),
+					SeverityUnchangedCount:         ptr.Int32(1),
+				},
+				Priority: types.RemediationPriority("Critical"),
+				RemediationSummary: &types.RemediationSummaryDetail{
+					Action:      ptr.String("__Action__"),
+					Description: ptr.String("__Description__"),
+					IsImmediate: ptr.Bool(true),
+					PostRemediationSteps: []string{
+						"__Member__",
+						"__Member__",
+					},
+					KbArticles: []types.KbArticle{
+						{
+							Title: ptr.String("__Title__"),
+							Url:   ptr.String("__Url__"),
+						},
+						{
+							Title: ptr.String("__Title__"),
+							Url:   ptr.String("__Url__"),
+						},
+					},
+				},
+				Resource: &types.RemediationResource{
+					AccountId:              ptr.String("__AccountId__"),
+					Region:                 ptr.String("__Region__"),
+					ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+					ResourceOwnerOrgId:     ptr.String("__ResourceOwnerOrgId__"),
+					Type:                   ptr.String("__Type__"),
+					Name:                   ptr.String("__Name__"),
+					Id:                     ptr.String("__Id__"),
+					ResourceGuid:           ptr.String("__ResourceGuid__"),
+					ResourceRegion:         ptr.String("__ResourceRegion__"),
+					CloudProvider:          types.CloudProviderName("Azure"),
+				},
+				Status: types.RemediationStatus("New"),
+				Trait: &types.RemediationTrait{
+					Type:  ptr.String("__Type__"),
+					Title: ptr.String("__Title__"),
+				},
+				Guidance: &types.RemediationGuidance{
+					TargetTypeName: ptr.String("__TargetTypeName__"),
+					Pattern:        ptr.String("__Pattern__"),
+					Version:        ptr.String("__Version__"),
+					Context: &types.RemediationGuidanceContext{
+						ProblemStatement: ptr.String("__ProblemStatement__"),
+						RiskAssessment:   ptr.String("__RiskAssessment__"),
+						AffectedScope:    ptr.String("__AffectedScope__"),
+						Prerequisites: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Specification: &types.RemediationGuidanceSpecification{
+						Parameters: []types.RemediationParameter{
+							{
+								Name:        ptr.String("__Name__"),
+								Type:        ptr.String("__Type__"),
+								Description: ptr.String("__Description__"),
+								Required:    ptr.Bool(true),
+							},
+							{
+								Name:        ptr.String("__Name__"),
+								Type:        ptr.String("__Type__"),
+								Description: ptr.String("__Description__"),
+								Required:    ptr.Bool(true),
+							},
+						},
+						Steps: []types.RemediationStep{
+							{
+								Phase:       ptr.String("__Phase__"),
+								Description: ptr.String("__Description__"),
+								Service:     ptr.String("__Service__"),
+								Action:      ptr.String("__Action__"),
+								Logic:       ptr.String("__Logic__"),
+								Inverse:     ptr.String("__Inverse__"),
+								VerifyAfter: ptr.String("__VerifyAfter__"),
+							},
+							{
+								Phase:       ptr.String("__Phase__"),
+								Description: ptr.String("__Description__"),
+								Service:     ptr.String("__Service__"),
+								Action:      ptr.String("__Action__"),
+								Logic:       ptr.String("__Logic__"),
+								Inverse:     ptr.String("__Inverse__"),
+								VerifyAfter: ptr.String("__VerifyAfter__"),
+							},
+						},
+						ExpectedEndState: ptr.String("__ExpectedEndState__"),
+						RequiredPermissions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Examples: &types.RemediationGuidanceExamples{
+						AwsCli:         ptr.String("__AwsCli__"),
+						Cli:            ptr.String("__Cli__"),
+						Python:         ptr.String("__Python__"),
+						Terraform:      ptr.String("__Terraform__"),
+						Cdk:            ptr.String("__Cdk__"),
+						CloudFormation: ptr.String("__CloudFormation__"),
+						IaC:            ptr.String("__IaC__"),
+						Template:       ptr.String("__Template__"),
+					},
+					Metadata: &types.RemediationGuidanceMetadata{
+						ResourceType: ptr.String("__ResourceType__"),
+						ExposureType: ptr.String("__ExposureType__"),
+						TraitTitles: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Reversibility:       ptr.String("__Reversibility__"),
+						FixEffect:           ptr.String("__FixEffect__"),
+						RiskLevel:           ptr.String("__RiskLevel__"),
+						AutomationLevel:     ptr.String("__AutomationLevel__"),
+						HumanReviewRequired: ptr.Bool(true),
+						GeneratedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						VerificationStatus:  ptr.String("__VerificationStatus__"),
+					},
+				},
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.SecurityHubAPIService)
+	opSchema := smithy.NewOperationSchema(schemas.GetRemediationsV2, schemas.GetRemediationsV2Response, schemas.GetRemediationsV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetRemediationsV2.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetResourcesStatisticsV2(t *testing.T) {
 	want := &GetResourcesStatisticsV2Output{
 		GroupByResults: []types.GroupByResult{
@@ -9450,6 +9728,64 @@ func TestUpdateResponseSnapshot_ListEnabledProductsForImport(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListEnabledProductsForImport.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListExposuresByRemediationV2(t *testing.T) {
+	want := &ListExposuresByRemediationV2Output{
+		Items: []types.ExposureFinding{
+			{
+				MetadataUid:       ptr.String("__MetadataUid__"),
+				Title:             ptr.String("__Title__"),
+				PreviousSeverity:  types.ExposureSeverity("Informational"),
+				ProjectedSeverity: types.ExposureSeverity("Informational"),
+				Impact:            types.ExposureImpact("Reduces"),
+			},
+			{
+				MetadataUid:       ptr.String("__MetadataUid__"),
+				Title:             ptr.String("__Title__"),
+				PreviousSeverity:  types.ExposureSeverity("Informational"),
+				ProjectedSeverity: types.ExposureSeverity("Informational"),
+				Impact:            types.ExposureImpact("Reduces"),
+			},
+		},
+		TargetUid: ptr.String("__TargetUid__"),
+		Resource: &types.RemediationResource{
+			AccountId:              ptr.String("__AccountId__"),
+			Region:                 ptr.String("__Region__"),
+			ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+			ResourceOwnerOrgId:     ptr.String("__ResourceOwnerOrgId__"),
+			Type:                   ptr.String("__Type__"),
+			Name:                   ptr.String("__Name__"),
+			Id:                     ptr.String("__Id__"),
+			ResourceGuid:           ptr.String("__ResourceGuid__"),
+			ResourceRegion:         ptr.String("__ResourceRegion__"),
+			CloudProvider:          types.CloudProviderName("Azure"),
+		},
+		TotalCount: ptr.Int32(1),
+		Trait: &types.RemediationTrait{
+			Type:  ptr.String("__Type__"),
+			Title: ptr.String("__Title__"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.SecurityHubAPIService)
+	opSchema := smithy.NewOperationSchema(schemas.ListExposuresByRemediationV2, schemas.ListExposuresByRemediationV2Response, schemas.ListExposuresByRemediationV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListExposuresByRemediationV2.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

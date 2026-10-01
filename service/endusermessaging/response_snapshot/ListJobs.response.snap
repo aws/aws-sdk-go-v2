@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"jobs":[{"brandProfileId":"__BrandProfileId__","createdAt":946684800,"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","jobId":"__JobId__","operationType":"__OperationType__","resources":[{"resourceArn":"__ResourceArn__","resourceId":"__ResourceId__","resourceType":"REGISTRATION"},{"resourceArn":"__ResourceArn__","resourceId":"__ResourceId__","resourceType":"REGISTRATION"}],"status":"SUCCESS","updatedAt":946684800},{"brandProfileId":"__BrandProfileId__","createdAt":946684800,"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","jobId":"__JobId__","operationType":"__OperationType__","resources":[{"resourceArn":"__ResourceArn__","resourceId":"__ResourceId__","resourceType":"REGISTRATION"},{"resourceArn":"__ResourceArn__","resourceId":"__ResourceId__","resourceType":"REGISTRATION"}],"status":"SUCCESS","updatedAt":946684800}],"nextToken":"__NextToken__"}

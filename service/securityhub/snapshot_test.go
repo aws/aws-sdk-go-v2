@@ -998,6 +998,18 @@ func TestCheckSnapshot_GetRecommendedPolicyV2(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetRemediationsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRemediationsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRemediationsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetResourcesStatisticsV2(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetResourcesStatisticsV2(context.Background(), nil, func(o *Options) {
@@ -1147,6 +1159,18 @@ func TestCheckSnapshot_ListEnabledProductsForImport(t *testing.T) {
 	_, err := svc.ListEnabledProductsForImport(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListEnabledProductsForImport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListExposuresByRemediationV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExposuresByRemediationV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListExposuresByRemediationV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2401,6 +2425,18 @@ func TestUpdateSnapshot_GetRecommendedPolicyV2(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetRemediationsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRemediationsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRemediationsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetResourcesStatisticsV2(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetResourcesStatisticsV2(context.Background(), nil, func(o *Options) {
@@ -2550,6 +2586,18 @@ func TestUpdateSnapshot_ListEnabledProductsForImport(t *testing.T) {
 	_, err := svc.ListEnabledProductsForImport(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEnabledProductsForImport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListExposuresByRemediationV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExposuresByRemediationV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListExposuresByRemediationV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

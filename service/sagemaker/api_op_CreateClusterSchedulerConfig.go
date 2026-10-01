@@ -35,7 +35,9 @@ type CreateClusterSchedulerConfigInput struct {
 	// This member is required.
 	ClusterArn *string
 
-	// Name for the cluster policy.
+	// The name for the cluster policy. The name must be unique within the SageMaker
+	// AI HyperPod cluster specified by ClusterArn . You can use the same name in other
+	// clusters within a Region or across Regions.
 	//
 	// This member is required.
 	Name *string

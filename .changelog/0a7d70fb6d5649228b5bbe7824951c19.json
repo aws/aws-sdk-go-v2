@@ -1,0 +1,8 @@
+{
+    "id": "0a7d70fb-6d56-4922-8b5b-be7824951c19",
+    "type": "feature",
+    "description": "AWS Transfer Family Workflows adds support for the structuredLogDestinations option, enabling customers to specify a custom Amazon CloudWatch Logs log group for managed workflow execution logs.",
+    "modules": [
+        "service/transfer"
+    ]
+}

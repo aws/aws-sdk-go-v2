@@ -1170,6 +1170,26 @@ func (m *validateOpGetRecommendedPolicyV2) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRemediationsV2 struct {
+}
+
+func (*validateOpGetRemediationsV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRemediationsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRemediationsV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRemediationsV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetResourcesStatisticsV2 struct {
 }
 
@@ -1245,6 +1265,26 @@ func (m *validateOpInviteMembers) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpInviteMembersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListExposuresByRemediationV2 struct {
+}
+
+func (*validateOpListExposuresByRemediationV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExposuresByRemediationV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExposuresByRemediationV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExposuresByRemediationV2Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1862,6 +1902,10 @@ func addOpGetRecommendedPolicyV2ValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpGetRecommendedPolicyV2{}, middleware.After)
 }
 
+func addOpGetRemediationsV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRemediationsV2{}, middleware.After)
+}
+
 func addOpGetResourcesStatisticsV2ValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourcesStatisticsV2{}, middleware.After)
 }
@@ -1876,6 +1920,10 @@ func addOpGetSecurityControlDefinitionValidationMiddleware(stack *middleware.Sta
 
 func addOpInviteMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInviteMembers{}, middleware.After)
+}
+
+func addOpListExposuresByRemediationV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExposuresByRemediationV2{}, middleware.After)
 }
 
 func addOpListStandardsControlAssociationsValidationMiddleware(stack *middleware.Stack) error {
@@ -2617,6 +2665,111 @@ func validateRelatedFindingList(v []types.RelatedFinding) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RelatedFindingList"}
 	for i := range v {
 		if err := validateRelatedFinding(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemediationCompositeFilter(v *types.RemediationCompositeFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemediationCompositeFilter"}
+	if v.StringFilters != nil {
+		if err := validateRemediationStringFilterList(v.StringFilters); err != nil {
+			invalidParams.AddNested("StringFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemediationCompositeFilterList(v []types.RemediationCompositeFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemediationCompositeFilterList"}
+	for i := range v {
+		if err := validateRemediationCompositeFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemediationFilters(v *types.RemediationFilters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemediationFilters"}
+	if v.CompositeFilters != nil {
+		if err := validateRemediationCompositeFilterList(v.CompositeFilters); err != nil {
+			invalidParams.AddNested("CompositeFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemediationStringFilter(v *types.RemediationStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemediationStringFilter"}
+	if len(v.FieldName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldName"))
+	}
+	if v.Filter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filter"))
+	} else if v.Filter != nil {
+		if err := validateRemediationStringFilterCondition(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemediationStringFilterCondition(v *types.RemediationStringFilterCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemediationStringFilterCondition"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemediationStringFilterList(v []types.RemediationStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemediationStringFilterList"}
+	for i := range v {
+		if err := validateRemediationStringFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4001,6 +4154,23 @@ func validateOpGetRecommendedPolicyV2Input(v *GetRecommendedPolicyV2Input) error
 	}
 }
 
+func validateOpGetRemediationsV2Input(v *GetRemediationsV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRemediationsV2Input"}
+	if v.Filters != nil {
+		if err := validateRemediationFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetResourcesStatisticsV2Input(v *GetResourcesStatisticsV2Input) error {
 	if v == nil {
 		return nil
@@ -4060,6 +4230,21 @@ func validateOpInviteMembersInput(v *InviteMembersInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "InviteMembersInput"}
 	if v.AccountIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListExposuresByRemediationV2Input(v *ListExposuresByRemediationV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExposuresByRemediationV2Input"}
+	if v.TargetUid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetUid"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

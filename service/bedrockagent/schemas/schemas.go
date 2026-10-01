@@ -2648,7 +2648,7 @@ var InferenceConfiguration_stopSequences *smithy.Schema
 var IngestionJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "IngestionJob",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var IngestionJob_knowledgeBaseId *smithy.Schema
 
 var IngestionJob_dataSourceId *smithy.Schema
@@ -2666,6 +2666,8 @@ var IngestionJob_failureReasons *smithy.Schema
 var IngestionJob_startedAt *smithy.Schema
 
 var IngestionJob_updatedAt *smithy.Schema
+
+var IngestionJob_textReadyAt *smithy.Schema
 
 var IngestionJobFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
@@ -2767,7 +2769,7 @@ var _IngestionJobSummaries_member *smithy.Schema
 var IngestionJobSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "IngestionJobSummary",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var IngestionJobSummary_knowledgeBaseId *smithy.Schema
 
 var IngestionJobSummary_dataSourceId *smithy.Schema
@@ -2781,6 +2783,8 @@ var IngestionJobSummary_status *smithy.Schema
 var IngestionJobSummary_startedAt *smithy.Schema
 
 var IngestionJobSummary_updatedAt *smithy.Schema
+
+var IngestionJobSummary_textReadyAt *smithy.Schema
 
 var IngestionJobSummary_statistics *smithy.Schema
 
@@ -8753,6 +8757,8 @@ func init() {
 
 	IngestionJob_updatedAt = IngestionJob.AddMember("updatedAt", _DateTimestamp)
 
+	IngestionJob_textReadyAt = IngestionJob.AddMember("textReadyAt", _DateTimestamp)
+
 	IngestionJobFilterAttribute_STATUS = IngestionJobFilterAttribute.AddMember("STATUS", smithyprelude.Unit)
 
 	IngestionJobFilterOperator_EQ = IngestionJobFilterOperator.AddMember("EQ", smithyprelude.Unit)
@@ -8792,6 +8798,8 @@ func init() {
 	IngestionJobSummary_startedAt = IngestionJobSummary.AddMember("startedAt", _DateTimestamp)
 
 	IngestionJobSummary_updatedAt = IngestionJobSummary.AddMember("updatedAt", _DateTimestamp)
+
+	IngestionJobSummary_textReadyAt = IngestionJobSummary.AddMember("textReadyAt", _DateTimestamp)
 
 	IngestionJobSummary_statistics = IngestionJobSummary.AddMember("statistics", IngestionJobStatistics)
 

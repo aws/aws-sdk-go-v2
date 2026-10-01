@@ -1118,7 +1118,7 @@ var DescribedWebAppVpcConfig_VpcEndpointId *smithy.Schema
 var DescribedWorkflow = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "DescribedWorkflow",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var DescribedWorkflow_Arn *smithy.Schema
 
 var DescribedWorkflow_Description *smithy.Schema
@@ -1130,6 +1130,8 @@ var DescribedWorkflow_OnExceptionSteps *smithy.Schema
 var DescribedWorkflow_WorkflowId *smithy.Schema
 
 var DescribedWorkflow_Tags *smithy.Schema
+
+var DescribedWorkflow_StructuredLogDestinations *smithy.Schema
 
 var _Description = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
@@ -2873,7 +2875,7 @@ var CreateWebAppResponse_WebAppId *smithy.Schema
 var CreateWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "CreateWorkflowRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var CreateWorkflowRequest_Description *smithy.Schema
 
 var CreateWorkflowRequest_Steps *smithy.Schema
@@ -2881,6 +2883,8 @@ var CreateWorkflowRequest_Steps *smithy.Schema
 var CreateWorkflowRequest_OnExceptionSteps *smithy.Schema
 
 var CreateWorkflowRequest_Tags *smithy.Schema
+
+var CreateWorkflowRequest_StructuredLogDestinations *smithy.Schema
 
 var CreateWorkflowResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
@@ -4694,6 +4698,8 @@ func init() {
 
 	DescribedWorkflow_Tags = DescribedWorkflow.AddMember("Tags", _Tags)
 
+	DescribedWorkflow_StructuredLogDestinations = DescribedWorkflow.AddMember("StructuredLogDestinations", _StructuredLogDestinations)
+
 	_FilePaths_member = _FilePaths.AddMember("member", _FilePath)
 
 	IdentityCenterConfig_InstanceArn = IdentityCenterConfig.AddMember("InstanceArn", _IdentityCenterInstanceArn)
@@ -5055,6 +5061,8 @@ func init() {
 	CreateWorkflowRequest_OnExceptionSteps = CreateWorkflowRequest.AddMember("OnExceptionSteps", _WorkflowSteps)
 
 	CreateWorkflowRequest_Tags = CreateWorkflowRequest.AddMember("Tags", _Tags)
+
+	CreateWorkflowRequest_StructuredLogDestinations = CreateWorkflowRequest.AddMember("StructuredLogDestinations", _StructuredLogDestinations)
 
 	CreateWorkflowResponse_WorkflowId = CreateWorkflowResponse.AddMember("WorkflowId", _WorkflowId)
 

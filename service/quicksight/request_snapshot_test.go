@@ -5577,6 +5577,189 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 									},
 								},
 							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
 						},
 						{
 							DateTimePicker: &types.FilterDateTimePickerControl{
@@ -6019,6 +6202,189 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 											},
 										},
 									},
+								},
+							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
 								},
 							},
 						},
@@ -8236,6 +8602,189 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 									},
 								},
 							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
 						},
 						{
 							DateTimePicker: &types.FilterDateTimePickerControl{
@@ -8678,6 +9227,189 @@ func TestCheckRequestSnapshot_CreateDashboard(t *testing.T) {
 											},
 										},
 									},
+								},
+							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
 								},
 							},
 						},
@@ -12080,6 +12812,189 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 									},
 								},
 							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
 						},
 						{
 							DateTimePicker: &types.FilterDateTimePickerControl{
@@ -12522,6 +13437,189 @@ func TestCheckRequestSnapshot_CreateTemplate(t *testing.T) {
 											},
 										},
 									},
+								},
+							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
 								},
 							},
 						},
@@ -23339,6 +24437,189 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 									},
 								},
 							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
 						},
 						{
 							DateTimePicker: &types.FilterDateTimePickerControl{
@@ -23781,6 +25062,189 @@ func TestCheckRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											},
 										},
 									},
+								},
+							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
 								},
 							},
 						},
@@ -26154,6 +27618,189 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 									},
 								},
 							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
 						},
 						{
 							DateTimePicker: &types.FilterDateTimePickerControl{
@@ -26596,6 +28243,189 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 											},
 										},
 									},
+								},
+							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
 								},
 							},
 						},
@@ -30583,6 +32413,189 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 									},
 								},
 							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
 						},
 						{
 							DateTimePicker: &types.FilterDateTimePickerControl{
@@ -31025,6 +33038,189 @@ func TestCheckRequestSnapshot_UpdateTemplate(t *testing.T) {
 											},
 										},
 									},
+								},
+							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
 								},
 							},
 						},
@@ -38595,6 +40791,189 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 									},
 								},
 							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
 						},
 						{
 							DateTimePicker: &types.FilterDateTimePickerControl{
@@ -39037,6 +41416,189 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 											},
 										},
 									},
+								},
+							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
 								},
 							},
 						},
@@ -41254,6 +43816,189 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 									},
 								},
 							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
 						},
 						{
 							DateTimePicker: &types.FilterDateTimePickerControl{
@@ -41696,6 +44441,189 @@ func TestUpdateRequestSnapshot_CreateDashboard(t *testing.T) {
 											},
 										},
 									},
+								},
+							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
 								},
 							},
 						},
@@ -45098,6 +48026,189 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 									},
 								},
 							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
 						},
 						{
 							DateTimePicker: &types.FilterDateTimePickerControl{
@@ -45540,6 +48651,189 @@ func TestUpdateRequestSnapshot_CreateTemplate(t *testing.T) {
 											},
 										},
 									},
+								},
+							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
 								},
 							},
 						},
@@ -56357,6 +59651,189 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 									},
 								},
 							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
 						},
 						{
 							DateTimePicker: &types.FilterDateTimePickerControl{
@@ -56799,6 +60276,189 @@ func TestUpdateRequestSnapshot_UpdateAnalysis(t *testing.T) {
 											},
 										},
 									},
+								},
+							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
 								},
 							},
 						},
@@ -59172,6 +62832,189 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 									},
 								},
 							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
 						},
 						{
 							DateTimePicker: &types.FilterDateTimePickerControl{
@@ -59614,6 +63457,189 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 											},
 										},
 									},
+								},
+							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
 								},
 							},
 						},
@@ -63601,6 +67627,189 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 									},
 								},
 							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
 						},
 						{
 							DateTimePicker: &types.FilterDateTimePickerControl{
@@ -64043,6 +68252,189 @@ func TestUpdateRequestSnapshot_UpdateTemplate(t *testing.T) {
 											},
 										},
 									},
+								},
+							},
+							HierarchyList: &types.HierarchyFilterListControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterListControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+									SearchOptions: &types.HierarchyFilterListControlSearchOptions{
+										Visibility: types.Visibility("HIDDEN"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
+								},
+							},
+							HierarchyDropdown: &types.HierarchyFilterDropDownControl{
+								FilterControlId: ptr.String("__FilterControlId__"),
+								SourceFilterId:  ptr.String("__SourceFilterId__"),
+								Title:           ptr.String("__Title__"),
+								DisplayOptions: &types.HierarchyFilterDropDownControlDisplayOptions{
+									TitleOptions: &types.LabelOptions{
+										Visibility: types.Visibility("HIDDEN"),
+										FontConfiguration: &types.FontConfiguration{
+											FontSize: &types.FontSize{
+												Relative: types.RelativeFontSize("EXTRA_SMALL"),
+												Absolute: ptr.String("__Absolute__"),
+											},
+											FontDecoration: types.FontDecoration("UNDERLINE"),
+											FontColor:      ptr.String("__FontColor__"),
+											FontWeight: &types.FontWeight{
+												Name: types.FontWeightName("NORMAL"),
+											},
+											FontStyle:  types.FontStyle("NORMAL"),
+											FontFamily: ptr.String("__FontFamily__"),
+										},
+										CustomLabel: ptr.String("__CustomLabel__"),
+									},
+									InfoIconLabelOptions: &types.SheetControlInfoIconLabelOptions{
+										Visibility:   types.Visibility("HIDDEN"),
+										InfoIconText: ptr.String("__InfoIconText__"),
+									},
+								},
+								Type:       types.SheetControlListType("MULTI_SELECT"),
+								CommitMode: types.CommitMode("AUTO"),
+								ControlSortConfigurations: []types.ControlSortConfiguration{
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+									{
+										SelectableValuesSort: &types.SelectableValuesSort{
+											Direction: types.ControlSortDirection("ASC"),
+										},
+										ControlColumnSort: &types.AggregationSortConfiguration{
+											Column: &types.ColumnIdentifier{
+												DataSetIdentifier: ptr.String("__DataSetIdentifier__"),
+												TopicIdentifier:   ptr.String("__TopicIdentifier__"),
+												ColumnName:        ptr.String("__ColumnName__"),
+											},
+											SortDirection: types.SortDirection("ASC"),
+											AggregationFunction: &types.AggregationFunction{
+												NumericalAggregationFunction: &types.NumericalAggregationFunction{
+													SimpleNumericalAggregation: types.SimpleNumericalAggregationFunction("SUM"),
+													PercentileAggregation: &types.PercentileAggregation{
+														PercentileValue: ptr.Float64(1.0),
+													},
+												},
+												CategoricalAggregationFunction: types.CategoricalAggregationFunction("COUNT"),
+												DateAggregationFunction:        types.DateAggregationFunction("COUNT"),
+												AttributeAggregationFunction: &types.AttributeAggregationFunction{
+													SimpleAttributeAggregation: types.SimpleAttributeAggregationFunction("UNIQUE_VALUE"),
+													ValueForMultipleValues:     ptr.String("__ValueForMultipleValues__"),
+												},
+											},
+										},
+									},
+								},
+								ControlTitleFormatText: &types.ControlTitleFormatText{
+									PlainText: ptr.String("__PlainText__"),
+									RichText:  ptr.String("__RichText__"),
 								},
 							},
 						},

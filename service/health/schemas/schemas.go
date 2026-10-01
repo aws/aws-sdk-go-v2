@@ -67,6 +67,11 @@ var DescribeHealthServiceStatusForOrganization = smithy.NewSchema(smithy.ShapeID
 	Name:      "DescribeHealthServiceStatusForOrganization",
 }, smithy.ShapeTypeOperation, 0)
 
+var DescribeServiceLifecycle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeServiceLifecycle",
+}, smithy.ShapeTypeOperation, 0)
+
 var DisableHealthServiceAccessForOrganization = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "DisableHealthServiceAccessForOrganization",
@@ -660,11 +665,42 @@ var _healthServiceAccessStatusForOrganization = smithy.NewSchema(smithy.ShapeID{
 	Name:      "healthServiceAccessStatusForOrganization",
 }, smithy.ShapeTypeString, 0)
 
+var _ImpactRiskList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ImpactRiskList",
+}, smithy.ShapeTypeList, 1)
+var _ImpactRiskList_member *smithy.Schema
+
 var InvalidPaginationToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "InvalidPaginationToken",
 }, smithy.ShapeTypeStructure, 1)
 var InvalidPaginationToken_message *smithy.Schema
+
+var LifecycleEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "LifecycleEvent",
+}, smithy.ShapeTypeStructure, 5)
+var LifecycleEvent_lifecycleEventType *smithy.Schema
+
+var LifecycleEvent_date *smithy.Schema
+
+var LifecycleEvent_regions *smithy.Schema
+
+var LifecycleEvent_impactRisks *smithy.Schema
+
+var LifecycleEvent_description *smithy.Schema
+
+var _LifecycleEventList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "LifecycleEventList",
+}, smithy.ShapeTypeList, 1)
+var _LifecycleEventList_member *smithy.Schema
+
+var _LifecycleMaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "LifecycleMaxResults",
+}, smithy.ShapeTypeInteger, 0)
 
 var _locale = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
@@ -859,6 +895,32 @@ var _service = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "service",
 }, smithy.ShapeTypeString, 0)
+
+var ServiceLifecycle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ServiceLifecycle",
+}, smithy.ShapeTypeStructure, 5)
+var ServiceLifecycle_service *smithy.Schema
+
+var ServiceLifecycle_version *smithy.Schema
+
+var ServiceLifecycle_title *smithy.Schema
+
+var ServiceLifecycle_recommendedVersion *smithy.Schema
+
+var ServiceLifecycle_lifecycleEvents *smithy.Schema
+
+var ServiceLifecycleFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ServiceLifecycleFilter",
+}, smithy.ShapeTypeStructure, 1)
+var ServiceLifecycleFilter_service *smithy.Schema
+
+var _ServiceLifecycleList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ServiceLifecycleList",
+}, smithy.ShapeTypeList, 1)
+var _ServiceLifecycleList_member *smithy.Schema
 
 var _serviceList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
@@ -1113,6 +1175,24 @@ var DescribeHealthServiceStatusForOrganizationResponse = smithy.NewSchema(smithy
 	Name:      "DescribeHealthServiceStatusForOrganizationResponse",
 }, smithy.ShapeTypeStructure, 1)
 var DescribeHealthServiceStatusForOrganizationResponse_healthServiceAccessStatusForOrganization *smithy.Schema
+
+var DescribeServiceLifecycleRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeServiceLifecycleRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DescribeServiceLifecycleRequest_filter *smithy.Schema
+
+var DescribeServiceLifecycleRequest_nextToken *smithy.Schema
+
+var DescribeServiceLifecycleRequest_maxResults *smithy.Schema
+
+var DescribeServiceLifecycleResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeServiceLifecycleResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeServiceLifecycleResponse_serviceLifecycles *smithy.Schema
+
+var DescribeServiceLifecycleResponse_nextToken *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -1429,7 +1509,21 @@ func init() {
 
 	_EventTypeList_member = _EventTypeList.AddMember("member", EventType)
 
+	_ImpactRiskList_member = _ImpactRiskList.AddMember("member", _string)
+
 	InvalidPaginationToken_message = InvalidPaginationToken.AddMember("message", _string)
+
+	LifecycleEvent_lifecycleEventType = LifecycleEvent.AddMember("lifecycleEventType", _string)
+
+	LifecycleEvent_date = LifecycleEvent.AddMember("date", _timestamp)
+
+	LifecycleEvent_regions = LifecycleEvent.AddMember("regions", _regionList)
+
+	LifecycleEvent_impactRisks = LifecycleEvent.AddMember("impactRisks", _ImpactRiskList)
+
+	LifecycleEvent_description = LifecycleEvent.AddMember("description", _string)
+
+	_LifecycleEventList_member = _LifecycleEventList.AddMember("member", LifecycleEvent)
 
 	_OrganizationAccountIdsList_member = _OrganizationAccountIdsList.AddMember("member", _accountId)
 
@@ -1502,6 +1596,20 @@ func init() {
 	OrganizationEventFilter_personas = OrganizationEventFilter.AddMember("personas", _EventPersonaList)
 
 	_OrganizationEventList_member = _OrganizationEventList.AddMember("member", OrganizationEvent)
+
+	ServiceLifecycle_service = ServiceLifecycle.AddMember("service", _service)
+
+	ServiceLifecycle_version = ServiceLifecycle.AddMember("version", _string)
+
+	ServiceLifecycle_title = ServiceLifecycle.AddMember("title", _string)
+
+	ServiceLifecycle_recommendedVersion = ServiceLifecycle.AddMember("recommendedVersion", _string)
+
+	ServiceLifecycle_lifecycleEvents = ServiceLifecycle.AddMember("lifecycleEvents", _LifecycleEventList)
+
+	ServiceLifecycleFilter_service = ServiceLifecycleFilter.AddMember("service", _service)
+
+	_ServiceLifecycleList_member = _ServiceLifecycleList.AddMember("member", ServiceLifecycle)
 
 	UnsupportedLocale_message = UnsupportedLocale.AddMember("message", _string)
 
@@ -1620,5 +1728,15 @@ func init() {
 	DescribeEventTypesResponse_nextToken = DescribeEventTypesResponse.AddMember("nextToken", _nextToken)
 
 	DescribeHealthServiceStatusForOrganizationResponse_healthServiceAccessStatusForOrganization = DescribeHealthServiceStatusForOrganizationResponse.AddMember("healthServiceAccessStatusForOrganization", _healthServiceAccessStatusForOrganization)
+
+	DescribeServiceLifecycleRequest_filter = DescribeServiceLifecycleRequest.AddMember("filter", ServiceLifecycleFilter)
+
+	DescribeServiceLifecycleRequest_nextToken = DescribeServiceLifecycleRequest.AddMember("nextToken", _nextToken)
+
+	DescribeServiceLifecycleRequest_maxResults = DescribeServiceLifecycleRequest.AddMember("maxResults", _LifecycleMaxResults)
+
+	DescribeServiceLifecycleResponse_serviceLifecycles = DescribeServiceLifecycleResponse.AddMember("serviceLifecycles", _ServiceLifecycleList)
+
+	DescribeServiceLifecycleResponse_nextToken = DescribeServiceLifecycleResponse.AddMember("nextToken", _nextToken)
 
 }

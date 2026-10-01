@@ -1619,6 +1619,10 @@ func TestUpdateResponseSnapshot_DescribeWorkflow(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
+			StructuredLogDestinations: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.TransferService)

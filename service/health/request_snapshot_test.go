@@ -874,6 +874,37 @@ func TestCheckRequestSnapshot_DescribeHealthServiceStatusForOrganization(t *test
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeServiceLifecycle(t *testing.T) {
+	input := &DescribeServiceLifecycleInput{
+		Filter: &types.ServiceLifecycleFilter{
+			Service: ptr.String("__Service__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeServiceLifecycle(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeServiceLifecycle"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DisableHealthServiceAccessForOrganization(t *testing.T) {
 	input := &DisableHealthServiceAccessForOrganizationInput{}
 	body := &bytes.Buffer{}
@@ -1587,6 +1618,37 @@ func TestUpdateRequestSnapshot_DescribeHealthServiceStatusForOrganization(t *tes
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeHealthServiceStatusForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeServiceLifecycle(t *testing.T) {
+	input := &DescribeServiceLifecycleInput{
+		Filter: &types.ServiceLifecycleFilter{
+			Service: ptr.String("__Service__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeServiceLifecycle(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeServiceLifecycle"); err != nil {
 		t.Fatal(err)
 	}
 }

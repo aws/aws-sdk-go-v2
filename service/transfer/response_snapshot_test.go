@@ -813,6 +813,10 @@ func TestCheckResponseSnapshot_CreateWorkflow(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		StructuredLogDestinations: []string{
+			"__Member__",
+			"__Member__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2092,6 +2096,10 @@ func TestCheckResponseSnapshot_DescribeWorkflow(t *testing.T) {
 					Key:   ptr.String("__Key__"),
 					Value: ptr.String("__Value__"),
 				},
+			},
+			StructuredLogDestinations: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 	}

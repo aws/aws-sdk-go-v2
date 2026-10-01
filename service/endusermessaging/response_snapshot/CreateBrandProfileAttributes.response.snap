@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"attributes":[{"attributeName":"__AttributeName__","attributeType":"TEXT","mediaDownloadUrl":"__MediaDownloadUrl__"},{"attributeName":"__AttributeName__","attributeType":"TEXT","mediaDownloadUrl":"__MediaDownloadUrl__"}]}

@@ -1,0 +1,8 @@
+{
+    "id": "2f7a0510-b5f9-422e-8ab6-751ed2279e47",
+    "type": "feature",
+    "description": "This release adds HierarchyFilter support for Amazon QuickSight analysis and dashboard and 2 legged OAuth for databricks datasources.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

@@ -65,6 +65,16 @@ type CreateWorkflowInput struct {
 	// SUCCESS before it times out, the exception steps are executed.
 	OnExceptionSteps []types.WorkflowStep
 
+	// Specifies the log groups to which your workflow logs are sent.
+	//
+	// To specify a log group, you must provide the ARN for an existing log group. In
+	// this case, the format of the log group is as follows:
+	//
+	//     arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*
+	//
+	// For example, arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*
+	StructuredLogDestinations []string
+
 	// Key-value pairs that can be used to group and search for workflows. Tags are
 	// metadata attached to workflows for any purpose.
 	Tags []types.Tag
@@ -84,6 +94,7 @@ func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	serializeWorkflowSteps(s, schemas.CreateWorkflowRequest_OnExceptionSteps, v.OnExceptionSteps)
 	serializeWorkflowSteps(s, schemas.CreateWorkflowRequest_Steps, v.Steps)
+	serializeStructuredLogDestinations(s, schemas.CreateWorkflowRequest_StructuredLogDestinations, v.StructuredLogDestinations)
 	serializeTags(s, schemas.CreateWorkflowRequest_Tags, v.Tags)
 }
 

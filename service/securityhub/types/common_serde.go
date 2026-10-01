@@ -2956,6 +2956,19 @@ func serializeEnabledStandardIdentifierList(s smithy.ShapeSerializer, schema *sm
 	s.CloseList()
 }
 
+func serializeExposureFindingItemsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ExposureFinding) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeFilePathList(s smithy.ShapeSerializer, schema *smithy.Schema, v []FilePaths) {
 	if v == nil {
 		return
@@ -3272,6 +3285,19 @@ func serializeIpFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeIpv6CidrBlockAssociationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Ipv6CidrBlockAssociation) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeKbArticleList(s smithy.ShapeSerializer, schema *smithy.Schema, v []KbArticle) {
 	if v == nil {
 		return
 	}
@@ -3645,6 +3671,82 @@ func serializeRelatedRequirementsList(s smithy.ShapeSerializer, schema *smithy.S
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeRemediationCompositeFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RemediationCompositeFilter) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRemediationParameterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RemediationParameter) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRemediationStepList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RemediationStep) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRemediationStringFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RemediationStringFilter) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRemediationStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeRemediationV2ItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RemediationV2Item) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -7225,6 +7327,20 @@ func deserializeEnabledStandardIdentifierList(d smithy.ShapeDeserializer, s *smi
 	})
 }
 
+func deserializeExposureFindingItemsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ExposureFinding) error {
+	*v = make([]ExposureFinding, 0)
+	var vv ExposureFinding
+	return smithy.ReadList(d, s, func() error {
+		vv = ExposureFinding{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeFilePathList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FilePaths) error {
 	*v = make([]FilePaths, 0)
 	var vv FilePaths
@@ -7580,6 +7696,20 @@ func deserializeIpv6CidrBlockAssociationList(d smithy.ShapeDeserializer, s *smit
 	var vv Ipv6CidrBlockAssociation
 	return smithy.ReadList(d, s, func() error {
 		vv = Ipv6CidrBlockAssociation{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeKbArticleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]KbArticle) error {
+	*v = make([]KbArticle, 0)
+	var vv KbArticle
+	return smithy.ReadList(d, s, func() error {
+		vv = KbArticle{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -7992,6 +8122,90 @@ func deserializeRelatedRequirementsList(d smithy.ShapeDeserializer, s *smithy.Sc
 	return smithy.ReadList(d, s, func() error {
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRemediationCompositeFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RemediationCompositeFilter) error {
+	*v = make([]RemediationCompositeFilter, 0)
+	var vv RemediationCompositeFilter
+	return smithy.ReadList(d, s, func() error {
+		vv = RemediationCompositeFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRemediationParameterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RemediationParameter) error {
+	*v = make([]RemediationParameter, 0)
+	var vv RemediationParameter
+	return smithy.ReadList(d, s, func() error {
+		vv = RemediationParameter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRemediationStepList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RemediationStep) error {
+	*v = make([]RemediationStep, 0)
+	var vv RemediationStep
+	return smithy.ReadList(d, s, func() error {
+		vv = RemediationStep{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRemediationStringFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RemediationStringFilter) error {
+	*v = make([]RemediationStringFilter, 0)
+	var vv RemediationStringFilter
+	return smithy.ReadList(d, s, func() error {
+		vv = RemediationStringFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRemediationStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRemediationV2ItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RemediationV2Item) error {
+	*v = make([]RemediationV2Item, 0)
+	var vv RemediationV2Item
+	return smithy.ReadList(d, s, func() error {
+		vv = RemediationV2Item{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

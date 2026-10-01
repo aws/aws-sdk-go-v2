@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"brandProfileAttributes":[{"attributeName":"__AttributeName__","attributeType":"TEXT","category":"__Category__","createdAt":946684800,"description":"__Description__","updatedAt":946684800},{"attributeName":"__AttributeName__","attributeType":"TEXT","category":"__Category__","createdAt":946684800,"description":"__Description__","updatedAt":946684800}],"nextToken":"__NextToken__"}

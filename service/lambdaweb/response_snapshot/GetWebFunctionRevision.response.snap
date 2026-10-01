@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"buildConfig":{"codeConfig":{"s3Object":{"bucket":"__Bucket__","key":"__Key__","versionId":"__VersionId__"}},"runtimeConfig":{"runtime":"__Runtime__"}},"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","errors":[{"attribute":"__Attribute__","errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__"},{"attribute":"__Attribute__","errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__"}],"functionArn":"__FunctionArn__","kmsKeyArn":"__KmsKeyArn__","revisionArn":"__RevisionArn__","revisionId":"__RevisionId__","serviceConfig":{"environmentVariables":{"key0":"__Value__"},"executionRoleArn":"__ExecutionRoleArn__","maxConcurrencyPerEnvironment":1,"telemetryConfig":{"loggingConfig":{"applicationLogLevel":"TRACE","logGroup":"__LogGroup__","systemLogLevel":"DEBUG"}},"timeoutSeconds":1},"state":"Pending","stateReason":"__StateReason__"}
