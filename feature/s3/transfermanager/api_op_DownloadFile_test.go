@@ -198,6 +198,7 @@ func TestDownloadFile(t *testing.T) {
 		getObjectFn func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
 		optFn       func(*Options)
 		rng         string
+		directIO    bool
 		initErr     error
 		writeErr    error
 		syncErr     error
@@ -217,6 +218,15 @@ func TestDownloadFile(t *testing.T) {
 			optFn:        ranges,
 			expectEvents: []string{"Init", "Sync", "Close", "Rename", "SyncDir"},
 			expectData:   data,
+			expectInit:   &fakeInit{size: int64(len(data))},
+		},
+		"ranges, direct I/O": {
+			data:         data,
+			getObjectFn:  s3testing.RangeGetObjectFn,
+			optFn:        ranges,
+			directIO:     true,
+			expectEvents: []string{"Init", "Sync", "Close", "Rename", "SyncDir"},
+			expectData:   data,
 			expectInit:   &fakeInit{size: int64(len(data)), directIO: true},
 		},
 		"parts": {
@@ -227,11 +237,22 @@ func TestDownloadFile(t *testing.T) {
 			expectData:   data,
 			expectInit:   &fakeInit{size: int64(len(data))},
 		},
+		// part sizes aren't known up front, so direct I/O is not used
+		"parts, direct I/O": {
+			data:         data,
+			getObjectFn:  partsGetObjectFn(data, partSizes),
+			optFn:        parts,
+			directIO:     true,
+			expectEvents: []string{"Init", "Sync", "Close", "Rename", "SyncDir"},
+			expectData:   data,
+			expectInit:   &fakeInit{size: int64(len(data))},
+		},
 		"explicit range": {
 			data:         data,
 			getObjectFn:  s3testing.RangeGetObjectFn,
 			optFn:        ranges,
 			rng:          "bytes=2-16777218",
+			directIO:     true,
 			expectEvents: []string{"Init", "Sync", "Close", "Rename", "SyncDir"},
 			expectData:   data[2:16777219],
 			expectInit:   &fakeInit{size: 16777217, directIO: true},
@@ -240,6 +261,7 @@ func TestDownloadFile(t *testing.T) {
 			data:         []byte{},
 			getObjectFn:  s3testing.RangeGetObjectFn,
 			optFn:        ranges,
+			directIO:     true,
 			expectEvents: []string{"Init", "Sync", "Close", "Rename", "SyncDir"},
 			expectData:   []byte{},
 			expectInit:   &fakeInit{size: 0, directIO: true},
@@ -249,6 +271,7 @@ func TestDownloadFile(t *testing.T) {
 				return nil, rangeNotSatisfiableError{}
 			},
 			optFn:        ranges,
+			directIO:     true,
 			expectEvents: []string{"Init", "Sync", "Close", "Rename", "SyncDir"},
 			expectData:   []byte{},
 			expectInit:   &fakeInit{size: 0},
@@ -354,6 +377,7 @@ func TestDownloadFile(t *testing.T) {
 				Bucket:   aws.String("bucket"),
 				Key:      aws.String("key"),
 				FilePath: testFilePath,
+				DirectIO: c.directIO,
 			}
 			if c.rng != "" {
 				in.Range = aws.String(c.rng)

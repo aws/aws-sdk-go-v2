@@ -9,14 +9,12 @@ import (
 	"syscall"
 )
 
-const oDirectThreshold = 64 * 1024 * 1024 // 64MiB
-
 var (
 	statfs    = syscall.Statfs
 	fallocate = syscall.Fallocate
 )
 
-// Linux files open with O_DIRECT above a size threshold when the filesystem and
+// Linux files open with O_DIRECT when the caller opts in and the filesystem and
 // transfer sizes are aligned. This bypasses the page cache and an inode lock,
 // which drastically improves performance for writes that are sustained enough.
 type file struct {
@@ -52,7 +50,8 @@ func (f *file) Init(size, partSize, writeSize int64, directIO bool) error {
 	}
 
 	f.size = size
-	if size < oDirectThreshold || !directIO || !supportsDirectIO(f.path, partSize, writeSize) {
+	// fallocate rejects a zero length, and there's nothing to write anyway
+	if size <= 0 || !directIO || !supportsDirectIO(f.path, partSize, writeSize) {
 		ff, err := openFile(f.path, os.O_RDWR|os.O_CREATE|os.O_EXCL, 0o666)
 		f.File = ff
 		return err

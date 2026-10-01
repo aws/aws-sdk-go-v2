@@ -564,6 +564,8 @@ type downloader struct {
 	emitter *singleObjectProgressEmitter
 
 	writer *internalio.AsyncWriterAt
+
+	directIO bool
 }
 
 func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error) {
@@ -819,8 +821,8 @@ func getWriteSize(partSize int64) int64 {
 	return partSize
 }
 
-func directIOEnabled(getObjectType types.GetObjectType) bool {
-	return getObjectType == types.GetObjectRanges
+func (d *downloader) useDirectIO() bool {
+	return d.directIO && d.options.GetObjectType == types.GetObjectRanges
 }
 
 func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectInput, chunk *dlChunk, clientOptions ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
@@ -867,7 +869,7 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 		d.emitter.Start(ctx, d.in, d.totalBytes-d.offset)
 
 		if i, ok := d.in.WriterAt.(internalio.File); ok {
-			if err := i.Init(d.totalBytes-d.offset, d.options.PartSizeBytes, getWriteSize(d.options.PartSizeBytes), directIOEnabled(d.options.GetObjectType)); err != nil {
+			if err := i.Init(d.totalBytes-d.offset, d.options.PartSizeBytes, getWriteSize(d.options.PartSizeBytes), d.useDirectIO()); err != nil {
 				initErr = err
 				return
 			}

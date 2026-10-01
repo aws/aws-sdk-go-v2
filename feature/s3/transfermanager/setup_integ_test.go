@@ -519,6 +519,7 @@ func testDownloadObject(t *testing.T, bucket string, testData downloadObjectTest
 type downloadFileTestData struct {
 	Key         string
 	Range       string
+	DirectIO    bool
 	OptFns      []func(*Options)
 	Existing    []byte // written to the destination before downloading
 	ExpectBody  []byte
@@ -543,6 +544,7 @@ func testDownloadFile(t *testing.T, bucket string, testData downloadFileTestData
 		Bucket:   aws.String(bucket),
 		Key:      aws.String(testData.Key),
 		FilePath: path,
+		DirectIO: testData.DirectIO,
 	}
 	if testData.Range != "" {
 		in.Range = aws.String(testData.Range)

@@ -5,7 +5,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
-	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -46,12 +45,6 @@ type Client struct {
 // uses a buildable HTTP client, NewFromConfig gives the S3 client an
 // independently owned transport with larger idle connection pools. A
 // non-buildable HTTP client is preserved unchanged.
-//
-// NewFromConfig defaults object downloads to ranged GETs. Ranged GETs provide
-// fixed byte ranges, allowing downloaded responses to be written at known
-// offsets and enabling optimized direct-I/O write paths when alignment permits.
-// GetObjectParts downloads do not use direct I/O because multipart part sizes
-// may be unequal and their write boundaries cannot be validated in advance.
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	s3Client := s3.NewFromConfig(cfg, func(o *s3.Options) {
 		buildable, ok := o.HTTPClient.(*awshttp.BuildableClient)
@@ -67,9 +60,8 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	})
 
 	opts := Options{
-		S3:            s3Client,
-		Concurrency:   defaultConfigTransferConcurrency,
-		GetObjectType: types.GetObjectRanges,
+		S3:          s3Client,
+		Concurrency: defaultConfigTransferConcurrency,
 	}
 	for _, fn := range optFns {
 		fn(&opts)

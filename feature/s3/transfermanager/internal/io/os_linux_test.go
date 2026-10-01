@@ -16,6 +16,7 @@ const (
 
 	testPartSize  = 10 * 1024 * 1024
 	testWriteSize = 8 * 1024 * 1024
+	testFileSize  = 64 * 1024 * 1024
 )
 
 type fallocateCall struct {
@@ -115,11 +116,11 @@ func TestFileInitUsesBufferedIO(t *testing.T) {
 		directIO  bool
 		writeSize int64
 	}{
-		{name: "size threshold", size: oDirectThreshold - 1, bsize: 4096, partSize: testPartSize, writeSize: testWriteSize, directIO: true},
-		{name: "filesystem block size", size: oDirectThreshold, bsize: 8192, partSize: testPartSize, writeSize: testWriteSize, directIO: true},
-		{name: "filesystem stat error", size: oDirectThreshold, bsize: 4096, statErr: errors.New("statfs failed"), partSize: testPartSize, writeSize: testWriteSize, directIO: true},
-		{name: "part size", size: oDirectThreshold, bsize: 4096, partSize: testPartSize + 1, writeSize: testWriteSize, directIO: true},
-		{name: "direct I/O disabled", size: oDirectThreshold, bsize: 4096, partSize: testPartSize, writeSize: testWriteSize},
+		{name: "empty file", size: 0, bsize: 4096, partSize: testPartSize, writeSize: testWriteSize, directIO: true},
+		{name: "filesystem block size", size: testFileSize, bsize: 8192, partSize: testPartSize, writeSize: testWriteSize, directIO: true},
+		{name: "filesystem stat error", size: testFileSize, bsize: 4096, statErr: errors.New("statfs failed"), partSize: testPartSize, writeSize: testWriteSize, directIO: true},
+		{name: "part size", size: testFileSize, bsize: 4096, partSize: testPartSize + 1, writeSize: testWriteSize, directIO: true},
+		{name: "direct I/O disabled", size: testFileSize, bsize: 4096, partSize: testPartSize, writeSize: testWriteSize},
 	} {
 		t.Run(test.name, func(t *testing.T) {
 			stubStatfs(t, test.bsize, test.statErr)
@@ -153,30 +154,41 @@ func TestFileInitUsesBufferedIO(t *testing.T) {
 }
 
 func TestFileInitDirectIO(t *testing.T) {
-	stubStatfs(t, 4096, nil)
-	fallocates := stubFallocate(t, nil)
-	ff := &fakeFile{fd: 42}
-	opens := stubOpenFile(t, ff, nil)
+	// there is no minimum size, opting in is sufficient
+	for _, test := range []struct {
+		name string
+		size int64
+	}{
+		{name: "one byte", size: 1},
+		{name: "unaligned", size: testFileSize + 13},
+		{name: "aligned", size: testFileSize},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			stubStatfs(t, 4096, nil)
+			fallocates := stubFallocate(t, nil)
+			ff := &fakeFile{fd: 42}
+			opens := stubOpenFile(t, ff, nil)
 
-	created, err := Create("/dir/file")
-	if err != nil {
-		t.Fatal(err)
-	}
-	f := created.(*file)
-	const size = oDirectThreshold
-	if err := f.Init(size, testPartSize, testWriteSize, true); err != nil {
-		t.Fatal(err)
-	}
+			created, err := Create("/dir/file")
+			if err != nil {
+				t.Fatal(err)
+			}
+			f := created.(*file)
+			if err := f.Init(test.size, testPartSize, testWriteSize, true); err != nil {
+				t.Fatal(err)
+			}
 
-	expectOpen(t, *opens, openCall{name: "/dir/file", flag: directOpenFlags, perm: 0o644})
-	if !f.direct {
-		t.Fatal("file did not initialize with direct I/O")
+			expectOpen(t, *opens, openCall{name: "/dir/file", flag: directOpenFlags, perm: 0o644})
+			if !f.direct {
+				t.Fatal("file did not initialize with direct I/O")
+			}
+			want := fallocateCall{fd: 42, mode: 0, off: 0, size: test.size}
+			if len(*fallocates) != 1 || (*fallocates)[0] != want {
+				t.Fatalf("fallocate calls = %+v, want [%+v]", *fallocates, want)
+			}
+			expectCalls(t, ff)
+		})
 	}
-	want := fallocateCall{fd: 42, mode: 0, off: 0, size: size}
-	if len(*fallocates) != 1 || (*fallocates)[0] != want {
-		t.Fatalf("fallocate calls = %+v, want [%+v]", *fallocates, want)
-	}
-	expectCalls(t, ff)
 }
 
 func TestFileInitAlreadyInitialized(t *testing.T) {
@@ -200,12 +212,12 @@ func TestFileInitAlreadyInitialized(t *testing.T) {
 
 func TestFileInitOpenError(t *testing.T) {
 	for _, test := range []struct {
-		name  string
-		size  int64
-		flags int
+		name     string
+		directIO bool
+		flags    int
 	}{
-		{name: "buffered", size: 1, flags: bufferedOpenFlags},
-		{name: "direct", size: oDirectThreshold, flags: directOpenFlags},
+		{name: "buffered", flags: bufferedOpenFlags},
+		{name: "direct", directIO: true, flags: directOpenFlags},
 	} {
 		t.Run(test.name, func(t *testing.T) {
 			stubStatfs(t, 4096, nil)
@@ -218,7 +230,7 @@ func TestFileInitOpenError(t *testing.T) {
 				t.Fatal(err)
 			}
 			f := created.(*file)
-			if err := f.Init(test.size, testPartSize, testWriteSize, true); !errors.Is(err, wantErr) {
+			if err := f.Init(testFileSize, testPartSize, testWriteSize, test.directIO); !errors.Is(err, wantErr) {
 				t.Fatalf("Init error = %v, want %v", err, wantErr)
 			}
 
@@ -247,7 +259,7 @@ func TestFileInitFallocateError(t *testing.T) {
 		t.Fatal(err)
 	}
 	f := created.(*file)
-	if err := f.Init(oDirectThreshold, testPartSize, testWriteSize, true); !errors.Is(err, wantErr) {
+	if err := f.Init(testFileSize, testPartSize, testWriteSize, true); !errors.Is(err, wantErr) {
 		t.Fatalf("Init error = %v, want %v", err, wantErr)
 	}
 
@@ -262,8 +274,8 @@ func TestFileInitFallocateError(t *testing.T) {
 
 func TestFileWriteAt(t *testing.T) {
 	const (
-		unaligned = oDirectThreshold + 13
-		aligned   = oDirectThreshold
+		unaligned = testFileSize + 13
+		aligned   = testFileSize
 	)
 
 	for _, test := range []struct {
@@ -311,7 +323,7 @@ func TestFileWriteAt(t *testing.T) {
 }
 
 func TestFileWriteAtError(t *testing.T) {
-	const size = oDirectThreshold + 13
+	const size = testFileSize + 13
 
 	for _, test := range []struct {
 		name   string
@@ -345,7 +357,7 @@ func TestFileWriteAtUninitialized(t *testing.T) {
 }
 
 func TestFileClose(t *testing.T) {
-	const size = oDirectThreshold + 13
+	const size = testFileSize + 13
 	truncateErr := errors.New("truncate failed")
 	closeErr := errors.New("close failed")
 
@@ -386,7 +398,7 @@ func TestFileCloseUninitialized(t *testing.T) {
 }
 
 func TestFileSync(t *testing.T) {
-	const size = oDirectThreshold + 13
+	const size = testFileSize + 13
 	truncateErr := errors.New("truncate failed")
 	syncErr := errors.New("sync failed")
 

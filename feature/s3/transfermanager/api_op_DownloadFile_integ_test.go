@@ -20,18 +20,19 @@ func TestInteg_DownloadFile(t *testing.T) {
 	ranges := []func(*Options){func(o *Options) { o.GetObjectType = types.GetObjectRanges }}
 	parts := []func(*Options){func(o *Options) { o.GetObjectType = types.GetObjectParts }}
 
-	// Above the direct I/O threshold, with an unaligned tail so the final write
-	// is padded. Only ranges downloads on Linux use direct I/O.
-	over := make([]byte, 96*mib+13)
-	if _, err := rand.Read(over); err != nil {
+	// Large enough for sustained direct I/O, with an unaligned tail so the
+	// final write is padded. Direct I/O is only used on Linux, when opted in,
+	// for ranges downloads.
+	large := make([]byte, 96*mib+13)
+	if _, err := rand.Read(large); err != nil {
 		t.Fatal(err)
 	}
-	under := largeObjectBuf
+	medium := largeObjectBuf
 
 	small := []byte("hello world")
 	empty := []byte{}
 	keys := map[string]string{}
-	for name, body := range map[string][]byte{"small": small, "empty": empty, "under": under, "over": over} {
+	for name, body := range map[string][]byte{"small": small, "empty": empty, "medium": medium, "large": large} {
 		key := UniqueID()
 		if _, err := s3Client.PutObject(context.Background(), &s3.PutObjectInput{
 			Bucket: aws.String(bucket),
@@ -53,17 +54,26 @@ func TestInteg_DownloadFile(t *testing.T) {
 
 	cases := map[string]downloadFileTestData{
 		"small":                       {Key: keys["small"], ExpectBody: small},
+		"small ranges direct":         {Key: keys["small"], OptFns: ranges, DirectIO: true, ExpectBody: small},
 		"empty ranges":                {Key: keys["empty"], OptFns: ranges, ExpectBody: empty},
+		"empty ranges direct":         {Key: keys["empty"], OptFns: ranges, DirectIO: true, ExpectBody: empty},
 		"empty parts":                 {Key: keys["empty"], OptFns: parts, ExpectBody: empty},
-		"under threshold ranges":      {Key: keys["under"], OptFns: ranges, ExpectBody: under},
-		"under threshold parts":       {Key: keys["under"], OptFns: parts, ExpectBody: under},
-		"over threshold ranges":       {Key: keys["over"], OptFns: ranges, ExpectBody: over},
-		"over threshold parts":        {Key: keys["over"], OptFns: parts, ExpectBody: over},
-		"range under threshold":       {Key: keys["under"], OptFns: ranges, Range: "bytes=1-10485760", ExpectBody: under[1:10485761]},
-		"range over threshold":        {Key: keys["over"], OptFns: ranges, Range: "bytes=10485760-94371852", ExpectBody: over[10485760:94371853]},
+		"medium ranges":               {Key: keys["medium"], OptFns: ranges, ExpectBody: medium},
+		"medium ranges direct":        {Key: keys["medium"], OptFns: ranges, DirectIO: true, ExpectBody: medium},
+		"medium parts":                {Key: keys["medium"], OptFns: parts, ExpectBody: medium},
+		"large ranges":                {Key: keys["large"], OptFns: ranges, ExpectBody: large},
+		"large ranges direct":         {Key: keys["large"], OptFns: ranges, DirectIO: true, ExpectBody: large},
+		"large parts":                 {Key: keys["large"], OptFns: parts, ExpectBody: large},
+		"large parts direct":          {Key: keys["large"], OptFns: parts, DirectIO: true, ExpectBody: large},
+		"large default direct":        {Key: keys["large"], DirectIO: true, ExpectBody: large},
+		"range medium":                {Key: keys["medium"], OptFns: ranges, Range: "bytes=1-10485760", ExpectBody: medium[1:10485761]},
+		"range medium direct":         {Key: keys["medium"], OptFns: ranges, DirectIO: true, Range: "bytes=1-10485760", ExpectBody: medium[1:10485761]},
+		"range large direct":          {Key: keys["large"], OptFns: ranges, DirectIO: true, Range: "bytes=10485760-94371852", ExpectBody: large[10485760:94371853]},
 		"unequal part sizes ranges":   {Key: keys["unequal"], OptFns: ranges, ExpectBody: unequal},
+		"unequal part sizes direct":   {Key: keys["unequal"], OptFns: ranges, DirectIO: true, ExpectBody: unequal},
 		"unequal part sizes parts":    {Key: keys["unequal"], OptFns: parts, ExpectBody: unequal},
-		"replaces larger file":        {Key: keys["under"], OptFns: ranges, Existing: bytes.Repeat([]byte{'x'}, 2*len(under)), ExpectBody: under},
+		"replaces larger file":        {Key: keys["medium"], OptFns: ranges, Existing: bytes.Repeat([]byte{'x'}, 2*len(medium)), ExpectBody: medium},
+		"replaces larger file direct": {Key: keys["medium"], OptFns: ranges, DirectIO: true, Existing: bytes.Repeat([]byte{'x'}, 2*len(medium)), ExpectBody: medium},
 		"missing key preserves file":  {Key: UniqueID(), OptFns: ranges, Existing: []byte("previous contents"), ExpectError: "NoSuchKey"},
 		"missing key creates nothing": {Key: UniqueID(), OptFns: ranges, ExpectError: "NoSuchKey"},
 	}

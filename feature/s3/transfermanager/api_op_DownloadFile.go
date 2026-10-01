@@ -34,6 +34,17 @@ type DownloadFileInput struct {
 	// FilePath is the local destination path the object is written to. Required.
 	FilePath string
 
+	// DirectIO opts in to writing the file with direct I/O, bypassing the
+	// operating system's page cache. This can substantially improve throughput
+	// for large downloads on fast storage, but data written this way is not
+	// cached for subsequent reads, and some filesystems do not support it.
+	//
+	// Direct I/O is currently only supported on Linux, and only takes effect
+	// when GetObjectType is GetObjectRanges and PartSizeBytes and the
+	// destination filesystem are compatible with the required 4KiB alignment.
+	// Otherwise the file is written with normal buffered I/O.
+	DirectIO bool
+
 	// To retrieve the checksum, this mode must be enabled.
 	ChecksumMode types.ChecksumMode
 
@@ -132,8 +143,9 @@ func (i *DownloadFileInput) toDownloadObjectInput(w io.WriterAt) *DownloadObject
 // is not modified.
 //
 // For write-to-disk use cases, prefer DownloadFile over DownloadObject, since
-// DownloadFile has exclusive ownership of the file handle it can apply various
-// optimizations based on the downloaded size and platform.
+// DownloadFile has exclusive ownership of the file handle it can apply
+// platform-specific optimizations, such as opt-in direct I/O (see
+// DownloadFileInput.DirectIO).
 func (c *Client) DownloadFile(ctx context.Context, input *DownloadFileInput, opts ...func(*Options)) (*DownloadObjectOutput, error) {
 	if input == nil || input.FilePath == "" {
 		return nil, fmt.Errorf("FilePath is required")
@@ -154,7 +166,7 @@ func (c *Client) DownloadFile(ctx context.Context, input *DownloadFileInput, opt
 		return nil, fmt.Errorf("create: %w", err)
 	}
 
-	d := downloader{in: input.toDownloadObjectInput(f), options: options}
+	d := downloader{in: input.toDownloadObjectInput(f), options: options, directIO: input.DirectIO}
 	out, err := d.download(ctx)
 	if err != nil {
 		_ = f.Close()
