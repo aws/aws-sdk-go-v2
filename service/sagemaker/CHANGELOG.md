@@ -1,3 +1,7 @@
+# v1.282.0 (2026-10-01)
+
+* **Feature**: Release support for c8a.16xlarge and m8a.16xlarge instance types for SageMaker HyperPod
+
 # v1.281.0 (2026-09-30)
 
 * **Feature**: This feature enables customers to modify their accounting database via API.

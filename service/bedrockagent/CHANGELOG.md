@@ -1,3 +1,7 @@
+# v1.68.0 (2026-10-01)
+
+* **Feature**: Adds an optional textReadyAt field to ListIngestionJobs and GetIngestionJob for Managed Knowledge Bases data source sync jobs. The field denotes the timestamp at which all the documents in the scope of a sync job had their text content indexed and are available for retrieval.
+
 # v1.67.0 (2026-09-25)
 
 * **Feature**: Adds support for calling VPC configuration API's in Bedrock. These configurations allow the use of On Prem connectors in Bedrock Managed Knowledge bases

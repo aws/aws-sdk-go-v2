@@ -1,3 +1,31 @@
+# Release (2026-10-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.68.0](service/bedrockagent/CHANGELOG.md#v1680-2026-10-01)
+  * **Feature**: Adds an optional textReadyAt field to ListIngestionJobs and GetIngestionJob for Managed Knowledge Bases data source sync jobs. The field denotes the timestamp at which all the documents in the scope of a sync job had their text content indexed and are available for retrieval.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.74.0](service/cloudfront/CHANGELOG.md#v1740-2026-10-01)
+  * **Feature**: Added always-amz-auth as a supported signing behavior for Origin Access Control (OAC), enabling CloudFront to authenticate requests to Lambda-Web origins.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.338.1](service/ec2/CHANGELOG.md#v13381-2026-10-01)
+  * **Documentation**: This release launches the AMI tag sharing feature, which lets AMI owners share tags alongside their AMIs, eliminating the need to build and maintain custom tag replication workflows.
+* `github.com/aws/aws-sdk-go-v2/service/endusermessaging`: [v1.0.0](service/endusermessaging/CHANGELOG.md#v100-2026-10-01)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS End User Messaging now supports Brand profiles and Notify code configurations. Brand profiles capture your sender details once to reuse across phone number registrations. Notify code configurations let you define your OTP policy and delivery settings to send passcodes in minutes.
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.48.0](service/health/CHANGELOG.md#v1480-2026-10-01)
+  * **Feature**: Adds DescribeServiceLifecycle operation returning lifecycle information for AWS services, including end-of-support dates, version recommendations, and lifecycle events.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/lambdaweb`: [v1.0.0](service/lambdaweb/CHANGELOG.md#v100-2026-10-01)
+  * **Release**: New AWS service client module
+  * **Feature**: Lambda Web Functions GA launch. Lambda Web Functions enable customers to run web applications and API backends
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.134.0](service/quicksight/CHANGELOG.md#v11340-2026-10-01)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+  * **Feature**: This release adds HierarchyFilter support for Amazon QuickSight analysis and dashboard and 2 legged OAuth for databricks datasources.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.282.0](service/sagemaker/CHANGELOG.md#v12820-2026-10-01)
+  * **Feature**: Release support for c8a.16xlarge and m8a.16xlarge instance types for SageMaker HyperPod
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.83.0](service/securityhub/CHANGELOG.md#v1830-2026-10-01)
+  * **Feature**: Adds GetRemediationsV2 and ListExposuresByRemediationV2 APIs. This feature allows customers to see their highest priority remediations for their Exposure findings. Remediations target key changes customers can make to resources to drive finding resolution.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.85.0](service/transfer/CHANGELOG.md#v1850-2026-10-01)
+  * **Feature**: AWS Transfer Family Workflows adds support for the structuredLogDestinations option, enabling customers to specify a custom Amazon CloudWatch Logs log group for managed workflow execution logs.
+
 # Release (2026-09-30)
 
 ## General Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "498db3c7-1e9e-4a2e-bdd6-5656de23b3f5",
-    "type": "feature",
-    "description": "Adds DescribeServiceLifecycle operation returning lifecycle information for AWS services, including end-of-support dates, version recommendations, and lifecycle events.",
-    "modules": [
-        "service/health"
-    ]
-}

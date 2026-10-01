@@ -1,8 +1,0 @@
-{
-    "id": "465b6840-abce-4d16-91ad-569e968530b5",
-    "type": "feature",
-    "description": "Added always-amz-auth as a supported signing behavior for Origin Access Control (OAC), enabling CloudFront to authenticate requests to Lambda-Web origins.",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

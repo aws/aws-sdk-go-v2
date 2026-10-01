@@ -1,3 +1,7 @@
+# v1.85.0 (2026-10-01)
+
+* **Feature**: AWS Transfer Family Workflows adds support for the structuredLogDestinations option, enabling customers to specify a custom Amazon CloudWatch Logs log group for managed workflow execution logs.
+
 # v1.84.0 (2026-09-29)
 
 * **Feature**: AWS Transfer Family now supports configuring up to three custom ports on public SFTP servers, instead of the single default port 22. You can also set each port's communication mode (server-talk-first or client-talk-first) so legacy and modern SFTP clients connect reliably.

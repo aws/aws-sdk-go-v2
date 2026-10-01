@@ -1,3 +1,8 @@
+# v1.134.0 (2026-10-01)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Feature**: This release adds HierarchyFilter support for Amazon QuickSight analysis and dashboard and 2 legged OAuth for databricks datasources.
+
 # v1.133.0 (2026-09-24)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

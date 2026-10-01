@@ -1,8 +1,0 @@
-{
-    "id": "7ebcbecb-33cd-4849-a9d6-3c9e57a36bbd",
-    "type": "feature",
-    "description": "Lambda Web Functions GA launch. Lambda Web Functions enable customers to run web applications and API backends",
-    "modules": [
-        "service/lambdaweb"
-    ]
-}
