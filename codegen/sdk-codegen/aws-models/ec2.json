@@ -18797,7 +18797,7 @@
                 "CopyImageTags": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to copy your user-defined AMI tags to the new AMI.</p>\n         <p>The following tags are not be copied:</p>\n         <ul>\n            <li>\n               <p>System tags (prefixed with <code>aws:</code>)</p>\n            </li>\n            <li>\n               <p>For public and shared AMIs, user-defined tags that are attached by other Amazon Web Services\n          accounts</p>\n            </li>\n         </ul>\n         <p>Default: Your user-defined AMI tags are not copied.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to copy your user-defined AMI tags to the new AMI.</p>\n         <p>The following tags are not be copied:</p>\n         <ul>\n            <li>\n               <p>System tags (prefixed with <code>aws:</code>)</p>\n            </li>\n            <li>\n               <p>For public and shared AMIs, user-defined tags that are attached by other Amazon Web Services\n          accounts, except tags with the <code>ec2:SharedTag/</code> prefix. For more information\n          about tag sharing, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#sharing-tags\">Sharing\n          tags</a> in the <i>Amazon EC2 User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>Default: Your user-defined AMI tags are not copied.</p>"
                     }
                 },
                 "TagSpecifications": {

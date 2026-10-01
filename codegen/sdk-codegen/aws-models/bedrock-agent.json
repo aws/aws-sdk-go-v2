@@ -11121,6 +11121,12 @@
                         "smithy.api#documentation": "<p>The time the data ingestion job was last updated.</p> <p>If you stop a data ingestion job, the <code>updatedAt</code> time is the time the job was stopped.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "textReadyAt": {
+                    "target": "com.amazonaws.bedrockagent#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which all text content in the data ingestion job finished extraction and became available to query.</p> <p>This time isn't returned until text extraction is complete for all the documents in the job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11428,6 +11434,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time the data ingestion job was last updated.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "textReadyAt": {
+                    "target": "com.amazonaws.bedrockagent#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which all text content in the data ingestion job finished extraction and became available to query.</p> <p>This time isn't returned until text extraction is complete for all the documents in the job.</p>"
                     }
                 },
                 "statistics": {

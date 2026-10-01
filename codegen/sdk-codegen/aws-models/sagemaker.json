@@ -12593,6 +12593,18 @@
                     "traits": {
                         "smithy.api#enumValue": "ml.g7.48xlarge"
                     }
+                },
+                "ML_C8A_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.c8a.16xlarge"
+                    }
+                },
+                "ML_M8A_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m8a.16xlarge"
+                    }
                 }
             }
         },
@@ -16532,7 +16544,7 @@
                     "target": "com.amazonaws.sagemaker#EntityName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Name for the cluster policy.</p>",
+                        "smithy.api#documentation": "<p>The name for the cluster policy. The name must be unique within the SageMaker AI HyperPod cluster specified by <code>ClusterArn</code>. You can use the same name in other clusters within a Region or across Regions.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16778,7 +16790,7 @@
                     "target": "com.amazonaws.sagemaker#EntityName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Name to the compute allocation definition.</p>",
+                        "smithy.api#documentation": "<p>The name of the compute allocation definition. The name must be unique within the SageMaker AI HyperPod cluster specified by <code>ClusterArn</code>. You can use the same name in other clusters within a Region or across Regions.</p>",
                         "smithy.api#required": {}
                     }
                 },

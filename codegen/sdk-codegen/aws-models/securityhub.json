@@ -28202,6 +28202,124 @@
                 "smithy.api#documentation": "<p>\n            The options for customizing a security control parameter that is a list of enums.\n        </p>"
             }
         },
+        "com.amazonaws.securityhub#ExposureFinding": {
+            "type": "structure",
+            "members": {
+                "MetadataUid": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of the Security Hub exposure finding, found under the\n         <code>metadata.uid</code> field of the finding.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The title of the exposure finding.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PreviousSeverity": {
+                    "target": "com.amazonaws.securityhub#ExposureSeverity",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The severity of the exposure finding before the remediation target is resolved.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProjectedSeverity": {
+                    "target": "com.amazonaws.securityhub#ExposureSeverity",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The severity of the exposure finding after the remediation target is resolved.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Impact": {
+                    "target": "com.amazonaws.securityhub#ExposureImpact",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The impact resolving a remediation target has on the exposure finding.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Reduces</code> specifies that resolving the remediation target lowers the severity of the exposure finding, but does not resolve it.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Resolves</code> specifies that resolving the remediation target resolves the exposure finding.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Unchanged</code> specifies that resolving the remediation target does not change the severity of the exposure finding.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about an exposure finding and the effect the specific remediation target has on it.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#ExposureFindingItemsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#ExposureFinding"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.securityhub#ExposureImpact": {
+            "type": "enum",
+            "members": {
+                "REDUCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Reduces"
+                    }
+                },
+                "RESOLVES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Resolves"
+                    }
+                },
+                "UNCHANGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unchanged"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#ExposureSeverity": {
+            "type": "enum",
+            "members": {
+                "INFORMATIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Informational"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Low"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Medium"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "High"
+                    }
+                },
+                "CRITICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Critical"
+                    }
+                }
+            }
+        },
         "com.amazonaws.securityhub#ExternalIntegrationConfiguration": {
             "type": "structure",
             "members": {
@@ -28850,7 +28968,7 @@
                     "target": "com.amazonaws.securityhub#FreeTrialStatusValue",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Whether the free trial period is currently active. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> specifies that the free trial period is ongoing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code> specifies that the free trial period has ended, or that it never started.</p>\n            </li>\n         </ul>\n         <p>To determine whether a trial has expired, compare <code>ExpiresAt</code> to the current time.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the free trial period is currently active. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> specifies that the free trial period is ongoing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code> specifies that the free trial period has ended, or that it never started.</p>\n            </li>\n         </ul>\n         <p>To determine whether a trial has expired, compare <code>ExpiresAt</code> to the current time.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -31204,6 +31322,118 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securityhub#GetRemediationsV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#GetRemediationsV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#GetRemediationsV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves remediation targets for the account, or for all member accounts if the caller is\n         the delegated administrator. Results are sorted by priority, highest first, and are paginated.\n         Use <code>TargetUid</code> or <code>MetadataUid</code> to scope the request to a single target\n         or finding.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetRemediationsV2",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.securityhub#GetRemediationsV2Request": {
+            "type": "structure",
+            "members": {
+                "TargetUid": {
+                    "target": "com.amazonaws.securityhub#RemediationStringUid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of an existing remediation target to return. Returns the single\n         matching target. You can't use <code>TargetUid</code> together with <code>MetadataUid</code>\n         or <code>Filters</code>.</p>"
+                    }
+                },
+                "MetadataUid": {
+                    "target": "com.amazonaws.securityhub#RemediationStringUid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of the Security Hub exposure finding, found under the\n         <code>metadata.uid</code> field of the finding. Returns the remediation targets associated with\n         that finding. You can't use <code>MetadataUid</code> together with <code>TargetUid</code> or\n         <code>Filters</code>.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.securityhub#RemediationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters remediation targets based on a set of criteria. You can't use <code>Filters</code>\n         together with <code>TargetUid</code> or <code>MetadataUid</code>.</p>"
+                    }
+                },
+                "ShowGuidance": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to show remediation target guidance.</p>"
+                    }
+                },
+                "GuidanceFormat": {
+                    "target": "com.amazonaws.securityhub#GuidanceFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the remediation guidance examples to return. Valid values are <code>All</code>,\n         <code>AwsCli</code>, <code>Cli</code>, <code>Python</code>, <code>Terraform</code>,\n         <code>Cdk</code>, <code>CloudFormation</code>, <code>IaC</code>, and <code>Template</code>.\n         If you don't specify a value, all formats are returned. Applies only when\n         <code>ShowGuidance</code> is <code>true</code>.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.securityhub#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return. Valid range is 1-100. If you don't specify a value,\n         the operation returns up to 25 results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used to paginate the remediations target list returned.\n         On your first call to <code>GetRemediationsV2</code>, omit this parameter or set it\n         to <code>NULL</code>. For subsequent calls, use the <code>NextToken</code> value returned in\n         the previous response to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetRemediationsV2Response": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.securityhub#RemediationV2ItemList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An array of remediation targets returned by the operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to request the next page of results.\n         Otherwise, this parameter is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityhub#GetResourcesStatisticsV2": {
             "type": "operation",
             "input": {
@@ -31905,6 +32135,65 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#GroupByValue"
+            }
+        },
+        "com.amazonaws.securityhub#GuidanceFormat": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "All"
+                    }
+                },
+                "AWS_CLI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AwsCli"
+                    }
+                },
+                "CLI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Cli"
+                    }
+                },
+                "PYTHON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Python"
+                    }
+                },
+                "TERRAFORM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Terraform"
+                    }
+                },
+                "CDK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Cdk"
+                    }
+                },
+                "CLOUDFORMATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CloudFormation"
+                    }
+                },
+                "IAC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IaC"
+                    }
+                },
+                "TEMPLATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Template"
+                    }
+                }
             }
         },
         "com.amazonaws.securityhub#HealthCheck": {
@@ -32696,6 +32985,42 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The parameters used to modify an existing Jira Cloud integration.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#KbArticle": {
+            "type": "structure",
+            "members": {
+                "Title": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The title of the <code>KbArticle</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Url": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The URL of the <code>KbArticle</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A knowledge base article that provides additional guidance related to the remediation target.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#KbArticleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#KbArticle"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.securityhub#KeywordFilter": {
@@ -33534,6 +33859,128 @@
                     "target": "com.amazonaws.securityhub#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The pagination token to use to request the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#ListExposuresByRemediationV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#ListExposuresByRemediationV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#ListExposuresByRemediationV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the exposure findings tied to a specific remediation target. Results are sorted by\n         previous severity, highest first, and are paginated.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListExposuresByRemediationV2",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.securityhub#ListExposuresByRemediationV2Request": {
+            "type": "structure",
+            "members": {
+                "TargetUid": {
+                    "target": "com.amazonaws.securityhub#RemediationStringUid",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of an existing remediation target to list exposure findings for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.securityhub#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return. Valid range is 1-100. If you don't specify a value,\n         the operation returns up to 25 results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used to paginate the exposures list returned.\n         On your first call to <code>ListExposuresByRemediationV2</code>, omit this parameter or set it\n         to <code>NULL</code>. For subsequent calls, use the <code>NextToken</code> value returned in\n         the previous response to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#ListExposuresByRemediationV2Response": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.securityhub#ExposureFindingItemsList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An array of exposure findings returned by the operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetUid": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of the remediation target that the exposure findings are associated with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Resource": {
+                    "target": "com.amazonaws.securityhub#RemediationResource",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Provides comprehensive details about a resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The total count of exposure findings associated with the remediation target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Trait": {
+                    "target": "com.amazonaws.securityhub#RemediationTrait",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The specific trait associated with the remediation target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to request the next page of results.\n         Otherwise, this parameter is null.</p>"
                     }
                 }
             },
@@ -37206,6 +37653,862 @@
                 "smithy.api#documentation": "<p>Details about the remediation steps for a finding.</p>"
             }
         },
+        "com.amazonaws.securityhub#RemediationCompositeFilter": {
+            "type": "structure",
+            "members": {
+                "StringFilters": {
+                    "target": "com.amazonaws.securityhub#RemediationStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables filtering based on string field values.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enables the creation of criteria for remediation targets.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationCompositeFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#RemediationCompositeFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.securityhub#RemediationFilters": {
+            "type": "structure",
+            "members": {
+                "CompositeFilters": {
+                    "target": "com.amazonaws.securityhub#RemediationCompositeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of complex filtering conditions that can be applied to remediation target data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the criteria used to filter remediation targets, such as resource type, priority,\n         or status.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationGuidance": {
+            "type": "structure",
+            "members": {
+                "TargetTypeName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the remediation target type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Pattern": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The remediation pattern of the remediation target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The guidance version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Context": {
+                    "target": "com.amazonaws.securityhub#RemediationGuidanceContext",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The context behind the remediation target's existence and guidance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Specification": {
+                    "target": "com.amazonaws.securityhub#RemediationGuidanceSpecification",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The specification of the remediation target guidance. This outlines required resource parameters\n         and permissions, remediation steps, and the end state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Examples": {
+                    "target": "com.amazonaws.securityhub#RemediationGuidanceExamples",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Provided remediation guidance examples in different formats that can be run for remediating the target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.securityhub#RemediationGuidanceMetadata",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The metadata of the remediation guidance.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A remediation guidebook outlining guidance in resolving the remediation target.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationGuidanceContext": {
+            "type": "structure",
+            "members": {
+                "ProblemStatement": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Explains the cause which directly created the remediation target.</p>"
+                    }
+                },
+                "RiskAssessment": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An assessment of the existing risk the remediation target creates.</p>"
+                    }
+                },
+                "AffectedScope": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the resources affected by the resolution of the remediation target.</p>"
+                    }
+                },
+                "Prerequisites": {
+                    "target": "com.amazonaws.securityhub#RemediationStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of prerequisite steps in resolving the remediation target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The context behind the remediation target's existence and guidance.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationGuidanceExamples": {
+            "type": "structure",
+            "members": {
+                "AwsCli": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An AWS CLI snippet version of the example.</p>"
+                    }
+                },
+                "Cli": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A CLI snippet version of the example.</p>"
+                    }
+                },
+                "Python": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Python snippet version of the example.</p>"
+                    }
+                },
+                "Terraform": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Terraform snippet version of the example.</p>"
+                    }
+                },
+                "Cdk": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A CDK snippet version of the example.</p>"
+                    }
+                },
+                "CloudFormation": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A CloudFormation snippet version of the example.</p>"
+                    }
+                },
+                "IaC": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An IaC snippet version of the example.</p>"
+                    }
+                },
+                "Template": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Template snippet version of the example.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provided remediation guidance examples in different formats that can be run for remediating the target.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationGuidanceMetadata": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The resource type of the remediation target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExposureType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The exposure type of the related exposure findings.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TraitTitles": {
+                    "target": "com.amazonaws.securityhub#RemediationStringList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The titles of traits this guidance applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Reversibility": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The extent to which changes made in accordance with the guidance can be reversed, for example <code>Fully reversible</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FixEffect": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>When the fix takes effect, for example <code>Immediate</code> or <code>Deferred</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RiskLevel": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The risk when implementing the guidance provided.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AutomationLevel": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The extent to which the guidance can be automated, for example <code>Full</code>.</p>"
+                    }
+                },
+                "HumanReviewRequired": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether human review is required.</p>"
+                    }
+                },
+                "GeneratedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp of when the guidance was generated.</p>\n         <p>For more information about the validation and formatting of timestamp fields in Security Hub CSPM, see <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps\">Timestamps</a>.</p>"
+                    }
+                },
+                "VerificationStatus": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Verification status of the guidance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata of the remediation guidance.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationGuidanceSpecification": {
+            "type": "structure",
+            "members": {
+                "Parameters": {
+                    "target": "com.amazonaws.securityhub#RemediationParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of the parameters used in running the steps provided.</p>"
+                    }
+                },
+                "Steps": {
+                    "target": "com.amazonaws.securityhub#RemediationStepList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of ordered steps for resolving the remediation targets.</p>"
+                    }
+                },
+                "ExpectedEndState": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected end state of the associated resources after completion of the steps.</p>"
+                    }
+                },
+                "RequiredPermissions": {
+                    "target": "com.amazonaws.securityhub#RemediationStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of required permissions to run the steps.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specification of the remediation target guidance. This outlines required resource parameters\n         and permissions, remediation steps, and the end state.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationOutcome": {
+            "type": "structure",
+            "members": {
+                "ResolvedFindingsCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of associated exposure findings that are resolved by remediating the target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SeverityReductionFindingsCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of associated exposure findings whose severity is reduced by remediating the target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SeverityUnchangedCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of associated exposure findings whose severity is unchanged by remediating the target.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The outcome from resolving the remediation target.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationParameter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of the parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A description of the parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Required": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the parameter is required for running the guidance steps.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A parameter used in running the guidance steps.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationParameterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#RemediationParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.securityhub#RemediationPriority": {
+            "type": "enum",
+            "members": {
+                "CRITICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Critical"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "High"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Medium"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Low"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#RemediationResource": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Web Services account that recorded the resource data in Security Hub.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region in which Security Hub recorded the resource data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceOwnerAccountId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the cloud account that owns the resource. For Amazon Web Services resources, this is the Amazon Web Services account ID. For Azure resources, this is the Azure subscription ID.</p>"
+                    }
+                },
+                "ResourceOwnerOrgId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the cloud organization that owns the resource. For Amazon Web Services resources, this is the Organizations ID. For Azure resources, this is the Azure tenant ID.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for a resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceGuid": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The global identifier used to identify a resource.</p>"
+                    }
+                },
+                "ResourceRegion": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The native cloud region where the resource is located. For Amazon Web Services, this is an Amazon Web Services Region (for example, <code>us-east-1</code>). For Azure resources, this is the Azure region (for example, <code>westus2</code>). This field is always included.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CloudProvider": {
+                    "target": "com.amazonaws.securityhub#CloudProviderName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The cloud provider where the resource exists.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS</code> specifies that the resource exists in Amazon Web Services.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Azure</code> specifies that the resource exists in Microsoft Azure.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides comprehensive details about a resource.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationStatus": {
+            "type": "enum",
+            "members": {
+                "NEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "New"
+                    }
+                },
+                "UPDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Updated"
+                    }
+                },
+                "RESOLVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Resolved"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#RemediationStep": {
+            "type": "structure",
+            "members": {
+                "Phase": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The phase of the remediation plan that this step belongs to (for example, <code>FIX</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A description of what the step does.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Service": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Which service this step is performed in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The action to be taken for this step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Logic": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logic behind the existence of this step.</p>"
+                    }
+                },
+                "Inverse": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inverse of the step, to be used if the step needs to be rolled back.</p>"
+                    }
+                },
+                "VerifyAfter": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take after the step to verify its success.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A step in the remediation guidance.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationStepList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#RemediationStep"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.securityhub#RemediationStringField": {
+            "type": "enum",
+            "members": {
+                "RESOURCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Resource.Type"
+                    }
+                },
+                "PRIORITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Priority"
+                    }
+                },
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Status"
+                    }
+                },
+                "RESOURCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Resource.Id"
+                    }
+                },
+                "RESOURCE_OWNER_ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Resource.ResourceOwnerAccountId"
+                    }
+                },
+                "RESOURCE_CLOUD_PROVIDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Resource.CloudProvider"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#RemediationStringFilter": {
+            "type": "structure",
+            "members": {
+                "FieldName": {
+                    "target": "com.amazonaws.securityhub#RemediationStringField",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the filter field. Valid values are <code>Resource.Type</code>, <code>Priority</code>, <code>Status</code>, <code>Resource.Id</code>, <code>Resource.ResourceOwnerAccountId</code>, and <code>Resource.CloudProvider</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.securityhub#RemediationStringFilterCondition",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The string filter definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A string filter for filtering remediation targets.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationStringFilterCondition": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The value the string filter is comparing against.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The condition to apply to the string filter.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationStringFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#RemediationStringFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.securityhub#RemediationStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#NonEmptyString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.securityhub#RemediationStringUid": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.securityhub#RemediationSummaryDetail": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A summarized action to take for the remediation target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the remediation target.</p>"
+                    }
+                },
+                "IsImmediate": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies whether the effect of this target is immediate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PostRemediationSteps": {
+                    "target": "com.amazonaws.securityhub#RemediationStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of steps to be taken after remediation.</p>"
+                    }
+                },
+                "KbArticles": {
+                    "target": "com.amazonaws.securityhub#KbArticleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>KbArticle</code> objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the remediation target.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationTrait": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The trait type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The trait title.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The trait associated with the remediation target.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationV2Item": {
+            "type": "structure",
+            "members": {
+                "TargetUid": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of the remediation target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Outcome": {
+                    "target": "com.amazonaws.securityhub#RemediationOutcome",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The outcome of the remediation target's resolution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Priority": {
+                    "target": "com.amazonaws.securityhub#RemediationPriority",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The remediation target's priority. Valid values are <code>Critical</code>, <code>High</code>, <code>Medium</code>, and <code>Low</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RemediationSummary": {
+                    "target": "com.amazonaws.securityhub#RemediationSummaryDetail",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A summary of the remediation target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Resource": {
+                    "target": "com.amazonaws.securityhub#RemediationResource",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The remediation target's associated resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.securityhub#RemediationStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The current status of the remediation target.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>New</code> specifies that the remediation target was newly identified.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Updated</code> specifies that the remediation target changed after it was identified.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Resolved</code> specifies that the remediation target is no longer present.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Trait": {
+                    "target": "com.amazonaws.securityhub#RemediationTrait",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The trait associated with the remediation target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Guidance": {
+                    "target": "com.amazonaws.securityhub#RemediationGuidance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The remediation target's guidance. Returned only when <code>ShowGuidance</code> is\n         <code>true</code> in the request.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The remediation target's last updated timestamp.</p>\n         <p>For more information about the validation and formatting of timestamp fields in Security Hub CSPM, see <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps\">Timestamps</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A remediation target.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RemediationV2ItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#RemediationV2Item"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.securityhub#Resource": {
             "type": "structure",
             "members": {
@@ -40429,6 +41732,9 @@
                     "target": "com.amazonaws.securityhub#GetRecommendedPolicyV2"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#GetRemediationsV2"
+                },
+                {
                     "target": "com.amazonaws.securityhub#GetResourcesStatisticsV2"
                 },
                 {
@@ -40466,6 +41772,9 @@
                 },
                 {
                     "target": "com.amazonaws.securityhub#ListEnabledProductsForImport"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ListExposuresByRemediationV2"
                 },
                 {
                     "target": "com.amazonaws.securityhub#ListFindingAggregators"
@@ -43289,7 +44598,7 @@
                 "Comparison": {
                     "target": "com.amazonaws.securityhub#StringFilterComparison",
                     "traits": {
-                        "smithy.api#documentation": "<p>The condition to apply to a string value when filtering Security Hub CSPM findings.</p>\n         <p>To search for values that have the filter value, use one of the following comparison operators:</p>\n         <ul>\n            <li>\n               <p>To search for values that include the filter value, use <code>CONTAINS</code>. For example, the\n               filter <code>Title CONTAINS CloudFront</code> matches findings that have a <code>Title</code> that\n               includes the string CloudFront.</p>\n            </li>\n            <li>\n               <p>To search for values that exactly match the filter value, use <code>EQUALS</code>. For example,\n               the filter <code>AwsAccountId EQUALS 123456789012</code> only matches findings that have an account ID of\n               <code>123456789012</code>.</p>\n            </li>\n            <li>\n               <p>To search for values that start with the filter value, use <code>PREFIX</code>. For example, the\n               filter <code>ResourceRegion PREFIX us</code> matches findings that have a <code>ResourceRegion</code> that starts\n               with <code>us</code>. A <code>ResourceRegion</code> that starts with a different value, such as <code>af</code>,\n               <code>ap</code>, or <code>ca</code>, doesn't match.</p>\n            </li>\n         </ul>\n         <p>\n            <code>CONTAINS</code>, <code>EQUALS</code>, and <code>PREFIX</code> filters on the same field are joined by\n           <code>OR</code>. A finding matches if it matches any one of those filters. For example, the filters <code>Title CONTAINS CloudFront OR\n               Title CONTAINS CloudWatch</code> match a finding that includes either <code>CloudFront</code>,\n           <code>CloudWatch</code>, or both strings in the title.</p>\n         <p>To search for values that don’t have the filter value, use one of the following comparison operators:</p>\n         <ul>\n            <li>\n               <p>To search for values that exclude the filter value, use <code>NOT_CONTAINS</code>. For example, the\n               filter <code>Title NOT_CONTAINS CloudFront</code> matches findings that have a <code>Title</code> that\n               excludes the string CloudFront.</p>\n            </li>\n            <li>\n               <p>To search for values other than the filter value, use <code>NOT_EQUALS</code>. For\n               example, the filter <code>AwsAccountId NOT_EQUALS 123456789012</code> only matches findings that have an account\n               ID other than <code>123456789012</code>.</p>\n            </li>\n            <li>\n               <p>To search for values that don't start with the filter value, use <code>PREFIX_NOT_EQUALS</code>. For\n               example, the filter <code>ResourceRegion PREFIX_NOT_EQUALS us</code> matches findings with a\n               <code>ResourceRegion</code> that starts with a value other than <code>us</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <code>NOT_CONTAINS</code>, <code>NOT_EQUALS</code>, and <code>PREFIX_NOT_EQUALS</code> filters on the same field\n           are joined by <code>AND</code>. A finding matches only if it matches all of those filters. For example, the filters <code>Title NOT_CONTAINS CloudFront AND\n               Title NOT_CONTAINS CloudWatch</code> match a finding that excludes both <code>CloudFront</code> and\n           <code>CloudWatch</code> in the title.</p>\n         <p>You can’t have both a <code>CONTAINS</code> filter and a <code>NOT_CONTAINS</code> filter on the same field. Similarly,\n            you can't provide both an <code>EQUALS</code> filter and a <code>NOT_EQUALS</code> or\n           <code>PREFIX_NOT_EQUALS</code> filter on the same field. Combining filters in this way returns an error. <code>CONTAINS</code> filters\n           can only be used with other <code>CONTAINS</code> filters. <code>NOT_CONTAINS</code> filters can only be used with\n           other <code>NOT_CONTAINS</code> filters. </p>\n         <p>You can combine <code>PREFIX</code> filters with <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filters for the same field.\n           Security Hub CSPM first processes the <code>PREFIX</code> filters, and then the <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filters.</p>\n         <p>For example, for the following filters, Security Hub CSPM first identifies findings that have resource types\n           that start with either <code>AwsIam</code> or <code>AwsEc2</code>. It then excludes findings that have a resource\n           type of <code>AwsIamPolicy</code> and findings that have a resource type of <code>AwsEc2NetworkInterface</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ResourceType PREFIX AwsIam</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType PREFIX AwsEc2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType NOT_EQUALS AwsIamPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType NOT_EQUALS AwsEc2NetworkInterface</code>\n               </p>\n            </li>\n         </ul>\n         <p>The <code>CONTAINS</code> operator works with automation rules V1 and V2.\n          The <code>NOT_CONTAINS</code> operator works only with automation rules V1.\n          The <code>CONTAINS_WORD</code> operator works only in the <code>GetFindingsV2</code>, <code>GetFindingStatisticsV2</code>, <code>GetResourcesV2</code>, and <code>GetResourcesStatisticsV2</code> APIs.\n          For more information, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html\">Automation rules</a> in the <i>Security Hub CSPM User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The condition to apply to a string value when filtering Security Hub CSPM findings.</p>\n         <p>To search for values that have the filter value, use one of the following comparison operators:</p>\n         <ul>\n            <li>\n               <p>To search for values that include the filter value, use <code>CONTAINS</code>. For example, the\n               filter <code>Title CONTAINS CloudFront</code> matches findings that have a <code>Title</code> that\n               includes the string <code>CloudFront</code>.</p>\n            </li>\n            <li>\n               <p>To search for values that contain a word matching the filter value, regardless of case, use <code>CONTAINS_WORD</code>. For example,\n               the filter <code>Title CONTAINS_WORD lambda</code> matches a finding whose <code>Title</code> is <code>GuardDuty Lambda Protection</code>, because\n               the <code>Title</code> contains the word Lambda. Including special characters in the filter value might produce unexpected search results.</p>\n            </li>\n            <li>\n               <p>To search for values that exactly match the filter value, use <code>EQUALS</code>. For example,\n               the filter <code>AwsAccountId EQUALS 123456789012</code> only matches findings that have an account ID of\n               <code>123456789012</code>.</p>\n            </li>\n            <li>\n               <p>To search for values that start with the filter value, use <code>PREFIX</code>. For example, the\n               filter <code>ResourceRegion PREFIX us</code> matches findings that have a <code>ResourceRegion</code> that starts\n               with <code>us</code>. A <code>ResourceRegion</code> that starts with a different value, such as <code>af</code>,\n               <code>ap</code>, or <code>ca</code>, doesn't match.</p>\n            </li>\n         </ul>\n         <p>\n            <code>CONTAINS</code>, <code>EQUALS</code>, and <code>PREFIX</code> filters on the same field are joined by\n           <code>OR</code>. A finding matches if it matches any one of those filters. For example, the filters <code>Title CONTAINS CloudFront OR\n               Title CONTAINS CloudWatch</code> match a finding that includes either <code>CloudFront</code>,\n           <code>CloudWatch</code>, or both strings in the title.</p>\n         <p>To search for values that don’t have the filter value, use one of the following comparison operators:</p>\n         <ul>\n            <li>\n               <p>To search for values that exclude the filter value, use <code>NOT_CONTAINS</code>. For example, the\n               filter <code>Title NOT_CONTAINS CloudFront</code> matches findings that have a <code>Title</code> that\n               excludes the string CloudFront.</p>\n            </li>\n            <li>\n               <p>To search for values other than the filter value, use <code>NOT_EQUALS</code>. For\n               example, the filter <code>AwsAccountId NOT_EQUALS 123456789012</code> only matches findings that have an account\n               ID other than <code>123456789012</code>.</p>\n            </li>\n            <li>\n               <p>To search for values that don't start with the filter value, use <code>PREFIX_NOT_EQUALS</code>. For\n               example, the filter <code>ResourceRegion PREFIX_NOT_EQUALS us</code> matches findings with a\n               <code>ResourceRegion</code> that starts with a value other than <code>us</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <code>NOT_CONTAINS</code>, <code>NOT_EQUALS</code>, and <code>PREFIX_NOT_EQUALS</code> filters on the same field\n           are joined by <code>AND</code>. A finding matches only if it matches all of those filters. For example, the filters <code>Title NOT_CONTAINS CloudFront AND\n               Title NOT_CONTAINS CloudWatch</code> match a finding that excludes both <code>CloudFront</code> and\n           <code>CloudWatch</code> in the title.</p>\n         <p>You can’t have both a <code>CONTAINS</code> filter and a <code>NOT_CONTAINS</code> filter on the same field. Similarly,\n            you can't provide both an <code>EQUALS</code> filter and a <code>NOT_EQUALS</code> or\n           <code>PREFIX_NOT_EQUALS</code> filter on the same field. Combining filters in this way returns an error. <code>CONTAINS</code> filters\n           can only be used with other <code>CONTAINS</code> filters. <code>NOT_CONTAINS</code> filters can only be used with\n           other <code>NOT_CONTAINS</code> filters. </p>\n         <p>You can combine <code>PREFIX</code> filters with <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filters for the same field.\n           Security Hub CSPM first processes the <code>PREFIX</code> filters, and then the <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filters.</p>\n         <p>For example, for the following filters, Security Hub CSPM first identifies findings that have resource types\n           that start with either <code>AwsIam</code> or <code>AwsEc2</code>. It then excludes findings that have a resource\n           type of <code>AwsIamPolicy</code> and findings that have a resource type of <code>AwsEc2NetworkInterface</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ResourceType PREFIX AwsIam</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType PREFIX AwsEc2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType NOT_EQUALS AwsIamPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType NOT_EQUALS AwsEc2NetworkInterface</code>\n               </p>\n            </li>\n         </ul>\n         <p>The <code>CONTAINS</code> operator works with automation rules V1 and V2.\n          The <code>NOT_CONTAINS</code> operator works only with automation rules V1.\n          The <code>CONTAINS_WORD</code> operator works only in the <code>GetFindingsV2</code>, <code>GetFindingStatisticsV2</code>, <code>GetResourcesV2</code>, and <code>GetResourcesStatisticsV2</code> APIs.\n          For more information, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html\">Automation rules</a> in the <i>Security Hub CSPM User Guide</i>.</p>"
                     }
                 }
             },

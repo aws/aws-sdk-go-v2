@@ -22596,6 +22596,18 @@
                         "smithy.api#documentation": "<p>The HTTP path of the Databricks data source.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AuthenticationType": {
+                    "target": "com.amazonaws.quicksight#AuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type that you want to use for your connection. This parameter accepts OAuth and non-OAuth authentication types.</p>"
+                    }
+                },
+                "OAuthParameters": {
+                    "target": "com.amazonaws.quicksight#OAuthParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information needed to create a data source connection between an Quick Sight account and Databricks.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23907,6 +23919,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The default options that correspond to the <code>RelativeDateTime</code> filter control type.</p>"
                     }
+                },
+                "DefaultHierarchyList": {
+                    "target": "com.amazonaws.quicksight#DefaultHierarchyFilterListControlOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default options that correspond to the <code>HierarchyList</code> filter control type.</p>"
+                    }
+                },
+                "DefaultHierarchyDropdown": {
+                    "target": "com.amazonaws.quicksight#DefaultHierarchyFilterDropDownControlOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default options that correspond to the <code>HierarchyDropdown</code> filter control type.</p>"
+                    }
                 }
             },
             "traits": {
@@ -24031,6 +24055,82 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The options that determine the default settings for a grid layout configuration.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DefaultHierarchyFilterDropDownControlOptions": {
+            "type": "structure",
+            "members": {
+                "DisplayOptions": {
+                    "target": "com.amazonaws.quicksight#HierarchyFilterDropDownControlDisplayOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display options of a control.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.quicksight#SheetControlListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the <code>DefaultHierarchyFilterDropDownControlOptions</code>. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CommitMode": {
+                    "target": "com.amazonaws.quicksight#CommitMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility configuration of the Apply button on a <code>HierarchyFilterDropDownControl</code>.</p>"
+                    }
+                },
+                "ControlSortConfigurations": {
+                    "target": "com.amazonaws.quicksight#ControlSortConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>"
+                    }
+                },
+                "ControlTitleFormatText": {
+                    "target": "com.amazonaws.quicksight#ControlTitleFormatText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title text format configuration for the control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The default options that correspond to the <code>HierarchyDropdown</code> filter control type.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DefaultHierarchyFilterListControlOptions": {
+            "type": "structure",
+            "members": {
+                "DisplayOptions": {
+                    "target": "com.amazonaws.quicksight#HierarchyFilterListControlDisplayOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display options of a control.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.quicksight#SheetControlListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the <code>DefaultHierarchyFilterListControlOptions</code>. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MULTI_SELECT</code>: The user can select multiple entries from the list.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_SELECT</code>: The user can select a single entry from the list.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CommitMode": {
+                    "target": "com.amazonaws.quicksight#CommitMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility configuration of the Apply button on a <code>HierarchyFilterListControl</code>.</p>"
+                    }
+                },
+                "ControlSortConfigurations": {
+                    "target": "com.amazonaws.quicksight#ControlSortConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>"
+                    }
+                },
+                "ControlTitleFormatText": {
+                    "target": "com.amazonaws.quicksight#ControlTitleFormatText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title text format configuration for the control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The default options that correspond to the <code>HierarchyList</code> filter control type.</p>"
             }
         },
         "com.amazonaws.quicksight#DefaultInteractiveLayoutConfiguration": {
@@ -37314,6 +37414,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A <code>NestedFilter</code> filters data with a subset of data that is defined by the nested inner filter.</p>"
                     }
+                },
+                "HierarchyFilter": {
+                    "target": "com.amazonaws.quicksight#HierarchyFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>HierarchyFilter</code> filters data by drilling down through an ordered list of columns. Each level in the list narrows the data by one column, and the selected values at each level determine which values are available at the next.</p>"
+                    }
                 }
             },
             "traits": {
@@ -37436,6 +37542,18 @@
                     "target": "com.amazonaws.quicksight#FilterCrossSheetControl",
                     "traits": {
                         "smithy.api#documentation": "<p>A control from a filter that is scoped across more than one sheet. This represents your filter control on a sheet</p>"
+                    }
+                },
+                "HierarchyList": {
+                    "target": "com.amazonaws.quicksight#HierarchyFilterListControl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A control from a hierarchy filter that displays the hierarchy as a list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>"
+                    }
+                },
+                "HierarchyDropdown": {
+                    "target": "com.amazonaws.quicksight#HierarchyFilterDropDownControl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A control from a hierarchy filter that displays the hierarchy as a dropdown list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>"
                     }
                 }
             },
@@ -43092,12 +43210,354 @@
                 "smithy.api#pattern": "^#[A-F0-9]{6}(?:[A-F0-9]{2})?$"
             }
         },
+        "com.amazonaws.quicksight#HierarchyFilter": {
+            "type": "structure",
+            "members": {
+                "FilterId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier that uniquely identifies a filter within a dashboard, analysis, or template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Column": {
+                    "target": "com.amazonaws.quicksight#ColumnIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column that anchors the filter. This column determines the dataset that the whole\n            filter applies to, so every column in <code>HierarchyLevels</code> and in\n            <code>HierarchyTree</code> must belong to the same dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HierarchyLevels": {
+                    "target": "com.amazonaws.quicksight#HierarchyFilterLevelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ordered list of columns that defines the drill-down path of the filter. The first level is the top of the hierarchy. You can specify a maximum of 5 levels.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HierarchyTree": {
+                    "target": "com.amazonaws.quicksight#HierarchyFilterNode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tree of selected values for the filter. Each node records the values that are selected at one level of the hierarchy, and its children record the selections beneath those values. Omit this attribute to define the drill-down path without restricting any values.</p>"
+                    }
+                },
+                "NullOption": {
+                    "target": "com.amazonaws.quicksight#FilterNullOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This option determines how null values should be treated when filtering data.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL_VALUES</code>: Include null values in filtered results.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NULLS_ONLY</code>: Only include null values in filtered results.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MatchOperator": {
+                    "target": "com.amazonaws.quicksight#HierarchyFilterMatchOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether the values selected in <code>HierarchyTree</code> are kept or\n            removed. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>INCLUDE</code>: Keep only the selected values.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXCLUDE</code>: Remove the selected values.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultFilterControlConfiguration": {
+                    "target": "com.amazonaws.quicksight#DefaultFilterControlConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A <code>HierarchyFilter</code> filters data by drilling down through an ordered list of columns. Each level in the list narrows the data by one column, and the selected values at each level determine which values are available at the next.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#HierarchyFilterDropDownControl": {
+            "type": "structure",
+            "members": {
+                "FilterControlId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the <code>HierarchyFilterDropDownControl</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceFilterId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source filter ID of the <code>HierarchyFilterDropDownControl</code>. This must be\n            the <code>FilterId</code> of a <code>HierarchyFilter</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.quicksight#SheetControlTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the <code>HierarchyFilterDropDownControl</code>.</p>"
+                    }
+                },
+                "DisplayOptions": {
+                    "target": "com.amazonaws.quicksight#HierarchyFilterDropDownControlDisplayOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display options of a control.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.quicksight#SheetControlListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the <code>HierarchyFilterDropDownControl</code>. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CommitMode": {
+                    "target": "com.amazonaws.quicksight#CommitMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility configuration of the Apply button on a <code>HierarchyFilterDropDownControl</code>.</p>"
+                    }
+                },
+                "ControlSortConfigurations": {
+                    "target": "com.amazonaws.quicksight#ControlSortConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>"
+                    }
+                },
+                "ControlTitleFormatText": {
+                    "target": "com.amazonaws.quicksight#ControlTitleFormatText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title text format configuration for the control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A control from a hierarchy filter that displays the hierarchy as a dropdown list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#HierarchyFilterDropDownControlDisplayOptions": {
+            "type": "structure",
+            "members": {
+                "TitleOptions": {
+                    "target": "com.amazonaws.quicksight#LabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options to configure the title visibility, name, and font size.</p>"
+                    }
+                },
+                "InfoIconLabelOptions": {
+                    "target": "com.amazonaws.quicksight#SheetControlInfoIconLabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of info icon label options.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The display options of a control.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#HierarchyFilterLevel": {
+            "type": "structure",
+            "members": {
+                "Column": {
+                    "target": "com.amazonaws.quicksight#ColumnIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column that this level of the hierarchy drills down by. This column must belong to\n            the same dataset as <code>HierarchyFilter$Column</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One level of the drill-down path of a <code>HierarchyFilter</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#HierarchyFilterLevelList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#HierarchyFilterLevel"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.quicksight#HierarchyFilterListControl": {
+            "type": "structure",
+            "members": {
+                "FilterControlId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the <code>HierarchyFilterListControl</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceFilterId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source filter ID of the <code>HierarchyFilterListControl</code>. This must be the\n            <code>FilterId</code> of a <code>HierarchyFilter</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.quicksight#SheetControlTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the <code>HierarchyFilterListControl</code>.</p>"
+                    }
+                },
+                "DisplayOptions": {
+                    "target": "com.amazonaws.quicksight#HierarchyFilterListControlDisplayOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display options of a control.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.quicksight#SheetControlListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the <code>HierarchyFilterListControl</code>. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MULTI_SELECT</code>: The user can select multiple entries from the list.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_SELECT</code>: The user can select a single entry from the list.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CommitMode": {
+                    "target": "com.amazonaws.quicksight#CommitMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility configuration of the Apply button on a <code>HierarchyFilterListControl</code>.</p>"
+                    }
+                },
+                "ControlSortConfigurations": {
+                    "target": "com.amazonaws.quicksight#ControlSortConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>"
+                    }
+                },
+                "ControlTitleFormatText": {
+                    "target": "com.amazonaws.quicksight#ControlTitleFormatText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title text format configuration for the control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A control from a hierarchy filter that displays the hierarchy as a list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#HierarchyFilterListControlDisplayOptions": {
+            "type": "structure",
+            "members": {
+                "TitleOptions": {
+                    "target": "com.amazonaws.quicksight#LabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options to configure the title visibility, name, and font size.</p>"
+                    }
+                },
+                "InfoIconLabelOptions": {
+                    "target": "com.amazonaws.quicksight#SheetControlInfoIconLabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of info icon label options.</p>"
+                    }
+                },
+                "SearchOptions": {
+                    "target": "com.amazonaws.quicksight#HierarchyFilterListControlSearchOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the search options in a hierarchy list control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The display options of a control.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#HierarchyFilterListControlSearchOptions": {
+            "type": "structure",
+            "members": {
+                "Visibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility configuration of the search options in a hierarchy list control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the search options in a hierarchy list control.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#HierarchyFilterMatchOperator": {
+            "type": "enum",
+            "members": {
+                "INCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUDE"
+                    }
+                },
+                "EXCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUDE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#HierarchyFilterNode": {
+            "type": "structure",
+            "members": {
+                "Column": {
+                    "target": "com.amazonaws.quicksight#ColumnIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column that this node selects values from. This column must match the column of the\n            corresponding level in <code>HierarchyFilter$HierarchyLevels</code>. The node at depth 1\n            must match the first level, the node at depth 2 must match the second level, and so on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ParentValue": {
+                    "target": "com.amazonaws.quicksight#HierarchyFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value in the parent node's <code>HierarchyValues</code> that this node belongs to.\n            When a parent selects several values, each of its children repeats one of them here to\n            identify which branch of the hierarchy that child describes.</p>\n         <p>Omit this attribute on the root node of <code>HierarchyTree</code>, which has no\n            parent.</p>"
+                    }
+                },
+                "HierarchyValues": {
+                    "target": "com.amazonaws.quicksight#HierarchyValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values that are selected at this level of the hierarchy. You can specify a maximum\n            of 2,000 values per node.</p>"
+                    }
+                },
+                "Children": {
+                    "target": "com.amazonaws.quicksight#HierarchyFilterNodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nodes that record the selections at the next level of the hierarchy. You can\n            specify a maximum of 1,000 children per node.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A node in the selection tree of a <code>HierarchyFilter</code>. Each node records the\n            values that are selected at one level of the hierarchy. Nodes nest through\n            <code>Children</code> to record selections at deeper levels.</p>\n         <p>The tree cannot be deeper than the number of levels declared in\n            <code>HierarchyLevels</code>. A tree can be a maximum of 5 levels deep, and a node can\n            have a maximum of 1,000 children.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#HierarchyFilterNodeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#HierarchyFilterNode"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.quicksight#HierarchyFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.quicksight#HierarchyId": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 512
+                }
+            }
+        },
+        "com.amazonaws.quicksight#HierarchyValuesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#HierarchyFilterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2000
                 }
             }
         },
@@ -55430,7 +55890,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that contains information needed to create a data source connection that uses OAuth client credentials. This option is available for data source connections that are made with Snowflake and Starburst.</p>"
+                "smithy.api#documentation": "<p>An object that contains information needed to create a data source connection that uses OAuth client credentials. This option is available for data source connections that are made with Snowflake, Starburst, and Databricks.</p>"
             }
         },
         "com.amazonaws.quicksight#OAuthScope": {
