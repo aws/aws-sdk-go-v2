@@ -1,8 +1,0 @@
-{
-    "id": "bfa3d21e-0d7f-47c4-b87c-75c300e675bb",
-    "type": "feature",
-    "description": "Adds trigger filters that control which pull request events, target branches, and labels start an automatic code review.",
-    "modules": [
-        "service/securityagent"
-    ]
-}

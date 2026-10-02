@@ -1,3 +1,23 @@
+# Release (2026-10-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.75.0](service/cognitoidentityprovider/CHANGELOG.md#v1750-2026-10-02)
+  * **Feature**: Amazon Cognito User Pools now supports the OIDC-standard authentication context class reference (ACR) and authentication methods reference (AMR) claims on issued access and Id tokens. Amazon Cognito User Pools also now supports step-up authentication via our existing authentication APIs.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.167.0](service/glue/CHANGELOG.md#v11670-2026-10-02)
+  * **Feature**: Added refresh token grant type to Glue Connection supported OAuth 2.0 grant types
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.22.0](service/invoicing/CHANGELOG.md#v1220-2026-10-02)
+  * **Feature**: API and doc updates related to adding MarketplacePunchOutEnabled and MarketplacePunchOutPreference fields to ProcurementPortalPreferences related APIs
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/lambdaweb`: [v1.0.1](service/lambdaweb/CHANGELOG.md#v101-2026-10-02)
+  * **Documentation**: Documentation update for AWS Lambda Web Functions, clarifies that the LambdaWeb APIs are experimental and not yet available to external customers.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.51.0](service/mediapackagev2/CHANGELOG.md#v1510-2026-10-02)
+  * **Feature**: Dynamic Multiview enables viewers to watch multiple live video streams in a single combined output. Static filter configuration allows users to configure endpoints with layouts and sources without using query parameters. The number of sources per multiview channel has been increased to 50.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.41.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1410-2026-10-02)
+  * **Feature**: AWS End User Messaging SMS CarrierLookup API now supports phone number cleansing on customer opt-in. when selected, the response includes the additional field "OriginalPhoneNumber". It can also return additional PhoneNumberType enums, VOIP and PREPAID.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.22.0](service/securityagent/CHANGELOG.md#v1220-2026-10-02)
+  * **Feature**: Adds trigger filters that control which pull request events, target branches, and labels start an automatic code review.
+
 # Release (2026-10-01)
 
 ## Module Highlights

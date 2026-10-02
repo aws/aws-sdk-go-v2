@@ -1,3 +1,8 @@
+# v1.167.0 (2026-10-02)
+
+* **Feature**: Added refresh token grant type to Glue Connection supported OAuth 2.0 grant types
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.166.0 (2026-09-30)
 
 * **Feature**: Enable Catalog ID for crawler, column statistics and materialized views.

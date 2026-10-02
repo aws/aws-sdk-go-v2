@@ -1,3 +1,7 @@
+# v1.22.0 (2026-10-02)
+
+* **Feature**: Adds trigger filters that control which pull request events, target branches, and labels start an automatic code review.
+
 # v1.21.0 (2026-09-29)
 
 * **Feature**: Adds support for Azure DevOps and Bitbucket Data Center integration providers.

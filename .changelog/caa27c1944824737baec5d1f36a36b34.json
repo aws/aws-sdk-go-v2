@@ -1,8 +1,0 @@
-{
-    "id": "caa27c19-4482-4737-baec-5d1f36a36b34",
-    "type": "feature",
-    "description": "Added refresh token grant type to Glue Connection supported OAuth 2.0 grant types",
-    "modules": [
-        "service/glue"
-    ]
-}

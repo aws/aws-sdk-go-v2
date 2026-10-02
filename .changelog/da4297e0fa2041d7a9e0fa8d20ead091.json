@@ -1,8 +1,0 @@
-{
-    "id": "da4297e0-fa20-41d7-a9e0-fa8d20ead091",
-    "type": "feature",
-    "description": "API and doc updates related to adding MarketplacePunchOutEnabled and MarketplacePunchOutPreference fields to ProcurementPortalPreferences related APIs",
-    "modules": [
-        "service/invoicing"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "aed0137f-3878-4b45-b1df-8c451a9bd50f",
-    "type": "documentation",
-    "description": "Documentation update for AWS Lambda Web Functions, clarifies that the LambdaWeb APIs are experimental and not yet available to external customers.",
-    "modules": [
-        "service/lambdaweb"
-    ]
-}

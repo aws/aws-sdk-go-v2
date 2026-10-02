@@ -1,8 +1,0 @@
-{
-    "id": "eda4875f-a095-4231-870a-83ec529111f1",
-    "type": "feature",
-    "description": "Amazon Cognito User Pools now supports the OIDC-standard authentication context class reference (ACR) and authentication methods reference (AMR) claims on issued access and Id tokens. Amazon Cognito User Pools also now supports step-up authentication via our existing authentication APIs.",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}

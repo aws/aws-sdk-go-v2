@@ -1,8 +1,0 @@
-{
-    "id": "ee90cbcb-3f54-40c4-b2c7-52518b4a0e41",
-    "type": "feature",
-    "description": "Dynamic Multiview enables viewers to watch multiple live video streams in a single combined output. Static filter configuration allows users to configure endpoints with layouts and sources without using query parameters. The number of sources per multiview channel has been increased to 50.",
-    "modules": [
-        "service/mediapackagev2"
-    ]
-}
