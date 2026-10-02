@@ -10,6 +10,9 @@ import (
 )
 
 // Removes tags from a web function.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

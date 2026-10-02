@@ -14,6 +14,9 @@ import (
 // Updates the configuration of a web function endpoint. You can modify the
 // authorization type, auto-deployment mode, revision weights, scaling, and
 // throttling settings.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) UpdateWebFunctionEndpoint(ctx context.Context, params *UpdateWebFunctionEndpointInput, optFns ...func(*Options)) (*UpdateWebFunctionEndpointOutput, error) {
 	if params == nil {
 		params = &UpdateWebFunctionEndpointInput{}

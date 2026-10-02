@@ -11,6 +11,9 @@ import (
 
 // Adds tags to a web function. If a tag key already exists, the existing value is
 // overwritten with the new value.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

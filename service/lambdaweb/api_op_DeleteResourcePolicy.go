@@ -10,6 +10,9 @@ import (
 )
 
 // Removes the resource-based policy from a web function.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourcePolicyInput, optFns ...func(*Options)) (*DeleteResourcePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteResourcePolicyInput{}

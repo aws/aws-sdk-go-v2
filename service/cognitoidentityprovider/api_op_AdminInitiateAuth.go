@@ -130,6 +130,32 @@ type AdminInitiateAuthInput struct {
 	//   Amazon Cognito responds with the AvailableChallenges parameter that specifies
 	//   the available sign-in methods.
 	//
+	//   - TARGET_ACR_VALUES . An optional, space-separated list of the authentication
+	//   context class reference (ACR) level URIs that you want the user to reach. List
+	//   the levels in priority order, from highest to lowest. Amazon Cognito attempts
+	//   the highest-priority level that the user can satisfy, and falls back through the
+	//   list. Amazon Cognito ignores any value that it doesn't recognize. If none of the
+	//   requested values are valid, Amazon Cognito returns an error.
+	//
+	// Requesting step-up authentication with this parameter requires the Essentials
+	//   or Plus feature plan. On a lower feature plan, AdminInitiateAuth returns a
+	//   FeatureUnavailableInTierException. USERNAME is required. When you provide an
+	//   ACCESS_TOKEN , you must also provide TARGET_ACR_VALUES . Amazon Cognito
+	//   returns an error if you provide an ACCESS_TOKEN without TARGET_ACR_VALUES .
+	//   The USERNAME that you provide must match the user that the ACCESS_TOKEN was
+	//   issued for.
+	//
+	// For more information about step-up authentication and how Amazon Cognito
+	//   handles multi-factor authentication requirements, see [Step-up authentication with ACR and AMR]in the Amazon Cognito
+	//   Developer Guide.
+	//
+	//   - MAX_AGE . An optional integer that sets the maximum number of seconds
+	//   allowed since the user last authenticated. If the user's most recent
+	//   authentication is older than this value, Amazon Cognito discards the
+	//   authentication-methods credit from any access token that you provide and
+	//   processes the request as a fresh authentication toward the target level. The
+	//   access token itself remains valid.
+	//
 	// USER_SRP_AUTH
 	//   - USERNAME (required)
 	//
@@ -155,6 +181,7 @@ type AdminInitiateAuthInput struct {
 	// For more information about SECRET_HASH , see [Computing secret hash values]. For information about DEVICE_KEY
 	// , see [Working with user devices in your user pool].
 	//
+	// [Step-up authentication with ACR and AMR]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-step-up-authentication.html
 	// [Computing secret hash values]: https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash
 	// [Working with user devices in your user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html
 	AuthParameters map[string]string

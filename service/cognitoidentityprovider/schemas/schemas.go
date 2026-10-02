@@ -735,6 +735,43 @@ var AccountTakeoverRiskConfigurationType_NotifyConfiguration *smithy.Schema
 
 var AccountTakeoverRiskConfigurationType_Actions *smithy.Schema
 
+var _AcrConfigurationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "AcrConfigurationType",
+}, smithy.ShapeTypeMap, 2)
+var _AcrConfigurationType_key *smithy.Schema
+
+var _AcrConfigurationType_value *smithy.Schema
+
+var AcrLevelConfigType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "AcrLevelConfigType",
+}, smithy.ShapeTypeStructure, 1)
+var AcrLevelConfigType_AcrValue *smithy.Schema
+
+var _AcrLevelKeyType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "AcrLevelKeyType",
+}, smithy.ShapeTypeString, 0)
+
+var _AcrMappingKeyType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "AcrMappingKeyType",
+}, smithy.ShapeTypeString, 0)
+
+var _AcrMappingType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "AcrMappingType",
+}, smithy.ShapeTypeMap, 2)
+var _AcrMappingType_key *smithy.Schema
+
+var _AcrMappingType_value *smithy.Schema
+
+var _AcrValueType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "AcrValueType",
+}, smithy.ShapeTypeString, 0)
+
 var AdminCreateUserConfigType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "AdminCreateUserConfigType",
@@ -1903,7 +1940,7 @@ var _HttpHeaderList_member *smithy.Schema
 var IdentityProviderType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "IdentityProviderType",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var IdentityProviderType_UserPoolId *smithy.Schema
 
 var IdentityProviderType_ProviderName *smithy.Schema
@@ -1915,6 +1952,8 @@ var IdentityProviderType_ProviderDetails *smithy.Schema
 var IdentityProviderType_AttributeMapping *smithy.Schema
 
 var IdentityProviderType_IdpIdentifiers *smithy.Schema
+
+var IdentityProviderType_AcrMapping *smithy.Schema
 
 var IdentityProviderType_LastModifiedDate *smithy.Schema
 
@@ -3492,7 +3531,7 @@ var UserPoolTierType_PLUS *smithy.Schema
 var UserPoolType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "UserPoolType",
-}, smithy.ShapeTypeStructure, 36)
+}, smithy.ShapeTypeStructure, 37)
 var UserPoolType_Id *smithy.Schema
 
 var UserPoolType_Name *smithy.Schema
@@ -3564,6 +3603,8 @@ var UserPoolType_UserPoolTier *smithy.Schema
 var UserPoolType_KeyConfiguration *smithy.Schema
 
 var UserPoolType_IssuerConfiguration *smithy.Schema
+
+var UserPoolType_AcrConfiguration *smithy.Schema
 
 var _UsersListType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -4164,7 +4205,7 @@ var AdminRespondToAuthChallengeRequest_ClientMetadata *smithy.Schema
 var AdminRespondToAuthChallengeResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "AdminRespondToAuthChallengeResponse",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var AdminRespondToAuthChallengeResponse_ChallengeName *smithy.Schema
 
 var AdminRespondToAuthChallengeResponse_Session *smithy.Schema
@@ -4172,6 +4213,8 @@ var AdminRespondToAuthChallengeResponse_Session *smithy.Schema
 var AdminRespondToAuthChallengeResponse_ChallengeParameters *smithy.Schema
 
 var AdminRespondToAuthChallengeResponse_AuthenticationResult *smithy.Schema
+
+var AdminRespondToAuthChallengeResponse_AvailableChallenges *smithy.Schema
 
 var AdminSetUserMFAPreferenceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -4428,7 +4471,7 @@ var CreateGroupResponse_Group *smithy.Schema
 var CreateIdentityProviderRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "CreateIdentityProviderRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var CreateIdentityProviderRequest_UserPoolId *smithy.Schema
 
 var CreateIdentityProviderRequest_ProviderName *smithy.Schema
@@ -4440,6 +4483,8 @@ var CreateIdentityProviderRequest_ProviderDetails *smithy.Schema
 var CreateIdentityProviderRequest_AttributeMapping *smithy.Schema
 
 var CreateIdentityProviderRequest_IdpIdentifiers *smithy.Schema
+
+var CreateIdentityProviderRequest_AcrMapping *smithy.Schema
 
 var CreateIdentityProviderResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -4610,7 +4655,7 @@ var CreateUserPoolDomainResponse_Routing *smithy.Schema
 var CreateUserPoolRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "CreateUserPoolRequest",
-}, smithy.ShapeTypeStructure, 26)
+}, smithy.ShapeTypeStructure, 27)
 var CreateUserPoolRequest_PoolName *smithy.Schema
 
 var CreateUserPoolRequest_Policies *smithy.Schema
@@ -4662,6 +4707,8 @@ var CreateUserPoolRequest_UserPoolTier *smithy.Schema
 var CreateUserPoolRequest_KeyConfiguration *smithy.Schema
 
 var CreateUserPoolRequest_IssuerConfiguration *smithy.Schema
+
+var CreateUserPoolRequest_AcrConfiguration *smithy.Schema
 
 var CreateUserPoolResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -5551,7 +5598,7 @@ var RespondToAuthChallengeRequest_ClientMetadata *smithy.Schema
 var RespondToAuthChallengeResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "RespondToAuthChallengeResponse",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var RespondToAuthChallengeResponse_ChallengeName *smithy.Schema
 
 var RespondToAuthChallengeResponse_Session *smithy.Schema
@@ -5559,6 +5606,8 @@ var RespondToAuthChallengeResponse_Session *smithy.Schema
 var RespondToAuthChallengeResponse_ChallengeParameters *smithy.Schema
 
 var RespondToAuthChallengeResponse_AuthenticationResult *smithy.Schema
+
+var RespondToAuthChallengeResponse_AvailableChallenges *smithy.Schema
 
 var RevokeTokenRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -5846,7 +5895,7 @@ var UpdateGroupResponse_Group *smithy.Schema
 var UpdateIdentityProviderRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "UpdateIdentityProviderRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var UpdateIdentityProviderRequest_UserPoolId *smithy.Schema
 
 var UpdateIdentityProviderRequest_ProviderName *smithy.Schema
@@ -5856,6 +5905,8 @@ var UpdateIdentityProviderRequest_ProviderDetails *smithy.Schema
 var UpdateIdentityProviderRequest_AttributeMapping *smithy.Schema
 
 var UpdateIdentityProviderRequest_IdpIdentifiers *smithy.Schema
+
+var UpdateIdentityProviderRequest_AcrMapping *smithy.Schema
 
 var UpdateIdentityProviderResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -6036,7 +6087,7 @@ var UpdateUserPoolDomainResponse_Routing *smithy.Schema
 var UpdateUserPoolRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "UpdateUserPoolRequest",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var UpdateUserPoolRequest_UserPoolId *smithy.Schema
 
 var UpdateUserPoolRequest_Policies *smithy.Schema
@@ -6082,6 +6133,8 @@ var UpdateUserPoolRequest_UserPoolTier *smithy.Schema
 var UpdateUserPoolRequest_KeyConfiguration *smithy.Schema
 
 var UpdateUserPoolRequest_IssuerConfiguration *smithy.Schema
+
+var UpdateUserPoolRequest_AcrConfiguration *smithy.Schema
 
 var UpdateUserPoolResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -6197,6 +6250,16 @@ func init() {
 	AccountTakeoverRiskConfigurationType_NotifyConfiguration = AccountTakeoverRiskConfigurationType.AddMember("NotifyConfiguration", NotifyConfigurationType)
 
 	AccountTakeoverRiskConfigurationType_Actions = AccountTakeoverRiskConfigurationType.AddMember("Actions", AccountTakeoverActionsType)
+
+	AcrLevelConfigType_AcrValue = AcrLevelConfigType.AddMember("AcrValue", _AcrValueType)
+
+	_AcrConfigurationType_key = _AcrConfigurationType.AddMember("key", _AcrLevelKeyType)
+
+	_AcrConfigurationType_value = _AcrConfigurationType.AddMember("value", AcrLevelConfigType)
+
+	_AcrMappingType_key = _AcrMappingType.AddMember("key", _AcrMappingKeyType)
+
+	_AcrMappingType_value = _AcrMappingType.AddMember("value", _AcrValueType)
 
 	MessageTemplateType_SMSMessage = MessageTemplateType.AddMember("SMSMessage", _SmsInviteMessageType)
 
@@ -6829,6 +6892,8 @@ func init() {
 	IdentityProviderType_AttributeMapping = IdentityProviderType.AddMember("AttributeMapping", _AttributeMappingType)
 
 	IdentityProviderType_IdpIdentifiers = IdentityProviderType.AddMember("IdpIdentifiers", _IdpIdentifiersListType)
+
+	IdentityProviderType_AcrMapping = IdentityProviderType.AddMember("AcrMapping", _AcrMappingType)
 
 	IdentityProviderType_LastModifiedDate = IdentityProviderType.AddMember("LastModifiedDate", _DateType)
 
@@ -7506,6 +7571,8 @@ func init() {
 
 	UserPoolType_IssuerConfiguration = UserPoolType.AddMember("IssuerConfiguration", IssuerConfigurationType)
 
+	UserPoolType_AcrConfiguration = UserPoolType.AddMember("AcrConfiguration", _AcrConfigurationType)
+
 	UserStatusType_UNCONFIRMED = UserStatusType.AddMember("UNCONFIRMED", smithyprelude.Unit)
 
 	UserStatusType_CONFIRMED = UserStatusType.AddMember("CONFIRMED", smithyprelude.Unit)
@@ -7810,6 +7877,8 @@ func init() {
 
 	AdminRespondToAuthChallengeResponse_AuthenticationResult = AdminRespondToAuthChallengeResponse.AddMember("AuthenticationResult", AuthenticationResultType)
 
+	AdminRespondToAuthChallengeResponse_AvailableChallenges = AdminRespondToAuthChallengeResponse.AddMember("AvailableChallenges", _AvailableChallengeListType)
+
 	AdminSetUserMFAPreferenceRequest_SMSMfaSettings = AdminSetUserMFAPreferenceRequest.AddMember("SMSMfaSettings", SMSMfaSettingsType)
 
 	AdminSetUserMFAPreferenceRequest_SoftwareTokenMfaSettings = AdminSetUserMFAPreferenceRequest.AddMember("SoftwareTokenMfaSettings", SoftwareTokenMfaSettingsType)
@@ -7951,6 +8020,8 @@ func init() {
 	CreateIdentityProviderRequest_AttributeMapping = CreateIdentityProviderRequest.AddMember("AttributeMapping", _AttributeMappingType)
 
 	CreateIdentityProviderRequest_IdpIdentifiers = CreateIdentityProviderRequest.AddMember("IdpIdentifiers", _IdpIdentifiersListType)
+
+	CreateIdentityProviderRequest_AcrMapping = CreateIdentityProviderRequest.AddMember("AcrMapping", _AcrMappingType)
 
 	CreateIdentityProviderResponse_IdentityProvider = CreateIdentityProviderResponse.AddMember("IdentityProvider", IdentityProviderType)
 
@@ -8117,6 +8188,8 @@ func init() {
 	CreateUserPoolRequest_KeyConfiguration = CreateUserPoolRequest.AddMember("KeyConfiguration", KeyConfigurationType)
 
 	CreateUserPoolRequest_IssuerConfiguration = CreateUserPoolRequest.AddMember("IssuerConfiguration", IssuerConfigurationType)
+
+	CreateUserPoolRequest_AcrConfiguration = CreateUserPoolRequest.AddMember("AcrConfiguration", _AcrConfigurationType)
 
 	CreateUserPoolResponse_UserPool = CreateUserPoolResponse.AddMember("UserPool", UserPoolType)
 
@@ -8570,6 +8643,8 @@ func init() {
 
 	RespondToAuthChallengeResponse_AuthenticationResult = RespondToAuthChallengeResponse.AddMember("AuthenticationResult", AuthenticationResultType)
 
+	RespondToAuthChallengeResponse_AvailableChallenges = RespondToAuthChallengeResponse.AddMember("AvailableChallenges", _AvailableChallengeListType)
+
 	RevokeTokenRequest_Token = RevokeTokenRequest.AddMember("Token", _TokenModelType)
 
 	RevokeTokenRequest_ClientId = RevokeTokenRequest.AddMember("ClientId", _ClientIdType)
@@ -8727,6 +8802,8 @@ func init() {
 	UpdateIdentityProviderRequest_AttributeMapping = UpdateIdentityProviderRequest.AddMember("AttributeMapping", _AttributeMappingType)
 
 	UpdateIdentityProviderRequest_IdpIdentifiers = UpdateIdentityProviderRequest.AddMember("IdpIdentifiers", _IdpIdentifiersListType)
+
+	UpdateIdentityProviderRequest_AcrMapping = UpdateIdentityProviderRequest.AddMember("AcrMapping", _AcrMappingType)
 
 	UpdateIdentityProviderResponse_IdentityProvider = UpdateIdentityProviderResponse.AddMember("IdentityProvider", IdentityProviderType)
 
@@ -8889,6 +8966,8 @@ func init() {
 	UpdateUserPoolRequest_KeyConfiguration = UpdateUserPoolRequest.AddMember("KeyConfiguration", KeyConfigurationType)
 
 	UpdateUserPoolRequest_IssuerConfiguration = UpdateUserPoolRequest.AddMember("IssuerConfiguration", IssuerConfigurationType)
+
+	UpdateUserPoolRequest_AcrConfiguration = UpdateUserPoolRequest.AddMember("AcrConfiguration", _AcrConfigurationType)
 
 	UpdateUserPoolReplicaRequest_UserPoolId = UpdateUserPoolReplicaRequest.AddMember("UserPoolId", _UserPoolIdType)
 

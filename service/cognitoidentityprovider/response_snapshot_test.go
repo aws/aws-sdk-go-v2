@@ -974,6 +974,10 @@ func TestCheckResponseSnapshot_AdminRespondToAuthChallenge(t *testing.T) {
 				DeviceGroupKey: ptr.String("__DeviceGroupKey__"),
 			},
 		},
+		AvailableChallenges: []types.ChallengeNameType{
+			types.ChallengeNameType("SMS_MFA"),
+			types.ChallengeNameType("SMS_MFA"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("AdminRespondToAuthChallenge.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1443,6 +1447,9 @@ func TestCheckResponseSnapshot_CreateIdentityProvider(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			AcrMapping: map[string]string{
+				"key0": "__Value__",
+			},
 			LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
@@ -1468,6 +1475,9 @@ func TestCheckResponseSnapshot_CreateIdentityProvider(t *testing.T) {
 		IdpIdentifiers: []string{
 			"__Member__",
 			"__Member__",
+		},
+		AcrMapping: map[string]string{
+			"key0": "__Value__",
 		},
 	})
 	if err != nil {
@@ -1865,6 +1875,11 @@ func TestCheckResponseSnapshot_CreateUserPool(t *testing.T) {
 			IssuerConfiguration: &types.IssuerConfigurationType{
 				Type: types.IssuerType("ORIGINAL"),
 			},
+			AcrConfiguration: map[string]types.AcrLevelConfigType{
+				"key0": {
+					AcrValue: ptr.String("__AcrValue__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateUserPool.response")
@@ -2052,6 +2067,11 @@ func TestCheckResponseSnapshot_CreateUserPool(t *testing.T) {
 		},
 		IssuerConfiguration: &types.IssuerConfigurationType{
 			Type: types.IssuerType("ORIGINAL"),
+		},
+		AcrConfiguration: map[string]types.AcrLevelConfigType{
+			"key0": {
+				AcrValue: ptr.String("__AcrValue__"),
+			},
 		},
 	})
 	if err != nil {
@@ -2593,6 +2613,9 @@ func TestCheckResponseSnapshot_DescribeIdentityProvider(t *testing.T) {
 			IdpIdentifiers: []string{
 				"__Member__",
 				"__Member__",
+			},
+			AcrMapping: map[string]string{
+				"key0": "__Value__",
 			},
 			LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -3137,6 +3160,11 @@ func TestCheckResponseSnapshot_DescribeUserPool(t *testing.T) {
 			IssuerConfiguration: &types.IssuerConfigurationType{
 				Type: types.IssuerType("ORIGINAL"),
 			},
+			AcrConfiguration: map[string]types.AcrLevelConfigType{
+				"key0": {
+					AcrValue: ptr.String("__AcrValue__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeUserPool.response")
@@ -3497,6 +3525,9 @@ func TestCheckResponseSnapshot_GetIdentityProviderByIdentifier(t *testing.T) {
 			IdpIdentifiers: []string{
 				"__Member__",
 				"__Member__",
+			},
+			AcrMapping: map[string]string{
+				"key0": "__Value__",
 			},
 			LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -4764,6 +4795,10 @@ func TestCheckResponseSnapshot_RespondToAuthChallenge(t *testing.T) {
 				DeviceGroupKey: ptr.String("__DeviceGroupKey__"),
 			},
 		},
+		AvailableChallenges: []types.ChallengeNameType{
+			types.ChallengeNameType("SMS_MFA"),
+			types.ChallengeNameType("SMS_MFA"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RespondToAuthChallenge.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -5536,6 +5571,9 @@ func TestCheckResponseSnapshot_UpdateIdentityProvider(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			AcrMapping: map[string]string{
+				"key0": "__Value__",
+			},
 			LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
@@ -5560,6 +5598,9 @@ func TestCheckResponseSnapshot_UpdateIdentityProvider(t *testing.T) {
 		IdpIdentifiers: []string{
 			"__Member__",
 			"__Member__",
+		},
+		AcrMapping: map[string]string{
+			"key0": "__Value__",
 		},
 	})
 	if err != nil {
@@ -5956,6 +5997,11 @@ func TestCheckResponseSnapshot_UpdateUserPool(t *testing.T) {
 		},
 		IssuerConfiguration: &types.IssuerConfigurationType{
 			Type: types.IssuerType("ORIGINAL"),
+		},
+		AcrConfiguration: map[string]types.AcrLevelConfigType{
+			"key0": {
+				AcrValue: ptr.String("__AcrValue__"),
+			},
 		},
 	})
 	if err != nil {
@@ -6495,6 +6541,9 @@ func TestCheckResponseSnapshot_Error_DuplicateProviderException(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		AcrMapping: map[string]string{
+			"key0": "__Value__",
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6605,184 +6654,36 @@ func TestCheckResponseSnapshot_Error_FeatureUnavailableInTierException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUserPool(context.Background(), &CreateUserPoolInput{
-		PoolName: ptr.String("__PoolName__"),
-		Policies: &types.UserPoolPolicyType{
-			PasswordPolicy: &types.PasswordPolicyType{
-				MinimumLength:                 ptr.Int32(1),
-				RequireUppercase:              true,
-				RequireLowercase:              true,
-				RequireNumbers:                true,
-				RequireSymbols:                true,
-				PasswordHistorySize:           ptr.Int32(1),
-				TemporaryPasswordValidityDays: 1,
-			},
-			SignInPolicy: &types.SignInPolicyType{
-				AllowedFirstAuthFactors: []types.AuthFactorType{
-					types.AuthFactorType("PASSWORD"),
-					types.AuthFactorType("PASSWORD"),
-				},
-			},
-		},
-		DeletionProtection: types.DeletionProtectionType("ACTIVE"),
-		LambdaConfig: &types.LambdaConfigType{
-			PreSignUp:                   ptr.String("__PreSignUp__"),
-			CustomMessage:               ptr.String("__CustomMessage__"),
-			PostConfirmation:            ptr.String("__PostConfirmation__"),
-			PreAuthentication:           ptr.String("__PreAuthentication__"),
-			PostAuthentication:          ptr.String("__PostAuthentication__"),
-			DefineAuthChallenge:         ptr.String("__DefineAuthChallenge__"),
-			CreateAuthChallenge:         ptr.String("__CreateAuthChallenge__"),
-			VerifyAuthChallengeResponse: ptr.String("__VerifyAuthChallengeResponse__"),
-			PreTokenGeneration:          ptr.String("__PreTokenGeneration__"),
-			UserMigration:               ptr.String("__UserMigration__"),
-			PreTokenGenerationConfig: &types.PreTokenGenerationVersionConfigType{
-				LambdaVersion: types.PreTokenGenerationLambdaVersionType("V1_0"),
-				LambdaArn:     ptr.String("__LambdaArn__"),
-			},
-			CustomSMSSender: &types.CustomSMSLambdaVersionConfigType{
-				LambdaVersion: types.CustomSMSSenderLambdaVersionType("V1_0"),
-				LambdaArn:     ptr.String("__LambdaArn__"),
-			},
-			CustomEmailSender: &types.CustomEmailLambdaVersionConfigType{
-				LambdaVersion: types.CustomEmailSenderLambdaVersionType("V1_0"),
-				LambdaArn:     ptr.String("__LambdaArn__"),
-			},
-			KMSKeyID: ptr.String("__KMSKeyID__"),
-			InboundFederation: &types.InboundFederationLambdaType{
-				LambdaVersion: types.InboundFederationLambdaVersionType("V1_0"),
-				LambdaArn:     ptr.String("__LambdaArn__"),
-			},
-		},
-		AutoVerifiedAttributes: []types.VerifiedAttributeType{
-			types.VerifiedAttributeType("phone_number"),
-			types.VerifiedAttributeType("phone_number"),
-		},
-		AliasAttributes: []types.AliasAttributeType{
-			types.AliasAttributeType("phone_number"),
-			types.AliasAttributeType("phone_number"),
-		},
-		UsernameAttributes: []types.UsernameAttributeType{
-			types.UsernameAttributeType("phone_number"),
-			types.UsernameAttributeType("phone_number"),
-		},
-		SmsVerificationMessage:   ptr.String("__SmsVerificationMessage__"),
-		EmailVerificationMessage: ptr.String("__EmailVerificationMessage__"),
-		EmailVerificationSubject: ptr.String("__EmailVerificationSubject__"),
-		VerificationMessageTemplate: &types.VerificationMessageTemplateType{
-			SmsMessage:         ptr.String("__SmsMessage__"),
-			EmailMessage:       ptr.String("__EmailMessage__"),
-			EmailSubject:       ptr.String("__EmailSubject__"),
-			EmailMessageByLink: ptr.String("__EmailMessageByLink__"),
-			EmailSubjectByLink: ptr.String("__EmailSubjectByLink__"),
-			DefaultEmailOption: types.DefaultEmailOptionType("CONFIRM_WITH_LINK"),
-		},
-		SmsAuthenticationMessage: ptr.String("__SmsAuthenticationMessage__"),
-		MfaConfiguration:         types.UserPoolMfaType("OFF"),
-		UserAttributeUpdateSettings: &types.UserAttributeUpdateSettingsType{
-			AttributesRequireVerificationBeforeUpdate: []types.VerifiedAttributeType{
-				types.VerifiedAttributeType("phone_number"),
-				types.VerifiedAttributeType("phone_number"),
-			},
-		},
-		DeviceConfiguration: &types.DeviceConfigurationType{
-			ChallengeRequiredOnNewDevice:     true,
-			DeviceOnlyRememberedOnUserPrompt: true,
-		},
-		EmailConfiguration: &types.EmailConfigurationType{
-			SourceArn:           ptr.String("__SourceArn__"),
-			ReplyToEmailAddress: ptr.String("__ReplyToEmailAddress__"),
-			EmailSendingAccount: types.EmailSendingAccountType("COGNITO_DEFAULT"),
-			From:                ptr.String("__From__"),
-			ConfigurationSet:    ptr.String("__ConfigurationSet__"),
-		},
-		SmsConfiguration: &types.SmsConfigurationType{
-			SnsCallerArn: ptr.String("__SnsCallerArn__"),
-			ExternalId:   ptr.String("__ExternalId__"),
-			SnsRegion:    ptr.String("__SnsRegion__"),
-			EumsSms: &types.EumsSmsConfigurationType{
-				CallerArn:            ptr.String("__CallerArn__"),
-				ExternalId:           ptr.String("__ExternalId__"),
-				OriginationIdentity:  ptr.String("__OriginationIdentity__"),
-				ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
-				InEntityId:           ptr.String("__InEntityId__"),
-				InTemplateId:         ptr.String("__InTemplateId__"),
-				Region:               ptr.String("__Region__"),
-			},
-		},
-		UserPoolTags: map[string]string{
+	_, opErr := svc.AdminInitiateAuth(context.Background(), &AdminInitiateAuthInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		ClientId:   ptr.String("__ClientId__"),
+		AuthFlow:   types.AuthFlowType("USER_SRP_AUTH"),
+		AuthParameters: map[string]string{
 			"key0": "__Value__",
 		},
-		AdminCreateUserConfig: &types.AdminCreateUserConfigType{
-			AllowAdminCreateUserOnly:  true,
-			UnusedAccountValidityDays: 1,
-			InviteMessageTemplate: &types.MessageTemplateType{
-				SMSMessage:   ptr.String("__SMSMessage__"),
-				EmailMessage: ptr.String("__EmailMessage__"),
-				EmailSubject: ptr.String("__EmailSubject__"),
-			},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
 		},
-		Schema: []types.SchemaAttributeType{
-			{
-				Name:                   ptr.String("__Name__"),
-				AttributeDataType:      types.AttributeDataType("String"),
-				DeveloperOnlyAttribute: ptr.Bool(true),
-				Mutable:                ptr.Bool(true),
-				Required:               ptr.Bool(true),
-				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
-					MinValue: ptr.String("__MinValue__"),
-					MaxValue: ptr.String("__MaxValue__"),
-				},
-				StringAttributeConstraints: &types.StringAttributeConstraintsType{
-					MinLength: ptr.String("__MinLength__"),
-					MaxLength: ptr.String("__MaxLength__"),
-				},
-			},
-			{
-				Name:                   ptr.String("__Name__"),
-				AttributeDataType:      types.AttributeDataType("String"),
-				DeveloperOnlyAttribute: ptr.Bool(true),
-				Mutable:                ptr.Bool(true),
-				Required:               ptr.Bool(true),
-				NumberAttributeConstraints: &types.NumberAttributeConstraintsType{
-					MinValue: ptr.String("__MinValue__"),
-					MaxValue: ptr.String("__MaxValue__"),
-				},
-				StringAttributeConstraints: &types.StringAttributeConstraintsType{
-					MinLength: ptr.String("__MinLength__"),
-					MaxLength: ptr.String("__MaxLength__"),
-				},
-			},
+		AnalyticsMetadata: &types.AnalyticsMetadataType{
+			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
 		},
-		UserPoolAddOns: &types.UserPoolAddOnsType{
-			AdvancedSecurityMode: types.AdvancedSecurityModeType("OFF"),
-			AdvancedSecurityAdditionalFlows: &types.AdvancedSecurityAdditionalFlowsType{
-				CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
-			},
-		},
-		UsernameConfiguration: &types.UsernameConfigurationType{
-			CaseSensitive: ptr.Bool(true),
-		},
-		AccountRecoverySetting: &types.AccountRecoverySettingType{
-			RecoveryMechanisms: []types.RecoveryOptionType{
+		ContextData: &types.ContextDataType{
+			IpAddress:  ptr.String("__IpAddress__"),
+			ServerName: ptr.String("__ServerName__"),
+			ServerPath: ptr.String("__ServerPath__"),
+			HttpHeaders: []types.HttpHeader{
 				{
-					Priority: ptr.Int32(1),
-					Name:     types.RecoveryOptionNameType("verified_email"),
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
 				},
 				{
-					Priority: ptr.Int32(1),
-					Name:     types.RecoveryOptionNameType("verified_email"),
+					HeaderName:  ptr.String("__HeaderName__"),
+					HeaderValue: ptr.String("__HeaderValue__"),
 				},
 			},
+			EncodedData: ptr.String("__EncodedData__"),
 		},
-		UserPoolTier: types.UserPoolTierType("LITE"),
-		KeyConfiguration: &types.KeyConfigurationType{
-			KeyType:   types.EncryptionKeyType("AWS_OWNED_KEY"),
-			KmsKeyArn: ptr.String("__KmsKeyArn__"),
-		},
-		IssuerConfiguration: &types.IssuerConfigurationType{
-			Type: types.IssuerType("ORIGINAL"),
-		},
+		Session: ptr.String("__Session__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -8286,6 +8187,11 @@ func TestCheckResponseSnapshot_Error_TierChangeNotAllowedException(t *testing.T)
 		IssuerConfiguration: &types.IssuerConfigurationType{
 			Type: types.IssuerType("ORIGINAL"),
 		},
+		AcrConfiguration: map[string]types.AcrLevelConfigType{
+			"key0": {
+				AcrValue: ptr.String("__AcrValue__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -8985,6 +8891,11 @@ func TestCheckResponseSnapshot_Error_UserPoolTaggingException(t *testing.T) {
 		},
 		IssuerConfiguration: &types.IssuerConfigurationType{
 			Type: types.IssuerType("ORIGINAL"),
+		},
+		AcrConfiguration: map[string]types.AcrLevelConfigType{
+			"key0": {
+				AcrValue: ptr.String("__AcrValue__"),
+			},
 		},
 	})
 	if opErr == nil {

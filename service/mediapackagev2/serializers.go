@@ -3720,6 +3720,13 @@ func awsRestjson1_serializeDocumentFilterConfiguration(v *types.FilterConfigurat
 		ok.String(*v.ManifestFilter)
 	}
 
+	if v.Multiview != nil {
+		ok := object.Key("Multiview")
+		if err := awsRestjson1_serializeDocumentMultiviewFilterConfiguration(v.Multiview, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Start != nil {
 		ok := object.Key("Start")
 		ok.Double(smithytime.FormatEpochSeconds(*v.Start))
@@ -3898,6 +3905,25 @@ func awsRestjson1_serializeDocumentMultiviewConfiguration(v *types.MultiviewConf
 	if v.AvailableSources != nil {
 		ok := object.Key("AvailableSources")
 		if err := awsRestjson1_serializeDocumentMultiviewSourceList(v.AvailableSources, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiviewFilterConfiguration(v *types.MultiviewFilterConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Layout) > 0 {
+		ok := object.Key("Layout")
+		ok.String(string(v.Layout))
+	}
+
+	if v.Sources != nil {
+		ok := object.Key("Sources")
+		if err := awsRestjson1_serializeDocumentMultiviewSourceList(v.Sources, ok); err != nil {
 			return err
 		}
 	}

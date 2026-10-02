@@ -60,6 +60,15 @@ type UpdateIdentityProviderInput struct {
 	// This member is required.
 	UserPoolId *string
 
+	// A mapping between the authentication context class reference (ACR) levels of
+	// your user pool and the ACR values of the external OpenID Connect (OIDC) identity
+	// provider (IdP). This mapping has the same behavior as it does when you create an
+	// identity provider. Only OIDC IdPs support ACR mapping.
+	//
+	// Setting AcrMapping is available in all feature plans. It isn't restricted to
+	// the Essentials or Plus feature plan.
+	AcrMapping map[string]string
+
 	// A mapping of IdP attributes to standard and custom user pool attributes.
 	// Specify a user pool attribute as the key of the key-value pair, and the IdP
 	// attribute claim name as the value.
@@ -179,6 +188,7 @@ func (v *UpdateIdentityProviderInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAcrMappingType(s, schemas.UpdateIdentityProviderRequest_AcrMapping, v.AcrMapping)
 	serializeAttributeMappingType(s, schemas.UpdateIdentityProviderRequest_AttributeMapping, v.AttributeMapping)
 	serializeIdpIdentifiersListType(s, schemas.UpdateIdentityProviderRequest_IdpIdentifiers, v.IdpIdentifiers)
 	serializeProviderDetailsType(s, schemas.UpdateIdentityProviderRequest_ProviderDetails, v.ProviderDetails)

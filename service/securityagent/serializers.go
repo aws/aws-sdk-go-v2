@@ -9386,6 +9386,13 @@ func awsRestjson1_serializeDocumentAzureDevOpsResourceCapabilities(v *types.Azur
 		ok.Boolean(*v.RemediateCode)
 	}
 
+	if v.TriggerFilterGroups != nil {
+		ok := object.Key("triggerFilterGroups")
+		if err := awsRestjson1_serializeDocumentTriggerFilterGroups(v.TriggerFilterGroups, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -9467,6 +9474,13 @@ func awsRestjson1_serializeDocumentBitbucketResourceCapabilities(v *types.Bitbuc
 	if v.RemediateCode != nil {
 		ok := object.Key("remediateCode")
 		ok.Boolean(*v.RemediateCode)
+	}
+
+	if v.TriggerFilterGroups != nil {
+		ok := object.Key("triggerFilterGroups")
+		if err := awsRestjson1_serializeDocumentTriggerFilterGroups(v.TriggerFilterGroups, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -9894,6 +9908,13 @@ func awsRestjson1_serializeDocumentGitHubResourceCapabilities(v *types.GitHubRes
 		ok.Boolean(*v.RemediateCode)
 	}
 
+	if v.TriggerFilterGroups != nil {
+		ok := object.Key("triggerFilterGroups")
+		if err := awsRestjson1_serializeDocumentTriggerFilterGroups(v.TriggerFilterGroups, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -9953,6 +9974,13 @@ func awsRestjson1_serializeDocumentGitLabResourceCapabilities(v *types.GitLabRes
 	if v.RemediateCode != nil {
 		ok := object.Key("remediateCode")
 		ok.Boolean(*v.RemediateCode)
+	}
+
+	if v.TriggerFilterGroups != nil {
+		ok := object.Key("triggerFilterGroups")
+		if err := awsRestjson1_serializeDocumentTriggerFilterGroups(v.TriggerFilterGroups, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -10934,6 +10962,99 @@ func awsRestjson1_serializeDocumentThreatModelIdList(v []string, value smithyjso
 }
 
 func awsRestjson1_serializeDocumentThreatModelJobIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTriggerEventList(v []types.TriggerEvent, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTriggerFilter(v *types.TriggerFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MatchMode) > 0 {
+		ok := object.Key("matchMode")
+		ok.String(string(v.MatchMode))
+	}
+
+	if v.Patterns != nil {
+		ok := object.Key("patterns")
+		if err := awsRestjson1_serializeDocumentTriggerRegexPatternList(v.Patterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTriggerFilterGroup(v *types.TriggerFilterGroup, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Events != nil {
+		ok := object.Key("events")
+		if err := awsRestjson1_serializeDocumentTriggerEventList(v.Events, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Filters != nil {
+		ok := object.Key("filters")
+		if err := awsRestjson1_serializeDocumentTriggerFilterList(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTriggerFilterGroups(v []types.TriggerFilterGroup, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTriggerFilterGroup(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTriggerFilterList(v []types.TriggerFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTriggerFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTriggerRegexPatternList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

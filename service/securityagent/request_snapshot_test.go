@@ -3556,6 +3556,56 @@ func TestCheckRequestSnapshot_UpdateIntegratedResources(t *testing.T) {
 				},
 				Capabilities: &types.ProviderResourceCapabilitiesMemberGithub{
 					Value: types.GitHubResourceCapabilities{
+						TriggerFilterGroups: []types.TriggerFilterGroup{
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+						},
 						LeaveComments: ptr.Bool(true),
 						RemediateCode: ptr.Bool(true),
 					},
@@ -3570,6 +3620,56 @@ func TestCheckRequestSnapshot_UpdateIntegratedResources(t *testing.T) {
 				},
 				Capabilities: &types.ProviderResourceCapabilitiesMemberGithub{
 					Value: types.GitHubResourceCapabilities{
+						TriggerFilterGroups: []types.TriggerFilterGroup{
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+						},
 						LeaveComments: ptr.Bool(true),
 						RemediateCode: ptr.Bool(true),
 					},
@@ -7507,6 +7607,56 @@ func TestUpdateRequestSnapshot_UpdateIntegratedResources(t *testing.T) {
 				},
 				Capabilities: &types.ProviderResourceCapabilitiesMemberGithub{
 					Value: types.GitHubResourceCapabilities{
+						TriggerFilterGroups: []types.TriggerFilterGroup{
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+						},
 						LeaveComments: ptr.Bool(true),
 						RemediateCode: ptr.Bool(true),
 					},
@@ -7521,6 +7671,56 @@ func TestUpdateRequestSnapshot_UpdateIntegratedResources(t *testing.T) {
 				},
 				Capabilities: &types.ProviderResourceCapabilitiesMemberGithub{
 					Value: types.GitHubResourceCapabilities{
+						TriggerFilterGroups: []types.TriggerFilterGroup{
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+							{
+								Events: []types.TriggerEvent{
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+									types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+								},
+								Filters: []types.TriggerFilter{
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+									{
+										Type: types.TriggerFilterType("TARGET_BRANCH"),
+										Patterns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										MatchMode: types.TriggerFilterMatchMode("INCLUDE"),
+									},
+								},
+							},
+						},
 						LeaveComments: ptr.Bool(true),
 						RemediateCode: ptr.Bool(true),
 					},

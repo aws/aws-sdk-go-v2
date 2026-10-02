@@ -22312,8 +22312,8 @@ type OAuth2Properties struct {
 	// The client application type. For example, AWS_MANAGED or USER_MANAGED.
 	OAuth2ClientApplication *OAuth2ClientApplication
 
-	// The OAuth2 grant type. For example, AUTHORIZATION_CODE , JWT_BEARER , or
-	// CLIENT_CREDENTIALS .
+	// The OAuth2 grant type. For example, AUTHORIZATION_CODE , JWT_BEARER ,
+	// REFRESH_TOKEN , or CLIENT_CREDENTIALS .
 	OAuth2GrantType OAuth2GrantType
 
 	// The URL of the provider's authentication server, to exchange an authorization
@@ -22383,7 +22383,7 @@ type OAuth2PropertiesInput struct {
 	OAuth2Credentials *OAuth2Credentials
 
 	// The OAuth2 grant type in the CreateConnection request. For example,
-	// AUTHORIZATION_CODE , JWT_BEARER , or CLIENT_CREDENTIALS .
+	// AUTHORIZATION_CODE , JWT_BEARER , REFRESH_TOKEN , or CLIENT_CREDENTIALS .
 	OAuth2GrantType OAuth2GrantType
 
 	// The URL of the provider's authentication server, to exchange an authorization
@@ -24017,6 +24017,11 @@ func (v *PropertyPredicate) Deserialize(d smithy.ShapeDeserializer) error {
 // A structure used as a protocol between query engines and Lake Formation or
 // Glue. Contains both a Lake Formation generated authorization identifier and
 // information from the request's authorization context.
+//
+// For more information about how to utilize QuerySessionContext, see [Lake Formation workflow for application integration API operations] in the
+// developer guide.
+//
+// [Lake Formation workflow for application integration API operations]: https://docs.aws.amazon.com/lake-formation/latest/dg/api-overview.html
 type QuerySessionContext struct {
 
 	// An opaque string-string map passed by the query engine.

@@ -909,6 +909,12 @@ const (
 	ValidationExceptionTypeMultiviewScteRequiresAvailsPeriodTrigger               ValidationExceptionType = "MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER"
 	ValidationExceptionTypeContentKeyPeriodTimingWithoutKeyRotation               ValidationExceptionType = "CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION"
 	ValidationExceptionTypeContentKeyPeriodTimingRequiresSpekeV21                 ValidationExceptionType = "CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1"
+	ValidationExceptionTypeMultiviewFilterConfigurationNotAllowed                 ValidationExceptionType = "MULTIVIEW_FILTER_CONFIGURATION_NOT_ALLOWED"
+	ValidationExceptionTypeMultiviewFilterLayoutNotAvailable                      ValidationExceptionType = "MULTIVIEW_FILTER_LAYOUT_NOT_AVAILABLE"
+	ValidationExceptionTypeMultiviewFilterSourceNotAvailable                      ValidationExceptionType = "MULTIVIEW_FILTER_SOURCE_NOT_AVAILABLE"
+	ValidationExceptionTypeMultiviewFilterSourceCountMismatch                     ValidationExceptionType = "MULTIVIEW_FILTER_SOURCE_COUNT_MISMATCH"
+	ValidationExceptionTypeMultiviewSourceChannelLimitExceeded                    ValidationExceptionType = "MULTIVIEW_SOURCE_CHANNEL_LIMIT_EXCEEDED"
+	ValidationExceptionTypeMultiviewTsUseAudioRenditionGroupDisabled              ValidationExceptionType = "MULTIVIEW_TS_USE_AUDIO_RENDITION_GROUP_DISABLED"
 )
 
 // Values returns all known values for ValidationExceptionType. Note that this can
@@ -1049,5 +1055,11 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER",
 		"CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION",
 		"CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1",
+		"MULTIVIEW_FILTER_CONFIGURATION_NOT_ALLOWED",
+		"MULTIVIEW_FILTER_LAYOUT_NOT_AVAILABLE",
+		"MULTIVIEW_FILTER_SOURCE_NOT_AVAILABLE",
+		"MULTIVIEW_FILTER_SOURCE_COUNT_MISMATCH",
+		"MULTIVIEW_SOURCE_CHANNEL_LIMIT_EXCEEDED",
+		"MULTIVIEW_TS_USE_AUDIO_RENDITION_GROUP_DISABLED",
 	}
 }

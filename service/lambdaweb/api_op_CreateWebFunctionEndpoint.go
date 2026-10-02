@@ -16,6 +16,9 @@ import (
 //
 // To use this operation, you must have the CreateWebFunctionEndpoint permission
 // on the web function, not on the endpoint being created.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) CreateWebFunctionEndpoint(ctx context.Context, params *CreateWebFunctionEndpointInput, optFns ...func(*Options)) (*CreateWebFunctionEndpointOutput, error) {
 	if params == nil {
 		params = &CreateWebFunctionEndpointInput{}

@@ -67,6 +67,14 @@ type PutProcurementPortalPreferenceInput struct {
 	// types, and customization settings for the portal.
 	EinvoiceDeliveryPreference *types.EinvoiceDeliveryPreference
 
+	// Whether Marketplace PunchOut is enabled for this connection. Defaults to false
+	// if not provided.
+	MarketplacePunchOutEnabled *bool
+
+	// Configuration for Marketplace PunchOut. Required when
+	// MarketplacePunchOutEnabled is true.
+	MarketplacePunchOutPreference *types.MarketplacePunchOutPreference
+
 	// The updated endpoint URL where e-invoices will be delivered to the procurement
 	// portal. Must be a valid HTTPS URL.
 	ProcurementPortalInstanceEndpoint *string
@@ -103,6 +111,14 @@ func (v *PutProcurementPortalPreferenceInput) SerializeMembers(s smithy.ShapeSer
 	if v.EinvoiceDeliveryPreference != nil {
 		s.WriteStruct(schemas.PutProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference)
 		v.EinvoiceDeliveryPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MarketplacePunchOutEnabled != nil {
+		s.WriteBool(schemas.PutProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled, *v.MarketplacePunchOutEnabled)
+	}
+	if v.MarketplacePunchOutPreference != nil {
+		s.WriteStruct(schemas.PutProcurementPortalPreferenceRequest_MarketplacePunchOutPreference)
+		v.MarketplacePunchOutPreference.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.ProcurementPortalInstanceEndpoint != nil {

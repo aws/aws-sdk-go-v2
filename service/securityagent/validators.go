@@ -2164,6 +2164,23 @@ func validateAzureDevOpsRepositoryResource(v *types.AzureDevOpsRepositoryResourc
 	}
 }
 
+func validateAzureDevOpsResourceCapabilities(v *types.AzureDevOpsResourceCapabilities) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureDevOpsResourceCapabilities"}
+	if v.TriggerFilterGroups != nil {
+		if err := validateTriggerFilterGroups(v.TriggerFilterGroups); err != nil {
+			invalidParams.AddNested("TriggerFilterGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBitbucketDataCenterIntegrationInput(v *types.BitbucketDataCenterIntegrationInput) error {
 	if v == nil {
 		return nil
@@ -2219,6 +2236,23 @@ func validateBitbucketRepositoryResource(v *types.BitbucketRepositoryResource) e
 	}
 	if v.Workspace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Workspace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBitbucketResourceCapabilities(v *types.BitbucketResourceCapabilities) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BitbucketResourceCapabilities"}
+	if v.TriggerFilterGroups != nil {
+		if err := validateTriggerFilterGroups(v.TriggerFilterGroups); err != nil {
+			invalidParams.AddNested("TriggerFilterGroups", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2401,6 +2435,23 @@ func validateGitHubRepositoryResource(v *types.GitHubRepositoryResource) error {
 	}
 }
 
+func validateGitHubResourceCapabilities(v *types.GitHubResourceCapabilities) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GitHubResourceCapabilities"}
+	if v.TriggerFilterGroups != nil {
+		if err := validateTriggerFilterGroups(v.TriggerFilterGroups); err != nil {
+			invalidParams.AddNested("TriggerFilterGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGitLabIntegrationInput(v *types.GitLabIntegrationInput) error {
 	if v == nil {
 		return nil
@@ -2429,6 +2480,23 @@ func validateGitLabRepositoryResource(v *types.GitLabRepositoryResource) error {
 	}
 	if v.Namespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGitLabResourceCapabilities(v *types.GitLabResourceCapabilities) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GitLabResourceCapabilities"}
+	if v.TriggerFilterGroups != nil {
+		if err := validateTriggerFilterGroups(v.TriggerFilterGroups); err != nil {
+			invalidParams.AddNested("TriggerFilterGroups", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2560,6 +2628,11 @@ func validateIntegratedResourceInputItem(v *types.IntegratedResourceInputItem) e
 			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Capabilities != nil {
+		if err := validateProviderResourceCapabilities(v.Capabilities); err != nil {
+			invalidParams.AddNested("Capabilities", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2641,6 +2714,40 @@ func validateProviderInput(v types.ProviderInput) error {
 
 	case *types.ProviderInputMemberGitlab:
 		if err := validateGitLabIntegrationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[gitlab]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProviderResourceCapabilities(v types.ProviderResourceCapabilities) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProviderResourceCapabilities"}
+	switch uv := v.(type) {
+	case *types.ProviderResourceCapabilitiesMemberAzureDevOps:
+		if err := validateAzureDevOpsResourceCapabilities(&uv.Value); err != nil {
+			invalidParams.AddNested("[azureDevOps]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProviderResourceCapabilitiesMemberBitbucket:
+		if err := validateBitbucketResourceCapabilities(&uv.Value); err != nil {
+			invalidParams.AddNested("[bitbucket]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProviderResourceCapabilitiesMemberGithub:
+		if err := validateGitHubResourceCapabilities(&uv.Value); err != nil {
+			invalidParams.AddNested("[github]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProviderResourceCapabilitiesMemberGitlab:
+		if err := validateGitLabResourceCapabilities(&uv.Value); err != nil {
 			invalidParams.AddNested("[gitlab]", err.(smithy.InvalidParamsError))
 		}
 
@@ -2774,6 +2881,75 @@ func validateServiceManagedInput(v *types.ServiceManagedInput) error {
 	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTriggerFilter(v *types.TriggerFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TriggerFilter"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Patterns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Patterns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTriggerFilterGroup(v *types.TriggerFilterGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TriggerFilterGroup"}
+	if v.Filters != nil {
+		if err := validateTriggerFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTriggerFilterGroups(v []types.TriggerFilterGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TriggerFilterGroups"}
+	for i := range v {
+		if err := validateTriggerFilterGroup(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTriggerFilterList(v []types.TriggerFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TriggerFilterList"}
+	for i := range v {
+		if err := validateTriggerFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

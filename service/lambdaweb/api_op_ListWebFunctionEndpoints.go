@@ -13,6 +13,9 @@ import (
 
 // Lists endpoints for a web function. We recommend using pagination to ensure
 // that the operation returns quickly and successfully.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) ListWebFunctionEndpoints(ctx context.Context, params *ListWebFunctionEndpointsInput, optFns ...func(*Options)) (*ListWebFunctionEndpointsOutput, error) {
 	if params == nil {
 		params = &ListWebFunctionEndpointsInput{}

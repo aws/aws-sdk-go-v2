@@ -17,6 +17,9 @@ import (
 
 // Retrieves details about a web function, including its current state and
 // configuration.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) GetWebFunction(ctx context.Context, params *GetWebFunctionInput, optFns ...func(*Options)) (*GetWebFunctionOutput, error) {
 	if params == nil {
 		params = &GetWebFunctionInput{}

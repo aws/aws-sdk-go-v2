@@ -9534,12 +9534,14 @@ var OAuth2Credentials_JwtToken *smithy.Schema
 var OAuth2GrantType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "OAuth2GrantType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var OAuth2GrantType_AUTHORIZATION_CODE *smithy.Schema
 
 var OAuth2GrantType_CLIENT_CREDENTIALS *smithy.Schema
 
 var OAuth2GrantType_JWT_BEARER *smithy.Schema
+
+var OAuth2GrantType_REFRESH_TOKEN *smithy.Schema
 
 var OAuth2Properties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -20176,6 +20178,8 @@ func init() {
 	OAuth2GrantType_CLIENT_CREDENTIALS = OAuth2GrantType.AddMember("CLIENT_CREDENTIALS", smithyprelude.Unit)
 
 	OAuth2GrantType_JWT_BEARER = OAuth2GrantType.AddMember("JWT_BEARER", smithyprelude.Unit)
+
+	OAuth2GrantType_REFRESH_TOKEN = OAuth2GrantType.AddMember("REFRESH_TOKEN", smithyprelude.Unit)
 
 	OAuth2ClientApplication_UserManagedClientApplicationClientId = OAuth2ClientApplication.AddMember("UserManagedClientApplicationClientId", _UserManagedClientApplicationClientId)
 

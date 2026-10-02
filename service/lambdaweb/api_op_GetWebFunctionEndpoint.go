@@ -17,6 +17,9 @@ import (
 
 // Retrieves details about a web function endpoint, including its current state,
 // configuration, and domain name.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) GetWebFunctionEndpoint(ctx context.Context, params *GetWebFunctionEndpointInput, optFns ...func(*Options)) (*GetWebFunctionEndpointOutput, error) {
 	if params == nil {
 		params = &GetWebFunctionEndpointInput{}

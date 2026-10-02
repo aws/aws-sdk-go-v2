@@ -357,6 +357,14 @@ type RespondToAuthChallengeOutput struct {
 	// JSON web tokens (JWTs) that indicate successful sign-in.
 	AuthenticationResult *types.AuthenticationResultType
 
+	// This response parameter lists the available authentication challenges that
+	// users can select from in [choice-based authentication]. For example, they might be able to choose between
+	// passkey authentication, a one-time password from an SMS message, and a
+	// traditional password.
+	//
+	// [choice-based authentication]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flows-selection-sdk.html#authentication-flows-selection-choice
+	AvailableChallenges []types.ChallengeNameType
+
 	// The name of the next challenge that you must respond to.
 	//
 	// Possible challenges include the following:
@@ -466,6 +474,7 @@ func (v *RespondToAuthChallengeOutput) SerializeMembers(s smithy.ShapeSerializer
 		v.AuthenticationResult.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serializeAvailableChallengeListType(s, schemas.RespondToAuthChallengeResponse_AvailableChallenges, v.AvailableChallenges)
 	if v.ChallengeName != "" {
 		s.WriteString(schemas.RespondToAuthChallengeResponse_ChallengeName, string(v.ChallengeName))
 	}
@@ -480,6 +489,8 @@ func (v *RespondToAuthChallengeOutput) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.RespondToAuthChallengeResponse_AuthenticationResult:
 			v.AuthenticationResult = &types.AuthenticationResultType{}
 			return v.AuthenticationResult.Deserialize(d)
+		case schemas.RespondToAuthChallengeResponse_AvailableChallenges:
+			return deserializeAvailableChallengeListType(d, schemas.RespondToAuthChallengeResponse_AvailableChallenges, &v.AvailableChallenges)
 		case schemas.RespondToAuthChallengeResponse_ChallengeName:
 			var ev string
 			if err := d.ReadString(schemas.RespondToAuthChallengeResponse_ChallengeName, &ev); err != nil {

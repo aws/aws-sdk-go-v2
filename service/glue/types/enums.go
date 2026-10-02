@@ -2311,6 +2311,7 @@ const (
 	OAuth2GrantTypeAuthorizationCode OAuth2GrantType = "AUTHORIZATION_CODE"
 	OAuth2GrantTypeClientCredentials OAuth2GrantType = "CLIENT_CREDENTIALS"
 	OAuth2GrantTypeJwtBearer         OAuth2GrantType = "JWT_BEARER"
+	OAuth2GrantTypeRefreshToken      OAuth2GrantType = "REFRESH_TOKEN"
 )
 
 // Values returns all known values for OAuth2GrantType. Note that this can be
@@ -2322,6 +2323,7 @@ func (OAuth2GrantType) Values() []OAuth2GrantType {
 		"AUTHORIZATION_CODE",
 		"CLIENT_CREDENTIALS",
 		"JWT_BEARER",
+		"REFRESH_TOKEN",
 	}
 }
 

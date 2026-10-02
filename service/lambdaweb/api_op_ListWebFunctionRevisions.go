@@ -13,6 +13,9 @@ import (
 
 // Lists revisions for a web function. We recommend using pagination to ensure
 // that the operation returns quickly and successfully.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) ListWebFunctionRevisions(ctx context.Context, params *ListWebFunctionRevisionsInput, optFns ...func(*Options)) (*ListWebFunctionRevisionsOutput, error) {
 	if params == nil {
 		params = &ListWebFunctionRevisionsInput{}

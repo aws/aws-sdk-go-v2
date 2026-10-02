@@ -14,6 +14,9 @@ import (
 // To use this operation, you must have the DeleteWebFunction permission on the
 // web function. You don't need the DeleteWebFunctionRevision or
 // DeleteWebFunctionEndpoint permission.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) DeleteWebFunction(ctx context.Context, params *DeleteWebFunctionInput, optFns ...func(*Options)) (*DeleteWebFunctionOutput, error) {
 	if params == nil {
 		params = &DeleteWebFunctionInput{}

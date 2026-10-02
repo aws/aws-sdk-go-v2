@@ -1304,6 +1304,32 @@ func deserializeWebAuthnCredentialDescriptionListType(d smithy.ShapeDeserializer
 	})
 }
 
+func serializeAcrConfigurationType(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]AcrLevelConfigType) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteStruct(schema.MapValue())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseMap()
+}
+
+func serializeAcrMappingType(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
 func serializeAttributeMappingType(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	if v == nil {
 		return
@@ -1410,6 +1436,34 @@ func serializeUserPoolTagsType(s smithy.ShapeSerializer, schema *smithy.Schema, 
 		s.WriteString(schema.MapValue(), string(vv))
 	}
 	s.CloseMap()
+}
+
+func deserializeAcrConfigurationType(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]AcrLevelConfigType) error {
+	*v = make(map[string]AcrLevelConfigType)
+	var vv AcrLevelConfigType
+	return smithy.ReadMap(d, s, func(k string) error {
+		vv = AcrLevelConfigType{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeAcrMappingType(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
 }
 
 func deserializeAttributeMappingType(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {

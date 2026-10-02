@@ -12,6 +12,9 @@ import (
 // Adds or updates a resource-based policy on a web function. A resource-based
 // policy grants permissions to other AWS accounts or services to perform actions
 // on the web function.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}

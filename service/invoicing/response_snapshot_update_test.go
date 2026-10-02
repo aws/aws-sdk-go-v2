@@ -436,6 +436,10 @@ func TestUpdateResponseSnapshot_GetProcurementPortalPreference(t *testing.T) {
 				EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+			MarketplacePunchOutEnabled:    ptr.Bool(true),
+			MarketplacePunchOutPreference: &types.MarketplacePunchOutPreference{
+				ApprovalRequestRedirectUrl: ptr.String("__ApprovalRequestRedirectUrl__"),
+			},
 			Contacts: []types.Contact{
 				{
 					Name:  ptr.String("__Name__"),
@@ -990,6 +994,7 @@ func TestUpdateResponseSnapshot_ListProcurementPortalPreferences(t *testing.T) {
 				},
 				EinvoiceDeliveryEnabled:                      ptr.Bool(true),
 				PurchaseOrderRetrievalEnabled:                ptr.Bool(true),
+				MarketplacePunchOutEnabled:                   ptr.Bool(true),
 				EinvoiceDeliveryPreferenceStatus:             types.ProcurementPortalPreferenceStatus("PENDING_VERIFICATION"),
 				EinvoiceDeliveryPreferenceStatusReason:       ptr.String("__EinvoiceDeliveryPreferenceStatusReason__"),
 				PurchaseOrderRetrievalPreferenceStatus:       types.ProcurementPortalPreferenceStatus("PENDING_VERIFICATION"),
@@ -1018,6 +1023,7 @@ func TestUpdateResponseSnapshot_ListProcurementPortalPreferences(t *testing.T) {
 				},
 				EinvoiceDeliveryEnabled:                      ptr.Bool(true),
 				PurchaseOrderRetrievalEnabled:                ptr.Bool(true),
+				MarketplacePunchOutEnabled:                   ptr.Bool(true),
 				EinvoiceDeliveryPreferenceStatus:             types.ProcurementPortalPreferenceStatus("PENDING_VERIFICATION"),
 				EinvoiceDeliveryPreferenceStatusReason:       ptr.String("__EinvoiceDeliveryPreferenceStatusReason__"),
 				PurchaseOrderRetrievalPreferenceStatus:       types.ProcurementPortalPreferenceStatus("PENDING_VERIFICATION"),

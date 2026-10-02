@@ -37,6 +37,13 @@ type CarrierLookupInput struct {
 	// This member is required.
 	PhoneNumber *string
 
+	// Specifies whether the service cleanses the phone number that you provide. When
+	// set to true , the service normalizes the phone number according to the
+	// destination country's national numbering plan and dialing rules. The service
+	// returns the cleansed number in E.164 format in the E164PhoneNumber field and
+	// returns the number that you provided in the OriginalPhoneNumber field.
+	EnableCleansing *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -47,6 +54,9 @@ func (v *CarrierLookupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CarrierLookupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableCleansing != nil {
+		s.WriteBool(schemas.CarrierLookupRequest_EnableCleansing, *v.EnableCleansing)
+	}
 	if v.PhoneNumber != nil {
 		s.WriteString(schemas.CarrierLookupRequest_PhoneNumber, *v.PhoneNumber)
 	}
@@ -60,9 +70,9 @@ type CarrierLookupOutput struct {
 	// This member is required.
 	E164PhoneNumber *string
 
-	// Describes the type of phone number. Valid values are: MOBILE, LANDLINE, OTHER,
-	// and INVALID. Avoid sending SMS or voice messages to INVALID phone numbers, as
-	// these numbers are unlikely to belong to actual recipients.
+	// Describes the type of phone number. Valid values are: MOBILE, LANDLINE, VOIP,
+	// PREPAID, OTHER, and INVALID. Avoid sending SMS or voice messages to INVALID
+	// phone numbers, as these numbers are unlikely to belong to actual recipients.
 	//
 	// This member is required.
 	PhoneNumberType types.PhoneNumberType
@@ -87,6 +97,12 @@ type CarrierLookupOutput struct {
 
 	// The phone number's mobile network code, for mobile phone number types.
 	MNC *string
+
+	// The phone number exactly as you supplied it in the request. This field is
+	// returned only when you set EnableCleansing to true , the phone number was
+	// cleansed, and a normalized E.164 phone number was returned in the
+	// E164PhoneNumber field.
+	OriginalPhoneNumber *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -122,6 +138,9 @@ func (v *CarrierLookupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MNC != nil {
 		s.WriteString(schemas.CarrierLookupResult_MNC, *v.MNC)
 	}
+	if v.OriginalPhoneNumber != nil {
+		s.WriteString(schemas.CarrierLookupResult_OriginalPhoneNumber, *v.OriginalPhoneNumber)
+	}
 	if v.PhoneNumberType != "" {
 		s.WriteString(schemas.CarrierLookupResult_PhoneNumberType, string(v.PhoneNumberType))
 	}
@@ -150,6 +169,9 @@ func (v *CarrierLookupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CarrierLookupResult_MNC:
 			v.MNC = new(string)
 			return d.ReadString(schemas.CarrierLookupResult_MNC, v.MNC)
+		case schemas.CarrierLookupResult_OriginalPhoneNumber:
+			v.OriginalPhoneNumber = new(string)
+			return d.ReadString(schemas.CarrierLookupResult_OriginalPhoneNumber, v.OriginalPhoneNumber)
 		case schemas.CarrierLookupResult_PhoneNumberType:
 			var ev string
 			if err := d.ReadString(schemas.CarrierLookupResult_PhoneNumberType, &ev); err != nil {

@@ -13,6 +13,9 @@ import (
 // Retrieves details about your AWS Lambda Web Functions account settings for the
 // current AWS Region, including the quotas that apply to web functions and your
 // current usage.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) GetWebAccountSettings(ctx context.Context, params *GetWebAccountSettingsInput, optFns ...func(*Options)) (*GetWebAccountSettingsOutput, error) {
 	if params == nil {
 		params = &GetWebAccountSettingsInput{}

@@ -773,6 +773,16 @@ type FilterConfiguration struct {
 	// identical manifest filter query parameter for this manifest's endpoint URL.
 	ManifestFilter *string
 
+	// Optionally pin this manifest to a single multiview combination, so that players
+	// request it without an aws.multiview query parameter. When you pin a
+	// combination, note that you cannot use the aws.multiview query parameter for
+	// this manifest's endpoint URL, even when that parameter requests the same
+	// combination.
+	//
+	// This setting is valid only on an origin endpoint whose channel has an InputType
+	// of MULTIVIEW .
+	Multiview *MultiviewFilterConfiguration
+
 	// Optionally specify the start time for all of your manifest egress requests.
 	// When you include start time, note that you cannot use start time query
 	// parameters for this manifest's endpoint URL.
@@ -1345,6 +1355,32 @@ type MultiviewConfiguration struct {
 	//
 	// This member is required.
 	AvailableSources []string
+
+	noSmithyDocumentSerde
+}
+
+// The multiview combination for a pinned manifest. MediaPackage serves the
+// manifest with this layout and these sources, so players request it without an
+// aws.multiview query parameter.
+//
+// If a request for a pinned manifest also includes an aws.multiview query
+// parameter, MediaPackage rejects the request, even when that parameter requests
+// the same combination.
+type MultiviewFilterConfiguration struct {
+
+	// The layout that MediaPackage uses to composite the tiles into a single output.
+	// This layout must be one of the AvailableLayouts of the channel that this origin
+	// endpoint is on.
+	//
+	// This member is required.
+	Layout MultiviewLayoutType
+
+	// The source channels to composite, in tile order. Each channel must be one of
+	// the AvailableSources of the channel that this origin endpoint is on, and the
+	// number of channels must equal the number of tiles in Layout .
+	//
+	// This member is required.
+	Sources []string
 
 	noSmithyDocumentSerde
 }

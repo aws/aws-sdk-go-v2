@@ -630,6 +630,12 @@ var ListInvoiceSummariesResourceType_ACCOUNT_ID *smithy.Schema
 
 var ListInvoiceSummariesResourceType_INVOICE_ID *smithy.Schema
 
+var MarketplacePunchOutPreference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "MarketplacePunchOutPreference",
+}, smithy.ShapeTypeStructure, 1)
+var MarketplacePunchOutPreference_ApprovalRequestRedirectUrl *smithy.Schema
+
 var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "MaxResults",
@@ -686,7 +692,7 @@ var ProcurementPortalName_COUPA *smithy.Schema
 var ProcurementPortalPreference = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ProcurementPortalPreference",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 25)
 var ProcurementPortalPreference_AwsAccountId *smithy.Schema
 
 var ProcurementPortalPreference_ProcurementPortalPreferenceArn *smithy.Schema
@@ -716,6 +722,10 @@ var ProcurementPortalPreference_EinvoiceDeliveryEnabled *smithy.Schema
 var ProcurementPortalPreference_EinvoiceDeliveryPreference *smithy.Schema
 
 var ProcurementPortalPreference_PurchaseOrderRetrievalEnabled *smithy.Schema
+
+var ProcurementPortalPreference_MarketplacePunchOutEnabled *smithy.Schema
+
+var ProcurementPortalPreference_MarketplacePunchOutPreference *smithy.Schema
 
 var ProcurementPortalPreference_Contacts *smithy.Schema
 
@@ -773,7 +783,7 @@ var _ProcurementPortalPreferenceSummaries_member *smithy.Schema
 var ProcurementPortalPreferenceSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ProcurementPortalPreferenceSummary",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var ProcurementPortalPreferenceSummary_AwsAccountId *smithy.Schema
 
 var ProcurementPortalPreferenceSummary_ProcurementPortalPreferenceArn *smithy.Schema
@@ -793,6 +803,8 @@ var ProcurementPortalPreferenceSummary_Selector *smithy.Schema
 var ProcurementPortalPreferenceSummary_EinvoiceDeliveryEnabled *smithy.Schema
 
 var ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalEnabled *smithy.Schema
+
+var ProcurementPortalPreferenceSummary_MarketplacePunchOutEnabled *smithy.Schema
 
 var ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatus *smithy.Schema
 
@@ -1197,7 +1209,7 @@ var CreateInvoiceUnitResponse_InvoiceUnitArn *smithy.Schema
 var CreateProcurementPortalPreferenceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "CreateProcurementPortalPreferenceRequest",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 17)
 var CreateProcurementPortalPreferenceRequest_ProcurementPortalName *smithy.Schema
 
 var CreateProcurementPortalPreferenceRequest_BuyerDomain *smithy.Schema
@@ -1221,6 +1233,10 @@ var CreateProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled *smithy.Sch
 var CreateProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference *smithy.Schema
 
 var CreateProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled *smithy.Schema
+
+var CreateProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled *smithy.Schema
+
+var CreateProcurementPortalPreferenceRequest_MarketplacePunchOutPreference *smithy.Schema
 
 var CreateProcurementPortalPreferenceRequest_Contacts *smithy.Schema
 
@@ -1417,7 +1433,7 @@ var ListTagsForResourceResponse_ResourceTags *smithy.Schema
 var PutProcurementPortalPreferenceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "PutProcurementPortalPreferenceRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var PutProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn *smithy.Schema
 
 var PutProcurementPortalPreferenceRequest_Selector *smithy.Schema
@@ -1433,6 +1449,10 @@ var PutProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled *smithy.Schema
 var PutProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference *smithy.Schema
 
 var PutProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled *smithy.Schema
+
+var PutProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled *smithy.Schema
+
+var PutProcurementPortalPreferenceRequest_MarketplacePunchOutPreference *smithy.Schema
 
 var PutProcurementPortalPreferenceRequest_Contacts *smithy.Schema
 
@@ -1877,6 +1897,8 @@ func init() {
 
 	_InvoiceUnits_member = _InvoiceUnits.AddMember("member", InvoiceUnit)
 
+	MarketplacePunchOutPreference_ApprovalRequestRedirectUrl = MarketplacePunchOutPreference.AddMember("ApprovalRequestRedirectUrl", _BasicStringWithoutSpace)
+
 	ProcurementPortalName_SAP_BUSINESS_NETWORK = ProcurementPortalName.AddMember("SAP_BUSINESS_NETWORK", smithyprelude.Unit)
 
 	ProcurementPortalName_COUPA = ProcurementPortalName.AddMember("COUPA", smithyprelude.Unit)
@@ -1959,6 +1981,10 @@ func init() {
 
 	ProcurementPortalPreference_PurchaseOrderRetrievalEnabled = ProcurementPortalPreference.AddMember("PurchaseOrderRetrievalEnabled", smithyprelude.Boolean)
 
+	ProcurementPortalPreference_MarketplacePunchOutEnabled = ProcurementPortalPreference.AddMember("MarketplacePunchOutEnabled", smithyprelude.Boolean)
+
+	ProcurementPortalPreference_MarketplacePunchOutPreference = ProcurementPortalPreference.AddMember("MarketplacePunchOutPreference", MarketplacePunchOutPreference)
+
 	ProcurementPortalPreference_Contacts = ProcurementPortalPreference.AddMember("Contacts", _Contacts)
 
 	ProcurementPortalPreference_EinvoiceDeliveryPreferenceStatus = ProcurementPortalPreference.AddMember("EinvoiceDeliveryPreferenceStatus", ProcurementPortalPreferenceStatus)
@@ -1994,6 +2020,8 @@ func init() {
 	ProcurementPortalPreferenceSummary_EinvoiceDeliveryEnabled = ProcurementPortalPreferenceSummary.AddMember("EinvoiceDeliveryEnabled", smithyprelude.Boolean)
 
 	ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalEnabled = ProcurementPortalPreferenceSummary.AddMember("PurchaseOrderRetrievalEnabled", smithyprelude.Boolean)
+
+	ProcurementPortalPreferenceSummary_MarketplacePunchOutEnabled = ProcurementPortalPreferenceSummary.AddMember("MarketplacePunchOutEnabled", smithyprelude.Boolean)
 
 	ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatus = ProcurementPortalPreferenceSummary.AddMember("EinvoiceDeliveryPreferenceStatus", ProcurementPortalPreferenceStatus)
 
@@ -2139,6 +2167,10 @@ func init() {
 
 	CreateProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled = CreateProcurementPortalPreferenceRequest.AddMember("PurchaseOrderRetrievalEnabled", smithyprelude.Boolean)
 
+	CreateProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled = CreateProcurementPortalPreferenceRequest.AddMember("MarketplacePunchOutEnabled", smithyprelude.Boolean)
+
+	CreateProcurementPortalPreferenceRequest_MarketplacePunchOutPreference = CreateProcurementPortalPreferenceRequest.AddMember("MarketplacePunchOutPreference", MarketplacePunchOutPreference)
+
 	CreateProcurementPortalPreferenceRequest_Contacts = CreateProcurementPortalPreferenceRequest.AddMember("Contacts", _Contacts)
 
 	CreateProcurementPortalPreferenceRequest_ResourceTags = CreateProcurementPortalPreferenceRequest.AddMember("ResourceTags", _ResourceTagList)
@@ -2254,6 +2286,10 @@ func init() {
 	PutProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference = PutProcurementPortalPreferenceRequest.AddMember("EinvoiceDeliveryPreference", EinvoiceDeliveryPreference)
 
 	PutProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled = PutProcurementPortalPreferenceRequest.AddMember("PurchaseOrderRetrievalEnabled", smithyprelude.Boolean)
+
+	PutProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled = PutProcurementPortalPreferenceRequest.AddMember("MarketplacePunchOutEnabled", smithyprelude.Boolean)
+
+	PutProcurementPortalPreferenceRequest_MarketplacePunchOutPreference = PutProcurementPortalPreferenceRequest.AddMember("MarketplacePunchOutPreference", MarketplacePunchOutPreference)
 
 	PutProcurementPortalPreferenceRequest_Contacts = PutProcurementPortalPreferenceRequest.AddMember("Contacts", _Contacts)
 

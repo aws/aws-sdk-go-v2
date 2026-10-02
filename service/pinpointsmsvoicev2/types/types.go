@@ -1476,7 +1476,8 @@ func (v *NotifyTemplateInformation) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
-// A single number preference — specifies a pattern type and filter value.
+// A single number preference that specifies how to match available phone numbers.
+// Each preference pairs a match type with one or more filter values.
 type NumberPreferenceItem struct {
 
 	// The digit pattern values to match against available phone numbers, using the

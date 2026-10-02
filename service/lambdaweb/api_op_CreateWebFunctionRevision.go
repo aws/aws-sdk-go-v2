@@ -16,6 +16,9 @@ import (
 //
 // To use this operation, you must have the CreateWebFunctionRevision permission
 // on the web function, not on the revision being created.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) CreateWebFunctionRevision(ctx context.Context, params *CreateWebFunctionRevisionInput, optFns ...func(*Options)) (*CreateWebFunctionRevisionOutput, error) {
 	if params == nil {
 		params = &CreateWebFunctionRevisionInput{}

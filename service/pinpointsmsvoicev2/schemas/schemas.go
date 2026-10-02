@@ -3284,13 +3284,15 @@ var AssociateProtectConfigurationResult_ProtectConfigurationId *smithy.Schema
 var CarrierLookupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "CarrierLookupRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var CarrierLookupRequest_PhoneNumber *smithy.Schema
+
+var CarrierLookupRequest_EnableCleansing *smithy.Schema
 
 var CarrierLookupResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "CarrierLookupResult",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var CarrierLookupResult_E164PhoneNumber *smithy.Schema
 
 var CarrierLookupResult_DialingCountryCode *smithy.Schema
@@ -3306,6 +3308,8 @@ var CarrierLookupResult_MNC *smithy.Schema
 var CarrierLookupResult_Carrier *smithy.Schema
 
 var CarrierLookupResult_PhoneNumberType *smithy.Schema
+
+var CarrierLookupResult_OriginalPhoneNumber *smithy.Schema
 
 var CreateConfigurationSetRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -6998,6 +7002,8 @@ func init() {
 
 	CarrierLookupRequest_PhoneNumber = CarrierLookupRequest.AddMember("PhoneNumber", _CarrierLookupInputPhoneNumberType)
 
+	CarrierLookupRequest_EnableCleansing = CarrierLookupRequest.AddMember("EnableCleansing", smithyprelude.Boolean)
+
 	CarrierLookupResult_E164PhoneNumber = CarrierLookupResult.AddMember("E164PhoneNumber", _E164PhoneNumberType)
 
 	CarrierLookupResult_DialingCountryCode = CarrierLookupResult.AddMember("DialingCountryCode", _DialingCountryCodeType)
@@ -7013,6 +7019,8 @@ func init() {
 	CarrierLookupResult_Carrier = CarrierLookupResult.AddMember("Carrier", smithyprelude.String)
 
 	CarrierLookupResult_PhoneNumberType = CarrierLookupResult.AddMember("PhoneNumberType", _PhoneNumberType)
+
+	CarrierLookupResult_OriginalPhoneNumber = CarrierLookupResult.AddMember("OriginalPhoneNumber", _CarrierLookupInputPhoneNumberType)
 
 	CreateConfigurationSetRequest_ConfigurationSetName = CreateConfigurationSetRequest.AddMember("ConfigurationSetName", _ConfigurationSetName)
 

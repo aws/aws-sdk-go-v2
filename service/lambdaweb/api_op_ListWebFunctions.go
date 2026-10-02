@@ -13,6 +13,9 @@ import (
 
 // Lists web functions in your account. We recommend using pagination to ensure
 // that the operation returns quickly and successfully.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) ListWebFunctions(ctx context.Context, params *ListWebFunctionsInput, optFns ...func(*Options)) (*ListWebFunctionsOutput, error) {
 	if params == nil {
 		params = &ListWebFunctionsInput{}

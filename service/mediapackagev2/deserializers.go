@@ -7731,6 +7731,11 @@ func awsRestjson1_deserializeDocumentFilterConfiguration(v **types.FilterConfigu
 				sv.ManifestFilter = ptr.String(jtv)
 			}
 
+		case "Multiview":
+			if err := awsRestjson1_deserializeDocumentMultiviewFilterConfiguration(&sv.Multiview, value); err != nil {
+				return err
+			}
+
 		case "Start":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9526,6 +9531,51 @@ func awsRestjson1_deserializeDocumentMultiviewConfiguration(v **types.MultiviewC
 
 		case "AvailableSources":
 			if err := awsRestjson1_deserializeDocumentMultiviewSourceList(&sv.AvailableSources, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMultiviewFilterConfiguration(v **types.MultiviewFilterConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MultiviewFilterConfiguration
+	if *v == nil {
+		sv = &types.MultiviewFilterConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Layout":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MultiviewLayoutType to be of type string, got %T instead", value)
+				}
+				sv.Layout = types.MultiviewLayoutType(jtv)
+			}
+
+		case "Sources":
+			if err := awsRestjson1_deserializeDocumentMultiviewSourceList(&sv.Sources, value); err != nil {
 				return err
 			}
 

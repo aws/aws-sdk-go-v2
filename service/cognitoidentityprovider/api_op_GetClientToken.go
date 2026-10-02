@@ -12,9 +12,7 @@ import (
 
 // Issues an access token for machine-to-machine (M2M) authorization. Your app
 // client provides its client ID and secret, and receives an access token that
-// authorizes requests to your resource servers. GetClientToken provides the same
-// functionality as the OAuth2 client-credentials grant; both authorize an
-// application rather than a user.
+// authorizes requests to your resource servers.
 //
 // To use this operation, you must configure the app client with a client secret
 // and enable the ALLOW_CLIENT_TOKEN_AUTH authentication flow. The

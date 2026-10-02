@@ -16,6 +16,9 @@ import (
 
 // Retrieves details about a web function revision, including its state and
 // configuration.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) GetWebFunctionRevision(ctx context.Context, params *GetWebFunctionRevisionInput, optFns ...func(*Options)) (*GetWebFunctionRevisionOutput, error) {
 	if params == nil {
 		params = &GetWebFunctionRevisionInput{}

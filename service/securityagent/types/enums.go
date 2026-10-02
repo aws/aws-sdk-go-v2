@@ -1082,6 +1082,75 @@ func (ThreatStatus) Values() []ThreatStatus {
 	}
 }
 
+type TriggerEvent string
+
+// Enum values for TriggerEvent
+const (
+	// A pull request that isn't a draft is opened, updated, or marked ready for
+	// review.
+	TriggerEventPullRequestReadyForReview TriggerEvent = "PULL_REQUEST_READY_FOR_REVIEW"
+	// A draft pull request is opened or updated.
+	TriggerEventPullRequestDraft TriggerEvent = "PULL_REQUEST_DRAFT"
+	// A label is added to a pull request. A filter group that selects this event must
+	// include a LABEL filter with the INCLUDE match mode, and a review starts only
+	// when the added label matches it.
+	TriggerEventPullRequestLabelAdded TriggerEvent = "PULL_REQUEST_LABEL_ADDED"
+)
+
+// Values returns all known values for TriggerEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TriggerEvent) Values() []TriggerEvent {
+	return []TriggerEvent{
+		"PULL_REQUEST_READY_FOR_REVIEW",
+		"PULL_REQUEST_DRAFT",
+		"PULL_REQUEST_LABEL_ADDED",
+	}
+}
+
+type TriggerFilterMatchMode string
+
+// Enum values for TriggerFilterMatchMode
+const (
+	// The filter passes when a value fully matches at least one pattern.
+	TriggerFilterMatchModeInclude TriggerFilterMatchMode = "INCLUDE"
+	// The filter passes when no value fully matches any pattern.
+	TriggerFilterMatchModeExclude TriggerFilterMatchMode = "EXCLUDE"
+)
+
+// Values returns all known values for TriggerFilterMatchMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TriggerFilterMatchMode) Values() []TriggerFilterMatchMode {
+	return []TriggerFilterMatchMode{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
+type TriggerFilterType string
+
+// Enum values for TriggerFilterType
+const (
+	// The name of the pull request's target branch, for example main .
+	TriggerFilterTypeTargetBranch TriggerFilterType = "TARGET_BRANCH"
+	// The labels on the pull request.
+	TriggerFilterTypeLabel TriggerFilterType = "LABEL"
+)
+
+// Values returns all known values for TriggerFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TriggerFilterType) Values() []TriggerFilterType {
+	return []TriggerFilterType{
+		"TARGET_BRANCH",
+		"LABEL",
+	}
+}
+
 type UserRole string
 
 // Enum values for UserRole

@@ -266,7 +266,8 @@ func TestCheckRequestSnapshot_AssociateProtectConfiguration(t *testing.T) {
 
 func TestCheckRequestSnapshot_CarrierLookup(t *testing.T) {
 	input := &CarrierLookupInput{
-		PhoneNumber: ptr.String("__PhoneNumber__"),
+		PhoneNumber:     ptr.String("__PhoneNumber__"),
+		EnableCleansing: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4132,7 +4133,8 @@ func TestUpdateRequestSnapshot_AssociateProtectConfiguration(t *testing.T) {
 
 func TestUpdateRequestSnapshot_CarrierLookup(t *testing.T) {
 	input := &CarrierLookupInput{
-		PhoneNumber: ptr.String("__PhoneNumber__"),
+		PhoneNumber:     ptr.String("__PhoneNumber__"),
+		EnableCleansing: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

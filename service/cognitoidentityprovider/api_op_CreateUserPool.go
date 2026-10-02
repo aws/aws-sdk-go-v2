@@ -83,6 +83,26 @@ type CreateUserPoolInput struct {
 	// with one having a higher priority than the other.
 	AccountRecoverySetting *types.AccountRecoverySettingType
 
+	// The custom names for the authentication context class reference (ACR) levels in
+	// your user pool. Amazon Cognito defines four fixed ACR levels that represent
+	// increasing authentication assurance. The combination of authentication factors
+	// that satisfies each level is fixed and you can't change it. With this
+	// configuration, you customize only the URI name that Amazon Cognito reports for
+	// each level in the acr token claim.
+	//
+	// You can override a subset of the levels. By default, the levels are named
+	// urn:cognito:loa:1 through urn:cognito:loa:4 , and Amazon Cognito applies the
+	// default name to any level that you don't specify. Each name must be unique
+	// across all four levels, including any default names that apply to levels you
+	// don't override. A name can contain any character that is valid in a URL or a
+	// URN.
+	//
+	// Configuring custom ACR level names requires the Essentials or Plus feature
+	// plan. To activate this setting, your user pool must be in the [Essentials tier]or higher.
+	//
+	// [Essentials tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+	AcrConfiguration map[string]types.AcrLevelConfigType
+
 	// The configuration for administrative creation of users. Includes the template
 	// for the invitation message for new users, the duration of temporary passwords,
 	// and permitting self-service sign-up.
@@ -283,6 +303,7 @@ func (v *CreateUserPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AccountRecoverySetting.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serializeAcrConfigurationType(s, schemas.CreateUserPoolRequest_AcrConfiguration, v.AcrConfiguration)
 	if v.AdminCreateUserConfig != nil {
 		s.WriteStruct(schemas.CreateUserPoolRequest_AdminCreateUserConfig)
 		v.AdminCreateUserConfig.SerializeMembers(s)

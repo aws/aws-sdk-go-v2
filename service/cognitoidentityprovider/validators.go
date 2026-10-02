@@ -3237,6 +3237,39 @@ func validateAccountTakeoverRiskConfigurationType(v *types.AccountTakeoverRiskCo
 	}
 }
 
+func validateAcrConfigurationType(v map[string]types.AcrLevelConfigType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcrConfigurationType"}
+	for key := range v {
+		value := v[key]
+		if err := validateAcrLevelConfigType(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAcrLevelConfigType(v *types.AcrLevelConfigType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcrLevelConfigType"}
+	if v.AcrValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcrValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssetListType(v []types.AssetType) error {
 	if v == nil {
 		return nil
@@ -4707,6 +4740,11 @@ func validateOpCreateUserPoolInput(v *CreateUserPoolInput) error {
 	if v.AccountRecoverySetting != nil {
 		if err := validateAccountRecoverySettingType(v.AccountRecoverySetting); err != nil {
 			invalidParams.AddNested("AccountRecoverySetting", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AcrConfiguration != nil {
+		if err := validateAcrConfigurationType(v.AcrConfiguration); err != nil {
+			invalidParams.AddNested("AcrConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6215,6 +6253,11 @@ func validateOpUpdateUserPoolInput(v *UpdateUserPoolInput) error {
 	if v.AccountRecoverySetting != nil {
 		if err := validateAccountRecoverySettingType(v.AccountRecoverySetting); err != nil {
 			invalidParams.AddNested("AccountRecoverySetting", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AcrConfiguration != nil {
+		if err := validateAcrConfigurationType(v.AcrConfiguration); err != nil {
+			invalidParams.AddNested("AcrConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -11,6 +11,9 @@ import (
 
 // Deletes a web function revision. You cannot delete a revision that is currently
 // serving traffic on an endpoint.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) DeleteWebFunctionRevision(ctx context.Context, params *DeleteWebFunctionRevisionInput, optFns ...func(*Options)) (*DeleteWebFunctionRevisionOutput, error) {
 	if params == nil {
 		params = &DeleteWebFunctionRevisionInput{}

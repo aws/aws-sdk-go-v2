@@ -53,6 +53,11 @@ type BatchGetPartitionInput struct {
 	// A structure used as a protocol between query engines and Lake Formation or
 	// Glue. Contains both a Lake Formation generated authorization identifier and
 	// information from the request's authorization context.
+	//
+	// For more information about how to utilize QuerySessionContext, see [Lake Formation workflow for application integration API operations] in the
+	// developer guide.
+	//
+	// [Lake Formation workflow for application integration API operations]: https://docs.aws.amazon.com/lake-formation/latest/dg/api-overview.html
 	QuerySessionContext *types.QuerySessionContext
 
 	noSmithyDocumentSerde

@@ -85,6 +85,19 @@ type UpdateUserPoolInput struct {
 	// SMS is preferred through email.
 	AccountRecoverySetting *types.AccountRecoverySettingType
 
+	// The custom names for the authentication context class reference (ACR) levels in
+	// your user pool. This configuration has the same behavior as it does when you
+	// create a user pool: you customize only the URI name that Amazon Cognito reports
+	// for each of the four fixed ACR levels, and any level that you don't specify
+	// keeps its default name. Each name must be unique across all four levels,
+	// including default names.
+	//
+	// Configuring custom ACR level names requires the Essentials or Plus feature
+	// plan. To activate this setting, your user pool must be in the [Essentials tier]or higher.
+	//
+	// [Essentials tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+	AcrConfiguration map[string]types.AcrLevelConfigType
+
 	// The configuration for administrative creation of users. Includes the template
 	// for the invitation message for new users, the duration of temporary passwords,
 	// and permitting self-service sign-up.
@@ -239,6 +252,7 @@ func (v *UpdateUserPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AccountRecoverySetting.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serializeAcrConfigurationType(s, schemas.UpdateUserPoolRequest_AcrConfiguration, v.AcrConfiguration)
 	if v.AdminCreateUserConfig != nil {
 		s.WriteStruct(schemas.UpdateUserPoolRequest_AdminCreateUserConfig)
 		v.AdminCreateUserConfig.SerializeMembers(s)

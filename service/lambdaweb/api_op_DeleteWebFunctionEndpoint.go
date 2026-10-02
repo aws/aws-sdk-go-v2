@@ -10,6 +10,9 @@ import (
 )
 
 // Deletes a web function endpoint.
+//
+// This API is experimental and for internal AWS use only. It is not yet available
+// to external customers.
 func (c *Client) DeleteWebFunctionEndpoint(ctx context.Context, params *DeleteWebFunctionEndpointInput, optFns ...func(*Options)) (*DeleteWebFunctionEndpointOutput, error) {
 	if params == nil {
 		params = &DeleteWebFunctionEndpointInput{}

@@ -355,6 +355,12 @@ type AzureDevOpsResourceCapabilities struct {
 	// Whether to create pull requests with automated fixes.
 	RemediateCode *bool
 
+	// The filter groups that control which pull request events start an automatic
+	// code review when leaveComments is enabled. A review starts when any group
+	// matches. If you omit this, a review starts on PULL_REQUEST_READY_FOR_REVIEW
+	// events.
+	TriggerFilterGroups []TriggerFilterGroup
+
 	noSmithyDocumentSerde
 }
 
@@ -569,6 +575,12 @@ type BitbucketResourceCapabilities struct {
 
 	// Whether to create pull requests with automated fixes.
 	RemediateCode *bool
+
+	// The filter groups that control which pull request events start an automatic
+	// code review when leaveComments is enabled. A review starts when any group
+	// matches. If you omit this, a review starts on PULL_REQUEST_READY_FOR_REVIEW
+	// events.
+	TriggerFilterGroups []TriggerFilterGroup
 
 	noSmithyDocumentSerde
 }
@@ -1509,6 +1521,12 @@ type GitHubResourceCapabilities struct {
 	// Indicates whether the integration can create code remediation pull requests.
 	RemediateCode *bool
 
+	// The filter groups that control which pull request events start an automatic
+	// code review when leaveComments is enabled. A review starts when any group
+	// matches. If you omit this, a review starts on PULL_REQUEST_READY_FOR_REVIEW
+	// events.
+	TriggerFilterGroups []TriggerFilterGroup
+
 	noSmithyDocumentSerde
 }
 
@@ -1586,6 +1604,12 @@ type GitLabResourceCapabilities struct {
 
 	// Whether to create merge requests with automated fixes.
 	RemediateCode *bool
+
+	// The filter groups that control which merge request events start an automatic
+	// code review when leaveComments is enabled. A review starts when any group
+	// matches. If you omit this, a review starts on PULL_REQUEST_READY_FOR_REVIEW
+	// events.
+	TriggerFilterGroups []TriggerFilterGroup
 
 	noSmithyDocumentSerde
 }
@@ -3280,6 +3304,41 @@ type ThreatSummary struct {
 
 	// Who last updated this threat.
 	UpdatedBy ThreatActor
+
+	noSmithyDocumentSerde
+}
+
+// A condition on a pull request value.
+type TriggerFilter struct {
+
+	// The regular expressions to match against the value.
+	//
+	// This member is required.
+	Patterns []string
+
+	// The pull request value to match.
+	//
+	// This member is required.
+	Type TriggerFilterType
+
+	// Whether the value must match the patterns. The default is INCLUDE .
+	MatchMode TriggerFilterMatchMode
+
+	noSmithyDocumentSerde
+}
+
+// A set of conditions that start an automatic code review when they all pass. A
+// filter group must include events , filters , or both.
+type TriggerFilterGroup struct {
+
+	// Passes when the pull request event is one of the listed events. If you omit
+	// this, the group matches PULL_REQUEST_READY_FOR_REVIEW and PULL_REQUEST_DRAFT
+	// events only.
+	Events []TriggerEvent
+
+	// Passes when every filter passes. If you omit this, the group matches its events
+	// on any target branch and with any labels.
+	Filters []TriggerFilter
 
 	noSmithyDocumentSerde
 }

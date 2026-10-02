@@ -166,14 +166,15 @@ func TestCheckResponseSnapshot_AssociateProtectConfiguration(t *testing.T) {
 
 func TestCheckResponseSnapshot_CarrierLookup(t *testing.T) {
 	want := &CarrierLookupOutput{
-		E164PhoneNumber:    ptr.String("__E164PhoneNumber__"),
-		DialingCountryCode: ptr.String("__DialingCountryCode__"),
-		IsoCountryCode:     ptr.String("__IsoCountryCode__"),
-		Country:            ptr.String("__Country__"),
-		MCC:                ptr.String("__MCC__"),
-		MNC:                ptr.String("__MNC__"),
-		Carrier:            ptr.String("__Carrier__"),
-		PhoneNumberType:    types.PhoneNumberType("MOBILE"),
+		E164PhoneNumber:     ptr.String("__E164PhoneNumber__"),
+		DialingCountryCode:  ptr.String("__DialingCountryCode__"),
+		IsoCountryCode:      ptr.String("__IsoCountryCode__"),
+		Country:             ptr.String("__Country__"),
+		MCC:                 ptr.String("__MCC__"),
+		MNC:                 ptr.String("__MNC__"),
+		Carrier:             ptr.String("__Carrier__"),
+		PhoneNumberType:     types.PhoneNumberType("MOBILE"),
+		OriginalPhoneNumber: ptr.String("__OriginalPhoneNumber__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CarrierLookup.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -184,7 +185,8 @@ func TestCheckResponseSnapshot_CarrierLookup(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.CarrierLookup(context.Background(), &CarrierLookupInput{
-		PhoneNumber: ptr.String("__PhoneNumber__"),
+		PhoneNumber:     ptr.String("__PhoneNumber__"),
+		EnableCleansing: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)

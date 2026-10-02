@@ -163,6 +163,19 @@ type CreateIdentityProviderInput struct {
 	// This member is required.
 	UserPoolId *string
 
+	// A mapping between the authentication context class reference (ACR) levels of
+	// your user pool and the ACR values of the external OpenID Connect (OIDC) identity
+	// provider (IdP). The map is keyed by level, from Level1 through Level4 , and each
+	// value is the ACR value that the IdP uses for the corresponding level. Amazon
+	// Cognito uses this mapping to translate a requested user pool ACR level to the
+	// value that the IdP expects, and to map an ACR value that the IdP returns back to
+	// a user pool level. When the IdP returns an ACR value that isn't mapped, Amazon
+	// Cognito resolves it to the lowest level. Only OIDC IdPs support ACR mapping.
+	//
+	// Setting AcrMapping is available in all feature plans. It isn't restricted to
+	// the Essentials or Plus feature plan.
+	AcrMapping map[string]string
+
 	// A mapping of IdP attributes to standard and custom user pool attributes.
 	// Specify a user pool attribute as the key of the key-value pair, and the IdP
 	// attribute claim name as the value.
@@ -187,6 +200,7 @@ func (v *CreateIdentityProviderInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAcrMappingType(s, schemas.CreateIdentityProviderRequest_AcrMapping, v.AcrMapping)
 	serializeAttributeMappingType(s, schemas.CreateIdentityProviderRequest_AttributeMapping, v.AttributeMapping)
 	serializeIdpIdentifiersListType(s, schemas.CreateIdentityProviderRequest_IdpIdentifiers, v.IdpIdentifiers)
 	serializeProviderDetailsType(s, schemas.CreateIdentityProviderRequest_ProviderDetails, v.ProviderDetails)

@@ -339,6 +339,10 @@ func TestCheckRequestSnapshot_CreateProcurementPortalPreference(t *testing.T) {
 			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		MarketplacePunchOutEnabled:    ptr.Bool(true),
+		MarketplacePunchOutPreference: &types.MarketplacePunchOutPreference{
+			ApprovalRequestRedirectUrl: ptr.String("__ApprovalRequestRedirectUrl__"),
+		},
 		Contacts: []types.Contact{
 			{
 				Name:  ptr.String("__Name__"),
@@ -773,6 +777,10 @@ func TestCheckRequestSnapshot_PutProcurementPortalPreference(t *testing.T) {
 			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		MarketplacePunchOutEnabled:    ptr.Bool(true),
+		MarketplacePunchOutPreference: &types.MarketplacePunchOutPreference{
+			ApprovalRequestRedirectUrl: ptr.String("__ApprovalRequestRedirectUrl__"),
+		},
 		Contacts: []types.Contact{
 			{
 				Name:  ptr.String("__Name__"),
@@ -1137,6 +1145,10 @@ func TestUpdateRequestSnapshot_CreateProcurementPortalPreference(t *testing.T) {
 			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		MarketplacePunchOutEnabled:    ptr.Bool(true),
+		MarketplacePunchOutPreference: &types.MarketplacePunchOutPreference{
+			ApprovalRequestRedirectUrl: ptr.String("__ApprovalRequestRedirectUrl__"),
+		},
 		Contacts: []types.Contact{
 			{
 				Name:  ptr.String("__Name__"),
@@ -1571,6 +1583,10 @@ func TestUpdateRequestSnapshot_PutProcurementPortalPreference(t *testing.T) {
 			EinvoiceDeliveryActivationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		PurchaseOrderRetrievalEnabled: ptr.Bool(true),
+		MarketplacePunchOutEnabled:    ptr.Bool(true),
+		MarketplacePunchOutPreference: &types.MarketplacePunchOutPreference{
+			ApprovalRequestRedirectUrl: ptr.String("__ApprovalRequestRedirectUrl__"),
+		},
 		Contacts: []types.Contact{
 			{
 				Name:  ptr.String("__Name__"),
