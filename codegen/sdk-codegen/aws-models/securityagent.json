@@ -943,6 +943,12 @@
         "com.amazonaws.securityagent#AzureDevOpsResourceCapabilities": {
             "type": "structure",
             "members": {
+                "triggerFilterGroups": {
+                    "target": "com.amazonaws.securityagent#TriggerFilterGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter groups that control which pull request events start an automatic code review when <code>leaveComments</code> is enabled. A review starts when any group matches. If you omit this, a review starts on <code>PULL_REQUEST_READY_FOR_REVIEW</code> events.</p>"
+                    }
+                },
                 "leaveComments": {
                     "target": "smithy.api#Boolean",
                     "traits": {
@@ -2619,6 +2625,12 @@
         "com.amazonaws.securityagent#BitbucketResourceCapabilities": {
             "type": "structure",
             "members": {
+                "triggerFilterGroups": {
+                    "target": "com.amazonaws.securityagent#TriggerFilterGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter groups that control which pull request events start an automatic code review when <code>leaveComments</code> is enabled. A review starts when any group matches. If you omit this, a review starts on <code>PULL_REQUEST_READY_FOR_REVIEW</code> events.</p>"
+                    }
+                },
                 "leaveComments": {
                     "target": "smithy.api#Boolean",
                     "traits": {
@@ -7201,6 +7213,12 @@
         "com.amazonaws.securityagent#GitHubResourceCapabilities": {
             "type": "structure",
             "members": {
+                "triggerFilterGroups": {
+                    "target": "com.amazonaws.securityagent#TriggerFilterGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter groups that control which pull request events start an automatic code review when <code>leaveComments</code> is enabled. A review starts when any group matches. If you omit this, a review starts on <code>PULL_REQUEST_READY_FOR_REVIEW</code> events.</p>"
+                    }
+                },
                 "leaveComments": {
                     "target": "smithy.api#Boolean",
                     "traits": {
@@ -7312,6 +7330,12 @@
         "com.amazonaws.securityagent#GitLabResourceCapabilities": {
             "type": "structure",
             "members": {
+                "triggerFilterGroups": {
+                    "target": "com.amazonaws.securityagent#TriggerFilterGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter groups that control which merge request events start an automatic code review when <code>leaveComments</code> is enabled. A review starts when any group matches. If you omit this, a review starts on <code>PULL_REQUEST_READY_FOR_REVIEW</code> events.</p>"
+                    }
+                },
                 "leaveComments": {
                     "target": "smithy.api#Boolean",
                     "traits": {
@@ -15074,6 +15098,191 @@
                 "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.securityagent#TriggerEvent": {
+            "type": "enum",
+            "members": {
+                "PULL_REQUEST_READY_FOR_REVIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pull request that isn't a draft is opened, updated, or marked ready for review.</p>",
+                        "smithy.api#enumValue": "PULL_REQUEST_READY_FOR_REVIEW"
+                    }
+                },
+                "PULL_REQUEST_DRAFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A draft pull request is opened or updated.</p>",
+                        "smithy.api#enumValue": "PULL_REQUEST_DRAFT"
+                    }
+                },
+                "PULL_REQUEST_LABEL_ADDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A label is added to a pull request. A filter group that selects this event must include a <code>LABEL</code> filter with the <code>INCLUDE</code> match mode, and a review starts only when the added label matches it.</p>",
+                        "smithy.api#enumValue": "PULL_REQUEST_LABEL_ADDED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A pull request event that can start an automatic code review. For GitLab repositories, pull request refers to a merge request.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#TriggerEventList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#TriggerEvent"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of pull request events that start an automatic code review.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.securityagent#TriggerFilter": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.securityagent#TriggerFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pull request value to match.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "patterns": {
+                    "target": "com.amazonaws.securityagent#TriggerRegexPatternList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The regular expressions to match against the value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "matchMode": {
+                    "target": "com.amazonaws.securityagent#TriggerFilterMatchMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the value must match the patterns. The default is <code>INCLUDE</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A condition on a pull request value.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#TriggerFilterGroup": {
+            "type": "structure",
+            "members": {
+                "events": {
+                    "target": "com.amazonaws.securityagent#TriggerEventList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Passes when the pull request event is one of the listed events. If you omit this, the group matches <code>PULL_REQUEST_READY_FOR_REVIEW</code> and <code>PULL_REQUEST_DRAFT</code> events only.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.securityagent#TriggerFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Passes when every filter passes. If you omit this, the group matches its events on any target branch and with any labels.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A set of conditions that start an automatic code review when they all pass. A filter group must include <code>events</code>, <code>filters</code>, or both.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#TriggerFilterGroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#TriggerFilterGroup"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of filter groups. An automatic code review starts when any group matches. The filters across all groups can contain at most 100 patterns in total.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.securityagent#TriggerFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#TriggerFilter"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of filters that must all pass.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.securityagent#TriggerFilterMatchMode": {
+            "type": "enum",
+            "members": {
+                "INCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter passes when a value fully matches at least one pattern.</p>",
+                        "smithy.api#enumValue": "INCLUDE"
+                    }
+                },
+                "EXCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter passes when no value fully matches any pattern.</p>",
+                        "smithy.api#enumValue": "EXCLUDE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Whether a filter's value must match its patterns.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#TriggerFilterType": {
+            "type": "enum",
+            "members": {
+                "TARGET_BRANCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the pull request's target branch, for example <code>main</code>.</p>",
+                        "smithy.api#enumValue": "TARGET_BRANCH"
+                    }
+                },
+                "LABEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The labels on the pull request.</p>",
+                        "smithy.api#enumValue": "LABEL"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A pull request value that a filter matches.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#TriggerRegexPattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A regular expression in RE2 syntax that must match the entire value, for example <code>main</code> or <code>release/.*</code>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\x00-\\x1F\\x7F-\\x9F]+$"
+            }
+        },
+        "com.amazonaws.securityagent#TriggerRegexPatternList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#TriggerRegexPattern"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of regular expressions.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.securityagent#TrustedCaCertificate": {

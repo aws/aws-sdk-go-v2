@@ -551,6 +551,10 @@
                                 "EinvoiceDeliveryActivationDate": 1.750279280091E9
                             },
                             "PurchaseOrderRetrievalEnabled": true,
+                            "MarketplacePunchOutEnabled": true,
+                            "MarketplacePunchOutPreference": {
+                                "ApprovalRequestRedirectUrl": "https://www.placeholder-domain.test/approvals"
+                            },
                             "Contacts": [
                                 {
                                     "Name": "John Doe",
@@ -650,6 +654,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether purchase order retrieval is enabled for this procurement portal preference. Set to true to enable PO retrieval, false to disable.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "MarketplacePunchOutEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Defaults to false if not provided."
+                    }
+                },
+                "MarketplacePunchOutPreference": {
+                    "target": "com.amazonaws.invoicing#MarketplacePunchOutPreference",
+                    "traits": {
+                        "smithy.api#documentation": "Required for Coupa when MarketplacePunchOutEnabled is true."
                     }
                 },
                 "Contacts": {
@@ -838,6 +854,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.invoicing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.invoicing#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.invoicing#InternalServerException"
@@ -1559,6 +1578,10 @@
                                 "PurchaseOrderRetrievalEnabled": true,
                                 "PurchaseOrderRetrievalEndpoint": "https://www.placeholder-domain.test",
                                 "PurchaseOrderRetrievalPreferenceStatus": "PENDING_VERIFICATION",
+                                "MarketplacePunchOutEnabled": true,
+                                "MarketplacePunchOutPreference": {
+                                    "ApprovalRequestRedirectUrl": "https://www.placeholder-domain.test/approvals"
+                                },
                                 "SupplierDomain": "NetworkID",
                                 "SupplierIdentifier": "SupplierId_1",
                                 "TestEnvPreference": {
@@ -3655,6 +3678,7 @@
                                     "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/1c7c6d71-fbc1-45bd-a18c-40cb61810679",
                                     "PurchaseOrderRetrievalEnabled": true,
                                     "PurchaseOrderRetrievalPreferenceStatus": "PENDING_VERIFICATION",
+                                    "MarketplacePunchOutEnabled": false,
                                     "SupplierDomain": "NetworkID",
                                     "SupplierIdentifier": "SupplierId_1",
                                     "Selector": {
@@ -3679,6 +3703,7 @@
                                     "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/ae467ebd-ec8c-4089-b904-a7cd9e76f970",
                                     "PurchaseOrderRetrievalEnabled": true,
                                     "PurchaseOrderRetrievalPreferenceStatus": "PENDING_VERIFICATION",
+                                    "MarketplacePunchOutEnabled": false,
                                     "SupplierDomain": "NetworkID",
                                     "SupplierIdentifier": "SupplierId_1",
                                     "Selector": {
@@ -3716,6 +3741,7 @@
                                     "PurchaseOrderRetrievalEnabled": true,
                                     "PurchaseOrderRetrievalPreferenceStatus": "TEST_INITIALIZED",
                                     "PurchaseOrderRetrievalPreferenceStatusReason": "test initialized example reason",
+                                    "MarketplacePunchOutEnabled": true,
                                     "SupplierDomain": "NetworkID",
                                     "SupplierIdentifier": "SupplierId_1",
                                     "Selector": {
@@ -4094,6 +4120,20 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.invoicing#MarketplacePunchOutPreference": {
+            "type": "structure",
+            "members": {
+                "ApprovalRequestRedirectUrl": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL that buyers are redirected to for approval requests in the procurement portal. This is only supported for Coupa. When provided together with the procurement portal instance endpoint, its host must match the host of that endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the Marketplace PunchOut configuration for a procurement portal preference.</p>"
+            }
+        },
         "com.amazonaws.invoicing#MaxResults": {
             "type": "integer",
             "traits": {
@@ -4302,7 +4342,7 @@
                 "EinvoiceDeliveryPreference": {
                     "target": "com.amazonaws.invoicing#EinvoiceDeliveryPreference",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings that specify how e-invoices are delivered to the procurement portal.</p>"
+                        "smithy.api#documentation": "<p>The e-invoice delivery configuration including document types, attachment types, and customization settings.</p>"
                     }
                 },
                 "PurchaseOrderRetrievalEnabled": {
@@ -4310,6 +4350,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether purchase order retrieval is enabled for this procurement portal preference.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "MarketplacePunchOutEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether Marketplace PunchOut is enabled for this procurement portal preference. Defaults to <code>false</code>.</p>"
+                    }
+                },
+                "MarketplacePunchOutPreference": {
+                    "target": "com.amazonaws.invoicing#MarketplacePunchOutPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Marketplace PunchOut configuration for this procurement portal preference. This is present when <code>MarketplacePunchOutEnabled</code> is <code>true</code>.</p>"
                     }
                 },
                 "Contacts": {
@@ -4518,6 +4570,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether purchase order retrieval is enabled for this procurement portal preference.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "MarketplacePunchOutEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether Marketplace PunchOut is enabled for this procurement portal preference. Defaults to <code>false</code>.</p>"
                     }
                 },
                 "EinvoiceDeliveryPreferenceStatus": {
@@ -4750,6 +4808,7 @@
                                 "EinvoiceDeliveryActivationDate": 1.750279280091E9
                             },
                             "PurchaseOrderRetrievalEnabled": true,
+                            "MarketplacePunchOutEnabled": true,
                             "Contacts": [
                                 {
                                     "Name": "John Doe2",
@@ -4815,6 +4874,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Updated flag indicating whether purchase order retrieval is enabled for this procurement portal preference.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "MarketplacePunchOutEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Whether Marketplace PunchOut is enabled for this connection. Defaults to false if not provided."
+                    }
+                },
+                "MarketplacePunchOutPreference": {
+                    "target": "com.amazonaws.invoicing#MarketplacePunchOutPreference",
+                    "traits": {
+                        "smithy.api#documentation": "Configuration for Marketplace PunchOut. Required when MarketplacePunchOutEnabled is true."
                     }
                 },
                 "Contacts": {
