@@ -259,3 +259,5 @@ type retryableError struct {
 func (e *retryableError) RetryableError() bool { return e.isRetryable }
 
 func (e *retryableError) Error() string { return e.Err.Error() }
+
+func (e *retryableError) Unwrap() error { return e.Err }
