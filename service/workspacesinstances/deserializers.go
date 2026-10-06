@@ -27,17 +27,26 @@ func (m *smithyRpcv2cbor_deserializeOpAssociateVolume) HandleDeserialize(ctx con
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
 
 	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, metadata, err
+		}
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
-	// Event streams close their own body in the event stream deserializer.
+	// Close the response body on return, including when an interceptor
+	// that runs after OperationDeserializer surfaces an error (after
+	// transmit or before deserialization). Registering this before the
+	// error check below is what covers those interceptor aborts. Event
+	// streams close their own body in the event stream deserializer.
 	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	if err != nil {
+		return out, metadata, err
+	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
@@ -78,17 +87,26 @@ func (m *smithyRpcv2cbor_deserializeOpCreateVolume) HandleDeserialize(ctx contex
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
 
 	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, metadata, err
+		}
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
-	// Event streams close their own body in the event stream deserializer.
+	// Close the response body on return, including when an interceptor
+	// that runs after OperationDeserializer surfaces an error (after
+	// transmit or before deserialization). Registering this before the
+	// error check below is what covers those interceptor aborts. Event
+	// streams close their own body in the event stream deserializer.
 	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	if err != nil {
+		return out, metadata, err
+	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
@@ -145,17 +163,26 @@ func (m *smithyRpcv2cbor_deserializeOpCreateWorkspaceInstance) HandleDeserialize
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
 
 	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, metadata, err
+		}
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
-	// Event streams close their own body in the event stream deserializer.
+	// Close the response body on return, including when an interceptor
+	// that runs after OperationDeserializer surfaces an error (after
+	// transmit or before deserialization). Registering this before the
+	// error check below is what covers those interceptor aborts. Event
+	// streams close their own body in the event stream deserializer.
 	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	if err != nil {
+		return out, metadata, err
+	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
@@ -212,17 +239,26 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteVolume) HandleDeserialize(ctx contex
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
 
 	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, metadata, err
+		}
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
-	// Event streams close their own body in the event stream deserializer.
+	// Close the response body on return, including when an interceptor
+	// that runs after OperationDeserializer surfaces an error (after
+	// transmit or before deserialization). Registering this before the
+	// error check below is what covers those interceptor aborts. Event
+	// streams close their own body in the event stream deserializer.
 	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	if err != nil {
+		return out, metadata, err
+	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
@@ -263,17 +299,26 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteWorkspaceInstance) HandleDeserialize
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
 
 	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, metadata, err
+		}
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
-	// Event streams close their own body in the event stream deserializer.
+	// Close the response body on return, including when an interceptor
+	// that runs after OperationDeserializer surfaces an error (after
+	// transmit or before deserialization). Registering this before the
+	// error check below is what covers those interceptor aborts. Event
+	// streams close their own body in the event stream deserializer.
 	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	if err != nil {
+		return out, metadata, err
+	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
@@ -314,17 +359,26 @@ func (m *smithyRpcv2cbor_deserializeOpDisassociateVolume) HandleDeserialize(ctx 
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
 
 	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, metadata, err
+		}
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
-	// Event streams close their own body in the event stream deserializer.
+	// Close the response body on return, including when an interceptor
+	// that runs after OperationDeserializer surfaces an error (after
+	// transmit or before deserialization). Registering this before the
+	// error check below is what covers those interceptor aborts. Event
+	// streams close their own body in the event stream deserializer.
 	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	if err != nil {
+		return out, metadata, err
+	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
@@ -365,17 +419,26 @@ func (m *smithyRpcv2cbor_deserializeOpGetWorkspaceInstance) HandleDeserialize(ct
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
 
 	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, metadata, err
+		}
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
-	// Event streams close their own body in the event stream deserializer.
+	// Close the response body on return, including when an interceptor
+	// that runs after OperationDeserializer surfaces an error (after
+	// transmit or before deserialization). Registering this before the
+	// error check below is what covers those interceptor aborts. Event
+	// streams close their own body in the event stream deserializer.
 	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	if err != nil {
+		return out, metadata, err
+	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
@@ -432,17 +495,26 @@ func (m *smithyRpcv2cbor_deserializeOpListInstanceTypes) HandleDeserialize(ctx c
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
 
 	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, metadata, err
+		}
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
-	// Event streams close their own body in the event stream deserializer.
+	// Close the response body on return, including when an interceptor
+	// that runs after OperationDeserializer surfaces an error (after
+	// transmit or before deserialization). Registering this before the
+	// error check below is what covers those interceptor aborts. Event
+	// streams close their own body in the event stream deserializer.
 	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	if err != nil {
+		return out, metadata, err
+	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
@@ -499,17 +571,26 @@ func (m *smithyRpcv2cbor_deserializeOpListRegions) HandleDeserialize(ctx context
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
 
 	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, metadata, err
+		}
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
-	// Event streams close their own body in the event stream deserializer.
+	// Close the response body on return, including when an interceptor
+	// that runs after OperationDeserializer surfaces an error (after
+	// transmit or before deserialization). Registering this before the
+	// error check below is what covers those interceptor aborts. Event
+	// streams close their own body in the event stream deserializer.
 	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	if err != nil {
+		return out, metadata, err
+	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
@@ -566,17 +647,26 @@ func (m *smithyRpcv2cbor_deserializeOpListTagsForResource) HandleDeserialize(ctx
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
 
 	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, metadata, err
+		}
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
-	// Event streams close their own body in the event stream deserializer.
+	// Close the response body on return, including when an interceptor
+	// that runs after OperationDeserializer surfaces an error (after
+	// transmit or before deserialization). Registering this before the
+	// error check below is what covers those interceptor aborts. Event
+	// streams close their own body in the event stream deserializer.
 	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	if err != nil {
+		return out, metadata, err
+	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
@@ -633,17 +723,26 @@ func (m *smithyRpcv2cbor_deserializeOpListWorkspaceInstances) HandleDeserialize(
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
 
 	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, metadata, err
+		}
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
-	// Event streams close their own body in the event stream deserializer.
+	// Close the response body on return, including when an interceptor
+	// that runs after OperationDeserializer surfaces an error (after
+	// transmit or before deserialization). Registering this before the
+	// error check below is what covers those interceptor aborts. Event
+	// streams close their own body in the event stream deserializer.
 	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	if err != nil {
+		return out, metadata, err
+	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
@@ -700,17 +799,26 @@ func (m *smithyRpcv2cbor_deserializeOpTagResource) HandleDeserialize(ctx context
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
 
 	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, metadata, err
+		}
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
-	// Event streams close their own body in the event stream deserializer.
+	// Close the response body on return, including when an interceptor
+	// that runs after OperationDeserializer surfaces an error (after
+	// transmit or before deserialization). Registering this before the
+	// error check below is what covers those interceptor aborts. Event
+	// streams close their own body in the event stream deserializer.
 	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	if err != nil {
+		return out, metadata, err
+	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
@@ -751,17 +859,26 @@ func (m *smithyRpcv2cbor_deserializeOpUntagResource) HandleDeserialize(ctx conte
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
 
 	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, metadata, err
+		}
 		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
 
-	// Event streams close their own body in the event stream deserializer.
+	// Close the response body on return, including when an interceptor
+	// that runs after OperationDeserializer surfaces an error (after
+	// transmit or before deserialization). Registering this before the
+	// error check below is what covers those interceptor aborts. Event
+	// streams close their own body in the event stream deserializer.
 	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	if err != nil {
+		return out, metadata, err
+	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
