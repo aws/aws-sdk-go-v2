@@ -5,8 +5,4 @@
 //
 // The AWS Lambda Web Functions APIs ( LambdaWeb namespace) are experimental and
 // for internal AWS use only. They are not yet available to external customers.
-//
-// AWS Lambda Web Functions let you run web applications and APIs as HTTP servers
-// on Lambda. A web function has one or more immutable revisions (code and
-// configuration) and one or more endpoints that expose it over HTTPS.
 package lambdaweb

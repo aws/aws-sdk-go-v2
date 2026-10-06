@@ -15,29 +15,13 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.AccessDeniedException,
 			New:    func() any { return &types.AccessDeniedException{} },
 		},
-		"com.amazonaws.lambdaweb#ConflictException": {
-			Schema: schemas.ConflictException,
-			New:    func() any { return &types.ConflictException{} },
-		},
 		"com.amazonaws.lambdaweb#InternalServerException": {
 			Schema: schemas.InternalServerException,
 			New:    func() any { return &types.InternalServerException{} },
 		},
-		"com.amazonaws.lambdaweb#ResourceNotFoundException": {
-			Schema: schemas.ResourceNotFoundException,
-			New:    func() any { return &types.ResourceNotFoundException{} },
-		},
-		"com.amazonaws.lambdaweb#ServiceQuotaExceededException": {
-			Schema: schemas.ServiceQuotaExceededException,
-			New:    func() any { return &types.ServiceQuotaExceededException{} },
-		},
 		"com.amazonaws.lambdaweb#ThrottlingException": {
 			Schema: schemas.ThrottlingException,
 			New:    func() any { return &types.ThrottlingException{} },
-		},
-		"com.amazonaws.lambdaweb#ValidationException": {
-			Schema: schemas.ValidationException,
-			New:    func() any { return &types.ValidationException{} },
 		},
 	},
 }
