@@ -1,3 +1,7 @@
+# v1.168.0 (2026-10-06)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.167.0 (2026-10-02)
 
 * **Feature**: Added refresh token grant type to Glue Connection supported OAuth 2.0 grant types

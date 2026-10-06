@@ -1,3 +1,7 @@
+# v1.48.0 (2026-10-06)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.47.0 (2026-09-29)
 
 * **Feature**: Add support for network access controls to restrict Identity Store API and SCIM access to trusted networks, optimistic locking for users and groups via resource revisions, and resource ARNs as identifiers in requests.

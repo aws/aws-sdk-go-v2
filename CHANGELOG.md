@@ -1,3 +1,113 @@
+# Release (2026-10-06)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/aiops`: [v1.17.0](service/aiops/CHANGELOG.md#v1170-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/amplifybackend`: [v1.43.0](service/amplifybackend/CHANGELOG.md#v1430-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.39.0](service/amplifyuibuilder/CHANGELOG.md#v1390-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.51.0](service/apigateway/CHANGELOG.md#v1510-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi`: [v1.40.0](service/apigatewaymanagementapi/CHANGELOG.md#v1400-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.45.0](service/apigatewayv2/CHANGELOG.md#v1450-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/appfabric`: [v1.27.0](service/appfabric/CHANGELOG.md#v1270-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.50.0](service/appintegrations/CHANGELOG.md#v1500-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler`: [v1.38.0](service/applicationcostprofiler/CHANGELOG.md#v1380-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.33.0](service/applicationsignals/CHANGELOG.md#v1330-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.33.0](service/arczonalshift/CHANGELOG.md#v1330-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.28.0](service/artifact/CHANGELOG.md#v1280-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.68.0](service/backup/CHANGELOG.md#v1680-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+  * **Bug Fix**: **BREAKING CHANGE**: The `ValidationWindowHours` field on `RestoreTestingSelectionForCreate` and `RestoreTestingSelectionForUpdate` has been changed from `int32` to `*int32`. Before this change, the field was incorrectly marked as having a default value of 0 by the service, which made it functionally impossible for users to set it to 0 in an `UpdateRestoreTestingSelection` call.
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.34.0](service/costoptimizationhub/CHANGELOG.md#v1340-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.74.0](service/databasemigrationservice/CHANGELOG.md#v1740-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/datapipeline`: [v1.41.0](service/datapipeline/CHANGELOG.md#v1410-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.51.0](service/devicefarm/CHANGELOG.md#v1510-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.54.0](service/directconnect/CHANGELOG.md#v1540-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.44.0](service/dynamodbstreams/CHANGELOG.md#v1440-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect`: [v1.43.0](service/ec2instanceconnect/CHANGELOG.md#v1430-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.103.0](service/eks/CHANGELOG.md#v11030-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.23.0](service/evs/CHANGELOG.md#v1230-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/freetier`: [v1.24.0](service/freetier/CHANGELOG.md#v1240-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.168.0](service/glue/CHANGELOG.md#v11680-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.98.0](service/guardduty/CHANGELOG.md#v1980-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.49.0](service/health/CHANGELOG.md#v1490-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.52.0](service/healthlake/CHANGELOG.md#v1520-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.48.0](service/identitystore/CHANGELOG.md#v1480-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.23.0](service/invoicing/CHANGELOG.md#v1230-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/iotthingsgraph`: [v1.41.0](service/iotthingsgraph/CHANGELOG.md#v1410-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.36.0](service/keyspaces/CHANGELOG.md#v1360-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/keyspacesstreams`: [v1.18.0](service/keyspacesstreams/CHANGELOG.md#v1180-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.111.0](service/lambda/CHANGELOG.md#v11110-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/lambdacore`: [v1.10.0](service/lambdacore/CHANGELOG.md#v1100-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/lambdamicrovms`: [v1.10.0](service/lambdamicrovms/CHANGELOG.md#v1100-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/lambdaweb`: [v1.1.0](service/lambdaweb/CHANGELOG.md#v110-2026-10-06)
+  * **Feature**: Removes operations that are not yet generally available from the Lambda Web.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.47.0](service/lookoutequipment/CHANGELOG.md#v1470-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.29.0](service/marketplaceagreement/CHANGELOG.md#v1290-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/mturk`: [v1.41.0](service/mturk/CHANGELOG.md#v1410-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/mwaaserverless`: [v1.12.0](service/mwaaserverless/CHANGELOG.md#v1120-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.75.0](service/networkfirewall/CHANGELOG.md#v1750-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.25.0](service/odb/CHANGELOG.md#v1250-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.84.0](service/opensearch/CHANGELOG.md#v1840-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralaccount`: [v1.16.0](service/partnercentralaccount/CHANGELOG.md#v1160-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits`: [v1.11.0](service/partnercentralbenefits/CHANGELOG.md#v1110-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointemail`: [v1.40.0](service/pinpointemail/CHANGELOG.md#v1400-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.135.0](service/quicksight/CHANGELOG.md#v11350-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakeredge`: [v1.42.0](service/sagemakeredge/CHANGELOG.md#v1420-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.47.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1470-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakermetrics`: [v1.29.0](service/sagemakermetrics/CHANGELOG.md#v1290-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.78.0](service/sesv2/CHANGELOG.md#v1780-2026-10-06)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+
 # Release (2026-10-02)
 
 ## Module Highlights

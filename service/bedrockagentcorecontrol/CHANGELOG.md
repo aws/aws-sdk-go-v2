@@ -1,3 +1,7 @@
+# v1.72.1 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.72.0 (2026-09-30)
 
 * **Feature**: This release adds support for private certificate authorities on Amazon Bedrock AgentCore Gateway targets. The new certificateConfigurations parameter on CreateGatewayTarget and UpdateGatewayTarget references a PEM-encoded CA certificate in Amazon S3 or AWS Secrets Manager.

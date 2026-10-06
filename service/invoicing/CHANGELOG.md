@@ -1,3 +1,7 @@
+# v1.23.0 (2026-10-06)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.22.0 (2026-10-02)
 
 * **Feature**: API and doc updates related to adding MarketplacePunchOutEnabled and MarketplacePunchOutPreference fields to ProcurementPortalPreferences related APIs

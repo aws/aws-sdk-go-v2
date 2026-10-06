@@ -1,3 +1,7 @@
+# v1.204.1 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.204.0 (2026-09-30)
 
 * **Feature**: Amazon Connect Rules can now trigger in-app notifications to users as a rule action. Notification character limit was increased to 500 visible characters.

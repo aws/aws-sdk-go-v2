@@ -1,3 +1,7 @@
+# v1.78.0 (2026-10-06)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.77.0 (2026-09-29)
 
 * **Feature**: Added Filter support for ListTenants, ListEmailIdentities, and ListConfigurationSets APIs.

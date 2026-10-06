@@ -1,3 +1,7 @@
+# v1.79.1 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.79.0 (2026-09-28)
 
 * **Feature**: Add support for sharing SSM documents with organizations and OUs using RAM.

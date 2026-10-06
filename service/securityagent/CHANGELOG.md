@@ -1,3 +1,7 @@
+# v1.22.1 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.22.0 (2026-10-02)
 
 * **Feature**: Adds trigger filters that control which pull request events, target branches, and labels start an automatic code review.

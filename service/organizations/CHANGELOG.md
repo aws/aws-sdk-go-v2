@@ -1,3 +1,7 @@
+# v1.61.1 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.61.0 (2026-09-30)
 
 * **Feature**: Add support for policy operations on the GUARDDUTY POLICY policy type.

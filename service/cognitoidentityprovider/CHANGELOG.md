@@ -1,3 +1,7 @@
+# v1.75.1 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.75.0 (2026-10-02)
 
 * **Feature**: Amazon Cognito User Pools now supports the OIDC-standard authentication context class reference (ACR) and authentication methods reference (AMR) claims on issued access and Id tokens. Amazon Cognito User Pools also now supports step-up authentication via our existing authentication APIs.

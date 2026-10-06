@@ -1,3 +1,7 @@
+# v1.49.0 (2026-10-06)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.48.0 (2026-10-01)
 
 * **Feature**: Adds DescribeServiceLifecycle operation returning lifecycle information for AWS services, including end-of-support dates, version recommendations, and lifecycle events.

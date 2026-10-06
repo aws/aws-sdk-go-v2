@@ -1,3 +1,7 @@
+# v1.11.1 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.11.0 (2026-09-24)
 
 * **Feature**: AWS Marketplace Discovery API now supports localized responses and SigV4a request signing. It returns new fulfillment details, including AMI architecture, EBS volume and security group information, SaaS quick-launch status, and SageMaker input and output MIME types.

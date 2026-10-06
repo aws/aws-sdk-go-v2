@@ -1,3 +1,7 @@
+# v1.338.2 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.338.1 (2026-10-01)
 
 * **Documentation**: This release launches the AMI tag sharing feature, which lets AMI owners share tags alongside their AMIs, eliminating the need to build and maintain custom tag replication workflows.

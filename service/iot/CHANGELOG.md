@@ -1,3 +1,7 @@
+# v1.84.2 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.84.1 (2026-09-24)
 
 * **Documentation**: Fixed ListV2LoggingLevels and DeleteV2LoggingLevel documentation to include all supported target-types

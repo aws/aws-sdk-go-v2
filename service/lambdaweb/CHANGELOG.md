@@ -1,3 +1,7 @@
+# v1.1.0 (2026-10-06)
+
+* **Feature**: Removes operations that are not yet generally available from the Lambda Web.
+
 # v1.0.1 (2026-10-02)
 
 * **Documentation**: Documentation update for AWS Lambda Web Functions, clarifies that the LambdaWeb APIs are experimental and not yet available to external customers.

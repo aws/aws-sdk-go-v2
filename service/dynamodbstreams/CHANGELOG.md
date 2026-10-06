@@ -1,3 +1,7 @@
+# v1.44.0 (2026-10-06)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.43.0 (2026-09-24)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

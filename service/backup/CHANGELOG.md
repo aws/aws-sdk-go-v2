@@ -1,3 +1,8 @@
+# v1.68.0 (2026-10-06)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Bug Fix**: **BREAKING CHANGE**: The `ValidationWindowHours` field on `RestoreTestingSelectionForCreate` and `RestoreTestingSelectionForUpdate` has been changed from `int32` to `*int32`. Before this change, the field was incorrectly marked as having a default value of 0 by the service, which made it functionally impossible for users to set it to 0 in an `UpdateRestoreTestingSelection` call.
+
 # v1.67.0 (2026-09-24)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

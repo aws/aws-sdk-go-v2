@@ -1,3 +1,7 @@
+# v1.100.1 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.100.0 (2026-09-30)
 
 * **Feature**: Releasing VPCL for BlueGreen ecs deployments.

@@ -1,3 +1,7 @@
+# v1.54.2 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.54.1 (2026-09-24)
 
 * **Documentation**: Documentation updates for Route 53 Resolver. Clarifies which Outpost Resolver operations apply to first-generation AWS Outposts and that Resolver is managed automatically on second-generation Outposts. Adds Local Network Interface subnet compatibility notes for Resolver endpoints.

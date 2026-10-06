@@ -1,3 +1,7 @@
+# v1.282.1 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.282.0 (2026-10-01)
 
 * **Feature**: Release support for c8a.16xlarge and m8a.16xlarge instance types for SageMaker HyperPod

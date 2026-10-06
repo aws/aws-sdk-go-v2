@@ -1,3 +1,7 @@
+# v1.130.1 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.130.0 (2026-09-29)
 
 * **Feature**: Adds the TargetResourceConfigurations parameter to CreateBlueGreenDeployment, letting you specify a target KMS key for each resource in the green environment.

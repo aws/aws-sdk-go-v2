@@ -1,3 +1,7 @@
+# v1.7.2 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.7.1 (2026-09-30)
 
 * **Documentation**: Minor doc update for the AWS Agent Registry Custom metadata SearchDiscoverableRegistryRecords API

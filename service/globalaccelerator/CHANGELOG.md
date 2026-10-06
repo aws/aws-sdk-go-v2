@@ -1,3 +1,7 @@
+# v1.45.1 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.45.0 (2026-09-30)
 
 * **Feature**: IpSets now include the Network Zone for each Static IP address.

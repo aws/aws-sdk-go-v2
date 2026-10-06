@@ -1,8 +1,0 @@
-{
-    "id": "eeb352a5-d599-460c-afbd-7e2f4cf6bc00",
-    "type": "feature",
-    "description": "Removes operations that are not yet generally available from the Lambda Web.",
-    "modules": [
-        "service/lambdaweb"
-    ]
-}

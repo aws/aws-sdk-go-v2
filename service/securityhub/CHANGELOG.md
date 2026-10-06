@@ -1,3 +1,7 @@
+# v1.83.1 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.83.0 (2026-10-01)
 
 * **Feature**: Adds GetRemediationsV2 and ListExposuresByRemediationV2 APIs. This feature allows customers to see their highest priority remediations for their Exposure findings. Remediations target key changes customers can make to resources to drive finding resolution.

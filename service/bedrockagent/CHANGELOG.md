@@ -1,3 +1,7 @@
+# v1.68.1 (2026-10-06)
+
+* No change notes available for this release.
+
 # v1.68.0 (2026-10-01)
 
 * **Feature**: Adds an optional textReadyAt field to ListIngestionJobs and GetIngestionJob for Managed Knowledge Bases data source sync jobs. The field denotes the timestamp at which all the documents in the scope of a sync job had their text content indexed and are available for retrieval.
