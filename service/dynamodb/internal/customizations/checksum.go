@@ -56,12 +56,14 @@ func (m *Checksum) HandleDeserialize(
 		}
 	}
 
-	expectChecksum, ok, err := getCRC32Checksum(resp.Header)
+	expectChecksum, hasChecksum, err := getCRC32Checksum(resp.Header)
 	if err != nil {
 		return output, metadata, &smithy.DeserializationError{Err: err}
 	}
 
-	resp.Body = wrapCRC32ChecksumValidate(expectChecksum, resp.Body)
+	if hasChecksum {
+		resp.Body = wrapCRC32ChecksumValidate(expectChecksum, resp.Body)
+	}
 
 	return output, metadata, err
 }
