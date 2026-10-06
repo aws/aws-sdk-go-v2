@@ -1,4 +1,4 @@
 github.com/awslabs/aws-go-multi-module-repository-tools v0.0.0-20210920212330-85c4889f37d1 h1:iEumauL7ykXr1p14PK7Nr3dXP/hm0e876wpgG4DKO94=
 github.com/awslabs/aws-go-multi-module-repository-tools v0.0.0-20210920212330-85c4889f37d1/go.mod h1:JZn9GHm+RwVZ5FxnzmfPxglZL76gPeG8Ls9hCym9cDk=
-github.com/pelletier/go-toml v1.9.0 h1:NOd0BRdOKpPf0SxkL3HxSQOG7rNh+4kl6PHcBPFs7Q0=
-github.com/pelletier/go-toml v1.9.0/go.mod h1:u1nR/EPcESfeI/szUZKdtJ0xRNbUoANCkoOuaOx1Y+c=
+github.com/pelletier/go-toml v1.9.5 h1:4yBQzkHv+7BHq2PQUZF3Mx0IYxG7LsP222s7Agd3ve8=
+github.com/pelletier/go-toml v1.9.5/go.mod h1:u1nR/EPcESfeI/szUZKdtJ0xRNbUoANCkoOuaOx1Y+c=
