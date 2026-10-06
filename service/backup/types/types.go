@@ -5876,7 +5876,7 @@ type RestoreTestingSelectionForCreate struct {
 	// This is amount of hours (0 to 168) available to run a validation script on the
 	// data. The data will be deleted upon the completion of the validation script or
 	// the end of the specified retention period, whichever comes first.
-	ValidationWindowHours int32
+	ValidationWindowHours *int32
 
 	noSmithyDocumentSerde
 }
@@ -5904,8 +5904,8 @@ func (v *RestoreTestingSelectionForCreate) SerializeMembers(s smithy.ShapeSerial
 	if v.RestoreTestingSelectionName != nil {
 		s.WriteString(schemas.RestoreTestingSelectionForCreate_RestoreTestingSelectionName, *v.RestoreTestingSelectionName)
 	}
-	if v.ValidationWindowHours != 0 {
-		s.WriteInt32(schemas.RestoreTestingSelectionForCreate_ValidationWindowHours, v.ValidationWindowHours)
+	if v.ValidationWindowHours != nil {
+		s.WriteInt32(schemas.RestoreTestingSelectionForCreate_ValidationWindowHours, *v.ValidationWindowHours)
 	}
 }
 func (v *RestoreTestingSelectionForCreate) Deserialize(d smithy.ShapeDeserializer) error {
@@ -5928,7 +5928,8 @@ func (v *RestoreTestingSelectionForCreate) Deserialize(d smithy.ShapeDeserialize
 			v.RestoreTestingSelectionName = new(string)
 			return d.ReadString(schemas.RestoreTestingSelectionForCreate_RestoreTestingSelectionName, v.RestoreTestingSelectionName)
 		case schemas.RestoreTestingSelectionForCreate_ValidationWindowHours:
-			return d.ReadInt32(schemas.RestoreTestingSelectionForCreate_ValidationWindowHours, &v.ValidationWindowHours)
+			v.ValidationWindowHours = new(int32)
+			return d.ReadInt32(schemas.RestoreTestingSelectionForCreate_ValidationWindowHours, v.ValidationWindowHours)
 		}
 		return nil
 	})
@@ -6207,7 +6208,7 @@ type RestoreTestingSelectionForUpdate struct {
 	//
 	// Accepted value is an integer between 0 and 168 (the hourly equivalent of seven
 	// days).
-	ValidationWindowHours int32
+	ValidationWindowHours *int32
 
 	noSmithyDocumentSerde
 }
@@ -6229,8 +6230,8 @@ func (v *RestoreTestingSelectionForUpdate) SerializeMembers(s smithy.ShapeSerial
 		s.CloseStruct()
 	}
 	serializeSensitiveStringMap(s, schemas.RestoreTestingSelectionForUpdate_RestoreMetadataOverrides, v.RestoreMetadataOverrides)
-	if v.ValidationWindowHours != 0 {
-		s.WriteInt32(schemas.RestoreTestingSelectionForUpdate_ValidationWindowHours, v.ValidationWindowHours)
+	if v.ValidationWindowHours != nil {
+		s.WriteInt32(schemas.RestoreTestingSelectionForUpdate_ValidationWindowHours, *v.ValidationWindowHours)
 	}
 }
 func (v *RestoreTestingSelectionForUpdate) Deserialize(d smithy.ShapeDeserializer) error {
@@ -6247,7 +6248,8 @@ func (v *RestoreTestingSelectionForUpdate) Deserialize(d smithy.ShapeDeserialize
 		case schemas.RestoreTestingSelectionForUpdate_RestoreMetadataOverrides:
 			return deserializeSensitiveStringMap(d, schemas.RestoreTestingSelectionForUpdate_RestoreMetadataOverrides, &v.RestoreMetadataOverrides)
 		case schemas.RestoreTestingSelectionForUpdate_ValidationWindowHours:
-			return d.ReadInt32(schemas.RestoreTestingSelectionForUpdate_ValidationWindowHours, &v.ValidationWindowHours)
+			v.ValidationWindowHours = new(int32)
+			return d.ReadInt32(schemas.RestoreTestingSelectionForUpdate_ValidationWindowHours, v.ValidationWindowHours)
 		}
 		return nil
 	})

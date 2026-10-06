@@ -1,0 +1,8 @@
+{
+    "id": "c20c6ecd-cd9d-4fd9-8c37-ef6cca6bbbfc",
+    "type": "bugfix",
+    "description": "**BREAKING CHANGE**: The `ValidationWindowHours` field on `RestoreTestingSelectionForCreate` and `RestoreTestingSelectionForUpdate` has been changed from `int32` to `*int32`. Before this change, the field was incorrectly marked as having a default value of 0 by the service, which made it functionally impossible for users to set it to 0 in an `UpdateRestoreTestingSelection` call.",
+    "modules": [
+        "service/backup"
+    ]
+}
