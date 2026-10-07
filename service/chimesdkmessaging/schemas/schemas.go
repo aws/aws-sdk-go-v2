@@ -395,7 +395,8 @@ var AppInstanceUserMembershipSummary_SubChannelId *smithy.Schema
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmessaging",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_Code *smithy.Schema
 
 var BadRequestException_Message *smithy.Schema
@@ -830,7 +831,8 @@ var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmessaging",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Code *smithy.Schema
 
 var ConflictException_Message *smithy.Schema
@@ -926,7 +928,8 @@ var _FilterRule = smithy.NewSchema(smithy.ShapeID{
 var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmessaging",
 	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var ForbiddenException_Code *smithy.Schema
 
 var ForbiddenException_Message *smithy.Schema
@@ -1075,7 +1078,8 @@ var _NonNullableBoolean = smithy.NewSchema(smithy.ShapeID{
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmessaging",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_Code *smithy.Schema
 
 var NotFoundException_Message *smithy.Schema
@@ -1143,7 +1147,8 @@ var PushNotificationType_VOIP *smithy.Schema
 var ResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmessaging",
 	Name:      "ResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceLimitExceededException_Code *smithy.Schema
 
 var ResourceLimitExceededException_Message *smithy.Schema
@@ -1197,7 +1202,8 @@ var _SearchFieldValues_member *smithy.Schema
 var ServiceFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmessaging",
 	Name:      "ServiceFailureException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ServiceFailureException_Code *smithy.Schema
 
 var ServiceFailureException_Message *smithy.Schema
@@ -1205,7 +1211,8 @@ var ServiceFailureException_Message *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmessaging",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_Code *smithy.Schema
 
 var ServiceUnavailableException_Message *smithy.Schema
@@ -1311,7 +1318,8 @@ var _TargetMembershipsPerSubChannel = smithy.NewSchema(smithy.ShapeID{
 var ThrottledClientException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmessaging",
 	Name:      "ThrottledClientException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottledClientException_Code *smithy.Schema
 
 var ThrottledClientException_Message *smithy.Schema
@@ -1324,7 +1332,8 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var UnauthorizedClientException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmessaging",
 	Name:      "UnauthorizedClientException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var UnauthorizedClientException_Code *smithy.Schema
 
 var UnauthorizedClientException_Message *smithy.Schema

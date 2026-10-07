@@ -348,13 +348,15 @@ var _AcceleratorEvents_member *smithy.Schema
 var AcceleratorNotDisabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "AcceleratorNotDisabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var AcceleratorNotDisabledException_Message *smithy.Schema
 
 var AcceleratorNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "AcceleratorNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var AcceleratorNotFoundException_Message *smithy.Schema
 
 var _Accelerators = smithy.NewSchema(smithy.ShapeID{
@@ -374,19 +376,22 @@ var AcceleratorStatus_IN_PROGRESS *smithy.Schema
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var AssociatedEndpointGroupFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "AssociatedEndpointGroupFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var AssociatedEndpointGroupFoundException_Message *smithy.Schema
 
 var AssociatedListenerFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "AssociatedListenerFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var AssociatedListenerFoundException_Message *smithy.Schema
 
 var Attachment = smithy.NewSchema(smithy.ShapeID{
@@ -413,7 +418,8 @@ var _AttachmentName = smithy.NewSchema(smithy.ShapeID{
 var AttachmentNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "AttachmentNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var AttachmentNotFoundException_Message *smithy.Schema
 
 var _Attachments = smithy.NewSchema(smithy.ShapeID{
@@ -460,7 +466,8 @@ var _ByoipCidrEvents_member *smithy.Schema
 var ByoipCidrNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "ByoipCidrNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ByoipCidrNotFoundException_Message *smithy.Schema
 
 var _ByoipCidrs = smithy.NewSchema(smithy.ShapeID{
@@ -514,7 +521,8 @@ var ClientAffinity_SOURCE_IP *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var CrossAccountResource = smithy.NewSchema(smithy.ShapeID{
@@ -732,7 +740,8 @@ var _DestinationPorts_member *smithy.Schema
 var EndpointAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "EndpointAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var EndpointAlreadyExistsException_Message *smithy.Schema
 
 var EndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -800,13 +809,15 @@ var EndpointGroup_PortOverrides *smithy.Schema
 var EndpointGroupAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "EndpointGroupAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var EndpointGroupAlreadyExistsException_Message *smithy.Schema
 
 var EndpointGroupNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "EndpointGroupNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var EndpointGroupNotFoundException_Message *smithy.Schema
 
 var _EndpointGroups = smithy.NewSchema(smithy.ShapeID{
@@ -838,7 +849,8 @@ var _EndpointIds_member *smithy.Schema
 var EndpointNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "EndpointNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var EndpointNotFoundException_Message *smithy.Schema
 
 var _EndpointWeight = smithy.NewSchema(smithy.ShapeID{
@@ -904,31 +916,36 @@ var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
 var IncorrectCidrStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "IncorrectCidrStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var IncorrectCidrStateException_Message *smithy.Schema
 
 var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServiceErrorException_Message *smithy.Schema
 
 var InvalidArgumentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "InvalidArgumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidArgumentException_Message *smithy.Schema
 
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidNextTokenException_Message *smithy.Schema
 
 var InvalidPortRangeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "InvalidPortRangeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidPortRangeException_Message *smithy.Schema
 
 var _IpAddress = smithy.NewSchema(smithy.ShapeID{
@@ -993,7 +1010,8 @@ var _IpSets_member *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var LimitExceededException_Message *smithy.Schema
 
 var Listener = smithy.NewSchema(smithy.ShapeID{
@@ -1011,7 +1029,8 @@ var Listener_ClientAffinity *smithy.Schema
 var ListenerNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "ListenerNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ListenerNotFoundException_Message *smithy.Schema
 
 var _Listeners = smithy.NewSchema(smithy.ShapeID{
@@ -1198,7 +1217,8 @@ var _TrafficDialPercentage = smithy.NewSchema(smithy.ShapeID{
 var TransactionInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.globalaccelerator",
 	Name:      "TransactionInProgressException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var TransactionInProgressException_Message *smithy.Schema
 
 var AddCustomRoutingEndpointsRequest = smithy.NewSchema(smithy.ShapeID{

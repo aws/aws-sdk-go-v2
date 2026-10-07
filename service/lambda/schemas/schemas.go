@@ -695,7 +695,8 @@ var AliasConfiguration_RevisionId *smithy.Schema
 var AliasLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "AliasLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var AliasLimitExceededException_Type *smithy.Schema
 
 var AliasLimitExceededException_message *smithy.Schema
@@ -867,7 +868,8 @@ var CallbackTimedOutDetails_Error *smithy.Schema
 var CallbackTimeoutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "CallbackTimeoutException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var CallbackTimeoutException_Type *smithy.Schema
 
 var CallbackTimeoutException_Message *smithy.Schema
@@ -910,7 +912,8 @@ var CapacityProviderConfig_LambdaManagedInstancesCapacityProviderConfig *smithy.
 var CapacityProviderLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "CapacityProviderLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var CapacityProviderLimitExceededException_Type *smithy.Schema
 
 var CapacityProviderLimitExceededException_message *smithy.Schema
@@ -1088,7 +1091,8 @@ var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 var CodeArtifactUserDeletedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "CodeArtifactUserDeletedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var CodeArtifactUserDeletedException_Type *smithy.Schema
 
 var CodeArtifactUserDeletedException_message *smithy.Schema
@@ -1096,7 +1100,8 @@ var CodeArtifactUserDeletedException_message *smithy.Schema
 var CodeArtifactUserFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "CodeArtifactUserFailedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var CodeArtifactUserFailedException_Type *smithy.Schema
 
 var CodeArtifactUserFailedException_message *smithy.Schema
@@ -1104,7 +1109,8 @@ var CodeArtifactUserFailedException_message *smithy.Schema
 var CodeArtifactUserPendingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "CodeArtifactUserPendingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var CodeArtifactUserPendingException_Type *smithy.Schema
 
 var CodeArtifactUserPendingException_message *smithy.Schema
@@ -1144,7 +1150,8 @@ var _CodeSigningConfigList_member *smithy.Schema
 var CodeSigningConfigNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "CodeSigningConfigNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var CodeSigningConfigNotFoundException_Type *smithy.Schema
 
 var CodeSigningConfigNotFoundException_Message *smithy.Schema
@@ -1166,7 +1173,8 @@ var CodeSigningPolicy_Enforce *smithy.Schema
 var CodeStorageExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "CodeStorageExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var CodeStorageExceededException_Type *smithy.Schema
 
 var CodeStorageExceededException_message *smithy.Schema
@@ -1174,7 +1182,8 @@ var CodeStorageExceededException_message *smithy.Schema
 var CodeVerificationFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "CodeVerificationFailedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var CodeVerificationFailedException_Type *smithy.Schema
 
 var CodeVerificationFailedException_Message *smithy.Schema
@@ -1318,7 +1327,8 @@ var DurableConfig_ExecutionTimeout *smithy.Schema
 var DurableExecutionAlreadyStartedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "DurableExecutionAlreadyStartedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var DurableExecutionAlreadyStartedException_Type *smithy.Schema
 
 var DurableExecutionAlreadyStartedException_Message *smithy.Schema
@@ -1347,7 +1357,8 @@ var _DurationSeconds = smithy.NewSchema(smithy.ShapeID{
 var EC2AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "EC2AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var EC2AccessDeniedException_Type *smithy.Schema
 
 var EC2AccessDeniedException_Message *smithy.Schema
@@ -1355,7 +1366,8 @@ var EC2AccessDeniedException_Message *smithy.Schema
 var EC2ThrottledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "EC2ThrottledException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var EC2ThrottledException_Type *smithy.Schema
 
 var EC2ThrottledException_Message *smithy.Schema
@@ -1363,7 +1375,8 @@ var EC2ThrottledException_Message *smithy.Schema
 var EC2UnexpectedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "EC2UnexpectedException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var EC2UnexpectedException_Type *smithy.Schema
 
 var EC2UnexpectedException_Message *smithy.Schema
@@ -1373,7 +1386,8 @@ var EC2UnexpectedException_EC2ErrorCode *smithy.Schema
 var EFSIOException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "EFSIOException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 410})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 410})
 var EFSIOException_Type *smithy.Schema
 
 var EFSIOException_Message *smithy.Schema
@@ -1381,7 +1395,8 @@ var EFSIOException_Message *smithy.Schema
 var EFSMountConnectivityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "EFSMountConnectivityException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 408})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 408})
 var EFSMountConnectivityException_Type *smithy.Schema
 
 var EFSMountConnectivityException_Message *smithy.Schema
@@ -1389,7 +1404,8 @@ var EFSMountConnectivityException_Message *smithy.Schema
 var EFSMountFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "EFSMountFailureException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var EFSMountFailureException_Type *smithy.Schema
 
 var EFSMountFailureException_Message *smithy.Schema
@@ -1397,7 +1413,8 @@ var EFSMountFailureException_Message *smithy.Schema
 var EFSMountTimeoutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "EFSMountTimeoutException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 408})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 408})
 var EFSMountTimeoutException_Type *smithy.Schema
 
 var EFSMountTimeoutException_Message *smithy.Schema
@@ -1435,7 +1452,8 @@ var EndPointType_KAFKA_BOOTSTRAP_SERVERS *smithy.Schema
 var ENILimitReachedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "ENILimitReachedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var ENILimitReachedException_Type *smithy.Schema
 
 var ENILimitReachedException_Message *smithy.Schema
@@ -1443,7 +1461,8 @@ var ENILimitReachedException_Message *smithy.Schema
 var ENINotReadyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "ENINotReadyException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var ENINotReadyException_Type *smithy.Schema
 
 var ENINotReadyException_Message *smithy.Schema
@@ -2245,7 +2264,8 @@ var FunctionVersionsByCapacityProviderListItem_State *smithy.Schema
 var FunctionVersionsPerCapacityProviderLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "FunctionVersionsPerCapacityProviderLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var FunctionVersionsPerCapacityProviderLimitExceededException_Type *smithy.Schema
 
 var FunctionVersionsPerCapacityProviderLimitExceededException_message *smithy.Schema
@@ -2336,7 +2356,8 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InvalidCodeSignatureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "InvalidCodeSignatureException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidCodeSignatureException_Type *smithy.Schema
 
 var InvalidCodeSignatureException_Message *smithy.Schema
@@ -2344,7 +2365,8 @@ var InvalidCodeSignatureException_Message *smithy.Schema
 var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterValueException_Type *smithy.Schema
 
 var InvalidParameterValueException_message *smithy.Schema
@@ -2352,7 +2374,8 @@ var InvalidParameterValueException_message *smithy.Schema
 var InvalidRequestContentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "InvalidRequestContentException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidRequestContentException_Type *smithy.Schema
 
 var InvalidRequestContentException_message *smithy.Schema
@@ -2360,7 +2383,8 @@ var InvalidRequestContentException_message *smithy.Schema
 var InvalidRuntimeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "InvalidRuntimeException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var InvalidRuntimeException_Type *smithy.Schema
 
 var InvalidRuntimeException_Message *smithy.Schema
@@ -2368,7 +2392,8 @@ var InvalidRuntimeException_Message *smithy.Schema
 var InvalidSecurityGroupIDException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "InvalidSecurityGroupIDException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var InvalidSecurityGroupIDException_Type *smithy.Schema
 
 var InvalidSecurityGroupIDException_Message *smithy.Schema
@@ -2376,7 +2401,8 @@ var InvalidSecurityGroupIDException_Message *smithy.Schema
 var InvalidSubnetIDException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "InvalidSubnetIDException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var InvalidSubnetIDException_Type *smithy.Schema
 
 var InvalidSubnetIDException_Message *smithy.Schema
@@ -2384,7 +2410,8 @@ var InvalidSubnetIDException_Message *smithy.Schema
 var InvalidZipFileException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "InvalidZipFileException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var InvalidZipFileException_Type *smithy.Schema
 
 var InvalidZipFileException_Message *smithy.Schema
@@ -2512,7 +2539,8 @@ var _KafkaSchemaValidationConfigList_member *smithy.Schema
 var KMSAccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "KMSAccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var KMSAccessDeniedException_Type *smithy.Schema
 
 var KMSAccessDeniedException_Message *smithy.Schema
@@ -2520,7 +2548,8 @@ var KMSAccessDeniedException_Message *smithy.Schema
 var KMSDisabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "KMSDisabledException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var KMSDisabledException_Type *smithy.Schema
 
 var KMSDisabledException_Message *smithy.Schema
@@ -2528,7 +2557,8 @@ var KMSDisabledException_Message *smithy.Schema
 var KMSInvalidStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "KMSInvalidStateException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var KMSInvalidStateException_Type *smithy.Schema
 
 var KMSInvalidStateException_Message *smithy.Schema
@@ -2546,7 +2576,8 @@ var _KMSKeyArnNonEmpty = smithy.NewSchema(smithy.ShapeID{
 var KMSNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "KMSNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var KMSNotFoundException_Type *smithy.Schema
 
 var KMSNotFoundException_Message *smithy.Schema
@@ -2922,7 +2953,8 @@ var _MinimumNumberOfPollers = smithy.NewSchema(smithy.ShapeID{
 var ModeNotSupportedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "ModeNotSupportedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ModeNotSupportedException_Type *smithy.Schema
 
 var ModeNotSupportedException_message *smithy.Schema
@@ -2950,7 +2982,8 @@ var _NonNegativeInteger = smithy.NewSchema(smithy.ShapeID{
 var NoPublishedVersionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "NoPublishedVersionException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var NoPublishedVersionException_Type *smithy.Schema
 
 var NoPublishedVersionException_Message *smithy.Schema
@@ -3162,7 +3195,8 @@ var _PerExecutionEnvironmentMaxConcurrency = smithy.NewSchema(smithy.ShapeID{
 var PolicyLengthExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "PolicyLengthExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var PolicyLengthExceededException_Type *smithy.Schema
 
 var PolicyLengthExceededException_message *smithy.Schema
@@ -3180,7 +3214,8 @@ var _PositiveInteger = smithy.NewSchema(smithy.ShapeID{
 var PreconditionFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "PreconditionFailedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 412})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 412})
 var PreconditionFailedException_Type *smithy.Schema
 
 var PreconditionFailedException_message *smithy.Schema
@@ -3238,7 +3273,8 @@ var ProvisionedConcurrencyConfigListItem_LastModified *smithy.Schema
 var ProvisionedConcurrencyConfigNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "ProvisionedConcurrencyConfigNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ProvisionedConcurrencyConfigNotFoundException_Type *smithy.Schema
 
 var ProvisionedConcurrencyConfigNotFoundException_message *smithy.Schema
@@ -3271,7 +3307,8 @@ var _ProvisionedPollerGroupName = smithy.NewSchema(smithy.ShapeID{
 var PublicPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "PublicPolicyException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var PublicPolicyException_Type *smithy.Schema
 
 var PublicPolicyException_Message *smithy.Schema
@@ -3300,7 +3337,8 @@ var _Queues_member *smithy.Schema
 var RecursiveInvocationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "RecursiveInvocationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var RecursiveInvocationException_Type *smithy.Schema
 
 var RecursiveInvocationException_Message *smithy.Schema
@@ -3321,7 +3359,8 @@ var _ReplayChildren = smithy.NewSchema(smithy.ShapeID{
 var RequestTooLargeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "RequestTooLargeException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 413})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 413})
 var RequestTooLargeException_Type *smithy.Schema
 
 var RequestTooLargeException_message *smithy.Schema
@@ -3349,7 +3388,8 @@ var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "ResourceConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceConflictException_Type *smithy.Schema
 
 var ResourceConflictException_message *smithy.Schema
@@ -3357,7 +3397,8 @@ var ResourceConflictException_message *smithy.Schema
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceInUseException_Type *smithy.Schema
 
 var ResourceInUseException_Message *smithy.Schema
@@ -3365,7 +3406,8 @@ var ResourceInUseException_Message *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Type *smithy.Schema
 
 var ResourceNotFoundException_Message *smithy.Schema
@@ -3373,7 +3415,8 @@ var ResourceNotFoundException_Message *smithy.Schema
 var ResourceNotReadyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "ResourceNotReadyException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var ResourceNotReadyException_Type *smithy.Schema
 
 var ResourceNotReadyException_message *smithy.Schema
@@ -3560,7 +3603,8 @@ var S3FilesConfig_DirectS3Read *smithy.Schema
 var S3FilesMountConnectivityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "S3FilesMountConnectivityException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 408})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 408})
 var S3FilesMountConnectivityException_Type *smithy.Schema
 
 var S3FilesMountConnectivityException_Message *smithy.Schema
@@ -3568,7 +3612,8 @@ var S3FilesMountConnectivityException_Message *smithy.Schema
 var S3FilesMountFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "S3FilesMountFailureException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var S3FilesMountFailureException_Type *smithy.Schema
 
 var S3FilesMountFailureException_Message *smithy.Schema
@@ -3576,7 +3621,8 @@ var S3FilesMountFailureException_Message *smithy.Schema
 var S3FilesMountTimeoutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "S3FilesMountTimeoutException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 408})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 408})
 var S3FilesMountTimeoutException_Type *smithy.Schema
 
 var S3FilesMountTimeoutException_Message *smithy.Schema
@@ -3656,7 +3702,8 @@ var _SensitiveStringOnServerOnly = smithy.NewSchema(smithy.ShapeID{
 var SerializedRequestEntityTooLargeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "SerializedRequestEntityTooLargeException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 413})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 413})
 var SerializedRequestEntityTooLargeException_Type *smithy.Schema
 
 var SerializedRequestEntityTooLargeException_message *smithy.Schema
@@ -3664,7 +3711,8 @@ var SerializedRequestEntityTooLargeException_message *smithy.Schema
 var ServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "ServiceException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ServiceException_Type *smithy.Schema
 
 var ServiceException_Message *smithy.Schema
@@ -3672,7 +3720,8 @@ var ServiceException_Message *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Type *smithy.Schema
 
 var ServiceQuotaExceededException_Message *smithy.Schema
@@ -3700,7 +3749,8 @@ var SnapStartApplyOn_None *smithy.Schema
 var SnapStartException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "SnapStartException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var SnapStartException_Type *smithy.Schema
 
 var SnapStartException_Message *smithy.Schema
@@ -3708,7 +3758,8 @@ var SnapStartException_Message *smithy.Schema
 var SnapStartNotReadyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "SnapStartNotReadyException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var SnapStartNotReadyException_Type *smithy.Schema
 
 var SnapStartNotReadyException_Message *smithy.Schema
@@ -3724,7 +3775,8 @@ var SnapStartOptimizationStatus_Off *smithy.Schema
 var SnapStartRegenerationFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "SnapStartRegenerationFailureException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var SnapStartRegenerationFailureException_Type *smithy.Schema
 
 var SnapStartRegenerationFailureException_Message *smithy.Schema
@@ -3740,7 +3792,8 @@ var SnapStartResponse_OptimizationStatus *smithy.Schema
 var SnapStartTimeoutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "SnapStartTimeoutException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 408})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 408})
 var SnapStartTimeoutException_Type *smithy.Schema
 
 var SnapStartTimeoutException_Message *smithy.Schema
@@ -3973,7 +4026,8 @@ var _SubnetIds_member *smithy.Schema
 var SubnetIPAddressLimitReachedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "SubnetIPAddressLimitReachedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var SubnetIPAddressLimitReachedException_Type *smithy.Schema
 
 var SubnetIPAddressLimitReachedException_Message *smithy.Schema
@@ -4089,7 +4143,8 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_retryAfterSeconds *smithy.Schema
 
 var TooManyRequestsException_Type *smithy.Schema
@@ -4158,7 +4213,8 @@ var _UnreservedConcurrentExecutions = smithy.NewSchema(smithy.ShapeID{
 var UnsupportedMediaTypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "UnsupportedMediaTypeException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 415})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 415})
 var UnsupportedMediaTypeException_Type *smithy.Schema
 
 var UnsupportedMediaTypeException_message *smithy.Schema

@@ -969,7 +969,8 @@ var _AcceleratorTypes_member *smithy.Schema
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var AccessDeniedException_context *smithy.Schema
@@ -2018,7 +2019,8 @@ var CompletedStatus_NEVER_ATTEMPTED *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConflictException_reason *smithy.Schema
@@ -2732,7 +2734,8 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerErrorException_message *smithy.Schema
 
 var InternalServerErrorException_retryAfterSeconds *smithy.Schema
@@ -3861,7 +3864,8 @@ var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_resourceId *smithy.Schema
@@ -4136,7 +4140,8 @@ var ServiceManagedFleetOperatingSystemFamily_LINUX *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 7, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 7, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceQuotaExceededException_reason *smithy.Schema
@@ -5060,7 +5065,8 @@ var _ThresholdPercentage = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var ThrottlingException_serviceCode *smithy.Schema
@@ -5242,7 +5248,8 @@ var UserJobsFirst_userIdentityId *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_reason *smithy.Schema

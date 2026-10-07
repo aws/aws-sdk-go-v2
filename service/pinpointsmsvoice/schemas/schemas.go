@@ -79,13 +79,15 @@ var ___string = smithy.NewSchema(smithy.ShapeID{
 var AlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoice",
 	Name:      "AlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var AlreadyExistsException_Message *smithy.Schema
 
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoice",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_Message *smithy.Schema
 
 var _Boolean = smithy.NewSchema(smithy.ShapeID{
@@ -176,7 +178,8 @@ var _EventTypes_member *smithy.Schema
 var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoice",
 	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServiceErrorException_Message *smithy.Schema
 
 var KinesisFirehoseDestination = smithy.NewSchema(smithy.ShapeID{
@@ -190,7 +193,8 @@ var KinesisFirehoseDestination_IamRoleArn *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoice",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 412})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 412})
 var LimitExceededException_Message *smithy.Schema
 
 var _NextTokenString = smithy.NewSchema(smithy.ShapeID{
@@ -206,7 +210,8 @@ var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoice",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_Message *smithy.Schema
 
 var PlainTextMessageType = smithy.NewSchema(smithy.ShapeID{
@@ -243,7 +248,8 @@ var _String = smithy.NewSchema(smithy.ShapeID{
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoice",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_Message *smithy.Schema
 
 var VoiceMessageContent = smithy.NewSchema(smithy.ShapeID{

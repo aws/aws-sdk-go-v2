@@ -455,7 +455,7 @@ var _AppPackagesCleanup = smithy.NewSchema(smithy.ShapeID{
 var ArgumentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "ArgumentException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ArgumentException_message *smithy.Schema
 
 var Artifact = smithy.NewSchema(smithy.ShapeID{
@@ -575,7 +575,8 @@ var _Boolean = smithy.NewSchema(smithy.ShapeID{
 var CannotDeleteException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "CannotDeleteException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var CannotDeleteException_message *smithy.Schema
 
 var _ContentType = smithy.NewSchema(smithy.ShapeID{
@@ -1035,7 +1036,7 @@ var _Filter = smithy.NewSchema(smithy.ShapeID{
 var IdempotencyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "IdempotencyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IdempotencyException_message *smithy.Schema
 
 var IncompatibilityMessage = smithy.NewSchema(smithy.ShapeID{
@@ -1122,13 +1123,14 @@ var InteractionMode_VIDEO_ONLY *smithy.Schema
 var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServiceException_message *smithy.Schema
 
 var InvalidOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "InvalidOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidOperationException_message *smithy.Schema
 
 var _IosPaths = smithy.NewSchema(smithy.ShapeID{
@@ -1229,7 +1231,7 @@ var _JobTimeoutMinutes = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var Location = smithy.NewSchema(smithy.ShapeID{
@@ -1331,13 +1333,13 @@ var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
 var NotEligibleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "NotEligibleException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NotEligibleException_message *smithy.Schema
 
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NotFoundException_message *smithy.Schema
 
 var Offering = smithy.NewSchema(smithy.ShapeID{
@@ -1920,7 +1922,7 @@ var _SensitiveURL = smithy.NewSchema(smithy.ShapeID{
 var ServiceAccountException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "ServiceAccountException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ServiceAccountException_message *smithy.Schema
 
 var _ServiceDnsName = smithy.NewSchema(smithy.ShapeID{
@@ -2009,7 +2011,8 @@ var _TagList_member *smithy.Schema
 var TagOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "TagOperationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TagOperationException_message *smithy.Schema
 
 var TagOperationException_resourceName *smithy.Schema
@@ -2017,7 +2020,8 @@ var TagOperationException_resourceName *smithy.Schema
 var TagPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "TagPolicyException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TagPolicyException_message *smithy.Schema
 
 var TagPolicyException_resourceName *smithy.Schema
@@ -2255,7 +2259,8 @@ var TestType_XCTEST_UI *smithy.Schema
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_message *smithy.Schema
 
 var TooManyTagsException_resourceName *smithy.Schema

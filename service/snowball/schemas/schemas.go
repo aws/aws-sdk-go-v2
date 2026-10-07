@@ -221,7 +221,7 @@ var _ClusterId = smithy.NewSchema(smithy.ShapeID{
 var ClusterLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.snowball",
 	Name:      "ClusterLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ClusterLimitExceededException_Message *smithy.Schema
 
 var ClusterListEntry = smithy.NewSchema(smithy.ShapeID{
@@ -307,7 +307,7 @@ var _CompatibleImageList_member *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.snowball",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ConflictException_ConflictResource *smithy.Schema
 
 var ConflictException_Message *smithy.Schema
@@ -374,7 +374,7 @@ var _Ec2AmiResourceList_member *smithy.Schema
 var Ec2RequestFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.snowball",
 	Name:      "Ec2RequestFailedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var Ec2RequestFailedException_Message *smithy.Schema
 
 var EKSOnDeviceServiceConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -440,31 +440,31 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InvalidAddressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.snowball",
 	Name:      "InvalidAddressException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidAddressException_Message *smithy.Schema
 
 var InvalidInputCombinationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.snowball",
 	Name:      "InvalidInputCombinationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidInputCombinationException_Message *smithy.Schema
 
 var InvalidJobStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.snowball",
 	Name:      "InvalidJobStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidJobStateException_Message *smithy.Schema
 
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.snowball",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidNextTokenException_Message *smithy.Schema
 
 var InvalidResourceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.snowball",
 	Name:      "InvalidResourceException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidResourceException_Message *smithy.Schema
 
 var InvalidResourceException_ResourceType *smithy.Schema
@@ -645,7 +645,7 @@ var _KmsKeyARN = smithy.NewSchema(smithy.ShapeID{
 var KMSRequestFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.snowball",
 	Name:      "KMSRequestFailedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KMSRequestFailedException_Message *smithy.Schema
 
 var LambdaResource = smithy.NewSchema(smithy.ShapeID{
@@ -807,7 +807,7 @@ var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
 var ReturnShippingLabelAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.snowball",
 	Name:      "ReturnShippingLabelAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ReturnShippingLabelAlreadyExistsException_Message *smithy.Schema
 
 var _RoleARN = smithy.NewSchema(smithy.ShapeID{
@@ -1046,7 +1046,7 @@ var TransferOption_LOCAL_USE *smithy.Schema
 var UnsupportedAddressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.snowball",
 	Name:      "UnsupportedAddressException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedAddressException_Message *smithy.Schema
 
 var WirelessConnection = smithy.NewSchema(smithy.ShapeID{

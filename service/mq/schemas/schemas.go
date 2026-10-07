@@ -352,7 +352,8 @@ var AvailabilityZone_Name *smithy.Schema
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mq",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_ErrorAttribute *smithy.Schema
 
 var BadRequestException_Message *smithy.Schema
@@ -504,7 +505,8 @@ var Configurations_Pending *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mq",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_ErrorAttribute *smithy.Schema
 
 var ConflictException_Message *smithy.Schema
@@ -588,7 +590,8 @@ var EngineVersion_Name *smithy.Schema
 var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mq",
 	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var ForbiddenException_ErrorAttribute *smithy.Schema
 
 var ForbiddenException_Message *smithy.Schema
@@ -598,7 +601,8 @@ var ForbiddenException_ResourceShareErrors *smithy.Schema
 var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mq",
 	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerErrorException_ErrorAttribute *smithy.Schema
 
 var InternalServerErrorException_Message *smithy.Schema
@@ -685,7 +689,8 @@ var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mq",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_ErrorAttribute *smithy.Schema
 
 var NotFoundException_Message *smithy.Schema
@@ -807,7 +812,8 @@ var SharedResourceType_RESOURCE *smithy.Schema
 var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mq",
 	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var UnauthorizedException_ErrorAttribute *smithy.Schema
 
 var UnauthorizedException_Message *smithy.Schema

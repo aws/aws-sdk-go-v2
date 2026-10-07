@@ -63,19 +63,19 @@ var _CustomerIdentifier = smithy.NewSchema(smithy.ShapeID{
 var CustomerNotEntitledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "CustomerNotEntitledException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CustomerNotEntitledException_message *smithy.Schema
 
 var DisabledApiException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "DisabledApiException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DisabledApiException_message *smithy.Schema
 
 var DuplicateRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "DuplicateRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DuplicateRequestException_message *smithy.Schema
 
 var _errorMessage = smithy.NewSchema(smithy.ShapeID{
@@ -86,79 +86,80 @@ var _errorMessage = smithy.NewSchema(smithy.ShapeID{
 var ExpiredTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "ExpiredTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ExpiredTokenException_message *smithy.Schema
 
 var IdempotencyConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "IdempotencyConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var IdempotencyConflictException_message *smithy.Schema
 
 var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServiceErrorException_message *smithy.Schema
 
 var InvalidCustomerIdentifierException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "InvalidCustomerIdentifierException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidCustomerIdentifierException_message *smithy.Schema
 
 var InvalidEndpointRegionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "InvalidEndpointRegionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidEndpointRegionException_message *smithy.Schema
 
 var InvalidLicenseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "InvalidLicenseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidLicenseException_message *smithy.Schema
 
 var InvalidProductCodeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "InvalidProductCodeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidProductCodeException_message *smithy.Schema
 
 var InvalidPublicKeyVersionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "InvalidPublicKeyVersionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidPublicKeyVersionException_message *smithy.Schema
 
 var InvalidRegionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "InvalidRegionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRegionException_message *smithy.Schema
 
 var InvalidTagException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "InvalidTagException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTagException_message *smithy.Schema
 
 var InvalidTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "InvalidTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTokenException_message *smithy.Schema
 
 var InvalidUsageAllocationsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "InvalidUsageAllocationsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidUsageAllocationsException_message *smithy.Schema
 
 var InvalidUsageDimensionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "InvalidUsageDimensionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidUsageDimensionException_message *smithy.Schema
 
 var _LicenseArn = smithy.NewSchema(smithy.ShapeID{
@@ -179,7 +180,7 @@ var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
 var PlatformNotSupportedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "PlatformNotSupportedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PlatformNotSupportedException_message *smithy.Schema
 
 var _ProductCode = smithy.NewSchema(smithy.ShapeID{
@@ -219,7 +220,7 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ThrottlingException_message *smithy.Schema
 
 var _Timestamp = smithy.NewSchema(smithy.ShapeID{
@@ -230,7 +231,7 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var TimestampOutOfBoundsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "TimestampOutOfBoundsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TimestampOutOfBoundsException_message *smithy.Schema
 
 var UsageAllocation = smithy.NewSchema(smithy.ShapeID{

@@ -5,6 +5,7 @@ package schemas
 import (
 	smithy "github.com/aws/smithy-go"
 	smithyprelude "github.com/aws/smithy-go/prelude"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 var AssociateOriginationIdentity = smithy.NewSchema(smithy.ShapeID{
@@ -567,7 +568,7 @@ var PinpointSMSVoiceV2 = smithy.NewServiceSchema(_PinpointSMSVoiceV2, "2022-03-3
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var AccessDeniedException_Message *smithy.Schema
 
 var AccessDeniedException_Reason *smithy.Schema
@@ -806,7 +807,7 @@ var _ConfigurationSetNameOrArn = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"})
 var ConflictException_Message *smithy.Schema
 
 var ConflictException_Reason *smithy.Schema
@@ -1020,7 +1021,7 @@ var _IamRoleArnOrUnset = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"})
 var InternalServerException_Message *smithy.Schema
 
 var InternalServerException_RequestId *smithy.Schema
@@ -2717,7 +2718,7 @@ var _ResourceIdOrArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_ResourceType *smithy.Schema
@@ -2861,7 +2862,7 @@ var _SenderIdOrArn = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ServiceQuotaExceededException_Reason *smithy.Schema
@@ -3075,7 +3076,7 @@ var _TextValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ThrottlingException_Message *smithy.Schema
 
 var _TierUpgradeStatus = smithy.NewSchema(smithy.ShapeID{
@@ -3111,7 +3112,7 @@ var _TwoWayMediaS3KeyPrefix = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var ValidationException_Message *smithy.Schema
 
 var ValidationException_Reason *smithy.Schema

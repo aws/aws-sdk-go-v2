@@ -608,7 +608,7 @@ var Logs_20140328 = smithy.NewServiceSchema(_Logs_20140328, "2014-03-28")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AccessDeniedException_message *smithy.Schema
 
 var _AccessPolicy = smithy.NewSchema(smithy.ShapeID{
@@ -943,7 +943,7 @@ var _ConfigurationTemplates_member *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConflictException_message *smithy.Schema
 
 var CopyValue = smithy.NewSchema(smithy.ShapeID{
@@ -1001,7 +1001,7 @@ var _Data = smithy.NewSchema(smithy.ShapeID{
 var DataAlreadyAcceptedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "DataAlreadyAcceptedException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var DataAlreadyAcceptedException_expectedSequenceToken *smithy.Schema
 
 var DataAlreadyAcceptedException_message *smithy.Schema
@@ -2156,31 +2156,32 @@ var _Interleaved = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var InternalStreamingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "InternalStreamingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InternalStreamingException_message *smithy.Schema
 
 var InvalidOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "InvalidOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidOperationException_message *smithy.Schema
 
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidParameterException_message *smithy.Schema
 
 var InvalidSequenceTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "InvalidSequenceTokenException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidSequenceTokenException_expectedSequenceToken *smithy.Schema
 
 var InvalidSequenceTokenException_message *smithy.Schema
@@ -2213,7 +2214,7 @@ var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var ListAggregateLogGroupSummariesGroupBy = smithy.NewSchema(smithy.ShapeID{
@@ -2637,7 +2638,7 @@ var _LowerCaseStringWithKeys_member *smithy.Schema
 var MalformedQueryException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "MalformedQueryException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var MalformedQueryException_queryCompileError *smithy.Schema
 
 var MalformedQueryException_message *smithy.Schema
@@ -2937,7 +2938,7 @@ var _OpenSearchWorkspaceId = smithy.NewSchema(smithy.ShapeID{
 var OperationAbortedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "OperationAbortedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OperationAbortedException_message *smithy.Schema
 
 var OrderBy = smithy.NewSchema(smithy.ShapeID{
@@ -3462,7 +3463,7 @@ var _RequestId = smithy.NewSchema(smithy.ShapeID{
 var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceAlreadyExistsException_message *smithy.Schema
 
 var _ResourceArns = smithy.NewSchema(smithy.ShapeID{
@@ -3485,7 +3486,7 @@ var _ResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _ResourcePolicies = smithy.NewSchema(smithy.ShapeID{
@@ -3772,13 +3773,13 @@ var _Service = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var ServiceUnavailableException_message *smithy.Schema
 
 var _SessionId = smithy.NewSchema(smithy.ShapeID{
@@ -3789,13 +3790,13 @@ var _SessionId = smithy.NewSchema(smithy.ShapeID{
 var SessionStreamingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "SessionStreamingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SessionStreamingException_message *smithy.Schema
 
 var SessionTimeoutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "SessionTimeoutException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SessionTimeoutException_message *smithy.Schema
 
 var _Source = smithy.NewSchema(smithy.ShapeID{
@@ -4172,7 +4173,7 @@ var _TestEventMessages_member *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ThrottlingException_message *smithy.Schema
 
 var _Time = smithy.NewSchema(smithy.ShapeID{
@@ -4208,7 +4209,8 @@ var _ToKey = smithy.NewSchema(smithy.ShapeID{
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_message *smithy.Schema
 
 var TooManyTagsException_resourceName *smithy.Schema
@@ -4306,7 +4308,7 @@ var _Unmask = smithy.NewSchema(smithy.ShapeID{
 var UnrecognizedClientException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "UnrecognizedClientException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnrecognizedClientException_message *smithy.Schema
 
 var UpperCaseString = smithy.NewSchema(smithy.ShapeID{
@@ -4329,7 +4331,7 @@ var _UserIdentity = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchlogs",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ValidationException_message *smithy.Schema
 
 var _Value = smithy.NewSchema(smithy.ShapeID{

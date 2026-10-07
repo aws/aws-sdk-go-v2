@@ -185,7 +185,8 @@ var Acceptor_accountId *smithy.Schema
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_requestId *smithy.Schema
 
 var AccessDeniedException_message *smithy.Schema
@@ -735,7 +736,8 @@ var _ConfigurableUpfrontRateCardList_member *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_requestId *smithy.Schema
 
 var ConflictException_message *smithy.Schema
@@ -975,7 +977,8 @@ var Intent_REPLACE *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_requestId *smithy.Schema
 
 var InternalServerException_message *smithy.Schema
@@ -1393,7 +1396,8 @@ var _ResourceId = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_requestId *smithy.Schema
 
 var ResourceNotFoundException_message *smithy.Schema
@@ -1453,7 +1457,8 @@ var Selector_value *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 6, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 6, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_requestId *smithy.Schema
 
 var ServiceQuotaExceededException_message *smithy.Schema
@@ -1547,7 +1552,8 @@ var _TermTemplateList_member *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_requestId *smithy.Schema
 
 var ThrottlingException_message *smithy.Schema
@@ -1599,7 +1605,8 @@ var _UsageBasedRateCardList_member *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_requestId *smithy.Schema
 
 var ValidationException_message *smithy.Schema

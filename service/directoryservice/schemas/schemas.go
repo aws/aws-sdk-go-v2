@@ -418,7 +418,7 @@ var DirectoryService_20150416 = smithy.NewServiceSchema(_DirectoryService_201504
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var AccessDeniedException_Message *smithy.Schema
 
 var AccessDeniedException_RequestId *smithy.Schema
@@ -431,7 +431,7 @@ var _AccessUrl = smithy.NewSchema(smithy.ShapeID{
 var ADAssessmentLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "ADAssessmentLimitExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ADAssessmentLimitExceededException_Message *smithy.Schema
 
 var ADAssessmentLimitExceededException_RequestId *smithy.Schema
@@ -672,7 +672,7 @@ var _AttributeValue = smithy.NewSchema(smithy.ShapeID{
 var AuthenticationFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "AuthenticationFailedException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var AuthenticationFailedException_Message *smithy.Schema
 
 var AuthenticationFailedException_RequestId *smithy.Schema
@@ -732,7 +732,7 @@ var Certificate_ClientCertAuthSettings *smithy.Schema
 var CertificateAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "CertificateAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var CertificateAlreadyExistsException_Message *smithy.Schema
 
 var CertificateAlreadyExistsException_RequestId *smithy.Schema
@@ -750,7 +750,7 @@ var _CertificateData = smithy.NewSchema(smithy.ShapeID{
 var CertificateDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "CertificateDoesNotExistException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var CertificateDoesNotExistException_Message *smithy.Schema
 
 var CertificateDoesNotExistException_RequestId *smithy.Schema
@@ -782,7 +782,7 @@ var CertificateInfo_Type *smithy.Schema
 var CertificateInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "CertificateInUseException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var CertificateInUseException_Message *smithy.Schema
 
 var CertificateInUseException_RequestId *smithy.Schema
@@ -790,7 +790,7 @@ var CertificateInUseException_RequestId *smithy.Schema
 var CertificateLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "CertificateLimitExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var CertificateLimitExceededException_Message *smithy.Schema
 
 var CertificateLimitExceededException_RequestId *smithy.Schema
@@ -898,7 +898,7 @@ var ClientCertAuthSettings_OCSPUrl *smithy.Schema
 var ClientException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "ClientException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ClientException_Message *smithy.Schema
 
 var ClientException_RequestId *smithy.Schema
@@ -1019,7 +1019,7 @@ var _DesiredNumberOfDomainControllers = smithy.NewSchema(smithy.ShapeID{
 var DirectoryAlreadyInRegionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "DirectoryAlreadyInRegionException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var DirectoryAlreadyInRegionException_Message *smithy.Schema
 
 var DirectoryAlreadyInRegionException_RequestId *smithy.Schema
@@ -1027,7 +1027,7 @@ var DirectoryAlreadyInRegionException_RequestId *smithy.Schema
 var DirectoryAlreadySharedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "DirectoryAlreadySharedException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var DirectoryAlreadySharedException_Message *smithy.Schema
 
 var DirectoryAlreadySharedException_RequestId *smithy.Schema
@@ -1197,7 +1197,7 @@ var _DirectoryDescriptions_member *smithy.Schema
 var DirectoryDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "DirectoryDoesNotExistException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var DirectoryDoesNotExistException_Message *smithy.Schema
 
 var DirectoryDoesNotExistException_RequestId *smithy.Schema
@@ -1226,7 +1226,7 @@ var _DirectoryIds_member *smithy.Schema
 var DirectoryInDesiredStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "DirectoryInDesiredStateException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var DirectoryInDesiredStateException_Message *smithy.Schema
 
 var DirectoryInDesiredStateException_RequestId *smithy.Schema
@@ -1234,7 +1234,7 @@ var DirectoryInDesiredStateException_RequestId *smithy.Schema
 var DirectoryLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "DirectoryLimitExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var DirectoryLimitExceededException_Message *smithy.Schema
 
 var DirectoryLimitExceededException_RequestId *smithy.Schema
@@ -1269,7 +1269,7 @@ var _DirectoryName = smithy.NewSchema(smithy.ShapeID{
 var DirectoryNotSharedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "DirectoryNotSharedException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var DirectoryNotSharedException_Message *smithy.Schema
 
 var DirectoryNotSharedException_RequestId *smithy.Schema
@@ -1336,7 +1336,7 @@ var DirectoryType_SHARED_MICROSOFT_AD *smithy.Schema
 var DirectoryUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "DirectoryUnavailableException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var DirectoryUnavailableException_Message *smithy.Schema
 
 var DirectoryUnavailableException_RequestId *smithy.Schema
@@ -1364,7 +1364,7 @@ var DirectoryVpcSettingsDescription_AvailabilityZones *smithy.Schema
 var DisableAlreadyInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "DisableAlreadyInProgressException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var DisableAlreadyInProgressException_Message *smithy.Schema
 
 var DisableAlreadyInProgressException_RequestId *smithy.Schema
@@ -1421,7 +1421,7 @@ var _DomainControllerIds_member *smithy.Schema
 var DomainControllerLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "DomainControllerLimitExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var DomainControllerLimitExceededException_Message *smithy.Schema
 
 var DomainControllerLimitExceededException_RequestId *smithy.Schema
@@ -1460,7 +1460,7 @@ var _DomainControllerStatusReason = smithy.NewSchema(smithy.ShapeID{
 var EnableAlreadyInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "EnableAlreadyInProgressException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var EnableAlreadyInProgressException_Message *smithy.Schema
 
 var EnableAlreadyInProgressException_RequestId *smithy.Schema
@@ -1473,7 +1473,7 @@ var _EndDateTime = smithy.NewSchema(smithy.ShapeID{
 var EntityAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "EntityAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var EntityAlreadyExistsException_Message *smithy.Schema
 
 var EntityAlreadyExistsException_RequestId *smithy.Schema
@@ -1481,7 +1481,7 @@ var EntityAlreadyExistsException_RequestId *smithy.Schema
 var EntityDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "EntityDoesNotExistException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var EntityDoesNotExistException_Message *smithy.Schema
 
 var EntityDoesNotExistException_RequestId *smithy.Schema
@@ -1586,7 +1586,7 @@ var HybridUpdateValue_DnsIps *smithy.Schema
 var IncompatibleSettingsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "IncompatibleSettingsException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var IncompatibleSettingsException_Message *smithy.Schema
 
 var IncompatibleSettingsException_RequestId *smithy.Schema
@@ -1599,7 +1599,7 @@ var _InitiatedBy = smithy.NewSchema(smithy.ShapeID{
 var InsufficientPermissionsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "InsufficientPermissionsException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InsufficientPermissionsException_Message *smithy.Schema
 
 var InsufficientPermissionsException_RequestId *smithy.Schema
@@ -1607,7 +1607,7 @@ var InsufficientPermissionsException_RequestId *smithy.Schema
 var InvalidCertificateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "InvalidCertificateException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidCertificateException_Message *smithy.Schema
 
 var InvalidCertificateException_RequestId *smithy.Schema
@@ -1615,7 +1615,7 @@ var InvalidCertificateException_RequestId *smithy.Schema
 var InvalidClientAuthStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "InvalidClientAuthStatusException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidClientAuthStatusException_Message *smithy.Schema
 
 var InvalidClientAuthStatusException_RequestId *smithy.Schema
@@ -1623,7 +1623,7 @@ var InvalidClientAuthStatusException_RequestId *smithy.Schema
 var InvalidLDAPSStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "InvalidLDAPSStatusException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidLDAPSStatusException_Message *smithy.Schema
 
 var InvalidLDAPSStatusException_RequestId *smithy.Schema
@@ -1631,7 +1631,7 @@ var InvalidLDAPSStatusException_RequestId *smithy.Schema
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidNextTokenException_Message *smithy.Schema
 
 var InvalidNextTokenException_RequestId *smithy.Schema
@@ -1639,7 +1639,7 @@ var InvalidNextTokenException_RequestId *smithy.Schema
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidParameterException_Message *smithy.Schema
 
 var InvalidParameterException_RequestId *smithy.Schema
@@ -1647,7 +1647,7 @@ var InvalidParameterException_RequestId *smithy.Schema
 var InvalidPasswordException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "InvalidPasswordException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidPasswordException_Message *smithy.Schema
 
 var InvalidPasswordException_RequestId *smithy.Schema
@@ -1655,7 +1655,7 @@ var InvalidPasswordException_RequestId *smithy.Schema
 var InvalidTargetException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "InvalidTargetException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidTargetException_Message *smithy.Schema
 
 var InvalidTargetException_RequestId *smithy.Schema
@@ -1702,7 +1702,7 @@ var IpRouteInfo_Description *smithy.Schema
 var IpRouteLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "IpRouteLimitExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var IpRouteLimitExceededException_Message *smithy.Schema
 
 var IpRouteLimitExceededException_RequestId *smithy.Schema
@@ -1867,7 +1867,7 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 var NoAvailableCertificateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "NoAvailableCertificateException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var NoAvailableCertificateException_Message *smithy.Schema
 
 var NoAvailableCertificateException_RequestId *smithy.Schema
@@ -1890,7 +1890,7 @@ var _OrganizationalUnitDN = smithy.NewSchema(smithy.ShapeID{
 var OrganizationsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "OrganizationsException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var OrganizationsException_Message *smithy.Schema
 
 var OrganizationsException_RequestId *smithy.Schema
@@ -2038,7 +2038,7 @@ var RegionDescription_LastUpdatedDateTime *smithy.Schema
 var RegionLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "RegionLimitExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var RegionLimitExceededException_Message *smithy.Schema
 
 var RegionLimitExceededException_RequestId *smithy.Schema
@@ -2191,7 +2191,7 @@ var _Servers_member *smithy.Schema
 var ServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "ServiceException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"})
 var ServiceException_Message *smithy.Schema
 
 var ServiceException_RequestId *smithy.Schema
@@ -2273,7 +2273,7 @@ var SharedDirectory_LastUpdatedDateTime *smithy.Schema
 var ShareLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "ShareLimitExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ShareLimitExceededException_Message *smithy.Schema
 
 var ShareLimitExceededException_RequestId *smithy.Schema
@@ -2351,7 +2351,7 @@ var _SnapshotIds_member *smithy.Schema
 var SnapshotLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "SnapshotLimitExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var SnapshotLimitExceededException_Message *smithy.Schema
 
 var SnapshotLimitExceededException_RequestId *smithy.Schema
@@ -2458,7 +2458,7 @@ var _TagKeys_member *smithy.Schema
 var TagLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "TagLimitExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var TagLimitExceededException_Message *smithy.Schema
 
 var TagLimitExceededException_RequestId *smithy.Schema
@@ -2621,7 +2621,7 @@ var UnshareTarget_Type *smithy.Schema
 var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "UnsupportedOperationException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var UnsupportedOperationException_Message *smithy.Schema
 
 var UnsupportedOperationException_RequestId *smithy.Schema
@@ -2629,7 +2629,7 @@ var UnsupportedOperationException_RequestId *smithy.Schema
 var UnsupportedSettingsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "UnsupportedSettingsException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var UnsupportedSettingsException_Message *smithy.Schema
 
 var UnsupportedSettingsException_RequestId *smithy.Schema
@@ -2699,7 +2699,7 @@ var UpdateValue_OSUpdateSettings *smithy.Schema
 var UserDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directoryservice",
 	Name:      "UserDoesNotExistException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var UserDoesNotExistException_Message *smithy.Schema
 
 var UserDoesNotExistException_RequestId *smithy.Schema

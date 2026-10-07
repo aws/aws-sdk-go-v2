@@ -613,7 +613,7 @@ var AmazonDMSv20160101 = smithy.NewServiceSchema(_AmazonDMSv20160101, "2016-01-0
 var AccessDeniedFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "AccessDeniedFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AccessDeniedFault_message *smithy.Schema
 
 var AccountQuota = smithy.NewSchema(smithy.ShapeID{
@@ -796,7 +796,8 @@ var CollectorHealthCheck_WebCollectorGrantedRoleBasedAccess *smithy.Schema
 var CollectorNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "CollectorNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var CollectorNotFoundFault_message *smithy.Schema
 
 var CollectorResponse = smithy.NewSchema(smithy.ShapeID{
@@ -1546,7 +1547,7 @@ var ExportSqlDetails_ObjectURL *smithy.Schema
 var FailedDependencyFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "FailedDependencyFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FailedDependencyFault_message *smithy.Schema
 
 var Filter = smithy.NewSchema(smithy.ShapeID{
@@ -1758,7 +1759,7 @@ var _InstanceProfileList_member *smithy.Schema
 var InsufficientResourceCapacityFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "InsufficientResourceCapacityFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InsufficientResourceCapacityFault_message *smithy.Schema
 
 var _Integer = smithy.NewSchema(smithy.ShapeID{
@@ -1780,25 +1781,25 @@ var _IntegerOptional = smithy.NewSchema(smithy.ShapeID{
 var InvalidCertificateFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "InvalidCertificateFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidCertificateFault_message *smithy.Schema
 
 var InvalidOperationFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "InvalidOperationFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidOperationFault_message *smithy.Schema
 
 var InvalidResourceStateFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "InvalidResourceStateFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidResourceStateFault_message *smithy.Schema
 
 var InvalidSubnet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "InvalidSubnet",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidSubnet_message *smithy.Schema
 
 var InventoryData = smithy.NewSchema(smithy.ShapeID{
@@ -1933,43 +1934,43 @@ var KinesisSettings_UseLargeIntegerValue *smithy.Schema
 var KMSAccessDeniedFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "KMSAccessDeniedFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KMSAccessDeniedFault_message *smithy.Schema
 
 var KMSDisabledFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "KMSDisabledFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KMSDisabledFault_message *smithy.Schema
 
 var KMSFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "KMSFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KMSFault_message *smithy.Schema
 
 var KMSInvalidStateFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "KMSInvalidStateFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KMSInvalidStateFault_message *smithy.Schema
 
 var KMSKeyNotAccessibleFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "KMSKeyNotAccessibleFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KMSKeyNotAccessibleFault_message *smithy.Schema
 
 var KMSNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "KMSNotFoundFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KMSNotFoundFault_message *smithy.Schema
 
 var KMSThrottlingFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "KMSThrottlingFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KMSThrottlingFault_message *smithy.Schema
 
 var LakehouseSettings = smithy.NewSchema(smithy.ShapeID{
@@ -3176,7 +3177,7 @@ var ReplicationSubnetGroup_IsReadOnly *smithy.Schema
 var ReplicationSubnetGroupDoesNotCoverEnoughAZs = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "ReplicationSubnetGroupDoesNotCoverEnoughAZs",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ReplicationSubnetGroupDoesNotCoverEnoughAZs_message *smithy.Schema
 
 var _ReplicationSubnetGroups = smithy.NewSchema(smithy.ShapeID{
@@ -3374,7 +3375,7 @@ var ReplicationTaskStats_FullLoadFinishDate *smithy.Schema
 var ResourceAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "ResourceAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ResourceAlreadyExistsFault_message *smithy.Schema
 
 var ResourceAlreadyExistsFault_resourceArn *smithy.Schema
@@ -3387,7 +3388,7 @@ var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "ResourceNotFoundFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundFault_message *smithy.Schema
 
 var ResourcePendingMaintenanceActions = smithy.NewSchema(smithy.ShapeID{
@@ -3401,19 +3402,19 @@ var ResourcePendingMaintenanceActions_PendingMaintenanceActionDetails *smithy.Sc
 var ResourceQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "ResourceQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceQuotaExceededFault_message *smithy.Schema
 
 var S3AccessDeniedFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "S3AccessDeniedFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var S3AccessDeniedFault_message *smithy.Schema
 
 var S3ResourceNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "S3ResourceNotFoundFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var S3ResourceNotFoundFault_message *smithy.Schema
 
 var S3Settings = smithy.NewSchema(smithy.ShapeID{
@@ -3602,13 +3603,13 @@ var ServerShortInfoResponse_ServerName *smithy.Schema
 var SNSInvalidTopicFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "SNSInvalidTopicFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SNSInvalidTopicFault_message *smithy.Schema
 
 var SNSNoAuthorizationFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "SNSNoAuthorizationFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SNSNoAuthorizationFault_message *smithy.Schema
 
 var SourceDataSetting = smithy.NewSchema(smithy.ShapeID{
@@ -3700,7 +3701,7 @@ var StatementProperties_Definition *smithy.Schema
 var StorageQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "StorageQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var StorageQuotaExceededFault_message *smithy.Schema
 
 var _String = smithy.NewSchema(smithy.ShapeID{
@@ -3727,7 +3728,7 @@ var Subnet_SubnetStatus *smithy.Schema
 var SubnetAlreadyInUse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "SubnetAlreadyInUse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SubnetAlreadyInUse_message *smithy.Schema
 
 var _SubnetIdentifierList = smithy.NewSchema(smithy.ShapeID{
@@ -3956,7 +3957,7 @@ var _TStamp = smithy.NewSchema(smithy.ShapeID{
 var UpgradeDependencyFailureFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.databasemigrationservice",
 	Name:      "UpgradeDependencyFailureFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UpgradeDependencyFailureFault_message *smithy.Schema
 
 var VersionStatus = smithy.NewSchema(smithy.ShapeID{

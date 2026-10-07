@@ -5,6 +5,7 @@ package schemas
 import (
 	smithy "github.com/aws/smithy-go"
 	smithyprelude "github.com/aws/smithy-go/prelude"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 var AcceptNetworkFirewallTransitGatewayAttachment = smithy.NewSchema(smithy.ShapeID{
@@ -1317,37 +1318,37 @@ var _InsertPosition = smithy.NewSchema(smithy.ShapeID{
 var InsufficientCapacityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "InsufficientCapacityException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InsufficientCapacityException_Message *smithy.Schema
 
 var InternalServerError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServerError_Message *smithy.Schema
 
 var InvalidOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "InvalidOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidOperationException_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_Message *smithy.Schema
 
 var InvalidResourcePolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "InvalidResourcePolicyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidResourcePolicyException_Message *smithy.Schema
 
 var InvalidTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "InvalidTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTokenException_Message *smithy.Schema
 
 var IPAddressType = smithy.NewSchema(smithy.ShapeID{
@@ -1435,7 +1436,7 @@ var _LastUpdateTime = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_Message *smithy.Schema
 
 var _ListenerProperties = smithy.NewSchema(smithy.ShapeID{
@@ -1506,7 +1507,7 @@ var _LogDestinationMap_value *smithy.Schema
 var LogDestinationPermissionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "LogDestinationPermissionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LogDestinationPermissionException_Message *smithy.Schema
 
 var LogDestinationType = smithy.NewSchema(smithy.ShapeID{
@@ -2116,13 +2117,13 @@ var _ResourceNameList_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceOwnerCheckException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ResourceOwnerCheckException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceOwnerCheckException_Message *smithy.Schema
 
 var ResourceStatus = smithy.NewSchema(smithy.ShapeID{
@@ -2781,7 +2782,7 @@ var _TcpIdleTimeoutRangeBound = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ThrottlingException_Message *smithy.Schema
 
 var TlsCertificateData = smithy.NewSchema(smithy.ShapeID{
@@ -2922,7 +2923,7 @@ var UniqueSources_Count *smithy.Schema
 var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "UnsupportedOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedOperationException_Message *smithy.Schema
 
 var _UpdateTime = smithy.NewSchema(smithy.ShapeID{

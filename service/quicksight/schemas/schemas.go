@@ -2117,7 +2117,8 @@ var AccessControlConfiguration_isACLEnabled *smithy.Schema
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var AccessDeniedException_Message *smithy.Schema
 
 var AccessDeniedException_RequestId *smithy.Schema
@@ -6974,7 +6975,8 @@ var _ComputationList_member *smithy.Schema
 var ConcurrentUpdatingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "ConcurrentUpdatingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ConcurrentUpdatingException_Message *smithy.Schema
 
 var ConcurrentUpdatingException_RequestId *smithy.Schema
@@ -7080,7 +7082,8 @@ var ConditionalFormattingSolidColor_Color *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConflictException_RequestId *smithy.Schema
@@ -7501,7 +7504,8 @@ var CustomContentVisual_VisualContentAltText *smithy.Schema
 var CustomerManagedKeyUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "CustomerManagedKeyUnavailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var CustomerManagedKeyUnavailableException_Message *smithy.Schema
 
 var CustomerManagedKeyUnavailableException_RequestId *smithy.Schema
@@ -9977,7 +9981,8 @@ var _Domain = smithy.NewSchema(smithy.ShapeID{
 var DomainNotWhitelistedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "DomainNotWhitelistedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var DomainNotWhitelistedException_Message *smithy.Schema
 
 var DomainNotWhitelistedException_RequestId *smithy.Schema
@@ -12900,7 +12905,8 @@ var IdentityType_IAM_IDENTITY_CENTER *smithy.Schema
 var IdentityTypeNotSupportedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "IdentityTypeNotSupportedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var IdentityTypeNotSupportedException_Message *smithy.Schema
 
 var IdentityTypeNotSupportedException_RequestId *smithy.Schema
@@ -13450,7 +13456,8 @@ var IntegerValueWhenUnsetConfiguration_CustomValue *smithy.Schema
 var InternalFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "InternalFailureException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalFailureException_Message *smithy.Schema
 
 var InternalFailureException_RequestId *smithy.Schema
@@ -13458,13 +13465,15 @@ var InternalFailureException_RequestId *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var InvalidDataSetParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "InvalidDataSetParameterValueException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidDataSetParameterValueException_Message *smithy.Schema
 
 var InvalidDataSetParameterValueException_RequestId *smithy.Schema
@@ -13472,7 +13481,8 @@ var InvalidDataSetParameterValueException_RequestId *smithy.Schema
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidNextTokenException_Message *smithy.Schema
 
 var InvalidNextTokenException_RequestId *smithy.Schema
@@ -13480,7 +13490,8 @@ var InvalidNextTokenException_RequestId *smithy.Schema
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterException_Message *smithy.Schema
 
 var InvalidParameterException_RequestId *smithy.Schema
@@ -13488,7 +13499,8 @@ var InvalidParameterException_RequestId *smithy.Schema
 var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterValueException_Message *smithy.Schema
 
 var InvalidParameterValueException_RequestId *smithy.Schema
@@ -13496,7 +13508,8 @@ var InvalidParameterValueException_RequestId *smithy.Schema
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidRequestException_Message *smithy.Schema
 
 var InvalidRequestException_RequestId *smithy.Schema
@@ -14215,7 +14228,8 @@ var _LimitedString = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var LimitExceededException_Message *smithy.Schema
 
 var LimitExceededException_ResourceType *smithy.Schema
@@ -16736,7 +16750,8 @@ var PostgreSqlParameters_Database *smithy.Schema
 var PreconditionNotMetException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "PreconditionNotMetException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var PreconditionNotMetException_Message *smithy.Schema
 
 var PreconditionNotMetException_RequestId *smithy.Schema
@@ -17019,7 +17034,8 @@ var QueueInfo_QueuedIngestion *smithy.Schema
 var QuickSightUserNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "QuickSightUserNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var QuickSightUserNotFoundException_Message *smithy.Schema
 
 var QuickSightUserNotFoundException_RequestId *smithy.Schema
@@ -17785,7 +17801,8 @@ var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "ResourceExistsException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceExistsException_Message *smithy.Schema
 
 var ResourceExistsException_ResourceType *smithy.Schema
@@ -17813,7 +17830,8 @@ var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_ResourceType *smithy.Schema
@@ -17869,7 +17887,8 @@ var _ResourceTypeList_member *smithy.Schema
 var ResourceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "ResourceUnavailableException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ResourceUnavailableException_Message *smithy.Schema
 
 var ResourceUnavailableException_ResourceType *smithy.Schema
@@ -18749,7 +18768,8 @@ var _SessionLifetimeInMinutes = smithy.NewSchema(smithy.ShapeID{
 var SessionLifetimeInMinutesInvalidException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "SessionLifetimeInMinutesInvalidException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var SessionLifetimeInMinutesInvalidException_Message *smithy.Schema
 
 var SessionLifetimeInMinutesInvalidException_RequestId *smithy.Schema
@@ -21091,7 +21111,8 @@ var ThresholdAlertsConfigurations_Enabled *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var ThrottlingException_RequestId *smithy.Schema
@@ -22661,7 +22682,8 @@ var UnpivotOperation_UnpivotedValueColumnId *smithy.Schema
 var UnsupportedPricingPlanException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "UnsupportedPricingPlanException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var UnsupportedPricingPlanException_Message *smithy.Schema
 
 var UnsupportedPricingPlanException_RequestId *smithy.Schema
@@ -22669,7 +22691,8 @@ var UnsupportedPricingPlanException_RequestId *smithy.Schema
 var UnsupportedUserEditionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "UnsupportedUserEditionException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var UnsupportedUserEditionException_Message *smithy.Schema
 
 var UnsupportedUserEditionException_RequestId *smithy.Schema

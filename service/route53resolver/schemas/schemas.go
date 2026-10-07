@@ -5,6 +5,7 @@ package schemas
 import (
 	smithy "github.com/aws/smithy-go"
 	smithyprelude "github.com/aws/smithy-go/prelude"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 var AssociateFirewallRuleGroup = smithy.NewSchema(smithy.ShapeID{
@@ -377,7 +378,7 @@ var Route53Resolver = smithy.NewServiceSchema(_Route53Resolver, "2018-04-01")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AccessDeniedException_Message *smithy.Schema
 
 var _AccountId = smithy.NewSchema(smithy.ShapeID{
@@ -507,7 +508,7 @@ var ConfidenceThreshold_HIGH *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConflictException_Message *smithy.Schema
 
 var _Count = smithy.NewSchema(smithy.ShapeID{
@@ -1034,19 +1035,19 @@ var _InstanceCount = smithy.NewSchema(smithy.ShapeID{
 var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InternalServiceErrorException_Message *smithy.Schema
 
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidNextTokenException_Message *smithy.Schema
 
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidParameterException_Message *smithy.Schema
 
 var InvalidParameterException_FieldName *smithy.Schema
@@ -1054,19 +1055,19 @@ var InvalidParameterException_FieldName *smithy.Schema
 var InvalidPolicyDocument = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "InvalidPolicyDocument",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidPolicyDocument_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_Message *smithy.Schema
 
 var InvalidTagException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "InvalidTagException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTagException_Message *smithy.Schema
 
 var _Ip = smithy.NewSchema(smithy.ShapeID{
@@ -1178,7 +1179,7 @@ var _Ipv6InternetAccessEnabled = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var LimitExceededException_Message *smithy.Schema
 
 var LimitExceededException_ResourceType *smithy.Schema
@@ -1705,7 +1706,7 @@ var ResolverRuleStatus_Failed *smithy.Schema
 var ResourceExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "ResourceExistsException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ResourceExistsException_Message *smithy.Schema
 
 var ResourceExistsException_ResourceType *smithy.Schema
@@ -1718,7 +1719,7 @@ var _ResourceId = smithy.NewSchema(smithy.ShapeID{
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ResourceInUseException_Message *smithy.Schema
 
 var ResourceInUseException_ResourceType *smithy.Schema
@@ -1726,7 +1727,7 @@ var ResourceInUseException_ResourceType *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_ResourceType *smithy.Schema
@@ -1734,7 +1735,7 @@ var ResourceNotFoundException_ResourceType *smithy.Schema
 var ResourceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "ResourceUnavailableException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ResourceUnavailableException_Message *smithy.Schema
 
 var ResourceUnavailableException_ResourceType *smithy.Schema
@@ -1795,7 +1796,7 @@ var _ServicePrinciple = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ShareStatus = smithy.NewSchema(smithy.ShapeID{
@@ -1902,13 +1903,13 @@ var _TargetNameServerMetricsEnabled = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ThrottlingException_Message *smithy.Schema
 
 var UnknownResourceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "UnknownResourceException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnknownResourceException_Message *smithy.Schema
 
 var _Unsigned = smithy.NewSchema(smithy.ShapeID{
@@ -1983,7 +1984,7 @@ var Validation_USE_LOCAL_RESOURCE_SETTING *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ValidationException_Message *smithy.Schema
 
 var _VendorName = smithy.NewSchema(smithy.ShapeID{

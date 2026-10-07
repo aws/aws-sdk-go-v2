@@ -5,6 +5,7 @@ package schemas
 import (
 	smithy "github.com/aws/smithy-go"
 	smithyprelude "github.com/aws/smithy-go/prelude"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 var GenerateDataSet = smithy.NewSchema(smithy.ShapeID{
@@ -119,7 +120,7 @@ var _FromDate = smithy.NewSchema(smithy.ShapeID{
 var MarketplaceCommerceAnalyticsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecommerceanalytics",
 	Name:      "MarketplaceCommerceAnalyticsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var MarketplaceCommerceAnalyticsException_message *smithy.Schema
 
 var _OptionalKey = smithy.NewSchema(smithy.ShapeID{

@@ -676,7 +676,8 @@ var WisdomService = smithy.NewServiceSchema(_WisdomService, "2020-10-19")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var _AccessRoleArn = smithy.NewSchema(smithy.ShapeID{
@@ -1466,7 +1467,8 @@ var Configuration_connectConfiguration *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConnectConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -1904,7 +1906,8 @@ var DelegateAgentConfiguration_instruction *smithy.Schema
 var DependencyFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "DependencyFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 424})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 424})
 var DependencyFailedException_message *smithy.Schema
 
 var _Description = smithy.NewSchema(smithy.ShapeID{
@@ -3362,7 +3365,8 @@ var _Participant = smithy.NewSchema(smithy.ShapeID{
 var PreconditionFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "PreconditionFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 412})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 412})
 var PreconditionFailedException_message *smithy.Schema
 
 var _Priority = smithy.NewSchema(smithy.ShapeID{
@@ -3924,13 +3928,15 @@ var RenderingConfiguration_templateUri *smithy.Schema
 var RequestTimeoutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "RequestTimeoutException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 408})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 408})
 var RequestTimeoutException_message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_resourceName *smithy.Schema
@@ -4133,7 +4139,8 @@ var ServerSideEncryptionConfiguration_kmsKeyId *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var SessionData = smithy.NewSchema(smithy.ShapeID{
@@ -4602,7 +4609,8 @@ var TextMessage_aiGuardrailAssessment *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ThrottlingException_message *smithy.Schema
 
 var _TimeToLive = smithy.NewSchema(smithy.ShapeID{
@@ -4733,7 +4741,8 @@ var ToolUseResultData_inputSchema *smithy.Schema
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_message *smithy.Schema
 
 var TooManyTagsException_resourceName *smithy.Schema
@@ -4746,13 +4755,15 @@ var _TopK = smithy.NewSchema(smithy.ShapeID{
 var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var UnauthorizedException_message *smithy.Schema
 
 var UnprocessableContentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "UnprocessableContentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 422})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 422})
 var UnprocessableContentException_message *smithy.Schema
 
 var _UploadId = smithy.NewSchema(smithy.ShapeID{
@@ -4816,7 +4827,8 @@ var _UuidWithQualifier = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var VectorIngestionConfiguration = smithy.NewSchema(smithy.ShapeID{

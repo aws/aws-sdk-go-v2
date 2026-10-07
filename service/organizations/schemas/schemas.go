@@ -333,13 +333,15 @@ var AWSOrganizationsV20161128 = smithy.NewServiceSchema(_AWSOrganizationsV201611
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var AccessDeniedForDependencyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "AccessDeniedForDependencyException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedForDependencyException_Message *smithy.Schema
 
 var AccessDeniedForDependencyException_Reason *smithy.Schema
@@ -375,13 +377,15 @@ var Account_JoinedTimestamp *smithy.Schema
 var AccountAlreadyClosedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "AccountAlreadyClosedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var AccountAlreadyClosedException_Message *smithy.Schema
 
 var AccountAlreadyRegisteredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "AccountAlreadyRegisteredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var AccountAlreadyRegisteredException_Message *smithy.Schema
 
 var _AccountArn = smithy.NewSchema(smithy.ShapeID{
@@ -410,19 +414,22 @@ var _AccountName = smithy.NewSchema(smithy.ShapeID{
 var AccountNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "AccountNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var AccountNotFoundException_Message *smithy.Schema
 
 var AccountNotRegisteredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "AccountNotRegisteredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var AccountNotRegisteredException_Message *smithy.Schema
 
 var AccountOwnerNotVerifiedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "AccountOwnerNotVerifiedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccountOwnerNotVerifiedException_Message *smithy.Schema
 
 var _Accounts = smithy.NewSchema(smithy.ShapeID{
@@ -472,7 +479,8 @@ var ActionType_TRANSFER_RESPONSIBILITY *smithy.Schema
 var AlreadyInOrganizationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "AlreadyInOrganizationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var AlreadyInOrganizationException_Message *smithy.Schema
 
 var _AwsManagedPolicy = smithy.NewSchema(smithy.ShapeID{
@@ -483,7 +491,8 @@ var _AwsManagedPolicy = smithy.NewSchema(smithy.ShapeID{
 var AWSOrganizationsNotInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "AWSOrganizationsNotInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var AWSOrganizationsNotInUseException_Message *smithy.Schema
 
 var Child = smithy.NewSchema(smithy.ShapeID{
@@ -502,7 +511,8 @@ var _ChildId = smithy.NewSchema(smithy.ShapeID{
 var ChildNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "ChildNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ChildNotFoundException_Message *smithy.Schema
 
 var _Children = smithy.NewSchema(smithy.ShapeID{
@@ -522,19 +532,22 @@ var ChildType_ORGANIZATIONAL_UNIT *smithy.Schema
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConcurrentModificationException_Message *smithy.Schema
 
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConstraintViolationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "ConstraintViolationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConstraintViolationException_Message *smithy.Schema
 
 var ConstraintViolationException_Reason *smithy.Schema
@@ -728,7 +741,8 @@ var _CreateAccountStatuses_member *smithy.Schema
 var CreateAccountStatusNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "CreateAccountStatusNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var CreateAccountStatusNotFoundException_Message *smithy.Schema
 
 var DelegatedAdministrator = smithy.NewSchema(smithy.ShapeID{
@@ -776,37 +790,43 @@ var _DelegatedServices_member *smithy.Schema
 var DestinationParentNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "DestinationParentNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var DestinationParentNotFoundException_Message *smithy.Schema
 
 var DuplicateAccountException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "DuplicateAccountException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var DuplicateAccountException_Message *smithy.Schema
 
 var DuplicateHandshakeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "DuplicateHandshakeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var DuplicateHandshakeException_Message *smithy.Schema
 
 var DuplicateOrganizationalUnitException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "DuplicateOrganizationalUnitException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var DuplicateOrganizationalUnitException_Message *smithy.Schema
 
 var DuplicatePolicyAttachmentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "DuplicatePolicyAttachmentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var DuplicatePolicyAttachmentException_Message *smithy.Schema
 
 var DuplicatePolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "DuplicatePolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var DuplicatePolicyException_Message *smithy.Schema
 
 var EffectivePolicy = smithy.NewSchema(smithy.ShapeID{
@@ -824,7 +844,7 @@ var EffectivePolicy_PolicyType *smithy.Schema
 var EffectivePolicyNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "EffectivePolicyNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var EffectivePolicyNotFoundException_Message *smithy.Schema
 
 var EffectivePolicyType = smithy.NewSchema(smithy.ShapeID{
@@ -915,7 +935,8 @@ var _ExceptionType = smithy.NewSchema(smithy.ShapeID{
 var FinalizingOrganizationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "FinalizingOrganizationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var FinalizingOrganizationException_Message *smithy.Schema
 
 var _GenericArn = smithy.NewSchema(smithy.ShapeID{
@@ -946,7 +967,8 @@ var Handshake_Resources *smithy.Schema
 var HandshakeAlreadyInStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "HandshakeAlreadyInStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var HandshakeAlreadyInStateException_Message *smithy.Schema
 
 var _HandshakeArn = smithy.NewSchema(smithy.ShapeID{
@@ -957,7 +979,8 @@ var _HandshakeArn = smithy.NewSchema(smithy.ShapeID{
 var HandshakeConstraintViolationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "HandshakeConstraintViolationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var HandshakeConstraintViolationException_Message *smithy.Schema
 
 var HandshakeConstraintViolationException_Reason *smithy.Schema
@@ -1019,7 +1042,8 @@ var _HandshakeNotes = smithy.NewSchema(smithy.ShapeID{
 var HandshakeNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "HandshakeNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var HandshakeNotFoundException_Message *smithy.Schema
 
 var _HandshakeParties = smithy.NewSchema(smithy.ShapeID{
@@ -1137,13 +1161,15 @@ var IAMUserAccessToBilling_DENY *smithy.Schema
 var InvalidHandshakeTransitionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "InvalidHandshakeTransitionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var InvalidHandshakeTransitionException_Message *smithy.Schema
 
 var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidInputException_Message *smithy.Schema
 
 var InvalidInputException_Reason *smithy.Schema
@@ -1237,19 +1263,22 @@ var InvalidInputExceptionReason_INVALID_END_DATE *smithy.Schema
 var InvalidResponsibilityTransferTransitionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "InvalidResponsibilityTransferTransitionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var InvalidResponsibilityTransferTransitionException_Message *smithy.Schema
 
 var MalformedPolicyDocumentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "MalformedPolicyDocumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var MalformedPolicyDocumentException_Message *smithy.Schema
 
 var MasterCannotLeaveOrganizationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "MasterCannotLeaveOrganizationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var MasterCannotLeaveOrganizationException_Message *smithy.Schema
 
 var _MaxResults = smithy.NewSchema(smithy.ShapeID{
@@ -1310,13 +1339,15 @@ var _OrganizationalUnitName = smithy.NewSchema(smithy.ShapeID{
 var OrganizationalUnitNotEmptyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "OrganizationalUnitNotEmptyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var OrganizationalUnitNotEmptyException_Message *smithy.Schema
 
 var OrganizationalUnitNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "OrganizationalUnitNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var OrganizationalUnitNotFoundException_Message *smithy.Schema
 
 var _OrganizationalUnits = smithy.NewSchema(smithy.ShapeID{
@@ -1346,7 +1377,8 @@ var _OrganizationId = smithy.NewSchema(smithy.ShapeID{
 var OrganizationNotEmptyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "OrganizationNotEmptyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var OrganizationNotEmptyException_Message *smithy.Schema
 
 var Parent = smithy.NewSchema(smithy.ShapeID{
@@ -1365,7 +1397,8 @@ var _ParentId = smithy.NewSchema(smithy.ShapeID{
 var ParentNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "ParentNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ParentNotFoundException_Message *smithy.Schema
 
 var _Parents = smithy.NewSchema(smithy.ShapeID{
@@ -1420,7 +1453,7 @@ var _PolicyArn = smithy.NewSchema(smithy.ShapeID{
 var PolicyChangesInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "PolicyChangesInProgressException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PolicyChangesInProgressException_Message *smithy.Schema
 
 var _PolicyContent = smithy.NewSchema(smithy.ShapeID{
@@ -1447,7 +1480,8 @@ var _PolicyIds_member *smithy.Schema
 var PolicyInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "PolicyInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var PolicyInUseException_Message *smithy.Schema
 
 var _PolicyName = smithy.NewSchema(smithy.ShapeID{
@@ -1458,13 +1492,15 @@ var _PolicyName = smithy.NewSchema(smithy.ShapeID{
 var PolicyNotAttachedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "PolicyNotAttachedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var PolicyNotAttachedException_Message *smithy.Schema
 
 var PolicyNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "PolicyNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var PolicyNotFoundException_Message *smithy.Schema
 
 var PolicySummary = smithy.NewSchema(smithy.ShapeID{
@@ -1541,19 +1577,22 @@ var PolicyType_GUARDDUTY_POLICY *smithy.Schema
 var PolicyTypeAlreadyEnabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "PolicyTypeAlreadyEnabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var PolicyTypeAlreadyEnabledException_Message *smithy.Schema
 
 var PolicyTypeNotAvailableForOrganizationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "PolicyTypeNotAvailableForOrganizationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var PolicyTypeNotAvailableForOrganizationException_Message *smithy.Schema
 
 var PolicyTypeNotEnabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "PolicyTypeNotEnabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var PolicyTypeNotEnabledException_Message *smithy.Schema
 
 var _PolicyTypes = smithy.NewSchema(smithy.ShapeID{
@@ -1606,7 +1645,8 @@ var _ResourcePolicyId = smithy.NewSchema(smithy.ShapeID{
 var ResourcePolicyNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "ResourcePolicyNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourcePolicyNotFoundException_Message *smithy.Schema
 
 var ResourcePolicySummary = smithy.NewSchema(smithy.ShapeID{
@@ -1644,7 +1684,8 @@ var ResponsibilityTransfer_ActiveHandshakeId *smithy.Schema
 var ResponsibilityTransferAlreadyInStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "ResponsibilityTransferAlreadyInStatusException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResponsibilityTransferAlreadyInStatusException_Message *smithy.Schema
 
 var _ResponsibilityTransferArn = smithy.NewSchema(smithy.ShapeID{
@@ -1665,7 +1706,8 @@ var _ResponsibilityTransferName = smithy.NewSchema(smithy.ShapeID{
 var ResponsibilityTransferNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "ResponsibilityTransferNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResponsibilityTransferNotFoundException_Message *smithy.Schema
 
 var _ResponsibilityTransfers = smithy.NewSchema(smithy.ShapeID{
@@ -1731,7 +1773,8 @@ var _RootName = smithy.NewSchema(smithy.ShapeID{
 var RootNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "RootNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var RootNotFoundException_Message *smithy.Schema
 
 var _Roots = smithy.NewSchema(smithy.ShapeID{
@@ -1743,7 +1786,8 @@ var _Roots_member *smithy.Schema
 var ServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "ServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ServiceException_Message *smithy.Schema
 
 var _ServicePrincipal = smithy.NewSchema(smithy.ShapeID{
@@ -1754,7 +1798,8 @@ var _ServicePrincipal = smithy.NewSchema(smithy.ShapeID{
 var SourceParentNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "SourceParentNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var SourceParentNotFoundException_Message *smithy.Schema
 
 var Tag = smithy.NewSchema(smithy.ShapeID{
@@ -1800,7 +1845,8 @@ var _TargetName = smithy.NewSchema(smithy.ShapeID{
 var TargetNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "TargetNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var TargetNotFoundException_Message *smithy.Schema
 
 var TargetType = smithy.NewSchema(smithy.ShapeID{
@@ -1821,7 +1867,8 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_Type *smithy.Schema
 
 var TooManyRequestsException_Message *smithy.Schema
@@ -1837,7 +1884,8 @@ var TransferParticipant_ManagementAccountEmail *smithy.Schema
 var UnsupportedAPIEndpointException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "UnsupportedAPIEndpointException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var UnsupportedAPIEndpointException_Message *smithy.Schema
 
 var AcceptHandshakeRequest = smithy.NewSchema(smithy.ShapeID{

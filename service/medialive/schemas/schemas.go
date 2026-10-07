@@ -2953,13 +2953,15 @@ var AvailSettings_Scte35TimeSignalApos *smithy.Schema
 var BadGatewayException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "BadGatewayException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var BadGatewayException_Message *smithy.Schema
 
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_Message *smithy.Schema
 
 var BandwidthReductionFilterSettings = smithy.NewSchema(smithy.ShapeID{
@@ -3882,7 +3884,8 @@ var ColorSpacePassthroughSettings = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConnectionMode = smithy.NewSchema(smithy.ShapeID{
@@ -4958,7 +4961,8 @@ var FollowPoint_START *smithy.Schema
 var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var ForbiddenException_Message *smithy.Schema
 
 var FrameCaptureCdnSettings = smithy.NewSchema(smithy.ShapeID{
@@ -5013,7 +5017,8 @@ var FrameCaptureSettings_TimecodeBurninSettings *smithy.Schema
 var GatewayTimeoutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "GatewayTimeoutException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 504})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 504})
 var GatewayTimeoutException_Message *smithy.Schema
 
 var GlobalConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -7057,7 +7062,8 @@ var InterfaceMappingUpdateRequest_NetworkId *smithy.Schema
 var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerErrorException_Message *smithy.Schema
 
 var IpPool = smithy.NewSchema(smithy.ShapeID{
@@ -8518,7 +8524,8 @@ var NodeState_DEREGISTERED *smithy.Schema
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_Message *smithy.Schema
 
 var Offering = smithy.NewSchema(smithy.ShapeID{
@@ -10157,7 +10164,8 @@ var TimedMetadataScheduleActionSettings_Id3 *smithy.Schema
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_Message *smithy.Schema
 
 var TransferringInputDeviceSummary = smithy.NewSchema(smithy.ShapeID{
@@ -10231,7 +10239,8 @@ var UdpTimedMetadataId3Frame_TDRL *smithy.Schema
 var UnprocessableEntityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "UnprocessableEntityException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 422})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 422})
 var UnprocessableEntityException_Message *smithy.Schema
 
 var UnprocessableEntityException_ValidationErrors *smithy.Schema

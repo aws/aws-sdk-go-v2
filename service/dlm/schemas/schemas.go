@@ -425,7 +425,8 @@ var GettablePolicyStateValues_ERROR *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dlm",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var InternalServerException_Code *smithy.Schema
@@ -444,7 +445,8 @@ var IntervalUnitValues_HOURS *smithy.Schema
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dlm",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidRequestException_Message *smithy.Schema
 
 var InvalidRequestException_Code *smithy.Schema
@@ -504,7 +506,8 @@ var _LifecyclePolicySummaryList_member *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dlm",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var LimitExceededException_Message *smithy.Schema
 
 var LimitExceededException_Code *smithy.Schema
@@ -641,7 +644,8 @@ var ResourceLocationValues_LOCAL_ZONE *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dlm",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_Code *smithy.Schema

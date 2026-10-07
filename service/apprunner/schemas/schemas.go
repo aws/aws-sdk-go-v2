@@ -635,7 +635,8 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apprunner",
 	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "InternalServiceError",
 		StatusCode: 500})
 var InternalServiceErrorException_Message *smithy.Schema
@@ -643,7 +644,8 @@ var InternalServiceErrorException_Message *smithy.Schema
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apprunner",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidRequest",
 		StatusCode: 400})
 var InvalidRequestException_Message *smithy.Schema
@@ -651,7 +653,8 @@ var InvalidRequestException_Message *smithy.Schema
 var InvalidStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apprunner",
 	Name:      "InvalidStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidState",
 		StatusCode: 400})
 var InvalidStateException_Message *smithy.Schema
@@ -855,7 +858,8 @@ var ProviderType_BITBUCKET *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apprunner",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotfound",
 		StatusCode: 400})
 var ResourceNotFoundException_Message *smithy.Schema
@@ -997,7 +1001,8 @@ var ServiceObservabilityConfiguration_ObservabilityConfigurationArn *smithy.Sche
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apprunner",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402},
 	&smithytraits.AWSQueryError{ErrorCode: "ServiceQuotaExceeded",
 		StatusCode: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema

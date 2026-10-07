@@ -263,7 +263,8 @@ var AmazonBedrockAgentRunTimeService = smithy.NewServiceSchema(_AmazonBedrockAge
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var ActionGroupExecutor = smithy.NewSchema(smithy.ShapeID{
@@ -1134,7 +1135,8 @@ var _AWSResourceARN = smithy.NewSchema(smithy.ShapeID{
 var BadGatewayException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "BadGatewayException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 502})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 502})
 var BadGatewayException_message *smithy.Schema
 
 var BadGatewayException_resourceName *smithy.Schema
@@ -1359,7 +1361,8 @@ var ConfirmationState_DENY *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ContentBlock = smithy.NewSchema(smithy.ShapeID{
@@ -1456,7 +1459,8 @@ var _DateTimestamp = smithy.NewSchema(smithy.ShapeID{
 var DependencyFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "DependencyFailedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 424})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 424})
 var DependencyFailedException_message *smithy.Schema
 
 var DependencyFailedException_resourceName *smithy.Schema
@@ -2964,7 +2968,8 @@ var _Instruction = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var InternalServerException_reason *smithy.Schema
@@ -3460,7 +3465,8 @@ var ModelInvocationInput_foundationModel *smithy.Schema
 var ModelNotReadyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "ModelNotReadyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 424})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 424})
 var ModelNotReadyException_message *smithy.Schema
 
 var ModelPerformanceConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -4294,7 +4300,8 @@ var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _ResponseBody = smithy.NewSchema(smithy.ShapeID{
@@ -4789,7 +4796,8 @@ var SearchType_SEMANTIC *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var _SessionArn = smithy.NewSchema(smithy.ShapeID{
@@ -5011,7 +5019,8 @@ var TextToSqlKnowledgeBaseConfiguration_knowledgeBaseArn *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var _TopK = smithy.NewSchema(smithy.ShapeID{
@@ -5124,7 +5133,8 @@ var _Uuid = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var VectorSearchBedrockRerankingConfiguration = smithy.NewSchema(smithy.ShapeID{

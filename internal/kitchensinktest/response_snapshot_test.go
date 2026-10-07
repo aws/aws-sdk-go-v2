@@ -154,7 +154,9 @@ func TestCheckResponseSnapshot_SubscribeEvents(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_Error_ItemNotFound(t *testing.T) {
-	want := &types.ItemNotFound{}
+	want := &types.ItemNotFound{
+		Message: ptr.String("__Message__"),
+	}
 	status, header, body, err := serdeRespReadSnapshot("ItemNotFound.error")
 	if errors.Is(err, fs.ErrNotExist) {
 		t.Skip("no response snapshot fixture")

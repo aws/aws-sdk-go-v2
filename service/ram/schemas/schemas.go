@@ -323,7 +323,8 @@ var _DateTime = smithy.NewSchema(smithy.ShapeID{
 var IdempotentParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "IdempotentParameterMismatchException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "IdempotentParameterMismatch",
 		StatusCode: 400})
 var IdempotentParameterMismatchException_message *smithy.Schema
@@ -336,7 +337,8 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InvalidClientTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "InvalidClientTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidClientToken",
 		StatusCode: 400})
 var InvalidClientTokenException_message *smithy.Schema
@@ -344,7 +346,8 @@ var InvalidClientTokenException_message *smithy.Schema
 var InvalidMaxResultsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "InvalidMaxResultsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidMaxResults",
 		StatusCode: 400})
 var InvalidMaxResultsException_message *smithy.Schema
@@ -352,7 +355,8 @@ var InvalidMaxResultsException_message *smithy.Schema
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidNextToken",
 		StatusCode: 400})
 var InvalidNextTokenException_message *smithy.Schema
@@ -360,7 +364,8 @@ var InvalidNextTokenException_message *smithy.Schema
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameter",
 		StatusCode: 400})
 var InvalidParameterException_message *smithy.Schema
@@ -368,7 +373,8 @@ var InvalidParameterException_message *smithy.Schema
 var InvalidPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "InvalidPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidPolicy",
 		StatusCode: 400})
 var InvalidPolicyException_message *smithy.Schema
@@ -376,7 +382,8 @@ var InvalidPolicyException_message *smithy.Schema
 var InvalidResourceTypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "InvalidResourceTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidResourceType.Unknown",
 		StatusCode: 400})
 var InvalidResourceTypeException_message *smithy.Schema
@@ -384,7 +391,8 @@ var InvalidResourceTypeException_message *smithy.Schema
 var InvalidStateTransitionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "InvalidStateTransitionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidStateTransitionException.Unknown",
 		StatusCode: 400})
 var InvalidStateTransitionException_message *smithy.Schema
@@ -392,7 +400,8 @@ var InvalidStateTransitionException_message *smithy.Schema
 var MalformedArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "MalformedArnException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidArn.Malformed",
 		StatusCode: 400})
 var MalformedArnException_message *smithy.Schema
@@ -400,7 +409,8 @@ var MalformedArnException_message *smithy.Schema
 var MalformedPolicyTemplateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "MalformedPolicyTemplateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "MalformedPolicyTemplateException",
 		StatusCode: 400})
 var MalformedPolicyTemplateException_message *smithy.Schema
@@ -413,7 +423,8 @@ var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 var MissingRequiredParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "MissingRequiredParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "MissingRequiredParameter",
 		StatusCode: 400})
 var MissingRequiredParameterException_message *smithy.Schema
@@ -421,7 +432,8 @@ var MissingRequiredParameterException_message *smithy.Schema
 var OperationNotPermittedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "OperationNotPermittedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "OperationNotPermitted",
 		StatusCode: 400})
 var OperationNotPermittedException_message *smithy.Schema
@@ -429,7 +441,8 @@ var OperationNotPermittedException_message *smithy.Schema
 var PermissionAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "PermissionAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409},
 	&smithytraits.AWSQueryError{ErrorCode: "PermissionAlreadyExistsException",
 		StatusCode: 409})
 var PermissionAlreadyExistsException_message *smithy.Schema
@@ -453,7 +466,8 @@ var PermissionFeatureSet_STANDARD *smithy.Schema
 var PermissionLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "PermissionLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "PermissionLimitExceededException",
 		StatusCode: 400})
 var PermissionLimitExceededException_message *smithy.Schema
@@ -496,7 +510,8 @@ var PermissionTypeFilter_CUSTOMER_MANAGED *smithy.Schema
 var PermissionVersionsLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "PermissionVersionsLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "PermissionVersionsLimitExceededException",
 		StatusCode: 400})
 var PermissionVersionsLimitExceededException_message *smithy.Schema
@@ -613,7 +628,8 @@ var _ResourceArnList_member *smithy.Schema
 var ResourceArnNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ResourceArnNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidResourceArn.NotFound",
 		StatusCode: 400})
 var ResourceArnNotFoundException_message *smithy.Schema
@@ -781,7 +797,8 @@ var ResourceShareInvitation_receiverArn *smithy.Schema
 var ResourceShareInvitationAlreadyAcceptedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ResourceShareInvitationAlreadyAcceptedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidResourceShareInvitationArn.AlreadyAccepted",
 		StatusCode: 400})
 var ResourceShareInvitationAlreadyAcceptedException_message *smithy.Schema
@@ -789,7 +806,8 @@ var ResourceShareInvitationAlreadyAcceptedException_message *smithy.Schema
 var ResourceShareInvitationAlreadyRejectedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ResourceShareInvitationAlreadyRejectedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidResourceShareInvitationArn.AlreadyRejected",
 		StatusCode: 400})
 var ResourceShareInvitationAlreadyRejectedException_message *smithy.Schema
@@ -803,7 +821,8 @@ var _ResourceShareInvitationArnList_member *smithy.Schema
 var ResourceShareInvitationArnNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ResourceShareInvitationArnNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidResourceShareInvitationArn.NotFound",
 		StatusCode: 400})
 var ResourceShareInvitationArnNotFoundException_message *smithy.Schema
@@ -811,7 +830,8 @@ var ResourceShareInvitationArnNotFoundException_message *smithy.Schema
 var ResourceShareInvitationExpiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ResourceShareInvitationExpiredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidResourceShareInvitationArn.Expired",
 		StatusCode: 400})
 var ResourceShareInvitationExpiredException_message *smithy.Schema
@@ -837,7 +857,8 @@ var ResourceShareInvitationStatus_EXPIRED *smithy.Schema
 var ResourceShareLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ResourceShareLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceShareLimitExceeded",
 		StatusCode: 400})
 var ResourceShareLimitExceededException_message *smithy.Schema
@@ -943,7 +964,8 @@ var ResourceStatus_PENDING *smithy.Schema
 var ServerInternalException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ServerInternalException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "InternalError",
 		StatusCode: 500})
 var ServerInternalException_message *smithy.Schema
@@ -967,7 +989,8 @@ var _ServiceNameAndResourceTypeList_member *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503},
 	&smithytraits.AWSQueryError{ErrorCode: "Unavailable",
 		StatusCode: 503})
 var ServiceUnavailableException_message *smithy.Schema
@@ -1019,7 +1042,8 @@ var _TagKeyList_member *smithy.Schema
 var TagLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "TagLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "TagLimitExceeded",
 		StatusCode: 400})
 var TagLimitExceededException_message *smithy.Schema
@@ -1033,7 +1057,8 @@ var _TagList_member *smithy.Schema
 var TagPolicyViolationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "TagPolicyViolationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "TagPolicyViolation",
 		StatusCode: 400})
 var TagPolicyViolationException_message *smithy.Schema
@@ -1052,7 +1077,8 @@ var _TagValueList_member *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "ThrottlingException",
 		StatusCode: 429})
 var ThrottlingException_message *smithy.Schema
@@ -1060,7 +1086,8 @@ var ThrottlingException_message *smithy.Schema
 var UnknownResourceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "UnknownResourceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidResourceShareArn.NotFound",
 		StatusCode: 400})
 var UnknownResourceException_message *smithy.Schema
@@ -1068,7 +1095,8 @@ var UnknownResourceException_message *smithy.Schema
 var UnmatchedPolicyPermissionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ram",
 	Name:      "UnmatchedPolicyPermissionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "UnmatchedPolicyPermissionException",
 		StatusCode: 400})
 var UnmatchedPolicyPermissionException_message *smithy.Schema

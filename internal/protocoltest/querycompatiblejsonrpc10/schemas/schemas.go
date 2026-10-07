@@ -23,14 +23,15 @@ var QueryCompatibleJsonRpc10 = smithy.NewServiceSchema(_QueryCompatibleJsonRpc10
 var CustomCodeError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.json10",
 	Name:      "CustomCodeError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.AWSQueryError{ErrorCode: "Customized",
-	StatusCode: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.AWSQueryError{ErrorCode: "Customized",
+		StatusCode: 402})
 var CustomCodeError_message *smithy.Schema
 
 var NoCustomCodeError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.json10",
 	Name:      "NoCustomCodeError",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoCustomCodeError_message *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid

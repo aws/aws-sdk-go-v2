@@ -53,7 +53,8 @@ var MediaStoreObject_20170901 = smithy.NewServiceSchema(_MediaStoreObject_201709
 var ContainerNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediastoredata",
 	Name:      "ContainerNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ContainerNotFoundException_Message *smithy.Schema
 
 var _ContentRangePattern = smithy.NewSchema(smithy.ShapeID{
@@ -79,7 +80,7 @@ var _ETag = smithy.NewSchema(smithy.ShapeID{
 var InternalServerError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediastoredata",
 	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServerError_Message *smithy.Schema
 
 var Item = smithy.NewSchema(smithy.ShapeID{
@@ -135,7 +136,8 @@ var _NonNegativeLong = smithy.NewSchema(smithy.ShapeID{
 var ObjectNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediastoredata",
 	Name:      "ObjectNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ObjectNotFoundException_Message *smithy.Schema
 
 var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
@@ -161,7 +163,8 @@ var _RangePattern = smithy.NewSchema(smithy.ShapeID{
 var RequestedRangeNotSatisfiableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediastoredata",
 	Name:      "RequestedRangeNotSatisfiableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 416})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 416})
 var RequestedRangeNotSatisfiableException_Message *smithy.Schema
 
 var _SHA256Hash = smithy.NewSchema(smithy.ShapeID{

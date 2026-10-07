@@ -489,7 +489,8 @@ var _AcceleratorTypeSet_member *smithy.Schema
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var AccessType = smithy.NewSchema(smithy.ShapeID{
@@ -610,7 +611,7 @@ var Attribute_targetId *smithy.Schema
 var AttributeLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "AttributeLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AttributeLimitExceededException_message *smithy.Schema
 
 var _Attributes = smithy.NewSchema(smithy.ShapeID{
@@ -694,7 +695,7 @@ var BaselineEbsBandwidthMbpsRequest_max *smithy.Schema
 var BlockedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "BlockedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BlockedException_message *smithy.Schema
 
 var _Boolean = smithy.NewSchema(smithy.ShapeID{
@@ -880,7 +881,7 @@ var CapacityReservationRequest_reservationPreference *smithy.Schema
 var ClientException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ClientException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ClientException_message *smithy.Schema
 
 var Cluster = smithy.NewSchema(smithy.ShapeID{
@@ -930,25 +931,25 @@ var ClusterConfiguration_managedStorageConfiguration *smithy.Schema
 var ClusterContainsCapacityProviderException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ClusterContainsCapacityProviderException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ClusterContainsCapacityProviderException_message *smithy.Schema
 
 var ClusterContainsContainerInstancesException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ClusterContainsContainerInstancesException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ClusterContainsContainerInstancesException_message *smithy.Schema
 
 var ClusterContainsServicesException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ClusterContainsServicesException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ClusterContainsServicesException_message *smithy.Schema
 
 var ClusterContainsTasksException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ClusterContainsTasksException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ClusterContainsTasksException_message *smithy.Schema
 
 var ClusterField = smithy.NewSchema(smithy.ShapeID{
@@ -974,7 +975,7 @@ var _ClusterFieldList_member *smithy.Schema
 var ClusterNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ClusterNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ClusterNotFoundException_message *smithy.Schema
 
 var _Clusters = smithy.NewSchema(smithy.ShapeID{
@@ -1036,7 +1037,7 @@ var _CompatibilityList_member *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ConflictException_resourceIds *smithy.Schema
 
 var ConflictException_message *smithy.Schema
@@ -1747,13 +1748,13 @@ var DaemonLinuxParameters_tmpfs *smithy.Schema
 var DaemonNotActiveException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "DaemonNotActiveException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DaemonNotActiveException_message *smithy.Schema
 
 var DaemonNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "DaemonNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DaemonNotFoundException_message *smithy.Schema
 
 var DaemonPidMode = smithy.NewSchema(smithy.ShapeID{
@@ -2961,7 +2962,7 @@ var _IntegerList_member *smithy.Schema
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidParameterException_message *smithy.Schema
 
 var IpcMode = smithy.NewSchema(smithy.ShapeID{
@@ -3005,7 +3006,7 @@ var LaunchType_MANAGED_INSTANCES *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var LinearConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -3539,7 +3540,7 @@ var _MetricResolutionSeconds = smithy.NewSchema(smithy.ShapeID{
 var MissingVersionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "MissingVersionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MissingVersionException_message *smithy.Schema
 
 var MonitoringConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -3567,7 +3568,7 @@ var _MountPointList_member *smithy.Schema
 var NamespaceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "NamespaceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NamespaceNotFoundException_message *smithy.Schema
 
 var NetworkBandwidthGbpsRequest = smithy.NewSchema(smithy.ShapeID{
@@ -3651,7 +3652,7 @@ var _NeuronDeviceIds_member *smithy.Schema
 var NoUpdateAvailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "NoUpdateAvailableException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoUpdateAvailableException_message *smithy.Schema
 
 var OSFamily = smithy.NewSchema(smithy.ShapeID{
@@ -3757,13 +3758,13 @@ var PlatformDeviceType_NEURON_DEVICE *smithy.Schema
 var PlatformTaskDefinitionIncompatibilityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "PlatformTaskDefinitionIncompatibilityException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PlatformTaskDefinitionIncompatibilityException_message *smithy.Schema
 
 var PlatformUnknownException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "PlatformUnknownException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PlatformUnknownException_message *smithy.Schema
 
 var PortMapping = smithy.NewSchema(smithy.ShapeID{
@@ -3894,7 +3895,7 @@ var _ResourceIds_member *smithy.Schema
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceInUseException_message *smithy.Schema
 
 var ResourceManagementType = smithy.NewSchema(smithy.ShapeID{
@@ -3908,7 +3909,7 @@ var ResourceManagementType_ECS *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceRequirement = smithy.NewSchema(smithy.ShapeID{
@@ -4029,7 +4030,7 @@ var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
 var ServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ServerException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var ServerException_message *smithy.Schema
 
 var Service = smithy.NewSchema(smithy.ShapeID{
@@ -4359,7 +4360,7 @@ var ServiceDeploymentLifecycleStage_CLEAN_UP *smithy.Schema
 var ServiceDeploymentNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ServiceDeploymentNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ServiceDeploymentNotFoundException_message *smithy.Schema
 
 var ServiceDeploymentRollbackMonitorsStatus = smithy.NewSchema(smithy.ShapeID{
@@ -4471,13 +4472,13 @@ var ServiceManagedEBSVolumeConfiguration_filesystemType *smithy.Schema
 var ServiceNotActiveException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ServiceNotActiveException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ServiceNotActiveException_message *smithy.Schema
 
 var ServiceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ServiceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ServiceNotFoundException_message *smithy.Schema
 
 var _ServiceRegistries = smithy.NewSchema(smithy.ShapeID{
@@ -4794,13 +4795,13 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var TargetNotConnectedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "TargetNotConnectedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TargetNotConnectedException_message *smithy.Schema
 
 var TargetNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "TargetNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TargetNotFoundException_message *smithy.Schema
 
 var TargetType = smithy.NewSchema(smithy.ShapeID{
@@ -5160,7 +5161,7 @@ var _TaskSetFieldList_member *smithy.Schema
 var TaskSetNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "TaskSetNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TaskSetNotFoundException_message *smithy.Schema
 
 var _TaskSets = smithy.NewSchema(smithy.ShapeID{
@@ -5322,7 +5323,7 @@ var UlimitName_STACK *smithy.Schema
 var UnsupportedFeatureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "UnsupportedFeatureException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedFeatureException_message *smithy.Schema
 
 var UpdatedExpressGatewayService = smithy.NewSchema(smithy.ShapeID{
@@ -5346,7 +5347,7 @@ var UpdatedExpressGatewayService_updatedAt *smithy.Schema
 var UpdateInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "UpdateInProgressException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UpdateInProgressException_message *smithy.Schema
 
 var UpdateManagedInstancesProviderConfiguration = smithy.NewSchema(smithy.ShapeID{

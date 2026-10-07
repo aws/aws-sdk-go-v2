@@ -44,7 +44,8 @@ var Item = smithy.NewSchema(smithy.ShapeID{
 var ItemNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
 	Name:      "ItemNotFound",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var ItemNotFound_message *smithy.Schema
 
 var MessageEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
@@ -93,6 +94,8 @@ func init() {
 	MessageEvent_body = MessageEvent.AddMember("body", smithyprelude.String)
 
 	Events_message = Events.AddMember("message", MessageEvent)
+
+	ItemNotFound_message = ItemNotFound.AddMember("message", smithyprelude.String)
 
 	GetItemInput_item = GetItemInput.AddMember("item", Item)
 

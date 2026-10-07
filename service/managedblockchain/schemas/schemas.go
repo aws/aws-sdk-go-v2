@@ -207,7 +207,8 @@ var TaigaWebService = smithy.NewServiceSchema(_TaigaWebService, "2018-09-24")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.managedblockchain",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var Accessor = smithy.NewSchema(smithy.ShapeID{
@@ -356,7 +357,8 @@ var _FrameworkVersionString = smithy.NewSchema(smithy.ShapeID{
 var IllegalActionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.managedblockchain",
 	Name:      "IllegalActionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var IllegalActionException_Message *smithy.Schema
 
 var _InputTagMap = smithy.NewSchema(smithy.ShapeID{
@@ -375,12 +377,14 @@ var _InstanceTypeString = smithy.NewSchema(smithy.ShapeID{
 var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.managedblockchain",
 	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.managedblockchain",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidRequestException_Message *smithy.Schema
 
 var Invitation = smithy.NewSchema(smithy.ShapeID{
@@ -957,7 +961,8 @@ var _RemoveActionList_member *smithy.Schema
 var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.managedblockchain",
 	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceAlreadyExistsException_Message *smithy.Schema
 
 var _ResourceIdString = smithy.NewSchema(smithy.ShapeID{
@@ -968,13 +973,15 @@ var _ResourceIdString = smithy.NewSchema(smithy.ShapeID{
 var ResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.managedblockchain",
 	Name:      "ResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ResourceLimitExceededException_Message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.managedblockchain",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_ResourceName *smithy.Schema
@@ -982,7 +989,8 @@ var ResourceNotFoundException_ResourceName *smithy.Schema
 var ResourceNotReadyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.managedblockchain",
 	Name:      "ResourceNotReadyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceNotReadyException_Message *smithy.Schema
 
 var StateDBType = smithy.NewSchema(smithy.ShapeID{
@@ -1030,7 +1038,8 @@ var _ThresholdPercentageInt = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.managedblockchain",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 
 var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.managedblockchain",
@@ -1040,7 +1049,8 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.managedblockchain",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_Message *smithy.Schema
 
 var TooManyTagsException_ResourceName *smithy.Schema

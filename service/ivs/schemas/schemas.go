@@ -305,7 +305,8 @@ var AmazonInteractiveVideoService = smithy.NewServiceSchema(_AmazonInteractiveVi
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_accessControlAllowOrigin *smithy.Schema
 
 var AccessDeniedException_accessControlExposeHeaders *smithy.Schema
@@ -524,7 +525,8 @@ var _ChannelName = smithy.NewSchema(smithy.ShapeID{
 var ChannelNotBroadcasting = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "ChannelNotBroadcasting",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ChannelNotBroadcasting_accessControlAllowOrigin *smithy.Schema
 
 var ChannelNotBroadcasting_accessControlExposeHeaders *smithy.Schema
@@ -600,7 +602,8 @@ var ChannelType_AdvancedHDChannelType *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_accessControlAllowOrigin *smithy.Schema
 
 var ConflictException_accessControlExposeHeaders *smithy.Schema
@@ -674,7 +677,8 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_accessControlAllowOrigin *smithy.Schema
 
 var InternalServerException_accessControlExposeHeaders *smithy.Schema
@@ -791,7 +795,8 @@ var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
 var PendingVerification = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "PendingVerification",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var PendingVerification_accessControlAllowOrigin *smithy.Schema
 
 var PendingVerification_accessControlExposeHeaders *smithy.Schema
@@ -1050,7 +1055,8 @@ var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_accessControlAllowOrigin *smithy.Schema
 
 var ResourceNotFoundException_accessControlExposeHeaders *smithy.Schema
@@ -1083,7 +1089,8 @@ var S3DestinationConfiguration_bucketName *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_accessControlAllowOrigin *smithy.Schema
 
 var ServiceQuotaExceededException_accessControlExposeHeaders *smithy.Schema
@@ -1105,7 +1112,8 @@ var ServiceQuotaExceededException_exceptionMessage *smithy.Schema
 var ServiceUnavailable = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "ServiceUnavailable",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailable_accessControlAllowOrigin *smithy.Schema
 
 var ServiceUnavailable_accessControlExposeHeaders *smithy.Schema
@@ -1322,7 +1330,8 @@ var StreamSummary_startTime *smithy.Schema
 var StreamUnavailable = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "StreamUnavailable",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var StreamUnavailable_accessControlAllowOrigin *smithy.Schema
 
 var StreamUnavailable_accessControlExposeHeaders *smithy.Schema
@@ -1383,7 +1392,8 @@ var _TargetIntervalSeconds = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_accessControlAllowOrigin *smithy.Schema
 
 var ThrottlingException_accessControlExposeHeaders *smithy.Schema
@@ -1453,7 +1463,8 @@ var TranscodePreset_ConstrainedBandwidthTranscodePreset *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_accessControlAllowOrigin *smithy.Schema
 
 var ValidationException_accessControlExposeHeaders *smithy.Schema

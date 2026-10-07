@@ -891,7 +891,8 @@ var DemodulationConfig_unvalidatedJSON *smithy.Schema
 var DependencyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.groundstation",
 	Name:      "DependencyException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 531})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 531})
 var DependencyException_message *smithy.Schema
 
 var DependencyException_parameterName *smithy.Schema
@@ -1353,7 +1354,8 @@ var IntegerRange_maximum *smithy.Schema
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.groundstation",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 431})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 431})
 var InvalidParameterException_message *smithy.Schema
 
 var InvalidParameterException_parameterName *smithy.Schema
@@ -1557,13 +1559,15 @@ var _ReservationTypeFilterList_member *smithy.Schema
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.groundstation",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceInUseException_message *smithy.Schema
 
 var ResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.groundstation",
 	Name:      "ResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ResourceLimitExceededException_message *smithy.Schema
 
 var ResourceLimitExceededException_parameterName *smithy.Schema
@@ -1571,7 +1575,8 @@ var ResourceLimitExceededException_parameterName *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.groundstation",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 434})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 434})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _RoleArn = smithy.NewSchema(smithy.ShapeID{
@@ -1676,7 +1681,8 @@ var _SecurityGroupIdList_member *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.groundstation",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceQuotaExceededException_parameterName *smithy.Schema

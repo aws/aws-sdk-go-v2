@@ -75,7 +75,8 @@ var _CoreTimestamp = smithy.NewSchema(smithy.ShapeID{
 var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterValueException_Type *smithy.Schema
 
 var InvalidParameterValueException_message *smithy.Schema
@@ -142,7 +143,8 @@ var NetworkConnectorLastUpdateStatusReasonCode_SubnetOutOfIPAddresses *smithy.Sc
 var NetworkConnectorLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "NetworkConnectorLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var NetworkConnectorLimitExceededException_Type *smithy.Schema
 
 var NetworkConnectorLimitExceededException_message *smithy.Schema
@@ -287,7 +289,8 @@ var NetworkProtocol_DualStack *smithy.Schema
 var ResourceConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "ResourceConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceConflictException_Type *smithy.Schema
 
 var ResourceConflictException_message *smithy.Schema
@@ -295,7 +298,8 @@ var ResourceConflictException_message *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Type *smithy.Schema
 
 var ResourceNotFoundException_Message *smithy.Schema
@@ -303,7 +307,8 @@ var ResourceNotFoundException_Message *smithy.Schema
 var ServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "ServiceException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ServiceException_Type *smithy.Schema
 
 var ServiceException_Message *smithy.Schema
@@ -332,7 +337,8 @@ var ThrottleReason_ConcurrentSnapshotCreateLimitExceeded *smithy.Schema
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_retryAfterSeconds *smithy.Schema
 
 var TooManyRequestsException_Type *smithy.Schema

@@ -1152,7 +1152,8 @@ var Lightsail_20161128 = smithy.NewServiceSchema(_Lightsail_20161128, "2016-11-2
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_code *smithy.Schema
 
 var AccessDeniedException_docs *smithy.Schema
@@ -1248,7 +1249,8 @@ var AccountLevelBpaSyncStatus_Defaulted *smithy.Schema
 var AccountSetupInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "AccountSetupInProgressException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 428})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 428})
 var AccountSetupInProgressException_code *smithy.Schema
 
 var AccountSetupInProgressException_docs *smithy.Schema
@@ -3337,7 +3339,8 @@ var _InUseResourceCount = smithy.NewSchema(smithy.ShapeID{
 var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidInputException_code *smithy.Schema
 
 var InvalidInputException_docs *smithy.Schema
@@ -4061,7 +4064,8 @@ var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_code *smithy.Schema
 
 var NotFoundException_docs *smithy.Schema
@@ -4107,7 +4111,8 @@ var Operation_errorDetails *smithy.Schema
 var OperationFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "OperationFailureException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var OperationFailureException_code *smithy.Schema
 
 var OperationFailureException_docs *smithy.Schema
@@ -4612,7 +4617,8 @@ var RegionName_SA_EAST_1 *smithy.Schema
 var RegionSetupInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "RegionSetupInProgressException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 428})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 428})
 var RegionSetupInProgressException_code *smithy.Schema
 
 var RegionSetupInProgressException_docs *smithy.Schema
@@ -5050,7 +5056,8 @@ var _SerialNumber = smithy.NewSchema(smithy.ShapeID{
 var ServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "ServiceException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ServiceException_code *smithy.Schema
 
 var ServiceException_docs *smithy.Schema
@@ -5334,7 +5341,8 @@ var TreatMissingData_Missing *smithy.Schema
 var UnauthenticatedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "UnauthenticatedException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var UnauthenticatedException_code *smithy.Schema
 
 var UnauthenticatedException_docs *smithy.Schema

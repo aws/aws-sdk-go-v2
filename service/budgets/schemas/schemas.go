@@ -148,7 +148,8 @@ var AWSBudgetServiceGateway = smithy.NewServiceSchema(_AWSBudgetServiceGateway, 
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var _AccountId = smithy.NewSchema(smithy.ShapeID{
@@ -311,7 +312,8 @@ var _BillingViewArn = smithy.NewSchema(smithy.ShapeID{
 var BillingViewHealthStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
 	Name:      "BillingViewHealthStatusException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BillingViewHealthStatusException_Message *smithy.Schema
 
 var Budget = smithy.NewSchema(smithy.ShapeID{
@@ -497,7 +499,8 @@ var CostTypes_UseAmortized *smithy.Schema
 var CreationLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
 	Name:      "CreationLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 405})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 405})
 var CreationLimitExceededException_Message *smithy.Schema
 
 var Definition = smithy.NewSchema(smithy.ShapeID{
@@ -594,7 +597,8 @@ var _DimensionValues_member *smithy.Schema
 var DuplicateRecordException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
 	Name:      "DuplicateRecordException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var DuplicateRecordException_Message *smithy.Schema
 
 var _errorMessage = smithy.NewSchema(smithy.ShapeID{
@@ -631,7 +635,8 @@ var ExecutionType_ResetBudgetAction *smithy.Schema
 var ExpiredNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
 	Name:      "ExpiredNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ExpiredNextTokenException_Message *smithy.Schema
 
 var Expression = smithy.NewSchema(smithy.ShapeID{
@@ -751,19 +756,22 @@ var _InstanceIds_member *smithy.Schema
 var InternalErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
 	Name:      "InternalErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalErrorException_Message *smithy.Schema
 
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidNextTokenException_Message *smithy.Schema
 
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterException_Message *smithy.Schema
 
 var MatchOption = smithy.NewSchema(smithy.ShapeID{
@@ -836,7 +844,8 @@ var _Metrics_member *smithy.Schema
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_Message *smithy.Schema
 
 var Notification = smithy.NewSchema(smithy.ShapeID{
@@ -930,7 +939,8 @@ var _Region = smithy.NewSchema(smithy.ShapeID{
 var ResourceLockedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
 	Name:      "ResourceLockedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 423})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 423})
 var ResourceLockedException_Message *smithy.Schema
 
 var ResourceTag = smithy.NewSchema(smithy.ShapeID{
@@ -990,7 +1000,8 @@ var ScpActionDefinition_TargetIds *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var Spend = smithy.NewSchema(smithy.ShapeID{
@@ -1075,7 +1086,8 @@ var ThresholdType_ABSOLUTE_VALUE *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ThrottlingException_Message *smithy.Schema
 
 var TimePeriod = smithy.NewSchema(smithy.ShapeID{

@@ -2778,7 +2778,8 @@ var _ConfidenceThreshold = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var _ContextTimeToLiveInSeconds = smithy.NewSchema(smithy.ShapeID{
@@ -3899,7 +3900,8 @@ var _IntentSummaryList_member *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var InvokedIntentSample = smithy.NewSchema(smithy.ShapeID{
@@ -4293,7 +4295,8 @@ var PostFulfillmentStatusSpecification_timeoutConditional *smithy.Schema
 var PreconditionFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "PreconditionFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 412})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 412})
 var PreconditionFailedException_message *smithy.Schema
 
 var _PresignedS3Url = smithy.NewSchema(smithy.ShapeID{
@@ -4495,7 +4498,8 @@ var _ResourceCount = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResponseSpecification = smithy.NewSchema(smithy.ShapeID{
@@ -4657,7 +4661,8 @@ var _ServicePrincipal = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var SessionDataSortBy = smithy.NewSchema(smithy.ShapeID{
@@ -5701,7 +5706,8 @@ var _TextLogSettingsList_member *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_retryAfterSeconds *smithy.Schema
 
 var ThrottlingException_message *smithy.Schema
@@ -6011,7 +6017,8 @@ var _UUID = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lexmodelsv2",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var _Value = smithy.NewSchema(smithy.ShapeID{

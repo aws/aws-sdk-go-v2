@@ -459,7 +459,7 @@ var _BatchedOperationLayerDigestList_member *smithy.Schema
 var BlockedByOrganizationPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "BlockedByOrganizationPolicyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BlockedByOrganizationPolicyException_message *smithy.Schema
 
 var _CreationTimestamp = smithy.NewSchema(smithy.ShapeID{
@@ -539,7 +539,7 @@ var DescribeImagesFilter_imageStatus *smithy.Schema
 var EmptyUploadException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "EmptyUploadException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var EmptyUploadException_message *smithy.Schema
 
 var EncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -630,13 +630,13 @@ var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
 var ExclusionAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ExclusionAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ExclusionAlreadyExistsException_message *smithy.Schema
 
 var ExclusionNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ExclusionNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ExclusionNotFoundException_message *smithy.Schema
 
 var _ExpirationTimestamp = smithy.NewSchema(smithy.ShapeID{
@@ -744,13 +744,13 @@ var ImageActionType_TRANSITION *smithy.Schema
 var ImageAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ImageAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ImageAlreadyExistsException_message *smithy.Schema
 
 var ImageArchivedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ImageArchivedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ImageArchivedException_message *smithy.Schema
 
 var _ImageCount = smithy.NewSchema(smithy.ShapeID{
@@ -806,7 +806,7 @@ var _ImageDigest = smithy.NewSchema(smithy.ShapeID{
 var ImageDigestDoesNotMatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ImageDigestDoesNotMatchException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ImageDigestDoesNotMatchException_message *smithy.Schema
 
 var ImageFailure = smithy.NewSchema(smithy.ShapeID{
@@ -884,7 +884,7 @@ var _ImageManifest = smithy.NewSchema(smithy.ShapeID{
 var ImageNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ImageNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ImageNotFoundException_message *smithy.Schema
 
 var ImageReferrer = smithy.NewSchema(smithy.ShapeID{
@@ -1033,7 +1033,7 @@ var ImageStatusFilter_ANY *smithy.Schema
 var ImageStorageClassUpdateNotSupportedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ImageStorageClassUpdateNotSupportedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ImageStorageClassUpdateNotSupportedException_message *smithy.Schema
 
 var _ImageTag = smithy.NewSchema(smithy.ShapeID{
@@ -1044,7 +1044,7 @@ var _ImageTag = smithy.NewSchema(smithy.ShapeID{
 var ImageTagAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ImageTagAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ImageTagAlreadyExistsException_message *smithy.Schema
 
 var _ImageTagList = smithy.NewSchema(smithy.ShapeID{
@@ -1104,13 +1104,13 @@ var _InUseCount = smithy.NewSchema(smithy.ShapeID{
 var InvalidLayerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "InvalidLayerException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidLayerException_message *smithy.Schema
 
 var InvalidLayerPartException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "InvalidLayerPartException",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"})
 var InvalidLayerPartException_registryId *smithy.Schema
 
 var InvalidLayerPartException_repositoryName *smithy.Schema
@@ -1124,13 +1124,13 @@ var InvalidLayerPartException_message *smithy.Schema
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidParameterException_message *smithy.Schema
 
 var InvalidTagParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "InvalidTagParameterException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTagParameterException_message *smithy.Schema
 
 var _IsPTCRuleValid = smithy.NewSchema(smithy.ShapeID{
@@ -1146,7 +1146,7 @@ var _KmsError = smithy.NewSchema(smithy.ShapeID{
 var KmsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "KmsException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var KmsException_message *smithy.Schema
 
 var KmsException_kmsError *smithy.Schema
@@ -1186,7 +1186,7 @@ var Layer_mediaType *smithy.Schema
 var LayerAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "LayerAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LayerAlreadyExistsException_message *smithy.Schema
 
 var LayerAvailability = smithy.NewSchema(smithy.ShapeID{
@@ -1242,7 +1242,7 @@ var _LayerFailureReason = smithy.NewSchema(smithy.ShapeID{
 var LayerInaccessibleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "LayerInaccessibleException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LayerInaccessibleException_message *smithy.Schema
 
 var _LayerList = smithy.NewSchema(smithy.ShapeID{
@@ -1259,7 +1259,7 @@ var _LayerPartBlob = smithy.NewSchema(smithy.ShapeID{
 var LayerPartTooSmallException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "LayerPartTooSmallException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LayerPartTooSmallException_message *smithy.Schema
 
 var _LayerSizeInBytes = smithy.NewSchema(smithy.ShapeID{
@@ -1270,13 +1270,13 @@ var _LayerSizeInBytes = smithy.NewSchema(smithy.ShapeID{
 var LayersNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "LayersNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LayersNotFoundException_message *smithy.Schema
 
 var LifecyclePolicyNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "LifecyclePolicyNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LifecyclePolicyNotFoundException_message *smithy.Schema
 
 var LifecyclePolicyPreviewFilter = smithy.NewSchema(smithy.ShapeID{
@@ -1288,13 +1288,13 @@ var LifecyclePolicyPreviewFilter_tagStatus *smithy.Schema
 var LifecyclePolicyPreviewInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "LifecyclePolicyPreviewInProgressException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LifecyclePolicyPreviewInProgressException_message *smithy.Schema
 
 var LifecyclePolicyPreviewNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "LifecyclePolicyPreviewNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LifecyclePolicyPreviewNotFoundException_message *smithy.Schema
 
 var LifecyclePolicyPreviewResult = smithy.NewSchema(smithy.ShapeID{
@@ -1384,7 +1384,7 @@ var _LifecyclePreviewMaxResults = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var ListImageReferrersFilter = smithy.NewSchema(smithy.ShapeID{
@@ -1519,7 +1519,7 @@ var PullThroughCacheRule_updatedAt *smithy.Schema
 var PullThroughCacheRuleAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "PullThroughCacheRuleAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PullThroughCacheRuleAlreadyExistsException_message *smithy.Schema
 
 var _PullThroughCacheRuleList = smithy.NewSchema(smithy.ShapeID{
@@ -1531,7 +1531,7 @@ var _PullThroughCacheRuleList_member *smithy.Schema
 var PullThroughCacheRuleNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "PullThroughCacheRuleNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PullThroughCacheRuleNotFoundException_message *smithy.Schema
 
 var _PullThroughCacheRuleRepositoryPrefix = smithy.NewSchema(smithy.ShapeID{
@@ -1598,7 +1598,7 @@ var _RecordedPullTimestamp = smithy.NewSchema(smithy.ShapeID{
 var ReferencedImagesNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ReferencedImagesNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ReferencedImagesNotFoundException_message *smithy.Schema
 
 var _ReferenceUrlsList = smithy.NewSchema(smithy.ShapeID{
@@ -1620,7 +1620,7 @@ var _RegistryId = smithy.NewSchema(smithy.ShapeID{
 var RegistryPolicyNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "RegistryPolicyNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RegistryPolicyNotFoundException_message *smithy.Schema
 
 var _RegistryPolicyText = smithy.NewSchema(smithy.ShapeID{
@@ -1746,7 +1746,7 @@ var Repository_encryptionConfiguration *smithy.Schema
 var RepositoryAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "RepositoryAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RepositoryAlreadyExistsException_message *smithy.Schema
 
 var RepositoryCreationTemplate = smithy.NewSchema(smithy.ShapeID{
@@ -1828,19 +1828,19 @@ var _RepositoryNameList_member *smithy.Schema
 var RepositoryNotEmptyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "RepositoryNotEmptyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RepositoryNotEmptyException_message *smithy.Schema
 
 var RepositoryNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "RepositoryNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RepositoryNotFoundException_message *smithy.Schema
 
 var RepositoryPolicyNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "RepositoryPolicyNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RepositoryPolicyNotFoundException_message *smithy.Schema
 
 var _RepositoryPolicyText = smithy.NewSchema(smithy.ShapeID{
@@ -1973,7 +1973,7 @@ var _ScanningRepositoryFilterValue = smithy.NewSchema(smithy.ShapeID{
 var ScanNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ScanNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ScanNotFoundException_message *smithy.Schema
 
 var _ScanOnPushFlag = smithy.NewSchema(smithy.ShapeID{
@@ -2042,13 +2042,13 @@ var _ScoringVector = smithy.NewSchema(smithy.ShapeID{
 var SecretNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "SecretNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SecretNotFoundException_message *smithy.Schema
 
 var ServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ServerException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var ServerException_message *smithy.Schema
 
 var _Severity = smithy.NewSchema(smithy.ShapeID{
@@ -2070,7 +2070,7 @@ var SigningConfiguration_rules *smithy.Schema
 var SigningConfigurationNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "SigningConfigurationNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SigningConfigurationNotFoundException_message *smithy.Schema
 
 var _SigningProfileArn = smithy.NewSchema(smithy.ShapeID{
@@ -2222,13 +2222,13 @@ var TargetStorageClass_ARCHIVE *smithy.Schema
 var TemplateAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "TemplateAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TemplateAlreadyExistsException_message *smithy.Schema
 
 var TemplateNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "TemplateNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TemplateNotFoundException_message *smithy.Schema
 
 var _Title = smithy.NewSchema(smithy.ShapeID{
@@ -2239,7 +2239,7 @@ var _Title = smithy.NewSchema(smithy.ShapeID{
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TooManyTagsException_message *smithy.Schema
 
 var TransitioningImageTotalCount = smithy.NewSchema(smithy.ShapeID{
@@ -2264,43 +2264,43 @@ var _Type = smithy.NewSchema(smithy.ShapeID{
 var UnableToAccessSecretException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "UnableToAccessSecretException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnableToAccessSecretException_message *smithy.Schema
 
 var UnableToDecryptSecretValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "UnableToDecryptSecretValueException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnableToDecryptSecretValueException_message *smithy.Schema
 
 var UnableToGetUpstreamImageException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "UnableToGetUpstreamImageException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnableToGetUpstreamImageException_message *smithy.Schema
 
 var UnableToGetUpstreamLayerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "UnableToGetUpstreamLayerException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnableToGetUpstreamLayerException_message *smithy.Schema
 
 var UnableToListUpstreamImageReferrersException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "UnableToListUpstreamImageReferrersException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnableToListUpstreamImageReferrersException_message *smithy.Schema
 
 var UnsupportedImageTypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "UnsupportedImageTypeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedImageTypeException_message *smithy.Schema
 
 var UnsupportedUpstreamRegistryException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "UnsupportedUpstreamRegistryException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedUpstreamRegistryException_message *smithy.Schema
 
 var _UpdatedTimestamp = smithy.NewSchema(smithy.ShapeID{
@@ -2316,7 +2316,7 @@ var _UploadId = smithy.NewSchema(smithy.ShapeID{
 var UploadNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "UploadNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UploadNotFoundException_message *smithy.Schema
 
 var UpstreamRegistry = smithy.NewSchema(smithy.ShapeID{
@@ -2349,7 +2349,8 @@ var _Url = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var _Version = smithy.NewSchema(smithy.ShapeID{

@@ -902,7 +902,8 @@ var AddEgressGatewayBridgeRequest_MaxBitrate *smithy.Schema
 var AddFlowOutputs420Exception = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "AddFlowOutputs420Exception",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 420})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 420})
 var AddFlowOutputs420Exception_Message *smithy.Schema
 
 var AddIngressGatewayBridgeRequest = smithy.NewSchema(smithy.ShapeID{
@@ -1013,7 +1014,8 @@ var AutomaticEncryptionKeyConfiguration = smithy.NewSchema(smithy.ShapeID{
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_Message *smithy.Schema
 
 var BatchGetRouterInputError = smithy.NewSchema(smithy.ShapeID{
@@ -1241,7 +1243,8 @@ var Colorimetry_XYZ *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConnectionStatus = smithy.NewSchema(smithy.ShapeID{
@@ -1273,19 +1276,22 @@ var ContentQualityAnalysisState_DISABLED *smithy.Schema
 var CreateBridge420Exception = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "CreateBridge420Exception",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 420})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 420})
 var CreateBridge420Exception_Message *smithy.Schema
 
 var CreateFlow420Exception = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "CreateFlow420Exception",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 420})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 420})
 var CreateFlow420Exception_Message *smithy.Schema
 
 var CreateGateway420Exception = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "CreateGateway420Exception",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 420})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 420})
 var CreateGateway420Exception_Message *smithy.Schema
 
 var Day = smithy.NewSchema(smithy.ShapeID{
@@ -1673,7 +1679,8 @@ var FmtpRequest_Tcs *smithy.Schema
 var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var ForbiddenException_Message *smithy.Schema
 
 var ForwardErrorCorrectionState = smithy.NewSchema(smithy.ShapeID{
@@ -1807,7 +1814,8 @@ var GrantEntitlementRequest_EntitlementTags *smithy.Schema
 var GrantFlowEntitlements420Exception = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "GrantFlowEntitlements420Exception",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 420})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 420})
 var GrantFlowEntitlements420Exception_Message *smithy.Schema
 
 var IngressGatewayBridge = smithy.NewSchema(smithy.ShapeID{
@@ -1869,7 +1877,8 @@ var InterfaceRequest_Name *smithy.Schema
 var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerErrorException_Message *smithy.Schema
 
 var KeyType = smithy.NewSchema(smithy.ShapeID{
@@ -2504,7 +2513,8 @@ var NetworkInterfaceType_efa *smithy.Schema
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_Message *smithy.Schema
 
 var Offering = smithy.NewSchema(smithy.ShapeID{
@@ -2906,7 +2916,8 @@ var RouterInputProtocolConfiguration_Rtp *smithy.Schema
 var RouterInputServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterInputServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 420})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 420})
 var RouterInputServiceQuotaExceededException_Message *smithy.Schema
 
 var RouterInputSourceMetadataDetails = smithy.NewSchema(smithy.ShapeID{
@@ -3095,7 +3106,8 @@ var _RouterNetworkInterfaceList_member *smithy.Schema
 var RouterNetworkInterfaceServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterNetworkInterfaceServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 420})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 420})
 var RouterNetworkInterfaceServiceQuotaExceededException_Message *smithy.Schema
 
 var RouterNetworkInterfaceState = smithy.NewSchema(smithy.ShapeID{
@@ -3284,7 +3296,8 @@ var RouterOutputRoutedState_UNROUTED *smithy.Schema
 var RouterOutputServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterOutputServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 420})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 420})
 var RouterOutputServiceQuotaExceededException_Message *smithy.Schema
 
 var RouterOutputState = smithy.NewSchema(smithy.ShapeID{
@@ -3425,7 +3438,8 @@ var _SecurityGroupIdList_member *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_Message *smithy.Schema
 
 var SetGatewayBridgeSourceRequest = smithy.NewSchema(smithy.ShapeID{
@@ -3749,7 +3763,8 @@ var TlsEncryptionType_PUBLIC *smithy.Schema
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_Message *smithy.Schema
 
 var Transport = smithy.NewSchema(smithy.ShapeID{

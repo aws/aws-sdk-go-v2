@@ -662,7 +662,8 @@ var _CompositeAlarms_member *smithy.Schema
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentModificationException",
 		StatusCode: 429})
 var ConcurrentModificationException_Message *smithy.Schema
@@ -670,7 +671,8 @@ var ConcurrentModificationException_Message *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var _ContributorAttributes = smithy.NewSchema(smithy.ShapeID{
@@ -728,7 +730,8 @@ var _DashboardErrorMessage = smithy.NewSchema(smithy.ShapeID{
 var DashboardInvalidInputError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "DashboardInvalidInputError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameterInput",
 		StatusCode: 400})
 var DashboardInvalidInputError_message *smithy.Schema
@@ -754,7 +757,8 @@ var _DashboardNames_member *smithy.Schema
 var DashboardNotFoundError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "DashboardNotFoundError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
 		StatusCode: 404})
 var DashboardNotFoundError_message *smithy.Schema
@@ -1258,7 +1262,8 @@ var _InsightRuleUnboundLong = smithy.NewSchema(smithy.ShapeID{
 var InternalServiceFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "InternalServiceFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "InternalServiceError",
 		StatusCode: 500})
 var InternalServiceFault_Message *smithy.Schema
@@ -1266,7 +1271,8 @@ var InternalServiceFault_Message *smithy.Schema
 var InvalidFormatFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "InvalidFormatFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidFormat",
 		StatusCode: 400})
 var InvalidFormatFault_message *smithy.Schema
@@ -1274,7 +1280,8 @@ var InvalidFormatFault_message *smithy.Schema
 var InvalidNextToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "InvalidNextToken",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidNextToken",
 		StatusCode: 400})
 var InvalidNextToken_message *smithy.Schema
@@ -1282,7 +1289,8 @@ var InvalidNextToken_message *smithy.Schema
 var InvalidParameterCombinationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "InvalidParameterCombinationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameterCombination",
 		StatusCode: 400})
 var InvalidParameterCombinationException_message *smithy.Schema
@@ -1290,7 +1298,8 @@ var InvalidParameterCombinationException_message *smithy.Schema
 var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameterValue",
 		StatusCode: 400})
 var InvalidParameterValueException_message *smithy.Schema
@@ -1298,7 +1307,7 @@ var InvalidParameterValueException_message *smithy.Schema
 var KmsAccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "KmsAccessDeniedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KmsAccessDeniedException_Message *smithy.Schema
 
 var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
@@ -1309,13 +1318,13 @@ var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
 var KmsKeyDisabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "KmsKeyDisabledException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KmsKeyDisabledException_Message *smithy.Schema
 
 var KmsKeyNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "KmsKeyNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KmsKeyNotFoundException_Message *smithy.Schema
 
 var LabelOptions = smithy.NewSchema(smithy.ShapeID{
@@ -1332,7 +1341,8 @@ var _LastModified = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "LimitExceededException",
 		StatusCode: 400})
 var LimitExceededException_Message *smithy.Schema
@@ -1340,7 +1350,8 @@ var LimitExceededException_Message *smithy.Schema
 var LimitExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "LimitExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "LimitExceeded",
 		StatusCode: 400})
 var LimitExceededFault_message *smithy.Schema
@@ -1829,7 +1840,8 @@ var _MetricWidgetImage = smithy.NewSchema(smithy.ShapeID{
 var MissingRequiredParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "MissingRequiredParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "MissingParameter",
 		StatusCode: 400})
 var MissingRequiredParameterException_message *smithy.Schema
@@ -1984,7 +1996,8 @@ var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceConflict = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "ResourceConflict",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceConflict",
 		StatusCode: 409})
 var ResourceConflict_message *smithy.Schema
@@ -2032,7 +2045,8 @@ var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "ResourceNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
 		StatusCode: 404})
 var ResourceNotFound_message *smithy.Schema
@@ -2040,7 +2054,8 @@ var ResourceNotFound_message *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
 		StatusCode: 404})
 var ResourceNotFoundException_ResourceType *smithy.Schema
@@ -2356,7 +2371,8 @@ var _TreatMissingData = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ValidationError",
 		StatusCode: 400})
 var ValidationException_message *smithy.Schema

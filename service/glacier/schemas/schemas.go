@@ -480,7 +480,8 @@ var InputSerialization_csv *smithy.Schema
 var InsufficientCapacityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glacier",
 	Name:      "InsufficientCapacityException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InsufficientCapacityException_type *smithy.Schema
 
 var InsufficientCapacityException_code *smithy.Schema
@@ -490,7 +491,8 @@ var InsufficientCapacityException_message *smithy.Schema
 var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glacier",
 	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterValueException_type *smithy.Schema
 
 var InvalidParameterValueException_code *smithy.Schema
@@ -556,7 +558,8 @@ var JobParameters_OutputLocation *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glacier",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var LimitExceededException_type *smithy.Schema
 
 var LimitExceededException_code *smithy.Schema
@@ -571,7 +574,8 @@ var _long = smithy.NewSchema(smithy.ShapeID{
 var MissingParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glacier",
 	Name:      "MissingParameterValueException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var MissingParameterValueException_type *smithy.Schema
 
 var MissingParameterValueException_code *smithy.Schema
@@ -581,7 +585,8 @@ var MissingParameterValueException_message *smithy.Schema
 var NoLongerSupportedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glacier",
 	Name:      "NoLongerSupportedException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var NoLongerSupportedException_type *smithy.Schema
 
 var NoLongerSupportedException_code *smithy.Schema
@@ -642,7 +647,8 @@ var Permission_READ_ACP *smithy.Schema
 var PolicyEnforcedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glacier",
 	Name:      "PolicyEnforcedException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var PolicyEnforcedException_type *smithy.Schema
 
 var PolicyEnforcedException_code *smithy.Schema
@@ -676,7 +682,8 @@ var QuoteFields_AsNeeded *smithy.Schema
 var RequestTimeoutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glacier",
 	Name:      "RequestTimeoutException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 408})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 408})
 var RequestTimeoutException_type *smithy.Schema
 
 var RequestTimeoutException_code *smithy.Schema
@@ -686,7 +693,8 @@ var RequestTimeoutException_message *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glacier",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_type *smithy.Schema
 
 var ResourceNotFoundException_code *smithy.Schema
@@ -728,7 +736,8 @@ var SelectParameters_OutputSerialization *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glacier",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ServiceUnavailableException_type *smithy.Schema
 
 var ServiceUnavailableException_code *smithy.Schema

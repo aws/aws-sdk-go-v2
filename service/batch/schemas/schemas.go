@@ -543,7 +543,8 @@ var CEType_UNMANAGED *smithy.Schema
 var ClientException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.batch",
 	Name:      "ClientException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ClientException_message *smithy.Schema
 
 var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
@@ -2775,7 +2776,8 @@ var _SecretList_member *smithy.Schema
 var ServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.batch",
 	Name:      "ServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ServerException_message *smithy.Schema
 
 var ServiceEnvironmentDetail = smithy.NewSchema(smithy.ShapeID{

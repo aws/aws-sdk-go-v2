@@ -268,13 +268,14 @@ var _CloudWatchLoggingOptionUpdates_member *smithy.Schema
 var CodeValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalytics",
 	Name:      "CodeValidationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CodeValidationException_message *smithy.Schema
 
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalytics",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConcurrentModificationException_message *smithy.Schema
 
 var CSVMappingParameters = smithy.NewSchema(smithy.ShapeID{
@@ -498,13 +499,13 @@ var _InputUpdates_member *smithy.Schema
 var InvalidApplicationConfigurationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalytics",
 	Name:      "InvalidApplicationConfigurationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidApplicationConfigurationException_message *smithy.Schema
 
 var InvalidArgumentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalytics",
 	Name:      "InvalidArgumentException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidArgumentException_message *smithy.Schema
 
 var JSONMappingParameters = smithy.NewSchema(smithy.ShapeID{
@@ -641,7 +642,7 @@ var LambdaOutputUpdate_RoleARNUpdate *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalytics",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var _ListApplicationsInputLimit = smithy.NewSchema(smithy.ShapeID{
@@ -886,19 +887,19 @@ var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalytics",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceInUseException_message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalytics",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceProvisionedThroughputExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalytics",
 	Name:      "ResourceProvisionedThroughputExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceProvisionedThroughputExceededException_message *smithy.Schema
 
 var _RoleARN = smithy.NewSchema(smithy.ShapeID{
@@ -949,7 +950,8 @@ var S3ReferenceDataSourceUpdate_ReferenceRoleARNUpdate *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalytics",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_message *smithy.Schema
 
 var SourceSchema = smithy.NewSchema(smithy.ShapeID{
@@ -1000,13 +1002,13 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalytics",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TooManyTagsException_message *smithy.Schema
 
 var UnableToDetectSchemaException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalytics",
 	Name:      "UnableToDetectSchemaException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var UnableToDetectSchemaException_message *smithy.Schema
 
 var UnableToDetectSchemaException_RawInputRecords *smithy.Schema
@@ -1016,7 +1018,7 @@ var UnableToDetectSchemaException_ProcessedInputRecords *smithy.Schema
 var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalytics",
 	Name:      "UnsupportedOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedOperationException_message *smithy.Schema
 
 var AddApplicationCloudWatchLoggingOptionRequest = smithy.NewSchema(smithy.ShapeID{

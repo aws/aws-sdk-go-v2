@@ -218,7 +218,8 @@ var CertificateManager = smithy.NewServiceSchema(_CertificateManager, "2015-12-0
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "AccessDenied",
 		StatusCode: 403})
 var AccessDeniedException_Message *smithy.Schema
@@ -873,7 +874,7 @@ var ComparisonOperator_EQUALS *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConflictException_message *smithy.Schema
 
 var _ContactList = smithy.NewSchema(smithy.ShapeID{
@@ -1272,7 +1273,7 @@ var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServerException_message *smithy.Schema
 
 var _InUseList = smithy.NewSchema(smithy.ShapeID{
@@ -1284,37 +1285,37 @@ var _InUseList_member *smithy.Schema
 var InvalidArgsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "InvalidArgsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidArgsException_message *smithy.Schema
 
 var InvalidArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "InvalidArnException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidArnException_message *smithy.Schema
 
 var InvalidDomainValidationOptionsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "InvalidDomainValidationOptionsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDomainValidationOptionsException_message *smithy.Schema
 
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidParameterException_message *smithy.Schema
 
 var InvalidStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "InvalidStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidStateException_message *smithy.Schema
 
 var InvalidTagException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "InvalidTagException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTagException_message *smithy.Schema
 
 var KeyAlgorithm = smithy.NewSchema(smithy.ShapeID{
@@ -1394,7 +1395,7 @@ var _KeyUsageNames_member *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var _MacKey = smithy.NewSchema(smithy.ShapeID{
@@ -1531,19 +1532,19 @@ var RenewalSummary_UpdatedAt *smithy.Schema
 var RequestInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "RequestInProgressException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RequestInProgressException_message *smithy.Schema
 
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceInUseException_message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceRecord = smithy.NewSchema(smithy.ShapeID{
@@ -1659,7 +1660,7 @@ var _ServiceErrorMessage = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var SortBy = smithy.NewSchema(smithy.ShapeID{
@@ -1721,7 +1722,7 @@ var _TagList_member *smithy.Schema
 var TagPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "TagPolicyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TagPolicyException_message *smithy.Schema
 
 var _TagValue = smithy.NewSchema(smithy.ShapeID{
@@ -1732,7 +1733,8 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "Throttling",
 		StatusCode: 400})
 var ThrottlingException_message *smithy.Schema
@@ -1774,7 +1776,7 @@ var TimeType_DAYS *smithy.Schema
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TooManyTagsException_message *smithy.Schema
 
 var _TStamp = smithy.NewSchema(smithy.ShapeID{
@@ -1839,7 +1841,8 @@ var _ValidationEmailList_member *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ValidationError",
 		StatusCode: 400})
 var ValidationException_message *smithy.Schema

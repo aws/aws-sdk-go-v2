@@ -419,13 +419,13 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalServiceError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pi",
 	Name:      "InternalServiceError",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServiceError_Message *smithy.Schema
 
 var InvalidArgumentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pi",
 	Name:      "InvalidArgumentException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidArgumentException_Message *smithy.Schema
 
 var _ISOTimestamp = smithy.NewSchema(smithy.ShapeID{
@@ -520,7 +520,7 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 var NotAuthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pi",
 	Name:      "NotAuthorizedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NotAuthorizedException_Message *smithy.Schema
 
 var PerformanceInsightsMetric = smithy.NewSchema(smithy.ShapeID{

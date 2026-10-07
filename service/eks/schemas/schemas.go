@@ -516,7 +516,8 @@ var AccessConfigResponse_authenticationMode *smithy.Schema
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var AccessEntry = smithy.NewSchema(smithy.ShapeID{
@@ -983,7 +984,8 @@ var _AutoScalingGroupList_member *smithy.Schema
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_message *smithy.Schema
 
 var BlockStorage = smithy.NewSchema(smithy.ShapeID{
@@ -1304,7 +1306,8 @@ var CertificateAuthorityValidity_notAfter *smithy.Schema
 var ClientException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "ClientException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ClientException_clusterName *smithy.Schema
 
 var ClientException_nodegroupName *smithy.Schema
@@ -2206,7 +2209,8 @@ var IntegerRangeConstraint_max *smithy.Schema
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 6, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 6, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterException_clusterName *smithy.Schema
 
 var InvalidParameterException_nodegroupName *smithy.Schema
@@ -2222,7 +2226,8 @@ var InvalidParameterException_message *smithy.Schema
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidRequestException_clusterName *smithy.Schema
 
 var InvalidRequestException_nodegroupName *smithy.Schema
@@ -2236,7 +2241,8 @@ var InvalidRequestException_message *smithy.Schema
 var InvalidStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "InvalidStateException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidStateException_clusterName *smithy.Schema
 
 var InvalidStateException_message *smithy.Schema
@@ -2758,7 +2764,8 @@ var _NonZeroInteger = smithy.NewSchema(smithy.ShapeID{
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_message *smithy.Schema
 
 var OIDC = smithy.NewSchema(smithy.ShapeID{
@@ -3053,7 +3060,8 @@ var ResourceConstraints_weight *smithy.Schema
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceInUseException_clusterName *smithy.Schema
 
 var ResourceInUseException_nodegroupName *smithy.Schema
@@ -3065,7 +3073,8 @@ var ResourceInUseException_message *smithy.Schema
 var ResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "ResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceLimitExceededException_clusterName *smithy.Schema
 
 var ResourceLimitExceededException_nodegroupName *smithy.Schema
@@ -3077,7 +3086,8 @@ var ResourceLimitExceededException_message *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 6, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 6, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_clusterName *smithy.Schema
 
 var ResourceNotFoundException_nodegroupName *smithy.Schema
@@ -3093,7 +3103,8 @@ var ResourceNotFoundException_message *smithy.Schema
 var ResourcePropagationDelayException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "ResourcePropagationDelayException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 428})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 428})
 var ResourcePropagationDelayException_message *smithy.Schema
 
 var ResourceWeight = smithy.NewSchema(smithy.ShapeID{
@@ -3166,7 +3177,8 @@ var ScoringStrategyType_MOST_ALLOCATED *smithy.Schema
 var ServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "ServerException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ServerException_clusterName *smithy.Schema
 
 var ServerException_nodegroupName *smithy.Schema
@@ -3188,7 +3200,8 @@ var ServiceNodePortRange_maxPort *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_message *smithy.Schema
 
 var SpreadLevel = smithy.NewSchema(smithy.ShapeID{
@@ -3320,7 +3333,8 @@ var _TerminatedPodGcThresholdValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_clusterName *smithy.Schema
 
 var ThrottlingException_message *smithy.Schema
@@ -3333,7 +3347,8 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var UnsupportedAvailabilityZoneException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "UnsupportedAvailabilityZoneException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var UnsupportedAvailabilityZoneException_message *smithy.Schema
 
 var UnsupportedAvailabilityZoneException_clusterName *smithy.Schema

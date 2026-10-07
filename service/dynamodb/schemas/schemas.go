@@ -552,7 +552,7 @@ var BackupDetails_BackupExpiryDateTime *smithy.Schema
 var BackupInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "BackupInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BackupInUseException_message *smithy.Schema
 
 var _BackupName = smithy.NewSchema(smithy.ShapeID{
@@ -563,7 +563,7 @@ var _BackupName = smithy.NewSchema(smithy.ShapeID{
 var BackupNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "BackupNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BackupNotFoundException_message *smithy.Schema
 
 var _BackupsInputLimit = smithy.NewSchema(smithy.ShapeID{
@@ -849,7 +849,7 @@ var Condition_ComparisonOperator *smithy.Schema
 var ConditionalCheckFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ConditionalCheckFailedException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ConditionalCheckFailedException_message *smithy.Schema
 
 var ConditionalCheckFailedException_Item *smithy.Schema
@@ -943,7 +943,7 @@ var ContinuousBackupsStatus_DISABLED *smithy.Schema
 var ContinuousBackupsUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ContinuousBackupsUnavailableException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ContinuousBackupsUnavailableException_message *smithy.Schema
 
 var ContributorInsightsAction = smithy.NewSchema(smithy.ShapeID{
@@ -1175,7 +1175,7 @@ var _DoubleObject = smithy.NewSchema(smithy.ShapeID{
 var DuplicateItemException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "DuplicateItemException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DuplicateItemException_message *smithy.Schema
 
 var EnableKinesisStreamingConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -1246,7 +1246,7 @@ var _ExportArn = smithy.NewSchema(smithy.ShapeID{
 var ExportConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ExportConflictException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ExportConflictException_message *smithy.Schema
 
 var ExportDescription = smithy.NewSchema(smithy.ShapeID{
@@ -1328,7 +1328,7 @@ var _ExportNextToken = smithy.NewSchema(smithy.ShapeID{
 var ExportNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ExportNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ExportNotFoundException_message *smithy.Schema
 
 var _ExportStartTime = smithy.NewSchema(smithy.ShapeID{
@@ -1591,7 +1591,7 @@ var GlobalTable_ReplicationGroup *smithy.Schema
 var GlobalTableAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "GlobalTableAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var GlobalTableAlreadyExistsException_message *smithy.Schema
 
 var _GlobalTableArnString = smithy.NewSchema(smithy.ShapeID{
@@ -1638,7 +1638,7 @@ var _GlobalTableList_member *smithy.Schema
 var GlobalTableNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "GlobalTableNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var GlobalTableNotFoundException_message *smithy.Schema
 
 var GlobalTableSettingsReplicationMode = smithy.NewSchema(smithy.ShapeID{
@@ -1694,7 +1694,7 @@ var _GlobalTableWitnessGroupUpdateList_member *smithy.Schema
 var IdempotentParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "IdempotentParameterMismatchException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IdempotentParameterMismatchException_Message *smithy.Schema
 
 var _ImportArn = smithy.NewSchema(smithy.ShapeID{
@@ -1705,7 +1705,7 @@ var _ImportArn = smithy.NewSchema(smithy.ShapeID{
 var ImportConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ImportConflictException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ImportConflictException_message *smithy.Schema
 
 var _ImportedItemCount = smithy.NewSchema(smithy.ShapeID{
@@ -1726,7 +1726,7 @@ var _ImportNextToken = smithy.NewSchema(smithy.ShapeID{
 var ImportNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ImportNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ImportNotFoundException_message *smithy.Schema
 
 var _ImportStartTime = smithy.NewSchema(smithy.ShapeID{
@@ -1834,7 +1834,7 @@ var _IndexName = smithy.NewSchema(smithy.ShapeID{
 var IndexNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "IndexNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IndexNotFoundException_message *smithy.Schema
 
 var IndexStatus = smithy.NewSchema(smithy.ShapeID{
@@ -1888,25 +1888,26 @@ var _IntegerObject = smithy.NewSchema(smithy.ShapeID{
 var InternalServerError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServerError_message *smithy.Schema
 
 var InvalidEndpointException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "InvalidEndpointException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 421})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 421})
 var InvalidEndpointException_Message *smithy.Schema
 
 var InvalidExportTimeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "InvalidExportTimeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidExportTimeException_message *smithy.Schema
 
 var InvalidRestoreTimeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "InvalidRestoreTimeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRestoreTimeException_message *smithy.Schema
 
 var _ItemCollectionKeyAttributeMap = smithy.NewSchema(smithy.ShapeID{
@@ -1953,7 +1954,7 @@ var _ItemCollectionSizeEstimateRange_member *smithy.Schema
 var ItemCollectionSizeLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ItemCollectionSizeLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ItemCollectionSizeLimitExceededException_message *smithy.Schema
 
 var _ItemCount = smithy.NewSchema(smithy.ShapeID{
@@ -2083,7 +2084,7 @@ var _LastUpdateDateTime = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var _ListAttributeValue = smithy.NewSchema(smithy.ShapeID{
@@ -2312,13 +2313,13 @@ var PointInTimeRecoveryStatus_DISABLED *smithy.Schema
 var PointInTimeRecoveryUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "PointInTimeRecoveryUnavailableException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PointInTimeRecoveryUnavailableException_message *smithy.Schema
 
 var PolicyNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "PolicyNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PolicyNotFoundException_message *smithy.Schema
 
 var _PolicyRevisionId = smithy.NewSchema(smithy.ShapeID{
@@ -2395,7 +2396,7 @@ var ProvisionedThroughputDescription_WriteCapacityUnits *smithy.Schema
 var ProvisionedThroughputExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ProvisionedThroughputExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ProvisionedThroughputExceededException_message *smithy.Schema
 
 var ProvisionedThroughputExceededException_ThrottlingReasons *smithy.Schema
@@ -2460,7 +2461,7 @@ var Replica_RegionName *smithy.Schema
 var ReplicaAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ReplicaAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ReplicaAlreadyExistsException_message *smithy.Schema
 
 var ReplicaAutoScalingDescription = smithy.NewSchema(smithy.ShapeID{
@@ -2648,7 +2649,7 @@ var _ReplicaList_member *smithy.Schema
 var ReplicaNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ReplicaNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ReplicaNotFoundException_message *smithy.Schema
 
 var ReplicaSettingsDescription = smithy.NewSchema(smithy.ShapeID{
@@ -2736,7 +2737,7 @@ var _ReplicaStatusPercentProgress = smithy.NewSchema(smithy.ShapeID{
 var ReplicatedWriteConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ReplicatedWriteConflictException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ReplicatedWriteConflictException_message *smithy.Schema
 
 var ReplicationGroupUpdate = smithy.NewSchema(smithy.ShapeID{
@@ -2772,7 +2773,7 @@ var _ReplicaUpdateList_member *smithy.Schema
 var RequestLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "RequestLimitExceeded",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var RequestLimitExceeded_message *smithy.Schema
 
 var RequestLimitExceeded_ThrottlingReasons *smithy.Schema
@@ -2790,13 +2791,13 @@ var _ResourceArnString = smithy.NewSchema(smithy.ShapeID{
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceInUseException_message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _ResourcePolicy = smithy.NewSchema(smithy.ShapeID{
@@ -3124,7 +3125,7 @@ var _StringSetAttributeValue_member *smithy.Schema
 var TableAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "TableAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TableAlreadyExistsException_message *smithy.Schema
 
 var _TableArn = smithy.NewSchema(smithy.ShapeID{
@@ -3255,7 +3256,7 @@ var _TableId = smithy.NewSchema(smithy.ShapeID{
 var TableInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "TableInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TableInUseException_message *smithy.Schema
 
 var _TableName = smithy.NewSchema(smithy.ShapeID{
@@ -3272,7 +3273,7 @@ var _TableNameList_member *smithy.Schema
 var TableNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "TableNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TableNotFoundException_message *smithy.Schema
 
 var TableStatus = smithy.NewSchema(smithy.ShapeID{
@@ -3338,7 +3339,8 @@ var _TagValueString = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "Throttling",
 		StatusCode: 400})
 var ThrottlingException_message *smithy.Schema
@@ -3427,7 +3429,7 @@ var _TransactGetItemList_member *smithy.Schema
 var TransactionCanceledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "TransactionCanceledException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var TransactionCanceledException_Message *smithy.Schema
 
 var TransactionCanceledException_CancellationReasons *smithy.Schema
@@ -3435,13 +3437,13 @@ var TransactionCanceledException_CancellationReasons *smithy.Schema
 var TransactionConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "TransactionConflictException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TransactionConflictException_message *smithy.Schema
 
 var TransactionInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "TransactionInProgressException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TransactionInProgressException_Message *smithy.Schema
 
 var TransactWriteItem = smithy.NewSchema(smithy.ShapeID{
