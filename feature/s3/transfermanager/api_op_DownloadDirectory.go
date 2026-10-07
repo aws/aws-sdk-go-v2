@@ -281,23 +281,12 @@ func (d *directoryDownloader) downloadSingleObject(ctx context.Context, data obj
 	if d.in.Callback != nil {
 		d.in.Callback.UpdateRequest(input)
 	}
-	out, err := d.c.GetObject(ctx, input)
-	if err != nil {
-		err = d.failurePolicy.OnDownloadFailed(d.in, input, err)
-		if err != nil {
-			d.setErr(fmt.Errorf("error when heading info of object %s: %v", data.key, err))
-			return
-		}
-		d.objectsFailed.Add(1)
-		return
-	}
 
 	d.progressOnce.Do(func() {
 		d.emitter.Start(ctx, d.in)
 	})
 
-	err = os.MkdirAll(filepath.Dir(data.path), 0755)
-	if err != nil {
+	if err := os.MkdirAll(filepath.Dir(data.path), 0755); err != nil {
 		d.setErr(fmt.Errorf("error when creating directory for file %s: %v", data.path, err))
 		return
 	}
@@ -307,22 +296,24 @@ func (d *directoryDownloader) downloadSingleObject(ctx context.Context, data obj
 		d.setErr(fmt.Errorf("error when creating file %s: %v", data.path, err))
 		return
 	}
-	var fileCopyFail bool
+	var transferFailed bool
 	defer func() {
 		if err := file.Close(); err != nil {
 			d.setErr(fmt.Errorf("error when closing file %s: %v", data.path, err))
 		}
-		if fileCopyFail {
-			os.Remove(data.path) // only remove the file if the copy failed
+		if transferFailed {
+			os.Remove(data.path)
 		}
 	}()
-	n, err := io.Copy(file, out.Body)
+
+	// Options are not forwarded here: d.options.Concurrency is the object worker
+	// count, and reusing it for parts would put workers^2 requests in flight.
+	out, err := d.c.DownloadObject(ctx, mapDownloadObjectInput(input, file))
 	if err != nil {
-		fileCopyFail = true
-		// where s3.GetObject is really called, must be handled by failure policy
+		transferFailed = true
 		err = d.failurePolicy.OnDownloadFailed(d.in, input, err)
 		if err != nil {
-			d.setErr(fmt.Errorf("error when getting object and writing to local file %s: %v", data.path, err))
+			d.setErr(fmt.Errorf("error when downloading object %s to local file %s: %v", data.key, data.path, err))
 			return
 		}
 		d.objectsFailed.Add(1)
@@ -330,7 +321,35 @@ func (d *directoryDownloader) downloadSingleObject(ctx context.Context, data obj
 	}
 
 	d.objectsDownloaded.Add(1)
-	d.emitter.ObjectsTransferred(ctx, n)
+	// DownloadObject sets ContentLength to the number of bytes it wrote.
+	d.emitter.ObjectsTransferred(ctx, aws.ToInt64(out.ContentLength))
+}
+
+// mapDownloadObjectInput returns the DownloadObjectInput equivalent of in, writing to w.
+func mapDownloadObjectInput(in *GetObjectInput, w io.WriterAt) *DownloadObjectInput {
+	return &DownloadObjectInput{
+		WriterAt:                   w,
+		Bucket:                     in.Bucket,
+		Key:                        in.Key,
+		ChecksumMode:               in.ChecksumMode,
+		ExpectedBucketOwner:        in.ExpectedBucketOwner,
+		IfMatch:                    in.IfMatch,
+		IfModifiedSince:            in.IfModifiedSince,
+		IfNoneMatch:                in.IfNoneMatch,
+		IfUnmodifiedSince:          in.IfUnmodifiedSince,
+		Range:                      in.Range,
+		RequestPayer:               in.RequestPayer,
+		ResponseCacheControl:       in.ResponseCacheControl,
+		ResponseContentDisposition: in.ResponseContentDisposition,
+		ResponseContentEncoding:    in.ResponseContentEncoding,
+		ResponseContentLanguage:    in.ResponseContentLanguage,
+		ResponseContentType:        in.ResponseContentType,
+		ResponseExpires:            in.ResponseExpires,
+		SSECustomerAlgorithm:       in.SSECustomerAlgorithm,
+		SSECustomerKey:             in.SSECustomerKey,
+		SSECustomerKeyMD5:          in.SSECustomerKeyMD5,
+		VersionID:                  in.VersionID,
+	}
 }
 
 func (d *directoryDownloader) freshContext(ctx context.Context) (context.Context, context.CancelFunc) {
