@@ -536,7 +536,8 @@ var AWSDeepdishControlPlaneService = smithy.NewServiceSchema(_AWSDeepdishControl
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appsync",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var AdditionalAuthenticationProvider = smithy.NewSchema(smithy.ShapeID{
@@ -684,7 +685,8 @@ var ApiKey_deletes *smithy.Schema
 var ApiKeyLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appsync",
 	Name:      "ApiKeyLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ApiKeyLimitExceededException_message *smithy.Schema
 
 var _ApiKeys = smithy.NewSchema(smithy.ShapeID{
@@ -696,13 +698,15 @@ var _ApiKeys_member *smithy.Schema
 var ApiKeyValidityOutOfBoundsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appsync",
 	Name:      "ApiKeyValidityOutOfBoundsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ApiKeyValidityOutOfBoundsException_message *smithy.Schema
 
 var ApiLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appsync",
 	Name:      "ApiLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ApiLimitExceededException_message *smithy.Schema
 
 var _ApiName = smithy.NewSchema(smithy.ShapeID{
@@ -809,7 +813,8 @@ var BadRequestDetail_codeErrors *smithy.Schema
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appsync",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_message *smithy.Schema
 
 var BadRequestException_reason *smithy.Schema
@@ -963,7 +968,8 @@ var CognitoUserPoolConfig_appIdClientRegex *smithy.Schema
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appsync",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConcurrentModificationException_message *smithy.Schema
 
 var ConflictDetectionType = smithy.NewSchema(smithy.ShapeID{
@@ -977,7 +983,8 @@ var ConflictDetectionType_NONE *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appsync",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConflictHandlerType = smithy.NewSchema(smithy.ShapeID{
@@ -1473,7 +1480,8 @@ var GraphQLApiVisibility_PRIVATE *smithy.Schema
 var GraphQLSchemaException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appsync",
 	Name:      "GraphQLSchemaException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var GraphQLSchemaException_message *smithy.Schema
 
 var HandlerBehavior = smithy.NewSchema(smithy.ShapeID{
@@ -1519,7 +1527,8 @@ var Integration_lambdaConfig *smithy.Schema
 var InternalFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appsync",
 	Name:      "InternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalFailureException_message *smithy.Schema
 
 var InvokeType = smithy.NewSchema(smithy.ShapeID{
@@ -1561,7 +1570,8 @@ var LambdaDataSourceConfig_lambdaFunctionArn *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appsync",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var LimitExceededException_message *smithy.Schema
 
 var LogConfig = smithy.NewSchema(smithy.ShapeID{
@@ -1624,7 +1634,8 @@ var _Namespace = smithy.NewSchema(smithy.ShapeID{
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appsync",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_message *smithy.Schema
 
 var OpenIDConnectConfig = smithy.NewSchema(smithy.ShapeID{
@@ -1852,7 +1863,8 @@ var SchemaStatus_NotApplicable *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appsync",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var SourceApiAssociation = smithy.NewSchema(smithy.ShapeID{
@@ -2021,7 +2033,8 @@ var _TypeList_member *smithy.Schema
 var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appsync",
 	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var UnauthorizedException_message *smithy.Schema
 
 var UserPoolConfig = smithy.NewSchema(smithy.ShapeID{

@@ -116,7 +116,8 @@ var QuickSetup = smithy.NewServiceSchema(_QuickSetup, "2018-05-10")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssmquicksetup",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var ConfigurationDefinition = smithy.NewSchema(smithy.ShapeID{
@@ -240,7 +241,8 @@ var ConfigurationSummary_StatusSummaries *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssmquicksetup",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var Filter = smithy.NewSchema(smithy.ShapeID{
@@ -271,7 +273,8 @@ var _IAMRoleArn = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssmquicksetup",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var _QuickSetupTypeList = smithy.NewSchema(smithy.ShapeID{
@@ -291,7 +294,8 @@ var QuickSetupTypeOutput_LatestVersion *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssmquicksetup",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ServiceSettings = smithy.NewSchema(smithy.ShapeID{
@@ -391,13 +395,15 @@ var _TagsMap_value *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssmquicksetup",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssmquicksetup",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_Message *smithy.Schema
 
 var CreateConfigurationManagerInput = smithy.NewSchema(smithy.ShapeID{

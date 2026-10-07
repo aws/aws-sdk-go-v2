@@ -285,19 +285,19 @@ var _AlarmName = smithy.NewSchema(smithy.ShapeID{
 var AlarmsLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "AlarmsLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AlarmsLimitExceededException_message *smithy.Schema
 
 var ApplicationAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "ApplicationAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ApplicationAlreadyExistsException_message *smithy.Schema
 
 var ApplicationDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "ApplicationDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ApplicationDoesNotExistException_message *smithy.Schema
 
 var _ApplicationId = smithy.NewSchema(smithy.ShapeID{
@@ -324,7 +324,7 @@ var ApplicationInfo_computePlatform *smithy.Schema
 var ApplicationLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "ApplicationLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ApplicationLimitExceededException_message *smithy.Schema
 
 var _ApplicationName = smithy.NewSchema(smithy.ShapeID{
@@ -335,7 +335,7 @@ var _ApplicationName = smithy.NewSchema(smithy.ShapeID{
 var ApplicationNameRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "ApplicationNameRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ApplicationNameRequiredException_message *smithy.Schema
 
 var ApplicationRevisionSortBy = smithy.NewSchema(smithy.ShapeID{
@@ -376,7 +376,7 @@ var _Arn = smithy.NewSchema(smithy.ShapeID{
 var ArnNotSupportedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "ArnNotSupportedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ArnNotSupportedException_message *smithy.Schema
 
 var AutoRollbackConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -438,7 +438,7 @@ var _AutoScalingGroupNameList_member *smithy.Schema
 var BatchLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "BatchLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BatchLimitExceededException_message *smithy.Schema
 
 var BlueGreenDeploymentConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -467,7 +467,7 @@ var _Boolean = smithy.NewSchema(smithy.ShapeID{
 var BucketNameFilterRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "BucketNameFilterRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BucketNameFilterRequiredException_message *smithy.Schema
 
 var BundleType = smithy.NewSchema(smithy.ShapeID{
@@ -525,19 +525,19 @@ var ComputePlatform_ECS *smithy.Schema
 var DeploymentAlreadyCompletedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentAlreadyCompletedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentAlreadyCompletedException_message *smithy.Schema
 
 var DeploymentConfigAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentConfigAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentConfigAlreadyExistsException_message *smithy.Schema
 
 var DeploymentConfigDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentConfigDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentConfigDoesNotExistException_message *smithy.Schema
 
 var _DeploymentConfigId = smithy.NewSchema(smithy.ShapeID{
@@ -566,13 +566,13 @@ var DeploymentConfigInfo_zonalConfig *smithy.Schema
 var DeploymentConfigInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentConfigInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentConfigInUseException_message *smithy.Schema
 
 var DeploymentConfigLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentConfigLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentConfigLimitExceededException_message *smithy.Schema
 
 var _DeploymentConfigName = smithy.NewSchema(smithy.ShapeID{
@@ -583,7 +583,7 @@ var _DeploymentConfigName = smithy.NewSchema(smithy.ShapeID{
 var DeploymentConfigNameRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentConfigNameRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentConfigNameRequiredException_message *smithy.Schema
 
 var _DeploymentConfigsList = smithy.NewSchema(smithy.ShapeID{
@@ -615,19 +615,19 @@ var DeploymentCreator_AutoscalingTermination *smithy.Schema
 var DeploymentDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentDoesNotExistException_message *smithy.Schema
 
 var DeploymentGroupAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentGroupAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentGroupAlreadyExistsException_message *smithy.Schema
 
 var DeploymentGroupDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentGroupDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentGroupDoesNotExistException_message *smithy.Schema
 
 var _DeploymentGroupId = smithy.NewSchema(smithy.ShapeID{
@@ -694,7 +694,7 @@ var _DeploymentGroupInfoList_member *smithy.Schema
 var DeploymentGroupLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentGroupLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentGroupLimitExceededException_message *smithy.Schema
 
 var _DeploymentGroupName = smithy.NewSchema(smithy.ShapeID{
@@ -705,7 +705,7 @@ var _DeploymentGroupName = smithy.NewSchema(smithy.ShapeID{
 var DeploymentGroupNameRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentGroupNameRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentGroupNameRequiredException_message *smithy.Schema
 
 var _DeploymentGroupsList = smithy.NewSchema(smithy.ShapeID{
@@ -722,7 +722,7 @@ var _DeploymentId = smithy.NewSchema(smithy.ShapeID{
 var DeploymentIdRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentIdRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentIdRequiredException_message *smithy.Schema
 
 var DeploymentInfo = smithy.NewSchema(smithy.ShapeID{
@@ -794,13 +794,13 @@ var DeploymentInfo_overrideAlarmConfiguration *smithy.Schema
 var DeploymentIsNotInReadyStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentIsNotInReadyStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentIsNotInReadyStateException_message *smithy.Schema
 
 var DeploymentLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentLimitExceededException_message *smithy.Schema
 
 var DeploymentMode = smithy.NewSchema(smithy.ShapeID{
@@ -814,7 +814,7 @@ var DeploymentMode_RESTART *smithy.Schema
 var DeploymentNotStartedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentNotStartedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentNotStartedException_message *smithy.Schema
 
 var DeploymentOption = smithy.NewSchema(smithy.ShapeID{
@@ -926,13 +926,13 @@ var DeploymentTarget_cloudFormationTarget *smithy.Schema
 var DeploymentTargetDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentTargetDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentTargetDoesNotExistException_message *smithy.Schema
 
 var DeploymentTargetIdRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentTargetIdRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentTargetIdRequiredException_message *smithy.Schema
 
 var _DeploymentTargetList = smithy.NewSchema(smithy.ShapeID{
@@ -944,7 +944,7 @@ var _DeploymentTargetList_member *smithy.Schema
 var DeploymentTargetListSizeExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentTargetListSizeExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DeploymentTargetListSizeExceededException_message *smithy.Schema
 
 var DeploymentTargetType = smithy.NewSchema(smithy.ShapeID{
@@ -983,7 +983,7 @@ var _Description = smithy.NewSchema(smithy.ShapeID{
 var DescriptionTooLongException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DescriptionTooLongException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DescriptionTooLongException_message *smithy.Schema
 
 var Diagnostics = smithy.NewSchema(smithy.ShapeID{
@@ -1063,7 +1063,7 @@ var _ECSServiceList_member *smithy.Schema
 var ECSServiceMappingLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "ECSServiceMappingLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ECSServiceMappingLimitExceededException_message *smithy.Schema
 
 var _ECSServiceName = smithy.NewSchema(smithy.ShapeID{
@@ -1280,7 +1280,7 @@ var GenericRevisionInfo_registerTime *smithy.Schema
 var GitHubAccountTokenDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "GitHubAccountTokenDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var GitHubAccountTokenDoesNotExistException_message *smithy.Schema
 
 var _GitHubAccountTokenName = smithy.NewSchema(smithy.ShapeID{
@@ -1297,7 +1297,7 @@ var _GitHubAccountTokenNameList_member *smithy.Schema
 var GitHubAccountTokenNameRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "GitHubAccountTokenNameRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var GitHubAccountTokenNameRequiredException_message *smithy.Schema
 
 var GitHubLocation = smithy.NewSchema(smithy.ShapeID{
@@ -1325,7 +1325,7 @@ var GreenFleetProvisioningOption_action *smithy.Schema
 var IamArnRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "IamArnRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IamArnRequiredException_message *smithy.Schema
 
 var _IamSessionArn = smithy.NewSchema(smithy.ShapeID{
@@ -1336,7 +1336,7 @@ var _IamSessionArn = smithy.NewSchema(smithy.ShapeID{
 var IamSessionArnAlreadyRegisteredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "IamSessionArnAlreadyRegisteredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IamSessionArnAlreadyRegisteredException_message *smithy.Schema
 
 var _IamUserArn = smithy.NewSchema(smithy.ShapeID{
@@ -1347,13 +1347,13 @@ var _IamUserArn = smithy.NewSchema(smithy.ShapeID{
 var IamUserArnAlreadyRegisteredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "IamUserArnAlreadyRegisteredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IamUserArnAlreadyRegisteredException_message *smithy.Schema
 
 var IamUserArnRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "IamUserArnRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IamUserArnRequiredException_message *smithy.Schema
 
 var InstanceAction = smithy.NewSchema(smithy.ShapeID{
@@ -1377,7 +1377,7 @@ var _InstanceCount = smithy.NewSchema(smithy.ShapeID{
 var InstanceDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InstanceDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InstanceDoesNotExistException_message *smithy.Schema
 
 var _InstanceId = smithy.NewSchema(smithy.ShapeID{
@@ -1388,7 +1388,7 @@ var _InstanceId = smithy.NewSchema(smithy.ShapeID{
 var InstanceIdRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InstanceIdRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InstanceIdRequiredException_message *smithy.Schema
 
 var InstanceInfo = smithy.NewSchema(smithy.ShapeID{
@@ -1418,7 +1418,7 @@ var _InstanceInfoList_member *smithy.Schema
 var InstanceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InstanceLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InstanceLimitExceededException_message *smithy.Schema
 
 var _InstanceName = smithy.NewSchema(smithy.ShapeID{
@@ -1429,7 +1429,7 @@ var _InstanceName = smithy.NewSchema(smithy.ShapeID{
 var InstanceNameAlreadyRegisteredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InstanceNameAlreadyRegisteredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InstanceNameAlreadyRegisteredException_message *smithy.Schema
 
 var _InstanceNameList = smithy.NewSchema(smithy.ShapeID{
@@ -1441,13 +1441,13 @@ var _InstanceNameList_member *smithy.Schema
 var InstanceNameRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InstanceNameRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InstanceNameRequiredException_message *smithy.Schema
 
 var InstanceNotRegisteredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InstanceNotRegisteredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InstanceNotRegisteredException_message *smithy.Schema
 
 var _InstancesList = smithy.NewSchema(smithy.ShapeID{
@@ -1537,331 +1537,331 @@ var _InstanceTypeList_member *smithy.Schema
 var InvalidAlarmConfigException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidAlarmConfigException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidAlarmConfigException_message *smithy.Schema
 
 var InvalidApplicationNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidApplicationNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidApplicationNameException_message *smithy.Schema
 
 var InvalidArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidArnException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidArnException_message *smithy.Schema
 
 var InvalidAutoRollbackConfigException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidAutoRollbackConfigException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidAutoRollbackConfigException_message *smithy.Schema
 
 var InvalidAutoScalingGroupException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidAutoScalingGroupException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidAutoScalingGroupException_message *smithy.Schema
 
 var InvalidBlueGreenDeploymentConfigurationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidBlueGreenDeploymentConfigurationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidBlueGreenDeploymentConfigurationException_message *smithy.Schema
 
 var InvalidBucketNameFilterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidBucketNameFilterException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidBucketNameFilterException_message *smithy.Schema
 
 var InvalidComputePlatformException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidComputePlatformException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidComputePlatformException_message *smithy.Schema
 
 var InvalidDeployedStateFilterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidDeployedStateFilterException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDeployedStateFilterException_message *smithy.Schema
 
 var InvalidDeploymentConfigNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidDeploymentConfigNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDeploymentConfigNameException_message *smithy.Schema
 
 var InvalidDeploymentGroupNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidDeploymentGroupNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDeploymentGroupNameException_message *smithy.Schema
 
 var InvalidDeploymentIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidDeploymentIdException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDeploymentIdException_message *smithy.Schema
 
 var InvalidDeploymentInstanceTypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidDeploymentInstanceTypeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDeploymentInstanceTypeException_message *smithy.Schema
 
 var InvalidDeploymentStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidDeploymentStatusException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDeploymentStatusException_message *smithy.Schema
 
 var InvalidDeploymentStyleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidDeploymentStyleException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDeploymentStyleException_message *smithy.Schema
 
 var InvalidDeploymentTargetIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidDeploymentTargetIdException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDeploymentTargetIdException_message *smithy.Schema
 
 var InvalidDeploymentWaitTypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidDeploymentWaitTypeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDeploymentWaitTypeException_message *smithy.Schema
 
 var InvalidEC2TagCombinationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidEC2TagCombinationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidEC2TagCombinationException_message *smithy.Schema
 
 var InvalidEC2TagException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidEC2TagException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidEC2TagException_message *smithy.Schema
 
 var InvalidECSServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidECSServiceException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidECSServiceException_message *smithy.Schema
 
 var InvalidExternalIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidExternalIdException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidExternalIdException_message *smithy.Schema
 
 var InvalidFileExistsBehaviorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidFileExistsBehaviorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidFileExistsBehaviorException_message *smithy.Schema
 
 var InvalidGitHubAccountTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidGitHubAccountTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidGitHubAccountTokenException_message *smithy.Schema
 
 var InvalidGitHubAccountTokenNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidGitHubAccountTokenNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidGitHubAccountTokenNameException_message *smithy.Schema
 
 var InvalidIamSessionArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidIamSessionArnException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidIamSessionArnException_message *smithy.Schema
 
 var InvalidIamUserArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidIamUserArnException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidIamUserArnException_message *smithy.Schema
 
 var InvalidIgnoreApplicationStopFailuresValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidIgnoreApplicationStopFailuresValueException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidIgnoreApplicationStopFailuresValueException_message *smithy.Schema
 
 var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidInputException_message *smithy.Schema
 
 var InvalidInstanceNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidInstanceNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidInstanceNameException_message *smithy.Schema
 
 var InvalidInstanceStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidInstanceStatusException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidInstanceStatusException_message *smithy.Schema
 
 var InvalidInstanceTypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidInstanceTypeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidInstanceTypeException_message *smithy.Schema
 
 var InvalidKeyPrefixFilterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidKeyPrefixFilterException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidKeyPrefixFilterException_message *smithy.Schema
 
 var InvalidLifecycleEventHookExecutionIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidLifecycleEventHookExecutionIdException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidLifecycleEventHookExecutionIdException_message *smithy.Schema
 
 var InvalidLifecycleEventHookExecutionStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidLifecycleEventHookExecutionStatusException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidLifecycleEventHookExecutionStatusException_message *smithy.Schema
 
 var InvalidLoadBalancerInfoException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidLoadBalancerInfoException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidLoadBalancerInfoException_message *smithy.Schema
 
 var InvalidMinimumHealthyHostValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidMinimumHealthyHostValueException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidMinimumHealthyHostValueException_message *smithy.Schema
 
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidNextTokenException_message *smithy.Schema
 
 var InvalidOnPremisesTagCombinationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidOnPremisesTagCombinationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidOnPremisesTagCombinationException_message *smithy.Schema
 
 var InvalidOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidOperationException_message *smithy.Schema
 
 var InvalidRegistrationStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidRegistrationStatusException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRegistrationStatusException_message *smithy.Schema
 
 var InvalidRevisionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidRevisionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRevisionException_message *smithy.Schema
 
 var InvalidRoleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidRoleException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRoleException_message *smithy.Schema
 
 var InvalidSortByException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidSortByException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidSortByException_message *smithy.Schema
 
 var InvalidSortOrderException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidSortOrderException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidSortOrderException_message *smithy.Schema
 
 var InvalidTagException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidTagException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTagException_message *smithy.Schema
 
 var InvalidTagFilterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidTagFilterException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTagFilterException_message *smithy.Schema
 
 var InvalidTagsToAddException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidTagsToAddException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTagsToAddException_message *smithy.Schema
 
 var InvalidTargetFilterNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidTargetFilterNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTargetFilterNameException_message *smithy.Schema
 
 var InvalidTargetGroupPairException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidTargetGroupPairException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTargetGroupPairException_message *smithy.Schema
 
 var InvalidTargetInstancesException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidTargetInstancesException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTargetInstancesException_message *smithy.Schema
 
 var InvalidTimeRangeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidTimeRangeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTimeRangeException_message *smithy.Schema
 
 var InvalidTrafficRoutingConfigurationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidTrafficRoutingConfigurationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTrafficRoutingConfigurationException_message *smithy.Schema
 
 var InvalidTriggerConfigException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidTriggerConfigException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTriggerConfigException_message *smithy.Schema
 
 var InvalidUpdateOutdatedInstancesOnlyValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidUpdateOutdatedInstancesOnlyValueException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidUpdateOutdatedInstancesOnlyValueException_message *smithy.Schema
 
 var InvalidZonalDeploymentConfigurationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "InvalidZonalDeploymentConfigurationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidZonalDeploymentConfigurationException_message *smithy.Schema
 
 var _Key = smithy.NewSchema(smithy.ShapeID{
@@ -1956,7 +1956,7 @@ var LifecycleEvent_status *smithy.Schema
 var LifecycleEventAlreadyCompletedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "LifecycleEventAlreadyCompletedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LifecycleEventAlreadyCompletedException_message *smithy.Schema
 
 var _LifecycleEventHookExecutionId = smithy.NewSchema(smithy.ShapeID{
@@ -1994,7 +1994,7 @@ var LifecycleEventStatus_UNKNOWN *smithy.Schema
 var LifecycleHookLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "LifecycleHookLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LifecycleHookLimitExceededException_message *smithy.Schema
 
 var _LifecycleMessage = smithy.NewSchema(smithy.ShapeID{
@@ -2088,7 +2088,7 @@ var _MinimumHealthyHostsValue = smithy.NewSchema(smithy.ShapeID{
 var MultipleIamArnsProvidedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "MultipleIamArnsProvidedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MultipleIamArnsProvidedException_message *smithy.Schema
 
 var _NextToken = smithy.NewSchema(smithy.ShapeID{
@@ -2116,7 +2116,7 @@ var _OnPremisesTagSetList_member *smithy.Schema
 var OperationNotSupportedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "OperationNotSupportedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OperationNotSupportedException_message *smithy.Schema
 
 var OutdatedInstancesStrategy = smithy.NewSchema(smithy.ShapeID{
@@ -2174,19 +2174,19 @@ var _Repository = smithy.NewSchema(smithy.ShapeID{
 var ResourceArnRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "ResourceArnRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceArnRequiredException_message *smithy.Schema
 
 var ResourceValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "ResourceValidationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceValidationException_message *smithy.Schema
 
 var RevisionDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "RevisionDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RevisionDoesNotExistException_message *smithy.Schema
 
 var RevisionInfo = smithy.NewSchema(smithy.ShapeID{
@@ -2238,7 +2238,7 @@ var RevisionLocationType_AppSpecContent *smithy.Schema
 var RevisionRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "RevisionRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RevisionRequiredException_message *smithy.Schema
 
 var _Role = smithy.NewSchema(smithy.ShapeID{
@@ -2249,7 +2249,7 @@ var _Role = smithy.NewSchema(smithy.ShapeID{
 var RoleRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "RoleRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RoleRequiredException_message *smithy.Schema
 
 var RollbackInfo = smithy.NewSchema(smithy.ShapeID{
@@ -2350,7 +2350,7 @@ var _TagKeyList_member *smithy.Schema
 var TagLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "TagLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TagLimitExceededException_message *smithy.Schema
 
 var _TagList = smithy.NewSchema(smithy.ShapeID{
@@ -2362,13 +2362,13 @@ var _TagList_member *smithy.Schema
 var TagRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "TagRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TagRequiredException_message *smithy.Schema
 
 var TagSetListLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "TagSetListLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TagSetListLimitExceededException_message *smithy.Schema
 
 var _TargetArn = smithy.NewSchema(smithy.ShapeID{
@@ -2475,7 +2475,7 @@ var TargetStatus_READY *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ThrottlingException_message *smithy.Schema
 
 var _Time = smithy.NewSchema(smithy.ShapeID{
@@ -2602,13 +2602,13 @@ var _TriggerTargetArn = smithy.NewSchema(smithy.ShapeID{
 var TriggerTargetsLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "TriggerTargetsLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TriggerTargetsLimitExceededException_message *smithy.Schema
 
 var UnsupportedActionForDeploymentTypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "UnsupportedActionForDeploymentTypeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedActionForDeploymentTypeException_message *smithy.Schema
 
 var _Value = smithy.NewSchema(smithy.ShapeID{

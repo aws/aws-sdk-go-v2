@@ -143,7 +143,8 @@ var AWSEventsV2 = smithy.NewServiceSchema(_AWSEventsV2, "2025-05-15")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var _AccountId = smithy.NewSchema(smithy.ShapeID{
@@ -200,13 +201,15 @@ var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConcurrentModificationException_Message *smithy.Schema
 
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConfluentPublicRegistryConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -526,7 +529,8 @@ var HttpParameters_InvocationTimeoutSeconds *smithy.Schema
 var IdempotentParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "IdempotentParameterMismatchException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var IdempotentParameterMismatchException_Message *smithy.Schema
 
 var IncludePayload = smithy.NewSchema(smithy.ShapeID{
@@ -545,19 +549,22 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "InternalException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalException_Message *smithy.Schema
 
 var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidInputException_Message *smithy.Schema
 
 var InvalidStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "InvalidStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var InvalidStateException_Message *smithy.Schema
 
 var InvocationType = smithy.NewSchema(smithy.ShapeID{
@@ -628,7 +635,8 @@ var LambdaParameters_InvocationTimeoutSeconds *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var LimitExceededException_Message *smithy.Schema
 
 var LogConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -737,7 +745,8 @@ var _PolicyDocument = smithy.NewSchema(smithy.ShapeID{
 var PolicyLengthExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "PolicyLengthExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var PolicyLengthExceededException_Message *smithy.Schema
 
 var _PolicyName = smithy.NewSchema(smithy.ShapeID{
@@ -753,7 +762,8 @@ var _PolicyRevisionId = smithy.NewSchema(smithy.ShapeID{
 var PublicPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "PublicPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var PublicPolicyException_Message *smithy.Schema
 
 var PutEventsRequestEntry = smithy.NewSchema(smithy.ShapeID{
@@ -879,19 +889,22 @@ var _QueryStringValue = smithy.NewSchema(smithy.ShapeID{
 var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceAlreadyExistsException_Message *smithy.Schema
 
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceInUseException_Message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourcePolicySummary = smithy.NewSchema(smithy.ShapeID{
@@ -958,7 +971,8 @@ var SchemaRegistryConfiguration_ConfluentPublicRegistryConfiguration *smithy.Sch
 var SchemaRegistryUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "SchemaRegistryUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var SchemaRegistryUnavailableException_Message *smithy.Schema
 
 var _SchemaRegistryUri = smithy.NewSchema(smithy.ShapeID{
@@ -1177,7 +1191,8 @@ var _TargetResourceArn = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var _Timestamp = smithy.NewSchema(smithy.ShapeID{

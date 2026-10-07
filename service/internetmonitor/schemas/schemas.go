@@ -130,7 +130,8 @@ var InternetMonitor20210603 = smithy.NewServiceSchema(_InternetMonitor20210603, 
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.internetmonitor",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var _AccountId = smithy.NewSchema(smithy.ShapeID{
@@ -156,7 +157,8 @@ var AvailabilityMeasurement_PercentOfClientLocationImpacted *smithy.Schema
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.internetmonitor",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_message *smithy.Schema
 
 var ClientLocation = smithy.NewSchema(smithy.ShapeID{
@@ -182,7 +184,8 @@ var ClientLocation_Longitude *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.internetmonitor",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var _FilterList = smithy.NewSchema(smithy.ShapeID{
@@ -309,13 +312,15 @@ var _ImpactedLocationsList_member *smithy.Schema
 var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.internetmonitor",
 	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerErrorException_message *smithy.Schema
 
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.internetmonitor",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var _InternetEventId = smithy.NewSchema(smithy.ShapeID{
@@ -385,7 +390,8 @@ var _Ipv4PrefixList_member *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.internetmonitor",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var LimitExceededException_message *smithy.Schema
 
 var LocalHealthEventsConfig = smithy.NewSchema(smithy.ShapeID{
@@ -478,7 +484,8 @@ var _NetworkList_member *smithy.Schema
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.internetmonitor",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_message *smithy.Schema
 
 var _Operator = smithy.NewSchema(smithy.ShapeID{
@@ -552,7 +559,8 @@ var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.internetmonitor",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var RoundTripTime = smithy.NewSchema(smithy.ShapeID{
@@ -608,13 +616,15 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.internetmonitor",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.internetmonitor",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_message *smithy.Schema
 
 var _TrafficPercentageToMonitor = smithy.NewSchema(smithy.ShapeID{
@@ -630,7 +640,8 @@ var _TriangulationEventType = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.internetmonitor",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var CreateMonitorInput = smithy.NewSchema(smithy.ShapeID{

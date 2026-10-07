@@ -122,7 +122,8 @@ var _InputList_member *smithy.Schema
 var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.personalizeruntime",
 	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidInputException_message *smithy.Schema
 
 var _ItemID = smithy.NewSchema(smithy.ShapeID{
@@ -226,7 +227,8 @@ var _RecommendationID = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.personalizeruntime",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _Score = smithy.NewSchema(smithy.ShapeID{

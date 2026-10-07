@@ -376,7 +376,8 @@ var AccessControlListConfiguration_KeyPath *smithy.Schema
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kendra",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var AclConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -776,7 +777,8 @@ var ConditionOperator_BeginsWith *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kendra",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConflictingItem = smithy.NewSchema(smithy.ShapeID{
@@ -2064,7 +2066,8 @@ var _FeaturedDocumentWithMetadataList_member *smithy.Schema
 var FeaturedResultsConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kendra",
 	Name:      "FeaturedResultsConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var FeaturedResultsConflictException_Message *smithy.Schema
 
 var FeaturedResultsConflictException_ConflictingItems *smithy.Schema
@@ -2522,7 +2525,8 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kendra",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var Interval = smithy.NewSchema(smithy.ShapeID{
@@ -2544,7 +2548,8 @@ var Interval_TWO_MONTHS_AGO *smithy.Schema
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kendra",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidRequestException_Message *smithy.Schema
 
 var _Issuer = smithy.NewSchema(smithy.ShapeID{
@@ -3253,25 +3258,29 @@ var _RepositoryNames_member *smithy.Schema
 var ResourceAlreadyExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kendra",
 	Name:      "ResourceAlreadyExistException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceAlreadyExistException_Message *smithy.Schema
 
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kendra",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceInUseException_Message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kendra",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kendra",
 	Name:      "ResourceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceUnavailableException_Message *smithy.Schema
 
 var _ResultId = smithy.NewSchema(smithy.ShapeID{
@@ -3673,7 +3682,8 @@ var ServiceNowServiceCatalogConfiguration_FieldMappings *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kendra",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var _SharedDriveId = smithy.NewSchema(smithy.ShapeID{
@@ -4183,7 +4193,8 @@ var _ThesaurusSummaryItems_member *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kendra",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var TimeRange = smithy.NewSchema(smithy.ShapeID{
@@ -4307,7 +4318,8 @@ var _UserTokenConfigurationList_member *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kendra",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_Message *smithy.Schema
 
 var _ValueImportanceMap = smithy.NewSchema(smithy.ShapeID{

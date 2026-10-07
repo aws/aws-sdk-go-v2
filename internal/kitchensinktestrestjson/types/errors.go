@@ -39,10 +39,16 @@ func (v *ResourceNotFound) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFound_message, *v.Message)
+	}
 }
 func (v *ResourceNotFound) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceNotFound, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ResourceNotFound_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFound_message, v.Message)
 		}
 		return nil
 	})

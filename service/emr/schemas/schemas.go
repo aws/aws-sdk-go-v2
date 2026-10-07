@@ -1646,20 +1646,21 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalServerError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emr",
 	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "InternalFailure",
 		StatusCode: 500})
 
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emr",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServerException_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emr",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_ErrorCode *smithy.Schema
 
 var InvalidRequestException_Message *smithy.Schema

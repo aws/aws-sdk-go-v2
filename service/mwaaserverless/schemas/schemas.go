@@ -123,7 +123,8 @@ var AmazonMWAAServerless = smithy.NewServiceSchema(_AmazonMWAAServerless, "2024-
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var Code = smithy.NewSchema(smithy.ShapeID{
@@ -135,7 +136,8 @@ var Code_S3Location *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConflictException_ResourceId *smithy.Schema
@@ -210,7 +212,8 @@ var _IdString = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var InternalServerException_RetryAfterSeconds *smithy.Schema
@@ -250,13 +253,15 @@ var _ObjectMap_value *smithy.Schema
 var OperationTimeoutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "OperationTimeoutException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 504})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 504})
 var OperationTimeoutException_Message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_ResourceId *smithy.Schema
@@ -318,7 +323,8 @@ var _SecurityGroupString = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ServiceQuotaExceededException_ResourceId *smithy.Schema
@@ -434,7 +440,8 @@ var TaskInstanceSummary_OperatorName *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var ThrottlingException_ServiceCode *smithy.Schema
@@ -451,7 +458,8 @@ var _TimestampValue = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_Message *smithy.Schema
 
 var ValidationException_Reason *smithy.Schema

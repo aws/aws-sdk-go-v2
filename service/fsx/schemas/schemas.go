@@ -260,6 +260,7 @@ var AccessPointAlreadyOwnedByYou = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AccessPointAlreadyOwnedByYou",
 }, smithy.ShapeTypeStructure, 2, &smithytraits.XMLName{Name: "Error"},
 
+	&smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 409})
 var AccessPointAlreadyOwnedByYou_ErrorCode *smithy.Schema
 
@@ -283,7 +284,7 @@ var ActiveDirectoryBackupAttributes_ResourceARN *smithy.Schema
 var ActiveDirectoryError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "ActiveDirectoryError",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var ActiveDirectoryError_ActiveDirectoryId *smithy.Schema
 
 var ActiveDirectoryError_Type *smithy.Schema
@@ -558,7 +559,7 @@ var Backup_SizeInBytes *smithy.Schema
 var BackupBeingCopied = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "BackupBeingCopied",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var BackupBeingCopied_Message *smithy.Schema
 
 var BackupBeingCopied_BackupId *smithy.Schema
@@ -583,7 +584,7 @@ var _BackupIds_member *smithy.Schema
 var BackupInProgress = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "BackupInProgress",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BackupInProgress_Message *smithy.Schema
 
 var BackupLifecycle = smithy.NewSchema(smithy.ShapeID{
@@ -607,13 +608,13 @@ var BackupLifecycle_COPYING *smithy.Schema
 var BackupNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "BackupNotFound",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BackupNotFound_Message *smithy.Schema
 
 var BackupRestoring = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "BackupRestoring",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var BackupRestoring_Message *smithy.Schema
 
 var BackupRestoring_FileSystemId *smithy.Schema
@@ -637,7 +638,7 @@ var BackupType_AWS_BACKUP *smithy.Schema
 var BadRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "BadRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BadRequest_Message *smithy.Schema
 
 var _BatchImportMetaDataOnCreate = smithy.NewSchema(smithy.ShapeID{
@@ -1026,7 +1027,7 @@ var _DataRepositoryAssociationIds_member *smithy.Schema
 var DataRepositoryAssociationNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "DataRepositoryAssociationNotFound",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DataRepositoryAssociationNotFound_Message *smithy.Schema
 
 var _DataRepositoryAssociations = smithy.NewSchema(smithy.ShapeID{
@@ -1112,13 +1113,13 @@ var DataRepositoryTask_ReleaseConfiguration *smithy.Schema
 var DataRepositoryTaskEnded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "DataRepositoryTaskEnded",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DataRepositoryTaskEnded_Message *smithy.Schema
 
 var DataRepositoryTaskExecuting = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "DataRepositoryTaskExecuting",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DataRepositoryTaskExecuting_Message *smithy.Schema
 
 var DataRepositoryTaskFailureDetails = smithy.NewSchema(smithy.ShapeID{
@@ -1183,7 +1184,7 @@ var DataRepositoryTaskLifecycle_CANCELING *smithy.Schema
 var DataRepositoryTaskNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "DataRepositoryTaskNotFound",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DataRepositoryTaskNotFound_Message *smithy.Schema
 
 var _DataRepositoryTaskPath = smithy.NewSchema(smithy.ShapeID{
@@ -1584,7 +1585,7 @@ var FileCacheNFSConfiguration_DnsIps *smithy.Schema
 var FileCacheNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "FileCacheNotFound",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FileCacheNotFound_Message *smithy.Schema
 
 var _FileCaches = smithy.NewSchema(smithy.ShapeID{
@@ -1735,7 +1736,7 @@ var _FileSystemMaintenanceOperations_member *smithy.Schema
 var FileSystemNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "FileSystemNotFound",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FileSystemNotFound_Message *smithy.Schema
 
 var _FileSystems = smithy.NewSchema(smithy.ShapeID{
@@ -1848,7 +1849,7 @@ var _IncludeShared = smithy.NewSchema(smithy.ShapeID{
 var IncompatibleParameterError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "IncompatibleParameterError",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var IncompatibleParameterError_Parameter *smithy.Schema
 
 var IncompatibleParameterError_Message *smithy.Schema
@@ -1856,7 +1857,7 @@ var IncompatibleParameterError_Message *smithy.Schema
 var IncompatibleRegionForMultiAZ = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "IncompatibleRegionForMultiAZ",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IncompatibleRegionForMultiAZ_Message *smithy.Schema
 
 var InputOntapVolumeType = smithy.NewSchema(smithy.ShapeID{
@@ -1885,7 +1886,7 @@ var _IntegerRecordSizeKiB = smithy.NewSchema(smithy.ShapeID{
 var InternalServerError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServerError_Message *smithy.Schema
 
 var InvalidAccessPoint = smithy.NewSchema(smithy.ShapeID{
@@ -1893,6 +1894,7 @@ var InvalidAccessPoint = smithy.NewSchema(smithy.ShapeID{
 	Name:      "InvalidAccessPoint",
 }, smithy.ShapeTypeStructure, 2, &smithytraits.XMLName{Name: "Error"},
 
+	&smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 400})
 var InvalidAccessPoint_ErrorCode *smithy.Schema
 
@@ -1901,31 +1903,31 @@ var InvalidAccessPoint_Message *smithy.Schema
 var InvalidDataRepositoryType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "InvalidDataRepositoryType",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDataRepositoryType_Message *smithy.Schema
 
 var InvalidDestinationKmsKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "InvalidDestinationKmsKey",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDestinationKmsKey_Message *smithy.Schema
 
 var InvalidExportPath = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "InvalidExportPath",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidExportPath_Message *smithy.Schema
 
 var InvalidImportPath = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "InvalidImportPath",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidImportPath_Message *smithy.Schema
 
 var InvalidNetworkSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "InvalidNetworkSettings",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"})
 var InvalidNetworkSettings_Message *smithy.Schema
 
 var InvalidNetworkSettings_InvalidSubnetId *smithy.Schema
@@ -1937,13 +1939,13 @@ var InvalidNetworkSettings_InvalidRouteTableId *smithy.Schema
 var InvalidPerUnitStorageThroughput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "InvalidPerUnitStorageThroughput",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidPerUnitStorageThroughput_Message *smithy.Schema
 
 var InvalidRegion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "InvalidRegion",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRegion_Message *smithy.Schema
 
 var InvalidRequest = smithy.NewSchema(smithy.ShapeID{
@@ -1951,6 +1953,7 @@ var InvalidRequest = smithy.NewSchema(smithy.ShapeID{
 	Name:      "InvalidRequest",
 }, smithy.ShapeTypeStructure, 2, &smithytraits.XMLName{Name: "Error"},
 
+	&smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 400})
 var InvalidRequest_ErrorCode *smithy.Schema
 
@@ -1959,7 +1962,7 @@ var InvalidRequest_Message *smithy.Schema
 var InvalidSourceKmsKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "InvalidSourceKmsKey",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidSourceKmsKey_Message *smithy.Schema
 
 var _Iops = smithy.NewSchema(smithy.ShapeID{
@@ -2167,19 +2170,19 @@ var _MetadataStorageCapacity = smithy.NewSchema(smithy.ShapeID{
 var MissingFileCacheConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "MissingFileCacheConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MissingFileCacheConfiguration_Message *smithy.Schema
 
 var MissingFileSystemConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "MissingFileSystemConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MissingFileSystemConfiguration_Message *smithy.Schema
 
 var MissingVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "MissingVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MissingVolumeConfiguration_Message *smithy.Schema
 
 var _Namespace = smithy.NewSchema(smithy.ShapeID{
@@ -2235,7 +2238,7 @@ var NfsVersion_NFS3 *smithy.Schema
 var NotServiceResourceError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "NotServiceResourceError",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var NotServiceResourceError_ResourceARN *smithy.Schema
 
 var NotServiceResourceError_Message *smithy.Schema
@@ -2700,7 +2703,7 @@ var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
 var ResourceDoesNotSupportTagging = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "ResourceDoesNotSupportTagging",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ResourceDoesNotSupportTagging_ResourceARN *smithy.Schema
 
 var ResourceDoesNotSupportTagging_Message *smithy.Schema
@@ -2708,7 +2711,7 @@ var ResourceDoesNotSupportTagging_Message *smithy.Schema
 var ResourceNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "ResourceNotFound",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ResourceNotFound_ResourceARN *smithy.Schema
 
 var ResourceNotFound_Message *smithy.Schema
@@ -2844,7 +2847,7 @@ var _S3AccessPointAttachmentNames_member *smithy.Schema
 var S3AccessPointAttachmentNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "S3AccessPointAttachmentNotFound",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var S3AccessPointAttachmentNotFound_Message *smithy.Schema
 
 var _S3AccessPointAttachments = smithy.NewSchema(smithy.ShapeID{
@@ -3026,7 +3029,7 @@ var ServiceLimit_FILE_CACHE_COUNT *smithy.Schema
 var ServiceLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "ServiceLimitExceeded",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ServiceLimitExceeded_Limit *smithy.Schema
 
 var ServiceLimitExceeded_Message *smithy.Schema
@@ -3156,7 +3159,7 @@ var _SnapshotName = smithy.NewSchema(smithy.ShapeID{
 var SnapshotNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "SnapshotNotFound",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SnapshotNotFound_Message *smithy.Schema
 
 var _SnapshotPolicy = smithy.NewSchema(smithy.ShapeID{
@@ -3178,7 +3181,7 @@ var _SourceBackupId = smithy.NewSchema(smithy.ShapeID{
 var SourceBackupUnavailable = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "SourceBackupUnavailable",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var SourceBackupUnavailable_Message *smithy.Schema
 
 var SourceBackupUnavailable_BackupId *smithy.Schema
@@ -3319,7 +3322,7 @@ var _StorageVirtualMachineName = smithy.NewSchema(smithy.ShapeID{
 var StorageVirtualMachineNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "StorageVirtualMachineNotFound",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var StorageVirtualMachineNotFound_Message *smithy.Schema
 
 var StorageVirtualMachineRootVolumeSecurityStyle = smithy.NewSchema(smithy.ShapeID{
@@ -3478,6 +3481,7 @@ var TooManyAccessPoints = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TooManyAccessPoints",
 }, smithy.ShapeTypeStructure, 2, &smithytraits.XMLName{Name: "Error"},
 
+	&smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 400})
 var TooManyAccessPoints_ErrorCode *smithy.Schema
 
@@ -3507,7 +3511,7 @@ var Unit_DAYS *smithy.Schema
 var UnsupportedOperation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "UnsupportedOperation",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedOperation_Message *smithy.Schema
 
 var UpdateFileCacheLustreConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -3823,7 +3827,7 @@ var _VolumeName = smithy.NewSchema(smithy.ShapeID{
 var VolumeNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "VolumeNotFound",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var VolumeNotFound_Message *smithy.Schema
 
 var _VolumePath = smithy.NewSchema(smithy.ShapeID{

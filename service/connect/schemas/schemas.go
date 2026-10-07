@@ -2797,7 +2797,8 @@ var AmazonConnectService = smithy.NewServiceSchema(_AmazonConnectService, "2017-
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "AccessDeniedException",
 		StatusCode: 403})
 var AccessDeniedException_Message *smithy.Schema
@@ -4517,7 +4518,8 @@ var Condition_NumberCondition *smithy.Schema
 var ConditionalOperationFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ConditionalOperationFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConditionalOperationFailedException_Message *smithy.Schema
 
 var _Conditions = smithy.NewSchema(smithy.ShapeID{
@@ -4537,7 +4539,8 @@ var ConfigurableNotificationPriority_Low *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConnectionCredentials = smithy.NewSchema(smithy.ShapeID{
@@ -5116,7 +5119,8 @@ var _ContactFlowName = smithy.NewSchema(smithy.ShapeID{
 var ContactFlowNotPublishedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ContactFlowNotPublishedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ContactFlowNotPublishedException_Message *smithy.Schema
 
 var _ContactFlowSearchConditionList = smithy.NewSchema(smithy.ShapeID{
@@ -5339,7 +5343,8 @@ var ContactMetricValue_Number *smithy.Schema
 var ContactNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ContactNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 410},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 410},
 	&smithytraits.AWSQueryError{ErrorCode: "ContactNotFoundException",
 		StatusCode: 410})
 var ContactNotFoundException_Message *smithy.Schema
@@ -5347,7 +5352,8 @@ var ContactNotFoundException_Message *smithy.Schema
 var ContactNotTerminatedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ContactNotTerminatedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ContactNotTerminatedException_Message *smithy.Schema
 
 var ContactParticipantRole = smithy.NewSchema(smithy.ShapeID{
@@ -6219,7 +6225,8 @@ var _DestinationId = smithy.NewSchema(smithy.ShapeID{
 var DestinationNotAllowedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "DestinationNotAllowedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "DestinationNotAllowedException",
 		StatusCode: 403})
 var DestinationNotAllowedException_Message *smithy.Schema
@@ -6374,7 +6381,8 @@ var DownloadUrlMetadata_UrlExpiry *smithy.Schema
 var DuplicateResourceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "DuplicateResourceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var DuplicateResourceException_Message *smithy.Schema
 
 var _Duration = smithy.NewSchema(smithy.ShapeID{
@@ -9312,7 +9320,8 @@ var _IAMRestrictedPrimaryValue = smithy.NewSchema(smithy.ShapeID{
 var IdempotencyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "IdempotencyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var IdempotencyException_Message *smithy.Schema
 
 var ImagesLogo = smithy.NewSchema(smithy.ShapeID{
@@ -9674,7 +9683,8 @@ var IntegrationType_MESSAGE_PROCESSOR *smithy.Schema
 var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServiceException_Message *smithy.Schema
 
 var IntervalDetails = smithy.NewSchema(smithy.ShapeID{
@@ -9709,31 +9719,36 @@ var _IntervalPositiveInteger = smithy.NewSchema(smithy.ShapeID{
 var InvalidActiveRegionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "InvalidActiveRegionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidActiveRegionException_Message *smithy.Schema
 
 var InvalidContactFlowException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "InvalidContactFlowException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidContactFlowException_problems *smithy.Schema
 
 var InvalidContactFlowModuleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "InvalidContactFlowModuleException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidContactFlowModuleException_Problems *smithy.Schema
 
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterException_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidRequestException_Message *smithy.Schema
 
 var InvalidRequestException_Reason *smithy.Schema
@@ -9747,7 +9762,8 @@ var InvalidRequestExceptionReason_AttachedFileInvalidRequestExceptionReason *smi
 var InvalidTestCaseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "InvalidTestCaseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidTestCaseException_Problems *smithy.Schema
 
 var InvisibleFieldInfo = smithy.NewSchema(smithy.ShapeID{
@@ -9898,7 +9914,8 @@ var LexVersion_V2 *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "LimitExceededException",
 		StatusCode: 429})
 var LimitExceededException_Message *smithy.Schema
@@ -10011,7 +10028,8 @@ var MatchCriteria_AgentsCriteria *smithy.Schema
 var MaximumResultReturnedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "MaximumResultReturnedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var MaximumResultReturnedException_Message *smithy.Schema
 
 var _MaximumSizeLimitInBytes = smithy.NewSchema(smithy.ShapeID{
@@ -11022,7 +11040,8 @@ var _OutboundCallsEnabled = smithy.NewSchema(smithy.ShapeID{
 var OutboundContactNotPermittedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "OutboundContactNotPermittedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "OutboundContactNotPermittedException",
 		StatusCode: 403})
 var OutboundContactNotPermittedException_Message *smithy.Schema
@@ -11094,7 +11113,8 @@ var _OutboundSubject = smithy.NewSchema(smithy.ShapeID{
 var OutputTypeNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "OutputTypeNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var OutputTypeNotFoundException_Message *smithy.Schema
 
 var OverrideDays = smithy.NewSchema(smithy.ShapeID{
@@ -12488,7 +12508,8 @@ var _PromptSummaryList_member *smithy.Schema
 var PropertyValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "PropertyValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var PropertyValidationException_Message *smithy.Schema
 
 var PropertyValidationException_PropertyList *smithy.Schema
@@ -13642,7 +13663,8 @@ var _ResourceArnOrId = smithy.NewSchema(smithy.ShapeID{
 var ResourceConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ResourceConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceConflictException_Message *smithy.Schema
 
 var _ResourceId = smithy.NewSchema(smithy.ShapeID{
@@ -13653,7 +13675,8 @@ var _ResourceId = smithy.NewSchema(smithy.ShapeID{
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceInUseException_Message *smithy.Schema
 
 var ResourceInUseException_ResourceType *smithy.Schema
@@ -13663,13 +13686,15 @@ var ResourceInUseException_ResourceId *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotReadyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ResourceNotReadyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceNotReadyException_Message *smithy.Schema
 
 var ResourceTagsSearchCriteria = smithy.NewSchema(smithy.ShapeID{
@@ -14720,7 +14745,8 @@ var SentimentConfiguration_Behavior *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ServiceQuotaExceededException_Reason *smithy.Schema
@@ -15645,7 +15671,8 @@ var _ThresholdValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "ThrottlingException",
 		StatusCode: 429})
 var ThrottlingException_Message *smithy.Schema
@@ -15671,7 +15698,8 @@ var _TimeZone = smithy.NewSchema(smithy.ShapeID{
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_Message *smithy.Schema
 
 var _TotalCount = smithy.NewSchema(smithy.ShapeID{
@@ -16089,7 +16117,8 @@ var UserInfo_UserId *smithy.Schema
 var UserNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UserNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var UserNotFoundException_Message *smithy.Schema
 
 var UserNotificationSummary = smithy.NewSchema(smithy.ShapeID{

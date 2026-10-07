@@ -95,7 +95,8 @@ var AIOps = smithy.NewServiceSchema(_AIOps, "2018-05-10")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.aiops",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var _ChatbotNotificationChannel = smithy.NewSchema(smithy.ShapeID{
@@ -120,7 +121,8 @@ var _ChatConfigurationArns_member *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.aiops",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var CrossAccountConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -154,7 +156,8 @@ var EncryptionConfigurationType_CUSTOMER_MANAGED_KMS_KEY *smithy.Schema
 var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.aiops",
 	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var ForbiddenException_message *smithy.Schema
 
 var _IdentifierStringWithPatternAndLengthLimits = smithy.NewSchema(smithy.ShapeID{
@@ -165,7 +168,8 @@ var _IdentifierStringWithPatternAndLengthLimits = smithy.NewSchema(smithy.ShapeI
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.aiops",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var _InvestigationGroupArn = smithy.NewSchema(smithy.ShapeID{
@@ -205,7 +209,8 @@ var ListInvestigationGroupsModel_name *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.aiops",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _Retention = smithy.NewSchema(smithy.ShapeID{
@@ -226,7 +231,8 @@ var _SensitiveStringWithLengthLimits = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.aiops",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceQuotaExceededException_resourceId *smithy.Schema
@@ -280,13 +286,15 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.aiops",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.aiops",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var CreateInvestigationGroupInput = smithy.NewSchema(smithy.ShapeID{

@@ -769,7 +769,8 @@ var ___string = smithy.NewSchema(smithy.ShapeID{
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.greengrass",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_ErrorDetails *smithy.Schema
 
 var BadRequestException_Message *smithy.Schema
@@ -1131,7 +1132,8 @@ var GroupVersion_SubscriptionDefinitionVersionArn *smithy.Schema
 var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.greengrass",
 	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerErrorException_ErrorDetails *smithy.Schema
 
 var InternalServerErrorException_Message *smithy.Schema

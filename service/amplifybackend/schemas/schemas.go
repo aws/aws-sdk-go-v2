@@ -383,7 +383,8 @@ var BackendStoragePermissions_UnAuthenticated *smithy.Schema
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.amplifybackend",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_Message *smithy.Schema
 
 var CreateBackendAuthForgotPasswordConfig = smithy.NewSchema(smithy.ShapeID{
@@ -507,7 +508,8 @@ var EmailSettings_EmailSubject *smithy.Schema
 var GatewayTimeoutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.amplifybackend",
 	Name:      "GatewayTimeoutException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 504})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 504})
 var GatewayTimeoutException_Message *smithy.Schema
 
 var GetBackendStorageResourceConfig = smithy.NewSchema(smithy.ShapeID{
@@ -627,7 +629,8 @@ var Mode_OPENID_CONNECT *smithy.Schema
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.amplifybackend",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_Message *smithy.Schema
 
 var NotFoundException_ResourceType *smithy.Schema
@@ -778,7 +781,8 @@ var Status_STALE *smithy.Schema
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.amplifybackend",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_LimitType *smithy.Schema
 
 var TooManyRequestsException_Message *smithy.Schema

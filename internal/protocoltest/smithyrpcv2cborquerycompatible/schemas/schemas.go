@@ -32,8 +32,9 @@ var GetItemOutput = smithy.NewSchema(smithy.ShapeID{
 var ItemNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "smithy.protocoltests.rpcv2Cbor",
 	Name:      "ItemNotFound",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.AWSQueryError{ErrorCode: "aws.protocolstests.json#ItemNotFound",
-	StatusCode: 404})
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"},
+	&smithytraits.AWSQueryError{ErrorCode: "aws.protocolstests.json#ItemNotFound",
+		StatusCode: 404})
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles

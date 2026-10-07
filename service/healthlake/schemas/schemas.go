@@ -170,7 +170,8 @@ var HealthLake = smithy.NewServiceSchema(_HealthLake, "2017-07-01")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var AgentInputMessage = smithy.NewSchema(smithy.ShapeID{
@@ -192,7 +193,7 @@ var AgentInputMessageType_USER_CONFIRMATION_RESPONSE *smithy.Schema
 var AgentMessageOutOfContextException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "AgentMessageOutOfContextException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AgentMessageOutOfContextException_Message *smithy.Schema
 
 var _AgentMessageString = smithy.NewSchema(smithy.ShapeID{
@@ -337,7 +338,8 @@ var _ConfigurationMetadata = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ContinuousBackupRestoreConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -354,7 +356,8 @@ var _ConversationIdString = smithy.NewSchema(smithy.ShapeID{
 var ConversationNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "ConversationNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ConversationNotFoundException_Message *smithy.Schema
 
 var CreateDataTransformationProfileSource = smithy.NewSchema(smithy.ShapeID{
@@ -651,7 +654,8 @@ var _ExportJobPropertiesList_member *smithy.Schema
 var FailedDependencyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "FailedDependencyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 424})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 424})
 var FailedDependencyException_Message *smithy.Schema
 
 var FHIRVersion = smithy.NewSchema(smithy.ShapeID{
@@ -745,7 +749,8 @@ var InputDataConfig_S3Uri *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var _JobId = smithy.NewSchema(smithy.ShapeID{
@@ -879,7 +884,8 @@ var NlpStatus_DISABLING *smithy.Schema
 var NotImplementedOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "NotImplementedOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 501})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 501})
 var NotImplementedOperationException_Message *smithy.Schema
 
 var OutputDataConfig = smithy.NewSchema(smithy.ShapeID{
@@ -953,7 +959,8 @@ var _ProfileVersion = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var RestoreConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -989,7 +996,8 @@ var SampleDataSource_S3Uri *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var SourceFormat = smithy.NewSchema(smithy.ShapeID{
@@ -1067,7 +1075,8 @@ var TargetFormat_FHIR_R4 *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var TransformationInputDataConfig = smithy.NewSchema(smithy.ShapeID{
@@ -1171,19 +1180,22 @@ var TransformationOutputDataConfig_S3Configuration *smithy.Schema
 var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var UnauthorizedException_Message *smithy.Schema
 
 var UnsupportedMIMETypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "UnsupportedMIMETypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 415})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 415})
 var UnsupportedMIMETypeException_Message *smithy.Schema
 
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_Message *smithy.Schema
 
 var ValidationLevel = smithy.NewSchema(smithy.ShapeID{

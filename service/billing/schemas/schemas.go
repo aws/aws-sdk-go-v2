@@ -135,7 +135,8 @@ var AWSBilling = smithy.NewServiceSchema(_AWSBilling, "2023-09-07")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "BillingAccessDenied",
 		StatusCode: 403})
 var AccessDeniedException_message *smithy.Schema
@@ -359,7 +360,8 @@ var BillingViewHealthStatus_statusReasons *smithy.Schema
 var BillingViewHealthStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "BillingViewHealthStatusException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BillingViewHealthStatusException_message *smithy.Schema
 
 var _BillingViewList = smithy.NewSchema(smithy.ShapeID{
@@ -616,7 +618,8 @@ var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409},
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409},
 	&smithytraits.AWSQueryError{ErrorCode: "BillingConflict",
 		StatusCode: 409})
 var ConflictException_message *smithy.Schema
@@ -819,7 +822,8 @@ var _FieldName = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "BillingInternalServer",
 		StatusCode: 500})
 var InternalServerException_message *smithy.Schema
@@ -987,7 +991,8 @@ var _ResourceId = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "BillingResourceNotFound",
 		StatusCode: 404})
 var ResourceNotFoundException_message *smithy.Schema
@@ -1064,7 +1069,8 @@ var _ServiceLevelAccountUsageList_member *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 402},
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402},
 	&smithytraits.AWSQueryError{ErrorCode: "BillingServiceQuotaExceeded",
 		StatusCode: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
@@ -1113,7 +1119,8 @@ var TagValues_values *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "BillingThrottling",
 		StatusCode: 429})
 var ThrottlingException_message *smithy.Schema
@@ -1135,7 +1142,8 @@ var TimeRange_endDateInclusive *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "BillingValidation",
 		StatusCode: 400})
 var ValidationException_message *smithy.Schema

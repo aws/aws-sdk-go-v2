@@ -123,7 +123,8 @@ var Invoicing = smithy.NewServiceSchema(_Invoicing, "2024-12-01")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "InvoicingAccessDenied",
 		StatusCode: 403})
 var AccessDeniedException_message *smithy.Schema
@@ -209,7 +210,8 @@ var BuyerDomain_NetworkID *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409},
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409},
 	&smithytraits.AWSQueryError{ErrorCode: "InvoicingConflict",
 		StatusCode: 409})
 var ConflictException_message *smithy.Schema
@@ -413,7 +415,8 @@ var Filters_BillSourceAccounts *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "InvoicingInternalServer",
 		StatusCode: 500})
 var InternalServerException_retryAfterSeconds *smithy.Schema
@@ -913,7 +916,8 @@ var ReceiverRole_BUYER *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "InvoicingResourceNotFound",
 		StatusCode: 404})
 var ResourceNotFoundException_message *smithy.Schema
@@ -970,7 +974,8 @@ var _SensitiveBasicStringWithoutSpace = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402},
 	&smithytraits.AWSQueryError{ErrorCode: "InvoicingServiceQuotaExceeded",
 		StatusCode: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
@@ -1100,7 +1105,8 @@ var TestEnvPreferenceInput_ProcurementPortalInstanceEndpoint *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "InvoicingThrottling",
 		StatusCode: 429})
 var ThrottlingException_message *smithy.Schema
@@ -1108,7 +1114,8 @@ var ThrottlingException_message *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvoicingValidation",
 		StatusCode: 400})
 var ValidationException_message *smithy.Schema

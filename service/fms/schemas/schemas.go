@@ -5,6 +5,7 @@ package schemas
 import (
 	smithy "github.com/aws/smithy-go"
 	smithyprelude "github.com/aws/smithy-go/prelude"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 var AssociateAdminAccount = smithy.NewSchema(smithy.ShapeID{
@@ -918,13 +919,13 @@ var _IntegerObjectMinimum0 = smithy.NewSchema(smithy.ShapeID{
 var InternalErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fms",
 	Name:      "InternalErrorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InternalErrorException_Message *smithy.Schema
 
 var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fms",
 	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidInputException_Message *smithy.Schema
 
 var InvalidNetworkAclEntriesViolation = smithy.NewSchema(smithy.ShapeID{
@@ -944,13 +945,13 @@ var InvalidNetworkAclEntriesViolation_EntryViolations *smithy.Schema
 var InvalidOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fms",
 	Name:      "InvalidOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidOperationException_Message *smithy.Schema
 
 var InvalidTypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fms",
 	Name:      "InvalidTypeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTypeException_Message *smithy.Schema
 
 var _IPPortNumber = smithy.NewSchema(smithy.ShapeID{
@@ -990,7 +991,7 @@ var _LengthBoundedStringList_member *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fms",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_Message *smithy.Schema
 
 var _ListId = smithy.NewSchema(smithy.ShapeID{
@@ -1743,7 +1744,7 @@ var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fms",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceSet = smithy.NewSchema(smithy.ShapeID{

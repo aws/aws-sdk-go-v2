@@ -151,7 +151,8 @@ var _AWSAccountIdList_member *smithy.Schema
 var BatchEntryIdsNotDistinct = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "BatchEntryIdsNotDistinct",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "AWS.SimpleQueueService.BatchEntryIdsNotDistinct",
 		StatusCode: 400})
 var BatchEntryIdsNotDistinct_message *smithy.Schema
@@ -159,7 +160,8 @@ var BatchEntryIdsNotDistinct_message *smithy.Schema
 var BatchRequestTooLong = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "BatchRequestTooLong",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "AWS.SimpleQueueService.BatchRequestTooLong",
 		StatusCode: 400})
 var BatchRequestTooLong_message *smithy.Schema
@@ -260,7 +262,8 @@ var _DeleteMessageBatchResultEntryList_member *smithy.Schema
 var EmptyBatchRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "EmptyBatchRequest",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "AWS.SimpleQueueService.EmptyBatchRequest",
 		StatusCode: 400})
 var EmptyBatchRequest_message *smithy.Schema
@@ -278,7 +281,8 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InvalidAddress = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "InvalidAddress",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidAddress",
 		StatusCode: 404})
 var InvalidAddress_message *smithy.Schema
@@ -286,19 +290,20 @@ var InvalidAddress_message *smithy.Schema
 var InvalidAttributeName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "InvalidAttributeName",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidAttributeName_message *smithy.Schema
 
 var InvalidAttributeValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "InvalidAttributeValue",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidAttributeValue_message *smithy.Schema
 
 var InvalidBatchEntryId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "InvalidBatchEntryId",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "AWS.SimpleQueueService.InvalidBatchEntryId",
 		StatusCode: 400})
 var InvalidBatchEntryId_message *smithy.Schema
@@ -306,18 +311,19 @@ var InvalidBatchEntryId_message *smithy.Schema
 var InvalidIdFormat = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "InvalidIdFormat",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"})
 
 var InvalidMessageContents = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "InvalidMessageContents",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidMessageContents_message *smithy.Schema
 
 var InvalidSecurity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "InvalidSecurity",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidSecurity",
 		StatusCode: 403})
 var InvalidSecurity_message *smithy.Schema
@@ -325,7 +331,8 @@ var InvalidSecurity_message *smithy.Schema
 var KmsAccessDenied = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "KmsAccessDenied",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "KMS.AccessDeniedException",
 		StatusCode: 400})
 var KmsAccessDenied_message *smithy.Schema
@@ -333,7 +340,8 @@ var KmsAccessDenied_message *smithy.Schema
 var KmsDisabled = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "KmsDisabled",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "KMS.DisabledException",
 		StatusCode: 400})
 var KmsDisabled_message *smithy.Schema
@@ -341,7 +349,8 @@ var KmsDisabled_message *smithy.Schema
 var KmsInvalidKeyUsage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "KmsInvalidKeyUsage",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "KMS.InvalidKeyUsageException",
 		StatusCode: 400})
 var KmsInvalidKeyUsage_message *smithy.Schema
@@ -349,7 +358,8 @@ var KmsInvalidKeyUsage_message *smithy.Schema
 var KmsInvalidState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "KmsInvalidState",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "KMS.InvalidStateException",
 		StatusCode: 400})
 var KmsInvalidState_message *smithy.Schema
@@ -357,7 +367,8 @@ var KmsInvalidState_message *smithy.Schema
 var KmsNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "KmsNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "KMS.NotFoundException",
 		StatusCode: 400})
 var KmsNotFound_message *smithy.Schema
@@ -365,7 +376,8 @@ var KmsNotFound_message *smithy.Schema
 var KmsOptInRequired = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "KmsOptInRequired",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "KMS.OptInRequired",
 		StatusCode: 403})
 var KmsOptInRequired_message *smithy.Schema
@@ -373,7 +385,8 @@ var KmsOptInRequired_message *smithy.Schema
 var KmsThrottled = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "KmsThrottled",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "KMS.ThrottlingException",
 		StatusCode: 400})
 var KmsThrottled_message *smithy.Schema
@@ -479,7 +492,8 @@ var _MessageList_member *smithy.Schema
 var MessageNotInflight = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "MessageNotInflight",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "AWS.SimpleQueueService.MessageNotInflight",
 		StatusCode: 400})
 
@@ -554,7 +568,8 @@ var _NullableLong = smithy.NewSchema(smithy.ShapeID{
 var OverLimit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "OverLimit",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "OverLimit",
 		StatusCode: 403})
 var OverLimit_message *smithy.Schema
@@ -562,7 +577,8 @@ var OverLimit_message *smithy.Schema
 var PurgeQueueInProgress = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "PurgeQueueInProgress",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "AWS.SimpleQueueService.PurgeQueueInProgress",
 		StatusCode: 403})
 var PurgeQueueInProgress_message *smithy.Schema
@@ -626,7 +642,8 @@ var QueueAttributeName_SqsManagedSseEnabled *smithy.Schema
 var QueueDeletedRecently = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "QueueDeletedRecently",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "AWS.SimpleQueueService.QueueDeletedRecently",
 		StatusCode: 400})
 var QueueDeletedRecently_message *smithy.Schema
@@ -634,7 +651,8 @@ var QueueDeletedRecently_message *smithy.Schema
 var QueueDoesNotExist = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "QueueDoesNotExist",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "AWS.SimpleQueueService.NonExistentQueue",
 		StatusCode: 400})
 var QueueDoesNotExist_message *smithy.Schema
@@ -642,7 +660,8 @@ var QueueDoesNotExist_message *smithy.Schema
 var QueueNameExists = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "QueueNameExists",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "QueueAlreadyExists",
 		StatusCode: 400})
 var QueueNameExists_message *smithy.Schema
@@ -656,7 +675,8 @@ var _QueueUrlList_member *smithy.Schema
 var ReceiptHandleIsInvalid = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "ReceiptHandleIsInvalid",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ReceiptHandleIsInvalid",
 		StatusCode: 404})
 var ReceiptHandleIsInvalid_message *smithy.Schema
@@ -664,7 +684,8 @@ var ReceiptHandleIsInvalid_message *smithy.Schema
 var RequestThrottled = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "RequestThrottled",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "RequestThrottled",
 		StatusCode: 403})
 var RequestThrottled_message *smithy.Schema
@@ -672,7 +693,8 @@ var RequestThrottled_message *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
 		StatusCode: 404})
 var ResourceNotFoundException_message *smithy.Schema
@@ -766,7 +788,8 @@ var _Token = smithy.NewSchema(smithy.ShapeID{
 var TooManyEntriesInBatchRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "TooManyEntriesInBatchRequest",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "AWS.SimpleQueueService.TooManyEntriesInBatchRequest",
 		StatusCode: 400})
 var TooManyEntriesInBatchRequest_message *smithy.Schema
@@ -774,7 +797,8 @@ var TooManyEntriesInBatchRequest_message *smithy.Schema
 var UnsupportedOperation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sqs",
 	Name:      "UnsupportedOperation",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "AWS.SimpleQueueService.UnsupportedOperation",
 		StatusCode: 400})
 var UnsupportedOperation_message *smithy.Schema

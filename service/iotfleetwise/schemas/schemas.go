@@ -417,7 +417,8 @@ var IoTAutobahnControlPlane = smithy.NewServiceSchema(_IoTAutobahnControlPlane, 
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iotfleetwise",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var _actionEventExpression = smithy.NewSchema(smithy.ShapeID{
@@ -686,7 +687,8 @@ var ConditionBasedSignalFetchConfig_triggerMode *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iotfleetwise",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConflictException_resource *smithy.Schema
@@ -904,7 +906,8 @@ var DecoderManifestSummary_message *smithy.Schema
 var DecoderManifestValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iotfleetwise",
 	Name:      "DecoderManifestValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var DecoderManifestValidationException_invalidSignals *smithy.Schema
 
 var DecoderManifestValidationException_invalidNetworkInterfaces *smithy.Schema
@@ -1059,7 +1062,8 @@ var _InterfaceIds_member *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iotfleetwise",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var InternalServerException_retryAfterSeconds *smithy.Schema
@@ -1081,7 +1085,8 @@ var _InvalidNetworkInterfaces_member *smithy.Schema
 var InvalidNodeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iotfleetwise",
 	Name:      "InvalidNodeException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidNodeException_invalidNodes *smithy.Schema
 
 var InvalidNodeException_reason *smithy.Schema
@@ -1121,7 +1126,8 @@ var _InvalidSignals_member *smithy.Schema
 var InvalidSignalsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iotfleetwise",
 	Name:      "InvalidSignalsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidSignalsException_message *smithy.Schema
 
 var InvalidSignalsException_invalidSignals *smithy.Schema
@@ -1134,7 +1140,8 @@ var _languageVersion = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iotfleetwise",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var LimitExceededException_message *smithy.Schema
 
 var LimitExceededException_resourceId *smithy.Schema
@@ -1598,7 +1605,8 @@ var _resourceName = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iotfleetwise",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_resourceId *smithy.Schema
@@ -2091,7 +2099,8 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iotfleetwise",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var ThrottlingException_quotaCode *smithy.Schema
@@ -2281,7 +2290,8 @@ var _updateVehicleResponseItems_member *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iotfleetwise",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_reason *smithy.Schema

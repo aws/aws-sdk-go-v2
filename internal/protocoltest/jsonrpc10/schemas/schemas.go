@@ -104,7 +104,7 @@ var ClientOptionalDefaults_member *smithy.Schema
 var ComplexError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.json10",
 	Name:      "ComplexError",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ComplexError_TopLevel *smithy.Schema
 
 var ComplexError_Nested *smithy.Schema
@@ -208,12 +208,12 @@ var Farewell_phrase *smithy.Schema
 var FooError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.json10",
 	Name:      "FooError",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "server"})
 
 var InvalidGreeting = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.json10",
 	Name:      "InvalidGreeting",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidGreeting_Message *smithy.Schema
 
 var MyUnion = smithy.NewSchema(smithy.ShapeID{

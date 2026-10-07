@@ -512,7 +512,7 @@ var _CapacityProviderStrategyItemWeight = smithy.NewSchema(smithy.ShapeID{
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchevents",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConcurrentModificationException_message *smithy.Schema
 
 var Condition = smithy.NewSchema(smithy.ShapeID{
@@ -955,7 +955,7 @@ var _HttpsEndpoint = smithy.NewSchema(smithy.ShapeID{
 var IllegalStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchevents",
 	Name:      "IllegalStatusException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IllegalStatusException_message *smithy.Schema
 
 var InputTransformer = smithy.NewSchema(smithy.ShapeID{
@@ -979,19 +979,19 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchevents",
 	Name:      "InternalException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalException_message *smithy.Schema
 
 var InvalidEventPatternException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchevents",
 	Name:      "InvalidEventPatternException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidEventPatternException_message *smithy.Schema
 
 var InvalidStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchevents",
 	Name:      "InvalidStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidStateException_message *smithy.Schema
 
 var KinesisParameters = smithy.NewSchema(smithy.ShapeID{
@@ -1013,7 +1013,7 @@ var LaunchType_EXTERNAL *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchevents",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var _LimitMax100 = smithy.NewSchema(smithy.ShapeID{
@@ -1039,7 +1039,7 @@ var _ManagedBy = smithy.NewSchema(smithy.ShapeID{
 var ManagedRuleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchevents",
 	Name:      "ManagedRuleException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ManagedRuleException_message *smithy.Schema
 
 var _MaximumEventAgeInSeconds = smithy.NewSchema(smithy.ShapeID{
@@ -1081,7 +1081,7 @@ var _NonPartnerEventBusNameOrArn = smithy.NewSchema(smithy.ShapeID{
 var OperationDisabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchevents",
 	Name:      "OperationDisabledException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OperationDisabledException_message *smithy.Schema
 
 var PartnerEventSource = smithy.NewSchema(smithy.ShapeID{
@@ -1191,7 +1191,7 @@ var PlacementStrategyType_BINPACK *smithy.Schema
 var PolicyLengthExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchevents",
 	Name:      "PolicyLengthExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PolicyLengthExceededException_message *smithy.Schema
 
 var _Principal = smithy.NewSchema(smithy.ShapeID{
@@ -1443,7 +1443,7 @@ var _ReplayStateReason = smithy.NewSchema(smithy.ShapeID{
 var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchevents",
 	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceAlreadyExistsException_message *smithy.Schema
 
 var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
@@ -1454,7 +1454,7 @@ var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchevents",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _RetentionDays = smithy.NewSchema(smithy.ShapeID{

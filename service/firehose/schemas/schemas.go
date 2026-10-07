@@ -442,7 +442,7 @@ var CompressionFormat_HADOOP_SNAPPY *smithy.Schema
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.firehose",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConcurrentModificationException_message *smithy.Schema
 
 var Connectivity = smithy.NewSchema(smithy.ShapeID{
@@ -1550,13 +1550,13 @@ var _IntervalInSeconds = smithy.NewSchema(smithy.ShapeID{
 var InvalidArgumentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.firehose",
 	Name:      "InvalidArgumentException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidArgumentException_message *smithy.Schema
 
 var InvalidKMSResourceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.firehose",
 	Name:      "InvalidKMSResourceException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidKMSResourceException_code *smithy.Schema
 
 var InvalidKMSResourceException_message *smithy.Schema
@@ -1564,7 +1564,7 @@ var InvalidKMSResourceException_message *smithy.Schema
 var InvalidSourceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.firehose",
 	Name:      "InvalidSourceException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidSourceException_code *smithy.Schema
 
 var InvalidSourceException_message *smithy.Schema
@@ -1609,7 +1609,7 @@ var KMSEncryptionConfig_AWSKMSKeyARN *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.firehose",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var _ListDeliveryStreamsInputLimit = smithy.NewSchema(smithy.ShapeID{
@@ -2067,13 +2067,13 @@ var RedshiftS3BackupMode_Enabled *smithy.Schema
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.firehose",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceInUseException_message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.firehose",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _RetryDurationInSeconds = smithy.NewSchema(smithy.ShapeID{
@@ -2214,7 +2214,8 @@ var Serializer_OrcSerDe *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.firehose",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_message *smithy.Schema
 
 var _SizeInMBs = smithy.NewSchema(smithy.ShapeID{

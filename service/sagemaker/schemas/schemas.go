@@ -7705,7 +7705,7 @@ var _ConfigValue = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConflictException_Message *smithy.Schema
 
 var _ContainerArgument = smithy.NewSchema(smithy.ShapeID{
@@ -20210,13 +20210,13 @@ var _ResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
 var ResourceInUse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ResourceInUse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceInUse_Message *smithy.Schema
 
 var ResourceLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ResourceLimitExceeded",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceLimitExceeded_Message *smithy.Schema
 
 var ResourceLimits = smithy.NewSchema(smithy.ShapeID{
@@ -20232,7 +20232,7 @@ var ResourceLimits_MaxRuntimeInSeconds *smithy.Schema
 var ResourceNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ResourceNotFound",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFound_Message *smithy.Schema
 
 var _ResourcePolicyString = smithy.NewSchema(smithy.ShapeID{

@@ -549,7 +549,8 @@ var _BatchItemErrorList_member *smithy.Schema
 var BatchSizeLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "BatchSizeLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BatchSizeLimitExceededException_Message *smithy.Schema
 
 var Block = smithy.NewSchema(smithy.ShapeID{
@@ -685,7 +686,8 @@ var _ComprehendModelArn = smithy.NewSchema(smithy.ShapeID{
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ConcurrentModificationException_Message *smithy.Schema
 
 var _CustomerInputString = smithy.NewSchema(smithy.ShapeID{
@@ -1870,13 +1872,15 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var InvalidFilterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "InvalidFilterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidFilterException_Message *smithy.Schema
 
 var InvalidRequestDetail = smithy.NewSchema(smithy.ShapeID{
@@ -1900,7 +1904,8 @@ var InvalidRequestDetailReason_TEXTRACT_ACCESS_DENIED *smithy.Schema
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidRequestException_Message *smithy.Schema
 
 var InvalidRequestException_Reason *smithy.Schema
@@ -1926,7 +1931,8 @@ var _JobName = smithy.NewSchema(smithy.ShapeID{
 var JobNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "JobNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var JobNotFoundException_Message *smithy.Schema
 
 var JobStatus = smithy.NewSchema(smithy.ShapeID{
@@ -2013,7 +2019,8 @@ var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
 var KmsKeyValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "KmsKeyValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var KmsKeyValidationException_Message *smithy.Schema
 
 var _LabelDelimiter = smithy.NewSchema(smithy.ShapeID{
@@ -2587,25 +2594,29 @@ var RelationshipType_CHILD *smithy.Schema
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceInUseException_Message *smithy.Schema
 
 var ResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "ResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceLimitExceededException_Message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "ResourceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceUnavailableException_Message *smithy.Schema
 
 var _S3Uri = smithy.NewSchema(smithy.ShapeID{
@@ -2928,7 +2939,8 @@ var TextSegment_Text *smithy.Schema
 var TextSizeLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "TextSizeLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TextSizeLimitExceededException_Message *smithy.Schema
 
 var _Timestamp = smithy.NewSchema(smithy.ShapeID{
@@ -2939,19 +2951,22 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_Message *smithy.Schema
 
 var TooManyTagKeysException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "TooManyTagKeysException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagKeysException_Message *smithy.Schema
 
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_Message *smithy.Schema
 
 var TopicsDetectionJobFilter = smithy.NewSchema(smithy.ShapeID{
@@ -3039,7 +3054,8 @@ var ToxicLabels_Toxicity *smithy.Schema
 var UnsupportedLanguageException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.comprehend",
 	Name:      "UnsupportedLanguageException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var UnsupportedLanguageException_Message *smithy.Schema
 
 var UpdateDataSecurityConfig = smithy.NewSchema(smithy.ShapeID{

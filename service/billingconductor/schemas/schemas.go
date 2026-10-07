@@ -256,7 +256,8 @@ var AWSBillingConductor = smithy.NewServiceSchema(_AWSBillingConductor, "2021-07
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var _AccountAssociationsList = smithy.NewSchema(smithy.ShapeID{
@@ -579,7 +580,8 @@ var ComputationRuleEnum_CONSOLIDATED *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConflictException_ResourceId *smithy.Schema
@@ -897,7 +899,8 @@ var _Instant = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var InternalServerException_RetryAfterSeconds *smithy.Schema
@@ -1302,7 +1305,8 @@ var _ProformaCost = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_ResourceId *smithy.Schema
@@ -1344,7 +1348,8 @@ var _Service = smithy.NewSchema(smithy.ShapeID{
 var ServiceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "ServiceLimitExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceLimitExceededException_Message *smithy.Schema
 
 var ServiceLimitExceededException_ResourceId *smithy.Schema
@@ -1401,7 +1406,8 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var ThrottlingException_RetryAfterSeconds *smithy.Schema
@@ -1476,7 +1482,8 @@ var _UsageType = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_Message *smithy.Schema
 
 var ValidationException_Reason *smithy.Schema

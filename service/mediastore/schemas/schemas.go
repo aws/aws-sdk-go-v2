@@ -167,7 +167,7 @@ var _ContainerARN = smithy.NewSchema(smithy.ShapeID{
 var ContainerInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediastore",
 	Name:      "ContainerInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ContainerInUseException_Message *smithy.Schema
 
 var ContainerLevelMetrics = smithy.NewSchema(smithy.ShapeID{
@@ -197,7 +197,7 @@ var _ContainerName = smithy.NewSchema(smithy.ShapeID{
 var ContainerNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediastore",
 	Name:      "ContainerNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ContainerNotFoundException_Message *smithy.Schema
 
 var _ContainerPolicy = smithy.NewSchema(smithy.ShapeID{
@@ -224,7 +224,7 @@ var _CorsPolicy_member *smithy.Schema
 var CorsPolicyNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediastore",
 	Name:      "CorsPolicyNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CorsPolicyNotFoundException_Message *smithy.Schema
 
 var CorsRule = smithy.NewSchema(smithy.ShapeID{
@@ -265,7 +265,7 @@ var _Header = smithy.NewSchema(smithy.ShapeID{
 var InternalServerError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediastore",
 	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServerError_Message *smithy.Schema
 
 var _LifecyclePolicy = smithy.NewSchema(smithy.ShapeID{
@@ -276,7 +276,7 @@ var _LifecyclePolicy = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediastore",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_Message *smithy.Schema
 
 var _MaxAgeSeconds = smithy.NewSchema(smithy.ShapeID{
@@ -341,7 +341,7 @@ var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
 var PolicyNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediastore",
 	Name:      "PolicyNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PolicyNotFoundException_Message *smithy.Schema
 
 var Tag = smithy.NewSchema(smithy.ShapeID{

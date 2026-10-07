@@ -473,7 +473,9 @@ var RestXml = smithy.NewServiceSchema(_RestXml, "2019-12-16")
 var ComplexError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restxml",
 	Name:      "ComplexError",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+
+	&smithytraits.HTTPError{Code: 403})
 var ComplexError_Header *smithy.Schema
 
 var ComplexError_TopLevel *smithy.Schema
@@ -513,7 +515,9 @@ var _FooPrefixHeaders_value *smithy.Schema
 var InvalidGreeting = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restxml",
 	Name:      "InvalidGreeting",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+
+	&smithytraits.HTTPError{Code: 400})
 var InvalidGreeting_Message *smithy.Schema
 
 var _ListWithMemberNamespace = smithy.NewSchema(smithy.ShapeID{

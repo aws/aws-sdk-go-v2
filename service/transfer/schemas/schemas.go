@@ -395,7 +395,8 @@ var TransferService = smithy.NewServiceSchema(_TransferService, "2018-11-05")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "AccessDenied",
 		StatusCode: 403})
 var AccessDeniedException_Message *smithy.Schema
@@ -579,7 +580,8 @@ var CompressionEnum_DISABLED *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConnectorEgressConfig = smithy.NewSchema(smithy.ShapeID{
@@ -1451,19 +1453,22 @@ var InputFileLocation_EfsFileLocation *smithy.Schema
 var InternalServiceError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "InternalServiceError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var InternalServiceError_Message *smithy.Schema
 
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidNextTokenException_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidRequestException_Message *smithy.Schema
 
 var IpAddressType = smithy.NewSchema(smithy.ShapeID{
@@ -1952,7 +1957,8 @@ var _Resource = smithy.NewSchema(smithy.ShapeID{
 var ResourceExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "ResourceExistsException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceExistsException_Message *smithy.Schema
 
 var ResourceExistsException_Resource *smithy.Schema
@@ -1962,7 +1968,8 @@ var ResourceExistsException_ResourceType *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_Resource *smithy.Schema
@@ -2166,7 +2173,8 @@ var ServiceMetadata_UserDetails *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503},
 	&smithytraits.AWSQueryError{ErrorCode: "ServiceUnavailable",
 		StatusCode: 503})
 var ServiceUnavailableException_Message *smithy.Schema
@@ -2395,7 +2403,8 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_RetryAfterSeconds *smithy.Schema
 
 var TlsSessionResumptionMode = smithy.NewSchema(smithy.ShapeID{

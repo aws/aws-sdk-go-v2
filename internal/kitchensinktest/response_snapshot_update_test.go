@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/kitchensinktest/types"
 	smithy "github.com/aws/smithy-go"
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
 	"io"
@@ -184,7 +185,9 @@ func TestUpdateResponseSnapshot_PutCompressedData(t *testing.T) {
 }
 
 func TestUpdateResponseSnapshot_Error_ItemNotFound(t *testing.T) {
-	want := &types.ItemNotFound{}
+	want := &types.ItemNotFound{
+		Message: ptr.String("__Message__"),
+	}
 	proto := awsjson.New10(schemas.AwsJson1KitchenSink)
 	opSchema := smithy.NewOperationSchema(schemas.GetItem, schemas.ItemNotFound, schemas.ItemNotFound)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)

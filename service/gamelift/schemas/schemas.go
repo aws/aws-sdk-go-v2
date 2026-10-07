@@ -898,7 +898,7 @@ var ComputeType_ANYWHERE *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConflictException_Message *smithy.Schema
 
 var ConnectionPortRange = smithy.NewSchema(smithy.ShapeID{
@@ -2804,7 +2804,7 @@ var FleetCapacity_ManagedCapacityConfiguration *smithy.Schema
 var FleetCapacityExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "FleetCapacityExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FleetCapacityExceededException_Message *smithy.Schema
 
 var _FleetCapacityList = smithy.NewSchema(smithy.ShapeID{
@@ -3528,7 +3528,7 @@ var _GameSessionDetailList_member *smithy.Schema
 var GameSessionFullException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "GameSessionFullException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var GameSessionFullException_Message *smithy.Schema
 
 var _GameSessionList = smithy.NewSchema(smithy.ShapeID{
@@ -3688,7 +3688,7 @@ var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
 var IdempotentParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "IdempotentParameterMismatchException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IdempotentParameterMismatchException_Message *smithy.Schema
 
 var _IdStringModel = smithy.NewSchema(smithy.ShapeID{
@@ -3801,25 +3801,25 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServiceException_Message *smithy.Schema
 
 var InvalidFleetStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "InvalidFleetStatusException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidFleetStatusException_Message *smithy.Schema
 
 var InvalidGameSessionStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "InvalidGameSessionStatusException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidGameSessionStatusException_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_Message *smithy.Schema
 
 var _IpAddress = smithy.NewSchema(smithy.ShapeID{
@@ -3909,7 +3909,7 @@ var _LaunchTemplateVersion = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_Message *smithy.Schema
 
 var LinuxCapabilities = smithy.NewSchema(smithy.ShapeID{
@@ -4462,13 +4462,13 @@ var _NonZeroAndMaxString = smithy.NewSchema(smithy.ShapeID{
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NotFoundException_Message *smithy.Schema
 
 var NotReadyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "NotReadyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NotReadyException_Message *smithy.Schema
 
 var OperatingSystem = smithy.NewSchema(smithy.ShapeID{
@@ -4490,7 +4490,7 @@ var OperatingSystem_WINDOWS_2022 *smithy.Schema
 var OutOfCapacityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "OutOfCapacityException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OutOfCapacityException_Message *smithy.Schema
 
 var PingBeacon = smithy.NewSchema(smithy.ShapeID{
@@ -5119,7 +5119,7 @@ var Tag_Value *smithy.Schema
 var TaggingFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "TaggingFailedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TaggingFailedException_Message *smithy.Schema
 
 var _TagKey = smithy.NewSchema(smithy.ShapeID{
@@ -5159,7 +5159,7 @@ var TargetTrackingConfiguration_TargetValue *smithy.Schema
 var TerminalRoutingStrategyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "TerminalRoutingStrategyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TerminalRoutingStrategyException_Message *smithy.Schema
 
 var TerminationMode = smithy.NewSchema(smithy.ShapeID{
@@ -5186,13 +5186,13 @@ var UDPEndpoint_Port *smithy.Schema
 var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnauthorizedException_Message *smithy.Schema
 
 var UnsupportedRegionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "UnsupportedRegionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedRegionException_Message *smithy.Schema
 
 var VpcPeeringAuthorization = smithy.NewSchema(smithy.ShapeID{

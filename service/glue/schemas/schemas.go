@@ -1580,7 +1580,7 @@ var AWSGlue = smithy.NewServiceSchema(_AWSGlue, "2017-03-31")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AccessDeniedException_Message *smithy.Schema
 
 var _AccessToken = smithy.NewSchema(smithy.ShapeID{
@@ -1750,7 +1750,7 @@ var AllowFullTableExternalDataAccessEnum_False *smithy.Schema
 var AlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "AlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AlreadyExistsException_Message *smithy.Schema
 
 var AmazonRedshiftAdvancedOption = smithy.NewSchema(smithy.ShapeID{
@@ -3252,7 +3252,7 @@ var ColumnStatisticsState_STOPPED *smithy.Schema
 var ColumnStatisticsTaskNotRunningException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ColumnStatisticsTaskNotRunningException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ColumnStatisticsTaskNotRunningException_Message *smithy.Schema
 
 var ColumnStatisticsTaskRun = smithy.NewSchema(smithy.ShapeID{
@@ -3306,7 +3306,7 @@ var _ColumnStatisticsTaskRunIdList_member *smithy.Schema
 var ColumnStatisticsTaskRunningException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ColumnStatisticsTaskRunningException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ColumnStatisticsTaskRunningException_Message *smithy.Schema
 
 var _ColumnStatisticsTaskRunsList = smithy.NewSchema(smithy.ShapeID{
@@ -3344,7 +3344,7 @@ var ColumnStatisticsTaskSettings_LastExecutionAttempt *smithy.Schema
 var ColumnStatisticsTaskStoppingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ColumnStatisticsTaskStoppingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ColumnStatisticsTaskStoppingException_Message *smithy.Schema
 
 var ColumnStatisticsType = smithy.NewSchema(smithy.ShapeID{
@@ -3528,13 +3528,13 @@ var _ComputeEnvironments_member *smithy.Schema
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConcurrentModificationException_Message *smithy.Schema
 
 var ConcurrentRunsExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ConcurrentRunsExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConcurrentRunsExceededException_Message *smithy.Schema
 
 var Condition = smithy.NewSchema(smithy.ShapeID{
@@ -3554,7 +3554,7 @@ var Condition_CrawlState *smithy.Schema
 var ConditionCheckFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ConditionCheckFailureException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConditionCheckFailureException_Message *smithy.Schema
 
 var ConditionExpression = smithy.NewSchema(smithy.ShapeID{
@@ -3615,7 +3615,7 @@ var _ConfigValueString = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConflictException_Message *smithy.Schema
 
 var ConfusionMatrix = smithy.NewSchema(smithy.ShapeID{
@@ -4437,13 +4437,13 @@ var CrawlerNodeDetails_Crawls *smithy.Schema
 var CrawlerNotRunningException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "CrawlerNotRunningException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CrawlerNotRunningException_Message *smithy.Schema
 
 var CrawlerRunningException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "CrawlerRunningException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CrawlerRunningException_Message *smithy.Schema
 
 var _CrawlerSecurityConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -4464,7 +4464,7 @@ var CrawlerState_STOPPING *smithy.Schema
 var CrawlerStoppingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "CrawlerStoppingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CrawlerStoppingException_Message *smithy.Schema
 
 var CrawlerTargets = smithy.NewSchema(smithy.ShapeID{
@@ -6045,7 +6045,7 @@ var _EntityName = smithy.NewSchema(smithy.ShapeID{
 var EntityNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "EntityNotFoundException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var EntityNotFoundException_Message *smithy.Schema
 
 var EntityNotFoundException_FromFederationSource *smithy.Schema
@@ -6285,7 +6285,7 @@ var FederatedDatabase_ConnectionType *smithy.Schema
 var FederatedResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "FederatedResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var FederatedResourceAlreadyExistsException_Message *smithy.Schema
 
 var FederatedResourceAlreadyExistsException_AssociatedGlueResource *smithy.Schema
@@ -6334,7 +6334,7 @@ var FederationSourceErrorCode_ThrottlingException *smithy.Schema
 var FederationSourceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "FederationSourceException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var FederationSourceException_FederationSourceErrorCode *smithy.Schema
 
 var FederationSourceException_Message *smithy.Schema
@@ -6342,7 +6342,7 @@ var FederationSourceException_Message *smithy.Schema
 var FederationSourceRetryableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "FederationSourceRetryableException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FederationSourceRetryableException_Message *smithy.Schema
 
 var Field = smithy.NewSchema(smithy.ShapeID{
@@ -6900,7 +6900,7 @@ var _glueConnectionNameString = smithy.NewSchema(smithy.ShapeID{
 var GlueEncryptionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "GlueEncryptionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var GlueEncryptionException_Message *smithy.Schema
 
 var GluePolicy = smithy.NewSchema(smithy.ShapeID{
@@ -7520,7 +7520,7 @@ var IcebergUpdateAction_REMOVE_ENCRYPTION_KEY *smithy.Schema
 var IdempotentParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "IdempotentParameterMismatchException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IdempotentParameterMismatchException_Message *smithy.Schema
 
 var _IdentityCenterInstanceArn = smithy.NewSchema(smithy.ShapeID{
@@ -7552,19 +7552,19 @@ var _IdString = smithy.NewSchema(smithy.ShapeID{
 var IllegalBlueprintStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "IllegalBlueprintStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IllegalBlueprintStateException_Message *smithy.Schema
 
 var IllegalSessionStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "IllegalSessionStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IllegalSessionStateException_Message *smithy.Schema
 
 var IllegalWorkflowStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "IllegalWorkflowStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IllegalWorkflowStateException_Message *smithy.Schema
 
 var ImportLabelsTaskRunProperties = smithy.NewSchema(smithy.ShapeID{
@@ -7685,7 +7685,8 @@ var IntegrationConfig_ContinuousSync *smithy.Schema
 var IntegrationConflictOperationFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "IntegrationConflictOperationFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var IntegrationConflictOperationFault_Message *smithy.Schema
 
 var _IntegrationDescription = smithy.NewSchema(smithy.ShapeID{
@@ -7740,7 +7741,8 @@ var _IntegrationInteger = smithy.NewSchema(smithy.ShapeID{
 var IntegrationNotFoundFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "IntegrationNotFoundFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var IntegrationNotFoundFault_Message *smithy.Schema
 
 var IntegrationPartition = smithy.NewSchema(smithy.ShapeID{
@@ -7762,7 +7764,8 @@ var _IntegrationPartitionSpecList_member *smithy.Schema
 var IntegrationQuotaExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "IntegrationQuotaExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var IntegrationQuotaExceededFault_Message *smithy.Schema
 
 var IntegrationResourceProperty = smithy.NewSchema(smithy.ShapeID{
@@ -7898,19 +7901,20 @@ var IntegrationType_REST *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServiceException_Message *smithy.Schema
 
 var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidInputException_Message *smithy.Schema
 
 var InvalidInputException_FromFederationSource *smithy.Schema
@@ -7918,13 +7922,14 @@ var InvalidInputException_FromFederationSource *smithy.Schema
 var InvalidIntegrationStateFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "InvalidIntegrationStateFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidIntegrationStateFault_Message *smithy.Schema
 
 var InvalidStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "InvalidStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidStateException_Message *smithy.Schema
 
 var _Iso8601DateTime = smithy.NewSchema(smithy.ShapeID{
@@ -8745,7 +8750,8 @@ var _KmsKeyArnString = smithy.NewSchema(smithy.ShapeID{
 var KMSKeyNotAccessibleFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "KMSKeyNotAccessibleFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var KMSKeyNotAccessibleFault_Message *smithy.Schema
 
 var _LabelCount = smithy.NewSchema(smithy.ShapeID{
@@ -9041,7 +9047,7 @@ var MaterializedViewRefreshState_STOPPED *smithy.Schema
 var MaterializedViewRefreshTaskNotRunningException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "MaterializedViewRefreshTaskNotRunningException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaterializedViewRefreshTaskNotRunningException_Message *smithy.Schema
 
 var MaterializedViewRefreshTaskRun = smithy.NewSchema(smithy.ShapeID{
@@ -9081,7 +9087,7 @@ var MaterializedViewRefreshTaskRun_ProcessedBytes *smithy.Schema
 var MaterializedViewRefreshTaskRunningException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "MaterializedViewRefreshTaskRunningException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaterializedViewRefreshTaskRunningException_Message *smithy.Schema
 
 var _MaterializedViewRefreshTaskRunsList = smithy.NewSchema(smithy.ShapeID{
@@ -9093,7 +9099,7 @@ var _MaterializedViewRefreshTaskRunsList_member *smithy.Schema
 var MaterializedViewRefreshTaskStoppingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "MaterializedViewRefreshTaskStoppingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaterializedViewRefreshTaskStoppingException_Message *smithy.Schema
 
 var MaterializedViewRefreshType = smithy.NewSchema(smithy.ShapeID{
@@ -9293,7 +9299,7 @@ var MLTransform_TransformEncryption *smithy.Schema
 var MLTransformNotReadyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "MLTransformNotReadyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MLTransformNotReadyException_Message *smithy.Schema
 
 var MLUserDataEncryption = smithy.NewSchema(smithy.ShapeID{
@@ -9443,7 +9449,7 @@ var _NonNegativeLong = smithy.NewSchema(smithy.ShapeID{
 var NoScheduleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "NoScheduleException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoScheduleException_Message *smithy.Schema
 
 var NotificationProperty = smithy.NewSchema(smithy.ShapeID{
@@ -9623,13 +9629,13 @@ var _Operation = smithy.NewSchema(smithy.ShapeID{
 var OperationNotSupportedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "OperationNotSupportedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OperationNotSupportedException_Message *smithy.Schema
 
 var OperationTimeoutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "OperationTimeoutException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OperationTimeoutException_Message *smithy.Schema
 
 var Option = smithy.NewSchema(smithy.ShapeID{
@@ -10064,7 +10070,7 @@ var _PermissionTypeList_member *smithy.Schema
 var PermissionTypeMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "PermissionTypeMismatchException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PermissionTypeMismatchException_Message *smithy.Schema
 
 var PhysicalConnectionRequirements = smithy.NewSchema(smithy.ShapeID{
@@ -10632,19 +10638,20 @@ var _ResourceArnString = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotReadyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ResourceNotReadyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotReadyException_Message *smithy.Schema
 
 var ResourceNumberLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ResourceNumberLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNumberLimitExceededException_Message *smithy.Schema
 
 var ResourceShareType = smithy.NewSchema(smithy.ShapeID{
@@ -11353,19 +11360,19 @@ var Schedule_State *smithy.Schema
 var SchedulerNotRunningException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "SchedulerNotRunningException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SchedulerNotRunningException_Message *smithy.Schema
 
 var SchedulerRunningException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "SchedulerRunningException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SchedulerRunningException_Message *smithy.Schema
 
 var SchedulerTransitioningException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "SchedulerTransitioningException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SchedulerTransitioningException_Message *smithy.Schema
 
 var ScheduleState = smithy.NewSchema(smithy.ShapeID{
@@ -11855,7 +11862,7 @@ var Session_SessionType *smithy.Schema
 var SessionBusyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "SessionBusyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SessionBusyException_Message *smithy.Schema
 
 var SessionCommand = smithy.NewSchema(smithy.ShapeID{
@@ -12929,7 +12936,8 @@ var TargetRedshiftCatalog_CatalogArn *smithy.Schema
 var TargetResourceNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "TargetResourceNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var TargetResourceNotFound_Message *smithy.Schema
 
 var TargetTableConfig = smithy.NewSchema(smithy.ShapeID{
@@ -13063,7 +13071,7 @@ var TestConnectionInput_AuthenticationConfiguration *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ThrottlingException_Message *smithy.Schema
 
 var _Timeout = smithy.NewSchema(smithy.ShapeID{
@@ -13617,7 +13625,7 @@ var _UUIDv4 = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ValidationException_Message *smithy.Schema
 
 var _ValueString = smithy.NewSchema(smithy.ShapeID{
@@ -13649,7 +13657,7 @@ var _VersionLongNumber = smithy.NewSchema(smithy.ShapeID{
 var VersionMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "VersionMismatchException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var VersionMismatchException_Message *smithy.Schema
 
 var _VersionsString = smithy.NewSchema(smithy.ShapeID{

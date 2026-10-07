@@ -113,7 +113,8 @@ var KeyspacesService = smithy.NewServiceSchema(_KeyspacesService, "2022-02-10")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.keyspaces",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "AccessDeniedException",
 		StatusCode: 403})
 var AccessDeniedException_message *smithy.Schema
@@ -259,7 +260,8 @@ var Comment_message *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.keyspaces",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409},
 	&smithytraits.AWSQueryError{ErrorCode: "ConflictException",
 		StatusCode: 409})
 var ConflictException_message *smithy.Schema
@@ -319,7 +321,8 @@ var _IntegerObject = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.keyspaces",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "InternalServerException",
 		StatusCode: 500})
 var InternalServerException_message *smithy.Schema
@@ -484,7 +487,8 @@ var ReplicationSpecification_regionList *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.keyspaces",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
 		StatusCode: 404})
 var ResourceNotFoundException_message *smithy.Schema
@@ -511,7 +515,8 @@ var SchemaDefinition_staticColumns *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.keyspaces",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402},
 	&smithytraits.AWSQueryError{ErrorCode: "ServiceQuotaExceededException",
 		StatusCode: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
@@ -651,8 +656,9 @@ var _TypeStatus = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.keyspaces",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.AWSQueryError{ErrorCode: "ValidationException",
-	StatusCode: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.AWSQueryError{ErrorCode: "ValidationException",
+		StatusCode: 400})
 var ValidationException_message *smithy.Schema
 
 var _ViewType = smithy.NewSchema(smithy.ShapeID{

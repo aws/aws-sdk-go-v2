@@ -781,7 +781,8 @@ var AuthorizerLogs_S3 *smithy.Schema
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_InvalidParameter *smithy.Schema
 
 var BadRequestException_Message *smithy.Schema
@@ -1003,7 +1004,8 @@ var Cluster_Serverless *smithy.Schema
 var ClusterConnectivityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "ClusterConnectivityException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ClusterConnectivityException_InvalidParameter *smithy.Schema
 
 var ClusterConnectivityException_Message *smithy.Schema
@@ -1245,7 +1247,8 @@ var ConfigurationState_DELETE_FAILED *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_InvalidParameter *smithy.Schema
 
 var ConflictException_Message *smithy.Schema
@@ -1297,7 +1300,8 @@ var ConsumerGroupReplicationUpdate_SynchroniseConsumerGroupOffsets *smithy.Schem
 var ControllerMovedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "ControllerMovedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ControllerMovedException_InvalidParameter *smithy.Schema
 
 var ControllerMovedException_Message *smithy.Schema
@@ -1405,7 +1409,8 @@ var Firehose_Enabled *smithy.Schema
 var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var ForbiddenException_InvalidParameter *smithy.Schema
 
 var ForbiddenException_Message *smithy.Schema
@@ -1413,7 +1418,8 @@ var ForbiddenException_Message *smithy.Schema
 var GroupSubscribedToTopicException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "GroupSubscribedToTopicException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var GroupSubscribedToTopicException_InvalidParameter *smithy.Schema
 
 var GroupSubscribedToTopicException_Message *smithy.Schema
@@ -1463,7 +1469,8 @@ var IcebergDestinationUpdate_DataFreshnessInSeconds *smithy.Schema
 var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerErrorException_InvalidParameter *smithy.Schema
 
 var InternalServerErrorException_Message *smithy.Schema
@@ -1629,7 +1636,8 @@ var KafkaClusterSummary_KafkaClusterAlias *smithy.Schema
 var KafkaRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "KafkaRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var KafkaRequestException_InvalidParameter *smithy.Schema
 
 var KafkaRequestException_Message *smithy.Schema
@@ -1637,7 +1645,8 @@ var KafkaRequestException_Message *smithy.Schema
 var KafkaTimeoutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "KafkaTimeoutException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var KafkaTimeoutException_InvalidParameter *smithy.Schema
 
 var KafkaTimeoutException_Message *smithy.Schema
@@ -1758,7 +1767,8 @@ var NodeType_BROKER *smithy.Schema
 var NotControllerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "NotControllerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var NotControllerException_InvalidParameter *smithy.Schema
 
 var NotControllerException_Message *smithy.Schema
@@ -1766,7 +1776,8 @@ var NotControllerException_Message *smithy.Schema
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_InvalidParameter *smithy.Schema
 
 var NotFoundException_Message *smithy.Schema
@@ -1892,7 +1903,8 @@ var PublicAccess_Type *smithy.Schema
 var ReassignmentInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "ReassignmentInProgressException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ReassignmentInProgressException_InvalidParameter *smithy.Schema
 
 var ReassignmentInProgressException_Message *smithy.Schema
@@ -2194,7 +2206,8 @@ var ServerlessSasl_Iam *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_InvalidParameter *smithy.Schema
 
 var ServiceUnavailableException_Message *smithy.Schema
@@ -2262,7 +2275,8 @@ var TokenEndpointAuthenticationMethod_NONE *smithy.Schema
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_InvalidParameter *smithy.Schema
 
 var TooManyRequestsException_Message *smithy.Schema
@@ -2280,7 +2294,8 @@ var TopicConfiguration_TopicArn *smithy.Schema
 var TopicExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "TopicExistsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var TopicExistsException_InvalidParameter *smithy.Schema
 
 var TopicExistsException_Message *smithy.Schema
@@ -2364,7 +2379,8 @@ var Unauthenticated_Enabled *smithy.Schema
 var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var UnauthorizedException_InvalidParameter *smithy.Schema
 
 var UnauthorizedException_Message *smithy.Schema
@@ -2372,7 +2388,8 @@ var UnauthorizedException_Message *smithy.Schema
 var UnknownTopicOrPartitionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "UnknownTopicOrPartitionException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var UnknownTopicOrPartitionException_InvalidParameter *smithy.Schema
 
 var UnknownTopicOrPartitionException_Message *smithy.Schema

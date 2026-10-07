@@ -338,7 +338,8 @@ var AbsoluteTimeRange_Last *smithy.Schema
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_Message *smithy.Schema
 
 var BaseModelName = smithy.NewSchema(smithy.ShapeID{
@@ -564,7 +565,8 @@ var CLMLanguageCode_JA_JP *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ContentRedaction = smithy.NewSchema(smithy.ShapeID{
@@ -631,7 +633,8 @@ var InputType_POST_CALL *smithy.Schema
 var InternalFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "InternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalFailureException_Message *smithy.Schema
 
 var InterruptionFilter = smithy.NewSchema(smithy.ShapeID{
@@ -972,7 +975,8 @@ var _LanguageOptions_member *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var LimitExceededException_Message *smithy.Schema
 
 var _MaxAlternatives = smithy.NewSchema(smithy.ShapeID{
@@ -1333,7 +1337,8 @@ var NonTalkTimeFilter_Negate *smithy.Schema
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_Message *smithy.Schema
 
 var _OutputBucketName = smithy.NewSchema(smithy.ShapeID{

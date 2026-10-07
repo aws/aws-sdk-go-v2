@@ -5,6 +5,7 @@ package schemas
 import (
 	smithy "github.com/aws/smithy-go"
 	smithyprelude "github.com/aws/smithy-go/prelude"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 var CborGetItem = smithy.NewSchema(smithy.ShapeID{
@@ -27,7 +28,7 @@ var RpcV2CborKitchenSink = smithy.NewServiceSchema(_RpcV2CborKitchenSink, "2025-
 var CborItemNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestcbor",
 	Name:      "CborItemNotFound",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"})
 
 var CborGetItemInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestcbor",

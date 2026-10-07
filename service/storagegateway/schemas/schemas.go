@@ -1407,7 +1407,8 @@ var _integer = smithy.NewSchema(smithy.ShapeID{
 var InternalServerError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.storagegateway",
 	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerError_message *smithy.Schema
 
 var InternalServerError_error *smithy.Schema
@@ -1415,7 +1416,8 @@ var InternalServerError_error *smithy.Schema
 var InvalidGatewayRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.storagegateway",
 	Name:      "InvalidGatewayRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidGatewayRequestException_message *smithy.Schema
 
 var InvalidGatewayRequestException_error *smithy.Schema
@@ -1730,7 +1732,8 @@ var _Role = smithy.NewSchema(smithy.ShapeID{
 var ServiceUnavailableError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.storagegateway",
 	Name:      "ServiceUnavailableError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableError_message *smithy.Schema
 
 var ServiceUnavailableError_error *smithy.Schema

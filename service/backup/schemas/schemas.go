@@ -913,7 +913,7 @@ var AggregationPeriod_FOURTEEN_DAYS *smithy.Schema
 var AlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
 	Name:      "AlreadyExistsException",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 6, &smithytraits.Error{Type: "client"})
 var AlreadyExistsException_Code *smithy.Schema
 
 var AlreadyExistsException_Message *smithy.Schema
@@ -1506,7 +1506,8 @@ var _ConditionValue = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 409},
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409},
 	&smithytraits.AWSQueryError{ErrorCode: "ConflictException",
 		StatusCode: 409})
 var ConflictException_Code *smithy.Schema
@@ -1719,7 +1720,7 @@ var DateRange_ToDate *smithy.Schema
 var DependencyFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
 	Name:      "DependencyFailureException",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "server"})
 var DependencyFailureException_Code *smithy.Schema
 
 var DependencyFailureException_Message *smithy.Schema
@@ -1886,7 +1887,7 @@ var _integer = smithy.NewSchema(smithy.ShapeID{
 var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
 	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"})
 var InvalidParameterValueException_Code *smithy.Schema
 
 var InvalidParameterValueException_Message *smithy.Schema
@@ -1898,7 +1899,7 @@ var InvalidParameterValueException_Context *smithy.Schema
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_Code *smithy.Schema
 
 var InvalidRequestException_Message *smithy.Schema
@@ -1910,7 +1911,7 @@ var InvalidRequestException_Context *smithy.Schema
 var InvalidResourceStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
 	Name:      "InvalidResourceStateException",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"})
 var InvalidResourceStateException_Code *smithy.Schema
 
 var InvalidResourceStateException_Message *smithy.Schema
@@ -2023,7 +2024,7 @@ var LifecycleDeleteAfterEvent_DELETE_AFTER_COPY *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"})
 var LimitExceededException_Code *smithy.Schema
 
 var LimitExceededException_Message *smithy.Schema
@@ -2151,7 +2152,7 @@ var _MetadataValue = smithy.NewSchema(smithy.ShapeID{
 var MissingParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
 	Name:      "MissingParameterValueException",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"})
 var MissingParameterValueException_Code *smithy.Schema
 
 var MissingParameterValueException_Message *smithy.Schema
@@ -2528,7 +2529,7 @@ var _ResourceIdentifiers_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_Code *smithy.Schema
 
 var ResourceNotFoundException_Message *smithy.Schema
@@ -3216,7 +3217,7 @@ var _SensitiveStringMap_value *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "server"})
 var ServiceUnavailableException_Code *smithy.Schema
 
 var ServiceUnavailableException_Message *smithy.Schema

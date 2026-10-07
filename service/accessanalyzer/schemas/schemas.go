@@ -314,7 +314,8 @@ var _AccessCheckResourceType = smithy.NewSchema(smithy.ShapeID{
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.accessanalyzer",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var _AccessList = smithy.NewSchema(smithy.ShapeID{
@@ -722,7 +723,8 @@ var _ConfigurationsMapKey = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.accessanalyzer",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConflictException_resourceId *smithy.Schema
@@ -1224,7 +1226,8 @@ var _InternalAccessType = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.accessanalyzer",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var InternalServerException_retryAfterSeconds *smithy.Schema
@@ -1237,7 +1240,8 @@ var InternetConfiguration = smithy.NewSchema(smithy.ShapeID{
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.accessanalyzer",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterException_message *smithy.Schema
 
 var _IssueCode = smithy.NewSchema(smithy.ShapeID{
@@ -1661,7 +1665,8 @@ var _ResourceControlPolicyRestriction = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.accessanalyzer",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_resourceId *smithy.Schema
@@ -1830,7 +1835,8 @@ var _ServiceControlPolicyRestriction = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.accessanalyzer",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceQuotaExceededException_resourceId *smithy.Schema
@@ -1923,7 +1929,8 @@ var _TagsMap_value *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.accessanalyzer",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var ThrottlingException_retryAfterSeconds *smithy.Schema
@@ -1978,7 +1985,8 @@ var _Type = smithy.NewSchema(smithy.ShapeID{
 var UnprocessableEntityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.accessanalyzer",
 	Name:      "UnprocessableEntityException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 422})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 422})
 var UnprocessableEntityException_message *smithy.Schema
 
 var UnusedAccessConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -2106,7 +2114,8 @@ var _ValidatePolicyResourceType = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.accessanalyzer",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_reason *smithy.Schema

@@ -27,7 +27,8 @@ var AWSEC2InstanceConnectService = smithy.NewServiceSchema(_AWSEC2InstanceConnec
 var AuthException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ec2instanceconnect",
 	Name:      "AuthException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "Forbidden",
 		StatusCode: 403})
 var AuthException_Message *smithy.Schema
@@ -40,7 +41,8 @@ var _AvailabilityZone = smithy.NewSchema(smithy.ShapeID{
 var EC2InstanceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ec2instanceconnect",
 	Name:      "EC2InstanceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "EC2InstanceNotFound",
 		StatusCode: 404})
 var EC2InstanceNotFoundException_Message *smithy.Schema
@@ -48,7 +50,8 @@ var EC2InstanceNotFoundException_Message *smithy.Schema
 var EC2InstanceStateInvalidException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ec2instanceconnect",
 	Name:      "EC2InstanceStateInvalidException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "EC2InstanceStateInvalid",
 		StatusCode: 400})
 var EC2InstanceStateInvalidException_Message *smithy.Schema
@@ -56,7 +59,8 @@ var EC2InstanceStateInvalidException_Message *smithy.Schema
 var EC2InstanceTypeInvalidException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ec2instanceconnect",
 	Name:      "EC2InstanceTypeInvalidException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "EC2InstanceTypeInvalid",
 		StatusCode: 400})
 var EC2InstanceTypeInvalidException_Message *smithy.Schema
@@ -64,7 +68,8 @@ var EC2InstanceTypeInvalidException_Message *smithy.Schema
 var EC2InstanceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ec2instanceconnect",
 	Name:      "EC2InstanceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503},
 	&smithytraits.AWSQueryError{ErrorCode: "EC2InstanceUnavailable",
 		StatusCode: 503})
 var EC2InstanceUnavailableException_Message *smithy.Schema
@@ -82,7 +87,8 @@ var _InstanceOSUser = smithy.NewSchema(smithy.ShapeID{
 var InvalidArgsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ec2instanceconnect",
 	Name:      "InvalidArgsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidArguments",
 		StatusCode: 400})
 var InvalidArgsException_Message *smithy.Schema
@@ -95,7 +101,8 @@ var _RequestId = smithy.NewSchema(smithy.ShapeID{
 var SerialConsoleAccessDisabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ec2instanceconnect",
 	Name:      "SerialConsoleAccessDisabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "SerialConsoleAccessDisabled",
 		StatusCode: 403})
 var SerialConsoleAccessDisabledException_Message *smithy.Schema
@@ -103,7 +110,8 @@ var SerialConsoleAccessDisabledException_Message *smithy.Schema
 var SerialConsoleSessionLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ec2instanceconnect",
 	Name:      "SerialConsoleSessionLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SerialConsoleSessionLimitExceeded",
 		StatusCode: 400})
 var SerialConsoleSessionLimitExceededException_Message *smithy.Schema
@@ -111,7 +119,8 @@ var SerialConsoleSessionLimitExceededException_Message *smithy.Schema
 var SerialConsoleSessionUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ec2instanceconnect",
 	Name:      "SerialConsoleSessionUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "SerialConsoleSessionUnavailable",
 		StatusCode: 500})
 var SerialConsoleSessionUnavailableException_Message *smithy.Schema
@@ -119,7 +128,8 @@ var SerialConsoleSessionUnavailableException_Message *smithy.Schema
 var SerialConsoleSessionUnsupportedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ec2instanceconnect",
 	Name:      "SerialConsoleSessionUnsupportedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "SerialConsoleSessionUnsupported",
 		StatusCode: 400})
 var SerialConsoleSessionUnsupportedException_Message *smithy.Schema
@@ -132,7 +142,8 @@ var _SerialPort = smithy.NewSchema(smithy.ShapeID{
 var ServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ec2instanceconnect",
 	Name:      "ServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "InternalServerError",
 		StatusCode: 500})
 var ServiceException_Message *smithy.Schema
@@ -155,7 +166,8 @@ var _Success = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ec2instanceconnect",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "TooManyRequests",
 		StatusCode: 429})
 var ThrottlingException_Message *smithy.Schema

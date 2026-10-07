@@ -175,7 +175,7 @@ var _CreatedDateType = smithy.NewSchema(smithy.ShapeID{
 var DecryptionFailure = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "DecryptionFailure",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DecryptionFailure_Message *smithy.Schema
 
 var _DeletedDateType = smithy.NewSchema(smithy.ShapeID{
@@ -201,7 +201,7 @@ var _DurationType = smithy.NewSchema(smithy.ShapeID{
 var EncryptionFailure = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "EncryptionFailure",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var EncryptionFailure_Message *smithy.Schema
 
 var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
@@ -314,25 +314,25 @@ var _IncludeSpaceType = smithy.NewSchema(smithy.ShapeID{
 var InternalServiceError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "InternalServiceError",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServiceError_Message *smithy.Schema
 
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidNextTokenException_Message *smithy.Schema
 
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidParameterException_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_Message *smithy.Schema
 
 var _KmsKeyIdListType = smithy.NewSchema(smithy.ShapeID{
@@ -364,13 +364,13 @@ var _LastRotatedDateType = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_Message *smithy.Schema
 
 var MalformedPolicyDocumentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "MalformedPolicyDocumentException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MalformedPolicyDocumentException_Message *smithy.Schema
 
 var _MaxResultsBatchType = smithy.NewSchema(smithy.ShapeID{
@@ -421,13 +421,13 @@ var _PasswordLengthType = smithy.NewSchema(smithy.ShapeID{
 var PreconditionNotMetException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "PreconditionNotMetException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PreconditionNotMetException_Message *smithy.Schema
 
 var PublicPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "PublicPolicyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PublicPolicyException_Message *smithy.Schema
 
 var _RandomPasswordType = smithy.NewSchema(smithy.ShapeID{
@@ -487,13 +487,13 @@ var _RequireEachIncludedTypeType = smithy.NewSchema(smithy.ShapeID{
 var ResourceExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "ResourceExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceExistsException_Message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.secretsmanager",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var _RoleARNType = smithy.NewSchema(smithy.ShapeID{

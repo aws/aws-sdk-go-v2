@@ -846,7 +846,8 @@ var AccountDetails_ReviewDetails *smithy.Schema
 var AccountSuspendedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "AccountSuspendedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var AccountSuspendedException_message *smithy.Schema
 
 var _AdditionalContactEmailAddress = smithy.NewSchema(smithy.ShapeID{
@@ -868,7 +869,8 @@ var _AdminEmail = smithy.NewSchema(smithy.ShapeID{
 var AlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "AlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var AlreadyExistsException_message *smithy.Schema
 
 var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
@@ -957,7 +959,8 @@ var _AttributesData = smithy.NewSchema(smithy.ShapeID{
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_message *smithy.Schema
 
 var _BatchGetMetricDataQueries = smithy.NewSchema(smithy.ShapeID{
@@ -1198,7 +1201,8 @@ var _ComplaintSubType = smithy.NewSchema(smithy.ShapeID{
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ConcurrentModificationException_message *smithy.Schema
 
 var ConfigurationOverrides = smithy.NewSchema(smithy.ShapeID{
@@ -1240,7 +1244,8 @@ var _ConfigurationSetNameList_member *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var Contact = smithy.NewSchema(smithy.ShapeID{
@@ -2335,13 +2340,15 @@ var _InsightsEvents_member *smithy.Schema
 var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServiceErrorException_message *smithy.Schema
 
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidNextTokenException_message *smithy.Schema
 
 var _Ip = smithy.NewSchema(smithy.ShapeID{
@@ -2438,7 +2445,8 @@ var _LastFreshStart = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var LimitExceededException_message *smithy.Schema
 
 var ListContactsFilter = smithy.NewSchema(smithy.ShapeID{
@@ -2566,7 +2574,8 @@ var _MailFromDomainName = smithy.NewSchema(smithy.ShapeID{
 var MailFromDomainNotVerifiedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "MailFromDomainNotVerifiedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var MailFromDomainNotVerifiedException_message *smithy.Schema
 
 var MailFromDomainStatus = smithy.NewSchema(smithy.ShapeID{
@@ -2695,7 +2704,8 @@ var MessageInsightsFilters_LastEngagementEvent *smithy.Schema
 var MessageRejected = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "MessageRejected",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var MessageRejected_message *smithy.Schema
 
 var MessageSecurityOptions = smithy.NewSchema(smithy.ShapeID{
@@ -2870,7 +2880,8 @@ var _NextTokenV2 = smithy.NewSchema(smithy.ShapeID{
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_message *smithy.Schema
 
 var _OutboundMessageId = smithy.NewSchema(smithy.ShapeID{
@@ -3290,7 +3301,8 @@ var SendingOptions_SendingEnabled *smithy.Schema
 var SendingPausedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "SendingPausedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var SendingPausedException_message *smithy.Schema
 
 var _SendingPoolName = smithy.NewSchema(smithy.ShapeID{
@@ -3686,7 +3698,8 @@ var TlsPolicy_OPTIONAL *smithy.Schema
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_message *smithy.Schema
 
 var Topic = smithy.NewSchema(smithy.ShapeID{

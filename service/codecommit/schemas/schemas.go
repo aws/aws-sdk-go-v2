@@ -423,7 +423,7 @@ var _AccountId = smithy.NewSchema(smithy.ShapeID{
 var ActorDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ActorDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ActorDoesNotExistException_message *smithy.Schema
 
 var _AdditionalData = smithy.NewSchema(smithy.ShapeID{
@@ -473,13 +473,13 @@ var _ApprovalRuleContent = smithy.NewSchema(smithy.ShapeID{
 var ApprovalRuleContentRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ApprovalRuleContentRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ApprovalRuleContentRequiredException_message *smithy.Schema
 
 var ApprovalRuleDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ApprovalRuleDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ApprovalRuleDoesNotExistException_message *smithy.Schema
 
 var ApprovalRuleEventMetadata = smithy.NewSchema(smithy.ShapeID{
@@ -505,13 +505,13 @@ var _ApprovalRuleName = smithy.NewSchema(smithy.ShapeID{
 var ApprovalRuleNameAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ApprovalRuleNameAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ApprovalRuleNameAlreadyExistsException_message *smithy.Schema
 
 var ApprovalRuleNameRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ApprovalRuleNameRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ApprovalRuleNameRequiredException_message *smithy.Schema
 
 var ApprovalRuleOverriddenEventMetadata = smithy.NewSchema(smithy.ShapeID{
@@ -568,7 +568,7 @@ var _ApprovalRuleTemplateContent = smithy.NewSchema(smithy.ShapeID{
 var ApprovalRuleTemplateContentRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ApprovalRuleTemplateContentRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ApprovalRuleTemplateContentRequiredException_message *smithy.Schema
 
 var _ApprovalRuleTemplateDescription = smithy.NewSchema(smithy.ShapeID{
@@ -579,7 +579,7 @@ var _ApprovalRuleTemplateDescription = smithy.NewSchema(smithy.ShapeID{
 var ApprovalRuleTemplateDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ApprovalRuleTemplateDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ApprovalRuleTemplateDoesNotExistException_message *smithy.Schema
 
 var _ApprovalRuleTemplateId = smithy.NewSchema(smithy.ShapeID{
@@ -590,7 +590,7 @@ var _ApprovalRuleTemplateId = smithy.NewSchema(smithy.ShapeID{
 var ApprovalRuleTemplateInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ApprovalRuleTemplateInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ApprovalRuleTemplateInUseException_message *smithy.Schema
 
 var _ApprovalRuleTemplateName = smithy.NewSchema(smithy.ShapeID{
@@ -601,7 +601,7 @@ var _ApprovalRuleTemplateName = smithy.NewSchema(smithy.ShapeID{
 var ApprovalRuleTemplateNameAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ApprovalRuleTemplateNameAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ApprovalRuleTemplateNameAlreadyExistsException_message *smithy.Schema
 
 var _ApprovalRuleTemplateNameList = smithy.NewSchema(smithy.ShapeID{
@@ -613,7 +613,7 @@ var _ApprovalRuleTemplateNameList_member *smithy.Schema
 var ApprovalRuleTemplateNameRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ApprovalRuleTemplateNameRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ApprovalRuleTemplateNameRequiredException_message *smithy.Schema
 
 var ApprovalState = smithy.NewSchema(smithy.ShapeID{
@@ -635,7 +635,7 @@ var ApprovalStateChangedEventMetadata_approvalStatus *smithy.Schema
 var ApprovalStateRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ApprovalStateRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ApprovalStateRequiredException_message *smithy.Schema
 
 var _Approved = smithy.NewSchema(smithy.ShapeID{
@@ -651,7 +651,7 @@ var _Arn = smithy.NewSchema(smithy.ShapeID{
 var AuthorDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "AuthorDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AuthorDoesNotExistException_message *smithy.Schema
 
 var BatchAssociateApprovalRuleTemplateWithRepositoriesError = smithy.NewSchema(smithy.ShapeID{
@@ -755,7 +755,7 @@ var _BatchGetRepositoriesErrorsList_member *smithy.Schema
 var BeforeCommitIdAndAfterCommitIdAreSameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "BeforeCommitIdAndAfterCommitIdAreSameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BeforeCommitIdAndAfterCommitIdAreSameException_message *smithy.Schema
 
 var _blob = smithy.NewSchema(smithy.ShapeID{
@@ -766,13 +766,13 @@ var _blob = smithy.NewSchema(smithy.ShapeID{
 var BlobIdDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "BlobIdDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BlobIdDoesNotExistException_message *smithy.Schema
 
 var BlobIdRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "BlobIdRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BlobIdRequiredException_message *smithy.Schema
 
 var BlobMetadata = smithy.NewSchema(smithy.ShapeID{
@@ -788,7 +788,7 @@ var BlobMetadata_mode *smithy.Schema
 var BranchDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "BranchDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BranchDoesNotExistException_message *smithy.Schema
 
 var BranchInfo = smithy.NewSchema(smithy.ShapeID{
@@ -807,13 +807,13 @@ var _BranchName = smithy.NewSchema(smithy.ShapeID{
 var BranchNameExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "BranchNameExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BranchNameExistsException_message *smithy.Schema
 
 var BranchNameIsTagNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "BranchNameIsTagNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BranchNameIsTagNameException_message *smithy.Schema
 
 var _BranchNameList = smithy.NewSchema(smithy.ShapeID{
@@ -825,7 +825,7 @@ var _BranchNameList_member *smithy.Schema
 var BranchNameRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "BranchNameRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BranchNameRequiredException_message *smithy.Schema
 
 var _CallerReactions = smithy.NewSchema(smithy.ShapeID{
@@ -837,13 +837,13 @@ var _CallerReactions_member *smithy.Schema
 var CannotDeleteApprovalRuleFromTemplateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "CannotDeleteApprovalRuleFromTemplateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CannotDeleteApprovalRuleFromTemplateException_message *smithy.Schema
 
 var CannotModifyApprovalRuleFromTemplateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "CannotModifyApprovalRuleFromTemplateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CannotModifyApprovalRuleFromTemplateException_message *smithy.Schema
 
 var _CapitalBoolean = smithy.NewSchema(smithy.ShapeID{
@@ -869,7 +869,7 @@ var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
 var ClientRequestTokenRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ClientRequestTokenRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ClientRequestTokenRequiredException_message *smithy.Schema
 
 var _CloneUrlHttp = smithy.NewSchema(smithy.ShapeID{
@@ -909,25 +909,25 @@ var Comment_reactionCounts *smithy.Schema
 var CommentContentRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "CommentContentRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CommentContentRequiredException_message *smithy.Schema
 
 var CommentContentSizeLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "CommentContentSizeLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CommentContentSizeLimitExceededException_message *smithy.Schema
 
 var CommentDeletedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "CommentDeletedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CommentDeletedException_message *smithy.Schema
 
 var CommentDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "CommentDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CommentDoesNotExistException_message *smithy.Schema
 
 var _CommentId = smithy.NewSchema(smithy.ShapeID{
@@ -938,13 +938,13 @@ var _CommentId = smithy.NewSchema(smithy.ShapeID{
 var CommentIdRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "CommentIdRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CommentIdRequiredException_message *smithy.Schema
 
 var CommentNotCreatedByCallerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "CommentNotCreatedByCallerException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CommentNotCreatedByCallerException_message *smithy.Schema
 
 var _Comments = smithy.NewSchema(smithy.ShapeID{
@@ -1024,7 +1024,7 @@ var Commit_additionalData *smithy.Schema
 var CommitDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "CommitDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CommitDoesNotExistException_message *smithy.Schema
 
 var _CommitId = smithy.NewSchema(smithy.ShapeID{
@@ -1035,13 +1035,13 @@ var _CommitId = smithy.NewSchema(smithy.ShapeID{
 var CommitIdDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "CommitIdDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CommitIdDoesNotExistException_message *smithy.Schema
 
 var CommitIdRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "CommitIdRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CommitIdRequiredException_message *smithy.Schema
 
 var _CommitIdsInputList = smithy.NewSchema(smithy.ShapeID{
@@ -1053,19 +1053,19 @@ var _CommitIdsInputList_member *smithy.Schema
 var CommitIdsLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "CommitIdsLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CommitIdsLimitExceededException_message *smithy.Schema
 
 var CommitIdsListRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "CommitIdsListRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CommitIdsListRequiredException_message *smithy.Schema
 
 var CommitMessageLengthExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "CommitMessageLengthExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CommitMessageLengthExceededException_message *smithy.Schema
 
 var _CommitName = smithy.NewSchema(smithy.ShapeID{
@@ -1082,13 +1082,13 @@ var _CommitObjectsList_member *smithy.Schema
 var CommitRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "CommitRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CommitRequiredException_message *smithy.Schema
 
 var ConcurrentReferenceUpdateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ConcurrentReferenceUpdateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConcurrentReferenceUpdateException_message *smithy.Schema
 
 var Conflict = smithy.NewSchema(smithy.ShapeID{
@@ -1188,7 +1188,7 @@ var _Date = smithy.NewSchema(smithy.ShapeID{
 var DefaultBranchCannotBeDeletedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "DefaultBranchCannotBeDeletedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DefaultBranchCannotBeDeletedException_message *smithy.Schema
 
 var _DeleteFileEntries = smithy.NewSchema(smithy.ShapeID{
@@ -1280,7 +1280,7 @@ var _DiffHunkList_member *smithy.Schema
 var DirectoryNameConflictsWithFileNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "DirectoryNameConflictsWithFileNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DirectoryNameConflictsWithFileNameException_message *smithy.Schema
 
 var _Email = smithy.NewSchema(smithy.ShapeID{
@@ -1291,49 +1291,49 @@ var _Email = smithy.NewSchema(smithy.ShapeID{
 var EncryptionIntegrityChecksFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "EncryptionIntegrityChecksFailedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var EncryptionIntegrityChecksFailedException_message *smithy.Schema
 
 var EncryptionKeyAccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "EncryptionKeyAccessDeniedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var EncryptionKeyAccessDeniedException_message *smithy.Schema
 
 var EncryptionKeyDisabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "EncryptionKeyDisabledException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var EncryptionKeyDisabledException_message *smithy.Schema
 
 var EncryptionKeyInvalidIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "EncryptionKeyInvalidIdException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var EncryptionKeyInvalidIdException_message *smithy.Schema
 
 var EncryptionKeyInvalidUsageException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "EncryptionKeyInvalidUsageException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var EncryptionKeyInvalidUsageException_message *smithy.Schema
 
 var EncryptionKeyNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "EncryptionKeyNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var EncryptionKeyNotFoundException_message *smithy.Schema
 
 var EncryptionKeyRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "EncryptionKeyRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var EncryptionKeyRequiredException_message *smithy.Schema
 
 var EncryptionKeyUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "EncryptionKeyUnavailableException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var EncryptionKeyUnavailableException_message *smithy.Schema
 
 var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
@@ -1388,31 +1388,31 @@ var _FileContent = smithy.NewSchema(smithy.ShapeID{
 var FileContentAndSourceFileSpecifiedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "FileContentAndSourceFileSpecifiedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FileContentAndSourceFileSpecifiedException_message *smithy.Schema
 
 var FileContentRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "FileContentRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FileContentRequiredException_message *smithy.Schema
 
 var FileContentSizeLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "FileContentSizeLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FileContentSizeLimitExceededException_message *smithy.Schema
 
 var FileDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "FileDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FileDoesNotExistException_message *smithy.Schema
 
 var FileEntryRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "FileEntryRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FileEntryRequiredException_message *smithy.Schema
 
 var _FileList = smithy.NewSchema(smithy.ShapeID{
@@ -1434,7 +1434,7 @@ var FileMetadata_fileMode *smithy.Schema
 var FileModeRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "FileModeRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FileModeRequiredException_message *smithy.Schema
 
 var FileModes = smithy.NewSchema(smithy.ShapeID{
@@ -1460,13 +1460,13 @@ var FileModeTypeEnum_SYMLINK *smithy.Schema
 var FileNameConflictsWithDirectoryNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "FileNameConflictsWithDirectoryNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FileNameConflictsWithDirectoryNameException_message *smithy.Schema
 
 var FilePathConflictsWithSubmodulePathException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "FilePathConflictsWithSubmodulePathException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FilePathConflictsWithSubmodulePathException_message *smithy.Schema
 
 var _FilePaths = smithy.NewSchema(smithy.ShapeID{
@@ -1499,7 +1499,7 @@ var _FilesMetadata_member *smithy.Schema
 var FileTooLargeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "FileTooLargeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FileTooLargeException_message *smithy.Schema
 
 var FileVersion = smithy.NewSchema(smithy.ShapeID{
@@ -1527,13 +1527,13 @@ var Folder_relativePath *smithy.Schema
 var FolderContentSizeLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "FolderContentSizeLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FolderContentSizeLimitExceededException_message *smithy.Schema
 
 var FolderDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "FolderDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var FolderDoesNotExistException_message *smithy.Schema
 
 var _FolderList = smithy.NewSchema(smithy.ShapeID{
@@ -1550,7 +1550,7 @@ var _HunkContent = smithy.NewSchema(smithy.ShapeID{
 var IdempotencyParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "IdempotencyParameterMismatchException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IdempotencyParameterMismatchException_message *smithy.Schema
 
 var _IgnoreWhiteSpaces = smithy.NewSchema(smithy.ShapeID{
@@ -1561,379 +1561,379 @@ var _IgnoreWhiteSpaces = smithy.NewSchema(smithy.ShapeID{
 var InvalidActorArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidActorArnException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidActorArnException_message *smithy.Schema
 
 var InvalidApprovalRuleContentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidApprovalRuleContentException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidApprovalRuleContentException_message *smithy.Schema
 
 var InvalidApprovalRuleNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidApprovalRuleNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidApprovalRuleNameException_message *smithy.Schema
 
 var InvalidApprovalRuleTemplateContentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidApprovalRuleTemplateContentException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidApprovalRuleTemplateContentException_message *smithy.Schema
 
 var InvalidApprovalRuleTemplateDescriptionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidApprovalRuleTemplateDescriptionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidApprovalRuleTemplateDescriptionException_message *smithy.Schema
 
 var InvalidApprovalRuleTemplateNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidApprovalRuleTemplateNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidApprovalRuleTemplateNameException_message *smithy.Schema
 
 var InvalidApprovalStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidApprovalStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidApprovalStateException_message *smithy.Schema
 
 var InvalidAuthorArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidAuthorArnException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidAuthorArnException_message *smithy.Schema
 
 var InvalidBlobIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidBlobIdException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidBlobIdException_message *smithy.Schema
 
 var InvalidBranchNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidBranchNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidBranchNameException_message *smithy.Schema
 
 var InvalidClientRequestTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidClientRequestTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidClientRequestTokenException_message *smithy.Schema
 
 var InvalidCommentIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidCommentIdException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidCommentIdException_message *smithy.Schema
 
 var InvalidCommitException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidCommitException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidCommitException_message *smithy.Schema
 
 var InvalidCommitIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidCommitIdException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidCommitIdException_message *smithy.Schema
 
 var InvalidConflictDetailLevelException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidConflictDetailLevelException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidConflictDetailLevelException_message *smithy.Schema
 
 var InvalidConflictResolutionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidConflictResolutionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidConflictResolutionException_message *smithy.Schema
 
 var InvalidConflictResolutionStrategyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidConflictResolutionStrategyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidConflictResolutionStrategyException_message *smithy.Schema
 
 var InvalidContinuationTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidContinuationTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidContinuationTokenException_message *smithy.Schema
 
 var InvalidDeletionParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidDeletionParameterException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDeletionParameterException_message *smithy.Schema
 
 var InvalidDescriptionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidDescriptionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDescriptionException_message *smithy.Schema
 
 var InvalidDestinationCommitSpecifierException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidDestinationCommitSpecifierException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDestinationCommitSpecifierException_message *smithy.Schema
 
 var InvalidEmailException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidEmailException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidEmailException_message *smithy.Schema
 
 var InvalidFileLocationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidFileLocationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidFileLocationException_message *smithy.Schema
 
 var InvalidFileModeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidFileModeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidFileModeException_message *smithy.Schema
 
 var InvalidFilePositionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidFilePositionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidFilePositionException_message *smithy.Schema
 
 var InvalidMaxConflictFilesException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidMaxConflictFilesException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidMaxConflictFilesException_message *smithy.Schema
 
 var InvalidMaxMergeHunksException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidMaxMergeHunksException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidMaxMergeHunksException_message *smithy.Schema
 
 var InvalidMaxResultsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidMaxResultsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidMaxResultsException_message *smithy.Schema
 
 var InvalidMergeOptionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidMergeOptionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidMergeOptionException_message *smithy.Schema
 
 var InvalidOrderException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidOrderException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidOrderException_message *smithy.Schema
 
 var InvalidOverrideStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidOverrideStatusException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidOverrideStatusException_message *smithy.Schema
 
 var InvalidParentCommitIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidParentCommitIdException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidParentCommitIdException_message *smithy.Schema
 
 var InvalidPathException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidPathException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidPathException_message *smithy.Schema
 
 var InvalidPullRequestEventTypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidPullRequestEventTypeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidPullRequestEventTypeException_message *smithy.Schema
 
 var InvalidPullRequestIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidPullRequestIdException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidPullRequestIdException_message *smithy.Schema
 
 var InvalidPullRequestStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidPullRequestStatusException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidPullRequestStatusException_message *smithy.Schema
 
 var InvalidPullRequestStatusUpdateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidPullRequestStatusUpdateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidPullRequestStatusUpdateException_message *smithy.Schema
 
 var InvalidReactionUserArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidReactionUserArnException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidReactionUserArnException_message *smithy.Schema
 
 var InvalidReactionValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidReactionValueException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidReactionValueException_message *smithy.Schema
 
 var InvalidReferenceNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidReferenceNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidReferenceNameException_message *smithy.Schema
 
 var InvalidRelativeFileVersionEnumException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidRelativeFileVersionEnumException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRelativeFileVersionEnumException_message *smithy.Schema
 
 var InvalidReplacementContentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidReplacementContentException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidReplacementContentException_message *smithy.Schema
 
 var InvalidReplacementTypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidReplacementTypeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidReplacementTypeException_message *smithy.Schema
 
 var InvalidRepositoryDescriptionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidRepositoryDescriptionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRepositoryDescriptionException_message *smithy.Schema
 
 var InvalidRepositoryNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidRepositoryNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRepositoryNameException_message *smithy.Schema
 
 var InvalidRepositoryTriggerBranchNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidRepositoryTriggerBranchNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRepositoryTriggerBranchNameException_message *smithy.Schema
 
 var InvalidRepositoryTriggerCustomDataException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidRepositoryTriggerCustomDataException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRepositoryTriggerCustomDataException_message *smithy.Schema
 
 var InvalidRepositoryTriggerDestinationArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidRepositoryTriggerDestinationArnException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRepositoryTriggerDestinationArnException_message *smithy.Schema
 
 var InvalidRepositoryTriggerEventsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidRepositoryTriggerEventsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRepositoryTriggerEventsException_message *smithy.Schema
 
 var InvalidRepositoryTriggerNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidRepositoryTriggerNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRepositoryTriggerNameException_message *smithy.Schema
 
 var InvalidRepositoryTriggerRegionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidRepositoryTriggerRegionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRepositoryTriggerRegionException_message *smithy.Schema
 
 var InvalidResourceArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidResourceArnException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidResourceArnException_message *smithy.Schema
 
 var InvalidRevisionIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidRevisionIdException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRevisionIdException_message *smithy.Schema
 
 var InvalidRuleContentSha256Exception = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidRuleContentSha256Exception",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRuleContentSha256Exception_message *smithy.Schema
 
 var InvalidSortByException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidSortByException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidSortByException_message *smithy.Schema
 
 var InvalidSourceCommitSpecifierException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidSourceCommitSpecifierException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidSourceCommitSpecifierException_message *smithy.Schema
 
 var InvalidSystemTagUsageException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidSystemTagUsageException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidSystemTagUsageException_message *smithy.Schema
 
 var InvalidTagKeysListException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidTagKeysListException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTagKeysListException_message *smithy.Schema
 
 var InvalidTagsMapException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidTagsMapException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTagsMapException_message *smithy.Schema
 
 var InvalidTargetBranchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidTargetBranchException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTargetBranchException_message *smithy.Schema
 
 var InvalidTargetException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidTargetException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTargetException_message *smithy.Schema
 
 var InvalidTargetsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidTargetsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTargetsException_message *smithy.Schema
 
 var InvalidTitleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "InvalidTitleException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTitleException_message *smithy.Schema
 
 var IsBinaryFile = smithy.NewSchema(smithy.ShapeID{
@@ -2029,67 +2029,67 @@ var Location_relativeFileVersion *smithy.Schema
 var ManualMergeRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ManualMergeRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ManualMergeRequiredException_message *smithy.Schema
 
 var MaximumBranchesExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "MaximumBranchesExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaximumBranchesExceededException_message *smithy.Schema
 
 var MaximumConflictResolutionEntriesExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "MaximumConflictResolutionEntriesExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaximumConflictResolutionEntriesExceededException_message *smithy.Schema
 
 var MaximumFileContentToLoadExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "MaximumFileContentToLoadExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaximumFileContentToLoadExceededException_message *smithy.Schema
 
 var MaximumFileEntriesExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "MaximumFileEntriesExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaximumFileEntriesExceededException_message *smithy.Schema
 
 var MaximumItemsToCompareExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "MaximumItemsToCompareExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaximumItemsToCompareExceededException_message *smithy.Schema
 
 var MaximumNumberOfApprovalsExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "MaximumNumberOfApprovalsExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaximumNumberOfApprovalsExceededException_message *smithy.Schema
 
 var MaximumOpenPullRequestsExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "MaximumOpenPullRequestsExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaximumOpenPullRequestsExceededException_message *smithy.Schema
 
 var MaximumRepositoryNamesExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "MaximumRepositoryNamesExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaximumRepositoryNamesExceededException_message *smithy.Schema
 
 var MaximumRepositoryTriggersExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "MaximumRepositoryTriggersExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaximumRepositoryTriggersExceededException_message *smithy.Schema
 
 var MaximumRuleTemplatesAssociatedWithRepositoryException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "MaximumRuleTemplatesAssociatedWithRepositoryException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MaximumRuleTemplatesAssociatedWithRepositoryException_message *smithy.Schema
 
 var _MaxResults = smithy.NewSchema(smithy.ShapeID{
@@ -2148,7 +2148,7 @@ var MergeOperations_destination *smithy.Schema
 var MergeOptionRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "MergeOptionRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MergeOptionRequiredException_message *smithy.Schema
 
 var _MergeOptions = smithy.NewSchema(smithy.ShapeID{
@@ -2180,13 +2180,13 @@ var _Mode = smithy.NewSchema(smithy.ShapeID{
 var MultipleConflictResolutionEntriesException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "MultipleConflictResolutionEntriesException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MultipleConflictResolutionEntriesException_message *smithy.Schema
 
 var MultipleRepositoriesInPullRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "MultipleRepositoriesInPullRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MultipleRepositoriesInPullRequestException_message *smithy.Schema
 
 var _Name = smithy.NewSchema(smithy.ShapeID{
@@ -2197,7 +2197,7 @@ var _Name = smithy.NewSchema(smithy.ShapeID{
 var NameLengthExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "NameLengthExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NameLengthExceededException_message *smithy.Schema
 
 var _NextToken = smithy.NewSchema(smithy.ShapeID{
@@ -2208,7 +2208,7 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 var NoChangeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "NoChangeException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoChangeException_message *smithy.Schema
 
 var _NumberOfConflicts = smithy.NewSchema(smithy.ShapeID{
@@ -2219,13 +2219,13 @@ var _NumberOfConflicts = smithy.NewSchema(smithy.ShapeID{
 var NumberOfRulesExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "NumberOfRulesExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NumberOfRulesExceededException_message *smithy.Schema
 
 var NumberOfRuleTemplatesExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "NumberOfRuleTemplatesExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NumberOfRuleTemplatesExceededException_message *smithy.Schema
 
 var _ObjectId = smithy.NewSchema(smithy.ShapeID{
@@ -2263,7 +2263,7 @@ var ObjectTypes_base *smithy.Schema
 var OperationNotAllowedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "OperationNotAllowedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OperationNotAllowedException_message *smithy.Schema
 
 var OrderEnum = smithy.NewSchema(smithy.ShapeID{
@@ -2290,7 +2290,7 @@ var _Overridden = smithy.NewSchema(smithy.ShapeID{
 var OverrideAlreadySetException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "OverrideAlreadySetException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OverrideAlreadySetException_message *smithy.Schema
 
 var OverrideStatus = smithy.NewSchema(smithy.ShapeID{
@@ -2304,25 +2304,25 @@ var OverrideStatus_REVOKE *smithy.Schema
 var OverrideStatusRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "OverrideStatusRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OverrideStatusRequiredException_message *smithy.Schema
 
 var ParentCommitDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ParentCommitDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ParentCommitDoesNotExistException_message *smithy.Schema
 
 var ParentCommitIdOutdatedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ParentCommitIdOutdatedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ParentCommitIdOutdatedException_message *smithy.Schema
 
 var ParentCommitIdRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ParentCommitIdRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ParentCommitIdRequiredException_message *smithy.Schema
 
 var _ParentList = smithy.NewSchema(smithy.ShapeID{
@@ -2339,13 +2339,13 @@ var _Path = smithy.NewSchema(smithy.ShapeID{
 var PathDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "PathDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PathDoesNotExistException_message *smithy.Schema
 
 var PathRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "PathRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PathRequiredException_message *smithy.Schema
 
 var _Position = smithy.NewSchema(smithy.ShapeID{
@@ -2382,19 +2382,19 @@ var PullRequest_approvalRules *smithy.Schema
 var PullRequestAlreadyClosedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "PullRequestAlreadyClosedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PullRequestAlreadyClosedException_message *smithy.Schema
 
 var PullRequestApprovalRulesNotSatisfiedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "PullRequestApprovalRulesNotSatisfiedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PullRequestApprovalRulesNotSatisfiedException_message *smithy.Schema
 
 var PullRequestCannotBeApprovedByAuthorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "PullRequestCannotBeApprovedByAuthorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PullRequestCannotBeApprovedByAuthorException_message *smithy.Schema
 
 var PullRequestCreatedEventMetadata = smithy.NewSchema(smithy.ShapeID{
@@ -2412,7 +2412,7 @@ var PullRequestCreatedEventMetadata_mergeBase *smithy.Schema
 var PullRequestDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "PullRequestDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PullRequestDoesNotExistException_message *smithy.Schema
 
 var PullRequestEvent = smithy.NewSchema(smithy.ShapeID{
@@ -2483,7 +2483,7 @@ var _PullRequestIdList_member *smithy.Schema
 var PullRequestIdRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "PullRequestIdRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PullRequestIdRequiredException_message *smithy.Schema
 
 var PullRequestMergedStateChangedEventMetadata = smithy.NewSchema(smithy.ShapeID{
@@ -2525,7 +2525,7 @@ var PullRequestStatusEnum_CLOSED *smithy.Schema
 var PullRequestStatusRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "PullRequestStatusRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PullRequestStatusRequiredException_message *smithy.Schema
 
 var PullRequestTarget = smithy.NewSchema(smithy.ShapeID{
@@ -2573,7 +2573,7 @@ var PutFileEntry_sourceFile *smithy.Schema
 var PutFileEntryConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "PutFileEntryConflictException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PutFileEntryConflictException_message *smithy.Schema
 
 var _ReactionCountsMap = smithy.NewSchema(smithy.ShapeID{
@@ -2602,7 +2602,7 @@ var ReactionForComment_reactionsFromDeletedUsersCount *smithy.Schema
 var ReactionLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ReactionLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ReactionLimitExceededException_message *smithy.Schema
 
 var _ReactionsForCommentList = smithy.NewSchema(smithy.ShapeID{
@@ -2645,13 +2645,13 @@ var ReactionValueFormats_unicode *smithy.Schema
 var ReactionValueRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ReactionValueRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ReactionValueRequiredException_message *smithy.Schema
 
 var ReferenceDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ReferenceDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ReferenceDoesNotExistException_message *smithy.Schema
 
 var _ReferenceName = smithy.NewSchema(smithy.ShapeID{
@@ -2662,13 +2662,13 @@ var _ReferenceName = smithy.NewSchema(smithy.ShapeID{
 var ReferenceNameRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ReferenceNameRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ReferenceNameRequiredException_message *smithy.Schema
 
 var ReferenceTypeNotSupportedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ReferenceTypeNotSupportedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ReferenceTypeNotSupportedException_message *smithy.Schema
 
 var RelativeFileVersionEnum = smithy.NewSchema(smithy.ShapeID{
@@ -2700,7 +2700,7 @@ var ReplaceContentEntry_fileMode *smithy.Schema
 var ReplacementContentRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ReplacementContentRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ReplacementContentRequiredException_message *smithy.Schema
 
 var ReplacementTypeEnum = smithy.NewSchema(smithy.ShapeID{
@@ -2718,7 +2718,7 @@ var ReplacementTypeEnum_USE_NEW_CONTENT *smithy.Schema
 var ReplacementTypeRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ReplacementTypeRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ReplacementTypeRequiredException_message *smithy.Schema
 
 var _RepositoryDescription = smithy.NewSchema(smithy.ShapeID{
@@ -2729,7 +2729,7 @@ var _RepositoryDescription = smithy.NewSchema(smithy.ShapeID{
 var RepositoryDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "RepositoryDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RepositoryDoesNotExistException_message *smithy.Schema
 
 var _RepositoryId = smithy.NewSchema(smithy.ShapeID{
@@ -2740,7 +2740,7 @@ var _RepositoryId = smithy.NewSchema(smithy.ShapeID{
 var RepositoryLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "RepositoryLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RepositoryLimitExceededException_message *smithy.Schema
 
 var RepositoryMetadata = smithy.NewSchema(smithy.ShapeID{
@@ -2783,7 +2783,7 @@ var _RepositoryName = smithy.NewSchema(smithy.ShapeID{
 var RepositoryNameExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "RepositoryNameExistsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RepositoryNameExistsException_message *smithy.Schema
 
 var RepositoryNameIdPair = smithy.NewSchema(smithy.ShapeID{
@@ -2809,19 +2809,19 @@ var _RepositoryNameList_member *smithy.Schema
 var RepositoryNameRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "RepositoryNameRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RepositoryNameRequiredException_message *smithy.Schema
 
 var RepositoryNamesRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "RepositoryNamesRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RepositoryNamesRequiredException_message *smithy.Schema
 
 var RepositoryNotAssociatedWithPullRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "RepositoryNotAssociatedWithPullRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RepositoryNotAssociatedWithPullRequestException_message *smithy.Schema
 
 var _RepositoryNotFoundList = smithy.NewSchema(smithy.ShapeID{
@@ -2847,7 +2847,7 @@ var RepositoryTrigger_events *smithy.Schema
 var RepositoryTriggerBranchNameListRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "RepositoryTriggerBranchNameListRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RepositoryTriggerBranchNameListRequiredException_message *smithy.Schema
 
 var _RepositoryTriggerCustomData = smithy.NewSchema(smithy.ShapeID{
@@ -2858,7 +2858,7 @@ var _RepositoryTriggerCustomData = smithy.NewSchema(smithy.ShapeID{
 var RepositoryTriggerDestinationArnRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "RepositoryTriggerDestinationArnRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RepositoryTriggerDestinationArnRequiredException_message *smithy.Schema
 
 var RepositoryTriggerEventEnum = smithy.NewSchema(smithy.ShapeID{
@@ -2882,7 +2882,7 @@ var _RepositoryTriggerEventList_member *smithy.Schema
 var RepositoryTriggerEventsListRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "RepositoryTriggerEventsListRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RepositoryTriggerEventsListRequiredException_message *smithy.Schema
 
 var RepositoryTriggerExecutionFailure = smithy.NewSchema(smithy.ShapeID{
@@ -2918,7 +2918,7 @@ var _RepositoryTriggerNameList_member *smithy.Schema
 var RepositoryTriggerNameRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "RepositoryTriggerNameRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RepositoryTriggerNameRequiredException_message *smithy.Schema
 
 var _RepositoryTriggersConfigurationId = smithy.NewSchema(smithy.ShapeID{
@@ -2935,7 +2935,7 @@ var _RepositoryTriggersList_member *smithy.Schema
 var RepositoryTriggersListRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "RepositoryTriggersListRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RepositoryTriggersListRequiredException_message *smithy.Schema
 
 var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
@@ -2946,13 +2946,13 @@ var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceArnRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ResourceArnRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceArnRequiredException_message *smithy.Schema
 
 var RestrictedSourceFileException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "RestrictedSourceFileException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RestrictedSourceFileException_message *smithy.Schema
 
 var _RevisionChildren = smithy.NewSchema(smithy.ShapeID{
@@ -2975,13 +2975,13 @@ var _RevisionId = smithy.NewSchema(smithy.ShapeID{
 var RevisionIdRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "RevisionIdRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RevisionIdRequiredException_message *smithy.Schema
 
 var RevisionNotCurrentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "RevisionNotCurrentException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RevisionNotCurrentException_message *smithy.Schema
 
 var _RuleContentSha256 = smithy.NewSchema(smithy.ShapeID{
@@ -2992,13 +2992,13 @@ var _RuleContentSha256 = smithy.NewSchema(smithy.ShapeID{
 var SameFileContentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "SameFileContentException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SameFileContentException_message *smithy.Schema
 
 var SamePathRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "SamePathRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SamePathRequestException_message *smithy.Schema
 
 var _SetFileModeEntries = smithy.NewSchema(smithy.ShapeID{
@@ -3026,13 +3026,13 @@ var SortByEnum_MODIFIED_DATE *smithy.Schema
 var SourceAndDestinationAreSameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "SourceAndDestinationAreSameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SourceAndDestinationAreSameException_message *smithy.Schema
 
 var SourceFileOrContentRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "SourceFileOrContentRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SourceFileOrContentRequiredException_message *smithy.Schema
 
 var SourceFileSpecifier = smithy.NewSchema(smithy.ShapeID{
@@ -3091,13 +3091,13 @@ var _TagKeysList_member *smithy.Schema
 var TagKeysListRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "TagKeysListRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TagKeysListRequiredException_message *smithy.Schema
 
 var TagPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "TagPolicyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TagPolicyException_message *smithy.Schema
 
 var _TagsMap = smithy.NewSchema(smithy.ShapeID{
@@ -3111,7 +3111,7 @@ var _TagsMap_value *smithy.Schema
 var TagsMapRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "TagsMapRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TagsMapRequiredException_message *smithy.Schema
 
 var _TagValue = smithy.NewSchema(smithy.ShapeID{
@@ -3138,25 +3138,25 @@ var _TargetList_member *smithy.Schema
 var TargetRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "TargetRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TargetRequiredException_message *smithy.Schema
 
 var TargetsRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "TargetsRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TargetsRequiredException_message *smithy.Schema
 
 var TipOfSourceReferenceIsDifferentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "TipOfSourceReferenceIsDifferentException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TipOfSourceReferenceIsDifferentException_message *smithy.Schema
 
 var TipsDivergenceExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "TipsDivergenceExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TipsDivergenceExceededException_message *smithy.Schema
 
 var _Title = smithy.NewSchema(smithy.ShapeID{
@@ -3167,13 +3167,13 @@ var _Title = smithy.NewSchema(smithy.ShapeID{
 var TitleRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "TitleRequiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TitleRequiredException_message *smithy.Schema
 
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TooManyTagsException_message *smithy.Schema
 
 var UserInfo = smithy.NewSchema(smithy.ShapeID{
@@ -3189,7 +3189,7 @@ var UserInfo_date *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ValidationException_message *smithy.Schema
 
 var AssociateApprovalRuleTemplateWithRepositoryInput = smithy.NewSchema(smithy.ShapeID{

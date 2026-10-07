@@ -256,7 +256,8 @@ var AmazonNeptuneGraph = smithy.NewServiceSchema(_AmazonNeptuneGraph, "2023-11-2
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var _Arn = smithy.NewSchema(smithy.ShapeID{
@@ -273,7 +274,8 @@ var BlankNodeHandling_CONVERT_TO_IRI *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConflictException_reason *smithy.Schema
@@ -685,7 +687,8 @@ var _ImportTaskSummaryList_member *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
@@ -883,7 +886,8 @@ var _ReplicaCount = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _RoleArn = smithy.NewSchema(smithy.ShapeID{
@@ -905,7 +909,8 @@ var _SecurityGroupIds_member *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceQuotaExceededException_resourceId *smithy.Schema
@@ -986,13 +991,15 @@ var _TaskId = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var UnprocessableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "UnprocessableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 422})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 422})
 var UnprocessableException_message *smithy.Schema
 
 var UnprocessableException_reason *smithy.Schema
@@ -1014,7 +1021,8 @@ var UnprocessableExceptionReason_PARTITION_FULL *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_reason *smithy.Schema

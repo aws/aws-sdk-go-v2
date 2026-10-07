@@ -128,7 +128,8 @@ var AWSIdentityStore = smithy.NewServiceSchema(_AWSIdentityStore, "2020-06-15")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var AccessDeniedException_RequestId *smithy.Schema
@@ -207,7 +208,8 @@ var _BooleanType = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConflictException_RequestId *smithy.Schema
@@ -419,7 +421,8 @@ var _IdentityStores_member *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var InternalServerException_RequestId *smithy.Schema
@@ -545,7 +548,8 @@ var _ResourceId = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_ResourceType *smithy.Schema
 
 var ResourceNotFoundException_ResourceId *smithy.Schema
@@ -610,7 +614,8 @@ var _SensitiveStringType = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ServiceQuotaExceededException_RequestId *smithy.Schema
@@ -623,7 +628,8 @@ var _StringType = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var ThrottlingException_RequestId *smithy.Schema
@@ -728,7 +734,8 @@ var UserStatus_DISABLED *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_Message *smithy.Schema
 
 var ValidationException_RequestId *smithy.Schema

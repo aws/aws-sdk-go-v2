@@ -243,7 +243,7 @@ var Kinesis_20131202 = smithy.NewServiceSchema(_Kinesis_20131202, "2013-12-02")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AccessDeniedException_message *smithy.Schema
 
 var _BooleanObject = smithy.NewSchema(smithy.ShapeID{
@@ -558,7 +558,7 @@ var _DescribeStreamInputLimit = smithy.NewSchema(smithy.ShapeID{
 var DryRunOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "DryRunOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DryRunOperationException_message *smithy.Schema
 
 var EncryptionType = smithy.NewSchema(smithy.ShapeID{
@@ -599,13 +599,13 @@ var _ExpectedBucketOwner = smithy.NewSchema(smithy.ShapeID{
 var ExpiredIteratorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "ExpiredIteratorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ExpiredIteratorException_message *smithy.Schema
 
 var ExpiredNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "ExpiredNextTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ExpiredNextTokenException_message *smithy.Schema
 
 var _GetRecordsInputLimit = smithy.NewSchema(smithy.ShapeID{
@@ -634,13 +634,13 @@ var HashKeyRange_EndingHashKey *smithy.Schema
 var InternalFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "InternalFailureException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalFailureException_message *smithy.Schema
 
 var InvalidArgumentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "InvalidArgumentException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidArgumentException_message *smithy.Schema
 
 var _KeyId = smithy.NewSchema(smithy.ShapeID{
@@ -651,43 +651,43 @@ var _KeyId = smithy.NewSchema(smithy.ShapeID{
 var KMSAccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "KMSAccessDeniedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KMSAccessDeniedException_message *smithy.Schema
 
 var KMSDisabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "KMSDisabledException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KMSDisabledException_message *smithy.Schema
 
 var KMSInvalidStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "KMSInvalidStateException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KMSInvalidStateException_message *smithy.Schema
 
 var KMSNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "KMSNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KMSNotFoundException_message *smithy.Schema
 
 var KMSOptInRequired = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "KMSOptInRequired",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KMSOptInRequired_message *smithy.Schema
 
 var KMSThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "KMSThrottlingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KMSThrottlingException_message *smithy.Schema
 
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var _ListChannelsInputLimit = smithy.NewSchema(smithy.ShapeID{
@@ -856,7 +856,7 @@ var _PositiveIntegerObject = smithy.NewSchema(smithy.ShapeID{
 var ProvisionedThroughputExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "ProvisionedThroughputExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ProvisionedThroughputExceededException_message *smithy.Schema
 
 var PutRecordsRequestEntry = smithy.NewSchema(smithy.ShapeID{
@@ -949,13 +949,13 @@ var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceInUseException_message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _RetentionPeriodHours = smithy.NewSchema(smithy.ShapeID{
@@ -1444,7 +1444,7 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ValidationException_message *smithy.Schema
 
 var WarmThroughputObject = smithy.NewSchema(smithy.ShapeID{

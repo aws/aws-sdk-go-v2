@@ -994,7 +994,8 @@ var AuthorizerType_COGNITO_USER_POOLS *smithy.Schema
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_message *smithy.Schema
 
 var BasePathMapping = smithy.NewSchema(smithy.ShapeID{
@@ -1082,7 +1083,8 @@ var ClientCertificate_tags *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConnectionType = smithy.NewSchema(smithy.ShapeID{
@@ -1445,7 +1447,8 @@ var IpAddressType_dualstack *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var LimitExceededException_retryAfterSeconds *smithy.Schema
 
 var LimitExceededException_message *smithy.Schema
@@ -1814,7 +1817,8 @@ var MutualTlsAuthenticationInput_truststoreVersion *smithy.Schema
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_message *smithy.Schema
 
 var _NullableBoolean = smithy.NewSchema(smithy.ShapeID{
@@ -2049,7 +2053,8 @@ var SecurityPolicy_SecurityPolicy_TLS12_2018_EDGE *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_retryAfterSeconds *smithy.Schema
 
 var ServiceUnavailableException_message *smithy.Schema
@@ -2132,7 +2137,8 @@ var TlsConfig_insecureSkipVerification *smithy.Schema
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_retryAfterSeconds *smithy.Schema
 
 var TooManyRequestsException_message *smithy.Schema
@@ -2150,7 +2156,8 @@ var UnauthorizedCacheControlHeaderStrategy_SUCCEED_WITHOUT_RESPONSE_HEADER *smit
 var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
 	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var UnauthorizedException_message *smithy.Schema
 
 var UsagePlan = smithy.NewSchema(smithy.ShapeID{

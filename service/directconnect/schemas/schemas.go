@@ -794,7 +794,7 @@ var CustomerAgreement_status *smithy.Schema
 var DirectConnectClientException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directconnect",
 	Name:      "DirectConnectClientException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DirectConnectClientException_message *smithy.Schema
 
 var DirectConnectGateway = smithy.NewSchema(smithy.ShapeID{
@@ -982,13 +982,14 @@ var DirectConnectGatewayState_deleted *smithy.Schema
 var DirectConnectServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directconnect",
 	Name:      "DirectConnectServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var DirectConnectServerException_message *smithy.Schema
 
 var DuplicateTagKeysException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directconnect",
 	Name:      "DuplicateTagKeysException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DuplicateTagKeysException_message *smithy.Schema
 
 var _EnableSiteLink = smithy.NewSchema(smithy.ShapeID{
@@ -1231,7 +1232,8 @@ var LagState_unknown *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directconnect",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var LimitExceededException_message *smithy.Schema
 
 var Loa = smithy.NewSchema(smithy.ShapeID{
@@ -1958,7 +1960,7 @@ var _TestId = smithy.NewSchema(smithy.ShapeID{
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.directconnect",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TooManyTagsException_message *smithy.Schema
 
 var _Vendor = smithy.NewSchema(smithy.ShapeID{

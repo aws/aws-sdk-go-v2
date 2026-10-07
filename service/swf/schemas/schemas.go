@@ -739,7 +739,7 @@ var DecisionType_ScheduleLambdaFunction *smithy.Schema
 var DefaultUndefinedFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.swf",
 	Name:      "DefaultUndefinedFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DefaultUndefinedFault_message *smithy.Schema
 
 var _Description = smithy.NewSchema(smithy.ShapeID{
@@ -750,7 +750,7 @@ var _Description = smithy.NewSchema(smithy.ShapeID{
 var DomainAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.swf",
 	Name:      "DomainAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DomainAlreadyExistsFault_message *smithy.Schema
 
 var DomainConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -762,7 +762,7 @@ var DomainConfiguration_workflowExecutionRetentionPeriodInDays *smithy.Schema
 var DomainDeprecatedFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.swf",
 	Name:      "DomainDeprecatedFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DomainDeprecatedFault_message *smithy.Schema
 
 var DomainInfo = smithy.NewSchema(smithy.ShapeID{
@@ -1198,7 +1198,7 @@ var _LimitedData = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.swf",
 	Name:      "LimitExceededFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededFault_message *smithy.Schema
 
 var _MarkerName = smithy.NewSchema(smithy.ShapeID{
@@ -1229,7 +1229,7 @@ var _OpenDecisionTasksCount = smithy.NewSchema(smithy.ShapeID{
 var OperationNotPermittedFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.swf",
 	Name:      "OperationNotPermittedFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var OperationNotPermittedFault_message *smithy.Schema
 
 var _PageSize = smithy.NewSchema(smithy.ShapeID{
@@ -1772,7 +1772,8 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var TooManyTagsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.swf",
 	Name:      "TooManyTagsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsFault_message *smithy.Schema
 
 var _Truncated = smithy.NewSchema(smithy.ShapeID{
@@ -1783,25 +1784,25 @@ var _Truncated = smithy.NewSchema(smithy.ShapeID{
 var TypeAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.swf",
 	Name:      "TypeAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TypeAlreadyExistsFault_message *smithy.Schema
 
 var TypeDeprecatedFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.swf",
 	Name:      "TypeDeprecatedFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TypeDeprecatedFault_message *smithy.Schema
 
 var TypeNotDeprecatedFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.swf",
 	Name:      "TypeNotDeprecatedFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TypeNotDeprecatedFault_message *smithy.Schema
 
 var UnknownResourceFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.swf",
 	Name:      "UnknownResourceFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnknownResourceFault_message *smithy.Schema
 
 var _Version = smithy.NewSchema(smithy.ShapeID{
@@ -1825,7 +1826,7 @@ var WorkflowExecution_runId *smithy.Schema
 var WorkflowExecutionAlreadyStartedFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.swf",
 	Name:      "WorkflowExecutionAlreadyStartedFault",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var WorkflowExecutionAlreadyStartedFault_message *smithy.Schema
 
 var WorkflowExecutionCanceledEventAttributes = smithy.NewSchema(smithy.ShapeID{

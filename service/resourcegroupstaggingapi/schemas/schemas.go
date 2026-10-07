@@ -114,13 +114,13 @@ var _ComplianceStatus = smithy.NewSchema(smithy.ShapeID{
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resourcegroupstaggingapi",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConcurrentModificationException_Message *smithy.Schema
 
 var ConstraintViolationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resourcegroupstaggingapi",
 	Name:      "ConstraintViolationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConstraintViolationException_Message *smithy.Schema
 
 var ErrorCode = smithy.NewSchema(smithy.ShapeID{
@@ -188,13 +188,13 @@ var _IncludeComplianceDetails = smithy.NewSchema(smithy.ShapeID{
 var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resourcegroupstaggingapi",
 	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServiceException_Message *smithy.Schema
 
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resourcegroupstaggingapi",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidParameterException_Message *smithy.Schema
 
 var _LastUpdated = smithy.NewSchema(smithy.ShapeID{
@@ -225,7 +225,7 @@ var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
 var PaginationTokenExpiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resourcegroupstaggingapi",
 	Name:      "PaginationTokenExpiredException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PaginationTokenExpiredException_Message *smithy.Schema
 
 var _Region = smithy.NewSchema(smithy.ShapeID{
@@ -462,7 +462,7 @@ var TargetIdType_ROOT *smithy.Schema
 var ThrottledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resourcegroupstaggingapi",
 	Name:      "ThrottledException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ThrottledException_Message *smithy.Schema
 
 var DescribeReportCreationInput = smithy.NewSchema(smithy.ShapeID{

@@ -328,7 +328,8 @@ var ___timestampIso8601 = smithy.NewSchema(smithy.ShapeID{
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.schemas",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_Code *smithy.Schema
 
 var BadRequestException_Message *smithy.Schema
@@ -351,7 +352,8 @@ var CodeGenerationStatus_CREATE_FAILED *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.schemas",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Code *smithy.Schema
 
 var ConflictException_Message *smithy.Schema
@@ -383,7 +385,8 @@ var DiscovererSummary_Tags *smithy.Schema
 var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.schemas",
 	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var ForbiddenException_Code *smithy.Schema
 
 var ForbiddenException_Message *smithy.Schema
@@ -396,7 +399,8 @@ var _GetDiscoveredSchemaVersionItemInput = smithy.NewSchema(smithy.ShapeID{
 var GoneException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.schemas",
 	Name:      "GoneException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 410})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 410})
 var GoneException_Code *smithy.Schema
 
 var GoneException_Message *smithy.Schema
@@ -404,7 +408,8 @@ var GoneException_Message *smithy.Schema
 var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.schemas",
 	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerErrorException_Code *smithy.Schema
 
 var InternalServerErrorException_Message *smithy.Schema
@@ -412,7 +417,8 @@ var InternalServerErrorException_Message *smithy.Schema
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.schemas",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_Code *smithy.Schema
 
 var NotFoundException_Message *smithy.Schema
@@ -420,7 +426,8 @@ var NotFoundException_Message *smithy.Schema
 var PreconditionFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.schemas",
 	Name:      "PreconditionFailedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 412})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 412})
 var PreconditionFailedException_Code *smithy.Schema
 
 var PreconditionFailedException_Message *smithy.Schema
@@ -486,7 +493,8 @@ var SearchSchemaVersionSummary_Type *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.schemas",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_Code *smithy.Schema
 
 var ServiceUnavailableException_Message *smithy.Schema
@@ -507,7 +515,8 @@ var _Tags_value *smithy.Schema
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.schemas",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_Code *smithy.Schema
 
 var TooManyRequestsException_Message *smithy.Schema
@@ -523,7 +532,8 @@ var Type_JSONSchemaDraft4 *smithy.Schema
 var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.schemas",
 	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var UnauthorizedException_Code *smithy.Schema
 
 var UnauthorizedException_Message *smithy.Schema

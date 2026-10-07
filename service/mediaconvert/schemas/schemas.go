@@ -2632,7 +2632,8 @@ var AvcIntraUhdSettings_QualityTuningLevel *smithy.Schema
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_Message *smithy.Schema
 
 var BandwidthReductionFilter = smithy.NewSchema(smithy.ShapeID{
@@ -3730,7 +3731,8 @@ var Commitment_ONE_YEAR *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var Container = smithy.NewSchema(smithy.ShapeID{
@@ -5000,7 +5002,8 @@ var FontScript_HANT *smithy.Schema
 var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var ForbiddenException_Message *smithy.Schema
 
 var ForceIncludeRenditionSize = smithy.NewSchema(smithy.ShapeID{
@@ -6746,7 +6749,8 @@ var InsertableImage_Width *smithy.Schema
 var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerErrorException_Message *smithy.Schema
 
 var Job = smithy.NewSchema(smithy.ShapeID{
@@ -8690,7 +8694,8 @@ var NoiseReducerTemporalFilterSettings_Strength *smithy.Schema
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_Message *smithy.Schema
 
 var OpusSettings = smithy.NewSchema(smithy.ShapeID{
@@ -9388,7 +9393,8 @@ var ServiceOverride_Value *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ShareStatus = smithy.NewSchema(smithy.ShapeID{
@@ -9634,7 +9640,8 @@ var Timing_SubmitTime *smithy.Schema
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_Message *smithy.Schema
 
 var Track = smithy.NewSchema(smithy.ShapeID{
@@ -9914,7 +9921,8 @@ var UncompressedTelecine_HARD *smithy.Schema
 var UnprocessableEntityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "UnprocessableEntityException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 422})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 422})
 var UnprocessableEntityException_Message *smithy.Schema
 
 var Vc3Class = smithy.NewSchema(smithy.ShapeID{

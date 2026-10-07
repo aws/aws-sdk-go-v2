@@ -328,7 +328,8 @@ var AWSLicenseManager = smithy.NewServiceSchema(_AWSLicenseManager, "2018-08-01"
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 401},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401},
 	&smithytraits.AWSQueryError{ErrorCode: "ServiceAccessDenied",
 		StatusCode: 401})
 var AccessDeniedException_Message *smithy.Schema
@@ -401,7 +402,8 @@ var _AssetList_member *smithy.Schema
 var AuthorizationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "AuthorizationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "AuthorizationFailure",
 		StatusCode: 403})
 var AuthorizationException_Message *smithy.Schema
@@ -461,7 +463,8 @@ var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409},
 	&smithytraits.AWSQueryError{ErrorCode: "ConflictException",
 		StatusCode: 409})
 var ConflictException_Message *smithy.Schema
@@ -620,7 +623,8 @@ var _EntitlementList_member *smithy.Schema
 var EntitlementNotAllowedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "EntitlementNotAllowedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var EntitlementNotAllowedException_Message *smithy.Schema
 
 var EntitlementUnit = smithy.NewSchema(smithy.ShapeID{
@@ -702,7 +706,8 @@ var _EntitlementUsageList_member *smithy.Schema
 var FailedDependencyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "FailedDependencyException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 424},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 424},
 	&smithytraits.AWSQueryError{ErrorCode: "FailedDependency",
 		StatusCode: 424})
 var FailedDependencyException_Message *smithy.Schema
@@ -720,7 +725,8 @@ var Filter_Values *smithy.Schema
 var FilterLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "FilterLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "FilterLimitExceeded",
 		StatusCode: 400})
 var FilterLimitExceededException_Message *smithy.Schema
@@ -867,7 +873,8 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameterValueProvided",
 		StatusCode: 400})
 var InvalidParameterValueException_Message *smithy.Schema
@@ -875,7 +882,8 @@ var InvalidParameterValueException_Message *smithy.Schema
 var InvalidResourceStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "InvalidResourceStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidResourceState",
 		StatusCode: 400})
 var InvalidResourceStateException_Message *smithy.Schema
@@ -1333,7 +1341,8 @@ var LicenseUsage_EntitlementUsages *smithy.Schema
 var LicenseUsageException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "LicenseUsageException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 412},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 412},
 	&smithytraits.AWSQueryError{ErrorCode: "LicenseUsageFailure",
 		StatusCode: 412})
 var LicenseUsageException_Message *smithy.Schema
@@ -1411,7 +1420,8 @@ var _MetadataList_member *smithy.Schema
 var NoEntitlementsAllowedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "NoEntitlementsAllowedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var NoEntitlementsAllowedException_Message *smithy.Schema
 
 var Options = smithy.NewSchema(smithy.ShapeID{
@@ -1504,7 +1514,8 @@ var ProvisionalConfiguration_MaxTimeToLiveInMinutes *smithy.Schema
 var RateLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "RateLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "RateLimitExceeded",
 		StatusCode: 429})
 var RateLimitExceededException_Message *smithy.Schema
@@ -1542,7 +1553,8 @@ var ReceivedStatus_WORKFLOW_COMPLETED *smithy.Schema
 var RedirectException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "RedirectException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 308})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 308})
 var RedirectException_Location *smithy.Schema
 
 var RedirectException_Message *smithy.Schema
@@ -1697,7 +1709,8 @@ var _ResourceInventoryList_member *smithy.Schema
 var ResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "ResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceLimitExceeded",
 		StatusCode: 400})
 var ResourceLimitExceededException_Message *smithy.Schema
@@ -1705,7 +1718,8 @@ var ResourceLimitExceededException_Message *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidResource.NotFound",
 		StatusCode: 400})
 var ResourceNotFoundException_Message *smithy.Schema
@@ -1759,7 +1773,8 @@ var _ScriptRuleStatementList_member *smithy.Schema
 var ServerInternalException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "ServerInternalException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "InternalError",
 		StatusCode: 500})
 var ServerInternalException_Message *smithy.Schema
@@ -1851,7 +1866,8 @@ var TokenType_REFRESH_TOKEN *smithy.Schema
 var UnsupportedDigitalSignatureMethodException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "UnsupportedDigitalSignatureMethodException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var UnsupportedDigitalSignatureMethodException_Message *smithy.Schema
 
 var _UsageOperation = smithy.NewSchema(smithy.ShapeID{
@@ -1862,7 +1878,8 @@ var _UsageOperation = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.licensemanager",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_Message *smithy.Schema
 
 var AcceptGrantRequest = smithy.NewSchema(smithy.ShapeID{

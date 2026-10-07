@@ -67,7 +67,8 @@ var AmazonSageMakerFeatureStoreRuntime = smithy.NewServiceSchema(_AmazonSageMake
 var AccessForbidden = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemakerfeaturestoreruntime",
 	Name:      "AccessForbidden",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessForbidden_Message *smithy.Schema
 
 var BatchGetRecordError = smithy.NewSchema(smithy.ShapeID{
@@ -164,7 +165,8 @@ var _Boolean = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemakerfeaturestoreruntime",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var DeletionMode = smithy.NewSchema(smithy.ShapeID{
@@ -217,7 +219,8 @@ var FeatureValue_ValueAsStringList *smithy.Schema
 var InternalFailure = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemakerfeaturestoreruntime",
 	Name:      "InternalFailure",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalFailure_Message *smithy.Schema
 
 var _ListRecordsMaxResults = smithy.NewSchema(smithy.ShapeID{
@@ -256,13 +259,15 @@ var _RecordIdentifiers_member *smithy.Schema
 var ResourceNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemakerfeaturestoreruntime",
 	Name:      "ResourceNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFound_Message *smithy.Schema
 
 var ServiceUnavailable = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemakerfeaturestoreruntime",
 	Name:      "ServiceUnavailable",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailable_Message *smithy.Schema
 
 var TargetStore = smithy.NewSchema(smithy.ShapeID{
@@ -321,7 +326,8 @@ var _UnprocessedIdentifiers_member *smithy.Schema
 var ValidationError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemakerfeaturestoreruntime",
 	Name:      "ValidationError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationError_Message *smithy.Schema
 
 var _ValueAsString = smithy.NewSchema(smithy.ShapeID{

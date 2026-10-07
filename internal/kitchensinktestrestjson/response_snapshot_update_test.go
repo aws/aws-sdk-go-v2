@@ -211,7 +211,9 @@ func TestUpdateResponseSnapshot_PutCompressedData(t *testing.T) {
 }
 
 func TestUpdateResponseSnapshot_Error_ResourceNotFound(t *testing.T) {
-	want := &types.ResourceNotFound{}
+	want := &types.ResourceNotFound{
+		Message: ptr.String("__Message__"),
+	}
 	proto := restjson1.New(schemas.RestJson1KitchenSink)
 	opSchema := smithy.NewOperationSchema(schemas.GetResource, schemas.ResourceNotFound, schemas.ResourceNotFound)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)

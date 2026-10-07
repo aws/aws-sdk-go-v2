@@ -101,7 +101,7 @@ var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
 var ExpiredIteratorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodbstreams",
 	Name:      "ExpiredIteratorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ExpiredIteratorException_message *smithy.Schema
 
 var Identity = smithy.NewSchema(smithy.ShapeID{
@@ -115,7 +115,7 @@ var Identity_Type *smithy.Schema
 var InternalServerError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodbstreams",
 	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServerError_message *smithy.Schema
 
 var _KeySchema = smithy.NewSchema(smithy.ShapeID{
@@ -148,7 +148,7 @@ var KeyType_RANGE *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodbstreams",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var _ListAttributeValue = smithy.NewSchema(smithy.ShapeID{
@@ -228,7 +228,7 @@ var _RecordList_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodbstreams",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _SequenceNumber = smithy.NewSchema(smithy.ShapeID{
@@ -405,7 +405,7 @@ var _TableName = smithy.NewSchema(smithy.ShapeID{
 var TrimmedDataAccessException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodbstreams",
 	Name:      "TrimmedDataAccessException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TrimmedDataAccessException_message *smithy.Schema
 
 var DescribeStreamInput = smithy.NewSchema(smithy.ShapeID{

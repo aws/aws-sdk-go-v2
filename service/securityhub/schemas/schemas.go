@@ -851,7 +851,8 @@ var SecurityHubAPIService = smithy.NewServiceSchema(_SecurityHubAPIService, "201
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var AccessDeniedException_Code *smithy.Schema
@@ -9641,7 +9642,8 @@ var _ConfigurationPolicySummaryList_member *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConflictException_Code *smithy.Schema
@@ -10792,7 +10794,8 @@ var _IntegrationV2TypeList_member *smithy.Schema
 var InternalException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "InternalException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalException_Message *smithy.Schema
 
 var InternalException_Code *smithy.Schema
@@ -10800,7 +10803,8 @@ var InternalException_Code *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var InternalServerException_Code *smithy.Schema
@@ -10808,7 +10812,8 @@ var InternalServerException_Code *smithy.Schema
 var InvalidAccessException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "InvalidAccessException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var InvalidAccessException_Message *smithy.Schema
 
 var InvalidAccessException_Code *smithy.Schema
@@ -10816,7 +10821,8 @@ var InvalidAccessException_Code *smithy.Schema
 var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidInputException_Message *smithy.Schema
 
 var InvalidInputException_Code *smithy.Schema
@@ -10939,7 +10945,8 @@ var _KeywordFilterList_member *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var LimitExceededException_Message *smithy.Schema
 
 var LimitExceededException_Code *smithy.Schema
@@ -11651,7 +11658,8 @@ var _OcsfStringFilterList_member *smithy.Schema
 var OrganizationalUnitNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "OrganizationalUnitNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var OrganizationalUnitNotFoundException_Message *smithy.Schema
 
 var OrganizationalUnitNotFoundException_Code *smithy.Schema
@@ -11687,7 +11695,8 @@ var OrganizationConfigurationStatus_FAILED *smithy.Schema
 var OrganizationNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "OrganizationNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var OrganizationNotFoundException_Message *smithy.Schema
 
 var OrganizationNotFoundException_Code *smithy.Schema
@@ -12473,7 +12482,8 @@ var _ResourceConfig = smithy.NewSchema(smithy.ShapeID{
 var ResourceConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ResourceConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceConflictException_Message *smithy.Schema
 
 var ResourceConflictException_Code *smithy.Schema
@@ -12761,7 +12771,8 @@ var ResourceInfo_AIDetails *smithy.Schema
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceInUseException_Message *smithy.Schema
 
 var ResourceInUseException_Code *smithy.Schema
@@ -12775,7 +12786,8 @@ var _ResourceList_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_Code *smithy.Schema
@@ -13729,7 +13741,8 @@ var ServiceNowUpdateConfiguration_SecretArn *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ServiceQuotaExceededException_Code *smithy.Schema
@@ -14390,7 +14403,8 @@ var _ThreatList_member *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var ThrottlingException_Code *smithy.Schema
@@ -14590,7 +14604,8 @@ var UserAccount_Name *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_Message *smithy.Schema
 
 var ValidationException_Code *smithy.Schema

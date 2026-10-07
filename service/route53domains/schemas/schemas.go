@@ -837,7 +837,8 @@ var _DnssecKeyList_member *smithy.Schema
 var DnssecLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "DnssecLimitExceeded",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var DnssecLimitExceeded_message *smithy.Schema
 
 var _DnssecPublicKey = smithy.NewSchema(smithy.ShapeID{
@@ -887,7 +888,8 @@ var DomainAvailability_PENDING *smithy.Schema
 var DomainLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "DomainLimitExceeded",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var DomainLimitExceeded_message *smithy.Schema
 
 var _DomainName = smithy.NewSchema(smithy.ShapeID{
@@ -974,7 +976,8 @@ var DomainTransferability_Transferable *smithy.Schema
 var DuplicateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "DuplicateRequest",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var DuplicateRequest_requestId *smithy.Schema
 
 var DuplicateRequest_message *smithy.Schema
@@ -1130,7 +1133,8 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InvalidInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "InvalidInput",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidInput_message *smithy.Schema
 
 var _InvoiceId = smithy.NewSchema(smithy.ShapeID{
@@ -1199,7 +1203,8 @@ var _OperationId = smithy.NewSchema(smithy.ShapeID{
 var OperationLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "OperationLimitExceeded",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var OperationLimitExceeded_message *smithy.Schema
 
 var OperationStatus = smithy.NewSchema(smithy.ShapeID{
@@ -1456,7 +1461,8 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var TLDInMaintenance = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "TLDInMaintenance",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TLDInMaintenance_message *smithy.Schema
 
 var TLDInMaintenance_tld *smithy.Schema
@@ -1469,7 +1475,8 @@ var _TldName = smithy.NewSchema(smithy.ShapeID{
 var TLDRulesViolation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "TLDRulesViolation",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TLDRulesViolation_message *smithy.Schema
 
 var Transferable = smithy.NewSchema(smithy.ShapeID{
@@ -1491,7 +1498,8 @@ var Transferable_PREMIUM_DOMAIN *smithy.Schema
 var UnsupportedTLD = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53domains",
 	Name:      "UnsupportedTLD",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var UnsupportedTLD_message *smithy.Schema
 
 var _Value = smithy.NewSchema(smithy.ShapeID{

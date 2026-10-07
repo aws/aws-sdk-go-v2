@@ -143,13 +143,15 @@ var _ClientTokenString = smithy.NewSchema(smithy.ShapeID{
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.translate",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConcurrentModificationException_Message *smithy.Schema
 
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.translate",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var _ContentType = smithy.NewSchema(smithy.ShapeID{
@@ -165,7 +167,8 @@ var _Description = smithy.NewSchema(smithy.ShapeID{
 var DetectedLanguageLowConfidenceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.translate",
 	Name:      "DetectedLanguageLowConfidenceException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var DetectedLanguageLowConfidenceException_Message *smithy.Schema
 
 var DetectedLanguageLowConfidenceException_DetectedLanguageCode *smithy.Schema
@@ -263,25 +266,29 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.translate",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var InvalidFilterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.translate",
 	Name:      "InvalidFilterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidFilterException_Message *smithy.Schema
 
 var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.translate",
 	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterValueException_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.translate",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidRequestException_Message *smithy.Schema
 
 var JobDetails = smithy.NewSchema(smithy.ShapeID{
@@ -350,7 +357,8 @@ var _LanguagesList_member *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.translate",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var LimitExceededException_Message *smithy.Schema
 
 var _LocalizedNameString = smithy.NewSchema(smithy.ShapeID{
@@ -501,7 +509,8 @@ var _ResourceNameList_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.translate",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var _S3Uri = smithy.NewSchema(smithy.ShapeID{
@@ -512,7 +521,8 @@ var _S3Uri = smithy.NewSchema(smithy.ShapeID{
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.translate",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_Message *smithy.Schema
 
 var _String = smithy.NewSchema(smithy.ShapeID{
@@ -649,7 +659,8 @@ var _TermList_member *smithy.Schema
 var TextSizeLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.translate",
 	Name:      "TextSizeLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TextSizeLimitExceededException_Message *smithy.Schema
 
 var TextTranslationJobFilter = smithy.NewSchema(smithy.ShapeID{
@@ -712,13 +723,15 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.translate",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_Message *smithy.Schema
 
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.translate",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_message *smithy.Schema
 
 var TooManyTagsException_ResourceArn *smithy.Schema
@@ -757,7 +770,8 @@ var _UnboundedLengthString = smithy.NewSchema(smithy.ShapeID{
 var UnsupportedDisplayLanguageCodeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.translate",
 	Name:      "UnsupportedDisplayLanguageCodeException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var UnsupportedDisplayLanguageCodeException_Message *smithy.Schema
 
 var UnsupportedDisplayLanguageCodeException_DisplayLanguageCode *smithy.Schema
@@ -765,7 +779,8 @@ var UnsupportedDisplayLanguageCodeException_DisplayLanguageCode *smithy.Schema
 var UnsupportedLanguagePairException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.translate",
 	Name:      "UnsupportedLanguagePairException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var UnsupportedLanguagePairException_Message *smithy.Schema
 
 var UnsupportedLanguagePairException_SourceLanguageCode *smithy.Schema

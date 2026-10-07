@@ -5,6 +5,7 @@ package schemas
 import (
 	smithy "github.com/aws/smithy-go"
 	smithyprelude "github.com/aws/smithy-go/prelude"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 var DeleteReportDefinition = smithy.NewSchema(smithy.ShapeID{
@@ -148,7 +149,7 @@ var _DeleteResponseMessage = smithy.NewSchema(smithy.ShapeID{
 var DuplicateReportNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costandusagereportservice",
 	Name:      "DuplicateReportNameException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DuplicateReportNameException_Message *smithy.Schema
 
 var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
@@ -164,7 +165,7 @@ var _GenericString = smithy.NewSchema(smithy.ShapeID{
 var InternalErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costandusagereportservice",
 	Name:      "InternalErrorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalErrorException_Message *smithy.Schema
 
 var _LastDelivery = smithy.NewSchema(smithy.ShapeID{
@@ -239,7 +240,7 @@ var ReportFormat_Parquet *smithy.Schema
 var ReportLimitReachedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costandusagereportservice",
 	Name:      "ReportLimitReachedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ReportLimitReachedException_Message *smithy.Schema
 
 var _ReportName = smithy.NewSchema(smithy.ShapeID{
@@ -266,7 +267,7 @@ var ReportVersioning_OVERWRITE_REPORT *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costandusagereportservice",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
@@ -338,7 +339,7 @@ var TimeUnit_MONTHLY *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costandusagereportservice",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ValidationException_Message *smithy.Schema
 
 var DeleteReportDefinitionRequest = smithy.NewSchema(smithy.ShapeID{

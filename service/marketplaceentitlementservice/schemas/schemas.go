@@ -5,6 +5,7 @@ package schemas
 import (
 	smithy "github.com/aws/smithy-go"
 	smithyprelude "github.com/aws/smithy-go/prelude"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 var GetEntitlements = smithy.NewSchema(smithy.ShapeID{
@@ -109,13 +110,13 @@ var _Integer = smithy.NewSchema(smithy.ShapeID{
 var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceentitlementservice",
 	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServiceErrorException_message *smithy.Schema
 
 var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceentitlementservice",
 	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidParameterException_message *smithy.Schema
 
 var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
@@ -141,7 +142,7 @@ var _String = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceentitlementservice",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ThrottlingException_message *smithy.Schema
 
 var _Timestamp = smithy.NewSchema(smithy.ShapeID{

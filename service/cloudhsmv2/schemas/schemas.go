@@ -5,6 +5,7 @@ package schemas
 import (
 	smithy "github.com/aws/smithy-go"
 	smithyprelude "github.com/aws/smithy-go/prelude"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 var CopyBackupToRegion = smithy.NewSchema(smithy.ShapeID{
@@ -221,7 +222,7 @@ var Certificates_ClusterCertificate *smithy.Schema
 var CloudHsmAccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudhsmv2",
 	Name:      "CloudHsmAccessDeniedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CloudHsmAccessDeniedException_Message *smithy.Schema
 
 var _CloudHsmArn = smithy.NewSchema(smithy.ShapeID{
@@ -232,37 +233,37 @@ var _CloudHsmArn = smithy.NewSchema(smithy.ShapeID{
 var CloudHsmInternalFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudhsmv2",
 	Name:      "CloudHsmInternalFailureException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var CloudHsmInternalFailureException_Message *smithy.Schema
 
 var CloudHsmInvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudhsmv2",
 	Name:      "CloudHsmInvalidRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CloudHsmInvalidRequestException_Message *smithy.Schema
 
 var CloudHsmResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudhsmv2",
 	Name:      "CloudHsmResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CloudHsmResourceLimitExceededException_Message *smithy.Schema
 
 var CloudHsmResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudhsmv2",
 	Name:      "CloudHsmResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CloudHsmResourceNotFoundException_Message *smithy.Schema
 
 var CloudHsmServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudhsmv2",
 	Name:      "CloudHsmServiceException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CloudHsmServiceException_Message *smithy.Schema
 
 var CloudHsmTagException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudhsmv2",
 	Name:      "CloudHsmTagException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CloudHsmTagException_Message *smithy.Schema
 
 var Cluster = smithy.NewSchema(smithy.ShapeID{

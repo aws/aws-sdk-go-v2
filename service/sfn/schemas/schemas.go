@@ -203,13 +203,13 @@ var AWSStepFunctions = smithy.NewServiceSchema(_AWSStepFunctions, "2016-11-23")
 var ActivityAlreadyExists = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "ActivityAlreadyExists",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ActivityAlreadyExists_message *smithy.Schema
 
 var ActivityDoesNotExist = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "ActivityDoesNotExist",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ActivityDoesNotExist_message *smithy.Schema
 
 var ActivityFailedEventDetails = smithy.NewSchema(smithy.ShapeID{
@@ -223,7 +223,7 @@ var ActivityFailedEventDetails_cause *smithy.Schema
 var ActivityLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "ActivityLimitExceeded",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ActivityLimitExceeded_message *smithy.Schema
 
 var _ActivityList = smithy.NewSchema(smithy.ShapeID{
@@ -289,7 +289,7 @@ var ActivityTimedOutEventDetails_cause *smithy.Schema
 var ActivityWorkerLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "ActivityWorkerLimitExceeded",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ActivityWorkerLimitExceeded_message *smithy.Schema
 
 var _AliasDescription = smithy.NewSchema(smithy.ShapeID{
@@ -359,7 +359,8 @@ var CloudWatchLogsLogGroup_logGroupArn *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var _ConnectorParameters = smithy.NewSchema(smithy.ShapeID{
@@ -438,13 +439,13 @@ var ExecutionAbortedEventDetails_cause *smithy.Schema
 var ExecutionAlreadyExists = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "ExecutionAlreadyExists",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ExecutionAlreadyExists_message *smithy.Schema
 
 var ExecutionDoesNotExist = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "ExecutionDoesNotExist",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ExecutionDoesNotExist_message *smithy.Schema
 
 var ExecutionFailedEventDetails = smithy.NewSchema(smithy.ShapeID{
@@ -458,7 +459,7 @@ var ExecutionFailedEventDetails_cause *smithy.Schema
 var ExecutionLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "ExecutionLimitExceeded",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ExecutionLimitExceeded_message *smithy.Schema
 
 var _ExecutionList = smithy.NewSchema(smithy.ShapeID{
@@ -498,7 +499,7 @@ var ExecutionListItem_redriveDate *smithy.Schema
 var ExecutionNotRedrivable = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "ExecutionNotRedrivable",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ExecutionNotRedrivable_message *smithy.Schema
 
 var ExecutionRedriveFilter = smithy.NewSchema(smithy.ShapeID{
@@ -961,61 +962,61 @@ var _InspectionToleratedFailurePercentage = smithy.NewSchema(smithy.ShapeID{
 var InvalidArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "InvalidArn",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidArn_message *smithy.Schema
 
 var InvalidDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "InvalidDefinition",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidDefinition_message *smithy.Schema
 
 var InvalidEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "InvalidEncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidEncryptionConfiguration_message *smithy.Schema
 
 var InvalidExecutionInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "InvalidExecutionInput",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidExecutionInput_message *smithy.Schema
 
 var InvalidLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "InvalidLoggingConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidLoggingConfiguration_message *smithy.Schema
 
 var InvalidName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "InvalidName",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidName_message *smithy.Schema
 
 var InvalidOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "InvalidOutput",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidOutput_message *smithy.Schema
 
 var InvalidToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "InvalidToken",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidToken_message *smithy.Schema
 
 var InvalidTracingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "InvalidTracingConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTracingConfiguration_message *smithy.Schema
 
 var KmsAccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "KmsAccessDeniedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KmsAccessDeniedException_message *smithy.Schema
 
 var _KmsDataKeyReusePeriodSeconds = smithy.NewSchema(smithy.ShapeID{
@@ -1026,7 +1027,7 @@ var _KmsDataKeyReusePeriodSeconds = smithy.NewSchema(smithy.ShapeID{
 var KmsInvalidStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "KmsInvalidStateException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var KmsInvalidStateException_kmsKeyState *smithy.Schema
 
 var KmsInvalidStateException_message *smithy.Schema
@@ -1053,7 +1054,7 @@ var KmsKeyState_CREATING *smithy.Schema
 var KmsThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "KmsThrottlingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var KmsThrottlingException_message *smithy.Schema
 
 var LambdaFunctionFailedEventDetails = smithy.NewSchema(smithy.ShapeID{
@@ -1293,7 +1294,7 @@ var _MaxConcurrency = smithy.NewSchema(smithy.ShapeID{
 var MissingRequiredParameter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "MissingRequiredParameter",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var MissingRequiredParameter_message *smithy.Schema
 
 var MockErrorOutput = smithy.NewSchema(smithy.ShapeID{
@@ -1352,7 +1353,8 @@ var _RedriveCount = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "ResourceNotFound",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFound_message *smithy.Schema
 
 var ResourceNotFound_resourceName *smithy.Schema
@@ -1419,7 +1421,8 @@ var _SensitiveError = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var StateEnteredEventDetails = smithy.NewSchema(smithy.ShapeID{
@@ -1463,25 +1466,25 @@ var StateMachineAliasListItem_creationDate *smithy.Schema
 var StateMachineAlreadyExists = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "StateMachineAlreadyExists",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var StateMachineAlreadyExists_message *smithy.Schema
 
 var StateMachineDeleting = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "StateMachineDeleting",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var StateMachineDeleting_message *smithy.Schema
 
 var StateMachineDoesNotExist = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "StateMachineDoesNotExist",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var StateMachineDoesNotExist_message *smithy.Schema
 
 var StateMachineLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "StateMachineLimitExceeded",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var StateMachineLimitExceeded_message *smithy.Schema
 
 var _StateMachineList = smithy.NewSchema(smithy.ShapeID{
@@ -1521,7 +1524,7 @@ var StateMachineType_EXPRESS *smithy.Schema
 var StateMachineTypeNotSupported = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "StateMachineTypeNotSupported",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var StateMachineTypeNotSupported_message *smithy.Schema
 
 var _StateMachineVersionList = smithy.NewSchema(smithy.ShapeID{
@@ -1592,7 +1595,7 @@ var TaskCredentials_roleArn *smithy.Schema
 var TaskDoesNotExist = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "TaskDoesNotExist",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TaskDoesNotExist_message *smithy.Schema
 
 var TaskFailedEventDetails = smithy.NewSchema(smithy.ShapeID{
@@ -1684,7 +1687,7 @@ var TaskSucceededEventDetails_outputDetails *smithy.Schema
 var TaskTimedOut = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "TaskTimedOut",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TaskTimedOut_message *smithy.Schema
 
 var TaskTimedOutEventDetails = smithy.NewSchema(smithy.ShapeID{
@@ -1756,7 +1759,8 @@ var _ToleratedFailurePercentage = smithy.NewSchema(smithy.ShapeID{
 var TooManyTags = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "TooManyTags",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTags_message *smithy.Schema
 
 var TooManyTags_resourceName *smithy.Schema
@@ -1854,7 +1858,8 @@ var _ValidateStateMachineDefinitionTruncated = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sfn",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_reason *smithy.Schema

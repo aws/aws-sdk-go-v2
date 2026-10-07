@@ -38,7 +38,7 @@ var AWSMigrationHubMultiAccountService = smithy.NewServiceSchema(_AWSMigrationHu
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhubconfig",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AccessDeniedException_Message *smithy.Schema
 
 var _ControlId = smithy.NewSchema(smithy.ShapeID{
@@ -59,7 +59,7 @@ var _DryRun = smithy.NewSchema(smithy.ShapeID{
 var DryRunOperation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhubconfig",
 	Name:      "DryRunOperation",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DryRunOperation_Message *smithy.Schema
 
 var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
@@ -93,13 +93,13 @@ var _HomeRegionControls_member *smithy.Schema
 var InternalServerError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhubconfig",
 	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServerError_Message *smithy.Schema
 
 var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhubconfig",
 	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidInputException_Message *smithy.Schema
 
 var _RequestedTime = smithy.NewSchema(smithy.ShapeID{
@@ -115,7 +115,7 @@ var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhubconfig",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var ServiceUnavailableException_Message *smithy.Schema
 
 var Target = smithy.NewSchema(smithy.ShapeID{
@@ -140,7 +140,8 @@ var TargetType_ACCOUNT *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.migrationhubconfig",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var ThrottlingException_RetryAfterSeconds *smithy.Schema

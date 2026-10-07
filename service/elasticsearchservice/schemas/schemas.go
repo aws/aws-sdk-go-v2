@@ -375,7 +375,8 @@ var AmazonElasticsearchService2015 = smithy.NewServiceSchema(_AmazonElasticsearc
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var AccessPoliciesStatus = smithy.NewSchema(smithy.ShapeID{
@@ -641,7 +642,7 @@ var _BackendRole = smithy.NewSchema(smithy.ShapeID{
 var BaseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "BaseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BaseException_message *smithy.Schema
 
 var _Boolean = smithy.NewSchema(smithy.ShapeID{
@@ -811,7 +812,8 @@ var ConfigChangeStatus_CANCELLED *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var _ConnectionAlias = smithy.NewSchema(smithy.ShapeID{
@@ -923,7 +925,8 @@ var _Description = smithy.NewSchema(smithy.ShapeID{
 var DisabledOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "DisabledOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var DisabledOperationException_message *smithy.Schema
 
 var _DisableTimestamp = smithy.NewSchema(smithy.ShapeID{
@@ -1619,19 +1622,22 @@ var _IntegerClass = smithy.NewSchema(smithy.ShapeID{
 var InternalException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "InternalException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalException_message *smithy.Schema
 
 var InvalidPaginationTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "InvalidPaginationTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidPaginationTokenException_message *smithy.Schema
 
 var InvalidTypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "InvalidTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var InvalidTypeException_message *smithy.Schema
 
 var _Issue = smithy.NewSchema(smithy.ShapeID{
@@ -1658,7 +1664,8 @@ var _LastUpdated = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var LimitExceededException_message *smithy.Schema
 
 var _LimitName = smithy.NewSchema(smithy.ShapeID{
@@ -2132,13 +2139,15 @@ var ReservedElasticsearchInstancePaymentOption_NO_UPFRONT *smithy.Schema
 var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceAlreadyExistsException_message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _RoleArn = smithy.NewSchema(smithy.ShapeID{
@@ -2490,7 +2499,8 @@ var _UserPoolId = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var _ValueStringList = smithy.NewSchema(smithy.ShapeID{

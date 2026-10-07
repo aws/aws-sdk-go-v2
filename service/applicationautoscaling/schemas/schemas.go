@@ -125,7 +125,8 @@ var CapacityForecast_Values *smithy.Schema
 var ConcurrentUpdateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationautoscaling",
 	Name:      "ConcurrentUpdateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentUpdateException",
 		StatusCode: 500})
 var ConcurrentUpdateException_Message *smithy.Schema
@@ -174,7 +175,8 @@ var _Expression = smithy.NewSchema(smithy.ShapeID{
 var FailedResourceAccessException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationautoscaling",
 	Name:      "FailedResourceAccessException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "FailedResourceAccessException",
 		StatusCode: 400})
 var FailedResourceAccessException_Message *smithy.Schema
@@ -192,7 +194,8 @@ var _IncludeNotScaledActivities = smithy.NewSchema(smithy.ShapeID{
 var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationautoscaling",
 	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "InternalServiceException",
 		StatusCode: 500})
 var InternalServiceException_Message *smithy.Schema
@@ -200,7 +203,8 @@ var InternalServiceException_Message *smithy.Schema
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationautoscaling",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidNextTokenException",
 		StatusCode: 400})
 var InvalidNextTokenException_Message *smithy.Schema
@@ -208,7 +212,8 @@ var InvalidNextTokenException_Message *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationautoscaling",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "LimitExceededException",
 		StatusCode: 400})
 var LimitExceededException_Message *smithy.Schema
@@ -394,7 +399,8 @@ var _NotScaledReasons_member *smithy.Schema
 var ObjectNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationautoscaling",
 	Name:      "ObjectNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ObjectNotFoundException",
 		StatusCode: 400})
 var ObjectNotFoundException_Message *smithy.Schema
@@ -641,7 +647,8 @@ var _ResourceLabel = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationautoscaling",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_ResourceName *smithy.Schema
@@ -1071,7 +1078,8 @@ var _TimestampType = smithy.NewSchema(smithy.ShapeID{
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationautoscaling",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_Message *smithy.Schema
 
 var TooManyTagsException_ResourceName *smithy.Schema
@@ -1079,7 +1087,8 @@ var TooManyTagsException_ResourceName *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationautoscaling",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ValidationException",
 		StatusCode: 400})
 var ValidationException_Message *smithy.Schema

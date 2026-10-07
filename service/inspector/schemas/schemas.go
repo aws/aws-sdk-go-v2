@@ -223,7 +223,8 @@ var AccessDeniedErrorCode_ACCESS_DENIED_TO_IAM_ROLE *smithy.Schema
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var AccessDeniedException_errorCode *smithy.Schema
@@ -336,7 +337,7 @@ var _AgentPreviewList_member *smithy.Schema
 var AgentsAlreadyRunningAssessmentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector",
 	Name:      "AgentsAlreadyRunningAssessmentException",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"})
 var AgentsAlreadyRunningAssessmentException_message *smithy.Schema
 
 var AgentsAlreadyRunningAssessmentException_agents *smithy.Schema
@@ -469,7 +470,7 @@ var _AssessmentRunInProgressArnList_member *smithy.Schema
 var AssessmentRunInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector",
 	Name:      "AssessmentRunInProgressException",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"})
 var AssessmentRunInProgressException_message *smithy.Schema
 
 var AssessmentRunInProgressException_assessmentRunArns *smithy.Schema
@@ -948,7 +949,7 @@ var InspectorServiceAttributes_rulesPackageArn *smithy.Schema
 var InternalException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector",
 	Name:      "InternalException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"})
 var InternalException_message *smithy.Schema
 
 var InternalException_canRetry *smithy.Schema
@@ -964,7 +965,7 @@ var InvalidCrossAccountRoleErrorCode_ROLE_DOES_NOT_HAVE_CORRECT_POLICY *smithy.S
 var InvalidCrossAccountRoleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector",
 	Name:      "InvalidCrossAccountRoleException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var InvalidCrossAccountRoleException_message *smithy.Schema
 
 var InvalidCrossAccountRoleException_errorCode *smithy.Schema
@@ -1086,7 +1087,7 @@ var InvalidInputErrorCode_INVALID_NUMBER_OF_SEVERITIES *smithy.Schema
 var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector",
 	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var InvalidInputException_message *smithy.Schema
 
 var InvalidInputException_errorCode *smithy.Schema
@@ -1137,7 +1138,7 @@ var LimitExceededErrorCode_EVENT_SUBSCRIPTION_LIMIT_EXCEEDED *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var LimitExceededException_errorCode *smithy.Schema
@@ -1245,7 +1246,7 @@ var NoSuchEntityErrorCode_IAM_ROLE_DOES_NOT_EXIST *smithy.Schema
 var NoSuchEntityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector",
 	Name:      "NoSuchEntityException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var NoSuchEntityException_message *smithy.Schema
 
 var NoSuchEntityException_errorCode *smithy.Schema
@@ -1280,7 +1281,7 @@ var _PreviewAgentsMaxResults = smithy.NewSchema(smithy.ShapeID{
 var PreviewGenerationInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector",
 	Name:      "PreviewGenerationInProgressException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PreviewGenerationInProgressException_message *smithy.Schema
 
 var PreviewStatus = smithy.NewSchema(smithy.ShapeID{
@@ -1451,7 +1452,8 @@ var _ServiceName = smithy.NewSchema(smithy.ShapeID{
 var ServiceTemporarilyUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector",
 	Name:      "ServiceTemporarilyUnavailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceTemporarilyUnavailableException_message *smithy.Schema
 
 var ServiceTemporarilyUnavailableException_canRetry *smithy.Schema
@@ -1567,7 +1569,7 @@ var TimestampRange_endDate *smithy.Schema
 var UnsupportedFeatureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector",
 	Name:      "UnsupportedFeatureException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var UnsupportedFeatureException_message *smithy.Schema
 
 var UnsupportedFeatureException_canRetry *smithy.Schema

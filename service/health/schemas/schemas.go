@@ -5,6 +5,7 @@ package schemas
 import (
 	smithy "github.com/aws/smithy-go"
 	smithyprelude "github.com/aws/smithy-go/prelude"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 var DescribeAffectedAccountsForOrganization = smithy.NewSchema(smithy.ShapeID{
@@ -163,7 +164,7 @@ var _awsAccountIdsList_member *smithy.Schema
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConcurrentModificationException_message *smithy.Schema
 
 var _count = smithy.NewSchema(smithy.ShapeID{
@@ -674,7 +675,7 @@ var _ImpactRiskList_member *smithy.Schema
 var InvalidPaginationToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "InvalidPaginationToken",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidPaginationToken_message *smithy.Schema
 
 var LifecycleEvent = smithy.NewSchema(smithy.ShapeID{
@@ -965,7 +966,7 @@ var _timestamp = smithy.NewSchema(smithy.ShapeID{
 var UnsupportedLocale = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "UnsupportedLocale",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedLocale_message *smithy.Schema
 
 var DescribeAffectedAccountsForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{

@@ -706,7 +706,7 @@ var _InputTagList_member *smithy.Schema
 var InternalException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
 	Name:      "InternalException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"})
 var InternalException_message *smithy.Schema
 
 var InternalException_errorCode *smithy.Schema
@@ -714,7 +714,7 @@ var InternalException_errorCode *smithy.Schema
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_message *smithy.Schema
 
 var InvalidRequestException_errorCode *smithy.Schema

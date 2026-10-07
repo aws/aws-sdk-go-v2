@@ -197,7 +197,8 @@ var AudioFeatures_EchoReduction *smithy.Schema
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmeetings",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_Code *smithy.Schema
 
 var BadRequestException_Message *smithy.Schema
@@ -223,7 +224,8 @@ var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmeetings",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Code *smithy.Schema
 
 var ConflictException_Message *smithy.Schema
@@ -341,7 +343,8 @@ var _ExternalUserId = smithy.NewSchema(smithy.ShapeID{
 var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmeetings",
 	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var ForbiddenException_Code *smithy.Schema
 
 var ForbiddenException_Message *smithy.Schema
@@ -361,7 +364,8 @@ var _JoinTokenString = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmeetings",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var LimitExceededException_Code *smithy.Schema
 
 var LimitExceededException_Message *smithy.Schema
@@ -458,7 +462,8 @@ var MeetingFeatureStatus_UNAVAILABLE *smithy.Schema
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmeetings",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_Code *smithy.Schema
 
 var NotFoundException_Message *smithy.Schema
@@ -483,7 +488,8 @@ var _PrimaryMeetingId = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmeetings",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Code *smithy.Schema
 
 var ResourceNotFoundException_Message *smithy.Schema
@@ -505,7 +511,8 @@ var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
 var ServiceFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmeetings",
 	Name:      "ServiceFailureException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ServiceFailureException_Code *smithy.Schema
 
 var ServiceFailureException_Message *smithy.Schema
@@ -515,7 +522,8 @@ var ServiceFailureException_RequestId *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmeetings",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_Code *smithy.Schema
 
 var ServiceUnavailableException_Message *smithy.Schema
@@ -573,7 +581,8 @@ var _TenantIdList_member *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmeetings",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Code *smithy.Schema
 
 var ThrottlingException_Message *smithy.Schema
@@ -583,7 +592,8 @@ var ThrottlingException_RequestId *smithy.Schema
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmeetings",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_Code *smithy.Schema
 
 var TooManyTagsException_Message *smithy.Schema
@@ -771,7 +781,8 @@ var TranscriptionConfiguration_EngineTranscribeMedicalSettings *smithy.Schema
 var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmeetings",
 	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var UnauthorizedException_Code *smithy.Schema
 
 var UnauthorizedException_Message *smithy.Schema
@@ -781,7 +792,8 @@ var UnauthorizedException_RequestId *smithy.Schema
 var UnprocessableEntityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkmeetings",
 	Name:      "UnprocessableEntityException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 422})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 422})
 var UnprocessableEntityException_Code *smithy.Schema
 
 var UnprocessableEntityException_Message *smithy.Schema

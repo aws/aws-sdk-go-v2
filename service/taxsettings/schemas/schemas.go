@@ -130,7 +130,8 @@ var TaxSettings = smithy.NewServiceSchema(_TaxSettings, "2018-05-10")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var AccessDeniedException_message *smithy.Schema
 
 var AccountDetails = smithy.NewSchema(smithy.ShapeID{
@@ -345,7 +346,8 @@ var AddressRoleType_CONTACT_ADDRESS *smithy.Schema
 var AttachmentUploadException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "AttachmentUploadException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var AttachmentUploadException_message *smithy.Schema
 
 var _Authorities = smithy.NewSchema(smithy.ShapeID{
@@ -455,7 +457,8 @@ var _CanadaRetailSalesTaxNumberString = smithy.NewSchema(smithy.ShapeID{
 var CaseCreationLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "CaseCreationLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 413})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 413})
 var CaseCreationLimitExceededException_message *smithy.Schema
 
 var _CcmCode = smithy.NewSchema(smithy.ShapeID{
@@ -497,7 +500,8 @@ var _City = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConflictException_errorCode *smithy.Schema
@@ -727,7 +731,8 @@ var _InheritanceObtainedReason = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var InternalServerException_errorCode *smithy.Schema
@@ -935,7 +940,8 @@ var _RegistryCommercialCode = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_errorCode *smithy.Schema
@@ -1364,7 +1370,8 @@ var UzbekistanTaxRegistrationNumberType_INDIVIDUAL *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_errorCode *smithy.Schema

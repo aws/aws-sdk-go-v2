@@ -148,7 +148,9 @@ structure GetItemOutput {}
 structure Item {}
 
 @error("client")
-structure ItemNotFound {}
+structure ItemNotFound {
+    message: String,
+}
 
 // Event stream (caller-owned) operation: the response body backs an event
 // stream reader and must NOT be closed on the success path.

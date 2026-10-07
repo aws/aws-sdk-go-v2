@@ -298,7 +298,8 @@ var _AnalysisIds_member *smithy.Schema
 var AnalysisNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "AnalysisNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var AnalysisNotFoundException_Message *smithy.Schema
 
 var AnalysisStatus = smithy.NewSchema(smithy.ShapeID{
@@ -505,13 +506,14 @@ var _AttributeValue = smithy.NewSchema(smithy.ShapeID{
 var BackfillLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "BackfillLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BackfillLimitExceededException_Message *smithy.Schema
 
 var BillExpirationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "BillExpirationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BillExpirationException_Message *smithy.Schema
 
 var _BillingViewArn = smithy.NewSchema(smithy.ShapeID{
@@ -522,7 +524,7 @@ var _BillingViewArn = smithy.NewSchema(smithy.ShapeID{
 var BillingViewHealthStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "BillingViewHealthStatusException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BillingViewHealthStatusException_Message *smithy.Schema
 
 var CommitmentPurchaseAnalysisConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -1042,7 +1044,7 @@ var CurrentInstance_CurrencyCode *smithy.Schema
 var DataUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "DataUnavailableException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var DataUnavailableException_Message *smithy.Schema
 
 var DateInterval = smithy.NewSchema(smithy.ShapeID{
@@ -1391,7 +1393,8 @@ var _ForecastResultsByTime_member *smithy.Schema
 var GenerationExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "GenerationExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var GenerationExistsException_Message *smithy.Schema
 
 var GenerationStatus = smithy.NewSchema(smithy.ShapeID{
@@ -1530,7 +1533,7 @@ var InstanceDetails_MemoryDBInstanceDetails *smithy.Schema
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidNextTokenException_Message *smithy.Schema
 
 var _Key = smithy.NewSchema(smithy.ShapeID{
@@ -1547,7 +1550,7 @@ var _Keys_member *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_Message *smithy.Schema
 
 var LookbackPeriodInDays = smithy.NewSchema(smithy.ShapeID{
@@ -1986,7 +1989,7 @@ var RedshiftInstanceDetails_SizeFlexEligible *smithy.Schema
 var RequestChangedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "RequestChangedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var RequestChangedException_Message *smithy.Schema
 
 var ReservationAggregates = smithy.NewSchema(smithy.ShapeID{
@@ -2196,7 +2199,8 @@ var ResourceDetails_EC2ResourceDetails *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_ResourceName *smithy.Schema
@@ -2723,7 +2727,8 @@ var _SearchString = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ServiceSpecification = smithy.NewSchema(smithy.ShapeID{
@@ -2878,7 +2883,8 @@ var TermInYears_THREE_YEARS *smithy.Schema
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_Message *smithy.Schema
 
 var TooManyTagsException_ResourceName *smithy.Schema
@@ -2926,13 +2932,15 @@ var _TotalRunningNormalizedUnits = smithy.NewSchema(smithy.ShapeID{
 var UnknownMonitorException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "UnknownMonitorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var UnknownMonitorException_Message *smithy.Schema
 
 var UnknownSubscriptionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "UnknownSubscriptionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var UnknownSubscriptionException_Message *smithy.Schema
 
 var _UnrealizedSavings = smithy.NewSchema(smithy.ShapeID{
@@ -2943,7 +2951,7 @@ var _UnrealizedSavings = smithy.NewSchema(smithy.ShapeID{
 var UnresolvableUsageUnitException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "UnresolvableUsageUnitException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnresolvableUsageUnitException_Message *smithy.Schema
 
 var _UnusedHours = smithy.NewSchema(smithy.ShapeID{
