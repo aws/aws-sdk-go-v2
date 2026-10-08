@@ -4932,6 +4932,12 @@
                     "traits": {
                         "smithy.api#enumValue": "MEDIATAILOR_PLAYBACK_CONFIGURATION"
                     }
+                },
+                "ELEMENTAL_INFERENCE_FEED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ELEMENTAL_INFERENCE_FEED"
+                    }
                 }
             },
             "traits": {

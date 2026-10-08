@@ -547,6 +547,12 @@
                     "target": "com.amazonaws.glue#GetStatement"
                 },
                 {
+                    "target": "com.amazonaws.glue#GetSystemLogsForJobRun"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetSystemLogsForSession"
+                },
+                {
                     "target": "com.amazonaws.glue#GetTable"
                 },
                 {
@@ -28235,6 +28241,128 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#GetSystemLogsForJobRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetSystemLogsForJobRunRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetSystemLogsForJobRunResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the system logs for a job run.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.glue#GetSystemLogsForJobRunRequest": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RunId": {
+                    "target": "com.amazonaws.glue#IdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job run.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#GetSystemLogsForJobRunResponse": {
+            "type": "structure",
+            "members": {
+                "SystemLogsUrl": {
+                    "target": "com.amazonaws.glue#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to download the system logs for the job run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#GetSystemLogsForSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetSystemLogsForSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetSystemLogsForSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the system logs for an interactive session.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.glue#GetSystemLogsForSessionRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#GetSystemLogsForSessionResponse": {
+            "type": "structure",
+            "members": {
+                "SystemLogsUrl": {
+                    "target": "com.amazonaws.glue#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to download the system logs for the session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#GetTable": {
             "type": "operation",
             "input": {
@@ -54628,6 +54756,15 @@
         },
         "com.amazonaws.glue#UriString": {
             "type": "string"
+        },
+        "com.amazonaws.glue#Url": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 40000
+                }
+            }
         },
         "com.amazonaws.glue#UrlString": {
             "type": "string"

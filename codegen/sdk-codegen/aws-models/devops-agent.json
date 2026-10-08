@@ -1009,9 +1009,6 @@
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
                 },
                 {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
                     "target": "com.amazonaws.devopsagent#ValidationException"
                 }
             ],
@@ -1527,9 +1524,6 @@
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ServiceQuotaExceededException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ValidationException"
@@ -2110,9 +2104,6 @@
                     "target": "com.amazonaws.devopsagent#InvalidParameterException"
                 },
                 {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
                     "target": "com.amazonaws.devopsagent#ValidationException"
                 }
             ],
@@ -2364,6 +2355,21 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.devopsagent#CronSchedule": {
+            "type": "structure",
+            "members": {
+                "expression": {
+                    "target": "com.amazonaws.devopsagent#ScheduleExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>EventBridge cron or rate expression that anchors the flexible window</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Cron or rate schedule. Trigger-created custom-agent schedules use an EventBridge flexible window of up to 30 minutes for load distribution.</p>"
+            }
+        },
         "com.amazonaws.devopsagent#CustomHeaderName": {
             "type": "string",
             "traits": {
@@ -2400,6 +2406,13 @@
                 "smithy.api#length": {
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.devopsagent#DailyRecurrence": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Daily recurrence</p>"
             }
         },
         "com.amazonaws.devopsagent#DatadogAuthorizationConfig": {
@@ -2460,6 +2473,56 @@
                 "smithy.api#timestampFormat": "date-time"
             }
         },
+        "com.amazonaws.devopsagent#DayOfWeek": {
+            "type": "enum",
+            "members": {
+                "MONDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONDAY"
+                    }
+                },
+                "TUESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TUESDAY"
+                    }
+                },
+                "WEDNESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEDNESDAY"
+                    }
+                },
+                "THURSDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THURSDAY"
+                    }
+                },
+                "FRIDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FRIDAY"
+                    }
+                },
+                "SATURDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SATURDAY"
+                    }
+                },
+                "SUNDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUNDAY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Day of week for a WEEKLY recurrence</p>"
+            }
+        },
         "com.amazonaws.devopsagent#DeleteAgentSpace": {
             "type": "operation",
             "input": {
@@ -2477,9 +2540,6 @@
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ValidationException"
@@ -2714,9 +2774,6 @@
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
                 },
                 {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
                     "target": "com.amazonaws.devopsagent#ValidationException"
                 }
             ],
@@ -2877,9 +2934,6 @@
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
                 },
                 {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
                     "target": "com.amazonaws.devopsagent#ValidationException"
                 }
             ],
@@ -2939,9 +2993,6 @@
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ValidationException"
@@ -3268,11 +3319,11 @@
                         "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"
                     },
                     "aidevops:SourceAgentSpaceArn": {
-                        "type": "String",
+                        "type": "ARN",
                         "documentation": "Filters access by the source AgentSpace ARN on the request. Set by the service from the request context, not supplied by the caller."
                     },
                     "aidevops:TargetAgentSpaceArn": {
-                        "type": "String",
+                        "type": "ARN",
                         "documentation": "Filters access by the target AgentSpace ARN on the request. Set by the service from the request context, not supplied by the caller."
                     }
                 },
@@ -3666,9 +3717,6 @@
                     "target": "com.amazonaws.devopsagent#InternalServerException"
                 },
                 {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
                     "target": "com.amazonaws.devopsagent#ValidationException"
                 }
             ],
@@ -3730,9 +3778,6 @@
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
                 },
                 {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
                     "target": "com.amazonaws.devopsagent#ValidationException"
                 }
             ],
@@ -3784,6 +3829,17 @@
             "traits": {
                 "smithy.api#documentation": "<p>Empty output for successful service disassociation.</p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#DisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Display name for the resource.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{N}\\p{P}\\p{S}\\p{Z}]+$"
             }
         },
         "com.amazonaws.devopsagent#DocumentList": {
@@ -3927,9 +3983,6 @@
                 },
                 {
                     "target": "com.amazonaws.devopsagent#InternalServerException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ValidationException"
@@ -4412,9 +4465,6 @@
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
                 },
                 {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
                     "target": "com.amazonaws.devopsagent#ValidationException"
                 }
             ],
@@ -4809,9 +4859,6 @@
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
                 },
                 {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
                     "target": "com.amazonaws.devopsagent#ValidationException"
                 }
             ],
@@ -4979,9 +5026,6 @@
             "errors": [
                 {
                     "target": "com.amazonaws.devopsagent#InternalServerException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ValidationException"
@@ -5164,9 +5208,6 @@
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ValidationException"
@@ -5362,6 +5403,12 @@
                         },
                         "smithy.api#documentation": "<p>Optional role ARN that AIDevOps assumes at runtime for automatic verification testing and VPC connectivity on this association.</p>"
                     }
+                },
+                "releaseManagementAssociationId": {
+                    "target": "com.amazonaws.devopsagent#AssociationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the release management association that this repository maps to for automatic verification testing.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5399,6 +5446,12 @@
                             "since": "2026-08-04"
                         },
                         "smithy.api#documentation": "<p>Optional role ARN that AIDevOps assumes at runtime for automatic verification testing and VPC connectivity on this association.</p>"
+                    }
+                },
+                "releaseManagementAssociationId": {
+                    "target": "com.amazonaws.devopsagent#AssociationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the release management association that this project maps to for automatic verification testing.</p>"
                     }
                 }
             },
@@ -6098,9 +6151,6 @@
                     "target": "com.amazonaws.devopsagent#InternalServerException"
                 },
                 {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
                     "target": "com.amazonaws.devopsagent#ValidationException"
                 }
             ],
@@ -6675,9 +6725,6 @@
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ValidationException"
@@ -7513,9 +7560,6 @@
                     "target": "com.amazonaws.devopsagent#InternalServerException"
                 },
                 {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
                     "target": "com.amazonaws.devopsagent#ValidationException"
                 }
             ],
@@ -7691,9 +7735,6 @@
             "errors": [
                 {
                     "target": "com.amazonaws.devopsagent#InternalServerException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ValidationException"
@@ -8009,9 +8050,6 @@
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
                 },
                 {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
                     "target": "com.amazonaws.devopsagent#ValidationException"
                 }
             ],
@@ -8161,7 +8199,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The endpoint to return to after OAuth flow completes (must be AWS console domain)</p>",
-                        "smithy.api#pattern": "^https://[a-zA-Z0-9.-]*\\.(console\\.(aws|aws-dev)|awsc-(integ|preprod)\\.aws)\\.amazon\\.com(/.*)?$",
+                        "smithy.api#pattern": "^https://([a-zA-Z0-9.-]*\\.(console\\.(aws|aws-dev)|awsc-(integ|preprod)\\.aws)\\.amazon\\.com|[a-zA-Z0-9-]+\\.aidevops(-beta|-gamma)?\\.global\\.app\\.aws)(/.*)?$",
                         "smithy.api#required": {}
                     }
                 }
@@ -8427,7 +8465,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The endpoint to return to after OAuth flow completes (must be AWS console domain)</p>",
-                        "smithy.api#pattern": "^https://[a-zA-Z0-9.-]*\\.(console\\.(aws|aws-dev)|awsc-(integ|preprod)\\.aws)\\.amazon\\.com(/.*)?$",
+                        "smithy.api#pattern": "^https://([a-zA-Z0-9.-]*\\.(console\\.(aws|aws-dev)|awsc-(integ|preprod)\\.aws)\\.amazon\\.com|[a-zA-Z0-9-]+\\.aidevops(-beta|-gamma)?\\.global\\.app\\.aws)(/.*)?$",
                         "smithy.api#required": {}
                     }
                 },
@@ -8751,6 +8789,39 @@
                 "smithy.api#documentation": "<p>AWS association type for monitoring account.</p>"
             }
         },
+        "com.amazonaws.devopsagent#MonthlyRecurrence": {
+            "type": "structure",
+            "members": {
+                "dayOfMonth": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Day of month the window recurs on</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 31
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Monthly recurrence</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#NetworkAccessConfiguration": {
+            "type": "union",
+            "members": {
+                "privateAccess": {
+                    "target": "com.amazonaws.devopsagent#PrivateNetworkAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Private network access to the resource inside a VPC, using a private connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies how AWS DevOps Agent reaches your application using a Release Management Environment</p>"
+            }
+        },
         "com.amazonaws.devopsagent#NewRelicAlertPolicyIds": {
             "type": "list",
             "member": {
@@ -8934,7 +9005,7 @@
                 "smithy.api#documentation": "<p>OAuth scope parameter</p>",
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 128
+                    "max": 256
                 },
                 "smithy.api#pattern": "^[!#-\\[\\]-~]+$"
             }
@@ -9518,6 +9589,28 @@
                 "smithy.api#documentation": "<p>The type of Private Connection.</p>"
             }
         },
+        "com.amazonaws.devopsagent#PrivateNetworkAccess": {
+            "type": "structure",
+            "members": {
+                "privateConnectionName": {
+                    "target": "com.amazonaws.devopsagent#PrivateConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the private connection that supplies the VPC configuration for this release management environment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "runtimeRoleArn": {
+                    "target": "com.amazonaws.devopsagent#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Role ARN that AWS DevOps Agent assumes at runtime to connect to your VPC.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Private network access to the resource inside a VPC, using a private connection.</p>"
+            }
+        },
         "com.amazonaws.devopsagent#Recommendation": {
             "type": "structure",
             "members": {
@@ -9738,6 +9831,32 @@
                 "smithy.api#documentation": "<p>Status of a recommendation</p>"
             }
         },
+        "com.amazonaws.devopsagent#Recurrence": {
+            "type": "union",
+            "members": {
+                "daily": {
+                    "target": "com.amazonaws.devopsagent#DailyRecurrence",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The window recurs every day</p>"
+                    }
+                },
+                "weekly": {
+                    "target": "com.amazonaws.devopsagent#WeeklyRecurrence",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The window recurs once per week</p>"
+                    }
+                },
+                "monthly": {
+                    "target": "com.amazonaws.devopsagent#MonthlyRecurrence",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The window recurs once per month</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Recurrence cadence for a time-range schedule</p>"
+            }
+        },
         "com.amazonaws.devopsagent#ReferenceInput": {
             "type": "structure",
             "members": {
@@ -9913,7 +10032,7 @@
                     }
                 },
                 "name": {
-                    "target": "com.amazonaws.devopsagent#ServiceName",
+                    "target": "com.amazonaws.devopsagent#ServiceNameInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The display name for the service registration.</p>"
                     }
@@ -10457,6 +10576,28 @@
                 "smithy.api#documentation": "<p>Details specific to a registered Slack workspace.</p>"
             }
         },
+        "com.amazonaws.devopsagent#ReleaseManagementConfiguration": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.devopsagent#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for this release management environment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "networkAccess": {
+                    "target": "com.amazonaws.devopsagent#NetworkAccessConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how AWS DevOps Agent reaches your application using a Release Management Environment</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a release management environment.</p>"
+            }
+        },
         "com.amazonaws.devopsagent#RemoteAgentAPIKeyConfig": {
             "type": "structure",
             "members": {
@@ -10843,7 +10984,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "^arn:aws:iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$"
+                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov):iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$"
             }
         },
         "com.amazonaws.devopsagent#ScheduleCondition": {
@@ -10852,13 +10993,18 @@
                 "expression": {
                     "target": "com.amazonaws.devopsagent#ScheduleExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schedule expression</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>EventBridge cron or rate expression. Required for existing request and response compatibility. For a structured schedule response, this is the expression derived by Backlog.</p>"
+                    }
+                },
+                "spec": {
+                    "target": "com.amazonaws.devopsagent#ScheduleSpec",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Structured schedule source of truth (cron | timeRange). On CreateTrigger supply exactly one of spec or expression. Present in responses together with the derived expression for structured triggers.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Schedule-based condition that fires the Trigger</p>"
+                "smithy.api#documentation": "<p>Expression-based schedule condition. CreateTrigger callers using this condition supply expression and omit spec. Trigger responses always use this condition, include the persisted or derived expression, and also include spec when the trigger was created from a structured schedule.</p>"
             }
         },
         "com.amazonaws.devopsagent#ScheduleExpression": {
@@ -10869,6 +11015,26 @@
                     "min": 1,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.devopsagent#ScheduleSpec": {
+            "type": "union",
+            "members": {
+                "cron": {
+                    "target": "com.amazonaws.devopsagent#CronSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Runs on an EventBridge cron or rate cadence</p>"
+                    }
+                },
+                "timeRange": {
+                    "target": "com.amazonaws.devopsagent#TimeRangeSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Runs within a recurring time-of-day window</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Structured schedule specification. Select exactly one schedule form.</p>"
             }
         },
         "com.amazonaws.devopsagent#SchedulerState": {
@@ -10966,6 +11132,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#conditionKeys": [
+                    "aidevops:SourceAgentSpaceArn",
+                    "aidevops:TargetAgentSpaceArn"
+                ],
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to send chat messages",
                     "resources": {
@@ -11697,6 +11867,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Remote A2A agent integration configuration (SigV4 auth).</p>"
                     }
+                },
+                "releaseManagement": {
+                    "target": "com.amazonaws.devopsagent#ReleaseManagementConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Release management network environment configuration</p>"
+                    }
                 }
             },
             "traits": {
@@ -11880,6 +12056,16 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^[\\p{L}\\p{N}\\p{P}\\p{S}\\p{Z}]+$"
+            }
+        },
+        "com.amazonaws.devopsagent#ServiceNameInput": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{N} _-]+$"
             }
         },
         "com.amazonaws.devopsagent#ServiceNowAuthenticationScopeList": {
@@ -12762,6 +12948,46 @@
                 "smithy.api#retryable": {}
             }
         },
+        "com.amazonaws.devopsagent#TimeOfDay": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Time of day in HH:MM format (24-hour clock, UTC)</p>",
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 5
+                },
+                "smithy.api#pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+            }
+        },
+        "com.amazonaws.devopsagent#TimeRangeSchedule": {
+            "type": "structure",
+            "members": {
+                "startAfter": {
+                    "target": "com.amazonaws.devopsagent#TimeOfDay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Earliest time of day the trigger may fire</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startBefore": {
+                    "target": "com.amazonaws.devopsagent#TimeOfDay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Latest time of day the trigger may fire</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "recurrence": {
+                    "target": "com.amazonaws.devopsagent#Recurrence",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How the window recurs</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Recurring time-of-day window in UTC. The service derives an EventBridge expression anchored at startAfter and a flexible-window width from the interval to startBefore. A startBefore earlier than startAfter wraps past midnight.</p>"
+            }
+        },
         "com.amazonaws.devopsagent#TokenValue": {
             "type": "string",
             "traits": {
@@ -12888,12 +13114,12 @@
                 "schedule": {
                     "target": "com.amazonaws.devopsagent#ScheduleCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Time-based firing condition</p>"
+                        "smithy.api#documentation": "<p>Schedule-based firing condition. On CreateTrigger supply exactly one of the schedule condition's expression or spec.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the firing condition for a Trigger</p>"
+                "smithy.api#documentation": "<p>Defines how a Trigger fires.</p>"
             }
         },
         "com.amazonaws.devopsagent#TriggerEvent": {
@@ -13151,9 +13377,6 @@
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ValidationException"
@@ -13622,9 +13845,6 @@
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
                 },
                 {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
                     "target": "com.amazonaws.devopsagent#ValidationException"
                 }
             ],
@@ -13738,6 +13958,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#conditionKeys": [
+                    "aidevops:SourceAgentSpaceArn",
+                    "aidevops:TargetAgentSpaceArn"
+                ],
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update a backlog task",
                     "resources": {
@@ -13937,9 +14161,6 @@
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
                 },
                 {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
                     "target": "com.amazonaws.devopsagent#ValidationException"
                 }
             ],
@@ -14024,9 +14245,6 @@
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ValidationException"
@@ -14479,9 +14697,6 @@
                     "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
                 },
                 {
-                    "target": "com.amazonaws.devopsagent#ThrottlingException"
-                },
-                {
                     "target": "com.amazonaws.devopsagent#ValidationException"
                 }
             ],
@@ -14709,6 +14924,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A list of Association Webhook resources.</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#WeeklyRecurrence": {
+            "type": "structure",
+            "members": {
+                "dayOfWeek": {
+                    "target": "com.amazonaws.devopsagent#DayOfWeek",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Day of week the window recurs on</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Weekly recurrence</p>"
             }
         }
     }

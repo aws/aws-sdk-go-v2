@@ -105,6 +105,7 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<p>Provides translation of the input content from the source language to the target language.</p>",
                 "smithy.api#title": "Amazon Translate",
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {

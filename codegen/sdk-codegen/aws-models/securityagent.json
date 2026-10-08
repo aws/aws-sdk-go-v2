@@ -6456,6 +6456,12 @@
                         "smithy.api#documentation": "<p>The attack script used to reproduce the finding.</p>"
                     }
                 },
+                "remediationCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The suggested fix for the finding, describing the changes recommended to remediate the vulnerability, with example code or configuration.</p>"
+                    }
+                },
                 "codeRemediationTask": {
                     "target": "com.amazonaws.securityagent#CodeRemediationTask",
                     "traits": {

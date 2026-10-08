@@ -4565,6 +4565,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The filter that's based on CostCategoryValues.</p>"
                     }
+                },
+                "ProductAttributes": {
+                    "target": "com.amazonaws.budgets#ProductAttributeValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter that limits results based on the values of specific product attributes.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5226,6 +5232,43 @@
                     "max": 130
                 },
                 "smithy.api#pattern": "^p-[0-9a-zA-Z_]{8,128}$"
+            }
+        },
+        "com.amazonaws.budgets#ProductAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.budgets#ProductAttributeValues": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.budgets#ProductAttributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the product attribute to filter on. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>feature</code> – The feature that was used, such as\n\t\t\t\t\t<code>On-demand Inference</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>inferenceType</code> – The type of inference usage, such as\n\t\t\t\t\t<code>Input tokens</code> or <code>Output tokens</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>model</code> – The model, such as <code>Claude Sonnet 5</code> or\n\t\t\t\t\t<code>Claude Haiku 4.5</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>provider</code> – The model provider, such as <code>Anthropic</code>,\n\t\t\t\t\t<code>Cohere</code>, or <code>Amazon</code>.</p>\n            </li>\n         </ul>\n         <p>Keys are case-sensitive.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.budgets#Values",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific values of the product attribute, such as <code>Claude Sonnet 5</code> for\n\t\t\tthe <code>model</code> key. Values are matched exactly.</p>\n         <p>\n            <code>Values</code> is required unless <code>MatchOptions</code> is\n\t\t\t<code>ABSENT</code>. To match costs that have no value for the key, set\n\t\t\t<code>MatchOptions</code> to <code>ABSENT</code> and omit <code>Values</code>.</p>"
+                    }
+                },
+                "MatchOptions": {
+                    "target": "com.amazonaws.budgets#MatchOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The match options for the <code>ProductAttributes</code> filter. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ABSENT</code> – Matches costs that have no value for the attribute.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CASE_SENSITIVE</code> – Requires an exact case match.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EQUALS</code> – Matches costs where the attribute equals the specified\n\t\t\t\t\tvalue.</p>\n            </li>\n         </ul>\n         <p>Specify either <code>EQUALS</code> or <code>ABSENT</code>. You can add\n\t\t\t<code>CASE_SENSITIVE</code> to <code>EQUALS</code>, but you can't use it by itself or\n\t\t\twith <code>ABSENT</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The product attribute values used for filtering the costs by key and value pairs.\n\t\t\tProduct attributes are supported for Amazon Bedrock only.</p>"
             }
         },
         "com.amazonaws.budgets#Region": {

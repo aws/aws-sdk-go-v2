@@ -9004,6 +9004,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The KMS key ID. Takes the form\n            <code>1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a</code>.</p>"
                     }
+                },
+                "EncryptionMode": {
+                    "target": "com.amazonaws.opensearch#EncryptionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption at rest applied to the domain's data. Valid values are\n            <code>DISK</code> and <code>NATIVE</code>. <code>DISK</code> is the default and uses\n            volume-level encryption. <code>NATIVE</code> uses engine-native, index-level encryption\n            and requires encryption at rest to be enabled and OpenSearch version 3.3 or later. After\n            the mode is set to <code>NATIVE</code>, it can't be changed back to\n            <code>DISK</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9030,6 +9036,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Status of the encryption at rest options for the specified OpenSearch Service\n            domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#EncryptionMode": {
+            "type": "enum",
+            "members": {
+                "Disk": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISK"
+                    }
+                },
+                "Native": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NATIVE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of encryption at rest applied to a domain's data: <code>DISK</code> for\n            volume-level encryption or <code>NATIVE</code> for engine-native, index-level\n            encryption.</p>"
             }
         },
         "com.amazonaws.opensearch#Endpoint": {
@@ -17958,7 +17984,7 @@
                 "AcceptedWarnings": {
                     "target": "com.amazonaws.opensearch#AcceptedWarningsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of advisory warning codes to accept for this configuration change. By default, any advisory warning blocks the change. Include the code of each warning you want to accept so the change can proceed. You can find warning codes in the<code>ValidationFailures</code> list returned by <code>DescribeDomainChangeProgress</code>and <code>DescribeDryRunProgress</code>. Critical validation failures cannot be accepted and always block the change. If you omit this parameter or pass an empty list, all warnings block the change. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check\">Validating a domain update</a>.</p>"
+                        "smithy.api#documentation": "<p>A list of advisory warning codes to accept for this configuration change. By default, any advisory warning blocks the change. Include the code of each warning you want to accept so the change can proceed. You can find warning codes in the <code>ValidationFailures</code> list returned by <code>DescribeDomainChangeProgress</code> and <code>DescribeDryRunProgress</code>. Critical validation failures cannot be accepted and always block the change. If you omit this parameter or pass an empty list, all warnings block the change. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check\">Validating a domain update</a>.</p>"
                     }
                 }
             },

@@ -7424,6 +7424,13 @@
                     "traits": {
                         "smithy.api#enumValue": "EC2_AGENT_MANAGEMENT"
                     }
+                },
+                "RDS_DATA_RISK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>RDS Data Activity Monitoring, which monitors data activity on supported Amazon RDS database engines to detect potentially unauthorized access to your data.</p>",
+                        "smithy.api#enumValue": "RDS_DATA_RISK"
+                    }
                 }
             }
         },
@@ -17131,6 +17138,13 @@
                     "traits": {
                         "smithy.api#enumValue": "EC2_AGENT_MANAGEMENT"
                     }
+                },
+                "RDS_DATA_RISK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>RDS Data Activity Monitoring, which monitors data activity on supported Amazon RDS database engines to detect potentially unauthorized access to your data.</p>",
+                        "smithy.api#enumValue": "RDS_DATA_RISK"
+                    }
                 }
             }
         },
@@ -23789,6 +23803,34 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RDS_DBI_PROTECTION_SERVERLESS"
+                    }
+                },
+                "RDS_DBI_PROTECTION_LIMITLESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Usage attributed to RDS Protection database infrastructure monitoring for Amazon Aurora DSQL Limitless databases.</p>",
+                        "smithy.api#enumValue": "RDS_DBI_PROTECTION_LIMITLESS"
+                    }
+                },
+                "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Usage attributed to RDS Data Activity Monitoring for provisioned Amazon RDS databases.</p>",
+                        "smithy.api#enumValue": "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED"
+                    }
+                },
+                "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Usage attributed to RDS Data Activity Monitoring for Amazon Aurora Serverless databases.</p>",
+                        "smithy.api#enumValue": "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS"
+                    }
+                },
+                "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Usage attributed to RDS Data Activity Monitoring for Amazon Aurora DSQL Limitless databases.</p>",
+                        "smithy.api#enumValue": "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS"
                     }
                 },
                 "AI_PROTECTION": {
