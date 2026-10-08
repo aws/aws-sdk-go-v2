@@ -1,8 +1,0 @@
-{
-    "id": "f0e9782f-d3f9-43e1-8d82-d4181b685a5e",
-    "type": "feature",
-    "description": "Release findings export APIs - StartExportJobV2, GetExportJobV2, ListExportJobsV2, and CancelExportJobV2. This supports exporting findings from AWS Security Hub to Amazon S3 bucket.",
-    "modules": [
-        "service/securityhub"
-    ]
-}

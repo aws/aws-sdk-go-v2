@@ -1,3 +1,9 @@
+# v1.84.0 (2026-10-08)
+
+* **Feature**: Release findings export APIs - StartExportJobV2, GetExportJobV2, ListExportJobsV2, and CancelExportJobV2. This supports exporting findings from AWS Security Hub to Amazon S3 bucket.
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.83.1 (2026-10-06)
 
 * No change notes available for this release.

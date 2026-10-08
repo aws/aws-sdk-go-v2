@@ -1,3 +1,9 @@
+# v1.82.0 (2026-10-08)
+
+* **Feature**: CloudFormation introduces force rollback, a new opt-in capability that lets your stacks complete a rollback even when an individual resource cannot be reverted. Set ForceRollback on ContinueUpdateRollback and CloudFormation records each resource that fails as skipped, completing the rollback.
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.81.2 (2026-10-06)
 
 * No change notes available for this release.

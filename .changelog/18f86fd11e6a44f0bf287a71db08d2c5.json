@@ -1,8 +1,0 @@
-{
-    "id": "18f86fd1-1e6a-44f0-bf28-7a71db08d2c5",
-    "type": "feature",
-    "description": "Adds support for retrieving finding-lifecycle metrics for an AWS Security Incident Response membership.",
-    "modules": [
-        "service/securityir"
-    ]
-}

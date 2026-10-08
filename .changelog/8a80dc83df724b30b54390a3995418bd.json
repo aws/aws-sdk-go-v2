@@ -1,8 +1,0 @@
-{
-    "id": "8a80dc83-df72-4b30-b543-90a3995418bd",
-    "type": "feature",
-    "description": "Configurations support for EKS ACK Capabilities, including EnableCrossNamespace and DisableServices configuration.",
-    "modules": [
-        "service/eks"
-    ]
-}

@@ -1,3 +1,8 @@
+# v1.1.1 (2026-10-08)
+
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.0 (2026-10-06)
 
 * **Feature**: Removes operations that are not yet generally available from the Lambda Web.

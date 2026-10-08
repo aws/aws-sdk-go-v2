@@ -1,3 +1,9 @@
+# v1.20.0 (2026-10-08)
+
+* **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.0. The SDK will prioritize its most performant protocol.
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.2 (2026-10-06)
 
 * No change notes available for this release.

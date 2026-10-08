@@ -1,8 +1,0 @@
-{
-    "id": "1dc69740-5364-46fa-8d45-ca22cd3ce99f",
-    "type": "feature",
-    "description": "This release adds support for system profile logs for lakeformation enabled Spark connect sessions .",
-    "modules": [
-        "service/emrserverless"
-    ]
-}

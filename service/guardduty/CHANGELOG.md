@@ -1,3 +1,10 @@
+# v1.99.0 (2026-10-08)
+
+* **Feature**: Added support for GuardDuty RDS Data Activity Monitoring
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.98.0 (2026-10-06)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

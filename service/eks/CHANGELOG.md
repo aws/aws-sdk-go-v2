@@ -1,3 +1,10 @@
+# v1.104.0 (2026-10-08)
+
+* **Feature**: Configurations support for EKS ACK Capabilities, including EnableCrossNamespace and DisableServices configuration.
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.103.0 (2026-10-06)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

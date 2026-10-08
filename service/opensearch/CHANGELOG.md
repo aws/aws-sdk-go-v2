@@ -1,3 +1,10 @@
+# v1.85.0 (2026-10-08)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Feature**: This release adds a new EncryptionMode option (DISK or NATIVE) to EncryptionAtRestOptions for the CreateDomain and UpdateDomainConfig operations, enabling selection of engine-native index-level encryption on supported Amazon OpenSearch Service domains.
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.84.0 (2026-10-06)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

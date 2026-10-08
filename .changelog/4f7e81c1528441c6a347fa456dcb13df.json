@@ -1,8 +1,0 @@
-{
-    "id": "4f7e81c1-5284-41c6-a347-fa456dcb13df",
-    "type": "feature",
-    "description": "Include model field for suggested remediation steps as part of findings",
-    "modules": [
-        "service/securityagent"
-    ]
-}

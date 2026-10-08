@@ -1,3 +1,10 @@
+# v1.79.0 (2026-10-08)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Documentation**: SESV2 DEED - Documentation Update
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.78.0 (2026-10-06)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

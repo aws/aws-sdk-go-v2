@@ -1,8 +1,0 @@
-{
-    "id": "e6e966b0-8a8c-4271-8255-d19b09662abe",
-    "type": "feature",
-    "description": "Adds a product attribute dimension to GetCostAndUsage, GetCostAndUsageWithResources, and GetDimensionValues, letting customers group, filter, and discover Cost Explorer costs by structured attributes such as Amazon Bedrock model, provider, inference type, and feature.",
-    "modules": [
-        "service/costexplorer"
-    ]
-}

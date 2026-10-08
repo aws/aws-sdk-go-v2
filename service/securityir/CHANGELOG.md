@@ -1,3 +1,9 @@
+# v1.19.0 (2026-10-08)
+
+* **Feature**: Adds support for retrieving finding-lifecycle metrics for an AWS Security Incident Response membership.
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.2 (2026-10-06)
 
 * No change notes available for this release.

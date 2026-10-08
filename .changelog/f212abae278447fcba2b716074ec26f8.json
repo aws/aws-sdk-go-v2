@@ -1,8 +1,0 @@
-{
-    "id": "f212abae-2784-47fc-ba2b-716074ec26f8",
-    "type": "feature",
-    "description": "Added support for GuardDuty RDS Data Activity Monitoring",
-    "modules": [
-        "service/guardduty"
-    ]
-}

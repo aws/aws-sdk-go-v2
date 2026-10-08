@@ -1,3 +1,10 @@
+# v1.169.0 (2026-10-08)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Feature**: Introduced GetSystemLogsForJobRun and GetSystemLogsForSession APIs, enabling account admins to retrieve system-space logs for FGAC-enabled Glue jobs and sessions.
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.168.0 (2026-10-06)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

@@ -1,3 +1,9 @@
+# v1.53.0 (2026-10-08)
+
+* **Feature**: Adds a product attribute dimension to CreateBudget and UpdateBudget, letting customers filter AWS Budgets costs by structured attributes such as Amazon Bedrock model, provider, inference type, and feature.
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.2 (2026-10-06)
 
 * No change notes available for this release.

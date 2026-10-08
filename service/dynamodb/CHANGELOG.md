@@ -1,3 +1,9 @@
+# v1.70.2 (2026-10-08)
+
+* **Bug Fix**: Fix modeled errors returning an empty `ErrorMessage()` when the service sends the message under a differently-cased key (`Message` instead of `message`). This was a regression introduced with schema-based deserialization.
+* **Dependency Update**: Update to smithy-go v1.28.4.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.70.1 (2026-10-06)
 
 * No change notes available for this release.

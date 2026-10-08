@@ -1,8 +1,0 @@
-{
-    "id": "46990e28-bb95-4fae-b795-f05a349b35b3",
-    "type": "feature",
-    "description": "Adds release management associations with private network access to AWS DevOps Agent, and a releaseManagementAssociationId field on GitHub and GitLab associations. This helps release management agents (Release-readiness review and Release Testing) access customer resources that are behind a VPC.",
-    "modules": [
-        "service/devopsagent"
-    ]
-}
