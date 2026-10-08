@@ -36,7 +36,7 @@ func (c *Client) ListTenants(ctx context.Context, params *ListTenantsInput, optF
 type ListTenantsInput struct {
 
 	// An object that contains filters to apply when listing tenants. You can filter
-	// by tenant name or sending status.
+	// by a substring of the tenant name or by sending status.
 	Filter map[string]string
 
 	// A token returned from a previous call to ListTenants to indicate the position

@@ -1,5 +1,6 @@
 503
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShineFrontendService_20170701.TranslateDocument
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"ServiceUnavailableException","Message":"__Message__"}
+¿f__typexServiceUnavailableExceptiongMessagek__Message__ÿ

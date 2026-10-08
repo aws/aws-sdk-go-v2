@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: KeyspacesService.CreateType
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"keyspaceArn":"__KeyspaceArn__","typeName":"__TypeName__"}
+¿kkeyspaceArno__KeyspaceArn__htypeNamel__TypeName__ÿ

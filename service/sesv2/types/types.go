@@ -1782,123 +1782,15 @@ type DkimAttributes struct {
 	//   - EXTERNAL – Indicates that DKIM was configured for the identity by using
 	//   Bring Your Own DKIM (BYODKIM).
 	//
-	//   - AWS_SES_AF_SOUTH_1 – Indicates that DKIM was configured for the identity by
-	//   replicating signing attributes from a parent identity in Africa (Cape Town)
-	//   region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_EU_NORTH_1 – Indicates that DKIM was configured for the identity by
-	//   replicating signing attributes from a parent identity in Europe (Stockholm)
-	//   region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_AP_SOUTH_1 – Indicates that DKIM was configured for the identity by
-	//   replicating signing attributes from a parent identity in Asia Pacific (Mumbai)
-	//   region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_AP_SOUTH_2 – Indicates that DKIM was configured for the identity by
-	//   replicating signing attributes from a parent identity in Asia Pacific
-	//   (Hyderabad) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_EU_WEST_3 – Indicates that DKIM was configured for the identity by
-	//   replicating signing attributes from a parent identity in Europe (Paris) region
-	//   using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_EU_WEST_2 – Indicates that DKIM was configured for the identity by
-	//   replicating signing attributes from a parent identity in Europe (London) region
-	//   using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_EU_SOUTH_1 – Indicates that DKIM was configured for the identity by
-	//   replicating signing attributes from a parent identity in Europe (Milan) region
-	//   using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_EU_WEST_1 – Indicates that DKIM was configured for the identity by
-	//   replicating signing attributes from a parent identity in Europe (Ireland) region
-	//   using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_AP_NORTHEAST_3 – Indicates that DKIM was configured for the identity
-	//   by replicating signing attributes from a parent identity in Asia Pacific (Osaka)
-	//   region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_AP_NORTHEAST_2 – Indicates that DKIM was configured for the identity
-	//   by replicating signing attributes from a parent identity in Asia Pacific (Seoul)
-	//   region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_ME_CENTRAL_1 – Indicates that DKIM was configured for the identity
-	//   by replicating signing attributes from a parent identity in Middle East (UAE)
-	//   region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_ME_SOUTH_1 – Indicates that DKIM was configured for the identity by
-	//   replicating signing attributes from a parent identity in Middle East (Bahrain)
-	//   region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_AP_NORTHEAST_1 – Indicates that DKIM was configured for the identity
-	//   by replicating signing attributes from a parent identity in Asia Pacific (Tokyo)
-	//   region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_IL_CENTRAL_1 – Indicates that DKIM was configured for the identity
-	//   by replicating signing attributes from a parent identity in Israel (Tel Aviv)
-	//   region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_SA_EAST_1 – Indicates that DKIM was configured for the identity by
-	//   replicating signing attributes from a parent identity in South America (São
-	//   Paulo) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_CA_CENTRAL_1 – Indicates that DKIM was configured for the identity
-	//   by replicating signing attributes from a parent identity in Canada (Central)
-	//   region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_CA_WEST_1 – Indicates that DKIM was configured for the identity by
-	//   replicating signing attributes from a parent identity in Canada (Calgary) region
-	//   using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_AP_SOUTHEAST_1 – Indicates that DKIM was configured for the identity
-	//   by replicating signing attributes from a parent identity in Asia Pacific
-	//   (Singapore) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_AP_SOUTHEAST_2 – Indicates that DKIM was configured for the identity
-	//   by replicating signing attributes from a parent identity in Asia Pacific
-	//   (Sydney) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_AP_SOUTHEAST_3 – Indicates that DKIM was configured for the identity
-	//   by replicating signing attributes from a parent identity in Asia Pacific
-	//   (Jakarta) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_AP_SOUTHEAST_5 – Indicates that DKIM was configured for the identity
-	//   by replicating signing attributes from a parent identity in Asia Pacific
-	//   (Malaysia) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_EU_CENTRAL_1 – Indicates that DKIM was configured for the identity
-	//   by replicating signing attributes from a parent identity in Europe (Frankfurt)
-	//   region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_EU_CENTRAL_2 – Indicates that DKIM was configured for the identity
-	//   by replicating signing attributes from a parent identity in Europe (Zurich)
-	//   region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_US_EAST_1 – Indicates that DKIM was configured for the identity by
-	//   replicating signing attributes from a parent identity in US East (N. Virginia)
-	//   region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_US_EAST_2 – Indicates that DKIM was configured for the identity by
-	//   replicating signing attributes from a parent identity in US East (Ohio) region
-	//   using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_US_WEST_1 – Indicates that DKIM was configured for the identity by
-	//   replicating signing attributes from a parent identity in US West (N. California)
-	//   region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_US_WEST_2 – Indicates that DKIM was configured for the identity by
-	//   replicating signing attributes from a parent identity in US West (Oregon) region
-	//   using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_US_GOV_EAST_1 – Indicates that DKIM was configured for the identity
-	//   by replicating signing attributes from a parent identity in AWS GovCloud
-	//   (US-East) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_US_GOV_WEST_1 – Indicates that DKIM was configured for the identity
-	//   by replicating signing attributes from a parent identity in AWS GovCloud
-	//   (US-West) region using Deterministic Easy-DKIM (DEED).
+	//   - AWS_SES_ – Indicates that DKIM was configured for the identity by
+	//   replicating the signing attributes of a parent identity in another Amazon Web
+	//   Services Region, using [Deterministic Easy-DKIM (DEED)]. is the Amazon Web Services Region of the parent
+	//   identity, in uppercase with each hyphen replaced by an underscore. Amazon SES
+	//   uses this format for every Amazon Web Services Region in which it supports DEED.
+	//   For example, a parent identity in us-east-1 is reported as AWS_SES_US_EAST_1 .
 	//
 	// [Easy DKIM]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+	// [Deterministic Easy-DKIM (DEED)]: https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-deed.html
 	SigningAttributesOrigin DkimSigningAttributesOrigin
 
 	// If the value is true , then the messages that you send from the identity are
@@ -2056,114 +1948,18 @@ type DkimSigningAttributes struct {
 	//   - EXTERNAL – Configure DKIM for the identity by using Bring Your Own DKIM
 	//   (BYODKIM).
 	//
-	//   - AWS_SES_AF_SOUTH_1 – Configure DKIM for the identity by replicating from a
-	//   parent identity in Africa (Cape Town) region using Deterministic Easy-DKIM
-	//   (DEED).
+	//   - AWS_SES_ – Configure DKIM for the identity by replicating the signing
+	//   attributes of a parent identity in another Amazon Web Services Region, using [Deterministic Easy-DKIM (DEED)]
+	//   . Replace with the Amazon Web Services Region of the parent identity, in
+	//   uppercase with each hyphen replaced by an underscore. You can specify any Amazon
+	//   Web Services Region in which Amazon SES supports DEED. For example, to replicate
+	//   from a parent identity in us-east-1 , specify AWS_SES_US_EAST_1 .
 	//
-	//   - AWS_SES_EU_NORTH_1 – Configure DKIM for the identity by replicating from a
-	//   parent identity in Europe (Stockholm) region using Deterministic Easy-DKIM
-	//   (DEED).
-	//
-	//   - AWS_SES_AP_SOUTH_1 – Configure DKIM for the identity by replicating from a
-	//   parent identity in Asia Pacific (Mumbai) region using Deterministic Easy-DKIM
-	//   (DEED).
-	//
-	//   - AWS_SES_AP_SOUTH_2 – Configure DKIM for the identity by replicating from a
-	//   parent identity in Asia Pacific (Hyderabad) region using Deterministic Easy-DKIM
-	//   (DEED).
-	//
-	//   - AWS_SES_EU_WEST_3 – Configure DKIM for the identity by replicating from a
-	//   parent identity in Europe (Paris) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_EU_WEST_2 – Configure DKIM for the identity by replicating from a
-	//   parent identity in Europe (London) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_EU_SOUTH_1 – Configure DKIM for the identity by replicating from a
-	//   parent identity in Europe (Milan) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_EU_WEST_1 – Configure DKIM for the identity by replicating from a
-	//   parent identity in Europe (Ireland) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_AP_NORTHEAST_3 – Configure DKIM for the identity by replicating from
-	//   a parent identity in Asia Pacific (Osaka) region using Deterministic Easy-DKIM
-	//   (DEED).
-	//
-	//   - AWS_SES_AP_NORTHEAST_2 – Configure DKIM for the identity by replicating from
-	//   a parent identity in Asia Pacific (Seoul) region using Deterministic Easy-DKIM
-	//   (DEED).
-	//
-	//   - AWS_SES_ME_CENTRAL_1 – Configure DKIM for the identity by replicating from a
-	//   parent identity in Middle East (UAE) region using Deterministic Easy-DKIM
-	//   (DEED).
-	//
-	//   - AWS_SES_ME_SOUTH_1 – Configure DKIM for the identity by replicating from a
-	//   parent identity in Middle East (Bahrain) region using Deterministic Easy-DKIM
-	//   (DEED).
-	//
-	//   - AWS_SES_AP_NORTHEAST_1 – Configure DKIM for the identity by replicating from
-	//   a parent identity in Asia Pacific (Tokyo) region using Deterministic Easy-DKIM
-	//   (DEED).
-	//
-	//   - AWS_SES_IL_CENTRAL_1 – Configure DKIM for the identity by replicating from a
-	//   parent identity in Israel (Tel Aviv) region using Deterministic Easy-DKIM
-	//   (DEED).
-	//
-	//   - AWS_SES_SA_EAST_1 – Configure DKIM for the identity by replicating from a
-	//   parent identity in South America (São Paulo) region using Deterministic
-	//   Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_CA_CENTRAL_1 – Configure DKIM for the identity by replicating from a
-	//   parent identity in Canada (Central) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_CA_WEST_1 – Configure DKIM for the identity by replicating from a
-	//   parent identity in Canada (Calgary) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_AP_SOUTHEAST_1 – Configure DKIM for the identity by replicating from
-	//   a parent identity in Asia Pacific (Singapore) region using Deterministic
-	//   Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_AP_SOUTHEAST_2 – Configure DKIM for the identity by replicating from
-	//   a parent identity in Asia Pacific (Sydney) region using Deterministic Easy-DKIM
-	//   (DEED).
-	//
-	//   - AWS_SES_AP_SOUTHEAST_3 – Configure DKIM for the identity by replicating from
-	//   a parent identity in Asia Pacific (Jakarta) region using Deterministic Easy-DKIM
-	//   (DEED).
-	//
-	//   - AWS_SES_AP_SOUTHEAST_5 – Configure DKIM for the identity by replicating from
-	//   a parent identity in Asia Pacific (Malaysia) region using Deterministic
-	//   Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_EU_CENTRAL_1 – Configure DKIM for the identity by replicating from a
-	//   parent identity in Europe (Frankfurt) region using Deterministic Easy-DKIM
-	//   (DEED).
-	//
-	//   - AWS_SES_EU_CENTRAL_2 – Configure DKIM for the identity by replicating from a
-	//   parent identity in Europe (Zurich) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_US_EAST_1 – Configure DKIM for the identity by replicating from a
-	//   parent identity in US East (N. Virginia) region using Deterministic Easy-DKIM
-	//   (DEED).
-	//
-	//   - AWS_SES_US_EAST_2 – Configure DKIM for the identity by replicating from a
-	//   parent identity in US East (Ohio) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_US_WEST_1 – Configure DKIM for the identity by replicating from a
-	//   parent identity in US West (N. California) region using Deterministic Easy-DKIM
-	//   (DEED).
-	//
-	//   - AWS_SES_US_WEST_2 – Configure DKIM for the identity by replicating from a
-	//   parent identity in US West (Oregon) region using Deterministic Easy-DKIM (DEED).
-	//
-	//   - AWS_SES_US_GOV_EAST_1 – Configure DKIM for the identity by replicating from
-	//   a parent identity in AWS GovCloud (US-East) region using Deterministic Easy-DKIM
-	//   (DEED).
-	//
-	//   - AWS_SES_US_GOV_WEST_1 – Configure DKIM for the identity by replicating from
-	//   a parent identity in AWS GovCloud (US-West) region using Deterministic Easy-DKIM
-	//   (DEED).
+	// The parent identity must already exist in the specified Amazon Web Services
+	//   Region and have Easy DKIM configured.
 	//
 	// [SigningAttributesOrigin]: https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_PutEmailIdentityDkimSigningAttributes.html#SES-PutEmailIdentityDkimSigningAttributes-request-SigningAttributesOrigin
+	// [Deterministic Easy-DKIM (DEED)]: https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-deed.html
 	DomainSigningAttributesOrigin DkimSigningAttributesOrigin
 
 	// [Bring Your Own DKIM] A private key that's used to generate a DKIM signature.
@@ -3274,6 +3070,12 @@ func (v *ExportDataSource) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // An object that contains details about the destination of the export job.
+//
+// When you create an export job, specify only DataFormat . SES writes the export
+// file to a location that it manages. After the job completes, call GetExportJob
+// and use the S3Url that's returned to download the file. To store a copy in your
+// own Amazon S3 bucket, upload the downloaded file to your bucket. Do not include
+// S3Url in the CreateExportJob request.
 type ExportDestination struct {
 
 	// The data format of the final export job file, can be one of the following:
@@ -3286,6 +3088,11 @@ type ExportDestination struct {
 	DataFormat DataFormat
 
 	// An Amazon S3 pre-signed URL that points to the generated export file.
+	//
+	// SES sets this value. It's returned only in the GetExportJob response, after the
+	// export job status is COMPLETED . The URL expires five minutes after GetExportJob
+	// returns it. Call GetExportJob again to get a new URL. If you include this field
+	// in a CreateExportJob request, the request fails with a BadRequestException .
 	S3Url *string
 
 	noSmithyDocumentSerde
@@ -6828,7 +6635,13 @@ type Tenant struct {
 	// The date and time when the tenant was created.
 	CreatedTimestamp *time.Time
 
-	// The status of sending capability for the tenant.
+	// The status of sending capability for the tenant:
+	//
+	//   - ENABLED – Sending is allowed for the tenant.
+	//
+	//   - DISABLED – Sending is prevented for the tenant.
+	//
+	//   - REINSTATED – Sending is allowed even if there are active reputation findings.
 	SendingStatus SendingStatus
 
 	// An object that contains information about the suppression list preferences for
@@ -6918,11 +6731,11 @@ type TenantInfo struct {
 	// The date and time when the tenant was created.
 	CreatedTimestamp *time.Time
 
-	// The sending status for a reputation entity. This can be one of the following:
+	// The status of sending capability for the tenant:
 	//
-	//   - ENABLED – Sending is allowed for this entity.
+	//   - ENABLED – Sending is allowed for the tenant.
 	//
-	//   - DISABLED – Sending is prevented for this entity.
+	//   - DISABLED – Sending is prevented for the tenant.
 	//
 	//   - REINSTATED – Sending is allowed even if there are active reputation findings.
 	SendingStatus SendingStatus

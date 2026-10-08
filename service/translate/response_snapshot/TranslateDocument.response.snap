@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShineFrontendService_20170701.TranslateDocument
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AppliedSettings":{"Brevity":"ON","Formality":"FORMAL","Profanity":"MASK"},"AppliedTerminologies":[{"Name":"__Name__","Terms":[{"SourceText":"__SourceText__","TargetText":"__TargetText__"},{"SourceText":"__SourceText__","TargetText":"__TargetText__"}]},{"Name":"__Name__","Terms":[{"SourceText":"__SourceText__","TargetText":"__TargetText__"},{"SourceText":"__SourceText__","TargetText":"__TargetText__"}]}],"SourceLanguageCode":"__SourceLanguageCode__","TargetLanguageCode":"__TargetLanguageCode__","TranslatedDocument":{"Content":"YmxvYg=="}}
+¿oAppliedSettings¿gBrevitybONiFormalityfFORMALiProfanitydMASKÿtAppliedTerminologiesŸ¿dNameh__Name__eTermsŸ¿jSourceTextn__SourceText__jTargetTextn__TargetText__ÿ¿jSourceTextn__SourceText__jTargetTextn__TargetText__ÿÿÿ¿dNameh__Name__eTermsŸ¿jSourceTextn__SourceText__jTargetTextn__TargetText__ÿ¿jSourceTextn__SourceText__jTargetTextn__TargetText__ÿÿÿÿrSourceLanguageCodev__SourceLanguageCode__rTargetLanguageCodev__TargetLanguageCode__rTranslatedDocument¿gContentDblobÿÿ

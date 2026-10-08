@@ -1,0 +1,8 @@
+{
+    "id": "93a3b841-e1af-4179-a628-464f213ade49",
+    "type": "feature",
+    "description": "Introduced GetSystemLogsForJobRun and GetSystemLogsForSession APIs, enabling account admins to retrieve system-space logs for FGAC-enabled Glue jobs and sessions.",
+    "modules": [
+        "service/glue"
+    ]
+}

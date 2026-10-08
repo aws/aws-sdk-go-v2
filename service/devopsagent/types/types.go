@@ -704,6 +704,23 @@ type ChatExecution struct {
 	noSmithyDocumentSerde
 }
 
+// Cron or rate schedule. Trigger-created custom-agent schedules use an
+// EventBridge flexible window of up to 30 minutes for load distribution.
+type CronSchedule struct {
+
+	// EventBridge cron or rate expression that anchors the flexible window
+	//
+	// This member is required.
+	Expression *string
+
+	noSmithyDocumentSerde
+}
+
+// Daily recurrence
+type DailyRecurrence struct {
+	noSmithyDocumentSerde
+}
+
 // Authorization configuration for Datadog MCP server (uses authorization
 // discovery only).
 //
@@ -924,6 +941,10 @@ type GitHubConfiguration struct {
 	// GitHub instance identifier (e.g., github.com or github.enterprise.com)
 	InstanceIdentifier *string
 
+	// The identifier of the release management association that this repository maps
+	// to for automatic verification testing.
+	ReleaseManagementAssociationId *string
+
 	// Optional role ARN that AIDevOps assumes at runtime for automatic verification
 	// testing and VPC connectivity on this association.
 	//
@@ -951,6 +972,10 @@ type GitLabConfiguration struct {
 	// GitLab instance identifier (e.g., gitlab.com or
 	// e2e.gamma.dev.us-east-1.gitlab.falco.ai.aws.dev)
 	InstanceIdentifier *string
+
+	// The identifier of the release management association that this project maps to
+	// for automatic verification testing.
+	ReleaseManagementAssociationId *string
 
 	// Optional role ARN that AIDevOps assumes at runtime for automatic verification
 	// testing and VPC connectivity on this association.
@@ -1625,6 +1650,36 @@ type MessageMemberUserMessage struct {
 
 func (*MessageMemberUserMessage) isMessage() {}
 
+// Monthly recurrence
+type MonthlyRecurrence struct {
+
+	// Day of month the window recurs on
+	//
+	// This member is required.
+	DayOfMonth *int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies how AWS DevOps Agent reaches your application using a Release
+// Management Environment
+//
+// The following types satisfy this interface:
+//
+//	NetworkAccessConfigurationMemberPrivateAccess
+type NetworkAccessConfiguration interface {
+	isNetworkAccessConfiguration()
+}
+
+// Private network access to the resource inside a VPC, using a private connection.
+type NetworkAccessConfigurationMemberPrivateAccess struct {
+	Value PrivateNetworkAccess
+
+	noSmithyDocumentSerde
+}
+
+func (*NetworkAccessConfigurationMemberPrivateAccess) isNetworkAccessConfiguration() {}
+
 // API key authentication configuration for New Relic service.
 type NewRelicApiKeyConfig struct {
 
@@ -1870,6 +1925,23 @@ type PrivateConnectionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Private network access to the resource inside a VPC, using a private connection.
+type PrivateNetworkAccess struct {
+
+	// Name of the private connection that supplies the VPC configuration for this
+	// release management environment.
+	//
+	// This member is required.
+	PrivateConnectionName *string
+
+	// Role ARN that AWS DevOps Agent assumes at runtime to connect to your VPC.
+	//
+	// This member is required.
+	RuntimeRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a recommendation with all its properties and metadata
 type Recommendation struct {
 
@@ -1954,6 +2026,44 @@ type RecommendationContent struct {
 
 	noSmithyDocumentSerde
 }
+
+// Recurrence cadence for a time-range schedule
+//
+// The following types satisfy this interface:
+//
+//	RecurrenceMemberDaily
+//	RecurrenceMemberMonthly
+//	RecurrenceMemberWeekly
+type Recurrence interface {
+	isRecurrence()
+}
+
+// The window recurs every day
+type RecurrenceMemberDaily struct {
+	Value DailyRecurrence
+
+	noSmithyDocumentSerde
+}
+
+func (*RecurrenceMemberDaily) isRecurrence() {}
+
+// The window recurs once per month
+type RecurrenceMemberMonthly struct {
+	Value MonthlyRecurrence
+
+	noSmithyDocumentSerde
+}
+
+func (*RecurrenceMemberMonthly) isRecurrence() {}
+
+// The window recurs once per week
+type RecurrenceMemberWeekly struct {
+	Value WeeklyRecurrence
+
+	noSmithyDocumentSerde
+}
+
+func (*RecurrenceMemberWeekly) isRecurrence() {}
 
 // Reference information linking a task to external systems - for input with
 // validation
@@ -2334,6 +2444,23 @@ type RegisteredSlackServiceDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for a release management environment.
+type ReleaseManagementConfiguration struct {
+
+	// The name for this release management environment.
+	//
+	// This member is required.
+	Name *string
+
+	// Specifies how AWS DevOps Agent reaches your application using a Release
+	// Management Environment
+	//
+	// This member is required.
+	NetworkAccess NetworkAccessConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // API key configuration for remote A2A agent.
 type RemoteAgentAPIKeyConfig struct {
 
@@ -2522,16 +2649,52 @@ type RemoteAgentSigV4ServiceDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Schedule-based condition that fires the Trigger
+// Expression-based schedule condition. CreateTrigger callers using this condition
+// supply expression and omit spec. Trigger responses always use this condition,
+// include the persisted or derived expression, and also include spec when the
+// trigger was created from a structured schedule.
 type ScheduleCondition struct {
 
-	// The schedule expression
-	//
-	// This member is required.
+	// EventBridge cron or rate expression. Required for existing request and response
+	// compatibility. For a structured schedule response, this is the expression
+	// derived by Backlog.
 	Expression *string
+
+	// Structured schedule source of truth (cron | timeRange). On CreateTrigger supply
+	// exactly one of spec or expression. Present in responses together with the
+	// derived expression for structured triggers.
+	Spec ScheduleSpec
 
 	noSmithyDocumentSerde
 }
+
+// Structured schedule specification. Select exactly one schedule form.
+//
+// The following types satisfy this interface:
+//
+//	ScheduleSpecMemberCron
+//	ScheduleSpecMemberTimeRange
+type ScheduleSpec interface {
+	isScheduleSpec()
+}
+
+// Runs on an EventBridge cron or rate cadence
+type ScheduleSpecMemberCron struct {
+	Value CronSchedule
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleSpecMemberCron) isScheduleSpec() {}
+
+// Runs within a recurring time-of-day window
+type ScheduleSpecMemberTimeRange struct {
+	Value TimeRangeSchedule
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleSpecMemberTimeRange) isScheduleSpec() {}
 
 // Configuration for a self-managed Private Connection.
 type SelfManagedInput struct {
@@ -2891,6 +3054,7 @@ type SendMessageUsageInfo struct {
 //	ServiceConfigurationMemberMcpserversigv4
 //	ServiceConfigurationMemberMcpserversplunk
 //	ServiceConfigurationMemberPagerduty
+//	ServiceConfigurationMemberReleaseManagement
 //	ServiceConfigurationMemberRemoteagent
 //	ServiceConfigurationMemberRemoteagentsigv4
 //	ServiceConfigurationMemberServicenow
@@ -3025,6 +3189,15 @@ type ServiceConfigurationMemberPagerduty struct {
 }
 
 func (*ServiceConfigurationMemberPagerduty) isServiceConfiguration() {}
+
+// Release management network environment configuration
+type ServiceConfigurationMemberReleaseManagement struct {
+	Value ReleaseManagementConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceConfigurationMemberReleaseManagement) isServiceConfiguration() {}
 
 // Remote A2A agent integration configuration (token-based auth).
 type ServiceConfigurationMemberRemoteagent struct {
@@ -3544,6 +3717,29 @@ type TaskFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Recurring time-of-day window in UTC. The service derives an EventBridge
+// expression anchored at startAfter and a flexible-window width from the interval
+// to startBefore. A startBefore earlier than startAfter wraps past midnight.
+type TimeRangeSchedule struct {
+
+	// How the window recurs
+	//
+	// This member is required.
+	Recurrence Recurrence
+
+	// Earliest time of day the trigger may fire
+	//
+	// This member is required.
+	StartAfter *string
+
+	// Latest time of day the trigger may fire
+	//
+	// This member is required.
+	StartBefore *string
+
+	noSmithyDocumentSerde
+}
+
 // A Trigger fires on a schedule and invokes an agent
 type Trigger struct {
 
@@ -3590,7 +3786,7 @@ type Trigger struct {
 	noSmithyDocumentSerde
 }
 
-// Defines the firing condition for a Trigger
+// Defines how a Trigger fires.
 //
 // The following types satisfy this interface:
 //
@@ -3599,7 +3795,8 @@ type TriggerCondition interface {
 	isTriggerCondition()
 }
 
-// Time-based firing condition
+// Schedule-based firing condition. On CreateTrigger supply exactly one of the
+// schedule condition's expression or spec.
 type TriggerConditionMemberSchedule struct {
 	Value ScheduleCondition
 
@@ -3718,6 +3915,17 @@ type Webhook struct {
 	noSmithyDocumentSerde
 }
 
+// Weekly recurrence
+type WeeklyRecurrence struct {
+
+	// Day of week the window recurs on
+	//
+	// This member is required.
+	DayOfWeek DayOfWeek
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -3738,10 +3946,13 @@ func (*UnknownUnionMember) isDatadogAuthorizationConfig()           {}
 func (*UnknownUnionMember) isDynatraceServiceAuthorizationConfig()  {}
 func (*UnknownUnionMember) isMCPServerAuthorizationConfig()         {}
 func (*UnknownUnionMember) isMessage()                              {}
+func (*UnknownUnionMember) isNetworkAccessConfiguration()           {}
 func (*UnknownUnionMember) isNewRelicServiceAuthorizationConfig()   {}
 func (*UnknownUnionMember) isPagerDutyAuthorizationConfig()         {}
 func (*UnknownUnionMember) isPrivateConnectionMode()                {}
+func (*UnknownUnionMember) isRecurrence()                           {}
 func (*UnknownUnionMember) isRemoteAgentAuthorizationConfig()       {}
+func (*UnknownUnionMember) isScheduleSpec()                         {}
 func (*UnknownUnionMember) isSendMessageContentBlockDelta()         {}
 func (*UnknownUnionMember) isSendMessageEvents()                    {}
 func (*UnknownUnionMember) isServiceConfiguration()                 {}

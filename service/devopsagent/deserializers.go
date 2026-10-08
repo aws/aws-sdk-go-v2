@@ -14916,6 +14916,46 @@ func awsRestjson1_deserializeDocumentContentSizeExceededException(v **types.Cont
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCronSchedule(v **types.CronSchedule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CronSchedule
+	if *v == nil {
+		sv = &types.CronSchedule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "expression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScheduleExpression to be of type string, got %T instead", value)
+				}
+				sv.Expression = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCustomHeaders(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14949,6 +14989,37 @@ func awsRestjson1_deserializeDocumentCustomHeaders(v *map[string]string, value i
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDailyRecurrence(v **types.DailyRecurrence, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DailyRecurrence
+	if *v == nil {
+		sv = &types.DailyRecurrence{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -15381,6 +15452,15 @@ func awsRestjson1_deserializeDocumentGitHubConfiguration(v **types.GitHubConfigu
 				sv.OwnerType = types.GithubRepoOwnerType(jtv)
 			}
 
+		case "releaseManagementAssociationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AssociationId to be of type string, got %T instead", value)
+				}
+				sv.ReleaseManagementAssociationId = ptr.String(jtv)
+			}
+
 		case "repoId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15464,6 +15544,15 @@ func awsRestjson1_deserializeDocumentGitLabConfiguration(v **types.GitLabConfigu
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ProjectPath = ptr.String(jtv)
+			}
+
+		case "releaseManagementAssociationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AssociationId to be of type string, got %T instead", value)
+				}
+				sv.ReleaseManagementAssociationId = ptr.String(jtv)
 			}
 
 		case "runtimeRoleArn":
@@ -16693,6 +16782,90 @@ loop:
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMonthlyRecurrence(v **types.MonthlyRecurrence, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MonthlyRecurrence
+	if *v == nil {
+		sv = &types.MonthlyRecurrence{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dayOfMonth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DayOfMonth = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetworkAccessConfiguration(v *types.NetworkAccessConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.NetworkAccessConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "privateAccess":
+			var mv types.PrivateNetworkAccess
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentPrivateNetworkAccess(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.NetworkAccessConfigurationMemberPrivateAccess{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOAuthAdditionalStepDetails(v **types.OAuthAdditionalStepDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17124,6 +17297,55 @@ func awsRestjson1_deserializeDocumentPrivateConnectionSummaryList(v *[]types.Pri
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPrivateNetworkAccess(v **types.PrivateNetworkAccess, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PrivateNetworkAccess
+	if *v == nil {
+		sv = &types.PrivateNetworkAccess{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "privateConnectionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PrivateConnectionName to be of type string, got %T instead", value)
+				}
+				sv.PrivateConnectionName = ptr.String(jtv)
+			}
+
+		case "runtimeRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RuntimeRoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17390,6 +17612,66 @@ func awsRestjson1_deserializeDocumentRecommendationList(v *[]types.Recommendatio
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRecurrence(v *types.Recurrence, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.Recurrence
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "daily":
+			var mv types.DailyRecurrence
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentDailyRecurrence(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RecurrenceMemberDaily{Value: mv}
+			break loop
+
+		case "monthly":
+			var mv types.MonthlyRecurrence
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentMonthlyRecurrence(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RecurrenceMemberMonthly{Value: mv}
+			break loop
+
+		case "weekly":
+			var mv types.WeeklyRecurrence
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentWeeklyRecurrence(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RecurrenceMemberWeekly{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -18402,6 +18684,51 @@ func awsRestjson1_deserializeDocumentRegisteredSlackServiceDetails(v **types.Reg
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentReleaseManagementConfiguration(v **types.ReleaseManagementConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReleaseManagementConfiguration
+	if *v == nil {
+		sv = &types.ReleaseManagementConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DisplayName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "networkAccess":
+			if err := awsRestjson1_deserializeDocumentNetworkAccessConfiguration(&sv.NetworkAccess, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRemoteAgentConfiguration(v **types.RemoteAgentConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18535,12 +18862,67 @@ func awsRestjson1_deserializeDocumentScheduleCondition(v **types.ScheduleConditi
 				sv.Expression = ptr.String(jtv)
 			}
 
+		case "spec":
+			if err := awsRestjson1_deserializeDocumentScheduleSpec(&sv.Spec, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScheduleSpec(v *types.ScheduleSpec, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ScheduleSpec
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "cron":
+			var mv types.CronSchedule
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCronSchedule(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ScheduleSpecMemberCron{Value: mv}
+			break loop
+
+		case "timeRange":
+			var mv types.TimeRangeSchedule
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentTimeRangeSchedule(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ScheduleSpecMemberTimeRange{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -18702,6 +19084,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.ServiceConfigurationMemberPagerduty{Value: mv}
+			break loop
+
+		case "releaseManagement":
+			var mv types.ReleaseManagementConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentReleaseManagementConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ServiceConfigurationMemberReleaseManagement{Value: mv}
 			break loop
 
 		case "remoteagent":
@@ -19451,6 +19843,60 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTimeRangeSchedule(v **types.TimeRangeSchedule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimeRangeSchedule
+	if *v == nil {
+		sv = &types.TimeRangeSchedule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "recurrence":
+			if err := awsRestjson1_deserializeDocumentRecurrence(&sv.Recurrence, value); err != nil {
+				return err
+			}
+
+		case "startAfter":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimeOfDay to be of type string, got %T instead", value)
+				}
+				sv.StartAfter = ptr.String(jtv)
+			}
+
+		case "startBefore":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimeOfDay to be of type string, got %T instead", value)
+				}
+				sv.StartBefore = ptr.String(jtv)
 			}
 
 		default:
@@ -20262,6 +20708,46 @@ func awsRestjson1_deserializeDocumentWebIdentityTokenAudienceList(v *[]string, v
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWeeklyRecurrence(v **types.WeeklyRecurrence, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WeeklyRecurrence
+	if *v == nil {
+		sv = &types.WeeklyRecurrence{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dayOfWeek":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DayOfWeek to be of type string, got %T instead", value)
+				}
+				sv.DayOfWeek = types.DayOfWeek(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

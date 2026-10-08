@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.GetAgreementTerms
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"acceptedTerms":[{"legalTerm":{"documents":[{"type":"__Type__","url":"__Url__","version":"__Version__"},{"type":"__Type__","url":"__Url__","version":"__Version__"}],"id":"__Id__","type":"__Type__"}},{"legalTerm":{"documents":[{"type":"__Type__","url":"__Url__","version":"__Version__"},{"type":"__Type__","url":"__Url__","version":"__Version__"}],"id":"__Id__","type":"__Type__"}}],"nextToken":"__NextToken__"}
+¿macceptedTermsŸ¡ilegalTerm¿idocumentsŸ¿dtypeh__Type__curlg__Url__gversionk__Version__ÿ¿dtypeh__Type__curlg__Url__gversionk__Version__ÿÿbidf__Id__dtypeh__Type__ÿ¡ilegalTerm¿idocumentsŸ¿dtypeh__Type__curlg__Url__gversionk__Version__ÿ¿dtypeh__Type__curlg__Url__gversionk__Version__ÿÿbidf__Id__dtypeh__Type__ÿÿinextTokenm__NextToken__ÿ

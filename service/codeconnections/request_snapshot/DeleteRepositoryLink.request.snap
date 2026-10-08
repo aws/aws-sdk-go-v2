@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeConnections_20231201/operation/DeleteRepositoryLink
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.DeleteRepositoryLink
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"RepositoryLinkId":"__RepositoryLinkId__"}
+¿pRepositoryLinkIdt__RepositoryLinkId__ÿ

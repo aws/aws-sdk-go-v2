@@ -1,5 +1,6 @@
 400
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.CreateConnection
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"ResourceUnavailableException","Message":"__Message__"}
+¿f__typexResourceUnavailableExceptiongMessagek__Message__ÿ

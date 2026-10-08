@@ -434,6 +434,7 @@ func TestUpdateResponseSnapshot_CreateContainerGroupDefinition(t *testing.T) {
 						types.LinuxCapability("AUDIT_CONTROL"),
 					},
 				},
+				Vcpu: ptr.Float64(1.0),
 			},
 			SupportContainerDefinitions: []types.SupportContainerDefinition{
 				{
@@ -1877,6 +1878,7 @@ func TestUpdateResponseSnapshot_DescribeContainerGroupDefinition(t *testing.T) {
 						types.LinuxCapability("AUDIT_CONTROL"),
 					},
 				},
+				Vcpu: ptr.Float64(1.0),
 			},
 			SupportContainerDefinitions: []types.SupportContainerDefinition{
 				{
@@ -4355,6 +4357,7 @@ func TestUpdateResponseSnapshot_ListContainerGroupDefinitionVersions(t *testing.
 							types.LinuxCapability("AUDIT_CONTROL"),
 						},
 					},
+					Vcpu: ptr.Float64(1.0),
 				},
 				SupportContainerDefinitions: []types.SupportContainerDefinition{
 					{
@@ -4568,6 +4571,7 @@ func TestUpdateResponseSnapshot_ListContainerGroupDefinitionVersions(t *testing.
 							types.LinuxCapability("AUDIT_CONTROL"),
 						},
 					},
+					Vcpu: ptr.Float64(1.0),
 				},
 				SupportContainerDefinitions: []types.SupportContainerDefinition{
 					{
@@ -4807,6 +4811,7 @@ func TestUpdateResponseSnapshot_ListContainerGroupDefinitions(t *testing.T) {
 							types.LinuxCapability("AUDIT_CONTROL"),
 						},
 					},
+					Vcpu: ptr.Float64(1.0),
 				},
 				SupportContainerDefinitions: []types.SupportContainerDefinition{
 					{
@@ -5020,6 +5025,7 @@ func TestUpdateResponseSnapshot_ListContainerGroupDefinitions(t *testing.T) {
 							types.LinuxCapability("AUDIT_CONTROL"),
 						},
 					},
+					Vcpu: ptr.Float64(1.0),
 				},
 				SupportContainerDefinitions: []types.SupportContainerDefinition{
 					{
@@ -6638,6 +6644,7 @@ func TestUpdateResponseSnapshot_UpdateContainerGroupDefinition(t *testing.T) {
 						types.LinuxCapability("AUDIT_CONTROL"),
 					},
 				},
+				Vcpu: ptr.Float64(1.0),
 			},
 			SupportContainerDefinitions: []types.SupportContainerDefinition{
 				{

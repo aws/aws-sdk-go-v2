@@ -258,10 +258,10 @@ type CreateFleetInput struct {
 	PlayerGatewayConfiguration *types.PlayerGatewayConfiguration
 
 	// Configures player gateway for your fleet. Player gateway provides benefits such
-	// as DDoS protection by rate limiting and validating traﬃc before it reaches game
-	// servers, hiding game server IP addresses from players, and providing updated
-	// endpoints when relay endpoints become unhealthy. Note, player gateway is only
-	// available for fleets using server SDK 5.x or later game server builds.
+	// as DDoS protection by rate limiting and validating traffic before it reaches
+	// game servers, hiding game server IP addresses from players, and providing
+	// updated endpoints when relay endpoints become unhealthy. Note, player gateway is
+	// only available for fleets using server SDK 5.x or later game server builds.
 	//
 	// How it works: When enabled, game clients connect to relay endpoints instead of
 	// to your game servers. Player gateway validates player gateway tokens and routes
@@ -292,7 +292,7 @@ type CreateFleetInput struct {
 	ResourceCreationLimitPolicy *types.ResourceCreationLimitPolicy
 
 	// Instructions for how to launch and run server processes on the fleet. Set
-	// runtime configuration for managed EC2 fleets. For an Anywhere fleets, set this
+	// runtime configuration for managed EC2 fleets. For an Anywhere fleet, set this
 	// parameter only if the fleet is running the Amazon GameLift Servers Agent. The
 	// runtime configuration defines one or more server process configurations. Each
 	// server process identifies a game executable or Realtime script file and the
@@ -319,7 +319,7 @@ type CreateFleetInput struct {
 	ServerLaunchPath *string
 
 	// A list of labels to assign to the new fleet resource. Tags are
-	// developer-defined key-value pairs. Tagging Amazon Web Services resources are
+	// developer-defined key-value pairs. Tagging Amazon Web Services resources is
 	// useful for resource management, access management and cost allocation. For more
 	// information, see [Tagging Amazon Web Services Resources]in the Amazon Web Services General Reference.
 	//

@@ -1563,6 +1563,7 @@ func TestCheckResponseSnapshot_BatchGetFindings(t *testing.T) {
 				Confidence:       types.ConfidenceLevel("FALSE_POSITIVE"),
 				ValidationStatus: types.ValidationStatus("CONFIRMED"),
 				AttackScript:     ptr.String("__AttackScript__"),
+				RemediationCode:  ptr.String("__RemediationCode__"),
 				CodeRemediationTask: &types.CodeRemediationTask{
 					Status:       types.CodeRemediationTaskStatus("IN_PROGRESS"),
 					StatusReason: ptr.String("__StatusReason__"),
@@ -1637,6 +1638,7 @@ func TestCheckResponseSnapshot_BatchGetFindings(t *testing.T) {
 				Confidence:       types.ConfidenceLevel("FALSE_POSITIVE"),
 				ValidationStatus: types.ValidationStatus("CONFIRMED"),
 				AttackScript:     ptr.String("__AttackScript__"),
+				RemediationCode:  ptr.String("__RemediationCode__"),
 				CodeRemediationTask: &types.CodeRemediationTask{
 					Status:       types.CodeRemediationTaskStatus("IN_PROGRESS"),
 					StatusReason: ptr.String("__StatusReason__"),

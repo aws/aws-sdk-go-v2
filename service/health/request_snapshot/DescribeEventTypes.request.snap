@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSHealth_20160804/operation/DescribeEventTypes
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSHealth_20160804.DescribeEventTypes
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"filter":{"actionabilities":["ACTION_REQUIRED","ACTION_REQUIRED"],"eventTypeCategories":["issue","issue"],"eventTypeCodes":["__Member__","__Member__"],"personas":["OPERATIONS","OPERATIONS"],"services":["__Member__","__Member__"]},"locale":"__Locale__","maxResults":1,"nextToken":"__NextToken__"}
+¿ffilter¿oactionabilitiesŸoACTION_REQUIREDoACTION_REQUIREDÿseventTypeCategoriesŸeissueeissueÿneventTypeCodesŸj__Member__j__Member__ÿhpersonasŸjOPERATIONSjOPERATIONSÿhservicesŸj__Member__j__Member__ÿÿflocalej__Locale__jmaxResultsinextTokenm__NextToken__ÿ

@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.ListRepositoryLinks
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"NextToken":"__NextToken__","RepositoryLinks":[{"ConnectionArn":"__ConnectionArn__","EncryptionKeyArn":"__EncryptionKeyArn__","OwnerId":"__OwnerId__","ProviderType":"Bitbucket","RepositoryLinkArn":"__RepositoryLinkArn__","RepositoryLinkId":"__RepositoryLinkId__","RepositoryName":"__RepositoryName__"},{"ConnectionArn":"__ConnectionArn__","EncryptionKeyArn":"__EncryptionKeyArn__","OwnerId":"__OwnerId__","ProviderType":"Bitbucket","RepositoryLinkArn":"__RepositoryLinkArn__","RepositoryLinkId":"__RepositoryLinkId__","RepositoryName":"__RepositoryName__"}]}
+¿iNextTokenm__NextToken__oRepositoryLinksŸ¿mConnectionArnq__ConnectionArn__pEncryptionKeyArnt__EncryptionKeyArn__gOwnerIdk__OwnerId__lProviderTypeiBitbucketqRepositoryLinkArnu__RepositoryLinkArn__pRepositoryLinkIdt__RepositoryLinkId__nRepositoryNamer__RepositoryName__ÿ¿mConnectionArnq__ConnectionArn__pEncryptionKeyArnt__EncryptionKeyArn__gOwnerIdk__OwnerId__lProviderTypeiBitbucketqRepositoryLinkArnu__RepositoryLinkArn__pRepositoryLinkIdt__RepositoryLinkId__nRepositoryNamer__RepositoryName__ÿÿÿ

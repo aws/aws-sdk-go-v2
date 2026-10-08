@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSFMS_20180101.ListProtocolsLists
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"NextToken":"__NextToken__","ProtocolsLists":[{"ListArn":"__ListArn__","ListId":"__ListId__","ListName":"__ListName__","ProtocolsList":["__Member__","__Member__"]},{"ListArn":"__ListArn__","ListId":"__ListId__","ListName":"__ListName__","ProtocolsList":["__Member__","__Member__"]}]}
+¿iNextTokenm__NextToken__nProtocolsListsŸ¿gListArnk__ListArn__fListIdj__ListId__hListNamel__ListName__mProtocolsListŸj__Member__j__Member__ÿÿ¿gListArnk__ListArn__fListIdj__ListId__hListNamel__ListName__mProtocolsListŸj__Member__j__Member__ÿÿÿÿ

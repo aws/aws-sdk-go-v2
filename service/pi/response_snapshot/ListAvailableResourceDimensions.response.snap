@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: PerformanceInsightsv20180227.ListAvailableResourceDimensions
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"MetricDimensions":[{"Groups":[{"Dimensions":[{"Identifier":"__Identifier__"},{"Identifier":"__Identifier__"}],"Group":"__Group__"},{"Dimensions":[{"Identifier":"__Identifier__"},{"Identifier":"__Identifier__"}],"Group":"__Group__"}],"Metric":"__Metric__"},{"Groups":[{"Dimensions":[{"Identifier":"__Identifier__"},{"Identifier":"__Identifier__"}],"Group":"__Group__"},{"Dimensions":[{"Identifier":"__Identifier__"},{"Identifier":"__Identifier__"}],"Group":"__Group__"}],"Metric":"__Metric__"}],"NextToken":"__NextToken__"}
+¿pMetricDimensionsŸ¿fGroupsŸ¿jDimensionsŸ¿jIdentifiern__Identifier__ÿ¿jIdentifiern__Identifier__ÿÿeGroupi__Group__ÿ¿jDimensionsŸ¿jIdentifiern__Identifier__ÿ¿jIdentifiern__Identifier__ÿÿeGroupi__Group__ÿÿfMetricj__Metric__ÿ¿fGroupsŸ¿jDimensionsŸ¿jIdentifiern__Identifier__ÿ¿jIdentifiern__Identifier__ÿÿeGroupi__Group__ÿ¿jDimensionsŸ¿jIdentifiern__Identifier__ÿ¿jIdentifiern__Identifier__ÿÿeGroupi__Group__ÿÿfMetricj__Metric__ÿÿiNextTokenm__NextToken__ÿ

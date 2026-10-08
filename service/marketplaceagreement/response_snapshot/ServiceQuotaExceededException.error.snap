@@ -1,5 +1,6 @@
 402
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.CreateAgreementRequest
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"ServiceQuotaExceededException","message":"__Message__","quotaCode":"__QuotaCode__","requestId":"__RequestId__","resourceId":"__ResourceId__","resourceType":"__ResourceType__","serviceCode":"__ServiceCode__"}
+¿f__typexServiceQuotaExceededExceptiongmessagek__Message__iquotaCodem__QuotaCode__irequestIdm__RequestId__jresourceIdn__ResourceId__lresourceTypep__ResourceType__kserviceCodeo__ServiceCode__ÿ

@@ -12,8 +12,8 @@ import (
 
 //	This API works with the following fleet types: EC2, Anywhere, Container
 //
-// Defines a new matchmaking configuration for use with FlexMatch. Whether your
-// are using FlexMatch with Amazon GameLift Servers hosting or as a standalone
+// Defines a new matchmaking configuration for use with FlexMatch. Whether you are
+// using FlexMatch with Amazon GameLift Servers hosting or as a standalone
 // matchmaking service, the matchmaking configuration sets out rules for matching
 // players and forming teams. If you're also using Amazon GameLift Servers hosting,
 // it defines how to start game sessions for each match. Your matchmaking system
@@ -155,8 +155,10 @@ type CreateMatchmakingConfigurationInput struct {
 	// session queue resource and uniquely identifies it. ARNs are unique across all
 	// Regions. Format is arn:aws:gamelift:::gamesessionqueue/ . Queues can be located
 	// in any Region. Queues are used to start new Amazon GameLift Servers-hosted game
-	// sessions for matches that are created with this matchmaking configuration. If
-	// FlexMatchMode is set to STANDALONE , do not set this parameter.
+	// sessions for matches that are created with this matchmaking configuration. A
+	// matchmaking configuration supports only one queue; if you specify more than one
+	// ARN, the request fails with an InvalidRequestException . If FlexMatchMode is
+	// set to STANDALONE , do not set this parameter.
 	//
 	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	GameSessionQueueArns []string
@@ -168,7 +170,7 @@ type CreateMatchmakingConfigurationInput struct {
 	NotificationTarget *string
 
 	// A list of labels to assign to the new matchmaking configuration resource. Tags
-	// are developer-defined key-value pairs. Tagging Amazon Web Services resources are
+	// are developer-defined key-value pairs. Tagging Amazon Web Services resources is
 	// useful for resource management, access management and cost allocation. For more
 	// information, see [Tagging Amazon Web Services Resources]in the Amazon Web Services General Reference.
 	//

@@ -26,7 +26,7 @@ import (
 	smithyrand "github.com/aws/smithy-go/rand"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"net"
 	"net/http"
 	"sync/atomic"
@@ -217,7 +217,7 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveAuthSchemeResolver(&options)
 
-	options.Protocol = awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	options.Protocol = rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -884,6 +884,16 @@ func addUserAgentRetryMode(stack *middleware.Stack, options Options) error {
 	case *retry.AdaptiveMode:
 		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureRetryModeAdaptive)
 	}
+	return nil
+}
+
+func addUserAgentFeatureProtocolRPCV2CBOR(stack *middleware.Stack, options Options) error {
+	ua, err := getOrAddRequestUserAgent(stack)
+	if err != nil {
+		return err
+	}
+
+	ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureProtocolRPCV2CBOR)
 	return nil
 }
 

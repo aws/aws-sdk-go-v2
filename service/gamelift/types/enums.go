@@ -290,6 +290,24 @@ func (ContainerFleetStatus) Values() []ContainerFleetStatus {
 	}
 }
 
+type ContainerGroupDefinitionRemoveAttribute string
+
+// Enum values for ContainerGroupDefinitionRemoveAttribute
+const (
+	ContainerGroupDefinitionRemoveAttributeTotalVcpuLimit ContainerGroupDefinitionRemoveAttribute = "TOTAL_VCPU_LIMIT"
+)
+
+// Values returns all known values for ContainerGroupDefinitionRemoveAttribute.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerGroupDefinitionRemoveAttribute) Values() []ContainerGroupDefinitionRemoveAttribute {
+	return []ContainerGroupDefinitionRemoveAttribute{
+		"TOTAL_VCPU_LIMIT",
+	}
+}
+
 type ContainerGroupDefinitionStatus string
 
 // Enum values for ContainerGroupDefinitionStatus

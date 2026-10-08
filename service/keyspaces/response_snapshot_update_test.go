@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -145,7 +145,7 @@ func TestUpdateResponseSnapshot_CreateKeyspace(t *testing.T) {
 	want := &CreateKeyspaceOutput{
 		ResourceArn: ptr.String("__ResourceArn__"),
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateKeyspace, schemas.CreateKeyspaceResponse, schemas.CreateKeyspaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -169,7 +169,7 @@ func TestUpdateResponseSnapshot_CreateTable(t *testing.T) {
 	want := &CreateTableOutput{
 		ResourceArn: ptr.String("__ResourceArn__"),
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateTable, schemas.CreateTableResponse, schemas.CreateTableResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -194,7 +194,7 @@ func TestUpdateResponseSnapshot_CreateType(t *testing.T) {
 		KeyspaceArn: ptr.String("__KeyspaceArn__"),
 		TypeName:    ptr.String("__TypeName__"),
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateType, schemas.CreateTypeResponse, schemas.CreateTypeResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -216,7 +216,7 @@ func TestUpdateResponseSnapshot_CreateType(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteKeyspace(t *testing.T) {
 	want := &DeleteKeyspaceOutput{}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteKeyspace, schemas.DeleteKeyspaceResponse, schemas.DeleteKeyspaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -238,7 +238,7 @@ func TestUpdateResponseSnapshot_DeleteKeyspace(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteTable(t *testing.T) {
 	want := &DeleteTableOutput{}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteTable, schemas.DeleteTableResponse, schemas.DeleteTableResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -263,7 +263,7 @@ func TestUpdateResponseSnapshot_DeleteType(t *testing.T) {
 		KeyspaceArn: ptr.String("__KeyspaceArn__"),
 		TypeName:    ptr.String("__TypeName__"),
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteType, schemas.DeleteTypeResponse, schemas.DeleteTypeResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -305,7 +305,7 @@ func TestUpdateResponseSnapshot_GetKeyspace(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.GetKeyspace, schemas.GetKeyspaceResponse, schemas.GetKeyspaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -437,7 +437,7 @@ func TestUpdateResponseSnapshot_GetTable(t *testing.T) {
 			Status:              types.WarmThroughputStatus("AVAILABLE"),
 		},
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.GetTable, schemas.GetTableResponse, schemas.GetTableResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -555,7 +555,7 @@ func TestUpdateResponseSnapshot_GetTableAutoScalingSettings(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.GetTableAutoScalingSettings, schemas.GetTableAutoScalingSettingsResponse, schemas.GetTableAutoScalingSettingsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -602,7 +602,7 @@ func TestUpdateResponseSnapshot_GetType(t *testing.T) {
 		MaxNestingDepth: 1,
 		KeyspaceArn:     ptr.String("__KeyspaceArn__"),
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.GetType, schemas.GetTypeResponse, schemas.GetTypeResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -646,7 +646,7 @@ func TestUpdateResponseSnapshot_ListKeyspaces(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ListKeyspaces, schemas.ListKeyspacesResponse, schemas.ListKeyspacesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -682,7 +682,7 @@ func TestUpdateResponseSnapshot_ListTables(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ListTables, schemas.ListTablesResponse, schemas.ListTablesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -716,7 +716,7 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceResponse, schemas.ListTagsForResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -744,7 +744,7 @@ func TestUpdateResponseSnapshot_ListTypes(t *testing.T) {
 			"__Member__",
 		},
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ListTypes, schemas.ListTypesResponse, schemas.ListTypesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -768,7 +768,7 @@ func TestUpdateResponseSnapshot_RestoreTable(t *testing.T) {
 	want := &RestoreTableOutput{
 		RestoredTableARN: ptr.String("__RestoredTableARN__"),
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.RestoreTable, schemas.RestoreTableResponse, schemas.RestoreTableResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -790,7 +790,7 @@ func TestUpdateResponseSnapshot_RestoreTable(t *testing.T) {
 
 func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceResponse, schemas.TagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -812,7 +812,7 @@ func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 	want := &UntagResourceOutput{}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceResponse, schemas.UntagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -836,7 +836,7 @@ func TestUpdateResponseSnapshot_UpdateKeyspace(t *testing.T) {
 	want := &UpdateKeyspaceOutput{
 		ResourceArn: ptr.String("__ResourceArn__"),
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateKeyspace, schemas.UpdateKeyspaceResponse, schemas.UpdateKeyspaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -860,7 +860,7 @@ func TestUpdateResponseSnapshot_UpdateTable(t *testing.T) {
 	want := &UpdateTableOutput{
 		ResourceArn: ptr.String("__ResourceArn__"),
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateTable, schemas.UpdateTableResponse, schemas.UpdateTableResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -884,7 +884,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateKeyspace, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -899,7 +899,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("AccessDeniedException.error", 403, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -909,7 +909,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateKeyspace, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -924,7 +924,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ConflictException.error", 409, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -934,7 +934,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 	want := &types.InternalServerException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateKeyspace, schemas.InternalServerException, schemas.InternalServerException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -949,7 +949,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InternalServerException.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -960,7 +960,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		Message:     ptr.String("__Message__"),
 		ResourceArn: ptr.String("__ResourceArn__"),
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateTable, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -975,7 +975,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -985,7 +985,7 @@ func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T
 	want := &types.ServiceQuotaExceededException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateKeyspace, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1000,7 +1000,7 @@ func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ServiceQuotaExceededException.error", 402, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1010,7 +1010,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 	want := &types.ValidationException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.KeyspacesService)
+	proto := rpcv2.NewCBOR(schemas.KeyspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateKeyspace, schemas.ValidationException, schemas.ValidationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1025,7 +1025,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ValidationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

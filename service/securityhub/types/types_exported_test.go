@@ -125,6 +125,60 @@ func ExampleCspmProviderUpdateConfiguration_outputUsage() {
 
 var _ *types.AzureUpdateConfiguration
 
+func ExampleExportDestination_outputUsage() {
+	var union types.ExportDestination
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ExportDestinationMemberS3:
+		_ = v.Value // Value is types.S3ExportDestination
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3ExportDestination
+
+func ExampleExportOutput_outputUsage() {
+	var union types.ExportOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ExportOutputMemberFindings:
+		_ = v.Value // Value is types.FindingsOutput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.FindingsOutput
+
+func ExampleExportOutputSummary_outputUsage() {
+	var union types.ExportOutputSummary
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ExportOutputSummaryMemberFindings:
+		_ = v.Value // Value is types.FindingsOutputSummary
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.FindingsOutputSummary
+
 func ExampleParameterValue_outputUsage() {
 	var union types.ParameterValue
 	// type switches can be used to check the union value

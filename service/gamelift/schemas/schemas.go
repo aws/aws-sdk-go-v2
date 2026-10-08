@@ -1152,6 +1152,18 @@ var _ContainerGroupDefinitionNameOrArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ContainerGroupDefinitionNameOrArn",
 }, smithy.ShapeTypeString, 0)
 
+var ContainerGroupDefinitionRemoveAttribute = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.gamelift",
+	Name:      "ContainerGroupDefinitionRemoveAttribute",
+}, smithy.ShapeTypeEnum, 1)
+var ContainerGroupDefinitionRemoveAttribute_TOTAL_VCPU_LIMIT *smithy.Schema
+
+var _ContainerGroupDefinitionRemoveAttributeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.gamelift",
+	Name:      "ContainerGroupDefinitionRemoveAttributeList",
+}, smithy.ShapeTypeList, 1)
+var _ContainerGroupDefinitionRemoveAttributeList_member *smithy.Schema
+
 var ContainerGroupDefinitionStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "ContainerGroupDefinitionStatus",
@@ -3013,7 +3025,7 @@ var _GameServerConnectionInfo = smithy.NewSchema(smithy.ShapeID{
 var GameServerContainerDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "GameServerContainerDefinition",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var GameServerContainerDefinition_ContainerName *smithy.Schema
 
 var GameServerContainerDefinition_DependsOn *smithy.Schema
@@ -3032,10 +3044,12 @@ var GameServerContainerDefinition_ServerSdkVersion *smithy.Schema
 
 var GameServerContainerDefinition_LinuxCapabilities *smithy.Schema
 
+var GameServerContainerDefinition_Vcpu *smithy.Schema
+
 var GameServerContainerDefinitionInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "GameServerContainerDefinitionInput",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var GameServerContainerDefinitionInput_ContainerName *smithy.Schema
 
 var GameServerContainerDefinitionInput_DependsOn *smithy.Schema
@@ -3051,6 +3065,8 @@ var GameServerContainerDefinitionInput_PortConfiguration *smithy.Schema
 var GameServerContainerDefinitionInput_ServerSdkVersion *smithy.Schema
 
 var GameServerContainerDefinitionInput_LinuxCapabilities *smithy.Schema
+
+var GameServerContainerDefinitionInput_Vcpu *smithy.Schema
 
 var GameServerContainerGroupCounts = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -7226,7 +7242,7 @@ var UpdateContainerFleetOutput_ContainerFleet *smithy.Schema
 var UpdateContainerGroupDefinitionInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "UpdateContainerGroupDefinitionInput",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var UpdateContainerGroupDefinitionInput_Name *smithy.Schema
 
 var UpdateContainerGroupDefinitionInput_GameServerContainerDefinition *smithy.Schema
@@ -7242,6 +7258,8 @@ var UpdateContainerGroupDefinitionInput_VersionDescription *smithy.Schema
 var UpdateContainerGroupDefinitionInput_SourceVersionNumber *smithy.Schema
 
 var UpdateContainerGroupDefinitionInput_OperatingSystem *smithy.Schema
+
+var UpdateContainerGroupDefinitionInput_RemoveAttributes *smithy.Schema
 
 var UpdateContainerGroupDefinitionOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -9018,6 +9036,8 @@ func init() {
 
 	GameServerContainerDefinition_LinuxCapabilities = GameServerContainerDefinition.AddMember("LinuxCapabilities", LinuxCapabilities)
 
+	GameServerContainerDefinition_Vcpu = GameServerContainerDefinition.AddMember("Vcpu", _ContainerVcpu)
+
 	ContainerHealthCheck_Command = ContainerHealthCheck.AddMember("Command", _ContainerCommandStringList)
 
 	ContainerHealthCheck_Interval = ContainerHealthCheck.AddMember("Interval", _ContainerHealthCheckInterval)
@@ -9087,6 +9107,10 @@ func init() {
 	ContainerGroupDefinition_StatusReason = ContainerGroupDefinition.AddMember("StatusReason", _NonZeroAndMaxString)
 
 	_ContainerGroupDefinitionList_member = _ContainerGroupDefinitionList.AddMember("member", ContainerGroupDefinition)
+
+	ContainerGroupDefinitionRemoveAttribute_TOTAL_VCPU_LIMIT = ContainerGroupDefinitionRemoveAttribute.AddMember("TOTAL_VCPU_LIMIT", smithyprelude.Unit)
+
+	_ContainerGroupDefinitionRemoveAttributeList_member = _ContainerGroupDefinitionRemoveAttributeList.AddMember("member", ContainerGroupDefinitionRemoveAttribute)
 
 	ContainerPortMapping_ContainerPort = ContainerPortMapping.AddMember("ContainerPort", _PortNumber)
 
@@ -9531,6 +9555,8 @@ func init() {
 	GameServerContainerDefinitionInput_ServerSdkVersion = GameServerContainerDefinitionInput.AddMember("ServerSdkVersion", _ServerSdkVersion)
 
 	GameServerContainerDefinitionInput_LinuxCapabilities = GameServerContainerDefinitionInput.AddMember("LinuxCapabilities", LinuxCapabilities)
+
+	GameServerContainerDefinitionInput_Vcpu = GameServerContainerDefinitionInput.AddMember("Vcpu", _ContainerVcpu)
 
 	GameServerGroupInstanceType_c4_large = GameServerGroupInstanceType.AddMember("c4_large", smithyprelude.Unit)
 
@@ -11593,6 +11619,8 @@ func init() {
 	UpdateContainerGroupDefinitionInput_SourceVersionNumber = UpdateContainerGroupDefinitionInput.AddMember("SourceVersionNumber", _PositiveInteger)
 
 	UpdateContainerGroupDefinitionInput_OperatingSystem = UpdateContainerGroupDefinitionInput.AddMember("OperatingSystem", ContainerOperatingSystem)
+
+	UpdateContainerGroupDefinitionInput_RemoveAttributes = UpdateContainerGroupDefinitionInput.AddMember("RemoveAttributes", _ContainerGroupDefinitionRemoveAttributeList)
 
 	UpdateContainerGroupDefinitionOutput_ContainerGroupDefinition = UpdateContainerGroupDefinitionOutput.AddMember("ContainerGroupDefinition", ContainerGroupDefinition)
 

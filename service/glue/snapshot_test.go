@@ -2114,6 +2114,30 @@ func TestCheckSnapshot_GetStatement(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetSystemLogsForJobRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSystemLogsForJobRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSystemLogsForJobRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetSystemLogsForSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSystemLogsForSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSystemLogsForSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTable(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTable(context.Background(), nil, func(o *Options) {
@@ -5706,6 +5730,30 @@ func TestUpdateSnapshot_GetStatement(t *testing.T) {
 	_, err := svc.GetStatement(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetStatement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetSystemLogsForJobRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSystemLogsForJobRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSystemLogsForJobRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetSystemLogsForSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSystemLogsForSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSystemLogsForSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -7,10 +7,10 @@ package marketplaceagreement
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -186,25 +186,12 @@ func serdeBodyEqual(got, expected []byte) bool {
 	if len(got) == 0 || len(expected) == 0 {
 		return bytes.Equal(got, expected)
 	}
-	gv, gok := serdeDecodeJSON(got)
-	ev, eok := serdeDecodeJSON(expected)
-	if !gok || !eok {
+	gv, gerr := smithycbor.Decode(got)
+	ev, eerr := smithycbor.Decode(expected)
+	if gerr != nil || eerr != nil {
 		return bytes.Equal(got, expected)
 	}
 	return reflect.DeepEqual(gv, ev)
-}
-
-// serdeDecodeJSON decodes a body for structural comparison. Numbers are kept as
-// json.Number rather than float64 so a large int64 doesn't lose precision (which would
-// mask a real difference) and so numeric formatting differences still show up.
-func serdeDecodeJSON(b []byte) (any, bool) {
-	d := json.NewDecoder(bytes.NewReader(b))
-	d.UseNumber()
-	var v any
-	if err := d.Decode(&v); err != nil {
-		return nil, false
-	}
-	return v, true
 }
 func TestCheckRequestSnapshot_AcceptAgreementCancellationRequest(t *testing.T) {
 	input := &AcceptAgreementCancellationRequestInput{

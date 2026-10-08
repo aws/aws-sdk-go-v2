@@ -1356,6 +1356,10 @@ type Finding struct {
 	// vulnerability.
 	Reasoning *string
 
+	// The suggested fix for the finding, describing the changes recommended to
+	// remediate the vulnerability, with example code or configuration.
+	RemediationCode *string
+
 	// The list of pentest job identifiers for revalidation jobs that retested this
 	// finding.
 	RevalidationJobIds []string

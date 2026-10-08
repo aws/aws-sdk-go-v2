@@ -1,5 +1,6 @@
 409
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShineFrontendService_20170701.CreateParallelData
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"ConflictException","Message":"__Message__"}
+¿f__typeqConflictExceptiongMessagek__Message__ÿ

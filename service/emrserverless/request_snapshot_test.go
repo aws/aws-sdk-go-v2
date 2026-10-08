@@ -498,9 +498,10 @@ func TestCheckRequestSnapshot_GetJobRun(t *testing.T) {
 
 func TestCheckRequestSnapshot_GetResourceDashboard(t *testing.T) {
 	input := &GetResourceDashboardInput{
-		ApplicationId: ptr.String("__ApplicationId__"),
-		ResourceId:    ptr.String("__ResourceId__"),
-		ResourceType:  types.ResourceType("SESSION"),
+		ApplicationId:           ptr.String("__ApplicationId__"),
+		ResourceId:              ptr.String("__ResourceId__"),
+		ResourceType:            types.ResourceType("SESSION"),
+		AccessSystemProfileLogs: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1488,9 +1489,10 @@ func TestUpdateRequestSnapshot_GetJobRun(t *testing.T) {
 
 func TestUpdateRequestSnapshot_GetResourceDashboard(t *testing.T) {
 	input := &GetResourceDashboardInput{
-		ApplicationId: ptr.String("__ApplicationId__"),
-		ResourceId:    ptr.String("__ResourceId__"),
-		ResourceType:  types.ResourceType("SESSION"),
+		ApplicationId:           ptr.String("__ApplicationId__"),
+		ResourceId:              ptr.String("__ResourceId__"),
+		ResourceType:            types.ResourceType("SESSION"),
+		AccessSystemProfileLogs: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

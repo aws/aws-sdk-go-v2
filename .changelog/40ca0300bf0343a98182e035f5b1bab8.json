@@ -1,0 +1,8 @@
+{
+    "id": "40ca0300-bf03-43a9-8182-e035f5b1bab8",
+    "type": "documentation",
+    "description": "SESV2 DEED - Documentation Update",
+    "modules": [
+        "service/sesv2"
+    ]
+}

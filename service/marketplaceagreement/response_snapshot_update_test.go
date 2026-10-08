@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -151,7 +151,7 @@ func TestUpdateResponseSnapshot_AcceptAgreementCancellationRequest(t *testing.T)
 		CreatedAt:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptAgreementCancellationRequest, schemas.AcceptAgreementCancellationRequestOutput, schemas.AcceptAgreementCancellationRequestOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -183,7 +183,7 @@ func TestUpdateResponseSnapshot_AcceptAgreementPaymentRequest(t *testing.T) {
 		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptAgreementPaymentRequest, schemas.AcceptAgreementPaymentRequestOutput, schemas.AcceptAgreementPaymentRequestOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -207,7 +207,7 @@ func TestUpdateResponseSnapshot_AcceptAgreementRequest(t *testing.T) {
 	want := &AcceptAgreementRequestOutput{
 		AgreementId: ptr.String("__AgreementId__"),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptAgreementRequest, schemas.AcceptAgreementRequestOutput, schemas.AcceptAgreementRequestOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -252,7 +252,7 @@ func TestUpdateResponseSnapshot_BatchCreateBillingAdjustmentRequest(t *testing.T
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.BatchCreateBillingAdjustmentRequest, schemas.BatchCreateBillingAdjustmentRequestOutput, schemas.BatchCreateBillingAdjustmentRequestOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -274,7 +274,7 @@ func TestUpdateResponseSnapshot_BatchCreateBillingAdjustmentRequest(t *testing.T
 
 func TestUpdateResponseSnapshot_CancelAgreement(t *testing.T) {
 	want := &CancelAgreementOutput{}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.CancelAgreement, schemas.CancelAgreementOutput, schemas.CancelAgreementOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -305,7 +305,7 @@ func TestUpdateResponseSnapshot_CancelAgreementCancellationRequest(t *testing.T)
 		CreatedAt:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.CancelAgreementCancellationRequest, schemas.CancelAgreementCancellationRequestOutput, schemas.CancelAgreementCancellationRequestOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -337,7 +337,7 @@ func TestUpdateResponseSnapshot_CancelAgreementPaymentRequest(t *testing.T) {
 		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.CancelAgreementPaymentRequest, schemas.CancelAgreementPaymentRequestOutput, schemas.CancelAgreementPaymentRequestOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -447,7 +447,7 @@ func TestUpdateResponseSnapshot_CreateAgreementRequest(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.CreateAgreementRequest, schemas.CreateAgreementRequestOutput, schemas.CreateAgreementRequestOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -508,7 +508,7 @@ func TestUpdateResponseSnapshot_DescribeAgreement(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeAgreement, schemas.DescribeAgreementOutput, schemas.DescribeAgreementOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -539,7 +539,7 @@ func TestUpdateResponseSnapshot_GetAgreementCancellationRequest(t *testing.T) {
 		CreatedAt:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.GetAgreementCancellationRequest, schemas.GetAgreementCancellationRequestOutput, schemas.GetAgreementCancellationRequestOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -587,7 +587,7 @@ func TestUpdateResponseSnapshot_GetAgreementEntitlements(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.GetAgreementEntitlements, schemas.GetAgreementEntitlementsOutput, schemas.GetAgreementEntitlementsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -621,7 +621,7 @@ func TestUpdateResponseSnapshot_GetAgreementPaymentRequest(t *testing.T) {
 		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.GetAgreementPaymentRequest, schemas.GetAgreementPaymentRequestOutput, schemas.GetAgreementPaymentRequestOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -683,7 +683,7 @@ func TestUpdateResponseSnapshot_GetAgreementTerms(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.GetAgreementTerms, schemas.GetAgreementTermsOutput, schemas.GetAgreementTermsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -717,7 +717,7 @@ func TestUpdateResponseSnapshot_GetBillingAdjustmentRequest(t *testing.T) {
 		CreatedAt:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.GetBillingAdjustmentRequest, schemas.GetBillingAdjustmentRequestOutput, schemas.GetBillingAdjustmentRequestOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -763,7 +763,7 @@ func TestUpdateResponseSnapshot_ListAgreementCancellationRequests(t *testing.T) 
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.ListAgreementCancellationRequests, schemas.ListAgreementCancellationRequestsOutput, schemas.ListAgreementCancellationRequestsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -809,7 +809,7 @@ func TestUpdateResponseSnapshot_ListAgreementCharges(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.ListAgreementCharges, schemas.ListAgreementChargesOutput, schemas.ListAgreementChargesOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -873,7 +873,7 @@ func TestUpdateResponseSnapshot_ListAgreementInvoiceLineItems(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.ListAgreementInvoiceLineItems, schemas.ListAgreementInvoiceLineItemsOutput, schemas.ListAgreementInvoiceLineItemsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -921,7 +921,7 @@ func TestUpdateResponseSnapshot_ListAgreementPaymentRequests(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.ListAgreementPaymentRequests, schemas.ListAgreementPaymentRequestsOutput, schemas.ListAgreementPaymentRequestsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -971,7 +971,7 @@ func TestUpdateResponseSnapshot_ListBillingAdjustmentRequests(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.ListBillingAdjustmentRequests, schemas.ListBillingAdjustmentRequestsOutput, schemas.ListBillingAdjustmentRequestsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1002,7 +1002,7 @@ func TestUpdateResponseSnapshot_RejectAgreementCancellationRequest(t *testing.T)
 		CreatedAt:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.RejectAgreementCancellationRequest, schemas.RejectAgreementCancellationRequestOutput, schemas.RejectAgreementCancellationRequestOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1035,7 +1035,7 @@ func TestUpdateResponseSnapshot_RejectAgreementPaymentRequest(t *testing.T) {
 		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.RejectAgreementPaymentRequest, schemas.RejectAgreementPaymentRequestOutput, schemas.RejectAgreementPaymentRequestOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1141,7 +1141,7 @@ func TestUpdateResponseSnapshot_SearchAgreements(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.SearchAgreements, schemas.SearchAgreementsOutput, schemas.SearchAgreementsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1171,7 +1171,7 @@ func TestUpdateResponseSnapshot_SendAgreementCancellationRequest(t *testing.T) {
 		CreatedAt:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.SendAgreementCancellationRequest, schemas.SendAgreementCancellationRequestOutput, schemas.SendAgreementCancellationRequestOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1202,7 +1202,7 @@ func TestUpdateResponseSnapshot_SendAgreementPaymentRequest(t *testing.T) {
 		CurrencyCode:     ptr.String("__CurrencyCode__"),
 		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.SendAgreementPaymentRequest, schemas.SendAgreementPaymentRequestOutput, schemas.SendAgreementPaymentRequestOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1224,7 +1224,7 @@ func TestUpdateResponseSnapshot_SendAgreementPaymentRequest(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdatePurchaseOrders(t *testing.T) {
 	want := &UpdatePurchaseOrdersOutput{}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.UpdatePurchaseOrders, schemas.UpdatePurchaseOrdersOutput, schemas.UpdatePurchaseOrdersOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1250,7 +1250,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		Message:   ptr.String("__Message__"),
 		Reason:    types.AccessDeniedExceptionReason("INVALID_ACCOUNT_STATE"),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptAgreementCancellationRequest, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1265,7 +1265,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("AccessDeniedException.error", 403, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1278,7 +1278,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		ResourceId:   ptr.String("__ResourceId__"),
 		ResourceType: types.ResourceType("Agreement"),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptAgreementCancellationRequest, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1293,7 +1293,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ConflictException.error", 409, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1304,7 +1304,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		RequestId: ptr.String("__RequestId__"),
 		Message:   ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptAgreementCancellationRequest, schemas.InternalServerException, schemas.InternalServerException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1319,7 +1319,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InternalServerException.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1332,7 +1332,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		ResourceId:   ptr.String("__ResourceId__"),
 		ResourceType: types.ResourceType("Agreement"),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptAgreementCancellationRequest, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1347,7 +1347,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1362,7 +1362,7 @@ func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T
 		ResourceType: ptr.String("__ResourceType__"),
 		ResourceId:   ptr.String("__ResourceId__"),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.CreateAgreementRequest, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1377,7 +1377,7 @@ func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ServiceQuotaExceededException.error", 402, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1388,7 +1388,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		RequestId: ptr.String("__RequestId__"),
 		Message:   ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptAgreementCancellationRequest, schemas.ThrottlingException, schemas.ThrottlingException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1403,7 +1403,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ThrottlingException.error", 429, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1425,7 +1425,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.AWSMPCommerceService_v20200301)
+	proto := rpcv2.NewCBOR(schemas.AWSMPCommerceService_v20200301)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptAgreementCancellationRequest, schemas.ValidationException, schemas.ValidationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1440,7 +1440,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ValidationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

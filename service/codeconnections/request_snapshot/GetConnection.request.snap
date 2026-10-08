@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeConnections_20231201/operation/GetConnection
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.GetConnection
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ConnectionArn":"__ConnectionArn__"}
+¿mConnectionArnq__ConnectionArn__ÿ

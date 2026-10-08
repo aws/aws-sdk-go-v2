@@ -35354,6 +35354,15 @@ func awsRestjson1_deserializeOpDocumentStartNotebookImportOutput(v **StartNotebo
 				sv.Status = types.NotebookStatus(jtv)
 			}
 
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NotebookType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.NotebookType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -61578,6 +61587,125 @@ func awsRestjson1_deserializeDocumentS3Destination(v **types.S3Destination, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentS3File(v **types.S3File, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3File
+	if *v == nil {
+		sv = &types.S3File{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3ObjectKey to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3FileList(v *[]types.S3File, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.S3File
+	if *v == nil {
+		cv = []types.S3File{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.S3File
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentS3File(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3FilesLocation(v **types.S3FilesLocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3FilesLocation
+	if *v == nil {
+		sv = &types.S3FilesLocation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3BucketName to be of type string, got %T instead", value)
+				}
+				sv.Bucket = ptr.String(jtv)
+			}
+
+		case "fileList":
+			if err := awsRestjson1_deserializeDocumentS3FileList(&sv.FileList, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentS3LocationList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -62524,6 +62652,16 @@ loop:
 				mv = jtv
 			}
 			uv = &types.SourceLocationMemberS3{Value: mv}
+			break loop
+
+		case "s3Files":
+			var mv types.S3FilesLocation
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3FilesLocation(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SourceLocationMemberS3Files{Value: mv}
 			break loop
 
 		default:

@@ -1,6 +1,7 @@
-POST /
+POST /service/KeyspacesService/operation/ListTagsForResource
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: KeyspacesService.ListTagsForResource
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"maxResults":1,"nextToken":"__NextToken__","resourceArn":"__ResourceArn__"}
+¿jmaxResultsinextTokenm__NextToken__kresourceArno__ResourceArn__ÿ

@@ -377,6 +377,7 @@ const (
 	DimensionInvoicingEntity              Dimension = "INVOICING_ENTITY"
 	DimensionAnomalyTotalImpactAbsolute   Dimension = "ANOMALY_TOTAL_IMPACT_ABSOLUTE"
 	DimensionAnomalyTotalImpactPercentage Dimension = "ANOMALY_TOTAL_IMPACT_PERCENTAGE"
+	DimensionProductAttribute             Dimension = "PRODUCT_ATTRIBUTE"
 )
 
 // Values returns all known values for Dimension. Note that this can be expanded
@@ -420,6 +421,7 @@ func (Dimension) Values() []Dimension {
 		"INVOICING_ENTITY",
 		"ANOMALY_TOTAL_IMPACT_ABSOLUTE",
 		"ANOMALY_TOTAL_IMPACT_PERCENTAGE",
+		"PRODUCT_ATTRIBUTE",
 	}
 }
 
@@ -541,9 +543,10 @@ type GroupDefinitionType string
 
 // Enum values for GroupDefinitionType
 const (
-	GroupDefinitionTypeDimension    GroupDefinitionType = "DIMENSION"
-	GroupDefinitionTypeTag          GroupDefinitionType = "TAG"
-	GroupDefinitionTypeCostCategory GroupDefinitionType = "COST_CATEGORY"
+	GroupDefinitionTypeDimension        GroupDefinitionType = "DIMENSION"
+	GroupDefinitionTypeTag              GroupDefinitionType = "TAG"
+	GroupDefinitionTypeCostCategory     GroupDefinitionType = "COST_CATEGORY"
+	GroupDefinitionTypeProductAttribute GroupDefinitionType = "PRODUCT_ATTRIBUTE"
 )
 
 // Values returns all known values for GroupDefinitionType. Note that this can be
@@ -555,6 +558,7 @@ func (GroupDefinitionType) Values() []GroupDefinitionType {
 		"DIMENSION",
 		"TAG",
 		"COST_CATEGORY",
+		"PRODUCT_ATTRIBUTE",
 	}
 }
 

@@ -642,7 +642,7 @@ var ExpiredNextTokenException_Message *smithy.Schema
 var Expression = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
 	Name:      "Expression",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var Expression_Or *smithy.Schema
 
 var Expression_And *smithy.Schema
@@ -654,6 +654,8 @@ var Expression_Dimensions *smithy.Schema
 var Expression_Tags *smithy.Schema
 
 var Expression_CostCategories *smithy.Schema
+
+var Expression_ProductAttributes *smithy.Schema
 
 var ExpressionDimensionValues = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
@@ -930,6 +932,21 @@ var _PolicyId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
 	Name:      "PolicyId",
 }, smithy.ShapeTypeString, 0)
+
+var _ProductAttributeName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.budgets",
+	Name:      "ProductAttributeName",
+}, smithy.ShapeTypeString, 0)
+
+var ProductAttributeValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.budgets",
+	Name:      "ProductAttributeValues",
+}, smithy.ShapeTypeStructure, 3)
+var ProductAttributeValues_Key *smithy.Schema
+
+var ProductAttributeValues_Values *smithy.Schema
+
+var ProductAttributeValues_MatchOptions *smithy.Schema
 
 var _Region = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.budgets",
@@ -1963,6 +1980,12 @@ func init() {
 
 	CostCategoryValues_MatchOptions = CostCategoryValues.AddMember("MatchOptions", _MatchOptions)
 
+	ProductAttributeValues_Key = ProductAttributeValues.AddMember("Key", _ProductAttributeName)
+
+	ProductAttributeValues_Values = ProductAttributeValues.AddMember("Values", _Values)
+
+	ProductAttributeValues_MatchOptions = ProductAttributeValues.AddMember("MatchOptions", _MatchOptions)
+
 	Expression_Or = Expression.AddMember("Or", _Expressions)
 
 	Expression_And = Expression.AddMember("And", _Expressions)
@@ -1974,6 +1997,8 @@ func init() {
 	Expression_Tags = Expression.AddMember("Tags", TagValues)
 
 	Expression_CostCategories = Expression.AddMember("CostCategories", CostCategoryValues)
+
+	Expression_ProductAttributes = Expression.AddMember("ProductAttributes", ProductAttributeValues)
 
 	Metric_BLENDED_COST = Metric.AddMember("BLENDED_COST", smithyprelude.Unit)
 

@@ -261,6 +261,102 @@ func (v *AccessScope) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Configuration settings for an ACK (Amazon Web Services Controllers for
+// Kubernetes) capability. This includes whether controllers can resolve
+// cross-namespace resource references and which ACK service controllers are
+// disabled.
+type AckConfigRequest struct {
+
+	// A list of ACK service names whose controllers are turned off for this
+	// capability, for example s3 , ec2 , and iam . Resources of a disabled service
+	// aren't reconciled until you re-enable the service. To keep all services enabled,
+	// omit this field or specify an empty list. An unrecognized service name is
+	// accepted and stored but turns nothing off, and DescribeCapability returns the
+	// list exactly as you supplied it. For more information, see [ACK capability configuration options]in the Amazon EKS
+	// User Guide.
+	//
+	// [ACK capability configuration options]: https://docs.aws.amazon.com/eks/latest/userguide/create-ack-capability.html#ack-configuration-options
+	DisabledServices []string
+
+	// Specifies whether ACK controllers resolve resource references to resources in a
+	// different Kubernetes namespace. Set this value to true to allow references to
+	// resolve to resources in another namespace. If you don't specify this value, or
+	// you omit the ack configuration entirely, the capability is created with this
+	// value set to false and references must remain within the same namespace.
+	EnableCrossNamespace *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *AckConfigRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AckConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AckConfigRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAckDisabledServicesList(s, schemas.AckConfigRequest_disabledServices, v.DisabledServices)
+	if v.EnableCrossNamespace != nil {
+		s.WriteBool(schemas.AckConfigRequest_enableCrossNamespace, *v.EnableCrossNamespace)
+	}
+}
+func (v *AckConfigRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AckConfigRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AckConfigRequest_disabledServices:
+			return deserializeAckDisabledServicesList(d, schemas.AckConfigRequest_disabledServices, &v.DisabledServices)
+		case schemas.AckConfigRequest_enableCrossNamespace:
+			v.EnableCrossNamespace = new(bool)
+			return d.ReadBool(schemas.AckConfigRequest_enableCrossNamespace, v.EnableCrossNamespace)
+		}
+		return nil
+	})
+}
+
+// The response object containing configuration details for an ACK (Amazon Web
+// Services Controllers for Kubernetes) capability.
+type AckConfigResponse struct {
+
+	// The list of ACK service names whose controllers are turned off for this
+	// capability. Existing custom resource definitions remain installed, and resources
+	// of a disabled service aren't reconciled until the service is re-enabled.
+	DisabledServices []string
+
+	// Indicates whether ACK controllers resolve resource references to resources in a
+	// different Kubernetes namespace. This value reflects the setting that's in
+	// effect, and is false if you never specified a value. Capabilities that were
+	// using cross-namespace references before this setting became available have this
+	// value set to true , so their behavior is unchanged.
+	EnableCrossNamespace *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *AckConfigResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AckConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AckConfigResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAckDisabledServicesList(s, schemas.AckConfigResponse_disabledServices, v.DisabledServices)
+	if v.EnableCrossNamespace != nil {
+		s.WriteBool(schemas.AckConfigResponse_enableCrossNamespace, *v.EnableCrossNamespace)
+	}
+}
+func (v *AckConfigResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AckConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AckConfigResponse_disabledServices:
+			return deserializeAckDisabledServicesList(d, schemas.AckConfigResponse_disabledServices, &v.DisabledServices)
+		case schemas.AckConfigResponse_enableCrossNamespace:
+			v.EnableCrossNamespace = new(bool)
+			return d.ReadBool(schemas.AckConfigResponse_enableCrossNamespace, v.EnableCrossNamespace)
+		}
+		return nil
+	})
+}
+
 // Identifies the certificate authority that is currently signing certificates for
 // the cluster.
 type ActiveCertificateAuthority struct {
@@ -1703,6 +1799,11 @@ func (v *Capability) Deserialize(d smithy.ShapeDeserializer) error {
 // depending on the capability type.
 type CapabilityConfigurationRequest struct {
 
+	// Configuration settings specific to ACK (Amazon Web Services Controllers for
+	// Kubernetes) capabilities. This field is only used when creating or updating an
+	// ACK capability.
+	Ack *AckConfigRequest
+
 	// Configuration settings specific to Argo CD capabilities. This field is only
 	// used when creating or updating an Argo CD capability.
 	ArgoCd *ArgoCdConfigRequest
@@ -1717,6 +1818,11 @@ func (v *CapabilityConfigurationRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CapabilityConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ack != nil {
+		s.WriteStruct(schemas.CapabilityConfigurationRequest_ack)
+		v.Ack.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ArgoCd != nil {
 		s.WriteStruct(schemas.CapabilityConfigurationRequest_argoCd)
 		v.ArgoCd.SerializeMembers(s)
@@ -1726,6 +1832,9 @@ func (v *CapabilityConfigurationRequest) SerializeMembers(s smithy.ShapeSerializ
 func (v *CapabilityConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CapabilityConfigurationRequest, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.CapabilityConfigurationRequest_ack:
+			v.Ack = &AckConfigRequest{}
+			return v.Ack.Deserialize(d)
 		case schemas.CapabilityConfigurationRequest_argoCd:
 			v.ArgoCd = &ArgoCdConfigRequest{}
 			return v.ArgoCd.Deserialize(d)
@@ -1736,6 +1845,11 @@ func (v *CapabilityConfigurationRequest) Deserialize(d smithy.ShapeDeserializer)
 
 // The response object containing capability configuration details.
 type CapabilityConfigurationResponse struct {
+
+	// Configuration settings for an ACK (Amazon Web Services Controllers for
+	// Kubernetes) capability, including the cross-namespace reference setting and the
+	// list of disabled services.
+	Ack *AckConfigResponse
 
 	// Configuration settings for an Argo CD capability, including the server URL and
 	// other Argo CD-specific settings.
@@ -1751,6 +1865,11 @@ func (v *CapabilityConfigurationResponse) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CapabilityConfigurationResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ack != nil {
+		s.WriteStruct(schemas.CapabilityConfigurationResponse_ack)
+		v.Ack.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ArgoCd != nil {
 		s.WriteStruct(schemas.CapabilityConfigurationResponse_argoCd)
 		v.ArgoCd.SerializeMembers(s)
@@ -1760,6 +1879,9 @@ func (v *CapabilityConfigurationResponse) SerializeMembers(s smithy.ShapeSeriali
 func (v *CapabilityConfigurationResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CapabilityConfigurationResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.CapabilityConfigurationResponse_ack:
+			v.Ack = &AckConfigResponse{}
+			return v.Ack.Deserialize(d)
 		case schemas.CapabilityConfigurationResponse_argoCd:
 			v.ArgoCd = &ArgoCdConfigResponse{}
 			return v.ArgoCd.Deserialize(d)
@@ -8618,6 +8740,52 @@ func (v *UpdateAccessConfigRequest) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// Configuration updates for an ACK (Amazon Web Services Controllers for
+// Kubernetes) capability. You only need to specify the fields that you want to
+// update.
+type UpdateAckConfig struct {
+
+	// An updated list of ACK service names whose controllers are turned off for this
+	// capability. This list replaces the previous list instead of merging with it, so
+	// specify the complete set of services that you want turned off. If you omit this
+	// field, the previous list is unchanged. To turn all services back on, specify an
+	// empty list.
+	DisabledServices []string
+
+	// Specifies whether ACK controllers resolve resource references to resources in a
+	// different Kubernetes namespace. Set this value to false to require references
+	// to remain within the same namespace, or true to allow cross-namespace
+	// references. If you omit this field, the current value is unchanged.
+	EnableCrossNamespace *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateAckConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAckConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAckConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAckDisabledServicesList(s, schemas.UpdateAckConfig_disabledServices, v.DisabledServices)
+	if v.EnableCrossNamespace != nil {
+		s.WriteBool(schemas.UpdateAckConfig_enableCrossNamespace, *v.EnableCrossNamespace)
+	}
+}
+func (v *UpdateAckConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAckConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAckConfig_disabledServices:
+			return deserializeAckDisabledServicesList(d, schemas.UpdateAckConfig_disabledServices, &v.DisabledServices)
+		case schemas.UpdateAckConfig_enableCrossNamespace:
+			v.EnableCrossNamespace = new(bool)
+			return d.ReadBool(schemas.UpdateAckConfig_enableCrossNamespace, v.EnableCrossNamespace)
+		}
+		return nil
+	})
+}
+
 // Configuration updates for an Argo CD capability. You only need to specify the
 // fields you want to update.
 type UpdateArgoCdConfig struct {
@@ -8670,6 +8838,10 @@ func (v *UpdateArgoCdConfig) Deserialize(d smithy.ShapeDeserializer) error {
 // capability type.
 type UpdateCapabilityConfiguration struct {
 
+	// Configuration updates specific to ACK (Amazon Web Services Controllers for
+	// Kubernetes) capabilities.
+	Ack *UpdateAckConfig
+
 	// Configuration updates specific to Argo CD capabilities.
 	ArgoCd *UpdateArgoCdConfig
 
@@ -8683,6 +8855,11 @@ func (v *UpdateCapabilityConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateCapabilityConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ack != nil {
+		s.WriteStruct(schemas.UpdateCapabilityConfiguration_ack)
+		v.Ack.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ArgoCd != nil {
 		s.WriteStruct(schemas.UpdateCapabilityConfiguration_argoCd)
 		v.ArgoCd.SerializeMembers(s)
@@ -8692,6 +8869,9 @@ func (v *UpdateCapabilityConfiguration) SerializeMembers(s smithy.ShapeSerialize
 func (v *UpdateCapabilityConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateCapabilityConfiguration, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.UpdateCapabilityConfiguration_ack:
+			v.Ack = &UpdateAckConfig{}
+			return v.Ack.Deserialize(d)
 		case schemas.UpdateCapabilityConfiguration_argoCd:
 			v.ArgoCd = &UpdateArgoCdConfig{}
 			return v.ArgoCd.Deserialize(d)

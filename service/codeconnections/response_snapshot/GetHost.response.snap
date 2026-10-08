@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.GetHost
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Name":"__Name__","ProviderEndpoint":"__ProviderEndpoint__","ProviderType":"Bitbucket","Status":"__Status__","VpcConfiguration":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"],"TlsCertificate":"__TlsCertificate__","VpcId":"__VpcId__"}}
+¿dNameh__Name__pProviderEndpointt__ProviderEndpoint__lProviderTypeiBitbucketfStatusj__Status__pVpcConfiguration¿pSecurityGroupIdsŸj__Member__j__Member__ÿiSubnetIdsŸj__Member__j__Member__ÿnTlsCertificater__TlsCertificate__eVpcIdi__VpcId__ÿÿ

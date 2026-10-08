@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: KeyspacesService.ListKeyspaces
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"keyspaces":[{"keyspaceName":"__KeyspaceName__","replicationRegions":["__Member__","__Member__"],"replicationStrategy":"SINGLE_REGION","resourceArn":"__ResourceArn__"},{"keyspaceName":"__KeyspaceName__","replicationRegions":["__Member__","__Member__"],"replicationStrategy":"SINGLE_REGION","resourceArn":"__ResourceArn__"}],"nextToken":"__NextToken__"}
+¿ikeyspacesŸ¿lkeyspaceNamep__KeyspaceName__rreplicationRegionsŸj__Member__j__Member__ÿsreplicationStrategymSINGLE_REGIONkresourceArno__ResourceArn__ÿ¿lkeyspaceNamep__KeyspaceName__rreplicationRegionsŸj__Member__j__Member__ÿsreplicationStrategymSINGLE_REGIONkresourceArno__ResourceArn__ÿÿinextTokenm__NextToken__ÿ

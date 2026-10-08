@@ -42,8 +42,8 @@ import (
 // can restrict new player access by using [UpdateGameSession]to change the game session's player
 // session creation policy.
 //
-// Amazon GameLift Servers retains logs for active for 14 days. To access the
-// logs, call [GetGameSessionLogUrl]to download the log files.
+// Amazon GameLift Servers retains logs for active game sessions for 14 days. To
+// access the logs, call [GetGameSessionLogUrl]to download the log files.
 //
 // Available in Amazon GameLift Servers Local.
 //
@@ -93,8 +93,8 @@ type CreateGameSessionInput struct {
 	// game session creation requests with the same CreatorId in a specified time
 	// period.
 	//
-	// If you your fleet doesn't have a resource creation limit policy and you provide
-	// a CreatorId in your CreateGameSession requests, Amazon GameLift Servers limits
+	// If your fleet doesn't have a resource creation limit policy and you provide a
+	// CreatorId in your CreateGameSession requests, Amazon GameLift Servers limits
 	// requests to one request per CreatorId per second.
 	//
 	// To not limit CreateGameSession requests with the same CreatorId , don't provide

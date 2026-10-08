@@ -640,6 +640,13 @@ func TestCheckResponseSnapshot_CreateCapability(t *testing.T) {
 					ServerUrl:      ptr.String("__ServerUrl__"),
 					EndpointPrefix: ptr.String("__EndpointPrefix__"),
 				},
+				Ack: &types.AckConfigResponse{
+					EnableCrossNamespace: ptr.Bool(true),
+					DisabledServices: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
@@ -717,6 +724,13 @@ func TestCheckResponseSnapshot_CreateCapability(t *testing.T) {
 					},
 				},
 				EndpointPrefix: ptr.String("__EndpointPrefix__"),
+			},
+			Ack: &types.AckConfigRequest{
+				EnableCrossNamespace: ptr.Bool(true),
+				DisabledServices: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		Tags: map[string]string{
@@ -1804,6 +1818,13 @@ func TestCheckResponseSnapshot_DeleteCapability(t *testing.T) {
 					},
 					ServerUrl:      ptr.String("__ServerUrl__"),
 					EndpointPrefix: ptr.String("__EndpointPrefix__"),
+				},
+				Ack: &types.AckConfigResponse{
+					EnableCrossNamespace: ptr.Bool(true),
+					DisabledServices: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 			},
 			Tags: map[string]string{
@@ -3113,6 +3134,13 @@ func TestCheckResponseSnapshot_DescribeCapability(t *testing.T) {
 					},
 					ServerUrl:      ptr.String("__ServerUrl__"),
 					EndpointPrefix: ptr.String("__EndpointPrefix__"),
+				},
+				Ack: &types.AckConfigResponse{
+					EnableCrossNamespace: ptr.Bool(true),
+					DisabledServices: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 			},
 			Tags: map[string]string{
@@ -5886,6 +5914,13 @@ func TestCheckResponseSnapshot_UpdateCapability(t *testing.T) {
 					},
 				},
 			},
+			Ack: &types.UpdateAckConfig{
+				EnableCrossNamespace: ptr.Bool(true),
+				DisabledServices: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
 		},
 		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
 		DeletePropagationPolicy: types.CapabilityDeletePropagationPolicy("RETAIN"),
@@ -6522,6 +6557,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 					},
 				},
 				EndpointPrefix: ptr.String("__EndpointPrefix__"),
+			},
+			Ack: &types.AckConfigRequest{
+				EnableCrossNamespace: ptr.Bool(true),
+				DisabledServices: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		Tags: map[string]string{

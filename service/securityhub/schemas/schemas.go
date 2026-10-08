@@ -106,6 +106,13 @@ var BatchUpdateStandardsControlAssociations = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/associations",
 	Code: 200})
 
+var CancelExportJobV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "CancelExportJobV2",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/exportjobsv2/{ExportJobId}/cancel",
+	Code: 200})
+
 var CreateActionTarget = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "CreateActionTarget",
@@ -470,6 +477,13 @@ var GetEnabledStandards = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/standards/get",
 	Code: 200})
 
+var GetExportJobV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GetExportJobV2",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/exportjobsv2/{ExportJobId}",
+	Code: 200})
+
 var GetFindingAggregator = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "GetFindingAggregator",
@@ -652,6 +666,13 @@ var ListEnabledProductsForImport = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/productSubscriptions",
 	Code: 200})
 
+var ListExportJobsV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ListExportJobsV2",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/exportjobsv2",
+	Code: 200})
+
 var ListExposuresByRemediationV2 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ListExposuresByRemediationV2",
@@ -735,6 +756,13 @@ var StartConfigurationPolicyDisassociation = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/configurationPolicyAssociation/disassociate",
 	Code: 200})
+
+var StartExportJobV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "StartExportJobV2",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/exportjobsv2",
+	Code: 202})
 
 var TagResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -10058,6 +10086,105 @@ var EnumListConfigurationOptions_MaxItems *smithy.Schema
 
 var EnumListConfigurationOptions_AllowedValues *smithy.Schema
 
+var ExportDataType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExportDataType",
+}, smithy.ShapeTypeEnum, 1)
+var ExportDataType_FINDINGS *smithy.Schema
+
+var ExportDestination = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExportDestination",
+}, smithy.ShapeTypeUnion, 1)
+var ExportDestination_S3 *smithy.Schema
+
+var ExportFailureCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExportFailureCode",
+}, smithy.ShapeTypeEnum, 3)
+var ExportFailureCode_ACCESS_DENIED *smithy.Schema
+
+var ExportFailureCode_RESOURCE_NOT_FOUND *smithy.Schema
+
+var ExportFailureCode_INTERNAL_ERROR *smithy.Schema
+
+var _ExportJobId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExportJobId",
+}, smithy.ShapeTypeString, 0)
+
+var _ExportMaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExportMaxResults",
+}, smithy.ShapeTypeInteger, 0)
+
+var _ExportName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExportName",
+}, smithy.ShapeTypeString, 0)
+
+var ExportOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExportOutput",
+}, smithy.ShapeTypeUnion, 1)
+var ExportOutput_Findings *smithy.Schema
+
+var ExportOutputSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExportOutputSummary",
+}, smithy.ShapeTypeUnion, 1)
+var ExportOutputSummary_Findings *smithy.Schema
+
+var ExportScopes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExportScopes",
+}, smithy.ShapeTypeStructure, 1)
+var ExportScopes_AwsOrganizations *smithy.Schema
+
+var ExportStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExportStatus",
+}, smithy.ShapeTypeEnum, 4)
+var ExportStatus_RUNNING *smithy.Schema
+
+var ExportStatus_SUCCEEDED *smithy.Schema
+
+var ExportStatus_FAILED *smithy.Schema
+
+var ExportStatus_CANCELLED *smithy.Schema
+
+var ExportSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExportSummary",
+}, smithy.ShapeTypeStructure, 11)
+var ExportSummary_ExportJobId *smithy.Schema
+
+var ExportSummary_Name *smithy.Schema
+
+var ExportSummary_Status *smithy.Schema
+
+var ExportSummary_DataType *smithy.Schema
+
+var ExportSummary_OutputConfiguration *smithy.Schema
+
+var ExportSummary_Scopes *smithy.Schema
+
+var ExportSummary_Destination *smithy.Schema
+
+var ExportSummary_FailureCode *smithy.Schema
+
+var ExportSummary_FailureMessage *smithy.Schema
+
+var ExportSummary_StartedAt *smithy.Schema
+
+var ExportSummary_EndedAt *smithy.Schema
+
+var _ExportSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ExportSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _ExportSummaryList_member *smithy.Schema
+
 var ExposureFinding = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ExposureFinding",
@@ -10262,6 +10389,258 @@ var FindingScopes = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FindingScopes",
 }, smithy.ShapeTypeStructure, 1)
 var FindingScopes_AwsOrganizations *smithy.Schema
+
+var FindingsExportFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "FindingsExportFormat",
+}, smithy.ShapeTypeEnum, 2)
+var FindingsExportFormat_CSV *smithy.Schema
+
+var FindingsExportFormat_OCSF_JSON *smithy.Schema
+
+var FindingsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "FindingsOutput",
+}, smithy.ShapeTypeStructure, 3)
+var FindingsOutput_Format *smithy.Schema
+
+var FindingsOutput_Filters *smithy.Schema
+
+var FindingsOutput_SelectedFields *smithy.Schema
+
+var FindingsOutputSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "FindingsOutputSummary",
+}, smithy.ShapeTypeStructure, 1)
+var FindingsOutputSummary_Format *smithy.Schema
+
+var FindingsSelectableField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "FindingsSelectableField",
+}, smithy.ShapeTypeEnum, 109)
+var FindingsSelectableField_METADATA_UID *smithy.Schema
+
+var FindingsSelectableField_ACTIVITY_NAME *smithy.Schema
+
+var FindingsSelectableField_CLOUD_ACCOUNT_NAME *smithy.Schema
+
+var FindingsSelectableField_CLOUD_ACCOUNT_UID *smithy.Schema
+
+var FindingsSelectableField_CLOUD_PROVIDER *smithy.Schema
+
+var FindingsSelectableField_CLOUD_REGION *smithy.Schema
+
+var FindingsSelectableField_COMPLIANCE_ASSESSMENTS_CATEGORY *smithy.Schema
+
+var FindingsSelectableField_COMPLIANCE_ASSESSMENTS_NAME *smithy.Schema
+
+var FindingsSelectableField_COMPLIANCE_CONTROL *smithy.Schema
+
+var FindingsSelectableField_COMPLIANCE_STATUS *smithy.Schema
+
+var FindingsSelectableField_COMPLIANCE_STANDARDS *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_DESC *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_SRC_URL *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_TITLE *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_TYPES *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_UID *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_RELATED_EVENTS_TRAITS_CATEGORY *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_RELATED_EVENTS_UID *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_RELATED_EVENTS_PRODUCT_UID *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_RELATED_EVENTS_TITLE *smithy.Schema
+
+var FindingsSelectableField_METADATA_PRODUCT_FEATURE_UID *smithy.Schema
+
+var FindingsSelectableField_METADATA_PRODUCT_NAME *smithy.Schema
+
+var FindingsSelectableField_METADATA_PRODUCT_UID *smithy.Schema
+
+var FindingsSelectableField_METADATA_PRODUCT_VENDOR_NAME *smithy.Schema
+
+var FindingsSelectableField_REMEDIATION_DESC *smithy.Schema
+
+var FindingsSelectableField_REMEDIATION_REFERENCES *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_CLOUD_PARTITION *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_NAME *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_OWNER_ACCOUNT_UID *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_OWNER_ORG_UID *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_OWNER_ACCOUNT_NAME *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_PROVIDER *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_REGION *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_TYPE *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_UID *smithy.Schema
+
+var FindingsSelectableField_SEVERITY *smithy.Schema
+
+var FindingsSelectableField_STATUS *smithy.Schema
+
+var FindingsSelectableField_COMMENT *smithy.Schema
+
+var FindingsSelectableField_VULNERABILITIES_FIX_COVERAGE *smithy.Schema
+
+var FindingsSelectableField_CLASS_NAME *smithy.Schema
+
+var FindingsSelectableField_DATABUCKET_ENCRYPTION_DETAILS_ALGORITHM *smithy.Schema
+
+var FindingsSelectableField_DATABUCKET_ENCRYPTION_DETAILS_KEY_UID *smithy.Schema
+
+var FindingsSelectableField_DATABUCKET_FILE_DATA_CLASSIFICATIONS_CLASSIFIER_DETAILS_TYPE *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_ACTOR_USER_ACCOUNT_UID *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_API_OPERATION *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_API_RESPONSE_ERROR_MESSAGE *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_API_SERVICE_NAME *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_CONNECTION_INFO_DIRECTION *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_CONNECTION_INFO_PROTOCOL_NAME *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NAME *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_DST_ENDPOINT_LOCATION_CITY *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_DST_ENDPOINT_LOCATION_COUNTRY *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NAME *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_SRC_ENDPOINT_HOSTNAME *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_SRC_ENDPOINT_LOCATION_CITY *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_SRC_ENDPOINT_LOCATION_COUNTRY *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_ANALYTIC_NAME *smithy.Schema
+
+var FindingsSelectableField_MALWARE_NAME *smithy.Schema
+
+var FindingsSelectableField_MALWARE_SCAN_INFO_UID *smithy.Schema
+
+var FindingsSelectableField_MALWARE_SEVERITY *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_CLOUD_FUNCTION_LAYERS_UID_ALT *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_CLOUD_FUNCTION_RUNTIME *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_CLOUD_FUNCTION_USER_UID *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_DEVICE_ENCRYPTION_DETAILS_KEY_UID *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_DEVICE_IMAGE_UID *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_IMAGE_ARCHITECTURE *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_IMAGE_REGISTRY_UID *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_IMAGE_REPOSITORY_NAME *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_IMAGE_UID *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_SUBNET_INFO_UID *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_VPC_UID *smithy.Schema
+
+var FindingsSelectableField_VULNERABILITIES_AFFECTED_CODE_FILE_PATH *smithy.Schema
+
+var FindingsSelectableField_VULNERABILITIES_AFFECTED_PACKAGES_NAME *smithy.Schema
+
+var FindingsSelectableField_VULNERABILITIES_CVE_CVSS_VENDOR_NAME *smithy.Schema
+
+var FindingsSelectableField_VULNERABILITIES_CVE_CVSS_VERSION *smithy.Schema
+
+var FindingsSelectableField_VULNERABILITIES_CVE_EPSS_SCORE *smithy.Schema
+
+var FindingsSelectableField_VULNERABILITIES_CVE_UID *smithy.Schema
+
+var FindingsSelectableField_VULNERABILITIES_RELATED_VULNERABILITIES *smithy.Schema
+
+var FindingsSelectableField_VENDOR_ATTRIBUTES_SEVERITY *smithy.Schema
+
+var FindingsSelectableField_ACTIVITY_ID *smithy.Schema
+
+var FindingsSelectableField_COMPLIANCE_STATUS_ID *smithy.Schema
+
+var FindingsSelectableField_CONFIDENCE_SCORE *smithy.Schema
+
+var FindingsSelectableField_SEVERITY_ID *smithy.Schema
+
+var FindingsSelectableField_STATUS_ID *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_RELATED_EVENTS_COUNT *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_API_RESPONSE_CODE *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_DST_ENDPOINT_PORT *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_SRC_ENDPOINT_PORT *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_IMAGE_IN_USE_COUNT *smithy.Schema
+
+var FindingsSelectableField_VULNERABILITIES_CVE_CVSS_BASE_SCORE *smithy.Schema
+
+var FindingsSelectableField_VENDOR_ATTRIBUTES_SEVERITY_ID *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_CREATED_TIME_DT *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_FIRST_SEEN_TIME_DT *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_LAST_SEEN_TIME_DT *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_MODIFIED_TIME_DT *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_IMAGE_CREATED_TIME_DT *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_IMAGE_LAST_USED_TIME_DT *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_MODIFIED_TIME_DT *smithy.Schema
+
+var FindingsSelectableField_COMPLIANCE_ASSESSMENTS_MEETS_CRITERIA *smithy.Schema
+
+var FindingsSelectableField_VULNERABILITIES_IS_EXPLOIT_AVAILABLE *smithy.Schema
+
+var FindingsSelectableField_VULNERABILITIES_IS_FIX_AVAILABLE *smithy.Schema
+
+var FindingsSelectableField_RESOURCES_TAGS *smithy.Schema
+
+var FindingsSelectableField_COMPLIANCE_CONTROL_PARAMETERS *smithy.Schema
+
+var FindingsSelectableField_DATABUCKET_TAGS *smithy.Schema
+
+var FindingsSelectableField_FINDING_INFO_TAGS *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_DST_ENDPOINT_IP *smithy.Schema
+
+var FindingsSelectableField_EVIDENCES_SRC_ENDPOINT_IP *smithy.Schema
+
+var _FindingsSelectedFieldList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "FindingsSelectedFieldList",
+}, smithy.ShapeTypeList, 1)
+var _FindingsSelectedFieldList_member *smithy.Schema
 
 var FindingsTrendsCompositeFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -13512,6 +13891,21 @@ var RuleStatusV2_ENABLED *smithy.Schema
 
 var RuleStatusV2_DISABLED *smithy.Schema
 
+var S3ExportDestination = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "S3ExportDestination",
+}, smithy.ShapeTypeStructure, 3)
+var S3ExportDestination_BucketArn *smithy.Schema
+
+var S3ExportDestination_KmsKeyArn *smithy.Schema
+
+var S3ExportDestination_ObjectPrefix *smithy.Schema
+
+var _S3ObjectPrefix = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "S3ObjectPrefix",
+}, smithy.ShapeTypeString, 0)
+
 var ScopeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ScopeType",
@@ -15028,6 +15422,20 @@ var BatchUpdateStandardsControlAssociationsResponse = smithy.NewSchema(smithy.Sh
 }, smithy.ShapeTypeStructure, 1)
 var BatchUpdateStandardsControlAssociationsResponse_UnprocessedAssociationUpdates *smithy.Schema
 
+var CancelExportJobV2Request = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "CancelExportJobV2Request",
+}, smithy.ShapeTypeStructure, 1)
+var CancelExportJobV2Request_ExportJobId *smithy.Schema
+
+var CancelExportJobV2Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "CancelExportJobV2Response",
+}, smithy.ShapeTypeStructure, 2)
+var CancelExportJobV2Response_ExportJobId *smithy.Schema
+
+var CancelExportJobV2Response_Status *smithy.Schema
+
 var CreateActionTargetRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "CreateActionTargetRequest",
@@ -15894,6 +16302,38 @@ var GetEnabledStandardsResponse_StandardsSubscriptions *smithy.Schema
 
 var GetEnabledStandardsResponse_NextToken *smithy.Schema
 
+var GetExportJobV2Request = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GetExportJobV2Request",
+}, smithy.ShapeTypeStructure, 1)
+var GetExportJobV2Request_ExportJobId *smithy.Schema
+
+var GetExportJobV2Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GetExportJobV2Response",
+}, smithy.ShapeTypeStructure, 11)
+var GetExportJobV2Response_ExportJobId *smithy.Schema
+
+var GetExportJobV2Response_Name *smithy.Schema
+
+var GetExportJobV2Response_Status *smithy.Schema
+
+var GetExportJobV2Response_DataType *smithy.Schema
+
+var GetExportJobV2Response_OutputConfiguration *smithy.Schema
+
+var GetExportJobV2Response_Scopes *smithy.Schema
+
+var GetExportJobV2Response_Destination *smithy.Schema
+
+var GetExportJobV2Response_FailureCode *smithy.Schema
+
+var GetExportJobV2Response_FailureMessage *smithy.Schema
+
+var GetExportJobV2Response_StartedAt *smithy.Schema
+
+var GetExportJobV2Response_EndedAt *smithy.Schema
+
 var GetFindingAggregatorRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "GetFindingAggregatorRequest",
@@ -16366,6 +16806,26 @@ var ListEnabledProductsForImportResponse_ProductSubscriptions *smithy.Schema
 
 var ListEnabledProductsForImportResponse_NextToken *smithy.Schema
 
+var ListExportJobsV2Request = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ListExportJobsV2Request",
+}, smithy.ShapeTypeStructure, 4)
+var ListExportJobsV2Request_Status *smithy.Schema
+
+var ListExportJobsV2Request_DataType *smithy.Schema
+
+var ListExportJobsV2Request_MaxResults *smithy.Schema
+
+var ListExportJobsV2Request_NextToken *smithy.Schema
+
+var ListExportJobsV2Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ListExportJobsV2Response",
+}, smithy.ShapeTypeStructure, 2)
+var ListExportJobsV2Response_Items *smithy.Schema
+
+var ListExportJobsV2Response_NextToken *smithy.Schema
+
 var ListExposuresByRemediationV2Request = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ListExposuresByRemediationV2Request",
@@ -16586,6 +17046,26 @@ var StartConfigurationPolicyDisassociationResponse = smithy.NewSchema(smithy.Sha
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "StartConfigurationPolicyDisassociationResponse",
 }, smithy.ShapeTypeStructure, 0)
+
+var StartExportJobV2Request = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "StartExportJobV2Request",
+}, smithy.ShapeTypeStructure, 5)
+var StartExportJobV2Request_Name *smithy.Schema
+
+var StartExportJobV2Request_Destination *smithy.Schema
+
+var StartExportJobV2Request_OutputConfiguration *smithy.Schema
+
+var StartExportJobV2Request_Scopes *smithy.Schema
+
+var StartExportJobV2Request_ClientToken *smithy.Schema
+
+var StartExportJobV2Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "StartExportJobV2Response",
+}, smithy.ShapeTypeStructure, 1)
+var StartExportJobV2Response_ExportJobId *smithy.Schema
 
 var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -24346,6 +24826,292 @@ func init() {
 
 	_EnabledStandardIdentifierList_member = _EnabledStandardIdentifierList.AddMember("member", _NonEmptyString)
 
+	ExportDataType_FINDINGS = ExportDataType.AddMember("FINDINGS", smithyprelude.Unit)
+
+	S3ExportDestination_BucketArn = S3ExportDestination.AddMember("BucketArn", _NonEmptyString)
+
+	S3ExportDestination_KmsKeyArn = S3ExportDestination.AddMember("KmsKeyArn", _NonEmptyString)
+
+	S3ExportDestination_ObjectPrefix = S3ExportDestination.AddMember("ObjectPrefix", _S3ObjectPrefix)
+
+	ExportDestination_S3 = ExportDestination.AddMember("S3", S3ExportDestination)
+
+	ExportFailureCode_ACCESS_DENIED = ExportFailureCode.AddMember("ACCESS_DENIED", smithyprelude.Unit)
+
+	ExportFailureCode_RESOURCE_NOT_FOUND = ExportFailureCode.AddMember("RESOURCE_NOT_FOUND", smithyprelude.Unit)
+
+	ExportFailureCode_INTERNAL_ERROR = ExportFailureCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
+
+	FindingsExportFormat_CSV = FindingsExportFormat.AddMember("CSV", smithyprelude.Unit)
+
+	FindingsExportFormat_OCSF_JSON = FindingsExportFormat.AddMember("OCSF_JSON", smithyprelude.Unit)
+
+	FindingsSelectableField_METADATA_UID = FindingsSelectableField.AddMember("METADATA_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_ACTIVITY_NAME = FindingsSelectableField.AddMember("ACTIVITY_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_CLOUD_ACCOUNT_NAME = FindingsSelectableField.AddMember("CLOUD_ACCOUNT_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_CLOUD_ACCOUNT_UID = FindingsSelectableField.AddMember("CLOUD_ACCOUNT_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_CLOUD_PROVIDER = FindingsSelectableField.AddMember("CLOUD_PROVIDER", smithyprelude.Unit)
+
+	FindingsSelectableField_CLOUD_REGION = FindingsSelectableField.AddMember("CLOUD_REGION", smithyprelude.Unit)
+
+	FindingsSelectableField_COMPLIANCE_ASSESSMENTS_CATEGORY = FindingsSelectableField.AddMember("COMPLIANCE_ASSESSMENTS_CATEGORY", smithyprelude.Unit)
+
+	FindingsSelectableField_COMPLIANCE_ASSESSMENTS_NAME = FindingsSelectableField.AddMember("COMPLIANCE_ASSESSMENTS_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_COMPLIANCE_CONTROL = FindingsSelectableField.AddMember("COMPLIANCE_CONTROL", smithyprelude.Unit)
+
+	FindingsSelectableField_COMPLIANCE_STATUS = FindingsSelectableField.AddMember("COMPLIANCE_STATUS", smithyprelude.Unit)
+
+	FindingsSelectableField_COMPLIANCE_STANDARDS = FindingsSelectableField.AddMember("COMPLIANCE_STANDARDS", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_DESC = FindingsSelectableField.AddMember("FINDING_INFO_DESC", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_SRC_URL = FindingsSelectableField.AddMember("FINDING_INFO_SRC_URL", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_TITLE = FindingsSelectableField.AddMember("FINDING_INFO_TITLE", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_TYPES = FindingsSelectableField.AddMember("FINDING_INFO_TYPES", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_UID = FindingsSelectableField.AddMember("FINDING_INFO_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_RELATED_EVENTS_TRAITS_CATEGORY = FindingsSelectableField.AddMember("FINDING_INFO_RELATED_EVENTS_TRAITS_CATEGORY", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_RELATED_EVENTS_UID = FindingsSelectableField.AddMember("FINDING_INFO_RELATED_EVENTS_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_RELATED_EVENTS_PRODUCT_UID = FindingsSelectableField.AddMember("FINDING_INFO_RELATED_EVENTS_PRODUCT_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_RELATED_EVENTS_TITLE = FindingsSelectableField.AddMember("FINDING_INFO_RELATED_EVENTS_TITLE", smithyprelude.Unit)
+
+	FindingsSelectableField_METADATA_PRODUCT_FEATURE_UID = FindingsSelectableField.AddMember("METADATA_PRODUCT_FEATURE_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_METADATA_PRODUCT_NAME = FindingsSelectableField.AddMember("METADATA_PRODUCT_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_METADATA_PRODUCT_UID = FindingsSelectableField.AddMember("METADATA_PRODUCT_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_METADATA_PRODUCT_VENDOR_NAME = FindingsSelectableField.AddMember("METADATA_PRODUCT_VENDOR_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_REMEDIATION_DESC = FindingsSelectableField.AddMember("REMEDIATION_DESC", smithyprelude.Unit)
+
+	FindingsSelectableField_REMEDIATION_REFERENCES = FindingsSelectableField.AddMember("REMEDIATION_REFERENCES", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_CLOUD_PARTITION = FindingsSelectableField.AddMember("RESOURCES_CLOUD_PARTITION", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_NAME = FindingsSelectableField.AddMember("RESOURCES_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_OWNER_ACCOUNT_UID = FindingsSelectableField.AddMember("RESOURCES_OWNER_ACCOUNT_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_OWNER_ORG_UID = FindingsSelectableField.AddMember("RESOURCES_OWNER_ORG_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_OWNER_ACCOUNT_NAME = FindingsSelectableField.AddMember("RESOURCES_OWNER_ACCOUNT_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_PROVIDER = FindingsSelectableField.AddMember("RESOURCES_PROVIDER", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_REGION = FindingsSelectableField.AddMember("RESOURCES_REGION", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_TYPE = FindingsSelectableField.AddMember("RESOURCES_TYPE", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_UID = FindingsSelectableField.AddMember("RESOURCES_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_SEVERITY = FindingsSelectableField.AddMember("SEVERITY", smithyprelude.Unit)
+
+	FindingsSelectableField_STATUS = FindingsSelectableField.AddMember("STATUS", smithyprelude.Unit)
+
+	FindingsSelectableField_COMMENT = FindingsSelectableField.AddMember("COMMENT", smithyprelude.Unit)
+
+	FindingsSelectableField_VULNERABILITIES_FIX_COVERAGE = FindingsSelectableField.AddMember("VULNERABILITIES_FIX_COVERAGE", smithyprelude.Unit)
+
+	FindingsSelectableField_CLASS_NAME = FindingsSelectableField.AddMember("CLASS_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_DATABUCKET_ENCRYPTION_DETAILS_ALGORITHM = FindingsSelectableField.AddMember("DATABUCKET_ENCRYPTION_DETAILS_ALGORITHM", smithyprelude.Unit)
+
+	FindingsSelectableField_DATABUCKET_ENCRYPTION_DETAILS_KEY_UID = FindingsSelectableField.AddMember("DATABUCKET_ENCRYPTION_DETAILS_KEY_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_DATABUCKET_FILE_DATA_CLASSIFICATIONS_CLASSIFIER_DETAILS_TYPE = FindingsSelectableField.AddMember("DATABUCKET_FILE_DATA_CLASSIFICATIONS_CLASSIFIER_DETAILS_TYPE", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_ACTOR_USER_ACCOUNT_UID = FindingsSelectableField.AddMember("EVIDENCES_ACTOR_USER_ACCOUNT_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_API_OPERATION = FindingsSelectableField.AddMember("EVIDENCES_API_OPERATION", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_API_RESPONSE_ERROR_MESSAGE = FindingsSelectableField.AddMember("EVIDENCES_API_RESPONSE_ERROR_MESSAGE", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_API_SERVICE_NAME = FindingsSelectableField.AddMember("EVIDENCES_API_SERVICE_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_CONNECTION_INFO_DIRECTION = FindingsSelectableField.AddMember("EVIDENCES_CONNECTION_INFO_DIRECTION", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_CONNECTION_INFO_PROTOCOL_NAME = FindingsSelectableField.AddMember("EVIDENCES_CONNECTION_INFO_PROTOCOL_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NAME = FindingsSelectableField.AddMember("EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_DST_ENDPOINT_LOCATION_CITY = FindingsSelectableField.AddMember("EVIDENCES_DST_ENDPOINT_LOCATION_CITY", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_DST_ENDPOINT_LOCATION_COUNTRY = FindingsSelectableField.AddMember("EVIDENCES_DST_ENDPOINT_LOCATION_COUNTRY", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NAME = FindingsSelectableField.AddMember("EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_SRC_ENDPOINT_HOSTNAME = FindingsSelectableField.AddMember("EVIDENCES_SRC_ENDPOINT_HOSTNAME", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_SRC_ENDPOINT_LOCATION_CITY = FindingsSelectableField.AddMember("EVIDENCES_SRC_ENDPOINT_LOCATION_CITY", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_SRC_ENDPOINT_LOCATION_COUNTRY = FindingsSelectableField.AddMember("EVIDENCES_SRC_ENDPOINT_LOCATION_COUNTRY", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_ANALYTIC_NAME = FindingsSelectableField.AddMember("FINDING_INFO_ANALYTIC_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_MALWARE_NAME = FindingsSelectableField.AddMember("MALWARE_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_MALWARE_SCAN_INFO_UID = FindingsSelectableField.AddMember("MALWARE_SCAN_INFO_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_MALWARE_SEVERITY = FindingsSelectableField.AddMember("MALWARE_SEVERITY", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_CLOUD_FUNCTION_LAYERS_UID_ALT = FindingsSelectableField.AddMember("RESOURCES_CLOUD_FUNCTION_LAYERS_UID_ALT", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_CLOUD_FUNCTION_RUNTIME = FindingsSelectableField.AddMember("RESOURCES_CLOUD_FUNCTION_RUNTIME", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_CLOUD_FUNCTION_USER_UID = FindingsSelectableField.AddMember("RESOURCES_CLOUD_FUNCTION_USER_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_DEVICE_ENCRYPTION_DETAILS_KEY_UID = FindingsSelectableField.AddMember("RESOURCES_DEVICE_ENCRYPTION_DETAILS_KEY_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_DEVICE_IMAGE_UID = FindingsSelectableField.AddMember("RESOURCES_DEVICE_IMAGE_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_IMAGE_ARCHITECTURE = FindingsSelectableField.AddMember("RESOURCES_IMAGE_ARCHITECTURE", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_IMAGE_REGISTRY_UID = FindingsSelectableField.AddMember("RESOURCES_IMAGE_REGISTRY_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_IMAGE_REPOSITORY_NAME = FindingsSelectableField.AddMember("RESOURCES_IMAGE_REPOSITORY_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_IMAGE_UID = FindingsSelectableField.AddMember("RESOURCES_IMAGE_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_SUBNET_INFO_UID = FindingsSelectableField.AddMember("RESOURCES_SUBNET_INFO_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_VPC_UID = FindingsSelectableField.AddMember("RESOURCES_VPC_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_VULNERABILITIES_AFFECTED_CODE_FILE_PATH = FindingsSelectableField.AddMember("VULNERABILITIES_AFFECTED_CODE_FILE_PATH", smithyprelude.Unit)
+
+	FindingsSelectableField_VULNERABILITIES_AFFECTED_PACKAGES_NAME = FindingsSelectableField.AddMember("VULNERABILITIES_AFFECTED_PACKAGES_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_VULNERABILITIES_CVE_CVSS_VENDOR_NAME = FindingsSelectableField.AddMember("VULNERABILITIES_CVE_CVSS_VENDOR_NAME", smithyprelude.Unit)
+
+	FindingsSelectableField_VULNERABILITIES_CVE_CVSS_VERSION = FindingsSelectableField.AddMember("VULNERABILITIES_CVE_CVSS_VERSION", smithyprelude.Unit)
+
+	FindingsSelectableField_VULNERABILITIES_CVE_EPSS_SCORE = FindingsSelectableField.AddMember("VULNERABILITIES_CVE_EPSS_SCORE", smithyprelude.Unit)
+
+	FindingsSelectableField_VULNERABILITIES_CVE_UID = FindingsSelectableField.AddMember("VULNERABILITIES_CVE_UID", smithyprelude.Unit)
+
+	FindingsSelectableField_VULNERABILITIES_RELATED_VULNERABILITIES = FindingsSelectableField.AddMember("VULNERABILITIES_RELATED_VULNERABILITIES", smithyprelude.Unit)
+
+	FindingsSelectableField_VENDOR_ATTRIBUTES_SEVERITY = FindingsSelectableField.AddMember("VENDOR_ATTRIBUTES_SEVERITY", smithyprelude.Unit)
+
+	FindingsSelectableField_ACTIVITY_ID = FindingsSelectableField.AddMember("ACTIVITY_ID", smithyprelude.Unit)
+
+	FindingsSelectableField_COMPLIANCE_STATUS_ID = FindingsSelectableField.AddMember("COMPLIANCE_STATUS_ID", smithyprelude.Unit)
+
+	FindingsSelectableField_CONFIDENCE_SCORE = FindingsSelectableField.AddMember("CONFIDENCE_SCORE", smithyprelude.Unit)
+
+	FindingsSelectableField_SEVERITY_ID = FindingsSelectableField.AddMember("SEVERITY_ID", smithyprelude.Unit)
+
+	FindingsSelectableField_STATUS_ID = FindingsSelectableField.AddMember("STATUS_ID", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_RELATED_EVENTS_COUNT = FindingsSelectableField.AddMember("FINDING_INFO_RELATED_EVENTS_COUNT", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_API_RESPONSE_CODE = FindingsSelectableField.AddMember("EVIDENCES_API_RESPONSE_CODE", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER = FindingsSelectableField.AddMember("EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_DST_ENDPOINT_PORT = FindingsSelectableField.AddMember("EVIDENCES_DST_ENDPOINT_PORT", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER = FindingsSelectableField.AddMember("EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_SRC_ENDPOINT_PORT = FindingsSelectableField.AddMember("EVIDENCES_SRC_ENDPOINT_PORT", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_IMAGE_IN_USE_COUNT = FindingsSelectableField.AddMember("RESOURCES_IMAGE_IN_USE_COUNT", smithyprelude.Unit)
+
+	FindingsSelectableField_VULNERABILITIES_CVE_CVSS_BASE_SCORE = FindingsSelectableField.AddMember("VULNERABILITIES_CVE_CVSS_BASE_SCORE", smithyprelude.Unit)
+
+	FindingsSelectableField_VENDOR_ATTRIBUTES_SEVERITY_ID = FindingsSelectableField.AddMember("VENDOR_ATTRIBUTES_SEVERITY_ID", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_CREATED_TIME_DT = FindingsSelectableField.AddMember("FINDING_INFO_CREATED_TIME_DT", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_FIRST_SEEN_TIME_DT = FindingsSelectableField.AddMember("FINDING_INFO_FIRST_SEEN_TIME_DT", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_LAST_SEEN_TIME_DT = FindingsSelectableField.AddMember("FINDING_INFO_LAST_SEEN_TIME_DT", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_MODIFIED_TIME_DT = FindingsSelectableField.AddMember("FINDING_INFO_MODIFIED_TIME_DT", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_IMAGE_CREATED_TIME_DT = FindingsSelectableField.AddMember("RESOURCES_IMAGE_CREATED_TIME_DT", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_IMAGE_LAST_USED_TIME_DT = FindingsSelectableField.AddMember("RESOURCES_IMAGE_LAST_USED_TIME_DT", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_MODIFIED_TIME_DT = FindingsSelectableField.AddMember("RESOURCES_MODIFIED_TIME_DT", smithyprelude.Unit)
+
+	FindingsSelectableField_COMPLIANCE_ASSESSMENTS_MEETS_CRITERIA = FindingsSelectableField.AddMember("COMPLIANCE_ASSESSMENTS_MEETS_CRITERIA", smithyprelude.Unit)
+
+	FindingsSelectableField_VULNERABILITIES_IS_EXPLOIT_AVAILABLE = FindingsSelectableField.AddMember("VULNERABILITIES_IS_EXPLOIT_AVAILABLE", smithyprelude.Unit)
+
+	FindingsSelectableField_VULNERABILITIES_IS_FIX_AVAILABLE = FindingsSelectableField.AddMember("VULNERABILITIES_IS_FIX_AVAILABLE", smithyprelude.Unit)
+
+	FindingsSelectableField_RESOURCES_TAGS = FindingsSelectableField.AddMember("RESOURCES_TAGS", smithyprelude.Unit)
+
+	FindingsSelectableField_COMPLIANCE_CONTROL_PARAMETERS = FindingsSelectableField.AddMember("COMPLIANCE_CONTROL_PARAMETERS", smithyprelude.Unit)
+
+	FindingsSelectableField_DATABUCKET_TAGS = FindingsSelectableField.AddMember("DATABUCKET_TAGS", smithyprelude.Unit)
+
+	FindingsSelectableField_FINDING_INFO_TAGS = FindingsSelectableField.AddMember("FINDING_INFO_TAGS", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_DST_ENDPOINT_IP = FindingsSelectableField.AddMember("EVIDENCES_DST_ENDPOINT_IP", smithyprelude.Unit)
+
+	FindingsSelectableField_EVIDENCES_SRC_ENDPOINT_IP = FindingsSelectableField.AddMember("EVIDENCES_SRC_ENDPOINT_IP", smithyprelude.Unit)
+
+	_FindingsSelectedFieldList_member = _FindingsSelectedFieldList.AddMember("member", FindingsSelectableField)
+
+	FindingsOutput_Format = FindingsOutput.AddMember("Format", FindingsExportFormat)
+
+	FindingsOutput_Filters = FindingsOutput.AddMember("Filters", OcsfFindingFilters)
+
+	FindingsOutput_SelectedFields = FindingsOutput.AddMember("SelectedFields", _FindingsSelectedFieldList)
+
+	ExportOutput_Findings = ExportOutput.AddMember("Findings", FindingsOutput)
+
+	FindingsOutputSummary_Format = FindingsOutputSummary.AddMember("Format", FindingsExportFormat)
+
+	ExportOutputSummary_Findings = ExportOutputSummary.AddMember("Findings", FindingsOutputSummary)
+
+	ExportScopes_AwsOrganizations = ExportScopes.AddMember("AwsOrganizations", _AwsOrganizationScopeList)
+
+	ExportStatus_RUNNING = ExportStatus.AddMember("RUNNING", smithyprelude.Unit)
+
+	ExportStatus_SUCCEEDED = ExportStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
+
+	ExportStatus_FAILED = ExportStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	ExportStatus_CANCELLED = ExportStatus.AddMember("CANCELLED", smithyprelude.Unit)
+
+	ExportSummary_ExportJobId = ExportSummary.AddMember("ExportJobId", _ExportJobId)
+
+	ExportSummary_Name = ExportSummary.AddMember("Name", _ExportName)
+
+	ExportSummary_Status = ExportSummary.AddMember("Status", ExportStatus)
+
+	ExportSummary_DataType = ExportSummary.AddMember("DataType", ExportDataType)
+
+	ExportSummary_OutputConfiguration = ExportSummary.AddMember("OutputConfiguration", ExportOutputSummary)
+
+	ExportSummary_Scopes = ExportSummary.AddMember("Scopes", ExportScopes)
+
+	ExportSummary_Destination = ExportSummary.AddMember("Destination", ExportDestination)
+
+	ExportSummary_FailureCode = ExportSummary.AddMember("FailureCode", ExportFailureCode)
+
+	ExportSummary_FailureMessage = ExportSummary.AddMember("FailureMessage", _NonEmptyString)
+
+	ExportSummary_StartedAt = ExportSummary.AddMember("StartedAt", _Timestamp)
+
+	ExportSummary_EndedAt = ExportSummary.AddMember("EndedAt", _Timestamp)
+
+	_ExportSummaryList_member = _ExportSummaryList.AddMember("member", ExportSummary)
+
 	ExposureSeverity_INFORMATIONAL = ExposureSeverity.AddMember("INFORMATIONAL", smithyprelude.Unit)
 
 	ExposureSeverity_LOW = ExposureSeverity.AddMember("LOW", smithyprelude.Unit)
@@ -25848,6 +26614,12 @@ func init() {
 
 	BatchUpdateStandardsControlAssociationsResponse_UnprocessedAssociationUpdates = BatchUpdateStandardsControlAssociationsResponse.AddMember("UnprocessedAssociationUpdates", _UnprocessedStandardsControlAssociationUpdates)
 
+	CancelExportJobV2Request_ExportJobId = CancelExportJobV2Request.AddMember("ExportJobId", _ExportJobId, &smithytraits.HTTPLabel{})
+
+	CancelExportJobV2Response_ExportJobId = CancelExportJobV2Response.AddMember("ExportJobId", _ExportJobId)
+
+	CancelExportJobV2Response_Status = CancelExportJobV2Response.AddMember("Status", ExportStatus)
+
 	CreateActionTargetRequest_Name = CreateActionTargetRequest.AddMember("Name", _NonEmptyString)
 
 	CreateActionTargetRequest_Description = CreateActionTargetRequest.AddMember("Description", _NonEmptyString)
@@ -26276,6 +27048,30 @@ func init() {
 
 	GetEnabledStandardsResponse_NextToken = GetEnabledStandardsResponse.AddMember("NextToken", _NextToken)
 
+	GetExportJobV2Request_ExportJobId = GetExportJobV2Request.AddMember("ExportJobId", _ExportJobId, &smithytraits.HTTPLabel{})
+
+	GetExportJobV2Response_ExportJobId = GetExportJobV2Response.AddMember("ExportJobId", _ExportJobId)
+
+	GetExportJobV2Response_Name = GetExportJobV2Response.AddMember("Name", _ExportName)
+
+	GetExportJobV2Response_Status = GetExportJobV2Response.AddMember("Status", ExportStatus)
+
+	GetExportJobV2Response_DataType = GetExportJobV2Response.AddMember("DataType", ExportDataType)
+
+	GetExportJobV2Response_OutputConfiguration = GetExportJobV2Response.AddMember("OutputConfiguration", ExportOutput)
+
+	GetExportJobV2Response_Scopes = GetExportJobV2Response.AddMember("Scopes", ExportScopes)
+
+	GetExportJobV2Response_Destination = GetExportJobV2Response.AddMember("Destination", ExportDestination)
+
+	GetExportJobV2Response_FailureCode = GetExportJobV2Response.AddMember("FailureCode", ExportFailureCode)
+
+	GetExportJobV2Response_FailureMessage = GetExportJobV2Response.AddMember("FailureMessage", _NonEmptyString)
+
+	GetExportJobV2Response_StartedAt = GetExportJobV2Response.AddMember("StartedAt", _Timestamp)
+
+	GetExportJobV2Response_EndedAt = GetExportJobV2Response.AddMember("EndedAt", _Timestamp)
+
 	GetFindingAggregatorRequest_FindingAggregatorArn = GetFindingAggregatorRequest.AddMember("FindingAggregatorArn", _NonEmptyString, &smithytraits.HTTPLabel{})
 
 	GetFindingAggregatorResponse_FindingAggregatorArn = GetFindingAggregatorResponse.AddMember("FindingAggregatorArn", _NonEmptyString)
@@ -26538,6 +27334,18 @@ func init() {
 
 	ListEnabledProductsForImportResponse_NextToken = ListEnabledProductsForImportResponse.AddMember("NextToken", _NextToken)
 
+	ListExportJobsV2Request_Status = ListExportJobsV2Request.AddMember("Status", ExportStatus, &smithytraits.HTTPQuery{Name: "Status"})
+
+	ListExportJobsV2Request_DataType = ListExportJobsV2Request.AddMember("DataType", ExportDataType, &smithytraits.HTTPQuery{Name: "DataType"})
+
+	ListExportJobsV2Request_MaxResults = ListExportJobsV2Request.AddMember("MaxResults", _ExportMaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
+
+	ListExportJobsV2Request_NextToken = ListExportJobsV2Request.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
+
+	ListExportJobsV2Response_Items = ListExportJobsV2Response.AddMember("Items", _ExportSummaryList)
+
+	ListExportJobsV2Response_NextToken = ListExportJobsV2Response.AddMember("NextToken", _NextToken)
+
 	ListExposuresByRemediationV2Request_TargetUid = ListExposuresByRemediationV2Request.AddMember("TargetUid", _RemediationStringUid)
 
 	ListExposuresByRemediationV2Request_MaxResults = ListExposuresByRemediationV2Request.AddMember("MaxResults", _MaxResults)
@@ -26661,6 +27469,18 @@ func init() {
 	StartConfigurationPolicyDisassociationRequest_Target = StartConfigurationPolicyDisassociationRequest.AddMember("Target", Target)
 
 	StartConfigurationPolicyDisassociationRequest_ConfigurationPolicyIdentifier = StartConfigurationPolicyDisassociationRequest.AddMember("ConfigurationPolicyIdentifier", _NonEmptyString)
+
+	StartExportJobV2Request_Name = StartExportJobV2Request.AddMember("Name", _ExportName)
+
+	StartExportJobV2Request_Destination = StartExportJobV2Request.AddMember("Destination", ExportDestination)
+
+	StartExportJobV2Request_OutputConfiguration = StartExportJobV2Request.AddMember("OutputConfiguration", ExportOutput)
+
+	StartExportJobV2Request_Scopes = StartExportJobV2Request.AddMember("Scopes", ExportScopes)
+
+	StartExportJobV2Request_ClientToken = StartExportJobV2Request.AddMember("ClientToken", _ClientToken)
+
+	StartExportJobV2Response_ExportJobId = StartExportJobV2Response.AddMember("ExportJobId", _ExportJobId)
 
 	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
 

@@ -572,6 +572,33 @@ var AccessScopeType_cluster *smithy.Schema
 
 var AccessScopeType_namespace *smithy.Schema
 
+var AckConfigRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eks",
+	Name:      "AckConfigRequest",
+}, smithy.ShapeTypeStructure, 2)
+var AckConfigRequest_enableCrossNamespace *smithy.Schema
+
+var AckConfigRequest_disabledServices *smithy.Schema
+
+var AckConfigResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eks",
+	Name:      "AckConfigResponse",
+}, smithy.ShapeTypeStructure, 2)
+var AckConfigResponse_enableCrossNamespace *smithy.Schema
+
+var AckConfigResponse_disabledServices *smithy.Schema
+
+var _AckDisabledServicesList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eks",
+	Name:      "AckDisabledServicesList",
+}, smithy.ShapeTypeList, 1)
+var _AckDisabledServicesList_member *smithy.Schema
+
+var _AckServiceName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eks",
+	Name:      "AckServiceName",
+}, smithy.ShapeTypeString, 0)
+
 var ActiveCertificateAuthority = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "ActiveCertificateAuthority",
@@ -1060,14 +1087,18 @@ var Capability_deletePropagationPolicy *smithy.Schema
 var CapabilityConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "CapabilityConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var CapabilityConfigurationRequest_argoCd *smithy.Schema
+
+var CapabilityConfigurationRequest_ack *smithy.Schema
 
 var CapabilityConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "CapabilityConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var CapabilityConfigurationResponse_argoCd *smithy.Schema
+
+var CapabilityConfigurationResponse_ack *smithy.Schema
 
 var CapabilityDeletePropagationPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
@@ -3381,6 +3412,14 @@ var UpdateAccessConfigRequest = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var UpdateAccessConfigRequest_authenticationMode *smithy.Schema
 
+var UpdateAckConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eks",
+	Name:      "UpdateAckConfig",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateAckConfig_enableCrossNamespace *smithy.Schema
+
+var UpdateAckConfig_disabledServices *smithy.Schema
+
 var UpdateArgoCdConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "UpdateArgoCdConfig",
@@ -3392,8 +3431,10 @@ var UpdateArgoCdConfig_networkAccess *smithy.Schema
 var UpdateCapabilityConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "UpdateCapabilityConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var UpdateCapabilityConfiguration_argoCd *smithy.Schema
+
+var UpdateCapabilityConfiguration_ack *smithy.Schema
 
 var UpdateLabelsPayload = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
@@ -3420,7 +3461,7 @@ var _UpdateParams_member *smithy.Schema
 var UpdateParamType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eks",
 	Name:      "UpdateParamType",
-}, smithy.ShapeTypeEnum, 58)
+}, smithy.ShapeTypeEnum, 60)
 var UpdateParamType_VERSION *smithy.Schema
 
 var UpdateParamType_PLATFORM_VERSION *smithy.Schema
@@ -3510,6 +3551,10 @@ var UpdateParamType_VENDED_LOGS *smithy.Schema
 var UpdateParamType_UPDATED_TIER *smithy.Schema
 
 var UpdateParamType_PREVIOUS_TIER *smithy.Schema
+
+var UpdateParamType_ENABLE_CROSS_NAMESPACE *smithy.Schema
+
+var UpdateParamType_DISABLED_SERVICES *smithy.Schema
 
 var UpdateParamType_WARM_POOL_ENABLED *smithy.Schema
 
@@ -5127,6 +5172,16 @@ func init() {
 
 	AccessScope_namespaces = AccessScope.AddMember("namespaces", _StringList)
 
+	_AckDisabledServicesList_member = _AckDisabledServicesList.AddMember("member", _AckServiceName)
+
+	AckConfigRequest_enableCrossNamespace = AckConfigRequest.AddMember("enableCrossNamespace", _BoxedBoolean)
+
+	AckConfigRequest_disabledServices = AckConfigRequest.AddMember("disabledServices", _AckDisabledServicesList)
+
+	AckConfigResponse_enableCrossNamespace = AckConfigResponse.AddMember("enableCrossNamespace", _BoxedBoolean)
+
+	AckConfigResponse_disabledServices = AckConfigResponse.AddMember("disabledServices", _AckDisabledServicesList)
+
 	CertificateAuthorityActivatedBy_EKS = CertificateAuthorityActivatedBy.AddMember("EKS", smithyprelude.Unit)
 
 	CertificateAuthorityActivatedBy_CUSTOMER = CertificateAuthorityActivatedBy.AddMember("CUSTOMER", smithyprelude.Unit)
@@ -5439,6 +5494,8 @@ func init() {
 
 	CapabilityConfigurationResponse_argoCd = CapabilityConfigurationResponse.AddMember("argoCd", ArgoCdConfigResponse)
 
+	CapabilityConfigurationResponse_ack = CapabilityConfigurationResponse.AddMember("ack", AckConfigResponse)
+
 	CapabilityIssueCode_ACCESS_DENIED = CapabilityIssueCode.AddMember("ACCESS_DENIED", smithyprelude.Unit)
 
 	CapabilityIssueCode_CLUSTER_UNREACHABLE = CapabilityIssueCode.AddMember("CLUSTER_UNREACHABLE", smithyprelude.Unit)
@@ -5480,6 +5537,8 @@ func init() {
 	Capability_deletePropagationPolicy = Capability.AddMember("deletePropagationPolicy", CapabilityDeletePropagationPolicy)
 
 	CapabilityConfigurationRequest_argoCd = CapabilityConfigurationRequest.AddMember("argoCd", ArgoCdConfigRequest)
+
+	CapabilityConfigurationRequest_ack = CapabilityConfigurationRequest.AddMember("ack", AckConfigRequest)
 
 	CapabilitySummary_capabilityName = CapabilitySummary.AddMember("capabilityName", _String)
 
@@ -6901,6 +6960,10 @@ func init() {
 
 	UpdateParamType_PREVIOUS_TIER = UpdateParamType.AddMember("PREVIOUS_TIER", smithyprelude.Unit)
 
+	UpdateParamType_ENABLE_CROSS_NAMESPACE = UpdateParamType.AddMember("ENABLE_CROSS_NAMESPACE", smithyprelude.Unit)
+
+	UpdateParamType_DISABLED_SERVICES = UpdateParamType.AddMember("DISABLED_SERVICES", smithyprelude.Unit)
+
 	UpdateParamType_WARM_POOL_ENABLED = UpdateParamType.AddMember("WARM_POOL_ENABLED", smithyprelude.Unit)
 
 	UpdateParamType_WARM_POOL_MAX_GROUP_PREPARED_CAPACITY = UpdateParamType.AddMember("WARM_POOL_MAX_GROUP_PREPARED_CAPACITY", smithyprelude.Unit)
@@ -6949,6 +7012,10 @@ func init() {
 
 	UpdateAccessConfigRequest_authenticationMode = UpdateAccessConfigRequest.AddMember("authenticationMode", AuthenticationMode)
 
+	UpdateAckConfig_enableCrossNamespace = UpdateAckConfig.AddMember("enableCrossNamespace", _BoxedBoolean)
+
+	UpdateAckConfig_disabledServices = UpdateAckConfig.AddMember("disabledServices", _AckDisabledServicesList)
+
 	UpdateRoleMappings_addOrUpdateRoleMappings = UpdateRoleMappings.AddMember("addOrUpdateRoleMappings", _ArgoCdRoleMappingList)
 
 	UpdateRoleMappings_removeRoleMappings = UpdateRoleMappings.AddMember("removeRoleMappings", _ArgoCdRoleMappingList)
@@ -6958,6 +7025,8 @@ func init() {
 	UpdateArgoCdConfig_networkAccess = UpdateArgoCdConfig.AddMember("networkAccess", ArgoCdNetworkAccessConfigRequest)
 
 	UpdateCapabilityConfiguration_argoCd = UpdateCapabilityConfiguration.AddMember("argoCd", UpdateArgoCdConfig)
+
+	UpdateCapabilityConfiguration_ack = UpdateCapabilityConfiguration.AddMember("ack", UpdateAckConfig)
 
 	UpdateLabelsPayload_addOrUpdateLabels = UpdateLabelsPayload.AddMember("addOrUpdateLabels", _labelsMap)
 

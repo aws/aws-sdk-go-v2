@@ -7251,6 +7251,11 @@ func awsAwsquery_serializeOpDocumentContinueUpdateRollbackInput(v *ContinueUpdat
 		objectKey.String(*v.ClientRequestToken)
 	}
 
+	if v.ForceRollback != nil {
+		objectKey := object.Key("ForceRollback")
+		objectKey.Boolean(*v.ForceRollback)
+	}
+
 	if v.ResourcesToSkip != nil {
 		objectKey := object.Key("ResourcesToSkip")
 		if err := awsAwsquery_serializeDocumentResourcesToSkip(v.ResourcesToSkip, objectKey); err != nil {

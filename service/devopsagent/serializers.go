@@ -6157,6 +6157,18 @@ func awsRestjson1_serializeDocumentCapabilityConfiguration(v *types.CapabilityCo
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCronSchedule(v *types.CronSchedule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Expression != nil {
+		ok := object.Key("expression")
+		ok.String(*v.Expression)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCustomHeaders(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6165,6 +6177,13 @@ func awsRestjson1_serializeDocumentCustomHeaders(v map[string]string, value smit
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDailyRecurrence(v *types.DailyRecurrence, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	return nil
 }
 
@@ -6360,6 +6379,11 @@ func awsRestjson1_serializeDocumentGitHubConfiguration(v *types.GitHubConfigurat
 		ok.String(string(v.OwnerType))
 	}
 
+	if v.ReleaseManagementAssociationId != nil {
+		ok := object.Key("releaseManagementAssociationId")
+		ok.String(*v.ReleaseManagementAssociationId)
+	}
+
 	if v.RepoId != nil {
 		ok := object.Key("repoId")
 		ok.String(*v.RepoId)
@@ -6395,6 +6419,11 @@ func awsRestjson1_serializeDocumentGitLabConfiguration(v *types.GitLabConfigurat
 	if v.ProjectPath != nil {
 		ok := object.Key("projectPath")
 		ok.String(*v.ProjectPath)
+	}
+
+	if v.ReleaseManagementAssociationId != nil {
+		ok := object.Key("releaseManagementAssociationId")
+		ok.String(*v.ReleaseManagementAssociationId)
 	}
 
 	if v.RuntimeRoleArn != nil {
@@ -6934,6 +6963,36 @@ func awsRestjson1_serializeDocumentMCPToolsList(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMonthlyRecurrence(v *types.MonthlyRecurrence, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DayOfMonth != nil {
+		ok := object.Key("dayOfMonth")
+		ok.Integer(*v.DayOfMonth)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNetworkAccessConfiguration(v types.NetworkAccessConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.NetworkAccessConfigurationMemberPrivateAccess:
+		av := object.Key("privateAccess")
+		if err := awsRestjson1_serializeDocumentPrivateNetworkAccess(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNewRelicAlertPolicyIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -7211,6 +7270,53 @@ func awsRestjson1_serializeDocumentPrivateConnectionMode(v types.PrivateConnecti
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPrivateNetworkAccess(v *types.PrivateNetworkAccess, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PrivateConnectionName != nil {
+		ok := object.Key("privateConnectionName")
+		ok.String(*v.PrivateConnectionName)
+	}
+
+	if v.RuntimeRoleArn != nil {
+		ok := object.Key("runtimeRoleArn")
+		ok.String(*v.RuntimeRoleArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRecurrence(v types.Recurrence, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RecurrenceMemberDaily:
+		av := object.Key("daily")
+		if err := awsRestjson1_serializeDocumentDailyRecurrence(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RecurrenceMemberMonthly:
+		av := object.Key("monthly")
+		if err := awsRestjson1_serializeDocumentMonthlyRecurrence(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RecurrenceMemberWeekly:
+		av := object.Key("weekly")
+		if err := awsRestjson1_serializeDocumentWeeklyRecurrence(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentReferenceInput(v *types.ReferenceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7265,6 +7371,25 @@ func awsRestjson1_serializeDocumentRegisteredAzureIdentityDetails(v *types.Regis
 	if v.WebIdentityTokenAudiences != nil {
 		ok := object.Key("webIdentityTokenAudiences")
 		if err := awsRestjson1_serializeDocumentWebIdentityTokenAudienceList(v.WebIdentityTokenAudiences, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentReleaseManagementConfiguration(v *types.ReleaseManagementConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.NetworkAccess != nil {
+		ok := object.Key("networkAccess")
+		if err := awsRestjson1_serializeDocumentNetworkAccessConfiguration(v.NetworkAccess, ok); err != nil {
 			return err
 		}
 	}
@@ -7490,6 +7615,37 @@ func awsRestjson1_serializeDocumentScheduleCondition(v *types.ScheduleCondition,
 		ok.String(*v.Expression)
 	}
 
+	if v.Spec != nil {
+		ok := object.Key("spec")
+		if err := awsRestjson1_serializeDocumentScheduleSpec(v.Spec, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentScheduleSpec(v types.ScheduleSpec, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ScheduleSpecMemberCron:
+		av := object.Key("cron")
+		if err := awsRestjson1_serializeDocumentCronSchedule(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ScheduleSpecMemberTimeRange:
+		av := object.Key("timeRange")
+		if err := awsRestjson1_serializeDocumentTimeRangeSchedule(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -7636,6 +7792,12 @@ func awsRestjson1_serializeDocumentServiceConfiguration(v types.ServiceConfigura
 	case *types.ServiceConfigurationMemberPagerduty:
 		av := object.Key("pagerduty")
 		if err := awsRestjson1_serializeDocumentPagerDutyConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ServiceConfigurationMemberReleaseManagement:
+		av := object.Key("releaseManagement")
+		if err := awsRestjson1_serializeDocumentReleaseManagementConfiguration(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -8125,6 +8287,30 @@ func awsRestjson1_serializeDocumentTaskTypeList(v []types.TaskType, value smithy
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTimeRangeSchedule(v *types.TimeRangeSchedule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Recurrence != nil {
+		ok := object.Key("recurrence")
+		if err := awsRestjson1_serializeDocumentRecurrence(v.Recurrence, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StartAfter != nil {
+		ok := object.Key("startAfter")
+		ok.String(*v.StartAfter)
+	}
+
+	if v.StartBefore != nil {
+		ok := object.Key("startBefore")
+		ok.String(*v.StartBefore)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentTriggerAction(v document.Interface, value smithyjson.Value) error {
 	if v == nil {
 		return nil
@@ -8222,6 +8408,18 @@ func awsRestjson1_serializeDocumentWebIdentityTokenAudienceList(v []string, valu
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWeeklyRecurrence(v *types.WeeklyRecurrence, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DayOfWeek) > 0 {
+		ok := object.Key("dayOfWeek")
+		ok.String(string(v.DayOfWeek))
+	}
+
 	return nil
 }
 

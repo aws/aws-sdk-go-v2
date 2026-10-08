@@ -6581,6 +6581,36 @@ type S3Destination struct {
 	noSmithyDocumentSerde
 }
 
+// A single Amazon Simple Storage Service object to import as a notebook cell.
+type S3File struct {
+
+	// The key of the Amazon Simple Storage Service object to import.
+	//
+	// This member is required.
+	Key *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon Simple Storage Service objects to import as the cells of a notebook,
+// specified as a bucket and an ordered list of object keys.
+type S3FilesLocation struct {
+
+	// The name of the Amazon Simple Storage Service bucket that contains the files to
+	// import.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The files to import. Cells are created in the order in which you list the
+	// files. You can specify between 1 and 100 files.
+	//
+	// This member is required.
+	FileList []S3File
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon S3 properties of a connection.
 type S3PropertiesInput struct {
 
@@ -6962,6 +6992,7 @@ type SnowflakePropertiesPatch struct {
 // The following types satisfy this interface:
 //
 //	SourceLocationMemberS3
+//	SourceLocationMemberS3Files
 type SourceLocation interface {
 	isSourceLocation()
 }
@@ -6974,6 +7005,16 @@ type SourceLocationMemberS3 struct {
 }
 
 func (*SourceLocationMemberS3) isSourceLocation() {}
+
+// The Amazon Simple Storage Service objects to import as the notebook's cells.
+// One cell is created for each object, in the order in which you list them.
+type SourceLocationMemberS3Files struct {
+	Value S3FilesLocation
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceLocationMemberS3Files) isSourceLocation() {}
 
 // The Spark EMR properties.
 type SparkEmrPropertiesInput struct {

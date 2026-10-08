@@ -2447,10 +2447,11 @@ type StackResourceDriftInformationSummary struct {
 	//   expected configuration.
 	//
 	// Any resources that don't currently support drift detection have a status of
-	//   NOT_CHECKED . For more information, see [Resource type support for imports and drift detection]. If you performed an ContinueUpdateRollbackoperation on a
-	//   stack, any resources included in ResourcesToSkip will also have a status of
-	//   NOT_CHECKED . For more information about skipping resources during rollback
-	//   operations, see [Continue rolling back an update]in the CloudFormation User Guide.
+	//   NOT_CHECKED . For more information, see [Resource type support for imports and drift detection]. If you performed a ContinueUpdateRollbackoperation on a
+	//   stack, resources skipped using ResourcesToSkip or ForceRollback also have a
+	//   status of NOT_CHECKED . To detect whether a skipped resource actually differs
+	//   from the template, run DetectStackResourceDrift. For more information about skipping resources during
+	//   rollback operations, see [Continue rolling back an update]in the CloudFormation User Guide.
 	//
 	//   - IN_SYNC : The resource's actual configuration matches its expected
 	//   configuration.

@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: KeyspacesService.ListTypes
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"nextToken":"__NextToken__","types":["__Member__","__Member__"]}
+¿inextTokenm__NextToken__etypesŸj__Member__j__Member__ÿÿ

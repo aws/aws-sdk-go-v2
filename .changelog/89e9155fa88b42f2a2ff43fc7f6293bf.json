@@ -1,0 +1,8 @@
+{
+    "id": "89e9155f-a88b-42f2-a2ff-43fc7f6293bf",
+    "type": "feature",
+    "description": "Adds support for multi-file notebook import. StartNotebookImport now accepts an s3Files source location with an ordered list of Amazon S3 objects, creating one notebook cell per file, plus a type field to create either a DATA or SQL notebook.",
+    "modules": [
+        "service/datazone"
+    ]
+}

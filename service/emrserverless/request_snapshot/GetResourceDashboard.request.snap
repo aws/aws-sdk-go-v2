@@ -1,3 +1,3 @@
-GET /applications/__ApplicationId__/dashboard?resourceId=__ResourceId__&resourceType=SESSION
+GET /applications/__ApplicationId__/dashboard?accessSystemProfileLogs=true&resourceId=__ResourceId__&resourceType=SESSION
 
 

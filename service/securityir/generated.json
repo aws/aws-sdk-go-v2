@@ -17,6 +17,7 @@
         "api_op_GetCase.go",
         "api_op_GetCaseAttachmentDownloadUrl.go",
         "api_op_GetCaseAttachmentUploadUrl.go",
+        "api_op_GetFindingMetrics.go",
         "api_op_GetMembership.go",
         "api_op_ListCaseEdits.go",
         "api_op_ListCases.go",

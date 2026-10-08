@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeConnections_20231201/operation/DeleteSyncConfiguration
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.DeleteSyncConfiguration
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ResourceName":"__ResourceName__","SyncType":"CFN_STACK_SYNC"}
+¿lResourceNamep__ResourceName__hSyncTypenCFN_STACK_SYNCÿ

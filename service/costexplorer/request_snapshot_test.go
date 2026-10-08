@@ -258,6 +258,17 @@ func TestCheckRequestSnapshot_CreateAnomalyMonitor(t *testing.T) {
 						types.MatchOption("EQUALS"),
 					},
 				},
+				ProductAttributes: &types.ProductAttributeValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
 			},
 			DimensionalValueCount: 1,
 		},
@@ -362,6 +373,17 @@ func TestCheckRequestSnapshot_CreateAnomalySubscription(t *testing.T) {
 						types.MatchOption("EQUALS"),
 					},
 				},
+				ProductAttributes: &types.ProductAttributeValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
 			},
 		},
 		ResourceTags: []types.ResourceTag{
@@ -449,6 +471,17 @@ func TestCheckRequestSnapshot_CreateCostCategoryDefinition(t *testing.T) {
 							types.MatchOption("EQUALS"),
 						},
 					},
+					ProductAttributes: &types.ProductAttributeValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
 				},
 				InheritedValue: &types.CostCategoryInheritedValueDimension{
 					DimensionName: types.CostCategoryInheritedValueDimensionName("LINKED_ACCOUNT_NAME"),
@@ -491,6 +524,17 @@ func TestCheckRequestSnapshot_CreateCostCategoryDefinition(t *testing.T) {
 						},
 					},
 					CostCategories: &types.CostCategoryValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					ProductAttributes: &types.ProductAttributeValues{
 						Key: ptr.String("__Key__"),
 						Values: []string{
 							"__Member__",
@@ -916,6 +960,17 @@ func TestCheckRequestSnapshot_GetCostAndUsage(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		Metrics: []string{
 			"__Member__",
@@ -1002,6 +1057,17 @@ func TestCheckRequestSnapshot_GetCostAndUsageComparisons(t *testing.T) {
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -1099,6 +1165,17 @@ func TestCheckRequestSnapshot_GetCostAndUsageWithResources(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		Metrics: []string{
 			"__Member__",
@@ -1181,6 +1258,17 @@ func TestCheckRequestSnapshot_GetCostCategories(t *testing.T) {
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -1284,6 +1372,17 @@ func TestCheckRequestSnapshot_GetCostComparisonDrivers(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		GroupBy: []types.GroupDefinition{
 			{
@@ -1372,6 +1471,17 @@ func TestCheckRequestSnapshot_GetCostForecast(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		BillingViewArn:          ptr.String("__BillingViewArn__"),
 		PredictionIntervalLevel: ptr.Int32(1),
@@ -1406,8 +1516,9 @@ func TestCheckRequestSnapshot_GetDimensionValues(t *testing.T) {
 			Start: ptr.String("__Start__"),
 			End:   ptr.String("__End__"),
 		},
-		Dimension: types.Dimension("AZ"),
-		Context:   types.Context("COST_AND_USAGE"),
+		Dimension:    types.Dimension("AZ"),
+		DimensionKey: ptr.String("__DimensionKey__"),
+		Context:      types.Context("COST_AND_USAGE"),
 		Filter: &types.Expression{
 			Or: []types.Expression{
 				{},
@@ -1441,6 +1552,17 @@ func TestCheckRequestSnapshot_GetDimensionValues(t *testing.T) {
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -1549,6 +1671,17 @@ func TestCheckRequestSnapshot_GetReservationCoverage(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		Metrics: []string{
 			"__Member__",
@@ -1621,6 +1754,17 @@ func TestCheckRequestSnapshot_GetReservationPurchaseRecommendation(t *testing.T)
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -1727,6 +1871,17 @@ func TestCheckRequestSnapshot_GetReservationUtilization(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		SortBy: &types.SortDefinition{
 			Key:       ptr.String("__Key__"),
@@ -1793,6 +1948,17 @@ func TestCheckRequestSnapshot_GetRightsizingRecommendation(t *testing.T) {
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -1922,6 +2088,17 @@ func TestCheckRequestSnapshot_GetSavingsPlansCoverage(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		Metrics: []string{
 			"__Member__",
@@ -2009,6 +2186,17 @@ func TestCheckRequestSnapshot_GetSavingsPlansPurchaseRecommendation(t *testing.T
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2074,6 +2262,17 @@ func TestCheckRequestSnapshot_GetSavingsPlansUtilization(t *testing.T) {
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -2152,6 +2351,17 @@ func TestCheckRequestSnapshot_GetSavingsPlansUtilizationDetails(t *testing.T) {
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -2248,6 +2458,17 @@ func TestCheckRequestSnapshot_GetTags(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		SortBy: []types.SortDefinition{
 			{
@@ -2327,6 +2548,17 @@ func TestCheckRequestSnapshot_GetUsageForecast(t *testing.T) {
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -2884,6 +3116,17 @@ func TestCheckRequestSnapshot_UpdateAnomalySubscription(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2996,6 +3239,17 @@ func TestCheckRequestSnapshot_UpdateCostCategoryDefinition(t *testing.T) {
 							types.MatchOption("EQUALS"),
 						},
 					},
+					ProductAttributes: &types.ProductAttributeValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
 				},
 				InheritedValue: &types.CostCategoryInheritedValueDimension{
 					DimensionName: types.CostCategoryInheritedValueDimensionName("LINKED_ACCOUNT_NAME"),
@@ -3038,6 +3292,17 @@ func TestCheckRequestSnapshot_UpdateCostCategoryDefinition(t *testing.T) {
 						},
 					},
 					CostCategories: &types.CostCategoryValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					ProductAttributes: &types.ProductAttributeValues{
 						Key: ptr.String("__Key__"),
 						Values: []string{
 							"__Member__",
@@ -3183,6 +3448,17 @@ func TestUpdateRequestSnapshot_CreateAnomalyMonitor(t *testing.T) {
 						types.MatchOption("EQUALS"),
 					},
 				},
+				ProductAttributes: &types.ProductAttributeValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
 			},
 			DimensionalValueCount: 1,
 		},
@@ -3287,6 +3563,17 @@ func TestUpdateRequestSnapshot_CreateAnomalySubscription(t *testing.T) {
 						types.MatchOption("EQUALS"),
 					},
 				},
+				ProductAttributes: &types.ProductAttributeValues{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MatchOptions: []types.MatchOption{
+						types.MatchOption("EQUALS"),
+						types.MatchOption("EQUALS"),
+					},
+				},
 			},
 		},
 		ResourceTags: []types.ResourceTag{
@@ -3374,6 +3661,17 @@ func TestUpdateRequestSnapshot_CreateCostCategoryDefinition(t *testing.T) {
 							types.MatchOption("EQUALS"),
 						},
 					},
+					ProductAttributes: &types.ProductAttributeValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
 				},
 				InheritedValue: &types.CostCategoryInheritedValueDimension{
 					DimensionName: types.CostCategoryInheritedValueDimensionName("LINKED_ACCOUNT_NAME"),
@@ -3416,6 +3714,17 @@ func TestUpdateRequestSnapshot_CreateCostCategoryDefinition(t *testing.T) {
 						},
 					},
 					CostCategories: &types.CostCategoryValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					ProductAttributes: &types.ProductAttributeValues{
 						Key: ptr.String("__Key__"),
 						Values: []string{
 							"__Member__",
@@ -3841,6 +4150,17 @@ func TestUpdateRequestSnapshot_GetCostAndUsage(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		Metrics: []string{
 			"__Member__",
@@ -3927,6 +4247,17 @@ func TestUpdateRequestSnapshot_GetCostAndUsageComparisons(t *testing.T) {
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -4024,6 +4355,17 @@ func TestUpdateRequestSnapshot_GetCostAndUsageWithResources(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		Metrics: []string{
 			"__Member__",
@@ -4106,6 +4448,17 @@ func TestUpdateRequestSnapshot_GetCostCategories(t *testing.T) {
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -4209,6 +4562,17 @@ func TestUpdateRequestSnapshot_GetCostComparisonDrivers(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		GroupBy: []types.GroupDefinition{
 			{
@@ -4297,6 +4661,17 @@ func TestUpdateRequestSnapshot_GetCostForecast(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		BillingViewArn:          ptr.String("__BillingViewArn__"),
 		PredictionIntervalLevel: ptr.Int32(1),
@@ -4331,8 +4706,9 @@ func TestUpdateRequestSnapshot_GetDimensionValues(t *testing.T) {
 			Start: ptr.String("__Start__"),
 			End:   ptr.String("__End__"),
 		},
-		Dimension: types.Dimension("AZ"),
-		Context:   types.Context("COST_AND_USAGE"),
+		Dimension:    types.Dimension("AZ"),
+		DimensionKey: ptr.String("__DimensionKey__"),
+		Context:      types.Context("COST_AND_USAGE"),
 		Filter: &types.Expression{
 			Or: []types.Expression{
 				{},
@@ -4366,6 +4742,17 @@ func TestUpdateRequestSnapshot_GetDimensionValues(t *testing.T) {
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -4474,6 +4861,17 @@ func TestUpdateRequestSnapshot_GetReservationCoverage(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		Metrics: []string{
 			"__Member__",
@@ -4546,6 +4944,17 @@ func TestUpdateRequestSnapshot_GetReservationPurchaseRecommendation(t *testing.T
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -4652,6 +5061,17 @@ func TestUpdateRequestSnapshot_GetReservationUtilization(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		SortBy: &types.SortDefinition{
 			Key:       ptr.String("__Key__"),
@@ -4718,6 +5138,17 @@ func TestUpdateRequestSnapshot_GetRightsizingRecommendation(t *testing.T) {
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -4847,6 +5278,17 @@ func TestUpdateRequestSnapshot_GetSavingsPlansCoverage(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		Metrics: []string{
 			"__Member__",
@@ -4934,6 +5376,17 @@ func TestUpdateRequestSnapshot_GetSavingsPlansPurchaseRecommendation(t *testing.
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -4999,6 +5452,17 @@ func TestUpdateRequestSnapshot_GetSavingsPlansUtilization(t *testing.T) {
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -5077,6 +5541,17 @@ func TestUpdateRequestSnapshot_GetSavingsPlansUtilizationDetails(t *testing.T) {
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -5173,6 +5648,17 @@ func TestUpdateRequestSnapshot_GetTags(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 		SortBy: []types.SortDefinition{
 			{
@@ -5252,6 +5738,17 @@ func TestUpdateRequestSnapshot_GetUsageForecast(t *testing.T) {
 				},
 			},
 			CostCategories: &types.CostCategoryValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
+			ProductAttributes: &types.ProductAttributeValues{
 				Key: ptr.String("__Key__"),
 				Values: []string{
 					"__Member__",
@@ -5809,6 +6306,17 @@ func TestUpdateRequestSnapshot_UpdateAnomalySubscription(t *testing.T) {
 					types.MatchOption("EQUALS"),
 				},
 			},
+			ProductAttributes: &types.ProductAttributeValues{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MatchOptions: []types.MatchOption{
+					types.MatchOption("EQUALS"),
+					types.MatchOption("EQUALS"),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -5921,6 +6429,17 @@ func TestUpdateRequestSnapshot_UpdateCostCategoryDefinition(t *testing.T) {
 							types.MatchOption("EQUALS"),
 						},
 					},
+					ProductAttributes: &types.ProductAttributeValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
 				},
 				InheritedValue: &types.CostCategoryInheritedValueDimension{
 					DimensionName: types.CostCategoryInheritedValueDimensionName("LINKED_ACCOUNT_NAME"),
@@ -5963,6 +6482,17 @@ func TestUpdateRequestSnapshot_UpdateCostCategoryDefinition(t *testing.T) {
 						},
 					},
 					CostCategories: &types.CostCategoryValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					ProductAttributes: &types.ProductAttributeValues{
 						Key: ptr.String("__Key__"),
 						Values: []string{
 							"__Member__",

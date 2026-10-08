@@ -454,6 +454,7 @@ const (
 	KafkaSchemaRegistryAuthTypeBasicAuth                KafkaSchemaRegistryAuthType = "BASIC_AUTH"
 	KafkaSchemaRegistryAuthTypeClientCertificateTlsAuth KafkaSchemaRegistryAuthType = "CLIENT_CERTIFICATE_TLS_AUTH"
 	KafkaSchemaRegistryAuthTypeServerRootCaCertificate  KafkaSchemaRegistryAuthType = "SERVER_ROOT_CA_CERTIFICATE"
+	KafkaSchemaRegistryAuthTypeOauthbearerAuth          KafkaSchemaRegistryAuthType = "OAUTHBEARER_AUTH"
 )
 
 // Values returns all known values for KafkaSchemaRegistryAuthType. Note that this
@@ -465,6 +466,7 @@ func (KafkaSchemaRegistryAuthType) Values() []KafkaSchemaRegistryAuthType {
 		"BASIC_AUTH",
 		"CLIENT_CERTIFICATE_TLS_AUTH",
 		"SERVER_ROOT_CA_CERTIFICATE",
+		"OAUTHBEARER_AUTH",
 	}
 }
 
@@ -1019,14 +1021,21 @@ type SourceAccessType string
 
 // Enum values for SourceAccessType
 const (
-	SourceAccessTypeBasicAuth                SourceAccessType = "BASIC_AUTH"
-	SourceAccessTypeVpcSubnet                SourceAccessType = "VPC_SUBNET"
-	SourceAccessTypeVpcSecurityGroup         SourceAccessType = "VPC_SECURITY_GROUP"
-	SourceAccessTypeSaslScram512Auth         SourceAccessType = "SASL_SCRAM_512_AUTH"
-	SourceAccessTypeSaslScram256Auth         SourceAccessType = "SASL_SCRAM_256_AUTH"
-	SourceAccessTypeVirtualHost              SourceAccessType = "VIRTUAL_HOST"
-	SourceAccessTypeClientCertificateTlsAuth SourceAccessType = "CLIENT_CERTIFICATE_TLS_AUTH"
-	SourceAccessTypeServerRootCaCertificate  SourceAccessType = "SERVER_ROOT_CA_CERTIFICATE"
+	SourceAccessTypeBasicAuth                 SourceAccessType = "BASIC_AUTH"
+	SourceAccessTypeVpcSubnet                 SourceAccessType = "VPC_SUBNET"
+	SourceAccessTypeVpcSecurityGroup          SourceAccessType = "VPC_SECURITY_GROUP"
+	SourceAccessTypeSaslScram512Auth          SourceAccessType = "SASL_SCRAM_512_AUTH"
+	SourceAccessTypeSaslScram256Auth          SourceAccessType = "SASL_SCRAM_256_AUTH"
+	SourceAccessTypeVirtualHost               SourceAccessType = "VIRTUAL_HOST"
+	SourceAccessTypeClientCertificateTlsAuth  SourceAccessType = "CLIENT_CERTIFICATE_TLS_AUTH"
+	SourceAccessTypeServerRootCaCertificate   SourceAccessType = "SERVER_ROOT_CA_CERTIFICATE"
+	SourceAccessTypeOauthbearerAuth           SourceAccessType = "OAUTHBEARER_AUTH"
+	SourceAccessTypeOauthbearerScope          SourceAccessType = "OAUTHBEARER_SCOPE"
+	SourceAccessTypeOauthbearerAudience       SourceAccessType = "OAUTHBEARER_AUDIENCE"
+	SourceAccessTypeOauthbearerLogicalCluster SourceAccessType = "OAUTHBEARER_LOGICAL_CLUSTER"
+	SourceAccessTypeOauthbearerIdentityPool   SourceAccessType = "OAUTHBEARER_IDENTITY_POOL"
+	SourceAccessTypeIamAuth                   SourceAccessType = "IAM_AUTH"
+	SourceAccessTypeIamOauthbearerAuth        SourceAccessType = "IAM_OAUTHBEARER_AUTH"
 )
 
 // Values returns all known values for SourceAccessType. Note that this can be
@@ -1043,6 +1052,13 @@ func (SourceAccessType) Values() []SourceAccessType {
 		"VIRTUAL_HOST",
 		"CLIENT_CERTIFICATE_TLS_AUTH",
 		"SERVER_ROOT_CA_CERTIFICATE",
+		"OAUTHBEARER_AUTH",
+		"OAUTHBEARER_SCOPE",
+		"OAUTHBEARER_AUDIENCE",
+		"OAUTHBEARER_LOGICAL_CLUSTER",
+		"OAUTHBEARER_IDENTITY_POOL",
+		"IAM_AUTH",
+		"IAM_OAUTHBEARER_AUTH",
 	}
 }
 

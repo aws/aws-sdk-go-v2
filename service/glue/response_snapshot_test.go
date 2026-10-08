@@ -30543,6 +30543,53 @@ func TestCheckResponseSnapshot_GetStatement(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetSystemLogsForJobRun(t *testing.T) {
+	want := &GetSystemLogsForJobRunOutput{
+		SystemLogsUrl: ptr.String("__SystemLogsUrl__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetSystemLogsForJobRun.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetSystemLogsForJobRun(context.Background(), &GetSystemLogsForJobRunInput{
+		JobName: ptr.String("__JobName__"),
+		RunId:   ptr.String("__RunId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetSystemLogsForJobRun.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetSystemLogsForSession(t *testing.T) {
+	want := &GetSystemLogsForSessionOutput{
+		SystemLogsUrl: ptr.String("__SystemLogsUrl__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetSystemLogsForSession.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetSystemLogsForSession(context.Background(), &GetSystemLogsForSessionInput{
+		Id: ptr.String("__Id__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetSystemLogsForSession.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetTable(t *testing.T) {
 	want := &GetTableOutput{
 		Table: &types.Table{

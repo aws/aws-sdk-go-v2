@@ -2473,12 +2473,14 @@ var FargateDetails_ManagementType *smithy.Schema
 var FeatureAdditionalConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "FeatureAdditionalConfiguration",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var FeatureAdditionalConfiguration_EKS_ADDON_MANAGEMENT *smithy.Schema
 
 var FeatureAdditionalConfiguration_ECS_FARGATE_AGENT_MANAGEMENT *smithy.Schema
 
 var FeatureAdditionalConfiguration_EC2_AGENT_MANAGEMENT *smithy.Schema
+
+var FeatureAdditionalConfiguration_RDS_DATA_RISK *smithy.Schema
 
 var FeatureStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -4405,12 +4407,14 @@ var OrgFeature_AI_PROTECTION *smithy.Schema
 var OrgFeatureAdditionalConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "OrgFeatureAdditionalConfiguration",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var OrgFeatureAdditionalConfiguration_EKS_ADDON_MANAGEMENT *smithy.Schema
 
 var OrgFeatureAdditionalConfiguration_ECS_FARGATE_AGENT_MANAGEMENT *smithy.Schema
 
 var OrgFeatureAdditionalConfiguration_EC2_AGENT_MANAGEMENT *smithy.Schema
+
+var OrgFeatureAdditionalConfiguration_RDS_DATA_RISK *smithy.Schema
 
 var OrgFeatureStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -6070,7 +6074,7 @@ var _UsageDataSourceResultList_member *smithy.Schema
 var UsageFeature = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "UsageFeature",
-}, smithy.ShapeTypeEnum, 14)
+}, smithy.ShapeTypeEnum, 18)
 var UsageFeature_FLOW_LOGS *smithy.Schema
 
 var UsageFeature_CLOUD_TRAIL *smithy.Schema
@@ -6096,6 +6100,14 @@ var UsageFeature_FARGATE_RUNTIME_MONITORING *smithy.Schema
 var UsageFeature_RDS_DBI_PROTECTION_PROVISIONED *smithy.Schema
 
 var UsageFeature_RDS_DBI_PROTECTION_SERVERLESS *smithy.Schema
+
+var UsageFeature_RDS_DBI_PROTECTION_LIMITLESS *smithy.Schema
+
+var UsageFeature_RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED *smithy.Schema
+
+var UsageFeature_RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS *smithy.Schema
+
+var UsageFeature_RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS *smithy.Schema
 
 var UsageFeature_AI_PROTECTION *smithy.Schema
 
@@ -9550,6 +9562,8 @@ func init() {
 
 	FeatureAdditionalConfiguration_EC2_AGENT_MANAGEMENT = FeatureAdditionalConfiguration.AddMember("EC2_AGENT_MANAGEMENT", smithyprelude.Unit)
 
+	FeatureAdditionalConfiguration_RDS_DATA_RISK = FeatureAdditionalConfiguration.AddMember("RDS_DATA_RISK", smithyprelude.Unit)
+
 	FeatureStatus_ENABLED = FeatureStatus.AddMember("ENABLED", smithyprelude.Unit)
 
 	FeatureStatus_DISABLED = FeatureStatus.AddMember("DISABLED", smithyprelude.Unit)
@@ -10682,6 +10696,8 @@ func init() {
 
 	OrgFeatureAdditionalConfiguration_EC2_AGENT_MANAGEMENT = OrgFeatureAdditionalConfiguration.AddMember("EC2_AGENT_MANAGEMENT", smithyprelude.Unit)
 
+	OrgFeatureAdditionalConfiguration_RDS_DATA_RISK = OrgFeatureAdditionalConfiguration.AddMember("RDS_DATA_RISK", smithyprelude.Unit)
+
 	MemberAdditionalConfiguration_Name = MemberAdditionalConfiguration.AddMember("Name", OrgFeatureAdditionalConfiguration, &smithytraits.JSONName{Name: "name"})
 
 	MemberAdditionalConfiguration_Status = MemberAdditionalConfiguration.AddMember("Status", FeatureStatus, &smithytraits.JSONName{Name: "status"})
@@ -11195,6 +11211,14 @@ func init() {
 	UsageFeature_RDS_DBI_PROTECTION_PROVISIONED = UsageFeature.AddMember("RDS_DBI_PROTECTION_PROVISIONED", smithyprelude.Unit)
 
 	UsageFeature_RDS_DBI_PROTECTION_SERVERLESS = UsageFeature.AddMember("RDS_DBI_PROTECTION_SERVERLESS", smithyprelude.Unit)
+
+	UsageFeature_RDS_DBI_PROTECTION_LIMITLESS = UsageFeature.AddMember("RDS_DBI_PROTECTION_LIMITLESS", smithyprelude.Unit)
+
+	UsageFeature_RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED = UsageFeature.AddMember("RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED", smithyprelude.Unit)
+
+	UsageFeature_RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS = UsageFeature.AddMember("RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS", smithyprelude.Unit)
+
+	UsageFeature_RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS = UsageFeature.AddMember("RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS", smithyprelude.Unit)
 
 	UsageFeature_AI_PROTECTION = UsageFeature.AddMember("AI_PROTECTION", smithyprelude.Unit)
 

@@ -50,6 +50,10 @@ type GetResourceDashboardInput struct {
 	// This member is required.
 	ResourceType types.ResourceType
 
+	// Allows access to system profile logs for Lake Formation-enabled sessions.
+	// Default is false.
+	AccessSystemProfileLogs *bool
+
 	noSmithyDocumentSerde
 }
 

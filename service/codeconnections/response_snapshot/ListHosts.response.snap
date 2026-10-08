@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.ListHosts
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Hosts":[{"HostArn":"__HostArn__","Name":"__Name__","ProviderEndpoint":"__ProviderEndpoint__","ProviderType":"Bitbucket","Status":"__Status__","StatusMessage":"__StatusMessage__","VpcConfiguration":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"],"TlsCertificate":"__TlsCertificate__","VpcId":"__VpcId__"}},{"HostArn":"__HostArn__","Name":"__Name__","ProviderEndpoint":"__ProviderEndpoint__","ProviderType":"Bitbucket","Status":"__Status__","StatusMessage":"__StatusMessage__","VpcConfiguration":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"],"TlsCertificate":"__TlsCertificate__","VpcId":"__VpcId__"}}],"NextToken":"__NextToken__"}
+¿eHostsŸ¿gHostArnk__HostArn__dNameh__Name__pProviderEndpointt__ProviderEndpoint__lProviderTypeiBitbucketfStatusj__Status__mStatusMessageq__StatusMessage__pVpcConfiguration¿pSecurityGroupIdsŸj__Member__j__Member__ÿiSubnetIdsŸj__Member__j__Member__ÿnTlsCertificater__TlsCertificate__eVpcIdi__VpcId__ÿÿ¿gHostArnk__HostArn__dNameh__Name__pProviderEndpointt__ProviderEndpoint__lProviderTypeiBitbucketfStatusj__Status__mStatusMessageq__StatusMessage__pVpcConfiguration¿pSecurityGroupIdsŸj__Member__j__Member__ÿiSubnetIdsŸj__Member__j__Member__ÿnTlsCertificater__TlsCertificate__eVpcIdi__VpcId__ÿÿÿiNextTokenm__NextToken__ÿ

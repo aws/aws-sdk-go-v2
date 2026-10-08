@@ -1,5 +1,6 @@
 404
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: KeyspacesService.CreateTable
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"ResourceNotFoundException","message":"__Message__","resourceArn":"__ResourceArn__"}
+¿f__typexResourceNotFoundExceptiongmessagek__Message__kresourceArno__ResourceArn__ÿ

@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeConnections_20231201/operation/UpdateRepositoryLink
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.UpdateRepositoryLink
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ConnectionArn":"__ConnectionArn__","EncryptionKeyArn":"__EncryptionKeyArn__","RepositoryLinkId":"__RepositoryLinkId__"}
+¿mConnectionArnq__ConnectionArn__pEncryptionKeyArnt__EncryptionKeyArn__pRepositoryLinkIdt__RepositoryLinkId__ÿ

@@ -94,7 +94,7 @@ type CreateScriptInput struct {
 	StorageLocation *types.S3Location
 
 	// A list of labels to assign to the new script resource. Tags are
-	// developer-defined key-value pairs. Tagging Amazon Web Services resources are
+	// developer-defined key-value pairs. Tagging Amazon Web Services resources is
 	// useful for resource management, access management and cost allocation. For more
 	// information, see [Tagging Amazon Web Services Resources]in the Amazon Web Services General Reference. Once the
 	// resource is created, you can use [TagResource], [UntagResource], and [ListTagsForResource] to add, remove, and view tags. The
@@ -159,7 +159,7 @@ type CreateScriptOutput struct {
 	// uploaded from an S3 bucket under your account, the storage location reflects the
 	// information that was provided in the CreateScript request; (2) If the script
 	// file was uploaded from a local zip file, the storage location reflects an S3
-	// location controls by the Amazon GameLift Servers service.
+	// location controlled by the Amazon GameLift Servers service.
 	Script *types.Script
 
 	// Metadata pertaining to the operation's result.

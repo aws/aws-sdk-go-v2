@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -145,7 +145,7 @@ func TestUpdateResponseSnapshot_CreatePerformanceAnalysisReport(t *testing.T) {
 	want := &CreatePerformanceAnalysisReportOutput{
 		AnalysisReportId: ptr.String("__AnalysisReportId__"),
 	}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.CreatePerformanceAnalysisReport, schemas.CreatePerformanceAnalysisReportResponse, schemas.CreatePerformanceAnalysisReportResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -167,7 +167,7 @@ func TestUpdateResponseSnapshot_CreatePerformanceAnalysisReport(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeletePerformanceAnalysisReport(t *testing.T) {
 	want := &DeletePerformanceAnalysisReportOutput{}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.DeletePerformanceAnalysisReport, schemas.DeletePerformanceAnalysisReportResponse, schemas.DeletePerformanceAnalysisReportResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -233,7 +233,7 @@ func TestUpdateResponseSnapshot_DescribeDimensionKeys(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeDimensionKeys, schemas.DescribeDimensionKeysResponse, schemas.DescribeDimensionKeysResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -268,7 +268,7 @@ func TestUpdateResponseSnapshot_GetDimensionKeyDetails(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.GetDimensionKeyDetails, schemas.GetDimensionKeyDetailsResponse, schemas.GetDimensionKeyDetailsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -464,7 +464,7 @@ func TestUpdateResponseSnapshot_GetPerformanceAnalysisReport(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.GetPerformanceAnalysisReport, schemas.GetPerformanceAnalysisReportResponse, schemas.GetPerformanceAnalysisReportResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -493,7 +493,7 @@ func TestUpdateResponseSnapshot_GetResourceMetadata(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.GetResourceMetadata, schemas.GetResourceMetadataResponse, schemas.GetResourceMetadataResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -558,7 +558,7 @@ func TestUpdateResponseSnapshot_GetResourceMetrics(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.GetResourceMetrics, schemas.GetResourceMetricsResponse, schemas.GetResourceMetricsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -638,7 +638,7 @@ func TestUpdateResponseSnapshot_ListAvailableResourceDimensions(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.ListAvailableResourceDimensions, schemas.ListAvailableResourceDimensionsResponse, schemas.ListAvailableResourceDimensionsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -674,7 +674,7 @@ func TestUpdateResponseSnapshot_ListAvailableResourceMetrics(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.ListAvailableResourceMetrics, schemas.ListAvailableResourceMetricsResponse, schemas.ListAvailableResourceMetricsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -710,7 +710,7 @@ func TestUpdateResponseSnapshot_ListPerformanceAnalysisReportRecommendations(t *
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.ListPerformanceAnalysisReportRecommendations, schemas.ListPerformanceAnalysisReportRecommendationsResponse, schemas.ListPerformanceAnalysisReportRecommendationsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -770,7 +770,7 @@ func TestUpdateResponseSnapshot_ListPerformanceAnalysisReports(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.ListPerformanceAnalysisReports, schemas.ListPerformanceAnalysisReportsResponse, schemas.ListPerformanceAnalysisReportsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -803,7 +803,7 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceResponse, schemas.ListTagsForResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -825,7 +825,7 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceResponse, schemas.TagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -847,7 +847,7 @@ func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 	want := &UntagResourceOutput{}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceResponse, schemas.UntagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -871,7 +871,7 @@ func TestUpdateResponseSnapshot_Error_InternalServiceError(t *testing.T) {
 	want := &types.InternalServiceError{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.CreatePerformanceAnalysisReport, schemas.InternalServiceError, schemas.InternalServiceError)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -886,7 +886,7 @@ func TestUpdateResponseSnapshot_Error_InternalServiceError(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InternalServiceError.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -896,7 +896,7 @@ func TestUpdateResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 	want := &types.InvalidArgumentException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.CreatePerformanceAnalysisReport, schemas.InvalidArgumentException, schemas.InvalidArgumentException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -911,7 +911,7 @@ func TestUpdateResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidArgumentException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -921,7 +921,7 @@ func TestUpdateResponseSnapshot_Error_NotAuthorizedException(t *testing.T) {
 	want := &types.NotAuthorizedException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.PerformanceInsightsv20180227)
+	proto := rpcv2.NewCBOR(schemas.PerformanceInsightsv20180227)
 	opSchema := smithy.NewOperationSchema(schemas.CreatePerformanceAnalysisReport, schemas.NotAuthorizedException, schemas.NotAuthorizedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -936,7 +936,7 @@ func TestUpdateResponseSnapshot_Error_NotAuthorizedException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("NotAuthorizedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

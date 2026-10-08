@@ -170,6 +170,18 @@ func TestCheckSnapshot_GetCaseAttachmentUploadUrl(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetFindingMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFindingMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFindingMetrics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetMembership(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMembership(context.Background(), nil, func(o *Options) {
@@ -450,6 +462,18 @@ func TestUpdateSnapshot_GetCaseAttachmentUploadUrl(t *testing.T) {
 	_, err := svc.GetCaseAttachmentUploadUrl(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetCaseAttachmentUploadUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetFindingMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFindingMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFindingMetrics")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

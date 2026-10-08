@@ -38,7 +38,8 @@ func (c *Client) ListEmailIdentities(ctx context.Context, params *ListEmailIdent
 type ListEmailIdentitiesInput struct {
 
 	// An object that contains filters to apply when listing email identities. You can
-	// filter by identity name, identity type, or verification status.
+	// filter by a substring of the identity name, by identity type, or by verification
+	// status.
 	Filter map[string]string
 
 	// A token returned from a previous call to ListEmailIdentities to indicate the

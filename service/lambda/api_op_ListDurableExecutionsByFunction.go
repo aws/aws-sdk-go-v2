@@ -50,8 +50,8 @@ type ListDurableExecutionsByFunctionInput struct {
 	// Maximum number of executions to return (1-1000). Default is 100.
 	MaxItems int32
 
-	// The function version or alias. If not specified, lists executions for the
-	// $LATEST version.
+	// The function version to filter executions by. If you don't specify a qualifier,
+	// this operation returns executions across all versions of the Lambda function.
 	Qualifier *string
 
 	// Set to true to return results in chronological order (oldest first). Default is

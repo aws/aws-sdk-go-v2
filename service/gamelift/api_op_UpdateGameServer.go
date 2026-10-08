@@ -22,8 +22,8 @@ import (
 //   - To update the game server's utilization status from AVAILABLE (when the game
 //     server is available to be claimed) to UTILIZED (when the game server is
 //     currently hosting games). Identify the game server and game server group and
-//     specify the new utilization status. You can't change the status from to
-//     UTILIZED to AVAILABLE .
+//     specify the new utilization status. You can't change the status from UTILIZED
+//     to AVAILABLE .
 //
 //   - To report health status, identify the game server and game server group and
 //     set health check to HEALTHY . If a game server does not report health status
@@ -80,7 +80,7 @@ type UpdateGameServerInput struct {
 
 	// Indicates if the game server is available or is currently hosting gameplay. You
 	// can update a game server status from AVAILABLE to UTILIZED , but you can't
-	// change a the status from UTILIZED to AVAILABLE .
+	// change the status from UTILIZED to AVAILABLE .
 	UtilizationStatus types.GameServerUtilizationStatus
 
 	noSmithyDocumentSerde

@@ -513,6 +513,11 @@ func TestCheckRequestSnapshot_CreateTrigger(t *testing.T) {
 		Condition: &types.TriggerConditionMemberSchedule{
 			Value: types.ScheduleCondition{
 				Expression: ptr.String("__Expression__"),
+				Spec: &types.ScheduleSpecMemberCron{
+					Value: types.CronSchedule{
+						Expression: ptr.String("__Expression__"),
+					},
+				},
 			},
 		},
 		Action:      document.NewLazyDocument("__Document__"),
@@ -2517,6 +2522,11 @@ func TestUpdateRequestSnapshot_CreateTrigger(t *testing.T) {
 		Condition: &types.TriggerConditionMemberSchedule{
 			Value: types.ScheduleCondition{
 				Expression: ptr.String("__Expression__"),
+				Spec: &types.ScheduleSpecMemberCron{
+					Value: types.CronSchedule{
+						Expression: ptr.String("__Expression__"),
+					},
+				},
 			},
 		},
 		Action:      document.NewLazyDocument("__Document__"),

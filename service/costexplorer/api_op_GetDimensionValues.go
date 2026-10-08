@@ -33,6 +33,11 @@ type GetDimensionValuesInput struct {
 	// For more information, see Context . LINK_ACCOUNT_NAME and SERVICE_CODE can only
 	// be used in [CostCategoryRule].
 	//
+	// PRODUCT_ATTRIBUTE returns the product attribute keys that are available for
+	// your costs of supported services, or the values of the key that you specify in
+	// DimensionKey . PRODUCT_ATTRIBUTE is supported only in the COST_AND_USAGE
+	// context.
+	//
 	// [CostCategoryRule]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html
 	//
 	// This member is required.
@@ -108,6 +113,9 @@ type GetDimensionValuesInput struct {
 	//   CreateBucket .
 	//
 	//   - PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.
+	//
+	//   - PRODUCT_ATTRIBUTE - The product attributes of supported services, such as
+	//   the model provider or the model for Amazon Bedrock.
 	//
 	//   - PURCHASE_TYPE - The reservation type of the purchase that this usage is
 	//   related to. Examples include On-Demand Instances and Standard Reserved
@@ -188,6 +196,23 @@ type GetDimensionValuesInput struct {
 	//   - SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.
 	Context types.Context
 
+	// The product attribute key to return values for, such as model . If you omit
+	// DimensionKey or set it to an empty string, the response lists the product
+	// attribute keys that are available for your costs of supported services instead.
+	// For the supported services, see [ProductAttributeValues].
+	//
+	// If you specify a key, the response lists the values of that key. If some of
+	// your costs have no value for the key, the response includes an empty-string
+	// value. Keys are case-sensitive, and a key that doesn't exist returns no values
+	// other than an empty string.
+	//
+	// You can specify DimensionKey only when Dimension is PRODUCT_ATTRIBUTE . If you
+	// also specify SortBy , DimensionKey is required. As a result, you can't list
+	// product attribute keys when you use SortBy .
+	//
+	// [ProductAttributeValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
+	DimensionKey *string
+
 	// Use Expression to filter in various Cost Explorer APIs.
 	//
 	// Not all Expression types are supported in each API. Refer to the documentation
@@ -197,8 +222,8 @@ type GetDimensionValuesInput struct {
 	//
 	//   - Simple dimension values.
 	//
-	//   - There are three types of simple dimension values: CostCategories , Tags ,
-	//   and Dimensions .
+	//   - There are four types of simple dimension values: CostCategories , Tags ,
+	//   Dimensions , and ProductAttributes .
 	//
 	//   - Specify the CostCategories field to define a filter that acts on Cost
 	//   Categories.
@@ -207,6 +232,13 @@ type GetDimensionValuesInput struct {
 	//
 	//   - Specify the Dimensions field to define a filter that acts on the [DimensionValues]
 	//   DimensionValues .
+	//
+	//   - Specify the ProductAttributes field to define a filter that acts on the
+	//   product attributes of supported services, such as Amazon Bedrock. Only
+	//   GetCostAndUsage , GetCostAndUsageWithResources , GetDimensionValues (in the
+	//   COST_AND_USAGE context), GetTags , and GetCostCategories support
+	//   ProductAttributes . For the supported services, keys and SERVICE filter rules,
+	//   see [ProductAttributeValues]ProductAttributeValues .
 	//
 	//   - For each filter type, you can set the dimension name and values for the
 	//   filters that you plan to use.
@@ -263,6 +295,7 @@ type GetDimensionValuesInput struct {
 	// and OR aren't supported. Dimensions are limited to LINKED_ACCOUNT .
 	//
 	// [DimensionValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+	// [ProductAttributeValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
 	Filter *types.Expression
 
 	// This field is only used when SortBy is provided in the request. The maximum
@@ -323,6 +356,9 @@ func (v *GetDimensionValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Dimension != "" {
 		s.WriteString(schemas.GetDimensionValuesRequest_Dimension, string(v.Dimension))
+	}
+	if v.DimensionKey != nil {
+		s.WriteString(schemas.GetDimensionValuesRequest_DimensionKey, *v.DimensionKey)
 	}
 	if v.Filter != nil {
 		s.WriteStruct(schemas.GetDimensionValuesRequest_Filter)

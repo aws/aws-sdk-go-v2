@@ -21698,6 +21698,15 @@ func awsRestjson1_deserializeDocumentFinding(v **types.Finding, value interface{
 				sv.Reasoning = ptr.String(jtv)
 			}
 
+		case "remediationCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RemediationCode = ptr.String(jtv)
+			}
+
 		case "revalidationJobIds":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.RevalidationJobIds, value); err != nil {
 				return err

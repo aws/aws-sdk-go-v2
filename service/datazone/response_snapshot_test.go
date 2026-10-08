@@ -11760,6 +11760,7 @@ func TestCheckResponseSnapshot_StartNotebookImport(t *testing.T) {
 		OwningProjectId: ptr.String("__OwningProjectId__"),
 		Name:            ptr.String("__Name__"),
 		Description:     ptr.String("__Description__"),
+		Type:            types.NotebookType("DATA"),
 		SourceLocation: &types.SourceLocationMemberS3{
 			Value: "__SourceLocationMemberS3__",
 		},
@@ -11782,6 +11783,7 @@ func TestCheckResponseSnapshot_StartNotebookImport(t *testing.T) {
 		},
 		Name:        ptr.String("__Name__"),
 		Description: ptr.String("__Description__"),
+		Type:        types.NotebookType("DATA"),
 		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if err != nil {

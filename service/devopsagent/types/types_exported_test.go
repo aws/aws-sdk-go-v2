@@ -260,6 +260,24 @@ func ExampleMessage_outputUsage() {
 var _ []types.AssistantMessageBlock
 var _ []types.UserMessageBlock
 
+func ExampleNetworkAccessConfiguration_outputUsage() {
+	var union types.NetworkAccessConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.NetworkAccessConfigurationMemberPrivateAccess:
+		_ = v.Value // Value is types.PrivateNetworkAccess
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PrivateNetworkAccess
+
 func ExampleNewRelicServiceAuthorizationConfig_outputUsage() {
 	var union types.NewRelicServiceAuthorizationConfig
 	// type switches can be used to check the union value
@@ -318,6 +336,32 @@ func ExamplePrivateConnectionMode_outputUsage() {
 var _ *types.SelfManagedInput
 var _ *types.ServiceManagedInput
 
+func ExampleRecurrence_outputUsage() {
+	var union types.Recurrence
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RecurrenceMemberDaily:
+		_ = v.Value // Value is types.DailyRecurrence
+
+	case *types.RecurrenceMemberMonthly:
+		_ = v.Value // Value is types.MonthlyRecurrence
+
+	case *types.RecurrenceMemberWeekly:
+		_ = v.Value // Value is types.WeeklyRecurrence
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MonthlyRecurrence
+var _ *types.DailyRecurrence
+var _ *types.WeeklyRecurrence
+
 func ExampleRemoteAgentAuthorizationConfig_outputUsage() {
 	var union types.RemoteAgentAuthorizationConfig
 	// type switches can be used to check the union value
@@ -343,6 +387,28 @@ func ExampleRemoteAgentAuthorizationConfig_outputUsage() {
 var _ *types.RemoteAgentAPIKeyConfig
 var _ *types.RemoteAgentBearerTokenConfig
 var _ *types.RemoteAgentOAuthClientCredentialsConfig
+
+func ExampleScheduleSpec_outputUsage() {
+	var union types.ScheduleSpec
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ScheduleSpecMemberCron:
+		_ = v.Value // Value is types.CronSchedule
+
+	case *types.ScheduleSpecMemberTimeRange:
+		_ = v.Value // Value is types.TimeRangeSchedule
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TimeRangeSchedule
+var _ *types.CronSchedule
 
 func ExampleSendMessageContentBlockDelta_outputUsage() {
 	var union types.SendMessageContentBlockDelta
@@ -462,6 +528,9 @@ func ExampleServiceConfiguration_outputUsage() {
 	case *types.ServiceConfigurationMemberPagerduty:
 		_ = v.Value // Value is types.PagerDutyConfiguration
 
+	case *types.ServiceConfigurationMemberReleaseManagement:
+		_ = v.Value // Value is types.ReleaseManagementConfiguration
+
 	case *types.ServiceConfigurationMemberRemoteagent:
 		_ = v.Value // Value is types.RemoteAgentConfiguration
 
@@ -504,6 +573,7 @@ var _ *types.RemoteAgentConfiguration
 var _ *types.MCPServerGrafanaConfiguration
 var _ *types.SourceAwsConfiguration
 var _ *types.AWSConfiguration
+var _ *types.ReleaseManagementConfiguration
 var _ *types.GitHubConfiguration
 
 func ExampleServiceDetails_outputUsage() {

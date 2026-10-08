@@ -1,5 +1,6 @@
 400
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.AcceptAgreementCancellationRequest
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"ValidationException","fields":[{"message":"__Message__","name":"__Name__"},{"message":"__Message__","name":"__Name__"}],"message":"__Message__","reason":"MISSING_BILLING_ADJUSTMENTS","requestId":"__RequestId__"}
+¿f__typesValidationExceptionffieldsŸ¿gmessagek__Message__dnameh__Name__ÿ¿gmessagek__Message__dnameh__Name__ÿÿgmessagek__Message__freasonxMISSING_BILLING_ADJUSTMENTSirequestIdm__RequestId__ÿ

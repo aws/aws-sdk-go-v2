@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSShineFrontendService_20170701/operation/UpdateParallelData
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShineFrontendService_20170701.UpdateParallelData
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClientToken":"__ClientToken__","Description":"__Description__","Name":"__Name__","ParallelDataConfig":{"Format":"TSV","S3Uri":"__S3Uri__"}}
+¿kClientTokeno__ClientToken__kDescriptiono__Description__dNameh__Name__rParallelDataConfig¿fFormatcTSVeS3Urii__S3Uri__ÿÿ

@@ -12,6 +12,9 @@ import (
 )
 
 // Provides information about an export job.
+//
+// When the job status is COMPLETED , the response includes a pre-signed URL in
+// ExportDestination.S3Url that you use to download the export file.
 func (c *Client) GetExportJob(ctx context.Context, params *GetExportJobInput, optFns ...func(*Options)) (*GetExportJobOutput, error) {
 	if params == nil {
 		params = &GetExportJobInput{}
@@ -64,7 +67,8 @@ type GetExportJobOutput struct {
 	// The data source of the export job.
 	ExportDataSource *types.ExportDataSource
 
-	// The destination of the export job.
+	// The destination of the export job. When JobStatus is COMPLETED , this object
+	// includes S3Url , a pre-signed URL that you use to download the export file.
 	ExportDestination *types.ExportDestination
 
 	// The type of source of the export job.

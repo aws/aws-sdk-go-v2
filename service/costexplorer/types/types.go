@@ -979,8 +979,8 @@ type CostAndUsageComparison struct {
 	//
 	//   - Simple dimension values.
 	//
-	//   - There are three types of simple dimension values: CostCategories , Tags ,
-	//   and Dimensions .
+	//   - There are four types of simple dimension values: CostCategories , Tags ,
+	//   Dimensions , and ProductAttributes .
 	//
 	//   - Specify the CostCategories field to define a filter that acts on Cost
 	//   Categories.
@@ -989,6 +989,13 @@ type CostAndUsageComparison struct {
 	//
 	//   - Specify the Dimensions field to define a filter that acts on the [DimensionValues]
 	//   DimensionValues .
+	//
+	//   - Specify the ProductAttributes field to define a filter that acts on the
+	//   product attributes of supported services, such as Amazon Bedrock. Only
+	//   GetCostAndUsage , GetCostAndUsageWithResources , GetDimensionValues (in the
+	//   COST_AND_USAGE context), GetTags , and GetCostCategories support
+	//   ProductAttributes . For the supported services, keys and SERVICE filter rules,
+	//   see [ProductAttributeValues]ProductAttributeValues .
 	//
 	//   - For each filter type, you can set the dimension name and values for the
 	//   filters that you plan to use.
@@ -1045,6 +1052,7 @@ type CostAndUsageComparison struct {
 	// and OR aren't supported. Dimensions are limited to LINKED_ACCOUNT .
 	//
 	// [DimensionValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+	// [ProductAttributeValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
 	CostAndUsageSelector *Expression
 
 	// A mapping of metric names to their comparison values.
@@ -1723,8 +1731,8 @@ type CostComparisonDriver struct {
 	//
 	//   - Simple dimension values.
 	//
-	//   - There are three types of simple dimension values: CostCategories , Tags ,
-	//   and Dimensions .
+	//   - There are four types of simple dimension values: CostCategories , Tags ,
+	//   Dimensions , and ProductAttributes .
 	//
 	//   - Specify the CostCategories field to define a filter that acts on Cost
 	//   Categories.
@@ -1733,6 +1741,13 @@ type CostComparisonDriver struct {
 	//
 	//   - Specify the Dimensions field to define a filter that acts on the [DimensionValues]
 	//   DimensionValues .
+	//
+	//   - Specify the ProductAttributes field to define a filter that acts on the
+	//   product attributes of supported services, such as Amazon Bedrock. Only
+	//   GetCostAndUsage , GetCostAndUsageWithResources , GetDimensionValues (in the
+	//   COST_AND_USAGE context), GetTags , and GetCostCategories support
+	//   ProductAttributes . For the supported services, keys and SERVICE filter rules,
+	//   see [ProductAttributeValues]ProductAttributeValues .
 	//
 	//   - For each filter type, you can set the dimension name and values for the
 	//   filters that you plan to use.
@@ -1789,6 +1804,7 @@ type CostComparisonDriver struct {
 	// and OR aren't supported. Dimensions are limited to LINKED_ACCOUNT .
 	//
 	// [DimensionValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+	// [ProductAttributeValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
 	CostSelector *Expression
 
 	// A mapping of metric names to their comparison values.
@@ -2333,6 +2349,10 @@ type DimensionValues struct {
 	//
 	// ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE can only be
 	// used in [AnomalySubscriptions].
+	//
+	// Use PRODUCT_ATTRIBUTE only as the Dimension in GetDimensionValues . To filter or
+	// group by product attributes, use the ProductAttributes field of Expression or
+	// the PRODUCT_ATTRIBUTE group type.
 	//
 	// [AnomalySubscriptions]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html
 	// [CostCategoryRule]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html
@@ -3054,8 +3074,8 @@ func (v *ESInstanceDetails) Deserialize(d smithy.ShapeDeserializer) error {
 //
 //   - Simple dimension values.
 //
-//   - There are three types of simple dimension values: CostCategories , Tags ,
-//     and Dimensions .
+//   - There are four types of simple dimension values: CostCategories , Tags ,
+//     Dimensions , and ProductAttributes .
 //
 //   - Specify the CostCategories field to define a filter that acts on Cost
 //     Categories.
@@ -3064,6 +3084,13 @@ func (v *ESInstanceDetails) Deserialize(d smithy.ShapeDeserializer) error {
 //
 //   - Specify the Dimensions field to define a filter that acts on the [DimensionValues]
 //     DimensionValues .
+//
+//   - Specify the ProductAttributes field to define a filter that acts on the
+//     product attributes of supported services, such as Amazon Bedrock. Only
+//     GetCostAndUsage , GetCostAndUsageWithResources , GetDimensionValues (in the
+//     COST_AND_USAGE context), GetTags , and GetCostCategories support
+//     ProductAttributes . For the supported services, keys and SERVICE filter rules,
+//     see [ProductAttributeValues]ProductAttributeValues .
 //
 //   - For each filter type, you can set the dimension name and values for the
 //     filters that you plan to use.
@@ -3122,6 +3149,7 @@ func (v *ESInstanceDetails) Deserialize(d smithy.ShapeDeserializer) error {
 // and OR aren't supported. Dimensions are limited to LINKED_ACCOUNT .
 //
 // [DimensionValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+// [ProductAttributeValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
 type Expression struct {
 
 	// Return results that match both Dimension objects.
@@ -3138,6 +3166,16 @@ type Expression struct {
 
 	// Return results that match either Dimension object.
 	Or []Expression
+
+	// The filter that's based on ProductAttributeValues . Use it to filter the costs
+	// of supported services, such as Amazon Bedrock, by product attributes. The
+	// following operations support this filter: GetCostAndUsage ,
+	// GetCostAndUsageWithResources , GetDimensionValues (in the COST_AND_USAGE
+	// context), GetTags , and GetCostCategories . For the supported services and keys,
+	// see [ProductAttributeValues]ProductAttributeValues .
+	//
+	// [ProductAttributeValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
+	ProductAttributes *ProductAttributeValues
 
 	// The specific Tag to use for Expression .
 	Tags *TagValues
@@ -3169,6 +3207,11 @@ func (v *Expression) SerializeMembers(s smithy.ShapeSerializer) {
 		s.CloseStruct()
 	}
 	serializeExpressions(s, schemas.Expression_Or, v.Or)
+	if v.ProductAttributes != nil {
+		s.WriteStruct(schemas.Expression_ProductAttributes)
+		v.ProductAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Tags != nil {
 		s.WriteStruct(schemas.Expression_Tags)
 		v.Tags.SerializeMembers(s)
@@ -3191,6 +3234,9 @@ func (v *Expression) Deserialize(d smithy.ShapeDeserializer) error {
 			return v.Not.Deserialize(d)
 		case schemas.Expression_Or:
 			return deserializeExpressions(d, schemas.Expression_Or, &v.Or)
+		case schemas.Expression_ProductAttributes:
+			v.ProductAttributes = &ProductAttributeValues{}
+			return v.ProductAttributes.Deserialize(d)
 		case schemas.Expression_Tags:
 			v.Tags = &TagValues{}
 			return v.Tags.Deserialize(d)
@@ -3765,6 +3811,119 @@ func (v *NetworkResourceUtilization) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.NetworkResourceUtilization_NetworkPacketsOutPerSecond:
 			v.NetworkPacketsOutPerSecond = new(string)
 			return d.ReadString(schemas.NetworkResourceUtilization_NetworkPacketsOutPerSecond, v.NetworkPacketsOutPerSecond)
+		}
+		return nil
+	})
+}
+
+// The product attribute values that you can use to filter the costs of supported
+// services. Currently, Amazon Bedrock is the only supported service.
+//
+// The following product attribute keys are available for each supported service:
+//
+//   - Amazon Bedrock
+//
+//   - provider - The model provider, such as Anthropic , Cohere , or OpenAI .
+//
+//   - model - The model, such as Claude Sonnet 5 or Claude Haiku 4.5 .
+//
+//   - inferenceType - The type of inference usage, such as Input tokens or Output
+//     tokens .
+//
+//   - feature - The feature that was used, such as On-demand Inference or Reranker
+//     .
+//
+// The following operations support product attributes: GetCostAndUsage ,
+// GetCostAndUsageWithResources , GetDimensionValues (in the COST_AND_USAGE
+// context), GetTags , and GetCostCategories .
+//
+// Product attribute data is available for time periods that start on or after
+// September 1, 2026. Requests for earlier time periods that use product attributes
+// fail with a DataUnavailableException .
+//
+// The SERVICE filter rules for product attributes depend on the operation:
+//
+//   - GetCostAndUsage and GetCostAndUsageWithResources - Optional.
+//
+//   - GetDimensionValues - Required when the filter includes ProductAttributes ,
+//     for any Dimension . Otherwise, optional.
+//
+//   - GetTags and GetCostCategories - Required when the filter includes
+//     ProductAttributes .
+//
+// A SERVICE filter must contain only supported services, or the request fails
+// with a ValidationException . Service names are matched exactly. To list them,
+// use GetDimensionValues with Dimension set to SERVICE and the same TimePeriod ,
+// for example with SearchString set to Bedrock .
+//
+// The costs of a supported service can appear under multiple service names. When
+// the SERVICE filter is optional, omit it so that your results include all of
+// those costs.
+//
+// For example, the following Expression filters for the costs of one model: {
+// "ProductAttributes": { "Key": "model", "Values": [ "Claude Sonnet 5" ],
+// "MatchOptions": [ "EQUALS" ] } }
+type ProductAttributeValues struct {
+
+	// The name of the product attribute, such as model . The keys that are available
+	// depend on the service. For the keys of each supported service, see [ProductAttributeValues]
+	// ProductAttributeValues .
+	//
+	// Keys are case-sensitive. A key that doesn't exist doesn't return an error:
+	// EQUALS matches no costs, and ABSENT matches all costs of supported services.
+	//
+	// [ProductAttributeValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
+	//
+	// This member is required.
+	Key *string
+
+	// The match options that you can use to filter your results. Valid values:
+	//
+	//   - EQUALS - Matches the values that you specify.
+	//
+	//   - ABSENT - Matches costs that have no value for the key. Omit Values .
+	//
+	//   - CASE_SENSITIVE - Use only with EQUALS . Values are always matched
+	//   case-sensitively.
+	//
+	// Default values are EQUALS and CASE_SENSITIVE .
+	MatchOptions []MatchOption
+
+	// The specific values of the product attribute, such as Claude Sonnet 5 for the
+	// model key. Values are matched exactly, including case. To list the values of a
+	// key, use GetDimensionValues with Dimension set to PRODUCT_ATTRIBUTE and
+	// DimensionKey set to the key.
+	//
+	// To match costs that have no value for the key, set MatchOptions to ABSENT and
+	// omit Values . Otherwise, Values is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProductAttributeValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProductAttributeValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProductAttributeValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.ProductAttributeValues_Key, *v.Key)
+	}
+	serializeMatchOptions(s, schemas.ProductAttributeValues_MatchOptions, v.MatchOptions)
+	serializeProductAttributeValueList(s, schemas.ProductAttributeValues_Values, v.Values)
+}
+func (v *ProductAttributeValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProductAttributeValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProductAttributeValues_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ProductAttributeValues_Key, v.Key)
+		case schemas.ProductAttributeValues_MatchOptions:
+			return deserializeMatchOptions(d, schemas.ProductAttributeValues_MatchOptions, &v.MatchOptions)
+		case schemas.ProductAttributeValues_Values:
+			return deserializeProductAttributeValueList(d, schemas.ProductAttributeValues_Values, &v.Values)
 		}
 		return nil
 	})

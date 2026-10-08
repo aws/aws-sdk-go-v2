@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeConnections_20231201/operation/UpdateSyncBlocker
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.UpdateSyncBlocker
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Id":"__Id__","ResolvedReason":"__ResolvedReason__","ResourceName":"__ResourceName__","SyncType":"CFN_STACK_SYNC"}
+¿bIdf__Id__nResolvedReasonr__ResolvedReason__lResourceNamep__ResourceName__hSyncTypenCFN_STACK_SYNCÿ

@@ -17,7 +17,7 @@ import (
 // specific build or script. For fleets that have multiple locations, this
 // operation retrieves fleets based on their home Region only.
 //
-// You can use operation in the following ways:
+// You can use this operation in the following ways:
 //
 //   - To get a list of all fleets in a Region, don't provide a build or script
 //     identifier.

@@ -1952,6 +1952,31 @@ func TestUpdateResponseSnapshot_BatchUpdateStandardsControlAssociations(t *testi
 	}
 }
 
+func TestUpdateResponseSnapshot_CancelExportJobV2(t *testing.T) {
+	want := &CancelExportJobV2Output{
+		ExportJobId: ptr.String("__ExportJobId__"),
+		Status:      types.ExportStatus("RUNNING"),
+	}
+	proto := restjson1.New(schemas.SecurityHubAPIService)
+	opSchema := smithy.NewOperationSchema(schemas.CancelExportJobV2, schemas.CancelExportJobV2Response, schemas.CancelExportJobV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CancelExportJobV2.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateActionTarget(t *testing.T) {
 	want := &CreateActionTargetOutput{
 		ActionTargetArn: ptr.String("__ActionTargetArn__"),
@@ -3862,6 +3887,304 @@ func TestUpdateResponseSnapshot_GetEnabledStandards(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetEnabledStandards.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetExportJobV2(t *testing.T) {
+	want := &GetExportJobV2Output{
+		ExportJobId: ptr.String("__ExportJobId__"),
+		Name:        ptr.String("__Name__"),
+		Status:      types.ExportStatus("RUNNING"),
+		DataType:    types.ExportDataType("FINDINGS"),
+		OutputConfiguration: &types.ExportOutputMemberFindings{
+			Value: types.FindingsOutput{
+				Format: types.FindingsExportFormat("CSV"),
+				Filters: &types.OcsfFindingFilters{
+					CompositeFilters: []types.CompositeFilter{
+						{
+							StringFilters: []types.OcsfStringFilter{
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							DateFilters: []types.OcsfDateFilter{
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+							},
+							BooleanFilters: []types.OcsfBooleanFilter{
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+							},
+							NumberFilters: []types.OcsfNumberFilter{
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+							},
+							MapFilters: []types.OcsfMapFilter{
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+							},
+							IpFilters: []types.OcsfIpFilter{
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.CompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+						{
+							StringFilters: []types.OcsfStringFilter{
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfStringField("metadata.uid"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							DateFilters: []types.OcsfDateFilter{
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+								{
+									FieldName: types.OcsfDateField("finding_info.created_time_dt"),
+									Filter: &types.DateFilter{
+										Start: ptr.String("__Start__"),
+										End:   ptr.String("__End__"),
+										DateRange: &types.DateRange{
+											Value:      ptr.Int32(1),
+											Unit:       types.DateRangeUnit("DAYS"),
+											Comparison: types.DateRangeComparison("WITHIN"),
+										},
+									},
+								},
+							},
+							BooleanFilters: []types.OcsfBooleanFilter{
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+								{
+									FieldName: types.OcsfBooleanField("compliance.assessments.meets_criteria"),
+									Filter: &types.BooleanFilter{
+										Value: ptr.Bool(true),
+									},
+								},
+							},
+							NumberFilters: []types.OcsfNumberFilter{
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+								{
+									FieldName: types.OcsfNumberField("activity_id"),
+									Filter: &types.NumberFilter{
+										Gte: ptr.Float64(1.0),
+										Lte: ptr.Float64(1.0),
+										Eq:  ptr.Float64(1.0),
+										Gt:  ptr.Float64(1.0),
+										Lt:  ptr.Float64(1.0),
+									},
+								},
+							},
+							MapFilters: []types.OcsfMapFilter{
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.OcsfMapField("resources.tags"),
+									Filter: &types.MapFilter{
+										Key:        ptr.String("__Key__"),
+										Value:      ptr.String("__Value__"),
+										Comparison: types.MapFilterComparison("EQUALS"),
+									},
+								},
+							},
+							IpFilters: []types.OcsfIpFilter{
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+								{
+									FieldName: types.OcsfIpField("evidences.dst_endpoint.ip"),
+									Filter: &types.IpFilter{
+										Cidr: ptr.String("__Cidr__"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.CompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+					},
+					CompositeOperator: types.AllowedOperators("AND"),
+				},
+				SelectedFields: []types.FindingsSelectableField{
+					types.FindingsSelectableField("metadata.uid"),
+					types.FindingsSelectableField("metadata.uid"),
+				},
+			},
+		},
+		Scopes: &types.ExportScopes{
+			AwsOrganizations: []types.AwsOrganizationScope{
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+			},
+		},
+		Destination: &types.ExportDestinationMemberS3{
+			Value: types.S3ExportDestination{
+				BucketArn:    ptr.String("__BucketArn__"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+				ObjectPrefix: ptr.String("__ObjectPrefix__"),
+			},
+		},
+		FailureCode:    types.ExportFailureCode("ACCESS_DENIED"),
+		FailureMessage: ptr.String("__FailureMessage__"),
+		StartedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.SecurityHubAPIService)
+	opSchema := smithy.NewOperationSchema(schemas.GetExportJobV2, schemas.GetExportJobV2Response, schemas.GetExportJobV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetExportJobV2.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -9732,6 +10055,100 @@ func TestUpdateResponseSnapshot_ListEnabledProductsForImport(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListExportJobsV2(t *testing.T) {
+	want := &ListExportJobsV2Output{
+		Items: []types.ExportSummary{
+			{
+				ExportJobId: ptr.String("__ExportJobId__"),
+				Name:        ptr.String("__Name__"),
+				Status:      types.ExportStatus("RUNNING"),
+				DataType:    types.ExportDataType("FINDINGS"),
+				OutputConfiguration: &types.ExportOutputSummaryMemberFindings{
+					Value: types.FindingsOutputSummary{
+						Format: types.FindingsExportFormat("CSV"),
+					},
+				},
+				Scopes: &types.ExportScopes{
+					AwsOrganizations: []types.AwsOrganizationScope{
+						{
+							OrganizationId:       ptr.String("__OrganizationId__"),
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+						},
+						{
+							OrganizationId:       ptr.String("__OrganizationId__"),
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+						},
+					},
+				},
+				Destination: &types.ExportDestinationMemberS3{
+					Value: types.S3ExportDestination{
+						BucketArn:    ptr.String("__BucketArn__"),
+						KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+						ObjectPrefix: ptr.String("__ObjectPrefix__"),
+					},
+				},
+				FailureCode:    types.ExportFailureCode("ACCESS_DENIED"),
+				FailureMessage: ptr.String("__FailureMessage__"),
+				StartedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ExportJobId: ptr.String("__ExportJobId__"),
+				Name:        ptr.String("__Name__"),
+				Status:      types.ExportStatus("RUNNING"),
+				DataType:    types.ExportDataType("FINDINGS"),
+				OutputConfiguration: &types.ExportOutputSummaryMemberFindings{
+					Value: types.FindingsOutputSummary{
+						Format: types.FindingsExportFormat("CSV"),
+					},
+				},
+				Scopes: &types.ExportScopes{
+					AwsOrganizations: []types.AwsOrganizationScope{
+						{
+							OrganizationId:       ptr.String("__OrganizationId__"),
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+						},
+						{
+							OrganizationId:       ptr.String("__OrganizationId__"),
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+						},
+					},
+				},
+				Destination: &types.ExportDestinationMemberS3{
+					Value: types.S3ExportDestination{
+						BucketArn:    ptr.String("__BucketArn__"),
+						KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+						ObjectPrefix: ptr.String("__ObjectPrefix__"),
+					},
+				},
+				FailureCode:    types.ExportFailureCode("ACCESS_DENIED"),
+				FailureMessage: ptr.String("__FailureMessage__"),
+				StartedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.SecurityHubAPIService)
+	opSchema := smithy.NewOperationSchema(schemas.ListExportJobsV2, schemas.ListExportJobsV2Response, schemas.ListExportJobsV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListExportJobsV2.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListExposuresByRemediationV2(t *testing.T) {
 	want := &ListExposuresByRemediationV2Output{
 		Items: []types.ExposureFinding{
@@ -10230,6 +10647,30 @@ func TestUpdateResponseSnapshot_StartConfigurationPolicyDisassociation(t *testin
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("StartConfigurationPolicyDisassociation.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StartExportJobV2(t *testing.T) {
+	want := &StartExportJobV2Output{
+		ExportJobId: ptr.String("__ExportJobId__"),
+	}
+	proto := restjson1.New(schemas.SecurityHubAPIService)
+	opSchema := smithy.NewOperationSchema(schemas.StartExportJobV2, schemas.StartExportJobV2Response, schemas.StartExportJobV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartExportJobV2.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

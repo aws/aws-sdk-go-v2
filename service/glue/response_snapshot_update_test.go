@@ -25850,6 +25850,54 @@ func TestUpdateResponseSnapshot_GetStatement(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetSystemLogsForJobRun(t *testing.T) {
+	want := &GetSystemLogsForJobRunOutput{
+		SystemLogsUrl: ptr.String("__SystemLogsUrl__"),
+	}
+	proto := awsjson.New11(schemas.AWSGlue)
+	opSchema := smithy.NewOperationSchema(schemas.GetSystemLogsForJobRun, schemas.GetSystemLogsForJobRunResponse, schemas.GetSystemLogsForJobRunResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetSystemLogsForJobRun.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetSystemLogsForSession(t *testing.T) {
+	want := &GetSystemLogsForSessionOutput{
+		SystemLogsUrl: ptr.String("__SystemLogsUrl__"),
+	}
+	proto := awsjson.New11(schemas.AWSGlue)
+	opSchema := smithy.NewOperationSchema(schemas.GetSystemLogsForSession, schemas.GetSystemLogsForSessionResponse, schemas.GetSystemLogsForSessionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetSystemLogsForSession.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetTable(t *testing.T) {
 	want := &GetTableOutput{
 		Table: &types.Table{

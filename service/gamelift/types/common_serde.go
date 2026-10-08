@@ -145,6 +145,17 @@ func serializeContainerGroupDefinitionList(s smithy.ShapeSerializer, schema *smi
 	s.CloseList()
 }
 
+func serializeContainerGroupDefinitionRemoveAttributeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ContainerGroupDefinitionRemoveAttribute) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeContainerGroupPortMappingList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ContainerGroupPortMapping) {
 	if v == nil {
 		return
@@ -1146,6 +1157,20 @@ func deserializeContainerGroupDefinitionList(d smithy.ShapeDeserializer, s *smit
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeContainerGroupDefinitionRemoveAttributeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ContainerGroupDefinitionRemoveAttribute) error {
+	*v = make([]ContainerGroupDefinitionRemoveAttribute, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, ContainerGroupDefinitionRemoveAttribute(vv))
 		return nil
 	})
 }

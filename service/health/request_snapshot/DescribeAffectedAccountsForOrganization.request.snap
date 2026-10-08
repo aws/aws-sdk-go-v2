@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSHealth_20160804/operation/DescribeAffectedAccountsForOrganization
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSHealth_20160804.DescribeAffectedAccountsForOrganization
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"eventArn":"__EventArn__","maxResults":1,"nextToken":"__NextToken__"}
+¿heventArnl__EventArn__jmaxResultsinextTokenm__NextToken__ÿ

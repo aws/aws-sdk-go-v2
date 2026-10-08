@@ -6719,6 +6719,60 @@ func validateRuleTarget(v types.RuleTarget) error {
 	}
 }
 
+func validateS3File(v *types.S3File) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3File"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3FileList(v []types.S3File) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3FileList"}
+	for i := range v {
+		if err := validateS3File(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3FilesLocation(v *types.S3FilesLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3FilesLocation"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.FileList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileList"))
+	} else if v.FileList != nil {
+		if err := validateS3FileList(v.FileList); err != nil {
+			invalidParams.AddNested("FileList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3PropertiesInput(v *types.S3PropertiesInput) error {
 	if v == nil {
 		return nil
@@ -6847,6 +6901,25 @@ func validateSnowflakePropertiesPatch(v *types.SnowflakePropertiesPatch) error {
 		if err := validateLineageSyncInput(v.LineageSync); err != nil {
 			invalidParams.AddNested("LineageSync", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceLocation(v types.SourceLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceLocation"}
+	switch uv := v.(type) {
+	case *types.SourceLocationMemberS3Files:
+		if err := validateS3FilesLocation(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3Files]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10345,6 +10418,10 @@ func validateOpStartNotebookImportInput(v *StartNotebookImportInput) error {
 	}
 	if v.SourceLocation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceLocation"))
+	} else if v.SourceLocation != nil {
+		if err := validateSourceLocation(v.SourceLocation); err != nil {
+			invalidParams.AddNested("SourceLocation", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
@@ -10400,6 +10477,10 @@ func validateOpStartNotebookSyncInput(v *StartNotebookSyncInput) error {
 	}
 	if v.SourceLocation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceLocation"))
+	} else if v.SourceLocation != nil {
+		if err := validateSourceLocation(v.SourceLocation); err != nil {
+			invalidParams.AddNested("SourceLocation", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.GitMetadata != nil {
 		if err := validateGitMetadata(v.GitMetadata); err != nil {

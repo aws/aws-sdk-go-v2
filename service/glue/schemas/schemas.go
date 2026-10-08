@@ -897,6 +897,16 @@ var GetStatement = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetStatement",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetSystemLogsForJobRun = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GetSystemLogsForJobRun",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetSystemLogsForSession = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GetSystemLogsForSession",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetTable = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "GetTable",
@@ -13535,6 +13545,11 @@ var _UriString = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UriString",
 }, smithy.ShapeTypeString, 0)
 
+var _Url = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "Url",
+}, smithy.ShapeTypeString, 0)
+
 var _UrlString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "UrlString",
@@ -17283,6 +17298,32 @@ var GetStatementResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetStatementResponse",
 }, smithy.ShapeTypeStructure, 1)
 var GetStatementResponse_Statement *smithy.Schema
+
+var GetSystemLogsForJobRunRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GetSystemLogsForJobRunRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetSystemLogsForJobRunRequest_JobName *smithy.Schema
+
+var GetSystemLogsForJobRunRequest_RunId *smithy.Schema
+
+var GetSystemLogsForJobRunResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GetSystemLogsForJobRunResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetSystemLogsForJobRunResponse_SystemLogsUrl *smithy.Schema
+
+var GetSystemLogsForSessionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GetSystemLogsForSessionRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetSystemLogsForSessionRequest_Id *smithy.Schema
+
+var GetSystemLogsForSessionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GetSystemLogsForSessionResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetSystemLogsForSessionResponse_SystemLogsUrl *smithy.Schema
 
 var GetTableRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -28700,6 +28741,16 @@ func init() {
 	GetStatementRequest_RequestOrigin = GetStatementRequest.AddMember("RequestOrigin", _OrchestrationNameString)
 
 	GetStatementResponse_Statement = GetStatementResponse.AddMember("Statement", Statement)
+
+	GetSystemLogsForJobRunRequest_JobName = GetSystemLogsForJobRunRequest.AddMember("JobName", _NameString)
+
+	GetSystemLogsForJobRunRequest_RunId = GetSystemLogsForJobRunRequest.AddMember("RunId", _IdString)
+
+	GetSystemLogsForJobRunResponse_SystemLogsUrl = GetSystemLogsForJobRunResponse.AddMember("SystemLogsUrl", _Url)
+
+	GetSystemLogsForSessionRequest_Id = GetSystemLogsForSessionRequest.AddMember("Id", _NameString)
+
+	GetSystemLogsForSessionResponse_SystemLogsUrl = GetSystemLogsForSessionResponse.AddMember("SystemLogsUrl", _Url)
 
 	GetTableRequest_CatalogId = GetTableRequest.AddMember("CatalogId", _CatalogIdString)
 

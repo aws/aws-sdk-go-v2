@@ -4612,6 +4612,13 @@ type EncryptionAtRestOptions struct {
 	// True to enable encryption at rest.
 	Enabled *bool
 
+	// The type of encryption at rest applied to the domain's data. Valid values are
+	// DISK and NATIVE . DISK is the default and uses volume-level encryption. NATIVE
+	// uses engine-native, index-level encryption and requires encryption at rest to be
+	// enabled and OpenSearch version 3.3 or later. After the mode is set to NATIVE ,
+	// it can't be changed back to DISK .
+	EncryptionMode EncryptionMode
+
 	// The KMS key ID. Takes the form 1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a .
 	KmsKeyId *string
 
@@ -4628,6 +4635,9 @@ func (v *EncryptionAtRestOptions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enabled != nil {
 		s.WriteBool(schemas.EncryptionAtRestOptions_Enabled, *v.Enabled)
 	}
+	if v.EncryptionMode != "" {
+		s.WriteString(schemas.EncryptionAtRestOptions_EncryptionMode, string(v.EncryptionMode))
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.EncryptionAtRestOptions_KmsKeyId, *v.KmsKeyId)
 	}
@@ -4638,6 +4648,13 @@ func (v *EncryptionAtRestOptions) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.EncryptionAtRestOptions_Enabled:
 			v.Enabled = new(bool)
 			return d.ReadBool(schemas.EncryptionAtRestOptions_Enabled, v.Enabled)
+		case schemas.EncryptionAtRestOptions_EncryptionMode:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionAtRestOptions_EncryptionMode, &ev); err != nil {
+				return err
+			}
+			v.EncryptionMode = EncryptionMode(ev)
+			return nil
 		case schemas.EncryptionAtRestOptions_KmsKeyId:
 			v.KmsKeyId = new(string)
 			return d.ReadString(schemas.EncryptionAtRestOptions_KmsKeyId, v.KmsKeyId)

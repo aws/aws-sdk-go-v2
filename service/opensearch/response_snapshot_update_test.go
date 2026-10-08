@@ -665,8 +665,9 @@ func TestUpdateResponseSnapshot_CreateDomain(t *testing.T) {
 				RoleArn:        ptr.String("__RoleArn__"),
 			},
 			EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
-				Enabled:  ptr.Bool(true),
-				KmsKeyId: ptr.String("__KmsKeyId__"),
+				Enabled:        ptr.Bool(true),
+				KmsKeyId:       ptr.String("__KmsKeyId__"),
+				EncryptionMode: types.EncryptionMode("DISK"),
 			},
 			NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
 				Enabled: ptr.Bool(true),
@@ -1159,8 +1160,9 @@ func TestUpdateResponseSnapshot_DeleteDomain(t *testing.T) {
 				RoleArn:        ptr.String("__RoleArn__"),
 			},
 			EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
-				Enabled:  ptr.Bool(true),
-				KmsKeyId: ptr.String("__KmsKeyId__"),
+				Enabled:        ptr.Bool(true),
+				KmsKeyId:       ptr.String("__KmsKeyId__"),
+				EncryptionMode: types.EncryptionMode("DISK"),
 			},
 			NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
 				Enabled: ptr.Bool(true),
@@ -1667,8 +1669,9 @@ func TestUpdateResponseSnapshot_DescribeDomain(t *testing.T) {
 				RoleArn:        ptr.String("__RoleArn__"),
 			},
 			EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
-				Enabled:  ptr.Bool(true),
-				KmsKeyId: ptr.String("__KmsKeyId__"),
+				Enabled:        ptr.Bool(true),
+				KmsKeyId:       ptr.String("__KmsKeyId__"),
+				EncryptionMode: types.EncryptionMode("DISK"),
 			},
 			NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
 				Enabled: ptr.Bool(true),
@@ -2088,8 +2091,9 @@ func TestUpdateResponseSnapshot_DescribeDomainConfig(t *testing.T) {
 			},
 			EncryptionAtRestOptions: &types.EncryptionAtRestOptionsStatus{
 				Options: &types.EncryptionAtRestOptions{
-					Enabled:  ptr.Bool(true),
-					KmsKeyId: ptr.String("__KmsKeyId__"),
+					Enabled:        ptr.Bool(true),
+					KmsKeyId:       ptr.String("__KmsKeyId__"),
+					EncryptionMode: types.EncryptionMode("DISK"),
 				},
 				Status: &types.OptionStatus{
 					CreationDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2596,8 +2600,9 @@ func TestUpdateResponseSnapshot_DescribeDomains(t *testing.T) {
 					RoleArn:        ptr.String("__RoleArn__"),
 				},
 				EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
-					Enabled:  ptr.Bool(true),
-					KmsKeyId: ptr.String("__KmsKeyId__"),
+					Enabled:        ptr.Bool(true),
+					KmsKeyId:       ptr.String("__KmsKeyId__"),
+					EncryptionMode: types.EncryptionMode("DISK"),
 				},
 				NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
 					Enabled: ptr.Bool(true),
@@ -2816,8 +2821,9 @@ func TestUpdateResponseSnapshot_DescribeDomains(t *testing.T) {
 					RoleArn:        ptr.String("__RoleArn__"),
 				},
 				EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
-					Enabled:  ptr.Bool(true),
-					KmsKeyId: ptr.String("__KmsKeyId__"),
+					Enabled:        ptr.Bool(true),
+					KmsKeyId:       ptr.String("__KmsKeyId__"),
+					EncryptionMode: types.EncryptionMode("DISK"),
 				},
 				NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
 					Enabled: ptr.Bool(true),
@@ -3082,8 +3088,9 @@ func TestUpdateResponseSnapshot_DescribeDryRunProgress(t *testing.T) {
 				RoleArn:        ptr.String("__RoleArn__"),
 			},
 			EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
-				Enabled:  ptr.Bool(true),
-				KmsKeyId: ptr.String("__KmsKeyId__"),
+				Enabled:        ptr.Bool(true),
+				KmsKeyId:       ptr.String("__KmsKeyId__"),
+				EncryptionMode: types.EncryptionMode("DISK"),
 			},
 			NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
 				Enabled: ptr.Bool(true),
@@ -5852,8 +5859,9 @@ func TestUpdateResponseSnapshot_UpdateDomainConfig(t *testing.T) {
 			},
 			EncryptionAtRestOptions: &types.EncryptionAtRestOptionsStatus{
 				Options: &types.EncryptionAtRestOptions{
-					Enabled:  ptr.Bool(true),
-					KmsKeyId: ptr.String("__KmsKeyId__"),
+					Enabled:        ptr.Bool(true),
+					KmsKeyId:       ptr.String("__KmsKeyId__"),
+					EncryptionMode: types.EncryptionMode("DISK"),
 				},
 				Status: &types.OptionStatus{
 					CreationDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),

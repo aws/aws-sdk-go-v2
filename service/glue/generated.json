@@ -179,6 +179,8 @@
         "api_op_GetSession.go",
         "api_op_GetSessionEndpoint.go",
         "api_op_GetStatement.go",
+        "api_op_GetSystemLogsForJobRun.go",
+        "api_op_GetSystemLogsForSession.go",
         "api_op_GetTable.go",
         "api_op_GetTableOptimizer.go",
         "api_op_GetTableVersion.go",

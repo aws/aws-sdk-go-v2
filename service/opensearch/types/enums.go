@@ -548,6 +548,25 @@ func (DryRunMode) Values() []DryRunMode {
 	}
 }
 
+type EncryptionMode string
+
+// Enum values for EncryptionMode
+const (
+	EncryptionModeDisk   EncryptionMode = "DISK"
+	EncryptionModeNative EncryptionMode = "NATIVE"
+)
+
+// Values returns all known values for EncryptionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionMode) Values() []EncryptionMode {
+	return []EncryptionMode{
+		"DISK",
+		"NATIVE",
+	}
+}
+
 type EngineMode string
 
 // Enum values for EngineMode

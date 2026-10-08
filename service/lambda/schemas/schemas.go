@@ -2497,12 +2497,14 @@ var _KafkaSchemaRegistryAccessConfigList_member *smithy.Schema
 var KafkaSchemaRegistryAuthType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "KafkaSchemaRegistryAuthType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var KafkaSchemaRegistryAuthType_BASIC_AUTH *smithy.Schema
 
 var KafkaSchemaRegistryAuthType_CLIENT_CERTIFICATE_TLS_AUTH *smithy.Schema
 
 var KafkaSchemaRegistryAuthType_SERVER_ROOT_CA_CERTIFICATE *smithy.Schema
+
+var KafkaSchemaRegistryAuthType_OAUTHBEARER_AUTH *smithy.Schema
 
 var KafkaSchemaRegistryConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -3815,7 +3817,7 @@ var _SourceAccessConfigurations_member *smithy.Schema
 var SourceAccessType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "SourceAccessType",
-}, smithy.ShapeTypeEnum, 8)
+}, smithy.ShapeTypeEnum, 15)
 var SourceAccessType_BASIC_AUTH *smithy.Schema
 
 var SourceAccessType_VPC_SUBNET *smithy.Schema
@@ -3831,6 +3833,20 @@ var SourceAccessType_VIRTUAL_HOST *smithy.Schema
 var SourceAccessType_CLIENT_CERTIFICATE_TLS_AUTH *smithy.Schema
 
 var SourceAccessType_SERVER_ROOT_CA_CERTIFICATE *smithy.Schema
+
+var SourceAccessType_OAUTHBEARER_AUTH *smithy.Schema
+
+var SourceAccessType_OAUTHBEARER_SCOPE *smithy.Schema
+
+var SourceAccessType_OAUTHBEARER_AUDIENCE *smithy.Schema
+
+var SourceAccessType_OAUTHBEARER_LOGICAL_CLUSTER *smithy.Schema
+
+var SourceAccessType_OAUTHBEARER_IDENTITY_POOL *smithy.Schema
+
+var SourceAccessType_IAM_AUTH *smithy.Schema
+
+var SourceAccessType_IAM_OAUTHBEARER_AUTH *smithy.Schema
 
 var _SourceOwner = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -6017,6 +6033,8 @@ func init() {
 
 	KafkaSchemaRegistryAuthType_SERVER_ROOT_CA_CERTIFICATE = KafkaSchemaRegistryAuthType.AddMember("SERVER_ROOT_CA_CERTIFICATE", smithyprelude.Unit)
 
+	KafkaSchemaRegistryAuthType_OAUTHBEARER_AUTH = KafkaSchemaRegistryAuthType.AddMember("OAUTHBEARER_AUTH", smithyprelude.Unit)
+
 	KafkaSchemaRegistryAccessConfig_Type = KafkaSchemaRegistryAccessConfig.AddMember("Type", KafkaSchemaRegistryAuthType)
 
 	KafkaSchemaRegistryAccessConfig_URI = KafkaSchemaRegistryAccessConfig.AddMember("URI", _Arn)
@@ -6820,6 +6838,20 @@ func init() {
 	SourceAccessType_CLIENT_CERTIFICATE_TLS_AUTH = SourceAccessType.AddMember("CLIENT_CERTIFICATE_TLS_AUTH", smithyprelude.Unit)
 
 	SourceAccessType_SERVER_ROOT_CA_CERTIFICATE = SourceAccessType.AddMember("SERVER_ROOT_CA_CERTIFICATE", smithyprelude.Unit)
+
+	SourceAccessType_OAUTHBEARER_AUTH = SourceAccessType.AddMember("OAUTHBEARER_AUTH", smithyprelude.Unit)
+
+	SourceAccessType_OAUTHBEARER_SCOPE = SourceAccessType.AddMember("OAUTHBEARER_SCOPE", smithyprelude.Unit)
+
+	SourceAccessType_OAUTHBEARER_AUDIENCE = SourceAccessType.AddMember("OAUTHBEARER_AUDIENCE", smithyprelude.Unit)
+
+	SourceAccessType_OAUTHBEARER_LOGICAL_CLUSTER = SourceAccessType.AddMember("OAUTHBEARER_LOGICAL_CLUSTER", smithyprelude.Unit)
+
+	SourceAccessType_OAUTHBEARER_IDENTITY_POOL = SourceAccessType.AddMember("OAUTHBEARER_IDENTITY_POOL", smithyprelude.Unit)
+
+	SourceAccessType_IAM_AUTH = SourceAccessType.AddMember("IAM_AUTH", smithyprelude.Unit)
+
+	SourceAccessType_IAM_OAUTHBEARER_AUTH = SourceAccessType.AddMember("IAM_OAUTHBEARER_AUTH", smithyprelude.Unit)
 
 	SourceAccessConfiguration_Type = SourceAccessConfiguration.AddMember("Type", SourceAccessType)
 

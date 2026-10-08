@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeConnections_20231201/operation/CreateSyncConfiguration
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.CreateSyncConfiguration
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Branch":"__Branch__","ConfigFile":"__ConfigFile__","PublishDeploymentStatus":"ENABLED","PullRequestComment":"ENABLED","RepositoryLinkId":"__RepositoryLinkId__","ResourceName":"__ResourceName__","RoleArn":"__RoleArn__","SyncType":"CFN_STACK_SYNC","TriggerResourceUpdateOn":"ANY_CHANGE"}
+¿fBranchj__Branch__jConfigFilen__ConfigFile__wPublishDeploymentStatusgENABLEDrPullRequestCommentgENABLEDpRepositoryLinkIdt__RepositoryLinkId__lResourceNamep__ResourceName__gRoleArnk__RoleArn__hSyncTypenCFN_STACK_SYNCwTriggerResourceUpdateOnjANY_CHANGEÿ

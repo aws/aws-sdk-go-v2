@@ -6077,6 +6077,7 @@ func TestCheckRequestSnapshot_StartNotebookImport(t *testing.T) {
 		},
 		Name:        ptr.String("__Name__"),
 		Description: ptr.String("__Description__"),
+		Type:        types.NotebookType("DATA"),
 		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -13276,6 +13277,7 @@ func TestUpdateRequestSnapshot_StartNotebookImport(t *testing.T) {
 		},
 		Name:        ptr.String("__Name__"),
 		Description: ptr.String("__Description__"),
+		Type:        types.NotebookType("DATA"),
 		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}

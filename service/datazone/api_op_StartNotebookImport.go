@@ -47,8 +47,9 @@ type StartNotebookImportInput struct {
 	// This member is required.
 	OwningProjectIdentifier *string
 
-	// The source location of the notebook to import. This specifies the Amazon Simple
-	// Storage Service URI of the notebook file.
+	// The source location of the notebook to import. Specify either a single Amazon
+	// Simple Storage Service URI, or a list of objects to import as the notebook's
+	// cells.
 	//
 	// This member is required.
 	SourceLocation types.SourceLocation
@@ -59,6 +60,9 @@ type StartNotebookImportInput struct {
 
 	// The description of the imported notebook.
 	Description *string
+
+	// The type of the notebook to import. If not specified, defaults to DATA .
+	Type types.NotebookType
 
 	noSmithyDocumentSerde
 }
@@ -91,6 +95,9 @@ type StartNotebookImportOutput struct {
 
 	// The status of the notebook import.
 	Status types.NotebookStatus
+
+	// The type of the imported notebook.
+	Type types.NotebookType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

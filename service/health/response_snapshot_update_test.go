@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -150,7 +150,7 @@ func TestUpdateResponseSnapshot_DescribeAffectedAccountsForOrganization(t *testi
 		EventScopeCode: types.EventScopeCode("PUBLIC"),
 		NextToken:      ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeAffectedAccountsForOrganization, schemas.DescribeAffectedAccountsForOrganizationResponse, schemas.DescribeAffectedAccountsForOrganizationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -206,7 +206,7 @@ func TestUpdateResponseSnapshot_DescribeAffectedEntities(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeAffectedEntities, schemas.DescribeAffectedEntitiesResponse, schemas.DescribeAffectedEntitiesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -276,7 +276,7 @@ func TestUpdateResponseSnapshot_DescribeAffectedEntitiesForOrganization(t *testi
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeAffectedEntitiesForOrganization, schemas.DescribeAffectedEntitiesForOrganizationResponse, schemas.DescribeAffectedEntitiesForOrganizationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -315,7 +315,7 @@ func TestUpdateResponseSnapshot_DescribeEntityAggregates(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeEntityAggregates, schemas.DescribeEntityAggregatesResponse, schemas.DescribeEntityAggregatesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -386,7 +386,7 @@ func TestUpdateResponseSnapshot_DescribeEntityAggregatesForOrganization(t *testi
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeEntityAggregatesForOrganization, schemas.DescribeEntityAggregatesForOrganizationResponse, schemas.DescribeEntityAggregatesForOrganizationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -420,7 +420,7 @@ func TestUpdateResponseSnapshot_DescribeEventAggregates(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeEventAggregates, schemas.DescribeEventAggregatesResponse, schemas.DescribeEventAggregatesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -509,7 +509,7 @@ func TestUpdateResponseSnapshot_DescribeEventDetails(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeEventDetails, schemas.DescribeEventDetailsResponse, schemas.DescribeEventDetailsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -602,7 +602,7 @@ func TestUpdateResponseSnapshot_DescribeEventDetailsForOrganization(t *testing.T
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeEventDetailsForOrganization, schemas.DescribeEventDetailsForOrganizationResponse, schemas.DescribeEventDetailsForOrganizationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -648,7 +648,7 @@ func TestUpdateResponseSnapshot_DescribeEventTypes(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeEventTypes, schemas.DescribeEventTypesResponse, schemas.DescribeEventTypesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -710,7 +710,7 @@ func TestUpdateResponseSnapshot_DescribeEvents(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeEvents, schemas.DescribeEventsResponse, schemas.DescribeEventsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -770,7 +770,7 @@ func TestUpdateResponseSnapshot_DescribeEventsForOrganization(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeEventsForOrganization, schemas.DescribeEventsForOrganizationResponse, schemas.DescribeEventsForOrganizationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -794,7 +794,7 @@ func TestUpdateResponseSnapshot_DescribeHealthServiceStatusForOrganization(t *te
 	want := &DescribeHealthServiceStatusForOrganizationOutput{
 		HealthServiceAccessStatusForOrganization: ptr.String("__HealthServiceAccessStatusForOrganization__"),
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeHealthServiceStatusForOrganization, schemas.DescribeHealthServiceStatusForOrganizationResponse, schemas.DescribeHealthServiceStatusForOrganizationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -888,7 +888,7 @@ func TestUpdateResponseSnapshot_DescribeServiceLifecycle(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeServiceLifecycle, schemas.DescribeServiceLifecycleResponse, schemas.DescribeServiceLifecycleResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -910,7 +910,7 @@ func TestUpdateResponseSnapshot_DescribeServiceLifecycle(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisableHealthServiceAccessForOrganization(t *testing.T) {
 	want := &DisableHealthServiceAccessForOrganizationOutput{}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DisableHealthServiceAccessForOrganization, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -932,7 +932,7 @@ func TestUpdateResponseSnapshot_DisableHealthServiceAccessForOrganization(t *tes
 
 func TestUpdateResponseSnapshot_EnableHealthServiceAccessForOrganization(t *testing.T) {
 	want := &EnableHealthServiceAccessForOrganizationOutput{}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.EnableHealthServiceAccessForOrganization, nil, nil)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -956,7 +956,7 @@ func TestUpdateResponseSnapshot_Error_ConcurrentModificationException(t *testing
 	want := &types.ConcurrentModificationException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DisableHealthServiceAccessForOrganization, schemas.ConcurrentModificationException, schemas.ConcurrentModificationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -971,7 +971,7 @@ func TestUpdateResponseSnapshot_Error_ConcurrentModificationException(t *testing
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ConcurrentModificationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -981,7 +981,7 @@ func TestUpdateResponseSnapshot_Error_InvalidPaginationToken(t *testing.T) {
 	want := &types.InvalidPaginationToken{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeAffectedAccountsForOrganization, schemas.InvalidPaginationToken, schemas.InvalidPaginationToken)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -996,7 +996,7 @@ func TestUpdateResponseSnapshot_Error_InvalidPaginationToken(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidPaginationToken.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1006,7 +1006,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedLocale(t *testing.T) {
 	want := &types.UnsupportedLocale{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWSHealth_20160804)
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeAffectedEntities, schemas.UnsupportedLocale, schemas.UnsupportedLocale)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1021,7 +1021,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedLocale(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("UnsupportedLocale.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

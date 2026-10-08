@@ -1,5 +1,6 @@
 429
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.AcceptAgreementCancellationRequest
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"ThrottlingException","message":"__Message__","requestId":"__RequestId__"}
+¿f__typesThrottlingExceptiongmessagek__Message__irequestIdm__RequestId__ÿ

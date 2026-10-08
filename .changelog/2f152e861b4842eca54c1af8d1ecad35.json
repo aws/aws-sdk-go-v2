@@ -1,0 +1,8 @@
+{
+    "id": "2f152e86-1b48-42ec-a54c-1af8d1ecad35",
+    "type": "feature",
+    "description": "Adds a product attribute dimension to CreateBudget and UpdateBudget, letting customers filter AWS Budgets costs by structured attributes such as Amazon Bedrock model, provider, inference type, and feature.",
+    "modules": [
+        "service/budgets"
+    ]
+}

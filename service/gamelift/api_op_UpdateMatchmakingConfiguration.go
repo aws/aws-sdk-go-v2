@@ -118,8 +118,10 @@ type UpdateMatchmakingConfigurationInput struct {
 	// session queue resource and uniquely identifies it. ARNs are unique across all
 	// Regions. Format is arn:aws:gamelift:::gamesessionqueue/ . Queues can be located
 	// in any Region. Queues are used to start new Amazon GameLift Servers-hosted game
-	// sessions for matches that are created with this matchmaking configuration. If
-	// FlexMatchMode is set to STANDALONE , do not set this parameter.
+	// sessions for matches that are created with this matchmaking configuration. A
+	// matchmaking configuration supports only one queue; if you specify more than one
+	// ARN, the request fails with an InvalidRequestException . If FlexMatchMode is
+	// set to STANDALONE , do not set this parameter.
 	//
 	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	GameSessionQueueArns []string

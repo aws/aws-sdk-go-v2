@@ -12,9 +12,9 @@ import (
 
 //	This API works with the following fleet types: EC2, Anywhere, Container
 //
-// Adds remote locations to an EC2 and begins populating the new locations with
-// instances. The new instances conform to the fleet's instance type, auto-scaling,
-// and other configuration settings.
+// Adds remote locations to an EC2 fleet and begins populating the new locations
+// with instances. The new instances conform to the fleet's instance type,
+// auto-scaling, and other configuration settings.
 //
 // You can't add remote locations to a fleet that resides in an Amazon Web
 // Services Region that doesn't support multiple locations. Fleets created prior to

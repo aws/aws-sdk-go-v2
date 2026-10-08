@@ -3613,7 +3613,7 @@ var CloudWatchAlarmTemplateSummary_TreatMissingData *smithy.Schema
 var CloudWatchAlarmTemplateTargetResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "CloudWatchAlarmTemplateTargetResourceType",
-}, smithy.ShapeTypeEnum, 9)
+}, smithy.ShapeTypeEnum, 10)
 var CloudWatchAlarmTemplateTargetResourceType_CLOUDFRONT_DISTRIBUTION *smithy.Schema
 
 var CloudWatchAlarmTemplateTargetResourceType_MEDIALIVE_MULTIPLEX *smithy.Schema
@@ -3631,6 +3631,8 @@ var CloudWatchAlarmTemplateTargetResourceType_MEDIACONNECT_FLOW *smithy.Schema
 var CloudWatchAlarmTemplateTargetResourceType_S3_BUCKET *smithy.Schema
 
 var CloudWatchAlarmTemplateTargetResourceType_MEDIATAILOR_PLAYBACK_CONFIGURATION *smithy.Schema
+
+var CloudWatchAlarmTemplateTargetResourceType_ELEMENTAL_INFERENCE_FEED *smithy.Schema
 
 var CloudWatchAlarmTemplateTreatMissingData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -15191,6 +15193,8 @@ func init() {
 	CloudWatchAlarmTemplateTargetResourceType_S3_BUCKET = CloudWatchAlarmTemplateTargetResourceType.AddMember("S3_BUCKET", smithyprelude.Unit)
 
 	CloudWatchAlarmTemplateTargetResourceType_MEDIATAILOR_PLAYBACK_CONFIGURATION = CloudWatchAlarmTemplateTargetResourceType.AddMember("MEDIATAILOR_PLAYBACK_CONFIGURATION", smithyprelude.Unit)
+
+	CloudWatchAlarmTemplateTargetResourceType_ELEMENTAL_INFERENCE_FEED = CloudWatchAlarmTemplateTargetResourceType.AddMember("ELEMENTAL_INFERENCE_FEED", smithyprelude.Unit)
 
 	CloudWatchAlarmTemplateTreatMissingData_notBreaching = CloudWatchAlarmTemplateTreatMissingData.AddMember("notBreaching", smithyprelude.Unit)
 

@@ -3010,6 +3010,46 @@ func (m *validateOpGetStatement) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSystemLogsForJobRun struct {
+}
+
+func (*validateOpGetSystemLogsForJobRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSystemLogsForJobRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSystemLogsForJobRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSystemLogsForJobRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSystemLogsForSession struct {
+}
+
+func (*validateOpGetSystemLogsForSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSystemLogsForSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSystemLogsForSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSystemLogsForSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTable struct {
 }
 
@@ -5628,6 +5668,14 @@ func addOpGetSessionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetStatementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStatement{}, middleware.After)
+}
+
+func addOpGetSystemLogsForJobRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSystemLogsForJobRun{}, middleware.After)
+}
+
+func addOpGetSystemLogsForSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSystemLogsForSession{}, middleware.After)
 }
 
 func addOpGetTableValidationMiddleware(stack *middleware.Stack) error {
@@ -13835,6 +13883,39 @@ func validateOpGetStatementInput(v *GetStatementInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetStatementInput"}
 	if v.SessionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSystemLogsForJobRunInput(v *GetSystemLogsForJobRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSystemLogsForJobRunInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.RunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSystemLogsForSessionInput(v *GetSystemLogsForSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSystemLogsForSessionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,6 +1,7 @@
-POST /
+POST /service/PerformanceInsightsv20180227/operation/DeletePerformanceAnalysisReport
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: PerformanceInsightsv20180227.DeletePerformanceAnalysisReport
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AnalysisReportId":"__AnalysisReportId__","Identifier":"__Identifier__","ServiceType":"RDS"}
+¿pAnalysisReportIdt__AnalysisReportId__jIdentifiern__Identifier__kServiceTypecRDSÿ

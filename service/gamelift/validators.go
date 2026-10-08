@@ -3100,9 +3100,6 @@ func validateOpCreateContainerGroupDefinitionInput(v *CreateContainerGroupDefini
 	if v.TotalMemoryLimitMebibytes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TotalMemoryLimitMebibytes"))
 	}
-	if v.TotalVcpuLimit == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TotalVcpuLimit"))
-	}
 	if v.GameServerContainerDefinition != nil {
 		if err := validateGameServerContainerDefinitionInput(v.GameServerContainerDefinition); err != nil {
 			invalidParams.AddNested("GameServerContainerDefinition", err.(smithy.InvalidParamsError))

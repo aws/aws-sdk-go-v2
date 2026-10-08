@@ -290,6 +290,26 @@ func (m *validateOpBatchUpdateStandardsControlAssociations) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelExportJobV2 struct {
+}
+
+func (*validateOpCancelExportJobV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelExportJobV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelExportJobV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelExportJobV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateActionTarget struct {
 }
 
@@ -1030,6 +1050,26 @@ func (m *validateOpGetConnectorV2) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetExportJobV2 struct {
+}
+
+func (*validateOpGetExportJobV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetExportJobV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetExportJobV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetExportJobV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetFindingAggregator struct {
 }
 
@@ -1390,6 +1430,26 @@ func (m *validateOpStartConfigurationPolicyDisassociation) HandleInitialize(ctx 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartExportJobV2 struct {
+}
+
+func (*validateOpStartExportJobV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartExportJobV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartExportJobV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartExportJobV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1726,6 +1786,10 @@ func addOpBatchUpdateStandardsControlAssociationsValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpBatchUpdateStandardsControlAssociations{}, middleware.After)
 }
 
+func addOpCancelExportJobV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelExportJobV2{}, middleware.After)
+}
+
 func addOpCreateActionTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateActionTarget{}, middleware.After)
 }
@@ -1874,6 +1938,10 @@ func addOpGetConnectorV2ValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetConnectorV2{}, middleware.After)
 }
 
+func addOpGetExportJobV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetExportJobV2{}, middleware.After)
+}
+
 func addOpGetFindingAggregatorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFindingAggregator{}, middleware.After)
 }
@@ -1944,6 +2012,10 @@ func addOpStartConfigurationPolicyAssociationValidationMiddleware(stack *middlew
 
 func addOpStartConfigurationPolicyDisassociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartConfigurationPolicyDisassociation{}, middleware.After)
+}
+
+func addOpStartExportJobV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartExportJobV2{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -2372,6 +2444,44 @@ func validateCspmProviderUpdateConfiguration(v types.CspmProviderUpdateConfigura
 	}
 }
 
+func validateExportDestination(v types.ExportDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportDestination"}
+	switch uv := v.(type) {
+	case *types.ExportDestinationMemberS3:
+		if err := validateS3ExportDestination(&uv.Value); err != nil {
+			invalidParams.AddNested("[S3]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExportOutput(v types.ExportOutput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportOutput"}
+	switch uv := v.(type) {
+	case *types.ExportOutputMemberFindings:
+		if err := validateFindingsOutput(&uv.Value); err != nil {
+			invalidParams.AddNested("[Findings]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFindingProviderFields(v *types.FindingProviderFields) error {
 	if v == nil {
 		return nil
@@ -2381,6 +2491,21 @@ func validateFindingProviderFields(v *types.FindingProviderFields) error {
 		if err := validateRelatedFindingList(v.RelatedFindings); err != nil {
 			invalidParams.AddNested("RelatedFindings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFindingsOutput(v *types.FindingsOutput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FindingsOutput"}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2839,6 +2964,24 @@ func validateResourceList(v []types.Resource) error {
 		if err := validateResource(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3ExportDestination(v *types.S3ExportDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ExportDestination"}
+	if v.BucketArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketArn"))
+	}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3403,6 +3546,21 @@ func validateOpBatchUpdateStandardsControlAssociationsInput(v *BatchUpdateStanda
 		if err := validateStandardsControlAssociationUpdates(v.StandardsControlAssociationUpdates); err != nil {
 			invalidParams.AddNested("StandardsControlAssociationUpdates", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelExportJobV2Input(v *CancelExportJobV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelExportJobV2Input"}
+	if v.ExportJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExportJobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4038,6 +4196,21 @@ func validateOpGetConnectorV2Input(v *GetConnectorV2Input) error {
 	}
 }
 
+func validateOpGetExportJobV2Input(v *GetExportJobV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetExportJobV2Input"}
+	if v.ExportJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExportJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetFindingAggregatorInput(v *GetFindingAggregatorInput) error {
 	if v == nil {
 		return nil
@@ -4326,6 +4499,32 @@ func validateOpStartConfigurationPolicyDisassociationInput(v *StartConfiguration
 	invalidParams := smithy.InvalidParamsError{Context: "StartConfigurationPolicyDisassociationInput"}
 	if v.ConfigurationPolicyIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationPolicyIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartExportJobV2Input(v *StartExportJobV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartExportJobV2Input"}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	} else if v.Destination != nil {
+		if err := validateExportDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfiguration"))
+	} else if v.OutputConfiguration != nil {
+		if err := validateExportOutput(v.OutputConfiguration); err != nil {
+			invalidParams.AddNested("OutputConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

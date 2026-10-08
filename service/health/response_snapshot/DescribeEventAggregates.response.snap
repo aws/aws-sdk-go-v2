@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSHealth_20160804.DescribeEventAggregates
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"eventAggregates":[{"aggregateValue":"__AggregateValue__","count":1},{"aggregateValue":"__AggregateValue__","count":1}],"nextToken":"__NextToken__"}
+¿oeventAggregatesŸ¿naggregateValuer__AggregateValue__ecountÿ¿naggregateValuer__AggregateValue__ecountÿÿinextTokenm__NextToken__ÿ

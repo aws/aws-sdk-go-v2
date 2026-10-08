@@ -510,6 +510,11 @@ func TestCheckResponseSnapshot_CreateTrigger(t *testing.T) {
 			Condition: &types.TriggerConditionMemberSchedule{
 				Value: types.ScheduleCondition{
 					Expression: ptr.String("__Expression__"),
+					Spec: &types.ScheduleSpecMemberCron{
+						Value: types.CronSchedule{
+							Expression: ptr.String("__Expression__"),
+						},
+					},
 				},
 			},
 			Action:    document.NewLazyDocument("__Document__"),
@@ -532,6 +537,11 @@ func TestCheckResponseSnapshot_CreateTrigger(t *testing.T) {
 		Condition: &types.TriggerConditionMemberSchedule{
 			Value: types.ScheduleCondition{
 				Expression: ptr.String("__Expression__"),
+				Spec: &types.ScheduleSpecMemberCron{
+					Value: types.CronSchedule{
+						Expression: ptr.String("__Expression__"),
+					},
+				},
 			},
 		},
 		Action:      document.NewLazyDocument("__Document__"),
@@ -1240,6 +1250,11 @@ func TestCheckResponseSnapshot_GetTrigger(t *testing.T) {
 			Condition: &types.TriggerConditionMemberSchedule{
 				Value: types.ScheduleCondition{
 					Expression: ptr.String("__Expression__"),
+					Spec: &types.ScheduleSpecMemberCron{
+						Value: types.CronSchedule{
+							Expression: ptr.String("__Expression__"),
+						},
+					},
 				},
 			},
 			Action:    document.NewLazyDocument("__Document__"),
@@ -2189,6 +2204,11 @@ func TestCheckResponseSnapshot_ListTriggers(t *testing.T) {
 				Condition: &types.TriggerConditionMemberSchedule{
 					Value: types.ScheduleCondition{
 						Expression: ptr.String("__Expression__"),
+						Spec: &types.ScheduleSpecMemberCron{
+							Value: types.CronSchedule{
+								Expression: ptr.String("__Expression__"),
+							},
+						},
 					},
 				},
 				Action:    document.NewLazyDocument("__Document__"),
@@ -2203,6 +2223,11 @@ func TestCheckResponseSnapshot_ListTriggers(t *testing.T) {
 				Condition: &types.TriggerConditionMemberSchedule{
 					Value: types.ScheduleCondition{
 						Expression: ptr.String("__Expression__"),
+						Spec: &types.ScheduleSpecMemberCron{
+							Value: types.CronSchedule{
+								Expression: ptr.String("__Expression__"),
+							},
+						},
 					},
 				},
 				Action:    document.NewLazyDocument("__Document__"),
@@ -2873,6 +2898,11 @@ func TestCheckResponseSnapshot_UpdateTrigger(t *testing.T) {
 			Condition: &types.TriggerConditionMemberSchedule{
 				Value: types.ScheduleCondition{
 					Expression: ptr.String("__Expression__"),
+					Spec: &types.ScheduleSpecMemberCron{
+						Value: types.CronSchedule{
+							Expression: ptr.String("__Expression__"),
+						},
+					},
 				},
 			},
 			Action:    document.NewLazyDocument("__Document__"),

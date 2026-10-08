@@ -1058,7 +1058,7 @@ var DateInterval_End *smithy.Schema
 var Dimension = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "Dimension",
-}, smithy.ShapeTypeEnum, 35)
+}, smithy.ShapeTypeEnum, 36)
 var Dimension_AZ *smithy.Schema
 
 var Dimension_INSTANCE_TYPE *smithy.Schema
@@ -1128,6 +1128,13 @@ var Dimension_INVOICING_ENTITY *smithy.Schema
 var Dimension_ANOMALY_TOTAL_IMPACT_ABSOLUTE *smithy.Schema
 
 var Dimension_ANOMALY_TOTAL_IMPACT_PERCENTAGE *smithy.Schema
+
+var Dimension_PRODUCT_ATTRIBUTE *smithy.Schema
+
+var _DimensionKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.costexplorer",
+	Name:      "DimensionKey",
+}, smithy.ShapeTypeString, 0)
 
 var DimensionValues = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
@@ -1311,7 +1318,7 @@ var _Estimated = smithy.NewSchema(smithy.ShapeID{
 var Expression = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "Expression",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var Expression_Or *smithy.Schema
 
 var Expression_And *smithy.Schema
@@ -1323,6 +1330,8 @@ var Expression_Dimensions *smithy.Schema
 var Expression_Tags *smithy.Schema
 
 var Expression_CostCategories *smithy.Schema
+
+var Expression_ProductAttributes *smithy.Schema
 
 var _Expressions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
@@ -1487,12 +1496,14 @@ var _GroupDefinitions_member *smithy.Schema
 var GroupDefinitionType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "GroupDefinitionType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var GroupDefinitionType_DIMENSION *smithy.Schema
 
 var GroupDefinitionType_TAG *smithy.Schema
 
 var GroupDefinitionType_COST_CATEGORY *smithy.Schema
+
+var GroupDefinitionType_PRODUCT_ATTRIBUTE *smithy.Schema
 
 var _Groups = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
@@ -1827,6 +1838,27 @@ var _PredictionIntervalLevel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "PredictionIntervalLevel",
 }, smithy.ShapeTypeInteger, 0)
+
+var _ProductAttributeName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.costexplorer",
+	Name:      "ProductAttributeName",
+}, smithy.ShapeTypeString, 0)
+
+var _ProductAttributeValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.costexplorer",
+	Name:      "ProductAttributeValueList",
+}, smithy.ShapeTypeList, 1)
+var _ProductAttributeValueList_member *smithy.Schema
+
+var ProductAttributeValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.costexplorer",
+	Name:      "ProductAttributeValues",
+}, smithy.ShapeTypeStructure, 3)
+var ProductAttributeValues_Key *smithy.Schema
+
+var ProductAttributeValues_Values *smithy.Schema
+
+var ProductAttributeValues_MatchOptions *smithy.Schema
 
 var _PurchasedHours = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
@@ -3424,12 +3456,14 @@ var GetCostForecastResponse_ForecastResultsByTime *smithy.Schema
 var GetDimensionValuesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "GetDimensionValuesRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var GetDimensionValuesRequest_SearchString *smithy.Schema
 
 var GetDimensionValuesRequest_TimePeriod *smithy.Schema
 
 var GetDimensionValuesRequest_Dimension *smithy.Schema
+
+var GetDimensionValuesRequest_DimensionKey *smithy.Schema
 
 var GetDimensionValuesRequest_Context *smithy.Schema
 
@@ -4349,6 +4383,8 @@ func init() {
 
 	Dimension_ANOMALY_TOTAL_IMPACT_PERCENTAGE = Dimension.AddMember("ANOMALY_TOTAL_IMPACT_PERCENTAGE", smithyprelude.Unit)
 
+	Dimension_PRODUCT_ATTRIBUTE = Dimension.AddMember("PRODUCT_ATTRIBUTE", smithyprelude.Unit)
+
 	_Values_member = _Values.AddMember("member", _Value)
 
 	MatchOption_EQUALS = MatchOption.AddMember("EQUALS", smithyprelude.Unit)
@@ -4387,6 +4423,14 @@ func init() {
 
 	CostCategoryValues_MatchOptions = CostCategoryValues.AddMember("MatchOptions", _MatchOptions)
 
+	_ProductAttributeValueList_member = _ProductAttributeValueList.AddMember("member", _Value)
+
+	ProductAttributeValues_Key = ProductAttributeValues.AddMember("Key", _ProductAttributeName)
+
+	ProductAttributeValues_Values = ProductAttributeValues.AddMember("Values", _ProductAttributeValueList)
+
+	ProductAttributeValues_MatchOptions = ProductAttributeValues.AddMember("MatchOptions", _MatchOptions)
+
 	Expression_Or = Expression.AddMember("Or", _Expressions)
 
 	Expression_And = Expression.AddMember("And", _Expressions)
@@ -4398,6 +4442,8 @@ func init() {
 	Expression_Tags = Expression.AddMember("Tags", TagValues)
 
 	Expression_CostCategories = Expression.AddMember("CostCategories", CostCategoryValues)
+
+	Expression_ProductAttributes = Expression.AddMember("ProductAttributes", ProductAttributeValues)
 
 	AnomalyMonitor_MonitorArn = AnomalyMonitor.AddMember("MonitorArn", _GenericString)
 
@@ -4946,6 +4992,8 @@ func init() {
 	GroupDefinitionType_TAG = GroupDefinitionType.AddMember("TAG", smithyprelude.Unit)
 
 	GroupDefinitionType_COST_CATEGORY = GroupDefinitionType.AddMember("COST_CATEGORY", smithyprelude.Unit)
+
+	GroupDefinitionType_PRODUCT_ATTRIBUTE = GroupDefinitionType.AddMember("PRODUCT_ATTRIBUTE", smithyprelude.Unit)
 
 	GroupDefinition_Type = GroupDefinition.AddMember("Type", GroupDefinitionType)
 
@@ -5784,6 +5832,8 @@ func init() {
 	GetDimensionValuesRequest_TimePeriod = GetDimensionValuesRequest.AddMember("TimePeriod", DateInterval)
 
 	GetDimensionValuesRequest_Dimension = GetDimensionValuesRequest.AddMember("Dimension", Dimension)
+
+	GetDimensionValuesRequest_DimensionKey = GetDimensionValuesRequest.AddMember("DimensionKey", _DimensionKey)
 
 	GetDimensionValuesRequest_Context = GetDimensionValuesRequest.AddMember("Context", Context)
 

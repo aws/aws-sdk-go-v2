@@ -1,6 +1,7 @@
-POST /
+POST /service/PerformanceInsightsv20180227/operation/GetPerformanceAnalysisReport
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: PerformanceInsightsv20180227.GetPerformanceAnalysisReport
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"EN_US","AnalysisReportId":"__AnalysisReportId__","Identifier":"__Identifier__","ServiceType":"RDS","TextFormat":"PLAIN_TEXT"}
+¿nAcceptLanguageeEN_USpAnalysisReportIdt__AnalysisReportId__jIdentifiern__Identifier__kServiceTypecRDSjTextFormatjPLAIN_TEXTÿ

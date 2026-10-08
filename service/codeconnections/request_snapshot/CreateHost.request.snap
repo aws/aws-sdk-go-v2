@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeConnections_20231201/operation/CreateHost
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.CreateHost
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Name":"__Name__","ProviderEndpoint":"__ProviderEndpoint__","ProviderType":"Bitbucket","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpcConfiguration":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"],"TlsCertificate":"__TlsCertificate__","VpcId":"__VpcId__"}}
+¿dNameh__Name__pProviderEndpointt__ProviderEndpoint__lProviderTypeiBitbucketdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿpVpcConfiguration¿pSecurityGroupIdsŸj__Member__j__Member__ÿiSubnetIdsŸj__Member__j__Member__ÿnTlsCertificater__TlsCertificate__eVpcIdi__VpcId__ÿÿ

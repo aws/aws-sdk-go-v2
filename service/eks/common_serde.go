@@ -20,6 +20,17 @@ func serializeAccessPoliciesList(s smithy.ShapeSerializer, schema *smithy.Schema
 	s.CloseList()
 }
 
+func serializeAckDisabledServicesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeAddonCompatibilityDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AddonCompatibilityDetail) {
 	if v == nil {
 		return
@@ -606,6 +617,20 @@ func deserializeAccessPoliciesList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AccessPolicy{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAckDisabledServicesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

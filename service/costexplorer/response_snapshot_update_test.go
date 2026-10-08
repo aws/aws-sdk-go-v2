@@ -336,6 +336,17 @@ func TestUpdateResponseSnapshot_DescribeCostCategoryDefinition(t *testing.T) {
 								types.MatchOption("EQUALS"),
 							},
 						},
+						ProductAttributes: &types.ProductAttributeValues{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MatchOptions: []types.MatchOption{
+								types.MatchOption("EQUALS"),
+								types.MatchOption("EQUALS"),
+							},
+						},
 					},
 					InheritedValue: &types.CostCategoryInheritedValueDimension{
 						DimensionName: types.CostCategoryInheritedValueDimensionName("LINKED_ACCOUNT_NAME"),
@@ -378,6 +389,17 @@ func TestUpdateResponseSnapshot_DescribeCostCategoryDefinition(t *testing.T) {
 							},
 						},
 						CostCategories: &types.CostCategoryValues{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MatchOptions: []types.MatchOption{
+								types.MatchOption("EQUALS"),
+								types.MatchOption("EQUALS"),
+							},
+						},
+						ProductAttributes: &types.ProductAttributeValues{
 							Key: ptr.String("__Key__"),
 							Values: []string{
 								"__Member__",
@@ -641,6 +663,17 @@ func TestUpdateResponseSnapshot_GetAnomalyMonitors(t *testing.T) {
 							types.MatchOption("EQUALS"),
 						},
 					},
+					ProductAttributes: &types.ProductAttributeValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
 				},
 				DimensionalValueCount: 1,
 			},
@@ -685,6 +718,17 @@ func TestUpdateResponseSnapshot_GetAnomalyMonitors(t *testing.T) {
 						},
 					},
 					CostCategories: &types.CostCategoryValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					ProductAttributes: &types.ProductAttributeValues{
 						Key: ptr.String("__Key__"),
 						Values: []string{
 							"__Member__",
@@ -789,6 +833,17 @@ func TestUpdateResponseSnapshot_GetAnomalySubscriptions(t *testing.T) {
 							types.MatchOption("EQUALS"),
 						},
 					},
+					ProductAttributes: &types.ProductAttributeValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
 				},
 			},
 			{
@@ -846,6 +901,17 @@ func TestUpdateResponseSnapshot_GetAnomalySubscriptions(t *testing.T) {
 						},
 					},
 					CostCategories: &types.CostCategoryValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					ProductAttributes: &types.ProductAttributeValues{
 						Key: ptr.String("__Key__"),
 						Values: []string{
 							"__Member__",
@@ -1193,6 +1259,17 @@ func TestUpdateResponseSnapshot_GetCostAndUsageComparisons(t *testing.T) {
 							types.MatchOption("EQUALS"),
 						},
 					},
+					ProductAttributes: &types.ProductAttributeValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
 				},
 				Metrics: map[string]types.ComparisonMetricValue{
 					"key0": {
@@ -1237,6 +1314,17 @@ func TestUpdateResponseSnapshot_GetCostAndUsageComparisons(t *testing.T) {
 						},
 					},
 					CostCategories: &types.CostCategoryValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					ProductAttributes: &types.ProductAttributeValues{
 						Key: ptr.String("__Key__"),
 						Values: []string{
 							"__Member__",
@@ -1497,6 +1585,17 @@ func TestUpdateResponseSnapshot_GetCostComparisonDrivers(t *testing.T) {
 							types.MatchOption("EQUALS"),
 						},
 					},
+					ProductAttributes: &types.ProductAttributeValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
 				},
 				Metrics: map[string]types.ComparisonMetricValue{
 					"key0": {
@@ -1567,6 +1666,17 @@ func TestUpdateResponseSnapshot_GetCostComparisonDrivers(t *testing.T) {
 						},
 					},
 					CostCategories: &types.CostCategoryValues{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						MatchOptions: []types.MatchOption{
+							types.MatchOption("EQUALS"),
+							types.MatchOption("EQUALS"),
+						},
+					},
+					ProductAttributes: &types.ProductAttributeValues{
 						Key: ptr.String("__Key__"),
 						Values: []string{
 							"__Member__",

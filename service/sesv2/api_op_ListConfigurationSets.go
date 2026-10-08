@@ -38,7 +38,7 @@ func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigur
 type ListConfigurationSetsInput struct {
 
 	// An object that contains filters to apply when listing configuration sets. You
-	// can filter by configuration set name.
+	// can filter by a substring of the configuration set name.
 	Filter map[string]string
 
 	// A token returned from a previous call to ListConfigurationSets to indicate the

@@ -2199,10 +2199,12 @@ var EBSOptionsStatus_Status *smithy.Schema
 var EncryptionAtRestOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "EncryptionAtRestOptions",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var EncryptionAtRestOptions_Enabled *smithy.Schema
 
 var EncryptionAtRestOptions_KmsKeyId *smithy.Schema
+
+var EncryptionAtRestOptions_EncryptionMode *smithy.Schema
 
 var EncryptionAtRestOptionsStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -2211,6 +2213,14 @@ var EncryptionAtRestOptionsStatus = smithy.NewSchema(smithy.ShapeID{
 var EncryptionAtRestOptionsStatus_Options *smithy.Schema
 
 var EncryptionAtRestOptionsStatus_Status *smithy.Schema
+
+var EncryptionMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "EncryptionMode",
+}, smithy.ShapeTypeEnum, 2)
+var EncryptionMode_Disk *smithy.Schema
+
+var EncryptionMode_Native *smithy.Schema
 
 var _Endpoint = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -7555,9 +7565,15 @@ func init() {
 
 	VPCDerivedInfoStatus_Status = VPCDerivedInfoStatus.AddMember("Status", OptionStatus)
 
+	EncryptionMode_Disk = EncryptionMode.AddMember("Disk", smithyprelude.Unit)
+
+	EncryptionMode_Native = EncryptionMode.AddMember("Native", smithyprelude.Unit)
+
 	EncryptionAtRestOptions_Enabled = EncryptionAtRestOptions.AddMember("Enabled", _Boolean)
 
 	EncryptionAtRestOptions_KmsKeyId = EncryptionAtRestOptions.AddMember("KmsKeyId", _KmsKeyId)
+
+	EncryptionAtRestOptions_EncryptionMode = EncryptionAtRestOptions.AddMember("EncryptionMode", EncryptionMode)
 
 	EncryptionAtRestOptionsStatus_Options = EncryptionAtRestOptionsStatus.AddMember("Options", EncryptionAtRestOptions)
 

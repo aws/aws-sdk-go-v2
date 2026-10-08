@@ -219,8 +219,8 @@ func (v *AttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
 //   - To upload a game server build directly to Amazon GameLift Servers S3
 //     storage using CreateBuild . To get access for this task, call [https://docs.aws.amazon.com/gamelift/latest/apireference/API_RequestUploadCredentials.html].
 //
-//   - To remotely connect to an active Amazon GameLift Servers fleet instances.
-//     To get remote access, call [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetComputeAccess.html].
+//   - To remotely connect to an active Amazon GameLift Servers fleet instance. To
+//     get remote access, call [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetComputeAccess.html].
 //
 // [https://docs.aws.amazon.com/gamelift/latest/apireference/API_RequestUploadCredentials.html]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_RequestUploadCredentials.html
 // [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetComputeAccess.html]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetComputeAccess.html
@@ -500,7 +500,7 @@ func (v *ClaimFilterOption) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // An Amazon GameLift Servers compute resource for hosting your game servers.
-// Computes in an Amazon GameLift Servers fleet differs depending on the fleet's
+// Computes in an Amazon GameLift Servers fleet differ depending on the fleet's
 // compute type property as follows:
 //
 //   - For managed EC2 fleets, a compute is an EC2 instance.
@@ -803,7 +803,7 @@ func (v *ContainerAttribute) Deserialize(d smithy.ShapeDeserializer) error {
 
 // A container's dependency on another container in the same container group. The
 // dependency impacts how the dependent container is able to start or shut down
-// based the status of the other container.
+// based on the status of the other container.
 //
 // For example, ContainerA is configured with the following dependency: a START
 // dependency on ContainerB. This means that ContainerA can't start until
@@ -1004,8 +1004,8 @@ type ContainerFleet struct {
 
 	// The Amazon EC2 instance type to use for all instances in the fleet. Instance
 	// type determines the computing resources and processing power that's available to
-	// host your game servers. This includes including CPU, memory, storage, and
-	// networking capacity. You can't update this fleet property.
+	// host your game servers. This includes CPU, memory, storage, and networking
+	// capacity. You can't update this fleet property.
 	InstanceType *string
 
 	// Information about the container fleet's remote locations where fleet instances
@@ -1024,7 +1024,7 @@ type ContainerFleet struct {
 	//   - NONE -- Don't collect container logs.
 	LogConfiguration *LogConfiguration
 
-	// The calculated maximum number of game server container group that can be
+	// The calculated maximum number of game server container groups that can be
 	// deployed on each fleet instance. The calculation depends on the resource needs
 	// of the container group and the CPU and memory resources of the fleet's instance
 	// type.
@@ -1078,8 +1078,8 @@ type ContainerFleet struct {
 	//   - ACTIVE -- The container fleet has been deployed and is ready to host game
 	//   sessions.
 	//
-	//   - UPDATING -- Updates to the container fleet is being updated. A deployment is
-	//   in progress.
+	//   - UPDATING -- The container fleet is being updated. A deployment is in
+	//   progress.
 	//
 	//   - EXPIRED -- The container fleet has been expired. The fleet is scaled down to
 	//   zero instances and cannot host new game sessions.
@@ -1292,8 +1292,8 @@ type ContainerFleetLocationAttributes struct {
 	//   - ACTIVE -- The container fleet has been deployed and is ready to host game
 	//   sessions.
 	//
-	//   - UPDATING -- Updates to the container fleet is being updated. A deployment is
-	//   in progress.
+	//   - UPDATING -- The container fleet is being updated. A deployment is in
+	//   progress.
 	//
 	//   - EXPIRED -- The container fleet has been expired. The fleet is scaled down to
 	//   zero instances and cannot host new game sessions.
@@ -1345,8 +1345,8 @@ func (v *ContainerFleetLocationAttributes) Deserialize(d smithy.ShapeDeserialize
 }
 
 // The properties that describe a container group resource. You can update all
-// properties of a container group definition properties. Updates to a container
-// group definition are saved as new versions.
+// properties of a container group definition. Updates to a container group
+// definition are saved as new versions.
 //
 // Used with: [CreateContainerGroupDefinition]
 //
@@ -1434,13 +1434,13 @@ type ContainerGroupDefinition struct {
 	//   definition uses a different operating system than the one defined for the
 	//   container group.
 	//
-	// [IAM permission examples]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-iam-policy-examples.html.html
+	// [IAM permission examples]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-iam-policy-examples.html
 	// [Amazon GameLift Servers endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/gamelift.html
 	// [CreateContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerGroupDefinition.html
 	StatusReason *string
 
 	// The set of definitions for support containers in this group. A container group
-	// definition might have zero support container definitions. Support container can
+	// definition might have zero support container definitions. Support containers can
 	// be used in any type of container group.
 	SupportContainerDefinitions []SupportContainerDefinition
 
@@ -1454,9 +1454,17 @@ type ContainerGroupDefinition struct {
 
 	// The amount of vCPU units on a fleet instance to allocate for the container
 	// group (1 vCPU is equal to 1024 CPU units). All containers in the group share
-	// these resources. You can set a limit for each container definition in the group.
-	// If individual containers have limits, this total value must be equal to or
-	// greater than the sum of the limits for each container in the group.
+	// these resources. You can set a vCPU reservation for each container definition in
+	// the group. If individual containers have reservations, this total value must be
+	// equal to or greater than the sum of the reservations for each container in the
+	// group.
+	//
+	// For a game server container group, if this property is set, Amazon GameLift
+	// Servers uses this value to calculate how many game server container groups fit
+	// on an instance. If this property isn't set, the group's containers can use up to
+	// the instance's available vCPU, and Amazon GameLift Servers uses the sum of the
+	// containers' Vcpu values to calculate how many game server container groups fit
+	// on an instance.
 	TotalVcpuLimit *float64
 
 	// An optional description that was provided for a container group definition
@@ -2249,7 +2257,7 @@ func (v *EC2InstanceCounts) Deserialize(d smithy.ShapeDeserializer) error {
 // The Amazon GameLift Servers service limits for an Amazon EC2 instance type and
 // current utilization. Amazon GameLift Servers allows Amazon Web Services accounts
 // a maximum number of instances, per instance type, per Amazon Web Services Region
-// or location, for use with Amazon GameLift Servers. You can request an limit
+// or location, for use with Amazon GameLift Servers. You can request a limit
 // increase for your account by using the Service limits page in the Amazon
 // GameLift Servers console.
 type EC2InstanceLimit struct {
@@ -2360,7 +2368,7 @@ type Event struct {
 	//   instance.
 	//
 	//   - FLEET_CREATION_EXTRACTING_BUILD -- The game server build was successfully
-	//   downloaded to an instance, and Amazon GameLift Serversis now extracting the
+	//   downloaded to an instance, and Amazon GameLift Servers is now extracting the
 	//   build files from the uploaded build. Failure at this stage prevents a fleet from
 	//   moving to ACTIVE status. Logs for this stage display a list of the files that
 	//   are extracted and saved on the instance. Access the logs by using the URL in
@@ -2376,12 +2384,12 @@ type Event struct {
 	//   - FLEET_CREATION_COMPLETED_INSTALLER -- The game server build files were
 	//   successfully installed and validation of the installation will begin soon.
 	//
-	//   - FLEET_CREATION_FAILED_INSTALLER -- The installed failed while attempting to
+	//   - FLEET_CREATION_FAILED_INSTALLER -- The installer failed while attempting to
 	//   install the build files. This event indicates that the failure occurred before
 	//   Amazon GameLift Servers could start validation.
 	//
 	//   - FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build process was
-	//   successful, and the GameLift is now verifying that the game server launch paths,
+	//   successful, and GameLift is now verifying that the game server launch paths,
 	//   which are specified in the fleet's runtime configuration, exist. If any listed
 	//   launch path exists, Amazon GameLift Servers tries to launch a game server
 	//   process and waits for the process to report ready. Failures in this stage
@@ -2584,7 +2592,7 @@ func (v *Event) Deserialize(d smithy.ShapeDeserializer) error {
 // A list of fleet locations where a game session queue can place new game
 // sessions. You can use a filter to temporarily exclude specific locations from
 // receiving placements. For queues that have multi-location fleets, you can use a
-// filter configuration allow placement with some, but not all, of a fleet's
+// filter configuration to allow placement with some, but not all, of a fleet's
 // locations.
 type FilterConfiguration struct {
 
@@ -2770,8 +2778,8 @@ type FleetAttributes struct {
 	//
 	// The policy is evaluated when a player tries to create a new game session. On
 	// receiving a CreateGameSession request, Amazon GameLift Servers checks that the
-	// player (identified by CreatorId ) has created fewer than game session limit in
-	// the specified time period.
+	// player (identified by CreatorId ) has created fewer than the game session limit
+	// in the specified time period.
 	//
 	// The purpose of this policy is to prevent a single player from consuming a large
 	// share of available hosting resources. For example, setting
@@ -2809,9 +2817,9 @@ type FleetAttributes struct {
 	//   - NEW -- A new fleet resource has been defined and Amazon GameLift Servers
 	//   has started creating the fleet. Desired instances is set to 1.
 	//
-	//   - DOWNLOADING/VALIDATING/BUILDING -- Amazon GameLift Servers is download the
-	//   game server build, running install scripts, and then validating the build files.
-	//   When complete, Amazon GameLift Servers launches a fleet instance.
+	//   - DOWNLOADING/VALIDATING/BUILDING -- Amazon GameLift Servers is downloading
+	//   the game server build, running install scripts, and then validating the build
+	//   files. When complete, Amazon GameLift Servers launches a fleet instance.
 	//
 	//   - ACTIVATING -- Amazon GameLift Servers is launching a game server process
 	//   and testing its connectivity with the Amazon GameLift Servers service.
@@ -3694,6 +3702,24 @@ type GameServerContainerDefinition struct {
 	// container fleets.
 	ServerSdkVersion *string
 
+	// The number of vCPU units reserved for the game server container. The container
+	// can use more vCPU when it's available, up to the container group's total vCPU
+	// limit if one is set. If the container group has a total vCPU limit and the
+	// request doesn't set this value, Amazon GameLift Servers calculates the game
+	// server container's vCPU as the total vCPU limit minus the sum of the vCPU units
+	// reserved for the group's support containers.
+	//
+	// A game server container group needs either a total vCPU limit or this value. If
+	// the container group doesn't have a total vCPU limit, the group's containers can
+	// use up to the instance's available vCPU, and Amazon GameLift Servers uses the
+	// sum of the group's container Vcpu values to calculate how many game server
+	// container groups fit on an instance.
+	//
+	// Related data type: [ContainerGroupDefinition]TotalVcpuLimit
+	//
+	// [ContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html
+	Vcpu *float64
+
 	noSmithyDocumentSerde
 }
 
@@ -3729,6 +3755,9 @@ func (v *GameServerContainerDefinition) SerializeMembers(s smithy.ShapeSerialize
 	if v.ServerSdkVersion != nil {
 		s.WriteString(schemas.GameServerContainerDefinition_ServerSdkVersion, *v.ServerSdkVersion)
 	}
+	if v.Vcpu != nil {
+		s.WriteFloat64(schemas.GameServerContainerDefinition_Vcpu, *v.Vcpu)
+	}
 }
 func (v *GameServerContainerDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GameServerContainerDefinition, func(s *smithy.Schema) error {
@@ -3757,6 +3786,9 @@ func (v *GameServerContainerDefinition) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.GameServerContainerDefinition_ServerSdkVersion:
 			v.ServerSdkVersion = new(string)
 			return d.ReadString(schemas.GameServerContainerDefinition_ServerSdkVersion, v.ServerSdkVersion)
+		case schemas.GameServerContainerDefinition_Vcpu:
+			v.Vcpu = new(float64)
+			return d.ReadFloat64(schemas.GameServerContainerDefinition_Vcpu, v.Vcpu)
 		}
 		return nil
 	})
@@ -3806,9 +3838,9 @@ type GameServerContainerDefinitionInput struct {
 	// container. The container port configuration must have enough ports for each
 	// container process that accepts inbound traffic connections. For example, a game
 	// server process requires a container port to allow game clients to connect to it.
-	// A container port configuration can have can have one or more container port
-	// ranges. Each range specifies starting and ending values as well as the supported
-	// network protocol.
+	// A container port configuration can have one or more container port ranges. Each
+	// range specifies starting and ending values as well as the supported network
+	// protocol.
 	//
 	// Container ports aren't directly accessed by inbound traffic. Amazon GameLift
 	// Servers maps each container port to an externally accessible connection port
@@ -3851,6 +3883,24 @@ type GameServerContainerDefinitionInput struct {
 	// the host system and lets it access the file or directory.
 	MountPoints []ContainerMountPoint
 
+	// The number of vCPU units reserved for the game server container. The container
+	// can use more vCPU when it's available, up to the container group's total vCPU
+	// limit if one is set. If the container group has a total vCPU limit and the
+	// request doesn't set this value, Amazon GameLift Servers calculates the game
+	// server container's vCPU as the total vCPU limit minus the sum of the vCPU units
+	// reserved for the group's support containers.
+	//
+	// A game server container group needs either a total vCPU limit or this value. If
+	// the container group doesn't have a total vCPU limit, the group's containers can
+	// use up to the instance's available vCPU, and Amazon GameLift Servers uses the
+	// sum of the group's container Vcpu values to calculate how many game server
+	// container groups fit on an instance.
+	//
+	// Related data type: [ContainerGroupDefinition]TotalVcpuLimit
+	//
+	// [ContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html
+	Vcpu *float64
+
 	noSmithyDocumentSerde
 }
 
@@ -3883,6 +3933,9 @@ func (v *GameServerContainerDefinitionInput) SerializeMembers(s smithy.ShapeSeri
 	if v.ServerSdkVersion != nil {
 		s.WriteString(schemas.GameServerContainerDefinitionInput_ServerSdkVersion, *v.ServerSdkVersion)
 	}
+	if v.Vcpu != nil {
+		s.WriteFloat64(schemas.GameServerContainerDefinitionInput_Vcpu, *v.Vcpu)
+	}
 }
 func (v *GameServerContainerDefinitionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GameServerContainerDefinitionInput, func(s *smithy.Schema) error {
@@ -3908,6 +3961,9 @@ func (v *GameServerContainerDefinitionInput) Deserialize(d smithy.ShapeDeseriali
 		case schemas.GameServerContainerDefinitionInput_ServerSdkVersion:
 			v.ServerSdkVersion = new(string)
 			return d.ReadString(schemas.GameServerContainerDefinitionInput_ServerSdkVersion, v.ServerSdkVersion)
+		case schemas.GameServerContainerDefinitionInput_Vcpu:
+			v.Vcpu = new(float64)
+			return d.ReadFloat64(schemas.GameServerContainerDefinitionInput_Vcpu, v.Vcpu)
 		}
 		return nil
 	})
@@ -3918,7 +3974,7 @@ func (v *GameServerContainerDefinitionInput) Deserialize(d smithy.ShapeDeseriali
 // each game server container group runs to learn how many game sessions the fleet
 // is capable of hosting concurrently. For example, if a fleet has 50 game server
 // container groups, and the game server container in each group runs 1 game server
-// process, then the fleet has the capacity to run host 50 game sessions at a time.
+// process, then the fleet has the capacity to host 50 game sessions at a time.
 //
 // Returned by: [https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetCapacity.html], [https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html]
 //
@@ -4033,8 +4089,8 @@ type GameServerGroup struct {
 	// running might be terminated during a scale-down event, causing players to be
 	// dropped from the game. Protected instances cannot be terminated while there are
 	// active game servers running except in the event of a forced game server group
-	// deletion (see ). An exception to this is with Spot Instances, which can be
-	// terminated by Amazon Web Services regardless of protection status.
+	// deletion. An exception to this is with Spot Instances, which can be terminated
+	// by Amazon Web Services regardless of protection status.
 	GameServerProtectionPolicy GameServerProtectionPolicy
 
 	// The set of Amazon EC2 instance types that Amazon GameLift Servers FleetIQ can
@@ -4240,7 +4296,7 @@ func (v *GameServerGroupAutoScalingPolicy) Deserialize(d smithy.ShapeDeserialize
 //	Additional properties, including status, that describe an EC2 instance in a
 //
 // game server group. Instance configurations are set with game server group
-// properties (see DescribeGameServerGroup and with the EC2 launch template that
+// properties (see DescribeGameServerGroup ) and with the EC2 launch template that
 // was used when creating the game server group.
 //
 // Retrieve game server instances for a game server group by calling
@@ -4732,8 +4788,8 @@ func (v *GameSessionConnectionInfo) Deserialize(d smithy.ShapeDeserializer) erro
 //
 // The policy is evaluated when a player tries to create a new game session. On
 // receiving a CreateGameSession request, Amazon GameLift Servers checks that the
-// player (identified by CreatorId ) has created fewer than game session limit in
-// the specified time period.
+// player (identified by CreatorId ) has created fewer than the game session limit
+// in the specified time period.
 type GameSessionCreationLimitPolicy struct {
 
 	// A policy that puts limits on the number of game sessions that a player can
@@ -4742,8 +4798,8 @@ type GameSessionCreationLimitPolicy struct {
 	//
 	// The policy evaluates when a player tries to create a new game session. On
 	// receiving a CreateGameSession request, Amazon GameLift Servers checks that the
-	// player (identified by CreatorId ) has created fewer than game session limit in
-	// the specified time period.
+	// player (identified by CreatorId ) has created fewer than the game session limit
+	// in the specified time period.
 	NewGameSessionsPerCreator *int32
 
 	// The time span used in evaluating the resource creation limit policy.
@@ -6569,7 +6625,7 @@ func (v *MatchmakingConfiguration) Deserialize(d smithy.ShapeDeserializer) error
 //     match based on player attributes. A rule might specify minimum requirements for
 //     individual players, teams, or entire matches. For example, a rule might require
 //     each player to meet a certain skill level, each team to have at least one player
-//     in a certain role, or the match to have a minimum average skill level. or may
+//     in a certain role, or the match to have a minimum average skill level, or may
 //     describe an entire group--such as all teams must be evenly matched or have at
 //     least one player in a certain role.
 //
@@ -6674,7 +6730,7 @@ type MatchmakingTicket struct {
 
 	// Connection information for a new game session. Once a match is made, the
 	// FlexMatch engine creates a new game session for it. This information is added to
-	// the matchmaking ticket, which you can be retrieve by calling [DescribeMatchmaking].
+	// the matchmaking ticket, which you can retrieve by calling [DescribeMatchmaking].
 	//
 	// [DescribeMatchmaking]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeMatchmaking.html
 	GameSessionConnectionInfo *GameSessionConnectionInfo
@@ -7192,7 +7248,7 @@ func (v *PlayerLatency) Deserialize(d smithy.ShapeDeserializer) error {
 // Sets a latency cap for individual players when placing a game session. With a
 // latency policy in force, a game session cannot be placed in a fleet location
 // where a player reports latency higher than the cap. Latency policies are used
-// only with placement request that provide player latency information. Player
+// only with placement requests that provide player latency information. Player
 // latency policies can be stacked to gradually relax latency requirements over
 // time.
 type PlayerLatencyPolicy struct {
@@ -7239,11 +7295,11 @@ func (v *PlayerLatencyPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 
 // Represents a player session. Player sessions are created either for a specific
 // game session, or as part of a game session placement or matchmaking request. A
-// player session can represents a reserved player slot in a game session (when
+// player session can represent a reserved player slot in a game session (when
 // status is RESERVED ) or actual player activity in a game session (when status is
 // ACTIVE ). A player session object, including player data, is automatically
 // passed to a game session when the player connects to the game session and is
-// validated. After the game session ends, player sessions information is retained
+// validated. After the game session ends, player session information is retained
 // for 30 days and then removed.
 //
 // # Related actions
@@ -7433,7 +7489,7 @@ func (v *PlayerSession) Deserialize(d smithy.ShapeDeserializer) error {
 //
 //   - When a game session request includes player latency data, Amazon GameLift
 //     Servers re-orders the queue's destinations to make placements where the average
-//     player latency is lowest. It reorders based the following priorities: (1) the
+//     player latency is lowest. It reorders based on the following priorities: (1) the
 //     lowest average latency across all players, (2) the lowest hosting cost, (3) the
 //     queue's default destination order, and (4) for multi-location fleets, an
 //     alphabetic list of locations.
@@ -7500,9 +7556,9 @@ func (v *PriorityConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 // A priority configuration override list does not override a queue's
 // FilterConfiguration setting, if the queue has one. Filter configurations are
 // used to limit placements to a subset of the locations in a queue's destinations.
-// If the override list includes a location that's not on in the
-// FilterConfiguration allowed list, Amazon GameLift Servers won't attempt to place
-// a game session there.
+// If the override list includes a location that's not in the FilterConfiguration
+// allowed list, Amazon GameLift Servers won't attempt to place a game session
+// there.
 //
 // [StartGameSessionPlacement]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html
 type PriorityConfigurationOverride struct {
@@ -7564,8 +7620,8 @@ func (v *PriorityConfigurationOverride) Deserialize(d smithy.ShapeDeserializer) 
 //
 // The policy is evaluated when a player tries to create a new game session. On
 // receiving a CreateGameSession request, Amazon GameLift Servers checks that the
-// player (identified by CreatorId ) has created fewer than game session limit in
-// the specified time period.
+// player (identified by CreatorId ) has created fewer than the game session limit
+// in the specified time period.
 //
 // The purpose of this policy is to prevent a single player from consuming a large
 // share of available hosting resources. For example, setting
@@ -7581,8 +7637,8 @@ type ResourceCreationLimitPolicy struct {
 	//
 	// The policy is evaluated when a player tries to create a new game session. On
 	// receiving a CreateGameSession request, Amazon GameLift Servers checks that the
-	// player (identified by CreatorId ) has created fewer than game session limit in
-	// the specified time period.
+	// player (identified by CreatorId ) has created fewer than the game session limit
+	// in the specified time period.
 	NewGameSessionsPerCreator *int32
 
 	// The time span used in evaluating the resource creation limit policy.
@@ -7755,7 +7811,7 @@ func (v *RuntimeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 // Amazon GameLift Servers.
 type S3Location struct {
 
-	// An Amazon S3 bucket identifier. Thename of the S3 bucket.
+	// An Amazon S3 bucket identifier. The name of the S3 bucket.
 	//
 	// Amazon GameLift Servers doesn't support uploading from Amazon S3 buckets with
 	// names that contain a dot (.).
@@ -7853,7 +7909,7 @@ type ScalingPolicy struct {
 	//   - ActiveInstances -- Fleet instances that are currently running at least one
 	//   game session.
 	//
-	//   - AvailableGameSessions -- Additional game sessions that fleet could host
+	//   - AvailableGameSessions -- Additional game sessions that a fleet could host
 	//   simultaneously, given current capacity.
 	//
 	//   - AvailablePlayerSessions -- Empty player slots in currently active game
@@ -8334,7 +8390,7 @@ type SupportContainerDefinition struct {
 	MountPoints []ContainerMountPoint
 
 	// A set of ports that allow access to the container from external users.
-	// Processes running in the container can bind to a one of these ports. Container
+	// Processes running in the container can bind to one of these ports. Container
 	// ports aren't directly accessed by inbound traffic. Amazon GameLift Servers maps
 	// these container ports to externally accessible connection ports, which are
 	// assigned as needed from the container fleet's ConnectionPortRange .
@@ -8485,8 +8541,6 @@ type SupportContainerDefinitionInput struct {
 	// containers in the same container group. A container can have dependencies on
 	// multiple different containers.
 	//
-	// .
-	//
 	// You can use dependencies to establish a startup/shutdown sequence across the
 	// container group. For example, you might specify that ContainerB has a START
 	// dependency on ContainerA. This dependency means that ContainerB can't start
@@ -8535,8 +8589,8 @@ type SupportContainerDefinitionInput struct {
 	// A set of ports that Amazon GameLift Servers can assign to processes in a
 	// container. The container port configuration must have enough ports for each
 	// container process that accepts inbound traffic connections. A container port
-	// configuration can have can have one or more container port ranges. Each range
-	// specifies starting and ending values as well as the supported network protocol.
+	// configuration can have one or more container port ranges. Each range specifies
+	// starting and ending values as well as the supported network protocol.
 	//
 	// Container ports aren't directly accessed by inbound traffic. Amazon GameLift
 	// Servers maps each container port to an externally accessible connection port
@@ -8544,10 +8598,10 @@ type SupportContainerDefinitionInput struct {
 	PortConfiguration *ContainerPortConfiguration
 
 	// The number of vCPU units to reserve for this container. The container can use
-	// more resources when needed, if available. If you don't reserve CPU units for
+	// more resources when needed, if available. If you don't reserve vCPU units for
 	// this container, it shares the container group's total vCPU limit.
 	//
-	// Related data type: [ContainerGroupDefinition] TotalCpuLimit
+	// Related data type: [ContainerGroupDefinition] TotalVcpuLimit
 	//
 	// [ContainerGroupDefinition]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html
 	Vcpu *float64
@@ -8695,9 +8749,9 @@ func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // Settings for a target-based scaling policy. A target-based policy tracks a
-// particular fleet metric specifies a target value for the metric. As player usage
-// changes, the policy triggers Amazon GameLift Servers to adjust capacity so that
-// the metric returns to the target value. The target configuration specifies
+// particular fleet metric and specifies a target value for the metric. As player
+// usage changes, the policy triggers Amazon GameLift Servers to adjust capacity so
+// that the metric returns to the target value. The target configuration specifies
 // settings as needed for the target based policy, including the target value.
 type TargetConfiguration struct {
 

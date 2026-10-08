@@ -1,5 +1,6 @@
 503
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.CreateRepositoryLink
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"InternalServerException","Message":"__Message__"}
+¿f__typewInternalServerExceptiongMessagek__Message__ÿ

@@ -107,6 +107,39 @@ func serializeCspmProviderUpdateConfiguration(s smithy.ShapeSerializer, schema *
 	}
 }
 
+func serializeExportDestination(s smithy.ShapeSerializer, schema *smithy.Schema, v ExportDestination) {
+	switch vv := v.(type) {
+	case *ExportDestinationMemberS3:
+		s.WriteUnion(schema, schemas.ExportDestination_S3)
+		s.WriteStruct(schemas.ExportDestination_S3)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeExportOutput(s smithy.ShapeSerializer, schema *smithy.Schema, v ExportOutput) {
+	switch vv := v.(type) {
+	case *ExportOutputMemberFindings:
+		s.WriteUnion(schema, schemas.ExportOutput_Findings)
+		s.WriteStruct(schemas.ExportOutput_Findings)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeExportOutputSummary(s smithy.ShapeSerializer, schema *smithy.Schema, v ExportOutputSummary) {
+	switch vv := v.(type) {
+	case *ExportOutputSummaryMemberFindings:
+		s.WriteUnion(schema, schemas.ExportOutputSummary_Findings)
+		s.WriteStruct(schemas.ExportOutputSummary_Findings)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeParameterValue(s smithy.ShapeSerializer, schema *smithy.Schema, v ParameterValue) {
 	switch vv := v.(type) {
 	case *ParameterValueMemberBoolean:
@@ -333,6 +366,42 @@ func deserializeCspmProviderUpdateConfiguration(d smithy.ShapeDeserializer, s *s
 		switch ms {
 		case schemas.CspmProviderUpdateConfiguration_Azure:
 			vv := &CspmProviderUpdateConfigurationMemberAzure{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeExportDestination(d smithy.ShapeDeserializer, s *smithy.Schema, v *ExportDestination) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ExportDestination_S3:
+			vv := &ExportDestinationMemberS3{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeExportOutput(d smithy.ShapeDeserializer, s *smithy.Schema, v *ExportOutput) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ExportOutput_Findings:
+			vv := &ExportOutputMemberFindings{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeExportOutputSummary(d smithy.ShapeDeserializer, s *smithy.Schema, v *ExportOutputSummary) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ExportOutputSummary_Findings:
+			vv := &ExportOutputSummaryMemberFindings{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -2956,6 +3025,19 @@ func serializeEnabledStandardIdentifierList(s smithy.ShapeSerializer, schema *sm
 	s.CloseList()
 }
 
+func serializeExportSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ExportSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeExposureFindingItemsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ExposureFinding) {
 	if v == nil {
 		return
@@ -3017,6 +3099,17 @@ func serializeFindingHistoryUpdatesList(s smithy.ShapeSerializer, schema *smithy
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeFindingsSelectedFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []FindingsSelectableField) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -7327,6 +7420,20 @@ func deserializeEnabledStandardIdentifierList(d smithy.ShapeDeserializer, s *smi
 	})
 }
 
+func deserializeExportSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ExportSummary) error {
+	*v = make([]ExportSummary, 0)
+	var vv ExportSummary
+	return smithy.ReadList(d, s, func() error {
+		vv = ExportSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeExposureFindingItemsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ExposureFinding) error {
 	*v = make([]ExposureFinding, 0)
 	var vv ExposureFinding
@@ -7393,6 +7500,20 @@ func deserializeFindingHistoryUpdatesList(d smithy.ShapeDeserializer, s *smithy.
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFindingsSelectedFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FindingsSelectableField) error {
+	*v = make([]FindingsSelectableField, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, FindingsSelectableField(vv))
 		return nil
 	})
 }

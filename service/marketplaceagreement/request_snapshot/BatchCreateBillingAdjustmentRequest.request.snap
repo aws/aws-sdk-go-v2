@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSMPCommerceService_v20200301/operation/BatchCreateBillingAdjustmentRequest
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.BatchCreateBillingAdjustmentRequest
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"billingAdjustmentRequestEntries":[{"adjustmentAmount":"__AdjustmentAmount__","adjustmentReasonCode":"INCORRECT_TERMS_ACCEPTED","agreementId":"__AgreementId__","clientToken":"__ClientToken__","currencyCode":"__CurrencyCode__","description":"__Description__","originalInvoiceId":"__OriginalInvoiceId__"},{"adjustmentAmount":"__AdjustmentAmount__","adjustmentReasonCode":"INCORRECT_TERMS_ACCEPTED","agreementId":"__AgreementId__","clientToken":"__ClientToken__","currencyCode":"__CurrencyCode__","description":"__Description__","originalInvoiceId":"__OriginalInvoiceId__"}]}
+¿xbillingAdjustmentRequestEntriesŸ¿padjustmentAmountt__AdjustmentAmount__tadjustmentReasonCodexINCORRECT_TERMS_ACCEPTEDkagreementIdo__AgreementId__kclientTokeno__ClientToken__lcurrencyCodep__CurrencyCode__kdescriptiono__Description__qoriginalInvoiceIdu__OriginalInvoiceId__ÿ¿padjustmentAmountt__AdjustmentAmount__tadjustmentReasonCodexINCORRECT_TERMS_ACCEPTEDkagreementIdo__AgreementId__kclientTokeno__ClientToken__lcurrencyCodep__CurrencyCode__kdescriptiono__Description__qoriginalInvoiceIdu__OriginalInvoiceId__ÿÿÿ

@@ -16157,6 +16157,11 @@ func awsRestjson1_serializeOpDocumentStartNotebookImportInput(v *StartNotebookIm
 		}
 	}
 
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }
 
@@ -23752,6 +23757,50 @@ func awsRestjson1_serializeDocumentRuleTarget(v types.RuleTarget, value smithyjs
 	return nil
 }
 
+func awsRestjson1_serializeDocumentS3File(v *types.S3File, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3FileList(v []types.S3File, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentS3File(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3FilesLocation(v *types.S3FilesLocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bucket != nil {
+		ok := object.Key("bucket")
+		ok.String(*v.Bucket)
+	}
+
+	if v.FileList != nil {
+		ok := object.Key("fileList")
+		if err := awsRestjson1_serializeDocumentS3FileList(v.FileList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentS3LocationList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -24013,6 +24062,12 @@ func awsRestjson1_serializeDocumentSourceLocation(v types.SourceLocation, value 
 	case *types.SourceLocationMemberS3:
 		av := object.Key("s3")
 		av.String(uv.Value)
+
+	case *types.SourceLocationMemberS3Files:
+		av := object.Key("s3Files")
+		if err := awsRestjson1_serializeDocumentS3FilesLocation(&uv.Value, av); err != nil {
+			return err
+		}
 
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)

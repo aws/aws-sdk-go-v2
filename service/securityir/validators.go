@@ -190,6 +190,26 @@ func (m *validateOpGetCase) HandleInitialize(ctx context.Context, in middleware.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetFindingMetrics struct {
+}
+
+func (*validateOpGetFindingMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFindingMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFindingMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFindingMetricsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMembership struct {
 }
 
@@ -484,6 +504,10 @@ func addOpGetCaseAttachmentUploadUrlValidationMiddleware(stack *middleware.Stack
 
 func addOpGetCaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCase{}, middleware.After)
+}
+
+func addOpGetFindingMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFindingMetrics{}, middleware.After)
 }
 
 func addOpGetMembershipValidationMiddleware(stack *middleware.Stack) error {
@@ -928,6 +952,27 @@ func validateOpGetCaseInput(v *GetCaseInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetCaseInput"}
 	if v.CaseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFindingMetricsInput(v *GetFindingMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFindingMetricsInput"}
+	if v.MembershipId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipId"))
+	}
+	if v.StartDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDate"))
+	}
+	if v.EndDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndDate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

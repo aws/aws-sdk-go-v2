@@ -791,6 +791,11 @@ func validateExpression(v *types.Expression) error {
 			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ProductAttributes != nil {
+		if err := validateProductAttributeValues(v.ProductAttributes); err != nil {
+			invalidParams.AddNested("ProductAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -934,6 +939,21 @@ func validatePlannedBudgetLimits(v map[string]types.Spend) error {
 		if err := validateSpend(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProductAttributeValues(v *types.ProductAttributeValues) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProductAttributeValues"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

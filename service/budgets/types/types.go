@@ -1189,6 +1189,10 @@ type Expression struct {
 	// Return results that match either Dimension object.
 	Or []Expression
 
+	// The filter that limits results based on the values of specific product
+	// attributes.
+	ProductAttributes *ProductAttributeValues
+
 	// The specific Tag to use for Expression.
 	Tags *TagValues
 
@@ -1219,6 +1223,11 @@ func (v *Expression) SerializeMembers(s smithy.ShapeSerializer) {
 		s.CloseStruct()
 	}
 	serializeExpressions(s, schemas.Expression_Or, v.Or)
+	if v.ProductAttributes != nil {
+		s.WriteStruct(schemas.Expression_ProductAttributes)
+		v.ProductAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Tags != nil {
 		s.WriteStruct(schemas.Expression_Tags)
 		v.Tags.SerializeMembers(s)
@@ -1241,6 +1250,9 @@ func (v *Expression) Deserialize(d smithy.ShapeDeserializer) error {
 			return v.Not.Deserialize(d)
 		case schemas.Expression_Or:
 			return deserializeExpressions(d, schemas.Expression_Or, &v.Or)
+		case schemas.Expression_ProductAttributes:
+			v.ProductAttributes = &ProductAttributeValues{}
+			return v.ProductAttributes.Deserialize(d)
 		case schemas.Expression_Tags:
 			v.Tags = &TagValues{}
 			return v.Tags.Deserialize(d)
@@ -1642,6 +1654,76 @@ func (v *NotificationWithSubscribers) Deserialize(d smithy.ShapeDeserializer) er
 			return v.Notification.Deserialize(d)
 		case schemas.NotificationWithSubscribers_Subscribers:
 			return deserializeSubscribers(d, schemas.NotificationWithSubscribers_Subscribers, &v.Subscribers)
+		}
+		return nil
+	})
+}
+
+// The product attribute values used for filtering the costs by key and value
+// pairs. Product attributes are supported for Amazon Bedrock only.
+type ProductAttributeValues struct {
+
+	// The name of the product attribute to filter on. Valid values are the following:
+	//
+	//   - feature – The feature that was used, such as On-demand Inference .
+	//
+	//   - inferenceType – The type of inference usage, such as Input tokens or Output
+	//   tokens .
+	//
+	//   - model – The model, such as Claude Sonnet 5 or Claude Haiku 4.5 .
+	//
+	//   - provider – The model provider, such as Anthropic , Cohere , or Amazon .
+	//
+	// Keys are case-sensitive.
+	//
+	// This member is required.
+	Key *string
+
+	// The match options for the ProductAttributes filter. Valid values:
+	//
+	//   - ABSENT – Matches costs that have no value for the attribute.
+	//
+	//   - CASE_SENSITIVE – Requires an exact case match.
+	//
+	//   - EQUALS – Matches costs where the attribute equals the specified value.
+	//
+	// Specify either EQUALS or ABSENT . You can add CASE_SENSITIVE to EQUALS , but you
+	// can't use it by itself or with ABSENT .
+	MatchOptions []MatchOption
+
+	// The specific values of the product attribute, such as Claude Sonnet 5 for the
+	// model key. Values are matched exactly.
+	//
+	// Values is required unless MatchOptions is ABSENT . To match costs that have no
+	// value for the key, set MatchOptions to ABSENT and omit Values .
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProductAttributeValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProductAttributeValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProductAttributeValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.ProductAttributeValues_Key, *v.Key)
+	}
+	serializeMatchOptions(s, schemas.ProductAttributeValues_MatchOptions, v.MatchOptions)
+	serializeValues(s, schemas.ProductAttributeValues_Values, v.Values)
+}
+func (v *ProductAttributeValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProductAttributeValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProductAttributeValues_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ProductAttributeValues_Key, v.Key)
+		case schemas.ProductAttributeValues_MatchOptions:
+			return deserializeMatchOptions(d, schemas.ProductAttributeValues_MatchOptions, &v.MatchOptions)
+		case schemas.ProductAttributeValues_Values:
+			return deserializeValues(d, schemas.ProductAttributeValues_Values, &v.Values)
 		}
 		return nil
 	})

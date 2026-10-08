@@ -1,6 +1,7 @@
-POST /
+POST /service/PerformanceInsightsv20180227/operation/ListAvailableResourceDimensions
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: PerformanceInsightsv20180227.ListAvailableResourceDimensions
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AuthorizedActions":["DescribeDimensionKeys","DescribeDimensionKeys"],"Identifier":"__Identifier__","MaxResults":1,"Metrics":["__Member__","__Member__"],"NextToken":"__NextToken__","ServiceType":"RDS"}
+¿qAuthorizedActionsŸuDescribeDimensionKeysuDescribeDimensionKeysÿjIdentifiern__Identifier__jMaxResultsgMetricsŸj__Member__j__Member__ÿiNextTokenm__NextToken__kServiceTypecRDSÿ

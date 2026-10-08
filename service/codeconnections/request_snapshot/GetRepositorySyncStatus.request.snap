@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeConnections_20231201/operation/GetRepositorySyncStatus
 
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.GetRepositorySyncStatus
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Branch":"__Branch__","RepositoryLinkId":"__RepositoryLinkId__","SyncType":"CFN_STACK_SYNC"}
+¿fBranchj__Branch__pRepositoryLinkIdt__RepositoryLinkId__hSyncTypenCFN_STACK_SYNCÿ

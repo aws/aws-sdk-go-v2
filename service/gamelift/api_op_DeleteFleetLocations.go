@@ -13,8 +13,8 @@ import (
 //	This API works with the following fleet types: EC2, Anywhere, Container
 //
 // Removes locations from a multi-location fleet. When deleting a location, all
-// game server process and all instances that are still active in the location are
-// shut down.
+// game server processes and all instances that are still active in the location
+// are shut down.
 //
 // To delete fleet locations, identify the fleet ID and provide a list of the
 // locations to be deleted.

@@ -40071,6 +40071,281 @@ func (v *EnumListConfigurationOptions) Deserialize(d smithy.ShapeDeserializer) e
 	})
 }
 
+// Specifies where Security Hub writes the export output. This is a union: you
+// must specify exactly one member. Currently, the only supported member is S3 .
+//
+// The following types satisfy this interface:
+//
+//	ExportDestinationMemberS3
+type ExportDestination interface {
+	isExportDestination()
+}
+
+// The Amazon Simple Storage Service (Amazon S3) bucket and Amazon Web Services
+// Key Management Service (Amazon Web Services KMS) key that Security Hub uses to
+// write the export.
+type ExportDestinationMemberS3 struct {
+	Value S3ExportDestination
+
+	noSmithyDocumentSerde
+}
+
+func (*ExportDestinationMemberS3) isExportDestination() {}
+func (v *ExportDestinationMemberS3) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportDestination_S3)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExportDestinationMemberS3) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Specifies what data to export and how to format it. This is a union: you must
+// specify exactly one member. Currently, the only supported member is Findings .
+//
+// The following types satisfy this interface:
+//
+//	ExportOutputMemberFindings
+type ExportOutput interface {
+	isExportOutput()
+}
+
+// Configures an export of Security Hub findings, including the output format and
+// any filters or selected fields.
+type ExportOutputMemberFindings struct {
+	Value FindingsOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ExportOutputMemberFindings) isExportOutput() {}
+func (v *ExportOutputMemberFindings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportOutput_Findings)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExportOutputMemberFindings) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A summary of the output configuration for an export job. The populated member
+// corresponds to the data type that was exported.
+//
+// The following types satisfy this interface:
+//
+//	ExportOutputSummaryMemberFindings
+type ExportOutputSummary interface {
+	isExportOutputSummary()
+}
+
+// The output configuration summary for a findings export.
+type ExportOutputSummaryMemberFindings struct {
+	Value FindingsOutputSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*ExportOutputSummaryMemberFindings) isExportOutputSummary() {}
+func (v *ExportOutputSummaryMemberFindings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportOutputSummary_Findings)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExportOutputSummaryMemberFindings) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Defines the data boundary for a findings export. Scopes determine which
+// organizational units or organizations to retrieve data from.
+//
+// Only a delegated administrator can use this structure. If a delegated
+// administrator omits it, the export covers the entire organization; any other
+// caller exports only findings from its own account.
+type ExportScopes struct {
+
+	// A list of Organizations scopes to include in the export. Each entry in the list
+	// specifies an organization or organizational unit to include for the delegated
+	// administrator's account. If the list specifies multiple entries, the entries are
+	// combined using OR logic.
+	AwsOrganizations []AwsOrganizationScope
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExportScopes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportScopes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportScopes) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsOrganizationScopeList(s, schemas.ExportScopes_AwsOrganizations, v.AwsOrganizations)
+}
+func (v *ExportScopes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportScopes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportScopes_AwsOrganizations:
+			return deserializeAwsOrganizationScopeList(d, schemas.ExportScopes_AwsOrganizations, &v.AwsOrganizations)
+		}
+		return nil
+	})
+}
+
+// A summary of an export job, as returned by ListExportJobsV2 .
+type ExportSummary struct {
+
+	// The category of data that the export job produces.
+	//
+	// This member is required.
+	DataType ExportDataType
+
+	// The destination that the export job writes to.
+	//
+	// This member is required.
+	Destination ExportDestination
+
+	// The unique identifier of the export job.
+	//
+	// This member is required.
+	ExportJobId *string
+
+	// The time when the export job was created.
+	//
+	// For more information about the validation and formatting of timestamp fields in
+	// Security Hub, see [Timestamps].
+	//
+	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+	//
+	// This member is required.
+	StartedAt *time.Time
+
+	// The current state of the export job.
+	//
+	// This member is required.
+	Status ExportStatus
+
+	// The time when the export job reached a terminal state. Absent while the job is
+	// RUNNING .
+	//
+	// For more information about the validation and formatting of timestamp fields in
+	// Security Hub, see [Timestamps].
+	//
+	// [Timestamps]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+	EndedAt *time.Time
+
+	// A code that classifies why the export job failed. Present only when Status is
+	// FAILED .
+	FailureCode ExportFailureCode
+
+	// A human-readable message about why the export job failed. Present only when
+	// Status is FAILED .
+	FailureMessage *string
+
+	// The user-provided name of the export job, if one was specified.
+	Name *string
+
+	// The output configuration of the export job. For findings exports, this reports
+	// the output format. Present only for findings exports; absent for other data
+	// types.
+	OutputConfiguration ExportOutputSummary
+
+	// The organization scopes that the export job was started with, echoed verbatim.
+	// Absent if the caller didn't supply Scopes .
+	Scopes *ExportScopes
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExportSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataType != "" {
+		s.WriteString(schemas.ExportSummary_DataType, string(v.DataType))
+	}
+	serializeExportDestination(s, schemas.ExportSummary_Destination, v.Destination)
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.ExportSummary_EndedAt, *v.EndedAt)
+	}
+	if v.ExportJobId != nil {
+		s.WriteString(schemas.ExportSummary_ExportJobId, *v.ExportJobId)
+	}
+	if v.FailureCode != "" {
+		s.WriteString(schemas.ExportSummary_FailureCode, string(v.FailureCode))
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.ExportSummary_FailureMessage, *v.FailureMessage)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ExportSummary_Name, *v.Name)
+	}
+	serializeExportOutputSummary(s, schemas.ExportSummary_OutputConfiguration, v.OutputConfiguration)
+	if v.Scopes != nil {
+		s.WriteStruct(schemas.ExportSummary_Scopes)
+		v.Scopes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.ExportSummary_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ExportSummary_Status, string(v.Status))
+	}
+}
+func (v *ExportSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportSummary_DataType:
+			var ev string
+			if err := d.ReadString(schemas.ExportSummary_DataType, &ev); err != nil {
+				return err
+			}
+			v.DataType = ExportDataType(ev)
+			return nil
+		case schemas.ExportSummary_Destination:
+			return deserializeExportDestination(d, schemas.ExportSummary_Destination, &v.Destination)
+		case schemas.ExportSummary_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.ExportSummary_EndedAt, v.EndedAt)
+		case schemas.ExportSummary_ExportJobId:
+			v.ExportJobId = new(string)
+			return d.ReadString(schemas.ExportSummary_ExportJobId, v.ExportJobId)
+		case schemas.ExportSummary_FailureCode:
+			var ev string
+			if err := d.ReadString(schemas.ExportSummary_FailureCode, &ev); err != nil {
+				return err
+			}
+			v.FailureCode = ExportFailureCode(ev)
+			return nil
+		case schemas.ExportSummary_FailureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.ExportSummary_FailureMessage, v.FailureMessage)
+		case schemas.ExportSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ExportSummary_Name, v.Name)
+		case schemas.ExportSummary_OutputConfiguration:
+			return deserializeExportOutputSummary(d, schemas.ExportSummary_OutputConfiguration, &v.OutputConfiguration)
+		case schemas.ExportSummary_Scopes:
+			v.Scopes = &ExportScopes{}
+			return v.Scopes.Deserialize(d)
+		case schemas.ExportSummary_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.ExportSummary_StartedAt, v.StartedAt)
+		case schemas.ExportSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.ExportSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ExportStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides details about an exposure finding and the effect the specific
 // remediation target has on it.
 type ExposureFinding struct {
@@ -40762,6 +41037,121 @@ func (v *FindingScopes) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.FindingScopes_AwsOrganizations:
 			return deserializeAwsOrganizationScopeList(d, schemas.FindingScopes_AwsOrganizations, &v.AwsOrganizations)
+		}
+		return nil
+	})
+}
+
+// The configuration for a findings export: the output format, an optional set of
+// filters, and the fields to include.
+type FindingsOutput struct {
+
+	// The output format of the export. CSV produces comma-separated rows that are
+	// suitable for spreadsheets and analysis tools. OCSF_JSON produces
+	// newline-delimited JSON records in the Open Cybersecurity Schema Framework (OCSF)
+	// format used elsewhere in Security Hub.
+	//
+	// This member is required.
+	Format FindingsExportFormat
+
+	// An optional set of OCSF finding filters that restrict which findings are
+	// exported. The filter structure is the same as the one used by GetFindingsV2 . If
+	// you omit this member, Security Hub exports all findings available to the caller.
+	// When echoed by GetExportJobV2 , relative date ranges are returned unresolved.
+	Filters *OcsfFindingFilters
+
+	// The OCSF finding fields to include in the export, specified as OCSF field paths
+	// (for example, finding_info.title or severity ). You can specify from 1 to 50
+	// fields.
+	//
+	// Whether this parameter is required depends on the value of Format :
+	//
+	//   - CSV – Required. The field paths that you specify become the columns of the
+	//   output, in the order that you provide them. If you omit this parameter, the
+	//   request returns a ValidationException .
+	//
+	//   - OCSF_JSON – Not supported. This format includes each finding in full, so
+	//   field selection doesn't apply. If you specify this parameter, the request
+	//   returns a ValidationException .
+	SelectedFields []FindingsSelectableField
+
+	noSmithyDocumentSerde
+}
+
+func (v *FindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FindingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.FindingsOutput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.FindingsOutput_Format, string(v.Format))
+	}
+	serializeFindingsSelectedFieldList(s, schemas.FindingsOutput_SelectedFields, v.SelectedFields)
+}
+func (v *FindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FindingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FindingsOutput_Filters:
+			v.Filters = &OcsfFindingFilters{}
+			return v.Filters.Deserialize(d)
+		case schemas.FindingsOutput_Format:
+			var ev string
+			if err := d.ReadString(schemas.FindingsOutput_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = FindingsExportFormat(ev)
+			return nil
+		case schemas.FindingsOutput_SelectedFields:
+			return deserializeFindingsSelectedFieldList(d, schemas.FindingsOutput_SelectedFields, &v.SelectedFields)
+		}
+		return nil
+	})
+}
+
+// A summary of the output configuration for a findings export, returned by
+// ListExportJobsV2 . Unlike the configuration returned by GetExportJobV2 , it
+// reports only the output format.
+type FindingsOutputSummary struct {
+
+	// The output format of the export. CSV produces comma-separated rows that are
+	// suitable for spreadsheets and analysis tools. OCSF_JSON produces
+	// newline-delimited JSON records in the Open Cybersecurity Schema Framework (OCSF)
+	// format used elsewhere in Security Hub.
+	//
+	// This member is required.
+	Format FindingsExportFormat
+
+	noSmithyDocumentSerde
+}
+
+func (v *FindingsOutputSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FindingsOutputSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FindingsOutputSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Format != "" {
+		s.WriteString(schemas.FindingsOutputSummary_Format, string(v.Format))
+	}
+}
+func (v *FindingsOutputSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FindingsOutputSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FindingsOutputSummary_Format:
+			var ev string
+			if err := d.ReadString(schemas.FindingsOutputSummary_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = FindingsExportFormat(ev)
+			return nil
 		}
 		return nil
 	})
@@ -45819,7 +46209,7 @@ func (v *RemediationGuidanceContext) Deserialize(d smithy.ShapeDeserializer) err
 // remediating the target.
 type RemediationGuidanceExamples struct {
 
-	// An AWS CLI snippet version of the example.
+	// An CLI snippet version of the example.
 	AwsCli *string
 
 	// A CDK snippet version of the example.
@@ -50434,6 +50824,85 @@ func (v *RuleGroupVariablesPortSetsDetails) Deserialize(d smithy.ShapeDeserializ
 	})
 }
 
+// The Amazon S3 destination for an export, including the bucket, the Amazon Web
+// Services KMS key used for encryption, and an optional object key prefix.
+type S3ExportDestination struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon S3 bucket that Security Hub writes
+	// the export to. You must own the bucket, and its bucket policy must grant the
+	// Security Hub service principal ( exportv2.securityhub.amazonaws.com ) permission
+	// to write objects. For the required bucket policy, see the Examples section of
+	// StartExportJobV2 .
+	//
+	// This member is required.
+	BucketArn *string
+
+	// The ARN of the Amazon Web Services KMS key that Security Hub uses to encrypt
+	// the export objects with server-side encryption. The key policy must allow the
+	// Security Hub service principal ( exportv2.securityhub.amazonaws.com ) to use the
+	// key through Amazon S3. For the required key policy, see the Examples section of
+	// StartExportJobV2 .
+	//
+	// The key must meet all of the following requirements:
+	//
+	//   - It must be a symmetric key with a key usage of ENCRYPT_DECRYPT .
+	//
+	//   - It must be a single-Region key. Multi-Region keys, whose key IDs begin with
+	//   mrk- , are rejected.
+	//
+	//   - You must specify the full key ARN. Key IDs and aliases are rejected.
+	//
+	//   - The key must be in the same Amazon Web Services account as the export job.
+	//
+	//   - The key must be in the same Amazon Web Services Region as the export job.
+	//
+	//   - The key must be in the aws , aws-cn , or aws-us-gov partition.
+	//
+	// This member is required.
+	KmsKeyArn *string
+
+	// An optional key prefix that Security Hub prepends to the Amazon S3 object keys
+	// of the export output. Use a prefix to organize exports within the bucket. The
+	// value can be up to 512 characters.
+	ObjectPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *S3ExportDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ExportDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ExportDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketArn != nil {
+		s.WriteString(schemas.S3ExportDestination_BucketArn, *v.BucketArn)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.S3ExportDestination_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.ObjectPrefix != nil {
+		s.WriteString(schemas.S3ExportDestination_ObjectPrefix, *v.ObjectPrefix)
+	}
+}
+func (v *S3ExportDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ExportDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ExportDestination_BucketArn:
+			v.BucketArn = new(string)
+			return d.ReadString(schemas.S3ExportDestination_BucketArn, v.BucketArn)
+		case schemas.S3ExportDestination_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.S3ExportDestination_KmsKeyArn, v.KmsKeyArn)
+		case schemas.S3ExportDestination_ObjectPrefix:
+			v.ObjectPrefix = new(string)
+			return d.ReadString(schemas.S3ExportDestination_ObjectPrefix, v.ObjectPrefix)
+		}
+		return nil
+	})
+}
+
 //	A security control in Security Hub CSPM describes a security best practice
 //
 // related to a specific resource.
@@ -54619,6 +55088,9 @@ func (*UnknownUnionMember) isCriteria()                        {}
 func (*UnknownUnionMember) isCspmProviderConfiguration()       {}
 func (*UnknownUnionMember) isCspmProviderDetail()              {}
 func (*UnknownUnionMember) isCspmProviderUpdateConfiguration() {}
+func (*UnknownUnionMember) isExportDestination()               {}
+func (*UnknownUnionMember) isExportOutput()                    {}
+func (*UnknownUnionMember) isExportOutputSummary()             {}
 func (*UnknownUnionMember) isParameterValue()                  {}
 func (*UnknownUnionMember) isPolicy()                          {}
 func (*UnknownUnionMember) isProviderConfiguration()           {}

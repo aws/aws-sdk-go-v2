@@ -1,0 +1,8 @@
+{
+    "id": "8a43cb61-ce9d-4fb7-b3a8-74eac97b0f4c",
+    "type": "feature",
+    "description": "AWS Lambda now supports OAuth 2.0 (OAUTHBEARER), IAM, and IAM with OAUTHBEARER authentication for self-managed Apache Kafka event source mappings, including optional OAuth scope, audience, logical cluster, and identity pool parameters. OAuth 2.0 is also available for Confluent Schema Registry.",
+    "modules": [
+        "service/lambda"
+    ]
+}

@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShineFrontendService_20170701.DeleteParallelData
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Name":"__Name__","Status":"CREATING"}
+¿dNameh__Name__fStatushCREATINGÿ

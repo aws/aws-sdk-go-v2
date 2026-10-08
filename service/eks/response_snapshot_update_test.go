@@ -598,6 +598,13 @@ func TestUpdateResponseSnapshot_CreateCapability(t *testing.T) {
 					ServerUrl:      ptr.String("__ServerUrl__"),
 					EndpointPrefix: ptr.String("__EndpointPrefix__"),
 				},
+				Ack: &types.AckConfigResponse{
+					EnableCrossNamespace: ptr.Bool(true),
+					DisabledServices: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
@@ -1413,6 +1420,13 @@ func TestUpdateResponseSnapshot_DeleteCapability(t *testing.T) {
 					},
 					ServerUrl:      ptr.String("__ServerUrl__"),
 					EndpointPrefix: ptr.String("__EndpointPrefix__"),
+				},
+				Ack: &types.AckConfigResponse{
+					EnableCrossNamespace: ptr.Bool(true),
+					DisabledServices: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 			},
 			Tags: map[string]string{
@@ -2710,6 +2724,13 @@ func TestUpdateResponseSnapshot_DescribeCapability(t *testing.T) {
 					},
 					ServerUrl:      ptr.String("__ServerUrl__"),
 					EndpointPrefix: ptr.String("__EndpointPrefix__"),
+				},
+				Ack: &types.AckConfigResponse{
+					EnableCrossNamespace: ptr.Bool(true),
+					DisabledServices: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 			},
 			Tags: map[string]string{
