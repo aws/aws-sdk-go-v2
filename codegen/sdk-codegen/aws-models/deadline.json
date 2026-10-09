@@ -7122,6 +7122,9 @@
                     "target": "com.amazonaws.deadline#ListAvailableMeteredProducts"
                 },
                 {
+                    "target": "com.amazonaws.deadline#ListMemberships"
+                },
+                {
                     "target": "com.amazonaws.deadline#ListQueueFleetAssociations"
                 },
                 {
@@ -17458,6 +17461,156 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.deadline#ListMemberships": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.deadline#ListMembershipsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.deadline#ListMembershipsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.deadline#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "deadline:RequesterPrincipalId",
+                    "deadline:PrincipalId"
+                ],
+                "aws.iam#iamAction": {
+                    "name": "ListMemberships",
+                    "documentation": "Grants permission to list Deadline Cloud resource memberships associated with an IAM Identity Center principal",
+                    "requiredActions": [
+                        "identitystore:ListGroupMembershipsForMember"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Lists the Deadline Cloud resource memberships associated with a specified IAM Identity Center principal, optionally filtered by the requested resource types.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "management."
+                },
+                "smithy.api#examples": [
+                    {
+                        "title": "List memberships using a cross-region identity store",
+                        "input": {
+                            "principalId": "12345678-1234-1234-1234-123456789abc",
+                            "identityStoreId": "d-1234567890",
+                            "identityCenterRegion": "us-east-1",
+                            "resourceTypes": [
+                                "QUEUE",
+                                "JOB"
+                            ]
+                        }
+                    },
+                    {
+                        "title": "List a Monitor user's memberships of every resource type",
+                        "input": {
+                            "principalId": "12345678-1234-1234-1234-123456789abc"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2023-10-12/memberships",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "memberships"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.deadline#ListMembershipsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.deadline#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.deadline#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#documentation": "<p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "principalId": {
+                    "target": "com.amazonaws.deadline#IdentityCenterPrincipalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the IAM Identity Center principal whose Deadline Cloud resource memberships you want to list.</p>",
+                        "smithy.api#httpQuery": "principalId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "identityStoreId": {
+                    "target": "com.amazonaws.deadline#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity store ID that contains the principal. This parameter is required for callers that do not use a monitor session.</p>",
+                        "smithy.api#httpQuery": "identityStoreId"
+                    }
+                },
+                "identityCenterRegion": {
+                    "target": "com.amazonaws.deadline#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region of the IAM Identity Center instance. If not provided, the service defaults to the Amazon Web Services Region in which you make the request.</p>",
+                        "smithy.api#httpQuery": "identityCenterRegion"
+                    }
+                },
+                "resourceTypes": {
+                    "target": "com.amazonaws.deadline#MembershipResourceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource types to include when listing the principal's memberships. If not specified, memberships for all supported resource types are returned.</p>",
+                        "smithy.api#httpQuery": "resourceTypes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.deadline#ListMembershipsResponse": {
+            "type": "structure",
+            "members": {
+                "memberships": {
+                    "target": "com.amazonaws.deadline#MembershipSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The memberships associated with the specified principal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.deadline#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.deadline#ListMeteredProducts": {
             "type": "operation",
             "input": {
@@ -19992,6 +20145,90 @@
                 }
             }
         },
+        "com.amazonaws.deadline#MembershipResourceType": {
+            "type": "enum",
+            "members": {
+                "FARM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FARM"
+                    }
+                },
+                "QUEUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUE"
+                    }
+                },
+                "FLEET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLEET"
+                    }
+                },
+                "JOB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JOB"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.deadline#MembershipResourceTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.deadline#MembershipResourceType"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of resource types to include when listing a principal's memberships.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.deadline#MembershipSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.deadline#MembershipSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of membership records for the principal.</p>"
+            }
+        },
+        "com.amazonaws.deadline#MembershipSummary": {
+            "type": "union",
+            "members": {
+                "farm": {
+                    "target": "com.amazonaws.deadline#FarmMember",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A membership on a farm.</p>"
+                    }
+                },
+                "queue": {
+                    "target": "com.amazonaws.deadline#QueueMember",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A membership on a queue.</p>"
+                    }
+                },
+                "fleet": {
+                    "target": "com.amazonaws.deadline#FleetMember",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A membership on a fleet.</p>"
+                    }
+                },
+                "job": {
+                    "target": "com.amazonaws.deadline#JobMember",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A membership on a job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A membership record for a principal on a single Deadline Cloud resource. The summary identifies the resource that the principal is a member of and the principal's membership level for that resource.</p>"
+            }
+        },
         "com.amazonaws.deadline#MemoryAmountMiB": {
             "type": "integer",
             "traits": {
@@ -20563,7 +20800,7 @@
                 "lastUsedTtlHours": {
                     "target": "com.amazonaws.deadline#PersistentVolumeTtlHours",
                     "traits": {
-                        "smithy.api#default": 168,
+                        "smithy.api#default": 12,
                         "smithy.api#documentation": "<p>The number of hours a persistent volume can remain unused before it is deleted. The default is 168 (7 days).</p>"
                     }
                 }

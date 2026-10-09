@@ -937,6 +937,12 @@
                         "smithy.api#documentation": "<p>A map of HTTP header names to expression values. MediaTailor evaluates each header value expression at runtime and includes the result in the outbound request to the AWS service. Use this to pass any headers required by the target service operation. You can include a maximum of 50 headers.</p>"
                     }
                 },
+                "Cache": {
+                    "target": "com.amazonaws.mediatailor#HttpRequestCacheConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional response-caching configuration for the function. When present, MediaTailor caches the responses that the function receives from the AWS service, within the time-to-live (TTL) bounds that you specify. Omit this configuration to disable response caching.</p>"
+                    }
+                },
                 "TargetService": {
                     "target": "com.amazonaws.mediatailor#AwsTargetService",
                     "traits": {
@@ -4626,6 +4632,34 @@
                 "smithy.api#documentation": "<p>HTTP request configuration parameters that define how MediaTailor communicates with the ad decision server.</p>"
             }
         },
+        "com.amazonaws.mediatailor#HttpRequestCacheConfiguration": {
+            "type": "structure",
+            "members": {
+                "TtlMinimumSeconds": {
+                    "target": "com.amazonaws.mediatailor#__integerMin1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lower bound, in seconds, on how long MediaTailor caches a response. MediaTailor also uses this value as the cache duration when a response has no <code>Cache-Control</code> <code>max-age</code> directive.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TtlMaximumSeconds": {
+                    "target": "com.amazonaws.mediatailor#__integerMin1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upper bound, in seconds, on how long MediaTailor caches a response. This value must be greater than or equal to <code>TtlMinimumSeconds</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSONata expression that MediaTailor evaluates to a custom cache key. By default, the cache key is a hash of the HTTP URL, the request body, and the HTTP method; request headers are not included. You can specify a custom cache key expression to vary caching by request headers and more. The evaluated key must be smaller than 1 KB; otherwise the HTTP function will fail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The optional response-caching configuration shared by the HTTP-based function types (<code>HTTP_REQUEST</code>, <code>AWS_SERVICE_REQUEST</code>, and <code>VAST_REQUEST</code>). When you provide this configuration, MediaTailor caches the function's responses that have one of the following HTTP status codes: <code>200</code>, <code>203</code>, <code>204</code>, <code>404</code>, <code>405</code>, <code>410</code>, <code>414</code>, and <code>501</code>. For a cacheable response, MediaTailor caches it for the number of seconds given by the response's <code>Cache-Control</code> <code>max-age</code> directive, limited to the range between <code>TtlMinimumSeconds</code> and <code>TtlMaximumSeconds</code>. If the response has no <code>Cache-Control</code> <code>max-age</code> directive, MediaTailor caches it for <code>TtlMinimumSeconds</code> seconds. Cached HTTP responses are scoped per playback configuration, not per function.</p>"
+            }
+        },
         "com.amazonaws.mediatailor#HttpRequestConfiguration": {
             "type": "structure",
             "members": {
@@ -4673,6 +4707,12 @@
                     "target": "com.amazonaws.mediatailor#__mapOf__string",
                     "traits": {
                         "smithy.api#documentation": "<p>A map of HTTP header names to expression values. MediaTailor evaluates each header value expression at runtime and includes the result in the outbound HTTP request. Maximum 50 headers.</p>"
+                    }
+                },
+                "Cache": {
+                    "target": "com.amazonaws.mediatailor#HttpRequestCacheConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional response-caching configuration for the function. When present, MediaTailor caches the responses that the function receives from the HTTP endpoint, within the time-to-live (TTL) bounds that you specify. Omit this configuration to disable response caching.</p>"
                     }
                 }
             },
@@ -10031,6 +10071,12 @@
                     "target": "com.amazonaws.mediatailor#__mapOf__string",
                     "traits": {
                         "smithy.api#documentation": "<p>A map of HTTP header names to expression values. MediaTailor evaluates each header value expression at runtime and includes the result in the outbound request. Headers beginning with <code>X-Amz-</code> are reserved by the service, and method override headers are not allowed.</p>"
+                    }
+                },
+                "Cache": {
+                    "target": "com.amazonaws.mediatailor#HttpRequestCacheConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional response-caching configuration for the function. When present, MediaTailor caches the responses that the function receives from the HTTP endpoint, within the time-to-live (TTL) bounds that you specify. Omit this configuration to disable response caching.</p>"
                     }
                 }
             },

@@ -10316,6 +10316,30 @@
                         "smithy.api#documentation": "<p>The ability to use Bee actions.</p>"
                     }
                 },
+                "GongAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to perform actions using Gong connectors.</p>"
+                    }
+                },
+                "CreateAndUpdateGongAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update Gong actions.</p>"
+                    }
+                },
+                "ShareGongAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Gong actions.</p>"
+                    }
+                },
+                "UseGongAction": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to use Gong actions.</p>"
+                    }
+                },
                 "Topic": {
                     "target": "com.amazonaws.quicksight#CapabilityState",
                     "traits": {
@@ -10470,6 +10494,1086 @@
                     "target": "com.amazonaws.quicksight#CapabilityState",
                     "traits": {
                         "smithy.api#documentation": "<p>The ability to create, view, edit, delete, and run Quick event triggers for flows and automations.</p>"
+                    }
+                },
+                "FileDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share file data sources.</p>"
+                    }
+                },
+                "CreateFileDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create file data sources.</p>"
+                    }
+                },
+                "UpdateFileDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update file data sources.</p>"
+                    }
+                },
+                "ShareFileDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share file data sources.</p>"
+                    }
+                },
+                "S3DataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Amazon S3 data sources.</p>"
+                    }
+                },
+                "CreateS3DataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Amazon S3 data sources.</p>"
+                    }
+                },
+                "UpdateS3DataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Amazon S3 data sources.</p>"
+                    }
+                },
+                "ShareS3DataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Amazon S3 data sources.</p>"
+                    }
+                },
+                "S3AnalyticsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Amazon S3 Analytics data sources.</p>"
+                    }
+                },
+                "CreateS3AnalyticsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Amazon S3 Analytics data sources.</p>"
+                    }
+                },
+                "UpdateS3AnalyticsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Amazon S3 Analytics data sources.</p>"
+                    }
+                },
+                "ShareS3AnalyticsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Amazon S3 Analytics data sources.</p>"
+                    }
+                },
+                "S3TablesDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Amazon S3 Tables data sources.</p>"
+                    }
+                },
+                "CreateS3TablesDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Amazon S3 Tables data sources.</p>"
+                    }
+                },
+                "UpdateS3TablesDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Amazon S3 Tables data sources.</p>"
+                    }
+                },
+                "ShareS3TablesDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Amazon S3 Tables data sources.</p>"
+                    }
+                },
+                "AthenaDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Amazon Athena data sources.</p>"
+                    }
+                },
+                "CreateAthenaDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Amazon Athena data sources.</p>"
+                    }
+                },
+                "UpdateAthenaDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Amazon Athena data sources.</p>"
+                    }
+                },
+                "ShareAthenaDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Amazon Athena data sources.</p>"
+                    }
+                },
+                "RdsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share auto-discovered Amazon RDS data sources.</p>"
+                    }
+                },
+                "CreateRdsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create auto-discovered Amazon RDS data sources.</p>"
+                    }
+                },
+                "UpdateRdsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update auto-discovered Amazon RDS data sources.</p>"
+                    }
+                },
+                "ShareRdsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share auto-discovered Amazon RDS data sources.</p>"
+                    }
+                },
+                "RedshiftAutoDiscoveredDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share auto-discovered Amazon Redshift data sources.</p>"
+                    }
+                },
+                "CreateRedshiftAutoDiscoveredDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create auto-discovered Amazon Redshift data sources.</p>"
+                    }
+                },
+                "UpdateRedshiftAutoDiscoveredDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update auto-discovered Amazon Redshift data sources.</p>"
+                    }
+                },
+                "ShareRedshiftAutoDiscoveredDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share auto-discovered Amazon Redshift data sources.</p>"
+                    }
+                },
+                "RedshiftManualDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share manually configured Amazon Redshift data sources.</p>"
+                    }
+                },
+                "CreateRedshiftManualDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create manually configured Amazon Redshift data sources.</p>"
+                    }
+                },
+                "UpdateRedshiftManualDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update manually configured Amazon Redshift data sources.</p>"
+                    }
+                },
+                "ShareRedshiftManualDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share manually configured Amazon Redshift data sources.</p>"
+                    }
+                },
+                "OpenSearchDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Amazon OpenSearch Service data sources.</p>"
+                    }
+                },
+                "CreateOpenSearchDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Amazon OpenSearch Service data sources.</p>"
+                    }
+                },
+                "UpdateOpenSearchDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Amazon OpenSearch Service data sources.</p>"
+                    }
+                },
+                "ShareOpenSearchDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Amazon OpenSearch Service data sources.</p>"
+                    }
+                },
+                "TimestreamDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Amazon Timestream data sources.</p>"
+                    }
+                },
+                "CreateTimestreamDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Amazon Timestream data sources.</p>"
+                    }
+                },
+                "UpdateTimestreamDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Amazon Timestream data sources.</p>"
+                    }
+                },
+                "ShareTimestreamDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Amazon Timestream data sources.</p>"
+                    }
+                },
+                "AuroraDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Amazon Aurora data sources.</p>"
+                    }
+                },
+                "CreateAuroraDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Amazon Aurora data sources.</p>"
+                    }
+                },
+                "UpdateAuroraDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Amazon Aurora data sources.</p>"
+                    }
+                },
+                "ShareAuroraDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Amazon Aurora data sources.</p>"
+                    }
+                },
+                "MySqlDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share MySQL data sources.</p>"
+                    }
+                },
+                "CreateMySqlDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create MySQL data sources.</p>"
+                    }
+                },
+                "UpdateMySqlDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update MySQL data sources.</p>"
+                    }
+                },
+                "ShareMySqlDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share MySQL data sources.</p>"
+                    }
+                },
+                "PostgreSqlDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share PostgreSQL data sources.</p>"
+                    }
+                },
+                "CreatePostgreSqlDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create PostgreSQL data sources.</p>"
+                    }
+                },
+                "UpdatePostgreSqlDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update PostgreSQL data sources.</p>"
+                    }
+                },
+                "SharePostgreSqlDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share PostgreSQL data sources.</p>"
+                    }
+                },
+                "OracleDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Oracle data sources.</p>"
+                    }
+                },
+                "CreateOracleDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Oracle data sources.</p>"
+                    }
+                },
+                "UpdateOracleDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Oracle data sources.</p>"
+                    }
+                },
+                "ShareOracleDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Oracle data sources.</p>"
+                    }
+                },
+                "SqlServerDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share SQL Server data sources.</p>"
+                    }
+                },
+                "CreateSqlServerDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create SQL Server data sources.</p>"
+                    }
+                },
+                "UpdateSqlServerDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update SQL Server data sources.</p>"
+                    }
+                },
+                "ShareSqlServerDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share SQL Server data sources.</p>"
+                    }
+                },
+                "MariaDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share MariaDB data sources.</p>"
+                    }
+                },
+                "CreateMariaDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create MariaDB data sources.</p>"
+                    }
+                },
+                "UpdateMariaDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update MariaDB data sources.</p>"
+                    }
+                },
+                "ShareMariaDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share MariaDB data sources.</p>"
+                    }
+                },
+                "SnowflakeDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Snowflake data sources.</p>"
+                    }
+                },
+                "CreateSnowflakeDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Snowflake data sources.</p>"
+                    }
+                },
+                "UpdateSnowflakeDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Snowflake data sources.</p>"
+                    }
+                },
+                "ShareSnowflakeDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Snowflake data sources.</p>"
+                    }
+                },
+                "GoogleBigQueryDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Google BigQuery data sources.</p>"
+                    }
+                },
+                "CreateGoogleBigQueryDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Google BigQuery data sources.</p>"
+                    }
+                },
+                "UpdateGoogleBigQueryDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Google BigQuery data sources.</p>"
+                    }
+                },
+                "ShareGoogleBigQueryDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Google BigQuery data sources.</p>"
+                    }
+                },
+                "DatabricksDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Databricks data sources.</p>"
+                    }
+                },
+                "CreateDatabricksDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Databricks data sources.</p>"
+                    }
+                },
+                "UpdateDatabricksDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Databricks data sources.</p>"
+                    }
+                },
+                "ShareDatabricksDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Databricks data sources.</p>"
+                    }
+                },
+                "StarburstDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Starburst data sources.</p>"
+                    }
+                },
+                "CreateStarburstDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Starburst data sources.</p>"
+                    }
+                },
+                "UpdateStarburstDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Starburst data sources.</p>"
+                    }
+                },
+                "ShareStarburstDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Starburst data sources.</p>"
+                    }
+                },
+                "TrinoDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Trino data sources.</p>"
+                    }
+                },
+                "CreateTrinoDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Trino data sources.</p>"
+                    }
+                },
+                "UpdateTrinoDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Trino data sources.</p>"
+                    }
+                },
+                "ShareTrinoDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Trino data sources.</p>"
+                    }
+                },
+                "ImpalaDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Impala data sources.</p>"
+                    }
+                },
+                "CreateImpalaDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Impala data sources.</p>"
+                    }
+                },
+                "UpdateImpalaDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Impala data sources.</p>"
+                    }
+                },
+                "ShareImpalaDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Impala data sources.</p>"
+                    }
+                },
+                "TeradataDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Teradata data sources.</p>"
+                    }
+                },
+                "CreateTeradataDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Teradata data sources.</p>"
+                    }
+                },
+                "UpdateTeradataDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Teradata data sources.</p>"
+                    }
+                },
+                "ShareTeradataDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Teradata data sources.</p>"
+                    }
+                },
+                "PrestoDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Presto data sources.</p>"
+                    }
+                },
+                "CreatePrestoDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Presto data sources.</p>"
+                    }
+                },
+                "UpdatePrestoDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Presto data sources.</p>"
+                    }
+                },
+                "SharePrestoDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Presto data sources.</p>"
+                    }
+                },
+                "SparkDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Spark data sources.</p>"
+                    }
+                },
+                "CreateSparkDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Spark data sources.</p>"
+                    }
+                },
+                "UpdateSparkDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Spark data sources.</p>"
+                    }
+                },
+                "ShareSparkDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Spark data sources.</p>"
+                    }
+                },
+                "ExasolDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Exasol data sources.</p>"
+                    }
+                },
+                "CreateExasolDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Exasol data sources.</p>"
+                    }
+                },
+                "UpdateExasolDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Exasol data sources.</p>"
+                    }
+                },
+                "ShareExasolDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Exasol data sources.</p>"
+                    }
+                },
+                "Db2DataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Db2 data sources.</p>"
+                    }
+                },
+                "CreateDb2DataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Db2 data sources.</p>"
+                    }
+                },
+                "UpdateDb2DataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Db2 data sources.</p>"
+                    }
+                },
+                "ShareDb2DataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Db2 data sources.</p>"
+                    }
+                },
+                "SapHanaDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share SAP HANA data sources.</p>"
+                    }
+                },
+                "CreateSapHanaDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create SAP HANA data sources.</p>"
+                    }
+                },
+                "UpdateSapHanaDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update SAP HANA data sources.</p>"
+                    }
+                },
+                "ShareSapHanaDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share SAP HANA data sources.</p>"
+                    }
+                },
+                "DenodoDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Denodo data sources.</p>"
+                    }
+                },
+                "CreateDenodoDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Denodo data sources.</p>"
+                    }
+                },
+                "UpdateDenodoDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Denodo data sources.</p>"
+                    }
+                },
+                "ShareDenodoDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Denodo data sources.</p>"
+                    }
+                },
+                "DremioDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Dremio data sources.</p>"
+                    }
+                },
+                "CreateDremioDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Dremio data sources.</p>"
+                    }
+                },
+                "UpdateDremioDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Dremio data sources.</p>"
+                    }
+                },
+                "ShareDremioDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Dremio data sources.</p>"
+                    }
+                },
+                "SalesforceDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Salesforce data sources.</p>"
+                    }
+                },
+                "CreateSalesforceDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Salesforce data sources.</p>"
+                    }
+                },
+                "UpdateSalesforceDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Salesforce data sources.</p>"
+                    }
+                },
+                "ShareSalesforceDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Salesforce data sources.</p>"
+                    }
+                },
+                "RadiantDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Amazon QuickSight data sources.</p>"
+                    }
+                },
+                "CreateRadiantDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Amazon QuickSight data sources.</p>"
+                    }
+                },
+                "UpdateRadiantDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Amazon QuickSight data sources.</p>"
+                    }
+                },
+                "ShareRadiantDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Amazon QuickSight data sources.</p>"
+                    }
+                },
+                "PayPalDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share PayPal data sources.</p>"
+                    }
+                },
+                "CreatePayPalDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create PayPal data sources.</p>"
+                    }
+                },
+                "UpdatePayPalDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update PayPal data sources.</p>"
+                    }
+                },
+                "SharePayPalDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share PayPal data sources.</p>"
+                    }
+                },
+                "SquareDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Square data sources.</p>"
+                    }
+                },
+                "CreateSquareDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Square data sources.</p>"
+                    }
+                },
+                "UpdateSquareDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Square data sources.</p>"
+                    }
+                },
+                "ShareSquareDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Square data sources.</p>"
+                    }
+                },
+                "GitHubDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share GitHub data sources.</p>"
+                    }
+                },
+                "CreateGitHubDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create GitHub data sources.</p>"
+                    }
+                },
+                "UpdateGitHubDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update GitHub data sources.</p>"
+                    }
+                },
+                "ShareGitHubDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share GitHub data sources.</p>"
+                    }
+                },
+                "TwitterDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Twitter data sources.</p>"
+                    }
+                },
+                "CreateTwitterDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Twitter data sources.</p>"
+                    }
+                },
+                "UpdateTwitterDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Twitter data sources.</p>"
+                    }
+                },
+                "ShareTwitterDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Twitter data sources.</p>"
+                    }
+                },
+                "JiraDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Jira data sources.</p>"
+                    }
+                },
+                "CreateJiraDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Jira data sources.</p>"
+                    }
+                },
+                "UpdateJiraDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Jira data sources.</p>"
+                    }
+                },
+                "ShareJiraDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Jira data sources.</p>"
+                    }
+                },
+                "ServiceNowDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share ServiceNow data sources.</p>"
+                    }
+                },
+                "CreateServiceNowDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create ServiceNow data sources.</p>"
+                    }
+                },
+                "UpdateServiceNowDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update ServiceNow data sources.</p>"
+                    }
+                },
+                "ShareServiceNowDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share ServiceNow data sources.</p>"
+                    }
+                },
+                "AdobeAnalyticsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Adobe Analytics data sources.</p>"
+                    }
+                },
+                "CreateAdobeAnalyticsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Adobe Analytics data sources.</p>"
+                    }
+                },
+                "UpdateAdobeAnalyticsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Adobe Analytics data sources.</p>"
+                    }
+                },
+                "ShareAdobeAnalyticsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Adobe Analytics data sources.</p>"
+                    }
+                },
+                "GoogleAnalyticsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Google Analytics data sources.</p>"
+                    }
+                },
+                "CreateGoogleAnalyticsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Google Analytics data sources.</p>"
+                    }
+                },
+                "UpdateGoogleAnalyticsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Google Analytics data sources.</p>"
+                    }
+                },
+                "ShareGoogleAnalyticsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Google Analytics data sources.</p>"
+                    }
+                },
+                "GoogleSheetsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Google Sheets data sources.</p>"
+                    }
+                },
+                "CreateGoogleSheetsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Google Sheets data sources.</p>"
+                    }
+                },
+                "UpdateGoogleSheetsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Google Sheets data sources.</p>"
+                    }
+                },
+                "ShareGoogleSheetsDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Google Sheets data sources.</p>"
+                    }
+                },
+                "DocumentDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Amazon DocumentDB data sources.</p>"
+                    }
+                },
+                "CreateDocumentDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Amazon DocumentDB data sources.</p>"
+                    }
+                },
+                "UpdateDocumentDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Amazon DocumentDB data sources.</p>"
+                    }
+                },
+                "ShareDocumentDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Amazon DocumentDB data sources.</p>"
+                    }
+                },
+                "MongoDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share MongoDB data sources.</p>"
+                    }
+                },
+                "CreateMongoDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create MongoDB data sources.</p>"
+                    }
+                },
+                "UpdateMongoDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update MongoDB data sources.</p>"
+                    }
+                },
+                "ShareMongoDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share MongoDB data sources.</p>"
+                    }
+                },
+                "MongoAtlasDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share MongoDB Atlas data sources.</p>"
+                    }
+                },
+                "CreateMongoAtlasDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create MongoDB Atlas data sources.</p>"
+                    }
+                },
+                "UpdateMongoAtlasDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update MongoDB Atlas data sources.</p>"
+                    }
+                },
+                "ShareMongoAtlasDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share MongoDB Atlas data sources.</p>"
+                    }
+                },
+                "DynamoDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, update, and share Amazon DynamoDB data sources.</p>"
+                    }
+                },
+                "CreateDynamoDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create Amazon DynamoDB data sources.</p>"
+                    }
+                },
+                "UpdateDynamoDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to update Amazon DynamoDB data sources.</p>"
+                    }
+                },
+                "ShareDynamoDbDataSource": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share Amazon DynamoDB data sources.</p>"
                     }
                 }
             },

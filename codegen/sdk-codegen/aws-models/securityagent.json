@@ -4403,6 +4403,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The CI/CD pentesting configuration to apply to the pentest.</p>"
                     }
+                },
+                "testScope": {
+                    "target": "com.amazonaws.securityagent#TestScope"
                 }
             },
             "traits": {
@@ -4486,6 +4489,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The CI/CD pentesting configuration applied to the pentest.</p>"
                     }
+                },
+                "testScope": {
+                    "target": "com.amazonaws.securityagent#TestScope"
                 }
             },
             "traits": {
@@ -10502,6 +10508,9 @@
                         "smithy.api#documentation": "<p>The CI/CD pentesting configuration for this pentest. Present when the pentest is set up to run from a CI/CD pipeline.</p>"
                     }
                 },
+                "testScope": {
+                    "target": "com.amazonaws.securityagent#TestScope"
+                },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -10718,6 +10727,9 @@
                 },
                 "cicdConfiguration": {
                     "target": "com.amazonaws.securityagent#CiCdConfiguration"
+                },
+                "testScope": {
+                    "target": "com.amazonaws.securityagent#TestScope"
                 },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
@@ -14210,6 +14222,43 @@
                 "target": "com.amazonaws.securityagent#TaskSummary"
             }
         },
+        "com.amazonaws.securityagent#TestScope": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.securityagent#TestScopeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of application under test.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The category of application a pentest targets.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#TestScopeType": {
+            "type": "enum",
+            "members": {
+                "WEB_APP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A traditional web application.</p>",
+                        "smithy.api#enumValue": "WEB_APP"
+                    }
+                },
+                "GENERATIVE_AI_APP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A generative AI application.</p>",
+                        "smithy.api#enumValue": "GENERATIVE_AI_APP"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The category of application a pentest targets.</p>"
+            }
+        },
         "com.amazonaws.securityagent#Threat": {
             "type": "structure",
             "members": {
@@ -16109,6 +16158,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The updated CI/CD pentesting configuration to apply to the pentest.</p>"
                     }
+                },
+                "testScope": {
+                    "target": "com.amazonaws.securityagent#TestScope"
                 }
             },
             "traits": {
@@ -16192,6 +16244,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The CI/CD pentesting configuration applied to the pentest.</p>"
                     }
+                },
+                "testScope": {
+                    "target": "com.amazonaws.securityagent#TestScope"
                 }
             },
             "traits": {

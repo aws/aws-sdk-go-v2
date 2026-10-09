@@ -1175,6 +1175,16 @@
                 }
             }
         },
+        "com.amazonaws.marketplacemetering#AgreementId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_/-]+$"
+            }
+        },
         "com.amazonaws.marketplacemetering#AllocatedUsageQuantity": {
             "type": "integer",
             "traits": {
@@ -1225,7 +1235,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<important>\n            <p>Amazon Web Services Marketplace is introducing Concurrent Agreements, enabling buyers to make multiple purchases per Amazon Web Services account. Starting June 1, 2026, new SaaS products must use <code>CustomerAWSAccountId</code> (instead of <code>CustomerIdentifier</code>), <code>LicenseArn</code> (instead of <code>ProductCode</code>) to support this feature. <code>BatchMeterUsage</code> does not support <code>CustomerIdentifier</code> for new integrations. Existing integrations continue to work. Review the new integration for Concurrent Agreements <a href=\"https://catalog.workshops.aws/mpseller/en-US/saas/integration-for-concurrent-agreements\">here</a>. For additional implementation details, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-licensearn-example\">BatchMeterUsage code example with LicenseArn</a> in the <i>Amazon Web Services Marketplace Seller Guide</i>.</p>\n         </important>\n         <p>To post metering records for customers, SaaS applications call\n        <code>BatchMeterUsage</code>, which is used for metering SaaS flexible\n      consumption pricing (FCP). Identical requests are idempotent and can be\n      retried with the same records or a subset of records. Each\n        <code>BatchMeterUsage</code> request is for only one product. If you\n      want to meter usage for multiple products, you must make multiple\n        <code>BatchMeterUsage</code> calls.</p>\n         <p>Usage records should be submitted in quick succession following a\n      recorded event. Usage records aren't accepted 24 hours or more after an\n      event. At the end of each billing cycle, a 6-hour grace period applies. We accept\n      usage records for the previous billing month until 06:00 UTC on the first day of the\n      next month. For example, you must submit March usage records before 06:00 UTC on\n      April 1. On April 1 at 05:00 UTC, you can still submit records for March 31 (within the 6-hour grace period). After 06:00 UTC on April 1, March records are rejected regardless of the normal 24-hour submission window. After this grace period, we return a\n      <code>TimestampOutOfBoundsException</code> error.</p>\n         <p>\n            <code>BatchMeterUsage</code> can process up to 25\n        <code>UsageRecords</code> at a time, and each request must be less than\n      1 MB in size. Optionally, you can have multiple usage allocations for\n      usage data that's split into buckets according to predefined tags.</p>\n         <p>\n            <code>BatchMeterUsage</code> returns a list of\n        <code>UsageRecordResult</code> objects, which have each\n        <code>UsageRecord</code>. It also returns a list of\n        <code>UnprocessedRecords</code>, which indicate errors on the service\n      side that should be retried.</p>\n         <p>For Amazon Web Services Regions that support <code>BatchMeterUsage</code>, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support\">BatchMeterUsage Region support</a>.\n      </p>\n         <note>\n            <p>For an example of <code>BatchMeterUsage</code>, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example\"> BatchMeterUsage code example</a> in the <i>Amazon Web Services Marketplace Seller\n          Guide</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<important>\n            <p>Amazon Web Services Marketplace is introducing Concurrent Agreements, enabling buyers to make multiple purchases per Amazon Web Services account. Starting June 1, 2026, new SaaS products must use <code>CustomerAWSAccountId</code> (instead of <code>CustomerIdentifier</code>), <code>LicenseArn</code> (instead of <code>ProductCode</code>) to support this feature. <code>BatchMeterUsage</code> does not support <code>CustomerIdentifier</code> for new integrations. Existing integrations continue to work. Review the new integration for Concurrent Agreements <a href=\"https://catalog.workshops.aws/mpseller/en-US/saas/integration-for-concurrent-agreements\">here</a>. For additional implementation details, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-licensearn-example\">BatchMeterUsage code example with LicenseArn</a> in the <i>Amazon Web Services Marketplace Seller Guide</i>.</p>\n         </important>\n         <p>To post metering records for customers, SaaS applications call\n        <code>BatchMeterUsage</code>, which is used for metering SaaS flexible\n      consumption pricing (FCP). Identical requests are idempotent and can be\n      retried with the same records or a subset of records. Each\n        <code>BatchMeterUsage</code> request is for only one product. If you\n      want to meter usage for multiple products, you must make multiple\n        <code>BatchMeterUsage</code> calls.</p>\n         <p>Usage records should be submitted in quick succession following a\n      recorded event. Usage records aren't accepted 24 hours or more after an\n      event. At the end of each billing cycle, a 6-hour grace period applies. We accept\n      usage records for the previous billing month until 06:00 UTC on the first day of the\n      next month. For example, you must submit March usage records before 06:00 UTC on\n      April 1. On April 1 at 05:00 UTC, you can still submit records for March 31 (within the 6-hour grace period). After 06:00 UTC on April 1, March records are rejected regardless of the normal 24-hour submission window. After this grace period, we return a\n      <code>TimestampOutOfBoundsException</code> error.</p>\n         <p>\n            <code>BatchMeterUsage</code> can process up to 25\n        <code>UsageRecords</code> at a time, and each request must be less than\n      1 MB in size.</p>\n         <p>\n            <b>Vendor-metered tagging</b>\n         </p>\n         <p>\n            <code>BatchMeterUsage</code> supports vendor-metered tagging. Optionally, you can\n      split the usage in a <code>UsageRecord</code> into buckets by including\n      <code>UsageAllocations</code>, where each <code>UsageAllocation</code> has a set of\n      <code>Tags</code> that you define. Vendor-metered tagging doesn't change the price,\n      dimensions, or the total usage that you report. It gives buyers a more granular view of\n      their usage of your product so they can perform cost allocation in the Amazon Web Services Billing and\n      Cost Management console. For more information, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/metering-for-usage.html#saas-vendor-metered-tagging\">Vendor-metered tagging</a> and <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-tagging\">BatchMeterUsage with usage allocation tagging code example</a> in the\n        <i>Amazon Web Services Marketplace Seller Guide</i>.</p>\n         <p>\n            <code>BatchMeterUsage</code> returns a list of\n        <code>UsageRecordResult</code> objects, which have each\n        <code>UsageRecord</code>. It also returns a list of\n        <code>UnprocessedRecords</code>, which indicate errors on the service\n      side that should be retried.</p>\n         <p>For Amazon Web Services Regions that support <code>BatchMeterUsage</code>, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support\">BatchMeterUsage Region support</a>.\n      </p>\n         <note>\n            <p>For an example of <code>BatchMeterUsage</code>, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example\"> BatchMeterUsage code example</a> in the <i>Amazon Web Services Marketplace Seller\n          Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.marketplacemetering#BatchMeterUsageRequest": {
@@ -1502,6 +1512,20 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
+            }
+        },
+        "com.amazonaws.marketplacemetering#Metadata": {
+            "type": "structure",
+            "members": {
+                "AgreementId": {
+                    "target": "com.amazonaws.marketplacemetering#AgreementId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Web Services Marketplace agreement the customer accepted. Use it to\n            call Amazon Web Services Marketplace Agreement APIs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata associated with a resolved customer. Includes the <code>AgreementId</code> of\n            the Amazon Web Services Marketplace agreement the customer accepted.</p>"
             }
         },
         "com.amazonaws.marketplacemetering#MeterUsage": {
@@ -1814,10 +1838,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>LicenseArn</code> is a unique identifier for a specific granted license. These are typically used for software purchased through Amazon Web Services Marketplace. Calls to <code>BatchMeterUsage</code> require <code>LicenseArn</code> for each <code>UsageRecord</code>.</p>\n         <note>\n            <p>Once you receive the <code>CustomerAWSAccountId</code> and <code>LicenseArn</code> in the response, store that for future purposes/API calls/integrations.</p>\n         </note>"
                     }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.marketplacemetering#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata associated with the resolved customer, including the\n            <code>AgreementId</code> of the Amazon Web Services Marketplace agreement the customer accepted.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of the <code>ResolveCustomer</code> operation. Contains the\n                <code>CustomerIdentifier</code> along with the <code>CustomerAWSAccountId</code>,\n                <code>ProductCode</code>, and <code>LicenseArn</code>.</p>",
+                "smithy.api#documentation": "<p>The result of the <code>ResolveCustomer</code> operation. Contains the\n                <code>CustomerIdentifier</code> along with the <code>CustomerAWSAccountId</code>,\n                <code>ProductCode</code>, <code>LicenseArn</code>, and <code>Metadata</code>.</p>",
                 "smithy.api#output": {}
             }
         },
