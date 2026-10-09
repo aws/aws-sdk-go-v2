@@ -1,0 +1,8 @@
+{
+    "id": "8d79af21-bb1d-425c-9743-070e92399357",
+    "type": "bugfix",
+    "description": "Fix deserialization failure when `TableMetadata.Parameters` contains a null value.",
+    "modules": [
+        "service/athena"
+    ]
+}
