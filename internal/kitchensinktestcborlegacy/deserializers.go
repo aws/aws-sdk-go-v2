@@ -9,6 +9,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -71,6 +72,82 @@ func (m *smithyRpcv2cbor_deserializeOpCborGetItem) HandleDeserialize(ctx context
 	}
 
 	out.Result = &CborGetItemOutput{}
+
+	return out, metadata, nil
+}
+
+type smithyRpcv2cbor_deserializeOpCborGetMaps struct {
+}
+
+func (*smithyRpcv2cbor_deserializeOpCborGetMaps) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *smithyRpcv2cbor_deserializeOpCborGetMaps) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, metadata, err
+		}
+		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
+	}
+
+	// Close the response body on return, including when an interceptor
+	// that runs after OperationDeserializer surfaces an error (after
+	// transmit or before deserialization). Registering this before the
+	// error check below is what covers those interceptor aborts. Event
+	// streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf(
+				"unexpected smithy-protocol response header '%s' (HTTP status: %s)",
+				resp.Header.Get("smithy-protocol"),
+				resp.Status,
+			),
+		}
+	}
+
+	if resp.StatusCode != 200 {
+		return out, metadata, rpc2_deserializeOpErrorCborGetMaps(resp)
+	}
+
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	if len(payload) == 0 {
+		out.Result = &CborGetMapsOutput{}
+		return out, metadata, nil
+	}
+
+	cv, err := smithycbor.Decode(payload)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	output, err := deserializeCBOR_CborGetMapsOutput(cv)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	out.Result = output
 
 	return out, metadata, nil
 }
@@ -146,6 +223,178 @@ func deserializeCBOR_CborItemNotFound(v smithycbor.Value) (*types.CborItemNotFou
 	}
 	return ds, nil
 }
+
+func deserializeCBOR_DenseIntegerMap(v smithycbor.Value) (map[string]int32, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]int32{}
+	for key, sv := range av {
+		if _, ok := sv.(*smithycbor.Nil); ok {
+			var zero int32
+			dm[key] = zero
+			continue
+		}
+		dv, err := deserializeCBOR_Int32(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = dv
+	}
+	return dm, nil
+}
+
+func deserializeCBOR_DenseStringMap(v smithycbor.Value) (map[string]string, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]string{}
+	for key, sv := range av {
+		if _, ok := sv.(*smithycbor.Nil); ok {
+			var zero string
+			dm[key] = zero
+			continue
+		}
+		dv, err := deserializeCBOR_String(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = dv
+	}
+	return dm, nil
+}
+
+func deserializeCBOR_DenseStructMap(v smithycbor.Value) (map[string]types.MapValueStruct, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]types.MapValueStruct{}
+	for key, sv := range av {
+		if _, ok := sv.(*smithycbor.Nil); ok {
+			var zero types.MapValueStruct
+			dm[key] = zero
+			continue
+		}
+		dv, err := deserializeCBOR_MapValueStruct(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = *dv
+	}
+	return dm, nil
+}
+
+func deserializeCBOR_MapValueStruct(v smithycbor.Value) (*types.MapValueStruct, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.MapValueStruct{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "name" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Name = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_SparseStringMap(v smithycbor.Value) (map[string]*string, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]*string{}
+	for key, sv := range av {
+		if _, ok := sv.(*smithycbor.Nil); ok {
+			dm[key] = nil
+			continue
+		}
+		dv, err := deserializeCBOR_String(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = &dv
+	}
+	return dm, nil
+}
+
+func deserializeCBOR_Int32(v smithycbor.Value) (int32, error) {
+	return smithycbor.AsInt32(v)
+}
+
+func deserializeCBOR_String(v smithycbor.Value) (string, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return "", fmt.Errorf("unexpected value type %T", v)
+	}
+	return string(av), nil
+}
+
+func deserializeCBOR_CborGetMapsOutput(v smithycbor.Value) (*CborGetMapsOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &CborGetMapsOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "strings" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_DenseStringMap(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Strings = dv
+		}
+
+		if key == "integers" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_DenseIntegerMap(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Integers = dv
+		}
+
+		if key == "structs" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_DenseStructMap(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Structs = dv
+		}
+
+		if key == "sparseStrings" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_SparseStringMap(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.SparseStrings = dv
+		}
+	}
+	return ds, nil
+}
 func rpc2_deserializeOpErrorCborGetItem(resp *smithyhttp.Response) error {
 	payload, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -179,6 +428,36 @@ func rpc2_deserializeOpErrorCborGetItem(resp *smithyhttp.Response) error {
 		}
 
 		return verr
+	default:
+
+		return &smithy.GenericAPIError{Code: typ, Message: msg}
+	}
+}
+
+func rpc2_deserializeOpErrorCborGetMaps(resp *smithyhttp.Response) error {
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}
+	}
+
+	typ, msg, v, err := getProtocolErrorInfo(payload)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("get error info: %w", err)}
+	}
+
+	if len(typ) == 0 {
+		typ = "UnknownError"
+	}
+	if len(msg) == 0 {
+		msg = "UnknownError"
+	}
+
+	_ = v
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+
 	default:
 
 		return &smithy.GenericAPIError{Code: typ, Message: msg}

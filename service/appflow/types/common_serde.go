@@ -1086,6 +1086,14 @@ func deserializeConnectorConfigurationsMap(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]ConnectorConfiguration)
 	var vv ConnectorConfiguration
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero ConnectorConfiguration
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = ConnectorConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1100,6 +1108,14 @@ func deserializeConnectorEntityMap(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make(map[string][]ConnectorEntity)
 	var vv []ConnectorEntity
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []ConnectorEntity
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeConnectorEntityList(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -1114,6 +1130,13 @@ func deserializeCredentialsMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1128,6 +1151,13 @@ func deserializeCustomProperties(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1142,6 +1172,13 @@ func deserializeProfilePropertiesMap(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1156,6 +1193,13 @@ func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1170,6 +1214,13 @@ func deserializeTaskPropertiesMap(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1184,6 +1235,13 @@ func deserializeTokenUrlCustomProperties(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

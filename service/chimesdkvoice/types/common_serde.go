@@ -1071,6 +1071,13 @@ func deserializeSipHeadersMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1085,6 +1092,13 @@ func deserializeSMACreateCallArgumentsMap(d smithy.ShapeDeserializer, s *smithy.
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1099,6 +1113,13 @@ func deserializeSMAUpdateCallArgumentsMap(d smithy.ShapeDeserializer, s *smithy.
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

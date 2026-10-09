@@ -258,6 +258,14 @@ func deserializeDialogMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[s
 	*v = make(map[string]Dialog)
 	var vv Dialog
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero Dialog
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = Dialog{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -272,6 +280,13 @@ func deserializeRequiredStringMap(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -286,6 +301,13 @@ func deserializeTestStringMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -300,6 +322,13 @@ func deserializeStringMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[s
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

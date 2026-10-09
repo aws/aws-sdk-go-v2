@@ -1141,6 +1141,14 @@ func deserializeRegionStatusMap(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]types.RegionStatus)
 	var vv types.RegionStatus
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RegionStatus
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.RegionStatus{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

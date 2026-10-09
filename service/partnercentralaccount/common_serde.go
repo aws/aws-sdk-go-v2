@@ -498,6 +498,14 @@ func deserializeConnectionTypeDetailMap(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make(map[string]types.ConnectionTypeDetail)
 	var vv types.ConnectionTypeDetail
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ConnectionTypeDetail
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ConnectionTypeDetail{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -512,6 +520,14 @@ func deserializeConnectionTypeSummaryMap(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make(map[string]types.ConnectionTypeSummary)
 	var vv types.ConnectionTypeSummary
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ConnectionTypeSummary
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ConnectionTypeSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

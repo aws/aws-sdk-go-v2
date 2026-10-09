@@ -128,7 +128,7 @@ namespace aws.kitchensinktest
 )
 service AwsJson1KitchenSink {
     version: "2025-03-01",
-    operations: [GetItem, SubscribeEvents, PutCompressedData],
+    operations: [GetItem, SubscribeEvents, PutCompressedData, GetMaps],
 }
 
 operation GetItem {
@@ -191,3 +191,44 @@ structure PutCompressedDataInput {
 }
 
 structure PutCompressedDataOutput {}
+
+// Dense maps where the server sends an explicit null value. Clients keep the
+// key with the zero value, matching legacy JSON deserializer behavior.
+operation GetMaps {
+    input: GetMapsInput,
+    output: GetMapsOutput,
+}
+
+structure GetMapsInput {}
+
+structure GetMapsOutput {
+    strings: DenseStringMap,
+    integers: DenseIntegerMap,
+    structs: DenseStructMap,
+    sparseStrings: SparseStringMap,
+}
+
+map DenseStringMap {
+    key: String,
+    value: String,
+}
+
+map DenseIntegerMap {
+    key: String,
+    value: Integer,
+}
+
+map DenseStructMap {
+    key: String,
+    value: MapValueStruct,
+}
+
+@sparse
+map SparseStringMap {
+    key: String,
+    value: String,
+}
+
+structure MapValueStruct {
+    name: String,
+}

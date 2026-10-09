@@ -75,6 +75,14 @@ func deserializeGetEntitlementFilters(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeFilterValueList(d, s.MapValue(), &vv); err != nil {
 			return err

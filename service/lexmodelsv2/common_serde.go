@@ -3216,6 +3216,14 @@ func deserializeBotAliasLocaleSettingsMap(d smithy.ShapeDeserializer, s *smithy.
 	*v = make(map[string]types.BotAliasLocaleSettings)
 	var vv types.BotAliasLocaleSettings
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BotAliasLocaleSettings
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.BotAliasLocaleSettings{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3230,6 +3238,14 @@ func deserializeBotVersionLocaleSpecification(d smithy.ShapeDeserializer, s *smi
 	*v = make(map[string]types.BotVersionLocaleDetails)
 	var vv types.BotVersionLocaleDetails
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BotVersionLocaleDetails
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.BotVersionLocaleDetails{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3244,6 +3260,13 @@ func deserializeConditionKeyValueMap(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -3258,6 +3281,14 @@ func deserializeConditionMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]map[string]string)
 	var vv map[string]string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeConditionKeyValueMap(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -3272,6 +3303,14 @@ func deserializePromptAttemptsSpecificationMap(d smithy.ShapeDeserializer, s *sm
 	*v = make(map[string]types.PromptAttemptSpecification)
 	var vv types.PromptAttemptSpecification
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PromptAttemptSpecification
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.PromptAttemptSpecification{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3286,6 +3325,14 @@ func deserializeSlotHintsIntentMap(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make(map[string]map[string]types.RuntimeHintDetails)
 	var vv map[string]types.RuntimeHintDetails
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]types.RuntimeHintDetails
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeSlotHintsSlotMap(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -3300,6 +3347,14 @@ func deserializeSlotHintsSlotMap(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]types.RuntimeHintDetails)
 	var vv types.RuntimeHintDetails
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RuntimeHintDetails
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.RuntimeHintDetails{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3314,6 +3369,14 @@ func deserializeSlotValueOverrideMap(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]types.SlotValueOverride)
 	var vv types.SlotValueOverride
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SlotValueOverride
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.SlotValueOverride{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3328,6 +3391,13 @@ func deserializeStringMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[s
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -3342,6 +3412,14 @@ func deserializeSubSlotSpecificationMap(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make(map[string]types.Specifications)
 	var vv types.Specifications
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Specifications
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.Specifications{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3356,6 +3434,13 @@ func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -3370,6 +3455,13 @@ func deserializeTestResultMatchStatusCountMap(d smithy.ShapeDeserializer, s *smi
 	*v = make(map[string]int32)
 	var vv int32
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero int32
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadInt32(s.MapValue(), &vv); err != nil {
 			return err
@@ -3384,6 +3476,14 @@ func deserializeUserTurnSlotOutputMap(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make(map[string]types.UserTurnSlotOutput)
 	var vv types.UserTurnSlotOutput
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.UserTurnSlotOutput
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.UserTurnSlotOutput{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

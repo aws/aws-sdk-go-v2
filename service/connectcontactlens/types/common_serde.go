@@ -157,6 +157,14 @@ func deserializeMatchedDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]CategoryDetails)
 	var vv CategoryDetails
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero CategoryDetails
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = CategoryDetails{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

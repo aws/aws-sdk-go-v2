@@ -1540,6 +1540,13 @@ func deserializeConversionMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1554,6 +1561,14 @@ func deserializeLaunchActionParameters(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make(map[string]LaunchActionParameter)
 	var vv LaunchActionParameter
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero LaunchActionParameter
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = LaunchActionParameter{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1568,6 +1583,13 @@ func deserializeTagsMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[str
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1582,6 +1604,14 @@ func deserializeVolumeToConversionMap(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make(map[string]map[string]string)
 	var vv map[string]string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeConversionMap(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -1596,6 +1626,14 @@ func deserializeVolumeToProductCodes(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string][]ProductCode)
 	var vv []ProductCode
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []ProductCode
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeProductCodes(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -1610,6 +1648,13 @@ func deserializeVolumeToSizeMap(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]int64)
 	var vv int64
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero int64
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadInt64(s.MapValue(), &vv); err != nil {
 			return err

@@ -3486,6 +3486,13 @@ func deserializeAffectedResources(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -3500,6 +3507,14 @@ func deserializeAnomalyProfileFeatures(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make(map[string][]types.AnomalyObject)
 	var vv []types.AnomalyObject
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []types.AnomalyObject
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeAnomalyProfileFeatureObjects(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -3514,6 +3529,14 @@ func deserializeAnomalyProfiles(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]map[string][]types.AnomalyObject)
 	var vv map[string][]types.AnomalyObject
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string][]types.AnomalyObject
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeAnomalyProfileFeatures(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -3528,6 +3551,14 @@ func deserializeAnomalyUnusualBehaviorFeature(d smithy.ShapeDeserializer, s *smi
 	*v = make(map[string]types.AnomalyObject)
 	var vv types.AnomalyObject
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AnomalyObject
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.AnomalyObject{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3542,6 +3573,14 @@ func deserializeBehavior(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[st
 	*v = make(map[string]map[string]types.AnomalyObject)
 	var vv map[string]types.AnomalyObject
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]types.AnomalyObject
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeAnomalyUnusualBehaviorFeature(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -3556,6 +3595,13 @@ func deserializeCountByCoverageStatus(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make(map[string]int64)
 	var vv int64
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero int64
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadInt64(s.MapValue(), &vv); err != nil {
 			return err
@@ -3570,6 +3616,13 @@ func deserializeCountByResourceType(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string]int64)
 	var vv int64
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero int64
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadInt64(s.MapValue(), &vv); err != nil {
 			return err
@@ -3584,6 +3637,13 @@ func deserializeCountBySeverity(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]int32)
 	var vv int32
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero int32
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadInt32(s.MapValue(), &vv); err != nil {
 			return err
@@ -3598,6 +3658,14 @@ func deserializeCriterion(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[s
 	*v = make(map[string]types.Condition)
 	var vv types.Condition
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Condition
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.Condition{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3612,6 +3680,14 @@ func deserializeScanCriterion(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 	*v = make(map[string]types.ScanCondition)
 	var vv types.ScanCondition
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ScanCondition
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ScanCondition{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3626,6 +3702,13 @@ func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

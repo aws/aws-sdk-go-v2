@@ -208,6 +208,13 @@ func deserializeExprs(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[strin
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -222,6 +229,14 @@ func deserializeFacets(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]types.BucketInfo)
 	var vv types.BucketInfo
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BucketInfo
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.BucketInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -236,6 +251,14 @@ func deserializeFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeFieldValue(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -250,6 +273,13 @@ func deserializeHighlights(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -264,6 +294,14 @@ func deserializeStats(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[strin
 	*v = make(map[string]types.FieldStats)
 	var vv types.FieldStats
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FieldStats
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.FieldStats{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

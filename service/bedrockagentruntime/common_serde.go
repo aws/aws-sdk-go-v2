@@ -3661,6 +3661,13 @@ func deserializeActionGroupSignatureParams(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -3675,6 +3682,13 @@ func deserializeAdditionalModelRequestFields(d smithy.ShapeDeserializer, s *smit
 	*v = make(map[string]document.Interface)
 	var vv smithydocument.Value
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero document.Interface
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadDocument(s.MapValue(), &vv); err != nil {
 			return err
@@ -3694,6 +3708,13 @@ func deserializeAgenticRetrieveMetadata(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make(map[string]document.Interface)
 	var vv smithydocument.Value
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero document.Interface
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadDocument(s.MapValue(), &vv); err != nil {
 			return err
@@ -3713,6 +3734,14 @@ func deserializeApiContentMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 	*v = make(map[string]types.PropertyParameters)
 	var vv types.PropertyParameters
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PropertyParameters
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.PropertyParameters{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3727,6 +3756,14 @@ func deserializeContentMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[
 	*v = make(map[string][]types.Parameter)
 	var vv []types.Parameter
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []types.Parameter
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeParameters(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -3741,6 +3778,14 @@ func deserializeParameterMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]types.ParameterDetail)
 	var vv types.ParameterDetail
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ParameterDetail
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ParameterDetail{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3755,6 +3800,13 @@ func deserializePromptSessionAttributesMap(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -3769,6 +3821,14 @@ func deserializeResponseBody(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]types.ContentBody)
 	var vv types.ContentBody
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ContentBody
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ContentBody{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3783,6 +3843,13 @@ func deserializeRetrievalResultMetadata(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make(map[string]document.Interface)
 	var vv smithydocument.Value
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero document.Interface
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadDocument(s.MapValue(), &vv); err != nil {
 			return err
@@ -3802,6 +3869,13 @@ func deserializeSessionAttributesMap(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -3816,6 +3890,13 @@ func deserializeSessionMetadataMap(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -3830,6 +3911,13 @@ func deserializeTagsMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[str
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

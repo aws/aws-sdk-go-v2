@@ -1174,6 +1174,13 @@ func deserializeAssessmentRunFindingCounts(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]int32)
 	var vv int32
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero int32
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadInt32(s.MapValue(), &vv); err != nil {
 			return err
@@ -1188,6 +1195,14 @@ func deserializeExclusionMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]types.Exclusion)
 	var vv types.Exclusion
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Exclusion
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.Exclusion{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1202,6 +1217,14 @@ func deserializeFailedItems(d smithy.ShapeDeserializer, s *smithy.Schema, v *map
 	*v = make(map[string]types.FailedItemDetails)
 	var vv types.FailedItemDetails
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FailedItemDetails
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.FailedItemDetails{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

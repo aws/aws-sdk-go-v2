@@ -273,6 +273,14 @@ func deserializeTableConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string]map[string]string)
 	var vv map[string]string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeTableProperties(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -287,6 +295,13 @@ func deserializeTableProperties(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

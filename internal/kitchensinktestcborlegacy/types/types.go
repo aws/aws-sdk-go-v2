@@ -6,4 +6,10 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+type MapValueStruct struct {
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde

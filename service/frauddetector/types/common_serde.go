@@ -1325,6 +1325,13 @@ func deserializeCsvIndexToVariableMap(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1339,6 +1346,13 @@ func deserializeEventAttributeMap(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1353,6 +1367,13 @@ func deserializeEventVariableMap(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1367,6 +1388,14 @@ func deserializeExternalModelEndpointDataBlobMap(d smithy.ShapeDeserializer, s *
 	*v = make(map[string]ModelEndpointDataBlob)
 	var vv ModelEndpointDataBlob
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero ModelEndpointDataBlob
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = ModelEndpointDataBlob{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1381,6 +1410,13 @@ func deserializeExternalModelPredictionMap(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1395,6 +1431,13 @@ func deserializeJsonKeyToVariableMap(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1409,6 +1452,14 @@ func deserializelabelMapper(d smithy.ShapeDeserializer, s *smithy.Schema, v *map
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeListOfStrings(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -1423,6 +1474,13 @@ func deserializeMapOfStrings(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1437,6 +1495,13 @@ func deserializeModelPredictionMap(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make(map[string]float32)
 	var vv float32
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero float32
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadFloat32(s.MapValue(), &vv); err != nil {
 			return err

@@ -531,6 +531,13 @@ func deserializeExtensions(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[
 	*v = make(map[string]document.Interface)
 	var vv smithydocument.Value
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero document.Interface
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadDocument(s.MapValue(), &vv); err != nil {
 			return err

@@ -3037,6 +3037,14 @@ func deserializeFailedMediaResourceMap(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make(map[string]types.MediaResource)
 	var vv types.MediaResource
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MediaResource
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.MediaResource{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3051,6 +3059,14 @@ func deserializeMediaConnectRouterOutputConnections(d smithy.ShapeDeserializer, 
 	*v = make(map[string]types.MediaConnectRouterOutputConnection)
 	var vv types.MediaConnectRouterOutputConnection
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MediaConnectRouterOutputConnection
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.MediaConnectRouterOutputConnection{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3065,6 +3081,14 @@ func deserializeMediaResourceMap(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]types.MediaResource)
 	var vv types.MediaResource
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MediaResource
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.MediaResource{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3079,6 +3103,14 @@ func deserializeMultiplexPacketIdentifiersMapping(d smithy.ShapeDeserializer, s 
 	*v = make(map[string]types.MultiplexProgramPacketIdentifiersMap)
 	var vv types.MultiplexProgramPacketIdentifiersMap
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MultiplexProgramPacketIdentifiersMap
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.MultiplexProgramPacketIdentifiersMap{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -3093,6 +3125,13 @@ func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -3107,6 +3146,13 @@ func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

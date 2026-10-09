@@ -1474,6 +1474,14 @@ func deserializeAdditionalInfoMap(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeAdditionalInfoValueList(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -1488,6 +1496,14 @@ func deserializeAssessmentCompliance(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]DisruptionCompliance)
 	var vv DisruptionCompliance
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero DisruptionCompliance
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = DisruptionCompliance{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1502,6 +1518,14 @@ func deserializeDisruptionPolicy(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]FailurePolicy)
 	var vv FailurePolicy
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero FailurePolicy
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = FailurePolicy{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1516,6 +1540,13 @@ func deserializeDisruptionResiliencyScore(d smithy.ShapeDeserializer, s *smithy.
 	*v = make(map[string]float64)
 	var vv float64
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero float64
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadFloat64(s.MapValue(), &vv); err != nil {
 			return err
@@ -1530,6 +1561,14 @@ func deserializeRecommendationCompliance(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make(map[string]RecommendationDisruptionCompliance)
 	var vv RecommendationDisruptionCompliance
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero RecommendationDisruptionCompliance
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = RecommendationDisruptionCompliance{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1544,6 +1583,14 @@ func deserializeScoringComponentResiliencyScores(d smithy.ShapeDeserializer, s *
 	*v = make(map[string]ScoringComponentResiliencyScore)
 	var vv ScoringComponentResiliencyScore
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero ScoringComponentResiliencyScore
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = ScoringComponentResiliencyScore{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1558,6 +1605,13 @@ func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

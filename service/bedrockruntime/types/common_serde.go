@@ -2440,6 +2440,14 @@ func deserializeGuardrailAssessmentListMap(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string][]GuardrailAssessment)
 	var vv []GuardrailAssessment
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []GuardrailAssessment
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeGuardrailAssessmentList(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -2454,6 +2462,14 @@ func deserializeGuardrailAssessmentMap(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make(map[string]GuardrailAssessment)
 	var vv GuardrailAssessment
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero GuardrailAssessment
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = GuardrailAssessment{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -2468,6 +2484,13 @@ func deserializePromptVariableMap(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]PromptVariableValues)
 	var vv PromptVariableValues
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero PromptVariableValues
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := deserializePromptVariableValues(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -2482,6 +2505,13 @@ func deserializeRequestMetadata(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

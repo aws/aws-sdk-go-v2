@@ -1944,6 +1944,13 @@ func deserializeAdvancedOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1958,6 +1965,13 @@ func deserializeEndpointsMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1972,6 +1986,14 @@ func deserializeLimitsByRole(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]Limits)
 	var vv Limits
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero Limits
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = Limits{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1986,6 +2008,14 @@ func deserializeLogPublishingOptions(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]LogPublishingOption)
 	var vv LogPublishingOption
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero LogPublishingOption
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = LogPublishingOption{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

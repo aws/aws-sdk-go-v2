@@ -1227,6 +1227,13 @@ func deserializeAdditionalVersionWeights(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make(map[string]float64)
 	var vv float64
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero float64
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadFloat64(s.MapValue(), &vv); err != nil {
 			return err
@@ -1241,6 +1248,14 @@ func deserializeEndpoints(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[s
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeEndpointLists(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -1255,6 +1270,13 @@ func deserializeEnvironmentVariables(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1269,6 +1291,13 @@ func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

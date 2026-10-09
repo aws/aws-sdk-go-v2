@@ -1559,6 +1559,14 @@ func deserializeAnnotations(d smithy.ShapeDeserializer, s *smithy.Schema, v *map
 	*v = make(map[string][]types.ValueWithServiceIds)
 	var vv []types.ValueWithServiceIds
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []types.ValueWithServiceIds
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeValuesWithServiceIds(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -1573,6 +1581,13 @@ func deserializeAttributeMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

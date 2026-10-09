@@ -336,6 +336,13 @@ func deserializeAttributeMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]AttributeValue)
 	var vv AttributeValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero AttributeValue
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := deserializeAttributeValue(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -350,6 +357,13 @@ func deserializeMapAttributeValue(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]AttributeValue)
 	var vv AttributeValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero AttributeValue
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := deserializeAttributeValue(d, s.MapValue(), &vv); err != nil {
 			return err

@@ -2778,6 +2778,14 @@ func deserializeRemediationParameters(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make(map[string]RemediationParameterValue)
 	var vv RemediationParameterValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero RemediationParameterValue
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = RemediationParameterValue{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -2792,6 +2800,13 @@ func deserializeSupplementaryConfiguration(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -2806,6 +2821,13 @@ func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

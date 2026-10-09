@@ -1832,6 +1832,14 @@ func deserializeCustomResponseBodies(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]types.CustomResponseBody)
 	var vv types.CustomResponseBody
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CustomResponseBody
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.CustomResponseBody{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1846,6 +1854,14 @@ func deserializePublishedVersions(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]types.ManagedRuleSetVersion)
 	var vv types.ManagedRuleSetVersion
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ManagedRuleSetVersion
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ManagedRuleSetVersion{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1860,6 +1876,14 @@ func deserializeRequestBody(d smithy.ShapeDeserializer, s *smithy.Schema, v *map
 	*v = make(map[string]types.RequestBodyAssociatedResourceTypeConfig)
 	var vv types.RequestBodyAssociatedResourceTypeConfig
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RequestBodyAssociatedResourceTypeConfig
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.RequestBodyAssociatedResourceTypeConfig{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1874,6 +1898,14 @@ func deserializeVersionsToPublish(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]types.VersionToPublish)
 	var vv types.VersionToPublish
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.VersionToPublish
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.VersionToPublish{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

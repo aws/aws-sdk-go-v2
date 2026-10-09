@@ -915,6 +915,13 @@ func deserialize__mapOf__string(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -929,6 +936,14 @@ func deserializeConfigurationAliasesRequest(d smithy.ShapeDeserializer, s *smith
 	*v = make(map[string]map[string]string)
 	var vv map[string]string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserialize__mapOf__string(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -943,6 +958,14 @@ func deserializeConfigurationAliasesResponse(d smithy.ShapeDeserializer, s *smit
 	*v = make(map[string]map[string]string)
 	var vv map[string]string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserialize__mapOf__string(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -957,6 +980,13 @@ func deserializeFunctionMapping(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -971,6 +1001,13 @@ func deserializeStringMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[s
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

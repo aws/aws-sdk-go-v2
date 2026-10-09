@@ -2154,6 +2154,13 @@ func deserializeAttributeMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]types.AttributeValue)
 	var vv types.AttributeValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AttributeValue
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := deserializeAttributeValue(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -2168,6 +2175,14 @@ func deserializeAttributeUpdates(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]types.AttributeValueUpdate)
 	var vv types.AttributeValueUpdate
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AttributeValueUpdate
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.AttributeValueUpdate{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -2182,6 +2197,14 @@ func deserializeBatchGetRequestMap(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make(map[string]types.KeysAndAttributes)
 	var vv types.KeysAndAttributes
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.KeysAndAttributes
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.KeysAndAttributes{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -2196,6 +2219,14 @@ func deserializeBatchGetResponseMap(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string][]map[string]types.AttributeValue)
 	var vv []map[string]types.AttributeValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []map[string]types.AttributeValue
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeItemList(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -2210,6 +2241,14 @@ func deserializeBatchWriteItemRequestMap(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make(map[string][]types.WriteRequest)
 	var vv []types.WriteRequest
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []types.WriteRequest
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeWriteRequests(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -2224,6 +2263,14 @@ func deserializeExpectedAttributeMap(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]types.ExpectedAttributeValue)
 	var vv types.ExpectedAttributeValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExpectedAttributeValue
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ExpectedAttributeValue{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -2238,6 +2285,13 @@ func deserializeExpressionAttributeNameMap(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -2252,6 +2306,13 @@ func deserializeExpressionAttributeValueMap(d smithy.ShapeDeserializer, s *smith
 	*v = make(map[string]types.AttributeValue)
 	var vv types.AttributeValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AttributeValue
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := deserializeAttributeValue(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -2266,6 +2327,14 @@ func deserializeFilterConditionMap(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make(map[string]types.Condition)
 	var vv types.Condition
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Condition
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.Condition{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -2280,6 +2349,13 @@ func deserializeItemCollectionKeyAttributeMap(d smithy.ShapeDeserializer, s *smi
 	*v = make(map[string]types.AttributeValue)
 	var vv types.AttributeValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AttributeValue
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := deserializeAttributeValue(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -2294,6 +2370,14 @@ func deserializeItemCollectionMetricsPerTable(d smithy.ShapeDeserializer, s *smi
 	*v = make(map[string][]types.ItemCollectionMetrics)
 	var vv []types.ItemCollectionMetrics
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []types.ItemCollectionMetrics
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeItemCollectionMetricsMultiple(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -2308,6 +2392,13 @@ func deserializeKey(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]
 	*v = make(map[string]types.AttributeValue)
 	var vv types.AttributeValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AttributeValue
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := deserializeAttributeValue(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -2322,6 +2413,14 @@ func deserializeKeyConditions(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 	*v = make(map[string]types.Condition)
 	var vv types.Condition
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Condition
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.Condition{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -2336,6 +2435,13 @@ func deserializeMapAttributeValue(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]types.AttributeValue)
 	var vv types.AttributeValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AttributeValue
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := deserializeAttributeValue(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -2350,6 +2456,13 @@ func deserializePutItemInputAttributeMap(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make(map[string]types.AttributeValue)
 	var vv types.AttributeValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AttributeValue
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := deserializeAttributeValue(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -2364,6 +2477,14 @@ func deserializeSecondaryIndexesCapacityMap(d smithy.ShapeDeserializer, s *smith
 	*v = make(map[string]types.Capacity)
 	var vv types.Capacity
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Capacity
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.Capacity{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -2378,6 +2499,14 @@ func deserializeVectorIndexesCapacityMap(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make(map[string]types.VectorCapacity)
 	var vv types.VectorCapacity
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.VectorCapacity
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.VectorCapacity{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

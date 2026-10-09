@@ -338,6 +338,14 @@ func deserializeDetectedWorkload(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]map[string]string)
 	var vv map[string]string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeWorkloadMetaData(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -352,6 +360,13 @@ func deserializeFeedback(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[st
 	*v = make(map[string]types.FeedbackValue)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FeedbackValue
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -366,6 +381,13 @@ func deserializeWorkloadMetaData(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

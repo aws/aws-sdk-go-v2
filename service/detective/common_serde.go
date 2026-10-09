@@ -482,6 +482,14 @@ func deserializeDatasourcePackageIngestDetails(d smithy.ShapeDeserializer, s *sm
 	*v = make(map[string]types.DatasourcePackageIngestDetail)
 	var vv types.DatasourcePackageIngestDetail
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DatasourcePackageIngestDetail
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.DatasourcePackageIngestDetail{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -496,6 +504,14 @@ func deserializeDatasourcePackageIngestHistory(d smithy.ShapeDeserializer, s *sm
 	*v = make(map[string]map[string]types.TimestampForCollection)
 	var vv map[string]types.TimestampForCollection
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]types.TimestampForCollection
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeLastIngestStateChangeDates(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -510,6 +526,13 @@ func deserializeDatasourcePackageIngestStates(d smithy.ShapeDeserializer, s *smi
 	*v = make(map[string]types.DatasourcePackageIngestState)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DatasourcePackageIngestState
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -524,6 +547,14 @@ func deserializeLastIngestStateChangeDates(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]types.TimestampForCollection)
 	var vv types.TimestampForCollection
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TimestampForCollection
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.TimestampForCollection{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -538,6 +569,13 @@ func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -552,6 +590,14 @@ func deserializeVolumeUsageByDatasourcePackage(d smithy.ShapeDeserializer, s *sm
 	*v = make(map[string]types.DatasourcePackageUsageInfo)
 	var vv types.DatasourcePackageUsageInfo
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DatasourcePackageUsageInfo
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.DatasourcePackageUsageInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

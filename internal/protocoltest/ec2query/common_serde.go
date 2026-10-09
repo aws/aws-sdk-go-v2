@@ -465,6 +465,13 @@ func deserializeFooEnumMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[
 	*v = make(map[string]types.FooEnum)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FooEnum
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -479,6 +486,13 @@ func deserializeIntegerEnumMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]types.IntegerEnum)
 	var vv int32
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.IntegerEnum
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadInt32(s.MapValue(), &vv); err != nil {
 			return err

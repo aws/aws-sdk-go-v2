@@ -1831,6 +1831,14 @@ func deserializeCustomResponseBodies(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]CustomResponseBody)
 	var vv CustomResponseBody
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero CustomResponseBody
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = CustomResponseBody{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1845,6 +1853,14 @@ func deserializePublishedVersions(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]ManagedRuleSetVersion)
 	var vv ManagedRuleSetVersion
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero ManagedRuleSetVersion
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = ManagedRuleSetVersion{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1859,6 +1875,14 @@ func deserializeRequestBody(d smithy.ShapeDeserializer, s *smithy.Schema, v *map
 	*v = make(map[string]RequestBodyAssociatedResourceTypeConfig)
 	var vv RequestBodyAssociatedResourceTypeConfig
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero RequestBodyAssociatedResourceTypeConfig
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = RequestBodyAssociatedResourceTypeConfig{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1873,6 +1897,14 @@ func deserializeVersionsToPublish(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]VersionToPublish)
 	var vv VersionToPublish
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero VersionToPublish
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = VersionToPublish{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

@@ -520,6 +520,13 @@ func deserializeKMSEncryptionContextMap(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -534,6 +541,14 @@ func deserializeMatchedCategoryDetails(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make(map[string]PointsOfInterest)
 	var vv PointsOfInterest
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero PointsOfInterest
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = PointsOfInterest{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

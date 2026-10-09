@@ -897,6 +897,14 @@ func deserializeActionParameterMap(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make(map[string]types.ActionParameter)
 	var vv types.ActionParameter
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ActionParameter
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ActionParameter{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -911,6 +919,14 @@ func deserializeActionTargetMap(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]types.ActionTarget)
 	var vv types.ActionTarget
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ActionTarget
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ActionTarget{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -925,6 +941,14 @@ func deserializeCreateExperimentTemplateActionInputMap(d smithy.ShapeDeserialize
 	*v = make(map[string]types.CreateExperimentTemplateActionInput)
 	var vv types.CreateExperimentTemplateActionInput
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CreateExperimentTemplateActionInput
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.CreateExperimentTemplateActionInput{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -939,6 +963,14 @@ func deserializeCreateExperimentTemplateTargetInputMap(d smithy.ShapeDeserialize
 	*v = make(map[string]types.CreateExperimentTemplateTargetInput)
 	var vv types.CreateExperimentTemplateTargetInput
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CreateExperimentTemplateTargetInput
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.CreateExperimentTemplateTargetInput{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -953,6 +985,14 @@ func deserializeExperimentActionMap(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string]types.ExperimentAction)
 	var vv types.ExperimentAction
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExperimentAction
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ExperimentAction{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -967,6 +1007,13 @@ func deserializeExperimentActionParameterMap(d smithy.ShapeDeserializer, s *smit
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -981,6 +1028,13 @@ func deserializeExperimentActionTargetMap(d smithy.ShapeDeserializer, s *smithy.
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -995,6 +1049,14 @@ func deserializeExperimentTargetMap(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string]types.ExperimentTarget)
 	var vv types.ExperimentTarget
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExperimentTarget
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ExperimentTarget{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1009,6 +1071,13 @@ func deserializeExperimentTargetParameterMap(d smithy.ShapeDeserializer, s *smit
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1023,6 +1092,14 @@ func deserializeExperimentTemplateActionMap(d smithy.ShapeDeserializer, s *smith
 	*v = make(map[string]types.ExperimentTemplateAction)
 	var vv types.ExperimentTemplateAction
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExperimentTemplateAction
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ExperimentTemplateAction{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1037,6 +1114,13 @@ func deserializeExperimentTemplateActionParameterMap(d smithy.ShapeDeserializer,
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1051,6 +1135,13 @@ func deserializeExperimentTemplateActionTargetMap(d smithy.ShapeDeserializer, s 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1065,6 +1156,14 @@ func deserializeExperimentTemplateTargetMap(d smithy.ShapeDeserializer, s *smith
 	*v = make(map[string]types.ExperimentTemplateTarget)
 	var vv types.ExperimentTemplateTarget
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExperimentTemplateTarget
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ExperimentTemplateTarget{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1079,6 +1178,13 @@ func deserializeExperimentTemplateTargetParameterMap(d smithy.ShapeDeserializer,
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1093,6 +1199,13 @@ func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1107,6 +1220,13 @@ func deserializeTargetInformationMap(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1121,6 +1241,14 @@ func deserializeTargetResourceTypeParameterMap(d smithy.ShapeDeserializer, s *sm
 	*v = make(map[string]types.TargetResourceTypeParameter)
 	var vv types.TargetResourceTypeParameter
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TargetResourceTypeParameter
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.TargetResourceTypeParameter{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1135,6 +1263,14 @@ func deserializeUpdateExperimentTemplateActionInputMap(d smithy.ShapeDeserialize
 	*v = make(map[string]types.UpdateExperimentTemplateActionInputItem)
 	var vv types.UpdateExperimentTemplateActionInputItem
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.UpdateExperimentTemplateActionInputItem
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.UpdateExperimentTemplateActionInputItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1149,6 +1285,14 @@ func deserializeUpdateExperimentTemplateTargetInputMap(d smithy.ShapeDeserialize
 	*v = make(map[string]types.UpdateExperimentTemplateTargetInput)
 	var vv types.UpdateExperimentTemplateTargetInput
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.UpdateExperimentTemplateTargetInput
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.UpdateExperimentTemplateTargetInput{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
