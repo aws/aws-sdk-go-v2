@@ -1,0 +1,8 @@
+{
+    "id": "df9e001c-ca3f-4b43-ad78-0c3a9c63710c",
+    "type": "bugfix",
+    "description": "**BREAKING CHANGE**: The `Metadata` field on `types.Application` has been changed from `map[string]string` to `map[string]*string`. The service returns explicit `null` values in this map (e.g. `WORKING_DIRECTORY`), which were not modeled as sparse. Previously the `null` entries were silently dropped, and with CBOR deserialization they caused a deserialization error.",
+    "modules": [
+        "service/appstream"
+    ]
+}

@@ -1624,7 +1624,7 @@ type IntegrationResponse struct {
 	// Specifies the templates used to transform the integration response body.
 	// Response templates are represented as a key/value map, with a content-type as
 	// the key and a template as the value.
-	ResponseTemplates map[string]string
+	ResponseTemplates map[string]*string
 
 	// Specifies the regular expression (regex) pattern used to choose an integration
 	// response based on the response from the back end. For example, if the success
@@ -1654,7 +1654,7 @@ func (v *IntegrationResponse) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.IntegrationResponse_contentHandling, string(v.ContentHandling))
 	}
 	serializeMapOfStringToString(s, schemas.IntegrationResponse_responseParameters, v.ResponseParameters)
-	serializeMapOfStringToString(s, schemas.IntegrationResponse_responseTemplates, v.ResponseTemplates)
+	serializeMapOfStringToStringSparse(s, schemas.IntegrationResponse_responseTemplates, v.ResponseTemplates)
 	if v.SelectionPattern != nil {
 		s.WriteString(schemas.IntegrationResponse_selectionPattern, *v.SelectionPattern)
 	}
@@ -1675,7 +1675,7 @@ func (v *IntegrationResponse) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.IntegrationResponse_responseParameters:
 			return deserializeMapOfStringToString(d, schemas.IntegrationResponse_responseParameters, &v.ResponseParameters)
 		case schemas.IntegrationResponse_responseTemplates:
-			return deserializeMapOfStringToString(d, schemas.IntegrationResponse_responseTemplates, &v.ResponseTemplates)
+			return deserializeMapOfStringToStringSparse(d, schemas.IntegrationResponse_responseTemplates, &v.ResponseTemplates)
 		case schemas.IntegrationResponse_selectionPattern:
 			v.SelectionPattern = new(string)
 			return d.ReadString(schemas.IntegrationResponse_selectionPattern, v.SelectionPattern)

@@ -542,8 +542,8 @@ func TestUpdateResponseSnapshot_CreateResource(t *testing.T) {
 							ResponseParameters: map[string]string{
 								"key0": "__Value__",
 							},
-							ResponseTemplates: map[string]string{
-								"key0": "__Value__",
+							ResponseTemplates: map[string]*string{
+								"key0": ptr.String("__Value__"),
 							},
 							ContentHandling: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
 						},
@@ -1797,8 +1797,8 @@ func TestUpdateResponseSnapshot_GetIntegration(t *testing.T) {
 				ResponseParameters: map[string]string{
 					"key0": "__Value__",
 				},
-				ResponseTemplates: map[string]string{
-					"key0": "__Value__",
+				ResponseTemplates: map[string]*string{
+					"key0": ptr.String("__Value__"),
 				},
 				ContentHandling: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
 			},
@@ -1914,8 +1914,8 @@ func TestUpdateResponseSnapshot_GetMethod(t *testing.T) {
 					ResponseParameters: map[string]string{
 						"key0": "__Value__",
 					},
-					ResponseTemplates: map[string]string{
-						"key0": "__Value__",
+					ResponseTemplates: map[string]*string{
+						"key0": ptr.String("__Value__"),
 					},
 					ContentHandling: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
 				},
@@ -2119,8 +2119,8 @@ func TestUpdateResponseSnapshot_GetResource(t *testing.T) {
 							ResponseParameters: map[string]string{
 								"key0": "__Value__",
 							},
-							ResponseTemplates: map[string]string{
-								"key0": "__Value__",
+							ResponseTemplates: map[string]*string{
+								"key0": ptr.String("__Value__"),
 							},
 							ContentHandling: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
 						},
@@ -2867,8 +2867,8 @@ func TestUpdateResponseSnapshot_PutIntegration(t *testing.T) {
 				ResponseParameters: map[string]string{
 					"key0": "__Value__",
 				},
-				ResponseTemplates: map[string]string{
-					"key0": "__Value__",
+				ResponseTemplates: map[string]*string{
+					"key0": ptr.String("__Value__"),
 				},
 				ContentHandling: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
 			},
@@ -2984,8 +2984,8 @@ func TestUpdateResponseSnapshot_PutMethod(t *testing.T) {
 					ResponseParameters: map[string]string{
 						"key0": "__Value__",
 					},
-					ResponseTemplates: map[string]string{
-						"key0": "__Value__",
+					ResponseTemplates: map[string]*string{
+						"key0": ptr.String("__Value__"),
 					},
 					ContentHandling: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
 				},
@@ -3631,8 +3631,8 @@ func TestUpdateResponseSnapshot_UpdateIntegration(t *testing.T) {
 				ResponseParameters: map[string]string{
 					"key0": "__Value__",
 				},
-				ResponseTemplates: map[string]string{
-					"key0": "__Value__",
+				ResponseTemplates: map[string]*string{
+					"key0": ptr.String("__Value__"),
 				},
 				ContentHandling: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
 			},
@@ -3748,8 +3748,8 @@ func TestUpdateResponseSnapshot_UpdateMethod(t *testing.T) {
 					ResponseParameters: map[string]string{
 						"key0": "__Value__",
 					},
-					ResponseTemplates: map[string]string{
-						"key0": "__Value__",
+					ResponseTemplates: map[string]*string{
+						"key0": ptr.String("__Value__"),
 					},
 					ContentHandling: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
 				},
@@ -3929,8 +3929,8 @@ func TestUpdateResponseSnapshot_UpdateResource(t *testing.T) {
 							ResponseParameters: map[string]string{
 								"key0": "__Value__",
 							},
-							ResponseTemplates: map[string]string{
-								"key0": "__Value__",
+							ResponseTemplates: map[string]*string{
+								"key0": ptr.String("__Value__"),
 							},
 							ContentHandling: types.ContentHandlingStrategy("CONVERT_TO_BINARY"),
 						},

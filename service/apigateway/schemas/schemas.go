@@ -1714,6 +1714,14 @@ var _MapOfStringToString_key *smithy.Schema
 
 var _MapOfStringToString_value *smithy.Schema
 
+var _MapOfStringToStringSparse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.apigateway",
+	Name:      "MapOfStringToStringSparse",
+}, smithy.ShapeTypeMap, 2)
+var _MapOfStringToStringSparse_key *smithy.Schema
+
+var _MapOfStringToStringSparse_value *smithy.Schema
+
 var Method = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
 	Name:      "Method",
@@ -4280,13 +4288,17 @@ func init() {
 
 	IntegrationType_AWS_PROXY = IntegrationType.AddMember("AWS_PROXY", smithyprelude.Unit)
 
+	_MapOfStringToStringSparse_key = _MapOfStringToStringSparse.AddMember("key", _String)
+
+	_MapOfStringToStringSparse_value = _MapOfStringToStringSparse.AddMember("value", _String)
+
 	IntegrationResponse_statusCode = IntegrationResponse.AddMember("statusCode", _StatusCode)
 
 	IntegrationResponse_selectionPattern = IntegrationResponse.AddMember("selectionPattern", _String)
 
 	IntegrationResponse_responseParameters = IntegrationResponse.AddMember("responseParameters", _MapOfStringToString)
 
-	IntegrationResponse_responseTemplates = IntegrationResponse.AddMember("responseTemplates", _MapOfStringToString)
+	IntegrationResponse_responseTemplates = IntegrationResponse.AddMember("responseTemplates", _MapOfStringToStringSparse)
 
 	IntegrationResponse_contentHandling = IntegrationResponse.AddMember("contentHandling", ContentHandlingStrategy)
 

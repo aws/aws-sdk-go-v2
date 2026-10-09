@@ -885,6 +885,22 @@ func serializeMapOfStringToString(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.CloseMap()
 }
 
+func serializeMapOfStringToStringSparse(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]*string) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		if vv != nil {
+			s.WriteString(schema.MapValue(), *vv)
+		} else {
+			s.WriteNil(schema.MapValue())
+		}
+	}
+	s.CloseMap()
+}
+
 func serializePathToMapOfMethodSnapshot(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]map[string]types.MethodSnapshot) {
 	if v == nil {
 		return
@@ -1033,6 +1049,29 @@ func deserializeMapOfStringToString(d smithy.ShapeDeserializer, s *smithy.Schema
 		}
 
 		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeMapOfStringToStringSparse(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]*string) error {
+	*v = make(map[string]*string)
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			(*v)[k] = nil
+			return nil
+		}
+
+		// vv must be declared per-element for sparse since we
+		// are taking its pointer
+		var vv string
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = &vv
 		return nil
 	})
 }

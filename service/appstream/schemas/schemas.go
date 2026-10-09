@@ -1775,13 +1775,13 @@ var MessageAction_SUPPRESS *smithy.Schema
 
 var MessageAction_RESEND *smithy.Schema
 
-var _Metadata = smithy.NewSchema(smithy.ShapeID{
+var _MetadataSparse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
-	Name:      "Metadata",
+	Name:      "MetadataSparse",
 }, smithy.ShapeTypeMap, 2)
-var _Metadata_key *smithy.Schema
+var _MetadataSparse_key *smithy.Schema
 
-var _Metadata_value *smithy.Schema
+var _MetadataSparse_value *smithy.Schema
 
 var _Name = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
@@ -4542,9 +4542,9 @@ func init() {
 
 	_AppCatalogConfig_member = _AppCatalogConfig.AddMember("member", ApplicationConfig)
 
-	_Metadata_key = _Metadata.AddMember("key", _String)
+	_MetadataSparse_key = _MetadataSparse.AddMember("key", _String)
 
-	_Metadata_value = _Metadata.AddMember("value", _String)
+	_MetadataSparse_value = _MetadataSparse.AddMember("value", _String)
 
 	PlatformType_WINDOWS = PlatformType.AddMember("WINDOWS", smithyprelude.Unit)
 
@@ -4580,7 +4580,7 @@ func init() {
 
 	Application_Enabled = Application.AddMember("Enabled", _Boolean)
 
-	Application_Metadata = Application.AddMember("Metadata", _Metadata)
+	Application_Metadata = Application.AddMember("Metadata", _MetadataSparse)
 
 	Application_WorkingDirectory = Application.AddMember("WorkingDirectory", _String)
 

@@ -1,0 +1,8 @@
+{
+    "id": "b9f61023-20a9-43e2-aeb8-6c46bd61ba65",
+    "type": "bugfix",
+    "description": "**BREAKING CHANGE**: The `ResponseTemplates` field on `types.IntegrationResponse` has been changed from `map[string]string` to `map[string]*string`. The service returns explicit `null` values in this map, which was not modeled as sparse. Previously the `null` entries were silently dropped, and with schema-based deserialization they caused a deserialization error.",
+    "modules": [
+        "service/apigateway"
+    ]
+}

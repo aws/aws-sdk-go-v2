@@ -859,7 +859,7 @@ type Application struct {
 	LaunchPath *string
 
 	// Additional attributes that describe the application.
-	Metadata map[string]string
+	Metadata map[string]*string
 
 	// The name of the application.
 	Name *string
@@ -913,7 +913,7 @@ func (v *Application) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LaunchPath != nil {
 		s.WriteString(schemas.Application_LaunchPath, *v.LaunchPath)
 	}
-	serializeMetadata(s, schemas.Application_Metadata, v.Metadata)
+	serializeMetadataSparse(s, schemas.Application_Metadata, v.Metadata)
 	if v.Name != nil {
 		s.WriteString(schemas.Application_Name, *v.Name)
 	}
@@ -958,7 +958,7 @@ func (v *Application) Deserialize(d smithy.ShapeDeserializer) error {
 			v.LaunchPath = new(string)
 			return d.ReadString(schemas.Application_LaunchPath, v.LaunchPath)
 		case schemas.Application_Metadata:
-			return deserializeMetadata(d, schemas.Application_Metadata, &v.Metadata)
+			return deserializeMetadataSparse(d, schemas.Application_Metadata, &v.Metadata)
 		case schemas.Application_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.Application_Name, v.Name)

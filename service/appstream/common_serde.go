@@ -1400,14 +1400,18 @@ func deserializeUserStackAssociationList(d smithy.ShapeDeserializer, s *smithy.S
 	})
 }
 
-func serializeMetadata(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+func serializeMetadataSparse(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]*string) {
 	if v == nil {
 		return
 	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
-		s.WriteString(schema.MapValue(), string(vv))
+		if vv != nil {
+			s.WriteString(schema.MapValue(), *vv)
+		} else {
+			s.WriteNil(schema.MapValue())
+		}
 	}
 	s.CloseMap()
 }
@@ -1424,16 +1428,25 @@ func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string
 	s.CloseMap()
 }
 
-func deserializeMetadata(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
-	*v = make(map[string]string)
-	var vv string
+func deserializeMetadataSparse(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]*string) error {
+	*v = make(map[string]*string)
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			(*v)[k] = nil
+			return nil
+		}
+
+		// vv must be declared per-element for sparse since we
+		// are taking its pointer
+		var vv string
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
 		}
 
-		(*v)[k] = vv
+		(*v)[k] = &vv
 		return nil
 	})
 }

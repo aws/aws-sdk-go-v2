@@ -597,8 +597,8 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 			LaunchPath:       ptr.String("__LaunchPath__"),
 			LaunchParameters: ptr.String("__LaunchParameters__"),
 			Enabled:          ptr.Bool(true),
-			Metadata: map[string]string{
-				"key0": "__Value__",
+			Metadata: map[string]*string{
+				"key0": ptr.String("__Value__"),
 			},
 			WorkingDirectory: ptr.String("__WorkingDirectory__"),
 			Description:      ptr.String("__Description__"),
@@ -1138,8 +1138,8 @@ func TestCheckResponseSnapshot_CreateImportedImage(t *testing.T) {
 					LaunchPath:       ptr.String("__LaunchPath__"),
 					LaunchParameters: ptr.String("__LaunchParameters__"),
 					Enabled:          ptr.Bool(true),
-					Metadata: map[string]string{
-						"key0": "__Value__",
+					Metadata: map[string]*string{
+						"key0": ptr.String("__Value__"),
 					},
 					WorkingDirectory: ptr.String("__WorkingDirectory__"),
 					Description:      ptr.String("__Description__"),
@@ -1166,8 +1166,8 @@ func TestCheckResponseSnapshot_CreateImportedImage(t *testing.T) {
 					LaunchPath:       ptr.String("__LaunchPath__"),
 					LaunchParameters: ptr.String("__LaunchParameters__"),
 					Enabled:          ptr.Bool(true),
-					Metadata: map[string]string{
-						"key0": "__Value__",
+					Metadata: map[string]*string{
+						"key0": ptr.String("__Value__"),
 					},
 					WorkingDirectory: ptr.String("__WorkingDirectory__"),
 					Description:      ptr.String("__Description__"),
@@ -1615,8 +1615,8 @@ func TestCheckResponseSnapshot_CreateUpdatedImage(t *testing.T) {
 					LaunchPath:       ptr.String("__LaunchPath__"),
 					LaunchParameters: ptr.String("__LaunchParameters__"),
 					Enabled:          ptr.Bool(true),
-					Metadata: map[string]string{
-						"key0": "__Value__",
+					Metadata: map[string]*string{
+						"key0": ptr.String("__Value__"),
 					},
 					WorkingDirectory: ptr.String("__WorkingDirectory__"),
 					Description:      ptr.String("__Description__"),
@@ -1643,8 +1643,8 @@ func TestCheckResponseSnapshot_CreateUpdatedImage(t *testing.T) {
 					LaunchPath:       ptr.String("__LaunchPath__"),
 					LaunchParameters: ptr.String("__LaunchParameters__"),
 					Enabled:          ptr.Bool(true),
-					Metadata: map[string]string{
-						"key0": "__Value__",
+					Metadata: map[string]*string{
+						"key0": ptr.String("__Value__"),
 					},
 					WorkingDirectory: ptr.String("__WorkingDirectory__"),
 					Description:      ptr.String("__Description__"),
@@ -1924,8 +1924,8 @@ func TestCheckResponseSnapshot_DeleteImage(t *testing.T) {
 					LaunchPath:       ptr.String("__LaunchPath__"),
 					LaunchParameters: ptr.String("__LaunchParameters__"),
 					Enabled:          ptr.Bool(true),
-					Metadata: map[string]string{
-						"key0": "__Value__",
+					Metadata: map[string]*string{
+						"key0": ptr.String("__Value__"),
 					},
 					WorkingDirectory: ptr.String("__WorkingDirectory__"),
 					Description:      ptr.String("__Description__"),
@@ -1952,8 +1952,8 @@ func TestCheckResponseSnapshot_DeleteImage(t *testing.T) {
 					LaunchPath:       ptr.String("__LaunchPath__"),
 					LaunchParameters: ptr.String("__LaunchParameters__"),
 					Enabled:          ptr.Bool(true),
-					Metadata: map[string]string{
-						"key0": "__Value__",
+					Metadata: map[string]*string{
+						"key0": ptr.String("__Value__"),
 					},
 					WorkingDirectory: ptr.String("__WorkingDirectory__"),
 					Description:      ptr.String("__Description__"),
@@ -2587,8 +2587,8 @@ func TestCheckResponseSnapshot_DescribeApplications(t *testing.T) {
 				LaunchPath:       ptr.String("__LaunchPath__"),
 				LaunchParameters: ptr.String("__LaunchParameters__"),
 				Enabled:          ptr.Bool(true),
-				Metadata: map[string]string{
-					"key0": "__Value__",
+				Metadata: map[string]*string{
+					"key0": ptr.String("__Value__"),
 				},
 				WorkingDirectory: ptr.String("__WorkingDirectory__"),
 				Description:      ptr.String("__Description__"),
@@ -2615,8 +2615,8 @@ func TestCheckResponseSnapshot_DescribeApplications(t *testing.T) {
 				LaunchPath:       ptr.String("__LaunchPath__"),
 				LaunchParameters: ptr.String("__LaunchParameters__"),
 				Enabled:          ptr.Bool(true),
-				Metadata: map[string]string{
-					"key0": "__Value__",
+				Metadata: map[string]*string{
+					"key0": ptr.String("__Value__"),
 				},
 				WorkingDirectory: ptr.String("__WorkingDirectory__"),
 				Description:      ptr.String("__Description__"),
@@ -3194,8 +3194,8 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 						LaunchPath:       ptr.String("__LaunchPath__"),
 						LaunchParameters: ptr.String("__LaunchParameters__"),
 						Enabled:          ptr.Bool(true),
-						Metadata: map[string]string{
-							"key0": "__Value__",
+						Metadata: map[string]*string{
+							"key0": ptr.String("__Value__"),
 						},
 						WorkingDirectory: ptr.String("__WorkingDirectory__"),
 						Description:      ptr.String("__Description__"),
@@ -3222,8 +3222,8 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 						LaunchPath:       ptr.String("__LaunchPath__"),
 						LaunchParameters: ptr.String("__LaunchParameters__"),
 						Enabled:          ptr.Bool(true),
-						Metadata: map[string]string{
-							"key0": "__Value__",
+						Metadata: map[string]*string{
+							"key0": ptr.String("__Value__"),
 						},
 						WorkingDirectory: ptr.String("__WorkingDirectory__"),
 						Description:      ptr.String("__Description__"),
@@ -3299,8 +3299,8 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 						LaunchPath:       ptr.String("__LaunchPath__"),
 						LaunchParameters: ptr.String("__LaunchParameters__"),
 						Enabled:          ptr.Bool(true),
-						Metadata: map[string]string{
-							"key0": "__Value__",
+						Metadata: map[string]*string{
+							"key0": ptr.String("__Value__"),
 						},
 						WorkingDirectory: ptr.String("__WorkingDirectory__"),
 						Description:      ptr.String("__Description__"),
@@ -3327,8 +3327,8 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 						LaunchPath:       ptr.String("__LaunchPath__"),
 						LaunchParameters: ptr.String("__LaunchParameters__"),
 						Enabled:          ptr.Bool(true),
-						Metadata: map[string]string{
-							"key0": "__Value__",
+						Metadata: map[string]*string{
+							"key0": ptr.String("__Value__"),
 						},
 						WorkingDirectory: ptr.String("__WorkingDirectory__"),
 						Description:      ptr.String("__Description__"),
@@ -4964,8 +4964,8 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 			LaunchPath:       ptr.String("__LaunchPath__"),
 			LaunchParameters: ptr.String("__LaunchParameters__"),
 			Enabled:          ptr.Bool(true),
-			Metadata: map[string]string{
-				"key0": "__Value__",
+			Metadata: map[string]*string{
+				"key0": ptr.String("__Value__"),
 			},
 			WorkingDirectory: ptr.String("__WorkingDirectory__"),
 			Description:      ptr.String("__Description__"),
