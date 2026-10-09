@@ -1,3 +1,7 @@
+# v1.46.0 (2026-10-09)
+
+* **Feature**: AWS Marketplace Metering Service adds AgreementId to ResolveCustomer API response.
+
 # v1.45.3 (2026-10-08)
 
 * **Dependency Update**: Update to smithy-go v1.28.4.

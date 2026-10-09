@@ -1,3 +1,7 @@
+# v1.44.0 (2026-10-09)
+
+* **Feature**: The new ListMemberships API enables users to discover their memberships across Deadline Cloud resources, enabling scoped users of Deadline resources to discover and interact with the resources they have been provided scoped access to.
+
 # v1.43.2 (2026-10-08)
 
 * **Dependency Update**: Update to smithy-go v1.28.4.

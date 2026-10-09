@@ -1,8 +1,0 @@
-{
-    "id": "5c686db1-d014-4b48-addf-860fd45598fc",
-    "type": "feature",
-    "description": "AWS Marketplace Metering Service adds AgreementId to ResolveCustomer API response.",
-    "modules": [
-        "service/marketplacemetering"
-    ]
-}

@@ -1,3 +1,18 @@
+# Release (2026-10-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.44.0](service/deadline/CHANGELOG.md#v1440-2026-10-09)
+  * **Feature**: The new ListMemberships API enables users to discover their memberships across Deadline Cloud resources, enabling scoped users of Deadline resources to discover and interact with the resources they have been provided scoped access to.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.46.0](service/marketplacemetering/CHANGELOG.md#v1460-2026-10-09)
+  * **Feature**: AWS Marketplace Metering Service adds AgreementId to ResolveCustomer API response.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.73.0](service/mediatailor/CHANGELOG.md#v1730-2026-10-09)
+  * **Feature**: Add caching settings to http functions
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.137.0](service/quicksight/CHANGELOG.md#v11370-2026-10-09)
+  * **Feature**: Adds granular custom permissions for the Gong action connector (GongAction, CreateAndUpdateGongAction, ShareGongAction, UseGongAction) and for create, update, and share operations on 45 data source connectors, such as Amazon S3 and Snowflake, through the Custom Permissions APIs.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.24.0](service/securityagent/CHANGELOG.md#v1240-2026-10-09)
+  * **Feature**: Adds a test scope field to specify whether a pentest targets a web application or a generative AI application.
+
 # Release (2026-10-08)
 
 ## General Highlights

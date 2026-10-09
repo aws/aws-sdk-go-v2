@@ -1,3 +1,7 @@
+# v1.73.0 (2026-10-09)
+
+* **Feature**: Add caching settings to http functions
+
 # v1.72.2 (2026-10-08)
 
 * **Bug Fix**: Fix modeled errors returning an empty `ErrorMessage()` when the service sends the message under a differently-cased key (`Message` instead of `message`). This was a regression introduced with schema-based deserialization.

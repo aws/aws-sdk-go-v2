@@ -1,3 +1,7 @@
+# v1.24.0 (2026-10-09)
+
+* **Feature**: Adds a test scope field to specify whether a pentest targets a web application or a generative AI application.
+
 # v1.23.0 (2026-10-08)
 
 * **Feature**: Include model field for suggested remediation steps as part of findings

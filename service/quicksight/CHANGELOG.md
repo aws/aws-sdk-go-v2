@@ -1,3 +1,8 @@
+# v1.137.0 (2026-10-09)
+
+* **Feature**: Adds granular custom permissions for the Gong action connector (GongAction, CreateAndUpdateGongAction, ShareGongAction, UseGongAction) and for create, update, and share operations on 45 data source connectors, such as Amazon S3 and Snowflake, through the Custom Permissions APIs.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.136.0 (2026-10-08)
 
 * **Feature**: Enable schema-based (de)serialization for this service.
