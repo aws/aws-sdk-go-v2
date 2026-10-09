@@ -220,6 +220,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	ignoreAnonymousAuth(&options)
 
+	wrapCredentialsCache(&options)
+
 	wrapWithAnonymousAuth(&options)
 
 	resolveAuthSchemes(&options)

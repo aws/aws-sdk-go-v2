@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
+	"github.com/aws/aws-sdk-go-v2/internal/credentials/cachewrap"
 	"github.com/aws/aws-sdk-go-v2/internal/v4a"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	smithyauth "github.com/aws/smithy-go/auth"
@@ -344,6 +345,10 @@ func ignoreAnonymousAuth(options *Options) {
 	if aws.IsCredentialsProvider(options.Credentials, (*aws.AnonymousCredentials)(nil)) {
 		options.Credentials = nil
 	}
+}
+
+func wrapCredentialsCache(options *Options) {
+	options.Credentials = cachewrap.Wrap(options.Credentials)
 }
 
 func getExpressIdentityResolver(o Options) smithyauth.IdentityResolver {
