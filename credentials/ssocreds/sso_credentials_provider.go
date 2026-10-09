@@ -2,11 +2,14 @@ package ssocreds
 
 import (
 	"context"
+	"errors"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/internal/credentials/nonrecoverable"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/sso"
+	ssotypes "github.com/aws/aws-sdk-go-v2/service/sso/types"
 )
 
 // ProviderName is the name of the provider used to specify the source of
@@ -101,18 +104,27 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 		if p.cachedTokenFilepath == "" {
 			cachedTokenFilepath, err := StandardCachedTokenFilepath(p.options.StartURL)
 			if err != nil {
-				return aws.Credentials{}, &InvalidTokenError{Err: err}
+				return aws.Credentials{}, &nonrecoverable.Failure{
+					Err:               &InvalidTokenError{Err: err},
+					ActionableMessage: "the SSO session has expired or is invalid, run `aws sso login`",
+				}
 			}
 			p.cachedTokenFilepath = cachedTokenFilepath
 		}
 
 		tokenFile, err := loadCachedToken(p.cachedTokenFilepath)
 		if err != nil {
-			return aws.Credentials{}, &InvalidTokenError{Err: err}
+			return aws.Credentials{}, &nonrecoverable.Failure{
+				Err:               &InvalidTokenError{Err: err},
+				ActionableMessage: "the SSO session has expired or is invalid, run `aws sso login`",
+			}
 		}
 
 		if tokenFile.ExpiresAt == nil || sdk.NowTime().After(time.Time(*tokenFile.ExpiresAt)) {
-			return aws.Credentials{}, &InvalidTokenError{}
+			return aws.Credentials{}, &nonrecoverable.Failure{
+				Err:               &InvalidTokenError{},
+				ActionableMessage: "the SSO session has expired or is invalid, run `aws sso login`",
+			}
 		}
 		accessToken = &tokenFile.AccessToken
 	}
@@ -123,6 +135,14 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 		RoleName:    &p.options.RoleName,
 	})
 	if err != nil {
+		var unauthorized *ssotypes.UnauthorizedException
+		if errors.As(err, &unauthorized) {
+			return aws.Credentials{}, &nonrecoverable.Failure{
+				Err: unauthorized,
+				ActionableMessage: "AWS IAM Identity Center rejected the cached SSO token. " +
+					"Sign in again, for example with `aws sso login`.",
+			}
+		}
 		return aws.Credentials{}, err
 	}
 

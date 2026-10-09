@@ -524,7 +524,7 @@ func TestCredentialsCache_cacheStrategies(t *testing.T) {
 
 			if c.initialCreds.HasKeys() {
 				creds := c.initialCreds
-				provider.creds.Store(&creds)
+				provider.creds.Store(&cachedCredentials{creds: creds})
 			}
 
 			creds, err := provider.Retrieve(context.Background())
@@ -616,6 +616,158 @@ func (m mockAdjustExpiryBy) AdjustExpiresBy(creds Credentials, dur time.Duration
 		}
 	}
 	return m.creds, m.err
+}
+
+// counterProvider is a fake provider that counts how many times Retrieve is called.
+type counterProvider struct {
+	calls int32
+	creds func() Credentials
+	err   func() error
+}
+
+func (p *counterProvider) Retrieve(context.Context) (Credentials, error) {
+	atomic.AddInt32(&p.calls, 1)
+	var c Credentials
+	if p.creds != nil {
+		c = p.creds()
+	}
+	var err error
+	if p.err != nil {
+		err = p.err()
+	}
+	return c, err
+}
+
+func (p *counterProvider) Calls() int {
+	return int(atomic.LoadInt32(&p.calls))
+}
+
+// ProviderSources reports IMDS so the cache treats this provider as in scope.
+func (p *counterProvider) ProviderSources() []CredentialSource {
+	return []CredentialSource{CredentialSourceIMDS}
+}
+
+// withMockTime fakes the SDK clock for the test and returns a pointer to move it.
+func withMockTime(t *testing.T, at time.Time) *time.Time {
+	t.Helper()
+	orig := sdk.NowTime
+	cur := at
+	sdk.NowTime = func() time.Time { return cur }
+	t.Cleanup(func() { sdk.NowTime = orig })
+	return &cur
+}
+
+// Tests that during an advisory refresh, other callers get the cached credentials right away instead of waiting.
+func TestCredentialsCache_AdvisoryWindow_NonInitiatorsDoNotWaitOrCallSource(t *testing.T) {
+	now := withMockTime(t, time.Date(2026, 1, 1, 0, 0, 0, 0, time.UTC))
+
+	gate := make(chan struct{})
+	released := make(chan struct{})
+	calls := int32(0)
+
+	initial := Credentials{AccessKeyID: "AKID-1", SecretAccessKey: "S", CanExpire: true, Expires: (*now).Add(10 * time.Minute)}
+
+	provider := &counterProvider{
+		creds: func() Credentials {
+			n := atomic.AddInt32(&calls, 1)
+			if n == 1 {
+				return initial
+			}
+			<-gate // block the refresher so we can observe non-initiators not waiting
+			return Credentials{AccessKeyID: "AKID-2", SecretAccessKey: "S", CanExpire: true, Expires: (*now).Add(20 * time.Minute)}
+		},
+	}
+
+	p := NewCredentialsCache(provider)
+
+	if _, err := p.Retrieve(context.Background()); err != nil {
+		t.Fatalf("initial: %v", err)
+	}
+
+	// move into the advisory window
+	*now = initial.Expires.Add(-4 * time.Minute)
+
+	go func() {
+		// the caller that starts the refresh waits for it and gets the new credentials
+		creds, err := p.Retrieve(context.Background())
+		if err != nil {
+			t.Errorf("refresher Retrieve: %v", err)
+		}
+		if creds.AccessKeyID != "AKID-2" {
+			t.Errorf("expect refresher to observe the refreshed creds, got %v", creds.AccessKeyID)
+		}
+		close(released)
+	}()
+
+	// let the first caller start the refresh
+	select {
+	case <-released:
+	case <-time.After(50 * time.Millisecond):
+	}
+
+	// a second caller should get the cached credentials without waiting
+	done := make(chan Credentials, 1)
+	go func() {
+		creds, _ := p.Retrieve(context.Background())
+		done <- creds
+	}()
+
+	select {
+	case creds := <-done:
+		if creds.AccessKeyID != initial.AccessKeyID {
+			t.Errorf("expect non-initiator to get cached creds, got %v", creds.AccessKeyID)
+		}
+	case <-time.After(time.Second):
+		t.Fatal("non-initiating caller blocked on the in-flight refresh")
+	}
+
+	close(gate)
+	<-released
+}
+
+// Tests that credentials that never expire are fetched once and never refreshed.
+func TestCredentialsCache_NeverExpiring(t *testing.T) {
+	provider := &counterProvider{creds: func() Credentials {
+		return Credentials{AccessKeyID: "AKID", SecretAccessKey: "S"}
+	}}
+	p := NewCredentialsCache(provider)
+
+	for i := 0; i < 5; i++ {
+		if _, err := p.Retrieve(context.Background()); err != nil {
+			t.Fatalf("retrieve %d: %v", i, err)
+		}
+	}
+	if got := provider.Calls(); got != 1 {
+		t.Fatalf("expect never-expiring credentials fetched once, calls=%d", got)
+	}
+
+	// invalidating credentials that never expire does nothing
+	p.InvalidateCredentials(Credentials{AccessKeyID: "AKID"})
+	if _, err := p.Retrieve(context.Background()); err != nil {
+		t.Fatalf("retrieve after invalidate: %v", err)
+	}
+	if got := provider.Calls(); got != 1 {
+		t.Fatalf("expect invalidation on never-expiring creds not to trigger a refresh, calls=%d", got)
+	}
+}
+
+// Tests that Invalidate drops the cached credentials so the next call fetches new ones.
+func TestCredentialsCache_Invalidate(t *testing.T) {
+	provider := &counterProvider{creds: func() Credentials {
+		return Credentials{AccessKeyID: "AKID", SecretAccessKey: "S", CanExpire: true, Expires: time.Now().Add(time.Hour)}
+	}}
+	p := NewCredentialsCache(provider)
+
+	if _, err := p.Retrieve(context.Background()); err != nil {
+		t.Fatalf("initial: %v", err)
+	}
+	p.Invalidate()
+	if _, err := p.Retrieve(context.Background()); err != nil {
+		t.Fatalf("retrieve after invalidate: %v", err)
+	}
+	if got := provider.Calls(); got != 2 {
+		t.Fatalf("expect Invalidate to force a full re-fetch, calls=%d", got)
+	}
 }
 
 func TestCredentialsCache_IsCredentialsProvider(t *testing.T) {

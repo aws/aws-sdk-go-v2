@@ -9,8 +9,10 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"sync/atomic"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/internal/credentials/nonrecoverable"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/signin"
 	"github.com/aws/aws-sdk-go-v2/service/signin/types"
@@ -28,6 +30,9 @@ type TokenAPIClient interface {
 // Provider supplies credentials for an `aws login` session.
 type Provider struct {
 	options Options
+
+	// lastIssued is the access key ID this provider last handed out, so a refresh calls Sign-In instead of reusing it.
+	lastIssued atomic.Pointer[string]
 }
 
 var _ aws.CredentialsProvider = (*Provider)(nil)
@@ -64,7 +69,7 @@ func New(client TokenAPIClient, path string, opts ...func(*Options)) *Provider {
 		opt(&options)
 	}
 
-	return &Provider{options}
+	return &Provider{options: options}
 }
 
 // Retrieve generates a new set of temporary credentials using an `aws login`
@@ -75,13 +80,16 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 		return aws.Credentials{}, fmt.Errorf("load login token: %w", err)
 	}
 	if err := token.Validate(); err != nil {
-		return aws.Credentials{}, fmt.Errorf("validate login token: %w", err)
+		return aws.Credentials{}, &nonrecoverable.Failure{
+			Err:               err,
+			ActionableMessage: "validate login token",
+		}
 	}
 
 	// the token may have been refreshed elsewhere or the login session might
 	// have just been created
-	if sdk.NowTime().Before(token.AccessToken.ExpiresAt) {
-		return token.Credentials(), nil
+	if sdk.NowTime().Before(token.AccessToken.ExpiresAt) && !p.issued(token.AccessToken.AccessKeyID) {
+		return p.issue(token.Credentials()), nil
 	}
 
 	opts := make([]func(*signin.Options), len(p.options.ClientOptions)+1)
@@ -108,7 +116,19 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 		return aws.Credentials{}, fmt.Errorf("save token: %w", err)
 	}
 
-	return token.Credentials(), nil
+	return p.issue(token.Credentials()), nil
+}
+
+// issued reports whether this provider already handed out the token on disk, meaning the caller wants a refresh.
+func (p *Provider) issued(accessKeyID string) bool {
+	last := p.lastIssued.Load()
+	return last != nil && *last == accessKeyID
+}
+
+// issue records the access key ID of the credentials being handed out.
+func (p *Provider) issue(creds aws.Credentials) aws.Credentials {
+	p.lastIssued.Store(&creds.AccessKeyID)
+	return creds
 }
 
 // ProviderSources returns the credential chain that was used to construct this
@@ -123,7 +143,9 @@ func (p *Provider) ProviderSources() []aws.CredentialSource {
 func (p *Provider) loadToken() (*loginToken, error) {
 	f, err := openFile(p.options.CachedTokenFilepath)
 	if err != nil && os.IsNotExist(err) {
-		return nil, fmt.Errorf("token file not found, please reauthenticate")
+		return nil, &nonrecoverable.Failure{
+			ActionableMessage: "token file not found, please reauthenticate",
+		}
 	}
 	if err != nil {
 		return nil, err
@@ -173,11 +195,17 @@ func (p *Provider) saveToken(token *loginToken) error {
 func toAccessDeniedError(err *types.AccessDeniedException) error {
 	switch err.Error_ {
 	case types.OAuth2ErrorCodeTokenExpired:
-		return fmt.Errorf("login session has expired, please reauthenticate")
+		return &nonrecoverable.Failure{
+			ActionableMessage: "login session has expired, please reauthenticate",
+		}
 	case types.OAuth2ErrorCodeUserCredentialsChanged:
-		return fmt.Errorf("login session password has changed, please reauthenticate")
+		return &nonrecoverable.Failure{
+			ActionableMessage: "login session password has changed, please reauthenticate",
+		}
 	case types.OAuth2ErrorCodeInsufficientPermissions:
-		return fmt.Errorf("insufficient permissions, you may be missing permissions for the CreateOAuth2Token action")
+		return &nonrecoverable.Failure{
+			ActionableMessage: "insufficient permissions, you may be missing permissions for the CreateOAuth2Token action",
+		}
 	default:
 		return err
 	}
