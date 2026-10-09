@@ -1,8 +1,0 @@
-{
-    "id": "db4c24a3-dc1d-43fb-875a-1dee6e74ff5c",
-    "type": "bugfix",
-    "description": "Fix deserialization failure when `Application.Metadata` contains a null value.",
-    "modules": [
-        "service/appstream"
-    ]
-}

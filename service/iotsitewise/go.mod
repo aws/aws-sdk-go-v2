@@ -3,10 +3,10 @@ module github.com/aws/aws-sdk-go-v2/service/iotsitewise
 go 1.24
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.47.2
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.21
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.5
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.5
+	github.com/aws/aws-sdk-go-v2 v1.47.3
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.22
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.6
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.6
 	github.com/aws/smithy-go v1.28.5
 )
 

@@ -1,3 +1,9 @@
+# v1.71.3 (2026-10-09.2)
+
+* **Bug Fix**: Fix deserialization failure when `Application.Metadata` contains a null value.
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.71.2 (2026-10-08)
 
 * **Dependency Update**: Update to smithy-go v1.28.4.

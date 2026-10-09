@@ -1,3 +1,17 @@
+# Release (2026-10-09.2)
+
+## General Highlights
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.52.1](service/apigateway/CHANGELOG.md#v1521-2026-10-092)
+  * **Bug Fix**: Fix deserialization failure when `IntegrationResponse.ResponseTemplates` contains a null value.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.71.3](service/appstream/CHANGELOG.md#v1713-2026-10-092)
+  * **Bug Fix**: Fix deserialization failure when `Application.Metadata` contains a null value.
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.66.4](service/athena/CHANGELOG.md#v1664-2026-10-092)
+  * **Bug Fix**: Fix deserialization failure when `TableMetadata.Parameters` contains a null value.
+
 # Release (2026-10-09)
 
 ## Module Highlights

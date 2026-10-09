@@ -1,3 +1,8 @@
+# v1.99.1 (2026-10-09.2)
+
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.99.0 (2026-10-08)
 
 * **Feature**: Added support for GuardDuty RDS Data Activity Monitoring

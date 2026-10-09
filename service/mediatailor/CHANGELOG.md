@@ -1,3 +1,8 @@
+# v1.73.1 (2026-10-09.2)
+
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.73.0 (2026-10-09)
 
 * **Feature**: Add caching settings to http functions

@@ -1,3 +1,9 @@
+# v1.52.1 (2026-10-09.2)
+
+* **Bug Fix**: Fix deserialization failure when `IntegrationResponse.ResponseTemplates` contains a null value.
+* **Dependency Update**: Update to smithy-go v1.28.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.0 (2026-10-08)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

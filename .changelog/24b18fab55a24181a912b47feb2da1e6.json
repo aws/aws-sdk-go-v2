@@ -1,8 +1,0 @@
-{
-    "id": "24b18fab-55a2-4181-a912-b47feb2da1e6",
-    "type": "bugfix",
-    "description": "Fix deserialization failure when `IntegrationResponse.ResponseTemplates` contains a null value.",
-    "modules": [
-        "service/apigateway"
-    ]
-}
