@@ -459,6 +459,14 @@ func deserializeGraphDisplayConfigMap(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make(map[string]types.GraphDisplayConfig)
 	var vv types.GraphDisplayConfig
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GraphDisplayConfig
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.GraphDisplayConfig{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

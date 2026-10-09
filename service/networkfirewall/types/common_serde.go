@@ -1880,6 +1880,14 @@ func deserializeAssociationSyncState(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]AZSyncState)
 	var vv AZSyncState
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero AZSyncState
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = AZSyncState{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1894,6 +1902,14 @@ func deserializeIPSetMetadataMap(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]IPSetMetadata)
 	var vv IPSetMetadata
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero IPSetMetadata
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = IPSetMetadata{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1908,6 +1924,14 @@ func deserializeIPSetReferenceMap(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]IPSetReference)
 	var vv IPSetReference
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero IPSetReference
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = IPSetReference{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1922,6 +1946,14 @@ func deserializeIPSets(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]IPSet)
 	var vv IPSet
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero IPSet
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = IPSet{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1936,6 +1968,13 @@ func deserializeLogDestinationMap(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1950,6 +1989,14 @@ func deserializePortSets(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[st
 	*v = make(map[string]PortSet)
 	var vv PortSet
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero PortSet
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = PortSet{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1964,6 +2011,14 @@ func deserializeSupportedAvailabilityZones(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]AvailabilityZoneMetadata)
 	var vv AvailabilityZoneMetadata
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero AvailabilityZoneMetadata
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = AvailabilityZoneMetadata{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1978,6 +2033,14 @@ func deserializeSyncStateConfig(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]PerObjectStatus)
 	var vv PerObjectStatus
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero PerObjectStatus
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = PerObjectStatus{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1992,6 +2055,14 @@ func deserializeSyncStates(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[
 	*v = make(map[string]SyncState)
 	var vv SyncState
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero SyncState
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = SyncState{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

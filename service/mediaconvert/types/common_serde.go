@@ -1720,6 +1720,13 @@ func deserialize__mapOf__string(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1734,6 +1741,14 @@ func deserialize__mapOfAudioSelector(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]AudioSelector)
 	var vv AudioSelector
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero AudioSelector
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = AudioSelector{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1748,6 +1763,14 @@ func deserialize__mapOfAudioSelectorGroup(d smithy.ShapeDeserializer, s *smithy.
 	*v = make(map[string]AudioSelectorGroup)
 	var vv AudioSelectorGroup
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero AudioSelectorGroup
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = AudioSelectorGroup{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1762,6 +1785,14 @@ func deserialize__mapOfCaptionSelector(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make(map[string]CaptionSelector)
 	var vv CaptionSelector
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero CaptionSelector
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = CaptionSelector{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1776,6 +1807,14 @@ func deserialize__mapOfDynamicAudioSelector(d smithy.ShapeDeserializer, s *smith
 	*v = make(map[string]DynamicAudioSelector)
 	var vv DynamicAudioSelector
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero DynamicAudioSelector
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = DynamicAudioSelector{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

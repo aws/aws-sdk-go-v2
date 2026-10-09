@@ -1082,6 +1082,13 @@ func deserializeMapOf__double(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 	*v = make(map[string]float64)
 	var vv float64
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero float64
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadFloat64(s.MapValue(), &vv); err != nil {
 			return err
@@ -1096,6 +1103,13 @@ func deserializeMapOf__integer(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]int32)
 	var vv int32
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero int32
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadInt32(s.MapValue(), &vv); err != nil {
 			return err
@@ -1110,6 +1124,13 @@ func deserializeMapOf__string(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1124,6 +1145,14 @@ func deserializeMapOfActivity(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 	*v = make(map[string]types.Activity)
 	var vv types.Activity
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Activity
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.Activity{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1138,6 +1167,14 @@ func deserializeMapOfAddressConfiguration(d smithy.ShapeDeserializer, s *smithy.
 	*v = make(map[string]types.AddressConfiguration)
 	var vv types.AddressConfiguration
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AddressConfiguration
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.AddressConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1152,6 +1189,14 @@ func deserializeMapOfAttributeDimension(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make(map[string]types.AttributeDimension)
 	var vv types.AttributeDimension
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AttributeDimension
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.AttributeDimension{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1166,6 +1211,14 @@ func deserializeMapOfChannelResponse(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]types.ChannelResponse)
 	var vv types.ChannelResponse
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ChannelResponse
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ChannelResponse{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1180,6 +1233,14 @@ func deserializeMapOfEndpointMessageResult(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]types.EndpointMessageResult)
 	var vv types.EndpointMessageResult
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EndpointMessageResult
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.EndpointMessageResult{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1194,6 +1255,14 @@ func deserializeMapOfEndpointSendConfiguration(d smithy.ShapeDeserializer, s *sm
 	*v = make(map[string]types.EndpointSendConfiguration)
 	var vv types.EndpointSendConfiguration
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EndpointSendConfiguration
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.EndpointSendConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1208,6 +1277,14 @@ func deserializeMapOfEvent(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[
 	*v = make(map[string]types.Event)
 	var vv types.Event
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Event
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.Event{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1222,6 +1299,14 @@ func deserializeMapOfEventItemResponse(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make(map[string]types.EventItemResponse)
 	var vv types.EventItemResponse
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EventItemResponse
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.EventItemResponse{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1236,6 +1321,14 @@ func deserializeMapOfEventsBatch(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]types.EventsBatch)
 	var vv types.EventsBatch
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EventsBatch
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.EventsBatch{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1250,6 +1343,14 @@ func deserializeMapOfItemResponse(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]types.ItemResponse)
 	var vv types.ItemResponse
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ItemResponse
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ItemResponse{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1264,6 +1365,14 @@ func deserializeMapOfListOf__string(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeListOf__string(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -1278,6 +1387,14 @@ func deserializeMapOfListOfOpenHoursRules(d smithy.ShapeDeserializer, s *smithy.
 	*v = make(map[string][]types.OpenHoursRule)
 	var vv []types.OpenHoursRule
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []types.OpenHoursRule
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeListOfOpenHoursRules(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -1292,6 +1409,14 @@ func deserializeMapOfMapOfEndpointMessageResult(d smithy.ShapeDeserializer, s *s
 	*v = make(map[string]map[string]types.EndpointMessageResult)
 	var vv map[string]types.EndpointMessageResult
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]types.EndpointMessageResult
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeMapOfEndpointMessageResult(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -1306,6 +1431,14 @@ func deserializeMapOfMessageResult(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make(map[string]types.MessageResult)
 	var vv types.MessageResult
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MessageResult
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.MessageResult{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1320,6 +1453,14 @@ func deserializeMapOfMetricDimension(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]types.MetricDimension)
 	var vv types.MetricDimension
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MetricDimension
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.MetricDimension{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

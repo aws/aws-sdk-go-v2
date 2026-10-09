@@ -543,6 +543,13 @@ func deserializeDocumentValuedMap(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]document.Interface)
 	var vv smithydocument.Value
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero document.Interface
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadDocument(s.MapValue(), &vv); err != nil {
 			return err
@@ -562,6 +569,14 @@ func deserializeExportFilterPerLabelMap(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make(map[string]types.ExportFilterElement)
 	var vv types.ExportFilterElement
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExportFilterElement
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ExportFilterElement{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -576,6 +591,14 @@ func deserializeExportFilterPropertyMap(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make(map[string]types.ExportFilterPropertyAttributes)
 	var vv types.ExportFilterPropertyAttributes
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExportFilterPropertyAttributes
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ExportFilterPropertyAttributes{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -590,6 +613,13 @@ func deserializeLongValuedMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 	*v = make(map[string]int64)
 	var vv int64
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero int64
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadInt64(s.MapValue(), &vv); err != nil {
 			return err
@@ -604,6 +634,13 @@ func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

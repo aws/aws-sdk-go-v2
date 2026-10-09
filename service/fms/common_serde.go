@@ -1329,6 +1329,13 @@ func deserializeComplianceViolatorMetadata(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1343,6 +1350,14 @@ func deserializeCustomerPolicyScopeMap(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeCustomerPolicyScopeIdList(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -1357,6 +1372,13 @@ func deserializeIssueInfoMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1371,6 +1393,14 @@ func deserializePreviousAppsList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string][]types.App)
 	var vv []types.App
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []types.App
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeAppsList(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -1385,6 +1415,14 @@ func deserializePreviousProtocolsList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeProtocolsList(d, s.MapValue(), &vv); err != nil {
 			return err

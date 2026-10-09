@@ -481,6 +481,14 @@ func deserializeDatasourcePackageIngestDetails(d smithy.ShapeDeserializer, s *sm
 	*v = make(map[string]DatasourcePackageIngestDetail)
 	var vv DatasourcePackageIngestDetail
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero DatasourcePackageIngestDetail
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = DatasourcePackageIngestDetail{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -495,6 +503,14 @@ func deserializeDatasourcePackageIngestHistory(d smithy.ShapeDeserializer, s *sm
 	*v = make(map[string]map[string]TimestampForCollection)
 	var vv map[string]TimestampForCollection
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]TimestampForCollection
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeLastIngestStateChangeDates(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -509,6 +525,13 @@ func deserializeDatasourcePackageIngestStates(d smithy.ShapeDeserializer, s *smi
 	*v = make(map[string]DatasourcePackageIngestState)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero DatasourcePackageIngestState
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -523,6 +546,14 @@ func deserializeLastIngestStateChangeDates(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]TimestampForCollection)
 	var vv TimestampForCollection
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero TimestampForCollection
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = TimestampForCollection{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -537,6 +568,13 @@ func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -551,6 +589,14 @@ func deserializeVolumeUsageByDatasourcePackage(d smithy.ShapeDeserializer, s *sm
 	*v = make(map[string]DatasourcePackageUsageInfo)
 	var vv DatasourcePackageUsageInfo
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero DatasourcePackageUsageInfo
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = DatasourcePackageUsageInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

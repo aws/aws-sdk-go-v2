@@ -74,6 +74,18 @@ func TestCheckSnapshot_GetItem(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetMaps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMaps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMaps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutCompressedData(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutCompressedData(context.Background(), nil, func(o *Options) {
@@ -102,6 +114,18 @@ func TestUpdateSnapshot_GetItem(t *testing.T) {
 	_, err := svc.GetItem(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetItem")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetMaps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMaps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMaps")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

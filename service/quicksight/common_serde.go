@@ -12217,6 +12217,13 @@ func deserializeAggFunctionParamMap(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -12231,6 +12238,13 @@ func deserializeAggregationFunctionParameters(d smithy.ShapeDeserializer, s *smi
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -12245,6 +12259,14 @@ func deserializeCreateLimitsProfileRequestResourceLimitsMap(d smithy.ShapeDeseri
 	*v = make(map[string]types.ProfileLimitValue)
 	var vv types.ProfileLimitValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ProfileLimitValue
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ProfileLimitValue{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -12259,6 +12281,13 @@ func deserializeDefaultCategoryEffectsMap(d smithy.ShapeDeserializer, s *smithy.
 	*v = make(map[string]types.DefaultCategoryEffect)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DefaultCategoryEffect
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -12273,6 +12302,14 @@ func deserializeDestinationTableMap(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string]types.DestinationTable)
 	var vv types.DestinationTable
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DestinationTable
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.DestinationTable{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -12287,6 +12324,14 @@ func deserializeFieldFolderMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]types.FieldFolder)
 	var vv types.FieldFolder
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FieldFolder
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.FieldFolder{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -12301,6 +12346,14 @@ func deserializeIdentityMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeIdentityNameList(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -12315,6 +12368,13 @@ func deserializeIpRestrictionRuleMap(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -12329,6 +12389,14 @@ func deserializeLogicalTableMap(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]types.LogicalTable)
 	var vv types.LogicalTable
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.LogicalTable
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.LogicalTable{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -12343,6 +12411,13 @@ func deserializePhysicalTableMap(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]types.PhysicalTable)
 	var vv types.PhysicalTable
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PhysicalTable
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := deserializePhysicalTable(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -12357,6 +12432,14 @@ func deserializeResourceLimitsMap(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]types.ProfileLimitValue)
 	var vv types.ProfileLimitValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ProfileLimitValue
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ProfileLimitValue{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -12371,6 +12454,14 @@ func deserializeRowLevelPermissionDataSetMap(d smithy.ShapeDeserializer, s *smit
 	*v = make(map[string]types.RowLevelPermissionDataSet)
 	var vv types.RowLevelPermissionDataSet
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RowLevelPermissionDataSet
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.RowLevelPermissionDataSet{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -12385,6 +12476,14 @@ func deserializeSemanticTableMap(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]types.SemanticTable)
 	var vv types.SemanticTable
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SemanticTable
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.SemanticTable{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -12399,6 +12498,14 @@ func deserializeSourceTableMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]types.SourceTable)
 	var vv types.SourceTable
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SourceTable
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.SourceTable{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -12413,6 +12520,14 @@ func deserializeTransformStepMap(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]types.TransformStep)
 	var vv types.TransformStep
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TransformStep
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.TransformStep{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -12427,6 +12542,13 @@ func deserializeTypeParameters(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -12441,6 +12563,13 @@ func deserializeVpcEndpointIdRestrictionRuleMap(d smithy.ShapeDeserializer, s *s
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -12455,6 +12584,13 @@ func deserializeVpcIdRestrictionRuleMap(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/kitchensinktestcbor/types"
 	smithy "github.com/aws/smithy-go"
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
@@ -157,6 +158,43 @@ func TestUpdateResponseSnapshot_CborGetItem(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CborGetItem.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CborGetMaps(t *testing.T) {
+	want := &CborGetMapsOutput{
+		Strings: map[string]string{
+			"key0": "__Value__",
+		},
+		Integers: map[string]int32{
+			"key0": 1,
+		},
+		Structs: map[string]types.MapValueStruct{
+			"key0": {
+				Name: ptr.String("__Name__"),
+			},
+		},
+		SparseStrings: map[string]*string{
+			"key0": ptr.String("__Value__"),
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.RpcV2CborKitchenSink)
+	opSchema := smithy.NewOperationSchema(schemas.CborGetMaps, schemas.CborGetMapsOutput, schemas.CborGetMapsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CborGetMaps.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

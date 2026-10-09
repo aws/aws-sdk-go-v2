@@ -312,6 +312,13 @@ func deserializeAppliedWeights(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]float32)
 	var vv float32
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero float32
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadFloat32(s.MapValue(), &vv); err != nil {
 			return err

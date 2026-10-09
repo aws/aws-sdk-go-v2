@@ -567,6 +567,13 @@ func deserializeAttributeValueMap(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]types.AttributeValue)
 	var vv types.AttributeValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AttributeValue
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := deserializeAttributeValue(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -581,6 +588,13 @@ func deserializeEntityAttributesMap(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -595,6 +609,13 @@ func deserializeEntityKeyAttributesMap(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -609,6 +630,14 @@ func deserializeExpectedAttributeMap(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]types.ExpectedAttributeValue)
 	var vv types.ExpectedAttributeValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExpectedAttributeValue
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ExpectedAttributeValue{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -623,6 +652,13 @@ func deserializeExpressionAttributeNameMap(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -637,6 +673,13 @@ func deserializeExpressionAttributeValueMap(d smithy.ShapeDeserializer, s *smith
 	*v = make(map[string]types.AttributeValue)
 	var vv types.AttributeValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AttributeValue
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := deserializeAttributeValue(d, s.MapValue(), &vv); err != nil {
 			return err

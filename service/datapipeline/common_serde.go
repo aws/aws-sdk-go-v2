@@ -397,6 +397,14 @@ func deserializePipelineObjectMap(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]types.PipelineObject)
 	var vv types.PipelineObject
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PipelineObject
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.PipelineObject{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

@@ -74,6 +74,18 @@ func TestCheckSnapshot_CborGetItem(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CborGetMaps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CborGetMaps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CborGetMaps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CborPutCompressedData(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CborPutCompressedData(context.Background(), nil, func(o *Options) {
@@ -90,6 +102,18 @@ func TestUpdateSnapshot_CborGetItem(t *testing.T) {
 	_, err := svc.CborGetItem(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CborGetItem")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CborGetMaps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CborGetMaps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CborGetMaps")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -313,6 +313,14 @@ func deserializeExclusionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeExcludedQuotaList(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -327,6 +335,14 @@ func deserializeExclusionQuotaList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make(map[string][]types.QuotaInfo)
 	var vv []types.QuotaInfo
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []types.QuotaInfo
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeQuotaInfoList(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -341,6 +357,13 @@ func deserializeMetricDimensionsMapDefinition(d smithy.ShapeDeserializer, s *smi
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

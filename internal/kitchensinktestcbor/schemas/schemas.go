@@ -13,6 +13,11 @@ var CborGetItem = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CborGetItem",
 }, smithy.ShapeTypeOperation, 0)
 
+var CborGetMaps = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "CborGetMaps",
+}, smithy.ShapeTypeOperation, 0)
+
 var CborPutCompressedData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestcbor",
 	Name:      "CborPutCompressedData",
@@ -30,6 +35,44 @@ var CborItemNotFound = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CborItemNotFound",
 }, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"})
 
+var _DenseIntegerMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "DenseIntegerMap",
+}, smithy.ShapeTypeMap, 2)
+var _DenseIntegerMap_key *smithy.Schema
+
+var _DenseIntegerMap_value *smithy.Schema
+
+var _DenseStringMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "DenseStringMap",
+}, smithy.ShapeTypeMap, 2)
+var _DenseStringMap_key *smithy.Schema
+
+var _DenseStringMap_value *smithy.Schema
+
+var _DenseStructMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "DenseStructMap",
+}, smithy.ShapeTypeMap, 2)
+var _DenseStructMap_key *smithy.Schema
+
+var _DenseStructMap_value *smithy.Schema
+
+var MapValueStruct = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "MapValueStruct",
+}, smithy.ShapeTypeStructure, 1)
+var MapValueStruct_name *smithy.Schema
+
+var _SparseStringMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "SparseStringMap",
+}, smithy.ShapeTypeMap, 2)
+var _SparseStringMap_key *smithy.Schema
+
+var _SparseStringMap_value *smithy.Schema
+
 var CborGetItemInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestcbor",
 	Name:      "CborGetItemInput",
@@ -40,6 +83,23 @@ var CborGetItemOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestcbor",
 	Name:      "CborGetItemOutput",
 }, smithy.ShapeTypeStructure, 0)
+
+var CborGetMapsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "CborGetMapsInput",
+}, smithy.ShapeTypeStructure, 0)
+
+var CborGetMapsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "CborGetMapsOutput",
+}, smithy.ShapeTypeStructure, 4)
+var CborGetMapsOutput_strings *smithy.Schema
+
+var CborGetMapsOutput_integers *smithy.Schema
+
+var CborGetMapsOutput_structs *smithy.Schema
+
+var CborGetMapsOutput_sparseStrings *smithy.Schema
 
 var CborPutCompressedDataInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestcbor",
@@ -55,7 +115,33 @@ var CborPutCompressedDataOutput = smithy.NewSchema(smithy.ShapeID{
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
+	_DenseIntegerMap_key = _DenseIntegerMap.AddMember("key", smithyprelude.String)
+
+	_DenseIntegerMap_value = _DenseIntegerMap.AddMember("value", smithyprelude.Integer)
+
+	_DenseStringMap_key = _DenseStringMap.AddMember("key", smithyprelude.String)
+
+	_DenseStringMap_value = _DenseStringMap.AddMember("value", smithyprelude.String)
+
+	MapValueStruct_name = MapValueStruct.AddMember("name", smithyprelude.String)
+
+	_DenseStructMap_key = _DenseStructMap.AddMember("key", smithyprelude.String)
+
+	_DenseStructMap_value = _DenseStructMap.AddMember("value", MapValueStruct)
+
+	_SparseStringMap_key = _SparseStringMap.AddMember("key", smithyprelude.String)
+
+	_SparseStringMap_value = _SparseStringMap.AddMember("value", smithyprelude.String)
+
 	CborGetItemInput_id = CborGetItemInput.AddMember("id", smithyprelude.String)
+
+	CborGetMapsOutput_strings = CborGetMapsOutput.AddMember("strings", _DenseStringMap)
+
+	CborGetMapsOutput_integers = CborGetMapsOutput.AddMember("integers", _DenseIntegerMap)
+
+	CborGetMapsOutput_structs = CborGetMapsOutput.AddMember("structs", _DenseStructMap)
+
+	CborGetMapsOutput_sparseStrings = CborGetMapsOutput.AddMember("sparseStrings", _SparseStringMap)
 
 	CborPutCompressedDataInput_data = CborPutCompressedDataInput.AddMember("data", smithyprelude.String)
 

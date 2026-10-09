@@ -262,6 +262,13 @@ func deserializeActiveContextParametersMap(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -276,6 +283,14 @@ func deserializeSlotHintsIntentMap(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make(map[string]map[string]types.RuntimeHintDetails)
 	var vv map[string]types.RuntimeHintDetails
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]types.RuntimeHintDetails
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeSlotHintsSlotMap(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -290,6 +305,14 @@ func deserializeSlotHintsSlotMap(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]types.RuntimeHintDetails)
 	var vv types.RuntimeHintDetails
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RuntimeHintDetails
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.RuntimeHintDetails{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -304,6 +327,14 @@ func deserializeSlots(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[strin
 	*v = make(map[string]types.Slot)
 	var vv types.Slot
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Slot
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.Slot{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -318,6 +349,13 @@ func deserializeStringMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[s
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

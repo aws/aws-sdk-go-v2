@@ -127,6 +127,40 @@ func TestCheckResponseSnapshot_CborGetItem(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CborGetMaps(t *testing.T) {
+	want := &CborGetMapsOutput{
+		Strings: map[string]string{
+			"key0": "__Value__",
+		},
+		Integers: map[string]int32{
+			"key0": 1,
+		},
+		Structs: map[string]types.MapValueStruct{
+			"key0": {
+				Name: ptr.String("__Name__"),
+			},
+		},
+		SparseStrings: map[string]*string{
+			"key0": ptr.String("__Value__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CborGetMaps.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CborGetMaps(context.Background(), &CborGetMapsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CborGetMaps.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CborPutCompressedData(t *testing.T) {
 	want := &CborPutCompressedDataOutput{}
 	status, header, body, err := serdeRespReadSnapshot("CborPutCompressedData.response")

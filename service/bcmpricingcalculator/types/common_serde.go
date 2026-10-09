@@ -1389,6 +1389,14 @@ func deserializeServiceCostDifferenceMap(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make(map[string]CostDifference)
 	var vv CostDifference
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero CostDifference
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = CostDifference{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1403,6 +1411,13 @@ func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

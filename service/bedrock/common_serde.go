@@ -4606,6 +4606,13 @@ func deserializeAdditionalModelRequestFields(d smithy.ShapeDeserializer, s *smit
 	*v = make(map[string]document.Interface)
 	var vv smithydocument.Value
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero document.Interface
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadDocument(s.MapValue(), &vv); err != nil {
 			return err
@@ -4625,6 +4632,14 @@ func deserializeAutomatedReasoningPolicyRuleReportMap(d smithy.ShapeDeserializer
 	*v = make(map[string]types.AutomatedReasoningPolicyRuleReport)
 	var vv types.AutomatedReasoningPolicyRuleReport
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AutomatedReasoningPolicyRuleReport
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.AutomatedReasoningPolicyRuleReport{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -4639,6 +4654,14 @@ func deserializeAutomatedReasoningPolicyVariableReportMap(d smithy.ShapeDeserial
 	*v = make(map[string]types.AutomatedReasoningPolicyVariableReport)
 	var vv types.AutomatedReasoningPolicyVariableReport
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AutomatedReasoningPolicyVariableReport
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.AutomatedReasoningPolicyVariableReport{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -4653,6 +4676,13 @@ func deserializeModelCustomizationHyperParameters(d smithy.ShapeDeserializer, s 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -4667,6 +4697,13 @@ func deserializeRequestMetadataMap(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

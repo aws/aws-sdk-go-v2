@@ -12,7 +12,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.11.6
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.20.5
-	github.com/aws/smithy-go v1.28.4
+	github.com/aws/smithy-go v1.28.5
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../

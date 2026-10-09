@@ -9,6 +9,7 @@
         "api_client.go",
         "api_client_test.go",
         "api_op_CborGetItem.go",
+        "api_op_CborGetMaps.go",
         "api_op_CborPutCompressedData.go",
         "auth.go",
         "deserializers.go",

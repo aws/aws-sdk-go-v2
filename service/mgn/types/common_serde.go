@@ -2459,6 +2459,14 @@ func deserializeCodeGenerationOutputFormatStatusDetailsMap(d smithy.ShapeDeseria
 	*v = make(map[string]CodeGenerationOutputFormatStatusDetails)
 	var vv CodeGenerationOutputFormatStatusDetails
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero CodeGenerationOutputFormatStatusDetails
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = CodeGenerationOutputFormatStatusDetails{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -2473,6 +2481,13 @@ func deserializeConstructProperties(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -2487,6 +2502,13 @@ func deserializeScopeTagsMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -2501,6 +2523,13 @@ func deserializeSsmDocumentExternalParameters(d smithy.ShapeDeserializer, s *smi
 	*v = make(map[string]SsmExternalParameter)
 	var vv SsmExternalParameter
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero SsmExternalParameter
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := deserializeSsmExternalParameter(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -2515,6 +2544,14 @@ func deserializeSsmDocumentParameters(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make(map[string][]SsmParameterStoreParameter)
 	var vv []SsmParameterStoreParameter
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []SsmParameterStoreParameter
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeSsmParameterStoreParameters(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -2529,6 +2566,13 @@ func deserializeTagsMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[str
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

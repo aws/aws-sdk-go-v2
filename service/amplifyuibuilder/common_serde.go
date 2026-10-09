@@ -1057,6 +1057,14 @@ func deserializeCodegenGenericDataEnums(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make(map[string]types.CodegenGenericDataEnum)
 	var vv types.CodegenGenericDataEnum
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CodegenGenericDataEnum
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.CodegenGenericDataEnum{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1071,6 +1079,14 @@ func deserializeCodegenGenericDataFields(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make(map[string]types.CodegenGenericDataField)
 	var vv types.CodegenGenericDataField
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CodegenGenericDataField
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.CodegenGenericDataField{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1085,6 +1101,14 @@ func deserializeCodegenGenericDataModels(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make(map[string]types.CodegenGenericDataModel)
 	var vv types.CodegenGenericDataModel
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CodegenGenericDataModel
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.CodegenGenericDataModel{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1099,6 +1123,14 @@ func deserializeCodegenGenericDataNonModelFields(d smithy.ShapeDeserializer, s *
 	*v = make(map[string]types.CodegenGenericDataField)
 	var vv types.CodegenGenericDataField
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CodegenGenericDataField
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.CodegenGenericDataField{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1113,6 +1145,14 @@ func deserializeCodegenGenericDataNonModels(d smithy.ShapeDeserializer, s *smith
 	*v = make(map[string]types.CodegenGenericDataNonModel)
 	var vv types.CodegenGenericDataNonModel
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CodegenGenericDataNonModel
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.CodegenGenericDataNonModel{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1127,6 +1167,14 @@ func deserializeComponentBindingProperties(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]types.ComponentBindingPropertiesValue)
 	var vv types.ComponentBindingPropertiesValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ComponentBindingPropertiesValue
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ComponentBindingPropertiesValue{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1141,6 +1189,14 @@ func deserializeComponentCollectionProperties(d smithy.ShapeDeserializer, s *smi
 	*v = make(map[string]types.ComponentDataConfiguration)
 	var vv types.ComponentDataConfiguration
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ComponentDataConfiguration
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ComponentDataConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1155,6 +1211,14 @@ func deserializeComponentEvents(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]types.ComponentEvent)
 	var vv types.ComponentEvent
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ComponentEvent
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ComponentEvent{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1169,6 +1233,14 @@ func deserializeComponentOverrides(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make(map[string]map[string]string)
 	var vv map[string]string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeComponentOverridesValue(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -1183,6 +1255,13 @@ func deserializeComponentOverridesValue(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1197,6 +1276,14 @@ func deserializeComponentProperties(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string]types.ComponentProperty)
 	var vv types.ComponentProperty
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ComponentProperty
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.ComponentProperty{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1211,6 +1298,13 @@ func deserializeComponentVariantValues(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1225,6 +1319,13 @@ func deserializeFeaturesMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1239,6 +1340,14 @@ func deserializeFieldsMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[s
 	*v = make(map[string]types.FieldConfig)
 	var vv types.FieldConfig
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FieldConfig
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.FieldConfig{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1253,6 +1362,14 @@ func deserializeFormBindings(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]types.FormBindingElement)
 	var vv types.FormBindingElement
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FormBindingElement
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.FormBindingElement{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1267,6 +1384,14 @@ func deserializeFormInputBindingProperties(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]types.FormInputBindingPropertiesValue)
 	var vv types.FormInputBindingPropertiesValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FormInputBindingPropertiesValue
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.FormInputBindingPropertiesValue{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1281,6 +1406,13 @@ func deserializeReactCodegenDependencies(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1295,6 +1427,14 @@ func deserializeSectionalElementMap(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string]types.SectionalElement)
 	var vv types.SectionalElement
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SectionalElement
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.SectionalElement{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1309,6 +1449,13 @@ func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

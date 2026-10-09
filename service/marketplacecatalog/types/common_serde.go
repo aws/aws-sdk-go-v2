@@ -1917,6 +1917,14 @@ func deserializeEntityDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 	*v = make(map[string]EntityDetail)
 	var vv EntityDetail
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero EntityDetail
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = EntityDetail{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1931,6 +1939,14 @@ func deserializeErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]BatchDescribeErrorDetail)
 	var vv BatchDescribeErrorDetail
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchDescribeErrorDetail
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = BatchDescribeErrorDetail{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

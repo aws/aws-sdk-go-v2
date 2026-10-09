@@ -358,6 +358,14 @@ func deserializeAddressRoleMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]Jurisdiction)
 	var vv Jurisdiction
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero Jurisdiction
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = Jurisdiction{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -372,6 +380,14 @@ func deserializeTaxExemptionDetailsMap(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make(map[string]TaxExemptionDetails)
 	var vv TaxExemptionDetails
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero TaxExemptionDetails
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = TaxExemptionDetails{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

@@ -1881,6 +1881,14 @@ func deserializeAssociationSyncState(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]types.AZSyncState)
 	var vv types.AZSyncState
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AZSyncState
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.AZSyncState{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1895,6 +1903,14 @@ func deserializeIPSetMetadataMap(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]types.IPSetMetadata)
 	var vv types.IPSetMetadata
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.IPSetMetadata
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.IPSetMetadata{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1909,6 +1925,14 @@ func deserializeIPSetReferenceMap(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]types.IPSetReference)
 	var vv types.IPSetReference
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.IPSetReference
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.IPSetReference{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1923,6 +1947,14 @@ func deserializeIPSets(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]types.IPSet)
 	var vv types.IPSet
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.IPSet
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.IPSet{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1937,6 +1969,13 @@ func deserializeLogDestinationMap(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -1951,6 +1990,14 @@ func deserializePortSets(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[st
 	*v = make(map[string]types.PortSet)
 	var vv types.PortSet
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PortSet
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.PortSet{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1965,6 +2012,14 @@ func deserializeSupportedAvailabilityZones(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]types.AvailabilityZoneMetadata)
 	var vv types.AvailabilityZoneMetadata
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AvailabilityZoneMetadata
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.AvailabilityZoneMetadata{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1979,6 +2034,14 @@ func deserializeSyncStateConfig(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]types.PerObjectStatus)
 	var vv types.PerObjectStatus
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PerObjectStatus
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.PerObjectStatus{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1993,6 +2056,14 @@ func deserializeSyncStates(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[
 	*v = make(map[string]types.SyncState)
 	var vv types.SyncState
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SyncState
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.SyncState{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
