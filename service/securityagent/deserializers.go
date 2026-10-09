@@ -4842,6 +4842,11 @@ func awsRestjson1_deserializeOpDocumentCreatePentestOutput(v **CreatePentestOutp
 				sv.ServiceRole = ptr.String(jtv)
 			}
 
+		case "testScope":
+			if err := awsRestjson1_deserializeDocumentTestScope(&sv.TestScope, value); err != nil {
+				return err
+			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15382,6 +15387,11 @@ func awsRestjson1_deserializeOpDocumentUpdatePentestOutput(v **UpdatePentestOutp
 				sv.ServiceRole = ptr.String(jtv)
 			}
 
+		case "testScope":
+			if err := awsRestjson1_deserializeDocumentTestScope(&sv.TestScope, value); err != nil {
+				return err
+			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23595,6 +23605,11 @@ func awsRestjson1_deserializeDocumentPentest(v **types.Pentest, value interface{
 				sv.ServiceRole = ptr.String(jtv)
 			}
 
+		case "testScope":
+			if err := awsRestjson1_deserializeDocumentTestScope(&sv.TestScope, value); err != nil {
+				return err
+			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23909,6 +23924,11 @@ func awsRestjson1_deserializeDocumentPentestJob(v **types.PentestJob, value inte
 
 		case "steps":
 			if err := awsRestjson1_deserializeDocumentStepList(&sv.Steps, value); err != nil {
+				return err
+			}
+
+		case "testScope":
+			if err := awsRestjson1_deserializeDocumentTestScope(&sv.TestScope, value); err != nil {
 				return err
 			}
 
@@ -26592,6 +26612,46 @@ func awsRestjson1_deserializeDocumentTaskSummaryList(v *[]types.TaskSummary, val
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTestScope(v **types.TestScope, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TestScope
+	if *v == nil {
+		sv = &types.TestScope{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TestScopeType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.TestScopeType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

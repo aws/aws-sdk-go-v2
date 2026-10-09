@@ -872,7 +872,7 @@ var AvailSuppression_FillPolicy *smithy.Schema
 var AwsServiceRequestConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "AwsServiceRequestConfiguration",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var AwsServiceRequestConfiguration_Runtime *smithy.Schema
 
 var AwsServiceRequestConfiguration_Output *smithy.Schema
@@ -886,6 +886,8 @@ var AwsServiceRequestConfiguration_Url *smithy.Schema
 var AwsServiceRequestConfiguration_Body *smithy.Schema
 
 var AwsServiceRequestConfiguration_Headers *smithy.Schema
+
+var AwsServiceRequestConfiguration_Cache *smithy.Schema
 
 var AwsServiceRequestConfiguration_TargetService *smithy.Schema
 
@@ -1217,10 +1219,20 @@ var HttpRequest_Headers *smithy.Schema
 
 var HttpRequest_CompressRequest *smithy.Schema
 
+var HttpRequestCacheConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediatailor",
+	Name:      "HttpRequestCacheConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var HttpRequestCacheConfiguration_TtlMinimumSeconds *smithy.Schema
+
+var HttpRequestCacheConfiguration_TtlMaximumSeconds *smithy.Schema
+
+var HttpRequestCacheConfiguration_Key *smithy.Schema
+
 var HttpRequestConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "HttpRequestConfiguration",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var HttpRequestConfiguration_Runtime *smithy.Schema
 
 var HttpRequestConfiguration_Output *smithy.Schema
@@ -1234,6 +1246,8 @@ var HttpRequestConfiguration_Url *smithy.Schema
 var HttpRequestConfiguration_Body *smithy.Schema
 
 var HttpRequestConfiguration_Headers *smithy.Schema
+
+var HttpRequestConfiguration_Cache *smithy.Schema
 
 var InsertionMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
@@ -1971,7 +1985,7 @@ var UpdateProgramTransition_DurationMillis *smithy.Schema
 var VastRequestConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
 	Name:      "VastRequestConfiguration",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var VastRequestConfiguration_Runtime *smithy.Schema
 
 var VastRequestConfiguration_Output *smithy.Schema
@@ -1985,6 +1999,8 @@ var VastRequestConfiguration_Url *smithy.Schema
 var VastRequestConfiguration_Body *smithy.Schema
 
 var VastRequestConfiguration_Headers *smithy.Schema
+
+var VastRequestConfiguration_Cache *smithy.Schema
 
 var VastResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediatailor",
@@ -3605,6 +3621,12 @@ func init() {
 
 	MethodType_POST = MethodType.AddMember("POST", smithyprelude.Unit)
 
+	HttpRequestCacheConfiguration_TtlMinimumSeconds = HttpRequestCacheConfiguration.AddMember("TtlMinimumSeconds", ___integerMin1)
+
+	HttpRequestCacheConfiguration_TtlMaximumSeconds = HttpRequestCacheConfiguration.AddMember("TtlMaximumSeconds", ___integerMin1)
+
+	HttpRequestCacheConfiguration_Key = HttpRequestCacheConfiguration.AddMember("Key", ___string)
+
 	HttpRequestConfiguration_Runtime = HttpRequestConfiguration.AddMember("Runtime", RuntimeType)
 
 	HttpRequestConfiguration_Output = HttpRequestConfiguration.AddMember("Output", ___mapOf__string)
@@ -3619,6 +3641,8 @@ func init() {
 
 	HttpRequestConfiguration_Headers = HttpRequestConfiguration.AddMember("Headers", ___mapOf__string)
 
+	HttpRequestConfiguration_Cache = HttpRequestConfiguration.AddMember("Cache", HttpRequestCacheConfiguration)
+
 	AwsServiceRequestConfiguration_Runtime = AwsServiceRequestConfiguration.AddMember("Runtime", RuntimeType)
 
 	AwsServiceRequestConfiguration_Output = AwsServiceRequestConfiguration.AddMember("Output", ___mapOf__string)
@@ -3632,6 +3656,8 @@ func init() {
 	AwsServiceRequestConfiguration_Body = AwsServiceRequestConfiguration.AddMember("Body", ___string)
 
 	AwsServiceRequestConfiguration_Headers = AwsServiceRequestConfiguration.AddMember("Headers", ___mapOf__string)
+
+	AwsServiceRequestConfiguration_Cache = AwsServiceRequestConfiguration.AddMember("Cache", HttpRequestCacheConfiguration)
 
 	AwsServiceRequestConfiguration_TargetService = AwsServiceRequestConfiguration.AddMember("TargetService", _AwsTargetService)
 
@@ -3672,6 +3698,8 @@ func init() {
 	VastRequestConfiguration_Body = VastRequestConfiguration.AddMember("Body", ___string)
 
 	VastRequestConfiguration_Headers = VastRequestConfiguration.AddMember("Headers", ___mapOf__string)
+
+	VastRequestConfiguration_Cache = VastRequestConfiguration.AddMember("Cache", HttpRequestCacheConfiguration)
 
 	Function_FunctionId = Function.AddMember("FunctionId", ___string)
 

@@ -844,6 +844,29 @@ func (MembershipLevel) Values() []MembershipLevel {
 	}
 }
 
+type MembershipResourceType string
+
+// Enum values for MembershipResourceType
+const (
+	MembershipResourceTypeFarm  MembershipResourceType = "FARM"
+	MembershipResourceTypeQueue MembershipResourceType = "QUEUE"
+	MembershipResourceTypeFleet MembershipResourceType = "FLEET"
+	MembershipResourceTypeJob   MembershipResourceType = "JOB"
+)
+
+// Values returns all known values for MembershipResourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MembershipResourceType) Values() []MembershipResourceType {
+	return []MembershipResourceType{
+		"FARM",
+		"QUEUE",
+		"FLEET",
+		"JOB",
+	}
+}
+
 type PathFormat string
 
 // Enum values for PathFormat

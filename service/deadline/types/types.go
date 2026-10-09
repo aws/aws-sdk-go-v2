@@ -7275,6 +7275,88 @@ func (v *ManifestProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A membership record for a principal on a single Deadline Cloud resource. The
+// summary identifies the resource that the principal is a member of and the
+// principal's membership level for that resource.
+//
+// The following types satisfy this interface:
+//
+//	MembershipSummaryMemberFarm
+//	MembershipSummaryMemberFleet
+//	MembershipSummaryMemberJob
+//	MembershipSummaryMemberQueue
+type MembershipSummary interface {
+	isMembershipSummary()
+}
+
+// A membership on a farm.
+type MembershipSummaryMemberFarm struct {
+	Value FarmMember
+
+	noSmithyDocumentSerde
+}
+
+func (*MembershipSummaryMemberFarm) isMembershipSummary() {}
+func (v *MembershipSummaryMemberFarm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MembershipSummary_farm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MembershipSummaryMemberFarm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A membership on a fleet.
+type MembershipSummaryMemberFleet struct {
+	Value FleetMember
+
+	noSmithyDocumentSerde
+}
+
+func (*MembershipSummaryMemberFleet) isMembershipSummary() {}
+func (v *MembershipSummaryMemberFleet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MembershipSummary_fleet)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MembershipSummaryMemberFleet) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A membership on a job.
+type MembershipSummaryMemberJob struct {
+	Value JobMember
+
+	noSmithyDocumentSerde
+}
+
+func (*MembershipSummaryMemberJob) isMembershipSummary() {}
+func (v *MembershipSummaryMemberJob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MembershipSummary_job)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MembershipSummaryMemberJob) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A membership on a queue.
+type MembershipSummaryMemberQueue struct {
+	Value QueueMember
+
+	noSmithyDocumentSerde
+}
+
+func (*MembershipSummaryMemberQueue) isMembershipSummary() {}
+func (v *MembershipSummaryMemberQueue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MembershipSummary_queue)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MembershipSummaryMemberQueue) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // The range of memory in MiB.
 type MemoryMiBRange struct {
 
@@ -12694,6 +12776,7 @@ func (*UnknownUnionMember) isGetJobEntityError()               {}
 func (*UnknownUnionMember) isJobEntity()                       {}
 func (*UnknownUnionMember) isJobEntityIdentifiersUnion()       {}
 func (*UnknownUnionMember) isJobParameter()                    {}
+func (*UnknownUnionMember) isMembershipSummary()               {}
 func (*UnknownUnionMember) isSchedulingConfiguration()         {}
 func (*UnknownUnionMember) isSchedulingMaxPriorityOverride()   {}
 func (*UnknownUnionMember) isSchedulingMinPriorityOverride()   {}

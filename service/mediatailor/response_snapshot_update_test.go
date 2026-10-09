@@ -2264,6 +2264,11 @@ func TestUpdateResponseSnapshot_GetFunction(t *testing.T) {
 			Headers: map[string]string{
 				"key0": "__Value__",
 			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
+			},
 		},
 		AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
 			Runtime: types.RuntimeType("JSONATA"),
@@ -2276,6 +2281,11 @@ func TestUpdateResponseSnapshot_GetFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 			TargetService: ptr.String("__TargetService__"),
 			TargetRegion:  ptr.String("__TargetRegion__"),
@@ -2336,6 +2346,11 @@ func TestUpdateResponseSnapshot_GetFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 		},
 		Tags: map[string]string{
@@ -2831,6 +2846,11 @@ func TestUpdateResponseSnapshot_ListFunctions(t *testing.T) {
 					Headers: map[string]string{
 						"key0": "__Value__",
 					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
+					},
 				},
 				AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
 					Runtime: types.RuntimeType("JSONATA"),
@@ -2843,6 +2863,11 @@ func TestUpdateResponseSnapshot_ListFunctions(t *testing.T) {
 					Body:                       ptr.String("__Body__"),
 					Headers: map[string]string{
 						"key0": "__Value__",
+					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
 					},
 					TargetService: ptr.String("__TargetService__"),
 					TargetRegion:  ptr.String("__TargetRegion__"),
@@ -2903,6 +2928,11 @@ func TestUpdateResponseSnapshot_ListFunctions(t *testing.T) {
 					Body:                       ptr.String("__Body__"),
 					Headers: map[string]string{
 						"key0": "__Value__",
+					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
 					},
 				},
 				Tags: map[string]string{
@@ -2926,6 +2956,11 @@ func TestUpdateResponseSnapshot_ListFunctions(t *testing.T) {
 					Headers: map[string]string{
 						"key0": "__Value__",
 					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
+					},
 				},
 				AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
 					Runtime: types.RuntimeType("JSONATA"),
@@ -2938,6 +2973,11 @@ func TestUpdateResponseSnapshot_ListFunctions(t *testing.T) {
 					Body:                       ptr.String("__Body__"),
 					Headers: map[string]string{
 						"key0": "__Value__",
+					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
 					},
 					TargetService: ptr.String("__TargetService__"),
 					TargetRegion:  ptr.String("__TargetRegion__"),
@@ -2998,6 +3038,11 @@ func TestUpdateResponseSnapshot_ListFunctions(t *testing.T) {
 					Body:                       ptr.String("__Body__"),
 					Headers: map[string]string{
 						"key0": "__Value__",
+					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
 					},
 				},
 				Tags: map[string]string{
@@ -3779,6 +3824,11 @@ func TestUpdateResponseSnapshot_PutFunction(t *testing.T) {
 			Headers: map[string]string{
 				"key0": "__Value__",
 			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
+			},
 		},
 		AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
 			Runtime: types.RuntimeType("JSONATA"),
@@ -3791,6 +3841,11 @@ func TestUpdateResponseSnapshot_PutFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 			TargetService: ptr.String("__TargetService__"),
 			TargetRegion:  ptr.String("__TargetRegion__"),
@@ -3851,6 +3906,11 @@ func TestUpdateResponseSnapshot_PutFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 		},
 		Tags: map[string]string{

@@ -1,0 +1,3 @@
+GET /2023-10-12/memberships?identityCenterRegion=__IdentityCenterRegion__&identityStoreId=__IdentityStoreId__&maxResults=1&nextToken=__NextToken__&principalId=__PrincipalId__&resourceTypes=FARM&resourceTypes=FARM
+
+

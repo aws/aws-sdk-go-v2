@@ -1590,6 +1590,26 @@ func (m *validateOpListLimits) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListMemberships struct {
+}
+
+func (*validateOpListMemberships) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMemberships) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMembershipsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMembershipsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListMeteredProducts struct {
 }
 
@@ -2764,6 +2784,10 @@ func addOpListJobsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListLimitsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListLimits{}, middleware.After)
+}
+
+func addOpListMembershipsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMemberships{}, middleware.After)
 }
 
 func addOpListMeteredProductsValidationMiddleware(stack *middleware.Stack) error {
@@ -6136,6 +6160,21 @@ func validateOpListLimitsInput(v *ListLimitsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListLimitsInput"}
 	if v.FarmId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMembershipsInput(v *ListMembershipsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMembershipsInput"}
+	if v.PrincipalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

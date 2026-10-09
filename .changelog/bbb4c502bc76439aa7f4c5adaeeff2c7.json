@@ -1,0 +1,8 @@
+{
+    "id": "bbb4c502-bc76-439a-a7f4-c5adaeeff2c7",
+    "type": "feature",
+    "description": "Adds a test scope field to specify whether a pentest targets a web application or a generative AI application.",
+    "modules": [
+        "service/securityagent"
+    ]
+}

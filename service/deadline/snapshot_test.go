@@ -1046,6 +1046,18 @@ func TestCheckSnapshot_ListLimits(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListMemberships(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMemberships(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMemberships")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListMeteredProducts(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListMeteredProducts(context.Background(), nil, func(o *Options) {
@@ -2550,6 +2562,18 @@ func TestUpdateSnapshot_ListLimits(t *testing.T) {
 	_, err := svc.ListLimits(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListLimits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListMemberships(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMemberships(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMemberships")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

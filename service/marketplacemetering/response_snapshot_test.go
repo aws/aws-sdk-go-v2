@@ -447,6 +447,9 @@ func TestCheckResponseSnapshot_ResolveCustomer(t *testing.T) {
 		ProductCode:          ptr.String("__ProductCode__"),
 		CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
 		LicenseArn:           ptr.String("__LicenseArn__"),
+		Metadata: &types.Metadata{
+			AgreementId: ptr.String("__AgreementId__"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResolveCustomer.response")
 	if errors.Is(err, fs.ErrNotExist) {

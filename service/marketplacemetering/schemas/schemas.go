@@ -35,6 +35,11 @@ var _AWSMPMeteringService = smithy.NewSchema(smithy.ShapeID{
 
 var AWSMPMeteringService = smithy.NewServiceSchema(_AWSMPMeteringService, "2016-01-14")
 
+var _AgreementId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacemetering",
+	Name:      "AgreementId",
+}, smithy.ShapeTypeString, 0)
+
 var _AllocatedUsageQuantity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "AllocatedUsageQuantity",
@@ -166,6 +171,12 @@ var _LicenseArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "LicenseArn",
 }, smithy.ShapeTypeString, 0)
+
+var Metadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacemetering",
+	Name:      "Metadata",
+}, smithy.ShapeTypeStructure, 1)
+var Metadata_AgreementId *smithy.Schema
 
 var _Nonce = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
@@ -380,7 +391,7 @@ var ResolveCustomerRequest_RegistrationToken *smithy.Schema
 var ResolveCustomerResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "ResolveCustomerResult",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var ResolveCustomerResult_CustomerIdentifier *smithy.Schema
 
 var ResolveCustomerResult_ProductCode *smithy.Schema
@@ -388,6 +399,8 @@ var ResolveCustomerResult_ProductCode *smithy.Schema
 var ResolveCustomerResult_CustomerAWSAccountId *smithy.Schema
 
 var ResolveCustomerResult_LicenseArn *smithy.Schema
+
+var ResolveCustomerResult_Metadata *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -423,6 +436,8 @@ func init() {
 	InvalidUsageAllocationsException_message = InvalidUsageAllocationsException.AddMember("message", _errorMessage)
 
 	InvalidUsageDimensionException_message = InvalidUsageDimensionException.AddMember("message", _errorMessage)
+
+	Metadata_AgreementId = Metadata.AddMember("AgreementId", _AgreementId)
 
 	PlatformNotSupportedException_message = PlatformNotSupportedException.AddMember("message", _errorMessage)
 
@@ -515,5 +530,7 @@ func init() {
 	ResolveCustomerResult_CustomerAWSAccountId = ResolveCustomerResult.AddMember("CustomerAWSAccountId", _CustomerAWSAccountId)
 
 	ResolveCustomerResult_LicenseArn = ResolveCustomerResult.AddMember("LicenseArn", _LicenseArn)
+
+	ResolveCustomerResult_Metadata = ResolveCustomerResult.AddMember("Metadata", Metadata)
 
 }

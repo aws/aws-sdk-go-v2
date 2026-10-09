@@ -9686,6 +9686,9 @@ type Capabilities struct {
 	// The ability to perform actions using Adobe Marketing Agent connectors.
 	AdobeAction CapabilityState
 
+	// The ability to create, update, and share Adobe Analytics data sources.
+	AdobeAnalyticsDataSource CapabilityState
+
 	// The ability to perform actions using Airtable connectors.
 	AirtableAction CapabilityState
 
@@ -9712,6 +9715,12 @@ type Capabilities struct {
 
 	// The ability to perform actions using Asana connectors.
 	AsanaAction CapabilityState
+
+	// The ability to create, update, and share Amazon Athena data sources.
+	AthenaDataSource CapabilityState
+
+	// The ability to create, update, and share Amazon Aurora data sources.
+	AuroraDataSource CapabilityState
 
 	// The ability to perform automate-related actions.
 	Automate CapabilityState
@@ -9785,6 +9794,9 @@ type Capabilities struct {
 	//   . In a governed category, this value overrides the category-level
 	//   deny-by-default behavior for that capability only.
 	ConfluenceKnowledgeBase CapabilityState
+
+	// The ability to create Adobe Analytics data sources.
+	CreateAdobeAnalyticsDataSource CapabilityState
 
 	// The ability to create and update Adobe Marketing Agent actions.
 	CreateAndUpdateAdobeAction CapabilityState
@@ -9902,6 +9914,9 @@ type Capabilities struct {
 
 	// The ability to create and update Gmail actions.
 	CreateAndUpdateGmailAction CapabilityState
+
+	// The ability to create and update Gong actions.
+	CreateAndUpdateGongAction CapabilityState
 
 	// The ability to create and update Google Analytics actions.
 	CreateAndUpdateGoogleAnalyticsAction CapabilityState
@@ -10149,23 +10164,170 @@ type Capabilities struct {
 	// The ability to create and update ZoomInfo Agent actions.
 	CreateAndUpdateZoomInfoAction CapabilityState
 
+	// The ability to create Amazon Athena data sources.
+	CreateAthenaDataSource CapabilityState
+
+	// The ability to create Amazon Aurora data sources.
+	CreateAuroraDataSource CapabilityState
+
 	// The ability to create chat agents.
 	CreateChatAgents CapabilityState
 
 	// The ability to Create Executive Summary
 	CreateDashboardExecutiveSummaryWithQ CapabilityState
 
+	// The ability to create Databricks data sources.
+	CreateDatabricksDataSource CapabilityState
+
+	// The ability to create Db2 data sources.
+	CreateDb2DataSource CapabilityState
+
+	// The ability to create Denodo data sources.
+	CreateDenodoDataSource CapabilityState
+
+	// The ability to create Amazon DocumentDB data sources.
+	CreateDocumentDbDataSource CapabilityState
+
+	// The ability to create Dremio data sources.
+	CreateDremioDataSource CapabilityState
+
+	// The ability to create Amazon DynamoDB data sources.
+	CreateDynamoDbDataSource CapabilityState
+
+	// The ability to create Exasol data sources.
+	CreateExasolDataSource CapabilityState
+
+	// The ability to create file data sources.
+	CreateFileDataSource CapabilityState
+
+	// The ability to create GitHub data sources.
+	CreateGitHubDataSource CapabilityState
+
+	// The ability to create Google Analytics data sources.
+	CreateGoogleAnalyticsDataSource CapabilityState
+
+	// The ability to create Google BigQuery data sources.
+	CreateGoogleBigQueryDataSource CapabilityState
+
+	// The ability to create Google Sheets data sources.
+	CreateGoogleSheetsDataSource CapabilityState
+
+	// The ability to create Impala data sources.
+	CreateImpalaDataSource CapabilityState
+
+	// The ability to create Jira data sources.
+	CreateJiraDataSource CapabilityState
+
+	// The ability to create MariaDB data sources.
+	CreateMariaDbDataSource CapabilityState
+
+	// The ability to create MongoDB Atlas data sources.
+	CreateMongoAtlasDataSource CapabilityState
+
+	// The ability to create MongoDB data sources.
+	CreateMongoDbDataSource CapabilityState
+
+	// The ability to create MySQL data sources.
+	CreateMySqlDataSource CapabilityState
+
+	// The ability to create Amazon OpenSearch Service data sources.
+	CreateOpenSearchDataSource CapabilityState
+
+	// The ability to create Oracle data sources.
+	CreateOracleDataSource CapabilityState
+
+	// The ability to create PayPal data sources.
+	CreatePayPalDataSource CapabilityState
+
+	// The ability to create PostgreSQL data sources.
+	CreatePostgreSqlDataSource CapabilityState
+
+	// The ability to create Presto data sources.
+	CreatePrestoDataSource CapabilityState
+
+	// The ability to create Amazon QuickSight data sources.
+	CreateRadiantDataSource CapabilityState
+
+	// The ability to create auto-discovered Amazon RDS data sources.
+	CreateRdsDataSource CapabilityState
+
+	// The ability to create auto-discovered Amazon Redshift data sources.
+	CreateRedshiftAutoDiscoveredDataSource CapabilityState
+
+	// The ability to create manually configured Amazon Redshift data sources.
+	CreateRedshiftManualDataSource CapabilityState
+
+	// The ability to create Amazon S3 Analytics data sources.
+	CreateS3AnalyticsDataSource CapabilityState
+
+	// The ability to create Amazon S3 data sources.
+	CreateS3DataSource CapabilityState
+
+	// The ability to create Amazon S3 Tables data sources.
+	CreateS3TablesDataSource CapabilityState
+
 	// The ability to create a SPICE dataset.
 	CreateSPICEDataset CapabilityState
+
+	// The ability to create Salesforce data sources.
+	CreateSalesforceDataSource CapabilityState
+
+	// The ability to create SAP HANA data sources.
+	CreateSapHanaDataSource CapabilityState
+
+	// The ability to create ServiceNow data sources.
+	CreateServiceNowDataSource CapabilityState
 
 	// The ability to create shared folders.
 	CreateSharedFolders CapabilityState
 
+	// The ability to create Snowflake data sources.
+	CreateSnowflakeDataSource CapabilityState
+
 	// The ability to create spaces.
 	CreateSpaces CapabilityState
 
+	// The ability to create Spark data sources.
+	CreateSparkDataSource CapabilityState
+
+	// The ability to create SQL Server data sources.
+	CreateSqlServerDataSource CapabilityState
+
+	// The ability to create Square data sources.
+	CreateSquareDataSource CapabilityState
+
+	// The ability to create Starburst data sources.
+	CreateStarburstDataSource CapabilityState
+
+	// The ability to create Teradata data sources.
+	CreateTeradataDataSource CapabilityState
+
+	// The ability to create Amazon Timestream data sources.
+	CreateTimestreamDataSource CapabilityState
+
+	// The ability to create Trino data sources.
+	CreateTrinoDataSource CapabilityState
+
+	// The ability to create Twitter data sources.
+	CreateTwitterDataSource CapabilityState
+
 	// The ability to perform dashboard-related actions.
 	Dashboard CapabilityState
+
+	// The ability to create, update, and share Databricks data sources.
+	DatabricksDataSource CapabilityState
+
+	// The ability to create, update, and share Db2 data sources.
+	Db2DataSource CapabilityState
+
+	// The ability to create, update, and share Denodo data sources.
+	DenodoDataSource CapabilityState
+
+	// The ability to create, update, and share Amazon DocumentDB data sources.
+	DocumentDbDataSource CapabilityState
+
+	// The ability to create, update, and share Dremio data sources.
+	DremioDataSource CapabilityState
 
 	// The ability to perform actions using Dropbox connectors.
 	DropboxAction CapabilityState
@@ -10173,8 +10335,14 @@ type Capabilities struct {
 	// The ability to perform actions using Dun and Bradstreet connectors.
 	DunAndBradstreetAction CapabilityState
 
+	// The ability to create, update, and share Amazon DynamoDB data sources.
+	DynamoDbDataSource CapabilityState
+
 	// The ability to Edit Visual with AI
 	EditVisualWithQ CapabilityState
+
+	// The ability to create, update, and share Exasol data sources.
+	ExasolDataSource CapabilityState
 
 	// The ability to export to CSV files from the UI.
 	ExportToCsv CapabilityState
@@ -10203,6 +10371,9 @@ type Capabilities struct {
 	// The ability to perform actions using Figma connectors.
 	FigmaAction CapabilityState
 
+	// The ability to create, update, and share file data sources.
+	FileDataSource CapabilityState
+
 	// The ability to perform flow-related actions.
 	Flow CapabilityState
 
@@ -10212,14 +10383,26 @@ type Capabilities struct {
 	// The ability to perform actions using REST API connection connectors.
 	GenericHTTPAction CapabilityState
 
+	// The ability to create, update, and share GitHub data sources.
+	GitHubDataSource CapabilityState
+
 	// The ability to perform actions using GitHub connectors.
 	GithubAction CapabilityState
 
 	// The ability to perform actions using Gmail connectors.
 	GmailAction CapabilityState
 
+	// The ability to perform actions using Gong connectors.
+	GongAction CapabilityState
+
 	// The ability to perform actions using Google Analytics connectors.
 	GoogleAnalyticsAction CapabilityState
+
+	// The ability to create, update, and share Google Analytics data sources.
+	GoogleAnalyticsDataSource CapabilityState
+
+	// The ability to create, update, and share Google BigQuery data sources.
+	GoogleBigQueryDataSource CapabilityState
 
 	// The ability to perform actions using Google Calendar connectors.
 	GoogleCalendarAction CapabilityState
@@ -10251,6 +10434,9 @@ type Capabilities struct {
 	// The ability to perform actions using Google Sheets connectors.
 	GoogleSheetsAction CapabilityState
 
+	// The ability to create, update, and share Google Sheets data sources.
+	GoogleSheetsDataSource CapabilityState
+
 	// The ability to perform actions using Google Slides connectors.
 	GoogleSlidesAction CapabilityState
 
@@ -10275,6 +10461,9 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	IDCKnowledgeBase CapabilityState
 
+	// The ability to create, update, and share Impala data sources.
+	ImpalaDataSource CapabilityState
+
 	// The ability to create, view, edit, delete, and run inbound email triggers for
 	// flows and automations.
 	InboundEmailTrigger CapabilityState
@@ -10290,6 +10479,9 @@ type Capabilities struct {
 
 	// The ability to perform actions using Jira connectors.
 	JiraAction CapabilityState
+
+	// The ability to create, update, and share Jira data sources.
+	JiraDataSource CapabilityState
 
 	// The ability to use knowledge bases to specify content from external
 	// applications.
@@ -10315,11 +10507,23 @@ type Capabilities struct {
 	// them through folder membership.
 	ManageSharedFolders CapabilityState
 
+	// The ability to create, update, and share MariaDB data sources.
+	MariaDbDataSource CapabilityState
+
 	// The ability to perform actions using Monday connectors.
 	MondayAction CapabilityState
 
+	// The ability to create, update, and share MongoDB Atlas data sources.
+	MongoAtlasDataSource CapabilityState
+
+	// The ability to create, update, and share MongoDB data sources.
+	MongoDbDataSource CapabilityState
+
 	// The ability to perform actions using Moody's GenAI Ready Data connectors.
 	MoodysAction CapabilityState
+
+	// The ability to create, update, and share MySQL data sources.
+	MySqlDataSource CapabilityState
 
 	// The ability to perform actions using New Relic connectors.
 	NewRelicAction CapabilityState
@@ -10348,14 +10552,29 @@ type Capabilities struct {
 	// The ability to perform actions using OpenAPI Specification connectors.
 	OpenAPIAction CapabilityState
 
+	// The ability to create, update, and share Amazon OpenSearch Service data sources.
+	OpenSearchDataSource CapabilityState
+
+	// The ability to create, update, and share Oracle data sources.
+	OracleDataSource CapabilityState
+
 	// The ability to perform actions using PagerDuty Advance connectors.
 	PagerDutyAction CapabilityState
 
 	// The ability to perform actions using PagerDuty Agent connectors.
 	PagerDutyAgentAction CapabilityState
 
+	// The ability to create, update, and share PayPal data sources.
+	PayPalDataSource CapabilityState
+
 	// The ability to use UI Agent step to perform tasks on public websites.
 	PerformFlowUiTask CapabilityState
+
+	// The ability to create, update, and share PostgreSQL data sources.
+	PostgreSqlDataSource CapabilityState
+
+	// The ability to create, update, and share Presto data sources.
+	PrestoDataSource CapabilityState
 
 	// The ability to print reports.
 	PrintReports CapabilityState
@@ -10382,11 +10601,32 @@ type Capabilities struct {
 	// flows and automations.
 	QuickEventTrigger CapabilityState
 
+	// The ability to create, update, and share Amazon QuickSight data sources.
+	RadiantDataSource CapabilityState
+
+	// The ability to create, update, and share auto-discovered Amazon RDS data
+	// sources.
+	RdsDataSource CapabilityState
+
+	// The ability to create, update, and share auto-discovered Amazon Redshift data
+	// sources.
+	RedshiftAutoDiscoveredDataSource CapabilityState
+
+	// The ability to create, update, and share manually configured Amazon Redshift
+	// data sources.
+	RedshiftManualDataSource CapabilityState
+
 	// The ability to rename shared folders.
 	RenameSharedFolders CapabilityState
 
 	// The ability to perform research-related actions.
 	Research CapabilityState
+
+	// The ability to create, update, and share Amazon S3 Analytics data sources.
+	S3AnalyticsDataSource CapabilityState
+
+	// The ability to create, update, and share Amazon S3 data sources.
+	S3DataSource CapabilityState
 
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
@@ -10399,6 +10639,9 @@ type Capabilities struct {
 	//   . In a governed category, this value overrides the category-level
 	//   deny-by-default behavior for that capability only.
 	S3KnowledgeBase CapabilityState
+
+	// The ability to create, update, and share Amazon S3 Tables data sources.
+	S3TablesDataSource CapabilityState
 
 	// The ability to perform actions using SAP Bill of Materials connectors.
 	SAPBillOfMaterialAction CapabilityState
@@ -10418,11 +10661,17 @@ type Capabilities struct {
 	// The ability to perform actions using Salesforce connectors.
 	SalesforceAction CapabilityState
 
+	// The ability to create, update, and share Salesforce data sources.
+	SalesforceDataSource CapabilityState
+
 	// The ability to perform actions using S&P Global Market Intelligence connectors.
 	SandPGMIAction CapabilityState
 
 	// The ability to perform actions using S&P Global Energy connectors.
 	SandPGlobalEnergyAction CapabilityState
+
+	// The ability to create, update, and share SAP HANA data sources.
+	SapHanaDataSource CapabilityState
 
 	// The ability to perform Scenario-related actions.
 	Scenario CapabilityState
@@ -10437,8 +10686,14 @@ type Capabilities struct {
 	// The ability to perform actions using ServiceNow connectors.
 	ServiceNowAction CapabilityState
 
+	// The ability to create, update, and share ServiceNow data sources.
+	ServiceNowDataSource CapabilityState
+
 	// The ability to share Adobe Marketing Agent actions.
 	ShareAdobeAction CapabilityState
+
+	// The ability to share Adobe Analytics data sources.
+	ShareAdobeAnalyticsDataSource CapabilityState
 
 	// The ability to share Airtable actions.
 	ShareAirtableAction CapabilityState
@@ -10463,6 +10718,12 @@ type Capabilities struct {
 
 	// The ability to share Asana actions.
 	ShareAsanaAction CapabilityState
+
+	// The ability to share Amazon Athena data sources.
+	ShareAthenaDataSource CapabilityState
+
+	// The ability to share Amazon Aurora data sources.
+	ShareAuroraDataSource CapabilityState
 
 	// The ability to share BambooHR actions.
 	ShareBambooHRAction CapabilityState
@@ -10536,8 +10797,23 @@ type Capabilities struct {
 	// The ability to share data sources.
 	ShareDataSources CapabilityState
 
+	// The ability to share Databricks data sources.
+	ShareDatabricksDataSource CapabilityState
+
 	// The ability to share datasets.
 	ShareDatasets CapabilityState
+
+	// The ability to share Db2 data sources.
+	ShareDb2DataSource CapabilityState
+
+	// The ability to share Denodo data sources.
+	ShareDenodoDataSource CapabilityState
+
+	// The ability to share Amazon DocumentDB data sources.
+	ShareDocumentDbDataSource CapabilityState
+
+	// The ability to share Dremio data sources.
+	ShareDremioDataSource CapabilityState
 
 	// The ability to share Dropbox actions.
 	ShareDropboxAction CapabilityState
@@ -10545,14 +10821,26 @@ type Capabilities struct {
 	// The ability to share Dun and Bradstreet actions.
 	ShareDunAndBradstreetAction CapabilityState
 
+	// The ability to share Amazon DynamoDB data sources.
+	ShareDynamoDbDataSource CapabilityState
+
+	// The ability to share Exasol data sources.
+	ShareExasolDataSource CapabilityState
+
 	// The ability to share FactSet actions.
 	ShareFactSetAction CapabilityState
 
 	// The ability to share Figma actions.
 	ShareFigmaAction CapabilityState
 
+	// The ability to share file data sources.
+	ShareFileDataSource CapabilityState
+
 	// The ability to share REST API connection actions.
 	ShareGenericHTTPAction CapabilityState
+
+	// The ability to share GitHub data sources.
+	ShareGitHubDataSource CapabilityState
 
 	// The ability to share GitHub actions.
 	ShareGithubAction CapabilityState
@@ -10560,8 +10848,17 @@ type Capabilities struct {
 	// The ability to share Gmail actions.
 	ShareGmailAction CapabilityState
 
+	// The ability to share Gong actions.
+	ShareGongAction CapabilityState
+
 	// The ability to share Google Analytics actions.
 	ShareGoogleAnalyticsAction CapabilityState
+
+	// The ability to share Google Analytics data sources.
+	ShareGoogleAnalyticsDataSource CapabilityState
+
+	// The ability to share Google BigQuery data sources.
+	ShareGoogleBigQueryDataSource CapabilityState
 
 	// The ability to share Google Calendar actions.
 	ShareGoogleCalendarAction CapabilityState
@@ -10593,6 +10890,9 @@ type Capabilities struct {
 	// The ability to share Google Sheets actions.
 	ShareGoogleSheetsAction CapabilityState
 
+	// The ability to share Google Sheets data sources.
+	ShareGoogleSheetsDataSource CapabilityState
+
 	// The ability to share Google Slides actions.
 	ShareGoogleSlidesAction CapabilityState
 
@@ -10617,11 +10917,17 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	ShareIDCKnowledgeBase CapabilityState
 
+	// The ability to share Impala data sources.
+	ShareImpalaDataSource CapabilityState
+
 	// The ability to share Intercom actions.
 	ShareIntercomAction CapabilityState
 
 	// The ability to share Jira actions.
 	ShareJiraAction CapabilityState
+
+	// The ability to share Jira data sources.
+	ShareJiraDataSource CapabilityState
 
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
@@ -10647,11 +10953,23 @@ type Capabilities struct {
 	// The ability to share Microsoft Teams actions.
 	ShareMSTeamsAction CapabilityState
 
+	// The ability to share MariaDB data sources.
+	ShareMariaDbDataSource CapabilityState
+
 	// The ability to share Monday actions.
 	ShareMondayAction CapabilityState
 
+	// The ability to share MongoDB Atlas data sources.
+	ShareMongoAtlasDataSource CapabilityState
+
+	// The ability to share MongoDB data sources.
+	ShareMongoDbDataSource CapabilityState
+
 	// The ability to share Moody's GenAI Ready Data actions.
 	ShareMoodysAction CapabilityState
+
+	// The ability to share MySQL data sources.
+	ShareMySqlDataSource CapabilityState
 
 	// The ability to share New Relic actions.
 	ShareNewRelicAction CapabilityState
@@ -10680,11 +10998,20 @@ type Capabilities struct {
 	// The ability to share OpenAPI Specification actions.
 	ShareOpenAPIAction CapabilityState
 
+	// The ability to share Amazon OpenSearch Service data sources.
+	ShareOpenSearchDataSource CapabilityState
+
+	// The ability to share Oracle data sources.
+	ShareOracleDataSource CapabilityState
+
 	// The ability to share PagerDuty Advance actions.
 	SharePagerDutyAction CapabilityState
 
 	// The ability to share PagerDuty Agent actions.
 	SharePagerDutyAgentAction CapabilityState
+
+	// The ability to share PayPal data sources.
+	SharePayPalDataSource CapabilityState
 
 	// The ability to perform actions using Microsoft SharePoint Online connectors.
 	SharePointAction CapabilityState
@@ -10701,6 +11028,12 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	SharePointKnowledgeBase CapabilityState
 
+	// The ability to share PostgreSQL data sources.
+	SharePostgreSqlDataSource CapabilityState
+
+	// The ability to share Presto data sources.
+	SharePrestoDataSource CapabilityState
+
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
 	//
@@ -10716,6 +11049,24 @@ type Capabilities struct {
 	// The ability to share QuickBooks actions.
 	ShareQuickBooksAction CapabilityState
 
+	// The ability to share Amazon QuickSight data sources.
+	ShareRadiantDataSource CapabilityState
+
+	// The ability to share auto-discovered Amazon RDS data sources.
+	ShareRdsDataSource CapabilityState
+
+	// The ability to share auto-discovered Amazon Redshift data sources.
+	ShareRedshiftAutoDiscoveredDataSource CapabilityState
+
+	// The ability to share manually configured Amazon Redshift data sources.
+	ShareRedshiftManualDataSource CapabilityState
+
+	// The ability to share Amazon S3 Analytics data sources.
+	ShareS3AnalyticsDataSource CapabilityState
+
+	// The ability to share Amazon S3 data sources.
+	ShareS3DataSource CapabilityState
+
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
 	//
@@ -10727,6 +11078,9 @@ type Capabilities struct {
 	//   . In a governed category, this value overrides the category-level
 	//   deny-by-default behavior for that capability only.
 	ShareS3KnowledgeBase CapabilityState
+
+	// The ability to share Amazon S3 Tables data sources.
+	ShareS3TablesDataSource CapabilityState
 
 	// The ability to share SAP Bill of Materials actions.
 	ShareSAPBillOfMaterialAction CapabilityState
@@ -10746,14 +11100,23 @@ type Capabilities struct {
 	// The ability to share Salesforce actions.
 	ShareSalesforceAction CapabilityState
 
+	// The ability to share Salesforce data sources.
+	ShareSalesforceDataSource CapabilityState
+
 	// The ability to share S&P Global Market Intelligence actions.
 	ShareSandPGMIAction CapabilityState
 
 	// The ability to share S&P Global Energy actions.
 	ShareSandPGlobalEnergyAction CapabilityState
 
+	// The ability to share SAP HANA data sources.
+	ShareSapHanaDataSource CapabilityState
+
 	// The ability to share ServiceNow actions.
 	ShareServiceNowAction CapabilityState
+
+	// The ability to share ServiceNow data sources.
+	ShareServiceNowDataSource CapabilityState
 
 	// The ability to share Microsoft SharePoint Online actions.
 	ShareSharePointAction CapabilityState
@@ -10782,11 +11145,38 @@ type Capabilities struct {
 	// The ability to share Snowflake Cortex Agent actions.
 	ShareSnowFlakeAction CapabilityState
 
+	// The ability to share Snowflake data sources.
+	ShareSnowflakeDataSource CapabilityState
+
 	// The ability to share spaces with other users and groups.
 	ShareSpaces CapabilityState
 
+	// The ability to share Spark data sources.
+	ShareSparkDataSource CapabilityState
+
+	// The ability to share SQL Server data sources.
+	ShareSqlServerDataSource CapabilityState
+
+	// The ability to share Square data sources.
+	ShareSquareDataSource CapabilityState
+
+	// The ability to share Starburst data sources.
+	ShareStarburstDataSource CapabilityState
+
+	// The ability to share Teradata data sources.
+	ShareTeradataDataSource CapabilityState
+
 	// The ability to share Textract actions.
 	ShareTextractAction CapabilityState
+
+	// The ability to share Amazon Timestream data sources.
+	ShareTimestreamDataSource CapabilityState
+
+	// The ability to share Trino data sources.
+	ShareTrinoDataSource CapabilityState
+
+	// The ability to share Twitter data sources.
+	ShareTwitterDataSource CapabilityState
 
 	// The ability to share Visier Agent actions.
 	ShareVisierAgentAction CapabilityState
@@ -10830,8 +11220,23 @@ type Capabilities struct {
 	// The ability to perform actions using Snowflake Cortex Agent connectors.
 	SnowFlakeAction CapabilityState
 
+	// The ability to create, update, and share Snowflake data sources.
+	SnowflakeDataSource CapabilityState
+
 	// The ability to perform space-related actions.
 	Space CapabilityState
+
+	// The ability to create, update, and share Spark data sources.
+	SparkDataSource CapabilityState
+
+	// The ability to create, update, and share SQL Server data sources.
+	SqlServerDataSource CapabilityState
+
+	// The ability to create, update, and share Square data sources.
+	SquareDataSource CapabilityState
+
+	// The ability to create, update, and share Starburst data sources.
+	StarburstDataSource CapabilityState
 
 	// The ability to perform Story-related actions.
 	Story CapabilityState
@@ -10839,14 +11244,161 @@ type Capabilities struct {
 	// The ability to subscribe to email reports.
 	SubscribeDashboardEmailReports CapabilityState
 
+	// The ability to create, update, and share Teradata data sources.
+	TeradataDataSource CapabilityState
+
 	// The ability to perform actions using Textract connectors.
 	TextractAction CapabilityState
+
+	// The ability to create, update, and share Amazon Timestream data sources.
+	TimestreamDataSource CapabilityState
 
 	// The ability to perform Topic-related actions.
 	Topic CapabilityState
 
 	// The ability to manage trigger-related settings for flows and automations.
 	Trigger CapabilityState
+
+	// The ability to create, update, and share Trino data sources.
+	TrinoDataSource CapabilityState
+
+	// The ability to create, update, and share Twitter data sources.
+	TwitterDataSource CapabilityState
+
+	// The ability to update Adobe Analytics data sources.
+	UpdateAdobeAnalyticsDataSource CapabilityState
+
+	// The ability to update Amazon Athena data sources.
+	UpdateAthenaDataSource CapabilityState
+
+	// The ability to update Amazon Aurora data sources.
+	UpdateAuroraDataSource CapabilityState
+
+	// The ability to update Databricks data sources.
+	UpdateDatabricksDataSource CapabilityState
+
+	// The ability to update Db2 data sources.
+	UpdateDb2DataSource CapabilityState
+
+	// The ability to update Denodo data sources.
+	UpdateDenodoDataSource CapabilityState
+
+	// The ability to update Amazon DocumentDB data sources.
+	UpdateDocumentDbDataSource CapabilityState
+
+	// The ability to update Dremio data sources.
+	UpdateDremioDataSource CapabilityState
+
+	// The ability to update Amazon DynamoDB data sources.
+	UpdateDynamoDbDataSource CapabilityState
+
+	// The ability to update Exasol data sources.
+	UpdateExasolDataSource CapabilityState
+
+	// The ability to update file data sources.
+	UpdateFileDataSource CapabilityState
+
+	// The ability to update GitHub data sources.
+	UpdateGitHubDataSource CapabilityState
+
+	// The ability to update Google Analytics data sources.
+	UpdateGoogleAnalyticsDataSource CapabilityState
+
+	// The ability to update Google BigQuery data sources.
+	UpdateGoogleBigQueryDataSource CapabilityState
+
+	// The ability to update Google Sheets data sources.
+	UpdateGoogleSheetsDataSource CapabilityState
+
+	// The ability to update Impala data sources.
+	UpdateImpalaDataSource CapabilityState
+
+	// The ability to update Jira data sources.
+	UpdateJiraDataSource CapabilityState
+
+	// The ability to update MariaDB data sources.
+	UpdateMariaDbDataSource CapabilityState
+
+	// The ability to update MongoDB Atlas data sources.
+	UpdateMongoAtlasDataSource CapabilityState
+
+	// The ability to update MongoDB data sources.
+	UpdateMongoDbDataSource CapabilityState
+
+	// The ability to update MySQL data sources.
+	UpdateMySqlDataSource CapabilityState
+
+	// The ability to update Amazon OpenSearch Service data sources.
+	UpdateOpenSearchDataSource CapabilityState
+
+	// The ability to update Oracle data sources.
+	UpdateOracleDataSource CapabilityState
+
+	// The ability to update PayPal data sources.
+	UpdatePayPalDataSource CapabilityState
+
+	// The ability to update PostgreSQL data sources.
+	UpdatePostgreSqlDataSource CapabilityState
+
+	// The ability to update Presto data sources.
+	UpdatePrestoDataSource CapabilityState
+
+	// The ability to update Amazon QuickSight data sources.
+	UpdateRadiantDataSource CapabilityState
+
+	// The ability to update auto-discovered Amazon RDS data sources.
+	UpdateRdsDataSource CapabilityState
+
+	// The ability to update auto-discovered Amazon Redshift data sources.
+	UpdateRedshiftAutoDiscoveredDataSource CapabilityState
+
+	// The ability to update manually configured Amazon Redshift data sources.
+	UpdateRedshiftManualDataSource CapabilityState
+
+	// The ability to update Amazon S3 Analytics data sources.
+	UpdateS3AnalyticsDataSource CapabilityState
+
+	// The ability to update Amazon S3 data sources.
+	UpdateS3DataSource CapabilityState
+
+	// The ability to update Amazon S3 Tables data sources.
+	UpdateS3TablesDataSource CapabilityState
+
+	// The ability to update Salesforce data sources.
+	UpdateSalesforceDataSource CapabilityState
+
+	// The ability to update SAP HANA data sources.
+	UpdateSapHanaDataSource CapabilityState
+
+	// The ability to update ServiceNow data sources.
+	UpdateServiceNowDataSource CapabilityState
+
+	// The ability to update Snowflake data sources.
+	UpdateSnowflakeDataSource CapabilityState
+
+	// The ability to update Spark data sources.
+	UpdateSparkDataSource CapabilityState
+
+	// The ability to update SQL Server data sources.
+	UpdateSqlServerDataSource CapabilityState
+
+	// The ability to update Square data sources.
+	UpdateSquareDataSource CapabilityState
+
+	// The ability to update Starburst data sources.
+	UpdateStarburstDataSource CapabilityState
+
+	// The ability to update Teradata data sources.
+	UpdateTeradataDataSource CapabilityState
+
+	// The ability to update Amazon Timestream data sources.
+	UpdateTimestreamDataSource CapabilityState
+
+	// The ability to update Trino data sources.
+	UpdateTrinoDataSource CapabilityState
+
+	// The ability to update Twitter data sources.
+	UpdateTwitterDataSource CapabilityState
 
 	// The ability to use Adobe Marketing Agent actions.
 	UseAdobeAction CapabilityState
@@ -10967,6 +11519,9 @@ type Capabilities struct {
 
 	// The ability to use Gmail actions.
 	UseGmailAction CapabilityState
+
+	// The ability to use Gong actions.
+	UseGongAction CapabilityState
 
 	// The ability to use Google Analytics actions.
 	UseGoogleAnalyticsAction CapabilityState
@@ -11260,6 +11815,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdobeAction != "" {
 		s.WriteString(schemas.Capabilities_AdobeAction, string(v.AdobeAction))
 	}
+	if v.AdobeAnalyticsDataSource != "" {
+		s.WriteString(schemas.Capabilities_AdobeAnalyticsDataSource, string(v.AdobeAnalyticsDataSource))
+	}
 	if v.AirtableAction != "" {
 		s.WriteString(schemas.Capabilities_AirtableAction, string(v.AirtableAction))
 	}
@@ -11286,6 +11844,12 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.AsanaAction != "" {
 		s.WriteString(schemas.Capabilities_AsanaAction, string(v.AsanaAction))
+	}
+	if v.AthenaDataSource != "" {
+		s.WriteString(schemas.Capabilities_AthenaDataSource, string(v.AthenaDataSource))
+	}
+	if v.AuroraDataSource != "" {
+		s.WriteString(schemas.Capabilities_AuroraDataSource, string(v.AuroraDataSource))
 	}
 	if v.Automate != "" {
 		s.WriteString(schemas.Capabilities_Automate, string(v.Automate))
@@ -11331,6 +11895,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ConfluenceKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_ConfluenceKnowledgeBase, string(v.ConfluenceKnowledgeBase))
+	}
+	if v.CreateAdobeAnalyticsDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateAdobeAnalyticsDataSource, string(v.CreateAdobeAnalyticsDataSource))
 	}
 	if v.CreateAndUpdateAdobeAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateAdobeAction, string(v.CreateAndUpdateAdobeAction))
@@ -11421,6 +11988,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.CreateAndUpdateGmailAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateGmailAction, string(v.CreateAndUpdateGmailAction))
+	}
+	if v.CreateAndUpdateGongAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateGongAction, string(v.CreateAndUpdateGongAction))
 	}
 	if v.CreateAndUpdateGoogleAnalyticsAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateGoogleAnalyticsAction, string(v.CreateAndUpdateGoogleAnalyticsAction))
@@ -11596,23 +12166,170 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateAndUpdateZoomInfoAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateZoomInfoAction, string(v.CreateAndUpdateZoomInfoAction))
 	}
+	if v.CreateAthenaDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateAthenaDataSource, string(v.CreateAthenaDataSource))
+	}
+	if v.CreateAuroraDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateAuroraDataSource, string(v.CreateAuroraDataSource))
+	}
 	if v.CreateChatAgents != "" {
 		s.WriteString(schemas.Capabilities_CreateChatAgents, string(v.CreateChatAgents))
 	}
 	if v.CreateDashboardExecutiveSummaryWithQ != "" {
 		s.WriteString(schemas.Capabilities_CreateDashboardExecutiveSummaryWithQ, string(v.CreateDashboardExecutiveSummaryWithQ))
 	}
+	if v.CreateDatabricksDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateDatabricksDataSource, string(v.CreateDatabricksDataSource))
+	}
+	if v.CreateDb2DataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateDb2DataSource, string(v.CreateDb2DataSource))
+	}
+	if v.CreateDenodoDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateDenodoDataSource, string(v.CreateDenodoDataSource))
+	}
+	if v.CreateDocumentDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateDocumentDbDataSource, string(v.CreateDocumentDbDataSource))
+	}
+	if v.CreateDremioDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateDremioDataSource, string(v.CreateDremioDataSource))
+	}
+	if v.CreateDynamoDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateDynamoDbDataSource, string(v.CreateDynamoDbDataSource))
+	}
+	if v.CreateExasolDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateExasolDataSource, string(v.CreateExasolDataSource))
+	}
+	if v.CreateFileDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateFileDataSource, string(v.CreateFileDataSource))
+	}
+	if v.CreateGitHubDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateGitHubDataSource, string(v.CreateGitHubDataSource))
+	}
+	if v.CreateGoogleAnalyticsDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateGoogleAnalyticsDataSource, string(v.CreateGoogleAnalyticsDataSource))
+	}
+	if v.CreateGoogleBigQueryDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateGoogleBigQueryDataSource, string(v.CreateGoogleBigQueryDataSource))
+	}
+	if v.CreateGoogleSheetsDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateGoogleSheetsDataSource, string(v.CreateGoogleSheetsDataSource))
+	}
+	if v.CreateImpalaDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateImpalaDataSource, string(v.CreateImpalaDataSource))
+	}
+	if v.CreateJiraDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateJiraDataSource, string(v.CreateJiraDataSource))
+	}
+	if v.CreateMariaDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateMariaDbDataSource, string(v.CreateMariaDbDataSource))
+	}
+	if v.CreateMongoAtlasDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateMongoAtlasDataSource, string(v.CreateMongoAtlasDataSource))
+	}
+	if v.CreateMongoDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateMongoDbDataSource, string(v.CreateMongoDbDataSource))
+	}
+	if v.CreateMySqlDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateMySqlDataSource, string(v.CreateMySqlDataSource))
+	}
+	if v.CreateOpenSearchDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateOpenSearchDataSource, string(v.CreateOpenSearchDataSource))
+	}
+	if v.CreateOracleDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateOracleDataSource, string(v.CreateOracleDataSource))
+	}
+	if v.CreatePayPalDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreatePayPalDataSource, string(v.CreatePayPalDataSource))
+	}
+	if v.CreatePostgreSqlDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreatePostgreSqlDataSource, string(v.CreatePostgreSqlDataSource))
+	}
+	if v.CreatePrestoDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreatePrestoDataSource, string(v.CreatePrestoDataSource))
+	}
+	if v.CreateRadiantDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateRadiantDataSource, string(v.CreateRadiantDataSource))
+	}
+	if v.CreateRdsDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateRdsDataSource, string(v.CreateRdsDataSource))
+	}
+	if v.CreateRedshiftAutoDiscoveredDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateRedshiftAutoDiscoveredDataSource, string(v.CreateRedshiftAutoDiscoveredDataSource))
+	}
+	if v.CreateRedshiftManualDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateRedshiftManualDataSource, string(v.CreateRedshiftManualDataSource))
+	}
+	if v.CreateS3AnalyticsDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateS3AnalyticsDataSource, string(v.CreateS3AnalyticsDataSource))
+	}
+	if v.CreateS3DataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateS3DataSource, string(v.CreateS3DataSource))
+	}
+	if v.CreateS3TablesDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateS3TablesDataSource, string(v.CreateS3TablesDataSource))
+	}
 	if v.CreateSPICEDataset != "" {
 		s.WriteString(schemas.Capabilities_CreateSPICEDataset, string(v.CreateSPICEDataset))
+	}
+	if v.CreateSalesforceDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateSalesforceDataSource, string(v.CreateSalesforceDataSource))
+	}
+	if v.CreateSapHanaDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateSapHanaDataSource, string(v.CreateSapHanaDataSource))
+	}
+	if v.CreateServiceNowDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateServiceNowDataSource, string(v.CreateServiceNowDataSource))
 	}
 	if v.CreateSharedFolders != "" {
 		s.WriteString(schemas.Capabilities_CreateSharedFolders, string(v.CreateSharedFolders))
 	}
+	if v.CreateSnowflakeDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateSnowflakeDataSource, string(v.CreateSnowflakeDataSource))
+	}
 	if v.CreateSpaces != "" {
 		s.WriteString(schemas.Capabilities_CreateSpaces, string(v.CreateSpaces))
 	}
+	if v.CreateSparkDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateSparkDataSource, string(v.CreateSparkDataSource))
+	}
+	if v.CreateSqlServerDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateSqlServerDataSource, string(v.CreateSqlServerDataSource))
+	}
+	if v.CreateSquareDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateSquareDataSource, string(v.CreateSquareDataSource))
+	}
+	if v.CreateStarburstDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateStarburstDataSource, string(v.CreateStarburstDataSource))
+	}
+	if v.CreateTeradataDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateTeradataDataSource, string(v.CreateTeradataDataSource))
+	}
+	if v.CreateTimestreamDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateTimestreamDataSource, string(v.CreateTimestreamDataSource))
+	}
+	if v.CreateTrinoDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateTrinoDataSource, string(v.CreateTrinoDataSource))
+	}
+	if v.CreateTwitterDataSource != "" {
+		s.WriteString(schemas.Capabilities_CreateTwitterDataSource, string(v.CreateTwitterDataSource))
+	}
 	if v.Dashboard != "" {
 		s.WriteString(schemas.Capabilities_Dashboard, string(v.Dashboard))
+	}
+	if v.DatabricksDataSource != "" {
+		s.WriteString(schemas.Capabilities_DatabricksDataSource, string(v.DatabricksDataSource))
+	}
+	if v.Db2DataSource != "" {
+		s.WriteString(schemas.Capabilities_Db2DataSource, string(v.Db2DataSource))
+	}
+	if v.DenodoDataSource != "" {
+		s.WriteString(schemas.Capabilities_DenodoDataSource, string(v.DenodoDataSource))
+	}
+	if v.DocumentDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_DocumentDbDataSource, string(v.DocumentDbDataSource))
+	}
+	if v.DremioDataSource != "" {
+		s.WriteString(schemas.Capabilities_DremioDataSource, string(v.DremioDataSource))
 	}
 	if v.DropboxAction != "" {
 		s.WriteString(schemas.Capabilities_DropboxAction, string(v.DropboxAction))
@@ -11620,8 +12337,14 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DunAndBradstreetAction != "" {
 		s.WriteString(schemas.Capabilities_DunAndBradstreetAction, string(v.DunAndBradstreetAction))
 	}
+	if v.DynamoDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_DynamoDbDataSource, string(v.DynamoDbDataSource))
+	}
 	if v.EditVisualWithQ != "" {
 		s.WriteString(schemas.Capabilities_EditVisualWithQ, string(v.EditVisualWithQ))
+	}
+	if v.ExasolDataSource != "" {
+		s.WriteString(schemas.Capabilities_ExasolDataSource, string(v.ExasolDataSource))
 	}
 	if v.ExportToCsv != "" {
 		s.WriteString(schemas.Capabilities_ExportToCsv, string(v.ExportToCsv))
@@ -11650,6 +12373,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FigmaAction != "" {
 		s.WriteString(schemas.Capabilities_FigmaAction, string(v.FigmaAction))
 	}
+	if v.FileDataSource != "" {
+		s.WriteString(schemas.Capabilities_FileDataSource, string(v.FileDataSource))
+	}
 	if v.Flow != "" {
 		s.WriteString(schemas.Capabilities_Flow, string(v.Flow))
 	}
@@ -11659,14 +12385,26 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GenericHTTPAction != "" {
 		s.WriteString(schemas.Capabilities_GenericHTTPAction, string(v.GenericHTTPAction))
 	}
+	if v.GitHubDataSource != "" {
+		s.WriteString(schemas.Capabilities_GitHubDataSource, string(v.GitHubDataSource))
+	}
 	if v.GithubAction != "" {
 		s.WriteString(schemas.Capabilities_GithubAction, string(v.GithubAction))
 	}
 	if v.GmailAction != "" {
 		s.WriteString(schemas.Capabilities_GmailAction, string(v.GmailAction))
 	}
+	if v.GongAction != "" {
+		s.WriteString(schemas.Capabilities_GongAction, string(v.GongAction))
+	}
 	if v.GoogleAnalyticsAction != "" {
 		s.WriteString(schemas.Capabilities_GoogleAnalyticsAction, string(v.GoogleAnalyticsAction))
+	}
+	if v.GoogleAnalyticsDataSource != "" {
+		s.WriteString(schemas.Capabilities_GoogleAnalyticsDataSource, string(v.GoogleAnalyticsDataSource))
+	}
+	if v.GoogleBigQueryDataSource != "" {
+		s.WriteString(schemas.Capabilities_GoogleBigQueryDataSource, string(v.GoogleBigQueryDataSource))
 	}
 	if v.GoogleCalendarAction != "" {
 		s.WriteString(schemas.Capabilities_GoogleCalendarAction, string(v.GoogleCalendarAction))
@@ -11689,6 +12427,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GoogleSheetsAction != "" {
 		s.WriteString(schemas.Capabilities_GoogleSheetsAction, string(v.GoogleSheetsAction))
 	}
+	if v.GoogleSheetsDataSource != "" {
+		s.WriteString(schemas.Capabilities_GoogleSheetsDataSource, string(v.GoogleSheetsDataSource))
+	}
 	if v.GoogleSlidesAction != "" {
 		s.WriteString(schemas.Capabilities_GoogleSlidesAction, string(v.GoogleSlidesAction))
 	}
@@ -11704,6 +12445,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IDCKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_IDCKnowledgeBase, string(v.IDCKnowledgeBase))
 	}
+	if v.ImpalaDataSource != "" {
+		s.WriteString(schemas.Capabilities_ImpalaDataSource, string(v.ImpalaDataSource))
+	}
 	if v.InboundEmailTrigger != "" {
 		s.WriteString(schemas.Capabilities_InboundEmailTrigger, string(v.InboundEmailTrigger))
 	}
@@ -11718,6 +12462,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.JiraAction != "" {
 		s.WriteString(schemas.Capabilities_JiraAction, string(v.JiraAction))
+	}
+	if v.JiraDataSource != "" {
+		s.WriteString(schemas.Capabilities_JiraDataSource, string(v.JiraDataSource))
 	}
 	if v.KnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_KnowledgeBase, string(v.KnowledgeBase))
@@ -11737,11 +12484,23 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ManageSharedFolders != "" {
 		s.WriteString(schemas.Capabilities_ManageSharedFolders, string(v.ManageSharedFolders))
 	}
+	if v.MariaDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_MariaDbDataSource, string(v.MariaDbDataSource))
+	}
 	if v.MondayAction != "" {
 		s.WriteString(schemas.Capabilities_MondayAction, string(v.MondayAction))
 	}
+	if v.MongoAtlasDataSource != "" {
+		s.WriteString(schemas.Capabilities_MongoAtlasDataSource, string(v.MongoAtlasDataSource))
+	}
+	if v.MongoDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_MongoDbDataSource, string(v.MongoDbDataSource))
+	}
 	if v.MoodysAction != "" {
 		s.WriteString(schemas.Capabilities_MoodysAction, string(v.MoodysAction))
+	}
+	if v.MySqlDataSource != "" {
+		s.WriteString(schemas.Capabilities_MySqlDataSource, string(v.MySqlDataSource))
 	}
 	if v.NewRelicAction != "" {
 		s.WriteString(schemas.Capabilities_NewRelicAction, string(v.NewRelicAction))
@@ -11761,14 +12520,29 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OpenAPIAction != "" {
 		s.WriteString(schemas.Capabilities_OpenAPIAction, string(v.OpenAPIAction))
 	}
+	if v.OpenSearchDataSource != "" {
+		s.WriteString(schemas.Capabilities_OpenSearchDataSource, string(v.OpenSearchDataSource))
+	}
+	if v.OracleDataSource != "" {
+		s.WriteString(schemas.Capabilities_OracleDataSource, string(v.OracleDataSource))
+	}
 	if v.PagerDutyAction != "" {
 		s.WriteString(schemas.Capabilities_PagerDutyAction, string(v.PagerDutyAction))
 	}
 	if v.PagerDutyAgentAction != "" {
 		s.WriteString(schemas.Capabilities_PagerDutyAgentAction, string(v.PagerDutyAgentAction))
 	}
+	if v.PayPalDataSource != "" {
+		s.WriteString(schemas.Capabilities_PayPalDataSource, string(v.PayPalDataSource))
+	}
 	if v.PerformFlowUiTask != "" {
 		s.WriteString(schemas.Capabilities_PerformFlowUiTask, string(v.PerformFlowUiTask))
+	}
+	if v.PostgreSqlDataSource != "" {
+		s.WriteString(schemas.Capabilities_PostgreSqlDataSource, string(v.PostgreSqlDataSource))
+	}
+	if v.PrestoDataSource != "" {
+		s.WriteString(schemas.Capabilities_PrestoDataSource, string(v.PrestoDataSource))
 	}
 	if v.PrintReports != "" {
 		s.WriteString(schemas.Capabilities_PrintReports, string(v.PrintReports))
@@ -11785,14 +12559,35 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QuickEventTrigger != "" {
 		s.WriteString(schemas.Capabilities_QuickEventTrigger, string(v.QuickEventTrigger))
 	}
+	if v.RadiantDataSource != "" {
+		s.WriteString(schemas.Capabilities_RadiantDataSource, string(v.RadiantDataSource))
+	}
+	if v.RdsDataSource != "" {
+		s.WriteString(schemas.Capabilities_RdsDataSource, string(v.RdsDataSource))
+	}
+	if v.RedshiftAutoDiscoveredDataSource != "" {
+		s.WriteString(schemas.Capabilities_RedshiftAutoDiscoveredDataSource, string(v.RedshiftAutoDiscoveredDataSource))
+	}
+	if v.RedshiftManualDataSource != "" {
+		s.WriteString(schemas.Capabilities_RedshiftManualDataSource, string(v.RedshiftManualDataSource))
+	}
 	if v.RenameSharedFolders != "" {
 		s.WriteString(schemas.Capabilities_RenameSharedFolders, string(v.RenameSharedFolders))
 	}
 	if v.Research != "" {
 		s.WriteString(schemas.Capabilities_Research, string(v.Research))
 	}
+	if v.S3AnalyticsDataSource != "" {
+		s.WriteString(schemas.Capabilities_S3AnalyticsDataSource, string(v.S3AnalyticsDataSource))
+	}
+	if v.S3DataSource != "" {
+		s.WriteString(schemas.Capabilities_S3DataSource, string(v.S3DataSource))
+	}
 	if v.S3KnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_S3KnowledgeBase, string(v.S3KnowledgeBase))
+	}
+	if v.S3TablesDataSource != "" {
+		s.WriteString(schemas.Capabilities_S3TablesDataSource, string(v.S3TablesDataSource))
 	}
 	if v.SAPBillOfMaterialAction != "" {
 		s.WriteString(schemas.Capabilities_SAPBillOfMaterialAction, string(v.SAPBillOfMaterialAction))
@@ -11812,11 +12607,17 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SalesforceAction != "" {
 		s.WriteString(schemas.Capabilities_SalesforceAction, string(v.SalesforceAction))
 	}
+	if v.SalesforceDataSource != "" {
+		s.WriteString(schemas.Capabilities_SalesforceDataSource, string(v.SalesforceDataSource))
+	}
 	if v.SandPGMIAction != "" {
 		s.WriteString(schemas.Capabilities_SandPGMIAction, string(v.SandPGMIAction))
 	}
 	if v.SandPGlobalEnergyAction != "" {
 		s.WriteString(schemas.Capabilities_SandPGlobalEnergyAction, string(v.SandPGlobalEnergyAction))
+	}
+	if v.SapHanaDataSource != "" {
+		s.WriteString(schemas.Capabilities_SapHanaDataSource, string(v.SapHanaDataSource))
 	}
 	if v.Scenario != "" {
 		s.WriteString(schemas.Capabilities_Scenario, string(v.Scenario))
@@ -11830,8 +12631,14 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceNowAction != "" {
 		s.WriteString(schemas.Capabilities_ServiceNowAction, string(v.ServiceNowAction))
 	}
+	if v.ServiceNowDataSource != "" {
+		s.WriteString(schemas.Capabilities_ServiceNowDataSource, string(v.ServiceNowDataSource))
+	}
 	if v.ShareAdobeAction != "" {
 		s.WriteString(schemas.Capabilities_ShareAdobeAction, string(v.ShareAdobeAction))
+	}
+	if v.ShareAdobeAnalyticsDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareAdobeAnalyticsDataSource, string(v.ShareAdobeAnalyticsDataSource))
 	}
 	if v.ShareAirtableAction != "" {
 		s.WriteString(schemas.Capabilities_ShareAirtableAction, string(v.ShareAirtableAction))
@@ -11856,6 +12663,12 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ShareAsanaAction != "" {
 		s.WriteString(schemas.Capabilities_ShareAsanaAction, string(v.ShareAsanaAction))
+	}
+	if v.ShareAthenaDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareAthenaDataSource, string(v.ShareAthenaDataSource))
+	}
+	if v.ShareAuroraDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareAuroraDataSource, string(v.ShareAuroraDataSource))
 	}
 	if v.ShareBambooHRAction != "" {
 		s.WriteString(schemas.Capabilities_ShareBambooHRAction, string(v.ShareBambooHRAction))
@@ -11902,8 +12715,23 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareDataSources != "" {
 		s.WriteString(schemas.Capabilities_ShareDataSources, string(v.ShareDataSources))
 	}
+	if v.ShareDatabricksDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareDatabricksDataSource, string(v.ShareDatabricksDataSource))
+	}
 	if v.ShareDatasets != "" {
 		s.WriteString(schemas.Capabilities_ShareDatasets, string(v.ShareDatasets))
+	}
+	if v.ShareDb2DataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareDb2DataSource, string(v.ShareDb2DataSource))
+	}
+	if v.ShareDenodoDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareDenodoDataSource, string(v.ShareDenodoDataSource))
+	}
+	if v.ShareDocumentDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareDocumentDbDataSource, string(v.ShareDocumentDbDataSource))
+	}
+	if v.ShareDremioDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareDremioDataSource, string(v.ShareDremioDataSource))
 	}
 	if v.ShareDropboxAction != "" {
 		s.WriteString(schemas.Capabilities_ShareDropboxAction, string(v.ShareDropboxAction))
@@ -11911,14 +12739,26 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareDunAndBradstreetAction != "" {
 		s.WriteString(schemas.Capabilities_ShareDunAndBradstreetAction, string(v.ShareDunAndBradstreetAction))
 	}
+	if v.ShareDynamoDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareDynamoDbDataSource, string(v.ShareDynamoDbDataSource))
+	}
+	if v.ShareExasolDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareExasolDataSource, string(v.ShareExasolDataSource))
+	}
 	if v.ShareFactSetAction != "" {
 		s.WriteString(schemas.Capabilities_ShareFactSetAction, string(v.ShareFactSetAction))
 	}
 	if v.ShareFigmaAction != "" {
 		s.WriteString(schemas.Capabilities_ShareFigmaAction, string(v.ShareFigmaAction))
 	}
+	if v.ShareFileDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareFileDataSource, string(v.ShareFileDataSource))
+	}
 	if v.ShareGenericHTTPAction != "" {
 		s.WriteString(schemas.Capabilities_ShareGenericHTTPAction, string(v.ShareGenericHTTPAction))
+	}
+	if v.ShareGitHubDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareGitHubDataSource, string(v.ShareGitHubDataSource))
 	}
 	if v.ShareGithubAction != "" {
 		s.WriteString(schemas.Capabilities_ShareGithubAction, string(v.ShareGithubAction))
@@ -11926,8 +12766,17 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareGmailAction != "" {
 		s.WriteString(schemas.Capabilities_ShareGmailAction, string(v.ShareGmailAction))
 	}
+	if v.ShareGongAction != "" {
+		s.WriteString(schemas.Capabilities_ShareGongAction, string(v.ShareGongAction))
+	}
 	if v.ShareGoogleAnalyticsAction != "" {
 		s.WriteString(schemas.Capabilities_ShareGoogleAnalyticsAction, string(v.ShareGoogleAnalyticsAction))
+	}
+	if v.ShareGoogleAnalyticsDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareGoogleAnalyticsDataSource, string(v.ShareGoogleAnalyticsDataSource))
+	}
+	if v.ShareGoogleBigQueryDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareGoogleBigQueryDataSource, string(v.ShareGoogleBigQueryDataSource))
 	}
 	if v.ShareGoogleCalendarAction != "" {
 		s.WriteString(schemas.Capabilities_ShareGoogleCalendarAction, string(v.ShareGoogleCalendarAction))
@@ -11950,6 +12799,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareGoogleSheetsAction != "" {
 		s.WriteString(schemas.Capabilities_ShareGoogleSheetsAction, string(v.ShareGoogleSheetsAction))
 	}
+	if v.ShareGoogleSheetsDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareGoogleSheetsDataSource, string(v.ShareGoogleSheetsDataSource))
+	}
 	if v.ShareGoogleSlidesAction != "" {
 		s.WriteString(schemas.Capabilities_ShareGoogleSlidesAction, string(v.ShareGoogleSlidesAction))
 	}
@@ -11965,11 +12817,17 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareIDCKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_ShareIDCKnowledgeBase, string(v.ShareIDCKnowledgeBase))
 	}
+	if v.ShareImpalaDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareImpalaDataSource, string(v.ShareImpalaDataSource))
+	}
 	if v.ShareIntercomAction != "" {
 		s.WriteString(schemas.Capabilities_ShareIntercomAction, string(v.ShareIntercomAction))
 	}
 	if v.ShareJiraAction != "" {
 		s.WriteString(schemas.Capabilities_ShareJiraAction, string(v.ShareJiraAction))
+	}
+	if v.ShareJiraDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareJiraDataSource, string(v.ShareJiraDataSource))
 	}
 	if v.ShareKnowledgeBases != "" {
 		s.WriteString(schemas.Capabilities_ShareKnowledgeBases, string(v.ShareKnowledgeBases))
@@ -11986,11 +12844,23 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareMSTeamsAction != "" {
 		s.WriteString(schemas.Capabilities_ShareMSTeamsAction, string(v.ShareMSTeamsAction))
 	}
+	if v.ShareMariaDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareMariaDbDataSource, string(v.ShareMariaDbDataSource))
+	}
 	if v.ShareMondayAction != "" {
 		s.WriteString(schemas.Capabilities_ShareMondayAction, string(v.ShareMondayAction))
 	}
+	if v.ShareMongoAtlasDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareMongoAtlasDataSource, string(v.ShareMongoAtlasDataSource))
+	}
+	if v.ShareMongoDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareMongoDbDataSource, string(v.ShareMongoDbDataSource))
+	}
 	if v.ShareMoodysAction != "" {
 		s.WriteString(schemas.Capabilities_ShareMoodysAction, string(v.ShareMoodysAction))
+	}
+	if v.ShareMySqlDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareMySqlDataSource, string(v.ShareMySqlDataSource))
 	}
 	if v.ShareNewRelicAction != "" {
 		s.WriteString(schemas.Capabilities_ShareNewRelicAction, string(v.ShareNewRelicAction))
@@ -12010,11 +12880,20 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareOpenAPIAction != "" {
 		s.WriteString(schemas.Capabilities_ShareOpenAPIAction, string(v.ShareOpenAPIAction))
 	}
+	if v.ShareOpenSearchDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareOpenSearchDataSource, string(v.ShareOpenSearchDataSource))
+	}
+	if v.ShareOracleDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareOracleDataSource, string(v.ShareOracleDataSource))
+	}
 	if v.SharePagerDutyAction != "" {
 		s.WriteString(schemas.Capabilities_SharePagerDutyAction, string(v.SharePagerDutyAction))
 	}
 	if v.SharePagerDutyAgentAction != "" {
 		s.WriteString(schemas.Capabilities_SharePagerDutyAgentAction, string(v.SharePagerDutyAgentAction))
+	}
+	if v.SharePayPalDataSource != "" {
+		s.WriteString(schemas.Capabilities_SharePayPalDataSource, string(v.SharePayPalDataSource))
 	}
 	if v.SharePointAction != "" {
 		s.WriteString(schemas.Capabilities_SharePointAction, string(v.SharePointAction))
@@ -12022,14 +12901,41 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SharePointKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_SharePointKnowledgeBase, string(v.SharePointKnowledgeBase))
 	}
+	if v.SharePostgreSqlDataSource != "" {
+		s.WriteString(schemas.Capabilities_SharePostgreSqlDataSource, string(v.SharePostgreSqlDataSource))
+	}
+	if v.SharePrestoDataSource != "" {
+		s.WriteString(schemas.Capabilities_SharePrestoDataSource, string(v.SharePrestoDataSource))
+	}
 	if v.ShareQBusinessKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_ShareQBusinessKnowledgeBase, string(v.ShareQBusinessKnowledgeBase))
 	}
 	if v.ShareQuickBooksAction != "" {
 		s.WriteString(schemas.Capabilities_ShareQuickBooksAction, string(v.ShareQuickBooksAction))
 	}
+	if v.ShareRadiantDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareRadiantDataSource, string(v.ShareRadiantDataSource))
+	}
+	if v.ShareRdsDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareRdsDataSource, string(v.ShareRdsDataSource))
+	}
+	if v.ShareRedshiftAutoDiscoveredDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareRedshiftAutoDiscoveredDataSource, string(v.ShareRedshiftAutoDiscoveredDataSource))
+	}
+	if v.ShareRedshiftManualDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareRedshiftManualDataSource, string(v.ShareRedshiftManualDataSource))
+	}
+	if v.ShareS3AnalyticsDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareS3AnalyticsDataSource, string(v.ShareS3AnalyticsDataSource))
+	}
+	if v.ShareS3DataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareS3DataSource, string(v.ShareS3DataSource))
+	}
 	if v.ShareS3KnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_ShareS3KnowledgeBase, string(v.ShareS3KnowledgeBase))
+	}
+	if v.ShareS3TablesDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareS3TablesDataSource, string(v.ShareS3TablesDataSource))
 	}
 	if v.ShareSAPBillOfMaterialAction != "" {
 		s.WriteString(schemas.Capabilities_ShareSAPBillOfMaterialAction, string(v.ShareSAPBillOfMaterialAction))
@@ -12049,14 +12955,23 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareSalesforceAction != "" {
 		s.WriteString(schemas.Capabilities_ShareSalesforceAction, string(v.ShareSalesforceAction))
 	}
+	if v.ShareSalesforceDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareSalesforceDataSource, string(v.ShareSalesforceDataSource))
+	}
 	if v.ShareSandPGMIAction != "" {
 		s.WriteString(schemas.Capabilities_ShareSandPGMIAction, string(v.ShareSandPGMIAction))
 	}
 	if v.ShareSandPGlobalEnergyAction != "" {
 		s.WriteString(schemas.Capabilities_ShareSandPGlobalEnergyAction, string(v.ShareSandPGlobalEnergyAction))
 	}
+	if v.ShareSapHanaDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareSapHanaDataSource, string(v.ShareSapHanaDataSource))
+	}
 	if v.ShareServiceNowAction != "" {
 		s.WriteString(schemas.Capabilities_ShareServiceNowAction, string(v.ShareServiceNowAction))
+	}
+	if v.ShareServiceNowDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareServiceNowDataSource, string(v.ShareServiceNowDataSource))
 	}
 	if v.ShareSharePointAction != "" {
 		s.WriteString(schemas.Capabilities_ShareSharePointAction, string(v.ShareSharePointAction))
@@ -12076,11 +12991,38 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareSnowFlakeAction != "" {
 		s.WriteString(schemas.Capabilities_ShareSnowFlakeAction, string(v.ShareSnowFlakeAction))
 	}
+	if v.ShareSnowflakeDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareSnowflakeDataSource, string(v.ShareSnowflakeDataSource))
+	}
 	if v.ShareSpaces != "" {
 		s.WriteString(schemas.Capabilities_ShareSpaces, string(v.ShareSpaces))
 	}
+	if v.ShareSparkDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareSparkDataSource, string(v.ShareSparkDataSource))
+	}
+	if v.ShareSqlServerDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareSqlServerDataSource, string(v.ShareSqlServerDataSource))
+	}
+	if v.ShareSquareDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareSquareDataSource, string(v.ShareSquareDataSource))
+	}
+	if v.ShareStarburstDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareStarburstDataSource, string(v.ShareStarburstDataSource))
+	}
+	if v.ShareTeradataDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareTeradataDataSource, string(v.ShareTeradataDataSource))
+	}
 	if v.ShareTextractAction != "" {
 		s.WriteString(schemas.Capabilities_ShareTextractAction, string(v.ShareTextractAction))
+	}
+	if v.ShareTimestreamDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareTimestreamDataSource, string(v.ShareTimestreamDataSource))
+	}
+	if v.ShareTrinoDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareTrinoDataSource, string(v.ShareTrinoDataSource))
+	}
+	if v.ShareTwitterDataSource != "" {
+		s.WriteString(schemas.Capabilities_ShareTwitterDataSource, string(v.ShareTwitterDataSource))
 	}
 	if v.ShareVisierAgentAction != "" {
 		s.WriteString(schemas.Capabilities_ShareVisierAgentAction, string(v.ShareVisierAgentAction))
@@ -12115,8 +13057,23 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SnowFlakeAction != "" {
 		s.WriteString(schemas.Capabilities_SnowFlakeAction, string(v.SnowFlakeAction))
 	}
+	if v.SnowflakeDataSource != "" {
+		s.WriteString(schemas.Capabilities_SnowflakeDataSource, string(v.SnowflakeDataSource))
+	}
 	if v.Space != "" {
 		s.WriteString(schemas.Capabilities_Space, string(v.Space))
+	}
+	if v.SparkDataSource != "" {
+		s.WriteString(schemas.Capabilities_SparkDataSource, string(v.SparkDataSource))
+	}
+	if v.SqlServerDataSource != "" {
+		s.WriteString(schemas.Capabilities_SqlServerDataSource, string(v.SqlServerDataSource))
+	}
+	if v.SquareDataSource != "" {
+		s.WriteString(schemas.Capabilities_SquareDataSource, string(v.SquareDataSource))
+	}
+	if v.StarburstDataSource != "" {
+		s.WriteString(schemas.Capabilities_StarburstDataSource, string(v.StarburstDataSource))
 	}
 	if v.Story != "" {
 		s.WriteString(schemas.Capabilities_Story, string(v.Story))
@@ -12124,14 +13081,161 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SubscribeDashboardEmailReports != "" {
 		s.WriteString(schemas.Capabilities_SubscribeDashboardEmailReports, string(v.SubscribeDashboardEmailReports))
 	}
+	if v.TeradataDataSource != "" {
+		s.WriteString(schemas.Capabilities_TeradataDataSource, string(v.TeradataDataSource))
+	}
 	if v.TextractAction != "" {
 		s.WriteString(schemas.Capabilities_TextractAction, string(v.TextractAction))
+	}
+	if v.TimestreamDataSource != "" {
+		s.WriteString(schemas.Capabilities_TimestreamDataSource, string(v.TimestreamDataSource))
 	}
 	if v.Topic != "" {
 		s.WriteString(schemas.Capabilities_Topic, string(v.Topic))
 	}
 	if v.Trigger != "" {
 		s.WriteString(schemas.Capabilities_Trigger, string(v.Trigger))
+	}
+	if v.TrinoDataSource != "" {
+		s.WriteString(schemas.Capabilities_TrinoDataSource, string(v.TrinoDataSource))
+	}
+	if v.TwitterDataSource != "" {
+		s.WriteString(schemas.Capabilities_TwitterDataSource, string(v.TwitterDataSource))
+	}
+	if v.UpdateAdobeAnalyticsDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateAdobeAnalyticsDataSource, string(v.UpdateAdobeAnalyticsDataSource))
+	}
+	if v.UpdateAthenaDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateAthenaDataSource, string(v.UpdateAthenaDataSource))
+	}
+	if v.UpdateAuroraDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateAuroraDataSource, string(v.UpdateAuroraDataSource))
+	}
+	if v.UpdateDatabricksDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateDatabricksDataSource, string(v.UpdateDatabricksDataSource))
+	}
+	if v.UpdateDb2DataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateDb2DataSource, string(v.UpdateDb2DataSource))
+	}
+	if v.UpdateDenodoDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateDenodoDataSource, string(v.UpdateDenodoDataSource))
+	}
+	if v.UpdateDocumentDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateDocumentDbDataSource, string(v.UpdateDocumentDbDataSource))
+	}
+	if v.UpdateDremioDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateDremioDataSource, string(v.UpdateDremioDataSource))
+	}
+	if v.UpdateDynamoDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateDynamoDbDataSource, string(v.UpdateDynamoDbDataSource))
+	}
+	if v.UpdateExasolDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateExasolDataSource, string(v.UpdateExasolDataSource))
+	}
+	if v.UpdateFileDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateFileDataSource, string(v.UpdateFileDataSource))
+	}
+	if v.UpdateGitHubDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateGitHubDataSource, string(v.UpdateGitHubDataSource))
+	}
+	if v.UpdateGoogleAnalyticsDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateGoogleAnalyticsDataSource, string(v.UpdateGoogleAnalyticsDataSource))
+	}
+	if v.UpdateGoogleBigQueryDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateGoogleBigQueryDataSource, string(v.UpdateGoogleBigQueryDataSource))
+	}
+	if v.UpdateGoogleSheetsDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateGoogleSheetsDataSource, string(v.UpdateGoogleSheetsDataSource))
+	}
+	if v.UpdateImpalaDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateImpalaDataSource, string(v.UpdateImpalaDataSource))
+	}
+	if v.UpdateJiraDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateJiraDataSource, string(v.UpdateJiraDataSource))
+	}
+	if v.UpdateMariaDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateMariaDbDataSource, string(v.UpdateMariaDbDataSource))
+	}
+	if v.UpdateMongoAtlasDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateMongoAtlasDataSource, string(v.UpdateMongoAtlasDataSource))
+	}
+	if v.UpdateMongoDbDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateMongoDbDataSource, string(v.UpdateMongoDbDataSource))
+	}
+	if v.UpdateMySqlDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateMySqlDataSource, string(v.UpdateMySqlDataSource))
+	}
+	if v.UpdateOpenSearchDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateOpenSearchDataSource, string(v.UpdateOpenSearchDataSource))
+	}
+	if v.UpdateOracleDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateOracleDataSource, string(v.UpdateOracleDataSource))
+	}
+	if v.UpdatePayPalDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdatePayPalDataSource, string(v.UpdatePayPalDataSource))
+	}
+	if v.UpdatePostgreSqlDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdatePostgreSqlDataSource, string(v.UpdatePostgreSqlDataSource))
+	}
+	if v.UpdatePrestoDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdatePrestoDataSource, string(v.UpdatePrestoDataSource))
+	}
+	if v.UpdateRadiantDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateRadiantDataSource, string(v.UpdateRadiantDataSource))
+	}
+	if v.UpdateRdsDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateRdsDataSource, string(v.UpdateRdsDataSource))
+	}
+	if v.UpdateRedshiftAutoDiscoveredDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateRedshiftAutoDiscoveredDataSource, string(v.UpdateRedshiftAutoDiscoveredDataSource))
+	}
+	if v.UpdateRedshiftManualDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateRedshiftManualDataSource, string(v.UpdateRedshiftManualDataSource))
+	}
+	if v.UpdateS3AnalyticsDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateS3AnalyticsDataSource, string(v.UpdateS3AnalyticsDataSource))
+	}
+	if v.UpdateS3DataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateS3DataSource, string(v.UpdateS3DataSource))
+	}
+	if v.UpdateS3TablesDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateS3TablesDataSource, string(v.UpdateS3TablesDataSource))
+	}
+	if v.UpdateSalesforceDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateSalesforceDataSource, string(v.UpdateSalesforceDataSource))
+	}
+	if v.UpdateSapHanaDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateSapHanaDataSource, string(v.UpdateSapHanaDataSource))
+	}
+	if v.UpdateServiceNowDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateServiceNowDataSource, string(v.UpdateServiceNowDataSource))
+	}
+	if v.UpdateSnowflakeDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateSnowflakeDataSource, string(v.UpdateSnowflakeDataSource))
+	}
+	if v.UpdateSparkDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateSparkDataSource, string(v.UpdateSparkDataSource))
+	}
+	if v.UpdateSqlServerDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateSqlServerDataSource, string(v.UpdateSqlServerDataSource))
+	}
+	if v.UpdateSquareDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateSquareDataSource, string(v.UpdateSquareDataSource))
+	}
+	if v.UpdateStarburstDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateStarburstDataSource, string(v.UpdateStarburstDataSource))
+	}
+	if v.UpdateTeradataDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateTeradataDataSource, string(v.UpdateTeradataDataSource))
+	}
+	if v.UpdateTimestreamDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateTimestreamDataSource, string(v.UpdateTimestreamDataSource))
+	}
+	if v.UpdateTrinoDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateTrinoDataSource, string(v.UpdateTrinoDataSource))
+	}
+	if v.UpdateTwitterDataSource != "" {
+		s.WriteString(schemas.Capabilities_UpdateTwitterDataSource, string(v.UpdateTwitterDataSource))
 	}
 	if v.UseAdobeAction != "" {
 		s.WriteString(schemas.Capabilities_UseAdobeAction, string(v.UseAdobeAction))
@@ -12222,6 +13326,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.UseGmailAction != "" {
 		s.WriteString(schemas.Capabilities_UseGmailAction, string(v.UseGmailAction))
+	}
+	if v.UseGongAction != "" {
+		s.WriteString(schemas.Capabilities_UseGongAction, string(v.UseGongAction))
 	}
 	if v.UseGoogleAnalyticsAction != "" {
 		s.WriteString(schemas.Capabilities_UseGoogleAnalyticsAction, string(v.UseGoogleAnalyticsAction))
@@ -12453,6 +13560,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.AdobeAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_AdobeAnalyticsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_AdobeAnalyticsDataSource, &ev); err != nil {
+				return err
+			}
+			v.AdobeAnalyticsDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_AirtableAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_AirtableAction, &ev); err != nil {
@@ -12515,6 +13629,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.AsanaAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_AthenaDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_AthenaDataSource, &ev); err != nil {
+				return err
+			}
+			v.AthenaDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_AuroraDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_AuroraDataSource, &ev); err != nil {
+				return err
+			}
+			v.AuroraDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_Automate:
 			var ev string
@@ -12620,6 +13748,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.ConfluenceKnowledgeBase = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAdobeAnalyticsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAdobeAnalyticsDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateAdobeAnalyticsDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_CreateAndUpdateAdobeAction:
 			var ev string
@@ -12830,6 +13965,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.CreateAndUpdateGmailAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateGongAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateGongAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateGongAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_CreateAndUpdateGoogleAnalyticsAction:
 			var ev string
@@ -13237,6 +14379,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CreateAndUpdateZoomInfoAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_CreateAthenaDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAthenaDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateAthenaDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAuroraDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAuroraDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateAuroraDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_CreateChatAgents:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_CreateChatAgents, &ev); err != nil {
@@ -13251,12 +14407,243 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CreateDashboardExecutiveSummaryWithQ = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_CreateDatabricksDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateDatabricksDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateDatabricksDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateDb2DataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateDb2DataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateDb2DataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateDenodoDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateDenodoDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateDenodoDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateDocumentDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateDocumentDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateDocumentDbDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateDremioDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateDremioDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateDremioDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateDynamoDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateDynamoDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateDynamoDbDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateExasolDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateExasolDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateExasolDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateFileDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateFileDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateFileDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateGitHubDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateGitHubDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateGitHubDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateGoogleAnalyticsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateGoogleAnalyticsDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateGoogleAnalyticsDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateGoogleBigQueryDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateGoogleBigQueryDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateGoogleBigQueryDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateGoogleSheetsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateGoogleSheetsDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateGoogleSheetsDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateImpalaDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateImpalaDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateImpalaDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateJiraDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateJiraDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateJiraDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateMariaDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateMariaDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateMariaDbDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateMongoAtlasDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateMongoAtlasDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateMongoAtlasDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateMongoDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateMongoDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateMongoDbDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateMySqlDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateMySqlDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateMySqlDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateOpenSearchDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateOpenSearchDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateOpenSearchDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateOracleDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateOracleDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateOracleDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreatePayPalDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreatePayPalDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreatePayPalDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreatePostgreSqlDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreatePostgreSqlDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreatePostgreSqlDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreatePrestoDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreatePrestoDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreatePrestoDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateRadiantDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateRadiantDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateRadiantDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateRdsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateRdsDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateRdsDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateRedshiftAutoDiscoveredDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateRedshiftAutoDiscoveredDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateRedshiftAutoDiscoveredDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateRedshiftManualDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateRedshiftManualDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateRedshiftManualDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateS3AnalyticsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateS3AnalyticsDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateS3AnalyticsDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateS3DataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateS3DataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateS3DataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateS3TablesDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateS3TablesDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateS3TablesDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_CreateSPICEDataset:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_CreateSPICEDataset, &ev); err != nil {
 				return err
 			}
 			v.CreateSPICEDataset = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateSalesforceDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateSalesforceDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateSalesforceDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateSapHanaDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateSapHanaDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateSapHanaDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateServiceNowDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateServiceNowDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateServiceNowDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_CreateSharedFolders:
 			var ev string
@@ -13265,6 +14652,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CreateSharedFolders = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_CreateSnowflakeDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateSnowflakeDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateSnowflakeDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_CreateSpaces:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_CreateSpaces, &ev); err != nil {
@@ -13272,12 +14666,103 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CreateSpaces = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_CreateSparkDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateSparkDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateSparkDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateSqlServerDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateSqlServerDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateSqlServerDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateSquareDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateSquareDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateSquareDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateStarburstDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateStarburstDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateStarburstDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateTeradataDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateTeradataDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateTeradataDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateTimestreamDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateTimestreamDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateTimestreamDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateTrinoDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateTrinoDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateTrinoDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateTwitterDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateTwitterDataSource, &ev); err != nil {
+				return err
+			}
+			v.CreateTwitterDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_Dashboard:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_Dashboard, &ev); err != nil {
 				return err
 			}
 			v.Dashboard = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_DatabricksDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_DatabricksDataSource, &ev); err != nil {
+				return err
+			}
+			v.DatabricksDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_Db2DataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_Db2DataSource, &ev); err != nil {
+				return err
+			}
+			v.Db2DataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_DenodoDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_DenodoDataSource, &ev); err != nil {
+				return err
+			}
+			v.DenodoDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_DocumentDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_DocumentDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.DocumentDbDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_DremioDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_DremioDataSource, &ev); err != nil {
+				return err
+			}
+			v.DremioDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_DropboxAction:
 			var ev string
@@ -13293,12 +14778,26 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.DunAndBradstreetAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_DynamoDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_DynamoDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.DynamoDbDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_EditVisualWithQ:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_EditVisualWithQ, &ev); err != nil {
 				return err
 			}
 			v.EditVisualWithQ = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ExasolDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ExasolDataSource, &ev); err != nil {
+				return err
+			}
+			v.ExasolDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ExportToCsv:
 			var ev string
@@ -13363,6 +14862,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.FigmaAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_FileDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_FileDataSource, &ev); err != nil {
+				return err
+			}
+			v.FileDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_Flow:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_Flow, &ev); err != nil {
@@ -13384,6 +14890,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.GenericHTTPAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_GitHubDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_GitHubDataSource, &ev); err != nil {
+				return err
+			}
+			v.GitHubDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_GithubAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_GithubAction, &ev); err != nil {
@@ -13398,12 +14911,33 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.GmailAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_GongAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_GongAction, &ev); err != nil {
+				return err
+			}
+			v.GongAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_GoogleAnalyticsAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_GoogleAnalyticsAction, &ev); err != nil {
 				return err
 			}
 			v.GoogleAnalyticsAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_GoogleAnalyticsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_GoogleAnalyticsDataSource, &ev); err != nil {
+				return err
+			}
+			v.GoogleAnalyticsDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_GoogleBigQueryDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_GoogleBigQueryDataSource, &ev); err != nil {
+				return err
+			}
+			v.GoogleBigQueryDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_GoogleCalendarAction:
 			var ev string
@@ -13454,6 +14988,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.GoogleSheetsAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_GoogleSheetsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_GoogleSheetsDataSource, &ev); err != nil {
+				return err
+			}
+			v.GoogleSheetsDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_GoogleSlidesAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_GoogleSlidesAction, &ev); err != nil {
@@ -13489,6 +15030,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.IDCKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ImpalaDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ImpalaDataSource, &ev); err != nil {
+				return err
+			}
+			v.ImpalaDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_InboundEmailTrigger:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_InboundEmailTrigger, &ev); err != nil {
@@ -13523,6 +15071,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.JiraAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_JiraDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_JiraDataSource, &ev); err != nil {
+				return err
+			}
+			v.JiraDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_KnowledgeBase:
 			var ev string
@@ -13566,6 +15121,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ManageSharedFolders = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_MariaDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_MariaDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.MariaDbDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_MondayAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_MondayAction, &ev); err != nil {
@@ -13573,12 +15135,33 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.MondayAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_MongoAtlasDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_MongoAtlasDataSource, &ev); err != nil {
+				return err
+			}
+			v.MongoAtlasDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_MongoDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_MongoDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.MongoDbDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_MoodysAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_MoodysAction, &ev); err != nil {
 				return err
 			}
 			v.MoodysAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_MySqlDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_MySqlDataSource, &ev); err != nil {
+				return err
+			}
+			v.MySqlDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_NewRelicAction:
 			var ev string
@@ -13622,6 +15205,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.OpenAPIAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_OpenSearchDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_OpenSearchDataSource, &ev); err != nil {
+				return err
+			}
+			v.OpenSearchDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_OracleDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_OracleDataSource, &ev); err != nil {
+				return err
+			}
+			v.OracleDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_PagerDutyAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_PagerDutyAction, &ev); err != nil {
@@ -13636,12 +15233,33 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.PagerDutyAgentAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_PayPalDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_PayPalDataSource, &ev); err != nil {
+				return err
+			}
+			v.PayPalDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_PerformFlowUiTask:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_PerformFlowUiTask, &ev); err != nil {
 				return err
 			}
 			v.PerformFlowUiTask = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_PostgreSqlDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_PostgreSqlDataSource, &ev); err != nil {
+				return err
+			}
+			v.PostgreSqlDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_PrestoDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_PrestoDataSource, &ev); err != nil {
+				return err
+			}
+			v.PrestoDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_PrintReports:
 			var ev string
@@ -13678,6 +15296,34 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.QuickEventTrigger = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_RadiantDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_RadiantDataSource, &ev); err != nil {
+				return err
+			}
+			v.RadiantDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_RdsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_RdsDataSource, &ev); err != nil {
+				return err
+			}
+			v.RdsDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_RedshiftAutoDiscoveredDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_RedshiftAutoDiscoveredDataSource, &ev); err != nil {
+				return err
+			}
+			v.RedshiftAutoDiscoveredDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_RedshiftManualDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_RedshiftManualDataSource, &ev); err != nil {
+				return err
+			}
+			v.RedshiftManualDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_RenameSharedFolders:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_RenameSharedFolders, &ev); err != nil {
@@ -13692,12 +15338,33 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Research = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_S3AnalyticsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_S3AnalyticsDataSource, &ev); err != nil {
+				return err
+			}
+			v.S3AnalyticsDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_S3DataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_S3DataSource, &ev); err != nil {
+				return err
+			}
+			v.S3DataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_S3KnowledgeBase:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_S3KnowledgeBase, &ev); err != nil {
 				return err
 			}
 			v.S3KnowledgeBase = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_S3TablesDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_S3TablesDataSource, &ev); err != nil {
+				return err
+			}
+			v.S3TablesDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_SAPBillOfMaterialAction:
 			var ev string
@@ -13741,6 +15408,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.SalesforceAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_SalesforceDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_SalesforceDataSource, &ev); err != nil {
+				return err
+			}
+			v.SalesforceDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_SandPGMIAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_SandPGMIAction, &ev); err != nil {
@@ -13754,6 +15428,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.SandPGlobalEnergyAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_SapHanaDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_SapHanaDataSource, &ev); err != nil {
+				return err
+			}
+			v.SapHanaDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_Scenario:
 			var ev string
@@ -13783,12 +15464,26 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ServiceNowAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ServiceNowDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ServiceNowDataSource, &ev); err != nil {
+				return err
+			}
+			v.ServiceNowDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareAdobeAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareAdobeAction, &ev); err != nil {
 				return err
 			}
 			v.ShareAdobeAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareAdobeAnalyticsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareAdobeAnalyticsDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareAdobeAnalyticsDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ShareAirtableAction:
 			var ev string
@@ -13845,6 +15540,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.ShareAsanaAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareAthenaDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareAthenaDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareAthenaDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareAuroraDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareAuroraDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareAuroraDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ShareBambooHRAction:
 			var ev string
@@ -13951,12 +15660,47 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareDataSources = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareDatabricksDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareDatabricksDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareDatabricksDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareDatasets:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareDatasets, &ev); err != nil {
 				return err
 			}
 			v.ShareDatasets = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareDb2DataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareDb2DataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareDb2DataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareDenodoDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareDenodoDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareDenodoDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareDocumentDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareDocumentDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareDocumentDbDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareDremioDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareDremioDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareDremioDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ShareDropboxAction:
 			var ev string
@@ -13972,6 +15716,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareDunAndBradstreetAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareDynamoDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareDynamoDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareDynamoDbDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareExasolDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareExasolDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareExasolDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareFactSetAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareFactSetAction, &ev); err != nil {
@@ -13986,12 +15744,26 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareFigmaAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareFileDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareFileDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareFileDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareGenericHTTPAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareGenericHTTPAction, &ev); err != nil {
 				return err
 			}
 			v.ShareGenericHTTPAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareGitHubDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareGitHubDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareGitHubDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ShareGithubAction:
 			var ev string
@@ -14007,12 +15779,33 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareGmailAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareGongAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareGongAction, &ev); err != nil {
+				return err
+			}
+			v.ShareGongAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareGoogleAnalyticsAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareGoogleAnalyticsAction, &ev); err != nil {
 				return err
 			}
 			v.ShareGoogleAnalyticsAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareGoogleAnalyticsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareGoogleAnalyticsDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareGoogleAnalyticsDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareGoogleBigQueryDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareGoogleBigQueryDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareGoogleBigQueryDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ShareGoogleCalendarAction:
 			var ev string
@@ -14063,6 +15856,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareGoogleSheetsAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareGoogleSheetsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareGoogleSheetsDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareGoogleSheetsDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareGoogleSlidesAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareGoogleSlidesAction, &ev); err != nil {
@@ -14098,6 +15898,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareIDCKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareImpalaDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareImpalaDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareImpalaDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareIntercomAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareIntercomAction, &ev); err != nil {
@@ -14111,6 +15918,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.ShareJiraAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareJiraDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareJiraDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareJiraDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ShareKnowledgeBases:
 			var ev string
@@ -14147,6 +15961,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareMSTeamsAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareMariaDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareMariaDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareMariaDbDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareMondayAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareMondayAction, &ev); err != nil {
@@ -14154,12 +15975,33 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareMondayAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareMongoAtlasDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareMongoAtlasDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareMongoAtlasDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareMongoDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareMongoDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareMongoDbDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareMoodysAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareMoodysAction, &ev); err != nil {
 				return err
 			}
 			v.ShareMoodysAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareMySqlDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareMySqlDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareMySqlDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ShareNewRelicAction:
 			var ev string
@@ -14203,6 +16045,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareOpenAPIAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareOpenSearchDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareOpenSearchDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareOpenSearchDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareOracleDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareOracleDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareOracleDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_SharePagerDutyAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_SharePagerDutyAction, &ev); err != nil {
@@ -14216,6 +16072,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.SharePagerDutyAgentAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_SharePayPalDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_SharePayPalDataSource, &ev); err != nil {
+				return err
+			}
+			v.SharePayPalDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_SharePointAction:
 			var ev string
@@ -14231,6 +16094,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.SharePointKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_SharePostgreSqlDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_SharePostgreSqlDataSource, &ev); err != nil {
+				return err
+			}
+			v.SharePostgreSqlDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_SharePrestoDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_SharePrestoDataSource, &ev); err != nil {
+				return err
+			}
+			v.SharePrestoDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareQBusinessKnowledgeBase:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareQBusinessKnowledgeBase, &ev); err != nil {
@@ -14245,12 +16122,61 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareQuickBooksAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareRadiantDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareRadiantDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareRadiantDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareRdsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareRdsDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareRdsDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareRedshiftAutoDiscoveredDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareRedshiftAutoDiscoveredDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareRedshiftAutoDiscoveredDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareRedshiftManualDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareRedshiftManualDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareRedshiftManualDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareS3AnalyticsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareS3AnalyticsDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareS3AnalyticsDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareS3DataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareS3DataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareS3DataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareS3KnowledgeBase:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareS3KnowledgeBase, &ev); err != nil {
 				return err
 			}
 			v.ShareS3KnowledgeBase = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareS3TablesDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareS3TablesDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareS3TablesDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ShareSAPBillOfMaterialAction:
 			var ev string
@@ -14294,6 +16220,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareSalesforceAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareSalesforceDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareSalesforceDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareSalesforceDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareSandPGMIAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareSandPGMIAction, &ev); err != nil {
@@ -14308,12 +16241,26 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareSandPGlobalEnergyAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareSapHanaDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareSapHanaDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareSapHanaDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareServiceNowAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareServiceNowAction, &ev); err != nil {
 				return err
 			}
 			v.ShareServiceNowAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareServiceNowDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareServiceNowDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareServiceNowDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ShareSharePointAction:
 			var ev string
@@ -14357,6 +16304,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareSnowFlakeAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareSnowflakeDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareSnowflakeDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareSnowflakeDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareSpaces:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareSpaces, &ev); err != nil {
@@ -14364,12 +16318,68 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareSpaces = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareSparkDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareSparkDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareSparkDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareSqlServerDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareSqlServerDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareSqlServerDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareSquareDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareSquareDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareSquareDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareStarburstDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareStarburstDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareStarburstDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareTeradataDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareTeradataDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareTeradataDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareTextractAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareTextractAction, &ev); err != nil {
 				return err
 			}
 			v.ShareTextractAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareTimestreamDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareTimestreamDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareTimestreamDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareTrinoDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareTrinoDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareTrinoDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareTwitterDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareTwitterDataSource, &ev); err != nil {
+				return err
+			}
+			v.ShareTwitterDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ShareVisierAgentAction:
 			var ev string
@@ -14448,12 +16458,47 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.SnowFlakeAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_SnowflakeDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_SnowflakeDataSource, &ev); err != nil {
+				return err
+			}
+			v.SnowflakeDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_Space:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_Space, &ev); err != nil {
 				return err
 			}
 			v.Space = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_SparkDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_SparkDataSource, &ev); err != nil {
+				return err
+			}
+			v.SparkDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_SqlServerDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_SqlServerDataSource, &ev); err != nil {
+				return err
+			}
+			v.SqlServerDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_SquareDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_SquareDataSource, &ev); err != nil {
+				return err
+			}
+			v.SquareDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_StarburstDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_StarburstDataSource, &ev); err != nil {
+				return err
+			}
+			v.StarburstDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_Story:
 			var ev string
@@ -14469,12 +16514,26 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.SubscribeDashboardEmailReports = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_TeradataDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_TeradataDataSource, &ev); err != nil {
+				return err
+			}
+			v.TeradataDataSource = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_TextractAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_TextractAction, &ev); err != nil {
 				return err
 			}
 			v.TextractAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_TimestreamDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_TimestreamDataSource, &ev); err != nil {
+				return err
+			}
+			v.TimestreamDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_Topic:
 			var ev string
@@ -14489,6 +16548,335 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.Trigger = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_TrinoDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_TrinoDataSource, &ev); err != nil {
+				return err
+			}
+			v.TrinoDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_TwitterDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_TwitterDataSource, &ev); err != nil {
+				return err
+			}
+			v.TwitterDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateAdobeAnalyticsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateAdobeAnalyticsDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateAdobeAnalyticsDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateAthenaDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateAthenaDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateAthenaDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateAuroraDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateAuroraDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateAuroraDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateDatabricksDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateDatabricksDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateDatabricksDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateDb2DataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateDb2DataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateDb2DataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateDenodoDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateDenodoDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateDenodoDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateDocumentDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateDocumentDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateDocumentDbDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateDremioDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateDremioDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateDremioDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateDynamoDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateDynamoDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateDynamoDbDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateExasolDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateExasolDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateExasolDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateFileDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateFileDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateFileDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateGitHubDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateGitHubDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateGitHubDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateGoogleAnalyticsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateGoogleAnalyticsDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateGoogleAnalyticsDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateGoogleBigQueryDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateGoogleBigQueryDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateGoogleBigQueryDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateGoogleSheetsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateGoogleSheetsDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateGoogleSheetsDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateImpalaDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateImpalaDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateImpalaDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateJiraDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateJiraDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateJiraDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateMariaDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateMariaDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateMariaDbDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateMongoAtlasDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateMongoAtlasDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateMongoAtlasDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateMongoDbDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateMongoDbDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateMongoDbDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateMySqlDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateMySqlDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateMySqlDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateOpenSearchDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateOpenSearchDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateOpenSearchDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateOracleDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateOracleDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateOracleDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdatePayPalDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdatePayPalDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdatePayPalDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdatePostgreSqlDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdatePostgreSqlDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdatePostgreSqlDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdatePrestoDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdatePrestoDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdatePrestoDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateRadiantDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateRadiantDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateRadiantDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateRdsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateRdsDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateRdsDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateRedshiftAutoDiscoveredDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateRedshiftAutoDiscoveredDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateRedshiftAutoDiscoveredDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateRedshiftManualDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateRedshiftManualDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateRedshiftManualDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateS3AnalyticsDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateS3AnalyticsDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateS3AnalyticsDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateS3DataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateS3DataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateS3DataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateS3TablesDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateS3TablesDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateS3TablesDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateSalesforceDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateSalesforceDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateSalesforceDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateSapHanaDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateSapHanaDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateSapHanaDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateServiceNowDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateServiceNowDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateServiceNowDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateSnowflakeDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateSnowflakeDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateSnowflakeDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateSparkDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateSparkDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateSparkDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateSqlServerDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateSqlServerDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateSqlServerDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateSquareDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateSquareDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateSquareDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateStarburstDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateStarburstDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateStarburstDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateTeradataDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateTeradataDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateTeradataDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateTimestreamDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateTimestreamDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateTimestreamDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateTrinoDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateTrinoDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateTrinoDataSource = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UpdateTwitterDataSource:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UpdateTwitterDataSource, &ev); err != nil {
+				return err
+			}
+			v.UpdateTwitterDataSource = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_UseAdobeAction:
 			var ev string
@@ -14699,6 +17087,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.UseGmailAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseGongAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseGongAction, &ev); err != nil {
+				return err
+			}
+			v.UseGongAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_UseGoogleAnalyticsAction:
 			var ev string

@@ -945,6 +945,12 @@ type AwsServiceRequestConfiguration struct {
 	// maximum size after evaluation is 64 KB.
 	Body *string
 
+	// The optional response-caching configuration for the function. When present,
+	// MediaTailor caches the responses that the function receives from the AWS
+	// service, within the time-to-live (TTL) bounds that you specify. Omit this
+	// configuration to disable response caching.
+	Cache *HttpRequestCacheConfiguration
+
 	// A map of HTTP header names to expression values. MediaTailor evaluates each
 	// header value expression at runtime and includes the result in the outbound
 	// request to the AWS service. Use this to pass any headers required by the target
@@ -971,6 +977,11 @@ func (v *AwsServiceRequestConfiguration) Serialize(s smithy.ShapeSerializer) {
 func (v *AwsServiceRequestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Body != nil {
 		s.WriteString(schemas.AwsServiceRequestConfiguration_Body, *v.Body)
+	}
+	if v.Cache != nil {
+		s.WriteStruct(schemas.AwsServiceRequestConfiguration_Cache)
+		v.Cache.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	serialize__mapOf__string(s, schemas.AwsServiceRequestConfiguration_Headers, v.Headers)
 	if v.MethodType != "" {
@@ -999,6 +1010,9 @@ func (v *AwsServiceRequestConfiguration) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.AwsServiceRequestConfiguration_Body:
 			v.Body = new(string)
 			return d.ReadString(schemas.AwsServiceRequestConfiguration_Body, v.Body)
+		case schemas.AwsServiceRequestConfiguration_Cache:
+			v.Cache = &HttpRequestCacheConfiguration{}
+			return v.Cache.Deserialize(d)
 		case schemas.AwsServiceRequestConfiguration_Headers:
 			return deserialize__mapOf__string(d, schemas.AwsServiceRequestConfiguration_Headers, &v.Headers)
 		case schemas.AwsServiceRequestConfiguration_MethodType:
@@ -2243,6 +2257,75 @@ func (v *HttpRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The optional response-caching configuration shared by the HTTP-based function
+// types ( HTTP_REQUEST , AWS_SERVICE_REQUEST , and VAST_REQUEST ). When you
+// provide this configuration, MediaTailor caches the function's responses that
+// have one of the following HTTP status codes: 200 , 203 , 204 , 404 , 405 , 410 ,
+// 414 , and 501 . For a cacheable response, MediaTailor caches it for the number
+// of seconds given by the response's Cache-Control max-age directive, limited to
+// the range between TtlMinimumSeconds and TtlMaximumSeconds . If the response has
+// no Cache-Control max-age directive, MediaTailor caches it for TtlMinimumSeconds
+// seconds. Cached HTTP responses are scoped per playback configuration, not per
+// function.
+type HttpRequestCacheConfiguration struct {
+
+	// The upper bound, in seconds, on how long MediaTailor caches a response. This
+	// value must be greater than or equal to TtlMinimumSeconds .
+	//
+	// This member is required.
+	TtlMaximumSeconds *int32
+
+	// The lower bound, in seconds, on how long MediaTailor caches a response.
+	// MediaTailor also uses this value as the cache duration when a response has no
+	// Cache-Control max-age directive.
+	//
+	// This member is required.
+	TtlMinimumSeconds *int32
+
+	// A JSONata expression that MediaTailor evaluates to a custom cache key. By
+	// default, the cache key is a hash of the HTTP URL, the request body, and the HTTP
+	// method; request headers are not included. You can specify a custom cache key
+	// expression to vary caching by request headers and more. The evaluated key must
+	// be smaller than 1 KB; otherwise the HTTP function will fail.
+	Key *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *HttpRequestCacheConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpRequestCacheConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpRequestCacheConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.HttpRequestCacheConfiguration_Key, *v.Key)
+	}
+	if v.TtlMaximumSeconds != nil {
+		s.WriteInt32(schemas.HttpRequestCacheConfiguration_TtlMaximumSeconds, *v.TtlMaximumSeconds)
+	}
+	if v.TtlMinimumSeconds != nil {
+		s.WriteInt32(schemas.HttpRequestCacheConfiguration_TtlMinimumSeconds, *v.TtlMinimumSeconds)
+	}
+}
+func (v *HttpRequestCacheConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpRequestCacheConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpRequestCacheConfiguration_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.HttpRequestCacheConfiguration_Key, v.Key)
+		case schemas.HttpRequestCacheConfiguration_TtlMaximumSeconds:
+			v.TtlMaximumSeconds = new(int32)
+			return d.ReadInt32(schemas.HttpRequestCacheConfiguration_TtlMaximumSeconds, v.TtlMaximumSeconds)
+		case schemas.HttpRequestCacheConfiguration_TtlMinimumSeconds:
+			v.TtlMinimumSeconds = new(int32)
+			return d.ReadInt32(schemas.HttpRequestCacheConfiguration_TtlMinimumSeconds, v.TtlMinimumSeconds)
+		}
+		return nil
+	})
+}
+
 // The configuration for an HTTP_REQUEST function. Specifies the HTTP method, URL,
 // headers, body, timeout, and output expressions for the request. For more
 // information, see [HTTP_REQUEST]in the MediaTailor User Guide.
@@ -2279,6 +2362,12 @@ type HttpRequestConfiguration struct {
 	// maximum size after evaluation is 64 KB.
 	Body *string
 
+	// The optional response-caching configuration for the function. When present,
+	// MediaTailor caches the responses that the function receives from the HTTP
+	// endpoint, within the time-to-live (TTL) bounds that you specify. Omit this
+	// configuration to disable response caching.
+	Cache *HttpRequestCacheConfiguration
+
 	// A map of HTTP header names to expression values. MediaTailor evaluates each
 	// header value expression at runtime and includes the result in the outbound HTTP
 	// request. Maximum 50 headers.
@@ -2306,6 +2395,11 @@ func (v *HttpRequestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Body != nil {
 		s.WriteString(schemas.HttpRequestConfiguration_Body, *v.Body)
 	}
+	if v.Cache != nil {
+		s.WriteStruct(schemas.HttpRequestConfiguration_Cache)
+		v.Cache.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	serialize__mapOf__string(s, schemas.HttpRequestConfiguration_Headers, v.Headers)
 	if v.MethodType != "" {
 		s.WriteString(schemas.HttpRequestConfiguration_MethodType, string(v.MethodType))
@@ -2327,6 +2421,9 @@ func (v *HttpRequestConfiguration) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.HttpRequestConfiguration_Body:
 			v.Body = new(string)
 			return d.ReadString(schemas.HttpRequestConfiguration_Body, v.Body)
+		case schemas.HttpRequestConfiguration_Cache:
+			v.Cache = &HttpRequestCacheConfiguration{}
+			return v.Cache.Deserialize(d)
 		case schemas.HttpRequestConfiguration_Headers:
 			return deserialize__mapOf__string(d, schemas.HttpRequestConfiguration_Headers, &v.Headers)
 		case schemas.HttpRequestConfiguration_MethodType:
@@ -4963,6 +5060,12 @@ type VastRequestConfiguration struct {
 	// body after evaluation can be up to 64 KB.
 	Body *string
 
+	// The optional response-caching configuration for the function. When present,
+	// MediaTailor caches the responses that the function receives from the HTTP
+	// endpoint, within the time-to-live (TTL) bounds that you specify. Omit this
+	// configuration to disable response caching.
+	Cache *HttpRequestCacheConfiguration
+
 	// A map of HTTP header names to expression values. MediaTailor evaluates each
 	// header value expression at runtime and includes the result in the outbound
 	// request. Headers beginning with X-Amz- are reserved by the service, and method
@@ -4993,6 +5096,11 @@ func (v *VastRequestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Body != nil {
 		s.WriteString(schemas.VastRequestConfiguration_Body, *v.Body)
 	}
+	if v.Cache != nil {
+		s.WriteStruct(schemas.VastRequestConfiguration_Cache)
+		v.Cache.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	serialize__mapOf__string(s, schemas.VastRequestConfiguration_Headers, v.Headers)
 	if v.MethodType != "" {
 		s.WriteString(schemas.VastRequestConfiguration_MethodType, string(v.MethodType))
@@ -5014,6 +5122,9 @@ func (v *VastRequestConfiguration) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.VastRequestConfiguration_Body:
 			v.Body = new(string)
 			return d.ReadString(schemas.VastRequestConfiguration_Body, v.Body)
+		case schemas.VastRequestConfiguration_Cache:
+			v.Cache = &HttpRequestCacheConfiguration{}
+			return v.Cache.Deserialize(d)
 		case schemas.VastRequestConfiguration_Headers:
 			return deserialize__mapOf__string(d, schemas.VastRequestConfiguration_Headers, &v.Headers)
 		case schemas.VastRequestConfiguration_MethodType:

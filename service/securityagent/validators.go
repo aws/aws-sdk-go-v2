@@ -2889,6 +2889,21 @@ func validateServiceManagedInput(v *types.ServiceManagedInput) error {
 	}
 }
 
+func validateTestScope(v *types.TestScope) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TestScope"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTriggerFilter(v *types.TriggerFilter) error {
 	if v == nil {
 		return nil
@@ -3544,6 +3559,11 @@ func validateOpCreatePentestInput(v *CreatePentestInput) error {
 	if v.ReportDestination != nil {
 		if err := validateReportDestination(v.ReportDestination); err != nil {
 			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TestScope != nil {
+		if err := validateTestScope(v.TestScope); err != nil {
+			invalidParams.AddNested("TestScope", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4513,6 +4533,11 @@ func validateOpUpdatePentestInput(v *UpdatePentestInput) error {
 	if v.ReportDestination != nil {
 		if err := validateReportDestination(v.ReportDestination); err != nil {
 			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TestScope != nil {
+		if err := validateTestScope(v.TestScope); err != nil {
+			invalidParams.AddNested("TestScope", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

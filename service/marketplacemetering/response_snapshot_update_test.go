@@ -375,6 +375,9 @@ func TestUpdateResponseSnapshot_ResolveCustomer(t *testing.T) {
 		ProductCode:          ptr.String("__ProductCode__"),
 		CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
 		LicenseArn:           ptr.String("__LicenseArn__"),
+		Metadata: &types.Metadata{
+			AgreementId: ptr.String("__AgreementId__"),
+		},
 	}
 	proto := awsjson.New11(schemas.AWSMPMeteringService)
 	opSchema := smithy.NewOperationSchema(schemas.ResolveCustomer, schemas.ResolveCustomerResult, schemas.ResolveCustomerResult)

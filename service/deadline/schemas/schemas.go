@@ -582,6 +582,13 @@ var ListLimits = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2023-10-12/farms/{farmId}/limits",
 	Code: 200})
 
+var ListMemberships = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "ListMemberships",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/2023-10-12/memberships",
+	Code: 200})
+
 var ListMeteredProducts = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ListMeteredProducts",
@@ -3372,6 +3379,42 @@ var MembershipLevel_CONTRIBUTOR *smithy.Schema
 var MembershipLevel_OWNER *smithy.Schema
 
 var MembershipLevel_MANAGER *smithy.Schema
+
+var MembershipResourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "MembershipResourceType",
+}, smithy.ShapeTypeEnum, 4)
+var MembershipResourceType_FARM *smithy.Schema
+
+var MembershipResourceType_QUEUE *smithy.Schema
+
+var MembershipResourceType_FLEET *smithy.Schema
+
+var MembershipResourceType_JOB *smithy.Schema
+
+var _MembershipResourceTypes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "MembershipResourceTypes",
+}, smithy.ShapeTypeList, 1)
+var _MembershipResourceTypes_member *smithy.Schema
+
+var _MembershipSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "MembershipSummaries",
+}, smithy.ShapeTypeList, 1)
+var _MembershipSummaries_member *smithy.Schema
+
+var MembershipSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "MembershipSummary",
+}, smithy.ShapeTypeUnion, 4)
+var MembershipSummary_farm *smithy.Schema
+
+var MembershipSummary_queue *smithy.Schema
+
+var MembershipSummary_fleet *smithy.Schema
+
+var MembershipSummary_job *smithy.Schema
 
 var _MemoryAmountMiB = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
@@ -7358,6 +7401,30 @@ var ListLimitsResponse_limits *smithy.Schema
 
 var ListLimitsResponse_nextToken *smithy.Schema
 
+var ListMembershipsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "ListMembershipsRequest",
+}, smithy.ShapeTypeStructure, 6)
+var ListMembershipsRequest_nextToken *smithy.Schema
+
+var ListMembershipsRequest_maxResults *smithy.Schema
+
+var ListMembershipsRequest_principalId *smithy.Schema
+
+var ListMembershipsRequest_identityStoreId *smithy.Schema
+
+var ListMembershipsRequest_identityCenterRegion *smithy.Schema
+
+var ListMembershipsRequest_resourceTypes *smithy.Schema
+
+var ListMembershipsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.deadline",
+	Name:      "ListMembershipsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListMembershipsResponse_memberships *smithy.Schema
+
+var ListMembershipsResponse_nextToken *smithy.Schema
+
 var ListMeteredProductsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "ListMeteredProductsRequest",
@@ -10037,6 +10104,38 @@ func init() {
 
 	LogicalOperator_OR = LogicalOperator.AddMember("OR", smithyprelude.Unit)
 
+	MembershipResourceType_FARM = MembershipResourceType.AddMember("FARM", smithyprelude.Unit)
+
+	MembershipResourceType_QUEUE = MembershipResourceType.AddMember("QUEUE", smithyprelude.Unit)
+
+	MembershipResourceType_FLEET = MembershipResourceType.AddMember("FLEET", smithyprelude.Unit)
+
+	MembershipResourceType_JOB = MembershipResourceType.AddMember("JOB", smithyprelude.Unit)
+
+	_MembershipResourceTypes_member = _MembershipResourceTypes.AddMember("member", MembershipResourceType)
+
+	QueueMember_farmId = QueueMember.AddMember("farmId", _FarmId)
+
+	QueueMember_queueId = QueueMember.AddMember("queueId", _QueueId)
+
+	QueueMember_principalId = QueueMember.AddMember("principalId", _IdentityCenterPrincipalId)
+
+	QueueMember_principalType = QueueMember.AddMember("principalType", DeadlinePrincipalType)
+
+	QueueMember_identityStoreId = QueueMember.AddMember("identityStoreId", _IdentityStoreId)
+
+	QueueMember_membershipLevel = QueueMember.AddMember("membershipLevel", MembershipLevel)
+
+	MembershipSummary_farm = MembershipSummary.AddMember("farm", FarmMember)
+
+	MembershipSummary_queue = MembershipSummary.AddMember("queue", QueueMember)
+
+	MembershipSummary_fleet = MembershipSummary.AddMember("fleet", FleetMember)
+
+	MembershipSummary_job = MembershipSummary.AddMember("job", JobMember)
+
+	_MembershipSummaries_member = _MembershipSummaries.AddMember("member", MembershipSummary)
+
 	MeteredProductSummary_productId = MeteredProductSummary.AddMember("productId", _MeteredProductId)
 
 	MeteredProductSummary_family = MeteredProductSummary.AddMember("family", _BoundedString)
@@ -10154,18 +10253,6 @@ func init() {
 	QueueLimitAssociationSummary_updatedBy = QueueLimitAssociationSummary.AddMember("updatedBy", _UpdatedBy)
 
 	_QueueLimitAssociationSummaries_member = _QueueLimitAssociationSummaries.AddMember("member", QueueLimitAssociationSummary)
-
-	QueueMember_farmId = QueueMember.AddMember("farmId", _FarmId)
-
-	QueueMember_queueId = QueueMember.AddMember("queueId", _QueueId)
-
-	QueueMember_principalId = QueueMember.AddMember("principalId", _IdentityCenterPrincipalId)
-
-	QueueMember_principalType = QueueMember.AddMember("principalType", DeadlinePrincipalType)
-
-	QueueMember_identityStoreId = QueueMember.AddMember("identityStoreId", _IdentityStoreId)
-
-	QueueMember_membershipLevel = QueueMember.AddMember("membershipLevel", MembershipLevel)
 
 	_QueueMemberList_member = _QueueMemberList.AddMember("member", QueueMember)
 
@@ -11926,6 +12013,22 @@ func init() {
 	ListLimitsResponse_limits = ListLimitsResponse.AddMember("limits", _LimitSummaries)
 
 	ListLimitsResponse_nextToken = ListLimitsResponse.AddMember("nextToken", _NextToken)
+
+	ListMembershipsRequest_nextToken = ListMembershipsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListMembershipsRequest_maxResults = ListMembershipsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListMembershipsRequest_principalId = ListMembershipsRequest.AddMember("principalId", _IdentityCenterPrincipalId, &smithytraits.HTTPQuery{Name: "principalId"})
+
+	ListMembershipsRequest_identityStoreId = ListMembershipsRequest.AddMember("identityStoreId", _IdentityStoreId, &smithytraits.HTTPQuery{Name: "identityStoreId"})
+
+	ListMembershipsRequest_identityCenterRegion = ListMembershipsRequest.AddMember("identityCenterRegion", _Region, &smithytraits.HTTPQuery{Name: "identityCenterRegion"})
+
+	ListMembershipsRequest_resourceTypes = ListMembershipsRequest.AddMember("resourceTypes", _MembershipResourceTypes, &smithytraits.HTTPQuery{Name: "resourceTypes"})
+
+	ListMembershipsResponse_memberships = ListMembershipsResponse.AddMember("memberships", _MembershipSummaries)
+
+	ListMembershipsResponse_nextToken = ListMembershipsResponse.AddMember("nextToken", _NextToken)
 
 	ListMeteredProductsRequest_licenseEndpointId = ListMeteredProductsRequest.AddMember("licenseEndpointId", _LicenseEndpointId, &smithytraits.HTTPLabel{})
 

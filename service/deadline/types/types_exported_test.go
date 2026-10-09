@@ -229,6 +229,36 @@ var _ *string
 var _ [][]string
 var _ []string
 
+func ExampleMembershipSummary_outputUsage() {
+	var union types.MembershipSummary
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MembershipSummaryMemberFarm:
+		_ = v.Value // Value is types.FarmMember
+
+	case *types.MembershipSummaryMemberFleet:
+		_ = v.Value // Value is types.FleetMember
+
+	case *types.MembershipSummaryMemberJob:
+		_ = v.Value // Value is types.JobMember
+
+	case *types.MembershipSummaryMemberQueue:
+		_ = v.Value // Value is types.QueueMember
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.FleetMember
+var _ *types.JobMember
+var _ *types.FarmMember
+var _ *types.QueueMember
+
 func ExampleSchedulingConfiguration_outputUsage() {
 	var union types.SchedulingConfiguration
 	// type switches can be used to check the union value

@@ -5305,7 +5305,7 @@ var CalculatedMeasureField_Expression *smithy.Schema
 var Capabilities = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "Capabilities",
-}, smithy.ShapeTypeStructure, 391)
+}, smithy.ShapeTypeStructure, 575)
 var Capabilities_ExportToCsv *smithy.Schema
 
 var Capabilities_ExportToExcel *smithy.Schema
@@ -6036,6 +6036,14 @@ var Capabilities_ShareBeeAction *smithy.Schema
 
 var Capabilities_UseBeeAction *smithy.Schema
 
+var Capabilities_GongAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateGongAction *smithy.Schema
+
+var Capabilities_ShareGongAction *smithy.Schema
+
+var Capabilities_UseGongAction *smithy.Schema
+
 var Capabilities_Topic *smithy.Schema
 
 var Capabilities_EditVisualWithQ *smithy.Schema
@@ -6087,6 +6095,366 @@ var Capabilities_ScheduleTrigger *smithy.Schema
 var Capabilities_InboundEmailTrigger *smithy.Schema
 
 var Capabilities_QuickEventTrigger *smithy.Schema
+
+var Capabilities_FileDataSource *smithy.Schema
+
+var Capabilities_CreateFileDataSource *smithy.Schema
+
+var Capabilities_UpdateFileDataSource *smithy.Schema
+
+var Capabilities_ShareFileDataSource *smithy.Schema
+
+var Capabilities_S3DataSource *smithy.Schema
+
+var Capabilities_CreateS3DataSource *smithy.Schema
+
+var Capabilities_UpdateS3DataSource *smithy.Schema
+
+var Capabilities_ShareS3DataSource *smithy.Schema
+
+var Capabilities_S3AnalyticsDataSource *smithy.Schema
+
+var Capabilities_CreateS3AnalyticsDataSource *smithy.Schema
+
+var Capabilities_UpdateS3AnalyticsDataSource *smithy.Schema
+
+var Capabilities_ShareS3AnalyticsDataSource *smithy.Schema
+
+var Capabilities_S3TablesDataSource *smithy.Schema
+
+var Capabilities_CreateS3TablesDataSource *smithy.Schema
+
+var Capabilities_UpdateS3TablesDataSource *smithy.Schema
+
+var Capabilities_ShareS3TablesDataSource *smithy.Schema
+
+var Capabilities_AthenaDataSource *smithy.Schema
+
+var Capabilities_CreateAthenaDataSource *smithy.Schema
+
+var Capabilities_UpdateAthenaDataSource *smithy.Schema
+
+var Capabilities_ShareAthenaDataSource *smithy.Schema
+
+var Capabilities_RdsDataSource *smithy.Schema
+
+var Capabilities_CreateRdsDataSource *smithy.Schema
+
+var Capabilities_UpdateRdsDataSource *smithy.Schema
+
+var Capabilities_ShareRdsDataSource *smithy.Schema
+
+var Capabilities_RedshiftAutoDiscoveredDataSource *smithy.Schema
+
+var Capabilities_CreateRedshiftAutoDiscoveredDataSource *smithy.Schema
+
+var Capabilities_UpdateRedshiftAutoDiscoveredDataSource *smithy.Schema
+
+var Capabilities_ShareRedshiftAutoDiscoveredDataSource *smithy.Schema
+
+var Capabilities_RedshiftManualDataSource *smithy.Schema
+
+var Capabilities_CreateRedshiftManualDataSource *smithy.Schema
+
+var Capabilities_UpdateRedshiftManualDataSource *smithy.Schema
+
+var Capabilities_ShareRedshiftManualDataSource *smithy.Schema
+
+var Capabilities_OpenSearchDataSource *smithy.Schema
+
+var Capabilities_CreateOpenSearchDataSource *smithy.Schema
+
+var Capabilities_UpdateOpenSearchDataSource *smithy.Schema
+
+var Capabilities_ShareOpenSearchDataSource *smithy.Schema
+
+var Capabilities_TimestreamDataSource *smithy.Schema
+
+var Capabilities_CreateTimestreamDataSource *smithy.Schema
+
+var Capabilities_UpdateTimestreamDataSource *smithy.Schema
+
+var Capabilities_ShareTimestreamDataSource *smithy.Schema
+
+var Capabilities_AuroraDataSource *smithy.Schema
+
+var Capabilities_CreateAuroraDataSource *smithy.Schema
+
+var Capabilities_UpdateAuroraDataSource *smithy.Schema
+
+var Capabilities_ShareAuroraDataSource *smithy.Schema
+
+var Capabilities_MySqlDataSource *smithy.Schema
+
+var Capabilities_CreateMySqlDataSource *smithy.Schema
+
+var Capabilities_UpdateMySqlDataSource *smithy.Schema
+
+var Capabilities_ShareMySqlDataSource *smithy.Schema
+
+var Capabilities_PostgreSqlDataSource *smithy.Schema
+
+var Capabilities_CreatePostgreSqlDataSource *smithy.Schema
+
+var Capabilities_UpdatePostgreSqlDataSource *smithy.Schema
+
+var Capabilities_SharePostgreSqlDataSource *smithy.Schema
+
+var Capabilities_OracleDataSource *smithy.Schema
+
+var Capabilities_CreateOracleDataSource *smithy.Schema
+
+var Capabilities_UpdateOracleDataSource *smithy.Schema
+
+var Capabilities_ShareOracleDataSource *smithy.Schema
+
+var Capabilities_SqlServerDataSource *smithy.Schema
+
+var Capabilities_CreateSqlServerDataSource *smithy.Schema
+
+var Capabilities_UpdateSqlServerDataSource *smithy.Schema
+
+var Capabilities_ShareSqlServerDataSource *smithy.Schema
+
+var Capabilities_MariaDbDataSource *smithy.Schema
+
+var Capabilities_CreateMariaDbDataSource *smithy.Schema
+
+var Capabilities_UpdateMariaDbDataSource *smithy.Schema
+
+var Capabilities_ShareMariaDbDataSource *smithy.Schema
+
+var Capabilities_SnowflakeDataSource *smithy.Schema
+
+var Capabilities_CreateSnowflakeDataSource *smithy.Schema
+
+var Capabilities_UpdateSnowflakeDataSource *smithy.Schema
+
+var Capabilities_ShareSnowflakeDataSource *smithy.Schema
+
+var Capabilities_GoogleBigQueryDataSource *smithy.Schema
+
+var Capabilities_CreateGoogleBigQueryDataSource *smithy.Schema
+
+var Capabilities_UpdateGoogleBigQueryDataSource *smithy.Schema
+
+var Capabilities_ShareGoogleBigQueryDataSource *smithy.Schema
+
+var Capabilities_DatabricksDataSource *smithy.Schema
+
+var Capabilities_CreateDatabricksDataSource *smithy.Schema
+
+var Capabilities_UpdateDatabricksDataSource *smithy.Schema
+
+var Capabilities_ShareDatabricksDataSource *smithy.Schema
+
+var Capabilities_StarburstDataSource *smithy.Schema
+
+var Capabilities_CreateStarburstDataSource *smithy.Schema
+
+var Capabilities_UpdateStarburstDataSource *smithy.Schema
+
+var Capabilities_ShareStarburstDataSource *smithy.Schema
+
+var Capabilities_TrinoDataSource *smithy.Schema
+
+var Capabilities_CreateTrinoDataSource *smithy.Schema
+
+var Capabilities_UpdateTrinoDataSource *smithy.Schema
+
+var Capabilities_ShareTrinoDataSource *smithy.Schema
+
+var Capabilities_ImpalaDataSource *smithy.Schema
+
+var Capabilities_CreateImpalaDataSource *smithy.Schema
+
+var Capabilities_UpdateImpalaDataSource *smithy.Schema
+
+var Capabilities_ShareImpalaDataSource *smithy.Schema
+
+var Capabilities_TeradataDataSource *smithy.Schema
+
+var Capabilities_CreateTeradataDataSource *smithy.Schema
+
+var Capabilities_UpdateTeradataDataSource *smithy.Schema
+
+var Capabilities_ShareTeradataDataSource *smithy.Schema
+
+var Capabilities_PrestoDataSource *smithy.Schema
+
+var Capabilities_CreatePrestoDataSource *smithy.Schema
+
+var Capabilities_UpdatePrestoDataSource *smithy.Schema
+
+var Capabilities_SharePrestoDataSource *smithy.Schema
+
+var Capabilities_SparkDataSource *smithy.Schema
+
+var Capabilities_CreateSparkDataSource *smithy.Schema
+
+var Capabilities_UpdateSparkDataSource *smithy.Schema
+
+var Capabilities_ShareSparkDataSource *smithy.Schema
+
+var Capabilities_ExasolDataSource *smithy.Schema
+
+var Capabilities_CreateExasolDataSource *smithy.Schema
+
+var Capabilities_UpdateExasolDataSource *smithy.Schema
+
+var Capabilities_ShareExasolDataSource *smithy.Schema
+
+var Capabilities_Db2DataSource *smithy.Schema
+
+var Capabilities_CreateDb2DataSource *smithy.Schema
+
+var Capabilities_UpdateDb2DataSource *smithy.Schema
+
+var Capabilities_ShareDb2DataSource *smithy.Schema
+
+var Capabilities_SapHanaDataSource *smithy.Schema
+
+var Capabilities_CreateSapHanaDataSource *smithy.Schema
+
+var Capabilities_UpdateSapHanaDataSource *smithy.Schema
+
+var Capabilities_ShareSapHanaDataSource *smithy.Schema
+
+var Capabilities_DenodoDataSource *smithy.Schema
+
+var Capabilities_CreateDenodoDataSource *smithy.Schema
+
+var Capabilities_UpdateDenodoDataSource *smithy.Schema
+
+var Capabilities_ShareDenodoDataSource *smithy.Schema
+
+var Capabilities_DremioDataSource *smithy.Schema
+
+var Capabilities_CreateDremioDataSource *smithy.Schema
+
+var Capabilities_UpdateDremioDataSource *smithy.Schema
+
+var Capabilities_ShareDremioDataSource *smithy.Schema
+
+var Capabilities_SalesforceDataSource *smithy.Schema
+
+var Capabilities_CreateSalesforceDataSource *smithy.Schema
+
+var Capabilities_UpdateSalesforceDataSource *smithy.Schema
+
+var Capabilities_ShareSalesforceDataSource *smithy.Schema
+
+var Capabilities_RadiantDataSource *smithy.Schema
+
+var Capabilities_CreateRadiantDataSource *smithy.Schema
+
+var Capabilities_UpdateRadiantDataSource *smithy.Schema
+
+var Capabilities_ShareRadiantDataSource *smithy.Schema
+
+var Capabilities_PayPalDataSource *smithy.Schema
+
+var Capabilities_CreatePayPalDataSource *smithy.Schema
+
+var Capabilities_UpdatePayPalDataSource *smithy.Schema
+
+var Capabilities_SharePayPalDataSource *smithy.Schema
+
+var Capabilities_SquareDataSource *smithy.Schema
+
+var Capabilities_CreateSquareDataSource *smithy.Schema
+
+var Capabilities_UpdateSquareDataSource *smithy.Schema
+
+var Capabilities_ShareSquareDataSource *smithy.Schema
+
+var Capabilities_GitHubDataSource *smithy.Schema
+
+var Capabilities_CreateGitHubDataSource *smithy.Schema
+
+var Capabilities_UpdateGitHubDataSource *smithy.Schema
+
+var Capabilities_ShareGitHubDataSource *smithy.Schema
+
+var Capabilities_TwitterDataSource *smithy.Schema
+
+var Capabilities_CreateTwitterDataSource *smithy.Schema
+
+var Capabilities_UpdateTwitterDataSource *smithy.Schema
+
+var Capabilities_ShareTwitterDataSource *smithy.Schema
+
+var Capabilities_JiraDataSource *smithy.Schema
+
+var Capabilities_CreateJiraDataSource *smithy.Schema
+
+var Capabilities_UpdateJiraDataSource *smithy.Schema
+
+var Capabilities_ShareJiraDataSource *smithy.Schema
+
+var Capabilities_ServiceNowDataSource *smithy.Schema
+
+var Capabilities_CreateServiceNowDataSource *smithy.Schema
+
+var Capabilities_UpdateServiceNowDataSource *smithy.Schema
+
+var Capabilities_ShareServiceNowDataSource *smithy.Schema
+
+var Capabilities_AdobeAnalyticsDataSource *smithy.Schema
+
+var Capabilities_CreateAdobeAnalyticsDataSource *smithy.Schema
+
+var Capabilities_UpdateAdobeAnalyticsDataSource *smithy.Schema
+
+var Capabilities_ShareAdobeAnalyticsDataSource *smithy.Schema
+
+var Capabilities_GoogleAnalyticsDataSource *smithy.Schema
+
+var Capabilities_CreateGoogleAnalyticsDataSource *smithy.Schema
+
+var Capabilities_UpdateGoogleAnalyticsDataSource *smithy.Schema
+
+var Capabilities_ShareGoogleAnalyticsDataSource *smithy.Schema
+
+var Capabilities_GoogleSheetsDataSource *smithy.Schema
+
+var Capabilities_CreateGoogleSheetsDataSource *smithy.Schema
+
+var Capabilities_UpdateGoogleSheetsDataSource *smithy.Schema
+
+var Capabilities_ShareGoogleSheetsDataSource *smithy.Schema
+
+var Capabilities_DocumentDbDataSource *smithy.Schema
+
+var Capabilities_CreateDocumentDbDataSource *smithy.Schema
+
+var Capabilities_UpdateDocumentDbDataSource *smithy.Schema
+
+var Capabilities_ShareDocumentDbDataSource *smithy.Schema
+
+var Capabilities_MongoDbDataSource *smithy.Schema
+
+var Capabilities_CreateMongoDbDataSource *smithy.Schema
+
+var Capabilities_UpdateMongoDbDataSource *smithy.Schema
+
+var Capabilities_ShareMongoDbDataSource *smithy.Schema
+
+var Capabilities_MongoAtlasDataSource *smithy.Schema
+
+var Capabilities_CreateMongoAtlasDataSource *smithy.Schema
+
+var Capabilities_UpdateMongoAtlasDataSource *smithy.Schema
+
+var Capabilities_ShareMongoAtlasDataSource *smithy.Schema
+
+var Capabilities_DynamoDbDataSource *smithy.Schema
+
+var Capabilities_CreateDynamoDbDataSource *smithy.Schema
+
+var Capabilities_UpdateDynamoDbDataSource *smithy.Schema
+
+var Capabilities_ShareDynamoDbDataSource *smithy.Schema
 
 var CapabilityState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -38802,6 +39170,14 @@ func init() {
 
 	Capabilities_UseBeeAction = Capabilities.AddMember("UseBeeAction", CapabilityState)
 
+	Capabilities_GongAction = Capabilities.AddMember("GongAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateGongAction = Capabilities.AddMember("CreateAndUpdateGongAction", CapabilityState)
+
+	Capabilities_ShareGongAction = Capabilities.AddMember("ShareGongAction", CapabilityState)
+
+	Capabilities_UseGongAction = Capabilities.AddMember("UseGongAction", CapabilityState)
+
 	Capabilities_Topic = Capabilities.AddMember("Topic", CapabilityState)
 
 	Capabilities_EditVisualWithQ = Capabilities.AddMember("EditVisualWithQ", CapabilityState)
@@ -38853,6 +39229,366 @@ func init() {
 	Capabilities_InboundEmailTrigger = Capabilities.AddMember("InboundEmailTrigger", CapabilityState)
 
 	Capabilities_QuickEventTrigger = Capabilities.AddMember("QuickEventTrigger", CapabilityState)
+
+	Capabilities_FileDataSource = Capabilities.AddMember("FileDataSource", CapabilityState)
+
+	Capabilities_CreateFileDataSource = Capabilities.AddMember("CreateFileDataSource", CapabilityState)
+
+	Capabilities_UpdateFileDataSource = Capabilities.AddMember("UpdateFileDataSource", CapabilityState)
+
+	Capabilities_ShareFileDataSource = Capabilities.AddMember("ShareFileDataSource", CapabilityState)
+
+	Capabilities_S3DataSource = Capabilities.AddMember("S3DataSource", CapabilityState)
+
+	Capabilities_CreateS3DataSource = Capabilities.AddMember("CreateS3DataSource", CapabilityState)
+
+	Capabilities_UpdateS3DataSource = Capabilities.AddMember("UpdateS3DataSource", CapabilityState)
+
+	Capabilities_ShareS3DataSource = Capabilities.AddMember("ShareS3DataSource", CapabilityState)
+
+	Capabilities_S3AnalyticsDataSource = Capabilities.AddMember("S3AnalyticsDataSource", CapabilityState)
+
+	Capabilities_CreateS3AnalyticsDataSource = Capabilities.AddMember("CreateS3AnalyticsDataSource", CapabilityState)
+
+	Capabilities_UpdateS3AnalyticsDataSource = Capabilities.AddMember("UpdateS3AnalyticsDataSource", CapabilityState)
+
+	Capabilities_ShareS3AnalyticsDataSource = Capabilities.AddMember("ShareS3AnalyticsDataSource", CapabilityState)
+
+	Capabilities_S3TablesDataSource = Capabilities.AddMember("S3TablesDataSource", CapabilityState)
+
+	Capabilities_CreateS3TablesDataSource = Capabilities.AddMember("CreateS3TablesDataSource", CapabilityState)
+
+	Capabilities_UpdateS3TablesDataSource = Capabilities.AddMember("UpdateS3TablesDataSource", CapabilityState)
+
+	Capabilities_ShareS3TablesDataSource = Capabilities.AddMember("ShareS3TablesDataSource", CapabilityState)
+
+	Capabilities_AthenaDataSource = Capabilities.AddMember("AthenaDataSource", CapabilityState)
+
+	Capabilities_CreateAthenaDataSource = Capabilities.AddMember("CreateAthenaDataSource", CapabilityState)
+
+	Capabilities_UpdateAthenaDataSource = Capabilities.AddMember("UpdateAthenaDataSource", CapabilityState)
+
+	Capabilities_ShareAthenaDataSource = Capabilities.AddMember("ShareAthenaDataSource", CapabilityState)
+
+	Capabilities_RdsDataSource = Capabilities.AddMember("RdsDataSource", CapabilityState)
+
+	Capabilities_CreateRdsDataSource = Capabilities.AddMember("CreateRdsDataSource", CapabilityState)
+
+	Capabilities_UpdateRdsDataSource = Capabilities.AddMember("UpdateRdsDataSource", CapabilityState)
+
+	Capabilities_ShareRdsDataSource = Capabilities.AddMember("ShareRdsDataSource", CapabilityState)
+
+	Capabilities_RedshiftAutoDiscoveredDataSource = Capabilities.AddMember("RedshiftAutoDiscoveredDataSource", CapabilityState)
+
+	Capabilities_CreateRedshiftAutoDiscoveredDataSource = Capabilities.AddMember("CreateRedshiftAutoDiscoveredDataSource", CapabilityState)
+
+	Capabilities_UpdateRedshiftAutoDiscoveredDataSource = Capabilities.AddMember("UpdateRedshiftAutoDiscoveredDataSource", CapabilityState)
+
+	Capabilities_ShareRedshiftAutoDiscoveredDataSource = Capabilities.AddMember("ShareRedshiftAutoDiscoveredDataSource", CapabilityState)
+
+	Capabilities_RedshiftManualDataSource = Capabilities.AddMember("RedshiftManualDataSource", CapabilityState)
+
+	Capabilities_CreateRedshiftManualDataSource = Capabilities.AddMember("CreateRedshiftManualDataSource", CapabilityState)
+
+	Capabilities_UpdateRedshiftManualDataSource = Capabilities.AddMember("UpdateRedshiftManualDataSource", CapabilityState)
+
+	Capabilities_ShareRedshiftManualDataSource = Capabilities.AddMember("ShareRedshiftManualDataSource", CapabilityState)
+
+	Capabilities_OpenSearchDataSource = Capabilities.AddMember("OpenSearchDataSource", CapabilityState)
+
+	Capabilities_CreateOpenSearchDataSource = Capabilities.AddMember("CreateOpenSearchDataSource", CapabilityState)
+
+	Capabilities_UpdateOpenSearchDataSource = Capabilities.AddMember("UpdateOpenSearchDataSource", CapabilityState)
+
+	Capabilities_ShareOpenSearchDataSource = Capabilities.AddMember("ShareOpenSearchDataSource", CapabilityState)
+
+	Capabilities_TimestreamDataSource = Capabilities.AddMember("TimestreamDataSource", CapabilityState)
+
+	Capabilities_CreateTimestreamDataSource = Capabilities.AddMember("CreateTimestreamDataSource", CapabilityState)
+
+	Capabilities_UpdateTimestreamDataSource = Capabilities.AddMember("UpdateTimestreamDataSource", CapabilityState)
+
+	Capabilities_ShareTimestreamDataSource = Capabilities.AddMember("ShareTimestreamDataSource", CapabilityState)
+
+	Capabilities_AuroraDataSource = Capabilities.AddMember("AuroraDataSource", CapabilityState)
+
+	Capabilities_CreateAuroraDataSource = Capabilities.AddMember("CreateAuroraDataSource", CapabilityState)
+
+	Capabilities_UpdateAuroraDataSource = Capabilities.AddMember("UpdateAuroraDataSource", CapabilityState)
+
+	Capabilities_ShareAuroraDataSource = Capabilities.AddMember("ShareAuroraDataSource", CapabilityState)
+
+	Capabilities_MySqlDataSource = Capabilities.AddMember("MySqlDataSource", CapabilityState)
+
+	Capabilities_CreateMySqlDataSource = Capabilities.AddMember("CreateMySqlDataSource", CapabilityState)
+
+	Capabilities_UpdateMySqlDataSource = Capabilities.AddMember("UpdateMySqlDataSource", CapabilityState)
+
+	Capabilities_ShareMySqlDataSource = Capabilities.AddMember("ShareMySqlDataSource", CapabilityState)
+
+	Capabilities_PostgreSqlDataSource = Capabilities.AddMember("PostgreSqlDataSource", CapabilityState)
+
+	Capabilities_CreatePostgreSqlDataSource = Capabilities.AddMember("CreatePostgreSqlDataSource", CapabilityState)
+
+	Capabilities_UpdatePostgreSqlDataSource = Capabilities.AddMember("UpdatePostgreSqlDataSource", CapabilityState)
+
+	Capabilities_SharePostgreSqlDataSource = Capabilities.AddMember("SharePostgreSqlDataSource", CapabilityState)
+
+	Capabilities_OracleDataSource = Capabilities.AddMember("OracleDataSource", CapabilityState)
+
+	Capabilities_CreateOracleDataSource = Capabilities.AddMember("CreateOracleDataSource", CapabilityState)
+
+	Capabilities_UpdateOracleDataSource = Capabilities.AddMember("UpdateOracleDataSource", CapabilityState)
+
+	Capabilities_ShareOracleDataSource = Capabilities.AddMember("ShareOracleDataSource", CapabilityState)
+
+	Capabilities_SqlServerDataSource = Capabilities.AddMember("SqlServerDataSource", CapabilityState)
+
+	Capabilities_CreateSqlServerDataSource = Capabilities.AddMember("CreateSqlServerDataSource", CapabilityState)
+
+	Capabilities_UpdateSqlServerDataSource = Capabilities.AddMember("UpdateSqlServerDataSource", CapabilityState)
+
+	Capabilities_ShareSqlServerDataSource = Capabilities.AddMember("ShareSqlServerDataSource", CapabilityState)
+
+	Capabilities_MariaDbDataSource = Capabilities.AddMember("MariaDbDataSource", CapabilityState)
+
+	Capabilities_CreateMariaDbDataSource = Capabilities.AddMember("CreateMariaDbDataSource", CapabilityState)
+
+	Capabilities_UpdateMariaDbDataSource = Capabilities.AddMember("UpdateMariaDbDataSource", CapabilityState)
+
+	Capabilities_ShareMariaDbDataSource = Capabilities.AddMember("ShareMariaDbDataSource", CapabilityState)
+
+	Capabilities_SnowflakeDataSource = Capabilities.AddMember("SnowflakeDataSource", CapabilityState)
+
+	Capabilities_CreateSnowflakeDataSource = Capabilities.AddMember("CreateSnowflakeDataSource", CapabilityState)
+
+	Capabilities_UpdateSnowflakeDataSource = Capabilities.AddMember("UpdateSnowflakeDataSource", CapabilityState)
+
+	Capabilities_ShareSnowflakeDataSource = Capabilities.AddMember("ShareSnowflakeDataSource", CapabilityState)
+
+	Capabilities_GoogleBigQueryDataSource = Capabilities.AddMember("GoogleBigQueryDataSource", CapabilityState)
+
+	Capabilities_CreateGoogleBigQueryDataSource = Capabilities.AddMember("CreateGoogleBigQueryDataSource", CapabilityState)
+
+	Capabilities_UpdateGoogleBigQueryDataSource = Capabilities.AddMember("UpdateGoogleBigQueryDataSource", CapabilityState)
+
+	Capabilities_ShareGoogleBigQueryDataSource = Capabilities.AddMember("ShareGoogleBigQueryDataSource", CapabilityState)
+
+	Capabilities_DatabricksDataSource = Capabilities.AddMember("DatabricksDataSource", CapabilityState)
+
+	Capabilities_CreateDatabricksDataSource = Capabilities.AddMember("CreateDatabricksDataSource", CapabilityState)
+
+	Capabilities_UpdateDatabricksDataSource = Capabilities.AddMember("UpdateDatabricksDataSource", CapabilityState)
+
+	Capabilities_ShareDatabricksDataSource = Capabilities.AddMember("ShareDatabricksDataSource", CapabilityState)
+
+	Capabilities_StarburstDataSource = Capabilities.AddMember("StarburstDataSource", CapabilityState)
+
+	Capabilities_CreateStarburstDataSource = Capabilities.AddMember("CreateStarburstDataSource", CapabilityState)
+
+	Capabilities_UpdateStarburstDataSource = Capabilities.AddMember("UpdateStarburstDataSource", CapabilityState)
+
+	Capabilities_ShareStarburstDataSource = Capabilities.AddMember("ShareStarburstDataSource", CapabilityState)
+
+	Capabilities_TrinoDataSource = Capabilities.AddMember("TrinoDataSource", CapabilityState)
+
+	Capabilities_CreateTrinoDataSource = Capabilities.AddMember("CreateTrinoDataSource", CapabilityState)
+
+	Capabilities_UpdateTrinoDataSource = Capabilities.AddMember("UpdateTrinoDataSource", CapabilityState)
+
+	Capabilities_ShareTrinoDataSource = Capabilities.AddMember("ShareTrinoDataSource", CapabilityState)
+
+	Capabilities_ImpalaDataSource = Capabilities.AddMember("ImpalaDataSource", CapabilityState)
+
+	Capabilities_CreateImpalaDataSource = Capabilities.AddMember("CreateImpalaDataSource", CapabilityState)
+
+	Capabilities_UpdateImpalaDataSource = Capabilities.AddMember("UpdateImpalaDataSource", CapabilityState)
+
+	Capabilities_ShareImpalaDataSource = Capabilities.AddMember("ShareImpalaDataSource", CapabilityState)
+
+	Capabilities_TeradataDataSource = Capabilities.AddMember("TeradataDataSource", CapabilityState)
+
+	Capabilities_CreateTeradataDataSource = Capabilities.AddMember("CreateTeradataDataSource", CapabilityState)
+
+	Capabilities_UpdateTeradataDataSource = Capabilities.AddMember("UpdateTeradataDataSource", CapabilityState)
+
+	Capabilities_ShareTeradataDataSource = Capabilities.AddMember("ShareTeradataDataSource", CapabilityState)
+
+	Capabilities_PrestoDataSource = Capabilities.AddMember("PrestoDataSource", CapabilityState)
+
+	Capabilities_CreatePrestoDataSource = Capabilities.AddMember("CreatePrestoDataSource", CapabilityState)
+
+	Capabilities_UpdatePrestoDataSource = Capabilities.AddMember("UpdatePrestoDataSource", CapabilityState)
+
+	Capabilities_SharePrestoDataSource = Capabilities.AddMember("SharePrestoDataSource", CapabilityState)
+
+	Capabilities_SparkDataSource = Capabilities.AddMember("SparkDataSource", CapabilityState)
+
+	Capabilities_CreateSparkDataSource = Capabilities.AddMember("CreateSparkDataSource", CapabilityState)
+
+	Capabilities_UpdateSparkDataSource = Capabilities.AddMember("UpdateSparkDataSource", CapabilityState)
+
+	Capabilities_ShareSparkDataSource = Capabilities.AddMember("ShareSparkDataSource", CapabilityState)
+
+	Capabilities_ExasolDataSource = Capabilities.AddMember("ExasolDataSource", CapabilityState)
+
+	Capabilities_CreateExasolDataSource = Capabilities.AddMember("CreateExasolDataSource", CapabilityState)
+
+	Capabilities_UpdateExasolDataSource = Capabilities.AddMember("UpdateExasolDataSource", CapabilityState)
+
+	Capabilities_ShareExasolDataSource = Capabilities.AddMember("ShareExasolDataSource", CapabilityState)
+
+	Capabilities_Db2DataSource = Capabilities.AddMember("Db2DataSource", CapabilityState)
+
+	Capabilities_CreateDb2DataSource = Capabilities.AddMember("CreateDb2DataSource", CapabilityState)
+
+	Capabilities_UpdateDb2DataSource = Capabilities.AddMember("UpdateDb2DataSource", CapabilityState)
+
+	Capabilities_ShareDb2DataSource = Capabilities.AddMember("ShareDb2DataSource", CapabilityState)
+
+	Capabilities_SapHanaDataSource = Capabilities.AddMember("SapHanaDataSource", CapabilityState)
+
+	Capabilities_CreateSapHanaDataSource = Capabilities.AddMember("CreateSapHanaDataSource", CapabilityState)
+
+	Capabilities_UpdateSapHanaDataSource = Capabilities.AddMember("UpdateSapHanaDataSource", CapabilityState)
+
+	Capabilities_ShareSapHanaDataSource = Capabilities.AddMember("ShareSapHanaDataSource", CapabilityState)
+
+	Capabilities_DenodoDataSource = Capabilities.AddMember("DenodoDataSource", CapabilityState)
+
+	Capabilities_CreateDenodoDataSource = Capabilities.AddMember("CreateDenodoDataSource", CapabilityState)
+
+	Capabilities_UpdateDenodoDataSource = Capabilities.AddMember("UpdateDenodoDataSource", CapabilityState)
+
+	Capabilities_ShareDenodoDataSource = Capabilities.AddMember("ShareDenodoDataSource", CapabilityState)
+
+	Capabilities_DremioDataSource = Capabilities.AddMember("DremioDataSource", CapabilityState)
+
+	Capabilities_CreateDremioDataSource = Capabilities.AddMember("CreateDremioDataSource", CapabilityState)
+
+	Capabilities_UpdateDremioDataSource = Capabilities.AddMember("UpdateDremioDataSource", CapabilityState)
+
+	Capabilities_ShareDremioDataSource = Capabilities.AddMember("ShareDremioDataSource", CapabilityState)
+
+	Capabilities_SalesforceDataSource = Capabilities.AddMember("SalesforceDataSource", CapabilityState)
+
+	Capabilities_CreateSalesforceDataSource = Capabilities.AddMember("CreateSalesforceDataSource", CapabilityState)
+
+	Capabilities_UpdateSalesforceDataSource = Capabilities.AddMember("UpdateSalesforceDataSource", CapabilityState)
+
+	Capabilities_ShareSalesforceDataSource = Capabilities.AddMember("ShareSalesforceDataSource", CapabilityState)
+
+	Capabilities_RadiantDataSource = Capabilities.AddMember("RadiantDataSource", CapabilityState)
+
+	Capabilities_CreateRadiantDataSource = Capabilities.AddMember("CreateRadiantDataSource", CapabilityState)
+
+	Capabilities_UpdateRadiantDataSource = Capabilities.AddMember("UpdateRadiantDataSource", CapabilityState)
+
+	Capabilities_ShareRadiantDataSource = Capabilities.AddMember("ShareRadiantDataSource", CapabilityState)
+
+	Capabilities_PayPalDataSource = Capabilities.AddMember("PayPalDataSource", CapabilityState)
+
+	Capabilities_CreatePayPalDataSource = Capabilities.AddMember("CreatePayPalDataSource", CapabilityState)
+
+	Capabilities_UpdatePayPalDataSource = Capabilities.AddMember("UpdatePayPalDataSource", CapabilityState)
+
+	Capabilities_SharePayPalDataSource = Capabilities.AddMember("SharePayPalDataSource", CapabilityState)
+
+	Capabilities_SquareDataSource = Capabilities.AddMember("SquareDataSource", CapabilityState)
+
+	Capabilities_CreateSquareDataSource = Capabilities.AddMember("CreateSquareDataSource", CapabilityState)
+
+	Capabilities_UpdateSquareDataSource = Capabilities.AddMember("UpdateSquareDataSource", CapabilityState)
+
+	Capabilities_ShareSquareDataSource = Capabilities.AddMember("ShareSquareDataSource", CapabilityState)
+
+	Capabilities_GitHubDataSource = Capabilities.AddMember("GitHubDataSource", CapabilityState)
+
+	Capabilities_CreateGitHubDataSource = Capabilities.AddMember("CreateGitHubDataSource", CapabilityState)
+
+	Capabilities_UpdateGitHubDataSource = Capabilities.AddMember("UpdateGitHubDataSource", CapabilityState)
+
+	Capabilities_ShareGitHubDataSource = Capabilities.AddMember("ShareGitHubDataSource", CapabilityState)
+
+	Capabilities_TwitterDataSource = Capabilities.AddMember("TwitterDataSource", CapabilityState)
+
+	Capabilities_CreateTwitterDataSource = Capabilities.AddMember("CreateTwitterDataSource", CapabilityState)
+
+	Capabilities_UpdateTwitterDataSource = Capabilities.AddMember("UpdateTwitterDataSource", CapabilityState)
+
+	Capabilities_ShareTwitterDataSource = Capabilities.AddMember("ShareTwitterDataSource", CapabilityState)
+
+	Capabilities_JiraDataSource = Capabilities.AddMember("JiraDataSource", CapabilityState)
+
+	Capabilities_CreateJiraDataSource = Capabilities.AddMember("CreateJiraDataSource", CapabilityState)
+
+	Capabilities_UpdateJiraDataSource = Capabilities.AddMember("UpdateJiraDataSource", CapabilityState)
+
+	Capabilities_ShareJiraDataSource = Capabilities.AddMember("ShareJiraDataSource", CapabilityState)
+
+	Capabilities_ServiceNowDataSource = Capabilities.AddMember("ServiceNowDataSource", CapabilityState)
+
+	Capabilities_CreateServiceNowDataSource = Capabilities.AddMember("CreateServiceNowDataSource", CapabilityState)
+
+	Capabilities_UpdateServiceNowDataSource = Capabilities.AddMember("UpdateServiceNowDataSource", CapabilityState)
+
+	Capabilities_ShareServiceNowDataSource = Capabilities.AddMember("ShareServiceNowDataSource", CapabilityState)
+
+	Capabilities_AdobeAnalyticsDataSource = Capabilities.AddMember("AdobeAnalyticsDataSource", CapabilityState)
+
+	Capabilities_CreateAdobeAnalyticsDataSource = Capabilities.AddMember("CreateAdobeAnalyticsDataSource", CapabilityState)
+
+	Capabilities_UpdateAdobeAnalyticsDataSource = Capabilities.AddMember("UpdateAdobeAnalyticsDataSource", CapabilityState)
+
+	Capabilities_ShareAdobeAnalyticsDataSource = Capabilities.AddMember("ShareAdobeAnalyticsDataSource", CapabilityState)
+
+	Capabilities_GoogleAnalyticsDataSource = Capabilities.AddMember("GoogleAnalyticsDataSource", CapabilityState)
+
+	Capabilities_CreateGoogleAnalyticsDataSource = Capabilities.AddMember("CreateGoogleAnalyticsDataSource", CapabilityState)
+
+	Capabilities_UpdateGoogleAnalyticsDataSource = Capabilities.AddMember("UpdateGoogleAnalyticsDataSource", CapabilityState)
+
+	Capabilities_ShareGoogleAnalyticsDataSource = Capabilities.AddMember("ShareGoogleAnalyticsDataSource", CapabilityState)
+
+	Capabilities_GoogleSheetsDataSource = Capabilities.AddMember("GoogleSheetsDataSource", CapabilityState)
+
+	Capabilities_CreateGoogleSheetsDataSource = Capabilities.AddMember("CreateGoogleSheetsDataSource", CapabilityState)
+
+	Capabilities_UpdateGoogleSheetsDataSource = Capabilities.AddMember("UpdateGoogleSheetsDataSource", CapabilityState)
+
+	Capabilities_ShareGoogleSheetsDataSource = Capabilities.AddMember("ShareGoogleSheetsDataSource", CapabilityState)
+
+	Capabilities_DocumentDbDataSource = Capabilities.AddMember("DocumentDbDataSource", CapabilityState)
+
+	Capabilities_CreateDocumentDbDataSource = Capabilities.AddMember("CreateDocumentDbDataSource", CapabilityState)
+
+	Capabilities_UpdateDocumentDbDataSource = Capabilities.AddMember("UpdateDocumentDbDataSource", CapabilityState)
+
+	Capabilities_ShareDocumentDbDataSource = Capabilities.AddMember("ShareDocumentDbDataSource", CapabilityState)
+
+	Capabilities_MongoDbDataSource = Capabilities.AddMember("MongoDbDataSource", CapabilityState)
+
+	Capabilities_CreateMongoDbDataSource = Capabilities.AddMember("CreateMongoDbDataSource", CapabilityState)
+
+	Capabilities_UpdateMongoDbDataSource = Capabilities.AddMember("UpdateMongoDbDataSource", CapabilityState)
+
+	Capabilities_ShareMongoDbDataSource = Capabilities.AddMember("ShareMongoDbDataSource", CapabilityState)
+
+	Capabilities_MongoAtlasDataSource = Capabilities.AddMember("MongoAtlasDataSource", CapabilityState)
+
+	Capabilities_CreateMongoAtlasDataSource = Capabilities.AddMember("CreateMongoAtlasDataSource", CapabilityState)
+
+	Capabilities_UpdateMongoAtlasDataSource = Capabilities.AddMember("UpdateMongoAtlasDataSource", CapabilityState)
+
+	Capabilities_ShareMongoAtlasDataSource = Capabilities.AddMember("ShareMongoAtlasDataSource", CapabilityState)
+
+	Capabilities_DynamoDbDataSource = Capabilities.AddMember("DynamoDbDataSource", CapabilityState)
+
+	Capabilities_CreateDynamoDbDataSource = Capabilities.AddMember("CreateDynamoDbDataSource", CapabilityState)
+
+	Capabilities_UpdateDynamoDbDataSource = Capabilities.AddMember("UpdateDynamoDbDataSource", CapabilityState)
+
+	Capabilities_ShareDynamoDbDataSource = Capabilities.AddMember("ShareDynamoDbDataSource", CapabilityState)
 
 	CapacityBytesRangeFilter_minBytes = CapacityBytesRangeFilter.AddMember("minBytes", _CapacityBytesRangeFilterMinBytesLong)
 

@@ -2689,6 +2689,13 @@ func awsRestjson1_serializeOpDocumentCreatePentestInput(v *CreatePentestInput, v
 		ok.String(*v.ServiceRole)
 	}
 
+	if v.TestScope != nil {
+		ok := object.Key("testScope")
+		if err := awsRestjson1_serializeDocumentTestScope(v.TestScope, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Title != nil {
 		ok := object.Key("title")
 		ok.String(*v.Title)
@@ -8480,6 +8487,13 @@ func awsRestjson1_serializeOpDocumentUpdatePentestInput(v *UpdatePentestInput, v
 		ok.String(*v.ServiceRole)
 	}
 
+	if v.TestScope != nil {
+		ok := object.Key("testScope")
+		if err := awsRestjson1_serializeDocumentTestScope(v.TestScope, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Title != nil {
 		ok := object.Key("title")
 		ok.String(*v.Title)
@@ -10884,6 +10898,18 @@ func awsRestjson1_serializeDocumentTaskIdList(v []string, value smithyjson.Value
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTestScope(v *types.TestScope, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }
 

@@ -2134,6 +2134,9 @@ type Pentest struct {
 	// The IAM service role used for the pentest.
 	ServiceRole *string
 
+	// The category of application a pentest targets.
+	TestScope *TestScope
+
 	// The date and time the pentest was last updated, in UTC format.
 	UpdatedAt *time.Time
 
@@ -2243,6 +2246,9 @@ type PentestJob struct {
 
 	// The list of steps in the pentest job execution.
 	Steps []Step
+
+	// The category of application a pentest targets.
+	TestScope *TestScope
 
 	// The title of the pentest job.
 	Title *string
@@ -2943,6 +2949,17 @@ type TaskSummary struct {
 
 	// The date and time the task was last updated, in UTC format.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The category of application a pentest targets.
+type TestScope struct {
+
+	// The category of application under test.
+	//
+	// This member is required.
+	Type TestScopeType
 
 	noSmithyDocumentSerde
 }

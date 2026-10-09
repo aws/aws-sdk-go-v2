@@ -36,9 +36,18 @@ import (
 // period, we return a TimestampOutOfBoundsException error.
 //
 // BatchMeterUsage can process up to 25 UsageRecords at a time, and each request
-// must be less than 1 MB in size. Optionally, you can have multiple usage
-// allocations for usage data that's split into buckets according to predefined
-// tags.
+// must be less than 1 MB in size.
+//
+// # Vendor-metered tagging
+//
+// BatchMeterUsage supports vendor-metered tagging. Optionally, you can split the
+// usage in a UsageRecord into buckets by including UsageAllocations , where each
+// UsageAllocation has a set of Tags that you define. Vendor-metered tagging
+// doesn't change the price, dimensions, or the total usage that you report. It
+// gives buyers a more granular view of their usage of your product so they can
+// perform cost allocation in the Amazon Web Services Billing and Cost Management
+// console. For more information, see [Vendor-metered tagging]and [BatchMeterUsage with usage allocation tagging code example] in the Amazon Web Services Marketplace
+// Seller Guide.
 //
 // BatchMeterUsage returns a list of UsageRecordResult objects, which have each
 // UsageRecord . It also returns a list of UnprocessedRecords , which indicate
@@ -51,7 +60,9 @@ import (
 //
 // [here]: https://catalog.workshops.aws/mpseller/en-US/saas/integration-for-concurrent-agreements
 // [BatchMeterUsage code example with LicenseArn]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-licensearn-example
+// [Vendor-metered tagging]: https://docs.aws.amazon.com/marketplace/latest/userguide/metering-for-usage.html#saas-vendor-metered-tagging
 // [BatchMeterUsage code example]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
+// [BatchMeterUsage with usage allocation tagging code example]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-tagging
 // [BatchMeterUsage Region support]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support
 func (c *Client) BatchMeterUsage(ctx context.Context, params *BatchMeterUsageInput, optFns ...func(*Options)) (*BatchMeterUsageOutput, error) {
 	if params == nil {

@@ -1,0 +1,8 @@
+{
+    "id": "e149c9aa-61df-455d-b60d-157e41db0aa6",
+    "type": "feature",
+    "description": "Add caching settings to http functions",
+    "modules": [
+        "service/mediatailor"
+    ]
+}

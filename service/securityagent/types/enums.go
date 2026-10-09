@@ -1015,6 +1015,27 @@ func (TaskExecutionStatus) Values() []TaskExecutionStatus {
 	}
 }
 
+type TestScopeType string
+
+// Enum values for TestScopeType
+const (
+	// A traditional web application.
+	TestScopeTypeWebApp TestScopeType = "WEB_APP"
+	// A generative AI application.
+	TestScopeTypeGenerativeAiApp TestScopeType = "GENERATIVE_AI_APP"
+)
+
+// Values returns all known values for TestScopeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestScopeType) Values() []TestScopeType {
+	return []TestScopeType{
+		"WEB_APP",
+		"GENERATIVE_AI_APP",
+	}
+}
+
 type ThreatActor string
 
 // Enum values for ThreatActor

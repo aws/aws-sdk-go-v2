@@ -1252,6 +1252,11 @@ func validateAwsServiceRequestConfiguration(v *types.AwsServiceRequestConfigurat
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
 	}
+	if v.Cache != nil {
+		if err := validateHttpRequestCacheConfiguration(v.Cache); err != nil {
+			invalidParams.AddNested("Cache", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.TargetService == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetService"))
 	}
@@ -1392,6 +1397,24 @@ func validateHttpPackageConfigurations(v []types.HttpPackageConfiguration) error
 	}
 }
 
+func validateHttpRequestCacheConfiguration(v *types.HttpRequestCacheConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpRequestCacheConfiguration"}
+	if v.TtlMinimumSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TtlMinimumSeconds"))
+	}
+	if v.TtlMaximumSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TtlMaximumSeconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHttpRequestConfiguration(v *types.HttpRequestConfiguration) error {
 	if v == nil {
 		return nil
@@ -1408,6 +1431,11 @@ func validateHttpRequestConfiguration(v *types.HttpRequestConfiguration) error {
 	}
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if v.Cache != nil {
+		if err := validateHttpRequestCacheConfiguration(v.Cache); err != nil {
+			invalidParams.AddNested("Cache", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1635,6 +1663,11 @@ func validateVastRequestConfiguration(v *types.VastRequestConfiguration) error {
 	}
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if v.Cache != nil {
+		if err := validateHttpRequestCacheConfiguration(v.Cache); err != nil {
+			invalidParams.AddNested("Cache", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

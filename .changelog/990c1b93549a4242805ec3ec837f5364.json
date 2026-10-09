@@ -1,0 +1,8 @@
+{
+    "id": "990c1b93-549a-4242-805e-c3ec837f5364",
+    "type": "feature",
+    "description": "Adds granular custom permissions for the Gong action connector (GongAction, CreateAndUpdateGongAction, ShareGongAction, UseGongAction) and for create, update, and share operations on 45 data source connectors, such as Amazon S3 and Snowflake, through the Custom Permissions APIs.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

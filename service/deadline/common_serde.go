@@ -208,6 +208,35 @@ func serializeJobParameter(s smithy.ShapeSerializer, schema *smithy.Schema, v ty
 	}
 }
 
+func serializeMembershipSummary(s smithy.ShapeSerializer, schema *smithy.Schema, v types.MembershipSummary) {
+	switch vv := v.(type) {
+	case *types.MembershipSummaryMemberFarm:
+		s.WriteUnion(schema, schemas.MembershipSummary_farm)
+		s.WriteStruct(schemas.MembershipSummary_farm)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.MembershipSummaryMemberFleet:
+		s.WriteUnion(schema, schemas.MembershipSummary_fleet)
+		s.WriteStruct(schemas.MembershipSummary_fleet)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.MembershipSummaryMemberJob:
+		s.WriteUnion(schema, schemas.MembershipSummary_job)
+		s.WriteStruct(schemas.MembershipSummary_job)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.MembershipSummaryMemberQueue:
+		s.WriteUnion(schema, schemas.MembershipSummary_queue)
+		s.WriteStruct(schemas.MembershipSummary_queue)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeSchedulingConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.SchedulingConfiguration) {
 	switch vv := v.(type) {
 	case *types.SchedulingConfigurationMemberPriorityBalanced:
@@ -595,6 +624,30 @@ func deserializeJobParameter(d smithy.ShapeDeserializer, s *smithy.Schema, v *ty
 			return vv.Deserialize(d)
 		case schemas.JobParameter_stringList:
 			vv := &types.JobParameterMemberStringList{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeMembershipSummary(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.MembershipSummary) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.MembershipSummary_farm:
+			vv := &types.MembershipSummaryMemberFarm{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.MembershipSummary_fleet:
+			vv := &types.MembershipSummaryMemberFleet{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.MembershipSummary_job:
+			vv := &types.MembershipSummaryMemberJob{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.MembershipSummary_queue:
+			vv := &types.MembershipSummaryMemberQueue{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -1570,6 +1623,28 @@ func serializeManifestPropertiesList(s smithy.ShapeSerializer, schema *smithy.Sc
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeMembershipResourceTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MembershipResourceType) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeMembershipSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MembershipSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeMembershipSummary(s, schema.ListMember(), vv)
 	}
 	s.CloseList()
 }
@@ -3016,6 +3091,34 @@ func deserializeManifestPropertiesList(d smithy.ShapeDeserializer, s *smithy.Sch
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ManifestProperties{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMembershipResourceTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MembershipResourceType) error {
+	*v = make([]types.MembershipResourceType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.MembershipResourceType(vv))
+		return nil
+	})
+}
+
+func deserializeMembershipSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MembershipSummary) error {
+	*v = make([]types.MembershipSummary, 0)
+	var vv types.MembershipSummary
+	return smithy.ReadList(d, s, func() error {
+
+		if err := deserializeMembershipSummary(d, s.ListMember(), &vv); err != nil {
 			return err
 		}
 

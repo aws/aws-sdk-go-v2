@@ -2989,6 +2989,11 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 			Headers: map[string]string{
 				"key0": "__Value__",
 			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
+			},
 		},
 		AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
 			Runtime: types.RuntimeType("JSONATA"),
@@ -3001,6 +3006,11 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 			TargetService: ptr.String("__TargetService__"),
 			TargetRegion:  ptr.String("__TargetRegion__"),
@@ -3061,6 +3071,11 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 		},
 		Tags: map[string]string{
@@ -3555,6 +3570,11 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					Headers: map[string]string{
 						"key0": "__Value__",
 					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
+					},
 				},
 				AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
 					Runtime: types.RuntimeType("JSONATA"),
@@ -3567,6 +3587,11 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					Body:                       ptr.String("__Body__"),
 					Headers: map[string]string{
 						"key0": "__Value__",
+					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
 					},
 					TargetService: ptr.String("__TargetService__"),
 					TargetRegion:  ptr.String("__TargetRegion__"),
@@ -3627,6 +3652,11 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					Body:                       ptr.String("__Body__"),
 					Headers: map[string]string{
 						"key0": "__Value__",
+					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
 					},
 				},
 				Tags: map[string]string{
@@ -3650,6 +3680,11 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					Headers: map[string]string{
 						"key0": "__Value__",
 					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
+					},
 				},
 				AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
 					Runtime: types.RuntimeType("JSONATA"),
@@ -3662,6 +3697,11 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					Body:                       ptr.String("__Body__"),
 					Headers: map[string]string{
 						"key0": "__Value__",
+					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
 					},
 					TargetService: ptr.String("__TargetService__"),
 					TargetRegion:  ptr.String("__TargetRegion__"),
@@ -3722,6 +3762,11 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					Body:                       ptr.String("__Body__"),
 					Headers: map[string]string{
 						"key0": "__Value__",
+					},
+					Cache: &types.HttpRequestCacheConfiguration{
+						TtlMinimumSeconds: ptr.Int32(1),
+						TtlMaximumSeconds: ptr.Int32(1),
+						Key:               ptr.String("__Key__"),
 					},
 				},
 				Tags: map[string]string{
@@ -4507,6 +4552,11 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 			Headers: map[string]string{
 				"key0": "__Value__",
 			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
+			},
 		},
 		AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
 			Runtime: types.RuntimeType("JSONATA"),
@@ -4519,6 +4569,11 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 			TargetService: ptr.String("__TargetService__"),
 			TargetRegion:  ptr.String("__TargetRegion__"),
@@ -4579,6 +4634,11 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 		},
 		Tags: map[string]string{
@@ -4610,6 +4670,11 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 			Headers: map[string]string{
 				"key0": "__Value__",
 			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
+			},
 		},
 		AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
 			Runtime: types.RuntimeType("JSONATA"),
@@ -4622,6 +4687,11 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 			TargetService: ptr.String("__TargetService__"),
 			TargetRegion:  ptr.String("__TargetRegion__"),
@@ -4682,6 +4752,11 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 			Body:                       ptr.String("__Body__"),
 			Headers: map[string]string{
 				"key0": "__Value__",
+			},
+			Cache: &types.HttpRequestCacheConfiguration{
+				TtlMinimumSeconds: ptr.Int32(1),
+				TtlMaximumSeconds: ptr.Int32(1),
+				Key:               ptr.String("__Key__"),
 			},
 		},
 		Tags: map[string]string{

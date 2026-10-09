@@ -90,6 +90,7 @@
         "api_op_ListJobs.go",
         "api_op_ListLicenseEndpoints.go",
         "api_op_ListLimits.go",
+        "api_op_ListMemberships.go",
         "api_op_ListMeteredProducts.go",
         "api_op_ListMonitors.go",
         "api_op_ListQueueEnvironments.go",

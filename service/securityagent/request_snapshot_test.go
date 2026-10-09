@@ -1444,6 +1444,9 @@ func TestCheckRequestSnapshot_CreatePentest(t *testing.T) {
 		CicdConfiguration: &types.CiCdConfiguration{
 			Enabled: ptr.Bool(true),
 		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3910,6 +3913,9 @@ func TestCheckRequestSnapshot_UpdatePentest(t *testing.T) {
 		CicdConfiguration: &types.CiCdConfiguration{
 			Enabled: ptr.Bool(true),
 		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5494,6 +5500,9 @@ func TestUpdateRequestSnapshot_CreatePentest(t *testing.T) {
 		},
 		CicdConfiguration: &types.CiCdConfiguration{
 			Enabled: ptr.Bool(true),
+		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -7960,6 +7969,9 @@ func TestUpdateRequestSnapshot_UpdatePentest(t *testing.T) {
 		},
 		CicdConfiguration: &types.CiCdConfiguration{
 			Enabled: ptr.Bool(true),
+		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
 		},
 	}
 	body := &bytes.Buffer{}

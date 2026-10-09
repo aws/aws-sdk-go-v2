@@ -430,6 +430,9 @@ func TestCheckResponseSnapshot_BatchDeletePentests(t *testing.T) {
 				CicdConfiguration: &types.CiCdConfiguration{
 					Enabled: ptr.Bool(true),
 				},
+				TestScope: &types.TestScope{
+					Type: types.TestScopeType("WEB_APP"),
+				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -614,6 +617,9 @@ func TestCheckResponseSnapshot_BatchDeletePentests(t *testing.T) {
 				},
 				CicdConfiguration: &types.CiCdConfiguration{
 					Enabled: ptr.Bool(true),
+				},
+				TestScope: &types.TestScope{
+					Type: types.TestScopeType("WEB_APP"),
 				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2051,6 +2057,9 @@ func TestCheckResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 				CicdConfiguration: &types.CiCdConfiguration{
 					Enabled: ptr.Bool(true),
 				},
+				TestScope: &types.TestScope{
+					Type: types.TestScopeType("WEB_APP"),
+				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -2280,6 +2289,9 @@ func TestCheckResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 				CicdConfiguration: &types.CiCdConfiguration{
 					Enabled: ptr.Bool(true),
 				},
+				TestScope: &types.TestScope{
+					Type: types.TestScopeType("WEB_APP"),
+				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -2497,6 +2509,9 @@ func TestCheckResponseSnapshot_BatchGetPentests(t *testing.T) {
 				CicdConfiguration: &types.CiCdConfiguration{
 					Enabled: ptr.Bool(true),
 				},
+				TestScope: &types.TestScope{
+					Type: types.TestScopeType("WEB_APP"),
+				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -2681,6 +2696,9 @@ func TestCheckResponseSnapshot_BatchGetPentests(t *testing.T) {
 				},
 				CicdConfiguration: &types.CiCdConfiguration{
 					Enabled: ptr.Bool(true),
+				},
+				TestScope: &types.TestScope{
+					Type: types.TestScopeType("WEB_APP"),
 				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -4234,6 +4252,9 @@ func TestCheckResponseSnapshot_CreatePentest(t *testing.T) {
 		CicdConfiguration: &types.CiCdConfiguration{
 			Enabled: ptr.Bool(true),
 		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreatePentest.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4422,6 +4443,9 @@ func TestCheckResponseSnapshot_CreatePentest(t *testing.T) {
 		},
 		CicdConfiguration: &types.CiCdConfiguration{
 			Enabled: ptr.Bool(true),
+		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
 		},
 	})
 	if err != nil {
@@ -7650,6 +7674,9 @@ func TestCheckResponseSnapshot_UpdatePentest(t *testing.T) {
 		CicdConfiguration: &types.CiCdConfiguration{
 			Enabled: ptr.Bool(true),
 		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdatePentest.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -7839,6 +7866,9 @@ func TestCheckResponseSnapshot_UpdatePentest(t *testing.T) {
 		},
 		CicdConfiguration: &types.CiCdConfiguration{
 			Enabled: ptr.Bool(true),
+		},
+		TestScope: &types.TestScope{
+			Type: types.TestScopeType("WEB_APP"),
 		},
 	})
 	if err != nil {
