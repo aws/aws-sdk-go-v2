@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"sync"
 	"sync/atomic"
 	"time"
 
@@ -66,10 +67,10 @@ type CredentialsCache struct {
 	creds   atomic.Pointer[cachedCredentials]
 	sf      singleflight.Group
 
-	cachedErr  atomic.Pointer[cachedError]
-	refreshing atomic.Bool
-	legacy     bool
-	rand       func() (float64, error)
+	cachedErr   atomic.Pointer[cachedError]
+	refreshLock sync.Mutex
+	legacy      bool
+	rand        func() (float64, error)
 }
 
 type cachedCredentials struct {
@@ -157,9 +158,10 @@ const (
 
 // advisoryRefresh starts a singleRetrieve if none is in flight; callers that find one in flight don't wait and get the cached credentials.
 func (p *CredentialsCache) advisoryRefresh(ctx context.Context, currCreds *cachedCredentials) (Credentials, error) {
-	if !p.refreshing.CompareAndSwap(false, true) {
+	if !p.refreshLock.TryLock() {
 		return currCreds.creds, nil
 	}
+	defer p.refreshLock.Unlock()
 
 	ch := p.sf.DoChan("", func() (interface{}, error) {
 		return p.singleRetrieve(&suppressedContext{ctx}, refreshAdvisory)
@@ -177,7 +179,6 @@ func (p *CredentialsCache) advisoryRefresh(ctx context.Context, currCreds *cache
 
 // waitForRetrieve starts a retrieve if none is in flight and waits for its result; used for the initial and mandatory refresh.
 func (p *CredentialsCache) waitForRetrieve(ctx context.Context, typ refreshType) (Credentials, error) {
-	p.refreshing.Store(true)
 	ch := p.sf.DoChan("", func() (interface{}, error) {
 		return p.singleRetrieve(&suppressedContext{ctx}, typ)
 	})
@@ -195,8 +196,6 @@ func (p *CredentialsCache) waitForRetrieve(ctx context.Context, typ refreshType)
 // singleRetrieve asks the provider for new credentials and caches the result. If the provider fails, it keeps
 // the old credentials and waits before trying again, or raises the error right away if retrying won't help.
 func (p *CredentialsCache) singleRetrieve(ctx context.Context, typ refreshType) (Credentials, error) {
-	defer p.refreshing.Store(false)
-
 	now := sdk.NowTime().Round(0)
 	currCreds := p.creds.Load()
 	if currCreds == nil || !currCreds.creds.HasKeys() {
