@@ -524,7 +524,7 @@ func TestCredentialsCache_cacheStrategies(t *testing.T) {
 
 			if c.initialCreds.HasKeys() {
 				creds := c.initialCreds
-				provider.creds.Store(&creds)
+				provider.creds.Store(&cachedCredentials{creds: creds})
 			}
 
 			creds, err := provider.Retrieve(context.Background())
