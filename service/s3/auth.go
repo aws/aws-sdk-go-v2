@@ -332,12 +332,8 @@ func (m *getIdentityMiddleware) HandleFinalize(ctx context.Context, in middlewar
 
 	span.End()
 	out, metadata, err = next.HandleFinalize(ctx, in)
-	if err != nil {
-		if v, ok := resolver.(interface {
-			InvalidateIdentity(context.Context, smithyauth.Identity, error)
-		}); ok {
-			v.InvalidateIdentity(ctx, identity, err)
-		}
+	if v, ok := resolver.(smithyauth.IdentityInvalidator); ok && err != nil {
+		v.InvalidateIdentity(ctx, identity, err)
 	}
 	return out, metadata, err
 }

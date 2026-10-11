@@ -11,6 +11,8 @@ import (
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
+	"github.com/aws/aws-sdk-go-v2/internal/credentials/nonrecoverable"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/signin"
 	"github.com/aws/aws-sdk-go-v2/service/signin/types"
@@ -75,12 +77,15 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 		return aws.Credentials{}, fmt.Errorf("load login token: %w", err)
 	}
 	if err := token.Validate(); err != nil {
-		return aws.Credentials{}, fmt.Errorf("validate login token: %w", err)
+		return aws.Credentials{}, &nonrecoverable.Failure{
+			Err:               err,
+			ActionableMessage: "validate login token",
+		}
 	}
 
 	// the token may have been refreshed elsewhere or the login session might
 	// have just been created
-	if sdk.NowTime().Before(token.AccessToken.ExpiresAt) {
+	if sdk.NowTime().Before(token.AccessToken.ExpiresAt) && token.AccessToken.AccessKeyID != internalcontext.GetStaleAccessKeyID(ctx) {
 		return token.Credentials(), nil
 	}
 
@@ -123,7 +128,9 @@ func (p *Provider) ProviderSources() []aws.CredentialSource {
 func (p *Provider) loadToken() (*loginToken, error) {
 	f, err := openFile(p.options.CachedTokenFilepath)
 	if err != nil && os.IsNotExist(err) {
-		return nil, fmt.Errorf("token file not found, please reauthenticate")
+		return nil, &nonrecoverable.Failure{
+			ActionableMessage: "token file not found, please reauthenticate",
+		}
 	}
 	if err != nil {
 		return nil, err
@@ -173,11 +180,17 @@ func (p *Provider) saveToken(token *loginToken) error {
 func toAccessDeniedError(err *types.AccessDeniedException) error {
 	switch err.Error_ {
 	case types.OAuth2ErrorCodeTokenExpired:
-		return fmt.Errorf("login session has expired, please reauthenticate")
+		return &nonrecoverable.Failure{
+			ActionableMessage: "login session has expired, please reauthenticate",
+		}
 	case types.OAuth2ErrorCodeUserCredentialsChanged:
-		return fmt.Errorf("login session password has changed, please reauthenticate")
+		return &nonrecoverable.Failure{
+			ActionableMessage: "login session password has changed, please reauthenticate",
+		}
 	case types.OAuth2ErrorCodeInsufficientPermissions:
-		return fmt.Errorf("insufficient permissions, you may be missing permissions for the CreateOAuth2Token action")
+		return &nonrecoverable.Failure{
+			ActionableMessage: "insufficient permissions, you may be missing permissions for the CreateOAuth2Token action",
+		}
 	default:
 		return err
 	}
