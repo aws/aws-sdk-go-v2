@@ -303,7 +303,15 @@ func (m *getIdentityMiddleware) HandleFinalize(ctx context.Context, in middlewar
 	ctx = setIdentity(ctx, identity)
 
 	span.End()
-	return next.HandleFinalize(ctx, in)
+	out, metadata, err = next.HandleFinalize(ctx, in)
+	if err != nil {
+		if v, ok := resolver.(interface {
+			InvalidateIdentity(context.Context, smithyauth.Identity, error)
+		}); ok {
+			v.InvalidateIdentity(ctx, identity, err)
+		}
+	}
+	return out, metadata, err
 }
 
 type identityKey struct{}
