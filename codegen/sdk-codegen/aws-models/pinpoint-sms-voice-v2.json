@@ -10338,6 +10338,12 @@
                         "smithy.api#documentation": "<p>The messaging limits that apply to the phone number, including the per-capability send rates and any advisory per-provider daily message caps.</p>"
                     }
                 },
+                "PricingTier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing model.</p>"
+                    }
+                },
                 "CreatedTimestamp": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -17043,6 +17049,12 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#MessagingLimits",
                     "traits": {
                         "smithy.api#documentation": "<p>The messaging limits that apply to the sender ID, including the per-capability send rates.</p>"
+                    }
+                },
+                "PricingTier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing model.</p>"
                     }
                 }
             },

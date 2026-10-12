@@ -1384,6 +1384,313 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securityagent#BatchDisassociateFindingIssue": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityagent#BatchDisassociateFindingIssueInput"
+            },
+            "output": {
+                "target": "com.amazonaws.securityagent#BatchDisassociateFindingIssueOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates a batch of findings from their linked issues.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/BatchDisassociateFindingIssue"
+                }
+            }
+        },
+        "com.amazonaws.securityagent#BatchDisassociateFindingIssueError": {
+            "type": "structure",
+            "members": {
+                "findingId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the finding that failed to disassociate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.securityagent#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine-readable failure category.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A customer-facing explanation of the failure.</p>",
+                        "smithy.api#length": {
+                            "max": 300
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A finding that failed to disassociate, with the cause of the failure.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#BatchDisassociateFindingIssueErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#BatchDisassociateFindingIssueError"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The per-finding errors from a BatchDisassociateFindingIssue request.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#BatchDisassociateFindingIssueInput": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the agent space where the job exists.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "pentestJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the penetration test job. This parameter is mutually exclusive with <code>codeReviewJobId</code>.</p>"
+                    }
+                },
+                "codeReviewJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the code review job. This parameter is mutually exclusive with <code>pentestJobId</code>.</p>"
+                    }
+                },
+                "findingIds": {
+                    "target": "com.amazonaws.securityagent#FindingIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the findings to disassociate from their issues. Each must belong to the specified job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input for the BatchDisassociateFindingIssue operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityagent#BatchDisassociateFindingIssueOutput": {
+            "type": "structure",
+            "members": {
+                "errors": {
+                    "target": "com.amazonaws.securityagent#BatchDisassociateFindingIssueErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The findings whose issue could not be disassociated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output for the BatchDisassociateFindingIssue operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityagent#BatchExportFindingError": {
+            "type": "structure",
+            "members": {
+                "findingId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the finding this error corresponds to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.securityagent#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine-readable failure category.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A customer-facing explanation of why the issue could not be created.</p>",
+                        "smithy.api#length": {
+                            "max": 300
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A finding whose issue could not be created, with the cause of the failure.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#BatchExportFindingErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#BatchExportFindingError"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The per-finding errors of a BatchExportFindings request.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#BatchExportFindingResult": {
+            "type": "structure",
+            "members": {
+                "findingId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the finding this result corresponds to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "linkedIssue": {
+                    "target": "com.amazonaws.securityagent#LinkedIssue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issue that was created for the finding.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A finding whose issue was created.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#BatchExportFindingResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#BatchExportFindingResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The per-finding successful results of a BatchExportFindings request.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#BatchExportFindings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityagent#BatchExportFindingsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.securityagent#BatchExportFindingsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Exports a batch of findings to the connected issue tracker as issues.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/BatchExportFindings"
+                }
+            }
+        },
+        "com.amazonaws.securityagent#BatchExportFindingsInput": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the agent space where the job exists.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "pentestJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the penetration test job. This parameter is mutually exclusive with <code>codeReviewJobId</code>.</p>"
+                    }
+                },
+                "codeReviewJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the code review job. This parameter is mutually exclusive with <code>pentestJobId</code>.</p>"
+                    }
+                },
+                "issueDestination": {
+                    "target": "com.amazonaws.securityagent#IssueDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination issue-tracker project the findings are exported to. Must be a connected capability of the agent space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "findingIds": {
+                    "target": "com.amazonaws.securityagent#FindingIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the findings to export. Each must belong to the specified job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input for the BatchExportFindings operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityagent#BatchExportFindingsOutput": {
+            "type": "structure",
+            "members": {
+                "results": {
+                    "target": "com.amazonaws.securityagent#BatchExportFindingResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The findings whose issue was created, each with its linked issue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.securityagent#BatchExportFindingErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The findings whose issue could not be created, each with a customer-facing reason.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output for the BatchExportFindings operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityagent#BatchGetAgentSpaces": {
             "type": "operation",
             "input": {
@@ -6516,6 +6823,12 @@
                         "smithy.api#documentation": "<p>The identifier of the original finding that this revalidation finding was produced from.</p>"
                     }
                 },
+                "linkedIssue": {
+                    "target": "com.amazonaws.securityagent#LinkedIssue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issue in a third-party issue tracker that this finding has been exported to.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -6974,6 +7287,12 @@
                     "target": "com.amazonaws.securityagent#TargetUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>The HTTPS URL of the customer self-hosted instance, such as a GitHub Enterprise Server or self-managed GitLab instance. This value is absent for SaaS integrations.</p>"
+                    }
+                },
+                "siteUrl": {
+                    "target": "com.amazonaws.securityagent#TargetUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Atlassian Cloud site URL for Atlassian integrations.</p>"
                     }
                 },
                 "webhookUrl": {
@@ -7724,6 +8043,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Azure DevOps repository resource information.</p>"
                     }
+                },
+                "jiraProject": {
+                    "target": "com.amazonaws.securityagent#JiraProjectResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Jira project resource information.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7782,6 +8107,12 @@
                     "target": "com.amazonaws.securityagent#AzureDevOpsRepositoryMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>The Azure DevOps repository metadata.</p>"
+                    }
+                },
+                "jiraProject": {
+                    "target": "com.amazonaws.securityagent#JiraProjectMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Jira project metadata.</p>"
                     }
                 }
             },
@@ -7876,6 +8207,9 @@
                     "target": "com.amazonaws.securityagent#KmsKeyId"
                 },
                 "targetUrl": {
+                    "target": "com.amazonaws.securityagent#TargetUrl"
+                },
+                "siteUrl": {
                     "target": "com.amazonaws.securityagent#TargetUrl"
                 },
                 "webhookUrl": {
@@ -8017,6 +8351,183 @@
                 "smithy.api#documentation": "<p>The IP address type of a resource gateway.</p>"
             }
         },
+        "com.amazonaws.securityagent#IssueDestination": {
+            "type": "structure",
+            "members": {
+                "integrationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The integration identifier for the issue-tracker provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectKey": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the project the issues are filed under.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The destination for filing findings as issues in an integrated issue tracker.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#JiraInstallationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An Atlassian installation identifier for a Jira integration.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#JiraIntegrationInput": {
+            "type": "structure",
+            "members": {
+                "installationId": {
+                    "target": "com.amazonaws.securityagent#JiraInstallationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Atlassian installation identifier, available from the Atlassian administration console.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.securityagent#AuthCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth 2.0 authorization code returned from the consent redirect.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.securityagent#CsrfState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CSRF state token echoed back from the OAuth redirect.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "siteUrl": {
+                    "target": "com.amazonaws.securityagent#JiraSiteUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Jira Cloud site URL, for example https://mysite.atlassian.net.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for creating a Jira integration.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#JiraProjectMetadata": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.securityagent#ProviderResourceName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "providerResourceId": {
+                    "target": "com.amazonaws.securityagent#ProviderResourceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectKey": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Jira project key, for example PROJ.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Jira project identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the Jira project.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about a Jira project that is integrated with the service.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#JiraProjectResource": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.securityagent#ProviderResourceName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectKey": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Jira project key, for example PROJ.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Jira project identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the Jira project.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a Jira project resource used in an integration.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#JiraResourceCapabilities": {
+            "type": "structure",
+            "members": {
+                "createIssue": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to create issues in the integrated jira project.</p>"
+                    }
+                },
+                "commentIssue": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to post comments on issues in the integrated jira project.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Capabilities for an integrated Jira project.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#JiraSiteUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The URL of a Jira Cloud site.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^https://[a-zA-Z0-9\\-]+\\.atlassian\\.net$"
+            }
+        },
         "com.amazonaws.securityagent#JobStatus": {
             "type": "enum",
             "members": {
@@ -8105,6 +8616,56 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityagent#LambdaFunctionArn"
+            }
+        },
+        "com.amazonaws.securityagent#LinkedIssue": {
+            "type": "structure",
+            "members": {
+                "provider": {
+                    "target": "com.amazonaws.securityagent#Provider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issue-tracker provider.</p>"
+                    }
+                },
+                "integrationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The integration identifier for the issue-tracker provider.</p>"
+                    }
+                },
+                "projectKey": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the project the issue belongs to.</p>"
+                    }
+                },
+                "issueKey": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issue key.</p>"
+                    }
+                },
+                "issueId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stable numeric issue identifier.</p>"
+                    }
+                },
+                "issueUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issue URL.</p>"
+                    }
+                },
+                "siteUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Atlassian Cloud site URL.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reference to an issue created for a finding in a third-party issue tracker.</p>"
             }
         },
         "com.amazonaws.securityagent#ListActorMessages": {
@@ -11165,6 +11726,12 @@
                     "traits": {
                         "smithy.api#enumValue": "AZURE_DEVOPS"
                     }
+                },
+                "JIRA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JIRA"
+                    }
                 }
             },
             "traits": {
@@ -11209,6 +11776,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Bitbucket Data Center-specific input for creating an integration.</p>"
                     }
+                },
+                "jira": {
+                    "target": "com.amazonaws.securityagent#JiraIntegrationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a Jira integration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11237,6 +11810,12 @@
                     "target": "com.amazonaws.securityagent#AzureDevOpsResourceCapabilities",
                     "traits": {
                         "smithy.api#documentation": "<p>The Azure DevOps-specific resource capabilities.</p>"
+                    }
+                },
+                "jira": {
+                    "target": "com.amazonaws.securityagent#JiraResourceCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Jira-specific resource capabilities.</p>"
                     }
                 }
             },
@@ -11269,6 +11848,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DOCUMENTATION"
+                    }
+                },
+                "ISSUE_TRACKING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ISSUE_TRACKING"
                     }
                 }
             },
@@ -11456,6 +12041,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DOCUMENT"
+                    }
+                },
+                "PROJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECT"
                     }
                 }
             },
@@ -11890,6 +12481,12 @@
                 },
                 {
                     "target": "com.amazonaws.securityagent#BatchDeleteThreatModels"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#BatchDisassociateFindingIssue"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#BatchExportFindings"
                 },
                 {
                     "target": "com.amazonaws.securityagent#BatchGetArtifactMetadata"

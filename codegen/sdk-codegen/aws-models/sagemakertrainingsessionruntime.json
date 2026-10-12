@@ -1,0 +1,2615 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.sagemakertrainingsessionruntime#AdamParamsConfig": {
+            "type": "structure",
+            "members": {
+                "learningRate": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The learning rate for the optimizer. Must be greater than 0.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 0.01
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "beta1": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#default": 0.9,
+                        "smithy.api#documentation": "<p>The exponential decay rate for the first moment estimates.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 0.999999
+                        }
+                    }
+                },
+                "beta2": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#default": 0.95,
+                        "smithy.api#documentation": "<p>The exponential decay rate for the second moment estimates.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 0.999999
+                        }
+                    }
+                },
+                "eps": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#default": 1.0E-8,
+                        "smithy.api#documentation": "<p>A small constant added to the denominator for numerical stability.</p>",
+                        "smithy.api#range": {
+                            "min": 1.0E-16,
+                            "max": 0.01
+                        }
+                    }
+                },
+                "weightDecay": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The weight decay (L2 regularization) coefficient.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1
+                        }
+                    }
+                },
+                "gradClipNorm": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#default": 1,
+                        "smithy.api#documentation": "<p>The maximum gradient norm for gradient clipping. Gradients are scaled down if their norm exceeds this value.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 100
+                        }
+                    }
+                },
+                "loraPlusLrRatio": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The learning rate multiplier for LoRA+ B matrices relative to A matrices. When set, B matrices use <code>learningRate * loraPlusLrRatio</code> while A matrices use the base learning rate.</p>",
+                        "smithy.api#range": {
+                            "min": 1.0,
+                            "max": 100.0
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Adam optimizer hyperparameters used during an optimizer step.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ComputeLogprobsConfig": {
+            "type": "structure",
+            "members": {
+                "prompt": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ModelInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input prompt whose token log-probabilities will be computed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelPackageArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model package whose checkpoint this operation should run against. Must be a valid SageMaker model package ARN in the format <code>arn:aws:sagemaker:REGION:ACCOUNT:model-package/PACKAGE_NAME/VERSION</code>. When absent, the operation runs against the session's latest checkpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for computing log-probabilities of prompt tokens without generating new text.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ComputeLogprobsResult": {
+            "type": "structure",
+            "members": {
+                "logprobs": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#DoubleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The per-token log-probabilities for the input prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a compute-logprobs operation.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The training session is in a state that cannot accept new operations. The session must be in <code>Running</code> or <code>Blocked</code> state to accept requests.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#Datum": {
+            "type": "structure",
+            "members": {
+                "modelInput": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ModelInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tokenized input to feed to the model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lossFnInputs": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#TensorDataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tensor inputs for the loss function, keyed by name. Unsupported keys are rejected. Supported keys: <code>target_tokens</code>, <code>weights</code>, <code>advantages</code>, <code>logprobs</code>, <code>ref_log_prob</code>, <code>temperature</code>. Required keys depend on the loss function type: SFT (<code>cross_entropy</code>) requires <code>target_tokens</code> and <code>weights</code>; RL (<code>ppo</code>, <code>cispo</code>, <code>importance_sampling</code>) requires <code>target_tokens</code>, <code>weights</code>, <code>advantages</code>, and <code>logprobs</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single training datum containing model input and optional loss function inputs.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#DatumList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#Datum"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#DoubleList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#Double"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#EncodedTextChunk": {
+            "type": "structure",
+            "members": {
+                "tokens": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#IntegerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token IDs representing the encoded text.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#EncodedTextChunkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the chunk encoding.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A chunk of pre-tokenized text represented as a list of token IDs.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#EncodedTextChunkList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#EncodedTextChunk"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#EncodedTextChunkType": {
+            "type": "enum",
+            "members": {
+                "ENCODED_TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "encoded_text"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ExecuteSamplingOperation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#ExecuteSamplingOperationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#ExecuteSamplingOperationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Submits an asynchronous sampling operation to generate text or compute log-probabilities from the model associated with the specified training session. The session must be in <code>Running</code> or <code>Blocked</code> state. Use <code>GetSamplingOperationResult</code> to poll for the result.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Generate samples from a prompt",
+                        "documentation": "Generates completions for a tokenized prompt using the session's current weights. Generation behavior is controlled by `samplingParams`, and the operation is dispatched asynchronously.",
+                        "input": {
+                            "trainingSessionName": "my-training-session",
+                            "operationConfig": {
+                                "sample": {
+                                    "prompt": {
+                                        "chunks": [
+                                            {
+                                                "tokens": [
+                                                    791,
+                                                    6864,
+                                                    315,
+                                                    9822,
+                                                    374
+                                                ],
+                                                "type": "encoded_text"
+                                            }
+                                        ]
+                                    },
+                                    "numSamples": 4,
+                                    "samplingParams": {
+                                        "maxTokens": 1024,
+                                        "temperature": 0.7,
+                                        "topP": 0.9
+                                    }
+                                }
+                            }
+                        },
+                        "output": {
+                            "operationId": "b2c3d4e5-6789-01bc-def0-234567890abc"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/v1/training-sessions/{trainingSessionName}/sampling-operations",
+                    "method": "POST"
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ExecuteSamplingOperationSample",
+                        "params": {
+                            "trainingSessionName": "smoke-test-nonexistent-session",
+                            "operationConfig": {
+                                "sample": {
+                                    "prompt": {
+                                        "chunks": [
+                                            {
+                                                "tokens": [
+                                                    1,
+                                                    2,
+                                                    3
+                                                ],
+                                                "type": "encoded_text"
+                                            }
+                                        ]
+                                    },
+                                    "numSamples": 1,
+                                    "samplingParams": {
+                                        "maxTokens": 512
+                                    }
+                                }
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "expect": {
+                            "failure": {}
+                        }
+                    },
+                    {
+                        "id": "ExecuteSamplingOperationComputeLogprobs",
+                        "params": {
+                            "trainingSessionName": "smoke-test-nonexistent-session",
+                            "operationConfig": {
+                                "computeLogprobs": {
+                                    "prompt": {
+                                        "chunks": [
+                                            {
+                                                "tokens": [
+                                                    1,
+                                                    2,
+                                                    3
+                                                ],
+                                                "type": "encoded_text"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "expect": {
+                            "failure": {}
+                        }
+                    },
+                    {
+                        "id": "ExecuteSamplingOperationLoadWeightsForSampling",
+                        "params": {
+                            "trainingSessionName": "smoke-test-nonexistent-session",
+                            "operationConfig": {
+                                "loadWeightsForSampling": {
+                                    "modelPackageArn": "arn:aws:sagemaker:us-west-2:123456789012:model-package/smoke-test/1"
+                                }
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ExecuteSamplingOperationInput": {
+            "type": "structure",
+            "members": {
+                "trainingSessionName": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#TrainingSessionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the training session to sample from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "operationConfig": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#SampleOperationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the sample operation. Specify either a sample configuration to generate text or a computeLogprobs configuration to compute token log-probabilities.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ExecuteSamplingOperationOutput": {
+            "type": "structure",
+            "members": {
+                "operationId": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the submitted sample operation. Use this identifier with <code>GetSamplingOperationResult</code> to retrieve the operation status and result.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ExecuteTrainingOperation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#ExecuteTrainingOperationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#ExecuteTrainingOperationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Submits an asynchronous training operation to the specified training session. The service executes operations in sequence number order. The session must be in <code>Running</code> or <code>Blocked</code> state. Use <code>GetTrainingOperationResult</code> to poll for the result. Supported operation types: <code>forward</code>, <code>forwardBackward</code>, <code>optimizerStep</code>, <code>saveWeights</code>, <code>saveState</code>, and <code>loadState</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Run a forward and backward pass",
+                        "documentation": "Computes gradients for a batch of tokenized prompts and accumulates them into the session. Operations are applied in `sequenceNumber` order, so each call must supply the next number in the sequence.",
+                        "input": {
+                            "trainingSessionName": "my-training-session",
+                            "sequenceNumber": 1,
+                            "operationConfig": {
+                                "forwardBackward": {
+                                    "lossFnName": "cross_entropy",
+                                    "datumList": [
+                                        {
+                                            "modelInput": {
+                                                "chunks": [
+                                                    {
+                                                        "tokens": [
+                                                            791,
+                                                            6864,
+                                                            315,
+                                                            9822,
+                                                            374,
+                                                            12366
+                                                        ],
+                                                        "type": "encoded_text"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "output": {
+                            "operationId": "a1b2c3d4-5678-90ab-cdef-1234567890ab"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/v1/training-sessions/{trainingSessionName}/operations",
+                    "method": "POST"
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ExecuteTrainingOperationForward",
+                        "params": {
+                            "trainingSessionName": "smoke-test-nonexistent-session",
+                            "sequenceNumber": 1,
+                            "operationConfig": {
+                                "forward": {
+                                    "lossFnName": "cross_entropy",
+                                    "datumList": [
+                                        {
+                                            "modelInput": {
+                                                "chunks": [
+                                                    {
+                                                        "tokens": [
+                                                            1,
+                                                            2,
+                                                            3
+                                                        ],
+                                                        "type": "encoded_text"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "expect": {
+                            "failure": {}
+                        }
+                    },
+                    {
+                        "id": "ExecuteTrainingOperationForwardBackward",
+                        "params": {
+                            "trainingSessionName": "smoke-test-nonexistent-session",
+                            "sequenceNumber": 1,
+                            "operationConfig": {
+                                "forwardBackward": {
+                                    "lossFnName": "importance_sampling",
+                                    "datumList": [
+                                        {
+                                            "modelInput": {
+                                                "chunks": [
+                                                    {
+                                                        "tokens": [
+                                                            1,
+                                                            2,
+                                                            3
+                                                        ],
+                                                        "type": "encoded_text"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "expect": {
+                            "failure": {}
+                        }
+                    },
+                    {
+                        "id": "ExecuteTrainingOperationOptimizerStep",
+                        "params": {
+                            "trainingSessionName": "smoke-test-nonexistent-session",
+                            "sequenceNumber": 1,
+                            "operationConfig": {
+                                "optimizerStep": {
+                                    "adamParamsConfig": {
+                                        "learningRate": 0.001
+                                    }
+                                }
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "expect": {
+                            "failure": {}
+                        }
+                    },
+                    {
+                        "id": "ExecuteTrainingOperationSaveWeights",
+                        "params": {
+                            "trainingSessionName": "smoke-test-nonexistent-session",
+                            "sequenceNumber": 1,
+                            "operationConfig": {
+                                "saveWeights": {}
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "expect": {
+                            "failure": {}
+                        }
+                    },
+                    {
+                        "id": "ExecuteTrainingOperationSaveState",
+                        "params": {
+                            "trainingSessionName": "smoke-test-nonexistent-session",
+                            "sequenceNumber": 1,
+                            "operationConfig": {
+                                "saveState": {}
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "expect": {
+                            "failure": {}
+                        }
+                    },
+                    {
+                        "id": "ExecuteTrainingOperationLoadState",
+                        "params": {
+                            "trainingSessionName": "smoke-test-nonexistent-session",
+                            "sequenceNumber": 1,
+                            "operationConfig": {
+                                "loadState": {
+                                    "modelPackageArn": "arn:aws:sagemaker:us-west-2:123456789012:model-package/smoke-test",
+                                    "loadOptimizer": true
+                                }
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ExecuteTrainingOperationInput": {
+            "type": "structure",
+            "members": {
+                "trainingSessionName": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#TrainingSessionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the training session to submit the operation to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sequenceNumber": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#SequenceNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The monotonically increasing sequence number that determines execution order. The training session processes operations strictly in sequence number order. If a gap exists, the session blocks until the missing operation arrives or times out. Must be at least 1.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same client token and the same parameters, the service ignores the request but does not return an error.</p>"
+                    }
+                },
+                "operationConfig": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#OperationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies the type and parameters of the training operation. Exactly one member of the union must be set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ExecuteTrainingOperationOutput": {
+            "type": "structure",
+            "members": {
+                "operationId": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the submitted operation. Use this identifier with <code>GetTrainingOperationResult</code> to retrieve the operation status and result.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ForwardBackwardConfig": {
+            "type": "structure",
+            "members": {
+                "lossFnName": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#LossFnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the loss function to evaluate during the forward-backward pass.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datumList": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#DatumList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of input data to feed through the model. Must contain at least one datum, and each datum must have a non-empty modelInput with at least one chunk.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lossFnConfig": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional loss function configuration passed to the engine. Supported keys are <code>clip_low_threshold</code> (valid range: 0 to 1) and <code>clip_high_threshold</code> (valid range: 1 to 10). Unsupported keys are rejected.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a forward and backward pass through the model. This computes both loss values and gradients for use in subsequent optimizer steps.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ForwardBackwardResult": {
+            "type": "structure",
+            "members": {
+                "lossFnOutputType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the loss function output tensors.</p>"
+                    }
+                },
+                "lossFnOutputs": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#TensorDataMapList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The loss function output tensors, keyed by name.</p>"
+                    }
+                },
+                "metrics": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#MetricsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The training metrics emitted by the engine, such as loss values.</p>"
+                    }
+                },
+                "tokenUsage": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#TrainingTokenUsage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token usage statistics for metering.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a forward and backward pass through the model, including computed gradients.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ForwardConfig": {
+            "type": "structure",
+            "members": {
+                "lossFnName": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#LossFnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the loss function to evaluate during the forward pass.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datumList": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#DatumList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of input data to feed through the model. Must contain at least one datum, and each datum must have a non-empty modelInput with at least one chunk.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lossFnConfig": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional loss function configuration passed to the engine. Supported keys are <code>clip_low_threshold</code> (valid range: 0 to 1) and <code>clip_high_threshold</code> (valid range: 1 to 10). Unsupported keys are rejected.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a forward-only pass through the model. This computes loss values without computing gradients.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ForwardResult": {
+            "type": "structure",
+            "members": {
+                "lossFnOutputType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the loss function output tensors.</p>"
+                    }
+                },
+                "lossFnOutputs": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#TensorDataMapList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The loss function output tensors, keyed by name.</p>"
+                    }
+                },
+                "metrics": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#MetricsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The training metrics emitted by the engine, such as loss values.</p>"
+                    }
+                },
+                "tokenUsage": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#TrainingTokenUsage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token usage statistics for metering.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a forward-only pass through the model.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#GetSamplingOperationResult": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#GetSamplingOperationResultInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#GetSamplingOperationResultOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the current status and result of a previously submitted sampling operation. Poll this operation until the status reaches a terminal state (Completed or Failed).</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get the result of a sampling operation",
+                        "documentation": "Retrieves the status and generated sequences for a sampling operation submitted with ExecuteSamplingOperation.",
+                        "input": {
+                            "trainingSessionName": "my-training-session",
+                            "operationId": "a1b2c3d4-5678-90ab-cdef-1234567890ab"
+                        },
+                        "output": {
+                            "status": "Completed",
+                            "operationResult": {
+                                "sample": {
+                                    "sequences": [
+                                        {
+                                            "stopReason": "stop",
+                                            "tokens": [
+                                                791,
+                                                6864,
+                                                315,
+                                                9822,
+                                                374,
+                                                12366,
+                                                13
+                                            ],
+                                            "tokenUsage": {
+                                                "prefill": 5,
+                                                "decode": 7
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/v1/training-sessions/{trainingSessionName}/sampling-operations/{operationId}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetSamplingOperationResultFailure",
+                        "params": {
+                            "trainingSessionName": "smoke-test-nonexistent-session",
+                            "operationId": "smoke-test-nonexistent-operation"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#GetSamplingOperationResultInput": {
+            "type": "structure",
+            "members": {
+                "trainingSessionName": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#TrainingSessionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the training session that owns the sample operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "operationId": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the sample operation to retrieve, returned by <code>ExecuteSamplingOperation</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#GetSamplingOperationResultOutput": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#RequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the sample operation. Possible values are <code>Pending</code>, <code>InProgress</code>, <code>Completed</code>, or <code>Failed</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operationResult": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#SampleOperationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result payload of the sample operation. The service populates this field only when the status is <code>Completed</code>.</p>"
+                    }
+                },
+                "errorDetails": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing why the sample operation failed. The service populates this field only when the status is <code>Failed</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#GetTrainingOperationResult": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#GetTrainingOperationResultInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#GetTrainingOperationResultOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the current status and result of a previously submitted training operation. Poll this operation until the status reaches a terminal state (Completed, Failed, or Skipped).</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get the result of a training operation",
+                        "documentation": "Retrieves the status and result of a training operation submitted with ExecuteTrainingOperation.",
+                        "input": {
+                            "trainingSessionName": "my-training-session",
+                            "operationId": "a1b2c3d4-5678-90ab-cdef-1234567890ab"
+                        },
+                        "output": {
+                            "status": "Completed",
+                            "operationResult": {
+                                "forwardBackward": {
+                                    "lossFnOutputType": "logprobs",
+                                    "metrics": {
+                                        "loss": 1.8342
+                                    }
+                                }
+                            },
+                            "tokenUsage": {
+                                "trainingTokens": 4096
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/v1/training-sessions/{trainingSessionName}/operations/{operationId}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetTrainingOperationResultFailure",
+                        "params": {
+                            "trainingSessionName": "smoke-test-nonexistent-session",
+                            "operationId": "smoke-test-nonexistent-operation"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#GetTrainingOperationResultInput": {
+            "type": "structure",
+            "members": {
+                "trainingSessionName": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#TrainingSessionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the training session that owns the operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "operationId": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the operation to retrieve, returned by <code>ExecuteTrainingOperation</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#GetTrainingOperationResultOutput": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#RequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the operation. Possible values are <code>Pending</code>, <code>InProgress</code>, <code>Completed</code>, <code>Failed</code>, or <code>Skipped</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operationResult": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#OperationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result payload of the operation. The service populates this field only when the status is <code>Completed</code>. The populated member of the union corresponds to the operation type that was submitted.</p>"
+                    }
+                },
+                "errorDetails": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing why the operation failed. The service populates this field only when the status is <code>Failed</code>.</p>"
+                    }
+                },
+                "tokenUsage": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#TrainingTokenUsage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token usage statistics for metering purposes. The service populates this field for forward and forwardBackward operations upon completion.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#InferenceBody": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#documentation": "Sensitive binary payload containing customer inference data.",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#IntegerList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#Integer"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal service error occurred. Retry the request using exponential backoff.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#LegoRouterService": {
+            "type": "service",
+            "version": "2025-02-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ExecuteSamplingOperation"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ExecuteTrainingOperation"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#GetSamplingOperationResult"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#GetTrainingOperationResult"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#SampleTrainingSession"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#SampleTrainingSessionWithResponseStream"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SageMakerTrainingSessionRuntime",
+                    "arnNamespace": "sagemaker",
+                    "endpointPrefix": "training-session-runtime.sagemaker"
+                },
+                "aws.auth#sigv4": {
+                    "name": "sagemaker"
+                },
+                "aws.endpoints#dualStackOnlyEndpoints": {},
+                "aws.endpoints#standardRegionalEndpoints": {
+                    "partitionSpecialCases": {
+                        "aws": [
+                            {
+                                "endpoint": "https://training-session-runtime.sagemaker.{region}.{dualStackDnsSuffix}",
+                                "dualStack": true
+                            }
+                        ],
+                        "aws-cn": [
+                            {
+                                "endpoint": "https://training-session-runtime.sagemaker.{region}.{dualStackDnsSuffix}",
+                                "dualStack": true
+                            }
+                        ],
+                        "aws-us-gov": [
+                            {
+                                "endpoint": "https://training-session-runtime.sagemaker.{region}.{dualStackDnsSuffix}",
+                                "dualStack": true
+                            }
+                        ]
+                    }
+                },
+                "aws.protocols#restJson1": {
+                    "http": [
+                        "h2",
+                        "http/1.1"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Amazon SageMaker Training Session Runtime provides APIs for executing training operations and sampling operations against a running training session. Use these APIs to submit asynchronous training steps (such as forward-backward passes, optimizer steps, and checkpoint saves) and to generate text samples from the model being trained.</p>",
+                "smithy.api#title": "SageMaker Training Session Runtime",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://training-session-runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://training-session-runtime.sagemaker-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 6,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QQF9eEDAAAAAwX14QEF9eEC"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://training-session-runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-cn"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://training-session-runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-us-gov"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://training-session-runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://training-session-runtime.sagemaker-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://training-session-runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://training-session-runtime.sagemaker-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://training-session-runtime.sagemaker.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://training-session-runtime.sagemaker-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://training-session-runtime.sagemaker.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://training-session-runtime.sagemaker-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://training-session-runtime.sagemaker.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#LoadStateConfig": {
+            "type": "structure",
+            "members": {
+                "modelPackageArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model package containing the checkpoint to load. Must be a valid SageMaker model package ARN in the format <code>arn:aws:sagemaker:REGION:ACCOUNT:model-package/PACKAGE_NAME/VERSION</code>. Model package group ARNs are not accepted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "loadOptimizer": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to also restore the optimizer state alongside model weights. When true, optimizer state is restored to resume training from where it left off.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for loading training state from a previously saved checkpoint. This restores model weights and optionally optimizer state.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#LoadStateResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The result of loading training state. An empty response indicates success.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#LoadWeightsForSamplingConfig": {
+            "type": "structure",
+            "members": {
+                "modelPackageArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model package containing the weights to load for sampling. Must be a valid SageMaker model package ARN in the format <code>arn:aws:sagemaker:REGION:ACCOUNT:model-package/PACKAGE_NAME/VERSION</code>. The model package must belong to the same AWS account as the training session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for loading model weights for inference and sampling without restoring optimizer state.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#LoadWeightsForSamplingResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The result of loading weights for sampling. An empty response indicates success.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#LossFnName": {
+            "type": "enum",
+            "members": {
+                "CROSS_ENTROPY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cross_entropy"
+                    }
+                },
+                "IMPORTANCE_SAMPLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "importance_sampling"
+                    }
+                },
+                "PPO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ppo"
+                    }
+                },
+                "CISPO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cispo"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#MetricsMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#Double"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ModelInput": {
+            "type": "structure",
+            "members": {
+                "chunks": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#EncodedTextChunkList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ordered list of encoded text chunks forming the input sequence.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tokenized model input composed of ordered encoded text chunks.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#OperationConfig": {
+            "type": "union",
+            "members": {
+                "forward": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ForwardConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a forward-only pass through the model without gradient computation.</p>"
+                    }
+                },
+                "forwardBackward": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ForwardBackwardConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a forward and backward pass that computes gradients.</p>"
+                    }
+                },
+                "optimizerStep": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#OptimizerStepConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for an optimizer step that updates model weights using accumulated gradients.</p>"
+                    }
+                },
+                "saveWeights": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#SaveWeightsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for saving model weights as a checkpoint.</p>"
+                    }
+                },
+                "saveState": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#SaveStateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for saving full training state, including model weights and optimizer state.</p>"
+                    }
+                },
+                "loadState": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#LoadStateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for loading training state from a previously saved checkpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a training operation. Exactly one member must be set to specify the operation type and its parameters.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#OperationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#OperationResult": {
+            "type": "union",
+            "members": {
+                "forward": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ForwardResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result from a forward-only pass.</p>"
+                    }
+                },
+                "forwardBackward": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ForwardBackwardResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result from a forward and backward pass.</p>"
+                    }
+                },
+                "optimizerStep": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#OptimizerStepResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result from an optimizer step.</p>"
+                    }
+                },
+                "saveWeights": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#SaveWeightsResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result from saving model weights.</p>"
+                    }
+                },
+                "saveState": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#SaveStateResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result from saving full training state.</p>"
+                    }
+                },
+                "loadState": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#LoadStateResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result from loading training state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a completed training operation. Exactly one member is populated, corresponding to the operation type that was submitted.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#OptimizerStepConfig": {
+            "type": "structure",
+            "members": {
+                "adamParamsConfig": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#AdamParamsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Adam optimizer hyperparameters for this step.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for an optimizer step that updates model weights using gradients accumulated from previous forward-backward passes.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#OptimizerStepResult": {
+            "type": "structure",
+            "members": {
+                "metrics": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#MetricsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The training metrics emitted by the engine after the optimizer step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of an optimizer step.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#RequestStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Completed"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "SKIPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Skipped"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified training session or operation does not exist, or the operation does not belong to the specified training session.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SampleConfig": {
+            "type": "structure",
+            "members": {
+                "prompt": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ModelInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input prompt to send to the model for text generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "numSamples": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of independent samples to generate for the prompt.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "samplingParams": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#SamplingParams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters controlling the sampling strategy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "includePromptLogprobs": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to include per-token log-probabilities for the input prompt in the response.</p>"
+                    }
+                },
+                "topkPromptLogprobs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of top-k log-probabilities to return per prompt token.</p>"
+                    }
+                },
+                "modelPackageArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model package whose checkpoint this sample should run against. Must be a valid SageMaker model package ARN in the format <code>arn:aws:sagemaker:REGION:ACCOUNT:model-package/PACKAGE_NAME/VERSION</code>. When absent, the sample runs against the session's latest checkpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for generating text samples from the model.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SampleOperationConfig": {
+            "type": "union",
+            "members": {
+                "sample": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#SampleConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for generating text samples from the model.</p>"
+                    }
+                },
+                "computeLogprobs": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ComputeLogprobsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for computing log-probabilities of prompt tokens without generating new text.</p>"
+                    }
+                },
+                "loadWeightsForSampling": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#LoadWeightsForSamplingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for loading model weights for inference and sampling without restoring optimizer state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a sampling operation. Exactly one member must be set to specify the operation type.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SampleOperationResult": {
+            "type": "union",
+            "members": {
+                "sample": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#SampleResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generated text samples from the model.</p>"
+                    }
+                },
+                "computeLogprobs": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ComputeLogprobsResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The computed log-probabilities for the prompt tokens.</p>"
+                    }
+                },
+                "loadWeightsForSampling": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#LoadWeightsForSamplingResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result from loading weights for sampling.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a completed sampling operation. Exactly one member is populated, corresponding to the operation type that was submitted.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SampleResponse": {
+            "type": "structure",
+            "members": {
+                "sequences": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#SampledSequenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of generated sequences.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "promptLogprobs": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#DoubleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The per-token log-probabilities for the input prompt. Populated only when <code>includePromptLogprobs</code> is true.</p>"
+                    }
+                },
+                "topkPromptLogprobs": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#TopkPromptLogprobsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The top-k log-probabilities per prompt token, as a list of lists. Populated only when <code>topkPromptLogprobs</code> is greater than 0.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response containing generated samples and optional log-probabilities.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SampleResponseStream": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#documentation": "<p>The streaming response body, delivered as Server-Sent Events (<code>text/event-stream</code>). Each event is a <code>data: {JSON}</code> line containing a chat completion chunk, and the stream is terminated by <code>data: [DONE]</code>. If an error occurs after streaming has started, it is delivered as a <code>data: {\"error\": {...}}</code> event and the stream ends without a <code>[DONE]</code> marker. Errors that occur before streaming starts are returned as the operation's errors.</p>",
+                "smithy.api#mediaType": "text/event-stream",
+                "smithy.api#sensitive": {},
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SampleTokenUsage": {
+            "type": "structure",
+            "members": {
+                "prefill": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of tokens in the input prompt (prefill phase).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "decode": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of tokens generated (decode phase).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The token usage statistics for a sample generation.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SampleTrainingSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#SampleTrainingSessionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#SampleTrainingSessionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sends an inference request to the model associated with the specified training session and returns the response synchronously. The service passes the request and response bodies to and from the model without modification.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample from a training session",
+                        "documentation": "Sends a chat completion request to the session's current weights and receives the complete response in a single payload.",
+                        "input": {
+                            "trainingSessionName": "my-training-session",
+                            "contentType": "application/json",
+                            "accept": "application/json",
+                            "body": "eyJtZXNzYWdlcyI6W3sicm9sZSI6InVzZXIiLCJjb250ZW50IjoiV2hhdCBpcyB0aGUgY2FwaXRhbCBvZiBGcmFuY2U/In1dLCJtYXhfdG9rZW5zIjoxMjh9"
+                        },
+                        "output": {
+                            "contentType": "application/json",
+                            "body": "eyJjaG9pY2VzIjpbeyJtZXNzYWdlIjp7InJvbGUiOiJhc3Npc3RhbnQiLCJjb250ZW50IjoiUGFyaXMifSwiZmluaXNoX3JlYXNvbiI6InN0b3AifV19"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/training-sessions/{trainingSessionName}/sample",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SampleTrainingSessionInput": {
+            "type": "structure",
+            "members": {
+                "trainingSessionName": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#TrainingSessionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the training session whose model to invoke.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the input data in the request body.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "accept": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired MIME type of the inference body in the response.</p>",
+                        "smithy.api#httpHeader": "Accept"
+                    }
+                },
+                "modelPackageArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model package whose checkpoint to invoke.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Model-Package"
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#InferenceBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The raw inference request body.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SampleTrainingSessionOutput": {
+            "type": "structure",
+            "members": {
+                "contentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the inference result in the response body.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#InferenceBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The raw inference response body from the model.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SampleTrainingSessionWithResponseStream": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#SampleTrainingSessionWithResponseStreamInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#SampleTrainingSessionWithResponseStreamOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Streams inference responses from the model associated with the specified training session. Use this operation for real-time token-by-token generation. The service passes the request body to the model without modification.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Stream samples from a training session",
+                        "documentation": "Sends a chat completion request to the session's current weights and receives the response as a stream of payload chunks.",
+                        "input": {
+                            "trainingSessionName": "my-training-session",
+                            "contentType": "application/json",
+                            "accept": "application/json",
+                            "body": "eyJtZXNzYWdlcyI6W3sicm9sZSI6InVzZXIiLCJjb250ZW50IjoiV2hhdCBpcyB0aGUgY2FwaXRhbCBvZiBGcmFuY2U/In1dLCJtYXhfdG9rZW5zIjoxMjgsInN0cmVhbSI6dHJ1ZX0="
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/training-sessions/{trainingSessionName}/sample-with-response-stream",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SampleTrainingSessionWithResponseStreamInput": {
+            "type": "structure",
+            "members": {
+                "trainingSessionName": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#TrainingSessionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the training session whose model to invoke.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the input data in the request body.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "accept": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired MIME type of the inference body in the response.</p>",
+                        "smithy.api#httpHeader": "Accept"
+                    }
+                },
+                "modelPackageArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model package whose checkpoint to invoke.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Model-Package"
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#InferenceBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The raw inference request body.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SampleTrainingSessionWithResponseStreamOutput": {
+            "type": "structure",
+            "members": {
+                "contentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the streaming inference result.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#SampleResponseStream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The streaming inference response from the model, delivered as a series of chunks.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SampledSequence": {
+            "type": "structure",
+            "members": {
+                "stopReason": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#StopReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why generation stopped. A value of <code>stop</code> indicates a stop sequence was encountered. A value of <code>length</code> indicates the maximum token limit was reached.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tokens": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#IntegerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token IDs of the generated sequence.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "logprobs": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#DoubleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The per-token log-probabilities for the generated tokens.</p>"
+                    }
+                },
+                "tokenUsage": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#SampleTokenUsage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token usage statistics for this individual sample.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single generated sequence from the model.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SampledSequenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#SampledSequence"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SamplingParams": {
+            "type": "structure",
+            "members": {
+                "maxTokens": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of tokens to generate per sample.</p>",
+                        "smithy.api#range": {
+                            "min": 512,
+                            "max": 131072
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "temperature": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#default": 1,
+                        "smithy.api#documentation": "<p>The sampling temperature controlling randomness. Higher values produce more diverse outputs.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 2
+                        }
+                    }
+                },
+                "topK": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": -1,
+                        "smithy.api#documentation": "<p>The number of highest-probability vocabulary tokens to keep for top-k filtering. Set to -1 to disable.</p>"
+                    }
+                },
+                "topP": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#default": 1,
+                        "smithy.api#documentation": "<p>The cumulative probability threshold for nucleus (top-p) sampling. Only tokens with cumulative probability below this threshold are considered.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1
+                        }
+                    }
+                },
+                "seed": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The random seed for reproducible sampling. When set, the same seed with the same input produces deterministic outputs.</p>"
+                    }
+                },
+                "stop": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#StopSequenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of stop sequences that terminate generation when encountered in the output.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The parameters controlling the text generation sampling strategy.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SaveStateConfig": {
+            "type": "structure",
+            "members": {
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description for the saved state checkpoint.</p>",
+                        "smithy.api#length": {
+                            "max": 1024
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for saving full training state, including model weights and optimizer state. Use this to create resumable checkpoints.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SaveStateResult": {
+            "type": "structure",
+            "members": {
+                "modelPackageArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model package created for the saved state checkpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of saving full training state.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SaveWeightsConfig": {
+            "type": "structure",
+            "members": {
+                "mergeWeights": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to merge LoRA adapter weights into the base model before saving. When true, the saved checkpoint contains the full merged model weights.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description for the saved checkpoint.</p>",
+                        "smithy.api#length": {
+                            "max": 1024
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for saving model weights as a checkpoint.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SaveWeightsResult": {
+            "type": "structure",
+            "members": {
+                "modelPackageArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model package created for the saved weights.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of saving model weights.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#SequenceNumber": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#StopReason": {
+            "type": "enum",
+            "members": {
+                "STOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "stop"
+                    }
+                },
+                "LENGTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "length"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#StopSequenceList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#TensorData": {
+            "type": "structure",
+            "members": {
+                "data": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The raw tensor data as JSON. The format is determined by the <code>dtype</code> field: integer arrays for <code>int64</code>, floating-point arrays for <code>float32</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dtype": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the tensor elements, such as <code>int64</code> or <code>float32</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "shape": {
+                    "target": "com.amazonaws.sagemakertrainingsessionruntime#IntegerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimensions of the tensor, such as [batch_size, seq_length].</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A tensor with data, data type, and shape metadata.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#TensorDataMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#TensorData"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#TensorDataMapList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#TensorDataMap"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of TensorDataMap — represents per-datum loss function outputs.\nEach element is a map of tensor names to TensorData for one datum in the batch."
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was throttled. Retry the request after a brief wait using exponential backoff.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#TokenLogprob": {
+            "type": "structure",
+            "members": {
+                "tokenId": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vocabulary token ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "logprob": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The log-probability of the token.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The log-probability for a single token.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#TokenLogprobList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#TokenLogprob"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#TopkPromptLogprobsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakertrainingsessionruntime#TokenLogprobList"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#TrainingSessionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#TrainingTokenUsage": {
+            "type": "structure",
+            "members": {
+                "trainingTokens": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of training tokens consumed by the operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The token usage statistics for training operations.</p>"
+            }
+        },
+        "com.amazonaws.sagemakertrainingsessionruntime#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request is not valid. Check the request syntax and parameters. Examples include invalid sequence numbers, malformed client tokens, missing required fields, or invalid operation configuration.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

@@ -5077,6 +5077,12 @@
                     "traits": {
                         "smithy.api#enumValue": "AWS::Bedrock::KnowledgeBase"
                     }
+                },
+                "AWS_XRAY_TRANSACTION_SEARCH_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::XRay::TransactionSearchConfig"
+                    }
                 }
             }
         },

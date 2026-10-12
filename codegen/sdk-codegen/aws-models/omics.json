@@ -3841,7 +3841,7 @@
                 "sessionPolicy": {
                     "target": "com.amazonaws.omics#SessionPolicy",
                     "traits": {
-                        "smithy.api#documentation": "Optional inline policy json for scoping down permissions via a session policy on the IAM role provided in the roleArn parameter."
+                        "smithy.api#documentation": "<p>Optional inline policy json for scoping down permissions via a session policy on the IAM role provided in the roleArn parameter.</p>"
                     }
                 },
                 "engineSettings": {
@@ -8755,7 +8755,7 @@
                 "sessionPolicy": {
                     "target": "com.amazonaws.omics#SessionPolicy",
                     "traits": {
-                        "smithy.api#documentation": "Inline policy json for scoping down permissions via a session policy on the IAM role."
+                        "smithy.api#documentation": "<p>Inline policy json for scoping down permissions via a session policy on the IAM role.</p>"
                     }
                 }
             },
@@ -19388,7 +19388,7 @@
                 "sessionPolicy": {
                     "target": "com.amazonaws.omics#SessionPolicy",
                     "traits": {
-                        "smithy.api#documentation": "Optional inline policy json for scoping down permissions via a session policy on the IAM role provided in the roleArn parameter."
+                        "smithy.api#documentation": "<p>Optional inline policy json for scoping down permissions via a session policy on the IAM role provided in the roleArn parameter.</p>"
                     }
                 },
                 "engineSettings": {
@@ -21953,6 +21953,12 @@
                             "max": 16
                         }
                     }
+                },
+                "vpcOwnerAccountId": {
+                    "target": "com.amazonaws.omics#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the cross-account VPC owner for RAM-shared VPC configurations.</p>"
+                    }
                 }
             },
             "traits": {
@@ -21978,6 +21984,12 @@
                     "target": "com.amazonaws.omics#VpcId",
                     "traits": {
                         "smithy.api#documentation": "<p>VPC ID computed from the provided subnet IDs.</p>"
+                    }
+                },
+                "vpcOwnerAccountId": {
+                    "target": "com.amazonaws.omics#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the cross-account VPC owner for RAM-shared VPC configurations.</p>"
                     }
                 }
             },

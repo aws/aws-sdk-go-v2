@@ -3086,7 +3086,8 @@
                             }
                         }
                     }
-                ]
+                ],
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.cloudwatchomni#CreateIntegrationInput": {
@@ -4235,6 +4236,9 @@
                     "target": "com.amazonaws.cloudwatchomni#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatchomni#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.cloudwatchomni#InternalServerException"
                 },
                 {
@@ -4303,6 +4307,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cloudwatchomni#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchomni#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchomni#InternalServerException"
@@ -7948,6 +7955,9 @@
                     "target": "com.amazonaws.cloudwatchomni#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatchomni#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.cloudwatchomni#ThrottlingException"
                 },
                 {
@@ -8530,7 +8540,7 @@
                 "target": "smithy.api#String"
             },
             "traits": {
-                "smithy.api#documentation": "One LOGS query-selector block: EXACT store column -> raw SCALAR value (mirroring the scalar\nMetadataAttributeMap). Keyed by the store column that carries the value (e.g.\n`resource.attributes['service.name']`, `attributes['aws.local.service']`, `@logGroupName`) so the\nselector matches the emitted signal. A dimension seen under several values (a service under two\nnamespaces, several log groups) becomes several blocks with the same columns and different\nvalues, which the console ORs. Dedicated to the LOGS selector so its cap evolves independently of\nthe metric attribute map and the TRACES map. Selector caps are deliberately DISTINCT from the metric caps.",
+                "smithy.api#documentation": "One LOGS query-selector block: an exact log-store column mapped to the raw value it carries,\nso the selector matches the emitted signal. Keys are store column names, not bare attribute\nnames. Every block carries \"@logGroupName\"; alongside it a block carries either the entity\ncolumns (\"`@entities`.KeyAttributes.Name\", \".Type\", \".Environment\",\n\"`@entities`.Attributes.PlatformType\") or OTel columns\n(\"resource.attributes['service.name']\", \"resource.attributes['service.namespace']\",\n\"resource.attributes['cloud.provider'|'cloud.account.id'|'cloud.region']\"). A dimension seen\nunder several values — several log groups, or a service under two namespaces — becomes\nseveral blocks with the same columns and different values, to be OR'd together.",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 10
@@ -8568,13 +8578,13 @@
                 "logs": {
                     "target": "com.amazonaws.cloudwatchomni#LogMetadataList",
                     "traits": {
-                        "smithy.api#documentation": "Per-signal LOGS query selectors: a LIST of blocks the console ORs, each an AND of exact\nstore column -> raw values. Node-level (edges carry only traces). Populated when the request\nsets includeMetadata; derived labels (logSourceType) are added by the service projection, not\nstored here."
+                        "smithy.api#documentation": "LOGS query selectors: a list of blocks to OR together, each block an AND of exact store\ncolumn to raw value. Present on node metadata only — edges carry trace selectors. Returned\nwhen the request sets includeMetadata."
                     }
                 },
                 "traces": {
                     "target": "com.amazonaws.cloudwatchomni#TraceMetadataList",
                     "traits": {
-                        "smithy.api#documentation": "Per-signal TRACES query selectors (same block shape as logs). Present on both node and edge\nmetadata. serviceName is derived at the service projection, not stored here."
+                        "smithy.api#documentation": "TRACES query selectors, same block shape as the logs selectors. Present on both node and\nedge metadata. Returned when the request sets includeMetadata."
                     }
                 }
             },
@@ -8607,16 +8617,6 @@
                         "smithy.api#documentation": "The metric name as emitted, such as \"Duration\"."
                     }
                 },
-                "namespace": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#deprecated": {
-                            "message": "Use attributes['service.namespace']; retained for backward compatibility.",
-                            "since": "2026-08-19"
-                        },
-                        "smithy.api#documentation": "DEPRECATED: read attributes[\"service.namespace\"] instead. Retained (deprecated) for\nbackward compatibility with existing consumers; will be removed once they migrate. The\nlogical service grouping the metric belongs to."
-                    }
-                },
                 "preferredStat": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -8632,7 +8632,7 @@
                 "attributes": {
                     "target": "com.amazonaws.cloudwatchomni#MetadataAttributeMap",
                     "traits": {
-                        "smithy.api#documentation": "Per-metric qualifying attributes the console uses to query this metric's telemetry.\nThese are the RAW, store-matching values keyed by their OTel names (\"service.name\",\n\"service.namespace\", \"cloud.provider\", \"cloud.account.id\", \"cloud.region\",\n\"instrumentation_scope\") — deliberately NOT the node's normalized/merged identity, so\nthe query selectors match the emitted series. A merged node can carry different values\nper metric, which is why they live here rather than on the node."
+                        "smithy.api#documentation": "Per-metric qualifying attributes used to query this metric's telemetry. Keys are the\nmetric store's own label names, not bare OTel attribute names: service identity arrives\nas \"@resource.service.name\" and \"@resource.service.namespace\", and the instrumentation\nscope as \"@instrumentation.@name\", while span-derived metrics label the service as a\nbare \"service.name\". Cloud provider, account and region are not repeated per metric —\nread those from the node. Values are RAW, deliberately NOT the node's normalized or\nmerged identity, so a selector built from them matches the emitted series. A merged node\ncan carry different values per metric, which is why these live here rather than on the\nnode."
                     }
                 },
                 "semantics": {
@@ -9871,7 +9871,7 @@
         "com.amazonaws.cloudwatchomni#PaginationToken": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Pagination token for context graph and insights.",
+                "smithy.api#documentation": "Pagination token for the context graph.",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
@@ -11669,7 +11669,7 @@
                 "target": "smithy.api#String"
             },
             "traits": {
-                "smithy.api#documentation": "TRACES counterpart of LogMetadataAttributeMap — a dedicated per-signal map so the two evolve\nindependently (same scalar shape and cap today).",
+                "smithy.api#documentation": "One TRACES query-selector block: an exact span-store column mapped to the raw value it\ncarries. Keys are store column names, not bare attribute names — the service identity and\ncloud dimensions arrive as \"resource.attributes['service.name']\",\n\"resource.attributes['service.namespace']\", \"resource.attributes['cloud.provider']\",\n\"resource.attributes['cloud.account.id']\", \"resource.attributes['cloud.region']\" and\n\"resource.attributes['deployment.environment']\", and span-level identity as\n\"attributes['aws.local.service']\" and \"attributes['aws.local.environment']\". Not every\ncolumn is present on every block; which ones appear depends on what the span carried.",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 10
@@ -12513,6 +12513,12 @@
                             "max": 64
                         },
                         "smithy.api#pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+                    }
+                },
+                "agentCoreEvaluationRoleArn": {
+                    "target": "com.amazonaws.cloudwatchomni#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the IAM role used by AgentCore online evaluation. Must be in the\ncaller's account. Omit if the space does not use AgentCore online evaluation."
                     }
                 },
                 "encryptionConfiguration": {

@@ -2381,6 +2381,17 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
             }
         },
+        "com.amazonaws.devopsagent#CustomHeaderNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsagent#CustomHeaderName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 3
+                }
+            }
+        },
         "com.amazonaws.devopsagent#CustomHeaderValue": {
             "type": "string",
             "traits": {
@@ -4430,6 +4441,9 @@
                         "smithy.api#documentation": "<p>Monthly on-demand hours usage and limit for an account</p>"
                     }
                 },
+                "monthlyAccountGraderHours": {
+                    "target": "com.amazonaws.devopsagent#UsageMetric"
+                },
                 "usagePeriodStartTime": {
                     "target": "com.amazonaws.devopsagent#DateTime",
                     "traits": {
@@ -4494,6 +4508,14 @@
                         "smithy.api#documentation": "<p>The unique identifier of the AgentSpace</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "includedData": {
+                    "target": "com.amazonaws.devopsagent#IncludedData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How much data to include in the response.</p>",
+                        "smithy.api#httpQuery": "includedData",
+                        "smithy.api#notProperty": {}
                     }
                 }
             },
@@ -5976,6 +5998,26 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.devopsagent#IncludedData": {
+            "type": "enum",
+            "members": {
+                "METADATA_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METADATA_ONLY"
+                    }
+                },
+                "ALL_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_DATA"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>How much data to include in the response. Defaults to ALL_DATA.</p>"
+            }
+        },
         "com.amazonaws.devopsagent#InternalServerException": {
             "type": "structure",
             "members": {
@@ -6209,6 +6251,14 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Token for the next page of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "includedData": {
+                    "target": "com.amazonaws.devopsagent#IncludedData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How much data to include in the response.</p>",
+                        "smithy.api#httpQuery": "includedData",
+                        "smithy.api#notProperty": {}
                     }
                 }
             },
@@ -8181,6 +8231,12 @@
                         "smithy.api#documentation": "<p>MCP server configuration with Bearer token (RFC 6750).</p>"
                     }
                 },
+                "customHeaders": {
+                    "target": "com.amazonaws.devopsagent#MCPServerCustomHeadersConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>MCP server configuration with one or more custom authentication headers.</p>"
+                    }
+                },
                 "authorizationDiscovery": {
                     "target": "com.amazonaws.devopsagent#MCPServerAuthorizationDiscoveryConfig",
                     "traits": {
@@ -8237,6 +8293,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Bearer token authentication (RFC 6750).</p>",
                         "smithy.api#enumValue": "bearer-token"
+                    }
+                },
+                "CUSTOM_HEADERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "custom-headers"
                     }
                 }
             },
@@ -8295,6 +8357,24 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for Model Context Protocol (MCP) server integration.</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#MCPServerCustomHeadersConfig": {
+            "type": "structure",
+            "members": {
+                "headers": {
+                    "target": "com.amazonaws.devopsagent#CustomHeaders",
+                    "traits": {
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for authenticating to an MCP server with custom HTTP headers.</p>"
             }
         },
         "com.amazonaws.devopsagent#MCPServerDatadogConfiguration": {
@@ -10247,6 +10327,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>If the MCP server uses API key authentication, these details are provided.</p>"
+                    }
+                },
+                "customHeaderNames": {
+                    "target": "com.amazonaws.devopsagent#CustomHeaderNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configured custom authentication header names when the MCP server uses custom-header authentication. Secret values are not returned.</p>"
                     }
                 }
             },
@@ -13838,6 +13924,9 @@
                 "target": "com.amazonaws.devopsagent#UpdateAssociationOutput"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#ConflictException"
+                },
                 {
                     "target": "com.amazonaws.devopsagent#InternalServerException"
                 },

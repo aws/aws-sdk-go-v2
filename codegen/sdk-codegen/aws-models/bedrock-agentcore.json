@@ -1553,6 +1553,12 @@
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure idempotent processing of the batch request.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "recordExpirySpecification": {
+                    "target": "com.amazonaws.bedrockagentcore#RecordExpirySpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The record expiry (long-term memory time-to-live) applied to every record created by this request. Set <code>recordExpiryDurationDays</code> to the number of days after which the records expire. Only the expiry provided here is applied; the records' strategy association has no effect on their expiry. If you do not provide this value, the records do not expire. The <code>REMOVE</code> action does not apply when creating records.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1909,6 +1915,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of memory record update inputs to be processed in the batch operation.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "recordExpirySpecification": {
+                    "target": "com.amazonaws.bedrockagentcore#RecordExpirySpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The record expiry (long-term memory time-to-live) applied to every record updated by this request. Set <code>recordExpiryDurationDays</code> to configure or overwrite the number of days after which the records expire, or set <code>action</code> to <code>REMOVE</code> to clear a previously configured expiry so that the records no longer expire.</p> <p>When you do not provide this value, the service determines each record's expiry from its current state:</p> <ul> <li> <p>If the record already has an expiry configured, the service resets and reapplies the expiry based on the last applied <code>recordExpiryDurationDays</code>.</p> </li> <li> <p>If the record does not have an expiry configured, no expiry is applied and the record remains non-expiring. This is the outcome regardless of whether the record's strategy configures an expiry.</p> </li> </ul> <p>Providing an explicit <code>recordExpiryDurationDays</code> always takes precedence: it overwrites an existing expiry, or sets one on a record that previously had none.</p>"
                     }
                 }
             },
@@ -9252,7 +9264,7 @@
                 "awsSkills": {
                     "target": "com.amazonaws.bedrockagentcore#HarnessSkillAwsSkillsSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>AWS Skills baked into the Harness's underlying Runtime.</p>"
+                        "smithy.api#documentation": "<p>Amazon Web Services Skills baked into the Harness's underlying Runtime.</p>"
                     }
                 }
             },
@@ -9271,7 +9283,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Passed to show that AWS Skills should be included.</p>"
+                "smithy.api#documentation": "<p>Passed to show that Amazon Web Services Skills should be included.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#HarnessSkillGitAuth": {
@@ -13369,10 +13381,22 @@
                         "smithy.api#required": {}
                     }
                 },
+                "timestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp based on which the memory record was ingested. This reflects the time of the source content that the record was derived from, which can differ from <code>createdAt</code>, the time the record itself was written.</p>"
+                    }
+                },
                 "metadata": {
                     "target": "com.amazonaws.bedrockagentcore#MemoryRecordMetadataMap",
                     "traits": {
                         "smithy.api#documentation": "<p>A map of metadata key-value pairs associated with a memory record.</p>"
+                    }
+                },
+                "expiresAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the memory record expires and becomes eligible for deletion. This value is set when a record expiry (long-term memory time-to-live) applies to the record, either from the strategy the record belongs to or from a record expiry provided on the batch request that created or updated it. If the record has no expiry configured, this value is not present and the record does not expire.</p>"
                     }
                 }
             },
@@ -13698,6 +13722,12 @@
                     "target": "smithy.api#Double",
                     "traits": {
                         "smithy.api#documentation": "<p>The relevance score of the memory record when returned as part of a search result. Higher values indicate greater relevance to the search query.</p>"
+                    }
+                },
+                "timestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp based on which the memory record was ingested. This reflects the time of the source content that the record was derived from, which can differ from <code>createdAt</code>, the time the record itself was written.</p>"
                     }
                 },
                 "metadata": {
@@ -16026,6 +16056,48 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The type of recommendation to generate.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#RecordExpiryAction": {
+            "type": "enum",
+            "members": {
+                "REMOVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action to apply to an existing record expiry (long-term memory time-to-live) configuration. <code>REMOVE</code> removes a previously configured expiry so that the records no longer expire.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#RecordExpiryDurationDays": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 31
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#RecordExpirySpecification": {
+            "type": "union",
+            "members": {
+                "recordExpiryDurationDays": {
+                    "target": "com.amazonaws.bedrockagentcore#RecordExpiryDurationDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration, in days, after which the records in this request expire. The minimum is 31 days.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.bedrockagentcore#RecordExpiryAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to apply to the existing record expiry configuration. Set to <code>REMOVE</code> to remove a previously configured expiry so that the records no longer expire. This value does not apply when creating records.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the record expiry (long-term memory time-to-live) applied to the records in a batch request. Provide exactly one of <code>recordExpiryDurationDays</code> or <code>action</code>. Set <code>recordExpiryDurationDays</code> to configure or update the expiry, or set <code>action</code> to <code>REMOVE</code> to remove a previously configured expiry.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#RegistryArn": {
