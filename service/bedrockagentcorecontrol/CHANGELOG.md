@@ -1,3 +1,7 @@
+# v1.73.0 (2026-10-12)
+
+* **Feature**: AgentCore Memory now supports configuring Long-Term Memory Time-to-Live (TTL) on Memory Strategies.
+
 # v1.72.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

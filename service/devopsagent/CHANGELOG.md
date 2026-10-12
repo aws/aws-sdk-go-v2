@@ -1,3 +1,7 @@
+# v1.19.0 (2026-10-12)
+
+* **Feature**: Adds support for the includedData field in GetAgentSpace and ListAgentSpaces APIs
+
 # v1.18.1 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

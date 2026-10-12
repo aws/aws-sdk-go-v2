@@ -1,8 +1,0 @@
-{
-    "id": "42c419d3-0ce3-4702-b4d1-03ab39e88cb0",
-    "type": "feature",
-    "description": "Amazon SageMaker Training Session is a managed service for training on shared GPU infrastructure. It provides full lifecycle management of training sessions and exposes low-level primitive APIs for operations like forward-backward passes, optimizer steps, and state management.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

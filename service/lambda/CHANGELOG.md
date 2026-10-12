@@ -1,3 +1,7 @@
+# v1.112.2 (2026-10-12)
+
+* **Documentation**: Doc updates to reposition Lambda Functions as Lambda Event Functions
+
 # v1.112.1 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

@@ -1,8 +1,0 @@
-{
-    "id": "a3c0ed2b-64de-44be-a228-33b75f73397d",
-    "type": "feature",
-    "description": "Adds support for updating agentCoreEvaluationRoleArn in UpdateSpace API",
-    "modules": [
-        "service/cloudwatchomni"
-    ]
-}

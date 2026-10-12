@@ -1,3 +1,7 @@
+# v1.51.0 (2026-10-12)
+
+* **Feature**: AgentCore Memory now supports Long-Term Memory Time-to-Live on Batch APIs.
+
 # v1.50.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

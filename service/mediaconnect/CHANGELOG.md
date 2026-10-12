@@ -1,3 +1,7 @@
+# v1.62.0 (2026-10-12)
+
+* **Feature**: This release adds support for MediaConnect Router high-bitrate tiers. It also adds a configurable audio reference level for NDI flows, and enhanced source metadata that includes color information and transport stream ID.
+
 # v1.61.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

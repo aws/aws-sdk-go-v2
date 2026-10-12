@@ -1,8 +1,0 @@
-{
-    "id": "d27d9cfb-a16d-46f1-880a-6d44ef93412d",
-    "type": "feature",
-    "description": "Adds support for Jira integration provider in AWS Security Agent.",
-    "modules": [
-        "service/securityagent"
-    ]
-}

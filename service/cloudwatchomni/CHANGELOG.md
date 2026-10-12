@@ -1,3 +1,7 @@
+# v1.1.0 (2026-10-12)
+
+* **Feature**: Adds support for updating agentCoreEvaluationRoleArn in UpdateSpace API
+
 # v1.0.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

@@ -1,8 +1,0 @@
-{
-    "id": "bc7a1dde-2f67-490a-8b98-72389f858dab",
-    "type": "feature",
-    "description": "DescribePhoneNumbers and DescribeSenderIds now return an optional PricingTier field that indicates whether a phone number, sender ID, short code, or long code is classified as Domestic or International, enabling customers to identify origination identities eligible for local pricing.",
-    "modules": [
-        "service/pinpointsmsvoicev2"
-    ]
-}

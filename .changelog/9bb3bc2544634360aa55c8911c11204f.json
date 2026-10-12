@@ -1,8 +1,0 @@
-{
-    "id": "9bb3bc25-4463-4360-aa55-c8911c11204f",
-    "type": "feature",
-    "description": "AgentCore Memory now supports configuring Long-Term Memory Time-to-Live (TTL) on Memory Strategies.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

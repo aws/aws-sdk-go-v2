@@ -1,3 +1,7 @@
+# v1.31.0 (2026-10-12)
+
+* **Feature**: Adding support for TransactionSearch telemetry rules.
+
 # v1.30.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

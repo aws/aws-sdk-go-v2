@@ -1,8 +1,0 @@
-{
-    "id": "3688016e-90a4-4e9a-be45-a83f722ff0b8",
-    "type": "feature",
-    "description": "Amazon SageMaker Training Session Runtime provides APIs for executing operations within active training sessions, including asynchronous training operations, sampling and inference requests, and streaming real-time model responses, enabling programmatic control over the training loop.",
-    "modules": [
-        "service/sagemakertrainingsessionruntime"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.42.0 (2026-10-12)
+
+* **Feature**: DescribePhoneNumbers and DescribeSenderIds now return an optional PricingTier field that indicates whether a phone number, sender ID, short code, or long code is classified as Domestic or International, enabling customers to identify origination identities eligible for local pricing.
+
 # v1.41.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

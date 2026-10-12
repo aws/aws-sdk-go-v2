@@ -1,3 +1,7 @@
+# v1.25.0 (2026-10-12)
+
+* **Feature**: Adds support for Jira integration provider in AWS Security Agent.
+
 # v1.24.1 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

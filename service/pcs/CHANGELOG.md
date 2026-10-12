@@ -1,3 +1,7 @@
+# v1.30.0 (2026-10-12)
+
+* **Feature**: Adding scheduler version to RegisterComputeNodeGroup API. A compute node uses this value to run the matching scheduler version.
+
 # v1.29.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

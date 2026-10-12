@@ -1,3 +1,7 @@
+# v1.2.0 (2026-10-12)
+
+* **Feature**: Lambda Web Functions GA launch. Lambda Web Functions enable customers to run web applications and API backends
+
 # v1.1.2 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

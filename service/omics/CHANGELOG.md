@@ -1,3 +1,7 @@
+# v1.56.0 (2026-10-12)
+
+* **Feature**: AWS HealthOmics now supports private workflow runs using VPC resources shared across accounts via AWS RAM. A new optional vpcOwnerAccountId field in CreateConfiguration's VpcConfig allows customers to specify the account that owns the shared subnets and security groups.
+
 # v1.55.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

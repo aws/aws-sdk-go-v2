@@ -1,3 +1,7 @@
+# v1.283.0 (2026-10-12)
+
+* **Feature**: Amazon SageMaker Training Session is a managed service for training on shared GPU infrastructure. It provides full lifecycle management of training sessions and exposes low-level primitive APIs for operations like forward-backward passes, optimizer steps, and state management.
+
 # v1.282.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.
