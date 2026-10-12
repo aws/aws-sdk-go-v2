@@ -708,6 +708,36 @@ func TestCheckRequestSnapshot_BatchGetDataQualityResult(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_BatchGetDataQualityResultV2(t *testing.T) {
+	input := &BatchGetDataQualityResultV2Input{
+		ResultIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchGetDataQualityResultV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchGetDataQualityResultV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_BatchGetDataQualityRulesetEvaluationRun(t *testing.T) {
 	input := &BatchGetDataQualityRulesetEvaluationRunInput{
 		RunIds: []string{
@@ -8410,6 +8440,33 @@ func TestCheckRequestSnapshot_GetDataQualityResult(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetDataQualityResultV2(t *testing.T) {
+	input := &GetDataQualityResultV2Input{
+		ResultId: ptr.String("__ResultId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDataQualityResultV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDataQualityResultV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetDataQualityRuleRecommendationRun(t *testing.T) {
 	input := &GetDataQualityRuleRecommendationRunInput{
 		RunId: ptr.String("__RunId__"),
@@ -10735,6 +10792,63 @@ func TestCheckRequestSnapshot_ListDataQualityResults(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListDataQualityResultsV2(t *testing.T) {
+	input := &ListDataQualityResultsV2Input{
+		Filter: &types.DataQualityResultsV2FilterCriteria{
+			DataSource: &types.DataSource{
+				GlueTable: &types.GlueTable{
+					DatabaseName:   ptr.String("__DatabaseName__"),
+					TableName:      ptr.String("__TableName__"),
+					CatalogId:      ptr.String("__CatalogId__"),
+					ConnectionName: ptr.String("__ConnectionName__"),
+					AdditionalOptions: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				DataQualityGlueTable: &types.DataQualityGlueTable{
+					DatabaseName:   ptr.String("__DatabaseName__"),
+					TableName:      ptr.String("__TableName__"),
+					CatalogId:      ptr.String("__CatalogId__"),
+					ConnectionName: ptr.String("__ConnectionName__"),
+					AdditionalOptions: map[string]string{
+						"key0": "__Value__",
+					},
+					PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
+				},
+			},
+			PublishedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			PublishedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Dimensions: map[string]string{
+				"key0": "__Value__",
+			},
+			EvaluationContext: ptr.String("__EvaluationContext__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDataQualityResultsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDataQualityResultsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.T) {
 	input := &ListDataQualityRuleRecommendationRunsInput{
 		Filter: &types.DataQualityRuleRecommendationRunFilter{
@@ -11646,6 +11760,262 @@ func TestCheckRequestSnapshot_ModifyIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyIntegration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PublishDataQualityResultV2(t *testing.T) {
+	input := &PublishDataQualityResultV2Input{
+		Dimensions: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ExecutionStartedOn:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExecutionCompletedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Score:                ptr.Float64(1.0),
+		RuleResults: []types.DataQualityRuleResult{
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				Result:            types.DataQualityRuleResultStatus("PASS"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedRule: ptr.String("__EvaluatedRule__"),
+				RuleMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				Labels: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				Result:            types.DataQualityRuleResultStatus("PASS"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedRule: ptr.String("__EvaluatedRule__"),
+				RuleMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				Labels: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		AnalyzerResults: []types.DataQualityAnalyzerResult{
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedDistributions: map[string]types.DistributionData{
+					"key0": {
+						BinEdges: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: []int32{
+							1,
+							1,
+						},
+						DataType: ptr.String("__DataType__"),
+					},
+				},
+			},
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedDistributions: map[string]types.DistributionData{
+					"key0": {
+						BinEdges: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: []int32{
+							1,
+							1,
+						},
+						DataType: ptr.String("__DataType__"),
+					},
+				},
+			},
+		},
+		Observations: []types.DataQualityObservation{
+			{
+				Description: ptr.String("__Description__"),
+				MetricBasedObservation: &types.MetricBasedObservation{
+					MetricName:  ptr.String("__MetricName__"),
+					StatisticId: ptr.String("__StatisticId__"),
+					MetricValues: &types.DataQualityMetricValues{
+						ActualValue:   ptr.Float64(1.0),
+						ExpectedValue: ptr.Float64(1.0),
+						LowerLimit:    ptr.Float64(1.0),
+						UpperLimit:    ptr.Float64(1.0),
+					},
+					NewRules: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				Description: ptr.String("__Description__"),
+				MetricBasedObservation: &types.MetricBasedObservation{
+					MetricName:  ptr.String("__MetricName__"),
+					StatisticId: ptr.String("__StatisticId__"),
+					MetricValues: &types.DataQualityMetricValues{
+						ActualValue:   ptr.Float64(1.0),
+						ExpectedValue: ptr.Float64(1.0),
+						LowerLimit:    ptr.Float64(1.0),
+						UpperLimit:    ptr.Float64(1.0),
+					},
+					NewRules: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AggregatedMetrics: &types.DataQualityAggregatedMetrics{
+			TotalRowsProcessed:  ptr.Float64(1.0),
+			TotalRowsPassed:     ptr.Float64(1.0),
+			TotalRowsFailed:     ptr.Float64(1.0),
+			TotalRulesProcessed: ptr.Float64(1.0),
+			TotalRulesPassed:    ptr.Float64(1.0),
+			TotalRulesFailed:    ptr.Float64(1.0),
+		},
+		Statistics: []types.StatisticSummary{
+			{
+				StatisticId: ptr.String("__StatisticId__"),
+				ProfileId:   ptr.String("__ProfileId__"),
+				RunIdentifier: &types.RunIdentifier{
+					RunId:    ptr.String("__RunId__"),
+					JobRunId: ptr.String("__JobRunId__"),
+				},
+				StatisticName: ptr.String("__StatisticName__"),
+				DoubleValue:   1.0,
+				DistributionValue: &types.DistributionData{
+					BinEdges: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Count: []int32{
+						1,
+						1,
+					},
+					DataType: ptr.String("__DataType__"),
+				},
+				EvaluationLevel: types.StatisticEvaluationLevel("Dataset"),
+				ColumnsReferenced: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ReferencedDatasets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				StatisticProperties: map[string]string{
+					"key0": "__Value__",
+				},
+				RecordedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				InclusionAnnotation: &types.TimestampedInclusionAnnotation{
+					Value:          types.InclusionAnnotationValue("INCLUDE"),
+					LastModifiedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			{
+				StatisticId: ptr.String("__StatisticId__"),
+				ProfileId:   ptr.String("__ProfileId__"),
+				RunIdentifier: &types.RunIdentifier{
+					RunId:    ptr.String("__RunId__"),
+					JobRunId: ptr.String("__JobRunId__"),
+				},
+				StatisticName: ptr.String("__StatisticName__"),
+				DoubleValue:   1.0,
+				DistributionValue: &types.DistributionData{
+					BinEdges: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Count: []int32{
+						1,
+						1,
+					},
+					DataType: ptr.String("__DataType__"),
+				},
+				EvaluationLevel: types.StatisticEvaluationLevel("Dataset"),
+				ColumnsReferenced: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ReferencedDatasets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				StatisticProperties: map[string]string{
+					"key0": "__Value__",
+				},
+				RecordedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				InclusionAnnotation: &types.TimestampedInclusionAnnotation{
+					Value:          types.InclusionAnnotationValue("INCLUDE"),
+					LastModifiedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		RunConfiguration: &types.DataQualityConfigurationV2{
+			ObservationsEnabled: types.ObservationConfiguration("ALL"),
+			ObservationMode:     types.ObservationMode("SCHEDULED"),
+		},
+		ClientToken:       ptr.String("__ClientToken__"),
+		EvaluationContext: ptr.String("__EvaluationContext__"),
+		Descriptors: map[string]string{
+			"key0": "__Value__",
+		},
+		RulesetName:                      ptr.String("__RulesetName__"),
+		DataQualitySecurityConfiguration: ptr.String("__DataQualitySecurityConfiguration__"),
+		Telemetry: &types.DataQualityTelemetry{
+			VcpuHours: ptr.Float64(1.0),
+			FlagsEnabled: map[string]string{
+				"key0": "__Value__",
+			},
+			LibraryVersion:     ptr.String("__LibraryVersion__"),
+			SparkVersion:       ptr.String("__SparkVersion__"),
+			HostRuntimeVersion: ptr.String("__HostRuntimeVersion__"),
+			Engine:             types.DataQualityEngine("SPARK"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PublishDataQualityResultV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PublishDataQualityResultV2"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -19402,6 +19772,36 @@ func TestUpdateRequestSnapshot_BatchGetDataQualityResult(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_BatchGetDataQualityResultV2(t *testing.T) {
+	input := &BatchGetDataQualityResultV2Input{
+		ResultIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchGetDataQualityResultV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchGetDataQualityResultV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_BatchGetDataQualityRulesetEvaluationRun(t *testing.T) {
 	input := &BatchGetDataQualityRulesetEvaluationRunInput{
 		RunIds: []string{
@@ -27104,6 +27504,33 @@ func TestUpdateRequestSnapshot_GetDataQualityResult(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetDataQualityResultV2(t *testing.T) {
+	input := &GetDataQualityResultV2Input{
+		ResultId: ptr.String("__ResultId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDataQualityResultV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDataQualityResultV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetDataQualityRuleRecommendationRun(t *testing.T) {
 	input := &GetDataQualityRuleRecommendationRunInput{
 		RunId: ptr.String("__RunId__"),
@@ -29429,6 +29856,63 @@ func TestUpdateRequestSnapshot_ListDataQualityResults(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListDataQualityResultsV2(t *testing.T) {
+	input := &ListDataQualityResultsV2Input{
+		Filter: &types.DataQualityResultsV2FilterCriteria{
+			DataSource: &types.DataSource{
+				GlueTable: &types.GlueTable{
+					DatabaseName:   ptr.String("__DatabaseName__"),
+					TableName:      ptr.String("__TableName__"),
+					CatalogId:      ptr.String("__CatalogId__"),
+					ConnectionName: ptr.String("__ConnectionName__"),
+					AdditionalOptions: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				DataQualityGlueTable: &types.DataQualityGlueTable{
+					DatabaseName:   ptr.String("__DatabaseName__"),
+					TableName:      ptr.String("__TableName__"),
+					CatalogId:      ptr.String("__CatalogId__"),
+					ConnectionName: ptr.String("__ConnectionName__"),
+					AdditionalOptions: map[string]string{
+						"key0": "__Value__",
+					},
+					PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
+				},
+			},
+			PublishedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			PublishedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Dimensions: map[string]string{
+				"key0": "__Value__",
+			},
+			EvaluationContext: ptr.String("__EvaluationContext__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDataQualityResultsV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDataQualityResultsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.T) {
 	input := &ListDataQualityRuleRecommendationRunsInput{
 		Filter: &types.DataQualityRuleRecommendationRunFilter{
@@ -30340,6 +30824,262 @@ func TestUpdateRequestSnapshot_ModifyIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyIntegration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PublishDataQualityResultV2(t *testing.T) {
+	input := &PublishDataQualityResultV2Input{
+		Dimensions: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ExecutionStartedOn:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExecutionCompletedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Score:                ptr.Float64(1.0),
+		RuleResults: []types.DataQualityRuleResult{
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				Result:            types.DataQualityRuleResultStatus("PASS"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedRule: ptr.String("__EvaluatedRule__"),
+				RuleMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				Labels: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				Result:            types.DataQualityRuleResultStatus("PASS"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedRule: ptr.String("__EvaluatedRule__"),
+				RuleMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				Labels: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		AnalyzerResults: []types.DataQualityAnalyzerResult{
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedDistributions: map[string]types.DistributionData{
+					"key0": {
+						BinEdges: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: []int32{
+							1,
+							1,
+						},
+						DataType: ptr.String("__DataType__"),
+					},
+				},
+			},
+			{
+				Name:              ptr.String("__Name__"),
+				Description:       ptr.String("__Description__"),
+				EvaluationMessage: ptr.String("__EvaluationMessage__"),
+				EvaluatedMetrics: map[string]float64{
+					"key0": 1.0,
+				},
+				EvaluatedDistributions: map[string]types.DistributionData{
+					"key0": {
+						BinEdges: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: []int32{
+							1,
+							1,
+						},
+						DataType: ptr.String("__DataType__"),
+					},
+				},
+			},
+		},
+		Observations: []types.DataQualityObservation{
+			{
+				Description: ptr.String("__Description__"),
+				MetricBasedObservation: &types.MetricBasedObservation{
+					MetricName:  ptr.String("__MetricName__"),
+					StatisticId: ptr.String("__StatisticId__"),
+					MetricValues: &types.DataQualityMetricValues{
+						ActualValue:   ptr.Float64(1.0),
+						ExpectedValue: ptr.Float64(1.0),
+						LowerLimit:    ptr.Float64(1.0),
+						UpperLimit:    ptr.Float64(1.0),
+					},
+					NewRules: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				Description: ptr.String("__Description__"),
+				MetricBasedObservation: &types.MetricBasedObservation{
+					MetricName:  ptr.String("__MetricName__"),
+					StatisticId: ptr.String("__StatisticId__"),
+					MetricValues: &types.DataQualityMetricValues{
+						ActualValue:   ptr.Float64(1.0),
+						ExpectedValue: ptr.Float64(1.0),
+						LowerLimit:    ptr.Float64(1.0),
+						UpperLimit:    ptr.Float64(1.0),
+					},
+					NewRules: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AggregatedMetrics: &types.DataQualityAggregatedMetrics{
+			TotalRowsProcessed:  ptr.Float64(1.0),
+			TotalRowsPassed:     ptr.Float64(1.0),
+			TotalRowsFailed:     ptr.Float64(1.0),
+			TotalRulesProcessed: ptr.Float64(1.0),
+			TotalRulesPassed:    ptr.Float64(1.0),
+			TotalRulesFailed:    ptr.Float64(1.0),
+		},
+		Statistics: []types.StatisticSummary{
+			{
+				StatisticId: ptr.String("__StatisticId__"),
+				ProfileId:   ptr.String("__ProfileId__"),
+				RunIdentifier: &types.RunIdentifier{
+					RunId:    ptr.String("__RunId__"),
+					JobRunId: ptr.String("__JobRunId__"),
+				},
+				StatisticName: ptr.String("__StatisticName__"),
+				DoubleValue:   1.0,
+				DistributionValue: &types.DistributionData{
+					BinEdges: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Count: []int32{
+						1,
+						1,
+					},
+					DataType: ptr.String("__DataType__"),
+				},
+				EvaluationLevel: types.StatisticEvaluationLevel("Dataset"),
+				ColumnsReferenced: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ReferencedDatasets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				StatisticProperties: map[string]string{
+					"key0": "__Value__",
+				},
+				RecordedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				InclusionAnnotation: &types.TimestampedInclusionAnnotation{
+					Value:          types.InclusionAnnotationValue("INCLUDE"),
+					LastModifiedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			{
+				StatisticId: ptr.String("__StatisticId__"),
+				ProfileId:   ptr.String("__ProfileId__"),
+				RunIdentifier: &types.RunIdentifier{
+					RunId:    ptr.String("__RunId__"),
+					JobRunId: ptr.String("__JobRunId__"),
+				},
+				StatisticName: ptr.String("__StatisticName__"),
+				DoubleValue:   1.0,
+				DistributionValue: &types.DistributionData{
+					BinEdges: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Count: []int32{
+						1,
+						1,
+					},
+					DataType: ptr.String("__DataType__"),
+				},
+				EvaluationLevel: types.StatisticEvaluationLevel("Dataset"),
+				ColumnsReferenced: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ReferencedDatasets: []string{
+					"__Member__",
+					"__Member__",
+				},
+				StatisticProperties: map[string]string{
+					"key0": "__Value__",
+				},
+				RecordedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				InclusionAnnotation: &types.TimestampedInclusionAnnotation{
+					Value:          types.InclusionAnnotationValue("INCLUDE"),
+					LastModifiedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		RunConfiguration: &types.DataQualityConfigurationV2{
+			ObservationsEnabled: types.ObservationConfiguration("ALL"),
+			ObservationMode:     types.ObservationMode("SCHEDULED"),
+		},
+		ClientToken:       ptr.String("__ClientToken__"),
+		EvaluationContext: ptr.String("__EvaluationContext__"),
+		Descriptors: map[string]string{
+			"key0": "__Value__",
+		},
+		RulesetName:                      ptr.String("__RulesetName__"),
+		DataQualitySecurityConfiguration: ptr.String("__DataQualitySecurityConfiguration__"),
+		Telemetry: &types.DataQualityTelemetry{
+			VcpuHours: ptr.Float64(1.0),
+			FlagsEnabled: map[string]string{
+				"key0": "__Value__",
+			},
+			LibraryVersion:     ptr.String("__LibraryVersion__"),
+			SparkVersion:       ptr.String("__SparkVersion__"),
+			HostRuntimeVersion: ptr.String("__HostRuntimeVersion__"),
+			Engine:             types.DataQualityEngine("SPARK"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PublishDataQualityResultV2(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PublishDataQualityResultV2"); err != nil {
 		t.Fatal(err)
 	}
 }

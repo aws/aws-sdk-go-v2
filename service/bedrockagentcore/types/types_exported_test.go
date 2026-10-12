@@ -1227,6 +1227,28 @@ func ExampleRecommendationResult_outputUsage() {
 var _ *types.SystemPromptRecommendationResult
 var _ *types.ToolDescriptionRecommendationResult
 
+func ExampleRecordExpirySpecification_outputUsage() {
+	var union types.RecordExpirySpecification
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RecordExpirySpecificationMemberAction:
+		_ = v.Value // Value is types.RecordExpiryAction
+
+	case *types.RecordExpirySpecificationMemberRecordExpiryDurationDays:
+		_ = v.Value // Value is int32
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.RecordExpiryAction
+var _ *int32
+
 func ExampleResourceLocation_outputUsage() {
 	var union types.ResourceLocation
 	// type switches can be used to check the union value

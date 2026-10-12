@@ -1832,6 +1832,10 @@ func awsRestjson1_serializeOpHttpBindingsGetAgentSpaceInput(v *GetAgentSpaceInpu
 		}
 	}
 
+	if len(v.IncludedData) > 0 {
+		encoder.SetQuery("includedData").String(string(v.IncludedData))
+	}
+
 	return nil
 }
 
@@ -2619,6 +2623,10 @@ func (m *awsRestjson1_serializeOpListAgentSpaces) HandleSerialize(ctx context.Co
 func awsRestjson1_serializeOpHttpBindingsListAgentSpacesInput(v *ListAgentSpacesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if len(v.IncludedData) > 0 {
+		encoder.SetQuery("includedData").String(string(v.IncludedData))
 	}
 
 	if v.MaxResults != nil {
@@ -6569,6 +6577,12 @@ func awsRestjson1_serializeDocumentMCPServerAuthorizationConfig(v types.MCPServe
 			return err
 		}
 
+	case *types.MCPServerAuthorizationConfigMemberCustomHeaders:
+		av := object.Key("customHeaders")
+		if err := awsRestjson1_serializeDocumentMCPServerCustomHeadersConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.MCPServerAuthorizationConfigMemberOAuth3LO:
 		av := object.Key("oAuth3LO")
 		if err := awsRestjson1_serializeDocumentMCPServerOAuth3LOConfig(&uv.Value, av); err != nil {
@@ -6636,6 +6650,20 @@ func awsRestjson1_serializeDocumentMCPServerConfiguration(v *types.MCPServerConf
 	if v.Tools != nil {
 		ok := object.Key("tools")
 		if err := awsRestjson1_serializeDocumentMCPToolsList(v.Tools, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMCPServerCustomHeadersConfig(v *types.MCPServerCustomHeadersConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Headers != nil {
+		ok := object.Key("headers")
+		if err := awsRestjson1_serializeDocumentCustomHeaders(v.Headers, ok); err != nil {
 			return err
 		}
 	}

@@ -77,6 +77,19 @@ func serializeNetworkConnectorSubnetIds(s smithy.ShapeSerializer, schema *smithy
 	s.CloseList()
 }
 
+func serializeNetworkConnectorVersionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.NetworkConnectorVersionSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func deserializeAssociatedComputeResourceTypesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ComputeResourceType) error {
 	*v = make([]types.ComputeResourceType, 0)
 	var vv string
@@ -125,6 +138,20 @@ func deserializeNetworkConnectorSubnetIds(d smithy.ShapeDeserializer, s *smithy.
 	return smithy.ReadList(d, s, func() error {
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeNetworkConnectorVersionsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkConnectorVersionSummary) error {
+	*v = make([]types.NetworkConnectorVersionSummary, 0)
+	var vv types.NetworkConnectorVersionSummary
+	return smithy.ReadList(d, s, func() error {
+		vv = types.NetworkConnectorVersionSummary{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

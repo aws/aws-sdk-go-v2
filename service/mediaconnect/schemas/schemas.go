@@ -945,7 +945,7 @@ var AddMediaStreamRequest_MediaStreamTags *smithy.Schema
 var AddOutputRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "AddOutputRequest",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 23)
 var AddOutputRequest_CidrAllowList *smithy.Schema
 
 var AddOutputRequest_Description *smithy.Schema
@@ -989,6 +989,8 @@ var AddOutputRequest_RouterIntegrationState *smithy.Schema
 var AddOutputRequest_RouterIntegrationTransitEncryption *smithy.Schema
 
 var AddOutputRequest_NdiOutputTimecodeSource *smithy.Schema
+
+var AddOutputRequest_NdiAudioReferenceLevel *smithy.Schema
 
 var Algorithm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -1239,6 +1241,16 @@ var Colorimetry_ST2065_1 *smithy.Schema
 var Colorimetry_ST2065_3 *smithy.Schema
 
 var Colorimetry_XYZ *smithy.Schema
+
+var ColorInformation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ColorInformation",
+}, smithy.ShapeTypeStructure, 3)
+var ColorInformation_Colorimetry *smithy.Schema
+
+var ColorInformation_TransferCharacteristics *smithy.Schema
+
+var ColorInformation_MatrixCoefficients *smithy.Schema
 
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -2410,6 +2422,11 @@ var MulticastSourceSettings = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var MulticastSourceSettings_MulticastSourceIp *smithy.Schema
 
+var _NdiAudioReferenceLevel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "NdiAudioReferenceLevel",
+}, smithy.ShapeTypeInteger, 0)
+
 var NdiConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "NdiConfig",
@@ -2439,7 +2456,7 @@ var NdiMediaInfo_Streams *smithy.Schema
 var NdiMediaStreamInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "NdiMediaStreamInfo",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var NdiMediaStreamInfo_StreamType *smithy.Schema
 
 var NdiMediaStreamInfo_Codec *smithy.Schema
@@ -2447,6 +2464,8 @@ var NdiMediaStreamInfo_Codec *smithy.Schema
 var NdiMediaStreamInfo_StreamId *smithy.Schema
 
 var NdiMediaStreamInfo_ScanMode *smithy.Schema
+
+var NdiMediaStreamInfo_Color *smithy.Schema
 
 var NdiMediaStreamInfo_FrameResolution *smithy.Schema
 
@@ -2485,8 +2504,10 @@ var NdiSourceMetadataInfo_Messages *smithy.Schema
 var NdiSourceSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "NdiSourceSettings",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var NdiSourceSettings_SourceName *smithy.Schema
+
+var NdiSourceSettings_AudioReferenceLevel *smithy.Schema
 
 var NdiState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -2983,12 +3004,16 @@ var RouterInputThumbnailDetails_Timestamp *smithy.Schema
 var RouterInputTier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterInputTier",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 5)
 var RouterInputTier_INPUT_100 *smithy.Schema
 
 var RouterInputTier_INPUT_50 *smithy.Schema
 
 var RouterInputTier_INPUT_20 *smithy.Schema
+
+var RouterInputTier_INPUT_500 *smithy.Schema
+
+var RouterInputTier_INPUT_250 *smithy.Schema
 
 var RouterInputTransitEncryption = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -3337,12 +3362,16 @@ var RouterOutputStreamDetails_MediaLiveInput *smithy.Schema
 var RouterOutputTier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterOutputTier",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 5)
 var RouterOutputTier_OUTPUT_100 *smithy.Schema
 
 var RouterOutputTier_OUTPUT_50 *smithy.Schema
 
 var RouterOutputTier_OUTPUT_20 *smithy.Schema
+
+var RouterOutputTier_OUTPUT_500 *smithy.Schema
+
+var RouterOutputTier_OUTPUT_250 *smithy.Schema
 
 var RouterOutputType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -3770,7 +3799,7 @@ var TooManyRequestsException_Message *smithy.Schema
 var Transport = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "Transport",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var Transport_CidrAllowList *smithy.Schema
 
 var Transport_MaxBitrate *smithy.Schema
@@ -3805,19 +3834,25 @@ var Transport_NdiSourceSettings *smithy.Schema
 
 var Transport_NdiOutputTimecodeSource *smithy.Schema
 
+var Transport_NdiAudioReferenceLevel *smithy.Schema
+
 var TransportMediaInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "TransportMediaInfo",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var TransportMediaInfo_Programs *smithy.Schema
+
+var TransportMediaInfo_TsId *smithy.Schema
 
 var TransportStream = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "TransportStream",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var TransportStream_Channels *smithy.Schema
 
 var TransportStream_Codec *smithy.Schema
+
+var TransportStream_Color *smithy.Schema
 
 var TransportStream_FrameRate *smithy.Schema
 
@@ -3947,6 +3982,62 @@ var UpdateMaintenance_MaintenanceScheduledDate *smithy.Schema
 
 var UpdateMaintenance_MaintenanceStartHour *smithy.Schema
 
+var VideoColorimetry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "VideoColorimetry",
+}, smithy.ShapeTypeEnum, 10)
+var VideoColorimetry_BT709 *smithy.Schema
+
+var VideoColorimetry_BT470M *smithy.Schema
+
+var VideoColorimetry_BT470BG *smithy.Schema
+
+var VideoColorimetry_BT601 *smithy.Schema
+
+var VideoColorimetry_SMPTE240M *smithy.Schema
+
+var VideoColorimetry_GENERIC_FILM *smithy.Schema
+
+var VideoColorimetry_BT2020 *smithy.Schema
+
+var VideoColorimetry_SMPTE428 *smithy.Schema
+
+var VideoColorimetry_SMPTE431 *smithy.Schema
+
+var VideoColorimetry_SMPTE432 *smithy.Schema
+
+var VideoMatrixCoefficients = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "VideoMatrixCoefficients",
+}, smithy.ShapeTypeEnum, 14)
+var VideoMatrixCoefficients_IDENTITY *smithy.Schema
+
+var VideoMatrixCoefficients_BT709 *smithy.Schema
+
+var VideoMatrixCoefficients_FCC *smithy.Schema
+
+var VideoMatrixCoefficients_BT470BG *smithy.Schema
+
+var VideoMatrixCoefficients_BT601 *smithy.Schema
+
+var VideoMatrixCoefficients_SMPTE240M *smithy.Schema
+
+var VideoMatrixCoefficients_YCGCO *smithy.Schema
+
+var VideoMatrixCoefficients_BT2020_NCL *smithy.Schema
+
+var VideoMatrixCoefficients_BT2020_CL *smithy.Schema
+
+var VideoMatrixCoefficients_SMPTE2085 *smithy.Schema
+
+var VideoMatrixCoefficients_CHROMATICITY_DERIVED_NCL *smithy.Schema
+
+var VideoMatrixCoefficients_CHROMATICITY_DERIVED_CL *smithy.Schema
+
+var VideoMatrixCoefficients_BT2100_ICTCP *smithy.Schema
+
+var VideoMatrixCoefficients_IPT_C2 *smithy.Schema
+
 var VideoMonitoringSetting = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "VideoMonitoringSetting",
@@ -3954,6 +4045,42 @@ var VideoMonitoringSetting = smithy.NewSchema(smithy.ShapeID{
 var VideoMonitoringSetting_BlackFrames *smithy.Schema
 
 var VideoMonitoringSetting_FrozenFrames *smithy.Schema
+
+var VideoTransferCharacteristics = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "VideoTransferCharacteristics",
+}, smithy.ShapeTypeEnum, 16)
+var VideoTransferCharacteristics_BT709 *smithy.Schema
+
+var VideoTransferCharacteristics_BT470M *smithy.Schema
+
+var VideoTransferCharacteristics_BT470BG *smithy.Schema
+
+var VideoTransferCharacteristics_BT601 *smithy.Schema
+
+var VideoTransferCharacteristics_SMPTE240M *smithy.Schema
+
+var VideoTransferCharacteristics_LINEAR *smithy.Schema
+
+var VideoTransferCharacteristics_LOG100 *smithy.Schema
+
+var VideoTransferCharacteristics_LOG316 *smithy.Schema
+
+var VideoTransferCharacteristics_IEC61966_2_4 *smithy.Schema
+
+var VideoTransferCharacteristics_BT1361_ECG *smithy.Schema
+
+var VideoTransferCharacteristics_IEC61966_2_1 *smithy.Schema
+
+var VideoTransferCharacteristics_BT2020_10 *smithy.Schema
+
+var VideoTransferCharacteristics_BT2020_12 *smithy.Schema
+
+var VideoTransferCharacteristics_BT2100_PQ *smithy.Schema
+
+var VideoTransferCharacteristics_SMPTE428 *smithy.Schema
+
+var VideoTransferCharacteristics_BT2100_HLG *smithy.Schema
 
 var VpcInterface = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -5266,7 +5393,7 @@ var UpdateFlowResponse_Flow *smithy.Schema
 var UpdateFlowOutputRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "UpdateFlowOutputRequest",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var UpdateFlowOutputRequest_CidrAllowList *smithy.Schema
 
 var UpdateFlowOutputRequest_Description *smithy.Schema
@@ -5312,6 +5439,8 @@ var UpdateFlowOutputRequest_RouterIntegrationState *smithy.Schema
 var UpdateFlowOutputRequest_RouterIntegrationTransitEncryption *smithy.Schema
 
 var UpdateFlowOutputRequest_NdiOutputTimecodeSource *smithy.Schema
+
+var UpdateFlowOutputRequest_NdiAudioReferenceLevel *smithy.Schema
 
 var UpdateFlowOutputResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -5766,6 +5895,8 @@ func init() {
 
 	AddOutputRequest_NdiOutputTimecodeSource = AddOutputRequest.AddMember("NdiOutputTimecodeSource", NdiOutputTimecodeSource, &smithytraits.JSONName{Name: "ndiOutputTimecodeSource"})
 
+	AddOutputRequest_NdiAudioReferenceLevel = AddOutputRequest.AddMember("NdiAudioReferenceLevel", _NdiAudioReferenceLevel, &smithytraits.JSONName{Name: "ndiAudioReferenceLevel"})
+
 	___listOfAddOutputRequest_member = ___listOfAddOutputRequest.AddMember("member", AddOutputRequest)
 
 	SilentAudio_State = SilentAudio.AddMember("State", State, &smithytraits.JSONName{Name: "state"})
@@ -6120,6 +6251,92 @@ func init() {
 
 	___listOfNdiDiscoveryServerConfig_member = ___listOfNdiDiscoveryServerConfig.AddMember("member", NdiDiscoveryServerConfig)
 
+	VideoColorimetry_BT709 = VideoColorimetry.AddMember("BT709", smithyprelude.Unit)
+
+	VideoColorimetry_BT470M = VideoColorimetry.AddMember("BT470M", smithyprelude.Unit)
+
+	VideoColorimetry_BT470BG = VideoColorimetry.AddMember("BT470BG", smithyprelude.Unit)
+
+	VideoColorimetry_BT601 = VideoColorimetry.AddMember("BT601", smithyprelude.Unit)
+
+	VideoColorimetry_SMPTE240M = VideoColorimetry.AddMember("SMPTE240M", smithyprelude.Unit)
+
+	VideoColorimetry_GENERIC_FILM = VideoColorimetry.AddMember("GENERIC_FILM", smithyprelude.Unit)
+
+	VideoColorimetry_BT2020 = VideoColorimetry.AddMember("BT2020", smithyprelude.Unit)
+
+	VideoColorimetry_SMPTE428 = VideoColorimetry.AddMember("SMPTE428", smithyprelude.Unit)
+
+	VideoColorimetry_SMPTE431 = VideoColorimetry.AddMember("SMPTE431", smithyprelude.Unit)
+
+	VideoColorimetry_SMPTE432 = VideoColorimetry.AddMember("SMPTE432", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_BT709 = VideoTransferCharacteristics.AddMember("BT709", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_BT470M = VideoTransferCharacteristics.AddMember("BT470M", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_BT470BG = VideoTransferCharacteristics.AddMember("BT470BG", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_BT601 = VideoTransferCharacteristics.AddMember("BT601", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_SMPTE240M = VideoTransferCharacteristics.AddMember("SMPTE240M", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_LINEAR = VideoTransferCharacteristics.AddMember("LINEAR", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_LOG100 = VideoTransferCharacteristics.AddMember("LOG100", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_LOG316 = VideoTransferCharacteristics.AddMember("LOG316", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_IEC61966_2_4 = VideoTransferCharacteristics.AddMember("IEC61966_2_4", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_BT1361_ECG = VideoTransferCharacteristics.AddMember("BT1361_ECG", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_IEC61966_2_1 = VideoTransferCharacteristics.AddMember("IEC61966_2_1", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_BT2020_10 = VideoTransferCharacteristics.AddMember("BT2020_10", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_BT2020_12 = VideoTransferCharacteristics.AddMember("BT2020_12", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_BT2100_PQ = VideoTransferCharacteristics.AddMember("BT2100_PQ", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_SMPTE428 = VideoTransferCharacteristics.AddMember("SMPTE428", smithyprelude.Unit)
+
+	VideoTransferCharacteristics_BT2100_HLG = VideoTransferCharacteristics.AddMember("BT2100_HLG", smithyprelude.Unit)
+
+	VideoMatrixCoefficients_IDENTITY = VideoMatrixCoefficients.AddMember("IDENTITY", smithyprelude.Unit)
+
+	VideoMatrixCoefficients_BT709 = VideoMatrixCoefficients.AddMember("BT709", smithyprelude.Unit)
+
+	VideoMatrixCoefficients_FCC = VideoMatrixCoefficients.AddMember("FCC", smithyprelude.Unit)
+
+	VideoMatrixCoefficients_BT470BG = VideoMatrixCoefficients.AddMember("BT470BG", smithyprelude.Unit)
+
+	VideoMatrixCoefficients_BT601 = VideoMatrixCoefficients.AddMember("BT601", smithyprelude.Unit)
+
+	VideoMatrixCoefficients_SMPTE240M = VideoMatrixCoefficients.AddMember("SMPTE240M", smithyprelude.Unit)
+
+	VideoMatrixCoefficients_YCGCO = VideoMatrixCoefficients.AddMember("YCGCO", smithyprelude.Unit)
+
+	VideoMatrixCoefficients_BT2020_NCL = VideoMatrixCoefficients.AddMember("BT2020_NCL", smithyprelude.Unit)
+
+	VideoMatrixCoefficients_BT2020_CL = VideoMatrixCoefficients.AddMember("BT2020_CL", smithyprelude.Unit)
+
+	VideoMatrixCoefficients_SMPTE2085 = VideoMatrixCoefficients.AddMember("SMPTE2085", smithyprelude.Unit)
+
+	VideoMatrixCoefficients_CHROMATICITY_DERIVED_NCL = VideoMatrixCoefficients.AddMember("CHROMATICITY_DERIVED_NCL", smithyprelude.Unit)
+
+	VideoMatrixCoefficients_CHROMATICITY_DERIVED_CL = VideoMatrixCoefficients.AddMember("CHROMATICITY_DERIVED_CL", smithyprelude.Unit)
+
+	VideoMatrixCoefficients_BT2100_ICTCP = VideoMatrixCoefficients.AddMember("BT2100_ICTCP", smithyprelude.Unit)
+
+	VideoMatrixCoefficients_IPT_C2 = VideoMatrixCoefficients.AddMember("IPT_C2", smithyprelude.Unit)
+
+	ColorInformation_Colorimetry = ColorInformation.AddMember("Colorimetry", VideoColorimetry, &smithytraits.JSONName{Name: "colorimetry"})
+
+	ColorInformation_TransferCharacteristics = ColorInformation.AddMember("TransferCharacteristics", VideoTransferCharacteristics, &smithytraits.JSONName{Name: "transferCharacteristics"})
+
+	ColorInformation_MatrixCoefficients = ColorInformation.AddMember("MatrixCoefficients", VideoMatrixCoefficients, &smithytraits.JSONName{Name: "matrixCoefficients"})
+
 	FrameResolution_FrameHeight = FrameResolution.AddMember("FrameHeight", smithyprelude.Integer, &smithytraits.JSONName{Name: "frameHeight"})
 
 	FrameResolution_FrameWidth = FrameResolution.AddMember("FrameWidth", smithyprelude.Integer, &smithytraits.JSONName{Name: "frameWidth"})
@@ -6131,6 +6348,8 @@ func init() {
 	NdiMediaStreamInfo_StreamId = NdiMediaStreamInfo.AddMember("StreamId", smithyprelude.Integer, &smithytraits.JSONName{Name: "streamId"})
 
 	NdiMediaStreamInfo_ScanMode = NdiMediaStreamInfo.AddMember("ScanMode", ScanMode, &smithytraits.JSONName{Name: "scanMode"})
+
+	NdiMediaStreamInfo_Color = NdiMediaStreamInfo.AddMember("Color", ColorInformation, &smithytraits.JSONName{Name: "color"})
 
 	NdiMediaStreamInfo_FrameResolution = NdiMediaStreamInfo.AddMember("FrameResolution", FrameResolution, &smithytraits.JSONName{Name: "frameResolution"})
 
@@ -6176,6 +6395,8 @@ func init() {
 
 	NdiSourceSettings_SourceName = NdiSourceSettings.AddMember("SourceName", smithyprelude.String, &smithytraits.JSONName{Name: "sourceName"})
 
+	NdiSourceSettings_AudioReferenceLevel = NdiSourceSettings.AddMember("AudioReferenceLevel", _NdiAudioReferenceLevel, &smithytraits.JSONName{Name: "audioReferenceLevel"})
+
 	Transport_CidrAllowList = Transport.AddMember("CidrAllowList", ___listOfString, &smithytraits.JSONName{Name: "cidrAllowList"})
 
 	Transport_MaxBitrate = Transport.AddMember("MaxBitrate", smithyprelude.Integer, &smithytraits.JSONName{Name: "maxBitrate"})
@@ -6209,6 +6430,8 @@ func init() {
 	Transport_NdiSourceSettings = Transport.AddMember("NdiSourceSettings", NdiSourceSettings, &smithytraits.JSONName{Name: "ndiSourceSettings"})
 
 	Transport_NdiOutputTimecodeSource = Transport.AddMember("NdiOutputTimecodeSource", NdiOutputTimecodeSource, &smithytraits.JSONName{Name: "ndiOutputTimecodeSource"})
+
+	Transport_NdiAudioReferenceLevel = Transport.AddMember("NdiAudioReferenceLevel", _NdiAudioReferenceLevel, &smithytraits.JSONName{Name: "ndiAudioReferenceLevel"})
 
 	Output_DataTransferSubscriberFeePercent = Output.AddMember("DataTransferSubscriberFeePercent", smithyprelude.Integer, &smithytraits.JSONName{Name: "dataTransferSubscriberFeePercent"})
 
@@ -6387,6 +6610,8 @@ func init() {
 	TransportStream_Channels = TransportStream.AddMember("Channels", smithyprelude.Integer, &smithytraits.JSONName{Name: "channels"})
 
 	TransportStream_Codec = TransportStream.AddMember("Codec", smithyprelude.String, &smithytraits.JSONName{Name: "codec"})
+
+	TransportStream_Color = TransportStream.AddMember("Color", ColorInformation, &smithytraits.JSONName{Name: "color"})
 
 	TransportStream_FrameRate = TransportStream.AddMember("FrameRate", smithyprelude.String, &smithytraits.JSONName{Name: "frameRate"})
 
@@ -7109,6 +7334,10 @@ func init() {
 
 	RouterInputTier_INPUT_20 = RouterInputTier.AddMember("INPUT_20", smithyprelude.Unit)
 
+	RouterInputTier_INPUT_500 = RouterInputTier.AddMember("INPUT_500", smithyprelude.Unit)
+
+	RouterInputTier_INPUT_250 = RouterInputTier.AddMember("INPUT_250", smithyprelude.Unit)
+
 	RouterInputMessage_Code = RouterInputMessage.AddMember("Code", smithyprelude.String, &smithytraits.JSONName{Name: "code"})
 
 	RouterInputMessage_Message = RouterInputMessage.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
@@ -7218,6 +7447,8 @@ func init() {
 	_RouterInputList_member = _RouterInputList.AddMember("member", RouterInput)
 
 	TransportMediaInfo_Programs = TransportMediaInfo.AddMember("Programs", ___listOfTransportStreamProgram, &smithytraits.JSONName{Name: "programs"})
+
+	TransportMediaInfo_TsId = TransportMediaInfo.AddMember("TsId", smithyprelude.Integer, &smithytraits.JSONName{Name: "tsId"})
 
 	RouterInputMetadata_TransportStreamMediaInfo = RouterInputMetadata.AddMember("TransportStreamMediaInfo", TransportMediaInfo, &smithytraits.JSONName{Name: "transportStreamMediaInfo"})
 
@@ -7368,6 +7599,10 @@ func init() {
 	RouterOutputTier_OUTPUT_50 = RouterOutputTier.AddMember("OUTPUT_50", smithyprelude.Unit)
 
 	RouterOutputTier_OUTPUT_20 = RouterOutputTier.AddMember("OUTPUT_20", smithyprelude.Unit)
+
+	RouterOutputTier_OUTPUT_500 = RouterOutputTier.AddMember("OUTPUT_500", smithyprelude.Unit)
+
+	RouterOutputTier_OUTPUT_250 = RouterOutputTier.AddMember("OUTPUT_250", smithyprelude.Unit)
 
 	RouterOutputMessage_Code = RouterOutputMessage.AddMember("Code", smithyprelude.String, &smithytraits.JSONName{Name: "code"})
 
@@ -8242,6 +8477,8 @@ func init() {
 	UpdateFlowOutputRequest_RouterIntegrationTransitEncryption = UpdateFlowOutputRequest.AddMember("RouterIntegrationTransitEncryption", FlowTransitEncryption, &smithytraits.JSONName{Name: "routerIntegrationTransitEncryption"})
 
 	UpdateFlowOutputRequest_NdiOutputTimecodeSource = UpdateFlowOutputRequest.AddMember("NdiOutputTimecodeSource", NdiOutputTimecodeSource, &smithytraits.JSONName{Name: "ndiOutputTimecodeSource"})
+
+	UpdateFlowOutputRequest_NdiAudioReferenceLevel = UpdateFlowOutputRequest.AddMember("NdiAudioReferenceLevel", _NdiAudioReferenceLevel, &smithytraits.JSONName{Name: "ndiAudioReferenceLevel"})
 
 	UpdateFlowOutputResponse_FlowArn = UpdateFlowOutputResponse.AddMember("FlowArn", smithyprelude.String, &smithytraits.JSONName{Name: "flowArn"})
 

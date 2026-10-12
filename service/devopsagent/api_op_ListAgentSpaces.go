@@ -29,6 +29,9 @@ func (c *Client) ListAgentSpaces(ctx context.Context, params *ListAgentSpacesInp
 // Input for listing AgentSpaces with pagination support.
 type ListAgentSpacesInput struct {
 
+	// How much data to include in the response.
+	IncludedData types.IncludedData
+
 	// Maximum number of results to return in a single call.
 	MaxResults *int32
 

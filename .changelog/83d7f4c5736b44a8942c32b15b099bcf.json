@@ -1,0 +1,8 @@
+{
+    "id": "83d7f4c5-736b-44a8-942c-32b15b099bcf",
+    "type": "documentation",
+    "description": "Doc updates to reposition Lambda Functions as Lambda Event Functions",
+    "modules": [
+        "service/lambda"
+    ]
+}

@@ -6280,6 +6280,15 @@ func awsAwsjson10_deserializeOpDocumentRegisterComputeNodeGroupInstanceOutput(v 
 				return err
 			}
 
+		case "schedulerVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SchedulerVersion = ptr.String(jtv)
+			}
+
 		case "sharedSecret":
 			if value != nil {
 				jtv, ok := value.(string)

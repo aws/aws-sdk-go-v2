@@ -1014,6 +1014,25 @@ func (DataQualityEncryptionMode) Values() []DataQualityEncryptionMode {
 	}
 }
 
+type DataQualityEngine string
+
+// Enum values for DataQualityEngine
+const (
+	DataQualityEngineSpark  DataQualityEngine = "SPARK"
+	DataQualityEnginePython DataQualityEngine = "PYTHON"
+)
+
+// Values returns all known values for DataQualityEngine. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataQualityEngine) Values() []DataQualityEngine {
+	return []DataQualityEngine{
+		"SPARK",
+		"PYTHON",
+	}
+}
+
 type DataQualityModelStatus string
 
 // Enum values for DataQualityModelStatus

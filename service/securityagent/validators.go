@@ -130,6 +130,46 @@ func (m *validateOpBatchDeleteThreatModels) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchDisassociateFindingIssue struct {
+}
+
+func (*validateOpBatchDisassociateFindingIssue) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDisassociateFindingIssue) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDisassociateFindingIssueInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDisassociateFindingIssueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchExportFindings struct {
+}
+
+func (*validateOpBatchExportFindings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchExportFindings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchExportFindingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchExportFindingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetAgentSpaces struct {
 }
 
@@ -1774,6 +1814,14 @@ func addOpBatchDeleteThreatModelsValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpBatchDeleteThreatModels{}, middleware.After)
 }
 
+func addOpBatchDisassociateFindingIssueValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDisassociateFindingIssue{}, middleware.After)
+}
+
+func addOpBatchExportFindingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchExportFindings{}, middleware.After)
+}
+
 func addOpBatchGetAgentSpacesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetAgentSpaces{}, middleware.After)
 }
@@ -2608,6 +2656,11 @@ func validateIntegratedResource(v types.IntegratedResource) error {
 			invalidParams.AddNested("[gitlabRepository]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.IntegratedResourceMemberJiraProject:
+		if err := validateJiraProjectResource(&uv.Value); err != nil {
+			invalidParams.AddNested("[jiraProject]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2649,6 +2702,69 @@ func validateIntegratedResourceInputItemList(v []types.IntegratedResourceInputIt
 		if err := validateIntegratedResourceInputItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIssueDestination(v *types.IssueDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IssueDestination"}
+	if v.IntegrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
+	}
+	if v.ProjectKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJiraIntegrationInput(v *types.JiraIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JiraIntegrationInput"}
+	if v.InstallationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstallationId"))
+	}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if v.State == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if v.SiteUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SiteUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJiraProjectResource(v *types.JiraProjectResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JiraProjectResource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ProjectKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectKey"))
+	}
+	if v.ProjectId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2715,6 +2831,11 @@ func validateProviderInput(v types.ProviderInput) error {
 	case *types.ProviderInputMemberGitlab:
 		if err := validateGitLabIntegrationInput(&uv.Value); err != nil {
 			invalidParams.AddNested("[gitlab]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProviderInputMemberJira:
+		if err := validateJiraIntegrationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[jira]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -3147,6 +3268,49 @@ func validateOpBatchDeleteThreatModelsInput(v *BatchDeleteThreatModelsInput) err
 	}
 	if v.AgentSpaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDisassociateFindingIssueInput(v *BatchDisassociateFindingIssueInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDisassociateFindingIssueInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.FindingIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchExportFindingsInput(v *BatchExportFindingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchExportFindingsInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.IssueDestination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IssueDestination"))
+	} else if v.IssueDestination != nil {
+		if err := validateIssueDestination(v.IssueDestination); err != nil {
+			invalidParams.AddNested("IssueDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FindingIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

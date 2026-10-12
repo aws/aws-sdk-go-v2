@@ -14,6 +14,8 @@
         "api_op_BatchDeletePentests.go",
         "api_op_BatchDeleteSecurityRequirements.go",
         "api_op_BatchDeleteThreatModels.go",
+        "api_op_BatchDisassociateFindingIssue.go",
+        "api_op_BatchExportFindings.go",
         "api_op_BatchGetAgentSpaces.go",
         "api_op_BatchGetArtifactMetadata.go",
         "api_op_BatchGetCodeReviewJobTasks.go",

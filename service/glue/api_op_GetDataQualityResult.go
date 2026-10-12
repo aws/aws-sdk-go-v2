@@ -78,8 +78,8 @@ type GetDataQualityResultOutput struct {
 	// The job run ID associated with the data quality result, if any.
 	JobRunId *string
 
-	// A list of DataQualityObservation objects representing the observations
-	// generated after evaluating the rules and analyzers.
+	// A list of DataQualityObservation objects representing the anomaly detection
+	// observations generated after evaluating the rules and analyzers.
 	Observations []types.DataQualityObservation
 
 	// The Profile ID for the data quality result.

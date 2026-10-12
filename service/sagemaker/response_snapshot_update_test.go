@@ -2343,6 +2343,30 @@ func TestUpdateResponseSnapshot_CreateTrainingPlan(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateTrainingSession(t *testing.T) {
+	want := &CreateTrainingSessionOutput{
+		TrainingSessionArn: ptr.String("__TrainingSessionArn__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.CreateTrainingSession, schemas.CreateTrainingSessionResponse, schemas.CreateTrainingSessionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateTrainingSession.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateTransformJob(t *testing.T) {
 	want := &CreateTransformJobOutput{
 		TransformJobArn: ptr.String("__TransformJobArn__"),
@@ -3766,6 +3790,28 @@ func TestUpdateResponseSnapshot_DeleteTrainingJob(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteTrainingJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteTrainingSession(t *testing.T) {
+	want := &DeleteTrainingSessionOutput{}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteTrainingSession, schemas.DeleteTrainingSessionResponse, schemas.DeleteTrainingSessionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteTrainingSession.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -14785,6 +14831,80 @@ func TestUpdateResponseSnapshot_DescribeTrainingPlanExtensionHistory(t *testing.
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeTrainingSession(t *testing.T) {
+	want := &DescribeTrainingSessionOutput{
+		TrainingSessionDetail: &types.TrainingSessionDetail{
+			TrainingSessionArn:         ptr.String("__TrainingSessionArn__"),
+			TrainingSessionName:        ptr.String("__TrainingSessionName__"),
+			TrainingSessionStatus:      types.TrainingSessionStatus("Created"),
+			ModelPackageGroupArn:       ptr.String("__ModelPackageGroupArn__"),
+			CreationTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ErrorDetails:               ptr.String("__ErrorDetails__"),
+			LastReceivedSequenceNumber: ptr.Int32(1),
+			BillableTokenUsage: &types.BillableTokenUsage{
+				PrefillTokenCount:  ptr.Int64(1),
+				SampleTokenCount:   ptr.Int64(1),
+				TrainingTokenCount: ptr.Int64(1),
+			},
+			VpcConfig: &types.VpcConfig{
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Subnets: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+			LoraConfig: &types.LoraConfig{
+				Rank:  ptr.Int32(1),
+				Alpha: ptr.Int32(1),
+			},
+			ModelConfig: &types.TrainingSessionModelConfig{
+				BaseModelArn: ptr.String("__BaseModelArn__"),
+				AcceptEula:   ptr.Bool(true),
+			},
+			OutputConfig: &types.TrainingSessionOutputConfig{
+				S3Location: &types.TrainingSessionS3Location{
+					Path:      ptr.String("__Path__"),
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeTrainingSession, schemas.DescribeTrainingSessionResponse, schemas.DescribeTrainingSessionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeTrainingSession.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeTransformJob(t *testing.T) {
 	want := &DescribeTransformJobOutput{
 		TransformJobName:        ptr.String("__TransformJobName__"),
@@ -20657,6 +20777,44 @@ func TestUpdateResponseSnapshot_ListTrainingPlans(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListTrainingPlans.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListTrainingSessions(t *testing.T) {
+	want := &ListTrainingSessionsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		TrainingSessionSummaries: []types.TrainingSessionSummary{
+			{
+				TrainingSessionArn:    ptr.String("__TrainingSessionArn__"),
+				TrainingSessionStatus: types.TrainingSessionStatus("Created"),
+				CreationTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				TrainingSessionArn:    ptr.String("__TrainingSessionArn__"),
+				TrainingSessionStatus: types.TrainingSessionStatus("Created"),
+				CreationTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.ListTrainingSessions, schemas.ListTrainingSessionsResponse, schemas.ListTrainingSessionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListTrainingSessions.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -32538,6 +32696,28 @@ func TestUpdateResponseSnapshot_StopTrainingJob(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("StopTrainingJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StopTrainingSession(t *testing.T) {
+	want := &StopTrainingSessionOutput{}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.StopTrainingSession, schemas.StopTrainingSessionResponse, schemas.StopTrainingSessionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StopTrainingSession.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

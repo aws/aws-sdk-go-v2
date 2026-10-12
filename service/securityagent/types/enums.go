@@ -552,6 +552,7 @@ const (
 	ProviderBitbucket   Provider = "BITBUCKET"
 	ProviderConfluence  Provider = "CONFLUENCE"
 	ProviderAzureDevops Provider = "AZURE_DEVOPS"
+	ProviderJira        Provider = "JIRA"
 )
 
 // Values returns all known values for Provider. Note that this can be expanded in
@@ -565,6 +566,7 @@ func (Provider) Values() []Provider {
 		"BITBUCKET",
 		"CONFLUENCE",
 		"AZURE_DEVOPS",
+		"JIRA",
 	}
 }
 
@@ -574,6 +576,7 @@ type ProviderType string
 const (
 	ProviderTypeSourceCode    ProviderType = "SOURCE_CODE"
 	ProviderTypeDocumentation ProviderType = "DOCUMENTATION"
+	ProviderTypeIssueTracking ProviderType = "ISSUE_TRACKING"
 )
 
 // Values returns all known values for ProviderType. Note that this can be
@@ -584,6 +587,7 @@ func (ProviderType) Values() []ProviderType {
 	return []ProviderType{
 		"SOURCE_CODE",
 		"DOCUMENTATION",
+		"ISSUE_TRACKING",
 	}
 }
 
@@ -612,6 +616,7 @@ type ResourceType string
 const (
 	ResourceTypeCodeRepository ResourceType = "CODE_REPOSITORY"
 	ResourceTypeDocument       ResourceType = "DOCUMENT"
+	ResourceTypeProject        ResourceType = "PROJECT"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -622,6 +627,7 @@ func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"CODE_REPOSITORY",
 		"DOCUMENT",
+		"PROJECT",
 	}
 }
 

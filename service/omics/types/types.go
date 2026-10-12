@@ -2252,6 +2252,10 @@ type VpcConfig struct {
 	// List of subnet IDs. Maximum of 16 subnets allowed.
 	SubnetIds []string
 
+	// The Amazon Web Services account ID of the cross-account VPC owner for
+	// RAM-shared VPC configurations.
+	VpcOwnerAccountId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -2266,6 +2270,10 @@ type VpcConfigResponse struct {
 
 	// VPC ID computed from the provided subnet IDs.
 	VpcId *string
+
+	// The Amazon Web Services account ID of the cross-account VPC owner for
+	// RAM-shared VPC configurations.
+	VpcOwnerAccountId *string
 
 	noSmithyDocumentSerde
 }

@@ -134,6 +134,30 @@ func TestCheckSnapshot_BatchDeleteThreatModels(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchDisassociateFindingIssue(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDisassociateFindingIssue(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDisassociateFindingIssue")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchExportFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchExportFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchExportFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetAgentSpaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetAgentSpaces(context.Background(), nil, func(o *Options) {
@@ -1254,6 +1278,30 @@ func TestUpdateSnapshot_BatchDeleteThreatModels(t *testing.T) {
 	_, err := svc.BatchDeleteThreatModels(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchDeleteThreatModels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchDisassociateFindingIssue(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDisassociateFindingIssue(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDisassociateFindingIssue")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchExportFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchExportFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchExportFindings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

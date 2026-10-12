@@ -64,8 +64,10 @@ func (v *InvalidParameterValueException) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 
-// The account has reached the maximum number of network connectors allowed.
-// Delete unused connectors or request a limit increase through Service Quotas.
+// The request would exceed a network connector limit. For CreateNetworkConnector ,
+// the account has reached the maximum number of network connectors allowed. For
+// UpdateNetworkConnector , the connector has reached the maximum number of
+// versions allowed.
 type NetworkConnectorLimitExceededException struct {
 	Message *string
 

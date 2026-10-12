@@ -837,6 +837,10 @@ func TestCheckResponseSnapshot_GetAccountUsage(t *testing.T) {
 			Limit: ptr.Int32(1),
 			Usage: ptr.Float64(1.0),
 		},
+		MonthlyAccountGraderHours: &types.UsageMetric{
+			Limit: ptr.Int32(1),
+			Usage: ptr.Float64(1.0),
+		},
 		UsagePeriodStartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UsagePeriodEndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
@@ -885,6 +889,7 @@ func TestCheckResponseSnapshot_GetAgentSpace(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetAgentSpace(context.Background(), &GetAgentSpaceInput{
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		IncludedData: types.IncludedData("METADATA_ONLY"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1322,8 +1327,9 @@ func TestCheckResponseSnapshot_ListAgentSpaces(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListAgentSpaces(context.Background(), &ListAgentSpacesInput{
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		IncludedData: types.IncludedData("METADATA_ONLY"),
 	})
 	if err != nil {
 		t.Fatal(err)

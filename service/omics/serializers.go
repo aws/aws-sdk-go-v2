@@ -11343,6 +11343,11 @@ func awsRestjson1_serializeDocumentVpcConfig(v *types.VpcConfig, value smithyjso
 		}
 	}
 
+	if v.VpcOwnerAccountId != nil {
+		ok := object.Key("vpcOwnerAccountId")
+		ok.String(*v.VpcOwnerAccountId)
+	}
+
 	return nil
 }
 

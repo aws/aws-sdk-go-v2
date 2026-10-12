@@ -2474,8 +2474,9 @@ func TestCheckRequestSnapshot_UpdateOmniDashboard(t *testing.T) {
 
 func TestCheckRequestSnapshot_UpdateSpace(t *testing.T) {
 	input := &UpdateSpaceInput{
-		SpaceId: ptr.String("__SpaceId__"),
-		Name:    ptr.String("__Name__"),
+		SpaceId:                    ptr.String("__SpaceId__"),
+		Name:                       ptr.String("__Name__"),
+		AgentCoreEvaluationRoleArn: ptr.String("__AgentCoreEvaluationRoleArn__"),
 		EncryptionConfiguration: &types.EncryptionConfiguration{
 			EncryptionStrategy: types.EncryptionStrategy("AWS_OWNED"),
 			KmsKeyArn:          ptr.String("__KmsKeyArn__"),
@@ -4813,8 +4814,9 @@ func TestUpdateRequestSnapshot_UpdateOmniDashboard(t *testing.T) {
 
 func TestUpdateRequestSnapshot_UpdateSpace(t *testing.T) {
 	input := &UpdateSpaceInput{
-		SpaceId: ptr.String("__SpaceId__"),
-		Name:    ptr.String("__Name__"),
+		SpaceId:                    ptr.String("__SpaceId__"),
+		Name:                       ptr.String("__Name__"),
+		AgentCoreEvaluationRoleArn: ptr.String("__AgentCoreEvaluationRoleArn__"),
 		EncryptionConfiguration: &types.EncryptionConfiguration{
 			EncryptionStrategy: types.EncryptionStrategy("AWS_OWNED"),
 			KmsKeyArn:          ptr.String("__KmsKeyArn__"),

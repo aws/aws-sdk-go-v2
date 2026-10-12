@@ -22293,6 +22293,22 @@ func awsRestjson1_deserializeDocumentMemoryRecord(v **types.MemoryRecord, value 
 				}
 			}
 
+		case "expiresAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ExpiresAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "memoryRecordId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22319,6 +22335,22 @@ func awsRestjson1_deserializeDocumentMemoryRecord(v **types.MemoryRecord, value 
 		case "namespaces":
 			if err := awsRestjson1_deserializeDocumentNamespacesList(&sv.Namespaces, value); err != nil {
 				return err
+			}
+
+		case "timestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Timestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:
@@ -22685,6 +22717,22 @@ func awsRestjson1_deserializeDocumentMemoryRecordSummary(v **types.MemoryRecordS
 
 				default:
 					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "timestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Timestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
 			}

@@ -110,6 +110,13 @@ func awsRestjson1_serializeOpDocumentBatchCreateMemoryRecordsInput(v *BatchCreat
 		ok.String(*v.ClientToken)
 	}
 
+	if v.RecordExpirySpecification != nil {
+		ok := object.Key("recordExpirySpecification")
+		if err := awsRestjson1_serializeDocumentRecordExpirySpecification(v.RecordExpirySpecification, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Records != nil {
 		ok := object.Key("records")
 		if err := awsRestjson1_serializeDocumentMemoryRecordsCreateInputList(v.Records, ok); err != nil {
@@ -301,6 +308,13 @@ func awsRestjson1_serializeOpHttpBindingsBatchUpdateMemoryRecordsInput(v *BatchU
 func awsRestjson1_serializeOpDocumentBatchUpdateMemoryRecordsInput(v *BatchUpdateMemoryRecordsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.RecordExpirySpecification != nil {
+		ok := object.Key("recordExpirySpecification")
+		if err := awsRestjson1_serializeDocumentRecordExpirySpecification(v.RecordExpirySpecification, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Records != nil {
 		ok := object.Key("records")
@@ -10489,6 +10503,26 @@ func awsRestjson1_serializeDocumentRecommendationEvaluatorReference(v *types.Rec
 		ok.String(*v.EvaluatorArn)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRecordExpirySpecification(v types.RecordExpirySpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RecordExpirySpecificationMemberAction:
+		av := object.Key("action")
+		av.String(string(uv.Value))
+
+	case *types.RecordExpirySpecificationMemberRecordExpiryDurationDays:
+		av := object.Key("recordExpiryDurationDays")
+		av.Integer(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 

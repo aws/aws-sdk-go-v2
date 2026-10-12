@@ -430,9 +430,11 @@ func TestUpdateResponseSnapshot_AddFlowOutputs(t *testing.T) {
 					NdiSpeedHqQuality:     ptr.Int32(1),
 					NdiProgramName:        ptr.String("__NdiProgramName__"),
 					NdiSourceSettings: &types.NdiSourceSettings{
-						SourceName: ptr.String("__SourceName__"),
+						SourceName:          ptr.String("__SourceName__"),
+						AudioReferenceLevel: ptr.Int32(1),
 					},
 					NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+					NdiAudioReferenceLevel:  ptr.Int32(1),
 				},
 				VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
 					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
@@ -551,9 +553,11 @@ func TestUpdateResponseSnapshot_AddFlowOutputs(t *testing.T) {
 					NdiSpeedHqQuality:     ptr.Int32(1),
 					NdiProgramName:        ptr.String("__NdiProgramName__"),
 					NdiSourceSettings: &types.NdiSourceSettings{
-						SourceName: ptr.String("__SourceName__"),
+						SourceName:          ptr.String("__SourceName__"),
+						AudioReferenceLevel: ptr.Int32(1),
 					},
 					NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+					NdiAudioReferenceLevel:  ptr.Int32(1),
 				},
 				VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
 					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
@@ -686,9 +690,11 @@ func TestUpdateResponseSnapshot_AddFlowSources(t *testing.T) {
 					NdiSpeedHqQuality:     ptr.Int32(1),
 					NdiProgramName:        ptr.String("__NdiProgramName__"),
 					NdiSourceSettings: &types.NdiSourceSettings{
-						SourceName: ptr.String("__SourceName__"),
+						SourceName:          ptr.String("__SourceName__"),
+						AudioReferenceLevel: ptr.Int32(1),
 					},
 					NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+					NdiAudioReferenceLevel:  ptr.Int32(1),
 				},
 				VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
 				WhitelistCidr:    ptr.String("__WhitelistCidr__"),
@@ -794,9 +800,11 @@ func TestUpdateResponseSnapshot_AddFlowSources(t *testing.T) {
 					NdiSpeedHqQuality:     ptr.Int32(1),
 					NdiProgramName:        ptr.String("__NdiProgramName__"),
 					NdiSourceSettings: &types.NdiSourceSettings{
-						SourceName: ptr.String("__SourceName__"),
+						SourceName:          ptr.String("__SourceName__"),
+						AudioReferenceLevel: ptr.Int32(1),
 					},
 					NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+					NdiAudioReferenceLevel:  ptr.Int32(1),
 				},
 				VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
 				WhitelistCidr:    ptr.String("__WhitelistCidr__"),
@@ -1692,9 +1700,11 @@ func TestUpdateResponseSnapshot_CreateFlow(t *testing.T) {
 						NdiSpeedHqQuality:     ptr.Int32(1),
 						NdiProgramName:        ptr.String("__NdiProgramName__"),
 						NdiSourceSettings: &types.NdiSourceSettings{
-							SourceName: ptr.String("__SourceName__"),
+							SourceName:          ptr.String("__SourceName__"),
+							AudioReferenceLevel: ptr.Int32(1),
 						},
 						NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+						NdiAudioReferenceLevel:  ptr.Int32(1),
 					},
 					VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
 						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
@@ -1813,9 +1823,11 @@ func TestUpdateResponseSnapshot_CreateFlow(t *testing.T) {
 						NdiSpeedHqQuality:     ptr.Int32(1),
 						NdiProgramName:        ptr.String("__NdiProgramName__"),
 						NdiSourceSettings: &types.NdiSourceSettings{
-							SourceName: ptr.String("__SourceName__"),
+							SourceName:          ptr.String("__SourceName__"),
+							AudioReferenceLevel: ptr.Int32(1),
 						},
 						NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+						NdiAudioReferenceLevel:  ptr.Int32(1),
 					},
 					VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
 						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
@@ -1923,9 +1935,11 @@ func TestUpdateResponseSnapshot_CreateFlow(t *testing.T) {
 					NdiSpeedHqQuality:     ptr.Int32(1),
 					NdiProgramName:        ptr.String("__NdiProgramName__"),
 					NdiSourceSettings: &types.NdiSourceSettings{
-						SourceName: ptr.String("__SourceName__"),
+						SourceName:          ptr.String("__SourceName__"),
+						AudioReferenceLevel: ptr.Int32(1),
 					},
 					NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+					NdiAudioReferenceLevel:  ptr.Int32(1),
 				},
 				VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
 				WhitelistCidr:    ptr.String("__WhitelistCidr__"),
@@ -2040,9 +2054,11 @@ func TestUpdateResponseSnapshot_CreateFlow(t *testing.T) {
 						NdiSpeedHqQuality:     ptr.Int32(1),
 						NdiProgramName:        ptr.String("__NdiProgramName__"),
 						NdiSourceSettings: &types.NdiSourceSettings{
-							SourceName: ptr.String("__SourceName__"),
+							SourceName:          ptr.String("__SourceName__"),
+							AudioReferenceLevel: ptr.Int32(1),
 						},
 						NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+						NdiAudioReferenceLevel:  ptr.Int32(1),
 					},
 					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
 					WhitelistCidr:    ptr.String("__WhitelistCidr__"),
@@ -2148,9 +2164,11 @@ func TestUpdateResponseSnapshot_CreateFlow(t *testing.T) {
 						NdiSpeedHqQuality:     ptr.Int32(1),
 						NdiProgramName:        ptr.String("__NdiProgramName__"),
 						NdiSourceSettings: &types.NdiSourceSettings{
-							SourceName: ptr.String("__SourceName__"),
+							SourceName:          ptr.String("__SourceName__"),
+							AudioReferenceLevel: ptr.Int32(1),
 						},
 						NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+						NdiAudioReferenceLevel:  ptr.Int32(1),
 					},
 					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
 					WhitelistCidr:    ptr.String("__WhitelistCidr__"),
@@ -3099,9 +3117,11 @@ func TestUpdateResponseSnapshot_DescribeFlow(t *testing.T) {
 						NdiSpeedHqQuality:     ptr.Int32(1),
 						NdiProgramName:        ptr.String("__NdiProgramName__"),
 						NdiSourceSettings: &types.NdiSourceSettings{
-							SourceName: ptr.String("__SourceName__"),
+							SourceName:          ptr.String("__SourceName__"),
+							AudioReferenceLevel: ptr.Int32(1),
 						},
 						NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+						NdiAudioReferenceLevel:  ptr.Int32(1),
 					},
 					VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
 						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
@@ -3220,9 +3240,11 @@ func TestUpdateResponseSnapshot_DescribeFlow(t *testing.T) {
 						NdiSpeedHqQuality:     ptr.Int32(1),
 						NdiProgramName:        ptr.String("__NdiProgramName__"),
 						NdiSourceSettings: &types.NdiSourceSettings{
-							SourceName: ptr.String("__SourceName__"),
+							SourceName:          ptr.String("__SourceName__"),
+							AudioReferenceLevel: ptr.Int32(1),
 						},
 						NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+						NdiAudioReferenceLevel:  ptr.Int32(1),
 					},
 					VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
 						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
@@ -3330,9 +3352,11 @@ func TestUpdateResponseSnapshot_DescribeFlow(t *testing.T) {
 					NdiSpeedHqQuality:     ptr.Int32(1),
 					NdiProgramName:        ptr.String("__NdiProgramName__"),
 					NdiSourceSettings: &types.NdiSourceSettings{
-						SourceName: ptr.String("__SourceName__"),
+						SourceName:          ptr.String("__SourceName__"),
+						AudioReferenceLevel: ptr.Int32(1),
 					},
 					NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+					NdiAudioReferenceLevel:  ptr.Int32(1),
 				},
 				VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
 				WhitelistCidr:    ptr.String("__WhitelistCidr__"),
@@ -3447,9 +3471,11 @@ func TestUpdateResponseSnapshot_DescribeFlow(t *testing.T) {
 						NdiSpeedHqQuality:     ptr.Int32(1),
 						NdiProgramName:        ptr.String("__NdiProgramName__"),
 						NdiSourceSettings: &types.NdiSourceSettings{
-							SourceName: ptr.String("__SourceName__"),
+							SourceName:          ptr.String("__SourceName__"),
+							AudioReferenceLevel: ptr.Int32(1),
 						},
 						NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+						NdiAudioReferenceLevel:  ptr.Int32(1),
 					},
 					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
 					WhitelistCidr:    ptr.String("__WhitelistCidr__"),
@@ -3555,9 +3581,11 @@ func TestUpdateResponseSnapshot_DescribeFlow(t *testing.T) {
 						NdiSpeedHqQuality:     ptr.Int32(1),
 						NdiProgramName:        ptr.String("__NdiProgramName__"),
 						NdiSourceSettings: &types.NdiSourceSettings{
-							SourceName: ptr.String("__SourceName__"),
+							SourceName:          ptr.String("__SourceName__"),
+							AudioReferenceLevel: ptr.Int32(1),
 						},
 						NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+						NdiAudioReferenceLevel:  ptr.Int32(1),
 					},
 					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
 					WhitelistCidr:    ptr.String("__WhitelistCidr__"),
@@ -3732,8 +3760,13 @@ func TestUpdateResponseSnapshot_DescribeFlowSourceMetadata(t *testing.T) {
 					ProgramPid:    ptr.Int32(1),
 					Streams: []types.TransportStream{
 						{
-							Channels:  ptr.Int32(1),
-							Codec:     ptr.String("__Codec__"),
+							Channels: ptr.Int32(1),
+							Codec:    ptr.String("__Codec__"),
+							Color: &types.ColorInformation{
+								Colorimetry:             types.VideoColorimetry("BT709"),
+								TransferCharacteristics: types.VideoTransferCharacteristics("BT709"),
+								MatrixCoefficients:      types.VideoMatrixCoefficients("IDENTITY"),
+							},
 							FrameRate: ptr.String("__FrameRate__"),
 							FrameResolution: &types.FrameResolution{
 								FrameHeight: ptr.Int32(1),
@@ -3745,8 +3778,13 @@ func TestUpdateResponseSnapshot_DescribeFlowSourceMetadata(t *testing.T) {
 							StreamType: ptr.String("__StreamType__"),
 						},
 						{
-							Channels:  ptr.Int32(1),
-							Codec:     ptr.String("__Codec__"),
+							Channels: ptr.Int32(1),
+							Codec:    ptr.String("__Codec__"),
+							Color: &types.ColorInformation{
+								Colorimetry:             types.VideoColorimetry("BT709"),
+								TransferCharacteristics: types.VideoTransferCharacteristics("BT709"),
+								MatrixCoefficients:      types.VideoMatrixCoefficients("IDENTITY"),
+							},
 							FrameRate: ptr.String("__FrameRate__"),
 							FrameResolution: &types.FrameResolution{
 								FrameHeight: ptr.Int32(1),
@@ -3766,8 +3804,13 @@ func TestUpdateResponseSnapshot_DescribeFlowSourceMetadata(t *testing.T) {
 					ProgramPid:    ptr.Int32(1),
 					Streams: []types.TransportStream{
 						{
-							Channels:  ptr.Int32(1),
-							Codec:     ptr.String("__Codec__"),
+							Channels: ptr.Int32(1),
+							Codec:    ptr.String("__Codec__"),
+							Color: &types.ColorInformation{
+								Colorimetry:             types.VideoColorimetry("BT709"),
+								TransferCharacteristics: types.VideoTransferCharacteristics("BT709"),
+								MatrixCoefficients:      types.VideoMatrixCoefficients("IDENTITY"),
+							},
 							FrameRate: ptr.String("__FrameRate__"),
 							FrameResolution: &types.FrameResolution{
 								FrameHeight: ptr.Int32(1),
@@ -3779,8 +3822,13 @@ func TestUpdateResponseSnapshot_DescribeFlowSourceMetadata(t *testing.T) {
 							StreamType: ptr.String("__StreamType__"),
 						},
 						{
-							Channels:  ptr.Int32(1),
-							Codec:     ptr.String("__Codec__"),
+							Channels: ptr.Int32(1),
+							Codec:    ptr.String("__Codec__"),
+							Color: &types.ColorInformation{
+								Colorimetry:             types.VideoColorimetry("BT709"),
+								TransferCharacteristics: types.VideoTransferCharacteristics("BT709"),
+								MatrixCoefficients:      types.VideoMatrixCoefficients("IDENTITY"),
+							},
 							FrameRate: ptr.String("__FrameRate__"),
 							FrameResolution: &types.FrameResolution{
 								FrameHeight: ptr.Int32(1),
@@ -3794,6 +3842,7 @@ func TestUpdateResponseSnapshot_DescribeFlowSourceMetadata(t *testing.T) {
 					},
 				},
 			},
+			TsId: ptr.Int32(1),
 		},
 		NdiInfo: &types.NdiSourceMetadataInfo{
 			ActiveSource: &types.NdiSourceInfo{
@@ -3814,6 +3863,11 @@ func TestUpdateResponseSnapshot_DescribeFlowSourceMetadata(t *testing.T) {
 						Codec:      ptr.String("__Codec__"),
 						StreamId:   ptr.Int32(1),
 						ScanMode:   types.ScanMode("progressive"),
+						Color: &types.ColorInformation{
+							Colorimetry:             types.VideoColorimetry("BT709"),
+							TransferCharacteristics: types.VideoTransferCharacteristics("BT709"),
+							MatrixCoefficients:      types.VideoMatrixCoefficients("IDENTITY"),
+						},
 						FrameResolution: &types.FrameResolution{
 							FrameHeight: ptr.Int32(1),
 							FrameWidth:  ptr.Int32(1),
@@ -3827,6 +3881,11 @@ func TestUpdateResponseSnapshot_DescribeFlowSourceMetadata(t *testing.T) {
 						Codec:      ptr.String("__Codec__"),
 						StreamId:   ptr.Int32(1),
 						ScanMode:   types.ScanMode("progressive"),
+						Color: &types.ColorInformation{
+							Colorimetry:             types.VideoColorimetry("BT709"),
+							TransferCharacteristics: types.VideoTransferCharacteristics("BT709"),
+							MatrixCoefficients:      types.VideoMatrixCoefficients("IDENTITY"),
+						},
 						FrameResolution: &types.FrameResolution{
 							FrameHeight: ptr.Int32(1),
 							FrameWidth:  ptr.Int32(1),
@@ -4224,8 +4283,13 @@ func TestUpdateResponseSnapshot_GetRouterInputSourceMetadata(t *testing.T) {
 							ProgramPid:    ptr.Int32(1),
 							Streams: []types.TransportStream{
 								{
-									Channels:  ptr.Int32(1),
-									Codec:     ptr.String("__Codec__"),
+									Channels: ptr.Int32(1),
+									Codec:    ptr.String("__Codec__"),
+									Color: &types.ColorInformation{
+										Colorimetry:             types.VideoColorimetry("BT709"),
+										TransferCharacteristics: types.VideoTransferCharacteristics("BT709"),
+										MatrixCoefficients:      types.VideoMatrixCoefficients("IDENTITY"),
+									},
 									FrameRate: ptr.String("__FrameRate__"),
 									FrameResolution: &types.FrameResolution{
 										FrameHeight: ptr.Int32(1),
@@ -4237,8 +4301,13 @@ func TestUpdateResponseSnapshot_GetRouterInputSourceMetadata(t *testing.T) {
 									StreamType: ptr.String("__StreamType__"),
 								},
 								{
-									Channels:  ptr.Int32(1),
-									Codec:     ptr.String("__Codec__"),
+									Channels: ptr.Int32(1),
+									Codec:    ptr.String("__Codec__"),
+									Color: &types.ColorInformation{
+										Colorimetry:             types.VideoColorimetry("BT709"),
+										TransferCharacteristics: types.VideoTransferCharacteristics("BT709"),
+										MatrixCoefficients:      types.VideoMatrixCoefficients("IDENTITY"),
+									},
 									FrameRate: ptr.String("__FrameRate__"),
 									FrameResolution: &types.FrameResolution{
 										FrameHeight: ptr.Int32(1),
@@ -4258,8 +4327,13 @@ func TestUpdateResponseSnapshot_GetRouterInputSourceMetadata(t *testing.T) {
 							ProgramPid:    ptr.Int32(1),
 							Streams: []types.TransportStream{
 								{
-									Channels:  ptr.Int32(1),
-									Codec:     ptr.String("__Codec__"),
+									Channels: ptr.Int32(1),
+									Codec:    ptr.String("__Codec__"),
+									Color: &types.ColorInformation{
+										Colorimetry:             types.VideoColorimetry("BT709"),
+										TransferCharacteristics: types.VideoTransferCharacteristics("BT709"),
+										MatrixCoefficients:      types.VideoMatrixCoefficients("IDENTITY"),
+									},
 									FrameRate: ptr.String("__FrameRate__"),
 									FrameResolution: &types.FrameResolution{
 										FrameHeight: ptr.Int32(1),
@@ -4271,8 +4345,13 @@ func TestUpdateResponseSnapshot_GetRouterInputSourceMetadata(t *testing.T) {
 									StreamType: ptr.String("__StreamType__"),
 								},
 								{
-									Channels:  ptr.Int32(1),
-									Codec:     ptr.String("__Codec__"),
+									Channels: ptr.Int32(1),
+									Codec:    ptr.String("__Codec__"),
+									Color: &types.ColorInformation{
+										Colorimetry:             types.VideoColorimetry("BT709"),
+										TransferCharacteristics: types.VideoTransferCharacteristics("BT709"),
+										MatrixCoefficients:      types.VideoMatrixCoefficients("IDENTITY"),
+									},
 									FrameRate: ptr.String("__FrameRate__"),
 									FrameResolution: &types.FrameResolution{
 										FrameHeight: ptr.Int32(1),
@@ -4286,6 +4365,7 @@ func TestUpdateResponseSnapshot_GetRouterInputSourceMetadata(t *testing.T) {
 							},
 						},
 					},
+					TsId: ptr.Int32(1),
 				},
 			},
 		},
@@ -6120,9 +6200,11 @@ func TestUpdateResponseSnapshot_UpdateFlow(t *testing.T) {
 						NdiSpeedHqQuality:     ptr.Int32(1),
 						NdiProgramName:        ptr.String("__NdiProgramName__"),
 						NdiSourceSettings: &types.NdiSourceSettings{
-							SourceName: ptr.String("__SourceName__"),
+							SourceName:          ptr.String("__SourceName__"),
+							AudioReferenceLevel: ptr.Int32(1),
 						},
 						NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+						NdiAudioReferenceLevel:  ptr.Int32(1),
 					},
 					VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
 						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
@@ -6241,9 +6323,11 @@ func TestUpdateResponseSnapshot_UpdateFlow(t *testing.T) {
 						NdiSpeedHqQuality:     ptr.Int32(1),
 						NdiProgramName:        ptr.String("__NdiProgramName__"),
 						NdiSourceSettings: &types.NdiSourceSettings{
-							SourceName: ptr.String("__SourceName__"),
+							SourceName:          ptr.String("__SourceName__"),
+							AudioReferenceLevel: ptr.Int32(1),
 						},
 						NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+						NdiAudioReferenceLevel:  ptr.Int32(1),
 					},
 					VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
 						VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
@@ -6351,9 +6435,11 @@ func TestUpdateResponseSnapshot_UpdateFlow(t *testing.T) {
 					NdiSpeedHqQuality:     ptr.Int32(1),
 					NdiProgramName:        ptr.String("__NdiProgramName__"),
 					NdiSourceSettings: &types.NdiSourceSettings{
-						SourceName: ptr.String("__SourceName__"),
+						SourceName:          ptr.String("__SourceName__"),
+						AudioReferenceLevel: ptr.Int32(1),
 					},
 					NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+					NdiAudioReferenceLevel:  ptr.Int32(1),
 				},
 				VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
 				WhitelistCidr:    ptr.String("__WhitelistCidr__"),
@@ -6468,9 +6554,11 @@ func TestUpdateResponseSnapshot_UpdateFlow(t *testing.T) {
 						NdiSpeedHqQuality:     ptr.Int32(1),
 						NdiProgramName:        ptr.String("__NdiProgramName__"),
 						NdiSourceSettings: &types.NdiSourceSettings{
-							SourceName: ptr.String("__SourceName__"),
+							SourceName:          ptr.String("__SourceName__"),
+							AudioReferenceLevel: ptr.Int32(1),
 						},
 						NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+						NdiAudioReferenceLevel:  ptr.Int32(1),
 					},
 					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
 					WhitelistCidr:    ptr.String("__WhitelistCidr__"),
@@ -6576,9 +6664,11 @@ func TestUpdateResponseSnapshot_UpdateFlow(t *testing.T) {
 						NdiSpeedHqQuality:     ptr.Int32(1),
 						NdiProgramName:        ptr.String("__NdiProgramName__"),
 						NdiSourceSettings: &types.NdiSourceSettings{
-							SourceName: ptr.String("__SourceName__"),
+							SourceName:          ptr.String("__SourceName__"),
+							AudioReferenceLevel: ptr.Int32(1),
 						},
 						NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+						NdiAudioReferenceLevel:  ptr.Int32(1),
 					},
 					VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
 					WhitelistCidr:    ptr.String("__WhitelistCidr__"),
@@ -6911,9 +7001,11 @@ func TestUpdateResponseSnapshot_UpdateFlowOutput(t *testing.T) {
 				NdiSpeedHqQuality:     ptr.Int32(1),
 				NdiProgramName:        ptr.String("__NdiProgramName__"),
 				NdiSourceSettings: &types.NdiSourceSettings{
-					SourceName: ptr.String("__SourceName__"),
+					SourceName:          ptr.String("__SourceName__"),
+					AudioReferenceLevel: ptr.Int32(1),
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+				NdiAudioReferenceLevel:  ptr.Int32(1),
 			},
 			VpcInterfaceAttachment: &types.VpcInterfaceAttachment{
 				VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
@@ -7044,9 +7136,11 @@ func TestUpdateResponseSnapshot_UpdateFlowSource(t *testing.T) {
 				NdiSpeedHqQuality:     ptr.Int32(1),
 				NdiProgramName:        ptr.String("__NdiProgramName__"),
 				NdiSourceSettings: &types.NdiSourceSettings{
-					SourceName: ptr.String("__SourceName__"),
+					SourceName:          ptr.String("__SourceName__"),
+					AudioReferenceLevel: ptr.Int32(1),
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+				NdiAudioReferenceLevel:  ptr.Int32(1),
 			},
 			VpcInterfaceName: ptr.String("__VpcInterfaceName__"),
 			WhitelistCidr:    ptr.String("__WhitelistCidr__"),

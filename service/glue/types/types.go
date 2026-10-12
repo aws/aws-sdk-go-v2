@@ -9510,6 +9510,62 @@ func (v *DataQualityAnalyzerResult) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// The run configuration for a data quality result.
+type DataQualityConfigurationV2 struct {
+
+	// The observation mode for the run. Valid values are:
+	//
+	//   - SCHEDULED
+	//
+	//   - FIXED
+	ObservationMode ObservationMode
+
+	// Whether observations are enabled for the run. Valid values are:
+	//
+	//   - ALL
+	//
+	//   - NONE
+	ObservationsEnabled ObservationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityConfigurationV2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityConfigurationV2)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityConfigurationV2) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObservationMode != "" {
+		s.WriteString(schemas.DataQualityConfigurationV2_ObservationMode, string(v.ObservationMode))
+	}
+	if v.ObservationsEnabled != "" {
+		s.WriteString(schemas.DataQualityConfigurationV2_ObservationsEnabled, string(v.ObservationsEnabled))
+	}
+}
+func (v *DataQualityConfigurationV2) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityConfigurationV2, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityConfigurationV2_ObservationMode:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityConfigurationV2_ObservationMode, &ev); err != nil {
+				return err
+			}
+			v.ObservationMode = ObservationMode(ev)
+			return nil
+		case schemas.DataQualityConfigurationV2_ObservationsEnabled:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityConfigurationV2_ObservationsEnabled, &ev); err != nil {
+				return err
+			}
+			v.ObservationsEnabled = ObservationConfiguration(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies how Data Quality assets in your account should be encrypted.
 type DataQualityEncryption struct {
 
@@ -9915,8 +9971,8 @@ type DataQualityResult struct {
 	// The job run ID associated with the data quality result, if any.
 	JobRunId *string
 
-	// A list of DataQualityObservation objects representing the observations
-	// generated after evaluating the rules and analyzers.
+	// A list of DataQualityObservation objects representing the anomaly detection
+	// observations generated after evaluating the rules and analyzers.
 	Observations []DataQualityObservation
 
 	// The Profile ID for the data quality result.
@@ -10179,6 +10235,308 @@ func (v *DataQualityResultFilterCriteria) Deserialize(d smithy.ShapeDeserializer
 		case schemas.DataQualityResultFilterCriteria_StartedBefore:
 			v.StartedBefore = new(time.Time)
 			return d.ReadTime(schemas.DataQualityResultFilterCriteria_StartedBefore, v.StartedBefore)
+		}
+		return nil
+	})
+}
+
+// Describes a data quality result returned by ListDataQualityResultsV2 .
+type DataQualityResultsV2Description struct {
+
+	// The table associated with the data quality result, if any.
+	DataSource *DataSource
+
+	// A map of user-provided descriptors that add contextual metadata and
+	// configuration to the data quality result, such as database name, table name,
+	// team, or environment.
+	Descriptors map[string]string
+
+	// A map of platform-specific identifiers, such as cluster, application,
+	// workgroup, or project IDs, that identify where the data quality evaluation ran.
+	Dimensions map[string]string
+
+	// The evaluation context for the data quality result. This value identifies a
+	// specific data quality result, or a series of related results, within a run.
+	EvaluationContext *string
+
+	// The unique result ID for this data quality result.
+	ResultId *string
+
+	// The date and time when this data quality result was published.
+	ResultPublishedOn *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityResultsV2Description) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityResultsV2Description)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityResultsV2Description) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.DataQualityResultsV2Description_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePublishDataQualityResultDescriptors(s, schemas.DataQualityResultsV2Description_Descriptors, v.Descriptors)
+	serializePublishDataQualityResultDimensions(s, schemas.DataQualityResultsV2Description_Dimensions, v.Dimensions)
+	if v.EvaluationContext != nil {
+		s.WriteString(schemas.DataQualityResultsV2Description_EvaluationContext, *v.EvaluationContext)
+	}
+	if v.ResultId != nil {
+		s.WriteString(schemas.DataQualityResultsV2Description_ResultId, *v.ResultId)
+	}
+	if v.ResultPublishedOn != nil {
+		s.WriteTime(schemas.DataQualityResultsV2Description_ResultPublishedOn, *v.ResultPublishedOn)
+	}
+}
+func (v *DataQualityResultsV2Description) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityResultsV2Description, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityResultsV2Description_DataSource:
+			v.DataSource = &DataSource{}
+			return v.DataSource.Deserialize(d)
+		case schemas.DataQualityResultsV2Description_Descriptors:
+			return deserializePublishDataQualityResultDescriptors(d, schemas.DataQualityResultsV2Description_Descriptors, &v.Descriptors)
+		case schemas.DataQualityResultsV2Description_Dimensions:
+			return deserializePublishDataQualityResultDimensions(d, schemas.DataQualityResultsV2Description_Dimensions, &v.Dimensions)
+		case schemas.DataQualityResultsV2Description_EvaluationContext:
+			v.EvaluationContext = new(string)
+			return d.ReadString(schemas.DataQualityResultsV2Description_EvaluationContext, v.EvaluationContext)
+		case schemas.DataQualityResultsV2Description_ResultId:
+			v.ResultId = new(string)
+			return d.ReadString(schemas.DataQualityResultsV2Description_ResultId, v.ResultId)
+		case schemas.DataQualityResultsV2Description_ResultPublishedOn:
+			v.ResultPublishedOn = new(time.Time)
+			return d.ReadTime(schemas.DataQualityResultsV2Description_ResultPublishedOn, v.ResultPublishedOn)
+		}
+		return nil
+	})
+}
+
+// Describes the criteria used to filter the data quality results returned by
+// ListDataQualityResultsV2 .
+type DataQualityResultsV2FilterCriteria struct {
+
+	// The data source used to filter the results. For example, you can retrieve all
+	// results for an Glue table. DatabaseName and TableName are required. If you omit
+	// CatalogId , the catalog of the calling account is used.
+	//
+	// When you filter by data source, a page of results can be empty but still
+	// include a NextToken . Keep requesting pages until NextToken is absent.
+	DataSource *DataSource
+
+	// The platform dimensions to filter results by.
+	Dimensions map[string]string
+
+	// The evaluation context to filter results by.
+	EvaluationContext *string
+
+	// The time after which to include published results.
+	PublishedAfter *time.Time
+
+	// The time before which to include published results.
+	PublishedBefore *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityResultsV2FilterCriteria) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityResultsV2FilterCriteria)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityResultsV2FilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.DataQualityResultsV2FilterCriteria_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePublishDataQualityResultDimensions(s, schemas.DataQualityResultsV2FilterCriteria_Dimensions, v.Dimensions)
+	if v.EvaluationContext != nil {
+		s.WriteString(schemas.DataQualityResultsV2FilterCriteria_EvaluationContext, *v.EvaluationContext)
+	}
+	if v.PublishedAfter != nil {
+		s.WriteTime(schemas.DataQualityResultsV2FilterCriteria_PublishedAfter, *v.PublishedAfter)
+	}
+	if v.PublishedBefore != nil {
+		s.WriteTime(schemas.DataQualityResultsV2FilterCriteria_PublishedBefore, *v.PublishedBefore)
+	}
+}
+func (v *DataQualityResultsV2FilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityResultsV2FilterCriteria, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityResultsV2FilterCriteria_DataSource:
+			v.DataSource = &DataSource{}
+			return v.DataSource.Deserialize(d)
+		case schemas.DataQualityResultsV2FilterCriteria_Dimensions:
+			return deserializePublishDataQualityResultDimensions(d, schemas.DataQualityResultsV2FilterCriteria_Dimensions, &v.Dimensions)
+		case schemas.DataQualityResultsV2FilterCriteria_EvaluationContext:
+			v.EvaluationContext = new(string)
+			return d.ReadString(schemas.DataQualityResultsV2FilterCriteria_EvaluationContext, v.EvaluationContext)
+		case schemas.DataQualityResultsV2FilterCriteria_PublishedAfter:
+			v.PublishedAfter = new(time.Time)
+			return d.ReadTime(schemas.DataQualityResultsV2FilterCriteria_PublishedAfter, v.PublishedAfter)
+		case schemas.DataQualityResultsV2FilterCriteria_PublishedBefore:
+			v.PublishedBefore = new(time.Time)
+			return d.ReadTime(schemas.DataQualityResultsV2FilterCriteria_PublishedBefore, v.PublishedBefore)
+		}
+		return nil
+	})
+}
+
+// Describes a data quality result returned by BatchGetDataQualityResultV2 .
+type DataQualityResultV2Item struct {
+
+	// A unique result ID for the data quality result.
+	//
+	// This member is required.
+	ResultId *string
+
+	// A summary of DataQualityAggregatedMetrics objects showing the total counts of
+	// processed rows and rules, including their pass/fail statistics based on
+	// row-level results.
+	AggregatedMetrics *DataQualityAggregatedMetrics
+
+	// A list of DataQualityAnalyzerResult objects representing the results for each
+	// analyzer.
+	AnalyzerResults []DataQualityAnalyzerResult
+
+	// The table associated with the data quality result, if any.
+	DataSource *DataSource
+
+	// A map of user-provided descriptors that add contextual metadata and
+	// configuration to the data quality result, such as database name, table name,
+	// team, or environment.
+	Descriptors map[string]string
+
+	// A map of platform-specific identifiers, such as cluster, application,
+	// workgroup, or project IDs, that identify where the data quality evaluation ran.
+	Dimensions map[string]string
+
+	// The evaluation context for the data quality result. This value identifies a
+	// specific data quality result, or a series of related results, within a run.
+	EvaluationContext *string
+
+	// The date and time when this data quality run completed.
+	ExecutionCompletedOn *time.Time
+
+	// The date and time when this data quality run started.
+	ExecutionStartedOn *time.Time
+
+	// A list of DataQualityObservation objects representing the anomaly detection
+	// observations generated after evaluating the rules and analyzers.
+	Observations []DataQualityObservation
+
+	// The date and time when this data quality result was published.
+	ResultPublishedOn *time.Time
+
+	// A list of DataQualityRuleResult objects representing the results for each rule.
+	RuleResults []DataQualityRuleResult
+
+	// The name of the ruleset associated with the data quality result.
+	RulesetName *string
+
+	// An aggregate data quality score. Represents the ratio of rules that passed to
+	// the total number of rules.
+	Score *float64
+
+	// A map of tags associated with the data quality result.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityResultV2Item) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityResultV2Item)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityResultV2Item) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregatedMetrics != nil {
+		s.WriteStruct(schemas.DataQualityResultV2Item_AggregatedMetrics)
+		v.AggregatedMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDataQualityAnalyzerResults(s, schemas.DataQualityResultV2Item_AnalyzerResults, v.AnalyzerResults)
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.DataQualityResultV2Item_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePublishDataQualityResultDescriptors(s, schemas.DataQualityResultV2Item_Descriptors, v.Descriptors)
+	serializePublishDataQualityResultDimensions(s, schemas.DataQualityResultV2Item_Dimensions, v.Dimensions)
+	if v.EvaluationContext != nil {
+		s.WriteString(schemas.DataQualityResultV2Item_EvaluationContext, *v.EvaluationContext)
+	}
+	if v.ExecutionCompletedOn != nil {
+		s.WriteTime(schemas.DataQualityResultV2Item_ExecutionCompletedOn, *v.ExecutionCompletedOn)
+	}
+	if v.ExecutionStartedOn != nil {
+		s.WriteTime(schemas.DataQualityResultV2Item_ExecutionStartedOn, *v.ExecutionStartedOn)
+	}
+	serializeDataQualityObservations(s, schemas.DataQualityResultV2Item_Observations, v.Observations)
+	if v.ResultId != nil {
+		s.WriteString(schemas.DataQualityResultV2Item_ResultId, *v.ResultId)
+	}
+	if v.ResultPublishedOn != nil {
+		s.WriteTime(schemas.DataQualityResultV2Item_ResultPublishedOn, *v.ResultPublishedOn)
+	}
+	serializeDataQualityRuleResults(s, schemas.DataQualityResultV2Item_RuleResults, v.RuleResults)
+	if v.RulesetName != nil {
+		s.WriteString(schemas.DataQualityResultV2Item_RulesetName, *v.RulesetName)
+	}
+	if v.Score != nil {
+		s.WriteFloat64(schemas.DataQualityResultV2Item_Score, *v.Score)
+	}
+	serializePublishDataQualityResultTags(s, schemas.DataQualityResultV2Item_Tags, v.Tags)
+}
+func (v *DataQualityResultV2Item) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityResultV2Item, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityResultV2Item_AggregatedMetrics:
+			v.AggregatedMetrics = &DataQualityAggregatedMetrics{}
+			return v.AggregatedMetrics.Deserialize(d)
+		case schemas.DataQualityResultV2Item_AnalyzerResults:
+			return deserializeDataQualityAnalyzerResults(d, schemas.DataQualityResultV2Item_AnalyzerResults, &v.AnalyzerResults)
+		case schemas.DataQualityResultV2Item_DataSource:
+			v.DataSource = &DataSource{}
+			return v.DataSource.Deserialize(d)
+		case schemas.DataQualityResultV2Item_Descriptors:
+			return deserializePublishDataQualityResultDescriptors(d, schemas.DataQualityResultV2Item_Descriptors, &v.Descriptors)
+		case schemas.DataQualityResultV2Item_Dimensions:
+			return deserializePublishDataQualityResultDimensions(d, schemas.DataQualityResultV2Item_Dimensions, &v.Dimensions)
+		case schemas.DataQualityResultV2Item_EvaluationContext:
+			v.EvaluationContext = new(string)
+			return d.ReadString(schemas.DataQualityResultV2Item_EvaluationContext, v.EvaluationContext)
+		case schemas.DataQualityResultV2Item_ExecutionCompletedOn:
+			v.ExecutionCompletedOn = new(time.Time)
+			return d.ReadTime(schemas.DataQualityResultV2Item_ExecutionCompletedOn, v.ExecutionCompletedOn)
+		case schemas.DataQualityResultV2Item_ExecutionStartedOn:
+			v.ExecutionStartedOn = new(time.Time)
+			return d.ReadTime(schemas.DataQualityResultV2Item_ExecutionStartedOn, v.ExecutionStartedOn)
+		case schemas.DataQualityResultV2Item_Observations:
+			return deserializeDataQualityObservations(d, schemas.DataQualityResultV2Item_Observations, &v.Observations)
+		case schemas.DataQualityResultV2Item_ResultId:
+			v.ResultId = new(string)
+			return d.ReadString(schemas.DataQualityResultV2Item_ResultId, v.ResultId)
+		case schemas.DataQualityResultV2Item_ResultPublishedOn:
+			v.ResultPublishedOn = new(time.Time)
+			return d.ReadTime(schemas.DataQualityResultV2Item_ResultPublishedOn, v.ResultPublishedOn)
+		case schemas.DataQualityResultV2Item_RuleResults:
+			return deserializeDataQualityRuleResults(d, schemas.DataQualityResultV2Item_RuleResults, &v.RuleResults)
+		case schemas.DataQualityResultV2Item_RulesetName:
+			v.RulesetName = new(string)
+			return d.ReadString(schemas.DataQualityResultV2Item_RulesetName, v.RulesetName)
+		case schemas.DataQualityResultV2Item_Score:
+			v.Score = new(float64)
+			return d.ReadFloat64(schemas.DataQualityResultV2Item_Score, v.Score)
+		case schemas.DataQualityResultV2Item_Tags:
+			return deserializePublishDataQualityResultTags(d, schemas.DataQualityResultV2Item_Tags, &v.Tags)
 		}
 		return nil
 	})
@@ -10998,6 +11356,75 @@ func (v *DataQualityTargetTable) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DataQualityTargetTable_TableName:
 			v.TableName = new(string)
 			return d.ReadString(schemas.DataQualityTargetTable_TableName, v.TableName)
+		}
+		return nil
+	})
+}
+
+type DataQualityTelemetry struct {
+	Engine DataQualityEngine
+
+	FlagsEnabled map[string]string
+
+	HostRuntimeVersion *string
+
+	LibraryVersion *string
+
+	SparkVersion *string
+
+	VcpuHours *float64
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataQualityTelemetry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataQualityTelemetry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataQualityTelemetry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Engine != "" {
+		s.WriteString(schemas.DataQualityTelemetry_Engine, string(v.Engine))
+	}
+	serializeDataQualityFlagsEnabled(s, schemas.DataQualityTelemetry_FlagsEnabled, v.FlagsEnabled)
+	if v.HostRuntimeVersion != nil {
+		s.WriteString(schemas.DataQualityTelemetry_HostRuntimeVersion, *v.HostRuntimeVersion)
+	}
+	if v.LibraryVersion != nil {
+		s.WriteString(schemas.DataQualityTelemetry_LibraryVersion, *v.LibraryVersion)
+	}
+	if v.SparkVersion != nil {
+		s.WriteString(schemas.DataQualityTelemetry_SparkVersion, *v.SparkVersion)
+	}
+	if v.VcpuHours != nil {
+		s.WriteFloat64(schemas.DataQualityTelemetry_VcpuHours, *v.VcpuHours)
+	}
+}
+func (v *DataQualityTelemetry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataQualityTelemetry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataQualityTelemetry_Engine:
+			var ev string
+			if err := d.ReadString(schemas.DataQualityTelemetry_Engine, &ev); err != nil {
+				return err
+			}
+			v.Engine = DataQualityEngine(ev)
+			return nil
+		case schemas.DataQualityTelemetry_FlagsEnabled:
+			return deserializeDataQualityFlagsEnabled(d, schemas.DataQualityTelemetry_FlagsEnabled, &v.FlagsEnabled)
+		case schemas.DataQualityTelemetry_HostRuntimeVersion:
+			v.HostRuntimeVersion = new(string)
+			return d.ReadString(schemas.DataQualityTelemetry_HostRuntimeVersion, v.HostRuntimeVersion)
+		case schemas.DataQualityTelemetry_LibraryVersion:
+			v.LibraryVersion = new(string)
+			return d.ReadString(schemas.DataQualityTelemetry_LibraryVersion, v.LibraryVersion)
+		case schemas.DataQualityTelemetry_SparkVersion:
+			v.SparkVersion = new(string)
+			return d.ReadString(schemas.DataQualityTelemetry_SparkVersion, v.SparkVersion)
+		case schemas.DataQualityTelemetry_VcpuHours:
+			v.VcpuHours = new(float64)
+			return d.ReadFloat64(schemas.DataQualityTelemetry_VcpuHours, v.VcpuHours)
 		}
 		return nil
 	})
@@ -24972,6 +25399,37 @@ func (v *RetentionMetrics) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A structure that describes the default row-level security policy of a table.
+type RLSProperties struct {
+
+	// The name of the default row-level security policy applied to the table.
+	DefaultRLSPolicy *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RLSProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RLSProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RLSProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultRLSPolicy != nil {
+		s.WriteString(schemas.RLSProperties_DefaultRLSPolicy, *v.DefaultRLSPolicy)
+	}
+}
+func (v *RLSProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RLSProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RLSProperties_DefaultRLSPolicy:
+			v.DefaultRLSPolicy = new(string)
+			return d.ReadString(schemas.RLSProperties_DefaultRLSPolicy, v.DefaultRLSPolicy)
+		}
+		return nil
+	})
+}
+
 // Specifies a route node that directs data to different output paths based on
 // defined filtering conditions.
 type Route struct {
@@ -31108,6 +31566,10 @@ type Table struct {
 	//     "PartitionKeys": []
 	PartitionKeys []Column
 
+	// A RLSProperties structure that describes the default row-level security policy
+	// of the table.
+	RLSProperties *RLSProperties
+
 	// The retention time for this table.
 	Retention int32
 
@@ -31208,6 +31670,11 @@ func (v *Table) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	serializeParametersMap(s, schemas.Table_Parameters, v.Parameters)
 	serializeColumnList(s, schemas.Table_PartitionKeys, v.PartitionKeys)
+	if v.RLSProperties != nil {
+		s.WriteStruct(schemas.Table_RLSProperties)
+		v.RLSProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Retention != 0 {
 		s.WriteInt32(schemas.Table_Retention, v.Retention)
 	}
@@ -31295,6 +31762,9 @@ func (v *Table) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeParametersMap(d, schemas.Table_Parameters, &v.Parameters)
 		case schemas.Table_PartitionKeys:
 			return deserializeColumnList(d, schemas.Table_PartitionKeys, &v.PartitionKeys)
+		case schemas.Table_RLSProperties:
+			v.RLSProperties = &RLSProperties{}
+			return v.RLSProperties.Deserialize(d)
 		case schemas.Table_Retention:
 			return d.ReadInt32(schemas.Table_Retention, &v.Retention)
 		case schemas.Table_Status:

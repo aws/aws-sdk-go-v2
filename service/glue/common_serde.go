@@ -1102,6 +1102,43 @@ func serializeDataQualityResultsList(s smithy.ShapeSerializer, schema *smithy.Sc
 	s.CloseList()
 }
 
+func serializeDataQualityResultsV2DescriptionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DataQualityResultsV2Description) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeDataQualityResultV2IdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeDataQualityResultV2List(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DataQualityResultV2Item) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeDataQualityRuleRecommendationRunList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DataQualityRuleRecommendationRunDescription) {
 	if v == nil {
 		return
@@ -4141,6 +4178,48 @@ func deserializeDataQualityResultsList(d smithy.ShapeDeserializer, s *smithy.Sch
 	})
 }
 
+func deserializeDataQualityResultsV2DescriptionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DataQualityResultsV2Description) error {
+	*v = make([]types.DataQualityResultsV2Description, 0)
+	var vv types.DataQualityResultsV2Description
+	return smithy.ReadList(d, s, func() error {
+		vv = types.DataQualityResultsV2Description{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDataQualityResultV2IdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDataQualityResultV2List(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DataQualityResultV2Item) error {
+	*v = make([]types.DataQualityResultV2Item, 0)
+	var vv types.DataQualityResultV2Item
+	return smithy.ReadList(d, s, func() error {
+		vv = types.DataQualityResultV2Item{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeDataQualityRuleRecommendationRunList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DataQualityRuleRecommendationRunDescription) error {
 	*v = make([]types.DataQualityRuleRecommendationRunDescription, 0)
 	var vv types.DataQualityRuleRecommendationRunDescription
@@ -6522,6 +6601,18 @@ func serializeCustomProperties(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseMap()
 }
 
+func serializeDataQualityFlagsEnabled(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
 func serializeDataSourceMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.DataSource) {
 	if v == nil {
 		return
@@ -6815,6 +6906,42 @@ func serializePropertyMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map
 }
 
 func serializePropertyNameOverrides(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
+func serializePublishDataQualityResultDescriptors(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
+func serializePublishDataQualityResultDimensions(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
+func serializePublishDataQualityResultTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	if v == nil {
 		return
 	}
@@ -7189,6 +7316,27 @@ func deserializeCredentialMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 }
 
 func deserializeCustomProperties(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeDataQualityFlagsEnabled(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
@@ -7701,6 +7849,69 @@ func deserializePropertyMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map
 }
 
 func deserializePropertyNameOverrides(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializePublishDataQualityResultDescriptors(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializePublishDataQualityResultDimensions(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializePublishDataQualityResultTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {

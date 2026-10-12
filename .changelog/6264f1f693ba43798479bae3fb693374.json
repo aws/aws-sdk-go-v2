@@ -1,0 +1,8 @@
+{
+    "id": "6264f1f6-93ba-4379-8479-bae3fb693374",
+    "type": "feature",
+    "description": "Adding scheduler version to RegisterComputeNodeGroup API. A compute node uses this value to run the matching scheduler version.",
+    "modules": [
+        "service/pcs"
+    ]
+}

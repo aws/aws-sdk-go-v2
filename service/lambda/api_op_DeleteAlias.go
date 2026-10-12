@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes a Lambda function [alias].
+// Deletes a Lambda Event Function [alias].
 //
 // [alias]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
 func (c *Client) DeleteAlias(ctx context.Context, params *DeleteAliasInput, optFns ...func(*Options)) (*DeleteAliasOutput, error) {

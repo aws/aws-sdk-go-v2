@@ -7592,6 +7592,55 @@ func (v *Bias) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The billable token usage for a training session, broken down by operation type.
+type BillableTokenUsage struct {
+
+	// The number of prefill tokens consumed.
+	PrefillTokenCount *int64
+
+	// The number of sample tokens consumed.
+	SampleTokenCount *int64
+
+	// The number of training tokens consumed.
+	TrainingTokenCount *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *BillableTokenUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillableTokenUsage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillableTokenUsage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrefillTokenCount != nil {
+		s.WriteInt64(schemas.BillableTokenUsage_PrefillTokenCount, *v.PrefillTokenCount)
+	}
+	if v.SampleTokenCount != nil {
+		s.WriteInt64(schemas.BillableTokenUsage_SampleTokenCount, *v.SampleTokenCount)
+	}
+	if v.TrainingTokenCount != nil {
+		s.WriteInt64(schemas.BillableTokenUsage_TrainingTokenCount, *v.TrainingTokenCount)
+	}
+}
+func (v *BillableTokenUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillableTokenUsage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillableTokenUsage_PrefillTokenCount:
+			v.PrefillTokenCount = new(int64)
+			return d.ReadInt64(schemas.BillableTokenUsage_PrefillTokenCount, v.PrefillTokenCount)
+		case schemas.BillableTokenUsage_SampleTokenCount:
+			v.SampleTokenCount = new(int64)
+			return d.ReadInt64(schemas.BillableTokenUsage_SampleTokenCount, v.SampleTokenCount)
+		case schemas.BillableTokenUsage_TrainingTokenCount:
+			v.TrainingTokenCount = new(int64)
+			return d.ReadInt64(schemas.BillableTokenUsage_TrainingTokenCount, v.TrainingTokenCount)
+		}
+		return nil
+	})
+}
+
 // Update policy for a blue/green deployment. If this update policy is specified,
 // SageMaker creates a new fleet during the deployment while maintaining the old
 // fleet. SageMaker flips traffic to the new fleet according to the specified
@@ -31430,6 +31479,51 @@ func (v *LineageMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The Low-Rank Adaptation (LoRA) configuration for a training session, including
+// the rank and alpha parameters.
+type LoraConfig struct {
+
+	// The Low-Rank Adaptation (LoRA) scaling factor.
+	//
+	// This member is required.
+	Alpha *int32
+
+	// The rank of the Low-Rank Adaptation (LoRA) adapter matrices.
+	//
+	// This member is required.
+	Rank *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *LoraConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoraConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoraConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alpha != nil {
+		s.WriteInt32(schemas.LoraConfig_Alpha, *v.Alpha)
+	}
+	if v.Rank != nil {
+		s.WriteInt32(schemas.LoraConfig_Rank, *v.Rank)
+	}
+}
+func (v *LoraConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoraConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoraConfig_Alpha:
+			v.Alpha = new(int32)
+			return d.ReadInt32(schemas.LoraConfig_Alpha, v.Alpha)
+		case schemas.LoraConfig_Rank:
+			v.Rank = new(int32)
+			return d.ReadInt32(schemas.LoraConfig_Rank, v.Rank)
+		}
+		return nil
+	})
+}
+
 // The managed configuration of a model package group.
 type ManagedConfiguration struct {
 
@@ -54535,6 +54629,386 @@ func (v *TrainingRepositoryAuthConfig) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.TrainingRepositoryAuthConfig_TrainingRepositoryCredentialsProviderArn:
 			v.TrainingRepositoryCredentialsProviderArn = new(string)
 			return d.ReadString(schemas.TrainingRepositoryAuthConfig_TrainingRepositoryCredentialsProviderArn, v.TrainingRepositoryCredentialsProviderArn)
+		}
+		return nil
+	})
+}
+
+// Contains detailed information about a training session.
+type TrainingSessionDetail struct {
+
+	// The date and time that the training session was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the training session.
+	//
+	// This member is required.
+	TrainingSessionArn *string
+
+	// The name of the training session.
+	//
+	// This member is required.
+	TrainingSessionName *string
+
+	// The current status of the training session.
+	//
+	// This member is required.
+	TrainingSessionStatus TrainingSessionStatus
+
+	// The billable token usage for the training session.
+	BillableTokenUsage *BillableTokenUsage
+
+	// The date and time that the training session ended.
+	EndTime *time.Time
+
+	// If the training session failed or is blocked, detailed error information.
+	ErrorDetails *string
+
+	// The date and time that the training session was last modified.
+	LastModifiedTime *time.Time
+
+	// The sequence number of the last training operation received by the session.
+	LastReceivedSequenceNumber *int32
+
+	// The Low-Rank Adaptation (LoRA) configuration for the training session.
+	LoraConfig *LoraConfig
+
+	// The configuration for the base model.
+	ModelConfig *TrainingSessionModelConfig
+
+	// The Amazon Resource Name (ARN) of the model package group where checkpoints are
+	// published.
+	ModelPackageGroupArn *string
+
+	// The output configuration for the training session.
+	OutputConfig *TrainingSessionOutputConfig
+
+	// The Amazon Resource Name (ARN) of the IAM role associated with the training
+	// session.
+	RoleArn *string
+
+	// The tags associated with the training session.
+	Tags []Tag
+
+	// The Virtual Private Cloud (VPC) configuration for the training session.
+	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrainingSessionDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrainingSessionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrainingSessionDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillableTokenUsage != nil {
+		s.WriteStruct(schemas.TrainingSessionDetail_BillableTokenUsage)
+		v.BillableTokenUsage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.TrainingSessionDetail_CreationTime, *v.CreationTime)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.TrainingSessionDetail_EndTime, *v.EndTime)
+	}
+	if v.ErrorDetails != nil {
+		s.WriteString(schemas.TrainingSessionDetail_ErrorDetails, *v.ErrorDetails)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.TrainingSessionDetail_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LastReceivedSequenceNumber != nil {
+		s.WriteInt32(schemas.TrainingSessionDetail_LastReceivedSequenceNumber, *v.LastReceivedSequenceNumber)
+	}
+	if v.LoraConfig != nil {
+		s.WriteStruct(schemas.TrainingSessionDetail_LoraConfig)
+		v.LoraConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelConfig != nil {
+		s.WriteStruct(schemas.TrainingSessionDetail_ModelConfig)
+		v.ModelConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelPackageGroupArn != nil {
+		s.WriteString(schemas.TrainingSessionDetail_ModelPackageGroupArn, *v.ModelPackageGroupArn)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.TrainingSessionDetail_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.TrainingSessionDetail_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.TrainingSessionDetail_Tags, v.Tags)
+	if v.TrainingSessionArn != nil {
+		s.WriteString(schemas.TrainingSessionDetail_TrainingSessionArn, *v.TrainingSessionArn)
+	}
+	if v.TrainingSessionName != nil {
+		s.WriteString(schemas.TrainingSessionDetail_TrainingSessionName, *v.TrainingSessionName)
+	}
+	if v.TrainingSessionStatus != "" {
+		s.WriteString(schemas.TrainingSessionDetail_TrainingSessionStatus, string(v.TrainingSessionStatus))
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.TrainingSessionDetail_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TrainingSessionDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrainingSessionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrainingSessionDetail_BillableTokenUsage:
+			v.BillableTokenUsage = &BillableTokenUsage{}
+			return v.BillableTokenUsage.Deserialize(d)
+		case schemas.TrainingSessionDetail_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.TrainingSessionDetail_CreationTime, v.CreationTime)
+		case schemas.TrainingSessionDetail_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.TrainingSessionDetail_EndTime, v.EndTime)
+		case schemas.TrainingSessionDetail_ErrorDetails:
+			v.ErrorDetails = new(string)
+			return d.ReadString(schemas.TrainingSessionDetail_ErrorDetails, v.ErrorDetails)
+		case schemas.TrainingSessionDetail_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.TrainingSessionDetail_LastModifiedTime, v.LastModifiedTime)
+		case schemas.TrainingSessionDetail_LastReceivedSequenceNumber:
+			v.LastReceivedSequenceNumber = new(int32)
+			return d.ReadInt32(schemas.TrainingSessionDetail_LastReceivedSequenceNumber, v.LastReceivedSequenceNumber)
+		case schemas.TrainingSessionDetail_LoraConfig:
+			v.LoraConfig = &LoraConfig{}
+			return v.LoraConfig.Deserialize(d)
+		case schemas.TrainingSessionDetail_ModelConfig:
+			v.ModelConfig = &TrainingSessionModelConfig{}
+			return v.ModelConfig.Deserialize(d)
+		case schemas.TrainingSessionDetail_ModelPackageGroupArn:
+			v.ModelPackageGroupArn = new(string)
+			return d.ReadString(schemas.TrainingSessionDetail_ModelPackageGroupArn, v.ModelPackageGroupArn)
+		case schemas.TrainingSessionDetail_OutputConfig:
+			v.OutputConfig = &TrainingSessionOutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		case schemas.TrainingSessionDetail_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.TrainingSessionDetail_RoleArn, v.RoleArn)
+		case schemas.TrainingSessionDetail_Tags:
+			return deserializeTagList(d, schemas.TrainingSessionDetail_Tags, &v.Tags)
+		case schemas.TrainingSessionDetail_TrainingSessionArn:
+			v.TrainingSessionArn = new(string)
+			return d.ReadString(schemas.TrainingSessionDetail_TrainingSessionArn, v.TrainingSessionArn)
+		case schemas.TrainingSessionDetail_TrainingSessionName:
+			v.TrainingSessionName = new(string)
+			return d.ReadString(schemas.TrainingSessionDetail_TrainingSessionName, v.TrainingSessionName)
+		case schemas.TrainingSessionDetail_TrainingSessionStatus:
+			var ev string
+			if err := d.ReadString(schemas.TrainingSessionDetail_TrainingSessionStatus, &ev); err != nil {
+				return err
+			}
+			v.TrainingSessionStatus = TrainingSessionStatus(ev)
+			return nil
+		case schemas.TrainingSessionDetail_VpcConfig:
+			v.VpcConfig = &VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The configuration for the base model used in a training session.
+type TrainingSessionModelConfig struct {
+
+	// The Amazon Resource Name (ARN) of the base foundation model from SageMaker Hub.
+	//
+	// This member is required.
+	BaseModelArn *string
+
+	// Specifies whether you accept the end-user license agreement (EULA) for gated
+	// models.
+	AcceptEula *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrainingSessionModelConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrainingSessionModelConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrainingSessionModelConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptEula != nil {
+		s.WriteBool(schemas.TrainingSessionModelConfig_AcceptEula, *v.AcceptEula)
+	}
+	if v.BaseModelArn != nil {
+		s.WriteString(schemas.TrainingSessionModelConfig_BaseModelArn, *v.BaseModelArn)
+	}
+}
+func (v *TrainingSessionModelConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrainingSessionModelConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrainingSessionModelConfig_AcceptEula:
+			v.AcceptEula = new(bool)
+			return d.ReadBool(schemas.TrainingSessionModelConfig_AcceptEula, v.AcceptEula)
+		case schemas.TrainingSessionModelConfig_BaseModelArn:
+			v.BaseModelArn = new(string)
+			return d.ReadString(schemas.TrainingSessionModelConfig_BaseModelArn, v.BaseModelArn)
+		}
+		return nil
+	})
+}
+
+// The output configuration for a training session, including the Amazon S3
+// location for checkpoints and model artifacts, and optional encryption settings.
+type TrainingSessionOutputConfig struct {
+
+	// The Amazon S3 location where training session outputs, including checkpoints
+	// and model artifacts, are stored.
+	//
+	// This member is required.
+	S3Location *TrainingSessionS3Location
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrainingSessionOutputConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrainingSessionOutputConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrainingSessionOutputConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Location != nil {
+		s.WriteStruct(schemas.TrainingSessionOutputConfig_S3Location)
+		v.S3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TrainingSessionOutputConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrainingSessionOutputConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrainingSessionOutputConfig_S3Location:
+			v.S3Location = &TrainingSessionS3Location{}
+			return v.S3Location.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Specifies the Amazon S3 path and optional encryption settings for training
+// session output data, including checkpoints, model artifacts, and invocation
+// results.
+type TrainingSessionS3Location struct {
+
+	// The Amazon S3 path where training session outputs are stored.
+	//
+	// This member is required.
+	Path *string
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt output data. If
+	// not specified, the default Amazon S3 encryption is used.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrainingSessionS3Location) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrainingSessionS3Location)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrainingSessionS3Location) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.TrainingSessionS3Location_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.TrainingSessionS3Location_Path, *v.Path)
+	}
+}
+func (v *TrainingSessionS3Location) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrainingSessionS3Location, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrainingSessionS3Location_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.TrainingSessionS3Location_KmsKeyArn, v.KmsKeyArn)
+		case schemas.TrainingSessionS3Location_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.TrainingSessionS3Location_Path, v.Path)
+		}
+		return nil
+	})
+}
+
+// Contains summary information about a training session.
+type TrainingSessionSummary struct {
+
+	// The date and time that the training session was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the training session.
+	//
+	// This member is required.
+	TrainingSessionArn *string
+
+	// The current status of the training session.
+	//
+	// This member is required.
+	TrainingSessionStatus TrainingSessionStatus
+
+	// The date and time that the training session was last modified.
+	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrainingSessionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrainingSessionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrainingSessionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.TrainingSessionSummary_CreationTime, *v.CreationTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.TrainingSessionSummary_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.TrainingSessionArn != nil {
+		s.WriteString(schemas.TrainingSessionSummary_TrainingSessionArn, *v.TrainingSessionArn)
+	}
+	if v.TrainingSessionStatus != "" {
+		s.WriteString(schemas.TrainingSessionSummary_TrainingSessionStatus, string(v.TrainingSessionStatus))
+	}
+}
+func (v *TrainingSessionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrainingSessionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrainingSessionSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.TrainingSessionSummary_CreationTime, v.CreationTime)
+		case schemas.TrainingSessionSummary_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.TrainingSessionSummary_LastModifiedTime, v.LastModifiedTime)
+		case schemas.TrainingSessionSummary_TrainingSessionArn:
+			v.TrainingSessionArn = new(string)
+			return d.ReadString(schemas.TrainingSessionSummary_TrainingSessionArn, v.TrainingSessionArn)
+		case schemas.TrainingSessionSummary_TrainingSessionStatus:
+			var ev string
+			if err := d.ReadString(schemas.TrainingSessionSummary_TrainingSessionStatus, &ev); err != nil {
+				return err
+			}
+			v.TrainingSessionStatus = TrainingSessionStatus(ev)
+			return nil
 		}
 		return nil
 	})

@@ -3336,6 +3336,11 @@ func awsRestjson1_deserializeOpDocumentGetAccountUsageOutput(v **GetAccountUsage
 				return err
 			}
 
+		case "monthlyAccountGraderHours":
+			if err := awsRestjson1_deserializeDocumentUsageMetric(&sv.MonthlyAccountGraderHours, value); err != nil {
+				return err
+			}
+
 		case "monthlyAccountInvestigationHours":
 			if err := awsRestjson1_deserializeDocumentUsageMetric(&sv.MonthlyAccountInvestigationHours, value); err != nil {
 				return err
@@ -14956,6 +14961,42 @@ func awsRestjson1_deserializeDocumentCronSchedule(v **types.CronSchedule, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCustomHeaderNames(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CustomHeaderName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCustomHeaders(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18057,6 +18098,11 @@ func awsRestjson1_deserializeDocumentRegisteredMCPServerDetails(v **types.Regist
 					return fmt.Errorf("expected MCPServerAuthorizationMethod to be of type string, got %T instead", value)
 				}
 				sv.AuthorizationMethod = types.MCPServerAuthorizationMethod(jtv)
+			}
+
+		case "customHeaderNames":
+			if err := awsRestjson1_deserializeDocumentCustomHeaderNames(&sv.CustomHeaderNames, value); err != nil {
+				return err
 			}
 
 		case "description":

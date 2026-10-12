@@ -1896,6 +1896,9 @@ type PhoneNumberInformation struct {
 	// The unique identifier of the pool associated with the phone number.
 	PoolId *string
 
+	// The pricing model.
+	PricingTier *string
+
 	// The unique identifier for the registration.
 	RegistrationId *string
 
@@ -1955,6 +1958,9 @@ func (v *PhoneNumberInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.PoolId != nil {
 		s.WriteString(schemas.PhoneNumberInformation_PoolId, *v.PoolId)
+	}
+	if v.PricingTier != nil {
+		s.WriteString(schemas.PhoneNumberInformation_PricingTier, *v.PricingTier)
 	}
 	if v.RegistrationId != nil {
 		s.WriteString(schemas.PhoneNumberInformation_RegistrationId, *v.RegistrationId)
@@ -2021,6 +2027,9 @@ func (v *PhoneNumberInformation) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PhoneNumberInformation_PoolId:
 			v.PoolId = new(string)
 			return d.ReadString(schemas.PhoneNumberInformation_PoolId, v.PoolId)
+		case schemas.PhoneNumberInformation_PricingTier:
+			v.PricingTier = new(string)
+			return d.ReadString(schemas.PhoneNumberInformation_PricingTier, v.PricingTier)
 		case schemas.PhoneNumberInformation_RegistrationId:
 			v.RegistrationId = new(string)
 			return d.ReadString(schemas.PhoneNumberInformation_RegistrationId, v.RegistrationId)
@@ -5552,6 +5561,9 @@ type SenderIdInformation struct {
 	// send rates.
 	MessagingLimits *MessagingLimits
 
+	// The pricing model.
+	PricingTier *string
+
 	// The unique identifier for the registration.
 	RegistrationId *string
 
@@ -5577,6 +5589,9 @@ func (v *SenderIdInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.MonthlyLeasingPrice != nil {
 		s.WriteString(schemas.SenderIdInformation_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
+	}
+	if v.PricingTier != nil {
+		s.WriteString(schemas.SenderIdInformation_PricingTier, *v.PricingTier)
 	}
 	s.WriteBool(schemas.SenderIdInformation_Registered, v.Registered)
 	if v.RegistrationId != nil {
@@ -5605,6 +5620,9 @@ func (v *SenderIdInformation) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SenderIdInformation_MonthlyLeasingPrice:
 			v.MonthlyLeasingPrice = new(string)
 			return d.ReadString(schemas.SenderIdInformation_MonthlyLeasingPrice, v.MonthlyLeasingPrice)
+		case schemas.SenderIdInformation_PricingTier:
+			v.PricingTier = new(string)
+			return d.ReadString(schemas.SenderIdInformation_PricingTier, v.PricingTier)
 		case schemas.SenderIdInformation_Registered:
 			return d.ReadBool(schemas.SenderIdInformation_Registered, &v.Registered)
 		case schemas.SenderIdInformation_RegistrationId:

@@ -10,9 +10,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Updates a Lambda function's code. If code signing is enabled for the function,
-// the code package must be signed by a trusted publisher. For more information,
-// see [Configuring code signing for Lambda].
+// Updates a Lambda Event Function's code. If code signing is enabled for the
+// function, the code package must be signed by a trusted publisher. For more
+// information, see [Configuring code signing for Lambda].
 //
 // If the function's package type is Image , then you must specify the code package
 // in ImageUri as the URI of a [container image] in the Amazon ECR registry.

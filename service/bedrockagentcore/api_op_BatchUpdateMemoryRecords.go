@@ -37,6 +37,25 @@ type BatchUpdateMemoryRecordsInput struct {
 	// This member is required.
 	Records []types.MemoryRecordUpdateInput
 
+	// The record expiry (long-term memory time-to-live) applied to every record
+	// updated by this request. Set recordExpiryDurationDays to configure or overwrite
+	// the number of days after which the records expire, or set action to REMOVE to
+	// clear a previously configured expiry so that the records no longer expire.
+	//
+	// When you do not provide this value, the service determines each record's expiry
+	// from its current state:
+	//
+	//   - If the record already has an expiry configured, the service resets and
+	//   reapplies the expiry based on the last applied recordExpiryDurationDays .
+	//
+	//   - If the record does not have an expiry configured, no expiry is applied and
+	//   the record remains non-expiring. This is the outcome regardless of whether the
+	//   record's strategy configures an expiry.
+	//
+	// Providing an explicit recordExpiryDurationDays always takes precedence: it
+	// overwrites an existing expiry, or sets one on a record that previously had none.
+	RecordExpirySpecification types.RecordExpirySpecification
+
 	noSmithyDocumentSerde
 }
 

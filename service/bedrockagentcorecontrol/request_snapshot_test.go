@@ -2116,6 +2116,9 @@ func TestCheckRequestSnapshot_CreateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
+					},
 				},
 			},
 			&types.MemoryStrategyInputMemberSemanticMemoryStrategy{
@@ -2171,6 +2174,9 @@ func TestCheckRequestSnapshot_CreateMemory(t *testing.T) {
 								},
 							},
 						},
+					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
 					},
 				},
 			},
@@ -7505,6 +7511,9 @@ func TestCheckRequestSnapshot_UpdateMemory(t *testing.T) {
 								},
 							},
 						},
+						RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+							Value: 1,
+						},
 					},
 				},
 				&types.MemoryStrategyInputMemberSemanticMemoryStrategy{
@@ -7560,6 +7569,9 @@ func TestCheckRequestSnapshot_UpdateMemory(t *testing.T) {
 									},
 								},
 							},
+						},
+						RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+							Value: 1,
 						},
 					},
 				},
@@ -7671,6 +7683,9 @@ func TestCheckRequestSnapshot_UpdateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
+					},
 				},
 				{
 					MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
@@ -7771,6 +7786,9 @@ func TestCheckRequestSnapshot_UpdateMemory(t *testing.T) {
 								},
 							},
 						},
+					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
 					},
 				},
 			},
@@ -10544,6 +10562,9 @@ func TestUpdateRequestSnapshot_CreateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
+					},
 				},
 			},
 			&types.MemoryStrategyInputMemberSemanticMemoryStrategy{
@@ -10599,6 +10620,9 @@ func TestUpdateRequestSnapshot_CreateMemory(t *testing.T) {
 								},
 							},
 						},
+					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
 					},
 				},
 			},
@@ -15933,6 +15957,9 @@ func TestUpdateRequestSnapshot_UpdateMemory(t *testing.T) {
 								},
 							},
 						},
+						RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+							Value: 1,
+						},
 					},
 				},
 				&types.MemoryStrategyInputMemberSemanticMemoryStrategy{
@@ -15988,6 +16015,9 @@ func TestUpdateRequestSnapshot_UpdateMemory(t *testing.T) {
 									},
 								},
 							},
+						},
+						RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+							Value: 1,
 						},
 					},
 				},
@@ -16099,6 +16129,9 @@ func TestUpdateRequestSnapshot_UpdateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
+					},
 				},
 				{
 					MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
@@ -16199,6 +16232,9 @@ func TestUpdateRequestSnapshot_UpdateMemory(t *testing.T) {
 								},
 							},
 						},
+					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
 					},
 				},
 			},

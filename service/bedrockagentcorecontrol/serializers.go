@@ -17824,6 +17824,13 @@ func awsRestjson1_serializeDocumentCustomMemoryStrategyInput(v *types.CustomMemo
 		}
 	}
 
+	if v.RecordExpirySpecification != nil {
+		ok := object.Key("recordExpirySpecification")
+		if err := awsRestjson1_serializeDocumentRecordExpirySpecification(v.RecordExpirySpecification, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -18379,6 +18386,13 @@ func awsRestjson1_serializeDocumentEpisodicMemoryStrategyInput(v *types.Episodic
 	if v.NamespaceTemplates != nil {
 		ok := object.Key("namespaceTemplates")
 		if err := awsRestjson1_serializeDocumentNamespacesList(v.NamespaceTemplates, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RecordExpirySpecification != nil {
+		ok := object.Key("recordExpirySpecification")
+		if err := awsRestjson1_serializeDocumentRecordExpirySpecification(v.RecordExpirySpecification, ok); err != nil {
 			return err
 		}
 	}
@@ -21767,6 +21781,13 @@ func awsRestjson1_serializeDocumentModifyMemoryStrategyInput(v *types.ModifyMemo
 		}
 	}
 
+	if v.RecordExpirySpecification != nil {
+		ok := object.Key("recordExpirySpecification")
+		if err := awsRestjson1_serializeDocumentRecordExpirySpecification(v.RecordExpirySpecification, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -22689,6 +22710,26 @@ func awsRestjson1_serializeDocumentReasoningConfiguration(v *types.ReasoningConf
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRecordExpirySpecification(v types.RecordExpirySpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RecordExpirySpecificationMemberAction:
+		av := object.Key("action")
+		av.String(string(uv.Value))
+
+	case *types.RecordExpirySpecificationMemberRecordExpiryDurationDays:
+		av := object.Key("recordExpiryDurationDays")
+		av.Integer(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRecordingConfig(v *types.RecordingConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -23435,6 +23476,13 @@ func awsRestjson1_serializeDocumentSemanticMemoryStrategyInput(v *types.Semantic
 		}
 	}
 
+	if v.RecordExpirySpecification != nil {
+		ok := object.Key("recordExpirySpecification")
+		if err := awsRestjson1_serializeDocumentRecordExpirySpecification(v.RecordExpirySpecification, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -23902,6 +23950,13 @@ func awsRestjson1_serializeDocumentSummaryMemoryStrategyInput(v *types.SummaryMe
 	if v.NamespaceTemplates != nil {
 		ok := object.Key("namespaceTemplates")
 		if err := awsRestjson1_serializeDocumentNamespacesList(v.NamespaceTemplates, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RecordExpirySpecification != nil {
+		ok := object.Key("recordExpirySpecification")
+		if err := awsRestjson1_serializeDocumentRecordExpirySpecification(v.RecordExpirySpecification, ok); err != nil {
 			return err
 		}
 	}
@@ -24666,6 +24721,13 @@ func awsRestjson1_serializeDocumentUserPreferenceMemoryStrategyInput(v *types.Us
 	if v.NamespaceTemplates != nil {
 		ok := object.Key("namespaceTemplates")
 		if err := awsRestjson1_serializeDocumentNamespacesList(v.NamespaceTemplates, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RecordExpirySpecification != nil {
+		ok := object.Key("recordExpirySpecification")
+		if err := awsRestjson1_serializeDocumentRecordExpirySpecification(v.RecordExpirySpecification, ok); err != nil {
 			return err
 		}
 	}

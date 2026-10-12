@@ -9437,6 +9437,69 @@ func TestCheckRequestSnapshot_CreateTrainingPlan(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateTrainingSession(t *testing.T) {
+	input := &CreateTrainingSessionInput{
+		TrainingSessionName:  ptr.String("__TrainingSessionName__"),
+		ModelPackageGroupArn: ptr.String("__ModelPackageGroupArn__"),
+		LoraConfig: &types.LoraConfig{
+			Rank:  ptr.Int32(1),
+			Alpha: ptr.Int32(1),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		VpcConfig: &types.VpcConfig{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ModelConfig: &types.TrainingSessionModelConfig{
+			BaseModelArn: ptr.String("__BaseModelArn__"),
+			AcceptEula:   ptr.Bool(true),
+		},
+		OutputConfig: &types.TrainingSessionOutputConfig{
+			S3Location: &types.TrainingSessionS3Location{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTrainingSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTrainingSession"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateTransformJob(t *testing.T) {
 	input := &CreateTransformJobInput{
 		TransformJobName:        ptr.String("__TransformJobName__"),
@@ -11684,6 +11747,33 @@ func TestCheckRequestSnapshot_DeleteTrainingJob(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteTrainingSession(t *testing.T) {
+	input := &DeleteTrainingSessionInput{
+		TrainingSessionName: ptr.String("__TrainingSessionName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTrainingSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTrainingSession"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteTrial(t *testing.T) {
 	input := &DeleteTrialInput{
 		TrialName: ptr.String("__TrialName__"),
@@ -13767,6 +13857,33 @@ func TestCheckRequestSnapshot_DescribeTrainingPlanExtensionHistory(t *testing.T)
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTrainingPlanExtensionHistory"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeTrainingSession(t *testing.T) {
+	input := &DescribeTrainingSessionInput{
+		TrainingSessionName: ptr.String("__TrainingSessionName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTrainingSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTrainingSession"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -17132,6 +17249,38 @@ func TestCheckRequestSnapshot_ListTrainingPlans(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListTrainingSessions(t *testing.T) {
+	input := &ListTrainingSessionsInput{
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NameContains:       ptr.String("__NameContains__"),
+		StatusEquals:       types.TrainingSessionStatus("Created"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTrainingSessions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTrainingSessions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListTransformJobs(t *testing.T) {
 	input := &ListTransformJobsInput{
 		CreationTimeAfter:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -18536,6 +18685,33 @@ func TestCheckRequestSnapshot_StopTrainingJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopTrainingJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StopTrainingSession(t *testing.T) {
+	input := &StopTrainingSessionInput{
+		TrainingSessionName: ptr.String("__TrainingSessionName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopTrainingSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopTrainingSession"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -31986,6 +32162,69 @@ func TestUpdateRequestSnapshot_CreateTrainingPlan(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateTrainingSession(t *testing.T) {
+	input := &CreateTrainingSessionInput{
+		TrainingSessionName:  ptr.String("__TrainingSessionName__"),
+		ModelPackageGroupArn: ptr.String("__ModelPackageGroupArn__"),
+		LoraConfig: &types.LoraConfig{
+			Rank:  ptr.Int32(1),
+			Alpha: ptr.Int32(1),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		VpcConfig: &types.VpcConfig{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ModelConfig: &types.TrainingSessionModelConfig{
+			BaseModelArn: ptr.String("__BaseModelArn__"),
+			AcceptEula:   ptr.Bool(true),
+		},
+		OutputConfig: &types.TrainingSessionOutputConfig{
+			S3Location: &types.TrainingSessionS3Location{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTrainingSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTrainingSession"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateTransformJob(t *testing.T) {
 	input := &CreateTransformJobInput{
 		TransformJobName:        ptr.String("__TransformJobName__"),
@@ -34233,6 +34472,33 @@ func TestUpdateRequestSnapshot_DeleteTrainingJob(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteTrainingSession(t *testing.T) {
+	input := &DeleteTrainingSessionInput{
+		TrainingSessionName: ptr.String("__TrainingSessionName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTrainingSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTrainingSession"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteTrial(t *testing.T) {
 	input := &DeleteTrialInput{
 		TrialName: ptr.String("__TrialName__"),
@@ -36316,6 +36582,33 @@ func TestUpdateRequestSnapshot_DescribeTrainingPlanExtensionHistory(t *testing.T
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTrainingPlanExtensionHistory"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeTrainingSession(t *testing.T) {
+	input := &DescribeTrainingSessionInput{
+		TrainingSessionName: ptr.String("__TrainingSessionName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTrainingSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTrainingSession"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -39681,6 +39974,38 @@ func TestUpdateRequestSnapshot_ListTrainingPlans(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListTrainingSessions(t *testing.T) {
+	input := &ListTrainingSessionsInput{
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NameContains:       ptr.String("__NameContains__"),
+		StatusEquals:       types.TrainingSessionStatus("Created"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTrainingSessions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTrainingSessions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListTransformJobs(t *testing.T) {
 	input := &ListTransformJobsInput{
 		CreationTimeAfter:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -41085,6 +41410,33 @@ func TestUpdateRequestSnapshot_StopTrainingJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopTrainingJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StopTrainingSession(t *testing.T) {
+	input := &StopTrainingSessionInput{
+		TrainingSessionName: ptr.String("__TrainingSessionName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopTrainingSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopTrainingSession"); err != nil {
 		t.Fatal(err)
 	}
 }

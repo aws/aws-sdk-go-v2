@@ -1,0 +1,8 @@
+{
+    "id": "cb4a981f-6d0c-4ede-b6c7-25c4ff291ea6",
+    "type": "feature",
+    "description": "Adding support for TransactionSearch telemetry rules.",
+    "modules": [
+        "service/observabilityadmin"
+    ]
+}

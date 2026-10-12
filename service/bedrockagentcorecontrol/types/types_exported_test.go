@@ -1588,6 +1588,28 @@ func ExampleRatingScale_outputUsage() {
 var _ []types.CategoricalScaleDefinition
 var _ []types.NumericalScaleDefinition
 
+func ExampleRecordExpirySpecification_outputUsage() {
+	var union types.RecordExpirySpecification
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RecordExpirySpecificationMemberAction:
+		_ = v.Value // Value is types.RecordExpiryAction
+
+	case *types.RecordExpirySpecificationMemberRecordExpiryDurationDays:
+		_ = v.Value // Value is int32
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *int32
+var _ types.RecordExpiryAction
+
 func ExampleReflectionConfiguration_outputUsage() {
 	var union types.ReflectionConfiguration
 	// type switches can be used to check the union value

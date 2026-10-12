@@ -10,7 +10,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Modify the version-specific settings of a Lambda function.
+// Modifies the version-specific settings of a Lambda Event Function.
 //
 // When you update a function, Lambda provisions an instance of the function and
 // its supporting resources. If your function connects to a VPC, this process can

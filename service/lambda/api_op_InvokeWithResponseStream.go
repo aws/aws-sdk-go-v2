@@ -12,8 +12,8 @@ import (
 	"sync"
 )
 
-// Configure your Lambda functions to stream response payloads back to clients.
-// For more information, see [Configuring a Lambda function to stream responses].
+// Configure your Lambda Event Functions to stream response payloads back to
+// clients. For more information, see [Configuring a Lambda function to stream responses].
 //
 // This operation requires permission for the [lambda:InvokeFunction] action. For details on how to set
 // up permissions for cross-account invocations, see [Granting function access to other accounts].

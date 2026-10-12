@@ -1,0 +1,3 @@
+GET /v1/training-sessions/__TrainingSessionName__/operations/__OperationId__
+
+

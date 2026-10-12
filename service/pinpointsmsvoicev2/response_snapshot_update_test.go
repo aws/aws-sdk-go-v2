@@ -1943,6 +1943,7 @@ func TestUpdateResponseSnapshot_DescribePhoneNumbers(t *testing.T) {
 						"key0": 1,
 					},
 				},
+				PricingTier:      ptr.String("__PricingTier__"),
 				CreatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
@@ -1975,6 +1976,7 @@ func TestUpdateResponseSnapshot_DescribePhoneNumbers(t *testing.T) {
 						"key0": 1,
 					},
 				},
+				PricingTier:      ptr.String("__PricingTier__"),
 				CreatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
@@ -2866,6 +2868,7 @@ func TestUpdateResponseSnapshot_DescribeSenderIds(t *testing.T) {
 						"key0": 1,
 					},
 				},
+				PricingTier: ptr.String("__PricingTier__"),
 			},
 			{
 				SenderIdArn:    ptr.String("__SenderIdArn__"),
@@ -2887,6 +2890,7 @@ func TestUpdateResponseSnapshot_DescribeSenderIds(t *testing.T) {
 						"key0": 1,
 					},
 				},
+				PricingTier: ptr.String("__PricingTier__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

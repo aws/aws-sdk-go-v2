@@ -68,9 +68,10 @@ type CreatePolicyInput struct {
 	PolicyEngineId *string
 
 	// A unique, case-sensitive identifier to ensure the idempotency of the request.
-	// The AWS SDK automatically generates this token, so you don't need to provide it
-	// in most cases. If you retry a request with the same client token, the service
-	// returns the same response without creating a duplicate policy.
+	// The Amazon Web Services SDK automatically generates this token, so you don't
+	// need to provide it in most cases. If you retry a request with the same client
+	// token, the service returns the same response without creating a duplicate
+	// policy.
 	ClientToken *string
 
 	// A human-readable description of the policy's purpose and functionality (1-4,096

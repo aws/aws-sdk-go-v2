@@ -559,6 +559,7 @@ func TestCheckRequestSnapshot_CreateConfiguration(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				VpcOwnerAccountId: ptr.String("__VpcOwnerAccountId__"),
 			},
 		},
 		Tags: map[string]string{
@@ -4169,6 +4170,7 @@ func TestUpdateRequestSnapshot_CreateConfiguration(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				VpcOwnerAccountId: ptr.String("__VpcOwnerAccountId__"),
 			},
 		},
 		Tags: map[string]string{

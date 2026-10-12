@@ -182,6 +182,18 @@ func TestCheckSnapshot_BatchGetDataQualityResult(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchGetDataQualityResultV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetDataQualityResultV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetDataQualityResultV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetDataQualityRulesetEvaluationRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetDataQualityRulesetEvaluationRun(context.Background(), nil, func(o *Options) {
@@ -1646,6 +1658,18 @@ func TestCheckSnapshot_GetDataQualityResult(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDataQualityResultV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataQualityResultV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataQualityResultV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDataQualityRuleRecommendationRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataQualityRuleRecommendationRun(context.Background(), nil, func(o *Options) {
@@ -2462,6 +2486,18 @@ func TestCheckSnapshot_ListDataQualityResults(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListDataQualityResultsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataQualityResultsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataQualityResultsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDataQualityRuleRecommendationRuns(context.Background(), nil, func(o *Options) {
@@ -2767,6 +2803,18 @@ func TestCheckSnapshot_ModifyIntegration(t *testing.T) {
 	_, err := svc.ModifyIntegration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PublishDataQualityResultV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PublishDataQualityResultV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PublishDataQualityResultV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3798,6 +3846,18 @@ func TestUpdateSnapshot_BatchGetDataQualityResult(t *testing.T) {
 	_, err := svc.BatchGetDataQualityResult(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchGetDataQualityResult")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetDataQualityResultV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetDataQualityResultV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetDataQualityResultV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5269,6 +5329,18 @@ func TestUpdateSnapshot_GetDataQualityResult(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDataQualityResultV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataQualityResultV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataQualityResultV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDataQualityRuleRecommendationRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataQualityRuleRecommendationRun(context.Background(), nil, func(o *Options) {
@@ -6085,6 +6157,18 @@ func TestUpdateSnapshot_ListDataQualityResults(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListDataQualityResultsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataQualityResultsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataQualityResultsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDataQualityRuleRecommendationRuns(context.Background(), nil, func(o *Options) {
@@ -6390,6 +6474,18 @@ func TestUpdateSnapshot_ModifyIntegration(t *testing.T) {
 	_, err := svc.ModifyIntegration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PublishDataQualityResultV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PublishDataQualityResultV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PublishDataQualityResultV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

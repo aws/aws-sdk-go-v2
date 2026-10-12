@@ -10,7 +10,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Creates a capacity provider that manages compute resources for Lambda functions
+// Creates a capacity provider that manages compute resources for Lambda Event
+// Functions
 func (c *Client) CreateCapacityProvider(ctx context.Context, params *CreateCapacityProviderInput, optFns ...func(*Options)) (*CreateCapacityProviderOutput, error) {
 	if params == nil {
 		params = &CreateCapacityProviderInput{}

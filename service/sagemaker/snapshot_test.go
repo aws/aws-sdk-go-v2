@@ -974,6 +974,18 @@ func TestCheckSnapshot_CreateTrainingPlan(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateTrainingSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTrainingSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTrainingSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateTransformJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTransformJob(context.Background(), nil, func(o *Options) {
@@ -1723,6 +1735,18 @@ func TestCheckSnapshot_DeleteTrainingJob(t *testing.T) {
 	_, err := svc.DeleteTrainingJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteTrainingJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTrainingSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTrainingSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTrainingSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2635,6 +2659,18 @@ func TestCheckSnapshot_DescribeTrainingPlanExtensionHistory(t *testing.T) {
 	_, err := svc.DescribeTrainingPlanExtensionHistory(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeTrainingPlanExtensionHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeTrainingSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTrainingSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTrainingSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3854,6 +3890,18 @@ func TestCheckSnapshot_ListTrainingPlans(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListTrainingSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTrainingSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTrainingSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTransformJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTransformJobs(context.Background(), nil, func(o *Options) {
@@ -4351,6 +4399,18 @@ func TestCheckSnapshot_StopTrainingJob(t *testing.T) {
 	_, err := svc.StopTrainingJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StopTrainingJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopTrainingSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopTrainingSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopTrainingSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5821,6 +5881,18 @@ func TestUpdateSnapshot_CreateTrainingPlan(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateTrainingSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTrainingSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTrainingSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateTransformJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTransformJob(context.Background(), nil, func(o *Options) {
@@ -6570,6 +6642,18 @@ func TestUpdateSnapshot_DeleteTrainingJob(t *testing.T) {
 	_, err := svc.DeleteTrainingJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTrainingJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTrainingSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTrainingSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTrainingSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7482,6 +7566,18 @@ func TestUpdateSnapshot_DescribeTrainingPlanExtensionHistory(t *testing.T) {
 	_, err := svc.DescribeTrainingPlanExtensionHistory(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeTrainingPlanExtensionHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeTrainingSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTrainingSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTrainingSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8701,6 +8797,18 @@ func TestUpdateSnapshot_ListTrainingPlans(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListTrainingSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTrainingSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTrainingSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTransformJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTransformJobs(context.Background(), nil, func(o *Options) {
@@ -9198,6 +9306,18 @@ func TestUpdateSnapshot_StopTrainingJob(t *testing.T) {
 	_, err := svc.StopTrainingJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopTrainingJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopTrainingSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopTrainingSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopTrainingSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

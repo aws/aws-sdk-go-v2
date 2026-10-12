@@ -1530,6 +1530,26 @@ func (m *validateOpCreateTrainingPlan) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateTrainingSession struct {
+}
+
+func (*validateOpCreateTrainingSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTrainingSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTrainingSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTrainingSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTransformJob struct {
 }
 
@@ -2785,6 +2805,26 @@ func (m *validateOpDeleteTrainingJob) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteTrainingJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTrainingSession struct {
+}
+
+func (*validateOpDeleteTrainingSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTrainingSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTrainingSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTrainingSessionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4310,6 +4350,26 @@ func (m *validateOpDescribeTrainingPlan) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeTrainingSession struct {
+}
+
+func (*validateOpDescribeTrainingSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTrainingSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTrainingSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTrainingSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeTransformJob struct {
 }
 
@@ -5730,6 +5790,26 @@ func (m *validateOpStopTrainingJob) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopTrainingSession struct {
+}
+
+func (*validateOpStopTrainingSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopTrainingSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopTrainingSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopTrainingSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopTransformJob struct {
 }
 
@@ -6954,6 +7034,10 @@ func addOpCreateTrainingPlanValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateTrainingPlan{}, middleware.After)
 }
 
+func addOpCreateTrainingSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTrainingSession{}, middleware.After)
+}
+
 func addOpCreateTransformJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTransformJob{}, middleware.After)
 }
@@ -7204,6 +7288,10 @@ func addOpDeleteTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteTrainingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTrainingJob{}, middleware.After)
+}
+
+func addOpDeleteTrainingSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTrainingSession{}, middleware.After)
 }
 
 func addOpDeleteTrialComponentValidationMiddleware(stack *middleware.Stack) error {
@@ -7510,6 +7598,10 @@ func addOpDescribeTrainingPlanValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDescribeTrainingPlan{}, middleware.After)
 }
 
+func addOpDescribeTrainingSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTrainingSession{}, middleware.After)
+}
+
 func addOpDescribeTransformJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTransformJob{}, middleware.After)
 }
@@ -7792,6 +7884,10 @@ func addOpStopProcessingJobValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStopTrainingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopTrainingJob{}, middleware.After)
+}
+
+func addOpStopTrainingSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopTrainingSession{}, middleware.After)
 }
 
 func addOpStopTransformJobValidationMiddleware(stack *middleware.Stack) error {
@@ -12858,6 +12954,24 @@ func validateLabelingJobSnsDataSource(v *types.LabelingJobSnsDataSource) error {
 	}
 }
 
+func validateLoraConfig(v *types.LoraConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LoraConfig"}
+	if v.Rank == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rank"))
+	}
+	if v.Alpha == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alpha"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMemberDefinition(v *types.MemberDefinition) error {
 	if v == nil {
 		return nil
@@ -16016,6 +16130,55 @@ func validateTrainingRepositoryAuthConfig(v *types.TrainingRepositoryAuthConfig)
 	}
 }
 
+func validateTrainingSessionModelConfig(v *types.TrainingSessionModelConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainingSessionModelConfig"}
+	if v.BaseModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseModelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainingSessionOutputConfig(v *types.TrainingSessionOutputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainingSessionOutputConfig"}
+	if v.S3Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Location"))
+	} else if v.S3Location != nil {
+		if err := validateTrainingSessionS3Location(v.S3Location); err != nil {
+			invalidParams.AddNested("S3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainingSessionS3Location(v *types.TrainingSessionS3Location) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainingSessionS3Location"}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTrainingSpecification(v *types.TrainingSpecification) error {
 	if v == nil {
 		return nil
@@ -18968,6 +19131,55 @@ func validateOpCreateTrainingPlanInput(v *CreateTrainingPlanInput) error {
 	}
 }
 
+func validateOpCreateTrainingSessionInput(v *CreateTrainingSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTrainingSessionInput"}
+	if v.TrainingSessionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingSessionName"))
+	}
+	if v.LoraConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoraConfig"))
+	} else if v.LoraConfig != nil {
+		if err := validateLoraConfig(v.LoraConfig); err != nil {
+			invalidParams.AddNested("LoraConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.VpcConfig != nil {
+		if err := validateVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelConfig"))
+	} else if v.ModelConfig != nil {
+		if err := validateTrainingSessionModelConfig(v.ModelConfig); err != nil {
+			invalidParams.AddNested("ModelConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	} else if v.OutputConfig != nil {
+		if err := validateTrainingSessionOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateTransformJobInput(v *CreateTransformJobInput) error {
 	if v == nil {
 		return nil
@@ -20051,6 +20263,21 @@ func validateOpDeleteTrainingJobInput(v *DeleteTrainingJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTrainingJobInput"}
 	if v.TrainingJobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrainingJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTrainingSessionInput(v *DeleteTrainingSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTrainingSessionInput"}
+	if v.TrainingSessionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingSessionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -21224,6 +21451,21 @@ func validateOpDescribeTrainingPlanInput(v *DescribeTrainingPlanInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeTrainingPlanInput"}
 	if v.TrainingPlanName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrainingPlanName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeTrainingSessionInput(v *DescribeTrainingSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTrainingSessionInput"}
+	if v.TrainingSessionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingSessionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -22429,6 +22671,21 @@ func validateOpStopTrainingJobInput(v *StopTrainingJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopTrainingJobInput"}
 	if v.TrainingJobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrainingJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopTrainingSessionInput(v *StopTrainingSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopTrainingSessionInput"}
+	if v.TrainingSessionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingSessionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

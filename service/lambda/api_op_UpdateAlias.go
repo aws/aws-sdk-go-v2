@@ -10,7 +10,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Updates the configuration of a Lambda function [alias].
+// Updates the configuration of a Lambda Event Function [alias].
 //
 // [alias]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
 func (c *Client) UpdateAlias(ctx context.Context, params *UpdateAliasInput, optFns ...func(*Options)) (*UpdateAliasOutput, error) {

@@ -1626,7 +1626,7 @@ var _PhoneNumberIdOrArn = smithy.NewSchema(smithy.ShapeID{
 var PhoneNumberInformation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "PhoneNumberInformation",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 21)
 var PhoneNumberInformation_PhoneNumberArn *smithy.Schema
 
 var PhoneNumberInformation_PhoneNumberId *smithy.Schema
@@ -1664,6 +1664,8 @@ var PhoneNumberInformation_PoolId *smithy.Schema
 var PhoneNumberInformation_RegistrationId *smithy.Schema
 
 var PhoneNumberInformation_MessagingLimits *smithy.Schema
+
+var PhoneNumberInformation_PricingTier *smithy.Schema
 
 var PhoneNumberInformation_CreatedTimestamp *smithy.Schema
 
@@ -2823,7 +2825,7 @@ var _SenderIdFilterName = smithy.NewSchema(smithy.ShapeID{
 var SenderIdInformation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "SenderIdInformation",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var SenderIdInformation_SenderIdArn *smithy.Schema
 
 var SenderIdInformation_SenderId *smithy.Schema
@@ -2841,6 +2843,8 @@ var SenderIdInformation_Registered *smithy.Schema
 var SenderIdInformation_RegistrationId *smithy.Schema
 
 var SenderIdInformation_MessagingLimits *smithy.Schema
+
+var SenderIdInformation_PricingTier *smithy.Schema
 
 var _SenderIdInformationList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -6365,6 +6369,8 @@ func init() {
 
 	PhoneNumberInformation_MessagingLimits = PhoneNumberInformation.AddMember("MessagingLimits", MessagingLimits)
 
+	PhoneNumberInformation_PricingTier = PhoneNumberInformation.AddMember("PricingTier", smithyprelude.String)
+
 	PhoneNumberInformation_CreatedTimestamp = PhoneNumberInformation.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
 
 	_PhoneNumberInformationList_member = _PhoneNumberInformationList.AddMember("member", PhoneNumberInformation)
@@ -6908,6 +6914,8 @@ func init() {
 	SenderIdInformation_RegistrationId = SenderIdInformation.AddMember("RegistrationId", smithyprelude.String)
 
 	SenderIdInformation_MessagingLimits = SenderIdInformation.AddMember("MessagingLimits", MessagingLimits)
+
+	SenderIdInformation_PricingTier = SenderIdInformation.AddMember("PricingTier", smithyprelude.String)
 
 	_SenderIdInformationList_member = _SenderIdInformationList.AddMember("member", SenderIdInformation)
 

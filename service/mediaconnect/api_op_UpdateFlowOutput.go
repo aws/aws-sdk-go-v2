@@ -71,6 +71,11 @@ type UpdateFlowOutputInput struct {
 	// receiver’s minimum latency.
 	MinLatency *int32
 
+	// The audio reference level of the NDI receiver, in decibels relative to full
+	// scale (dBFS). Common values are -20 (NDI and SMPTE) and -18 (EBU). If you don't
+	// specify this field, MediaConnect leaves the value unchanged.
+	NdiAudioReferenceLevel *int32
+
 	// Controls how MediaConnect generates timecodes for NDI output frames. If you
 	// don't specify this field, MediaConnect leaves the value unchanged.
 	//
@@ -162,6 +167,9 @@ func (v *UpdateFlowOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
 	serialize__listOfMediaStreamOutputConfigurationRequest(s, schemas.UpdateFlowOutputRequest_MediaStreamOutputConfigurations, v.MediaStreamOutputConfigurations)
 	if v.MinLatency != nil {
 		s.WriteInt32(schemas.UpdateFlowOutputRequest_MinLatency, *v.MinLatency)
+	}
+	if v.NdiAudioReferenceLevel != nil {
+		s.WriteInt32(schemas.UpdateFlowOutputRequest_NdiAudioReferenceLevel, *v.NdiAudioReferenceLevel)
 	}
 	if v.NdiOutputTimecodeSource != "" {
 		s.WriteString(schemas.UpdateFlowOutputRequest_NdiOutputTimecodeSource, string(v.NdiOutputTimecodeSource))

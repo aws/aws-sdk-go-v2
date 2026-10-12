@@ -217,6 +217,9 @@ func ExampleMCPServerAuthorizationConfig_outputUsage() {
 	case *types.MCPServerAuthorizationConfigMemberBearerToken:
 		_ = v.Value // Value is types.MCPServerBearerTokenConfig
 
+	case *types.MCPServerAuthorizationConfigMemberCustomHeaders:
+		_ = v.Value // Value is types.MCPServerCustomHeadersConfig
+
 	case *types.MCPServerAuthorizationConfigMemberOAuth3LO:
 		_ = v.Value // Value is types.MCPServerOAuth3LOConfig
 
@@ -234,6 +237,7 @@ func ExampleMCPServerAuthorizationConfig_outputUsage() {
 
 var _ *types.MCPServerAPIKeyConfig
 var _ *types.MCPServerOAuth3LOConfig
+var _ *types.MCPServerCustomHeadersConfig
 var _ *types.MCPServerOAuthClientCredentialsConfig
 var _ *types.MCPServerAuthorizationDiscoveryConfig
 var _ *types.MCPServerBearerTokenConfig

@@ -497,6 +497,7 @@ func TestCheckRequestSnapshot_AddFlowOutputs(t *testing.T) {
 					},
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+				NdiAudioReferenceLevel:  ptr.Int32(1),
 			},
 			{
 				CidrAllowList: []string{
@@ -595,6 +596,7 @@ func TestCheckRequestSnapshot_AddFlowOutputs(t *testing.T) {
 					},
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+				NdiAudioReferenceLevel:  ptr.Int32(1),
 			},
 		},
 	}
@@ -698,7 +700,8 @@ func TestCheckRequestSnapshot_AddFlowSources(t *testing.T) {
 					},
 				},
 				NdiSourceSettings: &types.NdiSourceSettings{
-					SourceName: ptr.String("__SourceName__"),
+					SourceName:          ptr.String("__SourceName__"),
+					AudioReferenceLevel: ptr.Int32(1),
 				},
 				SourceTags: map[string]string{
 					"key0": "__Value__",
@@ -787,7 +790,8 @@ func TestCheckRequestSnapshot_AddFlowSources(t *testing.T) {
 					},
 				},
 				NdiSourceSettings: &types.NdiSourceSettings{
-					SourceName: ptr.String("__SourceName__"),
+					SourceName:          ptr.String("__SourceName__"),
+					AudioReferenceLevel: ptr.Int32(1),
 				},
 				SourceTags: map[string]string{
 					"key0": "__Value__",
@@ -1278,6 +1282,7 @@ func TestCheckRequestSnapshot_CreateFlow(t *testing.T) {
 					},
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+				NdiAudioReferenceLevel:  ptr.Int32(1),
 			},
 			{
 				CidrAllowList: []string{
@@ -1376,6 +1381,7 @@ func TestCheckRequestSnapshot_CreateFlow(t *testing.T) {
 					},
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+				NdiAudioReferenceLevel:  ptr.Int32(1),
 			},
 		},
 		Source: &types.SetSourceRequest{
@@ -1451,7 +1457,8 @@ func TestCheckRequestSnapshot_CreateFlow(t *testing.T) {
 				},
 			},
 			NdiSourceSettings: &types.NdiSourceSettings{
-				SourceName: ptr.String("__SourceName__"),
+				SourceName:          ptr.String("__SourceName__"),
+				AudioReferenceLevel: ptr.Int32(1),
 			},
 			SourceTags: map[string]string{
 				"key0": "__Value__",
@@ -1549,7 +1556,8 @@ func TestCheckRequestSnapshot_CreateFlow(t *testing.T) {
 					},
 				},
 				NdiSourceSettings: &types.NdiSourceSettings{
-					SourceName: ptr.String("__SourceName__"),
+					SourceName:          ptr.String("__SourceName__"),
+					AudioReferenceLevel: ptr.Int32(1),
 				},
 				SourceTags: map[string]string{
 					"key0": "__Value__",
@@ -1638,7 +1646,8 @@ func TestCheckRequestSnapshot_CreateFlow(t *testing.T) {
 					},
 				},
 				NdiSourceSettings: &types.NdiSourceSettings{
-					SourceName: ptr.String("__SourceName__"),
+					SourceName:          ptr.String("__SourceName__"),
+					AudioReferenceLevel: ptr.Int32(1),
 				},
 				SourceTags: map[string]string{
 					"key0": "__Value__",
@@ -4018,6 +4027,7 @@ func TestCheckRequestSnapshot_UpdateFlowOutput(t *testing.T) {
 			},
 		},
 		NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+		NdiAudioReferenceLevel:  ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4117,7 +4127,8 @@ func TestCheckRequestSnapshot_UpdateFlowSource(t *testing.T) {
 			},
 		},
 		NdiSourceSettings: &types.NdiSourceSettings{
-			SourceName: ptr.String("__SourceName__"),
+			SourceName:          ptr.String("__SourceName__"),
+			AudioReferenceLevel: ptr.Int32(1),
 		},
 		RouterIntegrationState: types.State("ENABLED"),
 		RouterIntegrationTransitDecryption: &types.FlowTransitEncryption{
@@ -4638,6 +4649,7 @@ func TestUpdateRequestSnapshot_AddFlowOutputs(t *testing.T) {
 					},
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+				NdiAudioReferenceLevel:  ptr.Int32(1),
 			},
 			{
 				CidrAllowList: []string{
@@ -4736,6 +4748,7 @@ func TestUpdateRequestSnapshot_AddFlowOutputs(t *testing.T) {
 					},
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+				NdiAudioReferenceLevel:  ptr.Int32(1),
 			},
 		},
 	}
@@ -4839,7 +4852,8 @@ func TestUpdateRequestSnapshot_AddFlowSources(t *testing.T) {
 					},
 				},
 				NdiSourceSettings: &types.NdiSourceSettings{
-					SourceName: ptr.String("__SourceName__"),
+					SourceName:          ptr.String("__SourceName__"),
+					AudioReferenceLevel: ptr.Int32(1),
 				},
 				SourceTags: map[string]string{
 					"key0": "__Value__",
@@ -4928,7 +4942,8 @@ func TestUpdateRequestSnapshot_AddFlowSources(t *testing.T) {
 					},
 				},
 				NdiSourceSettings: &types.NdiSourceSettings{
-					SourceName: ptr.String("__SourceName__"),
+					SourceName:          ptr.String("__SourceName__"),
+					AudioReferenceLevel: ptr.Int32(1),
 				},
 				SourceTags: map[string]string{
 					"key0": "__Value__",
@@ -5419,6 +5434,7 @@ func TestUpdateRequestSnapshot_CreateFlow(t *testing.T) {
 					},
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+				NdiAudioReferenceLevel:  ptr.Int32(1),
 			},
 			{
 				CidrAllowList: []string{
@@ -5517,6 +5533,7 @@ func TestUpdateRequestSnapshot_CreateFlow(t *testing.T) {
 					},
 				},
 				NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+				NdiAudioReferenceLevel:  ptr.Int32(1),
 			},
 		},
 		Source: &types.SetSourceRequest{
@@ -5592,7 +5609,8 @@ func TestUpdateRequestSnapshot_CreateFlow(t *testing.T) {
 				},
 			},
 			NdiSourceSettings: &types.NdiSourceSettings{
-				SourceName: ptr.String("__SourceName__"),
+				SourceName:          ptr.String("__SourceName__"),
+				AudioReferenceLevel: ptr.Int32(1),
 			},
 			SourceTags: map[string]string{
 				"key0": "__Value__",
@@ -5690,7 +5708,8 @@ func TestUpdateRequestSnapshot_CreateFlow(t *testing.T) {
 					},
 				},
 				NdiSourceSettings: &types.NdiSourceSettings{
-					SourceName: ptr.String("__SourceName__"),
+					SourceName:          ptr.String("__SourceName__"),
+					AudioReferenceLevel: ptr.Int32(1),
 				},
 				SourceTags: map[string]string{
 					"key0": "__Value__",
@@ -5779,7 +5798,8 @@ func TestUpdateRequestSnapshot_CreateFlow(t *testing.T) {
 					},
 				},
 				NdiSourceSettings: &types.NdiSourceSettings{
-					SourceName: ptr.String("__SourceName__"),
+					SourceName:          ptr.String("__SourceName__"),
+					AudioReferenceLevel: ptr.Int32(1),
 				},
 				SourceTags: map[string]string{
 					"key0": "__Value__",
@@ -8159,6 +8179,7 @@ func TestUpdateRequestSnapshot_UpdateFlowOutput(t *testing.T) {
 			},
 		},
 		NdiOutputTimecodeSource: types.NdiOutputTimecodeSource("EMBEDDED_TIMECODE"),
+		NdiAudioReferenceLevel:  ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8258,7 +8279,8 @@ func TestUpdateRequestSnapshot_UpdateFlowSource(t *testing.T) {
 			},
 		},
 		NdiSourceSettings: &types.NdiSourceSettings{
-			SourceName: ptr.String("__SourceName__"),
+			SourceName:          ptr.String("__SourceName__"),
+			AudioReferenceLevel: ptr.Int32(1),
 		},
 		RouterIntegrationState: types.State("ENABLED"),
 		RouterIntegrationTransitDecryption: &types.FlowTransitEncryption{

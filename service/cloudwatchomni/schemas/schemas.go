@@ -1232,10 +1232,8 @@ var _MetadataAttributeMap_value *smithy.Schema
 var MetricMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchomni",
 	Name:      "MetricMetadata",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 5)
 var MetricMetadata_name *smithy.Schema
-
-var MetricMetadata_namespace *smithy.Schema
 
 var MetricMetadata_preferredStat *smithy.Schema
 
@@ -3304,10 +3302,12 @@ var UpdateOmniDashboardOutput_omniDashboard *smithy.Schema
 var UpdateSpaceInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchomni",
 	Name:      "UpdateSpaceInput",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var UpdateSpaceInput_spaceId *smithy.Schema
 
 var UpdateSpaceInput_name *smithy.Schema
+
+var UpdateSpaceInput_agentCoreEvaluationRoleArn *smithy.Schema
 
 var UpdateSpaceInput_encryptionConfiguration *smithy.Schema
 
@@ -3861,8 +3861,6 @@ func init() {
 	MetricSemantics_unit = MetricSemantics.AddMember("unit", smithyprelude.String)
 
 	MetricMetadata_name = MetricMetadata.AddMember("name", smithyprelude.String)
-
-	MetricMetadata_namespace = MetricMetadata.AddMember("namespace", smithyprelude.String)
 
 	MetricMetadata_preferredStat = MetricMetadata.AddMember("preferredStat", smithyprelude.String)
 
@@ -4999,6 +4997,8 @@ func init() {
 	UpdateSpaceInput_spaceId = UpdateSpaceInput.AddMember("spaceId", _SpaceId)
 
 	UpdateSpaceInput_name = UpdateSpaceInput.AddMember("name", smithyprelude.String)
+
+	UpdateSpaceInput_agentCoreEvaluationRoleArn = UpdateSpaceInput.AddMember("agentCoreEvaluationRoleArn", _Arn)
 
 	UpdateSpaceInput_encryptionConfiguration = UpdateSpaceInput.AddMember("encryptionConfiguration", EncryptionConfiguration)
 

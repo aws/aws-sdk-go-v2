@@ -402,6 +402,76 @@ func TestCheckRequestSnapshot_BatchDeleteThreatModels(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_BatchDisassociateFindingIssue(t *testing.T) {
+	input := &BatchDisassociateFindingIssueInput{
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestJobId:    ptr.String("__PentestJobId__"),
+		CodeReviewJobId: ptr.String("__CodeReviewJobId__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchDisassociateFindingIssue(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDisassociateFindingIssue"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_BatchExportFindings(t *testing.T) {
+	input := &BatchExportFindingsInput{
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestJobId:    ptr.String("__PentestJobId__"),
+		CodeReviewJobId: ptr.String("__CodeReviewJobId__"),
+		IssueDestination: &types.IssueDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ProjectKey:    ptr.String("__ProjectKey__"),
+		},
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchExportFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchExportFindings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_BatchGetAgentSpaces(t *testing.T) {
 	input := &BatchGetAgentSpacesInput{
 		AgentSpaceIds: []string{
@@ -4455,6 +4525,76 @@ func TestUpdateRequestSnapshot_BatchDeleteThreatModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDeleteThreatModels"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_BatchDisassociateFindingIssue(t *testing.T) {
+	input := &BatchDisassociateFindingIssueInput{
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestJobId:    ptr.String("__PentestJobId__"),
+		CodeReviewJobId: ptr.String("__CodeReviewJobId__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchDisassociateFindingIssue(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDisassociateFindingIssue"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_BatchExportFindings(t *testing.T) {
+	input := &BatchExportFindingsInput{
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestJobId:    ptr.String("__PentestJobId__"),
+		CodeReviewJobId: ptr.String("__CodeReviewJobId__"),
+		IssueDestination: &types.IssueDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ProjectKey:    ptr.String("__ProjectKey__"),
+		},
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchExportFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchExportFindings"); err != nil {
 		t.Fatal(err)
 	}
 }

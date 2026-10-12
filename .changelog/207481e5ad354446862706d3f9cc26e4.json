@@ -1,0 +1,8 @@
+{
+    "id": "207481e5-ad35-4446-8627-06d3f9cc26e4",
+    "type": "feature",
+    "description": "This release adds support for MediaConnect Router high-bitrate tiers. It also adds a configurable audio reference level for NDI flows, and enhanced source metadata that includes color information and transport stream ID.",
+    "modules": [
+        "service/mediaconnect"
+    ]
+}

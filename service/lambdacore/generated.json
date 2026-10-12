@@ -11,6 +11,7 @@
         "api_op_CreateNetworkConnector.go",
         "api_op_DeleteNetworkConnector.go",
         "api_op_GetNetworkConnector.go",
+        "api_op_ListNetworkConnectorVersions.go",
         "api_op_ListNetworkConnectors.go",
         "api_op_UpdateNetworkConnector.go",
         "auth.go",

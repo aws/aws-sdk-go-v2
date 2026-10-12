@@ -741,6 +741,116 @@ func TestCheckResponseSnapshot_BatchDeleteThreatModels(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_BatchDisassociateFindingIssue(t *testing.T) {
+	want := &BatchDisassociateFindingIssueOutput{
+		Errors: []types.BatchDisassociateFindingIssueError{
+			{
+				FindingId: ptr.String("__FindingId__"),
+				Code:      types.ErrorCode("CLIENT_ERROR"),
+				Message:   ptr.String("__Message__"),
+			},
+			{
+				FindingId: ptr.String("__FindingId__"),
+				Code:      types.ErrorCode("CLIENT_ERROR"),
+				Message:   ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchDisassociateFindingIssue.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchDisassociateFindingIssue(context.Background(), &BatchDisassociateFindingIssueInput{
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestJobId:    ptr.String("__PentestJobId__"),
+		CodeReviewJobId: ptr.String("__CodeReviewJobId__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchDisassociateFindingIssue.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_BatchExportFindings(t *testing.T) {
+	want := &BatchExportFindingsOutput{
+		Results: []types.BatchExportFindingResult{
+			{
+				FindingId: ptr.String("__FindingId__"),
+				LinkedIssue: &types.LinkedIssue{
+					Provider:      types.Provider("GITHUB"),
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ProjectKey:    ptr.String("__ProjectKey__"),
+					IssueKey:      ptr.String("__IssueKey__"),
+					IssueId:       ptr.String("__IssueId__"),
+					IssueUrl:      ptr.String("__IssueUrl__"),
+					SiteUrl:       ptr.String("__SiteUrl__"),
+				},
+			},
+			{
+				FindingId: ptr.String("__FindingId__"),
+				LinkedIssue: &types.LinkedIssue{
+					Provider:      types.Provider("GITHUB"),
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ProjectKey:    ptr.String("__ProjectKey__"),
+					IssueKey:      ptr.String("__IssueKey__"),
+					IssueId:       ptr.String("__IssueId__"),
+					IssueUrl:      ptr.String("__IssueUrl__"),
+					SiteUrl:       ptr.String("__SiteUrl__"),
+				},
+			},
+		},
+		Errors: []types.BatchExportFindingError{
+			{
+				FindingId: ptr.String("__FindingId__"),
+				Code:      types.ErrorCode("CLIENT_ERROR"),
+				Message:   ptr.String("__Message__"),
+			},
+			{
+				FindingId: ptr.String("__FindingId__"),
+				Code:      types.ErrorCode("CLIENT_ERROR"),
+				Message:   ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchExportFindings.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchExportFindings(context.Background(), &BatchExportFindingsInput{
+		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
+		PentestJobId:    ptr.String("__PentestJobId__"),
+		CodeReviewJobId: ptr.String("__CodeReviewJobId__"),
+		IssueDestination: &types.IssueDestination{
+			IntegrationId: ptr.String("__IntegrationId__"),
+			ProjectKey:    ptr.String("__ProjectKey__"),
+		},
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchExportFindings.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_BatchGetAgentSpaces(t *testing.T) {
 	want := &BatchGetAgentSpacesOutput{
 		AgentSpaces: []types.AgentSpace{
@@ -1623,8 +1733,17 @@ func TestCheckResponseSnapshot_BatchGetFindings(t *testing.T) {
 					"__Member__",
 				},
 				OriginalFindingId: ptr.String("__OriginalFindingId__"),
-				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LinkedIssue: &types.LinkedIssue{
+					Provider:      types.Provider("GITHUB"),
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ProjectKey:    ptr.String("__ProjectKey__"),
+					IssueKey:      ptr.String("__IssueKey__"),
+					IssueId:       ptr.String("__IssueId__"),
+					IssueUrl:      ptr.String("__IssueUrl__"),
+					SiteUrl:       ptr.String("__SiteUrl__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				FindingId:        ptr.String("__FindingId__"),
@@ -1698,8 +1817,17 @@ func TestCheckResponseSnapshot_BatchGetFindings(t *testing.T) {
 					"__Member__",
 				},
 				OriginalFindingId: ptr.String("__OriginalFindingId__"),
-				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LinkedIssue: &types.LinkedIssue{
+					Provider:      types.Provider("GITHUB"),
+					IntegrationId: ptr.String("__IntegrationId__"),
+					ProjectKey:    ptr.String("__ProjectKey__"),
+					IssueKey:      ptr.String("__IssueKey__"),
+					IssueId:       ptr.String("__IssueId__"),
+					IssueUrl:      ptr.String("__IssueUrl__"),
+					SiteUrl:       ptr.String("__SiteUrl__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NotFound: []string{
@@ -5257,6 +5385,7 @@ func TestCheckResponseSnapshot_GetIntegration(t *testing.T) {
 		DisplayName:           ptr.String("__DisplayName__"),
 		KmsKeyId:              ptr.String("__KmsKeyId__"),
 		TargetUrl:             ptr.String("__TargetUrl__"),
+		SiteUrl:               ptr.String("__SiteUrl__"),
 		WebhookUrl:            ptr.String("__WebhookUrl__"),
 		PrivateConnectionName: ptr.String("__PrivateConnectionName__"),
 	}

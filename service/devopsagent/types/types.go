@@ -1291,6 +1291,7 @@ type MCPServerAPIKeyConfig struct {
 //	MCPServerAuthorizationConfigMemberApiKey
 //	MCPServerAuthorizationConfigMemberAuthorizationDiscovery
 //	MCPServerAuthorizationConfigMemberBearerToken
+//	MCPServerAuthorizationConfigMemberCustomHeaders
 //	MCPServerAuthorizationConfigMemberOAuth3LO
 //	MCPServerAuthorizationConfigMemberOAuthClientCredentials
 type MCPServerAuthorizationConfig interface {
@@ -1323,6 +1324,15 @@ type MCPServerAuthorizationConfigMemberBearerToken struct {
 }
 
 func (*MCPServerAuthorizationConfigMemberBearerToken) isMCPServerAuthorizationConfig() {}
+
+// MCP server configuration with one or more custom authentication headers.
+type MCPServerAuthorizationConfigMemberCustomHeaders struct {
+	Value MCPServerCustomHeadersConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*MCPServerAuthorizationConfigMemberCustomHeaders) isMCPServerAuthorizationConfig() {}
 
 // MCP server configuration with OAuth 3LO.
 type MCPServerAuthorizationConfigMemberOAuth3LO struct {
@@ -1385,6 +1395,17 @@ type MCPServerConfiguration struct {
 	// List of MCP tools with their access categorization. When provided, the tool
 	// names must match those in the tools member.
 	ToolDetails []MCPToolDetail
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for authenticating to an MCP server with custom HTTP headers.
+type MCPServerCustomHeadersConfig struct {
+
+	// Custom headers map.
+	//
+	// This member is required.
+	Headers map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -2239,6 +2260,10 @@ type RegisteredMCPServerDetails struct {
 
 	// If the MCP server uses API key authentication, these details are provided.
 	ApiKeyHeader *string
+
+	// The configured custom authentication header names when the MCP server uses
+	// custom-header authentication. Secret values are not returned.
+	CustomHeaderNames []string
 
 	// Optional description for the MCP server.
 	Description *string

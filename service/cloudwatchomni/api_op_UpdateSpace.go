@@ -35,6 +35,10 @@ type UpdateSpaceInput struct {
 	// This member is required.
 	SpaceId *string
 
+	// The ARN of the IAM role used by AgentCore online evaluation. Must be in the
+	// caller's account. Omit if the space does not use AgentCore online evaluation.
+	AgentCoreEvaluationRoleArn *string
+
 	// How to encrypt the space's data at rest. Omit to leave encryption unchanged.
 	// Pass encryptionStrategy AWS_OWNED to stop using a customer managed key and
 	// revert to service owned encryption.
@@ -55,6 +59,9 @@ func (v *UpdateSpaceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentCoreEvaluationRoleArn != nil {
+		s.WriteString(schemas.UpdateSpaceInput_agentCoreEvaluationRoleArn, *v.AgentCoreEvaluationRoleArn)
+	}
 	if v.EncryptionConfiguration != nil {
 		s.WriteStruct(schemas.UpdateSpaceInput_encryptionConfiguration)
 		v.EncryptionConfiguration.SerializeMembers(s)

@@ -2744,7 +2744,7 @@ type HarnessSkill interface {
 	isHarnessSkill()
 }
 
-// AWS Skills baked into the Harness's underlying Runtime.
+// Amazon Web Services Skills baked into the Harness's underlying Runtime.
 type HarnessSkillMemberAwsSkills struct {
 	Value HarnessSkillAwsSkillsSource
 
@@ -2780,7 +2780,7 @@ type HarnessSkillMemberS3 struct {
 
 func (*HarnessSkillMemberS3) isHarnessSkill() {}
 
-// Passed to show that AWS Skills should be included.
+// Passed to show that Amazon Web Services Skills should be included.
 type HarnessSkillAwsSkillsSource struct {
 
 	// Optionally filter allowed skills with glob syntax, e.g., ['core-skills/*'].
@@ -3710,8 +3710,21 @@ type MemoryRecord struct {
 	// This member is required.
 	Namespaces []string
 
+	// The timestamp at which the memory record expires and becomes eligible for
+	// deletion. This value is set when a record expiry (long-term memory time-to-live)
+	// applies to the record, either from the strategy the record belongs to or from a
+	// record expiry provided on the batch request that created or updated it. If the
+	// record has no expiry configured, this value is not present and the record does
+	// not expire.
+	ExpiresAt *time.Time
+
 	// A map of metadata key-value pairs associated with a memory record.
 	Metadata map[string]MemoryRecordMetadataValue
+
+	// The timestamp based on which the memory record was ingested. This reflects the
+	// time of the source content that the record was derived from, which can differ
+	// from createdAt , the time the record itself was written.
+	Timestamp *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -3907,6 +3920,11 @@ type MemoryRecordSummary struct {
 	// The relevance score of the memory record when returned as part of a search
 	// result. Higher values indicate greater relevance to the search query.
 	Score *float64
+
+	// The timestamp based on which the memory record was ingested. This reflects the
+	// time of the source content that the record was derived from, which can differ
+	// from createdAt , the time the record itself was written.
+	Timestamp *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -4865,6 +4883,40 @@ type RecommendationSummary struct {
 
 	noSmithyDocumentSerde
 }
+
+// Specifies the record expiry (long-term memory time-to-live) applied to the
+// records in a batch request. Provide exactly one of recordExpiryDurationDays or
+// action . Set recordExpiryDurationDays to configure or update the expiry, or set
+// action to REMOVE to remove a previously configured expiry.
+//
+// The following types satisfy this interface:
+//
+//	RecordExpirySpecificationMemberAction
+//	RecordExpirySpecificationMemberRecordExpiryDurationDays
+type RecordExpirySpecification interface {
+	isRecordExpirySpecification()
+}
+
+// The action to apply to the existing record expiry configuration. Set to REMOVE
+// to remove a previously configured expiry so that the records no longer expire.
+// This value does not apply when creating records.
+type RecordExpirySpecificationMemberAction struct {
+	Value RecordExpiryAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RecordExpirySpecificationMemberAction) isRecordExpirySpecification() {}
+
+// The duration, in days, after which the records in this request expire. The
+// minimum is 31 days.
+type RecordExpirySpecificationMemberRecordExpiryDurationDays struct {
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+func (*RecordExpirySpecificationMemberRecordExpiryDurationDays) isRecordExpirySpecification() {}
 
 // Summary information about a registry record.
 type RegistryRecordSummary struct {
@@ -6068,6 +6120,7 @@ func (*UnknownUnionMember) isProxy()                                 {}
 func (*UnknownUnionMember) isProxyCredentials()                      {}
 func (*UnknownUnionMember) isRecommendationConfig()                  {}
 func (*UnknownUnionMember) isRecommendationResult()                  {}
+func (*UnknownUnionMember) isRecordExpirySpecification()             {}
 func (*UnknownUnionMember) isResourceLocation()                      {}
 func (*UnknownUnionMember) isRightExpression()                       {}
 func (*UnknownUnionMember) isStreamUpdate()                          {}

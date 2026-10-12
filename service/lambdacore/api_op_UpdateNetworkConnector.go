@@ -22,6 +22,11 @@ import (
 // transitions through InProgress to Successful or Failed . If the update fails,
 // the LastUpdateStatusReasonCode field provides a specific error code for
 // troubleshooting. This operation is idempotent when you provide a ClientToken .
+//
+// Each successful configuration change creates a new immutable version. A
+// connector can have a limited number of versions; once that limit is reached,
+// further updates fail with NetworkConnectorLimitExceededException until you
+// delete older versions.
 func (c *Client) UpdateNetworkConnector(ctx context.Context, params *UpdateNetworkConnectorInput, optFns ...func(*Options)) (*UpdateNetworkConnectorOutput, error) {
 	if params == nil {
 		params = &UpdateNetworkConnectorInput{}
@@ -39,7 +44,8 @@ func (c *Client) UpdateNetworkConnector(ctx context.Context, params *UpdateNetwo
 
 type UpdateNetworkConnectorInput struct {
 
-	// A flexible identifier that accepts a network connector ID, name, or ARN
+	// The identifier of the network connector to update. You can specify the
+	// connector ID, name, or full ARN.
 	//
 	// This member is required.
 	Identifier *string
@@ -85,8 +91,7 @@ type UpdateNetworkConnectorOutput struct {
 	// This member is required.
 	Arn *string
 
-	// The unique identifier for a network connector, assigned by the service at
-	// creation time
+	// The unique identifier of the network connector.
 	//
 	// This member is required.
 	Id *string
@@ -116,6 +121,15 @@ type UpdateNetworkConnectorOutput struct {
 
 	// The current state of the network connector.
 	State types.NetworkConnectorState
+
+	// The version number of the connector version resulting from this update. A
+	// configuration change creates a new, incremented version; a no-op update returns
+	// the current version number.
+	Version *int64
+
+	// The qualified ARN of the connector version resulting from this update,
+	// including the immutable version suffix.
+	VersionArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -155,6 +169,12 @@ func (v *UpdateNetworkConnectorOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.State != "" {
 		s.WriteString(schemas.UpdateNetworkConnectorResponse_State, string(v.State))
 	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.UpdateNetworkConnectorResponse_Version, *v.Version)
+	}
+	if v.VersionArn != nil {
+		s.WriteString(schemas.UpdateNetworkConnectorResponse_VersionArn, *v.VersionArn)
+	}
 }
 func (v *UpdateNetworkConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateNetworkConnectorResponse, func(s *smithy.Schema) error {
@@ -193,6 +213,12 @@ func (v *UpdateNetworkConnectorOutput) Deserialize(d smithy.ShapeDeserializer) e
 			}
 			v.State = types.NetworkConnectorState(ev)
 			return nil
+		case schemas.UpdateNetworkConnectorResponse_Version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.UpdateNetworkConnectorResponse_Version, v.Version)
+		case schemas.UpdateNetworkConnectorResponse_VersionArn:
+			v.VersionArn = new(string)
+			return d.ReadString(schemas.UpdateNetworkConnectorResponse_VersionArn, v.VersionArn)
 		}
 		return nil
 	})

@@ -37,7 +37,11 @@ func (c *Client) GetNetworkConnector(ctx context.Context, params *GetNetworkConn
 
 type GetNetworkConnectorInput struct {
 
-	// A flexible identifier that accepts a network connector ID, name, or ARN
+	// The identifier of the network connector to retrieve. You can specify the
+	// connector ID, name, or ARN. Provide an unqualified ARN (or an ID or name) to
+	// retrieve the connector's latest version, or a version-qualified ARN — one that
+	// includes the immutable version suffix — to retrieve a specific historical
+	// version.
 	//
 	// This member is required.
 	Identifier *string
@@ -64,8 +68,7 @@ type GetNetworkConnectorOutput struct {
 	// This member is required.
 	Arn *string
 
-	// The unique identifier for a network connector, assigned by the service at
-	// creation time
+	// The unique identifier of the network connector.
 	//
 	// This member is required.
 	Id *string
@@ -93,6 +96,17 @@ type GetNetworkConnectorOutput struct {
 	// this for programmatic error handling.
 	LastUpdateStatusReasonCode types.NetworkConnectorLastUpdateStatusReasonCode
 
+	// The version number of the connector's latest active version. Each configuration
+	// update creates a new immutable version; this attribute exposes the most recent
+	// one. This field is returned only on a standard (unqualified) request.
+	LatestVersion *int64
+
+	// The qualified ARN of the connector's latest active version, including the
+	// immutable version suffix. This field is returned only on a standard
+	// (unqualified) request; when you supply a version-qualified identifier it is not
+	// returned, and VersionArn is returned instead.
+	LatestVersionArn *string
+
 	// The ARN of the IAM role that Lambda uses to manage the underlying ENI resources
 	// for this connector.
 	OperatorRole *string
@@ -108,8 +122,18 @@ type GetNetworkConnectorOutput struct {
 	// for programmatic error handling.
 	StateReasonCode types.NetworkConnectorStateReasonCode
 
-	// The version number of the connector configuration, incremented on each update.
+	// The version number of the network connector. On a standard (unqualified)
+	// request, this is the connector's current version; each configuration update
+	// increments it. When you supply a version-qualified identifier, this is the
+	// specific version you requested.
 	Version *int64
+
+	// The qualified ARN of the specific connector version returned by this request,
+	// including the immutable version suffix. This is populated only when you supply a
+	// version-qualified identifier. On a standard (unqualified) request, this field is
+	// not populated; the connector's latest active version is returned instead through
+	// the LatestVersionArn and LatestVersion fields described below.
+	VersionArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -143,6 +167,12 @@ func (v *GetNetworkConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdateStatusReasonCode != "" {
 		s.WriteString(schemas.GetNetworkConnectorResponse_LastUpdateStatusReasonCode, string(v.LastUpdateStatusReasonCode))
 	}
+	if v.LatestVersion != nil {
+		s.WriteInt64(schemas.GetNetworkConnectorResponse_LatestVersion, *v.LatestVersion)
+	}
+	if v.LatestVersionArn != nil {
+		s.WriteString(schemas.GetNetworkConnectorResponse_LatestVersionArn, *v.LatestVersionArn)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetNetworkConnectorResponse_Name, *v.Name)
 	}
@@ -160,6 +190,9 @@ func (v *GetNetworkConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Version != nil {
 		s.WriteInt64(schemas.GetNetworkConnectorResponse_Version, *v.Version)
+	}
+	if v.VersionArn != nil {
+		s.WriteString(schemas.GetNetworkConnectorResponse_VersionArn, *v.VersionArn)
 	}
 }
 func (v *GetNetworkConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
@@ -193,6 +226,12 @@ func (v *GetNetworkConnectorOutput) Deserialize(d smithy.ShapeDeserializer) erro
 			}
 			v.LastUpdateStatusReasonCode = types.NetworkConnectorLastUpdateStatusReasonCode(ev)
 			return nil
+		case schemas.GetNetworkConnectorResponse_LatestVersion:
+			v.LatestVersion = new(int64)
+			return d.ReadInt64(schemas.GetNetworkConnectorResponse_LatestVersion, v.LatestVersion)
+		case schemas.GetNetworkConnectorResponse_LatestVersionArn:
+			v.LatestVersionArn = new(string)
+			return d.ReadString(schemas.GetNetworkConnectorResponse_LatestVersionArn, v.LatestVersionArn)
 		case schemas.GetNetworkConnectorResponse_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.GetNetworkConnectorResponse_Name, v.Name)
@@ -219,6 +258,9 @@ func (v *GetNetworkConnectorOutput) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.GetNetworkConnectorResponse_Version:
 			v.Version = new(int64)
 			return d.ReadInt64(schemas.GetNetworkConnectorResponse_Version, v.Version)
+		case schemas.GetNetworkConnectorResponse_VersionArn:
+			v.VersionArn = new(string)
+			return d.ReadString(schemas.GetNetworkConnectorResponse_VersionArn, v.VersionArn)
 		}
 		return nil
 	})

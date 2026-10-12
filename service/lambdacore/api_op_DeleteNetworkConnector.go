@@ -18,7 +18,13 @@ import (
 // This operation is idempotent — calling delete on a connector that is already
 // deleting or has been deleted succeeds without error. You can delete connectors
 // in ACTIVE or FAILED states. Before deleting a connector, ensure that no Lambda
-// MicroVMs are using it, as they will lose VPC egress connectivity immediately.
+// compute resources are using it, as they will lose VPC egress connectivity
+// immediately.
+//
+// Deleting with an unqualified identifier removes the connector and all of its
+// versions. To remove a single historical version, supply its version-qualified
+// ARN; the connector and its remaining versions are unaffected. You can't delete
+// the latest version on its own — delete the connector to remove it.
 func (c *Client) DeleteNetworkConnector(ctx context.Context, params *DeleteNetworkConnectorInput, optFns ...func(*Options)) (*DeleteNetworkConnectorOutput, error) {
 	if params == nil {
 		params = &DeleteNetworkConnectorInput{}
@@ -36,7 +42,11 @@ func (c *Client) DeleteNetworkConnector(ctx context.Context, params *DeleteNetwo
 
 type DeleteNetworkConnectorInput struct {
 
-	// A flexible identifier that accepts a network connector ID, name, or ARN
+	// The identifier of the network connector to delete. Provide an unqualified ARN
+	// (or an ID or name) to delete the entire connector and all of its versions, or a
+	// version-qualified ARN — one that includes the immutable version suffix — to
+	// delete a specific historical version. You can't delete the latest version with a
+	// version-qualified identifier; delete the connector instead.
 	//
 	// This member is required.
 	Identifier *string
@@ -63,8 +73,7 @@ type DeleteNetworkConnectorOutput struct {
 	// This member is required.
 	Arn *string
 
-	// The unique identifier for a network connector, assigned by the service at
-	// creation time
+	// The unique identifier of the network connector.
 	//
 	// This member is required.
 	Id *string
@@ -85,6 +94,13 @@ type DeleteNetworkConnectorOutput struct {
 	// The current state of the network connector. The State field is typically
 	// DELETING after this call.
 	State types.NetworkConnectorState
+
+	// The version number of the connector version affected by this request.
+	Version *int64
+
+	// The qualified ARN of the connector version affected by this request, including
+	// the immutable version suffix.
+	VersionArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -115,6 +131,12 @@ func (v *DeleteNetworkConnectorOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.State != "" {
 		s.WriteString(schemas.DeleteNetworkConnectorResponse_State, string(v.State))
 	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.DeleteNetworkConnectorResponse_Version, *v.Version)
+	}
+	if v.VersionArn != nil {
+		s.WriteString(schemas.DeleteNetworkConnectorResponse_VersionArn, *v.VersionArn)
+	}
 }
 func (v *DeleteNetworkConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteNetworkConnectorResponse, func(s *smithy.Schema) error {
@@ -140,6 +162,12 @@ func (v *DeleteNetworkConnectorOutput) Deserialize(d smithy.ShapeDeserializer) e
 			}
 			v.State = types.NetworkConnectorState(ev)
 			return nil
+		case schemas.DeleteNetworkConnectorResponse_Version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.DeleteNetworkConnectorResponse_Version, v.Version)
+		case schemas.DeleteNetworkConnectorResponse_VersionArn:
+			v.VersionArn = new(string)
+			return d.ReadString(schemas.DeleteNetworkConnectorResponse_VersionArn, v.VersionArn)
 		}
 		return nil
 	})

@@ -4,4 +4,4 @@ Accept: application/cbor
 Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 
-¿wencryptionConfiguration¿rencryptionStrategyiAWS_OWNEDikmsKeyArnm__KmsKeyArn__ÿdnameh__Name__gspaceIdk__SpaceId__ÿ
+¿xagentCoreEvaluationRoleArnx__AgentCoreEvaluationRoleArn__wencryptionConfiguration¿rencryptionStrategyiAWS_OWNEDikmsKeyArnm__KmsKeyArn__ÿdnameh__Name__gspaceIdk__SpaceId__ÿ

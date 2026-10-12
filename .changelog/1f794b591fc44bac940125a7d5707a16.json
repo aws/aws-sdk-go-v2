@@ -1,0 +1,8 @@
+{
+    "id": "1f794b59-1fc4-4bac-9401-25a7d5707a16",
+    "type": "feature",
+    "description": "AgentCore Memory now supports Long-Term Memory Time-to-Live on Batch APIs.",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

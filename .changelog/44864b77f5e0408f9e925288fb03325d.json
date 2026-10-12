@@ -1,0 +1,8 @@
+{
+    "id": "44864b77-f5e0-408f-9e92-5288fb03325d",
+    "type": "feature",
+    "description": "AWS HealthOmics now supports private workflow runs using VPC resources shared across accounts via AWS RAM. A new optional vpcOwnerAccountId field in CreateConfiguration's VpcConfig allows customers to specify the account that owns the shared subnets and security groups.",
+    "modules": [
+        "service/omics"
+    ]
+}

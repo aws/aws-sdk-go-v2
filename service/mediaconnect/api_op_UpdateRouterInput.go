@@ -56,7 +56,21 @@ type UpdateRouterInputInput struct {
 	// Region. GLOBAL - can be assigned to outputs in any Region.
 	RoutingScope types.RoutingScope
 
-	// The updated tier level for the router input.
+	// The updated tier level for the router input. The tier sets the maximum bitrate,
+	// in Mbps, for the router input. Valid values include the following:
+	//
+	//   - INPUT_20 – 20 Mbps
+	//
+	//   - INPUT_50 – 50 Mbps
+	//
+	//   - INPUT_100 – 100 Mbps
+	//
+	//   - INPUT_250 – 250 Mbps
+	//
+	//   - INPUT_500 – 500 Mbps
+	//
+	// The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG
+	// XS) workflows.
 	Tier types.RouterInputTier
 
 	// The updated transit encryption settings for the router input.

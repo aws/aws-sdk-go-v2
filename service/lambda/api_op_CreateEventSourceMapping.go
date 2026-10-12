@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// Creates a mapping between an event source and an Lambda function. Lambda reads
-// items from the event source and invokes the function.
+// Creates a mapping between an event source and an Lambda Event Function. Lambda
+// reads items from the event source and invokes the function.
 //
 // For details about how to configure different event sources, see the following
 // topics.

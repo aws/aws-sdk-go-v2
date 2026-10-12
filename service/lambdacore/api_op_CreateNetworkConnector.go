@@ -20,8 +20,9 @@ import (
 // This operation is asynchronous. The network connector starts in PENDING state
 // while ENIs are provisioned in your VPC (provisioning typically takes up to 10
 // minutes). Use GetNetworkConnector to poll the connector state until it reaches
-// ACTIVE . Once active, you can attach the connector to Lambda MicroVMs at run
-// time using the egressNetworkConnectors parameter on RunMicroVm .
+// ACTIVE . Once active, you can attach the connector to supported Lambda compute
+// resources — such as MicroVMs and WebFunctions — at run time. For how to attach a
+// connector, see the documentation for the specific compute type.
 //
 // This operation is idempotent when you provide a ClientToken — if you retry a
 // request that completed successfully using the same client token, the operation
@@ -100,8 +101,7 @@ type CreateNetworkConnectorOutput struct {
 	// This member is required.
 	Arn *string
 
-	// The unique identifier for a network connector, assigned by the service at
-	// creation time
+	// The unique identifier of the network connector.
 	//
 	// This member is required.
 	Id *string
@@ -121,6 +121,14 @@ type CreateNetworkConnectorOutput struct {
 
 	// The current state of the network connector.
 	State types.NetworkConnectorState
+
+	// The version number assigned to the connector. A newly created connector starts
+	// at version 1.
+	Version *int64
+
+	// The qualified ARN of the connector version created by this request, including
+	// the immutable version suffix.
+	VersionArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -151,6 +159,12 @@ func (v *CreateNetworkConnectorOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.State != "" {
 		s.WriteString(schemas.CreateNetworkConnectorResponse_State, string(v.State))
 	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.CreateNetworkConnectorResponse_Version, *v.Version)
+	}
+	if v.VersionArn != nil {
+		s.WriteString(schemas.CreateNetworkConnectorResponse_VersionArn, *v.VersionArn)
+	}
 }
 func (v *CreateNetworkConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateNetworkConnectorResponse, func(s *smithy.Schema) error {
@@ -176,6 +190,12 @@ func (v *CreateNetworkConnectorOutput) Deserialize(d smithy.ShapeDeserializer) e
 			}
 			v.State = types.NetworkConnectorState(ev)
 			return nil
+		case schemas.CreateNetworkConnectorResponse_Version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.CreateNetworkConnectorResponse_Version, v.Version)
+		case schemas.CreateNetworkConnectorResponse_VersionArn:
+			v.VersionArn = new(string)
+			return d.ReadString(schemas.CreateNetworkConnectorResponse_VersionArn, v.VersionArn)
 		}
 		return nil
 	})

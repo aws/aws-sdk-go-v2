@@ -2933,6 +2933,7 @@ func TestCheckResponseSnapshot_CreateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpiryDurationDays: ptr.Int32(1),
 				},
 				{
 					StrategyId:  ptr.String("__StrategyId__"),
@@ -3044,6 +3045,7 @@ func TestCheckResponseSnapshot_CreateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpiryDurationDays: ptr.Int32(1),
 				},
 			},
 			IndexedKeys: []types.IndexedKey{
@@ -3185,6 +3187,9 @@ func TestCheckResponseSnapshot_CreateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
+					},
 				},
 			},
 			&types.MemoryStrategyInputMemberSemanticMemoryStrategy{
@@ -3240,6 +3245,9 @@ func TestCheckResponseSnapshot_CreateMemory(t *testing.T) {
 								},
 							},
 						},
+					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
 					},
 				},
 			},
@@ -7079,6 +7087,7 @@ func TestCheckResponseSnapshot_GetMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpiryDurationDays: ptr.Int32(1),
 				},
 				{
 					StrategyId:  ptr.String("__StrategyId__"),
@@ -7190,6 +7199,7 @@ func TestCheckResponseSnapshot_GetMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpiryDurationDays: ptr.Int32(1),
 				},
 			},
 			IndexedKeys: []types.IndexedKey{
@@ -12920,6 +12930,7 @@ func TestCheckResponseSnapshot_UpdateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpiryDurationDays: ptr.Int32(1),
 				},
 				{
 					StrategyId:  ptr.String("__StrategyId__"),
@@ -13031,6 +13042,7 @@ func TestCheckResponseSnapshot_UpdateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpiryDurationDays: ptr.Int32(1),
 				},
 			},
 			IndexedKeys: []types.IndexedKey{
@@ -13172,6 +13184,9 @@ func TestCheckResponseSnapshot_UpdateMemory(t *testing.T) {
 								},
 							},
 						},
+						RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+							Value: 1,
+						},
 					},
 				},
 				&types.MemoryStrategyInputMemberSemanticMemoryStrategy{
@@ -13227,6 +13242,9 @@ func TestCheckResponseSnapshot_UpdateMemory(t *testing.T) {
 									},
 								},
 							},
+						},
+						RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+							Value: 1,
 						},
 					},
 				},
@@ -13338,6 +13356,9 @@ func TestCheckResponseSnapshot_UpdateMemory(t *testing.T) {
 							},
 						},
 					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
+					},
 				},
 				{
 					MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
@@ -13438,6 +13459,9 @@ func TestCheckResponseSnapshot_UpdateMemory(t *testing.T) {
 								},
 							},
 						},
+					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
 					},
 				},
 			},
@@ -15080,6 +15104,9 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 							},
 						},
 					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
+					},
 				},
 			},
 			&types.MemoryStrategyInputMemberSemanticMemoryStrategy{
@@ -15135,6 +15162,9 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 								},
 							},
 						},
+					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
 					},
 				},
 			},
@@ -15377,6 +15407,9 @@ func TestCheckResponseSnapshot_Error_ThrottledException(t *testing.T) {
 							},
 						},
 					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
+					},
 				},
 			},
 			&types.MemoryStrategyInputMemberSemanticMemoryStrategy{
@@ -15432,6 +15465,9 @@ func TestCheckResponseSnapshot_Error_ThrottledException(t *testing.T) {
 								},
 							},
 						},
+					},
+					RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+						Value: 1,
 					},
 				},
 			},

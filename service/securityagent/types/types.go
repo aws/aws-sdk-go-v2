@@ -408,6 +408,64 @@ type BatchCreateSecurityRequirementResult struct {
 	noSmithyDocumentSerde
 }
 
+// A finding that failed to disassociate, with the cause of the failure.
+type BatchDisassociateFindingIssueError struct {
+
+	// The machine-readable failure category.
+	//
+	// This member is required.
+	Code ErrorCode
+
+	// The identifier of the finding that failed to disassociate.
+	//
+	// This member is required.
+	FindingId *string
+
+	// A customer-facing explanation of the failure.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// A finding whose issue could not be created, with the cause of the failure.
+type BatchExportFindingError struct {
+
+	// The machine-readable failure category.
+	//
+	// This member is required.
+	Code ErrorCode
+
+	// The identifier of the finding this error corresponds to.
+	//
+	// This member is required.
+	FindingId *string
+
+	// A customer-facing explanation of why the issue could not be created.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// A finding whose issue was created.
+type BatchExportFindingResult struct {
+
+	// The identifier of the finding this result corresponds to.
+	//
+	// This member is required.
+	FindingId *string
+
+	// The issue that was created for the finding.
+	//
+	// This member is required.
+	LinkedIssue *LinkedIssue
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a successfully retrieved security requirement.
 type BatchGetSecurityRequirementResult struct {
 
@@ -1339,6 +1397,9 @@ type Finding struct {
 	// The identifier of the entity that last updated the finding.
 	LastUpdatedBy *string
 
+	// The issue in a third-party issue tracker that this finding has been exported to.
+	LinkedIssue *LinkedIssue
+
 	// The name of the finding.
 	Name *string
 
@@ -1709,6 +1770,7 @@ type IntegratedRepository struct {
 //	IntegratedResourceMemberConfluenceDocument
 //	IntegratedResourceMemberGithubRepository
 //	IntegratedResourceMemberGitlabRepository
+//	IntegratedResourceMemberJiraProject
 type IntegratedResource interface {
 	isIntegratedResource()
 }
@@ -1758,6 +1820,15 @@ type IntegratedResourceMemberGitlabRepository struct {
 
 func (*IntegratedResourceMemberGitlabRepository) isIntegratedResource() {}
 
+// The Jira project resource information.
+type IntegratedResourceMemberJiraProject struct {
+	Value JiraProjectResource
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMemberJiraProject) isIntegratedResource() {}
+
 // Represents an input item for updating integrated resources, including the
 // resource and its capabilities.
 type IntegratedResourceInputItem struct {
@@ -1783,6 +1854,7 @@ type IntegratedResourceInputItem struct {
 //	IntegratedResourceMetadataMemberConfluenceDocument
 //	IntegratedResourceMetadataMemberGithubRepository
 //	IntegratedResourceMetadataMemberGitlabRepository
+//	IntegratedResourceMetadataMemberJiraProject
 type IntegratedResourceMetadata interface {
 	isIntegratedResourceMetadata()
 }
@@ -1831,6 +1903,15 @@ type IntegratedResourceMetadataMemberGitlabRepository struct {
 }
 
 func (*IntegratedResourceMetadataMemberGitlabRepository) isIntegratedResourceMetadata() {}
+
+// The Jira project metadata.
+type IntegratedResourceMetadataMemberJiraProject struct {
+	Value JiraProjectMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMetadataMemberJiraProject) isIntegratedResourceMetadata() {}
 
 // Contains summary information about an integrated resource.
 type IntegratedResourceSummary struct {
@@ -1920,6 +2001,141 @@ type IntegrationSummary struct {
 	// The payload URL of the integration's webhook, once it has been created. The
 	// signing secret is never returned on a read.
 	WebhookUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// The destination for filing findings as issues in an integrated issue tracker.
+type IssueDestination struct {
+
+	// The integration identifier for the issue-tracker provider.
+	//
+	// This member is required.
+	IntegrationId *string
+
+	// The identifier of the project the issues are filed under.
+	//
+	// This member is required.
+	ProjectKey *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for creating a Jira integration.
+type JiraIntegrationInput struct {
+
+	// The OAuth 2.0 authorization code returned from the consent redirect.
+	//
+	// This member is required.
+	Code *string
+
+	// The Atlassian installation identifier, available from the Atlassian
+	// administration console.
+	//
+	// This member is required.
+	InstallationId *string
+
+	// The Jira Cloud site URL, for example https://mysite.atlassian.net.
+	//
+	// This member is required.
+	SiteUrl *string
+
+	// The CSRF state token echoed back from the OAuth redirect.
+	//
+	// This member is required.
+	State *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about a Jira project that is integrated with the service.
+type JiraProjectMetadata struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The Jira project identifier.
+	//
+	// This member is required.
+	ProjectId *string
+
+	// The Jira project key, for example PROJ.
+	//
+	// This member is required.
+	ProjectKey *string
+
+	// Provider Id of the resource e.g. GitHub repository id, etc.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// The display name of the Jira project.
+	ProjectName *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a Jira project resource used in an integration.
+type JiraProjectResource struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The Jira project identifier.
+	//
+	// This member is required.
+	ProjectId *string
+
+	// The Jira project key, for example PROJ.
+	//
+	// This member is required.
+	ProjectKey *string
+
+	// The display name of the Jira project.
+	ProjectName *string
+
+	noSmithyDocumentSerde
+}
+
+// Capabilities for an integrated Jira project.
+type JiraResourceCapabilities struct {
+
+	// Whether to post comments on issues in the integrated jira project.
+	CommentIssue *bool
+
+	// Whether to create issues in the integrated jira project.
+	CreateIssue *bool
+
+	noSmithyDocumentSerde
+}
+
+// A reference to an issue created for a finding in a third-party issue tracker.
+type LinkedIssue struct {
+
+	// The integration identifier for the issue-tracker provider.
+	IntegrationId *string
+
+	// The stable numeric issue identifier.
+	IssueId *string
+
+	// The issue key.
+	IssueKey *string
+
+	// The issue URL.
+	IssueUrl *string
+
+	// The key of the project the issue belongs to.
+	ProjectKey *string
+
+	// The issue-tracker provider.
+	Provider Provider
+
+	// The Atlassian Cloud site URL.
+	SiteUrl *string
 
 	noSmithyDocumentSerde
 }
@@ -2416,6 +2632,7 @@ type PrivateConnectionSummary struct {
 //	ProviderInputMemberConfluence
 //	ProviderInputMemberGithub
 //	ProviderInputMemberGitlab
+//	ProviderInputMemberJira
 type ProviderInput interface {
 	isProviderInput()
 }
@@ -2474,6 +2691,15 @@ type ProviderInputMemberGitlab struct {
 
 func (*ProviderInputMemberGitlab) isProviderInput() {}
 
+// The configuration for a Jira integration.
+type ProviderInputMemberJira struct {
+	Value JiraIntegrationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderInputMemberJira) isProviderInput() {}
+
 // The capabilities for an integrated resource from a third-party provider. This
 // is a union type that contains provider-specific capabilities.
 //
@@ -2484,6 +2710,7 @@ func (*ProviderInputMemberGitlab) isProviderInput() {}
 //	ProviderResourceCapabilitiesMemberConfluence
 //	ProviderResourceCapabilitiesMemberGithub
 //	ProviderResourceCapabilitiesMemberGitlab
+//	ProviderResourceCapabilitiesMemberJira
 type ProviderResourceCapabilities interface {
 	isProviderResourceCapabilities()
 }
@@ -2532,6 +2759,15 @@ type ProviderResourceCapabilitiesMemberGitlab struct {
 }
 
 func (*ProviderResourceCapabilitiesMemberGitlab) isProviderResourceCapabilities() {}
+
+// The Jira-specific resource capabilities.
+type ProviderResourceCapabilitiesMemberJira struct {
+	Value JiraResourceCapabilities
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderResourceCapabilitiesMemberJira) isProviderResourceCapabilities() {}
 
 // Destination for publishing scan reports to an integrated document provider.
 type ReportDestination struct {

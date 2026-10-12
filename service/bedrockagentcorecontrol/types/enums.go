@@ -2028,6 +2028,23 @@ func (Provider) Values() []Provider {
 	}
 }
 
+type RecordExpiryAction string
+
+// Enum values for RecordExpiryAction
+const (
+	RecordExpiryActionRemove RecordExpiryAction = "REMOVE"
+)
+
+// Values returns all known values for RecordExpiryAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecordExpiryAction) Values() []RecordExpiryAction {
+	return []RecordExpiryAction{
+		"REMOVE",
+	}
+}
+
 type RegistryAuthorizerType string
 
 // Enum values for RegistryAuthorizerType

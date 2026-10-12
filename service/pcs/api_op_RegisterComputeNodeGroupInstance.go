@@ -73,6 +73,10 @@ type RegisterComputeNodeGroupInstanceOutput struct {
 	// run when a compute node finishes bootstrapping or becomes ready to accept jobs.
 	NodeLifecycleActions *types.NodeLifecycleActions
 
+	// The scheduler version that the cluster is running. A compute node uses this
+	// value to run the matching scheduler version.
+	SchedulerVersion *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

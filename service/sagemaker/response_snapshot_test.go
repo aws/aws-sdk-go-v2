@@ -9412,6 +9412,65 @@ func TestCheckResponseSnapshot_CreateTrainingPlan(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateTrainingSession(t *testing.T) {
+	want := &CreateTrainingSessionOutput{
+		TrainingSessionArn: ptr.String("__TrainingSessionArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateTrainingSession.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateTrainingSession(context.Background(), &CreateTrainingSessionInput{
+		TrainingSessionName:  ptr.String("__TrainingSessionName__"),
+		ModelPackageGroupArn: ptr.String("__ModelPackageGroupArn__"),
+		LoraConfig: &types.LoraConfig{
+			Rank:  ptr.Int32(1),
+			Alpha: ptr.Int32(1),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		VpcConfig: &types.VpcConfig{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Subnets: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ModelConfig: &types.TrainingSessionModelConfig{
+			BaseModelArn: ptr.String("__BaseModelArn__"),
+			AcceptEula:   ptr.Bool(true),
+		},
+		OutputConfig: &types.TrainingSessionOutputConfig{
+			S3Location: &types.TrainingSessionS3Location{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateTrainingSession.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateTransformJob(t *testing.T) {
 	want := &CreateTransformJobOutput{
 		TransformJobArn: ptr.String("__TransformJobArn__"),
@@ -11319,6 +11378,27 @@ func TestCheckResponseSnapshot_DeleteTrainingJob(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteTrainingJob.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteTrainingSession(t *testing.T) {
+	want := &DeleteTrainingSessionOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteTrainingSession.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteTrainingSession(context.Background(), &DeleteTrainingSessionInput{
+		TrainingSessionName: ptr.String("__TrainingSessionName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteTrainingSession.response", err)
 	}
 }
 
@@ -22296,6 +22376,79 @@ func TestCheckResponseSnapshot_DescribeTrainingPlanExtensionHistory(t *testing.T
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeTrainingSession(t *testing.T) {
+	want := &DescribeTrainingSessionOutput{
+		TrainingSessionDetail: &types.TrainingSessionDetail{
+			TrainingSessionArn:         ptr.String("__TrainingSessionArn__"),
+			TrainingSessionName:        ptr.String("__TrainingSessionName__"),
+			TrainingSessionStatus:      types.TrainingSessionStatus("Created"),
+			ModelPackageGroupArn:       ptr.String("__ModelPackageGroupArn__"),
+			CreationTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ErrorDetails:               ptr.String("__ErrorDetails__"),
+			LastReceivedSequenceNumber: ptr.Int32(1),
+			BillableTokenUsage: &types.BillableTokenUsage{
+				PrefillTokenCount:  ptr.Int64(1),
+				SampleTokenCount:   ptr.Int64(1),
+				TrainingTokenCount: ptr.Int64(1),
+			},
+			VpcConfig: &types.VpcConfig{
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Subnets: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+			LoraConfig: &types.LoraConfig{
+				Rank:  ptr.Int32(1),
+				Alpha: ptr.Int32(1),
+			},
+			ModelConfig: &types.TrainingSessionModelConfig{
+				BaseModelArn: ptr.String("__BaseModelArn__"),
+				AcceptEula:   ptr.Bool(true),
+			},
+			OutputConfig: &types.TrainingSessionOutputConfig{
+				S3Location: &types.TrainingSessionS3Location{
+					Path:      ptr.String("__Path__"),
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeTrainingSession.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeTrainingSession(context.Background(), &DescribeTrainingSessionInput{
+		TrainingSessionName: ptr.String("__TrainingSessionName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeTrainingSession.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeTransformJob(t *testing.T) {
 	want := &DescribeTransformJobOutput{
 		TransformJobName:        ptr.String("__TransformJobName__"),
@@ -28702,6 +28855,48 @@ func TestCheckResponseSnapshot_ListTrainingPlans(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListTrainingPlans.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListTrainingSessions(t *testing.T) {
+	want := &ListTrainingSessionsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		TrainingSessionSummaries: []types.TrainingSessionSummary{
+			{
+				TrainingSessionArn:    ptr.String("__TrainingSessionArn__"),
+				TrainingSessionStatus: types.TrainingSessionStatus("Created"),
+				CreationTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				TrainingSessionArn:    ptr.String("__TrainingSessionArn__"),
+				TrainingSessionStatus: types.TrainingSessionStatus("Created"),
+				CreationTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTrainingSessions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTrainingSessions(context.Background(), &ListTrainingSessionsInput{
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NameContains:       ptr.String("__NameContains__"),
+		StatusEquals:       types.TrainingSessionStatus("Created"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTrainingSessions.response", err)
 	}
 }
 
@@ -40815,6 +41010,27 @@ func TestCheckResponseSnapshot_StopTrainingJob(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StopTrainingJob.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StopTrainingSession(t *testing.T) {
+	want := &StopTrainingSessionOutput{}
+	status, header, body, err := serdeRespReadSnapshot("StopTrainingSession.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StopTrainingSession(context.Background(), &StopTrainingSessionInput{
+		TrainingSessionName: ptr.String("__TrainingSessionName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StopTrainingSession.response", err)
 	}
 }
 

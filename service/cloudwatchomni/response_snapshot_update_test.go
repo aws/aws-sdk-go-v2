@@ -1574,7 +1574,6 @@ func TestUpdateResponseSnapshot_GetContextGraph(t *testing.T) {
 					Metrics: []types.MetricMetadata{
 						{
 							Name:          ptr.String("__Name__"),
-							Namespace:     ptr.String("__Namespace__"),
 							PreferredStat: ptr.String("__PreferredStat__"),
 							MetricType:    ptr.String("__MetricType__"),
 							Attributes: map[string]string{
@@ -1587,7 +1586,6 @@ func TestUpdateResponseSnapshot_GetContextGraph(t *testing.T) {
 						},
 						{
 							Name:          ptr.String("__Name__"),
-							Namespace:     ptr.String("__Namespace__"),
 							PreferredStat: ptr.String("__PreferredStat__"),
 							MetricType:    ptr.String("__MetricType__"),
 							Attributes: map[string]string{
@@ -1675,7 +1673,6 @@ func TestUpdateResponseSnapshot_GetContextGraph(t *testing.T) {
 							Metrics: []types.MetricMetadata{
 								{
 									Name:          ptr.String("__Name__"),
-									Namespace:     ptr.String("__Namespace__"),
 									PreferredStat: ptr.String("__PreferredStat__"),
 									MetricType:    ptr.String("__MetricType__"),
 									Attributes: map[string]string{
@@ -1688,7 +1685,6 @@ func TestUpdateResponseSnapshot_GetContextGraph(t *testing.T) {
 								},
 								{
 									Name:          ptr.String("__Name__"),
-									Namespace:     ptr.String("__Namespace__"),
 									PreferredStat: ptr.String("__PreferredStat__"),
 									MetricType:    ptr.String("__MetricType__"),
 									Attributes: map[string]string{
@@ -1776,7 +1772,6 @@ func TestUpdateResponseSnapshot_GetContextGraph(t *testing.T) {
 							Metrics: []types.MetricMetadata{
 								{
 									Name:          ptr.String("__Name__"),
-									Namespace:     ptr.String("__Namespace__"),
 									PreferredStat: ptr.String("__PreferredStat__"),
 									MetricType:    ptr.String("__MetricType__"),
 									Attributes: map[string]string{
@@ -1789,7 +1784,6 @@ func TestUpdateResponseSnapshot_GetContextGraph(t *testing.T) {
 								},
 								{
 									Name:          ptr.String("__Name__"),
-									Namespace:     ptr.String("__Namespace__"),
 									PreferredStat: ptr.String("__PreferredStat__"),
 									MetricType:    ptr.String("__MetricType__"),
 									Attributes: map[string]string{
@@ -1882,7 +1876,6 @@ func TestUpdateResponseSnapshot_GetContextGraph(t *testing.T) {
 					Metrics: []types.MetricMetadata{
 						{
 							Name:          ptr.String("__Name__"),
-							Namespace:     ptr.String("__Namespace__"),
 							PreferredStat: ptr.String("__PreferredStat__"),
 							MetricType:    ptr.String("__MetricType__"),
 							Attributes: map[string]string{
@@ -1895,7 +1888,6 @@ func TestUpdateResponseSnapshot_GetContextGraph(t *testing.T) {
 						},
 						{
 							Name:          ptr.String("__Name__"),
-							Namespace:     ptr.String("__Namespace__"),
 							PreferredStat: ptr.String("__PreferredStat__"),
 							MetricType:    ptr.String("__MetricType__"),
 							Attributes: map[string]string{
@@ -1983,7 +1975,6 @@ func TestUpdateResponseSnapshot_GetContextGraph(t *testing.T) {
 							Metrics: []types.MetricMetadata{
 								{
 									Name:          ptr.String("__Name__"),
-									Namespace:     ptr.String("__Namespace__"),
 									PreferredStat: ptr.String("__PreferredStat__"),
 									MetricType:    ptr.String("__MetricType__"),
 									Attributes: map[string]string{
@@ -1996,7 +1987,6 @@ func TestUpdateResponseSnapshot_GetContextGraph(t *testing.T) {
 								},
 								{
 									Name:          ptr.String("__Name__"),
-									Namespace:     ptr.String("__Namespace__"),
 									PreferredStat: ptr.String("__PreferredStat__"),
 									MetricType:    ptr.String("__MetricType__"),
 									Attributes: map[string]string{
@@ -2084,7 +2074,6 @@ func TestUpdateResponseSnapshot_GetContextGraph(t *testing.T) {
 							Metrics: []types.MetricMetadata{
 								{
 									Name:          ptr.String("__Name__"),
-									Namespace:     ptr.String("__Namespace__"),
 									PreferredStat: ptr.String("__PreferredStat__"),
 									MetricType:    ptr.String("__MetricType__"),
 									Attributes: map[string]string{
@@ -2097,7 +2086,6 @@ func TestUpdateResponseSnapshot_GetContextGraph(t *testing.T) {
 								},
 								{
 									Name:          ptr.String("__Name__"),
-									Namespace:     ptr.String("__Namespace__"),
 									PreferredStat: ptr.String("__PreferredStat__"),
 									MetricType:    ptr.String("__MetricType__"),
 									Attributes: map[string]string{

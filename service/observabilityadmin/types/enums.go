@@ -347,6 +347,7 @@ const (
 	ResourceTypeAwsMskCluster                       ResourceType = "AWS::MSK::Cluster"
 	ResourceTypeAwsS3Bucket                         ResourceType = "AWS::S3::Bucket"
 	ResourceTypeAwsBedrockKnowledgebase             ResourceType = "AWS::Bedrock::KnowledgeBase"
+	ResourceTypeAwsXrayTransactionSearchConfig      ResourceType = "AWS::XRay::TransactionSearchConfig"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -377,6 +378,7 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::MSK::Cluster",
 		"AWS::S3::Bucket",
 		"AWS::Bedrock::KnowledgeBase",
+		"AWS::XRay::TransactionSearchConfig",
 	}
 }
 

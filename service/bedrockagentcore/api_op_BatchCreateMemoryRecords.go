@@ -42,6 +42,14 @@ type BatchCreateMemoryRecordsInput struct {
 	// batch request.
 	ClientToken *string
 
+	// The record expiry (long-term memory time-to-live) applied to every record
+	// created by this request. Set recordExpiryDurationDays to the number of days
+	// after which the records expire. Only the expiry provided here is applied; the
+	// records' strategy association has no effect on their expiry. If you do not
+	// provide this value, the records do not expire. The REMOVE action does not apply
+	// when creating records.
+	RecordExpirySpecification types.RecordExpirySpecification
+
 	noSmithyDocumentSerde
 }
 

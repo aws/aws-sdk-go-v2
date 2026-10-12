@@ -53174,6 +53174,19 @@ func awsRestjson1_deserializeDocumentMemoryStrategy(v **types.MemoryStrategy, va
 				return err
 			}
 
+		case "recordExpiryDurationDays":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RecordExpiryDurationDays to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RecordExpiryDurationDays = ptr.Int32(int32(i64))
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)

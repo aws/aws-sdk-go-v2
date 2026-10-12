@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DescribeTrainingSession
+
+{"TrainingSessionDetail":{"BillableTokenUsage":{"PrefillTokenCount":1,"SampleTokenCount":1,"TrainingTokenCount":1},"CreationTime":946684800,"EndTime":946684800,"ErrorDetails":"__ErrorDetails__","LastModifiedTime":946684800,"LastReceivedSequenceNumber":1,"LoraConfig":{"Alpha":1,"Rank":1},"ModelConfig":{"AcceptEula":true,"BaseModelArn":"__BaseModelArn__"},"ModelPackageGroupArn":"__ModelPackageGroupArn__","OutputConfig":{"S3Location":{"KmsKeyArn":"__KmsKeyArn__","Path":"__Path__"}},"RoleArn":"__RoleArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TrainingSessionArn":"__TrainingSessionArn__","TrainingSessionName":"__TrainingSessionName__","TrainingSessionStatus":"Created","VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"Subnets":["__Member__","__Member__"]}}}

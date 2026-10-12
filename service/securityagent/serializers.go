@@ -552,6 +552,209 @@ func awsRestjson1_serializeOpDocumentBatchDeleteThreatModelsInput(v *BatchDelete
 	return nil
 }
 
+type awsRestjson1_serializeOpBatchDisassociateFindingIssue struct {
+}
+
+func (*awsRestjson1_serializeOpBatchDisassociateFindingIssue) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchDisassociateFindingIssue) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchDisassociateFindingIssueInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/BatchDisassociateFindingIssue")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentBatchDisassociateFindingIssueInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchDisassociateFindingIssueInput(v *BatchDisassociateFindingIssueInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentBatchDisassociateFindingIssueInput(v *BatchDisassociateFindingIssueInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AgentSpaceId != nil {
+		ok := object.Key("agentSpaceId")
+		ok.String(*v.AgentSpaceId)
+	}
+
+	if v.CodeReviewJobId != nil {
+		ok := object.Key("codeReviewJobId")
+		ok.String(*v.CodeReviewJobId)
+	}
+
+	if v.FindingIds != nil {
+		ok := object.Key("findingIds")
+		if err := awsRestjson1_serializeDocumentFindingIdList(v.FindingIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PentestJobId != nil {
+		ok := object.Key("pentestJobId")
+		ok.String(*v.PentestJobId)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpBatchExportFindings struct {
+}
+
+func (*awsRestjson1_serializeOpBatchExportFindings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchExportFindings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchExportFindingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/BatchExportFindings")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentBatchExportFindingsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchExportFindingsInput(v *BatchExportFindingsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentBatchExportFindingsInput(v *BatchExportFindingsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AgentSpaceId != nil {
+		ok := object.Key("agentSpaceId")
+		ok.String(*v.AgentSpaceId)
+	}
+
+	if v.CodeReviewJobId != nil {
+		ok := object.Key("codeReviewJobId")
+		ok.String(*v.CodeReviewJobId)
+	}
+
+	if v.FindingIds != nil {
+		ok := object.Key("findingIds")
+		if err := awsRestjson1_serializeDocumentFindingIdList(v.FindingIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IssueDestination != nil {
+		ok := object.Key("issueDestination")
+		if err := awsRestjson1_serializeDocumentIssueDestination(v.IssueDestination, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PentestJobId != nil {
+		ok := object.Key("pentestJobId")
+		ok.String(*v.PentestJobId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpBatchGetAgentSpaces struct {
 }
 
@@ -10116,6 +10319,12 @@ func awsRestjson1_serializeDocumentIntegratedResource(v types.IntegratedResource
 			return err
 		}
 
+	case *types.IntegratedResourceMemberJiraProject:
+		av := object.Key("jiraProject")
+		if err := awsRestjson1_serializeDocumentJiraProjectResource(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -10174,6 +10383,94 @@ func awsRestjson1_serializeDocumentIntegrationFilter(v types.IntegrationFilter, 
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIssueDestination(v *types.IssueDestination, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IntegrationId != nil {
+		ok := object.Key("integrationId")
+		ok.String(*v.IntegrationId)
+	}
+
+	if v.ProjectKey != nil {
+		ok := object.Key("projectKey")
+		ok.String(*v.ProjectKey)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJiraIntegrationInput(v *types.JiraIntegrationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Code != nil {
+		ok := object.Key("code")
+		ok.String(*v.Code)
+	}
+
+	if v.InstallationId != nil {
+		ok := object.Key("installationId")
+		ok.String(*v.InstallationId)
+	}
+
+	if v.SiteUrl != nil {
+		ok := object.Key("siteUrl")
+		ok.String(*v.SiteUrl)
+	}
+
+	if v.State != nil {
+		ok := object.Key("state")
+		ok.String(*v.State)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJiraProjectResource(v *types.JiraProjectResource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.ProjectId != nil {
+		ok := object.Key("projectId")
+		ok.String(*v.ProjectId)
+	}
+
+	if v.ProjectKey != nil {
+		ok := object.Key("projectKey")
+		ok.String(*v.ProjectKey)
+	}
+
+	if v.ProjectName != nil {
+		ok := object.Key("projectName")
+		ok.String(*v.ProjectName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJiraResourceCapabilities(v *types.JiraResourceCapabilities, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CommentIssue != nil {
+		ok := object.Key("commentIssue")
+		ok.Boolean(*v.CommentIssue)
+	}
+
+	if v.CreateIssue != nil {
+		ok := object.Key("createIssue")
+		ok.Boolean(*v.CreateIssue)
+	}
+
 	return nil
 }
 
@@ -10410,6 +10707,12 @@ func awsRestjson1_serializeDocumentProviderInput(v types.ProviderInput, value sm
 			return err
 		}
 
+	case *types.ProviderInputMemberJira:
+		av := object.Key("jira")
+		if err := awsRestjson1_serializeDocumentJiraIntegrationInput(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -10449,6 +10752,12 @@ func awsRestjson1_serializeDocumentProviderResourceCapabilities(v types.Provider
 	case *types.ProviderResourceCapabilitiesMemberGitlab:
 		av := object.Key("gitlab")
 		if err := awsRestjson1_serializeDocumentGitLabResourceCapabilities(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ProviderResourceCapabilitiesMemberJira:
+		av := object.Key("jira")
+		if err := awsRestjson1_serializeDocumentJiraResourceCapabilities(&uv.Value, av); err != nil {
 			return err
 		}
 

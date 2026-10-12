@@ -49,8 +49,7 @@ type NetworkConnectorSummary struct {
 	// This member is required.
 	Arn *string
 
-	// The unique identifier for a network connector, assigned by the service at
-	// creation time
+	// The unique identifier of the network connector.
 	//
 	// This member is required.
 	Id *string
@@ -67,6 +66,14 @@ type NetworkConnectorSummary struct {
 
 	// The date and time when the connector was last modified.
 	LastModified *time.Time
+
+	// The version number of the connector's latest version. Each configuration update
+	// creates a new immutable version; this attribute exposes the most recent one.
+	LatestVersion *int64
+
+	// The qualified ARN of the connector's latest version, including the immutable
+	// version suffix.
+	LatestVersionArn *string
 
 	// The current state of the network connector.
 	State NetworkConnectorState
@@ -90,6 +97,12 @@ func (v *NetworkConnectorSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModified != nil {
 		s.WriteTime(schemas.NetworkConnectorSummary_LastModified, *v.LastModified)
 	}
+	if v.LatestVersion != nil {
+		s.WriteInt64(schemas.NetworkConnectorSummary_LatestVersion, *v.LatestVersion)
+	}
+	if v.LatestVersionArn != nil {
+		s.WriteString(schemas.NetworkConnectorSummary_LatestVersionArn, *v.LatestVersionArn)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.NetworkConnectorSummary_Name, *v.Name)
 	}
@@ -112,6 +125,12 @@ func (v *NetworkConnectorSummary) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.NetworkConnectorSummary_LastModified:
 			v.LastModified = new(time.Time)
 			return d.ReadTime(schemas.NetworkConnectorSummary_LastModified, v.LastModified)
+		case schemas.NetworkConnectorSummary_LatestVersion:
+			v.LatestVersion = new(int64)
+			return d.ReadInt64(schemas.NetworkConnectorSummary_LatestVersion, v.LatestVersion)
+		case schemas.NetworkConnectorSummary_LatestVersionArn:
+			v.LatestVersionArn = new(string)
+			return d.ReadString(schemas.NetworkConnectorSummary_LatestVersionArn, v.LatestVersionArn)
 		case schemas.NetworkConnectorSummary_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.NetworkConnectorSummary_Name, v.Name)
@@ -134,20 +153,150 @@ func (v *NetworkConnectorSummary) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// Summary information about a single version of a network connector returned by
+// ListNetworkConnectorVersions . Each configuration update creates a new immutable
+// version; this shape describes one such version. To retrieve the full
+// configuration of a version, call GetNetworkConnector with a version-qualified
+// identifier.
+type NetworkConnectorVersionSummary struct {
+
+	// The unqualified ARN of the network connector that this version belongs to.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique identifier of the network connector.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the network connector.
+	//
+	// This member is required.
+	Name *string
+
+	// The current state of this connector version.
+	//
+	// This member is required.
+	State NetworkConnectorState
+
+	// The version number of this connector version.
+	//
+	// This member is required.
+	Version *int64
+
+	// The qualified ARN of this connector version, including the immutable version
+	// suffix.
+	//
+	// This member is required.
+	VersionArn *string
+
+	// The date and time when this connector version was last modified.
+	LastModified *time.Time
+
+	// A human-readable explanation of the current state, populated when the state is
+	// FAILED .
+	StateReason *string
+
+	// A machine-readable code indicating the reason for the current state. Use this
+	// for programmatic error handling.
+	StateReasonCode NetworkConnectorStateReasonCode
+
+	noSmithyDocumentSerde
+}
+
+func (v *NetworkConnectorVersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConnectorVersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConnectorVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.NetworkConnectorVersionSummary_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.NetworkConnectorVersionSummary_Id, *v.Id)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.NetworkConnectorVersionSummary_LastModified, *v.LastModified)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.NetworkConnectorVersionSummary_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.NetworkConnectorVersionSummary_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.NetworkConnectorVersionSummary_StateReason, *v.StateReason)
+	}
+	if v.StateReasonCode != "" {
+		s.WriteString(schemas.NetworkConnectorVersionSummary_StateReasonCode, string(v.StateReasonCode))
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.NetworkConnectorVersionSummary_Version, *v.Version)
+	}
+	if v.VersionArn != nil {
+		s.WriteString(schemas.NetworkConnectorVersionSummary_VersionArn, *v.VersionArn)
+	}
+}
+func (v *NetworkConnectorVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConnectorVersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConnectorVersionSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.NetworkConnectorVersionSummary_Arn, v.Arn)
+		case schemas.NetworkConnectorVersionSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.NetworkConnectorVersionSummary_Id, v.Id)
+		case schemas.NetworkConnectorVersionSummary_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.NetworkConnectorVersionSummary_LastModified, v.LastModified)
+		case schemas.NetworkConnectorVersionSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.NetworkConnectorVersionSummary_Name, v.Name)
+		case schemas.NetworkConnectorVersionSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.NetworkConnectorVersionSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = NetworkConnectorState(ev)
+			return nil
+		case schemas.NetworkConnectorVersionSummary_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.NetworkConnectorVersionSummary_StateReason, v.StateReason)
+		case schemas.NetworkConnectorVersionSummary_StateReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.NetworkConnectorVersionSummary_StateReasonCode, &ev); err != nil {
+				return err
+			}
+			v.StateReasonCode = NetworkConnectorStateReasonCode(ev)
+			return nil
+		case schemas.NetworkConnectorVersionSummary_Version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.NetworkConnectorVersionSummary_Version, v.Version)
+		case schemas.NetworkConnectorVersionSummary_VersionArn:
+			v.VersionArn = new(string)
+			return d.ReadString(schemas.NetworkConnectorVersionSummary_VersionArn, v.VersionArn)
+		}
+		return nil
+	})
+}
+
 // Configuration for a VPC egress network connector. Specifies the VPC subnets,
 // security groups, network protocol, and associated Lambda compute resource types.
 type NetworkConnectorVpcEgressConfiguration struct {
 
-	// The types of Lambda compute resources that can use this connector. Currently,
-	// only MicroVm is supported.
+	// The types of Lambda compute resources that can use this connector. Valid values
+	// are MicroVm and WebFunction . Specify exactly one value.
 	AssociatedComputeResourceTypes []ComputeResourceType
 
 	// The network protocol for the connector. Specify IPv4 for IPv4-only networking,
 	// or DualStack for both IPv4 and IPv6.
 	NetworkProtocol NetworkProtocol
 
-	// The IDs of the VPC security groups to attach to the ENIs. Specify 0 to 5
-	// security groups. All security groups must be in the same VPC as the subnets.
+	// The IDs of the VPC security groups to attach to the ENIs. All security groups
+	// must be in the same VPC as the subnets.
 	SecurityGroupIds []string
 
 	// The IDs of the VPC subnets where Lambda provisions elastic network interfaces

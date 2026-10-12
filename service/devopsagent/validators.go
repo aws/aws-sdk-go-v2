@@ -1865,6 +1865,11 @@ func validateMCPServerAuthorizationConfig(v types.MCPServerAuthorizationConfig) 
 			invalidParams.AddNested("[bearerToken]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.MCPServerAuthorizationConfigMemberCustomHeaders:
+		if err := validateMCPServerCustomHeadersConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[customHeaders]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.MCPServerAuthorizationConfigMemberOAuth3LO:
 		if err := validateMCPServerOAuth3LOConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[oAuth3LO]", err.(smithy.InvalidParamsError))
@@ -1928,6 +1933,21 @@ func validateMCPServerConfiguration(v *types.MCPServerConfiguration) error {
 		if err := validateMCPToolDetailsList(v.ToolDetails); err != nil {
 			invalidParams.AddNested("ToolDetails", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMCPServerCustomHeadersConfig(v *types.MCPServerCustomHeadersConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MCPServerCustomHeadersConfig"}
+	if v.Headers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Headers"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -618,6 +618,11 @@ type AddOutputRequest struct {
 	//  The name of the output. This value must be unique within the current flow.
 	Name *string
 
+	// The audio reference level of the NDI receiver, in decibels relative to full
+	// scale (dBFS). Common values are -20 (NDI and SMPTE) and -18 (EBU). If you don't
+	// specify this field, MediaConnect uses -20 .
+	NdiAudioReferenceLevel *int32
+
 	// Controls how MediaConnect generates timecodes for NDI output frames. If you
 	// don't specify this field, MediaConnect uses EMBEDDED_TIMECODE .
 	//
@@ -711,6 +716,9 @@ func (v *AddOutputRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.AddOutputRequest_Name, *v.Name)
 	}
+	if v.NdiAudioReferenceLevel != nil {
+		s.WriteInt32(schemas.AddOutputRequest_NdiAudioReferenceLevel, *v.NdiAudioReferenceLevel)
+	}
 	if v.NdiOutputTimecodeSource != "" {
 		s.WriteString(schemas.AddOutputRequest_NdiOutputTimecodeSource, string(v.NdiOutputTimecodeSource))
 	}
@@ -781,6 +789,9 @@ func (v *AddOutputRequest) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AddOutputRequest_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.AddOutputRequest_Name, v.Name)
+		case schemas.AddOutputRequest_NdiAudioReferenceLevel:
+			v.NdiAudioReferenceLevel = new(int32)
+			return d.ReadInt32(schemas.AddOutputRequest_NdiAudioReferenceLevel, v.NdiAudioReferenceLevel)
 		case schemas.AddOutputRequest_NdiOutputTimecodeSource:
 			var ev string
 			if err := d.ReadString(schemas.AddOutputRequest_NdiOutputTimecodeSource, &ev); err != nil {
@@ -1688,6 +1699,69 @@ func (v *BridgeSource) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.BridgeSource_NetworkSource:
 			v.NetworkSource = &BridgeNetworkSource{}
 			return v.NetworkSource.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The color signaling of the video stream.
+type ColorInformation struct {
+
+	// The color primaries that the video stream uses (for example, BT709 or BT2020 ).
+	Colorimetry VideoColorimetry
+
+	// The YCbCr matrix coefficients that the video stream uses (for example, BT709 or
+	// BT2020_NCL ).
+	MatrixCoefficients VideoMatrixCoefficients
+
+	// The transfer characteristics that the video stream uses (for example, BT601 ,
+	// BT709 , BT2100_PQ , or BT2100_HLG ).
+	TransferCharacteristics VideoTransferCharacteristics
+
+	noSmithyDocumentSerde
+}
+
+func (v *ColorInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ColorInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ColorInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Colorimetry != "" {
+		s.WriteString(schemas.ColorInformation_Colorimetry, string(v.Colorimetry))
+	}
+	if v.MatrixCoefficients != "" {
+		s.WriteString(schemas.ColorInformation_MatrixCoefficients, string(v.MatrixCoefficients))
+	}
+	if v.TransferCharacteristics != "" {
+		s.WriteString(schemas.ColorInformation_TransferCharacteristics, string(v.TransferCharacteristics))
+	}
+}
+func (v *ColorInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ColorInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ColorInformation_Colorimetry:
+			var ev string
+			if err := d.ReadString(schemas.ColorInformation_Colorimetry, &ev); err != nil {
+				return err
+			}
+			v.Colorimetry = VideoColorimetry(ev)
+			return nil
+		case schemas.ColorInformation_MatrixCoefficients:
+			var ev string
+			if err := d.ReadString(schemas.ColorInformation_MatrixCoefficients, &ev); err != nil {
+				return err
+			}
+			v.MatrixCoefficients = VideoMatrixCoefficients(ev)
+			return nil
+		case schemas.ColorInformation_TransferCharacteristics:
+			var ev string
+			if err := d.ReadString(schemas.ColorInformation_TransferCharacteristics, &ev); err != nil {
+				return err
+			}
+			v.TransferCharacteristics = VideoTransferCharacteristics(ev)
+			return nil
 		}
 		return nil
 	})
@@ -5052,6 +5126,14 @@ func (v *MaintenanceScheduleMemberWindow) Deserialize(d smithy.ShapeDeserializer
 }
 
 // Configuration settings for connecting a router input to a flow output.
+//
+// To connect the router input to the flow output, provide both flowArn and
+// flowOutputArn . To disconnect it, call the update operation and omit both fields
+// while keeping this configuration object.
+//
+// You can't change sourceTransitDecryption while the router input is connected to
+// a flow output. To change it, first disconnect the router input, then update the
+// decryption.
 type MediaConnectFlowRouterInputConfiguration struct {
 
 	// The decryption configuration for the flow source when connected to this router
@@ -5129,6 +5211,14 @@ func (v *MediaConnectFlowRouterInputStreamDetails) Deserialize(d smithy.ShapeDes
 
 // Configuration settings for connecting a router output to a MediaConnect flow
 // source.
+//
+// To connect the router output to the flow source, provide both flowArn and
+// flowSourceArn . To disconnect it, call the update operation and omit both fields
+// while keeping this configuration object.
+//
+// You can't change destinationTransitEncryption while the router output is
+// connected to a flow source. To change it, first disconnect the router output,
+// then update the encryption.
 type MediaConnectFlowRouterOutputConfiguration struct {
 
 	// The encryption configuration for the flow destination when connected to this
@@ -5206,6 +5296,15 @@ func (v *MediaConnectFlowRouterOutputStreamDetails) Deserialize(d smithy.ShapeDe
 
 // Configuration settings for connecting a router input to a MediaLive channel
 // output.
+//
+// To connect the router input to the MediaLive channel output, provide all three
+// of mediaLiveChannelArn , mediaLivePipelineId , and mediaLiveChannelOutputName .
+// To disconnect it, call the update operation and omit all three fields while
+// keeping this configuration object.
+//
+// You can't change sourceTransitDecryption while the router input is connected to
+// a MediaLive channel output. To change it, first disconnect the router input,
+// then update the decryption.
 type MediaLiveChannelRouterInputConfiguration struct {
 
 	// The encryption configuration that defines how content is encrypted during
@@ -5297,6 +5396,14 @@ func (v *MediaLiveChannelRouterInputStreamDetails) Deserialize(d smithy.ShapeDes
 }
 
 // Configuration settings for connecting a router output to a MediaLive input.
+//
+// To connect the router output to the MediaLive input, provide both
+// mediaLiveInputArn and mediaLivePipelineId . To disconnect it, call the update
+// operation and omit both fields while keeping this configuration object.
+//
+// You can't change destinationTransitEncryption while the router output is
+// connected to a MediaLive input. To change it, first disconnect the router
+// output, then update the encryption.
 type MediaLiveInputRouterOutputConfiguration struct {
 
 	// The encryption configuration for the MediaLive input when connected to this
@@ -6465,6 +6572,9 @@ type NdiMediaStreamInfo struct {
 	//  The number of audio channels in the stream. Used when the streamType is Audio .
 	Channels *int32
 
+	//  The color signaling of the video stream. Used when the streamType is Video .
+	Color *ColorInformation
+
 	//  The number of video frames displayed per second. Used when the streamType is
 	// Video .
 	FrameRate *string
@@ -6496,6 +6606,11 @@ func (v *NdiMediaStreamInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Codec != nil {
 		s.WriteString(schemas.NdiMediaStreamInfo_Codec, *v.Codec)
 	}
+	if v.Color != nil {
+		s.WriteStruct(schemas.NdiMediaStreamInfo_Color)
+		v.Color.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.FrameRate != nil {
 		s.WriteString(schemas.NdiMediaStreamInfo_FrameRate, *v.FrameRate)
 	}
@@ -6526,6 +6641,9 @@ func (v *NdiMediaStreamInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.NdiMediaStreamInfo_Codec:
 			v.Codec = new(string)
 			return d.ReadString(schemas.NdiMediaStreamInfo_Codec, v.Codec)
+		case schemas.NdiMediaStreamInfo_Color:
+			v.Color = &ColorInformation{}
+			return v.Color.Deserialize(d)
 		case schemas.NdiMediaStreamInfo_FrameRate:
 			v.FrameRate = new(string)
 			return d.ReadString(schemas.NdiMediaStreamInfo_FrameRate, v.FrameRate)
@@ -6657,7 +6775,15 @@ func (v *NdiSourceMetadataInfo) Deserialize(d smithy.ShapeDeserializer) error {
 //	The settings for the NDI® source. This includes the exact name of the upstream
 //
 // NDI sender that you want to connect to your source.
+//
+// When you update the NDI source, include only the members you want to change.
+// MediaConnect leaves the members that you don't specify unchanged.
 type NdiSourceSettings struct {
+
+	// The audio reference level of the NDI sender, in decibels relative to full scale
+	// (dBFS). Common values are -20 (NDI and SMPTE) and -18 (EBU). If you don't
+	// specify this field, MediaConnect uses -20 .
+	AudioReferenceLevel *int32
 
 	//  The exact name of an existing NDI sender that's registered with your discovery
 	// server. If included, the format of this name must be MACHINENAME (ProgramName) .
@@ -6673,6 +6799,9 @@ func (v *NdiSourceSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NdiSourceSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioReferenceLevel != nil {
+		s.WriteInt32(schemas.NdiSourceSettings_AudioReferenceLevel, *v.AudioReferenceLevel)
+	}
 	if v.SourceName != nil {
 		s.WriteString(schemas.NdiSourceSettings_SourceName, *v.SourceName)
 	}
@@ -6680,6 +6809,9 @@ func (v *NdiSourceSettings) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *NdiSourceSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NdiSourceSettings, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.NdiSourceSettings_AudioReferenceLevel:
+			v.AudioReferenceLevel = new(int32)
+			return d.ReadInt32(schemas.NdiSourceSettings_AudioReferenceLevel, v.AudioReferenceLevel)
 		case schemas.NdiSourceSettings_SourceName:
 			v.SourceName = new(string)
 			return d.ReadString(schemas.NdiSourceSettings_SourceName, v.SourceName)
@@ -7651,7 +7783,21 @@ type RouterInput struct {
 	// This member is required.
 	Tags map[string]string
 
-	// The tier level of the router input.
+	// The tier level for the router input. The tier sets the maximum bitrate, in
+	// Mbps, for the router input. Valid values include the following:
+	//
+	//   - INPUT_20 – 20 Mbps
+	//
+	//   - INPUT_50 – 50 Mbps
+	//
+	//   - INPUT_100 – 100 Mbps
+	//
+	//   - INPUT_250 – 250 Mbps
+	//
+	//   - INPUT_500 – 500 Mbps
+	//
+	// The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG
+	// XS) workflows.
 	//
 	// This member is required.
 	Tier RouterInputTier
@@ -7894,6 +8040,14 @@ func (v *RouterInputConfigurationMemberFailover) Deserialize(d smithy.ShapeDeser
 }
 
 // Configuration settings for connecting a router input to a flow output.
+//
+// To connect the router input to the flow output, provide both flowArn and
+// flowOutputArn . To disconnect it, call the update operation and omit both fields
+// while keeping this configuration object.
+//
+// You can't change sourceTransitDecryption while the router input is connected to
+// a flow output. To change it, first disconnect the router input, then update the
+// decryption.
 type RouterInputConfigurationMemberMediaConnectFlow struct {
 	Value MediaConnectFlowRouterInputConfiguration
 
@@ -7912,6 +8066,15 @@ func (v *RouterInputConfigurationMemberMediaConnectFlow) Deserialize(d smithy.Sh
 
 // Configuration settings for connecting a router input to a MediaLive channel
 // output.
+//
+// To connect the router input to the MediaLive channel output, provide all three
+// of mediaLiveChannelArn , mediaLivePipelineId , and mediaLiveChannelOutputName .
+// To disconnect it, call the update operation and omit all three fields while
+// keeping this configuration object.
+//
+// You can't change sourceTransitDecryption while the router input is connected to
+// a MediaLive channel output. To change it, first disconnect the router input,
+// then update the decryption.
 type RouterInputConfigurationMemberMediaLiveChannel struct {
 	Value MediaLiveChannelRouterInputConfiguration
 
@@ -8866,7 +9029,21 @@ type RouterOutput struct {
 	// This member is required.
 	Tags map[string]string
 
-	// The tier level of the router output.
+	// The tier level for the router output. The tier sets the maximum bitrate, in
+	// Mbps, for the router output. Valid values include the following:
+	//
+	//   - OUTPUT_20 – 20 Mbps
+	//
+	//   - OUTPUT_50 – 50 Mbps
+	//
+	//   - OUTPUT_100 – 100 Mbps
+	//
+	//   - OUTPUT_250 – 250 Mbps
+	//
+	//   - OUTPUT_500 – 500 Mbps
+	//
+	// The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG
+	// XS) workflows.
 	//
 	// This member is required.
 	Tier RouterOutputTier
@@ -9076,6 +9253,14 @@ type RouterOutputConfiguration interface {
 
 // Configuration settings for connecting a router output to a MediaConnect flow
 // source.
+//
+// To connect the router output to the flow source, provide both flowArn and
+// flowSourceArn . To disconnect it, call the update operation and omit both fields
+// while keeping this configuration object.
+//
+// You can't change destinationTransitEncryption while the router output is
+// connected to a flow source. To change it, first disconnect the router output,
+// then update the encryption.
 type RouterOutputConfigurationMemberMediaConnectFlow struct {
 	Value MediaConnectFlowRouterOutputConfiguration
 
@@ -9093,6 +9278,14 @@ func (v *RouterOutputConfigurationMemberMediaConnectFlow) Deserialize(d smithy.S
 }
 
 // Configuration settings for connecting a router output to a MediaLive input.
+//
+// To connect the router output to the MediaLive input, provide both
+// mediaLiveInputArn and mediaLivePipelineId . To disconnect it, call the update
+// operation and omit both fields while keeping this configuration object.
+//
+// You can't change destinationTransitEncryption while the router output is
+// connected to a MediaLive input. To change it, first disconnect the router
+// output, then update the encryption.
 type RouterOutputConfigurationMemberMediaLiveInput struct {
 	Value MediaLiveInputRouterOutputConfiguration
 
@@ -11060,6 +11253,11 @@ type Transport struct {
 	// receiver’s minimum latency.
 	MinLatency *int32
 
+	// The audio reference level of the NDI receiver, in decibels relative to full
+	// scale (dBFS). Common values are -20 (NDI and SMPTE) and -18 (EBU). For NDI
+	// outputs, this field is always present and defaults to -20 .
+	NdiAudioReferenceLevel *int32
+
 	// The timecode source for NDI output frames. For NDI outputs, this field is
 	// always present and defaults to EMBEDDED_TIMECODE .
 	//
@@ -11129,6 +11327,9 @@ func (v *Transport) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MinLatency != nil {
 		s.WriteInt32(schemas.Transport_MinLatency, *v.MinLatency)
 	}
+	if v.NdiAudioReferenceLevel != nil {
+		s.WriteInt32(schemas.Transport_NdiAudioReferenceLevel, *v.NdiAudioReferenceLevel)
+	}
 	if v.NdiOutputTimecodeSource != "" {
 		s.WriteString(schemas.Transport_NdiOutputTimecodeSource, string(v.NdiOutputTimecodeSource))
 	}
@@ -11185,6 +11386,9 @@ func (v *Transport) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Transport_MinLatency:
 			v.MinLatency = new(int32)
 			return d.ReadInt32(schemas.Transport_MinLatency, v.MinLatency)
+		case schemas.Transport_NdiAudioReferenceLevel:
+			v.NdiAudioReferenceLevel = new(int32)
+			return d.ReadInt32(schemas.Transport_NdiAudioReferenceLevel, v.NdiAudioReferenceLevel)
 		case schemas.Transport_NdiOutputTimecodeSource:
 			var ev string
 			if err := d.ReadString(schemas.Transport_NdiOutputTimecodeSource, &ev); err != nil {
@@ -11242,6 +11446,10 @@ type TransportMediaInfo struct {
 	// This member is required.
 	Programs []TransportStreamProgram
 
+	// The transport stream ID (TSID) of the source, from the Program Association
+	// Table (PAT).
+	TsId *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -11253,12 +11461,18 @@ func (v *TransportMediaInfo) Serialize(s smithy.ShapeSerializer) {
 
 func (v *TransportMediaInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	serialize__listOfTransportStreamProgram(s, schemas.TransportMediaInfo_Programs, v.Programs)
+	if v.TsId != nil {
+		s.WriteInt32(schemas.TransportMediaInfo_TsId, *v.TsId)
+	}
 }
 func (v *TransportMediaInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TransportMediaInfo, func(s *smithy.Schema) error {
 		switch s {
 		case schemas.TransportMediaInfo_Programs:
 			return deserialize__listOfTransportStreamProgram(d, schemas.TransportMediaInfo_Programs, &v.Programs)
+		case schemas.TransportMediaInfo_TsId:
+			v.TsId = new(int32)
+			return d.ReadInt32(schemas.TransportMediaInfo_TsId, v.TsId)
 		}
 		return nil
 	})
@@ -11282,6 +11496,9 @@ type TransportStream struct {
 
 	//  The codec used by the stream.
 	Codec *string
+
+	// The color signaling of the video stream.
+	Color *ColorInformation
 
 	//  The frame rate used by the video stream.
 	FrameRate *string
@@ -11310,6 +11527,11 @@ func (v *TransportStream) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Codec != nil {
 		s.WriteString(schemas.TransportStream_Codec, *v.Codec)
+	}
+	if v.Color != nil {
+		s.WriteStruct(schemas.TransportStream_Color)
+		v.Color.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.FrameRate != nil {
 		s.WriteString(schemas.TransportStream_FrameRate, *v.FrameRate)
@@ -11341,6 +11563,9 @@ func (v *TransportStream) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TransportStream_Codec:
 			v.Codec = new(string)
 			return d.ReadString(schemas.TransportStream_Codec, v.Codec)
+		case schemas.TransportStream_Color:
+			v.Color = &ColorInformation{}
+			return v.Color.Deserialize(d)
 		case schemas.TransportStream_FrameRate:
 			v.FrameRate = new(string)
 			return d.ReadString(schemas.TransportStream_FrameRate, v.FrameRate)

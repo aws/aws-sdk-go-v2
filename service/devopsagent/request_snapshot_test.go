@@ -858,6 +858,7 @@ func TestCheckRequestSnapshot_GetAccountUsage(t *testing.T) {
 func TestCheckRequestSnapshot_GetAgentSpace(t *testing.T) {
 	input := &GetAgentSpaceInput{
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		IncludedData: types.IncludedData("METADATA_ONLY"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1139,8 +1140,9 @@ func TestCheckRequestSnapshot_GetTrigger(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListAgentSpaces(t *testing.T) {
 	input := &ListAgentSpacesInput{
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		IncludedData: types.IncludedData("METADATA_ONLY"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2867,6 +2869,7 @@ func TestUpdateRequestSnapshot_GetAccountUsage(t *testing.T) {
 func TestUpdateRequestSnapshot_GetAgentSpace(t *testing.T) {
 	input := &GetAgentSpaceInput{
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		IncludedData: types.IncludedData("METADATA_ONLY"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3148,8 +3151,9 @@ func TestUpdateRequestSnapshot_GetTrigger(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListAgentSpaces(t *testing.T) {
 	input := &ListAgentSpacesInput{
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		IncludedData: types.IncludedData("METADATA_ONLY"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

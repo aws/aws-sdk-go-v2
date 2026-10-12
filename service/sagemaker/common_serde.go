@@ -4634,6 +4634,19 @@ func serializeTrainingPlanSummaries(s smithy.ShapeSerializer, schema *smithy.Sch
 	s.CloseList()
 }
 
+func serializeTrainingSessionSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TrainingSessionSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeTransformInstanceTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TransformInstanceType) {
 	if v == nil {
 		return
@@ -9450,6 +9463,20 @@ func deserializeTrainingPlanSummaries(d smithy.ShapeDeserializer, s *smithy.Sche
 	var vv types.TrainingPlanSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.TrainingPlanSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeTrainingSessionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TrainingSessionSummary) error {
+	*v = make([]types.TrainingSessionSummary, 0)
+	var vv types.TrainingSessionSummary
+	return smithy.ReadList(d, s, func() error {
+		vv = types.TrainingSessionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

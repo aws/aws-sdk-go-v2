@@ -34,8 +34,8 @@ type DeleteMemoryInput struct {
 	MemoryId *string
 
 	// A client token is used for keeping track of idempotent requests. It can contain
-	// a session id which can be around 250 chars, combined with a unique AWS
-	// identifier.
+	// a session id which can be around 250 chars, combined with a unique Amazon Web
+	// Services identifier.
 	ClientToken *string
 
 	noSmithyDocumentSerde

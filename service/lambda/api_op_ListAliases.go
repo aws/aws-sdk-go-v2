@@ -11,7 +11,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns a list of [aliases] for a Lambda function.
+// Returns a list of [aliases] for a Lambda Event Function.
 //
 // [aliases]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
 func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optFns ...func(*Options)) (*ListAliasesOutput, error) {

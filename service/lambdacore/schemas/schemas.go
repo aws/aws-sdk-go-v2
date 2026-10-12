@@ -36,6 +36,13 @@ var ListNetworkConnectors = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2026-04-04/network-connectors",
 	Code: 200})
 
+var ListNetworkConnectorVersions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "ListNetworkConnectorVersions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/2026-04-04/network-connectors/{Identifier}/versions",
+	Code: 200})
+
 var UpdateNetworkConnector = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "UpdateNetworkConnector",
@@ -64,8 +71,10 @@ var _ClientTokenString = smithy.NewSchema(smithy.ShapeID{
 var ComputeResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "ComputeResourceType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var ComputeResourceType_MicroVm *smithy.Schema
+
+var ComputeResourceType_WebFunction *smithy.Schema
 
 var _CoreTimestamp = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
@@ -125,7 +134,7 @@ var _NetworkConnectorLastUpdateStatusReason = smithy.NewSchema(smithy.ShapeID{
 var NetworkConnectorLastUpdateStatusReasonCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "NetworkConnectorLastUpdateStatusReasonCode",
-}, smithy.ShapeTypeEnum, 7)
+}, smithy.ShapeTypeEnum, 8)
 var NetworkConnectorLastUpdateStatusReasonCode_DisallowedByVpcEncryptionControl *smithy.Schema
 
 var NetworkConnectorLastUpdateStatusReasonCode_Ec2RequestLimitExceeded *smithy.Schema
@@ -137,6 +146,8 @@ var NetworkConnectorLastUpdateStatusReasonCode_InternalError *smithy.Schema
 var NetworkConnectorLastUpdateStatusReasonCode_InvalidSecurityGroup *smithy.Schema
 
 var NetworkConnectorLastUpdateStatusReasonCode_InvalidSubnet *smithy.Schema
+
+var NetworkConnectorLastUpdateStatusReasonCode_SecurityGroupsPerInterfaceLimitExceeded *smithy.Schema
 
 var NetworkConnectorLastUpdateStatusReasonCode_SubnetOutOfIPAddresses *smithy.Schema
 
@@ -195,7 +206,7 @@ var NetworkConnectorState_DELETE_FAILED *smithy.Schema
 var NetworkConnectorStateReasonCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "NetworkConnectorStateReasonCode",
-}, smithy.ShapeTypeEnum, 7)
+}, smithy.ShapeTypeEnum, 8)
 var NetworkConnectorStateReasonCode_DisallowedByVpcEncryptionControl *smithy.Schema
 
 var NetworkConnectorStateReasonCode_Ec2RequestLimitExceeded *smithy.Schema
@@ -207,6 +218,8 @@ var NetworkConnectorStateReasonCode_InternalError *smithy.Schema
 var NetworkConnectorStateReasonCode_InvalidSecurityGroup *smithy.Schema
 
 var NetworkConnectorStateReasonCode_InvalidSubnet *smithy.Schema
+
+var NetworkConnectorStateReasonCode_SecurityGroupsPerInterfaceLimitExceeded *smithy.Schema
 
 var NetworkConnectorStateReasonCode_SubnetOutOfIPAddresses *smithy.Schema
 
@@ -224,7 +237,7 @@ var _NetworkConnectorSubnetIds_member *smithy.Schema
 var NetworkConnectorSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "NetworkConnectorSummary",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 8)
 var NetworkConnectorSummary_Arn *smithy.Schema
 
 var NetworkConnectorSummary_Name *smithy.Schema
@@ -236,6 +249,10 @@ var NetworkConnectorSummary_Type *smithy.Schema
 var NetworkConnectorSummary_State *smithy.Schema
 
 var NetworkConnectorSummary_LastModified *smithy.Schema
+
+var NetworkConnectorSummary_LatestVersionArn *smithy.Schema
+
+var NetworkConnectorSummary_LatestVersion *smithy.Schema
 
 var _NetworkConnectorTagKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
@@ -265,6 +282,34 @@ var _NetworkConnectorVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "NetworkConnectorVersion",
 }, smithy.ShapeTypeLong, 0)
+
+var _NetworkConnectorVersionsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "NetworkConnectorVersionsList",
+}, smithy.ShapeTypeList, 1)
+var _NetworkConnectorVersionsList_member *smithy.Schema
+
+var NetworkConnectorVersionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "NetworkConnectorVersionSummary",
+}, smithy.ShapeTypeStructure, 9)
+var NetworkConnectorVersionSummary_Arn *smithy.Schema
+
+var NetworkConnectorVersionSummary_VersionArn *smithy.Schema
+
+var NetworkConnectorVersionSummary_Name *smithy.Schema
+
+var NetworkConnectorVersionSummary_Id *smithy.Schema
+
+var NetworkConnectorVersionSummary_Version *smithy.Schema
+
+var NetworkConnectorVersionSummary_State *smithy.Schema
+
+var NetworkConnectorVersionSummary_StateReason *smithy.Schema
+
+var NetworkConnectorVersionSummary_StateReasonCode *smithy.Schema
+
+var NetworkConnectorVersionSummary_LastModified *smithy.Schema
 
 var NetworkConnectorVpcEgressConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
@@ -364,12 +409,16 @@ var CreateNetworkConnectorRequest_Tags *smithy.Schema
 var CreateNetworkConnectorResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "CreateNetworkConnectorResponse",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 8)
 var CreateNetworkConnectorResponse_Arn *smithy.Schema
 
 var CreateNetworkConnectorResponse_Name *smithy.Schema
 
 var CreateNetworkConnectorResponse_Id *smithy.Schema
+
+var CreateNetworkConnectorResponse_VersionArn *smithy.Schema
+
+var CreateNetworkConnectorResponse_Version *smithy.Schema
 
 var CreateNetworkConnectorResponse_Configuration *smithy.Schema
 
@@ -386,12 +435,16 @@ var DeleteNetworkConnectorRequest_Identifier *smithy.Schema
 var DeleteNetworkConnectorResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "DeleteNetworkConnectorResponse",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 8)
 var DeleteNetworkConnectorResponse_Arn *smithy.Schema
 
 var DeleteNetworkConnectorResponse_Name *smithy.Schema
 
 var DeleteNetworkConnectorResponse_Id *smithy.Schema
+
+var DeleteNetworkConnectorResponse_VersionArn *smithy.Schema
+
+var DeleteNetworkConnectorResponse_Version *smithy.Schema
 
 var DeleteNetworkConnectorResponse_Configuration *smithy.Schema
 
@@ -408,14 +461,20 @@ var GetNetworkConnectorRequest_Identifier *smithy.Schema
 var GetNetworkConnectorResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "GetNetworkConnectorResponse",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 16)
 var GetNetworkConnectorResponse_Arn *smithy.Schema
 
 var GetNetworkConnectorResponse_Name *smithy.Schema
 
 var GetNetworkConnectorResponse_Id *smithy.Schema
 
+var GetNetworkConnectorResponse_VersionArn *smithy.Schema
+
 var GetNetworkConnectorResponse_Version *smithy.Schema
+
+var GetNetworkConnectorResponse_LatestVersionArn *smithy.Schema
+
+var GetNetworkConnectorResponse_LatestVersion *smithy.Schema
 
 var GetNetworkConnectorResponse_Configuration *smithy.Schema
 
@@ -453,6 +512,26 @@ var ListNetworkConnectorsResponse_NetworkConnectors *smithy.Schema
 
 var ListNetworkConnectorsResponse_NextMarker *smithy.Schema
 
+var ListNetworkConnectorVersionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "ListNetworkConnectorVersionsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListNetworkConnectorVersionsRequest_Identifier *smithy.Schema
+
+var ListNetworkConnectorVersionsRequest_State *smithy.Schema
+
+var ListNetworkConnectorVersionsRequest_Marker *smithy.Schema
+
+var ListNetworkConnectorVersionsRequest_MaxItems *smithy.Schema
+
+var ListNetworkConnectorVersionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "ListNetworkConnectorVersionsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListNetworkConnectorVersionsResponse_NetworkConnectorVersions *smithy.Schema
+
+var ListNetworkConnectorVersionsResponse_NextMarker *smithy.Schema
+
 var UpdateNetworkConnectorRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "UpdateNetworkConnectorRequest",
@@ -468,12 +547,16 @@ var UpdateNetworkConnectorRequest_ClientToken *smithy.Schema
 var UpdateNetworkConnectorResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "UpdateNetworkConnectorResponse",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 11)
 var UpdateNetworkConnectorResponse_Arn *smithy.Schema
 
 var UpdateNetworkConnectorResponse_Name *smithy.Schema
 
 var UpdateNetworkConnectorResponse_Id *smithy.Schema
+
+var UpdateNetworkConnectorResponse_VersionArn *smithy.Schema
+
+var UpdateNetworkConnectorResponse_Version *smithy.Schema
 
 var UpdateNetworkConnectorResponse_OperatorRole *smithy.Schema
 
@@ -491,6 +574,8 @@ var UpdateNetworkConnectorResponse_LastModified *smithy.Schema
 // initialization cycles
 func init() {
 	ComputeResourceType_MicroVm = ComputeResourceType.AddMember("MicroVm", smithyprelude.Unit)
+
+	ComputeResourceType_WebFunction = ComputeResourceType.AddMember("WebFunction", smithyprelude.Unit)
 
 	_AssociatedComputeResourceTypesList_member = _AssociatedComputeResourceTypesList.AddMember("member", ComputeResourceType)
 
@@ -534,6 +619,8 @@ func init() {
 
 	NetworkConnectorLastUpdateStatusReasonCode_InvalidSubnet = NetworkConnectorLastUpdateStatusReasonCode.AddMember("InvalidSubnet", smithyprelude.Unit)
 
+	NetworkConnectorLastUpdateStatusReasonCode_SecurityGroupsPerInterfaceLimitExceeded = NetworkConnectorLastUpdateStatusReasonCode.AddMember("SecurityGroupsPerInterfaceLimitExceeded", smithyprelude.Unit)
+
 	NetworkConnectorLastUpdateStatusReasonCode_SubnetOutOfIPAddresses = NetworkConnectorLastUpdateStatusReasonCode.AddMember("SubnetOutOfIPAddresses", smithyprelude.Unit)
 
 	NetworkConnectorLimitExceededException_Type = NetworkConnectorLimitExceededException.AddMember("Type", _String)
@@ -566,6 +653,10 @@ func init() {
 
 	NetworkConnectorSummary_LastModified = NetworkConnectorSummary.AddMember("LastModified", _CoreTimestamp)
 
+	NetworkConnectorSummary_LatestVersionArn = NetworkConnectorSummary.AddMember("LatestVersionArn", _NetworkConnectorArn)
+
+	NetworkConnectorSummary_LatestVersion = NetworkConnectorSummary.AddMember("LatestVersion", _NetworkConnectorVersion)
+
 	_NetworkConnectorsList_member = _NetworkConnectorsList.AddMember("member", NetworkConnectorSummary)
 
 	NetworkConnectorStateReasonCode_DisallowedByVpcEncryptionControl = NetworkConnectorStateReasonCode.AddMember("DisallowedByVpcEncryptionControl", smithyprelude.Unit)
@@ -580,11 +671,33 @@ func init() {
 
 	NetworkConnectorStateReasonCode_InvalidSubnet = NetworkConnectorStateReasonCode.AddMember("InvalidSubnet", smithyprelude.Unit)
 
+	NetworkConnectorStateReasonCode_SecurityGroupsPerInterfaceLimitExceeded = NetworkConnectorStateReasonCode.AddMember("SecurityGroupsPerInterfaceLimitExceeded", smithyprelude.Unit)
+
 	NetworkConnectorStateReasonCode_SubnetOutOfIPAddresses = NetworkConnectorStateReasonCode.AddMember("SubnetOutOfIPAddresses", smithyprelude.Unit)
 
 	_NetworkConnectorTags_key = _NetworkConnectorTags.AddMember("key", _NetworkConnectorTagKey)
 
 	_NetworkConnectorTags_value = _NetworkConnectorTags.AddMember("value", _NetworkConnectorTagValue)
+
+	NetworkConnectorVersionSummary_Arn = NetworkConnectorVersionSummary.AddMember("Arn", _NetworkConnectorArn)
+
+	NetworkConnectorVersionSummary_VersionArn = NetworkConnectorVersionSummary.AddMember("VersionArn", _NetworkConnectorArn)
+
+	NetworkConnectorVersionSummary_Name = NetworkConnectorVersionSummary.AddMember("Name", _NetworkConnectorName)
+
+	NetworkConnectorVersionSummary_Id = NetworkConnectorVersionSummary.AddMember("Id", _NetworkConnectorId)
+
+	NetworkConnectorVersionSummary_Version = NetworkConnectorVersionSummary.AddMember("Version", _NetworkConnectorVersion)
+
+	NetworkConnectorVersionSummary_State = NetworkConnectorVersionSummary.AddMember("State", NetworkConnectorState)
+
+	NetworkConnectorVersionSummary_StateReason = NetworkConnectorVersionSummary.AddMember("StateReason", _String)
+
+	NetworkConnectorVersionSummary_StateReasonCode = NetworkConnectorVersionSummary.AddMember("StateReasonCode", NetworkConnectorStateReasonCode)
+
+	NetworkConnectorVersionSummary_LastModified = NetworkConnectorVersionSummary.AddMember("LastModified", _CoreTimestamp)
+
+	_NetworkConnectorVersionsList_member = _NetworkConnectorVersionsList.AddMember("member", NetworkConnectorVersionSummary)
 
 	ResourceConflictException_Type = ResourceConflictException.AddMember("Type", _String)
 
@@ -634,6 +747,10 @@ func init() {
 
 	CreateNetworkConnectorResponse_Id = CreateNetworkConnectorResponse.AddMember("Id", _NetworkConnectorId)
 
+	CreateNetworkConnectorResponse_VersionArn = CreateNetworkConnectorResponse.AddMember("VersionArn", _NetworkConnectorArn)
+
+	CreateNetworkConnectorResponse_Version = CreateNetworkConnectorResponse.AddMember("Version", _NetworkConnectorVersion)
+
 	CreateNetworkConnectorResponse_Configuration = CreateNetworkConnectorResponse.AddMember("Configuration", NetworkConnectorConfiguration)
 
 	CreateNetworkConnectorResponse_OperatorRole = CreateNetworkConnectorResponse.AddMember("OperatorRole", _NetworkConnectorRoleArn)
@@ -647,6 +764,10 @@ func init() {
 	DeleteNetworkConnectorResponse_Name = DeleteNetworkConnectorResponse.AddMember("Name", _NetworkConnectorName)
 
 	DeleteNetworkConnectorResponse_Id = DeleteNetworkConnectorResponse.AddMember("Id", _NetworkConnectorId)
+
+	DeleteNetworkConnectorResponse_VersionArn = DeleteNetworkConnectorResponse.AddMember("VersionArn", _NetworkConnectorArn)
+
+	DeleteNetworkConnectorResponse_Version = DeleteNetworkConnectorResponse.AddMember("Version", _NetworkConnectorVersion)
 
 	DeleteNetworkConnectorResponse_Configuration = DeleteNetworkConnectorResponse.AddMember("Configuration", NetworkConnectorConfiguration)
 
@@ -662,7 +783,13 @@ func init() {
 
 	GetNetworkConnectorResponse_Id = GetNetworkConnectorResponse.AddMember("Id", _NetworkConnectorId)
 
+	GetNetworkConnectorResponse_VersionArn = GetNetworkConnectorResponse.AddMember("VersionArn", _NetworkConnectorArn)
+
 	GetNetworkConnectorResponse_Version = GetNetworkConnectorResponse.AddMember("Version", _NetworkConnectorVersion)
+
+	GetNetworkConnectorResponse_LatestVersionArn = GetNetworkConnectorResponse.AddMember("LatestVersionArn", _NetworkConnectorArn)
+
+	GetNetworkConnectorResponse_LatestVersion = GetNetworkConnectorResponse.AddMember("LatestVersion", _NetworkConnectorVersion)
 
 	GetNetworkConnectorResponse_Configuration = GetNetworkConnectorResponse.AddMember("Configuration", NetworkConnectorConfiguration)
 
@@ -692,6 +819,18 @@ func init() {
 
 	ListNetworkConnectorsResponse_NextMarker = ListNetworkConnectorsResponse.AddMember("NextMarker", _String)
 
+	ListNetworkConnectorVersionsRequest_Identifier = ListNetworkConnectorVersionsRequest.AddMember("Identifier", _NetworkConnectorIdentifier, &smithytraits.HTTPLabel{})
+
+	ListNetworkConnectorVersionsRequest_State = ListNetworkConnectorVersionsRequest.AddMember("State", NetworkConnectorState, &smithytraits.HTTPQuery{Name: "State"})
+
+	ListNetworkConnectorVersionsRequest_Marker = ListNetworkConnectorVersionsRequest.AddMember("Marker", _String, &smithytraits.HTTPQuery{Name: "Marker"})
+
+	ListNetworkConnectorVersionsRequest_MaxItems = ListNetworkConnectorVersionsRequest.AddMember("MaxItems", _MaxHundredListItems, &smithytraits.HTTPQuery{Name: "MaxItems"})
+
+	ListNetworkConnectorVersionsResponse_NetworkConnectorVersions = ListNetworkConnectorVersionsResponse.AddMember("NetworkConnectorVersions", _NetworkConnectorVersionsList)
+
+	ListNetworkConnectorVersionsResponse_NextMarker = ListNetworkConnectorVersionsResponse.AddMember("NextMarker", _String)
+
 	UpdateNetworkConnectorRequest_Identifier = UpdateNetworkConnectorRequest.AddMember("Identifier", _NetworkConnectorIdentifier, &smithytraits.HTTPLabel{})
 
 	UpdateNetworkConnectorRequest_Configuration = UpdateNetworkConnectorRequest.AddMember("Configuration", NetworkConnectorConfiguration)
@@ -705,6 +844,10 @@ func init() {
 	UpdateNetworkConnectorResponse_Name = UpdateNetworkConnectorResponse.AddMember("Name", _NetworkConnectorName)
 
 	UpdateNetworkConnectorResponse_Id = UpdateNetworkConnectorResponse.AddMember("Id", _NetworkConnectorId)
+
+	UpdateNetworkConnectorResponse_VersionArn = UpdateNetworkConnectorResponse.AddMember("VersionArn", _NetworkConnectorArn)
+
+	UpdateNetworkConnectorResponse_Version = UpdateNetworkConnectorResponse.AddMember("Version", _NetworkConnectorVersion)
 
 	UpdateNetworkConnectorResponse_OperatorRole = UpdateNetworkConnectorResponse.AddMember("OperatorRole", _NetworkConnectorRoleArn)
 

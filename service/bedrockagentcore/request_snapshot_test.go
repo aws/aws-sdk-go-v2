@@ -247,6 +247,9 @@ func TestCheckRequestSnapshot_BatchCreateMemoryRecords(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -354,6 +357,9 @@ func TestCheckRequestSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
 					},
 				},
 			},
+		},
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2952,6 +2958,9 @@ func TestUpdateRequestSnapshot_BatchCreateMemoryRecords(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3059,6 +3068,9 @@ func TestUpdateRequestSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
 					},
 				},
 			},
+		},
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
 		},
 	}
 	body := &bytes.Buffer{}

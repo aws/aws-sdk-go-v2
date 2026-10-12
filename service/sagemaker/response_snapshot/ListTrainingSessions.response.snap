@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListTrainingSessions
+
+{"NextToken":"__NextToken__","TrainingSessionSummaries":[{"CreationTime":946684800,"LastModifiedTime":946684800,"TrainingSessionArn":"__TrainingSessionArn__","TrainingSessionStatus":"Created"},{"CreationTime":946684800,"LastModifiedTime":946684800,"TrainingSessionArn":"__TrainingSessionArn__","TrainingSessionStatus":"Created"}]}

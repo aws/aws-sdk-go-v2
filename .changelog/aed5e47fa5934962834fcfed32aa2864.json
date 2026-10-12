@@ -1,0 +1,8 @@
+{
+    "id": "aed5e47f-a593-4962-834f-cfed32aa2864",
+    "type": "feature",
+    "description": "Adds support for the includedData field in GetAgentSpace and ListAgentSpaces APIs",
+    "modules": [
+        "service/devopsagent"
+    ]
+}

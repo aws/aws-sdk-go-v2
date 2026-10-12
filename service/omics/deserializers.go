@@ -29080,6 +29080,15 @@ func awsRestjson1_deserializeDocumentVpcConfigResponse(v **types.VpcConfigRespon
 				sv.VpcId = ptr.String(jtv)
 			}
 
+		case "vpcOwnerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsAccountId to be of type string, got %T instead", value)
+				}
+				sv.VpcOwnerAccountId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

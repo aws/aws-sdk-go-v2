@@ -388,6 +388,11 @@ var CreateTrainingPlan = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateTrainingPlan",
 }, smithy.ShapeTypeOperation, 0)
 
+var CreateTrainingSession = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CreateTrainingSession",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateTransformJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "CreateTransformJob",
@@ -701,6 +706,11 @@ var DeleteTags = smithy.NewSchema(smithy.ShapeID{
 var DeleteTrainingJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DeleteTrainingJob",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteTrainingSession = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteTrainingSession",
 }, smithy.ShapeTypeOperation, 0)
 
 var DeleteTrial = smithy.NewSchema(smithy.ShapeID{
@@ -1081,6 +1091,11 @@ var DescribeTrainingPlan = smithy.NewSchema(smithy.ShapeID{
 var DescribeTrainingPlanExtensionHistory = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeTrainingPlanExtensionHistory",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeTrainingSession = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeTrainingSession",
 }, smithy.ShapeTypeOperation, 0)
 
 var DescribeTransformJob = smithy.NewSchema(smithy.ShapeID{
@@ -1588,6 +1603,11 @@ var ListTrainingPlans = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListTrainingPlans",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListTrainingSessions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListTrainingSessions",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListTransformJobs = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListTransformJobs",
@@ -1796,6 +1816,11 @@ var StopProcessingJob = smithy.NewSchema(smithy.ShapeID{
 var StopTrainingJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "StopTrainingJob",
+}, smithy.ShapeTypeOperation, 0)
+
+var StopTrainingSession = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "StopTrainingSession",
 }, smithy.ShapeTypeOperation, 0)
 
 var StopTransformJob = smithy.NewSchema(smithy.ShapeID{
@@ -4651,6 +4676,11 @@ var BaseModel_HubContentVersion *smithy.Schema
 
 var BaseModel_RecipeName *smithy.Schema
 
+var _BaseModelArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "BaseModelArn",
+}, smithy.ShapeTypeString, 0)
+
 var _BaseModelName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "BaseModelName",
@@ -4963,6 +4993,16 @@ var _BillableTokenCount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "BillableTokenCount",
 }, smithy.ShapeTypeLong, 0)
+
+var BillableTokenUsage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "BillableTokenUsage",
+}, smithy.ShapeTypeStructure, 3)
+var BillableTokenUsage_PrefillTokenCount *smithy.Schema
+
+var BillableTokenUsage_SampleTokenCount *smithy.Schema
+
+var BillableTokenUsage_TrainingTokenCount *smithy.Schema
 
 var _BlockedReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -7961,6 +8001,11 @@ var _CsvContentTypes_member *smithy.Schema
 var _CurrencyCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "CurrencyCode",
+}, smithy.ShapeTypeString, 0)
+
+var _CustomerKmsKeyArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CustomerKmsKeyArn",
 }, smithy.ShapeTypeString, 0)
 
 var _CustomerMetadataKey = smithy.NewSchema(smithy.ShapeID{
@@ -12946,6 +12991,21 @@ var _ItemIdentifierAttributeName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ItemIdentifierAttributeName",
 }, smithy.ShapeTypeString, 0)
 
+var _JavaBoolean = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "JavaBoolean",
+}, smithy.ShapeTypeBoolean, 0)
+
+var _JavaInteger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "JavaInteger",
+}, smithy.ShapeTypeInteger, 0)
+
+var _JavaLong = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "JavaLong",
+}, smithy.ShapeTypeLong, 0)
+
 var Job = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "Job",
@@ -13736,6 +13796,19 @@ var _LongS3Uri = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "LongS3Uri",
 }, smithy.ShapeTypeString, 0)
+
+var _LoraAlpha = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "LoraAlpha",
+}, smithy.ShapeTypeInteger, 0)
+
+var LoraConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "LoraConfig",
+}, smithy.ShapeTypeStructure, 2)
+var LoraConfig_Rank *smithy.Schema
+
+var LoraConfig_Alpha *smithy.Schema
 
 var MaintenanceStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -16877,6 +16950,11 @@ var _OutputParameterList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _OutputParameterList_member *smithy.Schema
 
+var _OutputS3Path = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "OutputS3Path",
+}, smithy.ShapeTypeString, 0)
+
 var OwnershipSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "OwnershipSettings",
@@ -19494,6 +19572,11 @@ var _QueryTypes_member *smithy.Schema
 var _RandomSeed = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "RandomSeed",
+}, smithy.ShapeTypeInteger, 0)
+
+var _Rank = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "Rank",
 }, smithy.ShapeTypeInteger, 0)
 
 var RealTimeInferenceConfig = smithy.NewSchema(smithy.ShapeID{
@@ -23498,6 +23581,116 @@ var _TrainingRepositoryCredentialsProviderArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TrainingRepositoryCredentialsProviderArn",
 }, smithy.ShapeTypeString, 0)
 
+var _TrainingSessionArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionArn",
+}, smithy.ShapeTypeString, 0)
+
+var TrainingSessionDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionDetail",
+}, smithy.ShapeTypeStructure, 16)
+var TrainingSessionDetail_TrainingSessionArn *smithy.Schema
+
+var TrainingSessionDetail_TrainingSessionName *smithy.Schema
+
+var TrainingSessionDetail_TrainingSessionStatus *smithy.Schema
+
+var TrainingSessionDetail_ModelPackageGroupArn *smithy.Schema
+
+var TrainingSessionDetail_CreationTime *smithy.Schema
+
+var TrainingSessionDetail_LastModifiedTime *smithy.Schema
+
+var TrainingSessionDetail_EndTime *smithy.Schema
+
+var TrainingSessionDetail_ErrorDetails *smithy.Schema
+
+var TrainingSessionDetail_LastReceivedSequenceNumber *smithy.Schema
+
+var TrainingSessionDetail_BillableTokenUsage *smithy.Schema
+
+var TrainingSessionDetail_VpcConfig *smithy.Schema
+
+var TrainingSessionDetail_RoleArn *smithy.Schema
+
+var TrainingSessionDetail_LoraConfig *smithy.Schema
+
+var TrainingSessionDetail_ModelConfig *smithy.Schema
+
+var TrainingSessionDetail_OutputConfig *smithy.Schema
+
+var TrainingSessionDetail_Tags *smithy.Schema
+
+var TrainingSessionModelConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionModelConfig",
+}, smithy.ShapeTypeStructure, 2)
+var TrainingSessionModelConfig_BaseModelArn *smithy.Schema
+
+var TrainingSessionModelConfig_AcceptEula *smithy.Schema
+
+var _TrainingSessionName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionName",
+}, smithy.ShapeTypeString, 0)
+
+var TrainingSessionOutputConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionOutputConfig",
+}, smithy.ShapeTypeStructure, 1)
+var TrainingSessionOutputConfig_S3Location *smithy.Schema
+
+var TrainingSessionS3Location = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionS3Location",
+}, smithy.ShapeTypeStructure, 2)
+var TrainingSessionS3Location_Path *smithy.Schema
+
+var TrainingSessionS3Location_KmsKeyArn *smithy.Schema
+
+var TrainingSessionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionStatus",
+}, smithy.ShapeTypeEnum, 10)
+var TrainingSessionStatus_CREATED *smithy.Schema
+
+var TrainingSessionStatus_BLOCKED *smithy.Schema
+
+var TrainingSessionStatus_RUNNING *smithy.Schema
+
+var TrainingSessionStatus_FAILED *smithy.Schema
+
+var TrainingSessionStatus_SCHEDULED *smithy.Schema
+
+var TrainingSessionStatus_STOPPING *smithy.Schema
+
+var TrainingSessionStatus_STOPPED *smithy.Schema
+
+var TrainingSessionStatus_EXPIRED *smithy.Schema
+
+var TrainingSessionStatus_DELETING *smithy.Schema
+
+var TrainingSessionStatus_DELETION_FAILED *smithy.Schema
+
+var _TrainingSessionSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionSummaries",
+}, smithy.ShapeTypeList, 1)
+var _TrainingSessionSummaries_member *smithy.Schema
+
+var TrainingSessionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingSessionSummary",
+}, smithy.ShapeTypeStructure, 4)
+var TrainingSessionSummary_TrainingSessionArn *smithy.Schema
+
+var TrainingSessionSummary_TrainingSessionStatus *smithy.Schema
+
+var TrainingSessionSummary_CreationTime *smithy.Schema
+
+var TrainingSessionSummary_LastModifiedTime *smithy.Schema
+
 var TrainingSpecification = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "TrainingSpecification",
@@ -26941,6 +27134,32 @@ var CreateTrainingPlanResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var CreateTrainingPlanResponse_TrainingPlanArn *smithy.Schema
 
+var CreateTrainingSessionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CreateTrainingSessionRequest",
+}, smithy.ShapeTypeStructure, 8)
+var CreateTrainingSessionRequest_TrainingSessionName *smithy.Schema
+
+var CreateTrainingSessionRequest_ModelPackageGroupArn *smithy.Schema
+
+var CreateTrainingSessionRequest_LoraConfig *smithy.Schema
+
+var CreateTrainingSessionRequest_RoleArn *smithy.Schema
+
+var CreateTrainingSessionRequest_VpcConfig *smithy.Schema
+
+var CreateTrainingSessionRequest_ModelConfig *smithy.Schema
+
+var CreateTrainingSessionRequest_OutputConfig *smithy.Schema
+
+var CreateTrainingSessionRequest_Tags *smithy.Schema
+
+var CreateTrainingSessionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CreateTrainingSessionResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateTrainingSessionResponse_TrainingSessionArn *smithy.Schema
+
 var CreateTransformJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "CreateTransformJobRequest",
@@ -27596,6 +27815,17 @@ var DeleteTrainingJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteTrainingJobRequest",
 }, smithy.ShapeTypeStructure, 1)
 var DeleteTrainingJobRequest_TrainingJobName *smithy.Schema
+
+var DeleteTrainingSessionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteTrainingSessionRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteTrainingSessionRequest_TrainingSessionName *smithy.Schema
+
+var DeleteTrainingSessionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteTrainingSessionResponse",
+}, smithy.ShapeTypeStructure, 0)
 
 var DeleteTrialComponentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -30255,6 +30485,18 @@ var DescribeTrainingPlanResponse_TotalUltraServerCount *smithy.Schema
 var DescribeTrainingPlanResponse_TargetResources *smithy.Schema
 
 var DescribeTrainingPlanResponse_ReservedCapacitySummaries *smithy.Schema
+
+var DescribeTrainingSessionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeTrainingSessionRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeTrainingSessionRequest_TrainingSessionName *smithy.Schema
+
+var DescribeTrainingSessionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeTrainingSessionResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeTrainingSessionResponse_TrainingSessionDetail *smithy.Schema
 
 var DescribeTransformJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -32985,6 +33227,30 @@ var ListTrainingPlansResponse_NextToken *smithy.Schema
 
 var ListTrainingPlansResponse_TrainingPlanSummaries *smithy.Schema
 
+var ListTrainingSessionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListTrainingSessionsRequest",
+}, smithy.ShapeTypeStructure, 6)
+var ListTrainingSessionsRequest_NextToken *smithy.Schema
+
+var ListTrainingSessionsRequest_MaxResults *smithy.Schema
+
+var ListTrainingSessionsRequest_CreationTimeAfter *smithy.Schema
+
+var ListTrainingSessionsRequest_CreationTimeBefore *smithy.Schema
+
+var ListTrainingSessionsRequest_NameContains *smithy.Schema
+
+var ListTrainingSessionsRequest_StatusEquals *smithy.Schema
+
+var ListTrainingSessionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListTrainingSessionsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListTrainingSessionsResponse_NextToken *smithy.Schema
+
+var ListTrainingSessionsResponse_TrainingSessionSummaries *smithy.Schema
+
 var ListTransformJobsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListTransformJobsRequest",
@@ -33599,6 +33865,17 @@ var StopTrainingJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StopTrainingJobRequest",
 }, smithy.ShapeTypeStructure, 1)
 var StopTrainingJobRequest_TrainingJobName *smithy.Schema
+
+var StopTrainingSessionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "StopTrainingSessionRequest",
+}, smithy.ShapeTypeStructure, 1)
+var StopTrainingSessionRequest_TrainingSessionName *smithy.Schema
+
+var StopTrainingSessionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "StopTrainingSessionResponse",
+}, smithy.ShapeTypeStructure, 0)
 
 var StopTransformJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -38634,6 +38911,12 @@ func init() {
 	Bias_PreTrainingReport = Bias.AddMember("PreTrainingReport", MetricsSource)
 
 	Bias_PostTrainingReport = Bias.AddMember("PostTrainingReport", MetricsSource)
+
+	BillableTokenUsage_PrefillTokenCount = BillableTokenUsage.AddMember("PrefillTokenCount", _JavaLong)
+
+	BillableTokenUsage_SampleTokenCount = BillableTokenUsage.AddMember("SampleTokenCount", _JavaLong)
+
+	BillableTokenUsage_TrainingTokenCount = BillableTokenUsage.AddMember("TrainingTokenCount", _JavaLong)
 
 	TrafficRoutingConfigType_ALL_AT_ONCE = TrafficRoutingConfigType.AddMember("ALL_AT_ONCE", smithyprelude.Unit)
 
@@ -44055,6 +44338,10 @@ func init() {
 
 	ListWorkteamsSortByOptions_CreateDate = ListWorkteamsSortByOptions.AddMember("CreateDate", smithyprelude.Unit)
 
+	LoraConfig_Rank = LoraConfig.AddMember("Rank", _Rank)
+
+	LoraConfig_Alpha = LoraConfig.AddMember("Alpha", _LoraAlpha)
+
 	MaintenanceStatus_MAINTENANCE_IN_PROGRESS = MaintenanceStatus.AddMember("MAINTENANCE_IN_PROGRESS", smithyprelude.Unit)
 
 	MaintenanceStatus_MAINTENANCE_COMPLETE = MaintenanceStatus.AddMember("MAINTENANCE_COMPLETE", smithyprelude.Unit)
@@ -47297,6 +47584,78 @@ func init() {
 
 	TrainingProgressInfo_MaxEpoch = TrainingProgressInfo.AddMember("MaxEpoch", _TrainingEpochCount)
 
+	TrainingSessionStatus_CREATED = TrainingSessionStatus.AddMember("CREATED", smithyprelude.Unit)
+
+	TrainingSessionStatus_BLOCKED = TrainingSessionStatus.AddMember("BLOCKED", smithyprelude.Unit)
+
+	TrainingSessionStatus_RUNNING = TrainingSessionStatus.AddMember("RUNNING", smithyprelude.Unit)
+
+	TrainingSessionStatus_FAILED = TrainingSessionStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	TrainingSessionStatus_SCHEDULED = TrainingSessionStatus.AddMember("SCHEDULED", smithyprelude.Unit)
+
+	TrainingSessionStatus_STOPPING = TrainingSessionStatus.AddMember("STOPPING", smithyprelude.Unit)
+
+	TrainingSessionStatus_STOPPED = TrainingSessionStatus.AddMember("STOPPED", smithyprelude.Unit)
+
+	TrainingSessionStatus_EXPIRED = TrainingSessionStatus.AddMember("EXPIRED", smithyprelude.Unit)
+
+	TrainingSessionStatus_DELETING = TrainingSessionStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	TrainingSessionStatus_DELETION_FAILED = TrainingSessionStatus.AddMember("DELETION_FAILED", smithyprelude.Unit)
+
+	TrainingSessionModelConfig_BaseModelArn = TrainingSessionModelConfig.AddMember("BaseModelArn", _BaseModelArn)
+
+	TrainingSessionModelConfig_AcceptEula = TrainingSessionModelConfig.AddMember("AcceptEula", _JavaBoolean)
+
+	TrainingSessionS3Location_Path = TrainingSessionS3Location.AddMember("Path", _OutputS3Path)
+
+	TrainingSessionS3Location_KmsKeyArn = TrainingSessionS3Location.AddMember("KmsKeyArn", _CustomerKmsKeyArn)
+
+	TrainingSessionOutputConfig_S3Location = TrainingSessionOutputConfig.AddMember("S3Location", TrainingSessionS3Location)
+
+	TrainingSessionDetail_TrainingSessionArn = TrainingSessionDetail.AddMember("TrainingSessionArn", _TrainingSessionArn)
+
+	TrainingSessionDetail_TrainingSessionName = TrainingSessionDetail.AddMember("TrainingSessionName", _TrainingSessionName)
+
+	TrainingSessionDetail_TrainingSessionStatus = TrainingSessionDetail.AddMember("TrainingSessionStatus", TrainingSessionStatus)
+
+	TrainingSessionDetail_ModelPackageGroupArn = TrainingSessionDetail.AddMember("ModelPackageGroupArn", _ModelPackageGroupArn)
+
+	TrainingSessionDetail_CreationTime = TrainingSessionDetail.AddMember("CreationTime", _Timestamp)
+
+	TrainingSessionDetail_LastModifiedTime = TrainingSessionDetail.AddMember("LastModifiedTime", _Timestamp)
+
+	TrainingSessionDetail_EndTime = TrainingSessionDetail.AddMember("EndTime", _Timestamp)
+
+	TrainingSessionDetail_ErrorDetails = TrainingSessionDetail.AddMember("ErrorDetails", _FailureReason)
+
+	TrainingSessionDetail_LastReceivedSequenceNumber = TrainingSessionDetail.AddMember("LastReceivedSequenceNumber", _JavaInteger)
+
+	TrainingSessionDetail_BillableTokenUsage = TrainingSessionDetail.AddMember("BillableTokenUsage", BillableTokenUsage)
+
+	TrainingSessionDetail_VpcConfig = TrainingSessionDetail.AddMember("VpcConfig", VpcConfig)
+
+	TrainingSessionDetail_RoleArn = TrainingSessionDetail.AddMember("RoleArn", _RoleArn)
+
+	TrainingSessionDetail_LoraConfig = TrainingSessionDetail.AddMember("LoraConfig", LoraConfig)
+
+	TrainingSessionDetail_ModelConfig = TrainingSessionDetail.AddMember("ModelConfig", TrainingSessionModelConfig)
+
+	TrainingSessionDetail_OutputConfig = TrainingSessionDetail.AddMember("OutputConfig", TrainingSessionOutputConfig)
+
+	TrainingSessionDetail_Tags = TrainingSessionDetail.AddMember("Tags", _TagList)
+
+	TrainingSessionSummary_TrainingSessionArn = TrainingSessionSummary.AddMember("TrainingSessionArn", _TrainingSessionArn)
+
+	TrainingSessionSummary_TrainingSessionStatus = TrainingSessionSummary.AddMember("TrainingSessionStatus", TrainingSessionStatus)
+
+	TrainingSessionSummary_CreationTime = TrainingSessionSummary.AddMember("CreationTime", _Timestamp)
+
+	TrainingSessionSummary_LastModifiedTime = TrainingSessionSummary.AddMember("LastModifiedTime", _Timestamp)
+
+	_TrainingSessionSummaries_member = _TrainingSessionSummaries.AddMember("member", TrainingSessionSummary)
+
 	TrainingSpecification_TrainingImage = TrainingSpecification.AddMember("TrainingImage", _ContainerImage)
 
 	TrainingSpecification_TrainingImageDigest = TrainingSpecification.AddMember("TrainingImageDigest", _ImageDigest)
@@ -48903,6 +49262,24 @@ func init() {
 
 	CreateTrainingPlanResponse_TrainingPlanArn = CreateTrainingPlanResponse.AddMember("TrainingPlanArn", _TrainingPlanArn)
 
+	CreateTrainingSessionRequest_TrainingSessionName = CreateTrainingSessionRequest.AddMember("TrainingSessionName", _TrainingSessionName)
+
+	CreateTrainingSessionRequest_ModelPackageGroupArn = CreateTrainingSessionRequest.AddMember("ModelPackageGroupArn", _ModelPackageGroupArn)
+
+	CreateTrainingSessionRequest_LoraConfig = CreateTrainingSessionRequest.AddMember("LoraConfig", LoraConfig)
+
+	CreateTrainingSessionRequest_RoleArn = CreateTrainingSessionRequest.AddMember("RoleArn", _RoleArn)
+
+	CreateTrainingSessionRequest_VpcConfig = CreateTrainingSessionRequest.AddMember("VpcConfig", VpcConfig)
+
+	CreateTrainingSessionRequest_ModelConfig = CreateTrainingSessionRequest.AddMember("ModelConfig", TrainingSessionModelConfig)
+
+	CreateTrainingSessionRequest_OutputConfig = CreateTrainingSessionRequest.AddMember("OutputConfig", TrainingSessionOutputConfig)
+
+	CreateTrainingSessionRequest_Tags = CreateTrainingSessionRequest.AddMember("Tags", _TagList)
+
+	CreateTrainingSessionResponse_TrainingSessionArn = CreateTrainingSessionResponse.AddMember("TrainingSessionArn", _TrainingSessionArn)
+
 	CreateTransformJobRequest_TransformJobName = CreateTransformJobRequest.AddMember("TransformJobName", _TransformJobName)
 
 	CreateTransformJobRequest_ModelName = CreateTransformJobRequest.AddMember("ModelName", _ModelName)
@@ -49196,6 +49573,8 @@ func init() {
 	DeleteTagsInput_TagKeys = DeleteTagsInput.AddMember("TagKeys", _TagKeyList)
 
 	DeleteTrainingJobRequest_TrainingJobName = DeleteTrainingJobRequest.AddMember("TrainingJobName", _TrainingJobName)
+
+	DeleteTrainingSessionRequest_TrainingSessionName = DeleteTrainingSessionRequest.AddMember("TrainingSessionName", _TrainingSessionName)
 
 	DeleteTrialComponentRequest_TrialComponentName = DeleteTrialComponentRequest.AddMember("TrialComponentName", _ExperimentEntityName)
 
@@ -51255,6 +51634,10 @@ func init() {
 
 	DescribeTrainingPlanResponse_ReservedCapacitySummaries = DescribeTrainingPlanResponse.AddMember("ReservedCapacitySummaries", _ReservedCapacitySummaries)
 
+	DescribeTrainingSessionRequest_TrainingSessionName = DescribeTrainingSessionRequest.AddMember("TrainingSessionName", _TrainingSessionName)
+
+	DescribeTrainingSessionResponse_TrainingSessionDetail = DescribeTrainingSessionResponse.AddMember("TrainingSessionDetail", TrainingSessionDetail)
+
 	DescribeTransformJobRequest_TransformJobName = DescribeTransformJobRequest.AddMember("TransformJobName", _TransformJobName)
 
 	DescribeTransformJobResponse_TransformJobName = DescribeTransformJobResponse.AddMember("TransformJobName", _TransformJobName)
@@ -53171,6 +53554,22 @@ func init() {
 
 	ListTrainingPlansResponse_TrainingPlanSummaries = ListTrainingPlansResponse.AddMember("TrainingPlanSummaries", _TrainingPlanSummaries)
 
+	ListTrainingSessionsRequest_NextToken = ListTrainingSessionsRequest.AddMember("NextToken", _NextToken)
+
+	ListTrainingSessionsRequest_MaxResults = ListTrainingSessionsRequest.AddMember("MaxResults", _MaxResults)
+
+	ListTrainingSessionsRequest_CreationTimeAfter = ListTrainingSessionsRequest.AddMember("CreationTimeAfter", _Timestamp)
+
+	ListTrainingSessionsRequest_CreationTimeBefore = ListTrainingSessionsRequest.AddMember("CreationTimeBefore", _Timestamp)
+
+	ListTrainingSessionsRequest_NameContains = ListTrainingSessionsRequest.AddMember("NameContains", _NameContains)
+
+	ListTrainingSessionsRequest_StatusEquals = ListTrainingSessionsRequest.AddMember("StatusEquals", TrainingSessionStatus)
+
+	ListTrainingSessionsResponse_NextToken = ListTrainingSessionsResponse.AddMember("NextToken", _NextToken)
+
+	ListTrainingSessionsResponse_TrainingSessionSummaries = ListTrainingSessionsResponse.AddMember("TrainingSessionSummaries", _TrainingSessionSummaries)
+
 	ListTransformJobsRequest_CreationTimeAfter = ListTransformJobsRequest.AddMember("CreationTimeAfter", _Timestamp)
 
 	ListTransformJobsRequest_CreationTimeBefore = ListTransformJobsRequest.AddMember("CreationTimeBefore", _Timestamp)
@@ -53512,6 +53911,8 @@ func init() {
 	StopProcessingJobRequest_ProcessingJobName = StopProcessingJobRequest.AddMember("ProcessingJobName", _ProcessingJobName)
 
 	StopTrainingJobRequest_TrainingJobName = StopTrainingJobRequest.AddMember("TrainingJobName", _TrainingJobName)
+
+	StopTrainingSessionRequest_TrainingSessionName = StopTrainingSessionRequest.AddMember("TrainingSessionName", _TrainingSessionName)
 
 	StopTransformJobRequest_TransformJobName = StopTransformJobRequest.AddMember("TransformJobName", _TransformJobName)
 

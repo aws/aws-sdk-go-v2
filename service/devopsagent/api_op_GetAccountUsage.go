@@ -46,6 +46,9 @@ type GetAccountUsageOutput struct {
 	// Monthly evaluation hours usage and limit for an account
 	MonthlyAccountEvaluationHours *types.UsageMetric
 
+	// Represents a usage metric with its configured limit and current usage value.
+	MonthlyAccountGraderHours *types.UsageMetric
+
 	// Monthly investigation hours usage and limit for an account
 	MonthlyAccountInvestigationHours *types.UsageMetric
 

@@ -34,6 +34,9 @@ type GetAgentSpaceInput struct {
 	// This member is required.
 	AgentSpaceId *string
 
+	// How much data to include in the response.
+	IncludedData types.IncludedData
+
 	noSmithyDocumentSerde
 }
 

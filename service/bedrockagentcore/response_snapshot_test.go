@@ -190,6 +190,9 @@ func TestCheckResponseSnapshot_BatchCreateMemoryRecords(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -351,6 +354,9 @@ func TestCheckResponseSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
 					},
 				},
 			},
+		},
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
 		},
 	})
 	if err != nil {
@@ -2475,11 +2481,13 @@ func TestCheckResponseSnapshot_GetMemoryRecord(t *testing.T) {
 				"__Member__",
 			},
 			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Metadata: map[string]types.MemoryRecordMetadataValue{
 				"key0": &types.MemoryRecordMetadataValueMemberStringValue{
 					Value: "__MemoryRecordMetadataValueMemberStringValue__",
 				},
 			},
+			ExpiresAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetMemoryRecord.response")
@@ -3563,6 +3571,7 @@ func TestCheckResponseSnapshot_ListMemoryRecords(t *testing.T) {
 				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Score:     ptr.Float64(1.0),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Metadata: map[string]types.MemoryRecordMetadataValue{
 					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
 						Value: "__MemoryRecordMetadataValueMemberStringValue__",
@@ -3581,6 +3590,7 @@ func TestCheckResponseSnapshot_ListMemoryRecords(t *testing.T) {
 				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Score:     ptr.Float64(1.0),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Metadata: map[string]types.MemoryRecordMetadataValue{
 					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
 						Value: "__MemoryRecordMetadataValueMemberStringValue__",
@@ -3885,6 +3895,7 @@ func TestCheckResponseSnapshot_RetrieveMemoryRecords(t *testing.T) {
 				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Score:     ptr.Float64(1.0),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Metadata: map[string]types.MemoryRecordMetadataValue{
 					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
 						Value: "__MemoryRecordMetadataValueMemberStringValue__",
@@ -3903,6 +3914,7 @@ func TestCheckResponseSnapshot_RetrieveMemoryRecords(t *testing.T) {
 				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Score:     ptr.Float64(1.0),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Metadata: map[string]types.MemoryRecordMetadataValue{
 					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
 						Value: "__MemoryRecordMetadataValueMemberStringValue__",
@@ -4931,6 +4943,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5254,6 +5269,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5411,6 +5429,9 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5475,6 +5496,9 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5592,6 +5616,9 @@ func TestCheckResponseSnapshot_Error_ThrottledException(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5727,6 +5754,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		RecordExpirySpecification: &types.RecordExpirySpecificationMemberRecordExpiryDurationDays{
+			Value: 1,
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
