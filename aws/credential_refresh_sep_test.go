@@ -1,6 +1,7 @@
 package aws
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
@@ -243,7 +244,7 @@ func runSEPCase(t *testing.T, tc sepCase) {
 	}
 }
 
-// fixedRandReader returns a reader that makes sdkrand.CryptoRandFloat64 always return r.
+// fixedRandReader returns a reader that makes sdkrand.CryptoRandFloat64 return r for up to 64 calls.
 func fixedRandReader(r float64) io.Reader {
 	n := uint64(r * (1 << 53))
 	b := make([]byte, 7)
@@ -251,15 +252,5 @@ func fixedRandReader(r float64) io.Reader {
 		b[i] = byte(n)
 		n >>= 8
 	}
-	return repeatReader(b)
-}
-
-// repeatReader fills every read with the same bytes, over and over.
-type repeatReader []byte
-
-func (r repeatReader) Read(p []byte) (int, error) {
-	for i := range p {
-		p[i] = r[i%len(r)]
-	}
-	return len(p), nil
+	return bytes.NewReader(bytes.Repeat(b, 64))
 }
