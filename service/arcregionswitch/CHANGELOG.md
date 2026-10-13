@@ -1,3 +1,7 @@
+# v1.21.0 (2026-10-13)
+
+* **Feature**: Adds support for SSM Execution Block in Region switch plans
+
 # v1.20.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

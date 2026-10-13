@@ -1,8 +1,0 @@
-{
-    "id": "d7156d61-2eae-4a84-88b4-b3d8c9f6ec60",
-    "type": "feature",
-    "description": "Adds support for administrators to require users to re-authenticate OneDrive and Google Drive storage connectors when a streaming session is reused.",
-    "modules": [
-        "service/appstream"
-    ]
-}

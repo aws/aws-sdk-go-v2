@@ -1,3 +1,7 @@
+# v1.68.0 (2026-10-13)
+
+* **Feature**: Adds support for new instance types in the C8a, C8i, C9g, M8a, M8i, and M9g families for managed EC2 and container fleets
+
 # v1.67.1 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

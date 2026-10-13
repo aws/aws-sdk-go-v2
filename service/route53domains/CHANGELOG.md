@@ -1,3 +1,7 @@
+# v1.45.0 (2026-10-13)
+
+* **Feature**: Route 53 Domains now supports premium domains. This release adds consent objects to operations on premium domains and a new GetDomainPrices API. Also, the Flags and PublicKey fields were deprecated from the DnssecKey response.
+
 # v1.44.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

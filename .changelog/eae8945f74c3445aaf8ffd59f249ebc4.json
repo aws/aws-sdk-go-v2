@@ -1,8 +1,0 @@
-{
-    "id": "eae8945f-74c3-445a-af8f-fd59f249ebc4",
-    "type": "feature",
-    "description": "AWS DataSync Enhanced mode now supports FSx for OpenZFS, NFS 4.2, and object metadata controls",
-    "modules": [
-        "service/datasync"
-    ]
-}

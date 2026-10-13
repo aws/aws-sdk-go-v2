@@ -1,3 +1,7 @@
+# v1.57.0 (2026-10-13)
+
+* **Feature**: With Expanded container registry support, you can use container images from registries such as Seqera (Wave), NVIDIA NGC, and Google Artifact Registry with AWS HealthOmics private workflows, without manually migrating images into Amazon ECR or editing your workflow definitions.
+
 # v1.56.0 (2026-10-12)
 
 * **Feature**: AWS HealthOmics now supports private workflow runs using VPC resources shared across accounts via AWS RAM. A new optional vpcOwnerAccountId field in CreateConfiguration's VpcConfig allows customers to specify the account that owns the shared subnets and security groups.

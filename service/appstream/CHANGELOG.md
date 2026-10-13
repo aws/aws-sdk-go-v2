@@ -1,3 +1,7 @@
+# v1.72.0 (2026-10-13)
+
+* **Feature**: Adds support for administrators to require users to re-authenticate OneDrive and Google Drive storage connectors when a streaming session is reused.
+
 # v1.71.3 (2026-10-09.2)
 
 * **Bug Fix**: Fix deserialization failure when `Application.Metadata` contains a null value.

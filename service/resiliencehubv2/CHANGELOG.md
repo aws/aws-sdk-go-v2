@@ -1,3 +1,7 @@
+# v1.13.0 (2026-10-13)
+
+* **Feature**: Adds support for DevOpsAgent integration where users can specify the agent space ARN at service level and launch investigations directly from Resilience Hub v2.
+
 # v1.12.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

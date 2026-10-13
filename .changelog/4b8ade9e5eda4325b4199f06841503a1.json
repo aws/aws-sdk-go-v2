@@ -1,8 +1,0 @@
-{
-    "id": "4b8ade9e-5eda-4325-b419-9f06841503a1",
-    "type": "feature",
-    "description": "Adds support for DevOpsAgent integration where users can specify the agent space ARN at service level and launch investigations directly from Resilience Hub v2.",
-    "modules": [
-        "service/resiliencehubv2"
-    ]
-}

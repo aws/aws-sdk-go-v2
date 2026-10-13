@@ -1,3 +1,7 @@
+# v1.2.1 (2026-10-13)
+
+* **Documentation**: Documentation update to include common use cases.
+
 # v1.2.0 (2026-10-12)
 
 * **Feature**: Lambda Web Functions GA launch. Lambda Web Functions enable customers to run web applications and API backends

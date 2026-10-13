@@ -1,8 +1,0 @@
-{
-    "id": "34b1f6d6-3596-4bc5-b912-4258487f4111",
-    "type": "feature",
-    "description": "Added new LakeFormation APIs and documentation updates for Simple Row-level Security (RLS).",
-    "modules": [
-        "service/lakeformation"
-    ]
-}

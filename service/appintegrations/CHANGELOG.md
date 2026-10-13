@@ -1,3 +1,7 @@
+# v1.52.0 (2026-10-13)
+
+* **Feature**: This release adds the Connect JWT authentication type and the AudienceOverride field to AuthConfig, letting A2A server applications authenticate with JWTs issued by Amazon Connect.
+
 # v1.51.1 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

@@ -1,3 +1,7 @@
+# v1.205.0 (2026-10-13)
+
+* **Feature**: New APIs to support aliases and versions for ContactFlow.
+
 # v1.204.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

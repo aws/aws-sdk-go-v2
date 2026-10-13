@@ -1,3 +1,7 @@
+# v1.8.0 (2026-10-13)
+
+* **Feature**: AWS Agent Registry is improving recently launched custom metadata schema feature to make shared attributes easier to manage.
+
 # v1.7.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

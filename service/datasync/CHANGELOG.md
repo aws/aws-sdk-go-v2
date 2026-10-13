@@ -1,3 +1,7 @@
+# v1.68.0 (2026-10-13)
+
+* **Feature**: AWS DataSync Enhanced mode now supports FSx for OpenZFS, NFS 4.2, and object metadata controls
+
 # v1.67.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

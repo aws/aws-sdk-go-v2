@@ -1,8 +1,0 @@
-{
-    "id": "fd555a29-29de-4ccd-be8b-8570dc47d6d9",
-    "type": "feature",
-    "description": "Route 53 Domains now supports premium domains. This release adds consent objects to operations on premium domains and a new GetDomainPrices API. Also, the Flags and PublicKey fields were deprecated from the DnssecKey response.",
-    "modules": [
-        "service/route53domains"
-    ]
-}

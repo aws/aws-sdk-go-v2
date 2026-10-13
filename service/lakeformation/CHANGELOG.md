@@ -1,3 +1,7 @@
+# v1.56.0 (2026-10-13)
+
+* **Feature**: Added new LakeFormation APIs and documentation updates for Simple Row-level Security (RLS).
+
 # v1.55.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

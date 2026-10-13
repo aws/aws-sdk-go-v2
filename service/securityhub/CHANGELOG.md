@@ -1,3 +1,7 @@
+# v1.85.0 (2026-10-13)
+
+* **Feature**: Adds and updates APIs to support criticality. This feature allows customers to create automation rules to assign criticality to resources matching a criteria. With this release, resources and exposure findings will include the criticality.
+
 # v1.84.1 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

@@ -1,8 +1,0 @@
-{
-    "id": "4e309805-8765-4779-9936-a8a93e4f925d",
-    "type": "feature",
-    "description": "AWS Agent Registry is improving recently launched custom metadata schema feature to make shared attributes easier to manage.",
-    "modules": [
-        "service/agentregistrycontrol"
-    ]
-}

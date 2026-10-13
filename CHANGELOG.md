@@ -1,3 +1,37 @@
+# Release (2026-10-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol`: [v1.8.0](service/agentregistrycontrol/CHANGELOG.md#v180-2026-10-13)
+  * **Feature**: AWS Agent Registry is improving recently launched custom metadata schema feature to make shared attributes easier to manage.
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.52.0](service/appintegrations/CHANGELOG.md#v1520-2026-10-13)
+  * **Feature**: This release adds the Connect JWT authentication type and the AudienceOverride field to AuthConfig, letting A2A server applications authenticate with JWTs issued by Amazon Connect.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.72.0](service/appstream/CHANGELOG.md#v1720-2026-10-13)
+  * **Feature**: Adds support for administrators to require users to re-authenticate OneDrive and Google Drive storage connectors when a streaming session is reused.
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.21.0](service/arcregionswitch/CHANGELOG.md#v1210-2026-10-13)
+  * **Feature**: Adds support for SSM Execution Block in Region switch plans
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.205.0](service/connect/CHANGELOG.md#v12050-2026-10-13)
+  * **Feature**: New APIs to support aliases and versions for ContactFlow.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.68.0](service/datasync/CHANGELOG.md#v1680-2026-10-13)
+  * **Feature**: AWS DataSync Enhanced mode now supports FSx for OpenZFS, NFS 4.2, and object metadata controls
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.68.0](service/gamelift/CHANGELOG.md#v1680-2026-10-13)
+  * **Feature**: Adds support for new instance types in the C8a, C8i, C9g, M8a, M8i, and M9g families for managed EC2 and container fleets
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.171.0](service/glue/CHANGELOG.md#v11710-2026-10-13)
+  * **Feature**: Amazon Glue releasing support for adding custom namespace for S3 Tables in Glue zero-ETL integration
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.56.0](service/lakeformation/CHANGELOG.md#v1560-2026-10-13)
+  * **Feature**: Added new LakeFormation APIs and documentation updates for Simple Row-level Security (RLS).
+* `github.com/aws/aws-sdk-go-v2/service/lambdaweb`: [v1.2.1](service/lambdaweb/CHANGELOG.md#v121-2026-10-13)
+  * **Documentation**: Documentation update to include common use cases.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.57.0](service/omics/CHANGELOG.md#v1570-2026-10-13)
+  * **Feature**: With Expanded container registry support, you can use container images from registries such as Seqera (Wave), NVIDIA NGC, and Google Artifact Registry with AWS HealthOmics private workflows, without manually migrating images into Amazon ECR or editing your workflow definitions.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehubv2`: [v1.13.0](service/resiliencehubv2/CHANGELOG.md#v1130-2026-10-13)
+  * **Feature**: Adds support for DevOpsAgent integration where users can specify the agent space ARN at service level and launch investigations directly from Resilience Hub v2.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.45.0](service/route53domains/CHANGELOG.md#v1450-2026-10-13)
+  * **Feature**: Route 53 Domains now supports premium domains. This release adds consent objects to operations on premium domains and a new GetDomainPrices API. Also, the Flags and PublicKey fields were deprecated from the DnssecKey response.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.284.0](service/sagemaker/CHANGELOG.md#v12840-2026-10-13)
+  * **Feature**: Adds Amazon Athena, Cleanup, ForEach, and Amazon EMR Serverless step metadata, ForEach iteration context, and the CompletedWithFailures execution status to SageMaker Pipelines.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.85.0](service/securityhub/CHANGELOG.md#v1850-2026-10-13)
+  * **Feature**: Adds and updates APIs to support criticality. This feature allows customers to create automation rules to assign criticality to resources matching a criteria. With this release, resources and exposure findings will include the criticality.
+
 # Release (2026-10-12)
 
 ## Module Highlights
