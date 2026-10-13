@@ -601,7 +601,7 @@ var ExecutionApprovalConfiguration_approvalRole *smithy.Schema
 var ExecutionBlockConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "ExecutionBlockConfiguration",
-}, smithy.ShapeTypeUnion, 18)
+}, smithy.ShapeTypeUnion, 19)
 var ExecutionBlockConfiguration_customActionLambdaConfig *smithy.Schema
 
 var ExecutionBlockConfiguration_ec2AsgCapacityIncreaseConfig *smithy.Schema
@@ -638,10 +638,12 @@ var ExecutionBlockConfiguration_neptuneGlobalDatabaseConfig *smithy.Schema
 
 var ExecutionBlockConfiguration_rdsSwitchoverReadReplicaConfig *smithy.Schema
 
+var ExecutionBlockConfiguration_ssmSendCommandConfig *smithy.Schema
+
 var ExecutionBlockType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "ExecutionBlockType",
-}, smithy.ShapeTypeEnum, 18)
+}, smithy.ShapeTypeEnum, 19)
 var ExecutionBlockType_CUSTOM_ACTION_LAMBDA *smithy.Schema
 
 var ExecutionBlockType_EXECUTION_APPROVAL *smithy.Schema
@@ -677,6 +679,8 @@ var ExecutionBlockType_AURORA_PROVISIONED_SCALING *smithy.Schema
 var ExecutionBlockType_NEPTUNE *smithy.Schema
 
 var ExecutionBlockType_RDS_SWITCHOVER_READ_REPLICA *smithy.Schema
+
+var ExecutionBlockType_SSM_SEND_COMMAND *smithy.Schema
 
 var _ExecutionComment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
@@ -1287,6 +1291,14 @@ var _RegionNeptuneClusterArnMap_key *smithy.Schema
 
 var _RegionNeptuneClusterArnMap_value *smithy.Schema
 
+var _RegionSsmDocumentMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "RegionSsmDocumentMap",
+}, smithy.ShapeTypeMap, 2)
+var _RegionSsmDocumentMap_key *smithy.Schema
+
+var _RegionSsmDocumentMap_value *smithy.Schema
+
 var RegionSwitchPlanConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "RegionSwitchPlanConfiguration",
@@ -1556,6 +1568,110 @@ var _ServiceQuotaWarningSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ServiceQuotaWarningSummaryList",
 }, smithy.ShapeTypeList, 1)
 var _ServiceQuotaWarningSummaryList_member *smithy.Schema
+
+var _SsmDocumentArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmDocumentArn",
+}, smithy.ShapeTypeString, 0)
+
+var SsmDocumentConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmDocumentConfig",
+}, smithy.ShapeTypeStructure, 6)
+var SsmDocumentConfig_crossAccountRole *smithy.Schema
+
+var SsmDocumentConfig_externalId *smithy.Schema
+
+var SsmDocumentConfig_documentArn *smithy.Schema
+
+var SsmDocumentConfig_targets *smithy.Schema
+
+var SsmDocumentConfig_parameters *smithy.Schema
+
+var SsmDocumentConfig_documentVersion *smithy.Schema
+
+var _SsmDocumentParameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmDocumentParameters",
+}, smithy.ShapeTypeMap, 2)
+var _SsmDocumentParameters_key *smithy.Schema
+
+var _SsmDocumentParameters_value *smithy.Schema
+
+var _SsmDocumentVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmDocumentVersion",
+}, smithy.ShapeTypeString, 0)
+
+var _SsmParameterKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmParameterKey",
+}, smithy.ShapeTypeString, 0)
+
+var _SsmParameterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmParameterValue",
+}, smithy.ShapeTypeString, 0)
+
+var _SsmParameterValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmParameterValues",
+}, smithy.ShapeTypeList, 1)
+var _SsmParameterValues_member *smithy.Schema
+
+var SsmSendCommandConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmSendCommandConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var SsmSendCommandConfiguration_timeoutMinutes *smithy.Schema
+
+var SsmSendCommandConfiguration_regionDocuments *smithy.Schema
+
+var SsmSendCommandConfiguration_retryIntervalMinutes *smithy.Schema
+
+var SsmSendCommandConfiguration_ungraceful *smithy.Schema
+
+var SsmSendCommandUngraceful = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmSendCommandUngraceful",
+}, smithy.ShapeTypeStructure, 1)
+var SsmSendCommandUngraceful_behavior *smithy.Schema
+
+var SsmSendCommandUngracefulBehavior = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmSendCommandUngracefulBehavior",
+}, smithy.ShapeTypeEnum, 1)
+var SsmSendCommandUngracefulBehavior_SKIP *smithy.Schema
+
+var SsmTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmTarget",
+}, smithy.ShapeTypeStructure, 2)
+var SsmTarget_key *smithy.Schema
+
+var SsmTarget_values *smithy.Schema
+
+var _SsmTargetKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmTargetKey",
+}, smithy.ShapeTypeString, 0)
+
+var _SsmTargetList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmTargetList",
+}, smithy.ShapeTypeList, 1)
+var _SsmTargetList_member *smithy.Schema
+
+var _SsmTargetValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmTargetValue",
+}, smithy.ShapeTypeString, 0)
+
+var _SsmTargetValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmTargetValueList",
+}, smithy.ShapeTypeList, 1)
+var _SsmTargetValueList_member *smithy.Schema
 
 var Step = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
@@ -2606,6 +2722,8 @@ func init() {
 
 	ExecutionBlockType_RDS_SWITCHOVER_READ_REPLICA = ExecutionBlockType.AddMember("RDS_SWITCHOVER_READ_REPLICA", smithyprelude.Unit)
 
+	ExecutionBlockType_SSM_SEND_COMMAND = ExecutionBlockType.AddMember("SSM_SEND_COMMAND", smithyprelude.Unit)
+
 	Step_name = Step.AddMember("name", _StepName)
 
 	Step_description = Step.AddMember("description", smithyprelude.String)
@@ -2718,6 +2836,48 @@ func init() {
 
 	RdsSwitchoverReadReplicaConfiguration_ungraceful = RdsSwitchoverReadReplicaConfiguration.AddMember("ungraceful", RdsUngraceful)
 
+	_SsmTargetValueList_member = _SsmTargetValueList.AddMember("member", _SsmTargetValue)
+
+	SsmTarget_key = SsmTarget.AddMember("key", _SsmTargetKey)
+
+	SsmTarget_values = SsmTarget.AddMember("values", _SsmTargetValueList)
+
+	_SsmTargetList_member = _SsmTargetList.AddMember("member", SsmTarget)
+
+	_SsmParameterValues_member = _SsmParameterValues.AddMember("member", _SsmParameterValue)
+
+	_SsmDocumentParameters_key = _SsmDocumentParameters.AddMember("key", _SsmParameterKey)
+
+	_SsmDocumentParameters_value = _SsmDocumentParameters.AddMember("value", _SsmParameterValues)
+
+	SsmDocumentConfig_crossAccountRole = SsmDocumentConfig.AddMember("crossAccountRole", _IamRoleArn)
+
+	SsmDocumentConfig_externalId = SsmDocumentConfig.AddMember("externalId", smithyprelude.String)
+
+	SsmDocumentConfig_documentArn = SsmDocumentConfig.AddMember("documentArn", _SsmDocumentArn)
+
+	SsmDocumentConfig_targets = SsmDocumentConfig.AddMember("targets", _SsmTargetList)
+
+	SsmDocumentConfig_parameters = SsmDocumentConfig.AddMember("parameters", _SsmDocumentParameters)
+
+	SsmDocumentConfig_documentVersion = SsmDocumentConfig.AddMember("documentVersion", _SsmDocumentVersion)
+
+	_RegionSsmDocumentMap_key = _RegionSsmDocumentMap.AddMember("key", _Region)
+
+	_RegionSsmDocumentMap_value = _RegionSsmDocumentMap.AddMember("value", SsmDocumentConfig)
+
+	SsmSendCommandUngracefulBehavior_SKIP = SsmSendCommandUngracefulBehavior.AddMember("SKIP", smithyprelude.Unit)
+
+	SsmSendCommandUngraceful_behavior = SsmSendCommandUngraceful.AddMember("behavior", SsmSendCommandUngracefulBehavior)
+
+	SsmSendCommandConfiguration_timeoutMinutes = SsmSendCommandConfiguration.AddMember("timeoutMinutes", smithyprelude.Integer)
+
+	SsmSendCommandConfiguration_regionDocuments = SsmSendCommandConfiguration.AddMember("regionDocuments", _RegionSsmDocumentMap)
+
+	SsmSendCommandConfiguration_retryIntervalMinutes = SsmSendCommandConfiguration.AddMember("retryIntervalMinutes", smithyprelude.Float)
+
+	SsmSendCommandConfiguration_ungraceful = SsmSendCommandConfiguration.AddMember("ungraceful", SsmSendCommandUngraceful)
+
 	ExecutionBlockConfiguration_customActionLambdaConfig = ExecutionBlockConfiguration.AddMember("customActionLambdaConfig", CustomActionLambdaConfiguration)
 
 	ExecutionBlockConfiguration_ec2AsgCapacityIncreaseConfig = ExecutionBlockConfiguration.AddMember("ec2AsgCapacityIncreaseConfig", Ec2AsgCapacityIncreaseConfiguration)
@@ -2753,6 +2913,8 @@ func init() {
 	ExecutionBlockConfiguration_neptuneGlobalDatabaseConfig = ExecutionBlockConfiguration.AddMember("neptuneGlobalDatabaseConfig", NeptuneGlobalDatabaseConfiguration)
 
 	ExecutionBlockConfiguration_rdsSwitchoverReadReplicaConfig = ExecutionBlockConfiguration.AddMember("rdsSwitchoverReadReplicaConfig", RdsSwitchoverReadReplicaConfiguration)
+
+	ExecutionBlockConfiguration_ssmSendCommandConfig = ExecutionBlockConfiguration.AddMember("ssmSendCommandConfig", SsmSendCommandConfiguration)
 
 	ExecutionEventType_UNKNOWN = ExecutionEventType.AddMember("UNKNOWN", smithyprelude.Unit)
 

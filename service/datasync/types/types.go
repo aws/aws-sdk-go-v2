@@ -1009,7 +1009,9 @@ type NfsMountOptions struct {
 	//
 	// You can specify the following options:
 	//
-	//   - AUTOMATIC (default): DataSync chooses NFS version 4.1.
+	//   - AUTOMATIC (default): DataSync chooses NFS version 4.1. For Amazon FSx for
+	//   OpenZFS locations, DataSync first attempts to use NFS version 4.2, then falls
+	//   back to version 4.1, and then to earlier versions if needed.
 	//
 	//   - NFS3 : Stateless protocol version that allows for asynchronous writes on the
 	//   server.
@@ -1020,6 +1022,11 @@ type NfsMountOptions struct {
 	//   - NFSv4_1 : Stateful protocol version that supports sessions, directory
 	//   delegations, and parallel data processing. NFS version 4.1 also includes all
 	//   features available in version 4.0.
+	//
+	//   - NFSv4_2 : Stateful protocol version that supports sparse file operations,
+	//   space reservation, and server-side copy operations, in addition to all features
+	//   available in version 4.1. Selecting NFS version 4.2 requires an Enhanced mode
+	//   task.
 	//
 	// DataSync currently only supports NFS version 3 with Amazon FSx for NetApp ONTAP
 	// locations.
@@ -1170,6 +1177,14 @@ type Options struct {
 	//
 	// Enhanced mode tasks don't support Mtime set to NONE .
 	Mtime Mtime
+
+	// Specifies whether you want DataSync to PRESERVE object metadata (default
+	// behavior) when transferring between object storage systems. If you want your
+	// DataSync task to ignore object metadata, specify the NONE value.
+	//
+	// Even if you specify NONE , metadata for the last modified time is still
+	// preserved.
+	ObjectMetadata ObjectMetadata
 
 	// Specifies whether you want DataSync to PRESERVE object tags (default behavior)
 	// when transferring between object storage systems. If you want your DataSync task
@@ -1371,6 +1386,9 @@ func (v *Options) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Mtime != "" {
 		s.WriteString(schemas.Options_Mtime, string(v.Mtime))
 	}
+	if v.ObjectMetadata != "" {
+		s.WriteString(schemas.Options_ObjectMetadata, string(v.ObjectMetadata))
+	}
 	if v.ObjectTags != "" {
 		s.WriteString(schemas.Options_ObjectTags, string(v.ObjectTags))
 	}
@@ -1435,6 +1453,13 @@ func (v *Options) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.Mtime = Mtime(ev)
+			return nil
+		case schemas.Options_ObjectMetadata:
+			var ev string
+			if err := d.ReadString(schemas.Options_ObjectMetadata, &ev); err != nil {
+				return err
+			}
+			v.ObjectMetadata = ObjectMetadata(ev)
 			return nil
 		case schemas.Options_ObjectTags:
 			var ev string
@@ -1558,11 +1583,16 @@ type PrivateLinkConfig struct {
 	// DataSync access to your VPC endpoint. You can only specify one ARN.
 	SecurityGroupArns []string
 
-	// Specifies the ARN of the subnet where your VPC endpoint is located. You can
-	// only specify one ARN.
+	// Specifies the ARN of the subnet where DataSync creates the network interfaces
+	// that handle data transfer traffic for your tasks. You can only specify one ARN.
+	//
+	// The subnet doesn't have to be the subnet that contains your VPC endpoint.
 	SubnetArns []string
 
-	// Specifies the ID of the VPC endpoint that your agent connects to.
+	// Specifies the ID of the VPC service endpoint that's recorded for your agent.
+	// The endpoint ID is informational and isn't verified by DataSync. Your agent
+	// communicates through the private IP address in PrivateLinkEndpoint , which is
+	// set when you activate the agent.
 	VpcEndpointId *string
 
 	noSmithyDocumentSerde

@@ -1158,6 +1158,7 @@ func TestUpdateResponseSnapshot_CreateStack(t *testing.T) {
 				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 			},
+			StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 		},
 	}
 	proto := rpcv2.NewCBOR(schemas.PhotonAdminProxyService)
@@ -3266,6 +3267,7 @@ func TestUpdateResponseSnapshot_DescribeStacks(t *testing.T) {
 					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 				},
+				StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 			},
 			{
 				Arn:         ptr.String("__Arn__"),
@@ -3375,6 +3377,7 @@ func TestUpdateResponseSnapshot_DescribeStacks(t *testing.T) {
 					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 				},
+				StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4870,6 +4873,7 @@ func TestUpdateResponseSnapshot_UpdateStack(t *testing.T) {
 				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 			},
+			StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 		},
 	}
 	proto := rpcv2.NewCBOR(schemas.PhotonAdminProxyService)

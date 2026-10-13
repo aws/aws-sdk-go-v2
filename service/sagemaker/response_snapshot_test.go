@@ -27751,6 +27751,12 @@ func TestCheckResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 						StepName:    ptr.String("__StepName__"),
 						LogFilePath: ptr.String("__LogFilePath__"),
 					},
+					EMRServerless: &types.EMRServerlessStepMetadata{
+						ApplicationId: ptr.String("__ApplicationId__"),
+						JobRunId:      ptr.String("__JobRunId__"),
+						JobRunName:    ptr.String("__JobRunName__"),
+						LogFilePath:   ptr.String("__LogFilePath__"),
+					},
 					QualityCheck: &types.QualityCheckStepMetadata{
 						CheckType:                            ptr.String("__CheckType__"),
 						BaselineUsedForDriftCheckStatistics:  ptr.String("__BaselineUsedForDriftCheckStatistics__"),
@@ -27824,10 +27830,53 @@ func TestCheckResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 					Job: &types.JobStepMetadata{
 						Arn: ptr.String("__Arn__"),
 					},
+					Athena: &types.AthenaStepMetadata{
+						QueryExecutionId: ptr.String("__QueryExecutionId__"),
+						S3OutputLocation: ptr.String("__S3OutputLocation__"),
+					},
+					Cleanup: &types.CleanupStepMetadata{
+						CleanedSteps: []string{
+							"__Member__",
+							"__Member__",
+						},
+						FailedSteps: []types.CleanupFailure{
+							{
+								StepName:     ptr.String("__StepName__"),
+								ErrorCode:    types.CleanupFailureErrorCode("ClientError"),
+								ErrorMessage: ptr.String("__ErrorMessage__"),
+							},
+							{
+								StepName:     ptr.String("__StepName__"),
+								ErrorCode:    types.CleanupFailureErrorCode("ClientError"),
+								ErrorMessage: ptr.String("__ErrorMessage__"),
+							},
+						},
+						SkippedSteps: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ForEach: &types.ForEachStepMetadata{
+						Status:             types.ForEachStatus("Succeeded"),
+						InputItemCount:     ptr.Int32(1),
+						TotalStepCount:     ptr.Int32(1),
+						SucceededStepCount: ptr.Int32(1),
+						FailedStepCount:    ptr.Int32(1),
+						StoppedStepCount:   ptr.Int32(1),
+						Selector: &types.ForEachSelectorResult{
+							StepName: ptr.String("__StepName__"),
+							Index:    ptr.Int32(1),
+						},
+					},
 				},
 				AttemptCount: ptr.Int32(1),
 				SelectiveExecutionResult: &types.SelectiveExecutionResult{
 					SourcePipelineExecutionArn: ptr.String("__SourcePipelineExecutionArn__"),
+				},
+				IterationContext: &types.IterationContext{
+					ParentStepName: ptr.String("__ParentStepName__"),
+					Index:          ptr.Int32(1),
+					Item:           ptr.String("__Item__"),
 				},
 			},
 			{
@@ -27896,6 +27945,12 @@ func TestCheckResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 						StepName:    ptr.String("__StepName__"),
 						LogFilePath: ptr.String("__LogFilePath__"),
 					},
+					EMRServerless: &types.EMRServerlessStepMetadata{
+						ApplicationId: ptr.String("__ApplicationId__"),
+						JobRunId:      ptr.String("__JobRunId__"),
+						JobRunName:    ptr.String("__JobRunName__"),
+						LogFilePath:   ptr.String("__LogFilePath__"),
+					},
 					QualityCheck: &types.QualityCheckStepMetadata{
 						CheckType:                            ptr.String("__CheckType__"),
 						BaselineUsedForDriftCheckStatistics:  ptr.String("__BaselineUsedForDriftCheckStatistics__"),
@@ -27969,10 +28024,53 @@ func TestCheckResponseSnapshot_ListPipelineExecutionSteps(t *testing.T) {
 					Job: &types.JobStepMetadata{
 						Arn: ptr.String("__Arn__"),
 					},
+					Athena: &types.AthenaStepMetadata{
+						QueryExecutionId: ptr.String("__QueryExecutionId__"),
+						S3OutputLocation: ptr.String("__S3OutputLocation__"),
+					},
+					Cleanup: &types.CleanupStepMetadata{
+						CleanedSteps: []string{
+							"__Member__",
+							"__Member__",
+						},
+						FailedSteps: []types.CleanupFailure{
+							{
+								StepName:     ptr.String("__StepName__"),
+								ErrorCode:    types.CleanupFailureErrorCode("ClientError"),
+								ErrorMessage: ptr.String("__ErrorMessage__"),
+							},
+							{
+								StepName:     ptr.String("__StepName__"),
+								ErrorCode:    types.CleanupFailureErrorCode("ClientError"),
+								ErrorMessage: ptr.String("__ErrorMessage__"),
+							},
+						},
+						SkippedSteps: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ForEach: &types.ForEachStepMetadata{
+						Status:             types.ForEachStatus("Succeeded"),
+						InputItemCount:     ptr.Int32(1),
+						TotalStepCount:     ptr.Int32(1),
+						SucceededStepCount: ptr.Int32(1),
+						FailedStepCount:    ptr.Int32(1),
+						StoppedStepCount:   ptr.Int32(1),
+						Selector: &types.ForEachSelectorResult{
+							StepName: ptr.String("__StepName__"),
+							Index:    ptr.Int32(1),
+						},
+					},
 				},
 				AttemptCount: ptr.Int32(1),
 				SelectiveExecutionResult: &types.SelectiveExecutionResult{
 					SourcePipelineExecutionArn: ptr.String("__SourcePipelineExecutionArn__"),
+				},
+				IterationContext: &types.IterationContext{
+					ParentStepName: ptr.String("__ParentStepName__"),
+					Index:          ptr.Int32(1),
+					Item:           ptr.String("__Item__"),
 				},
 			},
 		},

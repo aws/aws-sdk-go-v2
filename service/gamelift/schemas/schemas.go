@@ -1487,7 +1487,7 @@ var _EC2InstanceLimitList_member *smithy.Schema
 var EC2InstanceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "EC2InstanceType",
-}, smithy.ShapeTypeEnum, 526)
+}, smithy.ShapeTypeEnum, 539)
 var EC2InstanceType_t2_micro *smithy.Schema
 
 var EC2InstanceType_t2_small *smithy.Schema
@@ -2506,11 +2506,19 @@ var EC2InstanceType_c8a_xlarge *smithy.Schema
 
 var EC2InstanceType_c8a_2xlarge *smithy.Schema
 
+var EC2InstanceType_c8a_4xlarge *smithy.Schema
+
+var EC2InstanceType_c8a_8xlarge *smithy.Schema
+
 var EC2InstanceType_c8i_large *smithy.Schema
 
 var EC2InstanceType_c8i_xlarge *smithy.Schema
 
 var EC2InstanceType_c8i_2xlarge *smithy.Schema
+
+var EC2InstanceType_c8i_4xlarge *smithy.Schema
+
+var EC2InstanceType_c8i_8xlarge *smithy.Schema
 
 var EC2InstanceType_c9g_medium *smithy.Schema
 
@@ -2520,6 +2528,10 @@ var EC2InstanceType_c9g_xlarge *smithy.Schema
 
 var EC2InstanceType_c9g_2xlarge *smithy.Schema
 
+var EC2InstanceType_c9g_4xlarge *smithy.Schema
+
+var EC2InstanceType_c9g_8xlarge *smithy.Schema
+
 var EC2InstanceType_m8a_medium *smithy.Schema
 
 var EC2InstanceType_m8a_large *smithy.Schema
@@ -2528,17 +2540,31 @@ var EC2InstanceType_m8a_xlarge *smithy.Schema
 
 var EC2InstanceType_m8a_2xlarge *smithy.Schema
 
+var EC2InstanceType_m8a_4xlarge *smithy.Schema
+
+var EC2InstanceType_m8a_8xlarge *smithy.Schema
+
 var EC2InstanceType_m8i_large *smithy.Schema
 
 var EC2InstanceType_m8i_xlarge *smithy.Schema
 
 var EC2InstanceType_m8i_2xlarge *smithy.Schema
 
+var EC2InstanceType_m8i_4xlarge *smithy.Schema
+
+var EC2InstanceType_m8i_8xlarge *smithy.Schema
+
+var EC2InstanceType_m9g_medium *smithy.Schema
+
 var EC2InstanceType_m9g_large *smithy.Schema
 
 var EC2InstanceType_m9g_xlarge *smithy.Schema
 
 var EC2InstanceType_m9g_2xlarge *smithy.Schema
+
+var EC2InstanceType_m9g_4xlarge *smithy.Schema
+
+var EC2InstanceType_m9g_8xlarge *smithy.Schema
 
 var Event = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -8662,11 +8688,19 @@ func init() {
 
 	EC2InstanceType_c8a_2xlarge = EC2InstanceType.AddMember("c8a_2xlarge", smithyprelude.Unit)
 
+	EC2InstanceType_c8a_4xlarge = EC2InstanceType.AddMember("c8a_4xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_c8a_8xlarge = EC2InstanceType.AddMember("c8a_8xlarge", smithyprelude.Unit)
+
 	EC2InstanceType_c8i_large = EC2InstanceType.AddMember("c8i_large", smithyprelude.Unit)
 
 	EC2InstanceType_c8i_xlarge = EC2InstanceType.AddMember("c8i_xlarge", smithyprelude.Unit)
 
 	EC2InstanceType_c8i_2xlarge = EC2InstanceType.AddMember("c8i_2xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_c8i_4xlarge = EC2InstanceType.AddMember("c8i_4xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_c8i_8xlarge = EC2InstanceType.AddMember("c8i_8xlarge", smithyprelude.Unit)
 
 	EC2InstanceType_c9g_medium = EC2InstanceType.AddMember("c9g_medium", smithyprelude.Unit)
 
@@ -8676,6 +8710,10 @@ func init() {
 
 	EC2InstanceType_c9g_2xlarge = EC2InstanceType.AddMember("c9g_2xlarge", smithyprelude.Unit)
 
+	EC2InstanceType_c9g_4xlarge = EC2InstanceType.AddMember("c9g_4xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_c9g_8xlarge = EC2InstanceType.AddMember("c9g_8xlarge", smithyprelude.Unit)
+
 	EC2InstanceType_m8a_medium = EC2InstanceType.AddMember("m8a_medium", smithyprelude.Unit)
 
 	EC2InstanceType_m8a_large = EC2InstanceType.AddMember("m8a_large", smithyprelude.Unit)
@@ -8684,17 +8722,31 @@ func init() {
 
 	EC2InstanceType_m8a_2xlarge = EC2InstanceType.AddMember("m8a_2xlarge", smithyprelude.Unit)
 
+	EC2InstanceType_m8a_4xlarge = EC2InstanceType.AddMember("m8a_4xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m8a_8xlarge = EC2InstanceType.AddMember("m8a_8xlarge", smithyprelude.Unit)
+
 	EC2InstanceType_m8i_large = EC2InstanceType.AddMember("m8i_large", smithyprelude.Unit)
 
 	EC2InstanceType_m8i_xlarge = EC2InstanceType.AddMember("m8i_xlarge", smithyprelude.Unit)
 
 	EC2InstanceType_m8i_2xlarge = EC2InstanceType.AddMember("m8i_2xlarge", smithyprelude.Unit)
 
+	EC2InstanceType_m8i_4xlarge = EC2InstanceType.AddMember("m8i_4xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m8i_8xlarge = EC2InstanceType.AddMember("m8i_8xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m9g_medium = EC2InstanceType.AddMember("m9g_medium", smithyprelude.Unit)
+
 	EC2InstanceType_m9g_large = EC2InstanceType.AddMember("m9g_large", smithyprelude.Unit)
 
 	EC2InstanceType_m9g_xlarge = EC2InstanceType.AddMember("m9g_xlarge", smithyprelude.Unit)
 
 	EC2InstanceType_m9g_2xlarge = EC2InstanceType.AddMember("m9g_2xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m9g_4xlarge = EC2InstanceType.AddMember("m9g_4xlarge", smithyprelude.Unit)
+
+	EC2InstanceType_m9g_8xlarge = EC2InstanceType.AddMember("m9g_8xlarge", smithyprelude.Unit)
 
 	ContainerAttribute_ContainerName = ContainerAttribute.AddMember("ContainerName", _NonZeroAnd128MaxAsciiString)
 

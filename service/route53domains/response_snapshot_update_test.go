@@ -216,6 +216,11 @@ func TestUpdateResponseSnapshot_CancelDomainTransferToAnotherAwsAccount(t *testi
 func TestUpdateResponseSnapshot_CheckDomainAvailability(t *testing.T) {
 	want := &CheckDomainAvailabilityOutput{
 		Availability: types.DomainAvailability("AVAILABLE"),
+		Price: &types.PriceWithCurrency{
+			Price:     1.0,
+			Currency:  ptr.String("__Currency__"),
+			PriceType: types.PriceType("STANDARD"),
+		},
 	}
 	proto := awsjson.New11(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.CheckDomainAvailability, schemas.CheckDomainAvailabilityResponse, schemas.CheckDomainAvailabilityResponse)
@@ -243,6 +248,11 @@ func TestUpdateResponseSnapshot_CheckDomainTransferability(t *testing.T) {
 			Transferable: types.Transferable("TRANSFERABLE"),
 		},
 		Message: ptr.String("__Message__"),
+		Price: &types.PriceWithCurrency{
+			Price:     1.0,
+			Currency:  ptr.String("__Currency__"),
+			PriceType: types.PriceType("STANDARD"),
+		},
 	}
 	proto := awsjson.New11(schemas.Route53Domains_v20140515)
 	opSchema := smithy.NewOperationSchema(schemas.CheckDomainTransferability, schemas.CheckDomainTransferabilityResponse, schemas.CheckDomainTransferabilityResponse)
@@ -631,16 +641,77 @@ func TestUpdateResponseSnapshot_GetDomainDetail(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetDomainPrices(t *testing.T) {
+	want := &GetDomainPricesOutput{
+		DomainPrice: &types.DomainPrice{
+			Name: ptr.String("__Name__"),
+			RegistrationPrice: &types.PriceWithCurrency{
+				Price:     1.0,
+				Currency:  ptr.String("__Currency__"),
+				PriceType: types.PriceType("STANDARD"),
+			},
+			TransferPrice: &types.PriceWithCurrency{
+				Price:     1.0,
+				Currency:  ptr.String("__Currency__"),
+				PriceType: types.PriceType("STANDARD"),
+			},
+			RenewalPrice: &types.PriceWithCurrency{
+				Price:     1.0,
+				Currency:  ptr.String("__Currency__"),
+				PriceType: types.PriceType("STANDARD"),
+			},
+			ChangeOwnershipPrice: &types.PriceWithCurrency{
+				Price:     1.0,
+				Currency:  ptr.String("__Currency__"),
+				PriceType: types.PriceType("STANDARD"),
+			},
+			RestorationPrice: &types.PriceWithCurrency{
+				Price:     1.0,
+				Currency:  ptr.String("__Currency__"),
+				PriceType: types.PriceType("STANDARD"),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.Route53Domains_v20140515)
+	opSchema := smithy.NewOperationSchema(schemas.GetDomainPrices, schemas.GetDomainPricesResponse, schemas.GetDomainPricesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetDomainPrices.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetDomainSuggestions(t *testing.T) {
 	want := &GetDomainSuggestionsOutput{
 		SuggestionsList: []types.DomainSuggestion{
 			{
 				DomainName:   ptr.String("__DomainName__"),
 				Availability: ptr.String("__Availability__"),
+				Price: &types.PriceWithCurrency{
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
+				},
 			},
 			{
 				DomainName:   ptr.String("__DomainName__"),
 				Availability: ptr.String("__Availability__"),
+				Price: &types.PriceWithCurrency{
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
+				},
 			},
 		},
 	}
@@ -785,47 +856,57 @@ func TestUpdateResponseSnapshot_ListPrices(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				RegistrationPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				TransferPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				RenewalPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				ChangeOwnershipPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				RestorationPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 			},
 			{
 				Name: ptr.String("__Name__"),
 				RegistrationPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				TransferPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				RenewalPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				ChangeOwnershipPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				RestorationPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 			},
 		},

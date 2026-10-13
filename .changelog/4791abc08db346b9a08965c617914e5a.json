@@ -1,0 +1,8 @@
+{
+    "id": "4791abc0-8db3-46b9-a089-65c617914e5a",
+    "type": "feature",
+    "description": "This release adds the Connect JWT authentication type and the AudienceOverride field to AuthConfig, letting A2A server applications authenticate with JWTs issued by Amazon Connect.",
+    "modules": [
+        "service/appintegrations"
+    ]
+}

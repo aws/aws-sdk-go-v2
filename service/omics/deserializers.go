@@ -25991,6 +25991,15 @@ func awsRestjson1_deserializeDocumentRegistryMapping(v **types.RegistryMapping, 
 
 	for key, value := range shape {
 		switch key {
+		case "credentialArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.CredentialArn = ptr.String(jtv)
+			}
+
 		case "ecrAccountId":
 			if value != nil {
 				jtv, ok := value.(string)

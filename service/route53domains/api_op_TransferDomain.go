@@ -114,6 +114,13 @@ type TransferDomainInput struct {
 	// Provides detailed contact information.
 	BillingContact *types.ContactDetail
 
+	// Specifies the maximum price that you agree to pay to transfer the domain name
+	// to Route 53. This element is required if the domain has registry premium
+	// pricing, and optional if the domain is priced at the standard rate for its TLD.
+	// If you include it and the transfer price is more than MaxPrice , the request
+	// fails.
+	Consent *types.Consent
+
 	// Reserved for future use.
 	//
 	// Currently, the effect of a domain transfer on the registration period varies by
@@ -197,6 +204,11 @@ func (v *TransferDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BillingContact != nil {
 		s.WriteStruct(schemas.TransferDomainRequest_BillingContact)
 		v.BillingContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Consent != nil {
+		s.WriteStruct(schemas.TransferDomainRequest_Consent)
+		v.Consent.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.DomainName != nil {

@@ -2,4 +2,4 @@
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: Route53Domains_v20140515.CheckDomainTransferability
 
-{"Message":"__Message__","Transferability":{"Transferable":"TRANSFERABLE"}}
+{"Message":"__Message__","Price":{"Currency":"__Currency__","Price":1,"PriceType":"STANDARD"},"Transferability":{"Transferable":"TRANSFERABLE"}}

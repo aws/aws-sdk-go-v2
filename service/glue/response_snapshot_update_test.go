@@ -10390,7 +10390,8 @@ func TestUpdateResponseSnapshot_CreateIntegration(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	}
 	proto := awsjson.New11(schemas.AWSGlue)
@@ -12637,7 +12638,8 @@ func TestUpdateResponseSnapshot_DescribeInboundIntegrations(t *testing.T) {
 					SourceProperties: map[string]string{
 						"key0": "__Value__",
 					},
-					ContinuousSync: ptr.Bool(true),
+					ContinuousSync:  ptr.Bool(true),
+					TargetNamespace: ptr.String("__TargetNamespace__"),
 				},
 				Errors: []types.IntegrationError{
 					{
@@ -12661,7 +12663,8 @@ func TestUpdateResponseSnapshot_DescribeInboundIntegrations(t *testing.T) {
 					SourceProperties: map[string]string{
 						"key0": "__Value__",
 					},
-					ContinuousSync: ptr.Bool(true),
+					ContinuousSync:  ptr.Bool(true),
+					TargetNamespace: ptr.String("__TargetNamespace__"),
 				},
 				Errors: []types.IntegrationError{
 					{
@@ -12727,7 +12730,8 @@ func TestUpdateResponseSnapshot_DescribeIntegrations(t *testing.T) {
 					SourceProperties: map[string]string{
 						"key0": "__Value__",
 					},
-					ContinuousSync: ptr.Bool(true),
+					ContinuousSync:  ptr.Bool(true),
+					TargetNamespace: ptr.String("__TargetNamespace__"),
 				},
 				Errors: []types.IntegrationError{
 					{
@@ -12768,7 +12772,8 @@ func TestUpdateResponseSnapshot_DescribeIntegrations(t *testing.T) {
 					SourceProperties: map[string]string{
 						"key0": "__Value__",
 					},
-					ContinuousSync: ptr.Bool(true),
+					ContinuousSync:  ptr.Bool(true),
+					TargetNamespace: ptr.String("__TargetNamespace__"),
 				},
 				Errors: []types.IntegrationError{
 					{
@@ -33968,7 +33973,8 @@ func TestUpdateResponseSnapshot_ModifyIntegration(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	}
 	proto := awsjson.New11(schemas.AWSGlue)

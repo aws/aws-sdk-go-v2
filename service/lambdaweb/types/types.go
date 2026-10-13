@@ -81,7 +81,9 @@ func (v *AccountQuotas) Deserialize(d smithy.ShapeDeserializer) error {
 // Contains your current web function usage for the current AWS Region.
 type AccountUsage struct {
 
-	// The number of web functions in your account in the current AWS Region.
+	// The number of web functions in your account in the current AWS Region. This
+	// count includes web functions in all states, not only functions in the Active
+	// state.
 	//
 	// This member is required.
 	FunctionCount *int32

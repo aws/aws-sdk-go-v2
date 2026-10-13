@@ -56,6 +56,11 @@ type CreateServiceInput struct {
 	// Resource description for services and policies.
 	Description *string
 
+	// The optional DevOps Agent integration configuration to apply to the new
+	// service. If you omit this field, the new service has no DevOps Agent
+	// integration.
+	DevOpsAgentConfiguration *types.DevOpsAgentConfiguration
+
 	// KMS key identifier — accepts key ID, key ARN, alias name, or alias ARN.
 	KmsKeyId *string
 
@@ -87,6 +92,11 @@ func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateServiceRequest_description, *v.Description)
+	}
+	if v.DevOpsAgentConfiguration != nil {
+		s.WriteStruct(schemas.CreateServiceRequest_devOpsAgentConfiguration)
+		v.DevOpsAgentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.CreateServiceRequest_kmsKeyId, *v.KmsKeyId)

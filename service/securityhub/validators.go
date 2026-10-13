@@ -2165,6 +2165,11 @@ func validateAutomationRulesActionV2(v *types.AutomationRulesActionV2) error {
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
+	if v.ResourceFieldsUpdate != nil {
+		if err := validateAutomationRulesResourceFieldsUpdateV2(v.ResourceFieldsUpdate); err != nil {
+			invalidParams.AddNested("ResourceFieldsUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2186,6 +2191,21 @@ func validateAutomationRulesFindingFieldsUpdate(v *types.AutomationRulesFindingF
 		if err := validateRelatedFindingList(v.RelatedFindings); err != nil {
 			invalidParams.AddNested("RelatedFindings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomationRulesResourceFieldsUpdateV2(v *types.AutomationRulesResourceFieldsUpdateV2) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomationRulesResourceFieldsUpdateV2"}
+	if len(v.Criticality) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Criticality"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

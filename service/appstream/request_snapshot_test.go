@@ -1082,6 +1082,7 @@ func TestCheckRequestSnapshot_CreateStack(t *testing.T) {
 			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 		},
+		StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3292,6 +3293,7 @@ func TestCheckRequestSnapshot_UpdateStack(t *testing.T) {
 			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 		},
+		StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4257,6 +4259,7 @@ func TestUpdateRequestSnapshot_CreateStack(t *testing.T) {
 			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 		},
+		StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6467,6 +6470,7 @@ func TestUpdateRequestSnapshot_UpdateStack(t *testing.T) {
 			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 		},
+		StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

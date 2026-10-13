@@ -418,6 +418,9 @@ func TestCheckRequestSnapshot_CreateService(t *testing.T) {
 			},
 		},
 		KmsKeyId: ptr.String("__KmsKeyId__"),
+		DevOpsAgentConfiguration: &types.DevOpsAgentConfiguration{
+			AgentSpaceArn: ptr.String("__AgentSpaceArn__"),
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -2465,6 +2468,9 @@ func TestCheckRequestSnapshot_UpdateService(t *testing.T) {
 				},
 			},
 		},
+		DevOpsAgentConfiguration: &types.DevOpsAgentConfiguration{
+			AgentSpaceArn: ptr.String("__AgentSpaceArn__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2841,6 +2847,9 @@ func TestUpdateRequestSnapshot_CreateService(t *testing.T) {
 			},
 		},
 		KmsKeyId: ptr.String("__KmsKeyId__"),
+		DevOpsAgentConfiguration: &types.DevOpsAgentConfiguration{
+			AgentSpaceArn: ptr.String("__AgentSpaceArn__"),
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -4887,6 +4896,9 @@ func TestUpdateRequestSnapshot_UpdateService(t *testing.T) {
 					},
 				},
 			},
+		},
+		DevOpsAgentConfiguration: &types.DevOpsAgentConfiguration{
+			AgentSpaceArn: ptr.String("__AgentSpaceArn__"),
 		},
 	}
 	body := &bytes.Buffer{}

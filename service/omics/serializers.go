@@ -10787,6 +10787,11 @@ func awsRestjson1_serializeDocumentRegistryMapping(v *types.RegistryMapping, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.CredentialArn != nil {
+		ok := object.Key("credentialArn")
+		ok.String(*v.CredentialArn)
+	}
+
 	if v.EcrAccountId != nil {
 		ok := object.Key("ecrAccountId")
 		ok.String(*v.EcrAccountId)

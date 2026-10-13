@@ -270,6 +270,7 @@ func TestCheckRequestSnapshot_CreateApplication(t *testing.T) {
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -927,6 +928,7 @@ func TestCheckRequestSnapshot_UpdateApplication(t *testing.T) {
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1113,6 +1115,7 @@ func TestUpdateRequestSnapshot_CreateApplication(t *testing.T) {
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1770,6 +1773,7 @@ func TestUpdateRequestSnapshot_UpdateApplication(t *testing.T) {
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	}
 	body := &bytes.Buffer{}

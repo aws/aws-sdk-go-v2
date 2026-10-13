@@ -7832,12 +7832,14 @@ var _IntegrationAdditionalEncryptionContextMap_value *smithy.Schema
 var IntegrationConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "IntegrationConfig",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var IntegrationConfig_RefreshInterval *smithy.Schema
 
 var IntegrationConfig_SourceProperties *smithy.Schema
 
 var IntegrationConfig_ContinuousSync *smithy.Schema
+
+var IntegrationConfig_TargetNamespace *smithy.Schema
 
 var IntegrationConflictOperationFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -13103,6 +13105,11 @@ var TargetFormat_ICEBERG *smithy.Schema
 var TargetFormat_HYPER *smithy.Schema
 
 var TargetFormat_XML *smithy.Schema
+
+var _TargetNamespace = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "TargetNamespace",
+}, smithy.ShapeTypeString, 0)
 
 var TargetProcessingProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -25656,6 +25663,8 @@ func init() {
 	IntegrationConfig_SourceProperties = IntegrationConfig.AddMember("SourceProperties", _IntegrationSourcePropertiesMap)
 
 	IntegrationConfig_ContinuousSync = IntegrationConfig.AddMember("ContinuousSync", _ContinuousSync)
+
+	IntegrationConfig_TargetNamespace = IntegrationConfig.AddMember("TargetNamespace", _TargetNamespace)
 
 	IntegrationError_ErrorCode = IntegrationError.AddMember("ErrorCode", _String128)
 

@@ -4548,6 +4548,50 @@ func (v *AthenaDatasetDefinition) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// The query execution identifier and the result output location for the Amazon
+// Athena query that an Athena step runs.
+type AthenaStepMetadata struct {
+
+	// The unique identifier of the Amazon Athena query execution that was run by this
+	// step execution.
+	QueryExecutionId *string
+
+	// The Amazon S3 location of the Amazon Athena query results. This is the
+	// effective output location reported by GetQueryExecution for the query. This
+	// value can be absent when the query uses Athena managed query results.
+	S3OutputLocation *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AthenaStepMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AthenaStepMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AthenaStepMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryExecutionId != nil {
+		s.WriteString(schemas.AthenaStepMetadata_QueryExecutionId, *v.QueryExecutionId)
+	}
+	if v.S3OutputLocation != nil {
+		s.WriteString(schemas.AthenaStepMetadata_S3OutputLocation, *v.S3OutputLocation)
+	}
+}
+func (v *AthenaStepMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AthenaStepMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AthenaStepMetadata_QueryExecutionId:
+			v.QueryExecutionId = new(string)
+			return d.ReadString(schemas.AthenaStepMetadata_QueryExecutionId, v.QueryExecutionId)
+		case schemas.AthenaStepMetadata_S3OutputLocation:
+			v.S3OutputLocation = new(string)
+			return d.ReadString(schemas.AthenaStepMetadata_S3OutputLocation, v.S3OutputLocation)
+		}
+		return nil
+	})
+}
+
 // Contains a presigned URL and its associated local file path for downloading hub
 // content artifacts.
 type AuthorizedUrl struct {
@@ -9587,6 +9631,108 @@ func (v *ClarifyTextConfig) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Language = ClarifyTextLanguage(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// The Amazon S3 output resources associated with an upstream step that the
+// Cleanup step could not delete.
+type CleanupFailure struct {
+
+	// The error code that identifies why the Cleanup step could not delete the output
+	// resources associated with the upstream step.
+	ErrorCode CleanupFailureErrorCode
+
+	// A message describing why the Cleanup step could not delete the output resources
+	// associated with the upstream step.
+	ErrorMessage *string
+
+	// The name of the upstream step whose Amazon S3 output resources the Cleanup step
+	// could not delete.
+	StepName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CleanupFailure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CleanupFailure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CleanupFailure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.CleanupFailure_ErrorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.CleanupFailure_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.StepName != nil {
+		s.WriteString(schemas.CleanupFailure_StepName, *v.StepName)
+	}
+}
+func (v *CleanupFailure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CleanupFailure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CleanupFailure_ErrorCode:
+			var ev string
+			if err := d.ReadString(schemas.CleanupFailure_ErrorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = CleanupFailureErrorCode(ev)
+			return nil
+		case schemas.CleanupFailure_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.CleanupFailure_ErrorMessage, v.ErrorMessage)
+		case schemas.CleanupFailure_StepName:
+			v.StepName = new(string)
+			return d.ReadString(schemas.CleanupFailure_StepName, v.StepName)
+		}
+		return nil
+	})
+}
+
+// The cleanup outcomes for Amazon S3 output resources associated with upstream
+// steps.
+type CleanupStepMetadata struct {
+
+	// The names of upstream steps whose Amazon S3 output resources the Cleanup step
+	// deleted successfully.
+	CleanedSteps []string
+
+	// The upstream steps whose Amazon S3 output resources the Cleanup step could not
+	// delete.
+	FailedSteps []CleanupFailure
+
+	// The names of upstream steps that the Cleanup step skipped. The Cleanup step
+	// skips a step when the output properties needed to locate its resources are
+	// unavailable.
+	SkippedSteps []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CleanupStepMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CleanupStepMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CleanupStepMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCleanupStepNameList(s, schemas.CleanupStepMetadata_CleanedSteps, v.CleanedSteps)
+	serializeCleanupFailureList(s, schemas.CleanupStepMetadata_FailedSteps, v.FailedSteps)
+	serializeCleanupStepNameList(s, schemas.CleanupStepMetadata_SkippedSteps, v.SkippedSteps)
+}
+func (v *CleanupStepMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CleanupStepMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CleanupStepMetadata_CleanedSteps:
+			return deserializeCleanupStepNameList(d, schemas.CleanupStepMetadata_CleanedSteps, &v.CleanedSteps)
+		case schemas.CleanupStepMetadata_FailedSteps:
+			return deserializeCleanupFailureList(d, schemas.CleanupStepMetadata_FailedSteps, &v.FailedSteps)
+		case schemas.CleanupStepMetadata_SkippedSteps:
+			return deserializeCleanupStepNameList(d, schemas.CleanupStepMetadata_SkippedSteps, &v.SkippedSteps)
 		}
 		return nil
 	})
@@ -19073,6 +19219,64 @@ func (v *EmrServerlessSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The configurations and outcomes of an Amazon EMR Serverless step execution.
+type EMRServerlessStepMetadata struct {
+
+	// The identifier of the Amazon EMR Serverless application.
+	ApplicationId *string
+
+	// The identifier of the Amazon EMR Serverless job run.
+	JobRunId *string
+
+	// The name of the Amazon EMR Serverless job run.
+	JobRunName *string
+
+	// The path to the log file for the Amazon EMR Serverless job run.
+	LogFilePath *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EMRServerlessStepMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EMRServerlessStepMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EMRServerlessStepMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.EMRServerlessStepMetadata_ApplicationId, *v.ApplicationId)
+	}
+	if v.JobRunId != nil {
+		s.WriteString(schemas.EMRServerlessStepMetadata_JobRunId, *v.JobRunId)
+	}
+	if v.JobRunName != nil {
+		s.WriteString(schemas.EMRServerlessStepMetadata_JobRunName, *v.JobRunName)
+	}
+	if v.LogFilePath != nil {
+		s.WriteString(schemas.EMRServerlessStepMetadata_LogFilePath, *v.LogFilePath)
+	}
+}
+func (v *EMRServerlessStepMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EMRServerlessStepMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EMRServerlessStepMetadata_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.EMRServerlessStepMetadata_ApplicationId, v.ApplicationId)
+		case schemas.EMRServerlessStepMetadata_JobRunId:
+			v.JobRunId = new(string)
+			return d.ReadString(schemas.EMRServerlessStepMetadata_JobRunId, v.JobRunId)
+		case schemas.EMRServerlessStepMetadata_JobRunName:
+			v.JobRunName = new(string)
+			return d.ReadString(schemas.EMRServerlessStepMetadata_JobRunName, v.JobRunName)
+		case schemas.EMRServerlessStepMetadata_LogFilePath:
+			v.LogFilePath = new(string)
+			return d.ReadString(schemas.EMRServerlessStepMetadata_LogFilePath, v.LogFilePath)
+		}
+		return nil
+	})
+}
+
 // The configuration parameters that specify the IAM roles assumed by the
 // execution role of SageMaker (assumable roles) and the cluster instances or job
 // execution environments (execution roles or runtime roles) to manage and access
@@ -21875,6 +22079,138 @@ func (v *FlowDefinitionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.FlowDefinitionStatus = FlowDefinitionStatus(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// The result of the selector that identifies an iteration of a ForEach step.
+type ForEachSelectorResult struct {
+
+	// The index of the iteration within the ForEach step.
+	Index *int32
+
+	// The name of the step associated with the iteration.
+	StepName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ForEachSelectorResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForEachSelectorResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForEachSelectorResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Index != nil {
+		s.WriteInt32(schemas.ForEachSelectorResult_Index, *v.Index)
+	}
+	if v.StepName != nil {
+		s.WriteString(schemas.ForEachSelectorResult_StepName, *v.StepName)
+	}
+}
+func (v *ForEachSelectorResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForEachSelectorResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForEachSelectorResult_Index:
+			v.Index = new(int32)
+			return d.ReadInt32(schemas.ForEachSelectorResult_Index, v.Index)
+		case schemas.ForEachSelectorResult_StepName:
+			v.StepName = new(string)
+			return d.ReadString(schemas.ForEachSelectorResult_StepName, v.StepName)
+		}
+		return nil
+	})
+}
+
+// The status, the iteration-step counts, and the selector information for a
+// ForEach step execution.
+type ForEachStepMetadata struct {
+
+	// The number of iteration steps that failed.
+	FailedStepCount *int32
+
+	// The number of input items that the ForEach step iterates over.
+	InputItemCount *int32
+
+	// Identifies the body step and iteration selected within the ForEach step.
+	Selector *ForEachSelectorResult
+
+	// The status of the ForEach step execution.
+	Status ForEachStatus
+
+	// The number of iteration steps that were stopped.
+	StoppedStepCount *int32
+
+	// The number of iteration steps that completed successfully.
+	SucceededStepCount *int32
+
+	// The total number of steps generated across all iterations of the ForEach step.
+	TotalStepCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ForEachStepMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForEachStepMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForEachStepMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailedStepCount != nil {
+		s.WriteInt32(schemas.ForEachStepMetadata_FailedStepCount, *v.FailedStepCount)
+	}
+	if v.InputItemCount != nil {
+		s.WriteInt32(schemas.ForEachStepMetadata_InputItemCount, *v.InputItemCount)
+	}
+	if v.Selector != nil {
+		s.WriteStruct(schemas.ForEachStepMetadata_Selector)
+		v.Selector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ForEachStepMetadata_Status, string(v.Status))
+	}
+	if v.StoppedStepCount != nil {
+		s.WriteInt32(schemas.ForEachStepMetadata_StoppedStepCount, *v.StoppedStepCount)
+	}
+	if v.SucceededStepCount != nil {
+		s.WriteInt32(schemas.ForEachStepMetadata_SucceededStepCount, *v.SucceededStepCount)
+	}
+	if v.TotalStepCount != nil {
+		s.WriteInt32(schemas.ForEachStepMetadata_TotalStepCount, *v.TotalStepCount)
+	}
+}
+func (v *ForEachStepMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForEachStepMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForEachStepMetadata_FailedStepCount:
+			v.FailedStepCount = new(int32)
+			return d.ReadInt32(schemas.ForEachStepMetadata_FailedStepCount, v.FailedStepCount)
+		case schemas.ForEachStepMetadata_InputItemCount:
+			v.InputItemCount = new(int32)
+			return d.ReadInt32(schemas.ForEachStepMetadata_InputItemCount, v.InputItemCount)
+		case schemas.ForEachStepMetadata_Selector:
+			v.Selector = &ForEachSelectorResult{}
+			return v.Selector.Deserialize(d)
+		case schemas.ForEachStepMetadata_Status:
+			var ev string
+			if err := d.ReadString(schemas.ForEachStepMetadata_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ForEachStatus(ev)
+			return nil
+		case schemas.ForEachStepMetadata_StoppedStepCount:
+			v.StoppedStepCount = new(int32)
+			return d.ReadInt32(schemas.ForEachStepMetadata_StoppedStepCount, v.StoppedStepCount)
+		case schemas.ForEachStepMetadata_SucceededStepCount:
+			v.SucceededStepCount = new(int32)
+			return d.ReadInt32(schemas.ForEachStepMetadata_SucceededStepCount, v.SucceededStepCount)
+		case schemas.ForEachStepMetadata_TotalStepCount:
+			v.TotalStepCount = new(int32)
+			return d.ReadInt32(schemas.ForEachStepMetadata_TotalStepCount, v.TotalStepCount)
 		}
 		return nil
 	})
@@ -29594,6 +29930,55 @@ func (v *IntegerParameterRangeSpecification) Deserialize(d smithy.ShapeDeseriali
 		case schemas.IntegerParameterRangeSpecification_MinValue:
 			v.MinValue = new(string)
 			return d.ReadString(schemas.IntegerParameterRangeSpecification_MinValue, v.MinValue)
+		}
+		return nil
+	})
+}
+
+// The context for an iteration of a ForEach step.
+type IterationContext struct {
+
+	// The index of the iteration within the ForEach step.
+	Index *int32
+
+	// The input item that is being processed in this iteration.
+	Item *string
+
+	// The name of the ForEach step that generated this iteration.
+	ParentStepName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *IterationContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IterationContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IterationContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Index != nil {
+		s.WriteInt32(schemas.IterationContext_Index, *v.Index)
+	}
+	if v.Item != nil {
+		s.WriteString(schemas.IterationContext_Item, *v.Item)
+	}
+	if v.ParentStepName != nil {
+		s.WriteString(schemas.IterationContext_ParentStepName, *v.ParentStepName)
+	}
+}
+func (v *IterationContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IterationContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IterationContext_Index:
+			v.Index = new(int32)
+			return d.ReadInt32(schemas.IterationContext_Index, v.Index)
+		case schemas.IterationContext_Item:
+			v.Item = new(string)
+			return d.ReadString(schemas.IterationContext_Item, v.Item)
+		case schemas.IterationContext_ParentStepName:
+			v.ParentStepName = new(string)
+			return d.ReadString(schemas.IterationContext_ParentStepName, v.ParentStepName)
 		}
 		return nil
 	})
@@ -41374,6 +41759,10 @@ type PipelineExecutionStep struct {
 	// failed its execution.
 	FailureReason *string
 
+	// The context for the iteration of a ForEach step that generated this step
+	// execution.
+	IterationContext *IterationContext
+
 	// Metadata to run the pipeline step.
 	Metadata *PipelineExecutionStepMetadata
 
@@ -41420,6 +41809,11 @@ func (v *PipelineExecutionStep) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FailureReason != nil {
 		s.WriteString(schemas.PipelineExecutionStep_FailureReason, *v.FailureReason)
 	}
+	if v.IterationContext != nil {
+		s.WriteStruct(schemas.PipelineExecutionStep_IterationContext)
+		v.IterationContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Metadata != nil {
 		s.WriteStruct(schemas.PipelineExecutionStep_Metadata)
 		v.Metadata.SerializeMembers(s)
@@ -41461,6 +41855,9 @@ func (v *PipelineExecutionStep) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PipelineExecutionStep_FailureReason:
 			v.FailureReason = new(string)
 			return d.ReadString(schemas.PipelineExecutionStep_FailureReason, v.FailureReason)
+		case schemas.PipelineExecutionStep_IterationContext:
+			v.IterationContext = &IterationContext{}
+			return v.IterationContext.Deserialize(d)
 		case schemas.PipelineExecutionStep_Metadata:
 			v.Metadata = &PipelineExecutionStepMetadata{}
 			return v.Metadata.Deserialize(d)
@@ -41493,6 +41890,9 @@ func (v *PipelineExecutionStep) Deserialize(d smithy.ShapeDeserializer) error {
 
 // Metadata for a step execution.
 type PipelineExecutionStepMetadata struct {
+
+	// The metadata for the Athena step execution.
+	Athena *AthenaStepMetadata
 
 	// The Amazon Resource Name (ARN) of the AutoML job that was run by this step.
 	AutoMLJob *AutoMLJobStepMetadata
@@ -41539,11 +41939,17 @@ type PipelineExecutionStepMetadata struct {
 	//   CalculatedBaseline .
 	ClarifyCheck *ClarifyCheckStepMetadata
 
+	// The metadata for the cleanup step execution.
+	Cleanup *CleanupStepMetadata
+
 	// The outcome of the condition evaluation that was run by this step execution.
 	Condition *ConditionStepMetadata
 
 	// The configurations and outcomes of an Amazon EMR step execution.
 	EMR *EMRStepMetadata
+
+	// The configurations and outcomes of an Amazon EMR Serverless step execution.
+	EMRServerless *EMRServerlessStepMetadata
 
 	// The endpoint that was invoked during this step execution.
 	Endpoint *EndpointStepMetadata
@@ -41554,6 +41960,9 @@ type PipelineExecutionStepMetadata struct {
 
 	// The configurations and outcomes of a Fail step execution.
 	Fail *FailStepMetadata
+
+	// The metadata for the ForEach step execution.
+	ForEach *ForEachStepMetadata
 
 	//  The metadata of the inference component used in pipeline execution step.
 	InferenceComponent *InferenceComponentMetadata
@@ -41624,6 +42033,11 @@ func (v *PipelineExecutionStepMetadata) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PipelineExecutionStepMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Athena != nil {
+		s.WriteStruct(schemas.PipelineExecutionStepMetadata_Athena)
+		v.Athena.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.AutoMLJob != nil {
 		s.WriteStruct(schemas.PipelineExecutionStepMetadata_AutoMLJob)
 		v.AutoMLJob.SerializeMembers(s)
@@ -41659,6 +42073,11 @@ func (v *PipelineExecutionStepMetadata) SerializeMembers(s smithy.ShapeSerialize
 		v.ClarifyCheck.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.Cleanup != nil {
+		s.WriteStruct(schemas.PipelineExecutionStepMetadata_Cleanup)
+		v.Cleanup.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Condition != nil {
 		s.WriteStruct(schemas.PipelineExecutionStepMetadata_Condition)
 		v.Condition.SerializeMembers(s)
@@ -41667,6 +42086,11 @@ func (v *PipelineExecutionStepMetadata) SerializeMembers(s smithy.ShapeSerialize
 	if v.EMR != nil {
 		s.WriteStruct(schemas.PipelineExecutionStepMetadata_EMR)
 		v.EMR.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EMRServerless != nil {
+		s.WriteStruct(schemas.PipelineExecutionStepMetadata_EMRServerless)
+		v.EMRServerless.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.Endpoint != nil {
@@ -41682,6 +42106,11 @@ func (v *PipelineExecutionStepMetadata) SerializeMembers(s smithy.ShapeSerialize
 	if v.Fail != nil {
 		s.WriteStruct(schemas.PipelineExecutionStepMetadata_Fail)
 		v.Fail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ForEach != nil {
+		s.WriteStruct(schemas.PipelineExecutionStepMetadata_ForEach)
+		v.ForEach.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.InferenceComponent != nil {
@@ -41743,6 +42172,9 @@ func (v *PipelineExecutionStepMetadata) SerializeMembers(s smithy.ShapeSerialize
 func (v *PipelineExecutionStepMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PipelineExecutionStepMetadata, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.PipelineExecutionStepMetadata_Athena:
+			v.Athena = &AthenaStepMetadata{}
+			return v.Athena.Deserialize(d)
 		case schemas.PipelineExecutionStepMetadata_AutoMLJob:
 			v.AutoMLJob = &AutoMLJobStepMetadata{}
 			return v.AutoMLJob.Deserialize(d)
@@ -41764,12 +42196,18 @@ func (v *PipelineExecutionStepMetadata) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.PipelineExecutionStepMetadata_ClarifyCheck:
 			v.ClarifyCheck = &ClarifyCheckStepMetadata{}
 			return v.ClarifyCheck.Deserialize(d)
+		case schemas.PipelineExecutionStepMetadata_Cleanup:
+			v.Cleanup = &CleanupStepMetadata{}
+			return v.Cleanup.Deserialize(d)
 		case schemas.PipelineExecutionStepMetadata_Condition:
 			v.Condition = &ConditionStepMetadata{}
 			return v.Condition.Deserialize(d)
 		case schemas.PipelineExecutionStepMetadata_EMR:
 			v.EMR = &EMRStepMetadata{}
 			return v.EMR.Deserialize(d)
+		case schemas.PipelineExecutionStepMetadata_EMRServerless:
+			v.EMRServerless = &EMRServerlessStepMetadata{}
+			return v.EMRServerless.Deserialize(d)
 		case schemas.PipelineExecutionStepMetadata_Endpoint:
 			v.Endpoint = &EndpointStepMetadata{}
 			return v.Endpoint.Deserialize(d)
@@ -41779,6 +42217,9 @@ func (v *PipelineExecutionStepMetadata) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.PipelineExecutionStepMetadata_Fail:
 			v.Fail = &FailStepMetadata{}
 			return v.Fail.Deserialize(d)
+		case schemas.PipelineExecutionStepMetadata_ForEach:
+			v.ForEach = &ForEachStepMetadata{}
+			return v.ForEach.Deserialize(d)
 		case schemas.PipelineExecutionStepMetadata_InferenceComponent:
 			v.InferenceComponent = &InferenceComponentMetadata{}
 			return v.InferenceComponent.Deserialize(d)

@@ -428,8 +428,17 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 			OrganizationId:        ptr.String("__OrganizationId__"),
 			OuId:                  ptr.String("__OuId__"),
 			AccountId:             ptr.String("__AccountId__"),
-			CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DevOpsAgentConfiguration: &types.DevOpsAgentConfigurationView{
+				AgentSpaceArn:  ptr.String("__AgentSpaceArn__"),
+				AgentSpaceId:   ptr.String("__AgentSpaceId__"),
+				Region:         ptr.String("__Region__"),
+				Status:         types.DevOpsAgentConnectionStatus("CONNECTING"),
+				OperatorAppUrl: ptr.String("__OperatorAppUrl__"),
+				ConnectedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StatusReason:   ptr.String("__StatusReason__"),
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateService.response")
@@ -497,6 +506,9 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 			},
 		},
 		KmsKeyId: ptr.String("__KmsKeyId__"),
+		DevOpsAgentConfiguration: &types.DevOpsAgentConfiguration{
+			AgentSpaceArn: ptr.String("__AgentSpaceArn__"),
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -1098,7 +1110,8 @@ func TestCheckResponseSnapshot_GetFailureModeFinding(t *testing.T) {
 					},
 				},
 			},
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			InvestigationDeepLink: ptr.String("__InvestigationDeepLink__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetFailureModeFinding.response")
@@ -1306,8 +1319,17 @@ func TestCheckResponseSnapshot_GetService(t *testing.T) {
 			OrganizationId:        ptr.String("__OrganizationId__"),
 			OuId:                  ptr.String("__OuId__"),
 			AccountId:             ptr.String("__AccountId__"),
-			CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DevOpsAgentConfiguration: &types.DevOpsAgentConfigurationView{
+				AgentSpaceArn:  ptr.String("__AgentSpaceArn__"),
+				AgentSpaceId:   ptr.String("__AgentSpaceId__"),
+				Region:         ptr.String("__Region__"),
+				Status:         types.DevOpsAgentConnectionStatus("CONNECTING"),
+				OperatorAppUrl: ptr.String("__OperatorAppUrl__"),
+				ConnectedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StatusReason:   ptr.String("__StatusReason__"),
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetService.response")
@@ -1546,6 +1568,13 @@ func TestCheckResponseSnapshot_GetTestRun(t *testing.T) {
 				"__Member__",
 			},
 			AccountTargeting: types.AccountTargeting("SINGLE_ACCOUNT"),
+			DevOpsAgentInvestigation: &types.DevOpsAgentInvestigation{
+				Verdict:    types.DevOpsAgentVerdict("PASS"),
+				Confidence: types.DevOpsAgentConfidence("HIGH"),
+				DeepLink:   ptr.String("__DeepLink__"),
+				Status:     types.DevOpsAgentInvestigationStatus("PENDING"),
+				Summary:    ptr.String("__Summary__"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetTestRun.response")
@@ -1789,8 +1818,17 @@ func TestCheckResponseSnapshot_ImportApp(t *testing.T) {
 			OrganizationId:        ptr.String("__OrganizationId__"),
 			OuId:                  ptr.String("__OuId__"),
 			AccountId:             ptr.String("__AccountId__"),
-			CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DevOpsAgentConfiguration: &types.DevOpsAgentConfigurationView{
+				AgentSpaceArn:  ptr.String("__AgentSpaceArn__"),
+				AgentSpaceId:   ptr.String("__AgentSpaceId__"),
+				Region:         ptr.String("__Region__"),
+				Status:         types.DevOpsAgentConnectionStatus("CONNECTING"),
+				OperatorAppUrl: ptr.String("__OperatorAppUrl__"),
+				ConnectedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StatusReason:   ptr.String("__StatusReason__"),
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ImportApp.response")
@@ -2116,26 +2154,28 @@ func TestCheckResponseSnapshot_ListFailureModeFindings(t *testing.T) {
 	want := &ListFailureModeFindingsOutput{
 		FindingsSummary: []types.FindingSummary{
 			{
-				ServiceArn:      ptr.String("__ServiceArn__"),
-				FindingId:       ptr.String("__FindingId__"),
-				Name:            ptr.String("__Name__"),
-				Description:     ptr.String("__Description__"),
-				FailureCategory: types.FailureCategory("SHARED_FATE"),
-				Severity:        types.FindingSeverity("LOW"),
-				Status:          types.FindingStatus("OPEN"),
-				PolicyComponent: types.PolicyComponent("AVAILABILITY_SLO"),
-				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ServiceArn:            ptr.String("__ServiceArn__"),
+				FindingId:             ptr.String("__FindingId__"),
+				Name:                  ptr.String("__Name__"),
+				Description:           ptr.String("__Description__"),
+				FailureCategory:       types.FailureCategory("SHARED_FATE"),
+				Severity:              types.FindingSeverity("LOW"),
+				Status:                types.FindingStatus("OPEN"),
+				PolicyComponent:       types.PolicyComponent("AVAILABILITY_SLO"),
+				UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				InvestigationDeepLink: ptr.String("__InvestigationDeepLink__"),
 			},
 			{
-				ServiceArn:      ptr.String("__ServiceArn__"),
-				FindingId:       ptr.String("__FindingId__"),
-				Name:            ptr.String("__Name__"),
-				Description:     ptr.String("__Description__"),
-				FailureCategory: types.FailureCategory("SHARED_FATE"),
-				Severity:        types.FindingSeverity("LOW"),
-				Status:          types.FindingStatus("OPEN"),
-				PolicyComponent: types.PolicyComponent("AVAILABILITY_SLO"),
-				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ServiceArn:            ptr.String("__ServiceArn__"),
+				FindingId:             ptr.String("__FindingId__"),
+				Name:                  ptr.String("__Name__"),
+				Description:           ptr.String("__Description__"),
+				FailureCategory:       types.FailureCategory("SHARED_FATE"),
+				Severity:              types.FindingSeverity("LOW"),
+				Status:                types.FindingStatus("OPEN"),
+				PolicyComponent:       types.PolicyComponent("AVAILABILITY_SLO"),
+				UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				InvestigationDeepLink: ptr.String("__InvestigationDeepLink__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -2564,10 +2604,14 @@ func TestCheckResponseSnapshot_ListResources(t *testing.T) {
 					Type:       types.InputSourceType("CFN_STACK"),
 				},
 				Resource: &types.Resource{
-					Identifier:   ptr.String("__Identifier__"),
-					AwsRegion:    ptr.String("__AwsRegion__"),
-					AwsAccountId: ptr.String("__AwsAccountId__"),
-					ResourceType: ptr.String("__ResourceType__"),
+					Identifier:             ptr.String("__Identifier__"),
+					AwsRegion:              ptr.String("__AwsRegion__"),
+					AwsAccountId:           ptr.String("__AwsAccountId__"),
+					ResourceType:           ptr.String("__ResourceType__"),
+					AvailabilityZoneId:     ptr.String("__AvailabilityZoneId__"),
+					AvailabilityZoneName:   ptr.String("__AvailabilityZoneName__"),
+					ContainmentParentId:    ptr.String("__ContainmentParentId__"),
+					LogicalResourceGroupId: ptr.String("__LogicalResourceGroupId__"),
 				},
 			},
 			{
@@ -2577,10 +2621,14 @@ func TestCheckResponseSnapshot_ListResources(t *testing.T) {
 					Type:       types.InputSourceType("CFN_STACK"),
 				},
 				Resource: &types.Resource{
-					Identifier:   ptr.String("__Identifier__"),
-					AwsRegion:    ptr.String("__AwsRegion__"),
-					AwsAccountId: ptr.String("__AwsAccountId__"),
-					ResourceType: ptr.String("__ResourceType__"),
+					Identifier:             ptr.String("__Identifier__"),
+					AwsRegion:              ptr.String("__AwsRegion__"),
+					AwsAccountId:           ptr.String("__AwsAccountId__"),
+					ResourceType:           ptr.String("__ResourceType__"),
+					AvailabilityZoneId:     ptr.String("__AvailabilityZoneId__"),
+					AvailabilityZoneName:   ptr.String("__AvailabilityZoneName__"),
+					ContainmentParentId:    ptr.String("__ContainmentParentId__"),
+					LogicalResourceGroupId: ptr.String("__LogicalResourceGroupId__"),
 				},
 			},
 		},
@@ -2827,6 +2875,8 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 				},
 				PolicyArn:             ptr.String("__PolicyArn__"),
 				AssessmentStatus:      types.AssessmentStatus("NOT_STARTED"),
+				DevOpsAgentStatus:     types.DevOpsAgentConnectionStatus("CONNECTING"),
+				DevOpsAgentSpaceArn:   ptr.String("__DevOpsAgentSpaceArn__"),
 				OpenFindingsCount:     ptr.Int32(1),
 				ResolvedFindingsCount: ptr.Int32(1),
 				DependencyDiscovery: &types.DependencyDiscoveryConfig{
@@ -2874,6 +2924,8 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 				},
 				PolicyArn:             ptr.String("__PolicyArn__"),
 				AssessmentStatus:      types.AssessmentStatus("NOT_STARTED"),
+				DevOpsAgentStatus:     types.DevOpsAgentConnectionStatus("CONNECTING"),
+				DevOpsAgentSpaceArn:   ptr.String("__DevOpsAgentSpaceArn__"),
 				OpenFindingsCount:     ptr.Int32(1),
 				ResolvedFindingsCount: ptr.Int32(1),
 				DependencyDiscovery: &types.DependencyDiscoveryConfig{
@@ -3791,7 +3843,8 @@ func TestCheckResponseSnapshot_UpdateFailureModeFinding(t *testing.T) {
 					},
 				},
 			},
-			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			InvestigationDeepLink: ptr.String("__InvestigationDeepLink__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateFailureModeFinding.response")
@@ -4019,8 +4072,17 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 			OrganizationId:        ptr.String("__OrganizationId__"),
 			OuId:                  ptr.String("__OuId__"),
 			AccountId:             ptr.String("__AccountId__"),
-			CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DevOpsAgentConfiguration: &types.DevOpsAgentConfigurationView{
+				AgentSpaceArn:  ptr.String("__AgentSpaceArn__"),
+				AgentSpaceId:   ptr.String("__AgentSpaceId__"),
+				Region:         ptr.String("__Region__"),
+				Status:         types.DevOpsAgentConnectionStatus("CONNECTING"),
+				OperatorAppUrl: ptr.String("__OperatorAppUrl__"),
+				ConnectedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StatusReason:   ptr.String("__StatusReason__"),
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateService.response")
@@ -4086,6 +4148,9 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 					},
 				},
 			},
+		},
+		DevOpsAgentConfiguration: &types.DevOpsAgentConfiguration{
+			AgentSpaceArn: ptr.String("__AgentSpaceArn__"),
 		},
 	})
 	if err != nil {

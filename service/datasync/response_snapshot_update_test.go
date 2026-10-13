@@ -1112,6 +1112,7 @@ func TestUpdateResponseSnapshot_DescribeTask(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 		Excludes: []types.FilterRule{
 			{
@@ -1225,6 +1226,7 @@ func TestUpdateResponseSnapshot_DescribeTaskExecution(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 		Excludes: []types.FilterRule{
 			{

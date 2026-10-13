@@ -267,6 +267,13 @@ var CreateContactFlow = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/contact-flows/{InstanceId}",
 	Code: 200})
 
+var CreateContactFlowAlias = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CreateContactFlowAlias",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/contact-flows/{InstanceId}/{ContactFlowId}/alias",
+	Code: 200})
+
 var CreateContactFlowModule = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "CreateContactFlowModule",
@@ -552,6 +559,13 @@ var DeleteContactFlow = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteContactFlow",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/contact-flows/{InstanceId}/{ContactFlowId}",
+	Code: 200})
+
+var DeleteContactFlowAlias = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "DeleteContactFlowAlias",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/contact-flows/{InstanceId}/{ContactFlowId}/alias/{AliasId}",
 	Code: 200})
 
 var DeleteContactFlowModule = smithy.NewSchema(smithy.ShapeID{
@@ -846,6 +860,13 @@ var DescribeContactFlow = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeContactFlow",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/contact-flows/{InstanceId}/{ContactFlowId}",
+	Code: 200})
+
+var DescribeContactFlowAlias = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "DescribeContactFlowAlias",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/contact-flows/{InstanceId}/{ContactFlowId}/alias/{AliasId}",
 	Code: 200})
 
 var DescribeContactFlowModule = smithy.NewSchema(smithy.ShapeID{
@@ -1392,6 +1413,13 @@ var ListContactEvaluations = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListContactEvaluations",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/contact-evaluations/{InstanceId}",
+	Code: 200})
+
+var ListContactFlowAliases = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ListContactFlowAliases",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/contact-flows/{InstanceId}/{ContactFlowId}/aliases",
 	Code: 200})
 
 var ListContactFlowModuleAliases = smithy.NewSchema(smithy.ShapeID{
@@ -2344,6 +2372,13 @@ var UpdateContactEvaluation = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateContactEvaluation",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/contact-evaluations/{InstanceId}/{EvaluationId}",
+	Code: 200})
+
+var UpdateContactFlowAlias = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateContactFlowAlias",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/contact-flows/{InstanceId}/{ContactFlowId}/alias/{AliasId}",
 	Code: 200})
 
 var UpdateContactFlowContent = smithy.NewSchema(smithy.ShapeID{
@@ -4891,6 +4926,50 @@ var ContactFlow_LastModifiedTime *smithy.Schema
 
 var ContactFlow_LastModifiedRegion *smithy.Schema
 
+var ContactFlowAliasInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactFlowAliasInfo",
+}, smithy.ShapeTypeStructure, 8)
+var ContactFlowAliasInfo_ContactFlowId *smithy.Schema
+
+var ContactFlowAliasInfo_ContactFlowArn *smithy.Schema
+
+var ContactFlowAliasInfo_AliasId *smithy.Schema
+
+var ContactFlowAliasInfo_Version *smithy.Schema
+
+var ContactFlowAliasInfo_Name *smithy.Schema
+
+var ContactFlowAliasInfo_Description *smithy.Schema
+
+var ContactFlowAliasInfo_LastModifiedRegion *smithy.Schema
+
+var ContactFlowAliasInfo_LastModifiedTime *smithy.Schema
+
+var ContactFlowAliasSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactFlowAliasSummary",
+}, smithy.ShapeTypeStructure, 7)
+var ContactFlowAliasSummary_Arn *smithy.Schema
+
+var ContactFlowAliasSummary_AliasId *smithy.Schema
+
+var ContactFlowAliasSummary_Version *smithy.Schema
+
+var ContactFlowAliasSummary_AliasName *smithy.Schema
+
+var ContactFlowAliasSummary_AliasDescription *smithy.Schema
+
+var ContactFlowAliasSummary_LastModifiedTime *smithy.Schema
+
+var ContactFlowAliasSummary_LastModifiedRegion *smithy.Schema
+
+var _ContactFlowAliasSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactFlowAliasSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _ContactFlowAliasSummaryList_member *smithy.Schema
+
 var ContactFlowAttributeAndCondition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ContactFlowAttributeAndCondition",
@@ -5236,12 +5315,16 @@ var _ContactFlowTypes_member *smithy.Schema
 var ContactFlowVersionSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ContactFlowVersionSummary",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 5)
 var ContactFlowVersionSummary_Arn *smithy.Schema
 
 var ContactFlowVersionSummary_VersionDescription *smithy.Schema
 
 var ContactFlowVersionSummary_Version *smithy.Schema
+
+var ContactFlowVersionSummary_LastModifiedTime *smithy.Schema
+
+var ContactFlowVersionSummary_LastModifiedRegion *smithy.Schema
 
 var _ContactFlowVersionSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -17732,6 +17815,28 @@ var CreateAuthCodeResponse_EntityType *smithy.Schema
 
 var CreateAuthCodeResponse_EntityId *smithy.Schema
 
+var CreateContactFlowAliasRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CreateContactFlowAliasRequest",
+}, smithy.ShapeTypeStructure, 5)
+var CreateContactFlowAliasRequest_InstanceId *smithy.Schema
+
+var CreateContactFlowAliasRequest_Description *smithy.Schema
+
+var CreateContactFlowAliasRequest_ContactFlowId *smithy.Schema
+
+var CreateContactFlowAliasRequest_ContactFlowVersion *smithy.Schema
+
+var CreateContactFlowAliasRequest_AliasName *smithy.Schema
+
+var CreateContactFlowAliasResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CreateContactFlowAliasResponse",
+}, smithy.ShapeTypeStructure, 2)
+var CreateContactFlowAliasResponse_ContactFlowArn *smithy.Schema
+
+var CreateContactFlowAliasResponse_Id *smithy.Schema
+
 var CreateContactFlowRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "CreateContactFlowRequest",
@@ -18793,6 +18898,21 @@ var DeleteContactEvaluationRequest_InstanceId *smithy.Schema
 
 var DeleteContactEvaluationRequest_EvaluationId *smithy.Schema
 
+var DeleteContactFlowAliasRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "DeleteContactFlowAliasRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteContactFlowAliasRequest_InstanceId *smithy.Schema
+
+var DeleteContactFlowAliasRequest_ContactFlowId *smithy.Schema
+
+var DeleteContactFlowAliasRequest_AliasId *smithy.Schema
+
+var DeleteContactFlowAliasResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "DeleteContactFlowAliasResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var DeleteContactFlowRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "DeleteContactFlowRequest",
@@ -19282,6 +19402,22 @@ var DescribeContactEvaluationResponse = smithy.NewSchema(smithy.ShapeID{
 var DescribeContactEvaluationResponse_Evaluation *smithy.Schema
 
 var DescribeContactEvaluationResponse_EvaluationForm *smithy.Schema
+
+var DescribeContactFlowAliasRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "DescribeContactFlowAliasRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DescribeContactFlowAliasRequest_InstanceId *smithy.Schema
+
+var DescribeContactFlowAliasRequest_ContactFlowId *smithy.Schema
+
+var DescribeContactFlowAliasRequest_AliasId *smithy.Schema
+
+var DescribeContactFlowAliasResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "DescribeContactFlowAliasResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeContactFlowAliasResponse_ContactFlowAlias *smithy.Schema
 
 var DescribeContactFlowRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -20621,6 +20757,26 @@ var ListContactEvaluationsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListContactEvaluationsResponse_EvaluationSummaryList *smithy.Schema
 
 var ListContactEvaluationsResponse_NextToken *smithy.Schema
+
+var ListContactFlowAliasesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ListContactFlowAliasesRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListContactFlowAliasesRequest_InstanceId *smithy.Schema
+
+var ListContactFlowAliasesRequest_ContactFlowId *smithy.Schema
+
+var ListContactFlowAliasesRequest_NextToken *smithy.Schema
+
+var ListContactFlowAliasesRequest_MaxResults *smithy.Schema
+
+var ListContactFlowAliasesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ListContactFlowAliasesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListContactFlowAliasesResponse_ContactFlowAliasSummaryList *smithy.Schema
+
+var ListContactFlowAliasesResponse_NextToken *smithy.Schema
 
 var ListContactFlowModuleAliasesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -23547,6 +23703,27 @@ var UpdateContactEvaluationResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateContactEvaluationResponse_EvaluationId *smithy.Schema
 
 var UpdateContactEvaluationResponse_EvaluationArn *smithy.Schema
+
+var UpdateContactFlowAliasRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateContactFlowAliasRequest",
+}, smithy.ShapeTypeStructure, 6)
+var UpdateContactFlowAliasRequest_InstanceId *smithy.Schema
+
+var UpdateContactFlowAliasRequest_ContactFlowId *smithy.Schema
+
+var UpdateContactFlowAliasRequest_AliasId *smithy.Schema
+
+var UpdateContactFlowAliasRequest_Name *smithy.Schema
+
+var UpdateContactFlowAliasRequest_Description *smithy.Schema
+
+var UpdateContactFlowAliasRequest_ContactFlowVersion *smithy.Schema
+
+var UpdateContactFlowAliasResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateContactFlowAliasResponse",
+}, smithy.ShapeTypeStructure, 0)
 
 var UpdateContactFlowContentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -26944,6 +27121,38 @@ func init() {
 
 	ContactFlow_LastModifiedRegion = ContactFlow.AddMember("LastModifiedRegion", _RegionName)
 
+	ContactFlowAliasInfo_ContactFlowId = ContactFlowAliasInfo.AddMember("ContactFlowId", _ResourceId)
+
+	ContactFlowAliasInfo_ContactFlowArn = ContactFlowAliasInfo.AddMember("ContactFlowArn", _ARN)
+
+	ContactFlowAliasInfo_AliasId = ContactFlowAliasInfo.AddMember("AliasId", _ResourceId)
+
+	ContactFlowAliasInfo_Version = ContactFlowAliasInfo.AddMember("Version", _ResourceVersion)
+
+	ContactFlowAliasInfo_Name = ContactFlowAliasInfo.AddMember("Name", _ContactFlowName)
+
+	ContactFlowAliasInfo_Description = ContactFlowAliasInfo.AddMember("Description", _ContactFlowDescription)
+
+	ContactFlowAliasInfo_LastModifiedRegion = ContactFlowAliasInfo.AddMember("LastModifiedRegion", _RegionName)
+
+	ContactFlowAliasInfo_LastModifiedTime = ContactFlowAliasInfo.AddMember("LastModifiedTime", _Timestamp)
+
+	ContactFlowAliasSummary_Arn = ContactFlowAliasSummary.AddMember("Arn", _ARN)
+
+	ContactFlowAliasSummary_AliasId = ContactFlowAliasSummary.AddMember("AliasId", _ResourceId)
+
+	ContactFlowAliasSummary_Version = ContactFlowAliasSummary.AddMember("Version", _ResourceVersion)
+
+	ContactFlowAliasSummary_AliasName = ContactFlowAliasSummary.AddMember("AliasName", _ContactFlowName)
+
+	ContactFlowAliasSummary_AliasDescription = ContactFlowAliasSummary.AddMember("AliasDescription", _ContactFlowDescription)
+
+	ContactFlowAliasSummary_LastModifiedTime = ContactFlowAliasSummary.AddMember("LastModifiedTime", _Timestamp)
+
+	ContactFlowAliasSummary_LastModifiedRegion = ContactFlowAliasSummary.AddMember("LastModifiedRegion", _RegionName)
+
+	_ContactFlowAliasSummaryList_member = _ContactFlowAliasSummaryList.AddMember("member", ContactFlowAliasSummary)
+
 	ContactFlowTypeCondition_ContactFlowType = ContactFlowTypeCondition.AddMember("ContactFlowType", ContactFlowType)
 
 	ContactFlowAttributeAndCondition_TagConditions = ContactFlowAttributeAndCondition.AddMember("TagConditions", _TagAndConditionList)
@@ -27111,6 +27320,10 @@ func init() {
 	ContactFlowVersionSummary_VersionDescription = ContactFlowVersionSummary.AddMember("VersionDescription", _ContactFlowDescription)
 
 	ContactFlowVersionSummary_Version = ContactFlowVersionSummary.AddMember("Version", _ResourceVersion)
+
+	ContactFlowVersionSummary_LastModifiedTime = ContactFlowVersionSummary.AddMember("LastModifiedTime", _Timestamp)
+
+	ContactFlowVersionSummary_LastModifiedRegion = ContactFlowVersionSummary.AddMember("LastModifiedRegion", _RegionName)
 
 	_ContactFlowVersionSummaryList_member = _ContactFlowVersionSummaryList.AddMember("member", ContactFlowVersionSummary)
 
@@ -32214,6 +32427,20 @@ func init() {
 
 	CreateAuthCodeResponse_EntityId = CreateAuthCodeResponse.AddMember("EntityId", _EntityId)
 
+	CreateContactFlowAliasRequest_InstanceId = CreateContactFlowAliasRequest.AddMember("InstanceId", _InstanceIdOrArn, &smithytraits.HTTPLabel{})
+
+	CreateContactFlowAliasRequest_Description = CreateContactFlowAliasRequest.AddMember("Description", _ContactFlowDescription)
+
+	CreateContactFlowAliasRequest_ContactFlowId = CreateContactFlowAliasRequest.AddMember("ContactFlowId", _ARN, &smithytraits.HTTPLabel{})
+
+	CreateContactFlowAliasRequest_ContactFlowVersion = CreateContactFlowAliasRequest.AddMember("ContactFlowVersion", _ResourceVersion)
+
+	CreateContactFlowAliasRequest_AliasName = CreateContactFlowAliasRequest.AddMember("AliasName", _ContactFlowName)
+
+	CreateContactFlowAliasResponse_ContactFlowArn = CreateContactFlowAliasResponse.AddMember("ContactFlowArn", _ARN)
+
+	CreateContactFlowAliasResponse_Id = CreateContactFlowAliasResponse.AddMember("Id", _ResourceId)
+
 	CreateContactFlowRequest_InstanceId = CreateContactFlowRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
 
 	CreateContactFlowRequest_Name = CreateContactFlowRequest.AddMember("Name", _ContactFlowName)
@@ -32944,6 +33171,12 @@ func init() {
 
 	DeleteContactEvaluationRequest_EvaluationId = DeleteContactEvaluationRequest.AddMember("EvaluationId", _ResourceId, &smithytraits.HTTPLabel{})
 
+	DeleteContactFlowAliasRequest_InstanceId = DeleteContactFlowAliasRequest.AddMember("InstanceId", _InstanceIdOrArn, &smithytraits.HTTPLabel{})
+
+	DeleteContactFlowAliasRequest_ContactFlowId = DeleteContactFlowAliasRequest.AddMember("ContactFlowId", _ARN, &smithytraits.HTTPLabel{})
+
+	DeleteContactFlowAliasRequest_AliasId = DeleteContactFlowAliasRequest.AddMember("AliasId", _ResourceId, &smithytraits.HTTPLabel{})
+
 	DeleteContactFlowRequest_InstanceId = DeleteContactFlowRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
 
 	DeleteContactFlowRequest_ContactFlowId = DeleteContactFlowRequest.AddMember("ContactFlowId", _ContactFlowId, &smithytraits.HTTPLabel{})
@@ -33145,6 +33378,14 @@ func init() {
 	DescribeContactEvaluationResponse_Evaluation = DescribeContactEvaluationResponse.AddMember("Evaluation", Evaluation)
 
 	DescribeContactEvaluationResponse_EvaluationForm = DescribeContactEvaluationResponse.AddMember("EvaluationForm", EvaluationFormContent)
+
+	DescribeContactFlowAliasRequest_InstanceId = DescribeContactFlowAliasRequest.AddMember("InstanceId", _InstanceIdOrArn, &smithytraits.HTTPLabel{})
+
+	DescribeContactFlowAliasRequest_ContactFlowId = DescribeContactFlowAliasRequest.AddMember("ContactFlowId", _ARN, &smithytraits.HTTPLabel{})
+
+	DescribeContactFlowAliasRequest_AliasId = DescribeContactFlowAliasRequest.AddMember("AliasId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	DescribeContactFlowAliasResponse_ContactFlowAlias = DescribeContactFlowAliasResponse.AddMember("ContactFlowAlias", ContactFlowAliasInfo)
 
 	DescribeContactFlowRequest_InstanceId = DescribeContactFlowRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
 
@@ -33895,6 +34136,18 @@ func init() {
 	ListContactEvaluationsResponse_EvaluationSummaryList = ListContactEvaluationsResponse.AddMember("EvaluationSummaryList", _EvaluationSummaryList)
 
 	ListContactEvaluationsResponse_NextToken = ListContactEvaluationsResponse.AddMember("NextToken", _NextToken)
+
+	ListContactFlowAliasesRequest_InstanceId = ListContactFlowAliasesRequest.AddMember("InstanceId", _InstanceIdOrArn, &smithytraits.HTTPLabel{})
+
+	ListContactFlowAliasesRequest_ContactFlowId = ListContactFlowAliasesRequest.AddMember("ContactFlowId", _ARN, &smithytraits.HTTPLabel{})
+
+	ListContactFlowAliasesRequest_NextToken = ListContactFlowAliasesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListContactFlowAliasesRequest_MaxResults = ListContactFlowAliasesRequest.AddMember("MaxResults", _MaxResult1000, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListContactFlowAliasesResponse_ContactFlowAliasSummaryList = ListContactFlowAliasesResponse.AddMember("ContactFlowAliasSummaryList", _ContactFlowAliasSummaryList)
+
+	ListContactFlowAliasesResponse_NextToken = ListContactFlowAliasesResponse.AddMember("NextToken", _NextToken)
 
 	ListContactFlowModuleAliasesRequest_InstanceId = ListContactFlowModuleAliasesRequest.AddMember("InstanceId", _InstanceIdOrArn, &smithytraits.HTTPLabel{})
 
@@ -35743,6 +35996,18 @@ func init() {
 	UpdateContactEvaluationResponse_EvaluationId = UpdateContactEvaluationResponse.AddMember("EvaluationId", _ResourceId)
 
 	UpdateContactEvaluationResponse_EvaluationArn = UpdateContactEvaluationResponse.AddMember("EvaluationArn", _ARN)
+
+	UpdateContactFlowAliasRequest_InstanceId = UpdateContactFlowAliasRequest.AddMember("InstanceId", _InstanceIdOrArn, &smithytraits.HTTPLabel{})
+
+	UpdateContactFlowAliasRequest_ContactFlowId = UpdateContactFlowAliasRequest.AddMember("ContactFlowId", _ARN, &smithytraits.HTTPLabel{})
+
+	UpdateContactFlowAliasRequest_AliasId = UpdateContactFlowAliasRequest.AddMember("AliasId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	UpdateContactFlowAliasRequest_Name = UpdateContactFlowAliasRequest.AddMember("Name", _ContactFlowName)
+
+	UpdateContactFlowAliasRequest_Description = UpdateContactFlowAliasRequest.AddMember("Description", _ContactFlowDescription)
+
+	UpdateContactFlowAliasRequest_ContactFlowVersion = UpdateContactFlowAliasRequest.AddMember("ContactFlowVersion", _ResourceVersion)
 
 	UpdateContactFlowContentRequest_InstanceId = UpdateContactFlowContentRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
 

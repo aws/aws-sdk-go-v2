@@ -3921,6 +3921,14 @@ var AthenaResultFormat_JSON *smithy.Schema
 
 var AthenaResultFormat_TEXTFILE *smithy.Schema
 
+var AthenaStepMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AthenaStepMetadata",
+}, smithy.ShapeTypeStructure, 2)
+var AthenaStepMetadata_QueryExecutionId *smithy.Schema
+
+var AthenaStepMetadata_S3OutputLocation *smithy.Schema
+
 var _AthenaWorkGroup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "AthenaWorkGroup",
@@ -5832,6 +5840,46 @@ var ClarifyTextLanguage_YORUBA *smithy.Schema
 var ClarifyTextLanguage_LIGURIAN *smithy.Schema
 
 var ClarifyTextLanguage_MULTI_LANGUAGE *smithy.Schema
+
+var CleanupFailure = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CleanupFailure",
+}, smithy.ShapeTypeStructure, 3)
+var CleanupFailure_StepName *smithy.Schema
+
+var CleanupFailure_ErrorCode *smithy.Schema
+
+var CleanupFailure_ErrorMessage *smithy.Schema
+
+var CleanupFailureErrorCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CleanupFailureErrorCode",
+}, smithy.ShapeTypeEnum, 2)
+var CleanupFailureErrorCode_CLIENT_ERROR *smithy.Schema
+
+var CleanupFailureErrorCode_INTERNAL_FAILURE *smithy.Schema
+
+var _CleanupFailureList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CleanupFailureList",
+}, smithy.ShapeTypeList, 1)
+var _CleanupFailureList_member *smithy.Schema
+
+var CleanupStepMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CleanupStepMetadata",
+}, smithy.ShapeTypeStructure, 3)
+var CleanupStepMetadata_CleanedSteps *smithy.Schema
+
+var CleanupStepMetadata_FailedSteps *smithy.Schema
+
+var CleanupStepMetadata_SkippedSteps *smithy.Schema
+
+var _CleanupStepNameList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CleanupStepNameList",
+}, smithy.ShapeTypeList, 1)
+var _CleanupStepNameList_member *smithy.Schema
 
 var _ClientId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -9292,11 +9340,21 @@ var _EksRoleAccessEntries = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _EksRoleAccessEntries_member *smithy.Schema
 
+var _EMRServerlessApplicationId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "EMRServerlessApplicationId",
+}, smithy.ShapeTypeString, 0)
+
 var EmrServerlessComputeConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "EmrServerlessComputeConfig",
 }, smithy.ShapeTypeStructure, 1)
 var EmrServerlessComputeConfig_ExecutionRoleARN *smithy.Schema
+
+var _EMRServerlessJobRunId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "EMRServerlessJobRunId",
+}, smithy.ShapeTypeString, 0)
 
 var EmrServerlessSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -9305,6 +9363,18 @@ var EmrServerlessSettings = smithy.NewSchema(smithy.ShapeID{
 var EmrServerlessSettings_ExecutionRoleArn *smithy.Schema
 
 var EmrServerlessSettings_Status *smithy.Schema
+
+var EMRServerlessStepMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "EMRServerlessStepMetadata",
+}, smithy.ShapeTypeStructure, 4)
+var EMRServerlessStepMetadata_ApplicationId *smithy.Schema
+
+var EMRServerlessStepMetadata_JobRunId *smithy.Schema
+
+var EMRServerlessStepMetadata_JobRunName *smithy.Schema
+
+var EMRServerlessStepMetadata_LogFilePath *smithy.Schema
 
 var EmrSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -10406,6 +10476,42 @@ var _FlowDefinitionTaskTitle = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "FlowDefinitionTaskTitle",
 }, smithy.ShapeTypeString, 0)
+
+var ForEachSelectorResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ForEachSelectorResult",
+}, smithy.ShapeTypeStructure, 2)
+var ForEachSelectorResult_StepName *smithy.Schema
+
+var ForEachSelectorResult_Index *smithy.Schema
+
+var ForEachStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ForEachStatus",
+}, smithy.ShapeTypeEnum, 3)
+var ForEachStatus_SUCCEEDED *smithy.Schema
+
+var ForEachStatus_FAILED *smithy.Schema
+
+var ForEachStatus_STOPPED *smithy.Schema
+
+var ForEachStepMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ForEachStepMetadata",
+}, smithy.ShapeTypeStructure, 7)
+var ForEachStepMetadata_Status *smithy.Schema
+
+var ForEachStepMetadata_InputItemCount *smithy.Schema
+
+var ForEachStepMetadata_TotalStepCount *smithy.Schema
+
+var ForEachStepMetadata_SucceededStepCount *smithy.Schema
+
+var ForEachStepMetadata_FailedStepCount *smithy.Schema
+
+var ForEachStepMetadata_StoppedStepCount *smithy.Schema
+
+var ForEachStepMetadata_Selector *smithy.Schema
 
 var _ForecastFrequency = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -12990,6 +13096,16 @@ var _ItemIdentifierAttributeName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ItemIdentifierAttributeName",
 }, smithy.ShapeTypeString, 0)
+
+var IterationContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "IterationContext",
+}, smithy.ShapeTypeStructure, 3)
+var IterationContext_ParentStepName *smithy.Schema
+
+var IterationContext_Index *smithy.Schema
+
+var IterationContext_Item *smithy.Schema
 
 var _JavaBoolean = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -17364,7 +17480,7 @@ var _PipelineExecutionName = smithy.NewSchema(smithy.ShapeID{
 var PipelineExecutionStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PipelineExecutionStatus",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 6)
 var PipelineExecutionStatus_EXECUTING *smithy.Schema
 
 var PipelineExecutionStatus_STOPPING *smithy.Schema
@@ -17375,10 +17491,12 @@ var PipelineExecutionStatus_FAILED *smithy.Schema
 
 var PipelineExecutionStatus_SUCCEEDED *smithy.Schema
 
+var PipelineExecutionStatus_COMPLETED_WITH_FAILURES *smithy.Schema
+
 var PipelineExecutionStep = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PipelineExecutionStep",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var PipelineExecutionStep_StepName *smithy.Schema
 
 var PipelineExecutionStep_StepDisplayName *smithy.Schema
@@ -17401,6 +17519,8 @@ var PipelineExecutionStep_AttemptCount *smithy.Schema
 
 var PipelineExecutionStep_SelectiveExecutionResult *smithy.Schema
 
+var PipelineExecutionStep_IterationContext *smithy.Schema
+
 var _PipelineExecutionStepList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PipelineExecutionStepList",
@@ -17410,7 +17530,7 @@ var _PipelineExecutionStepList_member *smithy.Schema
 var PipelineExecutionStepMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PipelineExecutionStepMetadata",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 27)
 var PipelineExecutionStepMetadata_TrainingJob *smithy.Schema
 
 var PipelineExecutionStepMetadata_ProcessingJob *smithy.Schema
@@ -17430,6 +17550,8 @@ var PipelineExecutionStepMetadata_Callback *smithy.Schema
 var PipelineExecutionStepMetadata_Lambda *smithy.Schema
 
 var PipelineExecutionStepMetadata_EMR *smithy.Schema
+
+var PipelineExecutionStepMetadata_EMRServerless *smithy.Schema
 
 var PipelineExecutionStepMetadata_QualityCheck *smithy.Schema
 
@@ -17456,6 +17578,12 @@ var PipelineExecutionStepMetadata_InferenceComponent *smithy.Schema
 var PipelineExecutionStepMetadata_Lineage *smithy.Schema
 
 var PipelineExecutionStepMetadata_Job *smithy.Schema
+
+var PipelineExecutionStepMetadata_Athena *smithy.Schema
+
+var PipelineExecutionStepMetadata_Cleanup *smithy.Schema
+
+var PipelineExecutionStepMetadata_ForEach *smithy.Schema
 
 var PipelineExecutionSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -21773,6 +21901,11 @@ var _String1024 = smithy.NewSchema(smithy.ShapeID{
 var _String128 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "String128",
+}, smithy.ShapeTypeString, 0)
+
+var _String12800 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "String12800",
 }, smithy.ShapeTypeString, 0)
 
 var _String200 = smithy.NewSchema(smithy.ShapeID{
@@ -38104,6 +38237,10 @@ func init() {
 
 	AthenaDatasetDefinition_OutputCompression = AthenaDatasetDefinition.AddMember("OutputCompression", AthenaResultCompressionType)
 
+	AthenaStepMetadata_QueryExecutionId = AthenaStepMetadata.AddMember("QueryExecutionId", _String256)
+
+	AthenaStepMetadata_S3OutputLocation = AthenaStepMetadata.AddMember("S3OutputLocation", _String1024)
+
 	_AuthenticationRequestExtraParams_key = _AuthenticationRequestExtraParams.AddMember("key", _AuthenticationRequestExtraParamsKey)
 
 	_AuthenticationRequestExtraParams_value = _AuthenticationRequestExtraParams.AddMember("value", _AuthenticationRequestExtraParamsValue)
@@ -39351,6 +39488,26 @@ func init() {
 	ClarifyExplainerConfig_InferenceConfig = ClarifyExplainerConfig.AddMember("InferenceConfig", ClarifyInferenceConfig)
 
 	ClarifyExplainerConfig_ShapConfig = ClarifyExplainerConfig.AddMember("ShapConfig", ClarifyShapConfig)
+
+	CleanupFailureErrorCode_CLIENT_ERROR = CleanupFailureErrorCode.AddMember("CLIENT_ERROR", smithyprelude.Unit)
+
+	CleanupFailureErrorCode_INTERNAL_FAILURE = CleanupFailureErrorCode.AddMember("INTERNAL_FAILURE", smithyprelude.Unit)
+
+	CleanupFailure_StepName = CleanupFailure.AddMember("StepName", _String256)
+
+	CleanupFailure_ErrorCode = CleanupFailure.AddMember("ErrorCode", CleanupFailureErrorCode)
+
+	CleanupFailure_ErrorMessage = CleanupFailure.AddMember("ErrorMessage", _String2048)
+
+	_CleanupFailureList_member = _CleanupFailureList.AddMember("member", CleanupFailure)
+
+	_CleanupStepNameList_member = _CleanupStepNameList.AddMember("member", _String256)
+
+	CleanupStepMetadata_CleanedSteps = CleanupStepMetadata.AddMember("CleanedSteps", _CleanupStepNameList)
+
+	CleanupStepMetadata_FailedSteps = CleanupStepMetadata.AddMember("FailedSteps", _CleanupFailureList)
+
+	CleanupStepMetadata_SkippedSteps = CleanupStepMetadata.AddMember("SkippedSteps", _CleanupStepNameList)
 
 	ClusterAccountingDatabase_Endpoint = ClusterAccountingDatabase.AddMember("Endpoint", _ClusterAccountingDatabaseEndpoint)
 
@@ -41792,6 +41949,14 @@ func init() {
 
 	_Edges_member = _Edges.AddMember("member", Edge)
 
+	EMRServerlessStepMetadata_ApplicationId = EMRServerlessStepMetadata.AddMember("ApplicationId", _EMRServerlessApplicationId)
+
+	EMRServerlessStepMetadata_JobRunId = EMRServerlessStepMetadata.AddMember("JobRunId", _EMRServerlessJobRunId)
+
+	EMRServerlessStepMetadata_JobRunName = EMRServerlessStepMetadata.AddMember("JobRunName", _String256)
+
+	EMRServerlessStepMetadata_LogFilePath = EMRServerlessStepMetadata.AddMember("LogFilePath", _String1024)
+
 	EMRStepMetadata_ClusterId = EMRStepMetadata.AddMember("ClusterId", _String256)
 
 	EMRStepMetadata_StepId = EMRStepMetadata.AddMember("StepId", _String256)
@@ -42535,6 +42700,30 @@ func init() {
 	_FlowDefinitionSummaries_member = _FlowDefinitionSummaries.AddMember("member", FlowDefinitionSummary)
 
 	_FlowDefinitionTaskKeywords_member = _FlowDefinitionTaskKeywords.AddMember("member", _FlowDefinitionTaskKeyword)
+
+	ForEachSelectorResult_StepName = ForEachSelectorResult.AddMember("StepName", _String256)
+
+	ForEachSelectorResult_Index = ForEachSelectorResult.AddMember("Index", _Integer)
+
+	ForEachStatus_SUCCEEDED = ForEachStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
+
+	ForEachStatus_FAILED = ForEachStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	ForEachStatus_STOPPED = ForEachStatus.AddMember("STOPPED", smithyprelude.Unit)
+
+	ForEachStepMetadata_Status = ForEachStepMetadata.AddMember("Status", ForEachStatus)
+
+	ForEachStepMetadata_InputItemCount = ForEachStepMetadata.AddMember("InputItemCount", _Integer)
+
+	ForEachStepMetadata_TotalStepCount = ForEachStepMetadata.AddMember("TotalStepCount", _Integer)
+
+	ForEachStepMetadata_SucceededStepCount = ForEachStepMetadata.AddMember("SucceededStepCount", _Integer)
+
+	ForEachStepMetadata_FailedStepCount = ForEachStepMetadata.AddMember("FailedStepCount", _Integer)
+
+	ForEachStepMetadata_StoppedStepCount = ForEachStepMetadata.AddMember("StoppedStepCount", _Integer)
+
+	ForEachStepMetadata_Selector = ForEachStepMetadata.AddMember("Selector", ForEachSelectorResult)
 
 	Framework_TENSORFLOW = Framework.AddMember("TENSORFLOW", smithyprelude.Unit)
 
@@ -44003,6 +44192,12 @@ func init() {
 	IsTrackingServerActive_ACTIVE = IsTrackingServerActive.AddMember("ACTIVE", smithyprelude.Unit)
 
 	IsTrackingServerActive_INACTIVE = IsTrackingServerActive.AddMember("INACTIVE", smithyprelude.Unit)
+
+	IterationContext_ParentStepName = IterationContext.AddMember("ParentStepName", _String256)
+
+	IterationContext_Index = IterationContext.AddMember("Index", _Integer)
+
+	IterationContext_Item = IterationContext.AddMember("Item", _String12800)
 
 	JobCategory_AGENT_RFT = JobCategory.AddMember("AGENT_RFT", smithyprelude.Unit)
 
@@ -45754,6 +45949,8 @@ func init() {
 
 	PipelineExecutionStatus_SUCCEEDED = PipelineExecutionStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
 
+	PipelineExecutionStatus_COMPLETED_WITH_FAILURES = PipelineExecutionStatus.AddMember("COMPLETED_WITH_FAILURES", smithyprelude.Unit)
+
 	PipelineExperimentConfig_ExperimentName = PipelineExperimentConfig.AddMember("ExperimentName", _ExperimentEntityName)
 
 	PipelineExperimentConfig_TrialName = PipelineExperimentConfig.AddMember("TrialName", _ExperimentEntityName)
@@ -45860,6 +46057,8 @@ func init() {
 
 	PipelineExecutionStepMetadata_EMR = PipelineExecutionStepMetadata.AddMember("EMR", EMRStepMetadata)
 
+	PipelineExecutionStepMetadata_EMRServerless = PipelineExecutionStepMetadata.AddMember("EMRServerless", EMRServerlessStepMetadata)
+
 	PipelineExecutionStepMetadata_QualityCheck = PipelineExecutionStepMetadata.AddMember("QualityCheck", QualityCheckStepMetadata)
 
 	PipelineExecutionStepMetadata_ClarifyCheck = PipelineExecutionStepMetadata.AddMember("ClarifyCheck", ClarifyCheckStepMetadata)
@@ -45886,6 +46085,12 @@ func init() {
 
 	PipelineExecutionStepMetadata_Job = PipelineExecutionStepMetadata.AddMember("Job", JobStepMetadata)
 
+	PipelineExecutionStepMetadata_Athena = PipelineExecutionStepMetadata.AddMember("Athena", AthenaStepMetadata)
+
+	PipelineExecutionStepMetadata_Cleanup = PipelineExecutionStepMetadata.AddMember("Cleanup", CleanupStepMetadata)
+
+	PipelineExecutionStepMetadata_ForEach = PipelineExecutionStepMetadata.AddMember("ForEach", ForEachStepMetadata)
+
 	SelectiveExecutionResult_SourcePipelineExecutionArn = SelectiveExecutionResult.AddMember("SourcePipelineExecutionArn", _PipelineExecutionArn)
 
 	PipelineExecutionStep_StepName = PipelineExecutionStep.AddMember("StepName", _StepName)
@@ -45909,6 +46114,8 @@ func init() {
 	PipelineExecutionStep_AttemptCount = PipelineExecutionStep.AddMember("AttemptCount", _Integer)
 
 	PipelineExecutionStep_SelectiveExecutionResult = PipelineExecutionStep.AddMember("SelectiveExecutionResult", SelectiveExecutionResult)
+
+	PipelineExecutionStep_IterationContext = PipelineExecutionStep.AddMember("IterationContext", IterationContext)
 
 	_PipelineExecutionStepList_member = _PipelineExecutionStepList.AddMember("member", PipelineExecutionStep)
 

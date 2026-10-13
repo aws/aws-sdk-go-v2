@@ -55,7 +55,10 @@ type GetDomainSuggestionsInput struct {
 	// If OnlyAvailable is true , Route 53 returns only domain names that are
 	// available. If OnlyAvailable is false , Route 53 returns domain names without
 	// checking whether they're available to be registered. To determine whether the
-	// domain is available, you can call checkDomainAvailability for each suggestion.
+	// domain is available, call checkDomainAvailability for each suggestion.
+	//
+	// If OnlyAvailable is false , Route 53 does not return pricing information for the
+	// suggested domain names.
 	//
 	// This member is required.
 	OnlyAvailable *bool
@@ -66,6 +69,11 @@ type GetDomainSuggestionsInput struct {
 	//
 	// This member is required.
 	SuggestionCount int32
+
+	// If true , Route 53 returns only domain names that are priced at the standard
+	// registration rate for their TLD. If false , Route 53 includes domain names with
+	// premium pricing in the suggestions list. The default is true .
+	OnlyStandardPrices *bool
 
 	noSmithyDocumentSerde
 }
@@ -82,6 +90,9 @@ func (v *GetDomainSuggestionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.OnlyAvailable != nil {
 		s.WriteBool(schemas.GetDomainSuggestionsRequest_OnlyAvailable, *v.OnlyAvailable)
+	}
+	if v.OnlyStandardPrices != nil {
+		s.WriteBool(schemas.GetDomainSuggestionsRequest_OnlyStandardPrices, *v.OnlyStandardPrices)
 	}
 	s.WriteInt32(schemas.GetDomainSuggestionsRequest_SuggestionCount, v.SuggestionCount)
 }

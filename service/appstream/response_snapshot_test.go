@@ -1383,6 +1383,7 @@ func TestCheckResponseSnapshot_CreateStack(t *testing.T) {
 				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 			},
+			StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateStack.response")
@@ -1491,6 +1492,7 @@ func TestCheckResponseSnapshot_CreateStack(t *testing.T) {
 			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 		},
+		StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3653,6 +3655,7 @@ func TestCheckResponseSnapshot_DescribeStacks(t *testing.T) {
 					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 				},
+				StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 			},
 			{
 				Arn:         ptr.String("__Arn__"),
@@ -3762,6 +3765,7 @@ func TestCheckResponseSnapshot_DescribeStacks(t *testing.T) {
 					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 				},
+				StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -5399,6 +5403,7 @@ func TestCheckResponseSnapshot_UpdateStack(t *testing.T) {
 				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 			},
+			StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateStack.response")
@@ -5509,6 +5514,7 @@ func TestCheckResponseSnapshot_UpdateStack(t *testing.T) {
 			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
 		},
+		StorageConnectorAuthentication: types.StorageConnectorAuthentication("FORCE_REAUTHENTICATION"),
 	})
 	if err != nil {
 		t.Fatal(err)

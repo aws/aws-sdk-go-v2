@@ -230,6 +230,18 @@ func TestCheckSnapshot_GetDomainDetail(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDomainPrices(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDomainPrices(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDomainPrices")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDomainSuggestions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDomainSuggestions(context.Background(), nil, func(o *Options) {
@@ -630,6 +642,18 @@ func TestUpdateSnapshot_GetDomainDetail(t *testing.T) {
 	_, err := svc.GetDomainDetail(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDomainDetail")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDomainPrices(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDomainPrices(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDomainPrices")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

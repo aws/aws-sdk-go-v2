@@ -1258,6 +1258,10 @@ type AutomationRulesActionV2 struct {
 	// rule is triggered.
 	FindingFieldsUpdate *AutomationRulesFindingFieldsUpdateV2
 
+	// The changes to be applied to resource fields when an automation rule is
+	// triggered.
+	ResourceFieldsUpdate *AutomationRulesResourceFieldsUpdateV2
+
 	noSmithyDocumentSerde
 }
 
@@ -1278,6 +1282,11 @@ func (v *AutomationRulesActionV2) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FindingFieldsUpdate.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.ResourceFieldsUpdate != nil {
+		s.WriteStruct(schemas.AutomationRulesActionV2_ResourceFieldsUpdate)
+		v.ResourceFieldsUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.AutomationRulesActionV2_Type, string(v.Type))
 	}
@@ -1291,6 +1300,9 @@ func (v *AutomationRulesActionV2) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.AutomationRulesActionV2_FindingFieldsUpdate:
 			v.FindingFieldsUpdate = &AutomationRulesFindingFieldsUpdateV2{}
 			return v.FindingFieldsUpdate.Deserialize(d)
+		case schemas.AutomationRulesActionV2_ResourceFieldsUpdate:
+			v.ResourceFieldsUpdate = &AutomationRulesResourceFieldsUpdateV2{}
+			return v.ResourceFieldsUpdate.Deserialize(d)
 		case schemas.AutomationRulesActionV2_Type:
 			var ev string
 			if err := d.ReadString(schemas.AutomationRulesActionV2_Type, &ev); err != nil {
@@ -2252,6 +2264,44 @@ func (v *AutomationRulesMetadataV2) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.AutomationRulesMetadataV2_UpdatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.AutomationRulesMetadataV2_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Allows you to define the structure for modifying specific fields of resources.
+type AutomationRulesResourceFieldsUpdateV2 struct {
+
+	// The criticality level to be assigned to resources that match the automation
+	// rule criteria.
+	//
+	// This member is required.
+	Criticality ResourceCriticality
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutomationRulesResourceFieldsUpdateV2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomationRulesResourceFieldsUpdateV2)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomationRulesResourceFieldsUpdateV2) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Criticality != "" {
+		s.WriteString(schemas.AutomationRulesResourceFieldsUpdateV2_Criticality, string(v.Criticality))
+	}
+}
+func (v *AutomationRulesResourceFieldsUpdateV2) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomationRulesResourceFieldsUpdateV2, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomationRulesResourceFieldsUpdateV2_Criticality:
+			var ev string
+			if err := d.ReadString(schemas.AutomationRulesResourceFieldsUpdateV2_Criticality, &ev); err != nil {
+				return err
+			}
+			v.Criticality = ResourceCriticality(ev)
+			return nil
 		}
 		return nil
 	})
@@ -39194,11 +39244,12 @@ func (v *Country) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // Defines the parameters and conditions used to evaluate and filter security
-// findings.
+// findings or resources.
 //
 // The following types satisfy this interface:
 //
 //	CriteriaMemberOcsfFindingCriteria
+//	CriteriaMemberResourceCriteria
 type Criteria interface {
 	isCriteria()
 }
@@ -39218,6 +39269,71 @@ func (v *CriteriaMemberOcsfFindingCriteria) Serialize(s smithy.ShapeSerializer) 
 }
 func (v *CriteriaMemberOcsfFindingCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
+}
+
+// The filtering conditions for resources.
+type CriteriaMemberResourceCriteria struct {
+	Value ResourcesFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*CriteriaMemberResourceCriteria) isCriteria() {}
+func (v *CriteriaMemberResourceCriteria) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Criteria_ResourceCriteria)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CriteriaMemberResourceCriteria) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Details the source and reason of a criticality.
+type CriticalitySource struct {
+
+	// The reason the criticality was assigned.
+	//
+	// This member is required.
+	Reason *string
+
+	// The source of the criticality.
+	//
+	// This member is required.
+	Source CriticalitySourceType
+
+	noSmithyDocumentSerde
+}
+
+func (v *CriticalitySource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CriticalitySource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CriticalitySource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != nil {
+		s.WriteString(schemas.CriticalitySource_Reason, *v.Reason)
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.CriticalitySource_Source, string(v.Source))
+	}
+}
+func (v *CriticalitySource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CriticalitySource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CriticalitySource_Reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.CriticalitySource_Reason, v.Reason)
+		case schemas.CriticalitySource_Source:
+			var ev string
+			if err := d.ReadString(schemas.CriticalitySource_Source, &ev); err != nil {
+				return err
+			}
+			v.Source = CriticalitySourceType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A summary of a CSPM connector.
@@ -48825,6 +48941,9 @@ type ResourceResult struct {
 	// The name of the Amazon Web Services account that's associated with the resource.
 	AccountName *string
 
+	// The sources of criticalities determined from a resource.
+	CriticalitySources []CriticalitySource
+
 	// Specifies how the resource was discovered. If the value is Managed , the
 	// resource is natively provided by a cloud service provider. If the value is
 	// SelfHosted , the resource is hosted on customer-managed infrastructure, such as
@@ -48844,6 +48963,9 @@ type ResourceResult struct {
 
 	// The time when the resource was created.
 	ResourceCreationTimeDt *string
+
+	// The criticality assigned to a resource.
+	ResourceCriticality ResourceCriticality
 
 	// The global identifier used to identify a resource.
 	ResourceGuid *string
@@ -48898,6 +49020,7 @@ func (v *ResourceResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountName != nil {
 		s.WriteString(schemas.ResourceResult_AccountName, *v.AccountName)
 	}
+	serializeCriticalitySourceList(s, schemas.ResourceResult_CriticalitySources, v.CriticalitySources)
 	if v.DiscoveryType != "" {
 		s.WriteString(schemas.ResourceResult_DiscoveryType, string(v.DiscoveryType))
 	}
@@ -48916,6 +49039,9 @@ func (v *ResourceResult) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ResourceCreationTimeDt != nil {
 		s.WriteString(schemas.ResourceResult_ResourceCreationTimeDt, *v.ResourceCreationTimeDt)
+	}
+	if v.ResourceCriticality != "" {
+		s.WriteString(schemas.ResourceResult_ResourceCriticality, string(v.ResourceCriticality))
 	}
 	if v.ResourceDetailCaptureTimeDt != nil {
 		s.WriteString(schemas.ResourceResult_ResourceDetailCaptureTimeDt, *v.ResourceDetailCaptureTimeDt)
@@ -48963,6 +49089,8 @@ func (v *ResourceResult) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourceResult_AccountName:
 			v.AccountName = new(string)
 			return d.ReadString(schemas.ResourceResult_AccountName, v.AccountName)
+		case schemas.ResourceResult_CriticalitySources:
+			return deserializeCriticalitySourceList(d, schemas.ResourceResult_CriticalitySources, &v.CriticalitySources)
 		case schemas.ResourceResult_DiscoveryType:
 			var ev string
 			if err := d.ReadString(schemas.ResourceResult_DiscoveryType, &ev); err != nil {
@@ -48997,6 +49125,13 @@ func (v *ResourceResult) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourceResult_ResourceCreationTimeDt:
 			v.ResourceCreationTimeDt = new(string)
 			return d.ReadString(schemas.ResourceResult_ResourceCreationTimeDt, v.ResourceCreationTimeDt)
+		case schemas.ResourceResult_ResourceCriticality:
+			var ev string
+			if err := d.ReadString(schemas.ResourceResult_ResourceCriticality, &ev); err != nil {
+				return err
+			}
+			v.ResourceCriticality = ResourceCriticality(ev)
+			return nil
 		case schemas.ResourceResult_ResourceDetailCaptureTimeDt:
 			v.ResourceDetailCaptureTimeDt = new(string)
 			return d.ReadString(schemas.ResourceResult_ResourceDetailCaptureTimeDt, v.ResourceDetailCaptureTimeDt)

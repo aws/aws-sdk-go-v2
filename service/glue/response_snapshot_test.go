@@ -11324,7 +11324,8 @@ func TestCheckResponseSnapshot_CreateIntegration(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateIntegration.response")
@@ -11360,7 +11361,8 @@ func TestCheckResponseSnapshot_CreateIntegration(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	})
 	if err != nil {
@@ -17054,7 +17056,8 @@ func TestCheckResponseSnapshot_DescribeInboundIntegrations(t *testing.T) {
 					SourceProperties: map[string]string{
 						"key0": "__Value__",
 					},
-					ContinuousSync: ptr.Bool(true),
+					ContinuousSync:  ptr.Bool(true),
+					TargetNamespace: ptr.String("__TargetNamespace__"),
 				},
 				Errors: []types.IntegrationError{
 					{
@@ -17078,7 +17081,8 @@ func TestCheckResponseSnapshot_DescribeInboundIntegrations(t *testing.T) {
 					SourceProperties: map[string]string{
 						"key0": "__Value__",
 					},
-					ContinuousSync: ptr.Bool(true),
+					ContinuousSync:  ptr.Bool(true),
+					TargetNamespace: ptr.String("__TargetNamespace__"),
 				},
 				Errors: []types.IntegrationError{
 					{
@@ -17146,7 +17150,8 @@ func TestCheckResponseSnapshot_DescribeIntegrations(t *testing.T) {
 					SourceProperties: map[string]string{
 						"key0": "__Value__",
 					},
-					ContinuousSync: ptr.Bool(true),
+					ContinuousSync:  ptr.Bool(true),
+					TargetNamespace: ptr.String("__TargetNamespace__"),
 				},
 				Errors: []types.IntegrationError{
 					{
@@ -17187,7 +17192,8 @@ func TestCheckResponseSnapshot_DescribeIntegrations(t *testing.T) {
 					SourceProperties: map[string]string{
 						"key0": "__Value__",
 					},
-					ContinuousSync: ptr.Bool(true),
+					ContinuousSync:  ptr.Bool(true),
+					TargetNamespace: ptr.String("__TargetNamespace__"),
 				},
 				Errors: []types.IntegrationError{
 					{
@@ -39070,7 +39076,8 @@ func TestCheckResponseSnapshot_ModifyIntegration(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifyIntegration.response")
@@ -39090,7 +39097,8 @@ func TestCheckResponseSnapshot_ModifyIntegration(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 		IntegrationName: ptr.String("__IntegrationName__"),
 	})
@@ -47859,7 +47867,8 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	})
 	if opErr == nil {
@@ -48588,7 +48597,8 @@ func TestCheckResponseSnapshot_Error_IntegrationConflictOperationFault(t *testin
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	})
 	if opErr == nil {
@@ -48667,7 +48677,8 @@ func TestCheckResponseSnapshot_Error_IntegrationQuotaExceededFault(t *testing.T)
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	})
 	if opErr == nil {
@@ -48719,7 +48730,8 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	})
 	if opErr == nil {
@@ -48927,7 +48939,8 @@ func TestCheckResponseSnapshot_Error_KMSKeyNotAccessibleFault(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	})
 	if opErr == nil {
@@ -49435,7 +49448,8 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	})
 	if opErr == nil {

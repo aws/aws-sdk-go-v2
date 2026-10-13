@@ -949,6 +949,105 @@ var _DependencySummaryList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _DependencySummaryList_member *smithy.Schema
 
+var DevOpsAgentConfidence = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentConfidence",
+}, smithy.ShapeTypeEnum, 3)
+var DevOpsAgentConfidence_HIGH *smithy.Schema
+
+var DevOpsAgentConfidence_MEDIUM *smithy.Schema
+
+var DevOpsAgentConfidence_LOW *smithy.Schema
+
+var DevOpsAgentConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var DevOpsAgentConfiguration_agentSpaceArn *smithy.Schema
+
+var DevOpsAgentConfigurationView = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentConfigurationView",
+}, smithy.ShapeTypeStructure, 7)
+var DevOpsAgentConfigurationView_agentSpaceArn *smithy.Schema
+
+var DevOpsAgentConfigurationView_agentSpaceId *smithy.Schema
+
+var DevOpsAgentConfigurationView_region *smithy.Schema
+
+var DevOpsAgentConfigurationView_status *smithy.Schema
+
+var DevOpsAgentConfigurationView_operatorAppUrl *smithy.Schema
+
+var DevOpsAgentConfigurationView_connectedAt *smithy.Schema
+
+var DevOpsAgentConfigurationView_statusReason *smithy.Schema
+
+var DevOpsAgentConnectionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentConnectionStatus",
+}, smithy.ShapeTypeEnum, 4)
+var DevOpsAgentConnectionStatus_CONNECTING *smithy.Schema
+
+var DevOpsAgentConnectionStatus_CONNECTED *smithy.Schema
+
+var DevOpsAgentConnectionStatus_DISCONNECTED *smithy.Schema
+
+var DevOpsAgentConnectionStatus_FAILED *smithy.Schema
+
+var DevOpsAgentInvestigation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentInvestigation",
+}, smithy.ShapeTypeStructure, 5)
+var DevOpsAgentInvestigation_verdict *smithy.Schema
+
+var DevOpsAgentInvestigation_confidence *smithy.Schema
+
+var DevOpsAgentInvestigation_deepLink *smithy.Schema
+
+var DevOpsAgentInvestigation_status *smithy.Schema
+
+var DevOpsAgentInvestigation_summary *smithy.Schema
+
+var DevOpsAgentInvestigationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentInvestigationStatus",
+}, smithy.ShapeTypeEnum, 6)
+var DevOpsAgentInvestigationStatus_PENDING *smithy.Schema
+
+var DevOpsAgentInvestigationStatus_IN_PROGRESS *smithy.Schema
+
+var DevOpsAgentInvestigationStatus_COMPLETED *smithy.Schema
+
+var DevOpsAgentInvestigationStatus_FAILED *smithy.Schema
+
+var DevOpsAgentInvestigationStatus_TIMED_OUT *smithy.Schema
+
+var DevOpsAgentInvestigationStatus_CANCELED *smithy.Schema
+
+var _DevOpsAgentRegion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentRegion",
+}, smithy.ShapeTypeString, 0)
+
+var _DevOpsAgentSpaceArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentSpaceArn",
+}, smithy.ShapeTypeString, 0)
+
+var _DevOpsAgentSpaceId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentSpaceId",
+}, smithy.ShapeTypeString, 0)
+
+var DevOpsAgentVerdict = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentVerdict",
+}, smithy.ShapeTypeEnum, 2)
+var DevOpsAgentVerdict_PASS *smithy.Schema
+
+var DevOpsAgentVerdict_FAIL *smithy.Schema
+
 var DisasterRecoverySource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "DisasterRecoverySource",
@@ -1151,7 +1250,7 @@ var FailureCategory_SINGLE_POINT_OF_FAILURE *smithy.Schema
 var Finding = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "Finding",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var Finding_findingId *smithy.Schema
 
 var Finding_name *smithy.Schema
@@ -1179,6 +1278,8 @@ var Finding_observabilityRecommendations *smithy.Schema
 var Finding_testingRecommendations *smithy.Schema
 
 var Finding_updatedAt *smithy.Schema
+
+var Finding_investigationDeepLink *smithy.Schema
 
 var FindingSeverity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -1209,7 +1310,7 @@ var FindingStatus_IRRELEVANT *smithy.Schema
 var FindingSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "FindingSummary",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var FindingSummary_serviceArn *smithy.Schema
 
 var FindingSummary_findingId *smithy.Schema
@@ -1227,6 +1328,8 @@ var FindingSummary_status *smithy.Schema
 var FindingSummary_policyComponent *smithy.Schema
 
 var FindingSummary_updatedAt *smithy.Schema
+
+var FindingSummary_investigationDeepLink *smithy.Schema
 
 var _FunctionsList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -1820,7 +1923,7 @@ var _ResolvedTargetResourceList_member *smithy.Schema
 var Resource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "Resource",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 8)
 var Resource_identifier *smithy.Schema
 
 var Resource_awsRegion *smithy.Schema
@@ -1828,6 +1931,14 @@ var Resource_awsRegion *smithy.Schema
 var Resource_awsAccountId *smithy.Schema
 
 var Resource_resourceType *smithy.Schema
+
+var Resource_availabilityZoneId *smithy.Schema
+
+var Resource_availabilityZoneName *smithy.Schema
+
+var Resource_containmentParentId *smithy.Schema
+
+var Resource_logicalResourceGroupId *smithy.Schema
 
 var ResourceConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -1962,7 +2073,7 @@ var _S3Url = smithy.NewSchema(smithy.ShapeID{
 var Service = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "Service",
-}, smithy.ShapeTypeStructure, 24)
+}, smithy.ShapeTypeStructure, 25)
 var Service_serviceArn *smithy.Schema
 
 var Service_name *smithy.Schema
@@ -2006,6 +2117,8 @@ var Service_organizationId *smithy.Schema
 var Service_ouId *smithy.Schema
 
 var Service_accountId *smithy.Schema
+
+var Service_devOpsAgentConfiguration *smithy.Schema
 
 var Service_createdAt *smithy.Schema
 
@@ -2353,7 +2466,7 @@ var ServiceResourcesDisassociatedMetadata_resourceTypes *smithy.Schema
 var ServiceSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ServiceSummary",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 17)
 var ServiceSummary_serviceArn *smithy.Schema
 
 var ServiceSummary_name *smithy.Schema
@@ -2365,6 +2478,10 @@ var ServiceSummary_regions *smithy.Schema
 var ServiceSummary_policyArn *smithy.Schema
 
 var ServiceSummary_assessmentStatus *smithy.Schema
+
+var ServiceSummary_devOpsAgentStatus *smithy.Schema
+
+var ServiceSummary_devOpsAgentSpaceArn *smithy.Schema
 
 var ServiceSummary_openFindingsCount *smithy.Schema
 
@@ -2845,7 +2962,7 @@ var _TestParameters_value *smithy.Schema
 var TestRun = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "TestRun",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 23)
 var TestRun_testRunId *smithy.Schema
 
 var TestRun_testId *smithy.Schema
@@ -2889,6 +3006,8 @@ var TestRun_permissionModel *smithy.Schema
 var TestRun_regions *smithy.Schema
 
 var TestRun_accountTargeting *smithy.Schema
+
+var TestRun_devOpsAgentInvestigation *smithy.Schema
 
 var TestRunDependencySource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -3501,7 +3620,7 @@ var CreateServiceFunctionResourcesResponse_resources *smithy.Schema
 var CreateServiceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "CreateServiceRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var CreateServiceRequest_name *smithy.Schema
 
 var CreateServiceRequest_description *smithy.Schema
@@ -3519,6 +3638,8 @@ var CreateServiceRequest_dependencyDiscovery *smithy.Schema
 var CreateServiceRequest_reportConfiguration *smithy.Schema
 
 var CreateServiceRequest_kmsKeyId *smithy.Schema
+
+var CreateServiceRequest_devOpsAgentConfiguration *smithy.Schema
 
 var CreateServiceRequest_tags *smithy.Schema
 
@@ -4678,7 +4799,7 @@ var UpdateServiceFunctionResponse_serviceFunction *smithy.Schema
 var UpdateServiceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "UpdateServiceRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var UpdateServiceRequest_serviceArn *smithy.Schema
 
 var UpdateServiceRequest_description *smithy.Schema
@@ -4694,6 +4815,8 @@ var UpdateServiceRequest_permissionModel *smithy.Schema
 var UpdateServiceRequest_dependencyDiscovery *smithy.Schema
 
 var UpdateServiceRequest_reportConfiguration *smithy.Schema
+
+var UpdateServiceRequest_devOpsAgentConfiguration *smithy.Schema
 
 var UpdateServiceResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -5020,6 +5143,62 @@ func init() {
 
 	_DependencySummaryList_member = _DependencySummaryList.AddMember("member", DependencySummary)
 
+	DevOpsAgentConfidence_HIGH = DevOpsAgentConfidence.AddMember("HIGH", smithyprelude.Unit)
+
+	DevOpsAgentConfidence_MEDIUM = DevOpsAgentConfidence.AddMember("MEDIUM", smithyprelude.Unit)
+
+	DevOpsAgentConfidence_LOW = DevOpsAgentConfidence.AddMember("LOW", smithyprelude.Unit)
+
+	DevOpsAgentConfiguration_agentSpaceArn = DevOpsAgentConfiguration.AddMember("agentSpaceArn", _DevOpsAgentSpaceArn)
+
+	DevOpsAgentConnectionStatus_CONNECTING = DevOpsAgentConnectionStatus.AddMember("CONNECTING", smithyprelude.Unit)
+
+	DevOpsAgentConnectionStatus_CONNECTED = DevOpsAgentConnectionStatus.AddMember("CONNECTED", smithyprelude.Unit)
+
+	DevOpsAgentConnectionStatus_DISCONNECTED = DevOpsAgentConnectionStatus.AddMember("DISCONNECTED", smithyprelude.Unit)
+
+	DevOpsAgentConnectionStatus_FAILED = DevOpsAgentConnectionStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	DevOpsAgentConfigurationView_agentSpaceArn = DevOpsAgentConfigurationView.AddMember("agentSpaceArn", _DevOpsAgentSpaceArn)
+
+	DevOpsAgentConfigurationView_agentSpaceId = DevOpsAgentConfigurationView.AddMember("agentSpaceId", _DevOpsAgentSpaceId)
+
+	DevOpsAgentConfigurationView_region = DevOpsAgentConfigurationView.AddMember("region", _DevOpsAgentRegion)
+
+	DevOpsAgentConfigurationView_status = DevOpsAgentConfigurationView.AddMember("status", DevOpsAgentConnectionStatus)
+
+	DevOpsAgentConfigurationView_operatorAppUrl = DevOpsAgentConfigurationView.AddMember("operatorAppUrl", smithyprelude.String)
+
+	DevOpsAgentConfigurationView_connectedAt = DevOpsAgentConfigurationView.AddMember("connectedAt", smithyprelude.Timestamp)
+
+	DevOpsAgentConfigurationView_statusReason = DevOpsAgentConfigurationView.AddMember("statusReason", smithyprelude.String)
+
+	DevOpsAgentVerdict_PASS = DevOpsAgentVerdict.AddMember("PASS", smithyprelude.Unit)
+
+	DevOpsAgentVerdict_FAIL = DevOpsAgentVerdict.AddMember("FAIL", smithyprelude.Unit)
+
+	DevOpsAgentInvestigationStatus_PENDING = DevOpsAgentInvestigationStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	DevOpsAgentInvestigationStatus_IN_PROGRESS = DevOpsAgentInvestigationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	DevOpsAgentInvestigationStatus_COMPLETED = DevOpsAgentInvestigationStatus.AddMember("COMPLETED", smithyprelude.Unit)
+
+	DevOpsAgentInvestigationStatus_FAILED = DevOpsAgentInvestigationStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	DevOpsAgentInvestigationStatus_TIMED_OUT = DevOpsAgentInvestigationStatus.AddMember("TIMED_OUT", smithyprelude.Unit)
+
+	DevOpsAgentInvestigationStatus_CANCELED = DevOpsAgentInvestigationStatus.AddMember("CANCELED", smithyprelude.Unit)
+
+	DevOpsAgentInvestigation_verdict = DevOpsAgentInvestigation.AddMember("verdict", DevOpsAgentVerdict)
+
+	DevOpsAgentInvestigation_confidence = DevOpsAgentInvestigation.AddMember("confidence", DevOpsAgentConfidence)
+
+	DevOpsAgentInvestigation_deepLink = DevOpsAgentInvestigation.AddMember("deepLink", smithyprelude.String)
+
+	DevOpsAgentInvestigation_status = DevOpsAgentInvestigation.AddMember("status", DevOpsAgentInvestigationStatus)
+
+	DevOpsAgentInvestigation_summary = DevOpsAgentInvestigation.AddMember("summary", smithyprelude.String)
+
 	PolicyValueSource_SELF = PolicyValueSource.AddMember("SELF", smithyprelude.Unit)
 
 	PolicyValueSource_CROSS_ACCOUNT = PolicyValueSource.AddMember("CROSS_ACCOUNT", smithyprelude.Unit)
@@ -5206,6 +5385,8 @@ func init() {
 
 	Finding_updatedAt = Finding.AddMember("updatedAt", smithyprelude.Timestamp)
 
+	Finding_investigationDeepLink = Finding.AddMember("investigationDeepLink", smithyprelude.String)
+
 	FindingSummary_serviceArn = FindingSummary.AddMember("serviceArn", _Arn)
 
 	FindingSummary_findingId = FindingSummary.AddMember("findingId", _Uuid)
@@ -5223,6 +5404,8 @@ func init() {
 	FindingSummary_policyComponent = FindingSummary.AddMember("policyComponent", PolicyComponent)
 
 	FindingSummary_updatedAt = FindingSummary.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	FindingSummary_investigationDeepLink = FindingSummary.AddMember("investigationDeepLink", smithyprelude.String)
 
 	_FindingsList_member = _FindingsList.AddMember("member", FindingSummary)
 
@@ -5504,6 +5687,14 @@ func init() {
 
 	Resource_resourceType = Resource.AddMember("resourceType", smithyprelude.String)
 
+	Resource_availabilityZoneId = Resource.AddMember("availabilityZoneId", smithyprelude.String)
+
+	Resource_availabilityZoneName = Resource.AddMember("availabilityZoneName", smithyprelude.String)
+
+	Resource_containmentParentId = Resource.AddMember("containmentParentId", smithyprelude.String)
+
+	Resource_logicalResourceGroupId = Resource.AddMember("logicalResourceGroupId", smithyprelude.String)
+
 	ResourceConfiguration_resourceTags = ResourceConfiguration.AddMember("resourceTags", _ResourceTagList)
 
 	ResourceConfiguration_cfnStackArn = ResourceConfiguration.AddMember("cfnStackArn", _Arn)
@@ -5603,6 +5794,8 @@ func init() {
 	Service_ouId = Service.AddMember("ouId", _OuId)
 
 	Service_accountId = Service.AddMember("accountId", _AccountId)
+
+	Service_devOpsAgentConfiguration = Service.AddMember("devOpsAgentConfiguration", DevOpsAgentConfigurationView)
 
 	Service_createdAt = Service.AddMember("createdAt", smithyprelude.Timestamp)
 
@@ -5841,6 +6034,10 @@ func init() {
 	ServiceSummary_policyArn = ServiceSummary.AddMember("policyArn", _Arn)
 
 	ServiceSummary_assessmentStatus = ServiceSummary.AddMember("assessmentStatus", AssessmentStatus)
+
+	ServiceSummary_devOpsAgentStatus = ServiceSummary.AddMember("devOpsAgentStatus", DevOpsAgentConnectionStatus)
+
+	ServiceSummary_devOpsAgentSpaceArn = ServiceSummary.AddMember("devOpsAgentSpaceArn", _DevOpsAgentSpaceArn)
 
 	ServiceSummary_openFindingsCount = ServiceSummary.AddMember("openFindingsCount", smithyprelude.Integer)
 
@@ -6160,6 +6357,8 @@ func init() {
 
 	TestRun_accountTargeting = TestRun.AddMember("accountTargeting", AccountTargeting)
 
+	TestRun_devOpsAgentInvestigation = TestRun.AddMember("devOpsAgentInvestigation", DevOpsAgentInvestigation)
+
 	TestRunDependencySource_DISCOVERED = TestRunDependencySource.AddMember("DISCOVERED", smithyprelude.Unit)
 
 	TestRunDependencySource_MANUAL = TestRunDependencySource.AddMember("MANUAL", smithyprelude.Unit)
@@ -6473,6 +6672,8 @@ func init() {
 	CreateServiceRequest_reportConfiguration = CreateServiceRequest.AddMember("reportConfiguration", ServiceReportConfiguration)
 
 	CreateServiceRequest_kmsKeyId = CreateServiceRequest.AddMember("kmsKeyId", _KmsKeyId)
+
+	CreateServiceRequest_devOpsAgentConfiguration = CreateServiceRequest.AddMember("devOpsAgentConfiguration", DevOpsAgentConfiguration)
 
 	CreateServiceRequest_tags = CreateServiceRequest.AddMember("tags", _TagMap)
 
@@ -7139,6 +7340,8 @@ func init() {
 	UpdateServiceRequest_dependencyDiscovery = UpdateServiceRequest.AddMember("dependencyDiscovery", DependencyDiscoveryInput)
 
 	UpdateServiceRequest_reportConfiguration = UpdateServiceRequest.AddMember("reportConfiguration", ServiceReportConfiguration)
+
+	UpdateServiceRequest_devOpsAgentConfiguration = UpdateServiceRequest.AddMember("devOpsAgentConfiguration", DevOpsAgentConfiguration)
 
 	UpdateServiceResponse_service = UpdateServiceResponse.AddMember("service", Service)
 

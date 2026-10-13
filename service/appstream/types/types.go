@@ -4015,6 +4015,13 @@ type Stack struct {
 	// The errors for the stack.
 	StackErrors []StackError
 
+	// Indicates whether users' cloud storage authentication persists across streaming
+	// sessions. When this attribute is FORCE_REAUTHENTICATION, WorkSpaces Applications
+	// removes the stored authentication for the stack's OneDrive and Google Drive
+	// connectors when a user's session ends. The user links their cloud storage again
+	// on their next session. The default is REUSE_CREDENTIALS.
+	StorageConnectorAuthentication StorageConnectorAuthentication
+
 	// The storage connectors to enable.
 	StorageConnectors []StorageConnector
 
@@ -4075,6 +4082,9 @@ func (v *Stack) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.Stack_RedirectURL, *v.RedirectURL)
 	}
 	serializeStackErrors(s, schemas.Stack_StackErrors, v.StackErrors)
+	if v.StorageConnectorAuthentication != "" {
+		s.WriteString(schemas.Stack_StorageConnectorAuthentication, string(v.StorageConnectorAuthentication))
+	}
 	serializeStorageConnectorList(s, schemas.Stack_StorageConnectors, v.StorageConnectors)
 	if v.StreamingExperienceSettings != nil {
 		s.WriteStruct(schemas.Stack_StreamingExperienceSettings)
@@ -4122,6 +4132,13 @@ func (v *Stack) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.Stack_RedirectURL, v.RedirectURL)
 		case schemas.Stack_StackErrors:
 			return deserializeStackErrors(d, schemas.Stack_StackErrors, &v.StackErrors)
+		case schemas.Stack_StorageConnectorAuthentication:
+			var ev string
+			if err := d.ReadString(schemas.Stack_StorageConnectorAuthentication, &ev); err != nil {
+				return err
+			}
+			v.StorageConnectorAuthentication = StorageConnectorAuthentication(ev)
+			return nil
 		case schemas.Stack_StorageConnectors:
 			return deserializeStorageConnectorList(d, schemas.Stack_StorageConnectors, &v.StorageConnectors)
 		case schemas.Stack_StreamingExperienceSettings:

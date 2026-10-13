@@ -60,6 +60,9 @@ func ExampleCriteria_outputUsage() {
 	case *types.CriteriaMemberOcsfFindingCriteria:
 		_ = v.Value // Value is types.OcsfFindingFilters
 
+	case *types.CriteriaMemberResourceCriteria:
+		_ = v.Value // Value is types.ResourcesFilters
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -69,6 +72,7 @@ func ExampleCriteria_outputUsage() {
 	}
 }
 
+var _ *types.ResourcesFilters
 var _ *types.OcsfFindingFilters
 
 func ExampleCspmProviderConfiguration_outputUsage() {

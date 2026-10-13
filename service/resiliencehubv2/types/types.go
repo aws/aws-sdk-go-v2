@@ -972,6 +972,249 @@ func (v *DependencySummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The AWS DevOps Agent (DevOps Agent) integration configuration that you supply
+// when creating or updating a service. Connecting a service to a DevOps Agent
+// Agent Space lets DevOps Agent investigate the service's resilience test runs and
+// attach its analysis to the results. Include this block with an Agent Space
+// Amazon Resource Name (ARN) to connect or reconnect the service to an Agent
+// Space. Include it without an Agent Space ARN to disconnect the service. Omit it
+// to leave the existing linkage unchanged.
+type DevOpsAgentConfiguration struct {
+
+	// The ARN of the DevOps Agent Agent Space to link to this service.
+	AgentSpaceArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DevOpsAgentConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DevOpsAgentConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DevOpsAgentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceArn != nil {
+		s.WriteString(schemas.DevOpsAgentConfiguration_agentSpaceArn, *v.AgentSpaceArn)
+	}
+}
+func (v *DevOpsAgentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DevOpsAgentConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DevOpsAgentConfiguration_agentSpaceArn:
+			v.AgentSpaceArn = new(string)
+			return d.ReadString(schemas.DevOpsAgentConfiguration_agentSpaceArn, v.AgentSpaceArn)
+		}
+		return nil
+	})
+}
+
+// The current DevOps Agent integration state for a service. Read operations
+// return this state.
+type DevOpsAgentConfigurationView struct {
+
+	// The ARN of the linked DevOps Agent Agent Space.
+	AgentSpaceArn *string
+
+	// The identifier of the linked DevOps Agent Agent Space.
+	AgentSpaceId *string
+
+	// The timestamp when the service successfully connected to the DevOps Agent Agent
+	// Space.
+	ConnectedAt *time.Time
+
+	// The URL of the DevOps Agent Operator App for the linked Agent Space. This URL
+	// is present when the connection status is CONNECTED.
+	OperatorAppUrl *string
+
+	// The AWS Region of the linked DevOps Agent Agent Space.
+	Region *string
+
+	// The connection status of the DevOps Agent integration for this service. Valid
+	// values:
+	//
+	//   - CONNECTING - The service is being connected to the Agent Space.
+	//
+	//   - CONNECTED - The service is connected to the Agent Space.
+	//
+	//   - DISCONNECTED - The service is not connected to an Agent Space.
+	//
+	//   - FAILED - The connection attempt failed. See statusReason for details.
+	Status DevOpsAgentConnectionStatus
+
+	// A human-readable explanation of the current connection status. This field
+	// explains the status when the connection fails.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DevOpsAgentConfigurationView) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DevOpsAgentConfigurationView)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DevOpsAgentConfigurationView) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceArn != nil {
+		s.WriteString(schemas.DevOpsAgentConfigurationView_agentSpaceArn, *v.AgentSpaceArn)
+	}
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.DevOpsAgentConfigurationView_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ConnectedAt != nil {
+		s.WriteTime(schemas.DevOpsAgentConfigurationView_connectedAt, *v.ConnectedAt)
+	}
+	if v.OperatorAppUrl != nil {
+		s.WriteString(schemas.DevOpsAgentConfigurationView_operatorAppUrl, *v.OperatorAppUrl)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.DevOpsAgentConfigurationView_region, *v.Region)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DevOpsAgentConfigurationView_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DevOpsAgentConfigurationView_statusReason, *v.StatusReason)
+	}
+}
+func (v *DevOpsAgentConfigurationView) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DevOpsAgentConfigurationView, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DevOpsAgentConfigurationView_agentSpaceArn:
+			v.AgentSpaceArn = new(string)
+			return d.ReadString(schemas.DevOpsAgentConfigurationView_agentSpaceArn, v.AgentSpaceArn)
+		case schemas.DevOpsAgentConfigurationView_agentSpaceId:
+			v.AgentSpaceId = new(string)
+			return d.ReadString(schemas.DevOpsAgentConfigurationView_agentSpaceId, v.AgentSpaceId)
+		case schemas.DevOpsAgentConfigurationView_connectedAt:
+			v.ConnectedAt = new(time.Time)
+			return d.ReadTime(schemas.DevOpsAgentConfigurationView_connectedAt, v.ConnectedAt)
+		case schemas.DevOpsAgentConfigurationView_operatorAppUrl:
+			v.OperatorAppUrl = new(string)
+			return d.ReadString(schemas.DevOpsAgentConfigurationView_operatorAppUrl, v.OperatorAppUrl)
+		case schemas.DevOpsAgentConfigurationView_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.DevOpsAgentConfigurationView_region, v.Region)
+		case schemas.DevOpsAgentConfigurationView_status:
+			var ev string
+			if err := d.ReadString(schemas.DevOpsAgentConfigurationView_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DevOpsAgentConnectionStatus(ev)
+			return nil
+		case schemas.DevOpsAgentConfigurationView_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DevOpsAgentConfigurationView_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
+
+// The result when DevOps Agent investigates a resilience test run. The verdict is
+// advisory and builds on the test run's own result, which remains authoritative.
+type DevOpsAgentInvestigation struct {
+
+	// The confidence level of the verdict. Valid values:
+	//
+	//   - HIGH - The verdict is highly reliable.
+	//
+	//   - MEDIUM - The verdict has moderate reliability.
+	//
+	//   - LOW - The verdict has low reliability.
+	Confidence DevOpsAgentConfidence
+
+	// A deep link to the interactive DevOps Agent investigation session.
+	DeepLink *string
+
+	// The lifecycle status of the investigation. Valid values:
+	//
+	//   - PENDING - The investigation has been created but has not started.
+	//
+	//   - IN_PROGRESS - The investigation is running.
+	//
+	//   - COMPLETED - The investigation finished successfully.
+	//
+	//   - FAILED - The investigation failed to complete.
+	//
+	//   - TIMED_OUT - The investigation did not complete within the allotted time.
+	//
+	//   - CANCELED - The investigation was canceled.
+	Status DevOpsAgentInvestigationStatus
+
+	// The DevOps Agent analysis summary for the investigation.
+	Summary *string
+
+	// The investigation verdict. Valid values:
+	//
+	//   - PASS - The resilience test run passed.
+	//
+	//   - FAIL - The resilience test run failed.
+	//
+	//   - INCONCLUSIVE - The investigation could not determine a clear outcome.
+	Verdict DevOpsAgentVerdict
+
+	noSmithyDocumentSerde
+}
+
+func (v *DevOpsAgentInvestigation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DevOpsAgentInvestigation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DevOpsAgentInvestigation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != "" {
+		s.WriteString(schemas.DevOpsAgentInvestigation_confidence, string(v.Confidence))
+	}
+	if v.DeepLink != nil {
+		s.WriteString(schemas.DevOpsAgentInvestigation_deepLink, *v.DeepLink)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DevOpsAgentInvestigation_status, string(v.Status))
+	}
+	if v.Summary != nil {
+		s.WriteString(schemas.DevOpsAgentInvestigation_summary, *v.Summary)
+	}
+	if v.Verdict != "" {
+		s.WriteString(schemas.DevOpsAgentInvestigation_verdict, string(v.Verdict))
+	}
+}
+func (v *DevOpsAgentInvestigation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DevOpsAgentInvestigation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DevOpsAgentInvestigation_confidence:
+			var ev string
+			if err := d.ReadString(schemas.DevOpsAgentInvestigation_confidence, &ev); err != nil {
+				return err
+			}
+			v.Confidence = DevOpsAgentConfidence(ev)
+			return nil
+		case schemas.DevOpsAgentInvestigation_deepLink:
+			v.DeepLink = new(string)
+			return d.ReadString(schemas.DevOpsAgentInvestigation_deepLink, v.DeepLink)
+		case schemas.DevOpsAgentInvestigation_status:
+			var ev string
+			if err := d.ReadString(schemas.DevOpsAgentInvestigation_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DevOpsAgentInvestigationStatus(ev)
+			return nil
+		case schemas.DevOpsAgentInvestigation_summary:
+			v.Summary = new(string)
+			return d.ReadString(schemas.DevOpsAgentInvestigation_summary, v.Summary)
+		case schemas.DevOpsAgentInvestigation_verdict:
+			var ev string
+			if err := d.ReadString(schemas.DevOpsAgentInvestigation_verdict, &ev); err != nil {
+				return err
+			}
+			v.Verdict = DevOpsAgentVerdict(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains the effective disaster recovery approach value for a service.
 type DisasterRecoverySource struct {
 
@@ -1503,6 +1746,10 @@ type Finding struct {
 	// Infrastructure and code recommendations to address the finding.
 	InfrastructureAndCodeRecommendations []InfrastructureAndCodeRecommendation
 
+	// A deep link to an interactive DevOps Agent investigation seeded with this
+	// finding. This value is null until DevOps Agent creates an investigation.
+	InvestigationDeepLink *string
+
 	// The name of the finding.
 	Name *string
 
@@ -1553,6 +1800,9 @@ func (v *Finding) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.Finding_findingId, *v.FindingId)
 	}
 	serializeInfrastructureAndCodeRecommendationsList(s, schemas.Finding_infrastructureAndCodeRecommendations, v.InfrastructureAndCodeRecommendations)
+	if v.InvestigationDeepLink != nil {
+		s.WriteString(schemas.Finding_investigationDeepLink, *v.InvestigationDeepLink)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Finding_name, *v.Name)
 	}
@@ -1596,6 +1846,9 @@ func (v *Finding) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.Finding_findingId, v.FindingId)
 		case schemas.Finding_infrastructureAndCodeRecommendations:
 			return deserializeInfrastructureAndCodeRecommendationsList(d, schemas.Finding_infrastructureAndCodeRecommendations, &v.InfrastructureAndCodeRecommendations)
+		case schemas.Finding_investigationDeepLink:
+			v.InvestigationDeepLink = new(string)
+			return d.ReadString(schemas.Finding_investigationDeepLink, v.InvestigationDeepLink)
 		case schemas.Finding_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.Finding_name, v.Name)
@@ -1649,6 +1902,10 @@ type FindingSummary struct {
 	// The unique identifier of the finding.
 	FindingId *string
 
+	// A deep link to an interactive DevOps Agent investigation seeded with this
+	// finding. This value is null until DevOps Agent creates an investigation.
+	InvestigationDeepLink *string
+
 	// The name of the finding.
 	Name *string
 
@@ -1686,6 +1943,9 @@ func (v *FindingSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FindingId != nil {
 		s.WriteString(schemas.FindingSummary_findingId, *v.FindingId)
 	}
+	if v.InvestigationDeepLink != nil {
+		s.WriteString(schemas.FindingSummary_investigationDeepLink, *v.InvestigationDeepLink)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.FindingSummary_name, *v.Name)
 	}
@@ -1721,6 +1981,9 @@ func (v *FindingSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.FindingSummary_findingId:
 			v.FindingId = new(string)
 			return d.ReadString(schemas.FindingSummary_findingId, v.FindingId)
+		case schemas.FindingSummary_investigationDeepLink:
+			v.InvestigationDeepLink = new(string)
+			return d.ReadString(schemas.FindingSummary_investigationDeepLink, v.InvestigationDeepLink)
 		case schemas.FindingSummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.FindingSummary_name, v.Name)
@@ -3286,11 +3549,28 @@ type Resource struct {
 	// This member is required.
 	Identifier *string
 
+	// The Availability Zone ID of the Availability Zone that hosts the resource, such
+	// as use1-az1. The Availability Zone ID is consistent across Amazon Web Services
+	// (AWS) accounts, unlike the Availability Zone name.
+	AvailabilityZoneId *string
+
+	// The name of the Availability Zone that hosts the resource, such as us-west-2a.
+	AvailabilityZoneName *string
+
 	// The AWS account ID that owns the resource.
 	AwsAccountId *string
 
 	// The AWS Region where the resource is located.
 	AwsRegion *string
+
+	// The identifier of the single parent resource that contains this resource, used
+	// to represent containment relationships in the resource topology. A resource has
+	// at most one containment parent.
+	ContainmentParentId *string
+
+	// The identifier of the logical resource group that this resource belongs to.
+	// Resources that share this identifier are managed as a single unit.
+	LogicalResourceGroupId *string
 
 	// The type of the resource.
 	ResourceType *string
@@ -3305,14 +3585,26 @@ func (v *Resource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.Resource_availabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.AvailabilityZoneName != nil {
+		s.WriteString(schemas.Resource_availabilityZoneName, *v.AvailabilityZoneName)
+	}
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.Resource_awsAccountId, *v.AwsAccountId)
 	}
 	if v.AwsRegion != nil {
 		s.WriteString(schemas.Resource_awsRegion, *v.AwsRegion)
 	}
+	if v.ContainmentParentId != nil {
+		s.WriteString(schemas.Resource_containmentParentId, *v.ContainmentParentId)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.Resource_identifier, *v.Identifier)
+	}
+	if v.LogicalResourceGroupId != nil {
+		s.WriteString(schemas.Resource_logicalResourceGroupId, *v.LogicalResourceGroupId)
 	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.Resource_resourceType, *v.ResourceType)
@@ -3321,15 +3613,27 @@ func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.Resource_availabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.Resource_availabilityZoneId, v.AvailabilityZoneId)
+		case schemas.Resource_availabilityZoneName:
+			v.AvailabilityZoneName = new(string)
+			return d.ReadString(schemas.Resource_availabilityZoneName, v.AvailabilityZoneName)
 		case schemas.Resource_awsAccountId:
 			v.AwsAccountId = new(string)
 			return d.ReadString(schemas.Resource_awsAccountId, v.AwsAccountId)
 		case schemas.Resource_awsRegion:
 			v.AwsRegion = new(string)
 			return d.ReadString(schemas.Resource_awsRegion, v.AwsRegion)
+		case schemas.Resource_containmentParentId:
+			v.ContainmentParentId = new(string)
+			return d.ReadString(schemas.Resource_containmentParentId, v.ContainmentParentId)
 		case schemas.Resource_identifier:
 			v.Identifier = new(string)
 			return d.ReadString(schemas.Resource_identifier, v.Identifier)
+		case schemas.Resource_logicalResourceGroupId:
+			v.LogicalResourceGroupId = new(string)
+			return d.ReadString(schemas.Resource_logicalResourceGroupId, v.LogicalResourceGroupId)
 		case schemas.Resource_resourceType:
 			v.ResourceType = new(string)
 			return d.ReadString(schemas.Resource_resourceType, v.ResourceType)
@@ -3647,6 +3951,9 @@ type Service struct {
 	// Resource description for services and policies.
 	Description *string
 
+	// The current DevOps Agent integration state for the service.
+	DevOpsAgentConfiguration *DevOpsAgentConfigurationView
+
 	// The effective policy values for the service.
 	EffectivePolicyValues *EffectivePolicyValues
 
@@ -3724,6 +4031,11 @@ func (v *Service) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.Service_description, *v.Description)
+	}
+	if v.DevOpsAgentConfiguration != nil {
+		s.WriteStruct(schemas.Service_devOpsAgentConfiguration)
+		v.DevOpsAgentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.EffectivePolicyValues != nil {
 		s.WriteStruct(schemas.Service_effectivePolicyValues)
@@ -3810,6 +4122,9 @@ func (v *Service) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Service_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.Service_description, v.Description)
+		case schemas.Service_devOpsAgentConfiguration:
+			v.DevOpsAgentConfiguration = &DevOpsAgentConfigurationView{}
+			return v.DevOpsAgentConfiguration.Deserialize(d)
 		case schemas.Service_effectivePolicyValues:
 			v.EffectivePolicyValues = &EffectivePolicyValues{}
 			return v.EffectivePolicyValues.Deserialize(d)
@@ -5237,6 +5552,21 @@ type ServiceSummary struct {
 	// The dependency discovery configuration.
 	DependencyDiscovery *DependencyDiscoveryConfig
 
+	// The ARN of the DevOps Agent Agent Space linked to the service, when the service
+	// is linked to one.
+	DevOpsAgentSpaceArn *string
+
+	// The DevOps Agent connection status for the service. Valid values:
+	//
+	//   - CONNECTING - The service is being connected to the Agent Space.
+	//
+	//   - CONNECTED - The service is connected to the Agent Space.
+	//
+	//   - DISCONNECTED - The service is not connected to an Agent Space.
+	//
+	//   - FAILED - The connection attempt failed.
+	DevOpsAgentStatus DevOpsAgentConnectionStatus
+
 	// The number of open findings.
 	OpenFindingsCount *int32
 
@@ -5288,6 +5618,12 @@ func (v *ServiceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DependencyDiscovery.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.DevOpsAgentSpaceArn != nil {
+		s.WriteString(schemas.ServiceSummary_devOpsAgentSpaceArn, *v.DevOpsAgentSpaceArn)
+	}
+	if v.DevOpsAgentStatus != "" {
+		s.WriteString(schemas.ServiceSummary_devOpsAgentStatus, string(v.DevOpsAgentStatus))
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ServiceSummary_name, *v.Name)
 	}
@@ -5338,6 +5674,16 @@ func (v *ServiceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ServiceSummary_dependencyDiscovery:
 			v.DependencyDiscovery = &DependencyDiscoveryConfig{}
 			return v.DependencyDiscovery.Deserialize(d)
+		case schemas.ServiceSummary_devOpsAgentSpaceArn:
+			v.DevOpsAgentSpaceArn = new(string)
+			return d.ReadString(schemas.ServiceSummary_devOpsAgentSpaceArn, v.DevOpsAgentSpaceArn)
+		case schemas.ServiceSummary_devOpsAgentStatus:
+			var ev string
+			if err := d.ReadString(schemas.ServiceSummary_devOpsAgentStatus, &ev); err != nil {
+				return err
+			}
+			v.DevOpsAgentStatus = DevOpsAgentConnectionStatus(ev)
+			return nil
 		case schemas.ServiceSummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.ServiceSummary_name, v.Name)
@@ -7028,6 +7374,10 @@ type TestRun struct {
 	// across multiple accounts.
 	AccountTargeting AccountTargeting
 
+	// The DevOps Agent investigation result for the test run, present when the
+	// integration is enabled for the service.
+	DevOpsAgentInvestigation *DevOpsAgentInvestigation
+
 	// The timestamp when the test run ended.
 	EndedAt *time.Time
 
@@ -7092,6 +7442,11 @@ func (v *TestRun) Serialize(s smithy.ShapeSerializer) {
 func (v *TestRun) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountTargeting != "" {
 		s.WriteString(schemas.TestRun_accountTargeting, string(v.AccountTargeting))
+	}
+	if v.DevOpsAgentInvestigation != nil {
+		s.WriteStruct(schemas.TestRun_devOpsAgentInvestigation)
+		v.DevOpsAgentInvestigation.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.EndedAt != nil {
 		s.WriteTime(schemas.TestRun_endedAt, *v.EndedAt)
@@ -7169,6 +7524,9 @@ func (v *TestRun) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.AccountTargeting = AccountTargeting(ev)
 			return nil
+		case schemas.TestRun_devOpsAgentInvestigation:
+			v.DevOpsAgentInvestigation = &DevOpsAgentInvestigation{}
+			return v.DevOpsAgentInvestigation.Deserialize(d)
 		case schemas.TestRun_endedAt:
 			v.EndedAt = new(time.Time)
 			return d.ReadTime(schemas.TestRun_endedAt, v.EndedAt)

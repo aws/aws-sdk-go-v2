@@ -2379,6 +2379,23 @@ func validateCompleteReadSetUploadPartListItem(v *types.CompleteReadSetUploadPar
 	}
 }
 
+func validateContainerRegistryMap(v *types.ContainerRegistryMap) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerRegistryMap"}
+	if v.RegistryMappings != nil {
+		if err := validateRegistryMappingsList(v.RegistryMappings); err != nil {
+			invalidParams.AddNested("RegistryMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDefaultRunSetting(v *types.DefaultRunSetting) error {
 	if v == nil {
 		return nil
@@ -2474,6 +2491,41 @@ func validateInlineSettings(v []types.InlineSetting) error {
 	invalidParams := smithy.InvalidParamsError{Context: "InlineSettings"}
 	for i := range v {
 		if err := validateInlineSetting(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegistryMapping(v *types.RegistryMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistryMapping"}
+	if v.UpstreamRegistryUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpstreamRegistryUrl"))
+	}
+	if v.EcrRepositoryPrefix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EcrRepositoryPrefix"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegistryMappingsList(v []types.RegistryMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistryMappingsList"}
+	for i := range v {
+		if err := validateRegistryMapping(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3017,6 +3069,11 @@ func validateOpCreateWorkflowInput(v *CreateWorkflowInput) error {
 	if v.RequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
 	}
+	if v.ContainerRegistryMap != nil {
+		if err := validateContainerRegistryMap(v.ContainerRegistryMap); err != nil {
+			invalidParams.AddNested("ContainerRegistryMap", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DefinitionRepository != nil {
 		if err := validateDefinitionRepository(v.DefinitionRepository); err != nil {
 			invalidParams.AddNested("DefinitionRepository", err.(smithy.InvalidParamsError))
@@ -3042,6 +3099,11 @@ func validateOpCreateWorkflowVersionInput(v *CreateWorkflowVersionInput) error {
 	}
 	if v.RequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
+	}
+	if v.ContainerRegistryMap != nil {
+		if err := validateContainerRegistryMap(v.ContainerRegistryMap); err != nil {
+			invalidParams.AddNested("ContainerRegistryMap", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.DefinitionRepository != nil {
 		if err := validateDefinitionRepository(v.DefinitionRepository); err != nil {

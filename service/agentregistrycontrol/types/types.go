@@ -819,21 +819,17 @@ func (v *CustomJWTAuthorizerConfiguration) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 
-// Configuration that defines a typed metadata schema for a registry. Specify at
-// least one of a default schema or per-record-type schema overrides. You can
-// provide both.
+// The custom metadata fields that records in the registry can carry. defaultSchema
+// defines the common attributes for every record type, and
+// recordTypeSchemaOverrides adds fields for individual record types.
 type CustomMetadataSchemaConfiguration struct {
 
-	// The default JSON Schema that applies to record types without a specific
-	// override. Supported property types are string , string with an enum constraint,
-	// string with a uri format, and boolean .
+	// A JSON Schema with the common attributes: fields that records of every record
+	// type can carry.
 	DefaultSchema *string
 
-	// A list of per-record-type schema overrides. When a record's type matches an
-	// override, that override's schema is used instead of the default schema for
-	// validation. If you don't specify an override for a record type, the default
-	// schema applies. If no default schema exists, custom metadata on records of that
-	// type is rejected.
+	// The fields for individual record types. Records of a record type can carry the
+	// common attributes defined in defaultSchema plus that record type's fields.
 	RecordTypeSchemaOverrides []RecordTypeSchemaOverride
 
 	noSmithyDocumentSerde
@@ -1591,17 +1587,16 @@ func (v *ProvenanceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// A schema override for a specific record type within a custom metadata schema
-// configuration.
+// The custom metadata fields for one record type, in addition to the common
+// attributes defined in defaultSchema .
 type RecordTypeSchemaOverride struct {
 
-	// The record type that this schema override applies to.
+	// The record type these fields apply to.
 	//
 	// This member is required.
 	RecordType RecordType
 
-	// The JSON Schema for the specified record type. Must follow the same structural
-	// rules as the default schema.
+	// A JSON Schema with the fields for this record type.
 	//
 	// This member is required.
 	Schema *string

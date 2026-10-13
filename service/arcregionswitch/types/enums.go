@@ -239,6 +239,7 @@ const (
 	ExecutionBlockTypeAuroraProvisionedScaling    ExecutionBlockType = "AuroraProvisionedScaling"
 	ExecutionBlockTypeNeptune                     ExecutionBlockType = "NeptuneGlobalDatabase"
 	ExecutionBlockTypeRdsSwitchoverReadReplica    ExecutionBlockType = "RdsSwitchoverReadReplica"
+	ExecutionBlockTypeSsmSendCommand              ExecutionBlockType = "SSMSendCommand"
 )
 
 // Values returns all known values for ExecutionBlockType. Note that this can be
@@ -265,6 +266,7 @@ func (ExecutionBlockType) Values() []ExecutionBlockType {
 		"AuroraProvisionedScaling",
 		"NeptuneGlobalDatabase",
 		"RdsSwitchoverReadReplica",
+		"SSMSendCommand",
 	}
 }
 
@@ -660,6 +662,24 @@ func (ServiceQuotaWarningStatus) Values() []ServiceQuotaWarningStatus {
 		"insufficientPermissions",
 		"maxRegionSwitchRequestsExceeded",
 		"maxAccountRequestsExceeded",
+	}
+}
+
+type SsmSendCommandUngracefulBehavior string
+
+// Enum values for SsmSendCommandUngracefulBehavior
+const (
+	SsmSendCommandUngracefulBehaviorSkip SsmSendCommandUngracefulBehavior = "skip"
+)
+
+// Values returns all known values for SsmSendCommandUngracefulBehavior. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SsmSendCommandUngracefulBehavior) Values() []SsmSendCommandUngracefulBehavior {
+	return []SsmSendCommandUngracefulBehavior{
+		"skip",
 	}
 }
 

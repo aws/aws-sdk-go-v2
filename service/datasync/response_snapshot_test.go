@@ -779,6 +779,7 @@ func TestCheckResponseSnapshot_CreateTask(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 		Excludes: []types.FilterRule{
 			{
@@ -1484,6 +1485,7 @@ func TestCheckResponseSnapshot_DescribeTask(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 		Excludes: []types.FilterRule{
 			{
@@ -1596,6 +1598,7 @@ func TestCheckResponseSnapshot_DescribeTaskExecution(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 		Excludes: []types.FilterRule{
 			{
@@ -1986,6 +1989,7 @@ func TestCheckResponseSnapshot_StartTaskExecution(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 		Includes: []types.FilterRule{
 			{
@@ -2586,6 +2590,7 @@ func TestCheckResponseSnapshot_UpdateTask(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 		Excludes: []types.FilterRule{
 			{
@@ -2688,6 +2693,7 @@ func TestCheckResponseSnapshot_UpdateTaskExecution(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 	})
 	if err != nil {

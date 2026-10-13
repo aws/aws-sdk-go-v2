@@ -130,6 +130,12 @@ type RegisterDomainInput struct {
 	// [ContactDetail]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html
 	BillingContact *types.ContactDetail
 
+	// Specifies the maximum price that you agree to pay to register the domain name.
+	// This element is required if the domain has registry premium pricing, and
+	// optional if the domain is priced at the standard rate for its TLD. If you
+	// include it and the registration price is more than MaxPrice , the request fails.
+	Consent *types.Consent
+
 	// Reserved for future use.
 	IdnLangCode *string
 
@@ -197,6 +203,11 @@ func (v *RegisterDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BillingContact != nil {
 		s.WriteStruct(schemas.RegisterDomainRequest_BillingContact)
 		v.BillingContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Consent != nil {
+		s.WriteStruct(schemas.RegisterDomainRequest_Consent)
+		v.Consent.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.DomainName != nil {

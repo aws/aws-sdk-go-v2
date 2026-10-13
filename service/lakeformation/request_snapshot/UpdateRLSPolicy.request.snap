@@ -1,0 +1,5 @@
+POST /UpdateRLSPolicy
+
+Content-Type: application/json
+
+{"FilterExpression":"__FilterExpression__","Name":"__Name__"}

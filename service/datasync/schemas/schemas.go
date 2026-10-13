@@ -886,7 +886,7 @@ var _NfsSubdirectory = smithy.NewSchema(smithy.ShapeID{
 var NfsVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
 	Name:      "NfsVersion",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var NfsVersion_AUTOMATIC *smithy.Schema
 
 var NfsVersion_NFS3 *smithy.Schema
@@ -894,6 +894,16 @@ var NfsVersion_NFS3 *smithy.Schema
 var NfsVersion_NFS4_0 *smithy.Schema
 
 var NfsVersion_NFS4_1 *smithy.Schema
+
+var NfsVersion_NFS4_2 *smithy.Schema
+
+var ObjectMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datasync",
+	Name:      "ObjectMetadata",
+}, smithy.ShapeTypeEnum, 2)
+var ObjectMetadata_PRESERVE *smithy.Schema
+
+var ObjectMetadata_NONE *smithy.Schema
 
 var _ObjectStorageAccessKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
@@ -977,7 +987,7 @@ var Operator_BEGINS_WITH *smithy.Schema
 var Options = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
 	Name:      "Options",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var Options_VerifyMode *smithy.Schema
 
 var Options_OverwriteMode *smithy.Schema
@@ -1007,6 +1017,8 @@ var Options_TransferMode *smithy.Schema
 var Options_SecurityDescriptorCopyFlags *smithy.Schema
 
 var Options_ObjectTags *smithy.Schema
+
+var Options_ObjectMetadata *smithy.Schema
 
 var _OutputTagList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
@@ -3007,6 +3019,8 @@ func init() {
 
 	NfsVersion_NFS4_1 = NfsVersion.AddMember("NFS4_1", smithyprelude.Unit)
 
+	NfsVersion_NFS4_2 = NfsVersion.AddMember("NFS4_2", smithyprelude.Unit)
+
 	NfsMountOptions_Version = NfsMountOptions.AddMember("Version", NfsVersion)
 
 	FsxProtocolNfs_MountOptions = FsxProtocolNfs.AddMember("MountOptions", NfsMountOptions)
@@ -3179,6 +3193,10 @@ func init() {
 
 	Mtime_PRESERVE = Mtime.AddMember("PRESERVE", smithyprelude.Unit)
 
+	ObjectMetadata_PRESERVE = ObjectMetadata.AddMember("PRESERVE", smithyprelude.Unit)
+
+	ObjectMetadata_NONE = ObjectMetadata.AddMember("NONE", smithyprelude.Unit)
+
 	ObjectStorageServerProtocol_HTTPS = ObjectStorageServerProtocol.AddMember("HTTPS", smithyprelude.Unit)
 
 	ObjectStorageServerProtocol_HTTP = ObjectStorageServerProtocol.AddMember("HTTP", smithyprelude.Unit)
@@ -3266,6 +3284,8 @@ func init() {
 	Options_SecurityDescriptorCopyFlags = Options.AddMember("SecurityDescriptorCopyFlags", SmbSecurityDescriptorCopyFlags)
 
 	Options_ObjectTags = Options.AddMember("ObjectTags", ObjectTags)
+
+	Options_ObjectMetadata = Options.AddMember("ObjectMetadata", ObjectMetadata)
 
 	_OutputTagList_member = _OutputTagList.AddMember("member", TagListEntry)
 

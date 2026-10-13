@@ -185,6 +185,11 @@ func TestCheckResponseSnapshot_CancelDomainTransferToAnotherAwsAccount(t *testin
 func TestCheckResponseSnapshot_CheckDomainAvailability(t *testing.T) {
 	want := &CheckDomainAvailabilityOutput{
 		Availability: types.DomainAvailability("AVAILABLE"),
+		Price: &types.PriceWithCurrency{
+			Price:     1.0,
+			Currency:  ptr.String("__Currency__"),
+			PriceType: types.PriceType("STANDARD"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CheckDomainAvailability.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -212,6 +217,11 @@ func TestCheckResponseSnapshot_CheckDomainTransferability(t *testing.T) {
 			Transferable: types.Transferable("TRANSFERABLE"),
 		},
 		Message: ptr.String("__Message__"),
+		Price: &types.PriceWithCurrency{
+			Price:     1.0,
+			Currency:  ptr.String("__Currency__"),
+			PriceType: types.PriceType("STANDARD"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CheckDomainTransferability.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -596,16 +606,76 @@ func TestCheckResponseSnapshot_GetDomainDetail(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetDomainPrices(t *testing.T) {
+	want := &GetDomainPricesOutput{
+		DomainPrice: &types.DomainPrice{
+			Name: ptr.String("__Name__"),
+			RegistrationPrice: &types.PriceWithCurrency{
+				Price:     1.0,
+				Currency:  ptr.String("__Currency__"),
+				PriceType: types.PriceType("STANDARD"),
+			},
+			TransferPrice: &types.PriceWithCurrency{
+				Price:     1.0,
+				Currency:  ptr.String("__Currency__"),
+				PriceType: types.PriceType("STANDARD"),
+			},
+			RenewalPrice: &types.PriceWithCurrency{
+				Price:     1.0,
+				Currency:  ptr.String("__Currency__"),
+				PriceType: types.PriceType("STANDARD"),
+			},
+			ChangeOwnershipPrice: &types.PriceWithCurrency{
+				Price:     1.0,
+				Currency:  ptr.String("__Currency__"),
+				PriceType: types.PriceType("STANDARD"),
+			},
+			RestorationPrice: &types.PriceWithCurrency{
+				Price:     1.0,
+				Currency:  ptr.String("__Currency__"),
+				PriceType: types.PriceType("STANDARD"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetDomainPrices.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetDomainPrices(context.Background(), &GetDomainPricesInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetDomainPrices.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetDomainSuggestions(t *testing.T) {
 	want := &GetDomainSuggestionsOutput{
 		SuggestionsList: []types.DomainSuggestion{
 			{
 				DomainName:   ptr.String("__DomainName__"),
 				Availability: ptr.String("__Availability__"),
+				Price: &types.PriceWithCurrency{
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
+				},
 			},
 			{
 				DomainName:   ptr.String("__DomainName__"),
 				Availability: ptr.String("__Availability__"),
+				Price: &types.PriceWithCurrency{
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
+				},
 			},
 		},
 	}
@@ -618,9 +688,10 @@ func TestCheckResponseSnapshot_GetDomainSuggestions(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetDomainSuggestions(context.Background(), &GetDomainSuggestionsInput{
-		DomainName:      ptr.String("__DomainName__"),
-		SuggestionCount: 1,
-		OnlyAvailable:   ptr.Bool(true),
+		DomainName:         ptr.String("__DomainName__"),
+		SuggestionCount:    1,
+		OnlyAvailable:      ptr.Bool(true),
+		OnlyStandardPrices: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -783,47 +854,57 @@ func TestCheckResponseSnapshot_ListPrices(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				RegistrationPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				TransferPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				RenewalPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				ChangeOwnershipPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				RestorationPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 			},
 			{
 				Name: ptr.String("__Name__"),
 				RegistrationPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				TransferPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				RenewalPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				ChangeOwnershipPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 				RestorationPrice: &types.PriceWithCurrency{
-					Price:    1.0,
-					Currency: ptr.String("__Currency__"),
+					Price:     1.0,
+					Currency:  ptr.String("__Currency__"),
+					PriceType: types.PriceType("STANDARD"),
 				},
 			},
 		},
@@ -1025,6 +1106,10 @@ func TestCheckResponseSnapshot_RegisterDomain(t *testing.T) {
 			},
 		},
 		PrivacyProtectBillingContact: ptr.Bool(true),
+		Consent: &types.Consent{
+			MaxPrice: 1.0,
+			Currency: ptr.String("__Currency__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1073,6 +1158,10 @@ func TestCheckResponseSnapshot_RenewDomain(t *testing.T) {
 		DomainName:        ptr.String("__DomainName__"),
 		DurationInYears:   ptr.Int32(1),
 		CurrentExpiryYear: 1,
+		Consent: &types.Consent{
+			MaxPrice: 1.0,
+			Currency: ptr.String("__Currency__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1289,6 +1378,10 @@ func TestCheckResponseSnapshot_TransferDomain(t *testing.T) {
 			},
 		},
 		PrivacyProtectBillingContact: ptr.Bool(true),
+		Consent: &types.Consent{
+			MaxPrice: 1.0,
+			Currency: ptr.String("__Currency__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

@@ -29,7 +29,8 @@ type AuthType string
 
 // Enum values for AuthType
 const (
-	AuthTypeApiKey AuthType = "API_KEY"
+	AuthTypeApiKey     AuthType = "API_KEY"
+	AuthTypeConnectJwt AuthType = "CONNECT_JWT"
 )
 
 // Values returns all known values for AuthType. Note that this can be expanded in
@@ -39,6 +40,7 @@ const (
 func (AuthType) Values() []AuthType {
 	return []AuthType{
 		"API_KEY",
+		"CONNECT_JWT",
 	}
 }
 

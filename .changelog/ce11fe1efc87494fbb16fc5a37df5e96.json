@@ -1,0 +1,8 @@
+{
+    "id": "ce11fe1e-fc87-494f-bb16-fc5a37df5e96",
+    "type": "feature",
+    "description": "Amazon Glue releasing support for adding custom namespace for S3 Tables in Glue zero-ETL integration",
+    "modules": [
+        "service/glue"
+    ]
+}

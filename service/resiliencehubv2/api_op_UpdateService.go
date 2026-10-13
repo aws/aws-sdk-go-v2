@@ -42,6 +42,11 @@ type UpdateServiceInput struct {
 	// Resource description for services and policies.
 	Description *string
 
+	// The optional DevOps Agent integration configuration to set, replace, or
+	// disconnect for the service. If you omit this field, the existing DevOps Agent
+	// linkage stays unchanged.
+	DevOpsAgentConfiguration *types.DevOpsAgentConfiguration
+
 	// The updated permission model for the service.
 	PermissionModel *types.PermissionModel
 
@@ -70,6 +75,11 @@ func (v *UpdateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateServiceRequest_description, *v.Description)
+	}
+	if v.DevOpsAgentConfiguration != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_devOpsAgentConfiguration)
+		v.DevOpsAgentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.PermissionModel != nil {
 		s.WriteStruct(schemas.UpdateServiceRequest_permissionModel)

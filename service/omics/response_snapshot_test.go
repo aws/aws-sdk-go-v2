@@ -846,12 +846,14 @@ func TestCheckResponseSnapshot_CreateWorkflow(t *testing.T) {
 					EcrRepositoryPrefix:      ptr.String("__EcrRepositoryPrefix__"),
 					UpstreamRepositoryPrefix: ptr.String("__UpstreamRepositoryPrefix__"),
 					EcrAccountId:             ptr.String("__EcrAccountId__"),
+					CredentialArn:            ptr.String("__CredentialArn__"),
 				},
 				{
 					UpstreamRegistryUrl:      ptr.String("__UpstreamRegistryUrl__"),
 					EcrRepositoryPrefix:      ptr.String("__EcrRepositoryPrefix__"),
 					UpstreamRepositoryPrefix: ptr.String("__UpstreamRepositoryPrefix__"),
 					EcrAccountId:             ptr.String("__EcrAccountId__"),
+					CredentialArn:            ptr.String("__CredentialArn__"),
 				},
 			},
 			ImageMappings: []types.ImageMapping{
@@ -940,12 +942,14 @@ func TestCheckResponseSnapshot_CreateWorkflowVersion(t *testing.T) {
 					EcrRepositoryPrefix:      ptr.String("__EcrRepositoryPrefix__"),
 					UpstreamRepositoryPrefix: ptr.String("__UpstreamRepositoryPrefix__"),
 					EcrAccountId:             ptr.String("__EcrAccountId__"),
+					CredentialArn:            ptr.String("__CredentialArn__"),
 				},
 				{
 					UpstreamRegistryUrl:      ptr.String("__UpstreamRegistryUrl__"),
 					EcrRepositoryPrefix:      ptr.String("__EcrRepositoryPrefix__"),
 					UpstreamRepositoryPrefix: ptr.String("__UpstreamRepositoryPrefix__"),
 					EcrAccountId:             ptr.String("__EcrAccountId__"),
+					CredentialArn:            ptr.String("__CredentialArn__"),
 				},
 			},
 			ImageMappings: []types.ImageMapping{
@@ -2495,12 +2499,14 @@ func TestCheckResponseSnapshot_GetWorkflow(t *testing.T) {
 					EcrRepositoryPrefix:      ptr.String("__EcrRepositoryPrefix__"),
 					UpstreamRepositoryPrefix: ptr.String("__UpstreamRepositoryPrefix__"),
 					EcrAccountId:             ptr.String("__EcrAccountId__"),
+					CredentialArn:            ptr.String("__CredentialArn__"),
 				},
 				{
 					UpstreamRegistryUrl:      ptr.String("__UpstreamRegistryUrl__"),
 					EcrRepositoryPrefix:      ptr.String("__EcrRepositoryPrefix__"),
 					UpstreamRepositoryPrefix: ptr.String("__UpstreamRepositoryPrefix__"),
 					EcrAccountId:             ptr.String("__EcrAccountId__"),
+					CredentialArn:            ptr.String("__CredentialArn__"),
 				},
 			},
 			ImageMappings: []types.ImageMapping{
@@ -2602,12 +2608,14 @@ func TestCheckResponseSnapshot_GetWorkflowVersion(t *testing.T) {
 					EcrRepositoryPrefix:      ptr.String("__EcrRepositoryPrefix__"),
 					UpstreamRepositoryPrefix: ptr.String("__UpstreamRepositoryPrefix__"),
 					EcrAccountId:             ptr.String("__EcrAccountId__"),
+					CredentialArn:            ptr.String("__CredentialArn__"),
 				},
 				{
 					UpstreamRegistryUrl:      ptr.String("__UpstreamRegistryUrl__"),
 					EcrRepositoryPrefix:      ptr.String("__EcrRepositoryPrefix__"),
 					UpstreamRepositoryPrefix: ptr.String("__UpstreamRepositoryPrefix__"),
 					EcrAccountId:             ptr.String("__EcrAccountId__"),
+					CredentialArn:            ptr.String("__CredentialArn__"),
 				},
 			},
 			ImageMappings: []types.ImageMapping{

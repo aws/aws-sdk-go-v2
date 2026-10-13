@@ -1448,6 +1448,19 @@ func serializeContactFields(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 	s.CloseList()
 }
 
+func serializeContactFlowAliasSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContactFlowAliasSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeContactFlowAttributeOrConditionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContactFlowAttributeAndCondition) {
 	if v == nil {
 		return
@@ -5761,6 +5774,20 @@ func deserializeContactFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 		}
 
 		*v = append(*v, types.ContactField(vv))
+		return nil
+	})
+}
+
+func deserializeContactFlowAliasSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ContactFlowAliasSummary) error {
+	*v = make([]types.ContactFlowAliasSummary, 0)
+	var vv types.ContactFlowAliasSummary
+	return smithy.ReadList(d, s, func() error {
+		vv = types.ContactFlowAliasSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }

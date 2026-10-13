@@ -1437,6 +1437,31 @@ func TestUpdateResponseSnapshot_CreateContactFlow(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateContactFlowAlias(t *testing.T) {
+	want := &CreateContactFlowAliasOutput{
+		ContactFlowArn: ptr.String("__ContactFlowArn__"),
+		Id:             ptr.String("__Id__"),
+	}
+	proto := restjson1.New(schemas.AmazonConnectService)
+	opSchema := smithy.NewOperationSchema(schemas.CreateContactFlowAlias, schemas.CreateContactFlowAliasResponse, schemas.CreateContactFlowAliasResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateContactFlowAlias.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateContactFlowModule(t *testing.T) {
 	want := &CreateContactFlowModuleOutput{
 		Id:  ptr.String("__Id__"),
@@ -2498,6 +2523,28 @@ func TestUpdateResponseSnapshot_DeleteContactFlow(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteContactFlow.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteContactFlowAlias(t *testing.T) {
+	want := &DeleteContactFlowAliasOutput{}
+	proto := restjson1.New(schemas.AmazonConnectService)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteContactFlowAlias, schemas.DeleteContactFlowAliasResponse, schemas.DeleteContactFlowAliasResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteContactFlowAlias.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4662,6 +4709,39 @@ func TestUpdateResponseSnapshot_DescribeContactFlow(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DescribeContactFlow.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeContactFlowAlias(t *testing.T) {
+	want := &DescribeContactFlowAliasOutput{
+		ContactFlowAlias: &types.ContactFlowAliasInfo{
+			ContactFlowId:      ptr.String("__ContactFlowId__"),
+			ContactFlowArn:     ptr.String("__ContactFlowArn__"),
+			AliasId:            ptr.String("__AliasId__"),
+			Version:            ptr.Int64(1),
+			Name:               ptr.String("__Name__"),
+			Description:        ptr.String("__Description__"),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := restjson1.New(schemas.AmazonConnectService)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeContactFlowAlias, schemas.DescribeContactFlowAliasResponse, schemas.DescribeContactFlowAliasResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeContactFlowAlias.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -9537,6 +9617,50 @@ func TestUpdateResponseSnapshot_ListContactEvaluations(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListContactFlowAliases(t *testing.T) {
+	want := &ListContactFlowAliasesOutput{
+		ContactFlowAliasSummaryList: []types.ContactFlowAliasSummary{
+			{
+				Arn:                ptr.String("__Arn__"),
+				AliasId:            ptr.String("__AliasId__"),
+				Version:            ptr.Int64(1),
+				AliasName:          ptr.String("__AliasName__"),
+				AliasDescription:   ptr.String("__AliasDescription__"),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			},
+			{
+				Arn:                ptr.String("__Arn__"),
+				AliasId:            ptr.String("__AliasId__"),
+				Version:            ptr.Int64(1),
+				AliasName:          ptr.String("__AliasName__"),
+				AliasDescription:   ptr.String("__AliasDescription__"),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.AmazonConnectService)
+	opSchema := smithy.NewOperationSchema(schemas.ListContactFlowAliases, schemas.ListContactFlowAliasesResponse, schemas.ListContactFlowAliasesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListContactFlowAliases.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListContactFlowModuleAliases(t *testing.T) {
 	want := &ListContactFlowModuleAliasesOutput{
 		ContactFlowModuleAliasSummaryList: []types.ContactFlowModuleAliasSummary{
@@ -9660,11 +9784,15 @@ func TestUpdateResponseSnapshot_ListContactFlowVersions(t *testing.T) {
 				Arn:                ptr.String("__Arn__"),
 				VersionDescription: ptr.String("__VersionDescription__"),
 				Version:            ptr.Int64(1),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 			},
 			{
 				Arn:                ptr.String("__Arn__"),
 				VersionDescription: ptr.String("__VersionDescription__"),
 				Version:            ptr.Int64(1),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -16294,6 +16422,28 @@ func TestUpdateResponseSnapshot_UpdateContactEvaluation(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateContactEvaluation.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateContactFlowAlias(t *testing.T) {
+	want := &UpdateContactFlowAliasOutput{}
+	proto := restjson1.New(schemas.AmazonConnectService)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateContactFlowAlias, schemas.UpdateContactFlowAliasResponse, schemas.UpdateContactFlowAliasResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateContactFlowAlias.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

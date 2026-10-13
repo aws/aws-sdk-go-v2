@@ -137,8 +137,9 @@ type AutomationRulesActionTypeV2 string
 
 // Enum values for AutomationRulesActionTypeV2
 const (
-	AutomationRulesActionTypeV2FindingFieldsUpdate AutomationRulesActionTypeV2 = "FINDING_FIELDS_UPDATE"
-	AutomationRulesActionTypeV2ExternalIntegration AutomationRulesActionTypeV2 = "EXTERNAL_INTEGRATION"
+	AutomationRulesActionTypeV2FindingFieldsUpdate  AutomationRulesActionTypeV2 = "FINDING_FIELDS_UPDATE"
+	AutomationRulesActionTypeV2ExternalIntegration  AutomationRulesActionTypeV2 = "EXTERNAL_INTEGRATION"
+	AutomationRulesActionTypeV2ResourceFieldsUpdate AutomationRulesActionTypeV2 = "RESOURCE_FIELDS_UPDATE"
 )
 
 // Values returns all known values for AutomationRulesActionTypeV2. Note that this
@@ -149,6 +150,7 @@ func (AutomationRulesActionTypeV2) Values() []AutomationRulesActionTypeV2 {
 	return []AutomationRulesActionTypeV2{
 		"FINDING_FIELDS_UPDATE",
 		"EXTERNAL_INTEGRATION",
+		"RESOURCE_FIELDS_UPDATE",
 	}
 }
 
@@ -400,6 +402,27 @@ func (ControlStatus) Values() []ControlStatus {
 	return []ControlStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type CriticalitySourceType string
+
+// Enum values for CriticalitySourceType
+const (
+	CriticalitySourceTypeAutomationRule CriticalitySourceType = "AutomationRule"
+	CriticalitySourceTypeResourceName   CriticalitySourceType = "ResourceName"
+	CriticalitySourceTypeTagInference   CriticalitySourceType = "TagInference"
+)
+
+// Values returns all known values for CriticalitySourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CriticalitySourceType) Values() []CriticalitySourceType {
+	return []CriticalitySourceType{
+		"AutomationRule",
+		"ResourceName",
+		"TagInference",
 	}
 }
 
@@ -1081,10 +1104,13 @@ const (
 	GroupByFieldFindingInfoTitle                       GroupByField = "finding_info.title"
 	GroupByFieldFindingInfoRelatedEventsTraitsCategory GroupByField = "finding_info.related_events.traits.category"
 	GroupByFieldFindingInfoTypes                       GroupByField = "finding_info.types"
+	GroupByFieldImpact                                 GroupByField = "impact"
+	GroupByFieldLikelihood                             GroupByField = "likelihood"
 	GroupByFieldMetadataProductName                    GroupByField = "metadata.product.name"
 	GroupByFieldMetadataProductUid                     GroupByField = "metadata.product.uid"
 	GroupByFieldResourcesType                          GroupByField = "resources.type"
 	GroupByFieldResourcesCloudPartition                GroupByField = "resources.cloud_partition"
+	GroupByFieldResourcesCriticality                   GroupByField = "resources.criticality"
 	GroupByFieldResourcesName                          GroupByField = "resources.name"
 	GroupByFieldResourcesOwnerAccountUid               GroupByField = "resources.owner.account.uid"
 	GroupByFieldResourcesOwnerOrgUid                   GroupByField = "resources.owner.org.uid"
@@ -1120,10 +1146,13 @@ func (GroupByField) Values() []GroupByField {
 		"finding_info.title",
 		"finding_info.related_events.traits.category",
 		"finding_info.types",
+		"impact",
+		"likelihood",
 		"metadata.product.name",
 		"metadata.product.uid",
 		"resources.type",
 		"resources.cloud_partition",
+		"resources.criticality",
 		"resources.name",
 		"resources.owner.account.uid",
 		"resources.owner.org.uid",
@@ -1516,12 +1545,15 @@ const (
 	OcsfStringFieldFindingInfoRelatedEventsUid                            OcsfStringField = "finding_info.related_events.uid"
 	OcsfStringFieldFindingInfoRelatedEventsProductUid                     OcsfStringField = "finding_info.related_events.product.uid"
 	OcsfStringFieldFindingInfoRelatedEventsTitle                          OcsfStringField = "finding_info.related_events.title"
+	OcsfStringFieldImpact                                                 OcsfStringField = "impact"
+	OcsfStringFieldLikelihood                                             OcsfStringField = "likelihood"
 	OcsfStringFieldMetadataProductName                                    OcsfStringField = "metadata.product.name"
 	OcsfStringFieldMetadataProductUid                                     OcsfStringField = "metadata.product.uid"
 	OcsfStringFieldMetadataProductVendorName                              OcsfStringField = "metadata.product.vendor_name"
 	OcsfStringFieldRemediationDesc                                        OcsfStringField = "remediation.desc"
 	OcsfStringFieldRemediationReferences                                  OcsfStringField = "remediation.references"
 	OcsfStringFieldResourcesCloudPartition                                OcsfStringField = "resources.cloud_partition"
+	OcsfStringFieldResourcesCriticality                                   OcsfStringField = "resources.criticality"
 	OcsfStringFieldResourcesName                                          OcsfStringField = "resources.name"
 	OcsfStringFieldResourcesOwnerAccountUid                               OcsfStringField = "resources.owner.account.uid"
 	OcsfStringFieldResourcesOwnerOrgUid                                   OcsfStringField = "resources.owner.org.uid"
@@ -1600,12 +1632,15 @@ func (OcsfStringField) Values() []OcsfStringField {
 		"finding_info.related_events.uid",
 		"finding_info.related_events.product.uid",
 		"finding_info.related_events.title",
+		"impact",
+		"likelihood",
 		"metadata.product.name",
 		"metadata.product.uid",
 		"metadata.product.vendor_name",
 		"remediation.desc",
 		"remediation.references",
 		"resources.cloud_partition",
+		"resources.criticality",
 		"resources.name",
 		"resources.owner.account.uid",
 		"resources.owner.org.uid",
@@ -1928,6 +1963,31 @@ func (ResourceCategory) Values() []ResourceCategory {
 	}
 }
 
+type ResourceCriticality string
+
+// Enum values for ResourceCriticality
+const (
+	ResourceCriticalityVeryHigh ResourceCriticality = "Very High"
+	ResourceCriticalityHigh     ResourceCriticality = "High"
+	ResourceCriticalityMedium   ResourceCriticality = "Medium"
+	ResourceCriticalityLow      ResourceCriticality = "Low"
+	ResourceCriticalityUnknown  ResourceCriticality = "Unknown"
+)
+
+// Values returns all known values for ResourceCriticality. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceCriticality) Values() []ResourceCriticality {
+	return []ResourceCriticality{
+		"Very High",
+		"High",
+		"Medium",
+		"Low",
+		"Unknown",
+	}
+}
+
 type ResourceGroupByField string
 
 // Enum values for ResourceGroupByField
@@ -1948,6 +2008,7 @@ const (
 	ResourceGroupByFieldDiscoveryType          ResourceGroupByField = "DiscoveryType"
 	ResourceGroupByFieldHostResourceType       ResourceGroupByField = "ResourceInfo.AIDetails.HostResourceType"
 	ResourceGroupByFieldCanonicalId            ResourceGroupByField = "ResourceInfo.AIDetails.CanonicalId"
+	ResourceGroupByFieldResourceCriticality    ResourceGroupByField = "ResourceCriticality"
 )
 
 // Values returns all known values for ResourceGroupByField. Note that this can be
@@ -1972,6 +2033,7 @@ func (ResourceGroupByField) Values() []ResourceGroupByField {
 		"DiscoveryType",
 		"ResourceInfo.AIDetails.HostResourceType",
 		"ResourceInfo.AIDetails.CanonicalId",
+		"ResourceCriticality",
 	}
 }
 
@@ -2084,6 +2146,7 @@ const (
 	ResourcesStringFieldHostResourceGuid       ResourcesStringField = "ResourceInfo.AIDetails.HostResourceGuid"
 	ResourcesStringFieldHostResourceType       ResourcesStringField = "ResourceInfo.AIDetails.HostResourceType"
 	ResourcesStringFieldCanonicalId            ResourcesStringField = "ResourceInfo.AIDetails.CanonicalId"
+	ResourcesStringFieldResourceCriticality    ResourcesStringField = "ResourceCriticality"
 )
 
 // Values returns all known values for ResourcesStringField. Note that this can be
@@ -2112,6 +2175,7 @@ func (ResourcesStringField) Values() []ResourcesStringField {
 		"ResourceInfo.AIDetails.HostResourceGuid",
 		"ResourceInfo.AIDetails.HostResourceType",
 		"ResourceInfo.AIDetails.CanonicalId",
+		"ResourceCriticality",
 	}
 }
 

@@ -1257,20 +1257,24 @@ var AutomationRulesActionTypeObjectV2_Type *smithy.Schema
 var AutomationRulesActionTypeV2 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "AutomationRulesActionTypeV2",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var AutomationRulesActionTypeV2_FINDING_FIELDS_UPDATE *smithy.Schema
 
 var AutomationRulesActionTypeV2_EXTERNAL_INTEGRATION *smithy.Schema
 
+var AutomationRulesActionTypeV2_RESOURCE_FIELDS_UPDATE *smithy.Schema
+
 var AutomationRulesActionV2 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "AutomationRulesActionV2",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var AutomationRulesActionV2_Type *smithy.Schema
 
 var AutomationRulesActionV2_FindingFieldsUpdate *smithy.Schema
 
 var AutomationRulesActionV2_ExternalIntegrationConfiguration *smithy.Schema
+
+var AutomationRulesActionV2_ResourceFieldsUpdate *smithy.Schema
 
 var _AutomationRulesArnsList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -1483,6 +1487,12 @@ var AutomationRulesMetadataV2_Actions *smithy.Schema
 var AutomationRulesMetadataV2_CreatedAt *smithy.Schema
 
 var AutomationRulesMetadataV2_UpdatedAt *smithy.Schema
+
+var AutomationRulesResourceFieldsUpdateV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "AutomationRulesResourceFieldsUpdateV2",
+}, smithy.ShapeTypeStructure, 1)
+var AutomationRulesResourceFieldsUpdateV2_Criticality *smithy.Schema
 
 var AvailabilityZone = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -9789,8 +9799,34 @@ var Country_CountryName *smithy.Schema
 var Criteria = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "Criteria",
-}, smithy.ShapeTypeUnion, 1)
+}, smithy.ShapeTypeUnion, 2)
 var Criteria_OcsfFindingCriteria *smithy.Schema
+
+var Criteria_ResourceCriteria *smithy.Schema
+
+var CriticalitySource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "CriticalitySource",
+}, smithy.ShapeTypeStructure, 2)
+var CriticalitySource_Source *smithy.Schema
+
+var CriticalitySource_Reason *smithy.Schema
+
+var _CriticalitySourceList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "CriticalitySourceList",
+}, smithy.ShapeTypeList, 1)
+var _CriticalitySourceList_member *smithy.Schema
+
+var CriticalitySourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "CriticalitySourceType",
+}, smithy.ShapeTypeEnum, 3)
+var CriticalitySourceType_AUTOMATION_RULE *smithy.Schema
+
+var CriticalitySourceType_RESOURCE_NAME *smithy.Schema
+
+var CriticalitySourceType_TAG_INFERENCE *smithy.Schema
 
 var _CrossAccountMaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -10848,7 +10884,7 @@ var GranularityField_MONTHLY *smithy.Schema
 var GroupByField = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "GroupByField",
-}, smithy.ShapeTypeEnum, 31)
+}, smithy.ShapeTypeEnum, 34)
 var GroupByField_ACTIVITY_NAME *smithy.Schema
 
 var GroupByField_CLOUD_ACCOUNT_UID *smithy.Schema
@@ -10869,6 +10905,10 @@ var GroupByField_FINDING_INFO_RELATED_EVENTS_TRAITS_CATEGORY *smithy.Schema
 
 var GroupByField_FINDING_INFO_TYPES *smithy.Schema
 
+var GroupByField_IMPACT *smithy.Schema
+
+var GroupByField_LIKELIHOOD *smithy.Schema
+
 var GroupByField_METADATA_PRODUCT_NAME *smithy.Schema
 
 var GroupByField_METADATA_PRODUCT_UID *smithy.Schema
@@ -10876,6 +10916,8 @@ var GroupByField_METADATA_PRODUCT_UID *smithy.Schema
 var GroupByField_RESOURCES_TYPE *smithy.Schema
 
 var GroupByField_RESOURCES_CLOUD_PARTITION *smithy.Schema
+
+var GroupByField_RESOURCES_CRITICALITY *smithy.Schema
 
 var GroupByField_RESOURCES_NAME *smithy.Schema
 
@@ -11867,7 +11909,7 @@ var _OcsfNumberFilterList_member *smithy.Schema
 var OcsfStringField = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "OcsfStringField",
-}, smithy.ShapeTypeEnum, 76)
+}, smithy.ShapeTypeEnum, 79)
 var OcsfStringField_METADATA_UID *smithy.Schema
 
 var OcsfStringField_ACTIVITY_NAME *smithy.Schema
@@ -11906,6 +11948,10 @@ var OcsfStringField_FINDING_INFO_RELATED_EVENTS_PRODUCT_UID *smithy.Schema
 
 var OcsfStringField_FINDING_INFO_RELATED_EVENTS_TITLE *smithy.Schema
 
+var OcsfStringField_IMPACT *smithy.Schema
+
+var OcsfStringField_LIKELIHOOD *smithy.Schema
+
 var OcsfStringField_METADATA_PRODUCT_NAME *smithy.Schema
 
 var OcsfStringField_METADATA_PRODUCT_UID *smithy.Schema
@@ -11917,6 +11963,8 @@ var OcsfStringField_REMEDIATION_DESC *smithy.Schema
 var OcsfStringField_REMEDIATION_REFERENCES *smithy.Schema
 
 var OcsfStringField_RESOURCES_CLOUD_PARTITION *smithy.Schema
+
+var OcsfStringField_RESOURCES_CRITICALITY *smithy.Schema
 
 var OcsfStringField_RESOURCES_NAME *smithy.Schema
 
@@ -12867,6 +12915,20 @@ var ResourceConflictException_Message *smithy.Schema
 
 var ResourceConflictException_Code *smithy.Schema
 
+var ResourceCriticality = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "ResourceCriticality",
+}, smithy.ShapeTypeEnum, 5)
+var ResourceCriticality_VERY_HIGH *smithy.Schema
+
+var ResourceCriticality_HIGH *smithy.Schema
+
+var ResourceCriticality_MEDIUM *smithy.Schema
+
+var ResourceCriticality_LOW *smithy.Schema
+
+var ResourceCriticality_UNKNOWN *smithy.Schema
+
 var ResourceDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ResourceDetails",
@@ -13094,7 +13156,7 @@ var _ResourceFindingsSummaryList_member *smithy.Schema
 var ResourceGroupByField = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ResourceGroupByField",
-}, smithy.ShapeTypeEnum, 16)
+}, smithy.ShapeTypeEnum, 17)
 var ResourceGroupByField_ACCOUNT_ID *smithy.Schema
 
 var ResourceGroupByField_ACCOUNT_NAME *smithy.Schema
@@ -13126,6 +13188,8 @@ var ResourceGroupByField_DISCOVERY_TYPE *smithy.Schema
 var ResourceGroupByField_HOST_RESOURCE_TYPE *smithy.Schema
 
 var ResourceGroupByField_CANONICAL_ID *smithy.Schema
+
+var ResourceGroupByField_RESOURCE_CRITICALITY *smithy.Schema
 
 var ResourceGroupByRule = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -13194,7 +13258,7 @@ var ResourceOwnerOrg_Id *smithy.Schema
 var ResourceResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ResourceResult",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 23)
 var ResourceResult_ResourceGuid *smithy.Schema
 
 var ResourceResult_ResourceId *smithy.Schema
@@ -13236,6 +13300,10 @@ var ResourceResult_ResourceSubCategory *smithy.Schema
 var ResourceResult_DiscoveryType *smithy.Schema
 
 var ResourceResult_ResourceInfo *smithy.Schema
+
+var ResourceResult_ResourceCriticality *smithy.Schema
+
+var ResourceResult_CriticalitySources *smithy.Schema
 
 var _Resources = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -13402,7 +13470,7 @@ var _ResourcesNumberFilterList_member *smithy.Schema
 var ResourcesStringField = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ResourcesStringField",
-}, smithy.ShapeTypeEnum, 20)
+}, smithy.ShapeTypeEnum, 21)
 var ResourcesStringField_RESOURCE_GUID *smithy.Schema
 
 var ResourcesStringField_RESOURCE_ID *smithy.Schema
@@ -13442,6 +13510,8 @@ var ResourcesStringField_HOST_RESOURCE_GUID *smithy.Schema
 var ResourcesStringField_HOST_RESOURCE_TYPE *smithy.Schema
 
 var ResourcesStringField_CANONICAL_ID *smithy.Schema
+
+var ResourcesStringField_RESOURCE_CRITICALITY *smithy.Schema
 
 var ResourcesStringFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -17686,6 +17756,8 @@ func init() {
 
 	AutomationRulesActionTypeV2_EXTERNAL_INTEGRATION = AutomationRulesActionTypeV2.AddMember("EXTERNAL_INTEGRATION", smithyprelude.Unit)
 
+	AutomationRulesActionTypeV2_RESOURCE_FIELDS_UPDATE = AutomationRulesActionTypeV2.AddMember("RESOURCE_FIELDS_UPDATE", smithyprelude.Unit)
+
 	AutomationRulesFindingFieldsUpdateV2_SeverityId = AutomationRulesFindingFieldsUpdateV2.AddMember("SeverityId", _Integer)
 
 	AutomationRulesFindingFieldsUpdateV2_Comment = AutomationRulesFindingFieldsUpdateV2.AddMember("Comment", _NonEmptyString)
@@ -17694,11 +17766,25 @@ func init() {
 
 	ExternalIntegrationConfiguration_ConnectorArn = ExternalIntegrationConfiguration.AddMember("ConnectorArn", _NonEmptyString)
 
+	ResourceCriticality_VERY_HIGH = ResourceCriticality.AddMember("VERY_HIGH", smithyprelude.Unit)
+
+	ResourceCriticality_HIGH = ResourceCriticality.AddMember("HIGH", smithyprelude.Unit)
+
+	ResourceCriticality_MEDIUM = ResourceCriticality.AddMember("MEDIUM", smithyprelude.Unit)
+
+	ResourceCriticality_LOW = ResourceCriticality.AddMember("LOW", smithyprelude.Unit)
+
+	ResourceCriticality_UNKNOWN = ResourceCriticality.AddMember("UNKNOWN", smithyprelude.Unit)
+
+	AutomationRulesResourceFieldsUpdateV2_Criticality = AutomationRulesResourceFieldsUpdateV2.AddMember("Criticality", ResourceCriticality)
+
 	AutomationRulesActionV2_Type = AutomationRulesActionV2.AddMember("Type", AutomationRulesActionTypeV2)
 
 	AutomationRulesActionV2_FindingFieldsUpdate = AutomationRulesActionV2.AddMember("FindingFieldsUpdate", AutomationRulesFindingFieldsUpdateV2)
 
 	AutomationRulesActionV2_ExternalIntegrationConfiguration = AutomationRulesActionV2.AddMember("ExternalIntegrationConfiguration", ExternalIntegrationConfiguration)
+
+	AutomationRulesActionV2_ResourceFieldsUpdate = AutomationRulesActionV2.AddMember("ResourceFieldsUpdate", AutomationRulesResourceFieldsUpdateV2)
 
 	_AutomationRulesActionListV2_member = _AutomationRulesActionListV2.AddMember("member", AutomationRulesActionV2)
 
@@ -24300,6 +24386,10 @@ func init() {
 
 	OcsfStringField_FINDING_INFO_RELATED_EVENTS_TITLE = OcsfStringField.AddMember("FINDING_INFO_RELATED_EVENTS_TITLE", smithyprelude.Unit)
 
+	OcsfStringField_IMPACT = OcsfStringField.AddMember("IMPACT", smithyprelude.Unit)
+
+	OcsfStringField_LIKELIHOOD = OcsfStringField.AddMember("LIKELIHOOD", smithyprelude.Unit)
+
 	OcsfStringField_METADATA_PRODUCT_NAME = OcsfStringField.AddMember("METADATA_PRODUCT_NAME", smithyprelude.Unit)
 
 	OcsfStringField_METADATA_PRODUCT_UID = OcsfStringField.AddMember("METADATA_PRODUCT_UID", smithyprelude.Unit)
@@ -24311,6 +24401,8 @@ func init() {
 	OcsfStringField_REMEDIATION_REFERENCES = OcsfStringField.AddMember("REMEDIATION_REFERENCES", smithyprelude.Unit)
 
 	OcsfStringField_RESOURCES_CLOUD_PARTITION = OcsfStringField.AddMember("RESOURCES_CLOUD_PARTITION", smithyprelude.Unit)
+
+	OcsfStringField_RESOURCES_CRITICALITY = OcsfStringField.AddMember("RESOURCES_CRITICALITY", smithyprelude.Unit)
 
 	OcsfStringField_RESOURCES_NAME = OcsfStringField.AddMember("RESOURCES_NAME", smithyprelude.Unit)
 
@@ -24734,7 +24826,145 @@ func init() {
 
 	OcsfFindingFilters_CompositeOperator = OcsfFindingFilters.AddMember("CompositeOperator", AllowedOperators)
 
+	ResourcesStringField_RESOURCE_GUID = ResourcesStringField.AddMember("RESOURCE_GUID", smithyprelude.Unit)
+
+	ResourcesStringField_RESOURCE_ID = ResourcesStringField.AddMember("RESOURCE_ID", smithyprelude.Unit)
+
+	ResourcesStringField_ACCOUNT_ID = ResourcesStringField.AddMember("ACCOUNT_ID", smithyprelude.Unit)
+
+	ResourcesStringField_ACCOUNT_NAME = ResourcesStringField.AddMember("ACCOUNT_NAME", smithyprelude.Unit)
+
+	ResourcesStringField_REGION = ResourcesStringField.AddMember("REGION", smithyprelude.Unit)
+
+	ResourcesStringField_RESOURCE_PROVIDER = ResourcesStringField.AddMember("RESOURCE_PROVIDER", smithyprelude.Unit)
+
+	ResourcesStringField_RESOURCE_OWNER_ACCOUNT_ID = ResourcesStringField.AddMember("RESOURCE_OWNER_ACCOUNT_ID", smithyprelude.Unit)
+
+	ResourcesStringField_RESOURCE_OWNER_ORG_ID = ResourcesStringField.AddMember("RESOURCE_OWNER_ORG_ID", smithyprelude.Unit)
+
+	ResourcesStringField_RESOURCE_CLOUD_PARTITION = ResourcesStringField.AddMember("RESOURCE_CLOUD_PARTITION", smithyprelude.Unit)
+
+	ResourcesStringField_RESOURCE_REGION = ResourcesStringField.AddMember("RESOURCE_REGION", smithyprelude.Unit)
+
+	ResourcesStringField_RESOURCE_CATEGORY = ResourcesStringField.AddMember("RESOURCE_CATEGORY", smithyprelude.Unit)
+
+	ResourcesStringField_RESOURCE_TYPE = ResourcesStringField.AddMember("RESOURCE_TYPE", smithyprelude.Unit)
+
+	ResourcesStringField_RESOURCE_NAME = ResourcesStringField.AddMember("RESOURCE_NAME", smithyprelude.Unit)
+
+	ResourcesStringField_FINDING_TYPE = ResourcesStringField.AddMember("FINDING_TYPE", smithyprelude.Unit)
+
+	ResourcesStringField_PRODUCT_NAME = ResourcesStringField.AddMember("PRODUCT_NAME", smithyprelude.Unit)
+
+	ResourcesStringField_RESOURCE_SUB_CATEGORY = ResourcesStringField.AddMember("RESOURCE_SUB_CATEGORY", smithyprelude.Unit)
+
+	ResourcesStringField_DISCOVERY_TYPE = ResourcesStringField.AddMember("DISCOVERY_TYPE", smithyprelude.Unit)
+
+	ResourcesStringField_HOST_RESOURCE_GUID = ResourcesStringField.AddMember("HOST_RESOURCE_GUID", smithyprelude.Unit)
+
+	ResourcesStringField_HOST_RESOURCE_TYPE = ResourcesStringField.AddMember("HOST_RESOURCE_TYPE", smithyprelude.Unit)
+
+	ResourcesStringField_CANONICAL_ID = ResourcesStringField.AddMember("CANONICAL_ID", smithyprelude.Unit)
+
+	ResourcesStringField_RESOURCE_CRITICALITY = ResourcesStringField.AddMember("RESOURCE_CRITICALITY", smithyprelude.Unit)
+
+	ResourcesStringFilter_FieldName = ResourcesStringFilter.AddMember("FieldName", ResourcesStringField)
+
+	ResourcesStringFilter_Filter = ResourcesStringFilter.AddMember("Filter", StringFilter)
+
+	_ResourcesStringFilterList_member = _ResourcesStringFilterList.AddMember("member", ResourcesStringFilter)
+
+	ResourcesDateField_RESOURCE_DETAIL_CAPTURE_TIME_DT = ResourcesDateField.AddMember("RESOURCE_DETAIL_CAPTURE_TIME_DT", smithyprelude.Unit)
+
+	ResourcesDateField_RESOURCE_CREATION_TIME_DT = ResourcesDateField.AddMember("RESOURCE_CREATION_TIME_DT", smithyprelude.Unit)
+
+	ResourcesDateFilter_FieldName = ResourcesDateFilter.AddMember("FieldName", ResourcesDateField)
+
+	ResourcesDateFilter_Filter = ResourcesDateFilter.AddMember("Filter", DateFilter)
+
+	_ResourcesDateFilterList_member = _ResourcesDateFilterList.AddMember("member", ResourcesDateFilter)
+
+	ResourcesNumberField_TOTAL_FINDINGS = ResourcesNumberField.AddMember("TOTAL_FINDINGS", smithyprelude.Unit)
+
+	ResourcesNumberField_SEVERITY_OTHER = ResourcesNumberField.AddMember("SEVERITY_OTHER", smithyprelude.Unit)
+
+	ResourcesNumberField_SEVERITY_FATAL = ResourcesNumberField.AddMember("SEVERITY_FATAL", smithyprelude.Unit)
+
+	ResourcesNumberField_SEVERITY_CRITICAL = ResourcesNumberField.AddMember("SEVERITY_CRITICAL", smithyprelude.Unit)
+
+	ResourcesNumberField_SEVERITY_HIGH = ResourcesNumberField.AddMember("SEVERITY_HIGH", smithyprelude.Unit)
+
+	ResourcesNumberField_SEVERITY_MEDIUM = ResourcesNumberField.AddMember("SEVERITY_MEDIUM", smithyprelude.Unit)
+
+	ResourcesNumberField_SEVERITY_LOW = ResourcesNumberField.AddMember("SEVERITY_LOW", smithyprelude.Unit)
+
+	ResourcesNumberField_SEVERITY_INFORMATIONAL = ResourcesNumberField.AddMember("SEVERITY_INFORMATIONAL", smithyprelude.Unit)
+
+	ResourcesNumberField_SEVERITY_UNKNOWN = ResourcesNumberField.AddMember("SEVERITY_UNKNOWN", smithyprelude.Unit)
+
+	ResourcesNumberField_SELF_HOSTED_AI_MODEL_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_AI_MODEL_RESOURCE_COUNT", smithyprelude.Unit)
+
+	ResourcesNumberField_SELF_HOSTED_AI_AGENT_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_AI_AGENT_RESOURCE_COUNT", smithyprelude.Unit)
+
+	ResourcesNumberField_SELF_HOSTED_AI_MODEL_SERVING_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_AI_MODEL_SERVING_RESOURCE_COUNT", smithyprelude.Unit)
+
+	ResourcesNumberField_SELF_HOSTED_AI_EXTERNAL_ENDPOINT_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_AI_EXTERNAL_ENDPOINT_RESOURCE_COUNT", smithyprelude.Unit)
+
+	ResourcesNumberField_SELF_HOSTED_AI_DEVELOPMENT_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_AI_DEVELOPMENT_RESOURCE_COUNT", smithyprelude.Unit)
+
+	ResourcesNumberField_SELF_HOSTED_AI_AGENT_FRAMEWORK_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_AI_AGENT_FRAMEWORK_RESOURCE_COUNT", smithyprelude.Unit)
+
+	ResourcesNumberField_SELF_HOSTED_AI_AGENT_TOOLS_AND_IDENTITY_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_AI_AGENT_TOOLS_AND_IDENTITY_RESOURCE_COUNT", smithyprelude.Unit)
+
+	ResourcesNumberField_SELF_HOSTED_TOTAL_AI_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_TOTAL_AI_RESOURCE_COUNT", smithyprelude.Unit)
+
+	ResourcesNumberFilter_FieldName = ResourcesNumberFilter.AddMember("FieldName", ResourcesNumberField)
+
+	ResourcesNumberFilter_Filter = ResourcesNumberFilter.AddMember("Filter", NumberFilter)
+
+	_ResourcesNumberFilterList_member = _ResourcesNumberFilterList.AddMember("member", ResourcesNumberFilter)
+
+	ResourcesMapField_TAG = ResourcesMapField.AddMember("TAG", smithyprelude.Unit)
+
+	ResourcesMapFilter_FieldName = ResourcesMapFilter.AddMember("FieldName", ResourcesMapField)
+
+	ResourcesMapFilter_Filter = ResourcesMapFilter.AddMember("Filter", MapFilter)
+
+	_ResourcesMapFilterList_member = _ResourcesMapFilterList.AddMember("member", ResourcesMapFilter)
+
+	ResourcesCompositeFilter_StringFilters = ResourcesCompositeFilter.AddMember("StringFilters", _ResourcesStringFilterList)
+
+	ResourcesCompositeFilter_DateFilters = ResourcesCompositeFilter.AddMember("DateFilters", _ResourcesDateFilterList)
+
+	ResourcesCompositeFilter_NumberFilters = ResourcesCompositeFilter.AddMember("NumberFilters", _ResourcesNumberFilterList)
+
+	ResourcesCompositeFilter_MapFilters = ResourcesCompositeFilter.AddMember("MapFilters", _ResourcesMapFilterList)
+
+	ResourcesCompositeFilter_NestedCompositeFilters = ResourcesCompositeFilter.AddMember("NestedCompositeFilters", _ResourcesCompositeFilterList)
+
+	ResourcesCompositeFilter_Operator = ResourcesCompositeFilter.AddMember("Operator", AllowedOperators)
+
+	_ResourcesCompositeFilterList_member = _ResourcesCompositeFilterList.AddMember("member", ResourcesCompositeFilter)
+
+	ResourcesFilters_CompositeFilters = ResourcesFilters.AddMember("CompositeFilters", _ResourcesCompositeFilterList)
+
+	ResourcesFilters_CompositeOperator = ResourcesFilters.AddMember("CompositeOperator", AllowedOperators)
+
 	Criteria_OcsfFindingCriteria = Criteria.AddMember("OcsfFindingCriteria", OcsfFindingFilters)
+
+	Criteria_ResourceCriteria = Criteria.AddMember("ResourceCriteria", ResourcesFilters)
+
+	CriticalitySourceType_AUTOMATION_RULE = CriticalitySourceType.AddMember("AUTOMATION_RULE", smithyprelude.Unit)
+
+	CriticalitySourceType_RESOURCE_NAME = CriticalitySourceType.AddMember("RESOURCE_NAME", smithyprelude.Unit)
+
+	CriticalitySourceType_TAG_INFERENCE = CriticalitySourceType.AddMember("TAG_INFERENCE", smithyprelude.Unit)
+
+	CriticalitySource_Source = CriticalitySource.AddMember("Source", CriticalitySourceType)
+
+	CriticalitySource_Reason = CriticalitySource.AddMember("Reason", _NonEmptyString)
+
+	_CriticalitySourceList_member = _CriticalitySourceList.AddMember("member", CriticalitySource)
 
 	CspmConnectorProviderName_AZURE = CspmConnectorProviderName.AddMember("AZURE", smithyprelude.Unit)
 
@@ -25266,6 +25496,10 @@ func init() {
 
 	GroupByField_FINDING_INFO_TYPES = GroupByField.AddMember("FINDING_INFO_TYPES", smithyprelude.Unit)
 
+	GroupByField_IMPACT = GroupByField.AddMember("IMPACT", smithyprelude.Unit)
+
+	GroupByField_LIKELIHOOD = GroupByField.AddMember("LIKELIHOOD", smithyprelude.Unit)
+
 	GroupByField_METADATA_PRODUCT_NAME = GroupByField.AddMember("METADATA_PRODUCT_NAME", smithyprelude.Unit)
 
 	GroupByField_METADATA_PRODUCT_UID = GroupByField.AddMember("METADATA_PRODUCT_UID", smithyprelude.Unit)
@@ -25273,6 +25507,8 @@ func init() {
 	GroupByField_RESOURCES_TYPE = GroupByField.AddMember("RESOURCES_TYPE", smithyprelude.Unit)
 
 	GroupByField_RESOURCES_CLOUD_PARTITION = GroupByField.AddMember("RESOURCES_CLOUD_PARTITION", smithyprelude.Unit)
+
+	GroupByField_RESOURCES_CRITICALITY = GroupByField.AddMember("RESOURCES_CRITICALITY", smithyprelude.Unit)
 
 	GroupByField_RESOURCES_NAME = GroupByField.AddMember("RESOURCES_NAME", smithyprelude.Unit)
 
@@ -25904,127 +26140,7 @@ func init() {
 
 	ResourceGroupByField_CANONICAL_ID = ResourceGroupByField.AddMember("CANONICAL_ID", smithyprelude.Unit)
 
-	ResourcesStringField_RESOURCE_GUID = ResourcesStringField.AddMember("RESOURCE_GUID", smithyprelude.Unit)
-
-	ResourcesStringField_RESOURCE_ID = ResourcesStringField.AddMember("RESOURCE_ID", smithyprelude.Unit)
-
-	ResourcesStringField_ACCOUNT_ID = ResourcesStringField.AddMember("ACCOUNT_ID", smithyprelude.Unit)
-
-	ResourcesStringField_ACCOUNT_NAME = ResourcesStringField.AddMember("ACCOUNT_NAME", smithyprelude.Unit)
-
-	ResourcesStringField_REGION = ResourcesStringField.AddMember("REGION", smithyprelude.Unit)
-
-	ResourcesStringField_RESOURCE_PROVIDER = ResourcesStringField.AddMember("RESOURCE_PROVIDER", smithyprelude.Unit)
-
-	ResourcesStringField_RESOURCE_OWNER_ACCOUNT_ID = ResourcesStringField.AddMember("RESOURCE_OWNER_ACCOUNT_ID", smithyprelude.Unit)
-
-	ResourcesStringField_RESOURCE_OWNER_ORG_ID = ResourcesStringField.AddMember("RESOURCE_OWNER_ORG_ID", smithyprelude.Unit)
-
-	ResourcesStringField_RESOURCE_CLOUD_PARTITION = ResourcesStringField.AddMember("RESOURCE_CLOUD_PARTITION", smithyprelude.Unit)
-
-	ResourcesStringField_RESOURCE_REGION = ResourcesStringField.AddMember("RESOURCE_REGION", smithyprelude.Unit)
-
-	ResourcesStringField_RESOURCE_CATEGORY = ResourcesStringField.AddMember("RESOURCE_CATEGORY", smithyprelude.Unit)
-
-	ResourcesStringField_RESOURCE_TYPE = ResourcesStringField.AddMember("RESOURCE_TYPE", smithyprelude.Unit)
-
-	ResourcesStringField_RESOURCE_NAME = ResourcesStringField.AddMember("RESOURCE_NAME", smithyprelude.Unit)
-
-	ResourcesStringField_FINDING_TYPE = ResourcesStringField.AddMember("FINDING_TYPE", smithyprelude.Unit)
-
-	ResourcesStringField_PRODUCT_NAME = ResourcesStringField.AddMember("PRODUCT_NAME", smithyprelude.Unit)
-
-	ResourcesStringField_RESOURCE_SUB_CATEGORY = ResourcesStringField.AddMember("RESOURCE_SUB_CATEGORY", smithyprelude.Unit)
-
-	ResourcesStringField_DISCOVERY_TYPE = ResourcesStringField.AddMember("DISCOVERY_TYPE", smithyprelude.Unit)
-
-	ResourcesStringField_HOST_RESOURCE_GUID = ResourcesStringField.AddMember("HOST_RESOURCE_GUID", smithyprelude.Unit)
-
-	ResourcesStringField_HOST_RESOURCE_TYPE = ResourcesStringField.AddMember("HOST_RESOURCE_TYPE", smithyprelude.Unit)
-
-	ResourcesStringField_CANONICAL_ID = ResourcesStringField.AddMember("CANONICAL_ID", smithyprelude.Unit)
-
-	ResourcesStringFilter_FieldName = ResourcesStringFilter.AddMember("FieldName", ResourcesStringField)
-
-	ResourcesStringFilter_Filter = ResourcesStringFilter.AddMember("Filter", StringFilter)
-
-	_ResourcesStringFilterList_member = _ResourcesStringFilterList.AddMember("member", ResourcesStringFilter)
-
-	ResourcesDateField_RESOURCE_DETAIL_CAPTURE_TIME_DT = ResourcesDateField.AddMember("RESOURCE_DETAIL_CAPTURE_TIME_DT", smithyprelude.Unit)
-
-	ResourcesDateField_RESOURCE_CREATION_TIME_DT = ResourcesDateField.AddMember("RESOURCE_CREATION_TIME_DT", smithyprelude.Unit)
-
-	ResourcesDateFilter_FieldName = ResourcesDateFilter.AddMember("FieldName", ResourcesDateField)
-
-	ResourcesDateFilter_Filter = ResourcesDateFilter.AddMember("Filter", DateFilter)
-
-	_ResourcesDateFilterList_member = _ResourcesDateFilterList.AddMember("member", ResourcesDateFilter)
-
-	ResourcesNumberField_TOTAL_FINDINGS = ResourcesNumberField.AddMember("TOTAL_FINDINGS", smithyprelude.Unit)
-
-	ResourcesNumberField_SEVERITY_OTHER = ResourcesNumberField.AddMember("SEVERITY_OTHER", smithyprelude.Unit)
-
-	ResourcesNumberField_SEVERITY_FATAL = ResourcesNumberField.AddMember("SEVERITY_FATAL", smithyprelude.Unit)
-
-	ResourcesNumberField_SEVERITY_CRITICAL = ResourcesNumberField.AddMember("SEVERITY_CRITICAL", smithyprelude.Unit)
-
-	ResourcesNumberField_SEVERITY_HIGH = ResourcesNumberField.AddMember("SEVERITY_HIGH", smithyprelude.Unit)
-
-	ResourcesNumberField_SEVERITY_MEDIUM = ResourcesNumberField.AddMember("SEVERITY_MEDIUM", smithyprelude.Unit)
-
-	ResourcesNumberField_SEVERITY_LOW = ResourcesNumberField.AddMember("SEVERITY_LOW", smithyprelude.Unit)
-
-	ResourcesNumberField_SEVERITY_INFORMATIONAL = ResourcesNumberField.AddMember("SEVERITY_INFORMATIONAL", smithyprelude.Unit)
-
-	ResourcesNumberField_SEVERITY_UNKNOWN = ResourcesNumberField.AddMember("SEVERITY_UNKNOWN", smithyprelude.Unit)
-
-	ResourcesNumberField_SELF_HOSTED_AI_MODEL_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_AI_MODEL_RESOURCE_COUNT", smithyprelude.Unit)
-
-	ResourcesNumberField_SELF_HOSTED_AI_AGENT_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_AI_AGENT_RESOURCE_COUNT", smithyprelude.Unit)
-
-	ResourcesNumberField_SELF_HOSTED_AI_MODEL_SERVING_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_AI_MODEL_SERVING_RESOURCE_COUNT", smithyprelude.Unit)
-
-	ResourcesNumberField_SELF_HOSTED_AI_EXTERNAL_ENDPOINT_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_AI_EXTERNAL_ENDPOINT_RESOURCE_COUNT", smithyprelude.Unit)
-
-	ResourcesNumberField_SELF_HOSTED_AI_DEVELOPMENT_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_AI_DEVELOPMENT_RESOURCE_COUNT", smithyprelude.Unit)
-
-	ResourcesNumberField_SELF_HOSTED_AI_AGENT_FRAMEWORK_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_AI_AGENT_FRAMEWORK_RESOURCE_COUNT", smithyprelude.Unit)
-
-	ResourcesNumberField_SELF_HOSTED_AI_AGENT_TOOLS_AND_IDENTITY_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_AI_AGENT_TOOLS_AND_IDENTITY_RESOURCE_COUNT", smithyprelude.Unit)
-
-	ResourcesNumberField_SELF_HOSTED_TOTAL_AI_RESOURCE_COUNT = ResourcesNumberField.AddMember("SELF_HOSTED_TOTAL_AI_RESOURCE_COUNT", smithyprelude.Unit)
-
-	ResourcesNumberFilter_FieldName = ResourcesNumberFilter.AddMember("FieldName", ResourcesNumberField)
-
-	ResourcesNumberFilter_Filter = ResourcesNumberFilter.AddMember("Filter", NumberFilter)
-
-	_ResourcesNumberFilterList_member = _ResourcesNumberFilterList.AddMember("member", ResourcesNumberFilter)
-
-	ResourcesMapField_TAG = ResourcesMapField.AddMember("TAG", smithyprelude.Unit)
-
-	ResourcesMapFilter_FieldName = ResourcesMapFilter.AddMember("FieldName", ResourcesMapField)
-
-	ResourcesMapFilter_Filter = ResourcesMapFilter.AddMember("Filter", MapFilter)
-
-	_ResourcesMapFilterList_member = _ResourcesMapFilterList.AddMember("member", ResourcesMapFilter)
-
-	ResourcesCompositeFilter_StringFilters = ResourcesCompositeFilter.AddMember("StringFilters", _ResourcesStringFilterList)
-
-	ResourcesCompositeFilter_DateFilters = ResourcesCompositeFilter.AddMember("DateFilters", _ResourcesDateFilterList)
-
-	ResourcesCompositeFilter_NumberFilters = ResourcesCompositeFilter.AddMember("NumberFilters", _ResourcesNumberFilterList)
-
-	ResourcesCompositeFilter_MapFilters = ResourcesCompositeFilter.AddMember("MapFilters", _ResourcesMapFilterList)
-
-	ResourcesCompositeFilter_NestedCompositeFilters = ResourcesCompositeFilter.AddMember("NestedCompositeFilters", _ResourcesCompositeFilterList)
-
-	ResourcesCompositeFilter_Operator = ResourcesCompositeFilter.AddMember("Operator", AllowedOperators)
-
-	_ResourcesCompositeFilterList_member = _ResourcesCompositeFilterList.AddMember("member", ResourcesCompositeFilter)
-
-	ResourcesFilters_CompositeFilters = ResourcesFilters.AddMember("CompositeFilters", _ResourcesCompositeFilterList)
-
-	ResourcesFilters_CompositeOperator = ResourcesFilters.AddMember("CompositeOperator", AllowedOperators)
+	ResourceGroupByField_RESOURCE_CRITICALITY = ResourceGroupByField.AddMember("RESOURCE_CRITICALITY", smithyprelude.Unit)
 
 	ResourceGroupByRule_GroupByField = ResourceGroupByRule.AddMember("GroupByField", ResourceGroupByField)
 
@@ -26111,6 +26227,10 @@ func init() {
 	ResourceResult_DiscoveryType = ResourceResult.AddMember("DiscoveryType", DiscoveryType)
 
 	ResourceResult_ResourceInfo = ResourceResult.AddMember("ResourceInfo", ResourceInfo)
+
+	ResourceResult_ResourceCriticality = ResourceResult.AddMember("ResourceCriticality", ResourceCriticality)
+
+	ResourceResult_CriticalitySources = ResourceResult.AddMember("CriticalitySources", _CriticalitySourceList)
 
 	_Resources_member = _Resources.AddMember("member", ResourceResult)
 

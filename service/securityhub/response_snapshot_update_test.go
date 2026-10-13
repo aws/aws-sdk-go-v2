@@ -3583,6 +3583,9 @@ func TestUpdateResponseSnapshot_GetAutomationRuleV2(t *testing.T) {
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
 				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
+				},
 			},
 			{
 				Type: types.AutomationRulesActionTypeV2("FINDING_FIELDS_UPDATE"),
@@ -3593,6 +3596,9 @@ func TestUpdateResponseSnapshot_GetAutomationRuleV2(t *testing.T) {
 				},
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
+				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
 				},
 			},
 		},
@@ -9463,6 +9469,17 @@ func TestUpdateResponseSnapshot_GetResourcesV2(t *testing.T) {
 						SelfHostedTotalAIResourceCount:                 ptr.Int32(1),
 					},
 				},
+				ResourceCriticality: types.ResourceCriticality("Very High"),
+				CriticalitySources: []types.CriticalitySource{
+					{
+						Source: types.CriticalitySourceType("AutomationRule"),
+						Reason: ptr.String("__Reason__"),
+					},
+					{
+						Source: types.CriticalitySourceType("AutomationRule"),
+						Reason: ptr.String("__Reason__"),
+					},
+				},
 			},
 			{
 				ResourceGuid:                ptr.String("__ResourceGuid__"),
@@ -9538,6 +9555,17 @@ func TestUpdateResponseSnapshot_GetResourcesV2(t *testing.T) {
 						SelfHostedAIAgentFrameworkResourceCount:        ptr.Int32(1),
 						SelfHostedAIAgentToolsAndIdentityResourceCount: ptr.Int32(1),
 						SelfHostedTotalAIResourceCount:                 ptr.Int32(1),
+					},
+				},
+				ResourceCriticality: types.ResourceCriticality("Very High"),
+				CriticalitySources: []types.CriticalitySource{
+					{
+						Source: types.CriticalitySourceType("AutomationRule"),
+						Reason: ptr.String("__Reason__"),
+					},
+					{
+						Source: types.CriticalitySourceType("AutomationRule"),
+						Reason: ptr.String("__Reason__"),
 					},
 				},
 			},

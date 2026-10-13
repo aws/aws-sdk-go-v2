@@ -5838,6 +5838,185 @@ func (v *ContactFlow) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains information about a flow alias.
+type ContactFlowAliasInfo struct {
+
+	// The identifier of the alias.
+	AliasId *string
+
+	// The Amazon Resource Name (ARN) of the flow.
+	ContactFlowArn *string
+
+	// The identifier of the flow.
+	ContactFlowId *string
+
+	// The description of the alias.
+	Description *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the alias.
+	Name *string
+
+	// The version of the flow.
+	Version *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContactFlowAliasInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactFlowAliasInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactFlowAliasInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasId != nil {
+		s.WriteString(schemas.ContactFlowAliasInfo_AliasId, *v.AliasId)
+	}
+	if v.ContactFlowArn != nil {
+		s.WriteString(schemas.ContactFlowAliasInfo_ContactFlowArn, *v.ContactFlowArn)
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.ContactFlowAliasInfo_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ContactFlowAliasInfo_Description, *v.Description)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ContactFlowAliasInfo_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ContactFlowAliasInfo_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ContactFlowAliasInfo_Name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.ContactFlowAliasInfo_Version, *v.Version)
+	}
+}
+func (v *ContactFlowAliasInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactFlowAliasInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactFlowAliasInfo_AliasId:
+			v.AliasId = new(string)
+			return d.ReadString(schemas.ContactFlowAliasInfo_AliasId, v.AliasId)
+		case schemas.ContactFlowAliasInfo_ContactFlowArn:
+			v.ContactFlowArn = new(string)
+			return d.ReadString(schemas.ContactFlowAliasInfo_ContactFlowArn, v.ContactFlowArn)
+		case schemas.ContactFlowAliasInfo_ContactFlowId:
+			v.ContactFlowId = new(string)
+			return d.ReadString(schemas.ContactFlowAliasInfo_ContactFlowId, v.ContactFlowId)
+		case schemas.ContactFlowAliasInfo_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ContactFlowAliasInfo_Description, v.Description)
+		case schemas.ContactFlowAliasInfo_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ContactFlowAliasInfo_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ContactFlowAliasInfo_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ContactFlowAliasInfo_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ContactFlowAliasInfo_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ContactFlowAliasInfo_Name, v.Name)
+		case schemas.ContactFlowAliasInfo_Version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.ContactFlowAliasInfo_Version, v.Version)
+		}
+		return nil
+	})
+}
+
+// Contains summary information about a flow alias.
+type ContactFlowAliasSummary struct {
+
+	// The description of the alias.
+	AliasDescription *string
+
+	// The identifier of the alias.
+	AliasId *string
+
+	// The name of the alias.
+	AliasName *string
+
+	// The Amazon Resource Name (ARN) of the flow alias.
+	Arn *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
+
+	// The version of the flow.
+	Version *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContactFlowAliasSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactFlowAliasSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactFlowAliasSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasDescription != nil {
+		s.WriteString(schemas.ContactFlowAliasSummary_AliasDescription, *v.AliasDescription)
+	}
+	if v.AliasId != nil {
+		s.WriteString(schemas.ContactFlowAliasSummary_AliasId, *v.AliasId)
+	}
+	if v.AliasName != nil {
+		s.WriteString(schemas.ContactFlowAliasSummary_AliasName, *v.AliasName)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ContactFlowAliasSummary_Arn, *v.Arn)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ContactFlowAliasSummary_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ContactFlowAliasSummary_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.ContactFlowAliasSummary_Version, *v.Version)
+	}
+}
+func (v *ContactFlowAliasSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactFlowAliasSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactFlowAliasSummary_AliasDescription:
+			v.AliasDescription = new(string)
+			return d.ReadString(schemas.ContactFlowAliasSummary_AliasDescription, v.AliasDescription)
+		case schemas.ContactFlowAliasSummary_AliasId:
+			v.AliasId = new(string)
+			return d.ReadString(schemas.ContactFlowAliasSummary_AliasId, v.AliasId)
+		case schemas.ContactFlowAliasSummary_AliasName:
+			v.AliasName = new(string)
+			return d.ReadString(schemas.ContactFlowAliasSummary_AliasName, v.AliasName)
+		case schemas.ContactFlowAliasSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ContactFlowAliasSummary_Arn, v.Arn)
+		case schemas.ContactFlowAliasSummary_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ContactFlowAliasSummary_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ContactFlowAliasSummary_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ContactFlowAliasSummary_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ContactFlowAliasSummary_Version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.ContactFlowAliasSummary_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // A list of conditions which would be applied together with an AND condition.
 type ContactFlowAttributeAndCondition struct {
 
@@ -6741,8 +6920,14 @@ func (v *ContactFlowTypeCondition) Deserialize(d smithy.ShapeDeserializer) error
 // A summary of a flow version's metadata.
 type ContactFlowVersionSummary struct {
 
-	// The Amazon Resource Name (ARN) of the view version.
+	// The Amazon Resource Name (ARN) of the flow version.
 	Arn *string
+
+	// The Amazon Web Services Region where this resource was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when this resource was last modified.
+	LastModifiedTime *time.Time
 
 	// The identifier of the flow version.
 	Version *int64
@@ -6763,6 +6948,12 @@ func (v *ContactFlowVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.ContactFlowVersionSummary_Arn, *v.Arn)
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ContactFlowVersionSummary_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ContactFlowVersionSummary_LastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.Version != nil {
 		s.WriteInt64(schemas.ContactFlowVersionSummary_Version, *v.Version)
 	}
@@ -6776,6 +6967,12 @@ func (v *ContactFlowVersionSummary) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.ContactFlowVersionSummary_Arn:
 			v.Arn = new(string)
 			return d.ReadString(schemas.ContactFlowVersionSummary_Arn, v.Arn)
+		case schemas.ContactFlowVersionSummary_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ContactFlowVersionSummary_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ContactFlowVersionSummary_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ContactFlowVersionSummary_LastModifiedTime, v.LastModifiedTime)
 		case schemas.ContactFlowVersionSummary_Version:
 			v.Version = new(int64)
 			return d.ReadInt64(schemas.ContactFlowVersionSummary_Version, v.Version)

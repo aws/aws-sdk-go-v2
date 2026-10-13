@@ -283,16 +283,20 @@ var _ArnOrUUID = smithy.NewSchema(smithy.ShapeID{
 var AuthConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "AuthConfig",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var AuthConfig_AuthType *smithy.Schema
 
 var AuthConfig_CredentialProviderIdentifier *smithy.Schema
 
+var AuthConfig_AudienceOverride *smithy.Schema
+
 var AuthType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "AuthType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var AuthType_API_KEY *smithy.Schema
+
+var AuthType_CONNECT_JWT *smithy.Schema
 
 var _Boolean = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
@@ -1310,9 +1314,13 @@ func init() {
 
 	AuthType_API_KEY = AuthType.AddMember("API_KEY", smithyprelude.Unit)
 
+	AuthType_CONNECT_JWT = AuthType.AddMember("CONNECT_JWT", smithyprelude.Unit)
+
 	AuthConfig_AuthType = AuthConfig.AddMember("AuthType", AuthType)
 
 	AuthConfig_CredentialProviderIdentifier = AuthConfig.AddMember("CredentialProviderIdentifier", _Arn)
+
+	AuthConfig_AudienceOverride = AuthConfig.AddMember("AudienceOverride", _Identifier)
 
 	_ClientAssociationMetadata_key = _ClientAssociationMetadata.AddMember("key", _NonBlankString)
 

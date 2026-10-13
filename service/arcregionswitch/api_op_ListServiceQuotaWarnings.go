@@ -17,11 +17,10 @@ import (
 // account in the plan.
 //
 // Returns the warnings for the plans that you own and for plans that are shared
-// with your account through AWS Resource Access Manager (AWS RAM). To return
-// warnings for specific plans, provide a list of plan Amazon Resource Names
-// (ARNs). Region switch ignores any plan ARN that you can't access. If you don't
-// provide any plan ARNs, Region switch returns the warnings for all of your
-// accessible plans.
+// with your account through Resource Access Manager (RAM). To return warnings for
+// specific plans, provide a list of plan Amazon Resource Names (ARNs). Region
+// switch ignores any plan ARN that you can't access. If you don't provide any plan
+// ARNs, Region switch returns the warnings for all of your accessible plans.
 func (c *Client) ListServiceQuotaWarnings(ctx context.Context, params *ListServiceQuotaWarningsInput, optFns ...func(*Options)) (*ListServiceQuotaWarningsOutput, error) {
 	if params == nil {
 		params = &ListServiceQuotaWarningsInput{}

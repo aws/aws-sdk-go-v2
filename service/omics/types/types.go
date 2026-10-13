@@ -1451,14 +1451,30 @@ type ReferenceStoreFilter struct {
 // pulled and synchronized.
 type RegistryMapping struct {
 
-	// Account ID of the account that owns the upstream container image.
-	EcrAccountId *string
-
 	// The repository prefix to use in the ECR private repository.
+	//
+	// This member is required.
 	EcrRepositoryPrefix *string
 
 	// The URI of the upstream registry.
+	//
+	// This member is required.
 	UpstreamRegistryUrl *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret that holds the credentials for the upstream registry. You must specify
+	// this value when Amazon Elastic Container Registry (Amazon ECR) doesn't support
+	// pull through cache for the upstream registry. HealthOmics supports only some of
+	// these registries. The workflow role must have permission to call the
+	// secretsmanager:GetSecretValue operation on the secret. For more information
+	// about the supported registries, see [Container images]in the Amazon Web Services HealthOmics User
+	// Guide.
+	//
+	// [Container images]: https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html
+	CredentialArn *string
+
+	// Account ID of the account that owns the upstream container image.
+	EcrAccountId *string
 
 	// The repository prefix of the corresponding repository in the upstream registry.
 	UpstreamRepositoryPrefix *string

@@ -1428,6 +1428,30 @@ func serializeClarifyLabelHeaders(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.CloseList()
 }
 
+func serializeCleanupFailureList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CleanupFailure) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeCleanupStepNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeClusterAvailabilityZones(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
@@ -5832,6 +5856,34 @@ func deserializeClarifyFeatureTypes(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeClarifyLabelHeaders(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCleanupFailureList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CleanupFailure) error {
+	*v = make([]CleanupFailure, 0)
+	var vv CleanupFailure
+	return smithy.ReadList(d, s, func() error {
+		vv = CleanupFailure{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCleanupStepNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {

@@ -1,0 +1,8 @@
+{
+    "id": "d67e7f8c-e9c4-4a88-b4f3-9d719012e113",
+    "type": "feature",
+    "description": "New APIs to support aliases and versions for ContactFlow.",
+    "modules": [
+        "service/connect"
+    ]
+}

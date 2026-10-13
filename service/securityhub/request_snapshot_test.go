@@ -4630,6 +4630,9 @@ func TestCheckRequestSnapshot_CreateAutomationRuleV2(t *testing.T) {
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
 				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
+				},
 			},
 			{
 				Type: types.AutomationRulesActionTypeV2("FINDING_FIELDS_UPDATE"),
@@ -4640,6 +4643,9 @@ func TestCheckRequestSnapshot_CreateAutomationRuleV2(t *testing.T) {
 				},
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
+				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
 				},
 			},
 		},
@@ -11903,6 +11909,9 @@ func TestCheckRequestSnapshot_UpdateAutomationRuleV2(t *testing.T) {
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
 				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
+				},
 			},
 			{
 				Type: types.AutomationRulesActionTypeV2("FINDING_FIELDS_UPDATE"),
@@ -11913,6 +11922,9 @@ func TestCheckRequestSnapshot_UpdateAutomationRuleV2(t *testing.T) {
 				},
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
+				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
 				},
 			},
 		},
@@ -19197,6 +19209,9 @@ func TestUpdateRequestSnapshot_CreateAutomationRuleV2(t *testing.T) {
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
 				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
+				},
 			},
 			{
 				Type: types.AutomationRulesActionTypeV2("FINDING_FIELDS_UPDATE"),
@@ -19207,6 +19222,9 @@ func TestUpdateRequestSnapshot_CreateAutomationRuleV2(t *testing.T) {
 				},
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
+				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
 				},
 			},
 		},
@@ -26470,6 +26488,9 @@ func TestUpdateRequestSnapshot_UpdateAutomationRuleV2(t *testing.T) {
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
 				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
+				},
 			},
 			{
 				Type: types.AutomationRulesActionTypeV2("FINDING_FIELDS_UPDATE"),
@@ -26480,6 +26501,9 @@ func TestUpdateRequestSnapshot_UpdateAutomationRuleV2(t *testing.T) {
 				},
 				ExternalIntegrationConfiguration: &types.ExternalIntegrationConfiguration{
 					ConnectorArn: ptr.String("__ConnectorArn__"),
+				},
+				ResourceFieldsUpdate: &types.AutomationRulesResourceFieldsUpdateV2{
+					Criticality: types.ResourceCriticality("Very High"),
 				},
 			},
 		},

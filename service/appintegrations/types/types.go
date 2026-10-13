@@ -225,15 +225,31 @@ func (v *ApplicationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // Contains the authentication settings that Connect Customer uses to call an
-// external application endpoint. The configuration includes the authentication
-// type and credential location.
+// external application endpoint.
 type AuthConfig struct {
 
-	// The type of authentication used when calling the external application.
+	// The value that Connect Customer uses as the audience ( aud ) claim of the JSON
+	// Web Token (JWT) that it issues. You can specify this parameter only when
+	// AuthType is CONNECT_JWT . If you don't specify it, the audience is the AccessUrl
+	// of the application. The value can't contain connect.amazonaws.com .
+	AudienceOverride *string
+
+	// The type of authentication that Connect Customer uses to call the external
+	// application endpoint. You must specify an authentication type for A2A_SERVER
+	// applications. Valid values:
+	//
+	//   - API_KEY : Connect Customer sends an API key that is stored in the Secrets
+	//   Manager secret that you specify in CredentialProviderIdentifier .
+	//
+	//   - CONNECT_JWT : Connect Customer issues a short-lived, signed JSON Web Token
+	//   (JWT). This authentication type doesn't require a stored credential.
 	AuthType AuthType
 
 	// The ARN of the Secrets Manager secret that stores the credentials. The secret
 	// must be accessible to Connect Customer.
+	//
+	// You must specify this ARN when AuthType is API_KEY . Don't specify it when
+	// AuthType is CONNECT_JWT .
 	CredentialProviderIdentifier *string
 
 	noSmithyDocumentSerde
@@ -246,6 +262,9 @@ func (v *AuthConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuthConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudienceOverride != nil {
+		s.WriteString(schemas.AuthConfig_AudienceOverride, *v.AudienceOverride)
+	}
 	if v.AuthType != "" {
 		s.WriteString(schemas.AuthConfig_AuthType, string(v.AuthType))
 	}
@@ -256,6 +275,9 @@ func (v *AuthConfig) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *AuthConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AuthConfig, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.AuthConfig_AudienceOverride:
+			v.AudienceOverride = new(string)
+			return d.ReadString(schemas.AuthConfig_AudienceOverride, v.AudienceOverride)
 		case schemas.AuthConfig_AuthType:
 			var ev string
 			if err := d.ReadString(schemas.AuthConfig_AuthType, &ev); err != nil {

@@ -100,6 +100,21 @@ type CatalogResource struct {
 	noSmithyDocumentSerde
 }
 
+// A column in a table that a row-level security policy's filter expression can
+// reference.
+type Column struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	Name *string
+
+	// The data type of the column.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // A structure containing the name of a column resource and the LF-tags attached
 // to it.
 type ColumnLFTag struct {
@@ -795,6 +810,10 @@ type Resource struct {
 	// resource's LF-tag policy.
 	LFTagPolicy *LFTagPolicyResource
 
+	// A row-level security policy resource. Specify this when granting or revoking
+	// permissions on a row-level security policy.
+	RLSPolicy *RLSPolicyResource
+
 	// The table for the resource. A table is a metadata definition that represents
 	// your data. You can Grant and Revoke table privileges to a principal.
 	Table *TableResource
@@ -846,6 +865,71 @@ type ResourceInfo struct {
 	// Grants the calling principal the permissions to perform all supported Lake
 	// Formation operations on the registered data location.
 	WithPrivilegedAccess *bool
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes a row-level security policy, including the columns
+// its filter expression references and the filter expression itself.
+type RLSPolicy struct {
+
+	// The list of columns that the filter expression references.
+	AttachmentColumns []Column
+
+	// The identifier for the Data Catalog that contains the policy. By default, the
+	// account ID.
+	CatalogId *string
+
+	// The filter predicate, written in a SQL-like syntax, that determines which rows
+	// are returned to the principal.
+	FilterExpression *string
+
+	// The name of the row-level security policy.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that describes the attachment of a row-level security policy to a
+// resource for a principal.
+type RLSPolicyAttachment struct {
+
+	// The identifier for the Data Catalog that contains the attachment. By default,
+	// the account ID.
+	CatalogId *string
+
+	// A Lake Formation condition, which applies to the row-level security policy
+	// attachment and contains an expression.
+	Condition *Condition
+
+	// Indicates whether this attachment is the default row-level security policy for
+	// the resource.
+	DefaultRLSPolicy *bool
+
+	// The name of the attached row-level security policy.
+	PolicyName *string
+
+	// The principal to which the attached policy applies.
+	Principal *DataLakePrincipal
+
+	// The resource to which the policy is attached.
+	Resource *Resource
+
+	noSmithyDocumentSerde
+}
+
+// A structure that identifies a row-level security policy as a resource, used
+// when granting permissions on the policy.
+type RLSPolicyResource struct {
+
+	// The name of the row-level security policy.
+	//
+	// This member is required.
+	Name *string
+
+	// The identifier for the Data Catalog that contains the policy. By default, the
+	// account ID.
+	CatalogId *string
 
 	noSmithyDocumentSerde
 }

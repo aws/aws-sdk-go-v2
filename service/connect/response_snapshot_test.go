@@ -1853,6 +1853,34 @@ func TestCheckResponseSnapshot_CreateContactFlow(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateContactFlowAlias(t *testing.T) {
+	want := &CreateContactFlowAliasOutput{
+		ContactFlowArn: ptr.String("__ContactFlowArn__"),
+		Id:             ptr.String("__Id__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateContactFlowAlias.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateContactFlowAlias(context.Background(), &CreateContactFlowAliasInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		Description:        ptr.String("__Description__"),
+		ContactFlowId:      ptr.String("__ContactFlowId__"),
+		ContactFlowVersion: ptr.Int64(1),
+		AliasName:          ptr.String("__AliasName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateContactFlowAlias.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateContactFlowModule(t *testing.T) {
 	want := &CreateContactFlowModuleOutput{
 		Id:  ptr.String("__Id__"),
@@ -4696,6 +4724,29 @@ func TestCheckResponseSnapshot_DeleteContactFlow(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteContactFlowAlias(t *testing.T) {
+	want := &DeleteContactFlowAliasOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteContactFlowAlias.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteContactFlowAlias(context.Background(), &DeleteContactFlowAliasInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		AliasId:       ptr.String("__AliasId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteContactFlowAlias.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteContactFlowModule(t *testing.T) {
 	want := &DeleteContactFlowModuleOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteContactFlowModule.response")
@@ -6867,6 +6918,40 @@ func TestCheckResponseSnapshot_DescribeContactFlow(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeContactFlow.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeContactFlowAlias(t *testing.T) {
+	want := &DescribeContactFlowAliasOutput{
+		ContactFlowAlias: &types.ContactFlowAliasInfo{
+			ContactFlowId:      ptr.String("__ContactFlowId__"),
+			ContactFlowArn:     ptr.String("__ContactFlowArn__"),
+			AliasId:            ptr.String("__AliasId__"),
+			Version:            ptr.Int64(1),
+			Name:               ptr.String("__Name__"),
+			Description:        ptr.String("__Description__"),
+			LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeContactFlowAlias.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeContactFlowAlias(context.Background(), &DescribeContactFlowAliasInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		AliasId:       ptr.String("__AliasId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeContactFlowAlias.response", err)
 	}
 }
 
@@ -12134,6 +12219,52 @@ func TestCheckResponseSnapshot_ListContactEvaluations(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListContactFlowAliases(t *testing.T) {
+	want := &ListContactFlowAliasesOutput{
+		ContactFlowAliasSummaryList: []types.ContactFlowAliasSummary{
+			{
+				Arn:                ptr.String("__Arn__"),
+				AliasId:            ptr.String("__AliasId__"),
+				Version:            ptr.Int64(1),
+				AliasName:          ptr.String("__AliasName__"),
+				AliasDescription:   ptr.String("__AliasDescription__"),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			},
+			{
+				Arn:                ptr.String("__Arn__"),
+				AliasId:            ptr.String("__AliasId__"),
+				Version:            ptr.Int64(1),
+				AliasName:          ptr.String("__AliasName__"),
+				AliasDescription:   ptr.String("__AliasDescription__"),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListContactFlowAliases.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListContactFlowAliases(context.Background(), &ListContactFlowAliasesInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListContactFlowAliases.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListContactFlowModuleAliases(t *testing.T) {
 	want := &ListContactFlowModuleAliasesOutput{
 		ContactFlowModuleAliasSummaryList: []types.ContactFlowModuleAliasSummary{
@@ -12263,11 +12394,15 @@ func TestCheckResponseSnapshot_ListContactFlowVersions(t *testing.T) {
 				Arn:                ptr.String("__Arn__"),
 				VersionDescription: ptr.String("__VersionDescription__"),
 				Version:            ptr.Int64(1),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 			},
 			{
 				Arn:                ptr.String("__Arn__"),
 				VersionDescription: ptr.String("__VersionDescription__"),
 				Version:            ptr.Int64(1),
+				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -21652,6 +21787,32 @@ func TestCheckResponseSnapshot_UpdateContactEvaluation(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateContactEvaluation.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateContactFlowAlias(t *testing.T) {
+	want := &UpdateContactFlowAliasOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateContactFlowAlias.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateContactFlowAlias(context.Background(), &UpdateContactFlowAliasInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		ContactFlowId:      ptr.String("__ContactFlowId__"),
+		AliasId:            ptr.String("__AliasId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		ContactFlowVersion: ptr.Int64(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateContactFlowAlias.response", err)
 	}
 }
 

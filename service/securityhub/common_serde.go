@@ -72,6 +72,12 @@ func serializeCriteria(s smithy.ShapeSerializer, schema *smithy.Schema, v types.
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *types.CriteriaMemberResourceCriteria:
+		s.WriteUnion(schema, schemas.Criteria_ResourceCriteria)
+		s.WriteStruct(schemas.Criteria_ResourceCriteria)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	}
 }
 
@@ -331,6 +337,10 @@ func deserializeCriteria(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.
 		switch ms {
 		case schemas.Criteria_OcsfFindingCriteria:
 			vv := &types.CriteriaMemberOcsfFindingCriteria{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.Criteria_ResourceCriteria:
+			vv := &types.CriteriaMemberResourceCriteria{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -2918,6 +2928,19 @@ func serializeConfigurationPolicySummaryList(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeConnectorSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ConnectorSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeCriticalitySourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CriticalitySource) {
 	if v == nil {
 		return
 	}
@@ -7300,6 +7323,20 @@ func deserializeConnectorSummaryList(d smithy.ShapeDeserializer, s *smithy.Schem
 	var vv types.ConnectorSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ConnectorSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCriticalitySourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CriticalitySource) error {
+	*v = make([]types.CriticalitySource, 0)
+	var vv types.CriticalitySource
+	return smithy.ReadList(d, s, func() error {
+		vv = types.CriticalitySource{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

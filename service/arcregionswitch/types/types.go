@@ -1456,6 +1456,7 @@ func (v *ExecutionApprovalConfiguration) Deserialize(d smithy.ShapeDeserializer)
 //	ExecutionBlockConfigurationMemberRdsSwitchoverReadReplicaConfig
 //	ExecutionBlockConfigurationMemberRegionSwitchPlanConfig
 //	ExecutionBlockConfigurationMemberRoute53HealthCheckConfig
+//	ExecutionBlockConfigurationMemberSsmSendCommandConfig
 type ExecutionBlockConfiguration interface {
 	isExecutionBlockConfiguration()
 }
@@ -1772,6 +1773,23 @@ func (v *ExecutionBlockConfigurationMemberRoute53HealthCheckConfig) Serialize(s 
 	s.CloseStruct()
 }
 func (v *ExecutionBlockConfigurationMemberRoute53HealthCheckConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Specifies an AWS Systems Manager SendCommand execution block.
+type ExecutionBlockConfigurationMemberSsmSendCommandConfig struct {
+	Value SsmSendCommandConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberSsmSendCommandConfig) isExecutionBlockConfiguration() {}
+func (v *ExecutionBlockConfigurationMemberSsmSendCommandConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionBlockConfiguration_ssmSendCommandConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExecutionBlockConfigurationMemberSsmSendCommandConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -3714,6 +3732,233 @@ func (v *ServiceQuotaWarningSummary) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.ServiceQuotaWarningSummary_warningMessage:
 			v.WarningMessage = new(string)
 			return d.ReadString(schemas.ServiceQuotaWarningSummary_warningMessage, v.WarningMessage)
+		}
+		return nil
+	})
+}
+
+// The Systems Manager document to run and the managed nodes to target for a
+// single Amazon Web Services Region.
+type SsmDocumentConfig struct {
+
+	// The Amazon Resource Name (ARN) of the Systems Manager document to run.
+	//
+	// This member is required.
+	DocumentArn *string
+
+	// The target filters that Systems Manager resolves to managed nodes when the
+	// command runs. To target specific managed nodes, use the InstanceIds key. You
+	// can specify up to five target filters.
+	//
+	// This member is required.
+	Targets []SsmTarget
+
+	// The cross-account role for the configuration.
+	CrossAccountRole *string
+
+	// The version of the Systems Manager document to run for this Region. When you
+	// omit it, Systems Manager runs the document's default version.
+	DocumentVersion *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
+
+	// The parameters that are passed to this Region's Systems Manager document. You
+	// set parameters for each document, so each Region can run its document with its
+	// own parameters.
+	Parameters map[string][]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SsmDocumentConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SsmDocumentConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SsmDocumentConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccountRole != nil {
+		s.WriteString(schemas.SsmDocumentConfig_crossAccountRole, *v.CrossAccountRole)
+	}
+	if v.DocumentArn != nil {
+		s.WriteString(schemas.SsmDocumentConfig_documentArn, *v.DocumentArn)
+	}
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.SsmDocumentConfig_documentVersion, *v.DocumentVersion)
+	}
+	if v.ExternalId != nil {
+		s.WriteString(schemas.SsmDocumentConfig_externalId, *v.ExternalId)
+	}
+	serializeSsmDocumentParameters(s, schemas.SsmDocumentConfig_parameters, v.Parameters)
+	serializeSsmTargetList(s, schemas.SsmDocumentConfig_targets, v.Targets)
+}
+func (v *SsmDocumentConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SsmDocumentConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SsmDocumentConfig_crossAccountRole:
+			v.CrossAccountRole = new(string)
+			return d.ReadString(schemas.SsmDocumentConfig_crossAccountRole, v.CrossAccountRole)
+		case schemas.SsmDocumentConfig_documentArn:
+			v.DocumentArn = new(string)
+			return d.ReadString(schemas.SsmDocumentConfig_documentArn, v.DocumentArn)
+		case schemas.SsmDocumentConfig_documentVersion:
+			v.DocumentVersion = new(string)
+			return d.ReadString(schemas.SsmDocumentConfig_documentVersion, v.DocumentVersion)
+		case schemas.SsmDocumentConfig_externalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.SsmDocumentConfig_externalId, v.ExternalId)
+		case schemas.SsmDocumentConfig_parameters:
+			return deserializeSsmDocumentParameters(d, schemas.SsmDocumentConfig_parameters, &v.Parameters)
+		case schemas.SsmDocumentConfig_targets:
+			return deserializeSsmTargetList(d, schemas.SsmDocumentConfig_targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
+// Configuration for an AWS Systems Manager SendCommand execution block in a
+// Region switch plan. This execution block runs a Systems Manager document on the
+// managed nodes that you target in each Amazon Web Services Region of the plan.
+type SsmSendCommandConfiguration struct {
+
+	// The Systems Manager document and target configuration for each Amazon Web
+	// Services Region in the plan. Provide an entry for each Amazon Web Services
+	// Region that you want the command to run in.
+	//
+	// This member is required.
+	RegionDocuments map[string]SsmDocumentConfig
+
+	// How often, in minutes, Region switch retries the command if it returns a
+	// failure.
+	//
+	// This member is required.
+	RetryIntervalMinutes *float32
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
+
+	// Specifies the settings that determine how the execution block behaves when the
+	// plan runs ungracefully, such as whether to skip the command.
+	Ungraceful *SsmSendCommandUngraceful
+
+	noSmithyDocumentSerde
+}
+
+func (v *SsmSendCommandConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SsmSendCommandConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SsmSendCommandConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegionSsmDocumentMap(s, schemas.SsmSendCommandConfiguration_regionDocuments, v.RegionDocuments)
+	if v.RetryIntervalMinutes != nil {
+		s.WriteFloat32(schemas.SsmSendCommandConfiguration_retryIntervalMinutes, *v.RetryIntervalMinutes)
+	}
+	if v.TimeoutMinutes != nil {
+		s.WriteInt32(schemas.SsmSendCommandConfiguration_timeoutMinutes, *v.TimeoutMinutes)
+	}
+	if v.Ungraceful != nil {
+		s.WriteStruct(schemas.SsmSendCommandConfiguration_ungraceful)
+		v.Ungraceful.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SsmSendCommandConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SsmSendCommandConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SsmSendCommandConfiguration_regionDocuments:
+			return deserializeRegionSsmDocumentMap(d, schemas.SsmSendCommandConfiguration_regionDocuments, &v.RegionDocuments)
+		case schemas.SsmSendCommandConfiguration_retryIntervalMinutes:
+			v.RetryIntervalMinutes = new(float32)
+			return d.ReadFloat32(schemas.SsmSendCommandConfiguration_retryIntervalMinutes, v.RetryIntervalMinutes)
+		case schemas.SsmSendCommandConfiguration_timeoutMinutes:
+			v.TimeoutMinutes = new(int32)
+			return d.ReadInt32(schemas.SsmSendCommandConfiguration_timeoutMinutes, v.TimeoutMinutes)
+		case schemas.SsmSendCommandConfiguration_ungraceful:
+			v.Ungraceful = &SsmSendCommandUngraceful{}
+			return v.Ungraceful.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The ungraceful execution settings for an AWS Systems Manager SendCommand
+// execution block.
+type SsmSendCommandUngraceful struct {
+
+	// Specifies whether to skip running this command during an ungraceful execution.
+	// Set to skip to skip the command.
+	Behavior SsmSendCommandUngracefulBehavior
+
+	noSmithyDocumentSerde
+}
+
+func (v *SsmSendCommandUngraceful) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SsmSendCommandUngraceful)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SsmSendCommandUngraceful) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Behavior != "" {
+		s.WriteString(schemas.SsmSendCommandUngraceful_behavior, string(v.Behavior))
+	}
+}
+func (v *SsmSendCommandUngraceful) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SsmSendCommandUngraceful, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SsmSendCommandUngraceful_behavior:
+			var ev string
+			if err := d.ReadString(schemas.SsmSendCommandUngraceful_behavior, &ev); err != nil {
+				return err
+			}
+			v.Behavior = SsmSendCommandUngracefulBehavior(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A single SendCommand target filter, consisting of a target key and the values
+// matched by that key.
+type SsmTarget struct {
+
+	// The target key, such as tag:Environment or InstanceIds .
+	//
+	// This member is required.
+	Key *string
+
+	// The values matched by this target key. Multiple values combine with a logical
+	// OR.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SsmTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SsmTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SsmTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.SsmTarget_key, *v.Key)
+	}
+	serializeSsmTargetValueList(s, schemas.SsmTarget_values, v.Values)
+}
+func (v *SsmTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SsmTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SsmTarget_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.SsmTarget_key, v.Key)
+		case schemas.SsmTarget_values:
+			return deserializeSsmTargetValueList(d, schemas.SsmTarget_values, &v.Values)
 		}
 		return nil
 	})

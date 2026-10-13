@@ -920,6 +920,7 @@ func TestCheckRequestSnapshot_CreateTask(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 		Excludes: []types.FilterRule{
 			{
@@ -1674,6 +1675,7 @@ func TestCheckRequestSnapshot_StartTaskExecution(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 		Includes: []types.FilterRule{
 			{
@@ -2364,6 +2366,7 @@ func TestCheckRequestSnapshot_UpdateTask(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 		Excludes: []types.FilterRule{
 			{
@@ -2472,6 +2475,7 @@ func TestCheckRequestSnapshot_UpdateTaskExecution(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -3211,6 +3215,7 @@ func TestUpdateRequestSnapshot_CreateTask(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 		Excludes: []types.FilterRule{
 			{
@@ -3965,6 +3970,7 @@ func TestUpdateRequestSnapshot_StartTaskExecution(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 		Includes: []types.FilterRule{
 			{
@@ -4655,6 +4661,7 @@ func TestUpdateRequestSnapshot_UpdateTask(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 		Excludes: []types.FilterRule{
 			{
@@ -4763,6 +4770,7 @@ func TestUpdateRequestSnapshot_UpdateTaskExecution(t *testing.T) {
 			TransferMode:                types.TransferMode("CHANGED"),
 			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
 			ObjectTags:                  types.ObjectTags("PRESERVE"),
+			ObjectMetadata:              types.ObjectMetadata("PRESERVE"),
 		},
 	}
 	body := &bytes.Buffer{}

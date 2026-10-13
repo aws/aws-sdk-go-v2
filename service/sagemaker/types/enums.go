@@ -2014,6 +2014,25 @@ func (ClarifyTextLanguage) Values() []ClarifyTextLanguage {
 	}
 }
 
+type CleanupFailureErrorCode string
+
+// Enum values for CleanupFailureErrorCode
+const (
+	CleanupFailureErrorCodeClientError     CleanupFailureErrorCode = "ClientError"
+	CleanupFailureErrorCodeInternalFailure CleanupFailureErrorCode = "InternalFailure"
+)
+
+// Values returns all known values for CleanupFailureErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CleanupFailureErrorCode) Values() []CleanupFailureErrorCode {
+	return []CleanupFailureErrorCode{
+		"ClientError",
+		"InternalFailure",
+	}
+}
+
 type ClusterAutoScalerType string
 
 // Enum values for ClusterAutoScalerType
@@ -3825,6 +3844,27 @@ func (FlowDefinitionStatus) Values() []FlowDefinitionStatus {
 		"Active",
 		"Failed",
 		"Deleting",
+	}
+}
+
+type ForEachStatus string
+
+// Enum values for ForEachStatus
+const (
+	ForEachStatusSucceeded ForEachStatus = "Succeeded"
+	ForEachStatusFailed    ForEachStatus = "Failed"
+	ForEachStatusStopped   ForEachStatus = "Stopped"
+)
+
+// Values returns all known values for ForEachStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ForEachStatus) Values() []ForEachStatus {
+	return []ForEachStatus{
+		"Succeeded",
+		"Failed",
+		"Stopped",
 	}
 }
 
@@ -7019,6 +7059,10 @@ const (
 	PipelineExecutionStatusStopped   PipelineExecutionStatus = "Stopped"
 	PipelineExecutionStatusFailed    PipelineExecutionStatus = "Failed"
 	PipelineExecutionStatusSucceeded PipelineExecutionStatus = "Succeeded"
+	// The pipeline completed all reachable work after one or more steps failed. Every
+	// failed step was handled by a scheduled downstream step whose trigger is Failed
+	// or Any .
+	PipelineExecutionStatusCompletedWithFailures PipelineExecutionStatus = "CompletedWithFailures"
 )
 
 // Values returns all known values for PipelineExecutionStatus. Note that this can
@@ -7032,6 +7076,7 @@ func (PipelineExecutionStatus) Values() []PipelineExecutionStatus {
 		"Stopped",
 		"Failed",
 		"Succeeded",
+		"CompletedWithFailures",
 	}
 }
 

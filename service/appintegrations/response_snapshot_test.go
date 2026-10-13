@@ -184,6 +184,7 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	})
 	if err != nil {
@@ -497,6 +498,7 @@ func TestCheckResponseSnapshot_GetApplication(t *testing.T) {
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetApplication.response")
@@ -1038,6 +1040,7 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	})
 	if err != nil {
@@ -1203,6 +1206,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	})
 	if opErr == nil {
@@ -1289,6 +1293,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	})
 	if opErr == nil {
@@ -1379,6 +1384,7 @@ func TestCheckResponseSnapshot_Error_DuplicateResourceException(t *testing.T) {
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	})
 	if opErr == nil {
@@ -1469,6 +1475,7 @@ func TestCheckResponseSnapshot_Error_InternalServiceError(t *testing.T) {
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	})
 	if opErr == nil {
@@ -1559,6 +1566,7 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	})
 	if opErr == nil {
@@ -1702,6 +1710,7 @@ func TestCheckResponseSnapshot_Error_ResourceQuotaExceededException(t *testing.T
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	})
 	if opErr == nil {
@@ -1792,6 +1801,7 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	})
 	if opErr == nil {
@@ -1882,6 +1892,7 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	})
 	if opErr == nil {

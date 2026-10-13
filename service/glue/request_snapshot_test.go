@@ -2321,7 +2321,8 @@ func TestCheckRequestSnapshot_CreateIntegration(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -11737,7 +11738,8 @@ func TestCheckRequestSnapshot_ModifyIntegration(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 		IntegrationName: ptr.String("__IntegrationName__"),
 	}
@@ -21385,7 +21387,8 @@ func TestUpdateRequestSnapshot_CreateIntegration(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -30801,7 +30804,8 @@ func TestUpdateRequestSnapshot_ModifyIntegration(t *testing.T) {
 			SourceProperties: map[string]string{
 				"key0": "__Value__",
 			},
-			ContinuousSync: ptr.Bool(true),
+			ContinuousSync:  ptr.Bool(true),
+			TargetNamespace: ptr.String("__TargetNamespace__"),
 		},
 		IntegrationName: ptr.String("__IntegrationName__"),
 	}

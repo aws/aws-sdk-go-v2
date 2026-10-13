@@ -1,0 +1,8 @@
+{
+    "id": "e8b91355-3cda-45fe-85a4-7b3a8d0c72dc",
+    "type": "feature",
+    "description": "Adds support for SSM Execution Block in Region switch plans",
+    "modules": [
+        "service/arcregionswitch"
+    ]
+}

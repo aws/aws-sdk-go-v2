@@ -1,0 +1,8 @@
+{
+    "id": "c58fed3f-7d8c-4d0f-9def-ee587bb65947",
+    "type": "feature",
+    "description": "Adds and updates APIs to support criticality. This feature allows customers to create automation rules to assign criticality to resources matching a criteria. With this release, resources and exposure findings will include the criticality.",
+    "modules": [
+        "service/securityhub"
+    ]
+}

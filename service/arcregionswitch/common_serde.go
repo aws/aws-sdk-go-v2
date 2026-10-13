@@ -118,6 +118,12 @@ func serializeExecutionBlockConfiguration(s smithy.ShapeSerializer, schema *smit
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *types.ExecutionBlockConfigurationMemberSsmSendCommandConfig:
+		s.WriteUnion(schema, schemas.ExecutionBlockConfiguration_ssmSendCommandConfig)
+		s.WriteStruct(schemas.ExecutionBlockConfiguration_ssmSendCommandConfig)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	}
 }
 
@@ -222,6 +228,10 @@ func deserializeExecutionBlockConfiguration(d smithy.ShapeDeserializer, s *smith
 			return vv.Deserialize(d)
 		case schemas.ExecutionBlockConfiguration_route53HealthCheckConfig:
 			vv := &types.ExecutionBlockConfigurationMemberRoute53HealthCheckConfig{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ExecutionBlockConfiguration_ssmSendCommandConfig:
+			vv := &types.ExecutionBlockConfigurationMemberSsmSendCommandConfig{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -499,6 +509,41 @@ func serializeServiceQuotaWarningSummaryList(s smithy.ShapeSerializer, schema *s
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSsmParameterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSsmTargetList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SsmTarget) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSsmTargetValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -859,6 +904,48 @@ func deserializeServiceQuotaWarningSummaryList(d smithy.ShapeDeserializer, s *sm
 	})
 }
 
+func deserializeSsmParameterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSsmTargetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SsmTarget) error {
+	*v = make([]types.SsmTarget, 0)
+	var vv types.SsmTarget
+	return smithy.ReadList(d, s, func() error {
+		vv = types.SsmTarget{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSsmTargetValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeSteps(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Step) error {
 	*v = make([]types.Step, 0)
 	var vv types.Step
@@ -1053,6 +1140,32 @@ func serializeRegionNeptuneClusterArnMap(s smithy.ShapeSerializer, schema *smith
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
 		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
+func serializeRegionSsmDocumentMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.SsmDocumentConfig) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteStruct(schema.MapValue())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseMap()
+}
+
+func serializeSsmDocumentParameters(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]string) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		serializeSsmParameterValues(s, schema.MapValue(), vv)
 	}
 	s.CloseMap()
 }
@@ -1255,6 +1368,50 @@ func deserializeRegionNeptuneClusterArnMap(d smithy.ShapeDeserializer, s *smithy
 		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeRegionSsmDocumentMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]types.SsmDocumentConfig) error {
+	*v = make(map[string]types.SsmDocumentConfig)
+	var vv types.SsmDocumentConfig
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SsmDocumentConfig
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = types.SsmDocumentConfig{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeSsmDocumentParameters(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string][]string) error {
+	*v = make(map[string][]string)
+	var vv []string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = nil
+		if err := deserializeSsmParameterValues(d, s.MapValue(), &vv); err != nil {
 			return err
 		}
 

@@ -270,6 +270,26 @@ func (m *validateOpGetDomainDetail) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDomainPrices struct {
+}
+
+func (*validateOpGetDomainPrices) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDomainPrices) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDomainPricesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDomainPricesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDomainSuggestions struct {
 }
 
@@ -640,6 +660,10 @@ func addOpEnableDomainTransferLockValidationMiddleware(stack *middleware.Stack) 
 
 func addOpGetDomainDetailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDomainDetail{}, middleware.After)
+}
+
+func addOpGetDomainPricesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDomainPrices{}, middleware.After)
 }
 
 func addOpGetDomainSuggestionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1068,6 +1092,21 @@ func validateOpGetDomainDetailInput(v *GetDomainDetailInput) error {
 	}
 }
 
+func validateOpGetDomainPricesInput(v *GetDomainPricesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDomainPricesInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDomainSuggestionsInput(v *GetDomainSuggestionsInput) error {
 	if v == nil {
 		return nil
@@ -1193,6 +1232,11 @@ func validateOpRegisterDomainInput(v *RegisterDomainInput) error {
 			invalidParams.AddNested("BillingContact", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Consent != nil {
+		if err := validateConsent(v.Consent); err != nil {
+			invalidParams.AddNested("Consent", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1222,6 +1266,11 @@ func validateOpRenewDomainInput(v *RenewDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RenewDomainInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Consent != nil {
+		if err := validateConsent(v.Consent); err != nil {
+			invalidParams.AddNested("Consent", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1297,6 +1346,11 @@ func validateOpTransferDomainInput(v *TransferDomainInput) error {
 	if v.BillingContact != nil {
 		if err := validateContactDetail(v.BillingContact); err != nil {
 			invalidParams.AddNested("BillingContact", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Consent != nil {
+		if err := validateConsent(v.Consent); err != nil {
+			invalidParams.AddNested("Consent", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

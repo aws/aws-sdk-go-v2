@@ -321,6 +321,97 @@ func (DependencyInsightsStatus) Values() []DependencyInsightsStatus {
 	}
 }
 
+type DevOpsAgentConfidence string
+
+// Enum values for DevOpsAgentConfidence
+const (
+	DevOpsAgentConfidenceHigh   DevOpsAgentConfidence = "HIGH"
+	DevOpsAgentConfidenceMedium DevOpsAgentConfidence = "MEDIUM"
+	DevOpsAgentConfidenceLow    DevOpsAgentConfidence = "LOW"
+)
+
+// Values returns all known values for DevOpsAgentConfidence. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DevOpsAgentConfidence) Values() []DevOpsAgentConfidence {
+	return []DevOpsAgentConfidence{
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+	}
+}
+
+type DevOpsAgentConnectionStatus string
+
+// Enum values for DevOpsAgentConnectionStatus
+const (
+	DevOpsAgentConnectionStatusConnecting   DevOpsAgentConnectionStatus = "CONNECTING"
+	DevOpsAgentConnectionStatusConnected    DevOpsAgentConnectionStatus = "CONNECTED"
+	DevOpsAgentConnectionStatusDisconnected DevOpsAgentConnectionStatus = "DISCONNECTED"
+	DevOpsAgentConnectionStatusFailed       DevOpsAgentConnectionStatus = "FAILED"
+)
+
+// Values returns all known values for DevOpsAgentConnectionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DevOpsAgentConnectionStatus) Values() []DevOpsAgentConnectionStatus {
+	return []DevOpsAgentConnectionStatus{
+		"CONNECTING",
+		"CONNECTED",
+		"DISCONNECTED",
+		"FAILED",
+	}
+}
+
+type DevOpsAgentInvestigationStatus string
+
+// Enum values for DevOpsAgentInvestigationStatus
+const (
+	DevOpsAgentInvestigationStatusPending    DevOpsAgentInvestigationStatus = "PENDING"
+	DevOpsAgentInvestigationStatusInProgress DevOpsAgentInvestigationStatus = "IN_PROGRESS"
+	DevOpsAgentInvestigationStatusCompleted  DevOpsAgentInvestigationStatus = "COMPLETED"
+	DevOpsAgentInvestigationStatusFailed     DevOpsAgentInvestigationStatus = "FAILED"
+	DevOpsAgentInvestigationStatusTimedOut   DevOpsAgentInvestigationStatus = "TIMED_OUT"
+	DevOpsAgentInvestigationStatusCanceled   DevOpsAgentInvestigationStatus = "CANCELED"
+)
+
+// Values returns all known values for DevOpsAgentInvestigationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DevOpsAgentInvestigationStatus) Values() []DevOpsAgentInvestigationStatus {
+	return []DevOpsAgentInvestigationStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"TIMED_OUT",
+		"CANCELED",
+	}
+}
+
+type DevOpsAgentVerdict string
+
+// Enum values for DevOpsAgentVerdict
+const (
+	DevOpsAgentVerdictPass DevOpsAgentVerdict = "PASS"
+	DevOpsAgentVerdictFail DevOpsAgentVerdict = "FAIL"
+)
+
+// Values returns all known values for DevOpsAgentVerdict. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DevOpsAgentVerdict) Values() []DevOpsAgentVerdict {
+	return []DevOpsAgentVerdict{
+		"PASS",
+		"FAIL",
+	}
+}
+
 type EksLabelSelectorOperator string
 
 // Enum values for EksLabelSelectorOperator

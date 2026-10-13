@@ -1692,6 +1692,37 @@ func TestCheckRequestSnapshot_CreateContactFlow(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateContactFlowAlias(t *testing.T) {
+	input := &CreateContactFlowAliasInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		Description:        ptr.String("__Description__"),
+		ContactFlowId:      ptr.String("__ContactFlowId__"),
+		ContactFlowVersion: ptr.Int64(1),
+		AliasName:          ptr.String("__AliasName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateContactFlowAlias"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateContactFlowModule(t *testing.T) {
 	input := &CreateContactFlowModuleInput{
 		InstanceId:  ptr.String("__InstanceId__"),
@@ -4618,6 +4649,35 @@ func TestCheckRequestSnapshot_DeleteContactFlow(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteContactFlowAlias(t *testing.T) {
+	input := &DeleteContactFlowAliasInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		AliasId:       ptr.String("__AliasId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteContactFlowAlias"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteContactFlowModule(t *testing.T) {
 	input := &DeleteContactFlowModuleInput{
 		InstanceId:          ptr.String("__InstanceId__"),
@@ -5800,6 +5860,35 @@ func TestCheckRequestSnapshot_DescribeContactFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeContactFlow"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeContactFlowAlias(t *testing.T) {
+	input := &DescribeContactFlowAliasInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		AliasId:       ptr.String("__AliasId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeContactFlowAlias"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8377,6 +8466,36 @@ func TestCheckRequestSnapshot_ListContactEvaluations(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContactEvaluations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListContactFlowAliases(t *testing.T) {
+	input := &ListContactFlowAliasesInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContactFlowAliases(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContactFlowAliases"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -14949,6 +15068,38 @@ func TestCheckRequestSnapshot_UpdateContactEvaluation(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateContactFlowAlias(t *testing.T) {
+	input := &UpdateContactFlowAliasInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		ContactFlowId:      ptr.String("__ContactFlowId__"),
+		AliasId:            ptr.String("__AliasId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		ContactFlowVersion: ptr.Int64(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateContactFlowAlias"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateContactFlowContent(t *testing.T) {
 	input := &UpdateContactFlowContentInput{
 		InstanceId:    ptr.String("__InstanceId__"),
@@ -20086,6 +20237,37 @@ func TestUpdateRequestSnapshot_CreateContactFlow(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateContactFlowAlias(t *testing.T) {
+	input := &CreateContactFlowAliasInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		Description:        ptr.String("__Description__"),
+		ContactFlowId:      ptr.String("__ContactFlowId__"),
+		ContactFlowVersion: ptr.Int64(1),
+		AliasName:          ptr.String("__AliasName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateContactFlowAlias"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateContactFlowModule(t *testing.T) {
 	input := &CreateContactFlowModuleInput{
 		InstanceId:  ptr.String("__InstanceId__"),
@@ -23012,6 +23194,35 @@ func TestUpdateRequestSnapshot_DeleteContactFlow(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteContactFlowAlias(t *testing.T) {
+	input := &DeleteContactFlowAliasInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		AliasId:       ptr.String("__AliasId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteContactFlowAlias"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteContactFlowModule(t *testing.T) {
 	input := &DeleteContactFlowModuleInput{
 		InstanceId:          ptr.String("__InstanceId__"),
@@ -24194,6 +24405,35 @@ func TestUpdateRequestSnapshot_DescribeContactFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeContactFlow"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeContactFlowAlias(t *testing.T) {
+	input := &DescribeContactFlowAliasInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		AliasId:       ptr.String("__AliasId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeContactFlowAlias"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -26771,6 +27011,36 @@ func TestUpdateRequestSnapshot_ListContactEvaluations(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContactEvaluations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListContactFlowAliases(t *testing.T) {
+	input := &ListContactFlowAliasesInput{
+		InstanceId:    ptr.String("__InstanceId__"),
+		ContactFlowId: ptr.String("__ContactFlowId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContactFlowAliases(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContactFlowAliases"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -33339,6 +33609,38 @@ func TestUpdateRequestSnapshot_UpdateContactEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateContactEvaluation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateContactFlowAlias(t *testing.T) {
+	input := &UpdateContactFlowAliasInput{
+		InstanceId:         ptr.String("__InstanceId__"),
+		ContactFlowId:      ptr.String("__ContactFlowId__"),
+		AliasId:            ptr.String("__AliasId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		ContactFlowVersion: ptr.Int64(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateContactFlowAlias(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateContactFlowAlias"); err != nil {
 		t.Fatal(err)
 	}
 }

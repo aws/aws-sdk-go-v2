@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: Route53Domains_v20140515.GetDomainSuggestions
 
-{"DomainName":"__DomainName__","OnlyAvailable":true,"SuggestionCount":1}
+{"DomainName":"__DomainName__","OnlyAvailable":true,"OnlyStandardPrices":true,"SuggestionCount":1}

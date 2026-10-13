@@ -17684,6 +17684,19 @@ type IntegrationConfig struct {
 	// operations.
 	SourceProperties map[string]string
 
+	// An optional custom namespace for the integration's target. Supply this
+	// parameter only when the target is an Amazon S3 Tables table bucket; it is not
+	// accepted for other target types. The integration replicates data into the
+	// namespace you specify, reusing it if it already exists. If you omit this
+	// parameter, the target namespace defaults to zetl_ followed by the integration
+	// ID, with hyphens converted to underscores.
+	//
+	// The value is immutable after the integration is created; ModifyIntegration
+	// rejects changes to it. It must be a valid Amazon S3 Tables namespace name: 1 to
+	// 255 characters using lowercase letters, numbers, and underscores, with no
+	// leading or trailing underscore and no reserved aws prefix.
+	TargetNamespace *string
+
 	noSmithyDocumentSerde
 }
 
@@ -17701,6 +17714,9 @@ func (v *IntegrationConfig) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.IntegrationConfig_RefreshInterval, *v.RefreshInterval)
 	}
 	serializeIntegrationSourcePropertiesMap(s, schemas.IntegrationConfig_SourceProperties, v.SourceProperties)
+	if v.TargetNamespace != nil {
+		s.WriteString(schemas.IntegrationConfig_TargetNamespace, *v.TargetNamespace)
+	}
 }
 func (v *IntegrationConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IntegrationConfig, func(s *smithy.Schema) error {
@@ -17713,6 +17729,9 @@ func (v *IntegrationConfig) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.IntegrationConfig_RefreshInterval, v.RefreshInterval)
 		case schemas.IntegrationConfig_SourceProperties:
 			return deserializeIntegrationSourcePropertiesMap(d, schemas.IntegrationConfig_SourceProperties, &v.SourceProperties)
+		case schemas.IntegrationConfig_TargetNamespace:
+			v.TargetNamespace = new(string)
+			return d.ReadString(schemas.IntegrationConfig_TargetNamespace, v.TargetNamespace)
 		}
 		return nil
 	})

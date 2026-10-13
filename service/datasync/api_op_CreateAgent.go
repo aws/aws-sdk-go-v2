@@ -49,10 +49,23 @@ type CreateAgentInput struct {
 	// Specifies the Amazon Resource Name (ARN) of the security group that allows
 	// traffic between your agent and VPC service endpoint. You can only specify one
 	// ARN.
+	//
+	// The ARN must specify your own account, even when the security group was shared
+	// with you from the account that owns the VPC. The security group must belong to
+	// the same VPC as the subnet that you specify in SubnetArns .
 	SecurityGroupArns []string
 
-	// Specifies the ARN of the subnet where your VPC service endpoint is located. You
-	// can only specify one ARN.
+	// Specifies the ARN of the subnet where DataSync creates the [network interfaces] that handle data
+	// transfer traffic for your tasks. You can only specify one ARN.
+	//
+	// The subnet doesn't have to be the subnet that contains your VPC service
+	// endpoint. The subnet can be one that another Amazon Web Services account shared
+	// with you through [RAM], in which case the ARN must specify the account that owns the
+	// subnet. For more information, see [Using a single VPC service endpoint across multiple subnets].
+	//
+	// [network interfaces]: https://docs.aws.amazon.com/datasync/latest/userguide/required-network-interfaces.html
+	// [Using a single VPC service endpoint across multiple subnets]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#vpc-endpoint-multiple-subnets
+	// [RAM]: https://docs.aws.amazon.com/ram/latest/userguide/what-is.html
 	SubnetArns []string
 
 	// Specifies labels that help you categorize, filter, and search for your Amazon
@@ -65,7 +78,11 @@ type CreateAgentInput struct {
 	// The VPC service endpoint you use must include the DataSync service name (for
 	// example, com.amazonaws.us-east-2.datasync ).
 	//
+	// The endpoint ID is informational. DataSync doesn't verify it or use it to
+	// connect to your agent. For more information, see [Using a single VPC service endpoint across multiple subnets].
+	//
 	// [VPC service endpoint]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#datasync-in-vpc
+	// [Using a single VPC service endpoint across multiple subnets]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#vpc-endpoint-multiple-subnets
 	VpcEndpointId *string
 
 	noSmithyDocumentSerde

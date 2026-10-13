@@ -407,6 +407,7 @@ func TestUpdateResponseSnapshot_GetApplication(t *testing.T) {
 		AuthConfig: &types.AuthConfig{
 			AuthType:                     types.AuthType("API_KEY"),
 			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+			AudienceOverride:             ptr.String("__AudienceOverride__"),
 		},
 	}
 	proto := restjson1.New(schemas.AmazonAppIntegrationService)
