@@ -4811,6 +4811,26 @@
                 "smithy.api#documentation": "<p>The data storage format for Athena query results.</p>"
             }
         },
+        "com.amazonaws.sagemaker#AthenaStepMetadata": {
+            "type": "structure",
+            "members": {
+                "QueryExecutionId": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Athena query execution that was run by this step execution.</p>"
+                    }
+                },
+                "S3OutputLocation": {
+                    "target": "com.amazonaws.sagemaker#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the Amazon Athena query results. This is the effective output location reported by <code>GetQueryExecution</code> for the query. This value can be absent when the query uses Athena managed query results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The query execution identifier and the result output location for the Amazon Athena query that an Athena step runs.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#AthenaWorkGroup": {
             "type": "string",
             "traits": {
@@ -10093,6 +10113,102 @@
                     "traits": {
                         "smithy.api#enumValue": "xx"
                     }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CleanupFailure": {
+            "type": "structure",
+            "members": {
+                "StepName": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the upstream step whose Amazon S3 output resources the Cleanup step could not delete.</p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.sagemaker#CleanupFailureErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code that identifies why the Cleanup step could not delete the output resources associated with the upstream step.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.sagemaker#String2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing why the Cleanup step could not delete the output resources associated with the upstream step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 output resources associated with an upstream step that the Cleanup step could not delete.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CleanupFailureErrorCode": {
+            "type": "enum",
+            "members": {
+                "CLIENT_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ClientError"
+                    }
+                },
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalFailure"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of error that prevented the Cleanup step from deleting output resources. Valid values are:</p> <ul> <li> <p> <code>ClientError</code> indicates that the failure was caused by the request.</p> </li> <li> <p> <code>InternalFailure</code> indicates that the failure was caused by an internal error.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.sagemaker#CleanupFailureList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CleanupFailure"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CleanupStepMetadata": {
+            "type": "structure",
+            "members": {
+                "CleanedSteps": {
+                    "target": "com.amazonaws.sagemaker#CleanupStepNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of upstream steps whose Amazon S3 output resources the Cleanup step deleted successfully.</p>"
+                    }
+                },
+                "FailedSteps": {
+                    "target": "com.amazonaws.sagemaker#CleanupFailureList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upstream steps whose Amazon S3 output resources the Cleanup step could not delete.</p>"
+                    }
+                },
+                "SkippedSteps": {
+                    "target": "com.amazonaws.sagemaker#CleanupStepNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of upstream steps that the Cleanup step skipped. The Cleanup step skips a step when the output properties needed to locate its resources are unavailable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The cleanup outcomes for Amazon S3 output resources associated with upstream steps.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CleanupStepNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#String256"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
                 }
             }
         },
@@ -37681,6 +37797,58 @@
                 "smithy.api#documentation": "<p>The settings for assigning a custom Amazon EFS file system to a user profile or space for an Amazon SageMaker AI Domain.</p>"
             }
         },
+        "com.amazonaws.sagemaker#EMRServerlessApplicationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "[0-9a-z]+"
+            }
+        },
+        "com.amazonaws.sagemaker#EMRServerlessJobRunId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "[0-9a-z]+"
+            }
+        },
+        "com.amazonaws.sagemaker#EMRServerlessStepMetadata": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.sagemaker#EMRServerlessApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon EMR Serverless application.</p>"
+                    }
+                },
+                "JobRunId": {
+                    "target": "com.amazonaws.sagemaker#EMRServerlessJobRunId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon EMR Serverless job run.</p>"
+                    }
+                },
+                "JobRunName": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon EMR Serverless job run.</p>"
+                    }
+                },
+                "LogFilePath": {
+                    "target": "com.amazonaws.sagemaker#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the log file for the Amazon EMR Serverless job run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configurations and outcomes of an Amazon EMR Serverless step execution.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#EMRStepMetadata": {
             "type": "structure",
             "members": {
@@ -41073,6 +41241,102 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^[\\t\\n\\r -\\uD7FF\\uE000-\\uFFFD]*$"
+            }
+        },
+        "com.amazonaws.sagemaker#ForEachSelectorResult": {
+            "type": "structure",
+            "members": {
+                "StepName": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step associated with the iteration.</p>"
+                    }
+                },
+                "Index": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index of the iteration within the ForEach step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of the selector that identifies an iteration of a ForEach step.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ForEachStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Succeeded"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopped"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a ForEach step execution. Valid values are:</p> <ul> <li> <p> <code>Succeeded</code> indicates that the ForEach step execution completed successfully.</p> </li> <li> <p> <code>Failed</code> indicates that the ForEach step execution failed.</p> </li> <li> <p> <code>Stopped</code> indicates that the ForEach step execution was stopped.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.sagemaker#ForEachStepMetadata": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#ForEachStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the ForEach step execution.</p>"
+                    }
+                },
+                "InputItemCount": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of input items that the ForEach step iterates over.</p>"
+                    }
+                },
+                "TotalStepCount": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of steps generated across all iterations of the ForEach step.</p>"
+                    }
+                },
+                "SucceededStepCount": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of iteration steps that completed successfully.</p>"
+                    }
+                },
+                "FailedStepCount": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of iteration steps that failed.</p>"
+                    }
+                },
+                "StoppedStepCount": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of iteration steps that were stopped.</p>"
+                    }
+                },
+                "Selector": {
+                    "target": "com.amazonaws.sagemaker#ForEachSelectorResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the body step and iteration selected within the ForEach step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status, the iteration-step counts, and the selector information for a ForEach step execution.</p>"
             }
         },
         "com.amazonaws.sagemaker#ForecastFrequency": {
@@ -48000,6 +48264,32 @@
                     "min": 1,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#IterationContext": {
+            "type": "structure",
+            "members": {
+                "ParentStepName": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ForEach step that generated this iteration.</p>"
+                    }
+                },
+                "Index": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index of the iteration within the ForEach step.</p>"
+                    }
+                },
+                "Item": {
+                    "target": "com.amazonaws.sagemaker#String12800",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input item that is being processed in this iteration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The context for an iteration of a ForEach step.</p>"
             }
         },
         "com.amazonaws.sagemaker#JavaBoolean": {
@@ -67277,6 +67567,13 @@
                     "traits": {
                         "smithy.api#enumValue": "Succeeded"
                     }
+                },
+                "COMPLETED_WITH_FAILURES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pipeline completed all reachable work after one or more steps failed. Every failed step was handled by a scheduled downstream step whose trigger is <code>Failed</code> or <code>Any</code>.</p>",
+                        "smithy.api#enumValue": "CompletedWithFailures"
+                    }
                 }
             }
         },
@@ -67347,6 +67644,12 @@
                     "target": "com.amazonaws.sagemaker#SelectiveExecutionResult",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN from an execution of the current pipeline from which results are reused for this step.</p>"
+                    }
+                },
+                "IterationContext": {
+                    "target": "com.amazonaws.sagemaker#IterationContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context for the iteration of a ForEach step that generated this step execution.</p>"
                     }
                 }
             },
@@ -67429,6 +67732,12 @@
                         "smithy.api#documentation": "<p>The configurations and outcomes of an Amazon EMR step execution.</p>"
                     }
                 },
+                "EMRServerless": {
+                    "target": "com.amazonaws.sagemaker#EMRServerlessStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configurations and outcomes of an Amazon EMR Serverless step execution.</p>"
+                    }
+                },
                 "QualityCheck": {
                     "target": "com.amazonaws.sagemaker#QualityCheckStepMetadata",
                     "traits": {
@@ -67505,6 +67814,24 @@
                     "target": "com.amazonaws.sagemaker#JobStepMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata for a SageMaker job used in a pipeline execution step.</p>"
+                    }
+                },
+                "Athena": {
+                    "target": "com.amazonaws.sagemaker#AthenaStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata for the Athena step execution.</p>"
+                    }
+                },
+                "Cleanup": {
+                    "target": "com.amazonaws.sagemaker#CleanupStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata for the cleanup step execution.</p>"
+                    }
+                },
+                "ForEach": {
+                    "target": "com.amazonaws.sagemaker#ForEachStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata for the ForEach step execution.</p>"
                     }
                 }
             },
@@ -82680,6 +83007,15 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 128
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#String12800": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 12800
                 }
             }
         },

@@ -40,6 +40,9 @@
                     "target": "com.amazonaws.lakeformation#AssumeDecoratedRoleWithSAML"
                 },
                 {
+                    "target": "com.amazonaws.lakeformation#AttachRLSPolicy"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#BatchGrantPermissions"
                 },
                 {
@@ -67,6 +70,9 @@
                     "target": "com.amazonaws.lakeformation#CreateLFTagExpression"
                 },
                 {
+                    "target": "com.amazonaws.lakeformation#CreateRLSPolicy"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#DeleteDataCellsFilter"
                 },
                 {
@@ -85,6 +91,9 @@
                     "target": "com.amazonaws.lakeformation#DeleteObjectsOnCancel"
                 },
                 {
+                    "target": "com.amazonaws.lakeformation#DeleteRLSPolicy"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#DeregisterResource"
                 },
                 {
@@ -95,6 +104,9 @@
                 },
                 {
                     "target": "com.amazonaws.lakeformation#DescribeTransaction"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#DetachRLSPolicy"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#ExtendTransaction"
@@ -125,6 +137,9 @@
                 },
                 {
                     "target": "com.amazonaws.lakeformation#GetResourceLFTags"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#GetRLSPolicy"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#GetTableObjects"
@@ -164,6 +179,12 @@
                 },
                 {
                     "target": "com.amazonaws.lakeformation#ListResources"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ListRLSPolicies"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ListRLSPolicyAttachments"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#ListTableStorageOptimizers"
@@ -209,6 +230,9 @@
                 },
                 {
                     "target": "com.amazonaws.lakeformation#UpdateResource"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#UpdateRLSPolicy"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#UpdateTableObjects"
@@ -1635,6 +1659,96 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lakeformation#AttachRLSPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#AttachRLSPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#AttachRLSPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ResourceNumberLimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Attaches a row-level security policy to a resource for a principal. When the principal queries the resource, Lake Formation applies the policy's filter expression so that only the permitted rows are returned.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/AttachRLSPolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#AttachRLSPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the row-level security policy to attach.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Resource": {
+                    "target": "com.amazonaws.lakeformation#Resource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource to which the row-level security policy is attached.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Principal": {
+                    "target": "com.amazonaws.lakeformation#DataLakePrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal to which the row-level security policy applies.</p>"
+                    }
+                },
+                "Condition": {
+                    "target": "com.amazonaws.lakeformation#Condition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Lake Formation condition, which applies to the row-level security policy attachment and contains an expression.</p>"
+                    }
+                },
+                "SetDefault": {
+                    "target": "com.amazonaws.lakeformation#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this policy becomes the default row-level security policy for the resource. The default policy applies to all principals by default.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#AttachRLSPolicyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lakeformation#AuditContext": {
             "type": "structure",
             "members": {
@@ -1954,6 +2068,27 @@
                 "smithy.api#documentation": "<p>A structure for the catalog object.</p>"
             }
         },
+        "com.amazonaws.lakeformation#Column": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.lakeformation#ColumnTypeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the column.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A column in a table that a row-level security policy's filter expression can reference.</p>"
+            }
+        },
         "com.amazonaws.lakeformation#ColumnLFTag": {
             "type": "structure",
             "members": {
@@ -1980,10 +2115,29 @@
                 "target": "com.amazonaws.lakeformation#ColumnLFTag"
             }
         },
+        "com.amazonaws.lakeformation#ColumnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#Column"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of <code>Column</code> structures.</p>"
+            }
+        },
         "com.amazonaws.lakeformation#ColumnNames": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lakeformation#NameString"
+            }
+        },
+        "com.amazonaws.lakeformation#ColumnTypeString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 131072
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.lakeformation#ColumnWildcard": {
@@ -2564,6 +2718,82 @@
             }
         },
         "com.amazonaws.lakeformation#CreateLakeFormationOptInResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lakeformation#CreateRLSPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#CreateRLSPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#CreateRLSPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ResourceNumberLimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a row-level security (RLS) policy. A row-level security policy defines a filter expression that Lake Formation evaluates to determine which rows of a table a principal is allowed to see. The policy is created independently of any resource, and is later associated with a resource and principal using <code>AttachRLSPolicy</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateRLSPolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#CreateRLSPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name for the row-level security policy within the Data Catalog.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttachmentColumns": {
+                    "target": "com.amazonaws.lakeformation#ColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of columns that the filter expression references. These columns define the shape of the data that the policy can be attached to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FilterExpression": {
+                    "target": "com.amazonaws.lakeformation#PredicateString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter predicate, written in a SQL-like syntax, that Lake Formation evaluates against each row. Only the rows for which the expression evaluates to true are returned to the principal.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#CreateRLSPolicyResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -3351,6 +3581,65 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lakeformation#DeleteRLSPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#DeleteRLSPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#DeleteRLSPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a row-level security policy. Any active attachments of the policy are automatically removed as part of the deletion, so you do not need to detach the policy first.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteRLSPolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#DeleteRLSPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the row-level security policy to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#DeleteRLSPolicyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lakeformation#DeregisterResource": {
             "type": "operation",
             "input": {
@@ -3630,6 +3919,90 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
+        "com.amazonaws.lakeformation#DetachRLSPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#DetachRLSPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#DetachRLSPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Detaches a row-level security policy from a resource for a principal. After the policy is detached, its filter expression is no longer applied to the principal's queries on that resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DetachRLSPolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#DetachRLSPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the row-level security policy to detach.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Resource": {
+                    "target": "com.amazonaws.lakeformation#Resource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource from which the row-level security policy is detached.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Principal": {
+                    "target": "com.amazonaws.lakeformation#DataLakePrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal for which the row-level security policy is detached.</p>"
+                    }
+                },
+                "Condition": {
+                    "target": "com.amazonaws.lakeformation#Condition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Lake Formation condition, which applies to the row-level security policy attachment and contains an expression.</p>"
+                    }
+                },
+                "RemoveDefault": {
+                    "target": "com.amazonaws.lakeformation#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to remove this policy as the default row-level security policy for the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#DetachRLSPolicyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lakeformation#DetailsMap": {
@@ -4524,6 +4897,69 @@
                     "target": "com.amazonaws.lakeformation#DateTime",
                     "traits": {
                         "smithy.api#documentation": "<p>The time that the query was submitted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lakeformation#GetRLSPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#GetRLSPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#GetRLSPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the definition of a row-level security policy, including its attachment columns and filter expression.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetRLSPolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetRLSPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the row-level security policy to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#GetRLSPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "RLSPolicy": {
+                    "target": "com.amazonaws.lakeformation#RLSPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An <code>RLSPolicy</code> structure containing the definition of the requested row-level security policy.</p>"
                     }
                 }
             },
@@ -6180,6 +6616,184 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lakeformation#ListRLSPolicies": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#ListRLSPoliciesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#ListRLSPoliciesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the row-level security policies in the Data Catalog.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListRLSPolicies",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RLSPolicies",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#ListRLSPoliciesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.lakeformation#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of row-level security policies to return in a single response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#ListRLSPoliciesResponse": {
+            "type": "structure",
+            "members": {
+                "RLSPolicies": {
+                    "target": "com.amazonaws.lakeformation#RLSPolicyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>RLSPolicy</code> structures.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if not all row-level security policies have been returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lakeformation#ListRLSPolicyAttachments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#ListRLSPolicyAttachmentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#ListRLSPolicyAttachmentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the row-level security policy attachments in the Data Catalog. You can filter the results by resource, principal, or policy name.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListRLSPolicyAttachments",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RLSPolicyAttachments",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#ListRLSPolicyAttachmentsRequest": {
+            "type": "structure",
+            "members": {
+                "Resource": {
+                    "target": "com.amazonaws.lakeformation#Resource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, returns only the attachments for the given resource.</p>"
+                    }
+                },
+                "Principal": {
+                    "target": "com.amazonaws.lakeformation#DataLakePrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, returns only the attachments for the given principal.</p>"
+                    }
+                },
+                "PolicyName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, returns only the attachments for the row-level security policy with this name.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lakeformation#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of attachments to return in a single response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#ListRLSPolicyAttachmentsResponse": {
+            "type": "structure",
+            "members": {
+                "RLSPolicyAttachments": {
+                    "target": "com.amazonaws.lakeformation#RLSPolicyAttachmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>RLSPolicyAttachment</code> structures.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if not all attachments have been returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lakeformation#ListResources": {
             "type": "operation",
             "input": {
@@ -7114,6 +7728,121 @@
         "com.amazonaws.lakeformation#RAMResourceShareArn": {
             "type": "string"
         },
+        "com.amazonaws.lakeformation#RLSPolicy": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog that contains the policy. By default, the account ID.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the row-level security policy.</p>"
+                    }
+                },
+                "AttachmentColumns": {
+                    "target": "com.amazonaws.lakeformation#ColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of columns that the filter expression references.</p>"
+                    }
+                },
+                "FilterExpression": {
+                    "target": "com.amazonaws.lakeformation#PredicateString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter predicate, written in a SQL-like syntax, that determines which rows are returned to the principal.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that describes a row-level security policy, including the columns its filter expression references and the filter expression itself.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#RLSPolicyAttachment": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog that contains the attachment. By default, the account ID.</p>"
+                    }
+                },
+                "PolicyName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attached row-level security policy.</p>"
+                    }
+                },
+                "Principal": {
+                    "target": "com.amazonaws.lakeformation#DataLakePrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal to which the attached policy applies.</p>"
+                    }
+                },
+                "Resource": {
+                    "target": "com.amazonaws.lakeformation#Resource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource to which the policy is attached.</p>"
+                    }
+                },
+                "Condition": {
+                    "target": "com.amazonaws.lakeformation#Condition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Lake Formation condition, which applies to the row-level security policy attachment and contains an expression.</p>"
+                    }
+                },
+                "DefaultRLSPolicy": {
+                    "target": "com.amazonaws.lakeformation#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this attachment is the default row-level security policy for the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that describes the attachment of a row-level security policy to a resource for a principal.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#RLSPolicyAttachmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#RLSPolicyAttachment"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of <code>RLSPolicyAttachment</code> structures.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#RLSPolicyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#RLSPolicy"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of <code>RLSPolicy</code> structures.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#RLSPolicyResource": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog that contains the policy. By default, the account ID.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the row-level security policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that identifies a row-level security policy as a resource, used when granting permissions on the policy.</p>"
+            }
+        },
         "com.amazonaws.lakeformation#RedshiftConnect": {
             "type": "structure",
             "members": {
@@ -7388,6 +8117,12 @@
                     "target": "com.amazonaws.lakeformation#LFTagExpressionResource",
                     "traits": {
                         "smithy.api#documentation": "<p>LF-Tag expression resource. A logical expression composed of one or more LF-Tag key:value pairs.</p>"
+                    }
+                },
+                "RLSPolicy": {
+                    "target": "com.amazonaws.lakeformation#RLSPolicyResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A row-level security policy resource. Specify this when granting or revoking permissions on a row-level security policy.</p>"
                     }
                 }
             },
@@ -8885,6 +9620,74 @@
             }
         },
         "com.amazonaws.lakeformation#UpdateLakeFormationIdentityCenterConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lakeformation#UpdateRLSPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#UpdateRLSPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#UpdateRLSPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ResourceNumberLimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the filter expression of an existing row-level security policy. The change applies to all attachments of the policy.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateRLSPolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#UpdateRLSPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the row-level security policy to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FilterExpression": {
+                    "target": "com.amazonaws.lakeformation#PredicateString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new filter predicate, written in a SQL-like syntax, that replaces the policy's current filter expression.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#UpdateRLSPolicyResponse": {
             "type": "structure",
             "members": {},
             "traits": {

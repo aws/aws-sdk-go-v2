@@ -874,7 +874,7 @@
                 "customMetadata": {
                     "target": "com.amazonaws.agentregistrycontrol#CustomMetadataDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>The custom metadata to attach to the registry record. Each key must match a property defined in the registry's custom metadata schema. Values can be strings (maximum 128 characters) or native JSON booleans (<code>true</code> or <code>false</code>). Values are validated against the schema at creation time.</p>"
+                        "smithy.api#documentation": "<p>The custom metadata for the record. Values are strings or JSON booleans.</p>"
                     }
                 },
                 "tags": {
@@ -1156,18 +1156,18 @@
                 "defaultSchema": {
                     "target": "com.amazonaws.agentregistrycontrol#CustomMetadataSchemaDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default JSON Schema that applies to record types without a specific override. Supported property types are <code>string</code>, <code>string</code> with an <code>enum</code> constraint, <code>string</code> with a <code>uri</code> format, and <code>boolean</code>.</p>"
+                        "smithy.api#documentation": "<p>A JSON Schema with the common attributes: fields that records of every record type can carry.</p>"
                     }
                 },
                 "recordTypeSchemaOverrides": {
                     "target": "com.amazonaws.agentregistrycontrol#RecordTypeSchemaOverrideList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of per-record-type schema overrides. When a record's type matches an override, that override's schema is used instead of the default schema for validation. If you don't specify an override for a record type, the default schema applies. If no default schema exists, custom metadata on records of that type is rejected.</p>"
+                        "smithy.api#documentation": "<p>The fields for individual record types. Records of a record type can carry the common attributes defined in <code>defaultSchema</code> plus that record type's fields.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration that defines a typed metadata schema for a registry. Specify at least one of a default schema or per-record-type schema overrides. You can provide both.</p>",
+                "smithy.api#documentation": "<p>The custom metadata fields that records in the registry can carry. <code>defaultSchema</code> defines the common attributes for every record type, and <code>recordTypeSchemaOverrides</code> adds fields for individual record types.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1176,7 +1176,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 10240
+                    "max": 16384
                 },
                 "smithy.api#sensitive": {}
             }
@@ -2755,20 +2755,20 @@
                 "recordType": {
                     "target": "com.amazonaws.agentregistrycontrol#RecordType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The record type that this schema override applies to.</p>",
+                        "smithy.api#documentation": "<p>The record type these fields apply to.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "schema": {
                     "target": "com.amazonaws.agentregistrycontrol#CustomMetadataSchemaDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON Schema for the specified record type. Must follow the same structural rules as the default schema.</p>",
+                        "smithy.api#documentation": "<p>A JSON Schema with the fields for this record type.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A schema override for a specific record type within a custom metadata schema configuration.</p>"
+                "smithy.api#documentation": "<p>The custom metadata fields for one record type, in addition to the common attributes defined in <code>defaultSchema</code>.</p>"
             }
         },
         "com.amazonaws.agentregistrycontrol#RecordTypeSchemaOverrideList": {
@@ -2778,7 +2778,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "max": 5
+                    "max": 10
                 }
             }
         },
@@ -4458,7 +4458,7 @@
                 "customMetadataSchemaConfiguration": {
                     "target": "com.amazonaws.agentregistrycontrol#UpdatedCustomMetadataSchemaConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updated custom metadata schema configuration for the registry. Omit to leave the existing schema unchanged. Schema evolution is additive only: you can add properties and enum values, but you cannot remove properties, change property types or formats, add or remove enum constraints, or remove record type overrides.</p>"
+                        "smithy.api#documentation": "<p>The new custom metadata schema configuration, which replaces the current one. You can add fields and allowed values, but you can't remove a field or an allowed value, or change a field's type.</p>"
                     }
                 },
                 "autoDetectionConfiguration": {

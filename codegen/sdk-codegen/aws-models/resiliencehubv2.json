@@ -1461,6 +1461,12 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.resiliencehubv2#KmsKeyId"
                 },
+                "devOpsAgentConfiguration": {
+                    "target": "com.amazonaws.resiliencehubv2#DevOpsAgentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional DevOps Agent integration configuration to apply to the new service. If you omit this field, the new service has no DevOps Agent integration.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.resiliencehubv2#TagMap"
                 },
@@ -3015,6 +3021,248 @@
                 "target": "com.amazonaws.resiliencehubv2#DependencySummary"
             }
         },
+        "com.amazonaws.resiliencehubv2#DevOpsAgentConfidence": {
+            "type": "enum",
+            "members": {
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DevOpsAgentConfiguration": {
+            "type": "structure",
+            "members": {
+                "agentSpaceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#DevOpsAgentSpaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the DevOps Agent Agent Space to link to this service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The AWS DevOps Agent (DevOps Agent) integration configuration that you supply when creating or updating a service. Connecting a service to a DevOps Agent Agent Space lets DevOps Agent investigate the service's resilience test runs and attach its analysis to the results. Include this block with an Agent Space Amazon Resource Name (ARN) to connect or reconnect the service to an Agent Space. Include it without an Agent Space ARN to disconnect the service. Omit it to leave the existing linkage unchanged.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DevOpsAgentConfigurationView": {
+            "type": "structure",
+            "members": {
+                "agentSpaceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#DevOpsAgentSpaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the linked DevOps Agent Agent Space.</p>"
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "com.amazonaws.resiliencehubv2#DevOpsAgentSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the linked DevOps Agent Agent Space.</p>"
+                    }
+                },
+                "region": {
+                    "target": "com.amazonaws.resiliencehubv2#DevOpsAgentRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Region of the linked DevOps Agent Agent Space.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.resiliencehubv2#DevOpsAgentConnectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection status of the DevOps Agent integration for this service. Valid values:</p> <ul> <li> <p>CONNECTING - The service is being connected to the Agent Space.</p> </li> <li> <p>CONNECTED - The service is connected to the Agent Space.</p> </li> <li> <p>DISCONNECTED - The service is not connected to an Agent Space.</p> </li> <li> <p>FAILED - The connection attempt failed. See statusReason for details.</p> </li> </ul>"
+                    }
+                },
+                "operatorAppUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the DevOps Agent Operator App for the linked Agent Space. This URL is present when the connection status is CONNECTED.</p>"
+                    }
+                },
+                "connectedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the service successfully connected to the DevOps Agent Agent Space.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable explanation of the current connection status. This field explains the status when the connection fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The current DevOps Agent integration state for a service. Read operations return this state.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DevOpsAgentConnectionStatus": {
+            "type": "enum",
+            "members": {
+                "CONNECTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTING"
+                    }
+                },
+                "CONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTED"
+                    }
+                },
+                "DISCONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISCONNECTED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DevOpsAgentInvestigation": {
+            "type": "structure",
+            "members": {
+                "verdict": {
+                    "target": "com.amazonaws.resiliencehubv2#DevOpsAgentVerdict",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The investigation verdict. Valid values:</p> <ul> <li> <p>PASS - The resilience test run passed.</p> </li> <li> <p>FAIL - The resilience test run failed.</p> </li> <li> <p>INCONCLUSIVE - The investigation could not determine a clear outcome.</p> </li> </ul>"
+                    }
+                },
+                "confidence": {
+                    "target": "com.amazonaws.resiliencehubv2#DevOpsAgentConfidence",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence level of the verdict. Valid values:</p> <ul> <li> <p>HIGH - The verdict is highly reliable.</p> </li> <li> <p>MEDIUM - The verdict has moderate reliability.</p> </li> <li> <p>LOW - The verdict has low reliability.</p> </li> </ul>"
+                    }
+                },
+                "deepLink": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A deep link to the interactive DevOps Agent investigation session.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.resiliencehubv2#DevOpsAgentInvestigationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle status of the investigation. Valid values:</p> <ul> <li> <p>PENDING - The investigation has been created but has not started.</p> </li> <li> <p>IN_PROGRESS - The investigation is running.</p> </li> <li> <p>COMPLETED - The investigation finished successfully.</p> </li> <li> <p>FAILED - The investigation failed to complete.</p> </li> <li> <p>TIMED_OUT - The investigation did not complete within the allotted time.</p> </li> <li> <p>CANCELED - The investigation was canceled.</p> </li> </ul>"
+                    }
+                },
+                "summary": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DevOps Agent analysis summary for the investigation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result when DevOps Agent investigates a resilience test run. The verdict is advisory and builds on the test run's own result, which remains authoritative.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DevOpsAgentInvestigationStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "TIMED_OUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMED_OUT"
+                    }
+                },
+                "CANCELED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DevOpsAgentRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DevOpsAgentSpaceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:aidevops:[a-z0-9-]+:[0-9]{12}:agentspace/[a-zA-Z0-9-]{1,64}$"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DevOpsAgentSpaceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]{1,64}$"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DevOpsAgentVerdict": {
+            "type": "enum",
+            "members": {
+                "PASS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASS"
+                    }
+                },
+                "FAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAIL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.resiliencehubv2#DisasterRecoverySource": {
             "type": "structure",
             "members": {
@@ -3573,6 +3821,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when the finding was last updated.</p>"
                     }
+                },
+                "investigationDeepLink": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A deep link to an interactive DevOps Agent investigation seeded with this finding. This value is null until DevOps Agent creates an investigation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3674,6 +3928,12 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when the finding was last updated.</p>"
+                    }
+                },
+                "investigationDeepLink": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A deep link to an interactive DevOps Agent investigation seeded with this finding. This value is null until DevOps Agent creates an investigation.</p>"
                     }
                 }
             },
@@ -4651,6 +4911,9 @@
                     "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.resiliencehubv2#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.resiliencehubv2#ValidationException"
                 }
             ],
@@ -4764,6 +5027,9 @@
                 },
                 {
                     "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.resiliencehubv2#ValidationException"
@@ -10337,6 +10603,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of the resource.</p>"
                     }
+                },
+                "availabilityZoneId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone ID of the Availability Zone that hosts the resource, such as use1-az1. The Availability Zone ID is consistent across Amazon Web Services (AWS) accounts, unlike the Availability Zone name.</p>"
+                    }
+                },
+                "availabilityZoneName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Availability Zone that hosts the resource, such as us-west-2a.</p>"
+                    }
+                },
+                "containmentParentId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the single parent resource that contains this resource, used to represent containment relationships in the resource topology. A resource has at most one containment parent.</p>"
+                    }
+                },
+                "logicalResourceGroupId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the logical resource group that this resource belongs to. Resources that share this identifier are managed as a single unit.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10767,6 +11057,12 @@
                     "target": "com.amazonaws.resiliencehubv2#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The AWS account ID that owns the service.</p>"
+                    }
+                },
+                "devOpsAgentConfiguration": {
+                    "target": "com.amazonaws.resiliencehubv2#DevOpsAgentConfigurationView",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current DevOps Agent integration state for the service.</p>"
                     }
                 },
                 "createdAt": {
@@ -11678,6 +11974,18 @@
                     "target": "com.amazonaws.resiliencehubv2#AssessmentStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The current assessment status of the service.</p>"
+                    }
+                },
+                "devOpsAgentStatus": {
+                    "target": "com.amazonaws.resiliencehubv2#DevOpsAgentConnectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DevOps Agent connection status for the service. Valid values:</p> <ul> <li> <p>CONNECTING - The service is being connected to the Agent Space.</p> </li> <li> <p>CONNECTED - The service is connected to the Agent Space.</p> </li> <li> <p>DISCONNECTED - The service is not connected to an Agent Space.</p> </li> <li> <p>FAILED - The connection attempt failed.</p> </li> </ul>"
+                    }
+                },
+                "devOpsAgentSpaceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#DevOpsAgentSpaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the DevOps Agent Agent Space linked to the service, when the service is linked to one.</p>"
                     }
                 },
                 "openFindingsCount": {
@@ -13449,6 +13757,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the test run targets resources in a single AWS account or across multiple accounts.</p>"
                     }
+                },
+                "devOpsAgentInvestigation": {
+                    "target": "com.amazonaws.resiliencehubv2#DevOpsAgentInvestigation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DevOps Agent investigation result for the test run, present when the integration is enabled for the service.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15214,6 +15528,12 @@
                 },
                 "reportConfiguration": {
                     "target": "com.amazonaws.resiliencehubv2#ServiceReportConfiguration"
+                },
+                "devOpsAgentConfiguration": {
+                    "target": "com.amazonaws.resiliencehubv2#DevOpsAgentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional DevOps Agent integration configuration to set, replace, or disconnect for the service. If you omit this field, the existing DevOps Agent linkage stays unchanged.</p>"
+                    }
                 }
             },
             "traits": {

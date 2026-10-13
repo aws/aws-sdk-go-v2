@@ -1025,6 +1025,12 @@
                     "traits": {
                         "smithy.api#enumValue": "EXTERNAL_INTEGRATION"
                     }
+                },
+                "RESOURCE_FIELDS_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_FIELDS_UPDATE"
+                    }
                 }
             }
         },
@@ -1049,6 +1055,12 @@
                     "target": "com.amazonaws.securityhub#ExternalIntegrationConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The settings for integrating automation rule actions with external systems or service.</p>"
+                    }
+                },
+                "ResourceFieldsUpdate": {
+                    "target": "com.amazonaws.securityhub#AutomationRulesResourceFieldsUpdateV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The changes to be applied to resource fields when an automation rule is triggered.</p>"
                     }
                 }
             },
@@ -1615,6 +1627,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Includes essential metadata information about automation rules.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AutomationRulesResourceFieldsUpdateV2": {
+            "type": "structure",
+            "members": {
+                "Criticality": {
+                    "target": "com.amazonaws.securityhub#ResourceCriticality",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The criticality level to be assigned to resources that match the automation rule criteria.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows you to define the structure for modifying specific fields of resources.</p>"
             }
         },
         "com.amazonaws.securityhub#AvailabilityZone": {
@@ -25186,10 +25214,75 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The filtering conditions that align with OCSF standards.</p>"
                     }
+                },
+                "ResourceCriteria": {
+                    "target": "com.amazonaws.securityhub#ResourcesFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filtering conditions for resources.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the parameters and conditions used to evaluate and filter security findings.</p>"
+                "smithy.api#documentation": "<p>Defines the parameters and conditions used to evaluate and filter security findings or resources.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#CriticalitySource": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.securityhub#CriticalitySourceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The source of the criticality.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The reason the criticality was assigned.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details the source and reason of a criticality.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#CriticalitySourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#CriticalitySource"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.securityhub#CriticalitySourceType": {
+            "type": "enum",
+            "members": {
+                "AUTOMATION_RULE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutomationRule"
+                    }
+                },
+                "RESOURCE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceName"
+                    }
+                },
+                "TAG_INFERENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TagInference"
+                    }
+                }
             }
         },
         "com.amazonaws.securityhub#CrossAccountMaxResults": {
@@ -33258,6 +33351,18 @@
                         "smithy.api#enumValue": "finding_info.types"
                     }
                 },
+                "IMPACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "impact"
+                    }
+                },
+                "LIKELIHOOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "likelihood"
+                    }
+                },
                 "METADATA_PRODUCT_NAME": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -33280,6 +33385,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "resources.cloud_partition"
+                    }
+                },
+                "RESOURCES_CRITICALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.criticality"
                     }
                 },
                 "RESOURCES_NAME": {
@@ -37620,6 +37731,18 @@
                         "smithy.api#enumValue": "finding_info.related_events.title"
                     }
                 },
+                "IMPACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "impact"
+                    }
+                },
+                "LIKELIHOOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "likelihood"
+                    }
+                },
                 "METADATA_PRODUCT_NAME": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -37654,6 +37777,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "resources.cloud_partition"
+                    }
+                },
+                "RESOURCES_CRITICALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resources.criticality"
                     }
                 },
                 "RESOURCES_NAME": {
@@ -40138,6 +40267,41 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.securityhub#ResourceCriticality": {
+            "type": "enum",
+            "members": {
+                "VERY_HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Very High"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "High"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Medium"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Low"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unknown"
+                    }
+                }
+            }
+        },
         "com.amazonaws.securityhub#ResourceDetails": {
             "type": "structure",
             "members": {
@@ -40882,6 +41046,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ResourceInfo.AIDetails.CanonicalId"
                     }
+                },
+                "RESOURCE_CRITICALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceCriticality"
+                    }
                 }
             }
         },
@@ -41152,6 +41322,18 @@
                     "target": "com.amazonaws.securityhub#ResourceInfo",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional resource-type-specific details. For self-hosted AI resources and their host resources, contains an <code>AIDetails</code> structure.</p>"
+                    }
+                },
+                "ResourceCriticality": {
+                    "target": "com.amazonaws.securityhub#ResourceCriticality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criticality assigned to a resource.</p>"
+                    }
+                },
+                "CriticalitySources": {
+                    "target": "com.amazonaws.securityhub#CriticalitySourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sources of criticalities determined from a resource.</p>"
                     }
                 }
             },
@@ -41747,6 +41929,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ResourceInfo.AIDetails.CanonicalId"
+                    }
+                },
+                "RESOURCE_CRITICALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceCriticality"
                     }
                 }
             }

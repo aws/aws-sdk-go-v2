@@ -16434,13 +16434,17 @@
                 "upstreamRegistryUrl": {
                     "target": "com.amazonaws.omics#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the upstream registry.</p>"
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The URI of the upstream registry.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "ecrRepositoryPrefix": {
                     "target": "com.amazonaws.omics#EcrRepositoryPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The repository prefix to use in the ECR private repository.</p>"
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The repository prefix to use in the ECR private repository.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "upstreamRepositoryPrefix": {
@@ -16453,6 +16457,12 @@
                     "target": "com.amazonaws.omics#AwsAccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>Account ID of the account that owns the upstream container image.</p>"
+                    }
+                },
+                "credentialArn": {
+                    "target": "com.amazonaws.omics#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that holds the credentials for the upstream registry. You must specify this value when Amazon Elastic Container Registry (Amazon ECR) doesn't support pull through cache for the upstream registry. HealthOmics supports only some of these registries. The workflow role must have permission to call the <code>secretsmanager:GetSecretValue</code> operation on the secret. For more information about the supported registries, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html\">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
                     }
                 }
             },
@@ -17654,6 +17664,16 @@
                     "min": 1,
                     "max": 64
                 }
+            }
+        },
+        "com.amazonaws.omics#SecretArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-\\w+)*:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9\\/_+=.@-]+$"
             }
         },
         "com.amazonaws.omics#SecurityGroupId": {
