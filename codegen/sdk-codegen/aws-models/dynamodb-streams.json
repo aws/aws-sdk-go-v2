@@ -1617,7 +1617,7 @@
                 "ShardIteratorType": {
                     "target": "com.amazonaws.dynamodbstreams#ShardIteratorType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines how the shard iterator is used to start reading stream records from the shard:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AT_SEQUENCE_NUMBER</code> - Start reading exactly from the position denoted by a\n          specific sequence number.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AFTER_SEQUENCE_NUMBER</code> - Start reading right after the position denoted by a\n          specific sequence number.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRIM_HORIZON</code> - Start reading at the last (untrimmed) stream record, which is\n          the oldest record in the shard. In DynamoDB Streams, there is a 24 hour limit on data retention.\n          Stream records whose age exceeds this limit are subject to removal (trimming) from the\n          stream.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LATEST</code> - Start reading just after the most recent stream record in the\n          shard, so that you always read the most recent data in the shard.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Determines how the shard iterator is used to start reading stream records from the shard:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AT_SEQUENCE_NUMBER</code> - Start reading exactly from the position denoted by a\n          specific sequence number.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AFTER_SEQUENCE_NUMBER</code> - Start reading right after the position denoted by a\n          specific sequence number.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRIM_HORIZON</code> - Start reading at the last (untrimmed) stream record, which is\n          the oldest record in the shard. In DynamoDB Streams, there is a 24 hour limit on data retention.\n          Stream records whose age exceeds this limit are subject to removal (trimming) from the\n          stream.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LATEST</code> - Start reading just after the most recent stream record in the\n          shard, so that you always read the most recent data in the shard.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AT_TIMESTAMP</code> - Start reading from the position denoted by a specific timestamp, provided in the parameter <code>Timestamp</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1625,6 +1625,12 @@
                     "target": "com.amazonaws.dynamodbstreams#SequenceNumber",
                     "traits": {
                         "smithy.api#documentation": "<p>The sequence number of a stream record in the shard from which to start reading.</p>"
+                    }
+                },
+                "Timestamp": {
+                    "target": "com.amazonaws.dynamodbstreams#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the stream record from which to start reading. Used with shard\n      iterator type <code>AT_TIMESTAMP</code>. A timestamp is the Unix epoch date with precision in\n      milliseconds. For example, <code>1791316726.480</code>. The iterator points to the first stream record whose\n      <code>ApproximateCreationDateTime</code> is at or after the specified timestamp. If no record\n      with that exact timestamp exists, the iterator points to the next (later) record. If the\n      timestamp is older than the current trim horizon, the iterator points to the oldest\n      untrimmed stream record (<code>TRIM_HORIZON</code>). If the timestamp is in the future,\n      the request returns a <code>ValidationException</code>.</p>"
                     }
                 }
             },
@@ -1690,8 +1696,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 2
+                    "min": 1
                 }
             }
         },
@@ -2124,6 +2129,12 @@
                     "traits": {
                         "smithy.api#enumValue": "AFTER_SEQUENCE_NUMBER"
                     }
+                },
+                "AT_TIMESTAMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AT_TIMESTAMP"
+                    }
                 }
             }
         },
@@ -2236,7 +2247,7 @@
                 "ApproximateCreationDateTime": {
                     "target": "com.amazonaws.dynamodbstreams#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>The approximate date and time when the stream record was created, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format and rounded down to the closest second.</p>"
+                        "smithy.api#documentation": "<p>The approximate date and time when the stream record was created, in <a href=\"http://www.epochconverter.com/\">UNIX epoch time</a> format and rounded down to the closest second.\n            Some tools and SDKs may convert this value to a different format, such as <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a>.</p>"
                     }
                 },
                 "Keys": {
@@ -2359,6 +2370,9 @@
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
+        },
+        "com.amazonaws.dynamodbstreams#Timestamp": {
+            "type": "timestamp"
         },
         "com.amazonaws.dynamodbstreams#TrimmedDataAccessException": {
             "type": "structure",

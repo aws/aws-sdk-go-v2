@@ -26583,6 +26583,26 @@
                 }
             }
         },
+        "com.amazonaws.cloudfront#VpcIpAddressType": {
+            "type": "enum",
+            "members": {
+                "Ipv4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
+                    }
+                },
+                "DualStack": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dualstack"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "IP address type supported for VPC Origins. IPv6-only is not supported for VPC Origins."
+            }
+        },
         "com.amazonaws.cloudfront#VpcOrigin": {
             "type": "structure",
             "members": {
@@ -26712,6 +26732,12 @@
                 },
                 "OriginSslProtocols": {
                     "target": "com.amazonaws.cloudfront#OriginSslProtocols"
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.cloudfront#VpcIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type of the CloudFront VPC origin endpoint configuration. Valid values are <code>ipv4</code> and <code>dualstack</code>. IPv6-only is not supported for VPC origins.</p>"
+                    }
                 }
             },
             "traits": {
@@ -26822,6 +26848,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The VPC origin summary origin endpoint ARN.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.cloudfront#VpcIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type of the CloudFront VPC origin. Valid values are <code>ipv4</code> and <code>dualstack</code>. IPv6-only is not supported for VPC origins.</p>"
                     }
                 }
             },

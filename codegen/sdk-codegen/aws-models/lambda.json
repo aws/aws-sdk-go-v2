@@ -2955,6 +2955,10 @@
         "com.amazonaws.lambda#CapacityProviderArn": {
             "type": "string",
             "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::Lambda::CapacityProvider",
+                    "resource": "com.amazonaws.lambda#CapacityProviderResource"
+                },
                 "smithy.api#length": {
                     "min": 1,
                     "max": 140
@@ -3472,6 +3476,15 @@
                             "feature:public"
                         ]
                     }
+                },
+                "XAmznTraceId": {
+                    "target": "com.amazonaws.lambda#XAmznTraceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional X-Ray trace header to use when starting the chained invocation. If you omit this value, the child invocation inherits the parent durable execution's trace header.</p> <p>Specify this value on the <code>START</code> update for the chained invocation operation. For more information about the header format, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader\">Tracing header</a> in the <i>X-Ray Developer Guide</i>.</p>",
+                        "smithy.api#tags": [
+                            "feature:dar-chained-invoke-trace"
+                        ]
+                    }
                 }
             },
             "traits": {
@@ -3957,6 +3970,10 @@
         "com.amazonaws.lambda#CodeSigningConfigArn": {
             "type": "string",
             "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::Lambda::CodeSigningConfig",
+                    "resource": "com.amazonaws.lambda#CodeSigningConfigResource"
+                },
                 "smithy.api#length": {
                     "min": 0,
                     "max": 200
@@ -7095,6 +7112,10 @@
         "com.amazonaws.lambda#DurableExecutionArn": {
             "type": "string",
             "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::Lambda::DurableExecution",
+                    "resource": "com.amazonaws.lambda#DurableExecution"
+                },
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1024
@@ -8163,6 +8184,10 @@
         "com.amazonaws.lambda#EventSourceMappingArn": {
             "type": "string",
             "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::Lambda::EventSourceMapping",
+                    "resource": "com.amazonaws.lambda#EventSourceMapping"
+                },
                 "smithy.api#length": {
                     "min": 85,
                     "max": 120
@@ -9635,6 +9660,10 @@
         "com.amazonaws.lambda#FunctionArn": {
             "type": "string",
             "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::Lambda::Function",
+                    "resource": "com.amazonaws.lambda#Function"
+                },
                 "smithy.api#length": {
                     "min": 0,
                     "max": 10000
@@ -13396,21 +13425,6 @@
                 "smithy.api#documentation": "<p>Retrieves the provisioned concurrency configuration for a function's alias or version.</p>",
                 "smithy.api#examples": [
                     {
-                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
-                        "input": {
-                            "FunctionName": "my-function",
-                            "Qualifier": "BLUE"
-                        },
-                        "output": {
-                            "AllocatedProvisionedConcurrentExecutions": 100,
-                            "AvailableProvisionedConcurrentExecutions": 100,
-                            "LastModified": "2019-12-31T20:28:49+0000",
-                            "RequestedProvisionedConcurrentExecutions": 100,
-                            "Status": "READY"
-                        },
-                        "title": "To view a provisioned concurrency configuration"
-                    },
-                    {
                         "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
                         "input": {
                             "FunctionName": "my-function",
@@ -13424,6 +13438,21 @@
                             "Status": "READY"
                         },
                         "title": "To get a provisioned concurrency configuration"
+                    },
+                    {
+                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Qualifier": "BLUE"
+                        },
+                        "output": {
+                            "AllocatedProvisionedConcurrentExecutions": 100,
+                            "AvailableProvisionedConcurrentExecutions": 100,
+                            "LastModified": "2019-12-31T20:28:49+0000",
+                            "RequestedProvisionedConcurrentExecutions": 100,
+                            "Status": "READY"
+                        },
+                        "title": "To view a provisioned concurrency configuration"
                     }
                 ],
                 "smithy.api#http": {
@@ -15518,7 +15547,7 @@
                     "traits": {
                         "smithy.api#enumValue": "OAUTHBEARER_AUTH",
                         "smithy.api#tags": [
-                            "feature:kafka-oauthbearer-auth"
+                            "feature:public"
                         ]
                     }
                 }
@@ -16109,6 +16138,10 @@
         "com.amazonaws.lambda#LayerArn": {
             "type": "string",
             "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::Lambda::Layer",
+                    "resource": "com.amazonaws.lambda#LayerResource"
+                },
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
@@ -16256,6 +16289,10 @@
         "com.amazonaws.lambda#LayerVersionArn": {
             "type": "string",
             "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::Lambda::LayerVersion",
+                    "resource": "com.amazonaws.lambda#LayerVersion"
+                },
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
@@ -22916,7 +22953,7 @@
                     "min": 26,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*):lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}::runtime:.+$",
+                "smithy.api#pattern": "^((arn:(aws[a-zA-Z-]*):lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}::runtime:.+)|(arn:(aws[a-zA-Z-]*):lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:runtime/[A-Za-z0-9_.-]{1,128}/version/[A-Za-z0-9_.-]{1,128}))$",
                 "smithy.api#tags": [
                     "feature:public"
                 ]
@@ -24064,7 +24101,7 @@
                     "traits": {
                         "smithy.api#enumValue": "OAUTHBEARER_AUTH",
                         "smithy.api#tags": [
-                            "feature:kafka-oauthbearer-auth"
+                            "feature:public"
                         ]
                     }
                 },
@@ -24073,7 +24110,7 @@
                     "traits": {
                         "smithy.api#enumValue": "OAUTHBEARER_SCOPE",
                         "smithy.api#tags": [
-                            "feature:kafka-oauthbearer-auth"
+                            "feature:public"
                         ]
                     }
                 },
@@ -24082,7 +24119,7 @@
                     "traits": {
                         "smithy.api#enumValue": "OAUTHBEARER_AUDIENCE",
                         "smithy.api#tags": [
-                            "feature:kafka-oauthbearer-auth"
+                            "feature:public"
                         ]
                     }
                 },
@@ -24091,7 +24128,7 @@
                     "traits": {
                         "smithy.api#enumValue": "OAUTHBEARER_LOGICAL_CLUSTER",
                         "smithy.api#tags": [
-                            "feature:kafka-oauthbearer-auth"
+                            "feature:public"
                         ]
                     }
                 },
@@ -24100,7 +24137,7 @@
                     "traits": {
                         "smithy.api#enumValue": "OAUTHBEARER_IDENTITY_POOL",
                         "smithy.api#tags": [
-                            "feature:kafka-oauthbearer-auth"
+                            "feature:public"
                         ]
                     }
                 },
@@ -24109,7 +24146,7 @@
                     "traits": {
                         "smithy.api#enumValue": "IAM_AUTH",
                         "smithy.api#tags": [
-                            "feature:kafka-oauthbearer-auth"
+                            "feature:public"
                         ]
                     }
                 },
@@ -24118,7 +24155,7 @@
                     "traits": {
                         "smithy.api#enumValue": "IAM_OAUTHBEARER_AUTH",
                         "smithy.api#tags": [
-                            "feature:kafka-oauthbearer-auth"
+                            "feature:public"
                         ]
                     }
                 }
