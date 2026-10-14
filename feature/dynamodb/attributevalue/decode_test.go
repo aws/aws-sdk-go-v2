@@ -1344,3 +1344,95 @@ func TestUnmarshalIndividualSetValues(t *testing.T) {
 		t.Errorf("expect value match\n%s", diff)
 	}
 }
+
+func TestDecodeDoublePointer(t *testing.T) {
+	type output struct {
+		Foo **int `dynamodbav:"Foo"`
+	}
+
+	number := 5
+	foo := &number
+
+	cases := []struct {
+		input       types.AttributeValue
+		expected    output
+		expectError bool
+	}{
+		{
+			input: &types.AttributeValueMemberM{
+				Value: nil,
+			},
+			expected: output{},
+		},
+		{
+			input: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{},
+			},
+			expected: output{},
+		},
+		{
+			input: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Foo": nil,
+				},
+			},
+			expected: output{},
+		},
+		{
+			input: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Foo": &types.AttributeValueMemberNULL{
+						Value: true,
+					},
+				},
+			},
+			expected: output{},
+		},
+		{
+			input: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Foo": &types.AttributeValueMemberN{
+						Value: "5",
+					},
+				},
+			},
+			expected: output{
+				Foo: &foo,
+			},
+		},
+		{
+			input: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Foo": &types.AttributeValueMemberS{
+						Value: "5",
+					},
+				},
+			},
+			expectError: true,
+		},
+	}
+
+	for i, c := range cases {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			var actual output
+			err := Unmarshal(c.input, &actual)
+			if c.expectError && err == nil {
+				t.Error("expected error")
+				t.Fail()
+			}
+			if !c.expectError && err != nil {
+				t.Errorf("unexpected error: %v", err)
+				t.Fail()
+			}
+
+			if c.expectError && err != nil {
+				t.Logf("found expected error: %v", err)
+				return
+			}
+
+			if diff := cmpDiff(c.expected, actual); diff != "" {
+				t.Errorf("unexpected diff: %v", diff)
+			}
+		})
+	}
+}
