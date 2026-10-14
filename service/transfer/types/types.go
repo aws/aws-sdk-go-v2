@@ -1809,6 +1809,14 @@ type DescribedHostKey struct {
 	// A unique identifier for the host key.
 	HostKeyId *string
 
+	// The ARN of the Secrets Manager secret that stores the host key material, when
+	// StorageType is SECRETS_MANAGER .
+	SecretId *string
+
+	// Specifies whether the host key is stored by Transfer Family ( SERVICE_MANAGED )
+	// or in Secrets Manager ( SECRETS_MANAGER ).
+	StorageType HostKeyStorageType
+
 	// Key-value pairs that can be used to group and search for host keys.
 	Tags []Tag
 
@@ -1851,6 +1859,12 @@ func (v *DescribedHostKey) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HostKeyId != nil {
 		s.WriteString(schemas.DescribedHostKey_HostKeyId, *v.HostKeyId)
 	}
+	if v.SecretId != nil {
+		s.WriteString(schemas.DescribedHostKey_SecretId, *v.SecretId)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.DescribedHostKey_StorageType, string(v.StorageType))
+	}
 	serializeTags(s, schemas.DescribedHostKey_Tags, v.Tags)
 	if v.Type != nil {
 		s.WriteString(schemas.DescribedHostKey_Type, *v.Type)
@@ -1874,6 +1888,16 @@ func (v *DescribedHostKey) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DescribedHostKey_HostKeyId:
 			v.HostKeyId = new(string)
 			return d.ReadString(schemas.DescribedHostKey_HostKeyId, v.HostKeyId)
+		case schemas.DescribedHostKey_SecretId:
+			v.SecretId = new(string)
+			return d.ReadString(schemas.DescribedHostKey_SecretId, v.SecretId)
+		case schemas.DescribedHostKey_StorageType:
+			var ev string
+			if err := d.ReadString(schemas.DescribedHostKey_StorageType, &ev); err != nil {
+				return err
+			}
+			v.StorageType = HostKeyStorageType(ev)
+			return nil
 		case schemas.DescribedHostKey_Tags:
 			return deserializeTags(d, schemas.DescribedHostKey_Tags, &v.Tags)
 		case schemas.DescribedHostKey_Type:
@@ -4181,6 +4205,14 @@ type ListedHostKey struct {
 	// A unique identifier for the host key.
 	HostKeyId *string
 
+	// The ARN of the Secrets Manager secret that stores the host key material, when
+	// StorageType is SECRETS_MANAGER .
+	SecretId *string
+
+	// Specifies whether the host key is stored by Transfer Family ( SERVICE_MANAGED )
+	// or in Secrets Manager ( SECRETS_MANAGER ).
+	StorageType HostKeyStorageType
+
 	// The encryption algorithm that is used for the host key. The Type parameter is
 	// specified by using one of the following values:
 	//
@@ -4220,6 +4252,12 @@ func (v *ListedHostKey) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HostKeyId != nil {
 		s.WriteString(schemas.ListedHostKey_HostKeyId, *v.HostKeyId)
 	}
+	if v.SecretId != nil {
+		s.WriteString(schemas.ListedHostKey_SecretId, *v.SecretId)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.ListedHostKey_StorageType, string(v.StorageType))
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.ListedHostKey_Type, *v.Type)
 	}
@@ -4242,6 +4280,16 @@ func (v *ListedHostKey) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ListedHostKey_HostKeyId:
 			v.HostKeyId = new(string)
 			return d.ReadString(schemas.ListedHostKey_HostKeyId, v.HostKeyId)
+		case schemas.ListedHostKey_SecretId:
+			v.SecretId = new(string)
+			return d.ReadString(schemas.ListedHostKey_SecretId, v.SecretId)
+		case schemas.ListedHostKey_StorageType:
+			var ev string
+			if err := d.ReadString(schemas.ListedHostKey_StorageType, &ev); err != nil {
+				return err
+			}
+			v.StorageType = HostKeyStorageType(ev)
+			return nil
 		case schemas.ListedHostKey_Type:
 			v.Type = new(string)
 			return d.ReadString(schemas.ListedHostKey_Type, v.Type)

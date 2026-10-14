@@ -1,0 +1,8 @@
+{
+    "id": "ab3a50b6-635e-4958-9b3c-6951e31ae88d",
+    "type": "feature",
+    "description": "Features - Adds support for an optional payload to invoke the Lambda function with as part of the Custom action Lambda execution block",
+    "modules": [
+        "service/arcregionswitch"
+    ]
+}

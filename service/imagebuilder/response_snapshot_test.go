@@ -944,9 +944,10 @@ func TestCheckResponseSnapshot_CreateInfrastructureConfiguration(t *testing.T) {
 				S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
 			},
 		},
-		KeyPair:                    ptr.String("__KeyPair__"),
-		TerminateInstanceOnFailure: ptr.Bool(true),
-		SnsTopicArn:                ptr.String("__SnsTopicArn__"),
+		KeyPair:                       ptr.String("__KeyPair__"),
+		TerminateInstanceOnFailure:    ptr.Bool(true),
+		TerminateInstanceOnCompletion: ptr.Bool(true),
+		SnsTopicArn:                   ptr.String("__SnsTopicArn__"),
 		ResourceTags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -962,6 +963,12 @@ func TestCheckResponseSnapshot_CreateInfrastructureConfiguration(t *testing.T) {
 			Tenancy:              types.TenancyType("default"),
 			HostId:               ptr.String("__HostId__"),
 			HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
+		},
+		ParentInstance: &types.ParentInstanceConfiguration{
+			AutoScalingGroup: &types.AutoScalingGroupConfiguration{
+				Name:                       ptr.String("__Name__"),
+				CapacityWaitTimeoutSeconds: ptr.Int32(1),
+			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 		DryRun:      true,
@@ -2187,6 +2194,13 @@ func TestCheckResponseSnapshot_GetImage(t *testing.T) {
 					HostId:               ptr.String("__HostId__"),
 					HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
 				},
+				TerminateInstanceOnCompletion: ptr.Bool(true),
+				ParentInstance: &types.ParentInstanceConfiguration{
+					AutoScalingGroup: &types.AutoScalingGroupConfiguration{
+						Name:                       ptr.String("__Name__"),
+						CapacityWaitTimeoutSeconds: ptr.Int32(1),
+					},
+				},
 			},
 			DistributionConfiguration: &types.DistributionConfiguration{
 				Arn:         ptr.String("__Arn__"),
@@ -2960,6 +2974,13 @@ func TestCheckResponseSnapshot_GetInfrastructureConfiguration(t *testing.T) {
 				Tenancy:              types.TenancyType("default"),
 				HostId:               ptr.String("__HostId__"),
 				HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
+			},
+			TerminateInstanceOnCompletion: ptr.Bool(true),
+			ParentInstance: &types.ParentInstanceConfiguration{
+				AutoScalingGroup: &types.AutoScalingGroupConfiguration{
+					Name:                       ptr.String("__Name__"),
+					CapacityWaitTimeoutSeconds: ptr.Int32(1),
+				},
 			},
 		},
 	}
@@ -6544,9 +6565,10 @@ func TestCheckResponseSnapshot_UpdateInfrastructureConfiguration(t *testing.T) {
 				S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
 			},
 		},
-		KeyPair:                    ptr.String("__KeyPair__"),
-		TerminateInstanceOnFailure: ptr.Bool(true),
-		SnsTopicArn:                ptr.String("__SnsTopicArn__"),
+		KeyPair:                       ptr.String("__KeyPair__"),
+		TerminateInstanceOnFailure:    ptr.Bool(true),
+		TerminateInstanceOnCompletion: ptr.Bool(true),
+		SnsTopicArn:                   ptr.String("__SnsTopicArn__"),
 		ResourceTags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -6559,6 +6581,12 @@ func TestCheckResponseSnapshot_UpdateInfrastructureConfiguration(t *testing.T) {
 			Tenancy:              types.TenancyType("default"),
 			HostId:               ptr.String("__HostId__"),
 			HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
+		},
+		ParentInstance: &types.ParentInstanceConfiguration{
+			AutoScalingGroup: &types.AutoScalingGroupConfiguration{
+				Name:                       ptr.String("__Name__"),
+				CapacityWaitTimeoutSeconds: ptr.Int32(1),
+			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	})

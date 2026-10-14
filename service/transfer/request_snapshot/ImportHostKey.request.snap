@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: TransferService.ImportHostKey
 
-{"Description":"__Description__","HostKeyBody":"__HostKeyBody__","ServerId":"__ServerId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+{"Description":"__Description__","HostKeyBody":"__HostKeyBody__","KmsKey":"__KmsKey__","ServerId":"__ServerId__","StorageType":"SERVICE_MANAGED","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

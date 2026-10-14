@@ -346,7 +346,9 @@ func TestMarshalOmitEmptyElemDoublePointer(t *testing.T) {
 			},
 			expected: &types.AttributeValueMemberM{
 				Value: map[string]types.AttributeValue{
-					"Values": &types.AttributeValueMemberL{Value: []types.AttributeValue{}},
+					"Values": &types.AttributeValueMemberL{
+						Value: []types.AttributeValue{},
+					},
 				},
 			},
 		},
@@ -360,7 +362,9 @@ func TestMarshalOmitEmptyElemDoublePointer(t *testing.T) {
 			},
 			expected: &types.AttributeValueMemberM{
 				Value: map[string]types.AttributeValue{
-					"Values": &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}},
+					"Values": &types.AttributeValueMemberM{
+						Value: map[string]types.AttributeValue{},
+					},
 				},
 			},
 		},

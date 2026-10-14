@@ -23,6 +23,7 @@ import (
 	"slices"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeSSPrefix = "request_snapshot"
@@ -272,6 +273,7 @@ func TestCheckRequestSnapshot_GetShardIterator(t *testing.T) {
 		ShardId:           ptr.String("__ShardId__"),
 		ShardIteratorType: types.ShardIteratorType("TRIM_HORIZON"),
 		SequenceNumber:    ptr.String("__SequenceNumber__"),
+		Timestamp:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -391,6 +393,7 @@ func TestUpdateRequestSnapshot_GetShardIterator(t *testing.T) {
 		ShardId:           ptr.String("__ShardId__"),
 		ShardIteratorType: types.ShardIteratorType("TRIM_HORIZON"),
 		SequenceNumber:    ptr.String("__SequenceNumber__"),
+		Timestamp:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -1,0 +1,8 @@
+{
+    "id": "56f8d5f8-af37-45ec-9cc0-647576c4b557",
+    "type": "feature",
+    "description": "AWS Lambda now supports an optional X-Ray trace header for chained invocations in durable executions, enabling child invocations to be linked to the initiating span.",
+    "modules": [
+        "service/lambda"
+    ]
+}

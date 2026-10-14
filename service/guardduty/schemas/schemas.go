@@ -1870,6 +1870,11 @@ var _DetectionRuleAccountIds = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _DetectionRuleAccountIds_member *smithy.Schema
 
+var _DetectionRuleAgentVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "DetectionRuleAgentVersion",
+}, smithy.ShapeTypeString, 0)
+
 var _DetectionRuleArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "DetectionRuleArn",
@@ -1888,13 +1893,33 @@ var DetectionRuleConfigurationStatus_FAILED *smithy.Schema
 var DetectionRuleDataSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "DetectionRuleDataSource",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var DetectionRuleDataSource_CLOUDTRAIL_MANAGEMENT_EVENT *smithy.Schema
+
+var DetectionRuleDataSource_RUNTIME_MONITORING *smithy.Schema
 
 var _DetectionRuleDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "DetectionRuleDescription",
 }, smithy.ShapeTypeString, 0)
+
+var DetectionRuleEc2Requirements = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "DetectionRuleEc2Requirements",
+}, smithy.ShapeTypeStructure, 1)
+var DetectionRuleEc2Requirements_MinAgentVersion *smithy.Schema
+
+var DetectionRuleEcsFargateRequirements = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "DetectionRuleEcsFargateRequirements",
+}, smithy.ShapeTypeStructure, 1)
+var DetectionRuleEcsFargateRequirements_MinAgentVersion *smithy.Schema
+
+var DetectionRuleEksRequirements = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "DetectionRuleEksRequirements",
+}, smithy.ShapeTypeStructure, 1)
+var DetectionRuleEksRequirements_MinAgentVersion *smithy.Schema
 
 var DetectionRuleFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -1981,6 +2006,22 @@ var _DetectionRuleOrgConfigurationSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DetectionRuleOrgConfigurationSummaryList",
 }, smithy.ShapeTypeList, 1)
 var _DetectionRuleOrgConfigurationSummaryList_member *smithy.Schema
+
+var DetectionRuleRuntimeMonitoringDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "DetectionRuleRuntimeMonitoringDetails",
+}, smithy.ShapeTypeStructure, 1)
+var DetectionRuleRuntimeMonitoringDetails_Platforms *smithy.Schema
+
+var DetectionRuleRuntimePlatforms = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.guardduty",
+	Name:      "DetectionRuleRuntimePlatforms",
+}, smithy.ShapeTypeStructure, 3)
+var DetectionRuleRuntimePlatforms_Eks *smithy.Schema
+
+var DetectionRuleRuntimePlatforms_Ec2 *smithy.Schema
+
+var DetectionRuleRuntimePlatforms_EcsFargate *smithy.Schema
 
 var _DetectionRuleServiceName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -2589,7 +2630,7 @@ var _FilterVersion = smithy.NewSchema(smithy.ShapeID{
 var Finding = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "Finding",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var Finding_AccountId *smithy.Schema
 
 var Finding_Arn *smithy.Schema
@@ -2621,6 +2662,8 @@ var Finding_Type *smithy.Schema
 var Finding_UpdatedAt *smithy.Schema
 
 var Finding_AssociatedAttackSequenceArn *smithy.Schema
+
+var Finding_CustomDetectionRuleName *smithy.Schema
 
 var FindingCriteria = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -4936,7 +4979,7 @@ var RuleDefinition_Expression *smithy.Schema
 var RuleDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "RuleDetail",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var RuleDetail_RuleId *smithy.Schema
 
 var RuleDetail_Arn *smithy.Schema
@@ -4960,6 +5003,8 @@ var RuleDetail_Definition *smithy.Schema
 var RuleDetail_Language *smithy.Schema
 
 var RuleDetail_Schema *smithy.Schema
+
+var RuleDetail_RuntimeMonitoringDetails *smithy.Schema
 
 var RuleDetail_CreatedAt *smithy.Schema
 
@@ -9482,6 +9527,14 @@ func init() {
 
 	DetectionRuleDataSource_CLOUDTRAIL_MANAGEMENT_EVENT = DetectionRuleDataSource.AddMember("CLOUDTRAIL_MANAGEMENT_EVENT", smithyprelude.Unit)
 
+	DetectionRuleDataSource_RUNTIME_MONITORING = DetectionRuleDataSource.AddMember("RUNTIME_MONITORING", smithyprelude.Unit)
+
+	DetectionRuleEc2Requirements_MinAgentVersion = DetectionRuleEc2Requirements.AddMember("MinAgentVersion", _DetectionRuleAgentVersion, &smithytraits.JSONName{Name: "minAgentVersion"})
+
+	DetectionRuleEcsFargateRequirements_MinAgentVersion = DetectionRuleEcsFargateRequirements.AddMember("MinAgentVersion", _DetectionRuleAgentVersion, &smithytraits.JSONName{Name: "minAgentVersion"})
+
+	DetectionRuleEksRequirements_MinAgentVersion = DetectionRuleEksRequirements.AddMember("MinAgentVersion", _DetectionRuleAgentVersion, &smithytraits.JSONName{Name: "minAgentVersion"})
+
 	FilterFieldName_NAME = FilterFieldName.AddMember("NAME", smithyprelude.Unit)
 
 	FilterFieldName_DESCRIPTION = FilterFieldName.AddMember("DESCRIPTION", smithyprelude.Unit)
@@ -9543,6 +9596,14 @@ func init() {
 	DetectionRuleOrgConfigurationSummary_ExpiresAt = DetectionRuleOrgConfigurationSummary.AddMember("ExpiresAt", _Timestamp, &smithytraits.JSONName{Name: "expiresAt"})
 
 	_DetectionRuleOrgConfigurationSummaryList_member = _DetectionRuleOrgConfigurationSummaryList.AddMember("member", DetectionRuleOrgConfigurationSummary)
+
+	DetectionRuleRuntimePlatforms_Eks = DetectionRuleRuntimePlatforms.AddMember("Eks", DetectionRuleEksRequirements, &smithytraits.JSONName{Name: "eks"})
+
+	DetectionRuleRuntimePlatforms_Ec2 = DetectionRuleRuntimePlatforms.AddMember("Ec2", DetectionRuleEc2Requirements, &smithytraits.JSONName{Name: "ec2"})
+
+	DetectionRuleRuntimePlatforms_EcsFargate = DetectionRuleRuntimePlatforms.AddMember("EcsFargate", DetectionRuleEcsFargateRequirements, &smithytraits.JSONName{Name: "ecsFargate"})
+
+	DetectionRuleRuntimeMonitoringDetails_Platforms = DetectionRuleRuntimeMonitoringDetails.AddMember("Platforms", DetectionRuleRuntimePlatforms, &smithytraits.JSONName{Name: "platforms"})
 
 	DetectionRuleSeverity_CRITICAL = DetectionRuleSeverity.AddMember("CRITICAL", smithyprelude.Unit)
 
@@ -10336,6 +10397,8 @@ func init() {
 
 	Finding_AssociatedAttackSequenceArn = Finding.AddMember("AssociatedAttackSequenceArn", _String, &smithytraits.JSONName{Name: "associatedAttackSequenceArn"})
 
+	Finding_CustomDetectionRuleName = Finding.AddMember("CustomDetectionRuleName", _String, &smithytraits.JSONName{Name: "customDetectionRuleName"})
+
 	FindingCriteria_Criterion = FindingCriteria.AddMember("Criterion", _Criterion, &smithytraits.JSONName{Name: "criterion"})
 
 	_FindingIds_member = _FindingIds.AddMember("member", _FindingId)
@@ -10899,6 +10962,8 @@ func init() {
 	RuleDetail_Language = RuleDetail.AddMember("Language", RuleLanguage, &smithytraits.JSONName{Name: "language"})
 
 	RuleDetail_Schema = RuleDetail.AddMember("Schema", RuleSchema, &smithytraits.JSONName{Name: "schema"})
+
+	RuleDetail_RuntimeMonitoringDetails = RuleDetail.AddMember("RuntimeMonitoringDetails", DetectionRuleRuntimeMonitoringDetails, &smithytraits.JSONName{Name: "runtimeMonitoringDetails"})
 
 	RuleDetail_CreatedAt = RuleDetail.AddMember("CreatedAt", _Timestamp, &smithytraits.JSONName{Name: "createdAt"})
 

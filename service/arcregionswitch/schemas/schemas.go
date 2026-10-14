@@ -988,15 +988,22 @@ var _LambdaList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _LambdaList_member *smithy.Schema
 
+var _LambdaPayload = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "LambdaPayload",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var Lambdas = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "Lambdas",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var Lambdas_crossAccountRole *smithy.Schema
 
 var Lambdas_externalId *smithy.Schema
 
 var Lambdas_arn *smithy.Schema
+
+var Lambdas_payload *smithy.Schema
 
 var LambdaUngraceful = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
@@ -2497,6 +2504,8 @@ func init() {
 	Lambdas_externalId = Lambdas.AddMember("externalId", smithyprelude.String)
 
 	Lambdas_arn = Lambdas.AddMember("arn", _LambdaArn)
+
+	Lambdas_payload = Lambdas.AddMember("payload", _LambdaPayload)
 
 	_LambdaList_member = _LambdaList.AddMember("member", Lambdas)
 

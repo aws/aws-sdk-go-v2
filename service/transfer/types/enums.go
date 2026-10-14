@@ -409,6 +409,25 @@ func (HomeDirectoryType) Values() []HomeDirectoryType {
 	}
 }
 
+type HostKeyStorageType string
+
+// Enum values for HostKeyStorageType
+const (
+	HostKeyStorageTypeServiceManaged HostKeyStorageType = "SERVICE_MANAGED"
+	HostKeyStorageTypeSecretsManager HostKeyStorageType = "SECRETS_MANAGER"
+)
+
+// Values returns all known values for HostKeyStorageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HostKeyStorageType) Values() []HostKeyStorageType {
+	return []HostKeyStorageType{
+		"SERVICE_MANAGED",
+		"SECRETS_MANAGER",
+	}
+}
+
 type IdentityProviderType string
 
 // Enum values for IdentityProviderType

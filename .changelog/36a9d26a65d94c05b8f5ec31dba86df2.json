@@ -1,0 +1,8 @@
+{
+    "id": "36a9d26a-65d9-4c05-b8f5-ec31dba86df2",
+    "type": "feature",
+    "description": "Adds T8i instance sizes to the InstanceType enum. T8i instances are low-cost burstable instances powered by custom sixth generation Intel Xeon 6 processors, available exclusively on AWS, and built on the latest sixth generation AWS Nitro cards",
+    "modules": [
+        "service/ec2"
+    ]
+}

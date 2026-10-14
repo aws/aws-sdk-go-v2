@@ -1,0 +1,8 @@
+{
+    "id": "df35a93a-ce64-40bd-a8af-aeb3b49d3243",
+    "type": "feature",
+    "description": "This release adds a new \"IpAddressType\" field to \"VPCOriginEndpointConfig\", allowing customers to specify whether their VPC origin accepts IPv4-only or dualstack connections.",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

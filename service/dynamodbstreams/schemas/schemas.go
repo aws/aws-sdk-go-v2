@@ -287,7 +287,7 @@ var _ShardIterator = smithy.NewSchema(smithy.ShapeID{
 var ShardIteratorType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodbstreams",
 	Name:      "ShardIteratorType",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var ShardIteratorType_TRIM_HORIZON *smithy.Schema
 
 var ShardIteratorType_LATEST *smithy.Schema
@@ -295,6 +295,8 @@ var ShardIteratorType_LATEST *smithy.Schema
 var ShardIteratorType_AT_SEQUENCE_NUMBER *smithy.Schema
 
 var ShardIteratorType_AFTER_SEQUENCE_NUMBER *smithy.Schema
+
+var ShardIteratorType_AT_TIMESTAMP *smithy.Schema
 
 var Stream = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodbstreams",
@@ -402,6 +404,11 @@ var _TableName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TableName",
 }, smithy.ShapeTypeString, 0)
 
+var _Timestamp = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodbstreams",
+	Name:      "Timestamp",
+}, smithy.ShapeTypeTimestamp, 0)
+
 var TrimmedDataAccessException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodbstreams",
 	Name:      "TrimmedDataAccessException",
@@ -445,7 +452,7 @@ var GetRecordsOutput_NextShardIterator *smithy.Schema
 var GetShardIteratorInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodbstreams",
 	Name:      "GetShardIteratorInput",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var GetShardIteratorInput_StreamArn *smithy.Schema
 
 var GetShardIteratorInput_ShardId *smithy.Schema
@@ -453,6 +460,8 @@ var GetShardIteratorInput_ShardId *smithy.Schema
 var GetShardIteratorInput_ShardIteratorType *smithy.Schema
 
 var GetShardIteratorInput_SequenceNumber *smithy.Schema
+
+var GetShardIteratorInput_Timestamp *smithy.Schema
 
 var GetShardIteratorOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodbstreams",
@@ -609,6 +618,8 @@ func init() {
 
 	ShardIteratorType_AFTER_SEQUENCE_NUMBER = ShardIteratorType.AddMember("AFTER_SEQUENCE_NUMBER", smithyprelude.Unit)
 
+	ShardIteratorType_AT_TIMESTAMP = ShardIteratorType.AddMember("AT_TIMESTAMP", smithyprelude.Unit)
+
 	Stream_StreamArn = Stream.AddMember("StreamArn", _StreamArn)
 
 	Stream_TableName = Stream.AddMember("TableName", _TableName)
@@ -670,6 +681,8 @@ func init() {
 	GetShardIteratorInput_ShardIteratorType = GetShardIteratorInput.AddMember("ShardIteratorType", ShardIteratorType)
 
 	GetShardIteratorInput_SequenceNumber = GetShardIteratorInput.AddMember("SequenceNumber", _SequenceNumber)
+
+	GetShardIteratorInput_Timestamp = GetShardIteratorInput.AddMember("Timestamp", _Timestamp)
 
 	GetShardIteratorOutput_ShardIterator = GetShardIteratorOutput.AddMember("ShardIterator", _ShardIterator)
 

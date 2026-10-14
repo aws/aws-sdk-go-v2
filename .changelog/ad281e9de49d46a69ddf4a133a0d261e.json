@@ -1,0 +1,8 @@
+{
+    "id": "ad281e9d-e49d-46a6-9ddf-4a133a0d261e",
+    "type": "feature",
+    "description": "This release adds parentInstance to infrastructure configurations, so builds can use an already-running instance from an Amazon EC2 Auto Scaling group. It also adds terminateInstanceOnCompletion, which keeps build and test instances running after image creation ends.",
+    "modules": [
+        "service/imagebuilder"
+    ]
+}

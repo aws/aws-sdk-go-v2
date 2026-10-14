@@ -1033,10 +1033,12 @@ var ChainedInvokeFailedDetails_Error *smithy.Schema
 var ChainedInvokeOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "ChainedInvokeOptions",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ChainedInvokeOptions_FunctionName *smithy.Schema
 
 var ChainedInvokeOptions_TenantId *smithy.Schema
+
+var ChainedInvokeOptions_XAmznTraceId *smithy.Schema
 
 var ChainedInvokeStartedDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -6234,6 +6236,8 @@ func init() {
 	ChainedInvokeOptions_FunctionName = ChainedInvokeOptions.AddMember("FunctionName", _NamespacedFunctionName)
 
 	ChainedInvokeOptions_TenantId = ChainedInvokeOptions.AddMember("TenantId", _TenantId)
+
+	ChainedInvokeOptions_XAmznTraceId = ChainedInvokeOptions.AddMember("XAmznTraceId", _XAmznTraceId)
 
 	EventInput_Payload = EventInput.AddMember("Payload", _InputPayload)
 

@@ -20693,6 +20693,17 @@ func awsRestxml_serializeDocumentVpcOriginEndpointConfig(v *types.VpcOriginEndpo
 		el := value.MemberElement(root)
 		el.Integer(*v.HTTPSPort)
 	}
+	if len(v.IpAddressType) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "IpAddressType",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.IpAddressType))
+	}
 	if v.Name != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{

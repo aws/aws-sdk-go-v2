@@ -132,6 +132,12 @@ type CreateServerInput struct {
 	// [Manage host keys for your SFTP-enabled server]: https://docs.aws.amazon.com/transfer/latest/userguide/edit-server-config.html#configuring-servers-change-host-key
 	HostKey *string
 
+	// Specifies whether the host key is stored by Transfer Family ( SERVICE_MANAGED )
+	// or in Secrets Manager ( SECRETS_MANAGER ). When you specify SECRETS_MANAGER ,
+	// Transfer Family stores the private host key material in an Secrets Manager
+	// secret.
+	HostKeyStorageType types.HostKeyStorageType
+
 	// Required when IdentityProviderType is set to AWS_DIRECTORY_SERVICE , Amazon Web
 	// Services_LAMBDA or API_GATEWAY . Accepts an array containing all of the
 	// information required to use a directory in AWS_DIRECTORY_SERVICE or invoke a
@@ -329,6 +335,9 @@ func (v *CreateServerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.HostKey != nil {
 		s.WriteString(schemas.CreateServerRequest_HostKey, *v.HostKey)
+	}
+	if v.HostKeyStorageType != "" {
+		s.WriteString(schemas.CreateServerRequest_HostKeyStorageType, string(v.HostKeyStorageType))
 	}
 	if v.IdentityProviderDetails != nil {
 		s.WriteStruct(schemas.CreateServerRequest_IdentityProviderDetails)

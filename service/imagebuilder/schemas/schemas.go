@@ -658,6 +658,14 @@ var AutoDisablePolicy = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var AutoDisablePolicy_failureCount *smithy.Schema
 
+var AutoScalingGroupConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "AutoScalingGroupConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var AutoScalingGroupConfiguration_name *smithy.Schema
+
+var AutoScalingGroupConfiguration_capacityWaitTimeoutSeconds *smithy.Schema
+
 var _Boolean = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "Boolean",
@@ -681,6 +689,11 @@ var CallRateLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 429})
 var CallRateLimitExceededException_message *smithy.Schema
+
+var _CapacityWaitTimeoutSeconds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "CapacityWaitTimeoutSeconds",
+}, smithy.ShapeTypeInteger, 0)
 
 var ClientException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
@@ -1920,7 +1933,7 @@ var _ImageVersionList_member *smithy.Schema
 var InfrastructureConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "InfrastructureConfiguration",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 19)
 var InfrastructureConfiguration_arn *smithy.Schema
 
 var InfrastructureConfiguration_name *smithy.Schema
@@ -1954,6 +1967,10 @@ var InfrastructureConfiguration_instanceMetadataOptions *smithy.Schema
 var InfrastructureConfiguration_tags *smithy.Schema
 
 var InfrastructureConfiguration_placement *smithy.Schema
+
+var InfrastructureConfiguration_terminateInstanceOnCompletion *smithy.Schema
+
+var InfrastructureConfiguration_parentInstance *smithy.Schema
 
 var _InfrastructureConfigurationArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
@@ -2681,6 +2698,12 @@ var _ParallelGroup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "ParallelGroup",
 }, smithy.ShapeTypeString, 0)
+
+var ParentInstanceConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "ParentInstanceConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ParentInstanceConfiguration_autoScalingGroup *smithy.Schema
 
 var PipelineExecutionStartCondition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
@@ -3876,7 +3899,7 @@ var CreateImageRecipeResponse_latestVersionReferences *smithy.Schema
 var CreateInfrastructureConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "CreateInfrastructureConfigurationRequest",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 18)
 var CreateInfrastructureConfigurationRequest_name *smithy.Schema
 
 var CreateInfrastructureConfigurationRequest_description *smithy.Schema
@@ -3895,6 +3918,8 @@ var CreateInfrastructureConfigurationRequest_keyPair *smithy.Schema
 
 var CreateInfrastructureConfigurationRequest_terminateInstanceOnFailure *smithy.Schema
 
+var CreateInfrastructureConfigurationRequest_terminateInstanceOnCompletion *smithy.Schema
+
 var CreateInfrastructureConfigurationRequest_snsTopicArn *smithy.Schema
 
 var CreateInfrastructureConfigurationRequest_resourceTags *smithy.Schema
@@ -3904,6 +3929,8 @@ var CreateInfrastructureConfigurationRequest_instanceMetadataOptions *smithy.Sch
 var CreateInfrastructureConfigurationRequest_tags *smithy.Schema
 
 var CreateInfrastructureConfigurationRequest_placement *smithy.Schema
+
+var CreateInfrastructureConfigurationRequest_parentInstance *smithy.Schema
 
 var CreateInfrastructureConfigurationRequest_clientToken *smithy.Schema
 
@@ -5252,7 +5279,7 @@ var UpdateImagePipelineResponse_imagePipelineArn *smithy.Schema
 var UpdateInfrastructureConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "UpdateInfrastructureConfigurationRequest",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 16)
 var UpdateInfrastructureConfigurationRequest_infrastructureConfigurationArn *smithy.Schema
 
 var UpdateInfrastructureConfigurationRequest_description *smithy.Schema
@@ -5271,6 +5298,8 @@ var UpdateInfrastructureConfigurationRequest_keyPair *smithy.Schema
 
 var UpdateInfrastructureConfigurationRequest_terminateInstanceOnFailure *smithy.Schema
 
+var UpdateInfrastructureConfigurationRequest_terminateInstanceOnCompletion *smithy.Schema
+
 var UpdateInfrastructureConfigurationRequest_snsTopicArn *smithy.Schema
 
 var UpdateInfrastructureConfigurationRequest_resourceTags *smithy.Schema
@@ -5278,6 +5307,8 @@ var UpdateInfrastructureConfigurationRequest_resourceTags *smithy.Schema
 var UpdateInfrastructureConfigurationRequest_instanceMetadataOptions *smithy.Schema
 
 var UpdateInfrastructureConfigurationRequest_placement *smithy.Schema
+
+var UpdateInfrastructureConfigurationRequest_parentInstance *smithy.Schema
 
 var UpdateInfrastructureConfigurationRequest_clientToken *smithy.Schema
 
@@ -5475,6 +5506,10 @@ func init() {
 	_AmiWatermarksList_member = _AmiWatermarksList.AddMember("member", _AmiWatermarkName)
 
 	AutoDisablePolicy_failureCount = AutoDisablePolicy.AddMember("failureCount", _AutoDisableFailureCount)
+
+	AutoScalingGroupConfiguration_name = AutoScalingGroupConfiguration.AddMember("name", _NonEmptyString)
+
+	AutoScalingGroupConfiguration_capacityWaitTimeoutSeconds = AutoScalingGroupConfiguration.AddMember("capacityWaitTimeoutSeconds", _CapacityWaitTimeoutSeconds)
 
 	BuildType_USER_INITIATED = BuildType.AddMember("USER_INITIATED", smithyprelude.Unit)
 
@@ -5976,6 +6011,8 @@ func init() {
 
 	Placement_hostResourceGroupArn = Placement.AddMember("hostResourceGroupArn", _NonEmptyString)
 
+	ParentInstanceConfiguration_autoScalingGroup = ParentInstanceConfiguration.AddMember("autoScalingGroup", AutoScalingGroupConfiguration)
+
 	InfrastructureConfiguration_arn = InfrastructureConfiguration.AddMember("arn", _ImageBuilderArn)
 
 	InfrastructureConfiguration_name = InfrastructureConfiguration.AddMember("name", _ResourceName)
@@ -6009,6 +6046,10 @@ func init() {
 	InfrastructureConfiguration_tags = InfrastructureConfiguration.AddMember("tags", _TagMap)
 
 	InfrastructureConfiguration_placement = InfrastructureConfiguration.AddMember("placement", Placement)
+
+	InfrastructureConfiguration_terminateInstanceOnCompletion = InfrastructureConfiguration.AddMember("terminateInstanceOnCompletion", _NullableBoolean)
+
+	InfrastructureConfiguration_parentInstance = InfrastructureConfiguration.AddMember("parentInstance", ParentInstanceConfiguration)
 
 	ImageTestsConfiguration_imageTestsEnabled = ImageTestsConfiguration.AddMember("imageTestsEnabled", _NullableBoolean)
 
@@ -7126,6 +7167,8 @@ func init() {
 
 	CreateInfrastructureConfigurationRequest_terminateInstanceOnFailure = CreateInfrastructureConfigurationRequest.AddMember("terminateInstanceOnFailure", _NullableBoolean)
 
+	CreateInfrastructureConfigurationRequest_terminateInstanceOnCompletion = CreateInfrastructureConfigurationRequest.AddMember("terminateInstanceOnCompletion", _NullableBoolean)
+
 	CreateInfrastructureConfigurationRequest_snsTopicArn = CreateInfrastructureConfigurationRequest.AddMember("snsTopicArn", _SnsTopicArn)
 
 	CreateInfrastructureConfigurationRequest_resourceTags = CreateInfrastructureConfigurationRequest.AddMember("resourceTags", _ResourceTagMap)
@@ -7135,6 +7178,8 @@ func init() {
 	CreateInfrastructureConfigurationRequest_tags = CreateInfrastructureConfigurationRequest.AddMember("tags", _TagMap)
 
 	CreateInfrastructureConfigurationRequest_placement = CreateInfrastructureConfigurationRequest.AddMember("placement", Placement)
+
+	CreateInfrastructureConfigurationRequest_parentInstance = CreateInfrastructureConfigurationRequest.AddMember("parentInstance", ParentInstanceConfiguration)
 
 	CreateInfrastructureConfigurationRequest_clientToken = CreateInfrastructureConfigurationRequest.AddMember("clientToken", _ClientToken)
 
@@ -7964,6 +8009,8 @@ func init() {
 
 	UpdateInfrastructureConfigurationRequest_terminateInstanceOnFailure = UpdateInfrastructureConfigurationRequest.AddMember("terminateInstanceOnFailure", _NullableBoolean)
 
+	UpdateInfrastructureConfigurationRequest_terminateInstanceOnCompletion = UpdateInfrastructureConfigurationRequest.AddMember("terminateInstanceOnCompletion", _NullableBoolean)
+
 	UpdateInfrastructureConfigurationRequest_snsTopicArn = UpdateInfrastructureConfigurationRequest.AddMember("snsTopicArn", _SnsTopicArn)
 
 	UpdateInfrastructureConfigurationRequest_resourceTags = UpdateInfrastructureConfigurationRequest.AddMember("resourceTags", _ResourceTagMap)
@@ -7971,6 +8018,8 @@ func init() {
 	UpdateInfrastructureConfigurationRequest_instanceMetadataOptions = UpdateInfrastructureConfigurationRequest.AddMember("instanceMetadataOptions", InstanceMetadataOptions)
 
 	UpdateInfrastructureConfigurationRequest_placement = UpdateInfrastructureConfigurationRequest.AddMember("placement", Placement)
+
+	UpdateInfrastructureConfigurationRequest_parentInstance = UpdateInfrastructureConfigurationRequest.AddMember("parentInstance", ParentInstanceConfiguration)
 
 	UpdateInfrastructureConfigurationRequest_clientToken = UpdateInfrastructureConfigurationRequest.AddMember("clientToken", _ClientToken)
 

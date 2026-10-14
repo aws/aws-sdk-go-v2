@@ -3681,6 +3681,103 @@ func (v *Detection) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The requirements for running a Runtime Monitoring custom detection rule on
+// Amazon EC2.
+type DetectionRuleEc2Requirements struct {
+
+	// The minimum GuardDuty agent version required to run the rule on Amazon EC2.
+	MinAgentVersion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DetectionRuleEc2Requirements) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectionRuleEc2Requirements)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectionRuleEc2Requirements) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MinAgentVersion != nil {
+		s.WriteString(schemas.DetectionRuleEc2Requirements_MinAgentVersion, *v.MinAgentVersion)
+	}
+}
+func (v *DetectionRuleEc2Requirements) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectionRuleEc2Requirements, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectionRuleEc2Requirements_MinAgentVersion:
+			v.MinAgentVersion = new(string)
+			return d.ReadString(schemas.DetectionRuleEc2Requirements_MinAgentVersion, v.MinAgentVersion)
+		}
+		return nil
+	})
+}
+
+// The requirements for running a Runtime Monitoring custom detection rule on
+// Amazon ECS with the Fargate launch type.
+type DetectionRuleEcsFargateRequirements struct {
+
+	// The minimum GuardDuty agent version required to run the rule on Amazon ECS with
+	// the Fargate launch type.
+	MinAgentVersion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DetectionRuleEcsFargateRequirements) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectionRuleEcsFargateRequirements)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectionRuleEcsFargateRequirements) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MinAgentVersion != nil {
+		s.WriteString(schemas.DetectionRuleEcsFargateRequirements_MinAgentVersion, *v.MinAgentVersion)
+	}
+}
+func (v *DetectionRuleEcsFargateRequirements) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectionRuleEcsFargateRequirements, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectionRuleEcsFargateRequirements_MinAgentVersion:
+			v.MinAgentVersion = new(string)
+			return d.ReadString(schemas.DetectionRuleEcsFargateRequirements_MinAgentVersion, v.MinAgentVersion)
+		}
+		return nil
+	})
+}
+
+// The requirements for running a Runtime Monitoring custom detection rule on
+// Amazon EKS.
+type DetectionRuleEksRequirements struct {
+
+	// The minimum GuardDuty agent version required to run the rule on Amazon EKS.
+	MinAgentVersion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DetectionRuleEksRequirements) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectionRuleEksRequirements)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectionRuleEksRequirements) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MinAgentVersion != nil {
+		s.WriteString(schemas.DetectionRuleEksRequirements_MinAgentVersion, *v.MinAgentVersion)
+	}
+}
+func (v *DetectionRuleEksRequirements) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectionRuleEksRequirements, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectionRuleEksRequirements_MinAgentVersion:
+			v.MinAgentVersion = new(string)
+			return d.ReadString(schemas.DetectionRuleEksRequirements_MinAgentVersion, v.MinAgentVersion)
+		}
+		return nil
+	})
+}
+
 // Contains filter criteria for listing custom detection rules or associations.
 type DetectionRuleFilter struct {
 
@@ -3960,6 +4057,100 @@ func (v *DetectionRuleOrgConfigurationSummary) Deserialize(d smithy.ShapeDeseria
 		case schemas.DetectionRuleOrgConfigurationSummary_UpdatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.DetectionRuleOrgConfigurationSummary_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains Runtime Monitoring-specific details for a custom detection rule.
+type DetectionRuleRuntimeMonitoringDetails struct {
+
+	// The platforms on which the rule can run. The presence of a platform member
+	// indicates that the rule is supported on that platform; the absence of a member
+	// indicates that the rule cannot run on that platform at any agent version.
+	Platforms *DetectionRuleRuntimePlatforms
+
+	noSmithyDocumentSerde
+}
+
+func (v *DetectionRuleRuntimeMonitoringDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectionRuleRuntimeMonitoringDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectionRuleRuntimeMonitoringDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Platforms != nil {
+		s.WriteStruct(schemas.DetectionRuleRuntimeMonitoringDetails_Platforms)
+		v.Platforms.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DetectionRuleRuntimeMonitoringDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectionRuleRuntimeMonitoringDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectionRuleRuntimeMonitoringDetails_Platforms:
+			v.Platforms = &DetectionRuleRuntimePlatforms{}
+			return v.Platforms.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The platforms on which a Runtime Monitoring custom detection rule can run. A
+// member's presence is the support statement: when present, the rule runs on that
+// platform and minAgentVersion is the minimum GuardDuty agent version required
+// there. When absent, the rule cannot run on that platform at any agent version.
+type DetectionRuleRuntimePlatforms struct {
+
+	// The requirements for running the rule on Amazon EC2.
+	Ec2 *DetectionRuleEc2Requirements
+
+	// The requirements for running the rule on Amazon ECS with the Fargate launch
+	// type.
+	EcsFargate *DetectionRuleEcsFargateRequirements
+
+	// The requirements for running the rule on Amazon EKS.
+	Eks *DetectionRuleEksRequirements
+
+	noSmithyDocumentSerde
+}
+
+func (v *DetectionRuleRuntimePlatforms) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectionRuleRuntimePlatforms)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectionRuleRuntimePlatforms) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ec2 != nil {
+		s.WriteStruct(schemas.DetectionRuleRuntimePlatforms_Ec2)
+		v.Ec2.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EcsFargate != nil {
+		s.WriteStruct(schemas.DetectionRuleRuntimePlatforms_EcsFargate)
+		v.EcsFargate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Eks != nil {
+		s.WriteStruct(schemas.DetectionRuleRuntimePlatforms_Eks)
+		v.Eks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DetectionRuleRuntimePlatforms) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectionRuleRuntimePlatforms, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectionRuleRuntimePlatforms_Ec2:
+			v.Ec2 = &DetectionRuleEc2Requirements{}
+			return v.Ec2.Deserialize(d)
+		case schemas.DetectionRuleRuntimePlatforms_EcsFargate:
+			v.EcsFargate = &DetectionRuleEcsFargateRequirements{}
+			return v.EcsFargate.Deserialize(d)
+		case schemas.DetectionRuleRuntimePlatforms_Eks:
+			v.Eks = &DetectionRuleEksRequirements{}
+			return v.Eks.Deserialize(d)
 		}
 		return nil
 	})
@@ -5638,6 +5829,9 @@ type Finding struct {
 	// The confidence score for the finding.
 	Confidence *float64
 
+	// The name of the custom detection rule that generated this finding.
+	CustomDetectionRuleName *string
+
 	// The description of the finding.
 	Description *string
 
@@ -5674,6 +5868,9 @@ func (v *Finding) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.CreatedAt != nil {
 		s.WriteString(schemas.Finding_CreatedAt, *v.CreatedAt)
+	}
+	if v.CustomDetectionRuleName != nil {
+		s.WriteString(schemas.Finding_CustomDetectionRuleName, *v.CustomDetectionRuleName)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.Finding_Description, *v.Description)
@@ -5731,6 +5928,9 @@ func (v *Finding) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Finding_CreatedAt:
 			v.CreatedAt = new(string)
 			return d.ReadString(schemas.Finding_CreatedAt, v.CreatedAt)
+		case schemas.Finding_CustomDetectionRuleName:
+			v.CustomDetectionRuleName = new(string)
+			return d.ReadString(schemas.Finding_CustomDetectionRuleName, v.CustomDetectionRuleName)
 		case schemas.Finding_Description:
 			v.Description = new(string)
 			return d.ReadString(schemas.Finding_Description, v.Description)
@@ -12655,6 +12855,10 @@ type RuleDetail struct {
 	// The language used for the detection logic expression.
 	Language RuleLanguage
 
+	// Runtime Monitoring-specific details for the rule, including the platforms on
+	// which the rule can run and the minimum GuardDuty agent version required on each.
+	RuntimeMonitoringDetails *DetectionRuleRuntimeMonitoringDetails
+
 	// The schema version used by the rule definition.
 	Schema RuleSchema
 
@@ -12696,6 +12900,11 @@ func (v *RuleDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.RuleId != nil {
 		s.WriteString(schemas.RuleDetail_RuleId, *v.RuleId)
+	}
+	if v.RuntimeMonitoringDetails != nil {
+		s.WriteStruct(schemas.RuleDetail_RuntimeMonitoringDetails)
+		v.RuntimeMonitoringDetails.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Schema != "" {
 		s.WriteString(schemas.RuleDetail_Schema, string(v.Schema))
@@ -12751,6 +12960,9 @@ func (v *RuleDetail) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RuleDetail_RuleId:
 			v.RuleId = new(string)
 			return d.ReadString(schemas.RuleDetail_RuleId, v.RuleId)
+		case schemas.RuleDetail_RuntimeMonitoringDetails:
+			v.RuntimeMonitoringDetails = &DetectionRuleRuntimeMonitoringDetails{}
+			return v.RuntimeMonitoringDetails.Deserialize(d)
 		case schemas.RuleDetail_Schema:
 			var ev string
 			if err := d.ReadString(schemas.RuleDetail_Schema, &ev); err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "306e3f96-5a4c-4626-8e78-42712b61fe6f",
+    "type": "feature",
+    "description": "With dual-stack enabled, all requests now resolve to the endpoint in the partition's primary Region (for example, organizations.us-east-1.api.aws) and are signed for that Region. Previously, requests from other Regions resolved to a nonexistent endpoint. No API changes.",
+    "modules": [
+        "service/organizations"
+    ]
+}

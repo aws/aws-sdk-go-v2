@@ -1491,8 +1491,21 @@ func TestCheckResponseSnapshot_GetCustomDetectionRule(t *testing.T) {
 			Definition: &types.RuleDefinition{
 				Expression: ptr.String("__Expression__"),
 			},
-			Language:  types.RuleLanguage("SQL"),
-			Schema:    types.RuleSchema("CloudTrail"),
+			Language: types.RuleLanguage("SQL"),
+			Schema:   types.RuleSchema("CloudTrail"),
+			RuntimeMonitoringDetails: &types.DetectionRuleRuntimeMonitoringDetails{
+				Platforms: &types.DetectionRuleRuntimePlatforms{
+					Eks: &types.DetectionRuleEksRequirements{
+						MinAgentVersion: ptr.String("__MinAgentVersion__"),
+					},
+					Ec2: &types.DetectionRuleEc2Requirements{
+						MinAgentVersion: ptr.String("__MinAgentVersion__"),
+					},
+					EcsFargate: &types.DetectionRuleEcsFargateRequirements{
+						MinAgentVersion: ptr.String("__MinAgentVersion__"),
+					},
+				},
+			},
 			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
@@ -3700,6 +3713,7 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 				Type:                        ptr.String("__Type__"),
 				UpdatedAt:                   ptr.String("__UpdatedAt__"),
 				AssociatedAttackSequenceArn: ptr.String("__AssociatedAttackSequenceArn__"),
+				CustomDetectionRuleName:     ptr.String("__CustomDetectionRuleName__"),
 			},
 			{
 				AccountId:   ptr.String("__AccountId__"),
@@ -5635,6 +5649,7 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 				Type:                        ptr.String("__Type__"),
 				UpdatedAt:                   ptr.String("__UpdatedAt__"),
 				AssociatedAttackSequenceArn: ptr.String("__AssociatedAttackSequenceArn__"),
+				CustomDetectionRuleName:     ptr.String("__CustomDetectionRuleName__"),
 			},
 		},
 	}

@@ -2750,6 +2750,7 @@ func TestCheckRequestSnapshot_CreateVpcOrigin(t *testing.T) {
 					types.SslProtocol("SSLv3"),
 				},
 			},
+			IpAddressType: types.VpcIpAddressType("ipv4"),
 		},
 		Tags: &types.Tags{
 			Items: []types.Tag{
@@ -7629,6 +7630,7 @@ func TestCheckRequestSnapshot_UpdateVpcOrigin(t *testing.T) {
 					types.SslProtocol("SSLv3"),
 				},
 			},
+			IpAddressType: types.VpcIpAddressType("ipv4"),
 		},
 		Id:      ptr.String("__Id__"),
 		IfMatch: ptr.String("__IfMatch__"),
@@ -10251,6 +10253,7 @@ func TestUpdateRequestSnapshot_CreateVpcOrigin(t *testing.T) {
 					types.SslProtocol("SSLv3"),
 				},
 			},
+			IpAddressType: types.VpcIpAddressType("ipv4"),
 		},
 		Tags: &types.Tags{
 			Items: []types.Tag{
@@ -15130,6 +15133,7 @@ func TestUpdateRequestSnapshot_UpdateVpcOrigin(t *testing.T) {
 					types.SslProtocol("SSLv3"),
 				},
 			},
+			IpAddressType: types.VpcIpAddressType("ipv4"),
 		},
 		Id:      ptr.String("__Id__"),
 		IfMatch: ptr.String("__IfMatch__"),

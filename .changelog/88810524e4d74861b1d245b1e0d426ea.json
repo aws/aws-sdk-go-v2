@@ -1,0 +1,8 @@
+{
+    "id": "88810524-e4d7-4861-b1d2-45b1e0d426ea",
+    "type": "feature",
+    "description": "Add support for a new iterator type (AT TIMESTAMP) for DynamoDB Streams GetShardIterator API that allows reading from a specific point in time from the stream.",
+    "modules": [
+        "service/dynamodbstreams"
+    ]
+}

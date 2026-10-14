@@ -1,0 +1,8 @@
+{
+    "id": "0f71b819-89a1-4746-9995-3866de9b6e89",
+    "type": "documentation",
+    "description": "Documentation update - added a Get started pointer to the AWS Marketplace AI Metering Agent Skill in the BatchMeterUsage API reference. No API or behavior change.",
+    "modules": [
+        "service/marketplacemetering"
+    ]
+}

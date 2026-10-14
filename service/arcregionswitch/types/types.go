@@ -1988,8 +1988,14 @@ func (v *GeneratedReport) Deserialize(d smithy.ShapeDeserializer) error {
 // Configuration for Amazon Aurora global databases used in a Region switch plan.
 type GlobalAuroraConfiguration struct {
 
-	// The behavior for a global database, that is, only allow switchover or also
-	// allow failover.
+	// The default behavior for the Aurora global database execution block. Valid
+	// values:
+	//
+	//   - switchoverOnly - Calls SwitchoverGlobalCluster for a zero-data-loss
+	//   switchover during graceful execution.
+	//
+	//   - failover - Calls FailoverGlobalCluster with AllowDataLoss set to true . This
+	//   operation might cause data loss, including during graceful execution.
 	//
 	// This member is required.
 	Behavior GlobalAuroraDefaultBehavior
@@ -2013,7 +2019,8 @@ type GlobalAuroraConfiguration struct {
 	// The timeout value specified for the configuration.
 	TimeoutMinutes *int32
 
-	// The settings for ungraceful execution.
+	// The behavior to use when the plan runs in ungraceful mode. If you omit this
+	// value, Region switch uses the value of behavior .
 	Ungraceful *GlobalAuroraUngraceful
 
 	noSmithyDocumentSerde
@@ -2080,11 +2087,11 @@ func (v *GlobalAuroraConfiguration) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
-// Configuration for handling failures when performing operations on Aurora global
-// databases.
+// Configuration for an Aurora global database execution block in ungraceful mode.
 type GlobalAuroraUngraceful struct {
 
-	// The settings for ungraceful execution.
+	// The ungraceful behavior. The only valid value is failover , which calls
+	// FailoverGlobalCluster with AllowDataLoss set to true and might cause data loss.
 	Ungraceful GlobalAuroraUngracefulBehavior
 
 	noSmithyDocumentSerde
@@ -2330,6 +2337,18 @@ type Lambdas struct {
 	// The external ID (secret key) for the configuration.
 	ExternalId *string
 
+	// The JSON payload to send to the Lambda function invocation. If you don't
+	// specify a payload, Region switch invokes the function with only the execution
+	// metadata.
+	//
+	// If you provide a JSON object, Region switch merges execution metadata keys (
+	// InvokedBy , PlanArn , ExecutionId , StepName ) into the top level. If one of
+	// your keys has the same name as a metadata key, your key takes precedence.
+	//
+	// If you provide any other JSON type (string, number, boolean, or array), Region
+	// switch forwards it to the Lambda function unchanged, without adding metadata.
+	Payload *string
+
 	noSmithyDocumentSerde
 }
 
@@ -2349,6 +2368,9 @@ func (v *Lambdas) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExternalId != nil {
 		s.WriteString(schemas.Lambdas_externalId, *v.ExternalId)
 	}
+	if v.Payload != nil {
+		s.WriteString(schemas.Lambdas_payload, *v.Payload)
+	}
 }
 func (v *Lambdas) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Lambdas, func(s *smithy.Schema) error {
@@ -2362,6 +2384,9 @@ func (v *Lambdas) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Lambdas_externalId:
 			v.ExternalId = new(string)
 			return d.ReadString(schemas.Lambdas_externalId, v.ExternalId)
+		case schemas.Lambdas_payload:
+			v.Payload = new(string)
+			return d.ReadString(schemas.Lambdas_payload, v.Payload)
 		}
 		return nil
 	})
