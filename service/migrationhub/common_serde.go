@@ -139,6 +139,13 @@ func deserializeApplicationIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -153,6 +160,14 @@ func deserializeApplicationStateList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]types.ApplicationState, 0)
 	var vv types.ApplicationState
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ApplicationState
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ApplicationState{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -167,6 +182,14 @@ func deserializeCreatedArtifactList(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]types.CreatedArtifact, 0)
 	var vv types.CreatedArtifact
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CreatedArtifact
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.CreatedArtifact{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -181,6 +204,14 @@ func deserializeDiscoveredResourceList(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.DiscoveredResource, 0)
 	var vv types.DiscoveredResource
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DiscoveredResource
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.DiscoveredResource{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -195,6 +226,14 @@ func deserializeLatestResourceAttributeList(d smithy.ShapeDeserializer, s *smith
 	*v = make([]types.ResourceAttribute, 0)
 	var vv types.ResourceAttribute
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ResourceAttribute
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ResourceAttribute{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -209,6 +248,14 @@ func deserializeMigrationTaskSummaryList(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]types.MigrationTaskSummary, 0)
 	var vv types.MigrationTaskSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MigrationTaskSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MigrationTaskSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -223,6 +270,14 @@ func deserializeMigrationTaskUpdateList(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]types.MigrationTaskUpdate, 0)
 	var vv types.MigrationTaskUpdate
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MigrationTaskUpdate
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MigrationTaskUpdate{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -237,6 +292,14 @@ func deserializeProgressUpdateStreamSummaryList(d smithy.ShapeDeserializer, s *s
 	*v = make([]types.ProgressUpdateStreamSummary, 0)
 	var vv types.ProgressUpdateStreamSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ProgressUpdateStreamSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ProgressUpdateStreamSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -251,6 +314,14 @@ func deserializeResourceAttributeList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.ResourceAttribute, 0)
 	var vv types.ResourceAttribute
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ResourceAttribute
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ResourceAttribute{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -265,6 +336,14 @@ func deserializeSourceResourceList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]types.SourceResource, 0)
 	var vv types.SourceResource
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SourceResource
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SourceResource{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

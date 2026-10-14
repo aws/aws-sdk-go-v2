@@ -162,6 +162,14 @@ func deserializeAccountDetailsList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]AccountDetails, 0)
 	var vv AccountDetails
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AccountDetails
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = AccountDetails{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -176,6 +184,13 @@ func deserializeAccountIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -190,6 +205,14 @@ func deserializeAuthorities(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]A
 	*v = make([]Authority, 0)
 	var vv Authority
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Authority
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Authority{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -204,6 +227,14 @@ func deserializeBatchDeleteTaxRegistrationErrors(d smithy.ShapeDeserializer, s *
 	*v = make([]BatchDeleteTaxRegistrationError, 0)
 	var vv BatchDeleteTaxRegistrationError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchDeleteTaxRegistrationError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchDeleteTaxRegistrationError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -218,6 +249,14 @@ func deserializeBatchPutTaxRegistrationErrors(d smithy.ShapeDeserializer, s *smi
 	*v = make([]BatchPutTaxRegistrationError, 0)
 	var vv BatchPutTaxRegistrationError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchPutTaxRegistrationError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchPutTaxRegistrationError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -232,6 +271,13 @@ func deserializeMalaysiaServiceTaxCodesList(d smithy.ShapeDeserializer, s *smith
 	*v = make([]MalaysiaServiceTaxCode, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MalaysiaServiceTaxCode
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -246,6 +292,14 @@ func deserializeSupplementalTaxRegistrationList(d smithy.ShapeDeserializer, s *s
 	*v = make([]SupplementalTaxRegistration, 0)
 	var vv SupplementalTaxRegistration
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SupplementalTaxRegistration
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = SupplementalTaxRegistration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -260,6 +314,14 @@ func deserializeTaxDocumentMetadatas(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]TaxDocumentMetadata, 0)
 	var vv TaxDocumentMetadata
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero TaxDocumentMetadata
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = TaxDocumentMetadata{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -274,6 +336,14 @@ func deserializeTaxExemptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]TaxExemption, 0)
 	var vv TaxExemption
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero TaxExemption
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = TaxExemption{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -288,6 +358,14 @@ func deserializeTaxExemptionTypes(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]TaxExemptionType, 0)
 	var vv TaxExemptionType
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero TaxExemptionType
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = TaxExemptionType{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -302,6 +380,14 @@ func deserializeTaxRegistrationDocuments(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]TaxRegistrationDocument, 0)
 	var vv TaxRegistrationDocument
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero TaxRegistrationDocument
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = TaxRegistrationDocument{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -316,6 +402,14 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ValidationExceptionField
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ValidationExceptionField{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

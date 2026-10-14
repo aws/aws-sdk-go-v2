@@ -74,6 +74,14 @@ func deserializeBucketList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 	*v = make([]types.Bucket, 0)
 	var vv types.Bucket
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Bucket
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Bucket{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -88,6 +96,14 @@ func deserializeDocumentServiceWarnings(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]types.DocumentServiceWarning, 0)
 	var vv types.DocumentServiceWarning
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DocumentServiceWarning
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.DocumentServiceWarning{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -102,6 +118,13 @@ func deserializeFieldValue(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -116,6 +139,14 @@ func deserializeHitList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 	*v = make([]types.Hit, 0)
 	var vv types.Hit
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Hit
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Hit{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -130,6 +161,14 @@ func deserializeSuggestions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 	*v = make([]types.SuggestionMatch, 0)
 	var vv types.SuggestionMatch
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SuggestionMatch
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SuggestionMatch{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

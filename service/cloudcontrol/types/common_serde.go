@@ -71,6 +71,14 @@ func deserializeHooksProgressEvent(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]HookProgressEvent, 0)
 	var vv HookProgressEvent
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero HookProgressEvent
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = HookProgressEvent{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -85,6 +93,13 @@ func deserializeOperations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Op
 	*v = make([]Operation, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Operation
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -99,6 +114,13 @@ func deserializeOperationStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]OperationStatus, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero OperationStatus
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -113,6 +135,14 @@ func deserializeResourceDescriptions(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]ResourceDescription, 0)
 	var vv ResourceDescription
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ResourceDescription
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ResourceDescription{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -127,6 +157,14 @@ func deserializeResourceRequestStatusSummaries(d smithy.ShapeDeserializer, s *sm
 	*v = make([]ProgressEvent, 0)
 	var vv ProgressEvent
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ProgressEvent
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ProgressEvent{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

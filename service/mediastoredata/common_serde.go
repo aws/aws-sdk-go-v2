@@ -24,6 +24,14 @@ func deserializeItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 	*v = make([]types.Item, 0)
 	var vv types.Item
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Item
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Item{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

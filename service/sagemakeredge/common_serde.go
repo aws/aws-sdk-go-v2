@@ -76,6 +76,14 @@ func deserializeDefinitions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 	*v = make([]types.Definition, 0)
 	var vv types.Definition
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Definition
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Definition{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -90,6 +98,14 @@ func deserializeDeploymentModels(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]types.DeploymentModel, 0)
 	var vv types.DeploymentModel
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DeploymentModel
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.DeploymentModel{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -104,6 +120,14 @@ func deserializeEdgeDeployments(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]types.EdgeDeployment, 0)
 	var vv types.EdgeDeployment
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EdgeDeployment
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.EdgeDeployment{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -118,6 +142,14 @@ func deserializeEdgeMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 	*v = make([]types.EdgeMetric, 0)
 	var vv types.EdgeMetric
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EdgeMetric
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.EdgeMetric{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -132,6 +164,14 @@ func deserializeModels(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.
 	*v = make([]types.Model, 0)
 	var vv types.Model
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Model
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Model{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

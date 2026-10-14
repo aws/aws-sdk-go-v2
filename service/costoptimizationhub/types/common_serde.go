@@ -490,6 +490,14 @@ func deserializeAccountEnrollmentStatuses(d smithy.ShapeDeserializer, s *smithy.
 	*v = make([]AccountEnrollmentStatus, 0)
 	var vv AccountEnrollmentStatus
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AccountEnrollmentStatus
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = AccountEnrollmentStatus{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -504,6 +512,13 @@ func deserializeAccountIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -518,6 +533,13 @@ func deserializeActionTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]ActionType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ActionType
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -532,6 +554,14 @@ func deserializeEfficiencyMetricsByGroupList(d smithy.ShapeDeserializer, s *smit
 	*v = make([]EfficiencyMetricsByGroup, 0)
 	var vv EfficiencyMetricsByGroup
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero EfficiencyMetricsByGroup
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = EfficiencyMetricsByGroup{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -546,6 +576,13 @@ func deserializeImplementationEffortList(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]ImplementationEffort, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ImplementationEffort
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -560,6 +597,14 @@ func deserializeMetricsByTimeList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]MetricsByTime, 0)
 	var vv MetricsByTime
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MetricsByTime
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = MetricsByTime{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -574,6 +619,14 @@ func deserializeMixedInstanceConfigurationList(d smithy.ShapeDeserializer, s *sm
 	*v = make([]MixedInstanceConfiguration, 0)
 	var vv MixedInstanceConfiguration
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MixedInstanceConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = MixedInstanceConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -588,6 +641,13 @@ func deserializeRecommendationIdList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -602,6 +662,14 @@ func deserializeRecommendationList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]Recommendation, 0)
 	var vv Recommendation
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Recommendation
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Recommendation{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -616,6 +684,14 @@ func deserializeRecommendationSummariesList(d smithy.ShapeDeserializer, s *smith
 	*v = make([]RecommendationSummary, 0)
 	var vv RecommendationSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RecommendationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = RecommendationSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -630,6 +706,13 @@ func deserializeRegionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -644,6 +727,13 @@ func deserializeResourceArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -658,6 +748,13 @@ func deserializeResourceIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -672,6 +769,13 @@ func deserializeResourceTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]ResourceType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ResourceType
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -686,6 +790,13 @@ func deserializeSummaryMetricsList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]SummaryMetrics, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SummaryMetrics
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -700,6 +811,14 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Tag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Tag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -714,6 +833,14 @@ func deserializeUsageList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Usa
 	*v = make([]Usage, 0)
 	var vv Usage
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Usage
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Usage{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -728,6 +855,14 @@ func deserializeValidationExceptionDetails(d smithy.ShapeDeserializer, s *smithy
 	*v = make([]ValidationExceptionDetail, 0)
 	var vv ValidationExceptionDetail
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ValidationExceptionDetail
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ValidationExceptionDetail{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

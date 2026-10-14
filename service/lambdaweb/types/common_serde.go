@@ -121,6 +121,14 @@ func deserializeFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Fi
 	*v = make([]Filter, 0)
 	var vv Filter
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Filter
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Filter{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -135,6 +143,13 @@ func deserializeFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -149,6 +164,14 @@ func deserializeFunctionEndpointSummaryList(d smithy.ShapeDeserializer, s *smith
 	*v = make([]FunctionEndpointSummary, 0)
 	var vv FunctionEndpointSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero FunctionEndpointSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = FunctionEndpointSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -163,6 +186,14 @@ func deserializeFunctionRevisionSummaryList(d smithy.ShapeDeserializer, s *smith
 	*v = make([]FunctionRevisionSummary, 0)
 	var vv FunctionRevisionSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero FunctionRevisionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = FunctionRevisionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -177,6 +208,14 @@ func deserializeFunctionSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]FunctionSummary, 0)
 	var vv FunctionSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero FunctionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = FunctionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -191,6 +230,13 @@ func deserializeRegionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -205,6 +251,14 @@ func deserializeRevisionErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]RevisionError, 0)
 	var vv RevisionError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RevisionError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = RevisionError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -219,6 +273,14 @@ func deserializeRevisionWeightList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]RevisionWeight, 0)
 	var vv RevisionWeight
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RevisionWeight
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = RevisionWeight{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -233,6 +295,13 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err

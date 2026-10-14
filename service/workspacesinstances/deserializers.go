@@ -1066,7 +1066,11 @@ func deserializeCBOR_EC2InstanceErrors(v smithycbor.Value) ([]types.EC2InstanceE
 	}
 	var dl []types.EC2InstanceError
 	for _, si := range av {
-
+		if _, ok := si.(*smithycbor.Nil); ok {
+			var zero types.EC2InstanceError
+			dl = append(dl, zero)
+			continue
+		}
 		di, err := deserializeCBOR_EC2InstanceError(si)
 		if err != nil {
 			return nil, err
@@ -1146,7 +1150,11 @@ func deserializeCBOR_InstanceTypes(v smithycbor.Value) ([]types.InstanceTypeInfo
 	}
 	var dl []types.InstanceTypeInfo
 	for _, si := range av {
-
+		if _, ok := si.(*smithycbor.Nil); ok {
+			var zero types.InstanceTypeInfo
+			dl = append(dl, zero)
+			continue
+		}
 		di, err := deserializeCBOR_InstanceTypeInfo(si)
 		if err != nil {
 			return nil, err
@@ -1234,7 +1242,11 @@ func deserializeCBOR_RegionList(v smithycbor.Value) ([]types.Region, error) {
 	}
 	var dl []types.Region
 	for _, si := range av {
-
+		if _, ok := si.(*smithycbor.Nil); ok {
+			var zero types.Region
+			dl = append(dl, zero)
+			continue
+		}
 		di, err := deserializeCBOR_Region(si)
 		if err != nil {
 			return nil, err
@@ -1405,7 +1417,11 @@ func deserializeCBOR_SupportedInstanceConfigurations(v smithycbor.Value) ([]type
 	}
 	var dl []types.SupportedInstanceConfiguration
 	for _, si := range av {
-
+		if _, ok := si.(*smithycbor.Nil); ok {
+			var zero types.SupportedInstanceConfiguration
+			dl = append(dl, zero)
+			continue
+		}
 		di, err := deserializeCBOR_SupportedInstanceConfiguration(si)
 		if err != nil {
 			return nil, err
@@ -1455,7 +1471,11 @@ func deserializeCBOR_TagList(v smithycbor.Value) ([]types.Tag, error) {
 	}
 	var dl []types.Tag
 	for _, si := range av {
-
+		if _, ok := si.(*smithycbor.Nil); ok {
+			var zero types.Tag
+			dl = append(dl, zero)
+			continue
+		}
 		di, err := deserializeCBOR_Tag(si)
 		if err != nil {
 			return nil, err
@@ -1615,7 +1635,11 @@ func deserializeCBOR_ValidationExceptionFieldList(v smithycbor.Value) ([]types.V
 	}
 	var dl []types.ValidationExceptionField
 	for _, si := range av {
-
+		if _, ok := si.(*smithycbor.Nil); ok {
+			var zero types.ValidationExceptionField
+			dl = append(dl, zero)
+			continue
+		}
 		di, err := deserializeCBOR_ValidationExceptionField(si)
 		if err != nil {
 			return nil, err
@@ -1717,7 +1741,11 @@ func deserializeCBOR_WorkspaceInstanceErrors(v smithycbor.Value) ([]types.Worksp
 	}
 	var dl []types.WorkspaceInstanceError
 	for _, si := range av {
-
+		if _, ok := si.(*smithycbor.Nil); ok {
+			var zero types.WorkspaceInstanceError
+			dl = append(dl, zero)
+			continue
+		}
 		di, err := deserializeCBOR_WorkspaceInstanceError(si)
 		if err != nil {
 			return nil, err
@@ -1734,7 +1762,11 @@ func deserializeCBOR_WorkspaceInstances(v smithycbor.Value) ([]types.WorkspaceIn
 	}
 	var dl []types.WorkspaceInstance
 	for _, si := range av {
-
+		if _, ok := si.(*smithycbor.Nil); ok {
+			var zero types.WorkspaceInstance
+			dl = append(dl, zero)
+			continue
+		}
 		di, err := deserializeCBOR_WorkspaceInstance(si)
 		if err != nil {
 			return nil, err

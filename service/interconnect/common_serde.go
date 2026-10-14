@@ -152,6 +152,14 @@ func deserializeAttachPointDescriptorList(d smithy.ShapeDeserializer, s *smithy.
 	*v = make([]types.AttachPointDescriptor, 0)
 	var vv types.AttachPointDescriptor
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AttachPointDescriptor
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.AttachPointDescriptor{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -166,6 +174,13 @@ func deserializeBandwidthList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -180,6 +195,14 @@ func deserializeConnectionSummariesList(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]types.ConnectionSummary, 0)
 	var vv types.ConnectionSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ConnectionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ConnectionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -194,6 +217,14 @@ func deserializeEnvironmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]types.Environment, 0)
 	var vv types.Environment
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Environment
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Environment{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -208,6 +239,13 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err

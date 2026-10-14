@@ -228,6 +228,13 @@ func deserialize__listOf__string(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -242,6 +249,14 @@ func deserialize__listOfActionRequired(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.ActionRequired, 0)
 	var vv types.ActionRequired
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ActionRequired
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ActionRequired{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -256,6 +271,14 @@ func deserialize__listOfAvailabilityZone(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]types.AvailabilityZone, 0)
 	var vv types.AvailabilityZone
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AvailabilityZone
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.AvailabilityZone{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -270,6 +293,14 @@ func deserialize__listOfBrokerEngineType(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]types.BrokerEngineType, 0)
 	var vv types.BrokerEngineType
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BrokerEngineType
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.BrokerEngineType{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -284,6 +315,14 @@ func deserialize__listOfBrokerInstance(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.BrokerInstance, 0)
 	var vv types.BrokerInstance
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BrokerInstance
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.BrokerInstance{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -298,6 +337,14 @@ func deserialize__listOfBrokerInstanceOption(d smithy.ShapeDeserializer, s *smit
 	*v = make([]types.BrokerInstanceOption, 0)
 	var vv types.BrokerInstanceOption
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BrokerInstanceOption
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.BrokerInstanceOption{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -312,6 +359,14 @@ func deserialize__listOfBrokerSummary(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.BrokerSummary, 0)
 	var vv types.BrokerSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BrokerSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.BrokerSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -326,6 +381,14 @@ func deserialize__listOfConfiguration(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.Configuration, 0)
 	var vv types.Configuration
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Configuration
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Configuration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -340,6 +403,14 @@ func deserialize__listOfConfigurationId(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]types.ConfigurationId, 0)
 	var vv types.ConfigurationId
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ConfigurationId
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ConfigurationId{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -354,6 +425,14 @@ func deserialize__listOfConfigurationRevision(d smithy.ShapeDeserializer, s *smi
 	*v = make([]types.ConfigurationRevision, 0)
 	var vv types.ConfigurationRevision
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ConfigurationRevision
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ConfigurationRevision{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -368,6 +447,13 @@ func deserialize__listOfDeploymentMode(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.DeploymentMode, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DeploymentMode
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -382,6 +468,14 @@ func deserialize__listOfEngineVersion(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.EngineVersion, 0)
 	var vv types.EngineVersion
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EngineVersion
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.EngineVersion{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -396,6 +490,14 @@ func deserialize__listOfResourceShareError(d smithy.ShapeDeserializer, s *smithy
 	*v = make([]types.ResourceShareError, 0)
 	var vv types.ResourceShareError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ResourceShareError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ResourceShareError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -410,6 +512,14 @@ func deserialize__listOfSanitizationWarning(d smithy.ShapeDeserializer, s *smith
 	*v = make([]types.SanitizationWarning, 0)
 	var vv types.SanitizationWarning
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SanitizationWarning
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SanitizationWarning{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -424,6 +534,14 @@ func deserialize__listOfSharedResource(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.SharedResource, 0)
 	var vv types.SharedResource
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SharedResource
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SharedResource{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -438,6 +556,14 @@ func deserialize__listOfUser(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	*v = make([]types.User, 0)
 	var vv types.User
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.User
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.User{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -452,6 +578,14 @@ func deserialize__listOfUserSummary(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]types.UserSummary, 0)
 	var vv types.UserSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.UserSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.UserSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

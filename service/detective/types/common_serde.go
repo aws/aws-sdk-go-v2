@@ -193,6 +193,13 @@ func deserializeAccountIdExtendedList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -207,6 +214,13 @@ func deserializeAccountIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -221,6 +235,14 @@ func deserializeAccountList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]A
 	*v = make([]Account, 0)
 	var vv Account
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Account
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Account{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -235,6 +257,14 @@ func deserializeAdministratorList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]Administrator, 0)
 	var vv Administrator
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Administrator
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Administrator{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -249,6 +279,13 @@ func deserializeDatasourcePackageList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]DatasourcePackage, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero DatasourcePackage
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -263,6 +300,13 @@ func deserializeGraphArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -277,6 +321,14 @@ func deserializeGraphList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Gra
 	*v = make([]Graph, 0)
 	var vv Graph
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Graph
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Graph{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -291,6 +343,14 @@ func deserializeIndicators(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]In
 	*v = make([]Indicator, 0)
 	var vv Indicator
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Indicator
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Indicator{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -305,6 +365,14 @@ func deserializeInvestigationDetails(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]InvestigationDetail, 0)
 	var vv InvestigationDetail
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero InvestigationDetail
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = InvestigationDetail{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -319,6 +387,14 @@ func deserializeMemberDetailList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]MemberDetail, 0)
 	var vv MemberDetail
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MemberDetail
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = MemberDetail{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -333,6 +409,14 @@ func deserializeMembershipDatasourcesList(d smithy.ShapeDeserializer, s *smithy.
 	*v = make([]MembershipDatasources, 0)
 	var vv MembershipDatasources
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MembershipDatasources
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = MembershipDatasources{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -347,6 +431,13 @@ func deserializeResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -361,6 +452,13 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -375,6 +473,14 @@ func deserializeUnprocessedAccountList(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]UnprocessedAccount, 0)
 	var vv UnprocessedAccount
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero UnprocessedAccount
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = UnprocessedAccount{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -389,6 +495,14 @@ func deserializeUnprocessedGraphList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]UnprocessedGraph, 0)
 	var vv UnprocessedGraph
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero UnprocessedGraph
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = UnprocessedGraph{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

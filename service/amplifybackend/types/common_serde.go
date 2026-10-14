@@ -126,6 +126,13 @@ func deserializeListOf__string(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -140,6 +147,13 @@ func deserializeListOfAdditionalConstraintsElement(d smithy.ShapeDeserializer, s
 	*v = make([]AdditionalConstraintsElement, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AdditionalConstraintsElement
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -154,6 +168,13 @@ func deserializeListOfAuthenticatedElement(d smithy.ShapeDeserializer, s *smithy
 	*v = make([]AuthenticatedElement, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AuthenticatedElement
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -168,6 +189,14 @@ func deserializeListOfBackendAPIAuthType(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]BackendAPIAuthType, 0)
 	var vv BackendAPIAuthType
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BackendAPIAuthType
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BackendAPIAuthType{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -182,6 +211,14 @@ func deserializeListOfBackendJobRespObj(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]BackendJobRespObj, 0)
 	var vv BackendJobRespObj
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BackendJobRespObj
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BackendJobRespObj{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -196,6 +233,13 @@ func deserializeListOfMfaTypesElement(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]MfaTypesElement, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MfaTypesElement
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -210,6 +254,13 @@ func deserializeListOfOAuthScopesElement(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]OAuthScopesElement, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero OAuthScopesElement
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -224,6 +275,13 @@ func deserializeListOfRequiredSignUpAttributesElement(d smithy.ShapeDeserializer
 	*v = make([]RequiredSignUpAttributesElement, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RequiredSignUpAttributesElement
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -238,6 +296,14 @@ func deserializeListOfS3BucketInfo(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]S3BucketInfo, 0)
 	var vv S3BucketInfo
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero S3BucketInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = S3BucketInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -252,6 +318,13 @@ func deserializeListOfUnAuthenticatedElement(d smithy.ShapeDeserializer, s *smit
 	*v = make([]UnAuthenticatedElement, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero UnAuthenticatedElement
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err

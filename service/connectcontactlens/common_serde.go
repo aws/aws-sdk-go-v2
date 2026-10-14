@@ -74,6 +74,14 @@ func deserializeExtractedInformationValues(d smithy.ShapeDeserializer, s *smithy
 	*v = make([]types.ExtractedInformationValue, 0)
 	var vv types.ExtractedInformationValue
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExtractedInformationValue
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ExtractedInformationValue{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -88,6 +96,14 @@ func deserializeIssuesDetected(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]types.IssueDetected, 0)
 	var vv types.IssueDetected
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.IssueDetected
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.IssueDetected{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -102,6 +118,13 @@ func deserializeMatchedCategories(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -116,6 +139,14 @@ func deserializePointsOfInterest(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]types.PointOfInterest, 0)
 	var vv types.PointOfInterest
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PointOfInterest
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.PointOfInterest{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -130,6 +161,14 @@ func deserializeRealtimeContactAnalysisSegments(d smithy.ShapeDeserializer, s *s
 	*v = make([]types.RealtimeContactAnalysisSegment, 0)
 	var vv types.RealtimeContactAnalysisSegment
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RealtimeContactAnalysisSegment
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.RealtimeContactAnalysisSegment{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

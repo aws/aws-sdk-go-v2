@@ -124,6 +124,14 @@ func deserializeColumnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 	*v = make([]types.Column, 0)
 	var vv types.Column
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Column
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Column{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -138,6 +146,14 @@ func deserializeExecutionReferenceList(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.ExecutionReference, 0)
 	var vv types.ExecutionReference
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExecutionReference
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ExecutionReference{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -152,6 +168,14 @@ func deserializeExportReferenceList(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]types.ExportReference, 0)
 	var vv types.ExportReference
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExportReference
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ExportReference{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -166,6 +190,13 @@ func deserializeGenericStringList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -180,6 +211,13 @@ func deserializeResourceTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -194,6 +232,14 @@ func deserializeResourceTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]types.ResourceTag, 0)
 	var vv types.ResourceTag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ResourceTag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ResourceTag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -208,6 +254,14 @@ func deserializeTableList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 	*v = make([]types.Table, 0)
 	var vv types.Table
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Table
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Table{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -222,6 +276,14 @@ func deserializeTablePropertyDescriptionList(d smithy.ShapeDeserializer, s *smit
 	*v = make([]types.TablePropertyDescription, 0)
 	var vv types.TablePropertyDescription
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TablePropertyDescription
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.TablePropertyDescription{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -236,6 +298,14 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 	*v = make([]types.ValidationExceptionField, 0)
 	var vv types.ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ValidationExceptionField
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ValidationExceptionField{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

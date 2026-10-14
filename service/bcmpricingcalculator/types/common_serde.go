@@ -677,6 +677,14 @@ func deserializeBatchCreateBillScenarioCommitmentModificationEntries(d smithy.Sh
 	*v = make([]BatchCreateBillScenarioCommitmentModificationEntry, 0)
 	var vv BatchCreateBillScenarioCommitmentModificationEntry
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchCreateBillScenarioCommitmentModificationEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchCreateBillScenarioCommitmentModificationEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -691,6 +699,14 @@ func deserializeBatchCreateBillScenarioCommitmentModificationErrors(d smithy.Sha
 	*v = make([]BatchCreateBillScenarioCommitmentModificationError, 0)
 	var vv BatchCreateBillScenarioCommitmentModificationError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchCreateBillScenarioCommitmentModificationError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchCreateBillScenarioCommitmentModificationError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -705,6 +721,14 @@ func deserializeBatchCreateBillScenarioCommitmentModificationItems(d smithy.Shap
 	*v = make([]BatchCreateBillScenarioCommitmentModificationItem, 0)
 	var vv BatchCreateBillScenarioCommitmentModificationItem
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchCreateBillScenarioCommitmentModificationItem
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchCreateBillScenarioCommitmentModificationItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -719,6 +743,14 @@ func deserializeBatchCreateBillScenarioUsageModificationEntries(d smithy.ShapeDe
 	*v = make([]BatchCreateBillScenarioUsageModificationEntry, 0)
 	var vv BatchCreateBillScenarioUsageModificationEntry
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchCreateBillScenarioUsageModificationEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchCreateBillScenarioUsageModificationEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -733,6 +765,14 @@ func deserializeBatchCreateBillScenarioUsageModificationErrors(d smithy.ShapeDes
 	*v = make([]BatchCreateBillScenarioUsageModificationError, 0)
 	var vv BatchCreateBillScenarioUsageModificationError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchCreateBillScenarioUsageModificationError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchCreateBillScenarioUsageModificationError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -747,6 +787,14 @@ func deserializeBatchCreateBillScenarioUsageModificationItems(d smithy.ShapeDese
 	*v = make([]BatchCreateBillScenarioUsageModificationItem, 0)
 	var vv BatchCreateBillScenarioUsageModificationItem
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchCreateBillScenarioUsageModificationItem
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchCreateBillScenarioUsageModificationItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -761,6 +809,14 @@ func deserializeBatchCreateWorkloadEstimateUsageEntries(d smithy.ShapeDeserializ
 	*v = make([]BatchCreateWorkloadEstimateUsageEntry, 0)
 	var vv BatchCreateWorkloadEstimateUsageEntry
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchCreateWorkloadEstimateUsageEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchCreateWorkloadEstimateUsageEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -775,6 +831,14 @@ func deserializeBatchCreateWorkloadEstimateUsageErrors(d smithy.ShapeDeserialize
 	*v = make([]BatchCreateWorkloadEstimateUsageError, 0)
 	var vv BatchCreateWorkloadEstimateUsageError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchCreateWorkloadEstimateUsageError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchCreateWorkloadEstimateUsageError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -789,6 +853,14 @@ func deserializeBatchCreateWorkloadEstimateUsageItems(d smithy.ShapeDeserializer
 	*v = make([]BatchCreateWorkloadEstimateUsageItem, 0)
 	var vv BatchCreateWorkloadEstimateUsageItem
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchCreateWorkloadEstimateUsageItem
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchCreateWorkloadEstimateUsageItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -803,6 +875,13 @@ func deserializeBatchDeleteBillScenarioCommitmentModificationEntries(d smithy.Sh
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -817,6 +896,14 @@ func deserializeBatchDeleteBillScenarioCommitmentModificationErrors(d smithy.Sha
 	*v = make([]BatchDeleteBillScenarioCommitmentModificationError, 0)
 	var vv BatchDeleteBillScenarioCommitmentModificationError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchDeleteBillScenarioCommitmentModificationError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchDeleteBillScenarioCommitmentModificationError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -831,6 +918,13 @@ func deserializeBatchDeleteBillScenarioUsageModificationEntries(d smithy.ShapeDe
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -845,6 +939,14 @@ func deserializeBatchDeleteBillScenarioUsageModificationErrors(d smithy.ShapeDes
 	*v = make([]BatchDeleteBillScenarioUsageModificationError, 0)
 	var vv BatchDeleteBillScenarioUsageModificationError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchDeleteBillScenarioUsageModificationError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchDeleteBillScenarioUsageModificationError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -859,6 +961,13 @@ func deserializeBatchDeleteWorkloadEstimateUsageEntries(d smithy.ShapeDeserializ
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -873,6 +982,14 @@ func deserializeBatchDeleteWorkloadEstimateUsageErrors(d smithy.ShapeDeserialize
 	*v = make([]BatchDeleteWorkloadEstimateUsageError, 0)
 	var vv BatchDeleteWorkloadEstimateUsageError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchDeleteWorkloadEstimateUsageError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchDeleteWorkloadEstimateUsageError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -887,6 +1004,14 @@ func deserializeBatchUpdateBillScenarioCommitmentModificationEntries(d smithy.Sh
 	*v = make([]BatchUpdateBillScenarioCommitmentModificationEntry, 0)
 	var vv BatchUpdateBillScenarioCommitmentModificationEntry
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchUpdateBillScenarioCommitmentModificationEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchUpdateBillScenarioCommitmentModificationEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -901,6 +1026,14 @@ func deserializeBatchUpdateBillScenarioCommitmentModificationErrors(d smithy.Sha
 	*v = make([]BatchUpdateBillScenarioCommitmentModificationError, 0)
 	var vv BatchUpdateBillScenarioCommitmentModificationError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchUpdateBillScenarioCommitmentModificationError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchUpdateBillScenarioCommitmentModificationError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -915,6 +1048,14 @@ func deserializeBatchUpdateBillScenarioUsageModificationEntries(d smithy.ShapeDe
 	*v = make([]BatchUpdateBillScenarioUsageModificationEntry, 0)
 	var vv BatchUpdateBillScenarioUsageModificationEntry
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchUpdateBillScenarioUsageModificationEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchUpdateBillScenarioUsageModificationEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -929,6 +1070,14 @@ func deserializeBatchUpdateBillScenarioUsageModificationErrors(d smithy.ShapeDes
 	*v = make([]BatchUpdateBillScenarioUsageModificationError, 0)
 	var vv BatchUpdateBillScenarioUsageModificationError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchUpdateBillScenarioUsageModificationError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchUpdateBillScenarioUsageModificationError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -943,6 +1092,14 @@ func deserializeBatchUpdateWorkloadEstimateUsageEntries(d smithy.ShapeDeserializ
 	*v = make([]BatchUpdateWorkloadEstimateUsageEntry, 0)
 	var vv BatchUpdateWorkloadEstimateUsageEntry
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchUpdateWorkloadEstimateUsageEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchUpdateWorkloadEstimateUsageEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -957,6 +1114,14 @@ func deserializeBatchUpdateWorkloadEstimateUsageErrors(d smithy.ShapeDeserialize
 	*v = make([]BatchUpdateWorkloadEstimateUsageError, 0)
 	var vv BatchUpdateWorkloadEstimateUsageError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchUpdateWorkloadEstimateUsageError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchUpdateWorkloadEstimateUsageError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -971,6 +1136,14 @@ func deserializeBillEstimateCommitmentSummaries(d smithy.ShapeDeserializer, s *s
 	*v = make([]BillEstimateCommitmentSummary, 0)
 	var vv BillEstimateCommitmentSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BillEstimateCommitmentSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BillEstimateCommitmentSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -985,6 +1158,14 @@ func deserializeBillEstimateInputCommitmentModificationSummaries(d smithy.ShapeD
 	*v = make([]BillEstimateInputCommitmentModificationSummary, 0)
 	var vv BillEstimateInputCommitmentModificationSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BillEstimateInputCommitmentModificationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BillEstimateInputCommitmentModificationSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -999,6 +1180,14 @@ func deserializeBillEstimateInputUsageModificationSummaries(d smithy.ShapeDeseri
 	*v = make([]BillEstimateInputUsageModificationSummary, 0)
 	var vv BillEstimateInputUsageModificationSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BillEstimateInputUsageModificationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BillEstimateInputUsageModificationSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1013,6 +1202,14 @@ func deserializeBillEstimateLineItemSummaries(d smithy.ShapeDeserializer, s *smi
 	*v = make([]BillEstimateLineItemSummary, 0)
 	var vv BillEstimateLineItemSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BillEstimateLineItemSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BillEstimateLineItemSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1027,6 +1224,14 @@ func deserializeBillEstimateSummaries(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]BillEstimateSummary, 0)
 	var vv BillEstimateSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BillEstimateSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BillEstimateSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1041,6 +1246,14 @@ func deserializeBillScenarioCommitmentModificationItems(d smithy.ShapeDeserializ
 	*v = make([]BillScenarioCommitmentModificationItem, 0)
 	var vv BillScenarioCommitmentModificationItem
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BillScenarioCommitmentModificationItem
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BillScenarioCommitmentModificationItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1055,6 +1268,14 @@ func deserializeBillScenarioSummaries(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]BillScenarioSummary, 0)
 	var vv BillScenarioSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BillScenarioSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BillScenarioSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1069,6 +1290,14 @@ func deserializeBillScenarioUsageModificationItems(d smithy.ShapeDeserializer, s
 	*v = make([]BillScenarioUsageModificationItem, 0)
 	var vv BillScenarioUsageModificationItem
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BillScenarioUsageModificationItem
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BillScenarioUsageModificationItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1083,6 +1312,14 @@ func deserializeExpressionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]Expression, 0)
 	var vv Expression
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Expression
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Expression{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1097,6 +1334,14 @@ func deserializeListBillEstimateLineItemsFilters(d smithy.ShapeDeserializer, s *
 	*v = make([]ListBillEstimateLineItemsFilter, 0)
 	var vv ListBillEstimateLineItemsFilter
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ListBillEstimateLineItemsFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ListBillEstimateLineItemsFilter{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1111,6 +1356,13 @@ func deserializeListBillEstimateLineItemsFilterValues(d smithy.ShapeDeserializer
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1125,6 +1377,14 @@ func deserializeListBillEstimatesFilters(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]ListBillEstimatesFilter, 0)
 	var vv ListBillEstimatesFilter
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ListBillEstimatesFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ListBillEstimatesFilter{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1139,6 +1399,13 @@ func deserializeListBillEstimatesFilterValues(d smithy.ShapeDeserializer, s *smi
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1153,6 +1420,14 @@ func deserializeListBillScenariosFilters(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]ListBillScenariosFilter, 0)
 	var vv ListBillScenariosFilter
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ListBillScenariosFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ListBillScenariosFilter{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1167,6 +1442,13 @@ func deserializeListBillScenariosFilterValues(d smithy.ShapeDeserializer, s *smi
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1181,6 +1463,14 @@ func deserializeListUsageFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]ListUsageFilter, 0)
 	var vv ListUsageFilter
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ListUsageFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ListUsageFilter{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1195,6 +1485,13 @@ func deserializeListUsageFilterValues(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1209,6 +1506,14 @@ func deserializeListWorkloadEstimatesFilters(d smithy.ShapeDeserializer, s *smit
 	*v = make([]ListWorkloadEstimatesFilter, 0)
 	var vv ListWorkloadEstimatesFilter
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ListWorkloadEstimatesFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ListWorkloadEstimatesFilter{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1223,6 +1528,13 @@ func deserializeListWorkloadEstimatesFilterValues(d smithy.ShapeDeserializer, s 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1237,6 +1549,13 @@ func deserializeRateTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Rat
 	*v = make([]RateType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RateType
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1251,6 +1570,13 @@ func deserializeResourceTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1265,6 +1591,13 @@ func deserializeSavingsPlanArns(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1279,6 +1612,13 @@ func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1293,6 +1633,14 @@ func deserializeUsageAmounts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	*v = make([]UsageAmount, 0)
 	var vv UsageAmount
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero UsageAmount
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = UsageAmount{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1307,6 +1655,14 @@ func deserializeUsageQuantities(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]UsageQuantity, 0)
 	var vv UsageQuantity
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero UsageQuantity
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = UsageQuantity{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1321,6 +1677,14 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ValidationExceptionField
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ValidationExceptionField{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1335,6 +1699,14 @@ func deserializeWorkloadEstimateSummaries(d smithy.ShapeDeserializer, s *smithy.
 	*v = make([]WorkloadEstimateSummary, 0)
 	var vv WorkloadEstimateSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero WorkloadEstimateSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = WorkloadEstimateSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1349,6 +1721,14 @@ func deserializeWorkloadEstimateUsageItems(d smithy.ShapeDeserializer, s *smithy
 	*v = make([]WorkloadEstimateUsageItem, 0)
 	var vv WorkloadEstimateUsageItem
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero WorkloadEstimateUsageItem
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = WorkloadEstimateUsageItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

@@ -123,6 +123,13 @@ func deserializeCounts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]float6
 	*v = make([]float64, 0)
 	var vv float64
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero float64
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadFloat64(s.ListMember(), &vv); err != nil {
 			return err
@@ -137,6 +144,14 @@ func deserializeDimensions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 	*v = make([]types.Dimension, 0)
 	var vv types.Dimension
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Dimension
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Dimension{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -151,6 +166,14 @@ func deserializeEntityMetricDataList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]types.EntityMetricDatum, 0)
 	var vv types.EntityMetricDatum
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EntityMetricDatum
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.EntityMetricDatum{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -165,6 +188,14 @@ func deserializeMetricData(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 	*v = make([]types.MetricDatum, 0)
 	var vv types.MetricDatum
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MetricDatum
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MetricDatum{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -179,6 +210,14 @@ func deserializeMetricDataQueries(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]types.MetricDataQuery, 0)
 	var vv types.MetricDataQuery
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MetricDataQuery
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MetricDataQuery{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -193,6 +232,14 @@ func deserializeMetricDataResultMessages(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]types.MessageData, 0)
 	var vv types.MessageData
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MessageData
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MessageData{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -207,6 +254,14 @@ func deserializeMetricDataResults(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]types.MetricDataResult, 0)
 	var vv types.MetricDataResult
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MetricDataResult
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MetricDataResult{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -221,6 +276,13 @@ func deserializeTimestamps(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ti
 	*v = make([]time.Time, 0)
 	var vv time.Time
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero time.Time
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadTime(s.ListMember(), &vv); err != nil {
 			return err
@@ -235,6 +297,13 @@ func deserializeValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]float6
 	*v = make([]float64, 0)
 	var vv float64
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero float64
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadFloat64(s.ListMember(), &vv); err != nil {
 			return err

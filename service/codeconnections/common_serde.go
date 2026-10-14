@@ -174,6 +174,14 @@ func deserializeConnectionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]types.Connection, 0)
 	var vv types.Connection
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Connection
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Connection{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -188,6 +196,14 @@ func deserializeHostList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 	*v = make([]types.Host, 0)
 	var vv types.Host
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Host
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Host{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -202,6 +218,14 @@ func deserializeLatestSyncBlockerList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.SyncBlocker, 0)
 	var vv types.SyncBlocker
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SyncBlocker
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SyncBlocker{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -216,6 +240,14 @@ func deserializeRepositoryLinkList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]types.RepositoryLinkInfo, 0)
 	var vv types.RepositoryLinkInfo
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RepositoryLinkInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.RepositoryLinkInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -230,6 +262,14 @@ func deserializeRepositorySyncDefinitionList(d smithy.ShapeDeserializer, s *smit
 	*v = make([]types.RepositorySyncDefinition, 0)
 	var vv types.RepositorySyncDefinition
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RepositorySyncDefinition
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.RepositorySyncDefinition{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -244,6 +284,14 @@ func deserializeRepositorySyncEventList(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]types.RepositorySyncEvent, 0)
 	var vv types.RepositorySyncEvent
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RepositorySyncEvent
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.RepositorySyncEvent{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -258,6 +306,14 @@ func deserializeResourceSyncEventList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.ResourceSyncEvent, 0)
 	var vv types.ResourceSyncEvent
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ResourceSyncEvent
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ResourceSyncEvent{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -272,6 +328,13 @@ func deserializeSecurityGroupIds(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -286,6 +349,13 @@ func deserializeSubnetIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]str
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -300,6 +370,14 @@ func deserializeSyncBlockerContextList(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.SyncBlockerContext, 0)
 	var vv types.SyncBlockerContext
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SyncBlockerContext
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SyncBlockerContext{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -314,6 +392,14 @@ func deserializeSyncConfigurationList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.SyncConfiguration, 0)
 	var vv types.SyncConfiguration
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SyncConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SyncConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -328,6 +414,13 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -342,6 +435,14 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Tag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Tag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

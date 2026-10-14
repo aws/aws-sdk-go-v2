@@ -132,6 +132,14 @@ func deserializeBatchGetDiscoverableRegistryRecordErrorList(d smithy.ShapeDeseri
 	*v = make([]BatchGetDiscoverableRegistryRecordError, 0)
 	var vv BatchGetDiscoverableRegistryRecordError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BatchGetDiscoverableRegistryRecordError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BatchGetDiscoverableRegistryRecordError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -146,6 +154,13 @@ func deserializeDescriptorTypeList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -160,6 +175,13 @@ func deserializeDiscoverableFilterValues(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -174,6 +196,14 @@ func deserializeDiscoverableRegistryRecordSummaryList(d smithy.ShapeDeserializer
 	*v = make([]DiscoverableRegistryRecordSummary, 0)
 	var vv DiscoverableRegistryRecordSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero DiscoverableRegistryRecordSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = DiscoverableRegistryRecordSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -188,6 +218,13 @@ func deserializeRegistryIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -202,6 +239,14 @@ func deserializeRegistryRecordFilterList(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]RegistryRecordFilter, 0)
 	var vv RegistryRecordFilter
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RegistryRecordFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = RegistryRecordFilter{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -216,6 +261,13 @@ func deserializeRegistryRecordIdList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -230,6 +282,14 @@ func deserializeRegistryRecordsEntryList(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]RegistryRecordsEntry, 0)
 	var vv RegistryRecordsEntry
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RegistryRecordsEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = RegistryRecordsEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -244,6 +304,14 @@ func deserializeRegistryRecordSummaryList(d smithy.ShapeDeserializer, s *smithy.
 	*v = make([]RegistryRecordSummary, 0)
 	var vv RegistryRecordSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RegistryRecordSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = RegistryRecordSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -258,6 +326,14 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ValidationExceptionField
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ValidationExceptionField{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

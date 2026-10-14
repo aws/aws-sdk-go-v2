@@ -254,6 +254,13 @@ func deserializeCapabilityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]Capability, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Capability
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -268,6 +275,14 @@ func deserializeCpuConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]CpuConfiguration, 0)
 	var vv CpuConfiguration
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero CpuConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = CpuConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -282,6 +297,13 @@ func deserializeListOfPortSpecification(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]PortSpecification, 0)
 	var vv PortSpecification
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero PortSpecification
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := deserializePortSpecification(d, s.ListMember(), &vv); err != nil {
 			return err
@@ -296,6 +318,14 @@ func deserializeManagedMicrovmImageSummaryList(d smithy.ShapeDeserializer, s *sm
 	*v = make([]ManagedMicrovmImageSummary, 0)
 	var vv ManagedMicrovmImageSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ManagedMicrovmImageSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ManagedMicrovmImageSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -310,6 +340,14 @@ func deserializeManagedMicrovmImageVersionList(d smithy.ShapeDeserializer, s *sm
 	*v = make([]ManagedMicrovmImageVersion, 0)
 	var vv ManagedMicrovmImageVersion
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ManagedMicrovmImageVersion
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ManagedMicrovmImageVersion{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -324,6 +362,14 @@ func deserializeMicrovmImageBuildSummaries(d smithy.ShapeDeserializer, s *smithy
 	*v = make([]MicrovmImageBuildSummary, 0)
 	var vv MicrovmImageBuildSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MicrovmImageBuildSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = MicrovmImageBuildSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -338,6 +384,14 @@ func deserializeMicrovmImageSummaries(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]MicrovmImageSummary, 0)
 	var vv MicrovmImageSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MicrovmImageSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = MicrovmImageSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -352,6 +406,14 @@ func deserializeMicrovmImageVersionSummaryList(d smithy.ShapeDeserializer, s *sm
 	*v = make([]MicrovmImageVersionSummary, 0)
 	var vv MicrovmImageVersionSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MicrovmImageVersionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = MicrovmImageVersionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -366,6 +428,14 @@ func deserializeMicrovmItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]MicrovmItem, 0)
 	var vv MicrovmItem
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MicrovmItem
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = MicrovmItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -380,6 +450,13 @@ func deserializeNetworkConnectorList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -394,6 +471,14 @@ func deserializeResourcesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]Resources, 0)
 	var vv Resources
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Resources
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Resources{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -408,6 +493,13 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
