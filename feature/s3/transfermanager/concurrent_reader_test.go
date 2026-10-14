@@ -47,6 +47,7 @@ func TestConcurrentReaderReadUsesSliceLenForBounds(t *testing.T) {
 				partsCount: 2,
 				buf:        make(map[int32]*outChunk),
 				ch:         make(chan outChunk, 1),
+				getType:    types.GetObjectRanges,
 			}
 			setup(r)
 
