@@ -1,0 +1,9 @@
+{
+    "id": "69e3c631-f7f4-43b4-b9b1-003d085e0890",
+    "type": "feature",
+    "description": "Support multi-attribute key conditions in `expression`. `KeyAnd` now accepts two or more conditions.",
+    "collapse": false,
+    "modules": [
+        "feature/dynamodb/expression"
+    ]
+}

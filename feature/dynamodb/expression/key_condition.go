@@ -2,6 +2,8 @@ package expression
 
 import (
 	"fmt"
+	"slices"
+	"strings"
 )
 
 // keyConditionMode specifies the types of the struct KeyConditionBuilder,
@@ -297,40 +299,59 @@ func (kb KeyBuilder) GreaterThanEqual(valueBuilder ValueBuilder) KeyConditionBui
 }
 
 // KeyAnd returns a KeyConditionBuilder representing the logical AND clause
-// of the two argument KeyConditionBuilders. The resulting KeyConditionBuilder
-// can be used as an argument to the WithKeyCondition() method for the Builder
-// struct.
+// of the argument KeyConditionBuilders. It accepts two or more conditions,
+// enabling key condition expressions for multi-attribute key GSIs. All
+// conditions except the last must be equality conditions. If the first
+// argument is itself an AND condition, its children are flattened into the
+// result. The resulting KeyConditionBuilder can be used as an argument to the
+// WithKeyCondition() method for the Builder struct.
 //
-// Example:
+// Example with partition key and sort key condition:
 //
-//	// keyCondition represents the key condition where the partition key
-//	// "TeamName" is equal to value "Wildcats" and sort key "Number" is equal
-//	// to value 1
 //	keyCondition := expression.KeyAnd(expression.Key("TeamName").Equal(expression.Value("Wildcats")), expression.Key("Number").Equal(expression.Value(1)))
-//
-//	// Used to make an Builder
 //	builder := expression.NewBuilder().WithKeyCondition(keyCondition)
 //
 // Expression Equivalent:
 //
-//	expression.KeyAnd(expression.Key("TeamName").Equal(expression.Value("Wildcats")), expression.Key("Number").Equal(expression.Value(1)))
-//	// Let #NUMBER, :teamName, and :one be ExpressionAttributeName and
-//	// ExpressionAttributeValues representing the item attribute "Number",
-//	// the value "Wildcats", and the value 1
 //	"(TeamName = :teamName) AND (#NUMBER = :one)"
-func KeyAnd(left, right KeyConditionBuilder) KeyConditionBuilder {
-	if left.mode != equalKeyCond {
+//
+// Example with multi-attribute key GSI:
+//
+//	keyCondition := expression.KeyAnd(expression.Key("TournamentId").Equal(expression.Value("WINTER2024")), expression.Key("Region").Equal(expression.Value("NA-EAST")), expression.Key("Round").GreaterThan(expression.Value(1)))
+//	builder := expression.NewBuilder().WithKeyCondition(keyCondition)
+//
+// Expression Equivalent:
+//
+//	"(TournamentId = :tournamentId) AND (Region = :region) AND (#ROUND > :one)"
+func KeyAnd(keyConditions ...KeyConditionBuilder) KeyConditionBuilder {
+	if len(keyConditions) < 2 {
 		return KeyConditionBuilder{
 			mode: invalidKeyCond,
 		}
 	}
-	if right.mode == andKeyCond {
+
+	// Flatten a chained AND on the left (supports .And().And() usage)
+	if keyConditions[0].mode == andKeyCond {
+		keyConditions = slices.Concat(keyConditions[0].keyConditionList, keyConditions[1:])
+	}
+
+	for _, keyCondition := range keyConditions[:len(keyConditions)-1] {
+		if keyCondition.mode != equalKeyCond {
+			return KeyConditionBuilder{
+				mode: invalidKeyCond,
+			}
+		}
+
+	}
+
+	if keyConditions[len(keyConditions)-1].mode == andKeyCond {
 		return KeyConditionBuilder{
 			mode: invalidKeyCond,
 		}
 	}
+
 	return KeyConditionBuilder{
-		keyConditionList: []KeyConditionBuilder{left, right},
+		keyConditionList: keyConditions,
 		mode:             andKeyCond,
 	}
 }
@@ -525,7 +546,7 @@ func andBuildKeyCondition(keyConditionBuilder KeyConditionBuilder, node exprNode
 	}
 	// create a string with escaped characters to substitute them with proper
 	// aliases during runtime
-	node.fmtExpr = "($c) AND ($c)"
+	node.fmtExpr = strings.Repeat("($c) AND ", len(node.children)-1) + "($c)"
 
 	return node, nil
 }
